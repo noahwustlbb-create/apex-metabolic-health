@@ -130,7 +130,7 @@ export default function Footer() {
               ))}
               <li>
                 <a
-                  href="#"
+                  href="/get-started"
                   data-cta="patient-portal"
                   className="text-sm transition-colors duration-200 hover:text-primary"
                   style={{ color: '#4a5a6a' }}

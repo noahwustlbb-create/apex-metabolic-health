@@ -324,8 +324,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
 
               {/* CTA buttons */}
               <a
-                href="#"
-                data-cta={`book-consult-${program.slug}`}
+                href={program.track === 'hormone' ? '/intake/hormone' : '/intake/general'}
                 className="btn-teal w-full block text-center"
                 style={{ marginBottom: '12px' }}
               >

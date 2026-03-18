@@ -115,7 +115,7 @@ function BookingCards() {
               understand your goals and point you in the right direction. No cost, no commitment.
             </p>
             <a
-              href="#"
+              href="/intake/hormone"
               data-cta="book-discovery-call"
               className="btn-teal w-full block text-center"
             >
@@ -144,7 +144,7 @@ function BookingCards() {
               optimisation or performance programs.
             </p>
             <a
-              href="#"
+              href="/intake/hormone"
               data-cta="book-hormone-consult"
               className="btn-ghost w-full block text-center"
             >
@@ -173,7 +173,7 @@ function BookingCards() {
               check-in with one of our doctors.
             </p>
             <a
-              href="#"
+              href="/intake/general"
               data-cta="book-general-consult"
               className="btn-ghost w-full block text-center"
             >

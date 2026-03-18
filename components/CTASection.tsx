@@ -81,12 +81,13 @@ export default function CTASection() {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="flex justify-center mb-8"
         >
-          <button
+          <a
+            href="/get-started"
             className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4"
             style={{ fontSize: '13px' }}
           >
             Book Your Consultation
-          </button>
+          </a>
         </motion.div>
 
         <motion.div

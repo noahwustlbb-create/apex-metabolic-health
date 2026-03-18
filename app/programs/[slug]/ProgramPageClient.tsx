@@ -133,7 +133,7 @@ function ProgramHero({ program }: { program: Program }) {
               className="flex flex-wrap gap-4"
             >
               {program.status === 'coming-soon' ? (
-                <a href="#" data-cta="waitlist" className="btn-ghost">
+                <a href="/intake/hormone" className="btn-ghost">
                   Join the Waitlist
                 </a>
               ) : (
