@@ -7,9 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
-// Set your Formspree endpoint: https://formspree.io/f/YOUR_FORM_ID
-// Or set NEXT_PUBLIC_GENERAL_INTAKE_ENDPOINT in your environment variables
-const FORM_ENDPOINT = process.env.NEXT_PUBLIC_GENERAL_INTAKE_ENDPOINT || ''
+const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const STORAGE_KEY = 'apex-general-intake-v1'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -686,24 +684,25 @@ export default function GeneralIntakeForm() {
     setSubmitting(true)
 
     const payload = {
+      access_key: WEB3FORMS_KEY,
+      subject: `New General Intake — ${data.firstName} ${data.lastName}`,
+      from_name: 'Apex Metabolic Health',
       ...data,
-      signatureData: data.signatureType === 'draw' ? signatureData : data.typedSignature,
+      signatureData: data.signatureType === 'draw' ? '[drawn]' : data.typedSignature,
       dlFileName: dlFile?.name || data.dlPhotoName,
       resultsFileName: resultsFile?.name || '',
       submittedAt: new Date().toISOString(),
       formType: 'General Appointment Intake',
     }
 
-    if (FORM_ENDPOINT) {
-      try {
-        await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        })
-      } catch {
-        // Fail silently — still show success to avoid patient frustration
-      }
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+    } catch {
+      // Fail silently — still show success to avoid patient frustration
     }
 
     try {
