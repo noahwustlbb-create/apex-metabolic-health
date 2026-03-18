@@ -7,9 +7,9 @@
   --surface: #0d1117;
   --elevated: #111820;
   --border: #1e2d3d;
-  --teal: #00c2b8;
-  --teal-glow: rgba(0, 194, 184, 0.15);
-  --gold: #c9a84c;
+  --teal: #2b7be0;
+  --teal-glow: rgba(43, 123, 224, 0.15);
+  --gold: #a8b8cc;
   --text-primary: #f0f4f8;
   --text-secondary: #8899aa;
   --text-muted: #4a5a6a;
@@ -68,9 +68,9 @@
     opacity: 0.4;
   }
 
-  /* Teal gradient text */
+  /* Brand blue gradient text */
   .text-teal-gradient {
-    background: linear-gradient(90deg, var(--teal), #00e0d4);
+    background: linear-gradient(90deg, #2b7be0, #5ab4f5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

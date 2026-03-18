@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const COMPANY_LINKS = [
@@ -37,25 +38,18 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <div className="flex items-center gap-3 mb-5">
-              <svg viewBox="0 0 32 32" fill="none" className="w-7 h-7 flex-shrink-0" aria-hidden="true">
-                <polygon
-                  points="16,2 30,9 30,23 16,30 2,23 2,9"
-                  stroke="#00c2b8"
-                  strokeWidth="1.5"
-                  fill="rgba(0,194,184,0.06)"
-                />
-                <circle cx="16" cy="16" r="2.5" fill="#00c2b8" />
-              </svg>
-              <div className="flex flex-col leading-none gap-[3px]">
-                <span
-                  className="text-[13px] font-bold tracking-[0.22em] uppercase"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-                >
-                  APEX METABOLIC
-                </span>
-                <span className="text-[9px] tracking-[0.3em] uppercase" style={{ color: '#4a5a6a' }}>
-                  HEALTH
+            <div className="mb-5">
+              <Image
+                src="/logo.png"
+                alt="Apex Metabolic Health"
+                width={120}
+                height={120}
+                className="w-auto"
+                style={{ height: '56px' }}
+              />
+              <div className="flex flex-col leading-none gap-[3px] hidden">
+                <span>APEX METABOLIC</span>
+                <span>HEALTH
                 </span>
               </div>
             </div>

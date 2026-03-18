@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
@@ -55,32 +56,16 @@ export default function Nav() {
       >
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center">
-              <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8" aria-hidden="true">
-                <polygon
-                  points="16,2 30,9 30,23 16,30 2,23 2,9"
-                  stroke="#00c2b8"
-                  strokeWidth="1.5"
-                  fill="rgba(0,194,184,0.06)"
-                />
-                <line x1="16" y1="2" x2="16" y2="30" stroke="#00c2b8" strokeWidth="0.8" opacity="0.35" />
-                <line x1="2" y1="16" x2="30" y2="16" stroke="#00c2b8" strokeWidth="0.8" opacity="0.35" />
-                <circle cx="16" cy="16" r="2.5" fill="#00c2b8" />
-                <circle cx="16" cy="16" r="5" stroke="#00c2b8" strokeWidth="0.8" opacity="0.4" />
-              </svg>
-            </div>
-            <div className="flex flex-col leading-none gap-[3px]">
-              <span
-                className="text-[13px] font-bold tracking-[0.22em] uppercase"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-              >
-                APEX METABOLIC
-              </span>
-              <span className="text-[9px] tracking-[0.3em] uppercase" style={{ color: '#4a5a6a' }}>
-                HEALTH
-              </span>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo.png"
+              alt="Apex Metabolic Health"
+              width={140}
+              height={140}
+              className="w-auto"
+              style={{ height: '52px' }}
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}
