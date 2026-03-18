@@ -233,15 +233,12 @@ export default function Hero() {
           >
             Start Your Program
           </button>
-          <button
-            onClick={() => {
-              const el = document.querySelector('#programs')
-              if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' })
-            }}
+          <a
+            href="/services"
             className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto"
           >
-            View Programs
-          </button>
+            Choose a Program
+          </a>
         </motion.div>
 
         {/* Stats strip */}

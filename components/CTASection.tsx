@@ -79,7 +79,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.35 }}
-          className="flex justify-center mb-8"
+          className="flex flex-wrap justify-center gap-4 mb-8"
         >
           <a
             href="/get-started"
@@ -87,6 +87,13 @@ export default function CTASection() {
             style={{ fontSize: '13px' }}
           >
             Book Your Consultation
+          </a>
+          <a
+            href="/services"
+            className="btn-ghost text-sm font-bold tracking-widest uppercase px-10 py-4"
+            style={{ fontSize: '13px' }}
+          >
+            Choose a Program
           </a>
         </motion.div>
 
