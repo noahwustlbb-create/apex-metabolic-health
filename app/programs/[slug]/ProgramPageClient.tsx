@@ -137,7 +137,7 @@ function ProgramHero({ program }: { program: Program }) {
                   Join the Waitlist
                 </a>
               ) : (
-                <Link href={program.ctaHref} className="btn-teal">
+                <Link href={program.track === 'hormone' ? '/intake/hormone' : '/intake/general'} className="btn-teal">
                   {program.ctaLabel}
                 </Link>
               )}
@@ -407,7 +407,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
 
 // ─── Bottom CTA ───────────────────────────────────────────────────────────────
 
-function ProgramBottomCTA() {
+function ProgramBottomCTA({ program }: { program: Program }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -447,7 +447,7 @@ function ProgramBottomCTA() {
           transition={{ duration: 0.6, delay: 0.22 }}
           className="mb-10"
         >
-          <Link href="/get-started" className="btn-teal">
+          <Link href={program.track === 'hormone' ? '/intake/hormone' : '/intake/general'} className="btn-teal">
             Book a Consultation
           </Link>
         </motion.div>
@@ -479,7 +479,7 @@ export default function ProgramPageClient({ program }: { program: Program }) {
         <WhatItAddresses program={program} />
         <WhatsIncluded program={program} />
         <HowThisProgramWorks program={program} />
-        <ProgramBottomCTA />
+        <ProgramBottomCTA program={program} />
       </main>
       <Footer />
     </>
