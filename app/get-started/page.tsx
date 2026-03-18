@@ -36,7 +36,7 @@ function GetStartedHero() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(0,194,184,0.07) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.07) 0%, transparent 60%)',
         }}
       />
 
@@ -96,11 +96,11 @@ function BookingCards() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
             className="apex-card p-8 flex flex-col"
-            style={{ border: '1px solid rgba(0,194,184,0.35)' }}
+            style={{ border: '1px solid rgba(43,123,224,0.35)' }}
           >
             <p
               className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4"
-              style={{ color: '#00c2b8' }}
+              style={{ color: '#2b7be0' }}
             >
               RECOMMENDED START
             </p>
@@ -242,7 +242,7 @@ function EnquiryForm() {
                   name="fullName"
                   placeholder="Your full name"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
                 />
               </div>
@@ -258,7 +258,7 @@ function EnquiryForm() {
                   name="email"
                   placeholder="your@email.com"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
                 />
               </div>
@@ -278,7 +278,7 @@ function EnquiryForm() {
                   name="phone"
                   placeholder="+61 4xx xxx xxx"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
                 />
               </div>
@@ -293,7 +293,7 @@ function EnquiryForm() {
                   name="program"
                   style={{ ...inputBase, cursor: 'pointer' }}
                   defaultValue=""
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
                 >
                   <option value="" disabled style={{ color: '#4a5a6a' }}>
@@ -324,7 +324,7 @@ function EnquiryForm() {
                 name="referral"
                 style={{ ...inputBase, cursor: 'pointer' }}
                 defaultValue=""
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
               >
                 <option value="" disabled style={{ color: '#4a5a6a' }}>
@@ -361,7 +361,7 @@ function EnquiryForm() {
                 rows={5}
                 placeholder="Tell us what you're experiencing or what you'd like to achieve..."
                 style={{ ...inputBase, resize: 'vertical' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#00c2b8')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
               />
             </div>
@@ -412,8 +412,8 @@ function TrustStrip() {
           {TRUST_ITEMS.map((item, i) => (
             <div key={item} className="flex items-center gap-3">
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                <circle cx="8" cy="8" r="7" stroke="#00c2b8" strokeWidth="1.2" fill="rgba(0,194,184,0.07)" />
-                <path d="M5 8l2.5 2.5 4-4" stroke="#00c2b8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="8" cy="8" r="7" stroke="#2b7be0" strokeWidth="1.2" fill="rgba(43,123,224,0.07)" />
+                <path d="M5 8l2.5 2.5 4-4" stroke="#2b7be0" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="text-sm font-semibold tracking-wide" style={{ color: '#f0f4f8' }}>
                 {item}

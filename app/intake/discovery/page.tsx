@@ -31,7 +31,7 @@ function Input({ value, onChange, placeholder, type = 'text', inputMode }: {
       placeholder={placeholder} inputMode={inputMode}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -44,7 +44,7 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
       placeholder={placeholder} rows={4}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -52,7 +52,7 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label className="block text-sm font-medium mb-1.5" style={{ color: '#8899aa' }}>
-      {children}{required && <span style={{ color: '#00c2b8' }}> *</span>}
+      {children}{required && <span style={{ color: '#2b7be0' }}> *</span>}
     </label>
   )
 }
@@ -105,8 +105,8 @@ export default function DiscoveryCallPage() {
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-                style={{ backgroundColor: 'rgba(0,194,184,0.1)', border: '1px solid rgba(0,194,184,0.3)' }}>
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#00c2b8' }}>
+                style={{ backgroundColor: 'rgba(43,123,224,0.1)', border: '1px solid rgba(43,123,224,0.3)' }}>
+                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#2b7be0' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -187,12 +187,12 @@ export default function DiscoveryCallPage() {
                   <button key={p} type="button" onClick={() => set('program', p)}
                     className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                     style={{
-                      backgroundColor: form.program === p ? 'rgba(0,194,184,0.08)' : '#070a0d',
-                      border: `1px solid ${form.program === p ? '#00c2b8' : '#1e2d3d'}`,
+                      backgroundColor: form.program === p ? 'rgba(43,123,224,0.08)' : '#070a0d',
+                      border: `1px solid ${form.program === p ? '#2b7be0' : '#1e2d3d'}`,
                       color: form.program === p ? '#f0f4f8' : '#8899aa',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? '#00c2b8' : '#4a5a6a'}`, backgroundColor: form.program === p ? '#00c2b8' : 'transparent' }}>
+                      style={{ border: `1px solid ${form.program === p ? '#2b7be0' : '#4a5a6a'}`, backgroundColor: form.program === p ? '#2b7be0' : 'transparent' }}>
                       {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#070a0d' }} />}
                     </span>
                     {p}

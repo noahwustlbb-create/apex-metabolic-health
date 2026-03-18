@@ -23,7 +23,7 @@ export default function CTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.08) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
         }}
       />
 
@@ -34,12 +34,12 @@ export default function CTASection() {
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 500, height: 500, border: '1px solid rgba(0,194,184,0.07)', top: '50%', left: '50%' }}
+        style={{ width: 500, height: 500, border: '1px solid rgba(43,123,224,0.07)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 800, height: 800, border: '1px solid rgba(0,194,184,0.03)', top: '50%', left: '50%' }}
+        style={{ width: 800, height: 800, border: '1px solid rgba(43,123,224,0.03)', top: '50%', left: '50%' }}
       />
 
       <div className="container-tight relative z-10 text-center">
@@ -121,7 +121,7 @@ export default function CTASection() {
               )}
               <span
                 className="w-1 h-1 rounded-full sm:hidden"
-                style={{ backgroundColor: '#00c2b8', opacity: 0.6 }}
+                style={{ backgroundColor: '#2b7be0', opacity: 0.6 }}
               />
               {item}
             </span>

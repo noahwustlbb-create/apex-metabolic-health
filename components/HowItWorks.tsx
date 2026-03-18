@@ -49,7 +49,7 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
             transition={{ duration: 0.8, delay: index * 0.2 + 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="h-full origin-left"
             style={{
-              background: 'linear-gradient(90deg, rgba(0,194,184,0.4), rgba(0,194,184,0.1))',
+              background: 'linear-gradient(90deg, rgba(43,123,224,0.4), rgba(43,123,224,0.1))',
               transformOrigin: 'left center',
             }}
           />
@@ -63,18 +63,18 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
         transition={{ duration: 0.5, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center mb-6 flex-shrink-0"
         style={{
-          backgroundColor: 'rgba(0,194,184,0.06)',
-          border: '1px solid rgba(0,194,184,0.25)',
+          backgroundColor: 'rgba(43,123,224,0.06)',
+          border: '1px solid rgba(43,123,224,0.25)',
         }}
       >
         {/* Inner ring */}
         <div
           className="absolute inset-2 rounded-full"
-          style={{ border: '1px solid rgba(0,194,184,0.12)' }}
+          style={{ border: '1px solid rgba(43,123,224,0.12)' }}
         />
         <span
           className="stat-number text-2xl"
-          style={{ color: '#00c2b8' }}
+          style={{ color: '#2b7be0' }}
         >
           {step.number}
         </span>
@@ -117,7 +117,7 @@ export default function HowItWorks() {
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -162,18 +162,18 @@ export default function HowItWorks() {
           <div
             className="inline-flex items-center gap-3 px-7 py-3.5"
             style={{
-              border: '1px solid rgba(0,194,184,0.2)',
+              border: '1px solid rgba(43,123,224,0.2)',
               borderRadius: '2px',
-              backgroundColor: 'rgba(0,194,184,0.04)',
+              backgroundColor: 'rgba(43,123,224,0.04)',
             }}
           >
             <span
               className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ backgroundColor: '#00c2b8' }}
+              style={{ backgroundColor: '#2b7be0' }}
             />
             <span
               className="text-sm font-medium tracking-wide"
-              style={{ color: '#00c2b8' }}
+              style={{ color: '#2b7be0' }}
             >
               100% online. Available Australia-wide.
             </span>

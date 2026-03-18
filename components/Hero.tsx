@@ -62,7 +62,7 @@ function HeroGrid() {
         const pulse = Math.sin(time + p.x * 0.01) * 0.5 + 0.5
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(0, 194, 184, ${p.opacity * pulse})`
+        ctx.fillStyle = `rgba(43, 123, 224, ${p.opacity * pulse})`
         ctx.fill()
       })
 
@@ -76,7 +76,7 @@ function HeroGrid() {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(0, 194, 184, ${0.06 * (1 - dist / 120)})`
+            ctx.strokeStyle = `rgba(43, 123, 224, ${0.06 * (1 - dist / 120)})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -123,7 +123,7 @@ export default function Hero() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[700px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, rgba(0,194,184,0.12) 0%, rgba(0,194,184,0.04) 35%, transparent 65%)',
+            'radial-gradient(ellipse at 50% 0%, rgba(43,123,224,0.12) 0%, rgba(43,123,224,0.04) 35%, transparent 65%)',
         }}
       />
 
@@ -133,7 +133,7 @@ export default function Hero() {
         className="absolute bottom-0 left-0 w-[600px] h-[500px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 0% 100%, rgba(0,194,184,0.06) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 0% 100%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -141,12 +141,12 @@ export default function Hero() {
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 600, height: 600, border: '1px solid rgba(0,194,184,0.06)', top: '50%', left: '50%' }}
+        style={{ width: 600, height: 600, border: '1px solid rgba(43,123,224,0.06)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 900, height: 900, border: '1px solid rgba(0,194,184,0.03)', top: '50%', left: '50%' }}
+        style={{ width: 900, height: 900, border: '1px solid rgba(43,123,224,0.03)', top: '50%', left: '50%' }}
       />
 
       {/* Content */}
@@ -161,10 +161,10 @@ export default function Hero() {
           <span
             className="inline-flex items-center gap-2.5 px-5 py-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase"
             style={{
-              border: '1px solid rgba(0,194,184,0.3)',
+              border: '1px solid rgba(43,123,224,0.3)',
               borderRadius: '2px',
-              color: '#00c2b8',
-              backgroundColor: 'rgba(0,194,184,0.06)',
+              color: '#2b7be0',
+              backgroundColor: 'rgba(43,123,224,0.06)',
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
@@ -261,7 +261,7 @@ export default function Hero() {
             >
               <p
                 className="stat-number text-xl md:text-2xl"
-                style={{ color: '#00c2b8' }}
+                style={{ color: '#2b7be0' }}
               >
                 {stat.value}
               </p>
@@ -290,7 +290,7 @@ export default function Hero() {
         <div className="w-px h-8 relative overflow-hidden" style={{ backgroundColor: '#1e2d3d' }}>
           <div
             className="scroll-drip absolute left-0 w-full"
-            style={{ backgroundColor: '#00c2b8', height: '40%' }}
+            style={{ backgroundColor: '#2b7be0', height: '40%' }}
           />
         </div>
       </motion.div>

@@ -127,7 +127,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  background: 'radial-gradient(ellipse at center, rgba(0,194,184,0.15) 0%, transparent 70%)',
+                  background: 'radial-gradient(ellipse at center, rgba(43,123,224,0.15) 0%, transparent 70%)',
                   width: '200px',
                   height: '200px',
                   pointerEvents: 'none',
@@ -147,14 +147,14 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 <svg viewBox="0 0 32 32" fill="none" width={64} height={64} aria-hidden="true">
                   <polygon
                     points="16,2 30,9 30,23 16,30 2,23 2,9"
-                    stroke="#00c2b8"
+                    stroke="#2b7be0"
                     strokeWidth="1.5"
-                    fill="rgba(0,194,184,0.06)"
+                    fill="rgba(43,123,224,0.06)"
                   />
-                  <line x1="16" y1="2" x2="16" y2="30" stroke="#00c2b8" strokeWidth="0.8" opacity="0.35" />
-                  <line x1="2" y1="16" x2="30" y2="16" stroke="#00c2b8" strokeWidth="0.8" opacity="0.35" />
-                  <circle cx="16" cy="16" r="2.5" fill="#00c2b8" />
-                  <circle cx="16" cy="16" r="5" stroke="#00c2b8" strokeWidth="0.8" opacity="0.4" />
+                  <line x1="16" y1="2" x2="16" y2="30" stroke="#2b7be0" strokeWidth="0.8" opacity="0.35" />
+                  <line x1="2" y1="16" x2="30" y2="16" stroke="#2b7be0" strokeWidth="0.8" opacity="0.35" />
+                  <circle cx="16" cy="16" r="2.5" fill="#2b7be0" />
+                  <circle cx="16" cy="16" r="5" stroke="#2b7be0" strokeWidth="0.8" opacity="0.4" />
                 </svg>
               </div>
 
@@ -189,9 +189,9 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                             textTransform: 'uppercase' as const,
                             padding: '4px 12px',
                             borderRadius: '20px',
-                            background: 'rgba(0,194,184,0.12)',
-                            color: '#00c2b8',
-                            border: '1px solid rgba(0,194,184,0.3)',
+                            background: 'rgba(43,123,224,0.12)',
+                            color: '#2b7be0',
+                            border: '1px solid rgba(43,123,224,0.3)',
                           }
                         : {
                             display: 'inline-block',
@@ -267,7 +267,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          background: '#00c2b8',
+                          background: '#2b7be0',
                           flexShrink: 0,
                           marginTop: '5px',
                         }}
@@ -308,7 +308,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                       >
                         <path
                           d="M2 7l3.5 3.5L12 4"
-                          stroke="#00c2b8"
+                          stroke="#2b7be0"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"

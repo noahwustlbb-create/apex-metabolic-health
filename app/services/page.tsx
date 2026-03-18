@@ -23,7 +23,7 @@ function ServicesHero() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(0,194,184,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.08) 0%, transparent 60%)',
         }}
       />
 
@@ -32,7 +32,7 @@ function ServicesHero() {
         aria-hidden="true"
         className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 100%, rgba(0,194,184,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -96,7 +96,7 @@ const EXPERTISE = [
     description:
       'Comprehensive, doctor-ordered blood panels that go well beyond the standard GP screen. We test what\'s actually relevant to your health goals.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M13 14h4M13 17h4" strokeLinecap="round" />
       </svg>
@@ -107,7 +107,7 @@ const EXPERTISE = [
     description:
       'Assessment and clinical management of hormonal imbalances across a broad range of markers. Evidenced-based protocols, personalised to your pathology.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <circle cx="12" cy="8" r="4" />
         <path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" strokeLinecap="round" />
         <path d="M19 8h2M3 8h2M12 1v2M12 13v2" strokeLinecap="round" />
@@ -119,7 +119,7 @@ const EXPERTISE = [
     description:
       'Clinically evaluated ED management that addresses root causes, not just symptoms. Our doctors assess hormonal, vascular, and metabolic contributors.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
@@ -129,7 +129,7 @@ const EXPERTISE = [
     description:
       'Specialised clinical care for the conditions that disproportionately affect men — from hormonal decline to metabolic dysfunction and cardiovascular risk.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <circle cx="11" cy="11" r="7" />
         <path d="M21 21l-4.35-4.35M16 7l3-3m0 0h-3m3 0v3" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -140,7 +140,7 @@ const EXPERTISE = [
     description:
       'Hormonal health, perimenopause, and metabolic support for women. Assessed and managed by AHPRA-registered practitioners with access to comprehensive pathology.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <circle cx="12" cy="8" r="5" />
         <path d="M12 13v8M9 18h6" strokeLinecap="round" />
       </svg>
@@ -151,7 +151,7 @@ const EXPERTISE = [
     description:
       'Medically supervised programs that address the biological drivers of weight resistance — not just willpower. Hormonal, metabolic, and clinical factors assessed.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
         <circle cx="12" cy="12" r="2.5" />
       </svg>
@@ -162,7 +162,7 @@ const EXPERTISE = [
     description:
       'Doctor-prescribed treatment for skin regeneration and hair restoration. Built on what your bloodwork shows, not off-the-shelf solutions.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <path d="M12 2C7 2 4 6 4 10c0 5 8 12 8 12s8-7 8-12c0-4-3-8-8-8z" strokeLinecap="round" strokeLinejoin="round" />
         <circle cx="12" cy="10" r="2.5" />
       </svg>
@@ -173,7 +173,7 @@ const EXPERTISE = [
     description:
       'Clinically supported programs for tissue repair, injury recovery, and sustained physical performance. Evidence-based protocols, doctor-managed.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <path d="M6.5 6.5S4 7 4 9.5s3 4 3 4h10s3-1.5 3-4-2.5-3-2.5-3M6.5 6.5L4 4M17.5 6.5L20 4M7 13.5l-1 4.5h12l-1-4.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
@@ -183,7 +183,7 @@ const EXPERTISE = [
     description:
       'AHPRA-registered doctors can issue medical certificates and referral letters during a telehealth consultation. Fast, private, and Australia-wide.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <rect x="4" y="3" width="16" height="18" rx="2" />
         <path d="M8 7h8M8 11h8M8 15h5" strokeLinecap="round" />
       </svg>
@@ -194,7 +194,7 @@ const EXPERTISE = [
     description:
       'All consultations are conducted via secure video call — no travel, no waiting rooms. Available to adults anywhere in Australia.',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#00c2b8" strokeWidth="1.5" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
         <rect x="2" y="3" width="20" height="14" rx="2" />
         <path d="M8 21h8M12 17v4" strokeLinecap="round" />
         <circle cx="12" cy="10" r="2" />
@@ -253,8 +253,8 @@ function AreasOfExpertise() {
               <div
                 className="w-10 h-10 flex items-center justify-center rounded-sm mb-4 flex-shrink-0"
                 style={{
-                  backgroundColor: 'rgba(0,194,184,0.07)',
-                  border: '1px solid rgba(0,194,184,0.18)',
+                  backgroundColor: 'rgba(43,123,224,0.07)',
+                  border: '1px solid rgba(43,123,224,0.18)',
                 }}
               >
                 {item.icon}
@@ -374,9 +374,9 @@ function WhatWeTest() {
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"
                 style={{
-                  color: '#00c2b8',
-                  backgroundColor: 'rgba(0,194,184,0.08)',
-                  border: '1px solid rgba(0,194,184,0.2)',
+                  color: '#2b7be0',
+                  backgroundColor: 'rgba(43,123,224,0.08)',
+                  border: '1px solid rgba(43,123,224,0.2)',
                 }}
               >
                 Hormone Programs
@@ -387,7 +387,7 @@ function WhatWeTest() {
                 <li key={item} className="flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: '#00c2b8' }}
+                    style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
                   <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -415,9 +415,9 @@ function WhatWeTest() {
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"
                 style={{
-                  color: '#00c2b8',
-                  backgroundColor: 'rgba(0,194,184,0.08)',
-                  border: '1px solid rgba(0,194,184,0.2)',
+                  color: '#2b7be0',
+                  backgroundColor: 'rgba(43,123,224,0.08)',
+                  border: '1px solid rgba(43,123,224,0.2)',
                 }}
               >
                 Women&apos;s Programs
@@ -428,7 +428,7 @@ function WhatWeTest() {
                 <li key={item} className="flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: '#00c2b8' }}
+                    style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
                   <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -508,7 +508,7 @@ function YourJourney() {
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -537,7 +537,7 @@ function YourJourney() {
           {/* Vertical line */}
           <div
             className="absolute left-8 top-0 bottom-0 w-px hidden sm:block"
-            style={{ backgroundColor: 'rgba(0,194,184,0.1)' }}
+            style={{ backgroundColor: 'rgba(43,123,224,0.1)' }}
             aria-hidden="true"
           />
 
@@ -556,7 +556,7 @@ function YourJourney() {
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
                       backgroundColor: '#0d1117',
-                      border: '1px solid rgba(0,194,184,0.3)',
+                      border: '1px solid rgba(43,123,224,0.3)',
                     }}
                   >
                     <span
@@ -564,7 +564,7 @@ function YourJourney() {
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
                         fontSize: '20px',
-                        color: '#00c2b8',
+                        color: '#2b7be0',
                         letterSpacing: '-0.02em',
                       }}
                     >
@@ -613,7 +613,7 @@ function ServicesCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
         }}
       />
 

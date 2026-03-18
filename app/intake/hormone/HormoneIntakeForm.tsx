@@ -141,7 +141,7 @@ const defaultData: FormData = {
 function FieldLabel({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label className="block text-sm font-medium mb-1.5" style={{ color: '#8899aa' }}>
-      {children}{required && <span style={{ color: '#00c2b8' }}> *</span>}
+      {children}{required && <span style={{ color: '#2b7be0' }}> *</span>}
     </label>
   )
 }
@@ -157,7 +157,7 @@ function TextInput({ value, onChange, placeholder, type = 'text', inputMode, max
       placeholder={placeholder} inputMode={inputMode} maxLength={maxLength}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -172,7 +172,7 @@ function TextArea({ value, onChange, placeholder, rows = 4 }: {
       placeholder={placeholder} rows={rows}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -184,9 +184,9 @@ function RadioGroup({ options, value, onChange }: { options: string[]; value: st
         <button key={opt} type="button" onClick={() => onChange(opt)}
           className="px-5 py-2.5 rounded-sm text-sm font-medium transition-all duration-200"
           style={{
-            backgroundColor: value === opt ? 'rgba(0,194,184,0.12)' : '#070a0d',
-            border: `1px solid ${value === opt ? '#00c2b8' : '#1e2d3d'}`,
-            color: value === opt ? '#00c2b8' : '#8899aa',
+            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#070a0d',
+            border: `1px solid ${value === opt ? '#2b7be0' : '#1e2d3d'}`,
+            color: value === opt ? '#2b7be0' : '#8899aa',
           }}>
           {opt}
         </button>
@@ -204,8 +204,8 @@ function ScoreSelector({ value, onChange, label }: { value: string; onChange: (v
           <button key={n} type="button" onClick={() => onChange(n)}
             className="w-10 h-10 rounded-sm text-sm font-semibold transition-all duration-150"
             style={{
-              backgroundColor: value === n ? '#00c2b8' : '#070a0d',
-              border: `1px solid ${value === n ? '#00c2b8' : '#1e2d3d'}`,
+              backgroundColor: value === n ? '#2b7be0' : '#070a0d',
+              border: `1px solid ${value === n ? '#2b7be0' : '#1e2d3d'}`,
               color: value === n ? '#070a0d' : '#8899aa',
             }}>
             {n}
@@ -228,12 +228,12 @@ function CheckboxGroup({ options, value, onChange }: { options: string[]; value:
           <button key={opt} type="button" onClick={() => toggle(opt)}
             className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
             style={{
-              backgroundColor: checked ? 'rgba(0,194,184,0.07)' : '#070a0d',
-              border: `1px solid ${checked ? '#00c2b8' : '#1e2d3d'}`,
+              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#070a0d',
+              border: `1px solid ${checked ? '#2b7be0' : '#1e2d3d'}`,
               color: checked ? '#f0f4f8' : '#8899aa',
             }}>
             <span className="w-4 h-4 flex-shrink-0 rounded-sm flex items-center justify-center transition-colors"
-              style={{ backgroundColor: checked ? '#00c2b8' : 'transparent', border: `1px solid ${checked ? '#00c2b8' : '#4a5a6a'}` }}>
+              style={{ backgroundColor: checked ? '#2b7be0' : 'transparent', border: `1px solid ${checked ? '#2b7be0' : '#4a5a6a'}` }}>
               {checked && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#070a0d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </span>
             {opt}
@@ -248,7 +248,7 @@ function ConsentCheckbox({ checked, onChange, children }: { checked: boolean; on
   return (
     <button type="button" onClick={() => onChange(!checked)} className="flex items-start gap-3 text-left w-full">
       <span className="w-5 h-5 flex-shrink-0 mt-0.5 rounded-sm flex items-center justify-center transition-colors"
-        style={{ backgroundColor: checked ? '#00c2b8' : 'transparent', border: `1px solid ${checked ? '#00c2b8' : '#4a5a6a'}` }}>
+        style={{ backgroundColor: checked ? '#2b7be0' : 'transparent', border: `1px solid ${checked ? '#2b7be0' : '#4a5a6a'}` }}>
         {checked && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#070a0d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       </span>
       <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{children}</span>
@@ -270,7 +270,7 @@ function FileInput({ label, accept, hint, onFile, currentName }: {
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         {currentName ? (
-          <span className="text-sm font-medium" style={{ color: '#00c2b8' }}>{currentName}</span>
+          <span className="text-sm font-medium" style={{ color: '#2b7be0' }}>{currentName}</span>
         ) : (
           <span className="text-sm" style={{ color: '#4a5a6a' }}>Click to upload (optional)</span>
         )}
@@ -347,12 +347,12 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
   return (
     <div className="mb-10">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#00c2b8' }}>Step {step + 1} of {total}</span>
+        <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>Step {step + 1} of {total}</span>
         <span className="text-xs" style={{ color: '#4a5a6a' }}>{STEPS[step]}</span>
       </div>
       <div className="w-full h-0.5 rounded-full" style={{ backgroundColor: '#1e2d3d' }}>
         <div className="h-full rounded-full transition-all duration-500"
-          style={{ width: `${((step + 1) / total) * 100}%`, backgroundColor: '#00c2b8', boxShadow: '0 0 8px rgba(0,194,184,0.5)' }} />
+          style={{ width: `${((step + 1) / total) * 100}%`, backgroundColor: '#2b7be0', boxShadow: '0 0 8px rgba(43,123,224,0.5)' }} />
       </div>
     </div>
   )
@@ -369,12 +369,12 @@ function MealRow({ label, value, onChange }: { label: string; value: { food: str
         placeholder="Food description and amount"
         onFocus={() => setFocusedFood(true)} onBlur={() => setFocusedFood(false)}
         className="px-3 py-2.5 rounded-sm text-sm focus:outline-none transition-colors"
-        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedFood ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }} />
+        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedFood ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }} />
       <input value={value.time} onChange={(e) => onChange({ ...value, time: e.target.value })}
         placeholder="Time"
         onFocus={() => setFocusedTime(true)} onBlur={() => setFocusedTime(false)}
         className="px-3 py-2.5 rounded-sm text-sm focus:outline-none transition-colors"
-        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedTime ? '#00c2b8' : '#1e2d3d'}`, color: '#f0f4f8' }} />
+        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedTime ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }} />
     </div>
   )
 }
@@ -525,8 +525,8 @@ export default function HormoneIntakeForm() {
           <div className="container-tight">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl mx-auto text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-                style={{ backgroundColor: 'rgba(0,194,184,0.1)', border: '1px solid rgba(0,194,184,0.3)' }}>
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#00c2b8' }}>
+                style={{ backgroundColor: 'rgba(43,123,224,0.1)', border: '1px solid rgba(43,123,224,0.3)' }}>
+                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#2b7be0' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -568,9 +568,9 @@ export default function HormoneIntakeForm() {
           {resumeAvailable && (
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-between gap-4 px-5 py-4 rounded-sm mb-6"
-              style={{ backgroundColor: 'rgba(0,194,184,0.08)', border: '1px solid rgba(0,194,184,0.25)' }}>
+              style={{ backgroundColor: 'rgba(43,123,224,0.08)', border: '1px solid rgba(43,123,224,0.25)' }}>
               <p className="text-sm" style={{ color: '#f0f4f8' }}>You have a saved form in progress.</p>
-              <button type="button" onClick={resumeProgress} className="text-sm font-semibold flex-shrink-0" style={{ color: '#00c2b8' }}>Resume →</button>
+              <button type="button" onClick={resumeProgress} className="text-sm font-semibold flex-shrink-0" style={{ color: '#2b7be0' }}>Resume →</button>
             </motion.div>
           )}
 
@@ -746,7 +746,7 @@ export default function HormoneIntakeForm() {
                 <div className="space-y-8">
                   <h2 className="text-xl font-semibold mb-6" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>Health Scores & Conditions</h2>
                   <div className="space-y-6">
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#00c2b8' }}>Physical Health (0 = lowest, 10 = highest)</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>Physical Health (0 = lowest, 10 = highest)</p>
                     <ScoreSelector label="Current level of health" value={data.healthScore} onChange={(v) => set('healthScore', v)} />
                     <ScoreSelector label="Current energy level" value={data.energyScore} onChange={(v) => set('energyScore', v)} />
                     <div className="grid grid-cols-2 gap-5">
@@ -755,7 +755,7 @@ export default function HormoneIntakeForm() {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#00c2b8' }}>Mental Health (0 = lowest, 10 = highest)</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>Mental Health (0 = lowest, 10 = highest)</p>
                     <ScoreSelector label="Current stress level" value={data.stressScore} onChange={(v) => set('stressScore', v)} />
                     <div>
                       <FieldLabel required>Three most significant stressful events in your life</FieldLabel>
@@ -764,7 +764,7 @@ export default function HormoneIntakeForm() {
                     </div>
                   </div>
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#00c2b8' }}>Have You Had Any of the Following? (tick all that apply)</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Have You Had Any of the Following? (tick all that apply)</p>
                     <CheckboxGroup options={MEDICAL_CONDITIONS} value={data.conditions} onChange={(v) => set('conditions', v)} />
                   </div>
                 </div>
@@ -801,15 +801,15 @@ export default function HormoneIntakeForm() {
                   </div>
 
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#00c2b8' }}>Signature</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Signature</p>
                     <div className="flex gap-3 mb-4">
                       {(['draw', 'type'] as const).map((t) => (
                         <button key={t} type="button" onClick={() => set('signatureType', t)}
                           className="px-4 py-2 rounded-sm text-xs font-medium transition-all duration-150"
                           style={{
-                            backgroundColor: data.signatureType === t ? 'rgba(0,194,184,0.1)' : 'transparent',
-                            border: `1px solid ${data.signatureType === t ? '#00c2b8' : '#1e2d3d'}`,
-                            color: data.signatureType === t ? '#00c2b8' : '#4a5a6a',
+                            backgroundColor: data.signatureType === t ? 'rgba(43,123,224,0.1)' : 'transparent',
+                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : '#1e2d3d'}`,
+                            color: data.signatureType === t ? '#2b7be0' : '#4a5a6a',
                           }}>
                           {t === 'draw' ? 'Draw Signature' : 'Type Signature'}
                         </button>
@@ -842,7 +842,7 @@ export default function HormoneIntakeForm() {
                 <button type="button" onClick={back} className="btn-ghost text-sm px-5 py-3">← Back</button>
               )}
               <button type="button" onClick={saveProgress} className="text-sm transition-colors duration-150"
-                style={{ color: hasSaved ? '#00c2b8' : '#4a5a6a' }}>
+                style={{ color: hasSaved ? '#2b7be0' : '#4a5a6a' }}>
                 {hasSaved ? '✓ Progress saved' : 'Save & continue later'}
               </button>
             </div>

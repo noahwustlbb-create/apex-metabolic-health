@@ -157,7 +157,7 @@ function FieldLabel({ children, required }: { children: React.ReactNode; require
   return (
     <label className="block text-sm font-medium mb-1.5" style={{ color: '#8899aa' }}>
       {children}
-      {required && <span style={{ color: '#00c2b8' }}> *</span>}
+      {required && <span style={{ color: '#2b7be0' }}> *</span>}
     </label>
   )
 }
@@ -194,7 +194,7 @@ function TextInput({
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
       style={{
         backgroundColor: '#070a0d',
-        border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`,
+        border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`,
         color: '#f0f4f8',
       }}
     />
@@ -224,7 +224,7 @@ function TextArea({
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
       style={{
         backgroundColor: '#070a0d',
-        border: `1px solid ${focused ? '#00c2b8' : '#1e2d3d'}`,
+        border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`,
         color: '#f0f4f8',
       }}
     />
@@ -249,9 +249,9 @@ function RadioGroup({
           onClick={() => onChange(opt)}
           className="px-5 py-2.5 rounded-sm text-sm font-medium transition-all duration-200"
           style={{
-            backgroundColor: value === opt ? 'rgba(0,194,184,0.12)' : '#070a0d',
-            border: `1px solid ${value === opt ? '#00c2b8' : '#1e2d3d'}`,
-            color: value === opt ? '#00c2b8' : '#8899aa',
+            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#070a0d',
+            border: `1px solid ${value === opt ? '#2b7be0' : '#1e2d3d'}`,
+            color: value === opt ? '#2b7be0' : '#8899aa',
           }}
         >
           {opt}
@@ -294,16 +294,16 @@ function CheckboxGroup({
             onClick={() => toggle(opt)}
             className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
             style={{
-              backgroundColor: checked ? 'rgba(0,194,184,0.07)' : '#070a0d',
-              border: `1px solid ${checked ? '#00c2b8' : '#1e2d3d'}`,
+              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#070a0d',
+              border: `1px solid ${checked ? '#2b7be0' : '#1e2d3d'}`,
               color: checked ? '#f0f4f8' : '#8899aa',
             }}
           >
             <span
               className="w-4 h-4 flex-shrink-0 rounded-sm flex items-center justify-center transition-colors duration-150"
               style={{
-                backgroundColor: checked ? '#00c2b8' : 'transparent',
-                border: `1px solid ${checked ? '#00c2b8' : '#4a5a6a'}`,
+                backgroundColor: checked ? '#2b7be0' : 'transparent',
+                border: `1px solid ${checked ? '#2b7be0' : '#4a5a6a'}`,
               }}
             >
               {checked && (
@@ -338,8 +338,8 @@ function ConsentCheckbox({
       <span
         className="w-5 h-5 flex-shrink-0 mt-0.5 rounded-sm flex items-center justify-center transition-colors duration-150"
         style={{
-          backgroundColor: checked ? '#00c2b8' : 'transparent',
-          border: `1px solid ${checked ? '#00c2b8' : '#4a5a6a'}`,
+          backgroundColor: checked ? '#2b7be0' : 'transparent',
+          border: `1px solid ${checked ? '#2b7be0' : '#4a5a6a'}`,
         }}
       >
         {checked && (
@@ -381,7 +381,7 @@ function FileInput({
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         {currentName ? (
-          <span className="text-sm font-medium" style={{ color: '#00c2b8' }}>{currentName}</span>
+          <span className="text-sm font-medium" style={{ color: '#2b7be0' }}>{currentName}</span>
         ) : (
           <span className="text-sm" style={{ color: '#4a5a6a' }}>Click to upload</span>
         )}
@@ -523,7 +523,7 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
   return (
     <div className="mb-10">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#00c2b8' }}>
+        <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>
           Step {step + 1} of {total}
         </span>
         <span className="text-xs" style={{ color: '#4a5a6a' }}>
@@ -535,8 +535,8 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
           className="h-full rounded-full transition-all duration-500"
           style={{
             width: `${((step + 1) / total) * 100}%`,
-            backgroundColor: '#00c2b8',
-            boxShadow: '0 0 8px rgba(0,194,184,0.5)',
+            backgroundColor: '#2b7be0',
+            boxShadow: '0 0 8px rgba(43,123,224,0.5)',
           }}
         />
       </div>
@@ -728,9 +728,9 @@ export default function GeneralIntakeForm() {
             >
               <div
                 className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-                style={{ backgroundColor: 'rgba(0,194,184,0.1)', border: '1px solid rgba(0,194,184,0.3)' }}
+                style={{ backgroundColor: 'rgba(43,123,224,0.1)', border: '1px solid rgba(43,123,224,0.3)' }}
               >
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#00c2b8' }}>
+                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#2b7be0' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -777,14 +777,14 @@ export default function GeneralIntakeForm() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-between gap-4 px-5 py-4 rounded-sm mb-6"
-              style={{ backgroundColor: 'rgba(0,194,184,0.08)', border: '1px solid rgba(0,194,184,0.25)' }}
+              style={{ backgroundColor: 'rgba(43,123,224,0.08)', border: '1px solid rgba(43,123,224,0.25)' }}
             >
               <p className="text-sm" style={{ color: '#f0f4f8' }}>You have a saved form in progress.</p>
               <button
                 type="button"
                 onClick={resumeProgress}
                 className="text-sm font-semibold flex-shrink-0"
-                style={{ color: '#00c2b8' }}
+                style={{ color: '#2b7be0' }}
               >
                 Resume →
               </button>
@@ -898,7 +898,7 @@ export default function GeneralIntakeForm() {
 
                   <div
                     className="p-5 rounded-sm"
-                    style={{ backgroundColor: 'rgba(0,194,184,0.04)', border: '1px solid #1e2d3d' }}
+                    style={{ backgroundColor: 'rgba(43,123,224,0.04)', border: '1px solid #1e2d3d' }}
                   >
                     <ConsentCheckbox checked={data.notMultipleClinic} onChange={(v) => set('notMultipleClinic', v)}>
                       I confirm and agree that I am not procuring medication or treatments through multiple clinics for the same conditions for either personal use or on-selling, and understand that it would be illegal to do so and would result in immediate termination of any relationship with Apex Metabolic Health.
@@ -938,12 +938,12 @@ export default function GeneralIntakeForm() {
                     <FieldLabel required>Consult Option</FieldLabel>
                     <div
                       className="p-5 rounded-sm"
-                      style={{ backgroundColor: 'rgba(0,194,184,0.06)', border: '1px solid rgba(0,194,184,0.25)' }}
+                      style={{ backgroundColor: 'rgba(43,123,224,0.06)', border: '1px solid rgba(43,123,224,0.25)' }}
                     >
                       <div className="flex items-start gap-3">
                         <div
                           className="w-4 h-4 rounded-sm flex-shrink-0 mt-0.5 flex items-center justify-center"
-                          style={{ backgroundColor: '#00c2b8', border: '1px solid #00c2b8' }}
+                          style={{ backgroundColor: '#2b7be0', border: '1px solid #2b7be0' }}
                         >
                           <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3">
                             <path d="M2 6l3 3 5-5" stroke="#070a0d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -969,16 +969,16 @@ export default function GeneralIntakeForm() {
                           onClick={() => set('healthCondition', cond)}
                           className="w-full flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                           style={{
-                            backgroundColor: data.healthCondition === cond ? 'rgba(0,194,184,0.08)' : '#070a0d',
-                            border: `1px solid ${data.healthCondition === cond ? '#00c2b8' : '#1e2d3d'}`,
+                            backgroundColor: data.healthCondition === cond ? 'rgba(43,123,224,0.08)' : '#070a0d',
+                            border: `1px solid ${data.healthCondition === cond ? '#2b7be0' : '#1e2d3d'}`,
                             color: data.healthCondition === cond ? '#f0f4f8' : '#8899aa',
                           }}
                         >
                           <span
                             className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
                             style={{
-                              border: `1px solid ${data.healthCondition === cond ? '#00c2b8' : '#4a5a6a'}`,
-                              backgroundColor: data.healthCondition === cond ? '#00c2b8' : 'transparent',
+                              border: `1px solid ${data.healthCondition === cond ? '#2b7be0' : '#4a5a6a'}`,
+                              backgroundColor: data.healthCondition === cond ? '#2b7be0' : 'transparent',
                             }}
                           >
                             {data.healthCondition === cond && (
@@ -1132,7 +1132,7 @@ export default function GeneralIntakeForm() {
 
                   {/* Agent Agreement */}
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#00c2b8' }}>Agent Agreement</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Agent Agreement</p>
                     <div
                       className="p-5 rounded-sm mb-4 text-xs leading-relaxed"
                       style={{ backgroundColor: '#0d1117', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
@@ -1146,7 +1146,7 @@ export default function GeneralIntakeForm() {
 
                   {/* GP Agreement */}
                   <div className="space-y-4">
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#00c2b8' }}>GP & Check Agreements</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>GP & Check Agreements</p>
                     <ConsentCheckbox checked={data.agreeGP} onChange={(v) => set('agreeGP', v)}>
                       I agree to attend my regular Doctor (GP) or Specialist for full health checks.
                     </ConsentCheckbox>
@@ -1163,7 +1163,7 @@ export default function GeneralIntakeForm() {
 
                   {/* Waiver */}
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#00c2b8' }}>Waiver / Disclaimer</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Waiver / Disclaimer</p>
                     <div
                       className="p-5 rounded-sm mb-4 text-xs leading-relaxed"
                       style={{ backgroundColor: '#0d1117', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
@@ -1174,7 +1174,7 @@ export default function GeneralIntakeForm() {
 
                   {/* Signature */}
                   <div>
-                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#00c2b8' }}>Signature</p>
+                    <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Signature</p>
                     <div className="flex gap-3 mb-4">
                       {(['draw', 'type'] as const).map((t) => (
                         <button
@@ -1183,9 +1183,9 @@ export default function GeneralIntakeForm() {
                           onClick={() => set('signatureType', t)}
                           className="px-4 py-2 rounded-sm text-xs font-medium transition-all duration-150"
                           style={{
-                            backgroundColor: data.signatureType === t ? 'rgba(0,194,184,0.1)' : 'transparent',
-                            border: `1px solid ${data.signatureType === t ? '#00c2b8' : '#1e2d3d'}`,
-                            color: data.signatureType === t ? '#00c2b8' : '#4a5a6a',
+                            backgroundColor: data.signatureType === t ? 'rgba(43,123,224,0.1)' : 'transparent',
+                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : '#1e2d3d'}`,
+                            color: data.signatureType === t ? '#2b7be0' : '#4a5a6a',
                           }}
                         >
                           {t === 'draw' ? 'Draw Signature' : 'Type Signature'}
@@ -1239,7 +1239,7 @@ export default function GeneralIntakeForm() {
                 type="button"
                 onClick={saveProgress}
                 className="text-sm transition-colors duration-150"
-                style={{ color: hasSaved ? '#00c2b8' : '#4a5a6a' }}
+                style={{ color: hasSaved ? '#2b7be0' : '#4a5a6a' }}
               >
                 {hasSaved ? '✓ Progress saved' : 'Save & continue later'}
               </button>

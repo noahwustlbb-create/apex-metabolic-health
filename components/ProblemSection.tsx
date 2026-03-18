@@ -86,9 +86,9 @@ function SymptomCard({ symptom, index }: { symptom: typeof SYMPTOMS[0]; index: n
       <div
         className="flex-shrink-0 w-9 h-9 rounded-sm flex items-center justify-center transition-colors duration-300"
         style={{
-          backgroundColor: 'rgba(0,194,184,0.08)',
-          color: '#00c2b8',
-          border: '1px solid rgba(0,194,184,0.15)',
+          backgroundColor: 'rgba(43,123,224,0.08)',
+          color: '#2b7be0',
+          border: '1px solid rgba(43,123,224,0.15)',
         }}
       >
         {symptom.icon}
@@ -124,7 +124,7 @@ export default function ProblemSection() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(0,194,184,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -181,8 +181,8 @@ export default function ProblemSection() {
           <div
             className="px-8 py-6 rounded-sm"
             style={{
-              backgroundColor: 'rgba(0,194,184,0.04)',
-              border: '1px solid rgba(0,194,184,0.15)',
+              backgroundColor: 'rgba(43,123,224,0.04)',
+              border: '1px solid rgba(43,123,224,0.15)',
             }}
           >
             <p className="text-base md:text-lg leading-relaxed" style={{ color: '#8899aa' }}>

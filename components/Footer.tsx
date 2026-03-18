@@ -27,7 +27,7 @@ export default function Footer() {
       <div
         className="h-px w-full"
         style={{
-          background: 'linear-gradient(90deg, transparent, rgba(0,194,184,0.3), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(43,123,224,0.3), transparent)',
         }}
         aria-hidden="true"
       />

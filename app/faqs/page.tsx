@@ -29,7 +29,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
         <span
           style={{
-            color: '#00c2b8',
+            color: '#2b7be0',
             fontSize: '22px',
             lineHeight: 1,
             flexShrink: 0,
@@ -208,7 +208,7 @@ function FAQHero() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(0,194,184,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -315,7 +315,7 @@ function FAQBottomCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
         }}
       />
 

@@ -21,7 +21,7 @@ function HowItWorksHero() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(0,194,184,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -151,7 +151,7 @@ function FullProcess() {
           {/* Vertical connector line */}
           <div
             className="absolute left-8 top-0 bottom-0 w-px hidden sm:block"
-            style={{ backgroundColor: 'rgba(0,194,184,0.1)' }}
+            style={{ backgroundColor: 'rgba(43,123,224,0.1)' }}
             aria-hidden="true"
           />
 
@@ -170,7 +170,7 @@ function FullProcess() {
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
                       backgroundColor: '#0d1117',
-                      border: '1px solid rgba(0,194,184,0.3)',
+                      border: '1px solid rgba(43,123,224,0.3)',
                     }}
                   >
                     <span
@@ -178,7 +178,7 @@ function FullProcess() {
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
                         fontSize: '22px',
-                        color: '#00c2b8',
+                        color: '#2b7be0',
                         letterSpacing: '-0.02em',
                       }}
                     >
@@ -200,9 +200,9 @@ function FullProcess() {
                       <span
                         className="text-xs font-medium px-2.5 py-1 rounded-sm"
                         style={{
-                          color: '#00c2b8',
-                          backgroundColor: 'rgba(0,194,184,0.08)',
-                          border: '1px solid rgba(0,194,184,0.2)',
+                          color: '#2b7be0',
+                          backgroundColor: 'rgba(43,123,224,0.08)',
+                          border: '1px solid rgba(43,123,224,0.2)',
                         }}
                       >
                         {step.subtitle}
@@ -249,7 +249,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
         <span
           style={{
-            color: '#00c2b8',
+            color: '#2b7be0',
             fontSize: '22px',
             lineHeight: 1,
             flexShrink: 0,
@@ -317,7 +317,7 @@ function FAQSection() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(0,194,184,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -367,7 +367,7 @@ function HowItWorksCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(0,194,184,0.07) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.07) 0%, transparent 60%)',
         }}
       />
 

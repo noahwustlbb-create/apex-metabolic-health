@@ -147,7 +147,7 @@ export default function Nav() {
                             style={{ color: '#8899aa' }}
                             onMouseEnter={(e) => {
                               e.currentTarget.style.color = '#f0f4f8'
-                              e.currentTarget.style.backgroundColor = 'rgba(0,194,184,0.06)'
+                              e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.06)'
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.color = '#8899aa'

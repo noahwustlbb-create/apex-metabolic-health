@@ -101,7 +101,7 @@
 
   .apex-card:hover {
     border-color: var(--teal);
-    box-shadow: 0 0 0 1px rgba(0, 194, 184, 0.2), 0 8px 40px rgba(0, 194, 184, 0.1);
+    box-shadow: 0 0 0 1px rgba(43, 123, 224, 0.2), 0 8px 40px rgba(43, 123, 224, 0.1);
     transform: translateY(-2px);
   }
 
@@ -125,7 +125,7 @@
 
   .btn-teal:hover {
     background: #00d9ce;
-    box-shadow: 0 0 30px rgba(0, 194, 184, 0.4);
+    box-shadow: 0 0 30px rgba(43, 123, 224, 0.4);
   }
 
   /* Ghost button */
@@ -139,7 +139,7 @@
   .btn-ghost:hover {
     background: var(--teal);
     color: var(--bg);
-    box-shadow: 0 0 30px rgba(0, 194, 184, 0.3);
+    box-shadow: 0 0 30px rgba(43, 123, 224, 0.3);
   }
 
   /* Stat number style */

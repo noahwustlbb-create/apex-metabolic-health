@@ -76,7 +76,7 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget
-        el.style.borderColor = 'rgba(0,194,184,0.35)'
+        el.style.borderColor = 'rgba(43,123,224,0.35)'
         el.style.backgroundColor = '#0f1a22'
       }}
       onMouseLeave={(e) => {
@@ -89,9 +89,9 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       <div
         className="w-14 h-14 rounded-sm flex items-center justify-center mb-6"
         style={{
-          backgroundColor: 'rgba(0,194,184,0.07)',
-          border: '1px solid rgba(0,194,184,0.18)',
-          color: '#00c2b8',
+          backgroundColor: 'rgba(43,123,224,0.07)',
+          border: '1px solid rgba(43,123,224,0.18)',
+          color: '#2b7be0',
         }}
       >
         {item.icon}
@@ -100,7 +100,7 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       {/* Accent bar */}
       <div
         className="w-8 h-px mb-5"
-        style={{ backgroundColor: '#00c2b8', opacity: 0.5 }}
+        style={{ backgroundColor: '#2b7be0', opacity: 0.5 }}
       />
 
       <h3
@@ -134,7 +134,7 @@ export default function WhyApex() {
         aria-hidden="true"
         className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 50%, rgba(0,194,184,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 50%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 

@@ -172,9 +172,9 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         <div
           className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
           style={{
-            backgroundColor: 'rgba(0,194,184,0.07)',
-            border: '1px solid rgba(0,194,184,0.18)',
-            color: '#00c2b8',
+            backgroundColor: 'rgba(43,123,224,0.07)',
+            border: '1px solid rgba(43,123,224,0.18)',
+            color: '#2b7be0',
           }}
         >
           {program.icon}
@@ -203,7 +203,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         >
           <span
             className="text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
-            style={{ color: '#00c2b8' }}
+            style={{ color: '#2b7be0' }}
           >
             Learn More
           </span>
@@ -211,7 +211,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
             viewBox="0 0 16 16"
             fill="none"
             className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
-            style={{ color: '#00c2b8' }}
+            style={{ color: '#2b7be0' }}
             aria-hidden="true"
           >
             <path
@@ -235,7 +235,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
             left: '50%',
             transform: 'translateX(-50%)',
             background: 'rgba(7,10,13,0.75)',
-            color: '#00c2b8',
+            color: '#2b7be0',
             fontSize: '11px',
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
@@ -276,7 +276,7 @@ export default function ProgramsGrid() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(0,194,184,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 
