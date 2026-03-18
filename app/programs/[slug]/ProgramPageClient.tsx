@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -40,104 +41,133 @@ function ProgramHero({ program }: { program: Program }) {
       <div className="glow-rule" aria-hidden="true" />
 
       <div className="container-tight relative z-10 mt-8">
-        {/* Badge */}
-        {program.badge && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-4"
-          >
-            <span
-              className="inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase px-3 py-1.5 rounded-sm"
-              style={
-                program.badge === 'Flagship'
-                  ? {
-                      color: '#00c2b8',
-                      backgroundColor: 'rgba(0,194,184,0.1)',
-                      border: '1px solid rgba(0,194,184,0.25)',
-                    }
-                  : {
-                      color: '#c9a84c',
-                      backgroundColor: 'rgba(201,168,76,0.1)',
-                      border: '1px solid rgba(201,168,76,0.25)',
-                    }
-              }
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Text content */}
+          <div>
+            {/* Badge */}
+            {program.badge && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-4"
+              >
+                <span
+                  className="inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase px-3 py-1.5 rounded-sm"
+                  style={
+                    program.badge === 'Flagship'
+                      ? {
+                          color: '#00c2b8',
+                          backgroundColor: 'rgba(0,194,184,0.1)',
+                          border: '1px solid rgba(0,194,184,0.25)',
+                        }
+                      : {
+                          color: '#c9a84c',
+                          backgroundColor: 'rgba(201,168,76,0.1)',
+                          border: '1px solid rgba(201,168,76,0.25)',
+                        }
+                  }
+                >
+                  {program.badge}
+                </span>
+              </motion.div>
+            )}
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: program.badge ? 0.05 : 0 }}
+              className="label mb-5"
             >
-              {program.badge}
-            </span>
-          </motion.div>
-        )}
+              CLINICAL PROGRAM
+            </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: program.badge ? 0.05 : 0 }}
-          className="label mb-5"
-        >
-          CLINICAL PROGRAM
-        </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+            >
+              {program.name}
+            </motion.h1>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
-        >
-          {program.name}
-        </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="text-xl font-medium mb-6 max-w-2xl"
+              style={{ color: '#8899aa' }}
+            >
+              {program.tagline}
+            </motion.p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.18 }}
-          className="text-xl font-medium mb-6 max-w-2xl"
-          style={{ color: '#8899aa' }}
-        >
-          {program.tagline}
-        </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.26 }}
+              className="mb-8"
+            >
+              <Link
+                href="/pricing"
+                className="inline-flex items-center gap-1.5 text-sm font-medium"
+                style={{ color: '#00c2b8' }}
+              >
+                View transparent pricing
+                <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
+                  <path
+                    d="M3 8h10M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.26 }}
-          className="mb-8"
-        >
-          <Link
-            href="/pricing"
-            className="inline-flex items-center gap-1.5 text-sm font-medium"
-            style={{ color: '#00c2b8' }}
-          >
-            View transparent pricing
-            <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
-              <path
-                d="M3 8h10M9 4l4 4-4 4"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.38 }}
+              className="flex flex-wrap gap-4"
+            >
+              {program.status === 'coming-soon' ? (
+                <a href="#" data-cta="waitlist" className="btn-ghost">
+                  Join the Waitlist
+                </a>
+              ) : (
+                <Link href={program.ctaHref} className="btn-teal">
+                  {program.ctaLabel}
+                </Link>
+              )}
+            </motion.div>
+          </div>
+
+          {/* Hero image */}
+          {program.image && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="relative aspect-[4/3] rounded-sm overflow-hidden hidden lg:block"
+              style={{ border: '1px solid #1e2d3d' }}
+            >
+              <Image
+                src={program.image}
+                alt={program.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 0vw, 50vw"
+                priority
               />
-            </svg>
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.38 }}
-          className="flex flex-wrap gap-4"
-        >
-          {program.status === 'coming-soon' ? (
-            <a href="#" data-cta="waitlist" className="btn-ghost">
-              Join the Waitlist
-            </a>
-          ) : (
-            <Link href={program.ctaHref} className="btn-teal">
-              {program.ctaLabel}
-            </Link>
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(135deg, rgba(0,194,184,0.08) 0%, transparent 60%)' }}
+              />
+            </motion.div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

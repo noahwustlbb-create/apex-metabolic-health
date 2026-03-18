@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import ProgramModal from './ProgramModal'
 import { programs } from '@/lib/programs'
 import type { Program } from '@/lib/programs'
@@ -141,67 +142,87 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
       initial={{ opacity: 0, y: 28 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="apex-card program-card p-6 flex flex-col group h-full"
+      className="apex-card program-card flex flex-col group h-full overflow-hidden"
       style={{
         cursor: fullProgram ? 'pointer' : 'default',
         position: 'relative',
       }}
       onClick={handleCardClick}
     >
-      {/* Icon */}
-      <div
-        className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
-        style={{
-          backgroundColor: 'rgba(0,194,184,0.07)',
-          border: '1px solid rgba(0,194,184,0.18)',
-          color: '#00c2b8',
-        }}
-      >
-        {program.icon}
-      </div>
-
-      {/* Program name */}
-      <h3
-        className="text-base font-semibold mb-2.5 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-      >
-        {program.name}
-      </h3>
-
-      {/* Description */}
-      <p
-        className="text-sm leading-relaxed flex-1 mb-5"
-        style={{ color: '#8899aa' }}
-      >
-        {program.description}
-      </p>
-
-      {/* Link */}
-      <div
-        className="flex items-center gap-1.5 mt-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <span
-          className="text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
-          style={{ color: '#00c2b8' }}
-        >
-          Learn More
-        </span>
-        <svg
-          viewBox="0 0 16 16"
-          fill="none"
-          className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
-          style={{ color: '#00c2b8' }}
-          aria-hidden="true"
-        >
-          <path
-            d="M3 8h10M9 4l4 4-4 4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      {/* Image strip */}
+      {fullProgram?.image && (
+        <div className="relative w-full h-36 flex-shrink-0 overflow-hidden">
+          <Image
+            src={fullProgram.image}
+            alt={program.name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
-        </svg>
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(13,17,23,0.85) 100%)' }}
+          />
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-1">
+        {/* Icon */}
+        <div
+          className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
+          style={{
+            backgroundColor: 'rgba(0,194,184,0.07)',
+            border: '1px solid rgba(0,194,184,0.18)',
+            color: '#00c2b8',
+          }}
+        >
+          {program.icon}
+        </div>
+
+        {/* Program name */}
+        <h3
+          className="text-base font-semibold mb-2.5 leading-snug"
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        >
+          {program.name}
+        </h3>
+
+        {/* Description */}
+        <p
+          className="text-sm leading-relaxed flex-1 mb-5"
+          style={{ color: '#8899aa' }}
+        >
+          {program.description}
+        </p>
+
+        {/* Link */}
+        <div
+          className="flex items-center gap-1.5 mt-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <span
+            className="text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
+            style={{ color: '#00c2b8' }}
+          >
+            Learn More
+          </span>
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
+            style={{ color: '#00c2b8' }}
+            aria-hidden="true"
+          >
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
       </div>
 
       {/* View Details hover hint */}
