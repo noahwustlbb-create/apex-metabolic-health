@@ -115,7 +115,7 @@ function BookingCards() {
               understand your goals and point you in the right direction. No cost, no commitment.
             </p>
             <a
-              href="/intake/hormone"
+              href="/intake/discovery"
               data-cta="book-discovery-call"
               className="btn-teal w-full block text-center"
             >
