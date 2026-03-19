@@ -1,12 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+
+const HIDDEN_PATHS = ['/intake', '/get-started']
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState(false)
+  const pathname = usePathname()
+
+  const isHidden = HIDDEN_PATHS.some((p) => pathname.startsWith(p))
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400)
@@ -16,7 +22,7 @@ export default function FloatingCTA() {
 
   return (
     <AnimatePresence>
-      {visible && (
+      {visible && !isHidden && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
