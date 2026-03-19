@@ -413,7 +413,7 @@ function WhatWeTest() {
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8"
+            className="apex-card p-8 flex flex-col"
           >
             <div className="flex items-center gap-3 mb-5">
               <h3
@@ -433,7 +433,7 @@ function WhatWeTest() {
                 Hormone Programs
               </span>
             </div>
-            <ul className="space-y-2 mb-7">
+            <ul className="space-y-2 mb-7 flex-1">
               {HORMONAL_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span
@@ -461,7 +461,7 @@ function WhatWeTest() {
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8"
+            className="apex-card p-8 flex flex-col"
           >
             <div className="flex items-center gap-3 mb-5">
               <h3
@@ -481,7 +481,7 @@ function WhatWeTest() {
                 Women&apos;s Programs
               </span>
             </div>
-            <ul className="space-y-2 mb-7">
+            <ul className="space-y-2 mb-7 flex-1">
               {WOMENS_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span
