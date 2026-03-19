@@ -468,7 +468,7 @@ function WhatWeTest() {
                 className="text-lg font-semibold leading-snug"
                 style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
               >
-                Women&apos;s Health Panel
+                Metabolic Health Panel
               </h3>
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"
@@ -478,7 +478,7 @@ function WhatWeTest() {
                   border: '1px solid rgba(43,123,224,0.2)',
                 }}
               >
-                Women&apos;s Programs
+                Metabolic Programs
               </span>
             </div>
             <ul className="space-y-2 mb-7 flex-1">
@@ -501,7 +501,7 @@ function WhatWeTest() {
               rel="noopener noreferrer"
               className="btn-teal w-full text-center text-xs"
             >
-              Order Women&apos;s Panel
+              Order Metabolic Panel
             </a>
           </motion.div>
         </div>
