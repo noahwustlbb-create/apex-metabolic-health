@@ -97,7 +97,7 @@ export default function PathologyPanel() {
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8"
+            className="apex-card p-8 flex flex-col"
           >
             <div className="flex items-center gap-3 mb-6">
               <div
@@ -127,7 +127,7 @@ export default function PathologyPanel() {
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7 flex-1">
               {HORMONAL_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-2.5">
                   <span
@@ -156,7 +156,7 @@ export default function PathologyPanel() {
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8"
+            className="apex-card p-8 flex flex-col"
           >
             <div className="flex items-center gap-3 mb-6">
               <div
@@ -186,7 +186,7 @@ export default function PathologyPanel() {
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7 flex-1">
               {WOMENS_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-2.5">
                   <span

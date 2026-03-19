@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
+  { label: 'Order Bloods', href: '/order-bloods' },
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
@@ -266,6 +267,7 @@ export default function Nav() {
               <nav className="flex flex-col gap-2 flex-1 justify-center">
                 {[
                   { label: 'Programs', href: '/services' },
+                  { label: 'Order Bloods', href: '/order-bloods' },
                   { label: 'How It Works', href: '/how-it-works' },
                   { label: 'Pricing', href: '/pricing' },
                   { label: 'FAQs', href: '/faqs' },
