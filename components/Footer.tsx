@@ -45,7 +45,7 @@ export default function Footer() {
                 width={120}
                 height={120}
                 className="w-auto"
-                style={{ height: '56px' }}
+                style={{ height: '56px', mixBlendMode: 'screen' }}
               />
               <div className="flex flex-col leading-none gap-[3px] hidden">
                 <span>APEX METABOLIC</span>

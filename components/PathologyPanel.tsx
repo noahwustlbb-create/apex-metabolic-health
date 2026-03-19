@@ -127,7 +127,7 @@ export default function PathologyPanel() {
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7">
               {HORMONAL_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-2.5">
                   <span
@@ -141,6 +141,14 @@ export default function PathologyPanel() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://imedical.com.au/order/blood-tests/apexmeta-trt-panel&tracking=69bae136964db"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-teal w-full text-center text-xs"
+            >
+              Order Men&apos;s Panel
+            </a>
           </motion.div>
 
           {/* Women's Panel */}
@@ -178,7 +186,7 @@ export default function PathologyPanel() {
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7">
               {WOMENS_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-2.5">
                   <span
@@ -192,6 +200,14 @@ export default function PathologyPanel() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://imedical.com.au/order/blood-tests/apex-meta-weightloss&tracking=69bae136964db"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-teal w-full text-center text-xs"
+            >
+              Order Women&apos;s Panel
+            </a>
           </motion.div>
         </div>
 

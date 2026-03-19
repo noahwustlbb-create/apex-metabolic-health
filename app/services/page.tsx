@@ -436,7 +436,7 @@ function WhatWeTest() {
                 Hormone Programs
               </span>
             </div>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-7">
               {HORMONAL_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span
@@ -450,6 +450,14 @@ function WhatWeTest() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://imedical.com.au/order/blood-tests/apexmeta-trt-panel&tracking=69bae136964db"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-teal w-full text-center text-xs"
+            >
+              Order Men&apos;s Panel
+            </a>
           </motion.div>
 
           <motion.div
@@ -476,7 +484,7 @@ function WhatWeTest() {
                 Women&apos;s Programs
               </span>
             </div>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-7">
               {WOMENS_PANEL.map((item) => (
                 <li key={item} className="flex items-center gap-3">
                   <span
@@ -490,6 +498,14 @@ function WhatWeTest() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://imedical.com.au/order/blood-tests/apex-meta-weightloss&tracking=69bae136964db"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-teal w-full text-center text-xs"
+            >
+              Order Women&apos;s Panel
+            </a>
           </motion.div>
         </div>
 
