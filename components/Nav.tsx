@@ -17,6 +17,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
+  const [getStartedOpen, setGetStartedOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -216,14 +217,70 @@ export default function Nav() {
             </a>
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
+          {/* Desktop CTA with dropdown */}
+          <div
+            className="hidden md:block relative"
+            onMouseEnter={() => setGetStartedOpen(true)}
+            onMouseLeave={() => setGetStartedOpen(false)}
+          >
             <Link
               href="/get-started"
-              className="btn-ghost text-[11px] tracking-[0.18em] uppercase py-3 px-6"
+              className="btn-ghost text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2"
             >
               Get Started
+              <svg
+                viewBox="0 0 12 12"
+                fill="none"
+                className="w-3 h-3 transition-transform duration-200"
+                style={{ transform: getStartedOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                aria-hidden="true"
+              >
+                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </Link>
+
+            <AnimatePresence>
+              {getStartedOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                  transition={{ duration: 0.18, ease: 'easeOut' }}
+                  className="absolute top-full right-0 mt-2 z-50"
+                  style={{
+                    width: '220px',
+                    background: '#0d1117',
+                    border: '1px solid #1e2d3d',
+                    borderRadius: '8px',
+                    boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
+                  }}
+                >
+                  <div className="p-2 flex flex-col gap-0.5">
+                    {[
+                      { label: 'Get Started', desc: 'Not sure where to begin', href: '/get-started' },
+                      { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
+                      { label: 'General Check Up', desc: 'Weight loss, peptides & more', href: '/intake/general' },
+                    ].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
+                        style={{ color: '#f0f4f8' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.06)'
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = 'transparent'
+                        }}
+                      >
+                        <span className="text-[13px] font-semibold">{item.label}</span>
+                        <span className="text-[11px] mt-0.5" style={{ color: '#4a5a6a' }}>{item.desc}</span>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile hamburger */}
