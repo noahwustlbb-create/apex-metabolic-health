@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import ProgramModal from './ProgramModal'
@@ -12,6 +13,7 @@ interface LocalProgram {
   name: string
   description: string
   slug?: string
+  href?: string
 }
 
 const PROGRAMS: LocalProgram[] = [
@@ -100,6 +102,7 @@ const PROGRAMS: LocalProgram[] = [
     name: 'Comprehensive Blood Panels',
     description:
       'Advanced pathology testing that goes beyond the standard GP screen — giving you a complete metabolic and hormonal picture.',
+    href: '/order-bloods',
   },
   {
     icon: (
@@ -113,6 +116,7 @@ const PROGRAMS: LocalProgram[] = [
     name: 'General Telehealth',
     description:
       'Access to our AHPRA-registered doctors for general health consultations, referrals, and medical management.',
+    href: '/intake/general',
   },
 ]
 
@@ -124,6 +128,7 @@ interface ProgramCardProps {
 
 function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
   const ref = useRef(null)
+  const router = useRouter()
   const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   const fullProgram = program.slug
@@ -131,7 +136,9 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
     : null
 
   const handleCardClick = () => {
-    if (fullProgram) {
+    if (program.href) {
+      router.push(program.href)
+    } else if (fullProgram) {
       onOpen(fullProgram)
     }
   }
