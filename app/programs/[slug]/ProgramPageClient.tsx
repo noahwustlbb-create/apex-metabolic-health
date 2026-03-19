@@ -151,13 +151,13 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="relative aspect-[4/3] rounded-sm overflow-hidden hidden lg:block"
-              style={{ border: '1px solid #1e2d3d' }}
+              style={{ border: '1px solid #1e2d3d', background: '#070a0d' }}
             >
               <Image
                 src={program.image}
                 alt={program.name}
                 fill
-                className="object-cover"
+                className="object-contain"
                 sizes="(max-width: 1024px) 0vw, 50vw"
                 priority
               />

@@ -97,13 +97,13 @@ function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0
       aria-label={program.name}
     >
       {/* Image */}
-      <div className="relative h-52 overflow-hidden flex-shrink-0">
+      <div className="relative h-56 overflow-hidden flex-shrink-0" style={{ background: '#070a0d' }}>
         {program.image ? (
           <Image
             src={program.image}
             alt={program.name}
             fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-contain transition-transform duration-700 group-hover:scale-105"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
@@ -113,7 +113,7 @@ function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(to top, rgba(13,17,23,0.85) 0%, transparent 50%)',
+            background: 'linear-gradient(to top, rgba(13,17,23,0.6) 0%, transparent 40%)',
           }}
           aria-hidden="true"
         />
