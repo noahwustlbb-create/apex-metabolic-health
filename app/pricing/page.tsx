@@ -364,7 +364,7 @@ function Track1Section() {
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  From $264
+                  $296
                 </span>
               </div>
             </div>
