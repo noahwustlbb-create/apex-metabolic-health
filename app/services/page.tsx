@@ -1,24 +1,25 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { programs } from '@/lib/programs'
+import type { ProgramTrack } from '@/lib/programs'
 
 // ─── Services Hero ────────────────────────────────────────────────────────────
 
 function ServicesHero() {
   return (
     <section
-      className="relative overflow-hidden min-h-screen flex items-center"
-      style={{ backgroundColor: '#070a0d' }}
+      className="relative overflow-hidden"
+      style={{ backgroundColor: '#070a0d', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Services hero"
     >
-      {/* Dot grid */}
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
 
-      {/* Glow — top left teal radial */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
@@ -27,7 +28,6 @@ function ServicesHero() {
         }}
       />
 
-      {/* Glow — bottom right */}
       <div
         aria-hidden="true"
         className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
@@ -36,196 +36,227 @@ function ServicesHero() {
         }}
       />
 
-      <div className="container-tight relative z-10 section-pad" style={{ paddingTop: '140px' }}>
+      <div className="container-tight relative z-10">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="label mb-5"
         >
-          OUR SERVICES
+          OUR PROGRAMS
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 max-w-4xl"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-4xl"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
         >
-          Comprehensive Health Optimisation.
-          <br />
-          <span className="text-teal-gradient">Doctor-Led. Evidence-Based. Australia-Wide.</span>
+          Doctor-Led Programs.{' '}
+          <span className="text-teal-gradient">Built Around Your Biology.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
-          className="text-lg leading-relaxed max-w-2xl mb-10"
+          className="text-lg leading-relaxed max-w-2xl"
           style={{ color: '#8899aa' }}
         >
-          Apex Metabolic Health provides clinically supervised health programs for adults seeking
-          evidence-based answers. Every decision begins with pathology. Every protocol is built by
-          a doctor.
+          Every program begins with pathology. Every protocol is built by an AHPRA-registered
+          doctor — not a generic plan. Choose the program that fits your goals.
         </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="flex flex-wrap gap-4"
-        >
-          <Link href="/get-started" className="btn-teal">
-            Get Started
-          </Link>
-          <Link href="/pricing" className="btn-ghost">
-            View Pricing
-          </Link>
-        </motion.div>
       </div>
     </section>
   )
 }
 
-// ─── Areas of Expertise ───────────────────────────────────────────────────────
+// ─── Program Catalogue ────────────────────────────────────────────────────────
 
-const EXPERTISE = [
-  {
-    title: 'Pathology & Blood Testing',
-    description:
-      'Comprehensive, doctor-ordered blood panels that go well beyond the standard GP screen. We test what\'s actually relevant to your health goals.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M13 14h4M13 17h4" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Hormone Health',
-    description:
-      'Assessment and clinical management of hormonal imbalances across a broad range of markers. Evidenced-based protocols, personalised to your pathology.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <circle cx="12" cy="8" r="4" />
-        <path d="M6 20c0-3.31 2.69-6 6-6s6 2.69 6 6" strokeLinecap="round" />
-        <path d="M19 8h2M3 8h2M12 1v2M12 13v2" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Erectile Dysfunction',
-    description:
-      'Clinically evaluated ED management that addresses root causes, not just symptoms. Our doctors assess hormonal, vascular, and metabolic contributors.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Men's Health",
-    description:
-      'Specialised clinical care for the conditions that disproportionately affect men — from hormonal decline to metabolic dysfunction and cardiovascular risk.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <circle cx="11" cy="11" r="7" />
-        <path d="M21 21l-4.35-4.35M16 7l3-3m0 0h-3m3 0v3" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Women's Health",
-    description:
-      'Hormonal health, perimenopause, and metabolic support for women. Assessed and managed by AHPRA-registered practitioners with access to comprehensive pathology.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <circle cx="12" cy="8" r="5" />
-        <path d="M12 13v8M9 18h6" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Weight Management',
-    description:
-      'Medically supervised programs that address the biological drivers of weight resistance — not just willpower. Hormonal, metabolic, and clinical factors assessed.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="2.5" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Anti-Ageing (Skin & Hair)',
-    description:
-      'Doctor-prescribed treatment for skin regeneration and hair restoration. Built on what your bloodwork shows, not off-the-shelf solutions.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M12 2C7 2 4 6 4 10c0 5 8 12 8 12s8-7 8-12c0-4-3-8-8-8z" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="12" cy="10" r="2.5" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Muscle Health & Recovery',
-    description:
-      'Clinically supported programs for tissue repair, injury recovery, and sustained physical performance. Evidence-based protocols, doctor-managed.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M6.5 6.5S4 7 4 9.5s3 4 3 4h10s3-1.5 3-4-2.5-3-2.5-3M6.5 6.5L4 4M17.5 6.5L20 4M7 13.5l-1 4.5h12l-1-4.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Medical Certificates',
-    description:
-      'AHPRA-registered doctors can issue medical certificates and referral letters during a telehealth consultation. Fast, private, and Australia-wide.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <rect x="4" y="3" width="16" height="18" rx="2" />
-        <path d="M8 7h8M8 11h8M8 15h5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Telehealth Consultations',
-    description:
-      'All consultations are conducted via secure video call — no travel, no waiting rooms. Available to adults anywhere in Australia.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <path d="M8 21h8M12 17v4" strokeLinecap="round" />
-        <circle cx="12" cy="10" r="2" />
-      </svg>
-    ),
-  },
+type FilterTab = 'all' | ProgramTrack
+
+const FILTER_TABS: { label: string; value: FilterTab }[] = [
+  { label: 'All Programs', value: 'all' },
+  { label: 'Hormone & Performance', value: 'hormone' },
+  { label: 'General Health', value: 'general' },
 ]
 
-function AreasOfExpertise() {
+function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0]; index: number }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const intakeHref = program.track === 'hormone' ? '/intake/hormone' : '/intake/general'
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 32 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.55, delay: (index % 3) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className="apex-card overflow-hidden flex flex-col group"
+      aria-label={program.name}
+    >
+      {/* Image */}
+      <div className="relative h-52 overflow-hidden flex-shrink-0">
+        {program.image ? (
+          <Image
+            src={program.image}
+            alt={program.name}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <div style={{ background: '#111820', width: '100%', height: '100%' }} />
+        )}
+        {/* Gradient overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to top, rgba(13,17,23,0.85) 0%, transparent 50%)',
+          }}
+          aria-hidden="true"
+        />
+        {/* Badge */}
+        {program.badge && (
+          <span
+            className="absolute top-4 left-4 text-[10px] font-semibold tracking-[0.18em] uppercase px-2.5 py-1 rounded-sm"
+            style={{
+              background: program.status === 'coming-soon'
+                ? 'rgba(30,45,61,0.9)'
+                : 'rgba(43,123,224,0.15)',
+              border: `1px solid ${program.status === 'coming-soon' ? '#1e2d3d' : 'rgba(43,123,224,0.4)'}`,
+              color: program.status === 'coming-soon' ? '#8899aa' : '#2b7be0',
+              backdropFilter: 'blur(4px)',
+            }}
+          >
+            {program.badge}
+          </span>
+        )}
+        {/* Track pill */}
+        <span
+          className="absolute top-4 right-4 text-[9px] font-semibold tracking-[0.18em] uppercase px-2 py-1 rounded-sm"
+          style={{
+            background: 'rgba(7,10,13,0.75)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            color: '#8899aa',
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          {program.track === 'hormone' ? 'Hormone' : 'General'}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="p-7 flex flex-col flex-1">
+        <h3
+          className="text-xl font-bold mb-1.5 leading-snug"
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        >
+          {program.name}
+        </h3>
+        <p
+          className="text-sm mb-4 leading-snug font-medium"
+          style={{ color: '#2b7be0' }}
+        >
+          {program.tagline}
+        </p>
+        <p
+          className="text-sm leading-relaxed mb-6 flex-1"
+          style={{ color: '#8899aa' }}
+        >
+          {program.bio.length > 180 ? program.bio.slice(0, 180).trimEnd() + '…' : program.bio}
+        </p>
+
+        {/* Includes */}
+        <ul className="space-y-2 mb-7">
+          {program.includes.slice(0, 3).map((item) => (
+            <li key={item} className="flex items-start gap-2.5">
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                className="w-4 h-4 flex-shrink-0 mt-px"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="#2b7be0"
+                  strokeWidth="1.2"
+                  fill="rgba(43,123,224,0.07)"
+                />
+                <path
+                  d="M5 8l2.5 2.5 4-4"
+                  stroke="#2b7be0"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span className="text-xs leading-relaxed" style={{ color: '#8899aa' }}>
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTAs */}
+        <div className="flex gap-3">
+          {program.status === 'coming-soon' ? (
+            <span
+              className="btn-ghost w-full text-center opacity-50 cursor-not-allowed"
+              aria-disabled="true"
+            >
+              Coming Soon
+            </span>
+          ) : (
+            <>
+              <a href={intakeHref} className="btn-teal flex-1 text-center">
+                Get Started
+              </a>
+              <Link
+                href={`/programs/${program.slug}`}
+                className="btn-ghost px-4"
+                aria-label={`Learn more about ${program.name}`}
+              >
+                Details
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </motion.article>
+  )
+}
+
+function ProgramCatalogue() {
+  const [activeFilter, setActiveFilter] = useState<FilterTab>('all')
   const headingRef = useRef(null)
   const headingInView = useInView(headingRef, { once: true, margin: '-80px' })
-  const gridRef = useRef(null)
-  const gridInView = useInView(gridRef, { once: true, margin: '-60px' })
+
+  const filtered = activeFilter === 'all'
+    ? programs
+    : programs.filter((p) => p.track === activeFilter)
 
   return (
     <section
       className="relative section-pad overflow-hidden"
       style={{ backgroundColor: '#0d1117' }}
-      aria-label="Areas of expertise"
+      aria-label="Program catalogue"
     >
       <div className="glow-rule" aria-hidden="true" />
 
       <div className="container-tight relative z-10">
-        <div ref={headingRef} className="text-center mb-12 md:mb-16">
+        {/* Heading */}
+        <div ref={headingRef} className="mb-10 md:mb-12">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="label mb-4"
           >
-            WHAT WE DO
+            CHOOSE YOUR PROGRAM
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
@@ -234,43 +265,67 @@ function AreasOfExpertise() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
             style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
-            Our Areas of Expertise
+            Clinical Programs
           </motion.h2>
         </div>
 
-        <div
-          ref={gridRef}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+        {/* Filter tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={headingInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.18 }}
+          className="flex flex-wrap gap-2 mb-10"
+          role="tablist"
+          aria-label="Filter programs by category"
         >
-          {EXPERTISE.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 28 }}
-              animate={gridInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-              className="apex-card p-5 flex flex-col"
+          {FILTER_TABS.map((tab) => (
+            <button
+              key={tab.value}
+              role="tab"
+              aria-selected={activeFilter === tab.value}
+              onClick={() => setActiveFilter(tab.value)}
+              className="text-xs font-semibold tracking-wide uppercase px-4 py-2 rounded-sm transition-all duration-200"
+              style={
+                activeFilter === tab.value
+                  ? {
+                      background: '#2b7be0',
+                      color: '#070a0d',
+                    }
+                  : {
+                      background: 'transparent',
+                      border: '1px solid #1e2d3d',
+                      color: '#8899aa',
+                    }
+              }
             >
-              <div
-                className="w-10 h-10 flex items-center justify-center rounded-sm mb-4 flex-shrink-0"
-                style={{
-                  backgroundColor: 'rgba(43,123,224,0.07)',
-                  border: '1px solid rgba(43,123,224,0.18)',
-                }}
-              >
-                {item.icon}
-              </div>
-              <h3
-                className="text-sm font-semibold mb-2 leading-snug"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-              >
-                {item.title}
-              </h3>
-              <p className="text-xs leading-relaxed" style={{ color: '#8899aa' }}>
-                {item.description}
-              </p>
-            </motion.div>
+              {tab.label}
+            </button>
           ))}
+        </motion.div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((program, i) => (
+              <ProgramCatalogueCard key={program.slug} program={program} index={i} />
+            ))}
+          </AnimatePresence>
         </div>
+
+        {/* Not sure prompt */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={headingInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-14 text-center"
+        >
+          <p className="text-sm mb-4" style={{ color: '#8899aa' }}>
+            Not sure which program is right for you?
+          </p>
+          <Link href="/intake/discovery" className="btn-ghost">
+            Book a Free Discovery Call
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
@@ -357,7 +412,6 @@ function WhatWeTest() {
         </div>
 
         <div ref={panelsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Hormonal Health Panel */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
@@ -398,7 +452,6 @@ function WhatWeTest() {
             </ul>
           </motion.div>
 
-          {/* Women's Health Panel */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
@@ -455,145 +508,6 @@ function WhatWeTest() {
   )
 }
 
-// ─── Your Journey — 5 Steps ───────────────────────────────────────────────────
-
-const JOURNEY_STEPS = [
-  {
-    number: '01',
-    title: 'Fill Out the Form',
-    description:
-      'Takes 3–5 minutes. Private and confidential. Our team will contact you to confirm your pathway and answer any questions before you commit to anything.',
-  },
-  {
-    number: '02',
-    title: 'Pathology Collection',
-    description:
-      'We issue a referral for blood work at a local accredited collection centre. No appointment needed at most locations. Results are sent directly to your doctor.',
-  },
-  {
-    number: '03',
-    title: 'Doctor Consultation',
-    description:
-      'A structured telehealth consultation — not a quick check-in. Your doctor reviews your full pathology results, takes a detailed health history, and builds a personalised protocol.',
-  },
-  {
-    number: '04',
-    title: 'Begin Your Protocol',
-    description:
-      'Where treatment is clinically appropriate, it\'s coordinated through our TGA-compliant pharmacy partner or your own pharmacy — your choice. Your doctor manages the protocol ongoing.',
-  },
-  {
-    number: '05',
-    title: 'Ongoing Monitoring',
-    description:
-      'Follow-up blood work and review consultations are mandatory every 4 months for patients on active protocols. Adjustments are made based on your results, not guesswork.',
-  },
-]
-
-function YourJourney() {
-  const headingRef = useRef(null)
-  const headingInView = useInView(headingRef, { once: true, margin: '-80px' })
-  const stepsRef = useRef(null)
-  const stepsInView = useInView(stepsRef, { once: true, margin: '-60px' })
-
-  return (
-    <section
-      className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
-      aria-label="Your journey with Apex"
-    >
-      <div className="glow-rule" aria-hidden="true" />
-
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="container-tight relative z-10">
-        <div ref={headingRef} className="mb-16 md:mb-20">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="label mb-4"
-          >
-            THE PROCESS
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-          >
-            Your Journey With Apex
-          </motion.h2>
-        </div>
-
-        <div ref={stepsRef} className="relative">
-          {/* Vertical line */}
-          <div
-            className="absolute left-8 top-0 bottom-0 w-px hidden sm:block"
-            style={{ backgroundColor: 'rgba(43,123,224,0.1)' }}
-            aria-hidden="true"
-          />
-
-          <div className="space-y-0">
-            {JOURNEY_STEPS.map((step, i) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, x: -20 }}
-                animate={stepsInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="flex gap-8 pb-12 last:pb-0"
-              >
-                {/* Step number */}
-                <div className="flex flex-col items-center flex-shrink-0">
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
-                    style={{
-                      backgroundColor: '#0d1117',
-                      border: '1px solid rgba(43,123,224,0.3)',
-                    }}
-                  >
-                    <span
-                      className="font-bold"
-                      style={{
-                        fontFamily: 'var(--font-space-grotesk)',
-                        fontSize: '20px',
-                        color: '#2b7be0',
-                        letterSpacing: '-0.02em',
-                      }}
-                    >
-                      {step.number}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 pt-3">
-                  <h3
-                    className="text-lg font-semibold mb-3"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed max-w-xl" style={{ color: '#8899aa' }}>
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Bottom CTA ───────────────────────────────────────────────────────────────
 
 function ServicesCTA() {
@@ -604,7 +518,7 @@ function ServicesCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#0d1117' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -616,7 +530,6 @@ function ServicesCTA() {
           background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
         }}
       />
-
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
 
       <div className="container-tight relative z-10 text-center">
@@ -645,8 +558,12 @@ function ServicesCTA() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.35 }}
+          className="flex flex-wrap gap-4 justify-center"
         >
-          <Link href="/get-started" className="btn-teal">
+          <Link href="/intake/discovery" className="btn-teal">
+            Book a Free Discovery Call
+          </Link>
+          <Link href="/get-started" className="btn-ghost">
             Get Started
           </Link>
         </motion.div>
@@ -673,9 +590,8 @@ export default function ServicesPage() {
       <Nav />
       <main>
         <ServicesHero />
-        <AreasOfExpertise />
+        <ProgramCatalogue />
         <WhatWeTest />
-        <YourJourney />
         <ServicesCTA />
       </main>
       <Footer />

@@ -76,32 +76,40 @@ export default function Nav() {
               onMouseEnter={() => setProgramsOpen(true)}
               onMouseLeave={() => setProgramsOpen(false)}
             >
-              <button
-                className="flex items-center gap-1.5 text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
-                style={{ color: '#8899aa' }}
-                aria-expanded={programsOpen}
-                aria-haspopup="true"
-              >
-                Programs
-                <svg
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  className="w-3 h-3 transition-transform duration-200"
-                  style={{
-                    transform: programsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    color: '#8899aa',
-                  }}
-                  aria-hidden="true"
+              <div className="flex items-center gap-0.5">
+                <Link
+                  href="/services"
+                  className="text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
+                  style={{ color: '#8899aa' }}
                 >
-                  <path
-                    d="M2 4l4 4 4-4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
+                  Programs
+                </Link>
+                <button
+                  className="flex items-center p-1 transition-colors duration-200"
+                  style={{ color: '#8899aa' }}
+                  aria-expanded={programsOpen}
+                  aria-haspopup="true"
+                  aria-label="Open programs menu"
+                >
+                  <svg
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="w-3 h-3 transition-transform duration-200"
+                    style={{
+                      transform: programsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    }}
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M2 4l4 4 4-4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
 
               <AnimatePresence>
                 {programsOpen && (
@@ -119,7 +127,8 @@ export default function Nav() {
                       boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
                     }}
                   >
-                    <div className="p-2 grid grid-cols-2 gap-0.5">
+                    <div className="p-2">
+                      <div className="grid grid-cols-2 gap-0.5">
                       {programs.map((program) =>
                         program.status === 'coming-soon' ? (
                           <div
@@ -158,6 +167,25 @@ export default function Nav() {
                           </Link>
                         )
                       )}
+                      </div>
+                      <div style={{ borderTop: '1px solid #1e2d3d', marginTop: '4px', paddingTop: '4px' }}>
+                        <Link
+                          href="/services"
+                          className="flex items-center justify-between px-4 py-2.5 rounded-sm text-[12px] font-semibold tracking-wide transition-all duration-150"
+                          style={{ color: '#2b7be0' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.06)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent'
+                          }}
+                        >
+                          View all programs
+                          <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </motion.div>
                 )}
