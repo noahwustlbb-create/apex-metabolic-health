@@ -225,8 +225,13 @@ export default function Nav() {
           >
             <Link
               href="/get-started"
-              className="btn-ghost text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2"
+              className="btn-ghost text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2.5"
             >
+              {/* Apex triangle icon */}
+              <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                <polygon points="10,2 18,17 2,17" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+                <polygon points="10,7 15,15 5,15" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5" />
+              </svg>
               Get Started
               <svg
                 viewBox="0 0 12 12"

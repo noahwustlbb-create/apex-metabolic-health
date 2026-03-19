@@ -169,11 +169,18 @@ export default function Footer() {
             Investments Pty Ltd.
           </p>
           <p
-            className="text-xs leading-relaxed"
+            className="text-xs leading-relaxed mb-2"
             style={{ color: '#4a5a6a' }}
           >
             Clinical suitability is assessed by a doctor during consultation. All medical services
             are provided by Australian AHPRA-registered medical practitioners.
+          </p>
+          <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
+            <strong style={{ color: '#8899aa' }}>After-hours &amp; emergencies:</strong> Apex
+            Metabolic Health does not provide emergency medical care. If you are experiencing a
+            medical emergency, call <strong style={{ color: '#f0f4f8' }}>000</strong> immediately.
+            For after-hours GP care, contact the{' '}
+            <strong style={{ color: '#8899aa' }}>National Home Doctor Service on 13 7425</strong>.
           </p>
         </div>
 

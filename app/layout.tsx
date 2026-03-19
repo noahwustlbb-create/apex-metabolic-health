@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import FloatingCTA from '@/components/FloatingCTA'
+import AgeGate from '@/components/AgeGate'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="antialiased overflow-x-hidden"
         style={{ backgroundColor: '#070a0d', color: '#f0f4f8' }}
       >
+        <AgeGate />
         {children}
         <FloatingCTA />
       </body>
