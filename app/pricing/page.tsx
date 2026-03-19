@@ -322,7 +322,7 @@ function Track1Section() {
           <TimelineStep
             stepNumber="2"
             title="Blood Work"
-            costBadge="From $180"
+            costBadge="From $264"
             index={1}
           >
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#8899aa' }}>
@@ -338,33 +338,33 @@ function Track1Section() {
               >
                 <div>
                   <span className="text-sm font-medium" style={{ color: '#f0f4f8' }}>
-                    Comprehensive Hormone Panel
+                    Hormone Health Panel
                   </span>
                   <span className="block text-xs mt-0.5" style={{ color: '#4a5a6a' }}>
-                    New patients
+                    Hormone &amp; TRT programs
                   </span>
                 </div>
                 <span
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $280
+                  $264
                 </span>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 py-4">
                 <div>
                   <span className="text-sm font-medium" style={{ color: '#f0f4f8' }}>
-                    Monitoring Panel
+                    Metabolic Health Panel
                   </span>
                   <span className="block text-xs mt-0.5" style={{ color: '#4a5a6a' }}>
-                    Returning patients on active protocols
+                    Metabolic &amp; weight loss programs
                   </span>
                 </div>
                 <span
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $180
+                  From $264
                 </span>
               </div>
             </div>
