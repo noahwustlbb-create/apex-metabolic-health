@@ -49,8 +49,8 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? 'rgba(7,10,13,0.97)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          backgroundColor: 'rgba(7,10,13,0.97)',
+          backdropFilter: 'blur(16px)',
           borderBottom: scrolled ? '1px solid rgba(30,45,61,0.9)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 32px rgba(0,0,0,0.5)' : 'none',
         }}
@@ -64,7 +64,7 @@ export default function Nav() {
               width={140}
               height={140}
               className="w-auto"
-              style={{ height: '52px', mixBlendMode: 'screen' }}
+              style={{ height: '52px' }}
               priority
             />
           </Link>
