@@ -151,17 +151,17 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
     >
       {/* Image strip */}
       {fullProgram?.image && (
-        <div className="relative w-full h-36 flex-shrink-0 overflow-hidden">
+        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#070a0d' }}>
           <Image
             src={fullProgram.image}
             alt={program.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-contain transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(13,17,23,0.85) 100%)' }}
+            style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(13,17,23,0.7) 100%)' }}
           />
         </div>
       )}
