@@ -208,7 +208,7 @@ export default function Nav() {
 
             {/* Patient Login */}
             <a
-              href="/get-started"
+              href="https://my.practicebetter.io/#/p/home"
               data-cta="patient-portal"
               className="text-[13px] font-medium tracking-wide transition-colors duration-200"
               style={{ color: '#8899aa' }}
