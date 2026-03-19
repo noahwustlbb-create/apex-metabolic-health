@@ -334,36 +334,33 @@ function ProgramCatalogue() {
 // ─── What We Test ─────────────────────────────────────────────────────────────
 
 const HORMONAL_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + FSH / LH',
-  'Prolactin + Progesterone',
-  'Cortisol + DHEAS',
-  'IGF-1 + Growth Hormone',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
-  'Cholesterol / TG / HDL / LDL',
+  'Free & Total Testosterone',
+  'Oestradiol (E2)',
+  'SHBG',
+  'FSH / LH',
+  'Prolactin',
+  'Thyroid Function — TSH / FT3 / FT4',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
   'Full Blood Count (FBC)',
-  'Iron Studies + Magnesium',
-  'Glucose + Insulin + HbA1c',
-  'TSH / FT3 / FT4',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c',
   'High Sensitivity CRP',
-  'Prostate-Specific Antigen (PSA)',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
 const WOMENS_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + Progesterone',
-  'FSH + DHEAS',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
   'Full Blood Count (FBC)',
-  'Iron Studies + Ferritin',
-  'Magnesium + Glucose',
-  'Cholesterol / TG / HDL / LDL',
-  'TSH / FT3 / FT4',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c + Insulin',
+  'Iron Studies',
+  'Thyroid Function — TSH / FT3 / FT4',
   'High Sensitivity CRP',
   'Vitamin D',
-  'HbA1c + Insulin',
+  'Vitamin B12',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
 function WhatWeTest() {
@@ -423,7 +420,7 @@ function WhatWeTest() {
                 className="text-lg font-semibold leading-snug"
                 style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
               >
-                Hormonal Health Panel
+                Hormone Health Panel
               </h3>
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"

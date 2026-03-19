@@ -3,37 +3,34 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const HORMONAL_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + FSH / LH',
-  'Prolactin + Progesterone',
-  'Cortisol + DHEAS',
-  'IGF-1 + Growth Hormone',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
-  'Cholesterol / TG / HDL / LDL',
+const HORMONE_PANEL = [
+  'Free & Total Testosterone',
+  'Oestradiol (E2)',
+  'SHBG',
+  'FSH / LH',
+  'Prolactin',
+  'Thyroid Function — TSH / FT3 / FT4',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
   'Full Blood Count (FBC)',
-  'Iron Studies + Magnesium',
-  'Glucose + Insulin + HbA1c',
-  'TSH / FT3 / FT4',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c',
   'High Sensitivity CRP',
-  'Prostate-Specific Antigen (PSA)',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
-const WOMENS_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + Progesterone',
-  'FSH + DHEAS',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
+const METABOLIC_PANEL = [
   'Full Blood Count (FBC)',
-  'Iron Studies + Ferritin',
-  'Magnesium + Glucose',
-  'Cholesterol / TG / HDL / LDL',
-  'TSH / FT3 / FT4',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c + Insulin',
+  'Iron Studies',
+  'Thyroid Function — TSH / FT3 / FT4',
   'High Sensitivity CRP',
   'Vitamin D',
-  'HbA1c + Insulin',
+  'Vitamin B12',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
 export default function PathologyPanel() {
@@ -92,7 +89,7 @@ export default function PathologyPanel() {
         </div>
 
         <div ref={panelsRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Men's / Hormonal Panel */}
+          {/* Hormone Health Panel */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
@@ -117,7 +114,7 @@ export default function PathologyPanel() {
                   className="text-base font-semibold leading-snug"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  Men&apos;s Hormonal Panel
+                  Hormone Health Panel
                 </h3>
                 <span
                   className="text-[10px] font-semibold tracking-wider uppercase"
@@ -127,11 +124,11 @@ export default function PathologyPanel() {
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7 flex-1">
-              {HORMONAL_PANEL.map((item) => (
-                <li key={item} className="flex items-center gap-2.5">
+            <ul className="space-y-2.5 flex-1 mb-7">
+              {HORMONE_PANEL.map((item) => (
+                <li key={item} className="flex items-start gap-2.5">
                   <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
@@ -147,11 +144,11 @@ export default function PathologyPanel() {
               rel="noopener noreferrer"
               className="btn-teal w-full text-center text-xs"
             >
-              Order Men&apos;s Panel
+              Order Hormone Panel
             </a>
           </motion.div>
 
-          {/* Women's Panel */}
+          {/* Metabolic Health Panel */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={panelsInView ? { opacity: 1, y: 0 } : {}}
@@ -167,8 +164,8 @@ export default function PathologyPanel() {
                 }}
               >
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-                  <circle cx="12" cy="8" r="5" />
-                  <path d="M12 13v8M9 18h6" strokeLinecap="round" />
+                  <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
+                  <circle cx="12" cy="12" r="2.5" />
                 </svg>
               </div>
               <div>
@@ -176,21 +173,21 @@ export default function PathologyPanel() {
                   className="text-base font-semibold leading-snug"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  Women&apos;s Hormonal Panel
+                  Metabolic Health Panel
                 </h3>
                 <span
                   className="text-[10px] font-semibold tracking-wider uppercase"
                   style={{ color: '#2b7be0' }}
                 >
-                  Women&apos;s Programs
+                  Metabolic Programs
                 </span>
               </div>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7 flex-1">
-              {WOMENS_PANEL.map((item) => (
-                <li key={item} className="flex items-center gap-2.5">
+            <ul className="space-y-2.5 flex-1 mb-7">
+              {METABOLIC_PANEL.map((item) => (
+                <li key={item} className="flex items-start gap-2.5">
                   <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
@@ -206,7 +203,7 @@ export default function PathologyPanel() {
               rel="noopener noreferrer"
               className="btn-teal w-full text-center text-xs"
             >
-              Order Women&apos;s Panel
+              Order Metabolic Panel
             </a>
           </motion.div>
         </div>

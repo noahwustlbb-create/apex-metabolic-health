@@ -5,37 +5,34 @@ import { motion, useInView } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-const MENS_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + FSH / LH',
-  'Prolactin + Progesterone',
-  'Cortisol + DHEAS',
-  'IGF-1 + Growth Hormone',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
-  'Cholesterol / TG / HDL / LDL',
+const HORMONE_PANEL = [
+  'Free & Total Testosterone',
+  'Oestradiol (E2)',
+  'SHBG',
+  'FSH / LH',
+  'Prolactin',
+  'Thyroid Function — TSH / FT3 / FT4',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
   'Full Blood Count (FBC)',
-  'Iron Studies + Magnesium',
-  'Glucose + Insulin + HbA1c',
-  'TSH / FT3 / FT4',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c',
   'High Sensitivity CRP',
-  'Prostate-Specific Antigen (PSA)',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
-const WOMENS_PANEL = [
-  'Free & Total Testosterone + SHBG',
-  'Oestradiol (E2) + Progesterone',
-  'FSH + DHEAS',
-  'Liver Function (LFT)',
-  'Kidney Function (UEC)',
+const METABOLIC_PANEL = [
   'Full Blood Count (FBC)',
-  'Iron Studies + Ferritin',
-  'Magnesium + Glucose',
-  'Cholesterol / TG / HDL / LDL',
-  'TSH / FT3 / FT4',
+  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
+  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Glucose + HbA1c + Insulin',
+  'Iron Studies',
+  'Thyroid Function — TSH / FT3 / FT4',
   'High Sensitivity CRP',
   'Vitamin D',
-  'HbA1c + Insulin',
+  'Vitamin B12',
+  'Magnesium, Calcium, Phosphate, Uric Acid',
 ]
 
 function PanelCard({
@@ -185,9 +182,9 @@ export default function OrderBloodsPage() {
           <div className="container-tight relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <PanelCard
-                title="Hormone Panel"
-                subtitle="Hormone & TRT Programs"
-                items={MENS_PANEL}
+                title="Hormone Health Panel"
+                subtitle="Hormone Programs"
+                items={HORMONE_PANEL}
                 ctaLabel="Order Hormone Panel"
                 ctaHref="https://imedical.com.au/order/blood-tests/apexmeta-trt-panel&tracking=69bae136964db"
                 delay={0}
@@ -199,9 +196,9 @@ export default function OrderBloodsPage() {
                 }
               />
               <PanelCard
-                title="Metabolic Panel"
-                subtitle="Metabolic & Weight Loss Programs"
-                items={WOMENS_PANEL}
+                title="Metabolic Health Panel"
+                subtitle="Metabolic Programs"
+                items={METABOLIC_PANEL}
                 ctaLabel="Order Metabolic Panel"
                 ctaHref="https://imedical.com.au/order/blood-tests/apex-meta-weightloss&tracking=69bae136964db"
                 delay={0.08}
