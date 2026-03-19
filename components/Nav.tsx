@@ -206,15 +206,6 @@ export default function Nav() {
               </Link>
             ))}
 
-            {/* Patient Login */}
-            <a
-              href="https://my.practicebetter.io/#/p/home"
-              data-cta="patient-portal"
-              className="text-[13px] font-medium tracking-wide transition-colors duration-200"
-              style={{ color: '#8899aa' }}
-            >
-              Patient Login
-            </a>
           </nav>
 
           {/* Desktop CTA with dropdown */}
@@ -355,26 +346,6 @@ export default function Nav() {
                     </Link>
                   </motion.div>
                 ))}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ delay: 4 * 0.07 + 0.05 }}
-                >
-                  <a
-                    href="#"
-                    data-cta="patient-portal"
-                    onClick={() => setMenuOpen(false)}
-                    className="block text-left py-4 text-2xl font-semibold transition-colors duration-200 border-b"
-                    style={{
-                      color: '#8899aa',
-                      borderColor: '#1e2d3d',
-                      fontFamily: 'var(--font-space-grotesk)',
-                    }}
-                  >
-                    Patient Login
-                  </a>
-                </motion.div>
               </nav>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

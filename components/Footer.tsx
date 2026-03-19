@@ -122,16 +122,6 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <a
-                  href="https://my.practicebetter.io/#/p/home"
-                  data-cta="patient-portal"
-                  className="text-sm transition-colors duration-200 hover:text-primary"
-                  style={{ color: '#4a5a6a' }}
-                >
-                  Patient Portal
-                </a>
-              </li>
             </ul>
 
             <div className="mt-8">
