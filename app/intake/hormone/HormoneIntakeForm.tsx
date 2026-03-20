@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { getReferral } from '@/lib/referral'
+import { validatePromoCode } from '@/lib/promoCodes'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -112,6 +113,7 @@ interface FormData {
   printName: string
   isOver18: boolean
   notProhibited: boolean
+  promoCode: string
 }
 
 const defaultData: FormData = {
@@ -135,7 +137,7 @@ const defaultData: FormData = {
   stressScore: '', stressEvents: '',
   conditions: [],
   mainCondition: '', signatureType: 'draw', typedSignature: '', printName: '',
-  isOver18: false, notProhibited: false,
+  isOver18: false, notProhibited: false, promoCode: '',
 }
 
 // ─── Reusable Components ──────────────────────────────────────────────────────
@@ -388,6 +390,7 @@ export default function HormoneIntakeForm() {
   const [signatureData, setSignatureData] = useState('')
   const [captcha] = useState(() => { const a = Math.floor(Math.random() * 9) + 1; const b = Math.floor(Math.random() * 9) + 1; return { a, b, answer: a + b } })
   const [captchaInput, setCaptchaInput] = useState('')
+  const [promoStatus, setPromoStatus] = useState<'idle' | 'valid' | 'invalid'>('idle')
   const [errors, setErrors] = useState<string[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -503,6 +506,7 @@ export default function HormoneIntakeForm() {
       submittedAt: new Date().toISOString(),
       formType: 'Hormone Program Pre-Screen Intake',
       referredBy: getReferral() || 'Direct',
+      promoCode: data.promoCode.trim() || 'None',
     }
 
     try {
@@ -821,6 +825,38 @@ export default function HormoneIntakeForm() {
                       <SignatureCanvas onSave={setSignatureData} />
                     ) : (
                       <TextInput value={data.typedSignature} onChange={(v) => set('typedSignature', v)} placeholder="Type your full name" />
+                    )}
+                  </div>
+
+                  <div>
+                    <FieldLabel>Promo Code (optional)</FieldLabel>
+                    <div className="flex gap-3 max-w-xs">
+                      <TextInput
+                        value={data.promoCode}
+                        onChange={(v) => { set('promoCode', v.toUpperCase()); setPromoStatus('idle') }}
+                        placeholder="Enter code"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!data.promoCode.trim()) return
+                          setPromoStatus(validatePromoCode(data.promoCode) ? 'valid' : 'invalid')
+                        }}
+                        className="px-4 py-2 rounded-sm text-xs font-semibold tracking-wide flex-shrink-0 transition-all duration-150"
+                        style={{
+                          background: 'rgba(43,123,224,0.1)',
+                          border: '1px solid rgba(43,123,224,0.3)',
+                          color: '#2b7be0',
+                        }}
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {promoStatus === 'valid' && (
+                      <p className="text-xs mt-2" style={{ color: '#00c2b8' }}>✓ Promo code applied</p>
+                    )}
+                    {promoStatus === 'invalid' && (
+                      <p className="text-xs mt-2" style={{ color: '#e05c5c' }}>Invalid promo code</p>
                     )}
                   </div>
 

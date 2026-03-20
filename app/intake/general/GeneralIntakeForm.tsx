@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { getReferral } from '@/lib/referral'
+import { validatePromoCode } from '@/lib/promoCodes'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -111,6 +112,7 @@ interface FormData {
   wantSOPCopy: boolean
   signatureType: 'draw' | 'type'
   typedSignature: string
+  promoCode: string
 }
 
 const defaultData: FormData = {
@@ -151,6 +153,7 @@ const defaultData: FormData = {
   wantSOPCopy: false,
   signatureType: 'draw',
   typedSignature: '',
+  promoCode: '',
 }
 
 // ─── Reusable Field Components ────────────────────────────────────────────────
@@ -558,6 +561,7 @@ export default function GeneralIntakeForm() {
     return { a, b, answer: a + b }
   })
   const [captchaInput, setCaptchaInput] = useState('')
+  const [promoStatus, setPromoStatus] = useState<'idle' | 'valid' | 'invalid'>('idle')
   const [errors, setErrors] = useState<string[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -695,6 +699,7 @@ export default function GeneralIntakeForm() {
       submittedAt: new Date().toISOString(),
       formType: 'General Appointment Intake',
       referredBy: getReferral() || 'Direct',
+      promoCode: data.promoCode.trim() || 'None',
     }
 
     try {
@@ -1205,6 +1210,39 @@ export default function GeneralIntakeForm() {
                           placeholder="Type your full name"
                         />
                       </div>
+                    )}
+                  </div>
+
+                  {/* Promo Code */}
+                  <div>
+                    <FieldLabel>Promo Code (optional)</FieldLabel>
+                    <div className="flex gap-3 max-w-xs">
+                      <TextInput
+                        value={data.promoCode}
+                        onChange={(v) => { set('promoCode', v.toUpperCase()); setPromoStatus('idle') }}
+                        placeholder="Enter code"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (!data.promoCode.trim()) return
+                          setPromoStatus(validatePromoCode(data.promoCode) ? 'valid' : 'invalid')
+                        }}
+                        className="px-4 py-2 rounded-sm text-xs font-semibold tracking-wide flex-shrink-0 transition-all duration-150"
+                        style={{
+                          background: 'rgba(43,123,224,0.1)',
+                          border: '1px solid rgba(43,123,224,0.3)',
+                          color: '#2b7be0',
+                        }}
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {promoStatus === 'valid' && (
+                      <p className="text-xs mt-2" style={{ color: '#00c2b8' }}>✓ Promo code applied</p>
+                    )}
+                    {promoStatus === 'invalid' && (
+                      <p className="text-xs mt-2" style={{ color: '#e05c5c' }}>Invalid promo code</p>
                     )}
                   </div>
 
