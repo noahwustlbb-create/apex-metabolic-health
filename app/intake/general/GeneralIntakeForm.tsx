@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { getReferral } from '@/lib/referral'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -693,6 +694,7 @@ export default function GeneralIntakeForm() {
       resultsFileName: resultsFile?.name || '',
       submittedAt: new Date().toISOString(),
       formType: 'General Appointment Intake',
+      referredBy: getReferral() || 'Direct',
     }
 
     try {

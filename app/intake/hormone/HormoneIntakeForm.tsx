@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { getReferral } from '@/lib/referral'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -501,6 +502,7 @@ export default function HormoneIntakeForm() {
       previousTestsFileName: previousTestsFile?.name || data.previousTestsFileName,
       submittedAt: new Date().toISOString(),
       formType: 'Hormone Program Pre-Screen Intake',
+      referredBy: getReferral() || 'Direct',
     }
 
     try {
