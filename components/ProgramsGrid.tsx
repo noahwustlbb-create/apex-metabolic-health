@@ -232,31 +232,6 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         </div>
       </div>
 
-      {/* View Details hover hint */}
-      {fullProgram && (
-        <div
-          className="view-details-hint"
-          style={{
-            position: 'absolute',
-            bottom: '12px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'rgba(7,10,13,0.75)',
-            color: '#2b7be0',
-            fontSize: '11px',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            padding: '5px 14px',
-            borderRadius: '20px',
-            opacity: 0,
-            transition: 'opacity 0.2s',
-            pointerEvents: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          View Details
-        </div>
-      )}
     </motion.div>
   )
 }
