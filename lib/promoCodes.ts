@@ -2,9 +2,7 @@
 // Format: { code: 'CODE', description: 'What it represents' }
 
 export const PROMO_CODES: Record<string, string> = {
-  // Example — add your codes here when ready:
-  // 'JENNA10': 'Jenna referral promo',
-  // 'APEX20': 'Launch promo',
+  'MMFITNESS': 'MM Fitness referral',
 }
 
 export function validatePromoCode(code: string): boolean {
