@@ -7,6 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { getReferral } from '@/lib/referral'
 import { validatePromoCode } from '@/lib/promoCodes'
+import { uploadFile } from '@/lib/uploadcare'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -387,6 +388,8 @@ export default function HormoneIntakeForm() {
   const [step, setStep] = useState(0)
   const [data, setData] = useState<FormData>(defaultData)
   const [previousTestsFile, setPreviousTestsFile] = useState<File | null>(null)
+  const [previousTestsUrl, setPreviousTestsUrl] = useState('')
+  const [uploadingTests, setUploadingTests] = useState(false)
   const [signatureData, setSignatureData] = useState('')
   const [captcha] = useState(() => { const a = Math.floor(Math.random() * 9) + 1; const b = Math.floor(Math.random() * 9) + 1; return { a, b, answer: a + b } })
   const [captchaInput, setCaptchaInput] = useState('')
@@ -503,6 +506,7 @@ export default function HormoneIntakeForm() {
       mealLog: JSON.stringify(mealLog),
       signatureData: data.signatureType === 'draw' ? '[drawn]' : data.typedSignature,
       previousTestsFileName: previousTestsFile?.name || data.previousTestsFileName,
+      previousTestsUrl: previousTestsUrl || 'No file uploaded',
       submittedAt: new Date().toISOString(),
       formType: 'Hormone Program Pre-Screen Intake',
       referredBy: getReferral() || 'Direct',
@@ -658,10 +662,19 @@ export default function HormoneIntakeForm() {
                     <RadioGroup options={['Yes', 'No', 'Prefer not to say']} value={data.isIndigenous} onChange={(v) => set('isIndigenous', v)} />
                   </div>
                   <FileInput
-                    label="Upload Previous Blood Tests, Hair Tests, Salivary Tests, DEXA Scans, etc. (optional)"
+                    label={`Upload Previous Blood Tests, Hair Tests, Salivary Tests, DEXA Scans, etc. (optional)${uploadingTests ? ' — Uploading...' : previousTestsUrl ? ' — ✓ Uploaded' : ''}`}
                     accept="image/*,.pdf,.doc,.docx"
                     hint="Please forward any previous test reports that may be relevant to your consultation."
-                    onFile={(f, name) => { setPreviousTestsFile(f); set('previousTestsFileName', name) }}
+                    onFile={async (f, name) => {
+                      setPreviousTestsFile(f)
+                      set('previousTestsFileName', name)
+                      setUploadingTests(true)
+                      try {
+                        const url = await uploadFile(f)
+                        setPreviousTestsUrl(url)
+                      } catch {}
+                      setUploadingTests(false)
+                    }}
                     currentName={data.previousTestsFileName}
                   />
                 </div>

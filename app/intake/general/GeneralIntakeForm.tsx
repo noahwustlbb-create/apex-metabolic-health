@@ -7,6 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { getReferral } from '@/lib/referral'
 import { validatePromoCode } from '@/lib/promoCodes'
+import { uploadFile } from '@/lib/uploadcare'
 
 // ─── Config ───────────────────────────────────────────────────────────────────
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -553,7 +554,11 @@ export default function GeneralIntakeForm() {
   const [step, setStep] = useState(0)
   const [data, setData] = useState<FormData>(defaultData)
   const [dlFile, setDlFile] = useState<File | null>(null)
+  const [dlUrl, setDlUrl] = useState('')
+  const [uploadingDl, setUploadingDl] = useState(false)
   const [resultsFile, setResultsFile] = useState<File | null>(null)
+  const [resultsUrl, setResultsUrl] = useState('')
+  const [uploadingResults, setUploadingResults] = useState(false)
   const [signatureData, setSignatureData] = useState('')
   const [captcha] = useState(() => {
     const a = Math.floor(Math.random() * 9) + 1
@@ -695,7 +700,9 @@ export default function GeneralIntakeForm() {
       ...data,
       signatureData: data.signatureType === 'draw' ? '[drawn]' : data.typedSignature,
       dlFileName: dlFile?.name || data.dlPhotoName,
+      dlFileUrl: dlUrl || 'No file uploaded',
       resultsFileName: resultsFile?.name || '',
+      resultsFileUrl: resultsUrl || 'No file uploaded',
       submittedAt: new Date().toISOString(),
       formType: 'General Appointment Intake',
       referredBy: getReferral() || 'Direct',
@@ -896,10 +903,15 @@ export default function GeneralIntakeForm() {
                   </div>
 
                   <FileInput
-                    label="Photo of Driver Licence (name & DOB only)"
+                    label={`Photo of Driver Licence (name & DOB only)${uploadingDl ? ' — Uploading...' : dlUrl ? ' — ✓ Uploaded' : ''}`}
                     accept="image/*,.pdf"
                     hint="Please only upload the section showing your name and date of birth. We do not require your DL number. This information will be destroyed once confirmed."
-                    onFile={(f, name) => { setDlFile(f); set('dlPhotoName', name) }}
+                    onFile={async (f, name) => {
+                      setDlFile(f); set('dlPhotoName', name)
+                      setUploadingDl(true)
+                      try { const url = await uploadFile(f); setDlUrl(url) } catch {}
+                      setUploadingDl(false)
+                    }}
                     currentName={data.dlPhotoName}
                   />
 
@@ -1060,10 +1072,15 @@ export default function GeneralIntakeForm() {
                   </div>
 
                   <FileInput
-                    label="Upload Results or Medical Files (optional)"
+                    label={`Upload Results or Medical Files (optional)${uploadingResults ? ' — Uploading...' : resultsUrl ? ' — ✓ Uploaded' : ''}`}
                     accept="image/*,.pdf,.doc,.docx"
                     hint="You may upload any existing results or medical files here."
-                    onFile={(f, name) => { setResultsFile(f); }}
+                    onFile={async (f, name) => {
+                      setResultsFile(f)
+                      setUploadingResults(true)
+                      try { const url = await uploadFile(f); setResultsUrl(url) } catch {}
+                      setUploadingResults(false)
+                    }}
                     currentName={resultsFile?.name || ''}
                   />
                 </div>
