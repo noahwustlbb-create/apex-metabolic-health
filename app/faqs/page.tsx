@@ -67,7 +67,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'How do I begin the process?',
         answer:
-          'Submit the form on our website. Our team will call to confirm your appointment and pathology referral. No commitment until we've spoken.',
+          "Submit the form on our website. Our team will call to confirm your appointment and pathology referral. No commitment until we've spoken.",
       },
       {
         question: 'How long does the initial review take?',
