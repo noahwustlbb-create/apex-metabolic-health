@@ -50,10 +50,10 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: 'rgba(13,24,64,0.97)',
+          backgroundColor: 'rgba(255,255,255,0.97)',
           backdropFilter: 'blur(16px)',
-          borderBottom: scrolled ? '1px solid rgba(43,123,224,0.2)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.4)' : 'none',
+          borderBottom: scrolled ? '1px solid rgba(204,218,236,0.9)' : '1px solid transparent',
+          boxShadow: scrolled ? '0 4px 24px rgba(43,123,224,0.08)' : 'none',
         }}
       >
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
@@ -82,13 +82,13 @@ export default function Nav() {
                 <Link
                   href="/services"
                   className="text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                 >
                   Programs
                 </Link>
                 <button
                   className="flex items-center p-1 transition-colors duration-200"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                   aria-expanded={programsOpen}
                   aria-haspopup="true"
                   aria-label="Open programs menu"
@@ -157,7 +157,7 @@ export default function Nav() {
                             className="block px-4 py-2.5 rounded-sm text-[13px] transition-all duration-150"
                             style={{ color: '#8899aa' }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#f0f4f8'
+                              e.currentTarget.style.color = '#0d1420'
                               e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.06)'
                             }}
                             onMouseLeave={(e) => {
@@ -200,7 +200,7 @@ export default function Nav() {
                 key={link.href}
                 href={link.href}
                 className="text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
-                style={{ color: '#8899aa' }}
+                style={{ color: '#4a6080' }}
               >
                 {link.label}
               </Link>
@@ -245,10 +245,10 @@ export default function Nav() {
                   className="absolute top-full right-0 mt-2 z-50"
                   style={{
                     width: '220px',
-                    background: '#0d1117',
-                    border: '1px solid rgba(43,123,224,0.2)',
+                    background: '#ffffff',
+                    border: '1px solid #ccdaec',
                     borderRadius: '8px',
-                    boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
+                    boxShadow: '0 16px 48px rgba(43,123,224,0.12)',
                   }}
                 >
                   <div className="p-2 flex flex-col gap-0.5">
@@ -261,7 +261,7 @@ export default function Nav() {
                         key={item.href}
                         href={item.href}
                         className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
-                        style={{ color: '#f0f4f8' }}
+                        style={{ color: '#0d1420' }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.06)'
                         }}
@@ -314,7 +314,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
-            style={{ backgroundColor: 'rgba(13,24,64,0.98)', backdropFilter: 'blur(20px)' }}
+            style={{ backgroundColor: 'rgba(255,255,255,0.98)', backdropFilter: 'blur(20px)' }}
           >
             <div className="flex flex-col h-full pt-20 pb-10 px-6">
               <nav className="flex flex-col gap-2 flex-1 justify-center">
@@ -337,8 +337,8 @@ export default function Nav() {
                       onClick={() => setMenuOpen(false)}
                       className="block text-left py-4 text-2xl font-semibold transition-colors duration-200 border-b"
                       style={{
-                        color: '#f0f4f8',
-                        borderColor: 'rgba(43,123,224,0.2)',
+                        color: '#0d1420',
+                        borderColor: '#ccdaec',
                         fontFamily: 'var(--font-space-grotesk)',
                       }}
                     >
