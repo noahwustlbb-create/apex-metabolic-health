@@ -105,8 +105,8 @@ export default function PathologyPanel() {
                 }}
               >
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="M21 21l-4.35-4.35M16 7l3-3m0 0h-3m3 0v3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 2C10.5 2 9.5 3 9.5 4.5V13.5C8 14.3 7 15.8 7 17.5C7 20 9.2 22 12 22C14.8 22 17 20 17 17.5C17 15.8 16 14.3 14.5 13.5V4.5C14.5 3 13.5 2 12 2Z" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="17.5" r="1.5" fill="#2b7be0" stroke="none" />
                 </svg>
               </div>
               <div>
@@ -120,7 +120,7 @@ export default function PathologyPanel() {
                   className="text-[10px] font-semibold tracking-wider uppercase"
                   style={{ color: '#2b7be0' }}
                 >
-                  Hormone Programs
+                  Comprehensive Hormone Panel
                 </span>
               </div>
             </div>
@@ -164,8 +164,9 @@ export default function PathologyPanel() {
                 }}
               >
                 <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-                  <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
-                  <circle cx="12" cy="12" r="2.5" />
+                  <path d="M9 3H15L17 8H7L9 3Z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7 8C7 8 5 12 5 15.5C5 18.5 8.1 21 12 21C15.9 21 19 18.5 19 15.5C19 12 17 8 17 8H7Z" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M10 14C10 14 10.5 16 12 16C13.5 16 14 14 14 14" strokeLinecap="round" />
                 </svg>
               </div>
               <div>
@@ -179,7 +180,7 @@ export default function PathologyPanel() {
                   className="text-[10px] font-semibold tracking-wider uppercase"
                   style={{ color: '#2b7be0' }}
                 >
-                  Metabolic Programs
+                  Comprehensive Metabolic Panel
                 </span>
               </div>
             </div>
