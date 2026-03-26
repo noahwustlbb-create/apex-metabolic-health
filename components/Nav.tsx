@@ -62,10 +62,9 @@ export default function Nav() {
             <Image
               src="/logo-new.png"
               alt="Apex Metabolic Health"
-              width={140}
-              height={140}
-              className="w-auto"
-              style={{ height: '52px' }}
+              width={160}
+              height={160}
+              className="w-[120px] md:w-[160px] h-auto"
               priority
             />
           </Link>
