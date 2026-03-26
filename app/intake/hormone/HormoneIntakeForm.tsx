@@ -255,7 +255,7 @@ function ConsentCheckbox({ checked, onChange, children }: { checked: boolean; on
         style={{ backgroundColor: checked ? '#2b7be0' : 'transparent', border: `1px solid ${checked ? '#2b7be0' : '#4a5a6a'}` }}>
         {checked && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#070a0d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       </span>
-      <span className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>{children}</span>
+      <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{children}</span>
     </button>
   )
 }
@@ -531,7 +531,7 @@ export default function HormoneIntakeForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl mx-auto text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
@@ -541,10 +541,10 @@ export default function HormoneIntakeForm() {
                 </svg>
               </div>
               <p className="label mb-4">Form Submitted</p>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
                 Thank You, {data.firstName}.
               </h1>
-              <p className="text-base leading-relaxed mb-8" style={{ color: '#4a6080' }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: '#8899aa' }}>
                 We&apos;ve received your Request an Appointment & Pre-Screen Intake Form. Our clinical team will review your details and be in touch within one business day to confirm your next steps.
               </p>
               <p className="text-sm mb-10" style={{ color: '#4a5a6a' }}>
@@ -562,15 +562,15 @@ export default function HormoneIntakeForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div ref={topRef} className="container-tight max-w-3xl">
 
           <div className="mb-10 pt-6">
             <p className="label mb-3">Hormone Program</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
               Request an Appointment & Pre-Screen Intake Form
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
               Please ensure each question is answered. If something does not apply, write &ldquo;N/A&rdquo; or &ldquo;Nil&rdquo;. Takes approximately 3–5 minutes.
             </p>
           </div>
@@ -579,7 +579,7 @@ export default function HormoneIntakeForm() {
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
               className="flex items-center justify-between gap-4 px-5 py-4 rounded-sm mb-6"
               style={{ backgroundColor: 'rgba(43,123,224,0.08)', border: '1px solid rgba(43,123,224,0.25)' }}>
-              <p className="text-sm" style={{ color: '#0d1420' }}>You have a saved form in progress.</p>
+              <p className="text-sm" style={{ color: '#f0f4f8' }}>You have a saved form in progress.</p>
               <button type="button" onClick={resumeProgress} className="text-sm font-semibold flex-shrink-0" style={{ color: '#2b7be0' }}>Resume →</button>
             </motion.div>
           )}
