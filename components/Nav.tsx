@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
@@ -58,15 +57,47 @@ export default function Nav() {
       >
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/logo-new.png"
-              alt="Apex Metabolic Health"
-              width={160}
-              height={160}
-              className="w-[120px] md:w-[160px] h-auto"
-              priority
-            />
+          <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
+            <svg
+              viewBox="0 0 140 44"
+              className="w-[100px] md:w-[140px] h-auto"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="apx-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop stopColor="#0A3D8F"/>
+                  <stop offset="1" stopColor="#005F8E"/>
+                </linearGradient>
+              </defs>
+              {/* Outer precision frame */}
+              <polygon
+                points="13,2 26,42 0,42"
+                stroke="#0A3D8F" strokeWidth="0.7" strokeOpacity="0.25" fill="none"
+              />
+              {/* Main apex mark */}
+              <polygon points="13,6 23,40 3,40" fill="url(#apx-grad)"/>
+              {/* Vertical divider */}
+              <line x1="31" y1="6" x2="31" y2="40" stroke="#ccdaec" strokeWidth="0.8"/>
+              {/* APEX */}
+              <text
+                x="37" y="29"
+                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
+                fontSize="22" fontWeight="700"
+                fill="#0B1D40"
+                letterSpacing="-0.3"
+              >APEX</text>
+              {/* METABOLIC HEALTH */}
+              <text
+                x="37" y="40"
+                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
+                fontSize="6.8" fontWeight="500"
+                fill="#005F8E"
+                letterSpacing="1.4"
+              >METABOLIC HEALTH</text>
+            </svg>
           </Link>
 
           {/* Desktop nav */}
@@ -288,17 +319,17 @@ export default function Nav() {
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-primary"
+              className="block w-5 h-px bg-[#2b7be0]"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.2 }}
-              className="block w-5 h-px bg-primary"
+              className="block w-5 h-px bg-[#2b7be0]"
             />
             <motion.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-primary"
+              className="block w-5 h-px bg-[#2b7be0]"
             />
           </button>
         </div>

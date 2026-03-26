@@ -45,7 +45,7 @@ export default function Footer() {
                 width={120}
                 height={120}
                 className="w-auto"
-                style={{ height: '56px' }}
+                style={{ height: '56px', filter: 'brightness(0) invert(1)', opacity: 0.85 }}
               />
               <div className="flex flex-col leading-none gap-[3px] hidden">
                 <span>APEX METABOLIC</span>
