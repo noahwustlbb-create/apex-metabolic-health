@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function TreatmentOptions() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-      {/* Card A: Partner Pharmacies */}
+      {/* Card A: Apex Protocol Membership */}
       <div className="apex-card p-7 flex flex-col">
         <p
           className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3"
@@ -20,15 +20,17 @@ function TreatmentOptions() {
           RECOMMENDED
         </p>
         <h4
-          className="text-base font-semibold mb-4 leading-snug"
+          className="text-base font-semibold mb-1 leading-snug"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
-          Through Our Partner Pharmacies
+          Apex Protocol Membership
         </h4>
+        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+          $99<span className="text-sm font-normal" style={{ color: '#8899aa' }}>/month</span>
+        </p>
         <ul className="space-y-3 flex-1">
           {[
             'Medication priced at pharmacy rates',
-            <>Apex Protocol Membership: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$99/month</span></>,
             'Medication fulfilment access through our partner pharmacy',
             'File management & treatment coordination',
             'Medication safety review',
@@ -51,9 +53,9 @@ function TreatmentOptions() {
         </ul>
       </div>
 
-      {/* Card B: Through Your Own Pharmacy */}
+      {/* Card B: Script Release Only */}
       <div className="apex-card p-7 flex flex-col">
-        <div className="mb-7">
+        <div className="mb-4">
           <div
             className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3 opacity-0 select-none"
             aria-hidden="true"
@@ -61,15 +63,18 @@ function TreatmentOptions() {
             OPTION
           </div>
           <h4
-            className="text-base font-semibold mb-4 leading-snug"
+            className="text-base font-semibold mb-1 leading-snug"
             style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
-            Through Your Own Pharmacy
+            Script Release Only
           </h4>
+          <p className="text-2xl font-bold mb-0" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+            $145<span className="text-sm font-normal" style={{ color: '#8899aa' }}> one-off</span>
+          </p>
         </div>
         <ul className="space-y-3 flex-1">
           {[
-            <>Script release &amp; prescribing fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$125</span></>,
+            <>Script release &amp; prescribing fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span></>,
             'No ongoing support fee',
             'Access to our clinical team for dosing guidance as needed',
             'You fill your prescription at any pharmacy',
