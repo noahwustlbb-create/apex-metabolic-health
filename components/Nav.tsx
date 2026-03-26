@@ -65,7 +65,7 @@ export default function Nav() {
               width={140}
               height={140}
               className="w-auto"
-              style={{ height: '52px', mixBlendMode: 'multiply' }}
+              style={{ height: '52px' }}
               priority
             />
           </Link>
