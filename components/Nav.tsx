@@ -60,7 +60,7 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/logo.png"
+              src="/logo-new.png"
               alt="Apex Metabolic Health"
               width={140}
               height={140}

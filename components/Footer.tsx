@@ -40,7 +40,7 @@ export default function Footer() {
             {/* Logo */}
             <div className="mb-5">
               <Image
-                src="/logo.png"
+                src="/logo-new.png"
                 alt="Apex Metabolic Health"
                 width={120}
                 height={120}
