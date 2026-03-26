@@ -59,7 +59,7 @@ export default function StatsBar() {
     <section
       ref={ref}
       className="relative py-16 md:py-20 overflow-hidden"
-      style={{ backgroundColor: '#111820' }}
+      style={{ backgroundColor: '#0d1840' }}
       aria-label="Clinical credentials"
     >
       {/* Top and bottom rules */}
@@ -98,8 +98,8 @@ export default function StatsBar() {
               transition={{ duration: 0.6, delay: i * 0.1 }}
               className="text-center py-8 px-6"
               style={{
-                borderRight: i < STATS.length - 1 ? '1px solid #1e2d3d' : 'none',
-                borderBottom: i < 2 ? '1px solid #1e2d3d' : 'none',
+                borderRight: i < STATS.length - 1 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
               }}
             >
               <p

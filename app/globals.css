@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: #070a0d;
-  --surface: #0d1117;
-  --elevated: #111820;
-  --border: #1e2d3d;
+  --bg: #ffffff;
+  --surface: #f0f5ff;
+  --elevated: #e4edf8;
+  --border: #ccdaec;
   --teal: #2b7be0;
-  --teal-glow: rgba(43, 123, 224, 0.15);
-  --gold: #a8b8cc;
-  --text-primary: #f0f4f8;
-  --text-secondary: #8899aa;
-  --text-muted: #4a5a6a;
+  --teal-glow: rgba(43, 123, 224, 0.12);
+  --gold: #c9a84c;
+  --text-primary: #0d1420;
+  --text-secondary: #4a6080;
+  --text-muted: #8299b0;
 }
 
 @layer base {
@@ -49,15 +49,15 @@
 @layer utilities {
   /* Dot-grid background — very subtle */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(43, 123, 224, 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
   /* Fine line grid */
   .line-grid {
     background-image:
-      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      linear-gradient(rgba(43, 123, 224, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(43, 123, 224, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -124,8 +124,8 @@
   }
 
   .btn-teal:hover {
-    background: #00d9ce;
-    box-shadow: 0 0 30px rgba(43, 123, 224, 0.4);
+    background: #1a5fb4;
+    box-shadow: 0 0 30px rgba(43, 123, 224, 0.35);
   }
 
   /* Ghost button */

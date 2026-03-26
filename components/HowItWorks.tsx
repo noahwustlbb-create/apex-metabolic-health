@@ -8,25 +8,25 @@ const STEPS = [
     number: '01',
     title: 'Select Your Program',
     description:
-      'Choose the clinical pathway that matches your goals and symptoms. Our intake process is designed to point you in the right direction.',
+      'Eight doctor-led programs. Pick the one that fits your symptoms and goals.',
   },
   {
     number: '02',
     title: 'Complete Pathology Testing',
     description:
-      'Attend an accredited collection centre near you. We guide you through exactly what testing is required for your program.',
+      'We issue the referral. Attend any accredited collection centre. No appointment needed at most locations.',
   },
   {
     number: '03',
     title: 'Consult With Your Doctor',
     description:
-      'Telehealth consultation with one of our AHPRA-registered physicians. Review your results, discuss your history, receive a clinical assessment.',
+      'Your doctor reviews results, takes your history, and delivers a clinical assessment. Typically 30–60 minutes.',
   },
   {
     number: '04',
-    title: 'Ongoing Personalised Care',
+    title: 'Ongoing Protocol Management',
     description:
-      'Your protocol is coordinated end-to-end — including access to our TGA-compliant compounding pharmacy partner, scheduled follow-ups, and ongoing clinical support.',
+      'Medication through our TGA-compliant partner pharmacy. Mandatory 4-month reviews. Clinical support throughout.',
   },
 ]
 
@@ -63,14 +63,14 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
         transition={{ duration: 0.5, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center mb-6 flex-shrink-0"
         style={{
-          backgroundColor: 'rgba(43,123,224,0.06)',
+          backgroundColor: 'rgba(43,123,224,0.08)',
           border: '1px solid rgba(43,123,224,0.25)',
         }}
       >
         {/* Inner ring */}
         <div
           className="absolute inset-2 rounded-full"
-          style={{ border: '1px solid rgba(43,123,224,0.12)' }}
+          style={{ border: '1px solid rgba(43,123,224,0.15)' }}
         />
         <span
           className="stat-number text-2xl"
@@ -87,11 +87,11 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
       >
         <h3
           className="text-lg font-semibold mb-3"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
         >
           {step.title}
         </h3>
-        <p className="text-sm leading-relaxed max-w-[220px] mx-auto" style={{ color: '#8899aa' }}>
+        <p className="text-sm leading-relaxed max-w-[220px] mx-auto" style={{ color: '#4a6080' }}>
           {step.description}
         </p>
       </motion.div>
@@ -109,7 +109,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="How it works"
     >
       {/* Background accent */}
@@ -137,10 +137,10 @@ export default function HowItWorks() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
             Clinical Medicine.{' '}
-            <span className="text-teal-gradient">Zero Waiting Rooms.</span>
+            <span className="text-teal-gradient">No Waiting Rooms.</span>
           </motion.h2>
         </div>
 
@@ -164,7 +164,7 @@ export default function HowItWorks() {
             style={{
               border: '1px solid rgba(43,123,224,0.2)',
               borderRadius: '2px',
-              backgroundColor: 'rgba(43,123,224,0.04)',
+              backgroundColor: 'rgba(43,123,224,0.05)',
             }}
           >
             <span

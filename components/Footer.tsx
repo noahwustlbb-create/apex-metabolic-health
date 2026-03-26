@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer
       className="relative"
-      style={{ backgroundColor: '#070a0d', borderTop: '1px solid #1e2d3d' }}
+      style={{ backgroundColor: '#0d1420', borderTop: '1px solid rgba(43,123,224,0.2)' }}
     >
       {/* Top glow rule */}
       <div
@@ -138,7 +138,7 @@ export default function Footer() {
         {/* Divider */}
         <div
           className="h-px w-full mb-8"
-          style={{ backgroundColor: '#1e2d3d' }}
+          style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
           aria-hidden="true"
         />
 
@@ -146,8 +146,8 @@ export default function Footer() {
         <div
           className="p-5 rounded-sm mb-8"
           style={{
-            backgroundColor: 'rgba(17,24,32,0.8)',
-            border: '1px solid #1e2d3d',
+            backgroundColor: 'rgba(255,255,255,0.04)',
+            border: '1px solid rgba(255,255,255,0.08)',
           }}
         >
           <p

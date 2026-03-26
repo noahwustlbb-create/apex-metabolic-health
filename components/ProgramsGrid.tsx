@@ -190,7 +190,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Program name */}
         <h3
           className="text-base font-semibold mb-2.5 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
         >
           {program.name}
         </h3>
@@ -198,7 +198,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Description */}
         <p
           className="text-sm leading-relaxed flex-1 mb-5"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#4a6080' }}
         >
           {program.description}
         </p>
@@ -245,7 +245,7 @@ export default function ProgramsGrid() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -278,20 +278,20 @@ export default function ProgramsGrid() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
             Eight Clinical Programs.
             <br />
-            <span className="text-teal-gradient">One Focused Approach.</span>
+            <span className="text-teal-gradient">Evidence-Based Protocols.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#4a6080' }}
           >
-            Every program is doctor-led, evidence-based, and tailored to your pathology results.
+            Every program starts with doctor assessment. All treatment is clinically indicated.
           </motion.p>
         </div>
 

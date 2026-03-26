@@ -12,7 +12,7 @@ function HowItWorksHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#070a0d', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0d1840', paddingTop: '120px' }}
       aria-label="How it works hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -40,9 +40,9 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420', lineHeight: '1.06' }}
         >
-          From Your First Form to Your Ongoing Protocol.
+          From First Contact to Ongoing Protocol.
         </motion.h1>
 
         <motion.p
@@ -50,10 +50,9 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl mb-10"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#4a6080' }}
         >
-          We&apos;ve designed the process to be as straightforward as possible. Here&apos;s exactly
-          what happens at every stage.
+          No vague timelines. Here&apos;s every step.
         </motion.p>
 
         <motion.div
@@ -62,7 +61,7 @@ function HowItWorksHero() {
           transition={{ duration: 0.6, delay: 0.35 }}
         >
           <Link href="/get-started" className="btn-teal">
-            Get Started
+            Book a Consult
           </Link>
         </motion.div>
       </div>
@@ -77,37 +76,37 @@ const FULL_STEPS = [
     number: '1',
     title: 'Request an Appointment and Consent Form',
     subtitle: 'Appointment & Consent Form',
-    body: `Your journey begins with a short, private form. You'll tell us about your health goals, any symptoms you've been experiencing, and which program interests you. There's no commitment at this stage — we use this information to confirm you're on the right pathway before you spend a dollar.
+    body: `Fill out the form. Tell us your symptoms and goals. No commitment at this point.
 
-After submitting, our team will schedule a complimentary discovery call with you.`,
+Our team will call to confirm your appointment and pathology referral.`,
   },
   {
     number: '2',
     title: 'Pathology Collection',
     subtitle: '',
-    body: `For hormone programs, we'll issue a blood panel referral. You attend a local accredited pathology collection centre — no appointment required at most locations, and there are centres in most suburbs across Australia. Results are sent securely to your doctor before your consultation.
+    body: `For hormone programs: we issue a blood panel referral. Attend any accredited collection centre — no appointment required at most locations.
 
-Weight loss and general programs may not require upfront blood work — your doctor will advise.`,
+Weight loss and general programs may not need upfront bloods. Your doctor advises.`,
   },
   {
     number: '3',
     title: 'Telehealth Consultation',
     subtitle: '',
-    body: `This is the clinical core of every program. Your AHPRA-registered doctor reviews your pathology results in full, takes a detailed health history, and assesses your goals. This is a structured clinical appointment — typically 30–60 minutes — not a quick prescription call.
+    body: `Your doctor reviews your results, takes a detailed history, and delivers a clinical assessment. Typically 30–60 minutes. Not a quick prescription call.
 
-At the end of your consultation, you'll have a clear, personalised protocol and understand exactly what the next steps are.`,
+You'll leave with a clear protocol and know exactly what happens next.`,
   },
   {
     number: '4',
     title: 'Begin Your Protocol',
     subtitle: '',
-    body: `If your doctor determines that treatment is clinically appropriate, you'll have two options for how medication is fulfilled: through our TGA-compliant partner pharmacy, or through a pharmacy of your choosing with a script release. Your doctor will explain both options and guide you through the process.`,
+    body: `Where clinically appropriate, two fulfilment options: our TGA-compliant partner pharmacy, or a script release to your own pharmacy. Your doctor explains both.`,
   },
   {
     number: '5',
     title: 'Ongoing Monitoring & Reviews',
     subtitle: '',
-    body: `For patients on active protocols, follow-up blood work and a review consultation are mandatory every 4 months. This is not optional — it's how we ensure your protocol remains safe, effective, and appropriate for your current biology. Adjustments are made based on your results, not assumptions.`,
+    body: `Blood work and a review consultation are required every 4 months for active protocol patients. Non-negotiable — it's how we keep treatment safe and effective. Adjustments are based on results, not assumptions.`,
   },
 ]
 
@@ -120,7 +119,7 @@ function FullProcess() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#f4f8ff' }}
       aria-label="The full process"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -140,7 +139,7 @@ function FullProcess() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
             Step by Step
           </motion.h2>
@@ -192,7 +191,7 @@ function FullProcess() {
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <h3
                       className="text-xl font-semibold"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
                     >
                       {step.title}
                     </h3>
@@ -211,7 +210,7 @@ function FullProcess() {
                   </div>
                   <div className="space-y-3">
                     {step.body.split('\n\n').map((para, j) => (
-                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#8899aa' }}>
+                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#4a6080' }}>
                         {para}
                       </p>
                     ))}
@@ -231,7 +230,7 @@ function FullProcess() {
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid #1e2d3d' }}>
+    <div style={{ borderBottom: '1px solid #ccdaec' }}>
       <button
         className="w-full flex items-center justify-between py-5 text-left gap-4"
         onClick={() => setOpen((o) => !o)}
@@ -241,7 +240,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
           style={{
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: 600,
-            color: '#f0f4f8',
+            color: '#0d1420',
             fontSize: '15px',
           }}
         >
@@ -260,7 +259,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a6080' }}>
           {answer}
         </p>
       )}
@@ -308,7 +307,7 @@ function FAQSection() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#f4f8ff' }}
       aria-label="Common questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -332,7 +331,7 @@ function FAQSection() {
           <p className="label mb-4">COMMON QUESTIONS</p>
           <h2
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
             Quick Answers
           </h2>
@@ -358,7 +357,7 @@ function HowItWorksCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Have more questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -377,7 +376,7 @@ function HowItWorksCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
         >
           Have more questions?
         </motion.h2>

@@ -108,7 +108,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#0d1840' }}
       aria-label="Hero — Apex Metabolic Health"
     >
       {/* Dot grid background */}
@@ -212,9 +212,7 @@ export default function Hero() {
           className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-11"
           style={{ color: '#8899aa' }}
         >
-          Apex Metabolic Health is a doctor-led telehealth clinic built for adults who want real
-          answers — not reassurance. Evidence-based hormonal and metabolic medicine, delivered
-          online across Australia.
+          Doctor-led hormonal and metabolic medicine. If your tests came back normal but you don&apos;t feel normal — this is where you get real answers.
         </motion.p>
 
         {/* CTAs */}

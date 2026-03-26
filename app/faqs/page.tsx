@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid #1e2d3d' }}>
+    <div style={{ borderBottom: '1px solid #ccdaec' }}>
       <button
         className="w-full flex items-center justify-between py-5 text-left gap-4"
         onClick={() => setOpen((o) => !o)}
@@ -21,7 +21,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
           style={{
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: 600,
-            color: '#f0f4f8',
+            color: '#0d1420',
             fontSize: '15px',
           }}
         >
@@ -40,7 +40,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a6080' }}>
           {answer}
         </p>
       )}
@@ -67,7 +67,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'How do I begin the process?',
         answer:
-          'Fill out the Get Started form on our website. Takes 3–5 minutes. Our team will contact you to schedule a complimentary discovery call and confirm the right program for you — before you spend anything.',
+          'Submit the form on our website. Our team will call to confirm your appointment and pathology referral. No commitment until we've spoken.',
       },
       {
         question: 'How long does the initial review take?',
@@ -117,7 +117,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What happens if treatment isn\'t clinically appropriate for me?',
         answer:
-          'Your doctor will explain their assessment, discuss alternative options, and ensure you leave the consultation with clear guidance — even if that guidance is to explore a different pathway. You will not be charged for a consultation that doesn\'t result in a treatment plan without prior discussion.',
+          'Your doctor will explain their assessment, discuss alternative options, and ensure you leave the consultation with clear guidance — even if that guidance is to explore other options. You will not be charged for a consultation that doesn\'t result in a treatment plan without prior discussion.',
       },
       {
         question: 'Can I share my medication with someone else?',
@@ -199,7 +199,7 @@ function FAQHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#070a0d', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0d1840', paddingTop: '120px' }}
       aria-label="FAQs hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -227,9 +227,9 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420', lineHeight: '1.06' }}
         >
-          Everything You Need to Know
+          Straight Answers.
         </motion.h1>
 
         <motion.p
@@ -237,9 +237,9 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#4a6080' }}
         >
-          Can&apos;t find what you&apos;re looking for? Contact us through our Get Started page.
+          Not on this list? Contact us through the Get Started page.
         </motion.p>
       </div>
     </section>
@@ -259,7 +259,7 @@ function FAQCategory({
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
-  const bg = index % 2 === 0 ? '#0d1117' : '#070a0d'
+  const bg = index % 2 === 0 ? '#ffffff' : '#f4f8ff'
 
   return (
     <section
@@ -276,7 +276,7 @@ function FAQCategory({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
         >
           {category}
         </motion.h2>
@@ -306,7 +306,7 @@ function FAQBottomCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -325,7 +325,7 @@ function FAQBottomCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
         >
           Still have questions?
         </motion.h2>

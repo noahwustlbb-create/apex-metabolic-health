@@ -27,7 +27,7 @@ const SYMPTOMS = [
         <path d="M12 2a5 5 0 100 10A5 5 0 0012 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z" fill="currentColor" />
       </svg>
     ),
-    label: 'Weight gain that won\'t shift',
+    label: "Weight gain that won't shift",
   },
   {
     icon: (
@@ -95,7 +95,7 @@ function SymptomCard({ symptom, index }: { symptom: typeof SYMPTOMS[0]; index: n
       </div>
       <p
         className="text-sm font-medium leading-snug pt-1.5"
-        style={{ color: '#8899aa' }}
+        style={{ color: '#4a6080' }}
       >
         {symptom.label}
       </p>
@@ -113,7 +113,7 @@ export default function ProblemSection() {
     <section
       id="problem"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#f4f8ff' }}
       aria-label="Symptoms section"
     >
       {/* Top glow rule */}
@@ -124,7 +124,7 @@ export default function ProblemSection() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -144,22 +144,20 @@ export default function ProblemSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
             Something Is Off.
             <br />
-            <span className="text-teal-gradient">And You&apos;re Not Imagining It.</span>
+            <span className="text-teal-gradient">The Numbers Back It Up.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#4a6080' }}
           >
-            Most patients we see have been told their bloodwork is &ldquo;fine&rdquo;. They leave with
-            no answers, no plan, and the creeping sense that this is just what getting older
-            feels like. It isn&apos;t.
+            Your GP said normal. You know something&apos;s wrong. We run the panels that find what others miss — and we act on what we find.
           </motion.p>
         </div>
 
@@ -181,15 +179,14 @@ export default function ProblemSection() {
           <div
             className="px-8 py-6 rounded-sm"
             style={{
-              backgroundColor: 'rgba(43,123,224,0.04)',
+              backgroundColor: 'rgba(43,123,224,0.05)',
               border: '1px solid rgba(43,123,224,0.15)',
             }}
           >
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#8899aa' }}>
-              These aren&apos;t signs of ageing. They&apos;re signs that something in your biology
-              needs attention.{' '}
-              <span className="font-semibold" style={{ color: '#f0f4f8' }}>
-                Our doctors know the difference.
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#4a6080' }}>
+              These are clinical symptoms — not lifestyle problems.{' '}
+              <span className="font-semibold" style={{ color: '#0d1420' }}>
+                Our doctors run the panels that find the cause.
               </span>
             </p>
           </div>

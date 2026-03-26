@@ -10,9 +10,9 @@ import { programs } from '@/lib/programs'
 // ─── Input styles ─────────────────────────────────────────────────────────────
 
 const inputBase: React.CSSProperties = {
-  background: '#0d1117',
-  border: '1px solid #1e2d3d',
-  color: '#f0f4f8',
+  background: '#ffffff',
+  border: '1px solid #ccdaec',
+  color: '#0d1420',
   padding: '12px 16px',
   borderRadius: '4px',
   width: '100%',
@@ -27,7 +27,7 @@ function GetStartedHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#070a0d', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0d1840', paddingTop: '120px' }}
       aria-label="Get started hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -55,9 +55,9 @@ function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420', lineHeight: '1.06' }}
         >
-          Ready to Take Control of Your Health?
+          Three Ways to Book. Choose Yours.
         </motion.h1>
 
         <motion.p
@@ -65,7 +65,7 @@ function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#4a6080' }}
         >
           Three ways to begin. Choose what feels right for where you&apos;re at.
         </motion.p>
@@ -83,7 +83,7 @@ function BookingCards() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#f4f8ff' }}
       aria-label="Booking options"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -106,13 +106,12 @@ function BookingCards() {
             </p>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
             >
               Free Discovery Call
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
-              Not sure which program is right for you? Talk to our team first. A 15-minute call to
-              understand your goals and point you in the right direction. No cost, no commitment.
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
+              Unsure which program fits? A 15-minute call with our team. No cost.
             </p>
             <a
               href="/intake/discovery"
@@ -135,13 +134,12 @@ function BookingCards() {
             </div>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
             >
               Hormone Consultation
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
-              Ready to get your bloods done and meet with a doctor. For patients pursuing hormone
-              optimisation or performance programs.
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
+              For hormone or performance programs. Blood work first, then your consultation.
             </p>
             <a
               href="/intake/hormone"
@@ -164,11 +162,11 @@ function BookingCards() {
             </div>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
             >
               General Consultation
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
               For weight management, peptide programs, medical certificates, or a general health
               check-in with one of our doctors.
             </p>
@@ -195,7 +193,7 @@ function EnquiryForm() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Enquiry form"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -211,11 +209,11 @@ function EnquiryForm() {
             <p className="label mb-4">SEND AN ENQUIRY</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
             >
-              Prefer to reach out directly?
+              Send a Direct Enquiry
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#8899aa' }}>
+            <p className="text-base leading-relaxed" style={{ color: '#4a6080' }}>
               Fill out the form below and we&apos;ll get back to you within 1 business day.
             </p>
           </motion.div>
@@ -233,7 +231,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                 >
                   Full Name
                 </label>
@@ -249,7 +247,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                 >
                   Email
                 </label>
@@ -269,7 +267,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                 >
                   Phone
                 </label>
@@ -285,7 +283,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a6080' }}
                 >
                   Program of Interest
                 </label>
@@ -296,14 +294,14 @@ function EnquiryForm() {
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
                 >
-                  <option value="" disabled style={{ color: '#4a5a6a' }}>
+                  <option value="" disabled style={{ color: '#8299b0' }}>
                     Select a program
                   </option>
                   {programs.map((p) => (
                     <option
                       key={p.slug}
                       value={p.slug}
-                      style={{ background: '#0d1117', color: '#f0f4f8' }}
+                      style={{ background: '#ffffff', color: '#0d1420' }}
                     >
                       {p.name}
                     </option>
@@ -316,7 +314,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#8899aa' }}
+                style={{ color: '#4a6080' }}
               >
                 How did you hear about us?
               </label>
@@ -327,7 +325,7 @@ function EnquiryForm() {
                 onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
               >
-                <option value="" disabled style={{ color: '#4a5a6a' }}>
+                <option value="" disabled style={{ color: '#8299b0' }}>
                   Select an option
                 </option>
                 {[
@@ -340,7 +338,7 @@ function EnquiryForm() {
                   <option
                     key={option}
                     value={option}
-                    style={{ background: '#0d1117', color: '#f0f4f8' }}
+                    style={{ background: '#ffffff', color: '#0d1420' }}
                   >
                     {option}
                   </option>
@@ -352,7 +350,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#8899aa' }}
+                style={{ color: '#4a6080' }}
               >
                 Message
               </label>
@@ -370,7 +368,7 @@ function EnquiryForm() {
               Send Enquiry
             </button>
 
-            <p className="text-xs" style={{ color: '#4a5a6a' }}>
+            <p className="text-xs" style={{ color: '#8299b0' }}>
               We respond within 1 business day. Your information is kept strictly private.
             </p>
           </motion.form>
@@ -397,7 +395,7 @@ function TrustStrip() {
     <section
       ref={ref}
       className="relative py-14 overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#0d1840' }}
       aria-label="Trust signals"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -415,7 +413,7 @@ function TrustStrip() {
                 <circle cx="8" cy="8" r="7" stroke="#2b7be0" strokeWidth="1.2" fill="rgba(43,123,224,0.07)" />
                 <path d="M5 8l2.5 2.5 4-4" stroke="#2b7be0" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm font-semibold tracking-wide" style={{ color: '#f0f4f8' }}>
+              <span className="text-sm font-semibold tracking-wide" style={{ color: '#0d1420' }}>
                 {item}
               </span>
             </div>

@@ -12,7 +12,7 @@ export default function CTASection() {
       id="cta"
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0d1840' }}
       aria-label="Book a consultation"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -23,23 +23,23 @@ export default function CTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.15) 0%, transparent 60%)',
         }}
       />
 
       {/* Dot grid */}
-      <div className="absolute inset-0 dot-grid opacity-50" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
 
-      {/* Pulsing rings — CSS-only animation */}
+      {/* Pulsing rings */}
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 500, height: 500, border: '1px solid rgba(43,123,224,0.07)', top: '50%', left: '50%' }}
+        style={{ width: 500, height: 500, border: '1px solid rgba(43,123,224,0.12)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 800, height: 800, border: '1px solid rgba(43,123,224,0.03)', top: '50%', left: '50%' }}
+        style={{ width: 800, height: 800, border: '1px solid rgba(43,123,224,0.06)', top: '50%', left: '50%' }}
       />
 
       <div className="container-tight relative z-10 text-center">
@@ -59,9 +59,9 @@ export default function CTASection() {
           className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-6 max-w-3xl mx-auto"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.08' }}
         >
-          Ready to Find Out What&apos;s
+          Get Answers.
           <br />
-          <span className="text-teal-gradient">Actually Going On?</span>
+          <span className="text-teal-gradient">Not Reassurance.</span>
         </motion.h2>
 
         <motion.p
@@ -71,8 +71,7 @@ export default function CTASection() {
           className="text-lg leading-relaxed max-w-xl mx-auto mb-10"
           style={{ color: '#8899aa' }}
         >
-          Book a telehealth consultation with one of our doctors. Get answers backed by
-          pathology, not guesswork.
+          Book a telehealth consultation. Pathology-backed diagnosis. Clinical protocol delivered online.
         </motion.p>
 
         <motion.div
@@ -91,9 +90,9 @@ export default function CTASection() {
           <a
             href="/services"
             className="btn-ghost text-sm font-bold tracking-widest uppercase px-10 py-4"
-            style={{ fontSize: '13px' }}
+            style={{ fontSize: '13px', borderColor: 'rgba(255,255,255,0.3)', color: '#f0f4f8' }}
           >
-            Choose a Program
+            View Programs
           </a>
         </motion.div>
 

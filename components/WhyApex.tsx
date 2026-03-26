@@ -25,7 +25,7 @@ const DIFFERENTIATORS = [
     ),
     title: 'Evidence-Based Medicine',
     description:
-      'Our protocols are grounded in peer-reviewed clinical research, not trends or marketing. Every clinical decision is defensible.',
+      'Protocols grounded in peer-reviewed clinical research. No trends. No marketing. Every decision is defensible.',
   },
   {
     icon: (
@@ -36,7 +36,7 @@ const DIFFERENTIATORS = [
     ),
     title: 'TGA-Compliant Fulfilment',
     description:
-      "Where prescriptions are indicated, medication is fulfilled through our TGA-compliant compounding pharmacy partner — to the letter of Australian regulatory requirements.",
+      'All prescriptions fulfilled through our TGA-compliant partner pharmacy. No grey areas. No shortcuts.',
   },
   {
     icon: (
@@ -48,7 +48,7 @@ const DIFFERENTIATORS = [
     ),
     title: 'Ongoing Clinical Relationship',
     description:
-      "We don't disappear after your first consult. Scheduled reviews and clinical support are built into every program from day one.",
+      "We don't disappear after your first consult. Scheduled reviews and clinical support are built into every program.",
   },
 ]
 
@@ -70,19 +70,19 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="p-7 rounded-sm group cursor-default"
       style={{
-        backgroundColor: '#0d1117',
-        border: '1px solid #1e2d3d',
-        transition: 'border-color 0.3s ease, background-color 0.3s ease',
+        backgroundColor: '#ffffff',
+        border: '1px solid #ccdaec',
+        transition: 'border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget
-        el.style.borderColor = 'rgba(43,123,224,0.35)'
-        el.style.backgroundColor = '#0f1a22'
+        el.style.borderColor = 'rgba(43,123,224,0.4)'
+        el.style.boxShadow = '0 4px 24px rgba(43,123,224,0.1)'
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget
-        el.style.borderColor = '#1e2d3d'
-        el.style.backgroundColor = '#0d1117'
+        el.style.borderColor = '#ccdaec'
+        el.style.boxShadow = 'none'
       }}
     >
       {/* Icon */}
@@ -105,11 +105,11 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
 
       <h3
         className="text-base font-semibold mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>
         {item.description}
       </p>
     </motion.div>
@@ -124,7 +124,7 @@ export default function WhyApex() {
     <section
       id="why-apex"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#f4f8ff' }}
       aria-label="Why choose Apex"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -134,7 +134,7 @@ export default function WhyApex() {
         aria-hidden="true"
         className="absolute left-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 50%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 50%, rgba(43,123,224,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -154,10 +154,10 @@ export default function WhyApex() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
           >
-            Clinical Rigour.{' '}
-            <span className="text-teal-gradient">Without the Waiting List.</span>
+            Clinical Standards.{' '}
+            <span className="text-teal-gradient">No Waiting List.</span>
           </motion.h2>
         </div>
 
