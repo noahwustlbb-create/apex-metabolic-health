@@ -28,10 +28,14 @@ function TreatmentOptions() {
         <ul className="space-y-3 flex-1">
           {[
             'Medication priced at pharmacy rates',
-            <>Administration &amp; handling fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>from $50/month</span></>,
-            'Covers ongoing file management, treatment coordination, and medication safety review',
-            'Access to our clinical support team',
+            <>Apex Protocol Membership: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$99/month</span></>,
+            'Medication fulfilment access through our partner pharmacy',
+            'File management & treatment coordination',
+            'Medication safety review',
+            'Clinical support team access',
             'Coordinated review consultations built in',
+            'Admin support 9–5, 7 days a week',
+            'Evidence-based supplement recommendations',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span
