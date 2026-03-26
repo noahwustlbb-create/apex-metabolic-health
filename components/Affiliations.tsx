@@ -25,12 +25,12 @@ const BADGES = [
     ),
   },
   {
-    label: 'Medicare Accessible',
-    sublabel: 'Bulk billing available',
+    label: 'Fully Private Clinic',
+    sublabel: 'No Medicare rebates',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
-        <path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M9 22V12h6v10" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 3l-8 4.5v5C4 17.4 7.4 21.5 12 22c4.6-.5 8-4.6 8-9.5v-5L12 3z" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 8v4M12 16h.01" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },

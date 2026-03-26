@@ -11,8 +11,8 @@ const COMPANY_LINKS = [
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
   { label: 'Get Started', href: '/get-started' },
-  { label: 'Privacy Policy', href: '#' },
-  { label: 'Terms', href: '#' },
+  { label: 'Privacy Policy', href: '/privacy-policy' },
+  { label: 'Terms', href: '/terms' },
 ]
 
 export default function Footer() {

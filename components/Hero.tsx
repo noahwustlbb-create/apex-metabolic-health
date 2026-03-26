@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 const STATS = [
-  { value: '2,400+', label: 'Consultations' },
   { value: '8', label: 'Clinical Programs' },
   { value: '100%', label: 'Online' },
   { value: 'AHPRA', label: 'Registered Doctors' },
@@ -185,9 +184,9 @@ export default function Hero() {
               color: '#f0f4f8',
             }}
           >
-            Your GP Said
+            Your GP Screen
             <br />
-            <span className="text-teal-gradient">Everything Looks Normal.</span>
+            <span className="text-teal-gradient">Has Limits.</span>
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -200,7 +199,7 @@ export default function Hero() {
               color: '#f0f4f8',
             }}
           >
-            You Know It Doesn&apos;t.
+            We Run the Panels That Go Further.
           </motion.h1>
         </div>
 

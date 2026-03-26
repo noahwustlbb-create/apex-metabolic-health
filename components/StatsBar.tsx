@@ -118,7 +118,7 @@ export default function StatsBar() {
                     {stat.suffix}
                   </>
                 ) : (
-                  '0'
+                  stat.value
                 )}
               </p>
               <p

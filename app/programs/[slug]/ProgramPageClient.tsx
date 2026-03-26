@@ -144,6 +144,20 @@ function ProgramHero({ program }: { program: Program }) {
             </motion.div>
           </div>
 
+          {/* SAS Category B disclosure */}
+          {program.sasDisclosure && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="mt-6 px-4 py-3 rounded-sm text-xs leading-relaxed"
+              style={{ backgroundColor: 'rgba(43,123,224,0.06)', border: '1px solid rgba(43,123,224,0.18)', color: '#8899aa' }}
+            >
+              <strong style={{ color: '#f0f4f8' }}>Therapeutic goods disclosure: </strong>
+              Some treatment options available through this program involve therapeutic goods not registered on the Australian Register of Therapeutic Goods (ARTG). Your doctor will advise you if this applies to your protocol and will obtain your informed consent before proceeding.
+            </motion.div>
+          )}
+
           {/* Hero image */}
           {program.image && (
             <motion.div

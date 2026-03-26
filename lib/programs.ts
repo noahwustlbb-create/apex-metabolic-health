@@ -15,6 +15,7 @@ export interface Program {
   howItWorks: Array<{ number: string; title: string; description: string }>
   ctaLabel: string
   ctaHref: string
+  sasDisclosure?: boolean
 }
 
 const defaultHormoneHowItWorks = [
@@ -118,11 +119,12 @@ export const programs: Program[] = [
       'Telehealth consultation with a performance-focused AHPRA-registered doctor',
       'Combined hormonal and performance clinical protocol',
       'Treatment coordination through our TGA-compliant pharmacy partner',
-      'Quarterly review consultations',
+      '4-monthly review consultations',
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Get Started',
     ctaHref: '/get-started',
+  sasDisclosure: true,
   },
   {
     slug: 'performance-plus',
@@ -146,11 +148,12 @@ export const programs: Program[] = [
       'Extended consultation with a performance-specialist AHPRA-registered doctor',
       'Comprehensive combined protocol — hormonal + performance focus',
       'Priority pharmacy coordination through our TGA-compliant partner',
-      'Quarterly review schedule with clinical progress tracking',
+      '4-monthly review schedule with clinical progress tracking',
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Get Started',
     ctaHref: '/get-started',
+  sasDisclosure: true,
   },
   {
     slug: 'injury-repair',
@@ -178,6 +181,7 @@ export const programs: Program[] = [
     howItWorks: defaultGeneralHowItWorks,
     ctaLabel: 'Get Started',
     ctaHref: '/get-started',
+  sasDisclosure: true,
   },
   {
     slug: 'skin-regeneration',
@@ -204,6 +208,7 @@ export const programs: Program[] = [
     howItWorks: defaultGeneralHowItWorks,
     ctaLabel: 'Get Started',
     ctaHref: '/get-started',
+  sasDisclosure: true,
   },
   {
     slug: 'hair-restoration',
