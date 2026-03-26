@@ -75,8 +75,8 @@ function HowItWorksHero() {
 const FULL_STEPS = [
   {
     number: '1',
-    title: 'Fill Out the Get Started Form',
-    subtitle: '3–5 minutes',
+    title: 'Request an Appointment',
+    subtitle: 'Appointment & Consent Form',
     body: `Your journey begins with a short, private form. You'll tell us about your health goals, any symptoms you've been experiencing, and which program interests you. There's no commitment at this stage — we use this information to confirm you're on the right pathway before you spend a dollar.
 
 After submitting, our team will schedule a complimentary discovery call with you.`,
