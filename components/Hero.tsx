@@ -222,26 +222,23 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.6, ease }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          <button
-            onClick={() => {
-              const el = document.querySelector('#cta')
-              if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' })
-            }}
+          <a
+            href="/intake/hormone"
             className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
           >
-            Start Your Program
-          </button>
+            Hormone Consult
+          </a>
+          <a
+            href="/intake/general"
+            className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
+          >
+            General Health Check Up
+          </a>
           <a
             href="/services"
             className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto"
           >
-            Choose a Program
-          </a>
-          <a
-            href="/get-started"
-            className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
-          >
-            Request an Appointment
+            Explore Our Programs
           </a>
         </motion.div>
 

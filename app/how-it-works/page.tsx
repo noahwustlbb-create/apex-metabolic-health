@@ -40,7 +40,7 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
         >
           From First Contact to Ongoing Protocol.
         </motion.h1>
