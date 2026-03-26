@@ -568,7 +568,7 @@ export default function HormoneIntakeForm() {
           <div className="mb-10 pt-6">
             <p className="label mb-3">Hormone Program</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
-              Request an Appointment & Pre-Screen Intake Form
+              Request an Appointment and Intake Form
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
               Please ensure each question is answered. If something does not apply, write &ldquo;N/A&rdquo; or &ldquo;Nil&rdquo;. Takes approximately 3–5 minutes.
