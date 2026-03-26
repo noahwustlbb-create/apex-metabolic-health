@@ -777,7 +777,7 @@ export default function GeneralIntakeForm() {
           <div className="mb-10 pt-6">
             <p className="label mb-3">General Appointment</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
-              Request an Appointment and Intake Form
+              Request an Appointment & Pre-Screen Intake Form
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
               Complete this form to request your general consultation. Takes approximately 3–5 minutes.
