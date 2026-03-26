@@ -50,7 +50,7 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: 'rgba(7,10,13,0.97)',
+          backgroundColor: 'rgba(13,24,64,0.97)',
           backdropFilter: 'blur(16px)',
           borderBottom: scrolled ? '1px solid rgba(43,123,224,0.2)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 24px rgba(0,0,0,0.4)' : 'none',
@@ -314,7 +314,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
-            style={{ backgroundColor: 'rgba(7,10,13,0.98)', backdropFilter: 'blur(20px)' }}
+            style={{ backgroundColor: 'rgba(13,24,64,0.98)', backdropFilter: 'blur(20px)' }}
           >
             <div className="flex flex-col h-full pt-20 pb-10 px-6">
               <nav className="flex flex-col gap-2 flex-1 justify-center">

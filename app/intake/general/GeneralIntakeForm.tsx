@@ -353,7 +353,7 @@ function ConsentCheckbox({
           </svg>
         )}
       </span>
-      <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+      <span className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>
         {children}
       </span>
     </button>
@@ -732,7 +732,7 @@ export default function GeneralIntakeForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -749,10 +749,10 @@ export default function GeneralIntakeForm() {
                 </svg>
               </div>
               <p className="label mb-4">Form Submitted</p>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}>
                 Thank You, {data.firstName}.
               </h1>
-              <p className="text-base leading-relaxed mb-8" style={{ color: '#8899aa' }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: '#4a6080' }}>
                 We&apos;ve received your Request an Appointment & Pre-Screen Intake Form. Our team will review your details and be in touch within one business day to confirm your appointment and next steps.
               </p>
               <p className="text-sm mb-10" style={{ color: '#4a5a6a' }}>
@@ -770,16 +770,16 @@ export default function GeneralIntakeForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div ref={topRef} className="container-tight max-w-3xl">
 
           {/* Header */}
           <div className="mb-10 pt-6">
             <p className="label mb-3">General Appointment</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}>
               Request an Appointment & Pre-Screen Intake Form
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>
               Complete this form to request your general consultation. Takes approximately 3–5 minutes.
               Your information is collected securely and handled in accordance with the Australian Privacy Act.
             </p>
@@ -793,7 +793,7 @@ export default function GeneralIntakeForm() {
               className="flex items-center justify-between gap-4 px-5 py-4 rounded-sm mb-6"
               style={{ backgroundColor: 'rgba(43,123,224,0.08)', border: '1px solid rgba(43,123,224,0.25)' }}
             >
-              <p className="text-sm" style={{ color: '#f0f4f8' }}>You have a saved form in progress.</p>
+              <p className="text-sm" style={{ color: '#0d1420' }}>You have a saved form in progress.</p>
               <button
                 type="button"
                 onClick={resumeProgress}
