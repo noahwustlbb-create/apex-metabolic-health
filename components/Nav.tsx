@@ -50,7 +50,7 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: 'rgba(255,255,255,0.97)',
+          backgroundColor: 'rgb(254,254,254)',
           backdropFilter: 'blur(16px)',
           borderBottom: scrolled ? '1px solid rgba(204,218,236,0.9)' : '1px solid transparent',
           boxShadow: scrolled ? '0 4px 24px rgba(43,123,224,0.08)' : 'none',
@@ -65,7 +65,7 @@ export default function Nav() {
               width={140}
               height={140}
               className="w-auto"
-              style={{ height: '52px', mixBlendMode: 'multiply' }}
+              style={{ height: '52px' }}
               priority
             />
           </Link>
