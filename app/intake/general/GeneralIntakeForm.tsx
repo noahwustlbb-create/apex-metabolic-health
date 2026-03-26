@@ -198,8 +198,8 @@ function TextInput({
       onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
       style={{
-        backgroundColor: '#070a0d',
-        border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`,
+        backgroundColor: '#0d1840',
+        border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
         color: '#f0f4f8',
       }}
     />
@@ -228,8 +228,8 @@ function TextArea({
       onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
       style={{
-        backgroundColor: '#070a0d',
-        border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`,
+        backgroundColor: '#0d1840',
+        border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
         color: '#f0f4f8',
       }}
     />
@@ -254,8 +254,8 @@ function RadioGroup({
           onClick={() => onChange(opt)}
           className="px-5 py-2.5 rounded-sm text-sm font-medium transition-all duration-200"
           style={{
-            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#070a0d',
-            border: `1px solid ${value === opt ? '#2b7be0' : '#1e2d3d'}`,
+            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#0d1840',
+            border: `1px solid ${value === opt ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
             color: value === opt ? '#2b7be0' : '#8899aa',
           }}
         >
@@ -299,8 +299,8 @@ function CheckboxGroup({
             onClick={() => toggle(opt)}
             className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
             style={{
-              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#070a0d',
-              border: `1px solid ${checked ? '#2b7be0' : '#1e2d3d'}`,
+              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#0d1840',
+              border: `1px solid ${checked ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
               color: checked ? '#f0f4f8' : '#8899aa',
             }}
           >
@@ -379,7 +379,7 @@ function FileInput({
       <FieldLabel required>{label}</FieldLabel>
       <div
         className="relative flex flex-col items-center justify-center gap-2 py-8 px-4 rounded-sm cursor-pointer transition-colors duration-200"
-        style={{ border: '1px dashed #1e2d3d', backgroundColor: '#070a0d' }}
+        style={{ border: '1px dashed #1e2d3d', backgroundColor: '#0d1840' }}
         onClick={() => ref.current?.click()}
       >
         <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" style={{ color: '#4a5a6a' }}>
@@ -487,7 +487,7 @@ function SignatureCanvas({ onSave }: { onSave: (data: string) => void }) {
     <div>
       <div
         className="relative rounded-sm overflow-hidden"
-        style={{ border: '1px solid #1e2d3d', backgroundColor: '#070a0d', touchAction: 'none' }}
+        style={{ border: '1px solid #1e2d3d', backgroundColor: '#0d1840', touchAction: 'none' }}
       >
         <canvas
           ref={canvasRef}
@@ -505,7 +505,7 @@ function SignatureCanvas({ onSave }: { onSave: (data: string) => void }) {
         />
         <p
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs pointer-events-none select-none"
-          style={{ color: '#1e2d3d' }}
+          style={{ color: 'rgba(43,123,224,0.2)' }}
           aria-hidden="true"
         >
           Sign here
@@ -535,7 +535,7 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
           {STEPS[step]}
         </span>
       </div>
-      <div className="w-full h-0.5 rounded-full" style={{ backgroundColor: '#1e2d3d' }}>
+      <div className="w-full h-0.5 rounded-full" style={{ backgroundColor: 'rgba(43,123,224,0.2)' }}>
         <div
           className="h-full rounded-full transition-all duration-500"
           style={{
@@ -732,7 +732,7 @@ export default function GeneralIntakeForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -770,7 +770,7 @@ export default function GeneralIntakeForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div ref={topRef} className="container-tight max-w-3xl">
 
           {/* Header */}
@@ -988,8 +988,8 @@ export default function GeneralIntakeForm() {
                           onClick={() => set('healthCondition', cond)}
                           className="w-full flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                           style={{
-                            backgroundColor: data.healthCondition === cond ? 'rgba(43,123,224,0.08)' : '#070a0d',
-                            border: `1px solid ${data.healthCondition === cond ? '#2b7be0' : '#1e2d3d'}`,
+                            backgroundColor: data.healthCondition === cond ? 'rgba(43,123,224,0.08)' : '#0d1840',
+                            border: `1px solid ${data.healthCondition === cond ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
                             color: data.healthCondition === cond ? '#f0f4f8' : '#8899aa',
                           }}
                         >
@@ -1001,7 +1001,7 @@ export default function GeneralIntakeForm() {
                             }}
                           >
                             {data.healthCondition === cond && (
-                              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#070a0d' }} />
+                              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#0d1840' }} />
                             )}
                           </span>
                           {cond}
@@ -1159,7 +1159,7 @@ export default function GeneralIntakeForm() {
                     <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Agent Agreement</p>
                     <div
                       className="p-5 rounded-sm mb-4 text-xs leading-relaxed"
-                      style={{ backgroundColor: '#0d1117', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
+                      style={{ backgroundColor: '#091230', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
                     >
                       The individual filling out this form and/or whose identification has been supplied consents and/or agrees to Apex Metabolic Health, its Director, Staff, Contractors and associated partners to act as their agent. You agree to give consent for the agent to act on your behalf with Doctors, Pharmacists, Allied Health Professionals within the interest of your enquiries and in accordance with the Australian Privacy Act. You acknowledge that the team at Apex Metabolic Health comprise contractors and admin staff who are not Doctors and cannot provide medical advice. You agree for the team to act as an agent in liaising with your Doctor/s, pharmacies and other parties at your instruction and in your best interests.
                     </div>
@@ -1190,7 +1190,7 @@ export default function GeneralIntakeForm() {
                     <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#2b7be0' }}>Waiver / Disclaimer</p>
                     <div
                       className="p-5 rounded-sm mb-4 text-xs leading-relaxed"
-                      style={{ backgroundColor: '#0d1117', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
+                      style={{ backgroundColor: '#091230', border: '1px solid #1e2d3d', color: '#4a5a6a' }}
                     >
                       By filling in this form, I agree to only use the medication or treatment prescribed to me, if any, in the correct and safe manner as ordered by the Doctor. I agree that the information and medication are only for me and that I will not sell, share or distribute medication or protocol to any other parties. I agree to use medication at the prescribed dose only and to report any side effects or adverse reactions to the pharmacy.
                     </div>
@@ -1208,7 +1208,7 @@ export default function GeneralIntakeForm() {
                           className="px-4 py-2 rounded-sm text-xs font-medium transition-all duration-150"
                           style={{
                             backgroundColor: data.signatureType === t ? 'rgba(43,123,224,0.1)' : 'transparent',
-                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : '#1e2d3d'}`,
+                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
                             color: data.signatureType === t ? '#2b7be0' : '#4a5a6a',
                           }}
                         >

@@ -161,7 +161,7 @@ function TextInput({ value, onChange, placeholder, type = 'text', inputMode, max
       placeholder={placeholder} inputMode={inputMode} maxLength={maxLength}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#0d1840', border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -176,7 +176,7 @@ function TextArea({ value, onChange, placeholder, rows = 4 }: {
       placeholder={placeholder} rows={rows}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: '#070a0d', border: `1px solid ${focused ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#0d1840', border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -188,8 +188,8 @@ function RadioGroup({ options, value, onChange }: { options: string[]; value: st
         <button key={opt} type="button" onClick={() => onChange(opt)}
           className="px-5 py-2.5 rounded-sm text-sm font-medium transition-all duration-200"
           style={{
-            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#070a0d',
-            border: `1px solid ${value === opt ? '#2b7be0' : '#1e2d3d'}`,
+            backgroundColor: value === opt ? 'rgba(43,123,224,0.12)' : '#0d1840',
+            border: `1px solid ${value === opt ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
             color: value === opt ? '#2b7be0' : '#8899aa',
           }}>
           {opt}
@@ -208,9 +208,9 @@ function ScoreSelector({ value, onChange, label }: { value: string; onChange: (v
           <button key={n} type="button" onClick={() => onChange(n)}
             className="w-10 h-10 rounded-sm text-sm font-semibold transition-all duration-150"
             style={{
-              backgroundColor: value === n ? '#2b7be0' : '#070a0d',
-              border: `1px solid ${value === n ? '#2b7be0' : '#1e2d3d'}`,
-              color: value === n ? '#070a0d' : '#8899aa',
+              backgroundColor: value === n ? '#2b7be0' : '#0d1840',
+              border: `1px solid ${value === n ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
+              color: value === n ? '#0d1840' : '#8899aa',
             }}>
             {n}
           </button>
@@ -232,8 +232,8 @@ function CheckboxGroup({ options, value, onChange }: { options: string[]; value:
           <button key={opt} type="button" onClick={() => toggle(opt)}
             className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
             style={{
-              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#070a0d',
-              border: `1px solid ${checked ? '#2b7be0' : '#1e2d3d'}`,
+              backgroundColor: checked ? 'rgba(43,123,224,0.07)' : '#0d1840',
+              border: `1px solid ${checked ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
               color: checked ? '#f0f4f8' : '#8899aa',
             }}>
             <span className="w-4 h-4 flex-shrink-0 rounded-sm flex items-center justify-center transition-colors"
@@ -268,7 +268,7 @@ function FileInput({ label, accept, hint, onFile, currentName }: {
     <div>
       <FieldLabel>{label}</FieldLabel>
       <div className="relative flex flex-col items-center justify-center gap-2 py-6 px-4 rounded-sm cursor-pointer"
-        style={{ border: '1px dashed #1e2d3d', backgroundColor: '#070a0d' }}
+        style={{ border: '1px dashed #1e2d3d', backgroundColor: '#0d1840' }}
         onClick={() => ref.current?.click()}>
         <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" style={{ color: '#4a5a6a' }}>
           <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -334,12 +334,12 @@ function SignatureCanvas({ onSave }: { onSave: (data: string) => void }) {
 
   return (
     <div>
-      <div className="relative rounded-sm overflow-hidden" style={{ border: '1px solid #1e2d3d', backgroundColor: '#070a0d', touchAction: 'none' }}>
+      <div className="relative rounded-sm overflow-hidden" style={{ border: '1px solid #1e2d3d', backgroundColor: '#0d1840', touchAction: 'none' }}>
         <canvas ref={canvasRef} width={800} height={180} className="w-full block" style={{ cursor: 'crosshair' }}
           onMouseDown={startDraw} onMouseMove={draw} onMouseUp={() => { isDrawing.current = false }}
           onMouseLeave={() => { isDrawing.current = false }}
           onTouchStart={startDraw} onTouchMove={draw} onTouchEnd={() => { isDrawing.current = false }} />
-        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs pointer-events-none select-none" style={{ color: '#1e2d3d' }}>Sign here</p>
+        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs pointer-events-none select-none" style={{ color: 'rgba(43,123,224,0.2)' }}>Sign here</p>
       </div>
       <button type="button" onClick={clear} className="mt-2 text-xs font-medium" style={{ color: '#4a5a6a' }}>Clear</button>
     </div>
@@ -354,7 +354,7 @@ function ProgressBar({ step, total }: { step: number; total: number }) {
         <span className="text-xs font-semibold tracking-[0.15em] uppercase" style={{ color: '#2b7be0' }}>Step {step + 1} of {total}</span>
         <span className="text-xs" style={{ color: '#4a5a6a' }}>{STEPS[step]}</span>
       </div>
-      <div className="w-full h-0.5 rounded-full" style={{ backgroundColor: '#1e2d3d' }}>
+      <div className="w-full h-0.5 rounded-full" style={{ backgroundColor: 'rgba(43,123,224,0.2)' }}>
         <div className="h-full rounded-full transition-all duration-500"
           style={{ width: `${((step + 1) / total) * 100}%`, backgroundColor: '#2b7be0', boxShadow: '0 0 8px rgba(43,123,224,0.5)' }} />
       </div>
@@ -373,12 +373,12 @@ function MealRow({ label, value, onChange }: { label: string; value: { food: str
         placeholder="Food description and amount"
         onFocus={() => setFocusedFood(true)} onBlur={() => setFocusedFood(false)}
         className="px-3 py-2.5 rounded-sm text-sm focus:outline-none transition-colors"
-        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedFood ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }} />
+        style={{ backgroundColor: '#0d1840', border: `1px solid ${focusedFood ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }} />
       <input value={value.time} onChange={(e) => onChange({ ...value, time: e.target.value })}
         placeholder="Time"
         onFocus={() => setFocusedTime(true)} onBlur={() => setFocusedTime(false)}
         className="px-3 py-2.5 rounded-sm text-sm focus:outline-none transition-colors"
-        style={{ backgroundColor: '#070a0d', border: `1px solid ${focusedTime ? '#2b7be0' : '#1e2d3d'}`, color: '#f0f4f8' }} />
+        style={{ backgroundColor: '#0d1840', border: `1px solid ${focusedTime ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }} />
     </div>
   )
 }
@@ -531,7 +531,7 @@ export default function HormoneIntakeForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl mx-auto text-center">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
@@ -562,7 +562,7 @@ export default function HormoneIntakeForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div ref={topRef} className="container-tight max-w-3xl">
 
           <div className="mb-10 pt-6">
@@ -801,7 +801,7 @@ export default function HormoneIntakeForm() {
                     <TextArea value={data.mainCondition} onChange={(v) => set('mainCondition', v)} placeholder="Describe your main concern, when it started, what you think caused it, and what you are hoping to achieve..." rows={8} />
                   </div>
 
-                  <div className="p-5 rounded-sm text-xs leading-relaxed" style={{ backgroundColor: '#0d1117', border: '1px solid #1e2d3d', color: '#4a5a6a' }}>
+                  <div className="p-5 rounded-sm text-xs leading-relaxed" style={{ backgroundColor: '#091230', border: '1px solid #1e2d3d', color: '#4a5a6a' }}>
                     I hereby authorise the Apex Metabolic Health medical team and staff to perform examinations and/or treatment deemed necessary.
                   </div>
 
@@ -827,7 +827,7 @@ export default function HormoneIntakeForm() {
                           className="px-4 py-2 rounded-sm text-xs font-medium transition-all duration-150"
                           style={{
                             backgroundColor: data.signatureType === t ? 'rgba(43,123,224,0.1)' : 'transparent',
-                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : '#1e2d3d'}`,
+                            border: `1px solid ${data.signatureType === t ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
                             color: data.signatureType === t ? '#2b7be0' : '#4a5a6a',
                           }}>
                           {t === 'draw' ? 'Draw Signature' : 'Type Signature'}
