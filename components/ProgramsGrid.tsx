@@ -296,7 +296,7 @@ export default function ProgramsGrid() {
         </div>
 
         {/* Programs grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
           {PROGRAMS.map((program, i) => (
             <ProgramCard
               key={program.name}
@@ -305,6 +305,12 @@ export default function ProgramsGrid() {
               onOpen={setActiveProgram}
             />
           ))}
+        </div>
+
+        <div className="flex justify-center">
+          <a href="/get-started" className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4">
+            Request an Appointment
+          </a>
         </div>
       </div>
 

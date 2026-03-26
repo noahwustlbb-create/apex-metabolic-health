@@ -3,7 +3,7 @@ import HormoneIntakeForm from './HormoneIntakeForm'
 
 export const metadata: Metadata = {
   title: 'Hormone Program Intake | Apex Metabolic Health',
-  description: 'Complete your hormone program pre-screen intake form. Takes 3–5 minutes.',
+  description: 'Request an Appointment & Pre-Screen Intake Form for the Hormone Program. Takes 3–5 minutes.',
   robots: 'noindex, nofollow',
 }
 

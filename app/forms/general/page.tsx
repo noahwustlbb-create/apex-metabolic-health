@@ -90,7 +90,7 @@ export default function GeneralFormPDF() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <span style={{ color: 'white', fontWeight: 700, fontSize: '14px', fontFamily: 'Arial' }}>
-          General Appointment Intake Form — Print / Save as PDF
+          General Appointment — Request an Appointment & Pre-Screen Intake Form
         </span>
         <button
           onClick={handlePrint}
@@ -115,7 +115,7 @@ export default function GeneralFormPDF() {
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '14px', fontWeight: 700, color: '#2b7be0' }}>GENERAL APPOINTMENT</div>
-            <div style={{ fontSize: '10px', color: '#555' }}>Pre-Appointment Intake Form</div>
+            <div style={{ fontSize: '10px', color: '#555' }}>Request an Appointment & Pre-Screen Intake Form</div>
             <div style={{ fontSize: '9px', color: '#999', marginTop: '4px' }}>Date: ___________________</div>
           </div>
         </div>

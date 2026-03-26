@@ -239,6 +239,12 @@ export default function Hero() {
           >
             Choose a Program
           </a>
+          <a
+            href="/get-started"
+            className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
+          >
+            Request an Appointment
+          </a>
         </motion.div>
 
         {/* Stats strip */}

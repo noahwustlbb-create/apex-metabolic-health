@@ -162,10 +162,16 @@ export default function WhyApex() {
         </div>
 
         {/* Differentiator blocks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
           {DIFFERENTIATORS.map((item, i) => (
             <DifferentiatorCard key={item.title} item={item} index={i} />
           ))}
+        </div>
+
+        <div className="flex justify-center">
+          <a href="/get-started" className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4">
+            Request an Appointment
+          </a>
         </div>
       </div>
     </section>

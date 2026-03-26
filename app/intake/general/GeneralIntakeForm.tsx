@@ -753,7 +753,7 @@ export default function GeneralIntakeForm() {
                 Thank You, {data.firstName}.
               </h1>
               <p className="text-base leading-relaxed mb-8" style={{ color: '#8899aa' }}>
-                We&apos;ve received your intake form. Our team will review your details and be in touch within one business day to confirm your appointment and next steps.
+                We&apos;ve received your Request an Appointment & Pre-Screen Intake Form. Our team will review your details and be in touch within one business day to confirm your appointment and next steps.
               </p>
               <p className="text-sm mb-10" style={{ color: '#4a5a6a' }}>
                 All consultations are conducted by AHPRA-registered medical practitioners. Your information is handled in accordance with the Australian Privacy Act.

@@ -157,7 +157,7 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: 16 }}
           animate={badgeInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="flex justify-center"
+          className="flex flex-col items-center gap-6"
         >
           <div
             className="inline-flex items-center gap-3 px-7 py-3.5"
@@ -178,6 +178,9 @@ export default function HowItWorks() {
               100% online. Available Australia-wide.
             </span>
           </div>
+          <a href="/get-started" className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4">
+            Request an Appointment
+          </a>
         </motion.div>
       </div>
     </section>

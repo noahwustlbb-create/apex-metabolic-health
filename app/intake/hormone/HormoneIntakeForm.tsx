@@ -545,7 +545,7 @@ export default function HormoneIntakeForm() {
                 Thank You, {data.firstName}.
               </h1>
               <p className="text-base leading-relaxed mb-8" style={{ color: '#8899aa' }}>
-                We&apos;ve received your hormone program intake form. Our clinical team will review your details and be in touch within one business day to confirm your next steps.
+                We&apos;ve received your Request an Appointment & Pre-Screen Intake Form. Our clinical team will review your details and be in touch within one business day to confirm your next steps.
               </p>
               <p className="text-sm mb-10" style={{ color: '#4a5a6a' }}>
                 All consultations are conducted by AHPRA-registered medical practitioners. Your information is handled in accordance with the Australian Privacy Act.
@@ -568,7 +568,7 @@ export default function HormoneIntakeForm() {
           <div className="mb-10 pt-6">
             <p className="label mb-3">Hormone Program</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
-              Pre-Screen Intake Form
+              Request an Appointment & Pre-Screen Intake Form
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
               Please ensure each question is answered. If something does not apply, write &ldquo;N/A&rdquo; or &ldquo;Nil&rdquo;. Takes approximately 3–5 minutes.

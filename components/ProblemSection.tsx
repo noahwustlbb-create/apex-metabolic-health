@@ -193,6 +193,11 @@ export default function ProblemSection() {
               </span>
             </p>
           </div>
+          <div className="mt-8">
+            <a href="/get-started" className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4">
+              Request an Appointment
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

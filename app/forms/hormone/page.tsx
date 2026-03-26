@@ -69,7 +69,7 @@ export default function HormoneFormPDF() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <span style={{ color: 'white', fontWeight: 700, fontSize: '14px', fontFamily: 'Arial' }}>
-          Hormone Program Intake Form — Print / Save as PDF
+          Hormone Program — Request an Appointment & Pre-Screen Intake Form
         </span>
         <button
           onClick={handlePrint}
@@ -94,7 +94,7 @@ export default function HormoneFormPDF() {
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '14px', fontWeight: 700, color: '#2b7be0' }}>HORMONE PROGRAM</div>
-            <div style={{ fontSize: '10px', color: '#555' }}>Pre-Screen Intake Form</div>
+            <div style={{ fontSize: '10px', color: '#555' }}>Request an Appointment & Pre-Screen Intake Form</div>
             <div style={{ fontSize: '9px', color: '#999', marginTop: '4px' }}>Date: ___________________</div>
           </div>
         </div>
