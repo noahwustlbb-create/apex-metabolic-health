@@ -59,7 +59,7 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
             <svg
-              viewBox="0 0 140 44"
+              viewBox="0 0 88 36"
               className="w-[100px] md:w-[140px] h-auto"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -67,35 +67,30 @@ export default function Nav() {
               aria-hidden="true"
             >
               <defs>
-                <linearGradient id="apx-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop stopColor="#0A3D8F"/>
-                  <stop offset="1" stopColor="#005F8E"/>
+                <linearGradient id="apx-tg" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#0A3D8F"/>
+                  <stop offset="28%" stopColor="#0B1D40"/>
+                  <stop offset="100%" stopColor="#0B1D40"/>
                 </linearGradient>
               </defs>
-              {/* Outer precision frame */}
-              <polygon
-                points="13,2 26,42 0,42"
-                stroke="#0A3D8F" strokeWidth="0.7" strokeOpacity="0.25" fill="none"
-              />
-              {/* Main apex mark */}
-              <polygon points="13,6 23,40 3,40" fill="url(#apx-grad)"/>
-              {/* Vertical divider */}
-              <line x1="31" y1="6" x2="31" y2="40" stroke="#ccdaec" strokeWidth="0.8"/>
-              {/* APEX */}
+              {/* APEX — extra bold, gradient A → dark navy */}
               <text
-                x="37" y="29"
+                x="0" y="23"
                 fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="22" fontWeight="700"
-                fill="#0B1D40"
-                letterSpacing="-0.3"
+                fontSize="24" fontWeight="800"
+                fill="url(#apx-tg)"
+                letterSpacing="-0.5"
               >APEX</text>
-              {/* METABOLIC HEALTH */}
+              {/* Hairline rule */}
+              <line x1="0" y1="26.5" x2="57" y2="26.5"
+                stroke="#0A3D8F" strokeWidth="0.8" strokeOpacity="0.55"/>
+              {/* METABOLIC HEALTH — light, tracked */}
               <text
-                x="37" y="40"
+                x="0.5" y="35"
                 fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="6.8" fontWeight="500"
+                fontSize="6.6" fontWeight="400"
                 fill="#005F8E"
-                letterSpacing="1.4"
+                letterSpacing="1.55"
               >METABOLIC HEALTH</text>
             </svg>
           </Link>
