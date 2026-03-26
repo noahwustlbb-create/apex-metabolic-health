@@ -601,7 +601,7 @@ export default function HormoneIntakeForm() {
 
           <AnimatePresence mode="wait">
             <motion.div key={step} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} className="apex-card p-8">
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} className="apex-card p-8" style={{ backgroundColor: '#091230', border: '1px solid rgba(43,123,224,0.2)' }}>
 
               {/* ── STEP 0: Personal Details ── */}
               {step === 0 && (

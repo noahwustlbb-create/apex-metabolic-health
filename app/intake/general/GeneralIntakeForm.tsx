@@ -837,6 +837,7 @@ export default function GeneralIntakeForm() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="apex-card p-8"
+              style={{ backgroundColor: '#091230', border: '1px solid rgba(43,123,224,0.2)' }}
             >
 
               {/* ── STEP 0: Personal Details ── */}
