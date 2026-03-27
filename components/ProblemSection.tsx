@@ -189,9 +189,15 @@ export default function ProblemSection() {
               </span>
             </p>
           </div>
-          <div className="mt-8">
-            <a href="/get-started" className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4">
-              Request an Appointment
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="/services" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
+              Choose Your Program
+            </a>
+            <a href="/intake/hormone" className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto">
+              Hormone Consult
+            </a>
+            <a href="/intake/general" className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto">
+              General Health Check Up
             </a>
           </div>
         </motion.div>
