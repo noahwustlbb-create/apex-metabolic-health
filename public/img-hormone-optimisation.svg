@@ -64,28 +64,37 @@
   <!-- Divider -->
   <line x1="588" y1="90" x2="588" y2="350" stroke="#4890f7" stroke-width="0.5" opacity="0.18"/>
 
-  <!-- Clinical readout panel -->
-  <rect x="604" y="118" width="162" height="22" fill="rgba(72,144,247,0.07)" rx="2"/>
-  <circle cx="616" cy="129" r="3.5" fill="#a9c7ff" opacity="0.9"/>
-  <text x="626" y="133" font-family="monospace" font-size="9.5" fill="#8899aa">TESTOSTERONE  ↑</text>
+  <!-- Abstract biomarker bars -->
+  <!-- Bar 1 -->
+  <rect x="604" y="122" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="122" width="116" height="6" rx="3" fill="url(#og1)" opacity="0.7"/>
+  <circle cx="720" cy="125" r="3" fill="#a9c7ff" opacity="0.8"/>
 
-  <rect x="604" y="145" width="162" height="22" fill="rgba(72,144,247,0.05)" rx="2"/>
-  <circle cx="616" cy="156" r="3.5" fill="#a9c7ff" opacity="0.9"/>
-  <text x="626" y="160" font-family="monospace" font-size="9.5" fill="#8899aa">ESTRADIOL  ✓</text>
+  <!-- Bar 2 -->
+  <rect x="604" y="146" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="146" width="98" height="6" rx="3" fill="url(#og2)" opacity="0.6"/>
+  <circle cx="702" cy="149" r="3" fill="#4890f7" opacity="0.8"/>
 
-  <rect x="604" y="172" width="162" height="22" fill="rgba(72,144,247,0.07)" rx="2"/>
-  <circle cx="616" cy="183" r="3.5" fill="#a9c7ff" opacity="0.9"/>
-  <text x="626" y="187" font-family="monospace" font-size="9.5" fill="#8899aa">LH  ✓</text>
+  <!-- Bar 3 -->
+  <rect x="604" y="170" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="170" width="128" height="6" rx="3" fill="url(#og1)" opacity="0.7"/>
+  <circle cx="732" cy="173" r="3" fill="#a9c7ff" opacity="0.9"/>
 
-  <rect x="604" y="199" width="162" height="22" fill="rgba(72,144,247,0.05)" rx="2"/>
-  <circle cx="616" cy="210" r="3.5" fill="#c9a84c" opacity="0.9"/>
-  <text x="626" y="214" font-family="monospace" font-size="9.5" fill="#8899aa">FSH  ↑</text>
+  <!-- Bar 4 — gold -->
+  <rect x="604" y="194" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="194" width="85" height="6" rx="3" fill="#c9a84c" opacity="0.45"/>
+  <circle cx="689" cy="197" r="3" fill="#c9a84c" opacity="0.8"/>
 
-  <rect x="604" y="226" width="162" height="22" fill="rgba(72,144,247,0.07)" rx="2"/>
-  <circle cx="616" cy="237" r="3.5" fill="#c9a84c" opacity="0.9"/>
-  <text x="626" y="241" font-family="monospace" font-size="9.5" fill="#8899aa">SHBG  ↓</text>
+  <!-- Bar 5 -->
+  <rect x="604" y="218" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="218" width="110" height="6" rx="3" fill="url(#og2)" opacity="0.6"/>
+  <circle cx="714" cy="221" r="3" fill="#4890f7" opacity="0.8"/>
 
-  <rect x="604" y="253" width="162" height="22" fill="rgba(72,144,247,0.05)" rx="2"/>
-  <circle cx="616" cy="264" r="3.5" fill="#a9c7ff" opacity="0.9"/>
-  <text x="626" y="268" font-family="monospace" font-size="9.5" fill="#8899aa">CORTISOL  ✓</text>
+  <!-- Bar 6 -->
+  <rect x="604" y="242" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
+  <rect x="604" y="242" width="132" height="6" rx="3" fill="url(#og1)" opacity="0.65"/>
+  <circle cx="736" cy="245" r="3" fill="#a9c7ff" opacity="0.9"/>
+
+  <!-- Small label above panel -->
+  <text x="604" y="108" font-family="monospace" font-size="8" fill="rgba(72,144,247,0.35)" letter-spacing="2">BIOMARKER PANEL</text>
 </svg>
