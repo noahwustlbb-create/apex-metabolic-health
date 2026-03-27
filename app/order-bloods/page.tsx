@@ -154,8 +154,8 @@ export default function OrderBloodsPage() {
               className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
               style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
             >
-              Order Your{' '}
-              <span className="text-teal-gradient">Blood Tests</span>
+              Start With{' '}
+              <span className="text-teal-gradient">Your Bloods</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -164,8 +164,8 @@ export default function OrderBloodsPage() {
               className="text-lg leading-relaxed max-w-xl"
               style={{ color: '#8899aa' }}
             >
-              Comprehensive, doctor-ordered panels through our accredited pathology partner.
-              Collect at a centre near you — no appointment needed at most locations.
+              Just need bloods? No GP referral needed. Doctor-ordered panels issued directly
+              through Apex — collect at any accredited centre near you, no appointment required.
             </motion.p>
           </div>
         </section>
