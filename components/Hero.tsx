@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 
 const STATS = [
   { value: '8', label: 'Clinical Programs' },
+  { value: '50+', label: 'Biomarkers Analysed' },
   { value: '100%', label: 'Online' },
   { value: 'AHPRA', label: 'Registered Doctors' },
 ]
