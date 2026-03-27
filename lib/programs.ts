@@ -76,7 +76,7 @@ export const programs: Program[] = [
   {
     slug: 'hormone-optimisation',
     name: 'Hormone Optimisation',
-    image: '/img-hormone-optimisation.png',
+    image: '/img-hormone-optimisation.svg',
     tagline: 'Understand your hormones. Optimise your baseline.',
     bio: "Hormonal imbalances don't always announce themselves loudly. Fatigue, poor recovery, changes in body composition and mood are often the first signs something is off. Our Hormone Optimisation program starts with comprehensive pathology to establish your clinical baseline, followed by a doctor consultation to interpret your results and build a treatment plan around your actual biology — not a generic protocol.",
     track: 'hormone',
@@ -102,7 +102,7 @@ export const programs: Program[] = [
   {
     slug: 'hormone-performance',
     name: 'Hormone & Performance',
-    image: '/img-hormone-performance.png',
+    image: '/img-hormone-performance.svg',
     tagline: 'Hormonal health meets physical output.',
     bio: "Designed for those who train hard and expect their body to keep up. This program combines hormonal assessment with performance-specific markers to identify what's limiting your output — whether that's recovery, energy, or hormonal interference. Your doctor reviews the full picture and builds a protocol that supports both your health and your physical goals.",
     track: 'hormone',
@@ -129,7 +129,7 @@ export const programs: Program[] = [
   {
     slug: 'performance-plus',
     name: 'Performance+',
-    image: '/img-performance-plus.png',
+    image: '/img-performance-plus.svg',
     tagline:
       'Our flagship program. Hormone optimisation specialised for performance and body composition.',
     bio: "Our flagship program. Built for people who treat their body like a system to be optimised, not just maintained. Performance+ combines deep hormonal analysis with performance and metabolic markers, giving your doctor the most complete picture possible. The result is a protocol engineered around your biology, your goals, and your lifestyle — with ongoing monitoring built in.",
@@ -158,7 +158,7 @@ export const programs: Program[] = [
   {
     slug: 'injury-repair',
     name: 'Injury Repair & Recovery',
-    image: '/img-injury-repair.png',
+    image: '/img-injury-repair.svg',
     tagline:
       'Clinically supported protocols to accelerate tissue repair and get you back performing.',
     bio: "The body has a remarkable capacity to heal — but the right clinical environment makes the difference between slow recovery and real progress. Our Injury Repair program takes a doctor-led approach to tissue repair and recovery, using evidence-based protocols tailored to your injury history and health markers. No guesswork. Just a clear, medically supervised pathway back to full function.",
@@ -186,7 +186,7 @@ export const programs: Program[] = [
   {
     slug: 'skin-regeneration',
     name: 'Skin Regeneration',
-    image: '/img-skin-regeneration.png',
+    image: '/img-skin-regeneration.svg',
     tagline: 'Doctor-prescribed anti-ageing. Built on what your bloodwork actually shows.',
     bio: "Skin quality is a direct reflection of what's happening internally — hormones, inflammation markers, nutrient status. Our Skin Regeneration program goes beyond surface treatments by identifying the underlying clinical drivers of skin changes and addressing them through doctor-prescribed protocols. The outcome is healthier skin built from the inside out, not just managed from the outside.",
     track: 'general',
@@ -213,7 +213,7 @@ export const programs: Program[] = [
   {
     slug: 'hair-restoration',
     name: 'Hair Restoration',
-    image: '/img-hair-restoration.png',
+    image: '/img-hair-restoration.svg',
     tagline: 'Evidence-based treatment for hair loss — not guesswork, not off-the-shelf.',
     bio: "Hair loss has real clinical causes — hormonal, nutritional, and metabolic — and real clinical solutions. This program uses pathology to identify the specific drivers of hair loss in your case, and your doctor builds a treatment plan targeted to those causes. Evidence-based, doctor-prescribed, and monitored over time to ensure it's working.",
     track: 'general',
@@ -239,7 +239,7 @@ export const programs: Program[] = [
   {
     slug: 'metabolic-weight-loss',
     name: 'Metabolic Weight Loss',
-    image: '/img-weight-loss.png',
+    image: '/img-weight-loss.svg',
     tagline:
       'Address the real drivers of weight resistance — hormonal, metabolic, and clinical.',
     bio: "Resistance to weight loss is rarely about willpower. Hormonal dysfunction, metabolic disruption, and underlying clinical factors are the most common culprits — and the most overlooked. Our Metabolic Weight Loss program uses pathology and a doctor consultation to understand your body's specific barriers, then builds a medically supervised protocol to address them directly.",
@@ -291,7 +291,7 @@ export const programs: Program[] = [
   {
     slug: 'longevity',
     name: 'Longevity Protocol',
-    image: '/img-longevity.png',
+    image: '/img-longevity.svg',
     tagline: 'Comprehensive health optimisation for the long game.',
     bio: "A comprehensive health optimisation program for people thinking long-term. The Longevity Protocol uses our most extensive pathology panel to build a complete picture of your hormonal, metabolic, cardiovascular, and cellular health. Your doctor uses this data to identify where you are today and create a protocol designed to keep you performing at your best for the long haul. Coming soon.",
     track: 'hormone',

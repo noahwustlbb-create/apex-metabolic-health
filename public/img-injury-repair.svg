@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0f1e38"/>
+      <stop offset="100%" stop-color="#0c131f"/>
+    </radialGradient>
+
+    <!-- Repair zone glow -->
+    <radialGradient id="repairGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(72,144,247,0.32)"/>
+      <stop offset="100%" stop-color="rgba(72,144,247,0)"/>
+    </radialGradient>
+
+    <!-- Top ambient -->
+    <radialGradient id="topGlow" cx="50%" cy="20%" r="50%">
+      <stop offset="0%" stop-color="rgba(72,144,247,0.06)"/>
+      <stop offset="100%" stop-color="rgba(72,144,247,0)"/>
+    </radialGradient>
+
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="0.8" fill="rgba(72,144,247,0.1)"/>
+    </pattern>
+
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="repairFilter" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="440" fill="url(#bg)"/>
+  <rect width="800" height="440" fill="url(#dots)"/>
+  <rect width="800" height="440" fill="url(#topGlow)"/>
+
+  <!-- Repair zone: vertical ellipse center -->
+  <ellipse cx="400" cy="220" rx="55" ry="175" fill="url(#repairGlow)" filter="url(#repairFilter)"/>
+  <ellipse cx="400" cy="220" rx="25" ry="155" fill="rgba(72,144,247,0.06)"/>
+
+  <!-- ──────────── LEFT: torn tissue lines ──────────── -->
+  <!-- 4 wavy paths, mirroring each other on left side, x from 80 to ~345 -->
+
+  <!-- Line L1 (outermost) -->
+  <path d="M 80,130 C 120,130 140,150 180,145 C 220,140 240,125 280,135 C 310,143 330,140 345,155"
+    stroke="rgba(72,144,247,0.35)" stroke-width="1" fill="none"/>
+
+  <!-- Line L2 -->
+  <path d="M 80,175 C 115,175 135,195 175,188 C 215,181 238,168 278,180 C 308,189 328,185 345,198"
+    stroke="rgba(72,144,247,0.4)" stroke-width="1" fill="none"/>
+
+  <!-- Line L3 -->
+  <path d="M 80,225 C 118,225 138,244 178,237 C 218,230 240,217 280,230 C 310,240 330,236 345,248"
+    stroke="rgba(72,144,247,0.4)" stroke-width="1" fill="none"/>
+
+  <!-- Line L4 (innermost) -->
+  <path d="M 80,272 C 116,272 136,292 176,285 C 216,278 238,265 278,278 C 308,288 328,285 345,295"
+    stroke="rgba(72,144,247,0.35)" stroke-width="1" fill="none"/>
+
+  <!-- Very faint fill between left lines -->
+  <path d="M 80,130 C 120,130 140,150 180,145 C 220,140 240,125 280,135 C 310,143 330,140 345,155
+           L 345,295 C 330,285 308,288 278,278 C 238,265 216,278 176,285 C 136,292 116,272 80,272 Z"
+    fill="rgba(72,144,247,0.03)"/>
+
+  <!-- ──────────── RIGHT: mirror tissue lines ──────────── -->
+  <!-- Mirror of left: x from 455 to 720 -->
+
+  <!-- Line R1 -->
+  <path d="M 455,155 C 470,140 490,143 520,135 C 560,125 580,140 620,145 C 660,150 680,130 720,130"
+    stroke="rgba(72,144,247,0.35)" stroke-width="1" fill="none"/>
+
+  <!-- Line R2 -->
+  <path d="M 455,198 C 472,185 492,189 522,180 C 562,168 585,181 625,188 C 665,195 685,175 720,175"
+    stroke="rgba(72,144,247,0.4)" stroke-width="1" fill="none"/>
+
+  <!-- Line R3 -->
+  <path d="M 455,248 C 470,236 490,240 520,230 C 560,217 582,230 622,237 C 662,244 682,225 720,225"
+    stroke="rgba(72,144,247,0.4)" stroke-width="1" fill="none"/>
+
+  <!-- Line R4 -->
+  <path d="M 455,295 C 472,285 492,288 522,278 C 562,265 585,278 625,285 C 665,292 685,272 720,272"
+    stroke="rgba(72,144,247,0.35)" stroke-width="1" fill="none"/>
+
+  <!-- Very faint fill between right lines -->
+  <path d="M 455,155 C 470,140 490,143 520,135 C 560,125 580,140 620,145 C 660,150 680,130 720,130
+           L 720,272 C 685,272 665,292 625,285 C 585,278 562,265 522,278 C 492,288 472,285 455,295 Z"
+    fill="rgba(72,144,247,0.03)"/>
+
+  <!-- ──────────── CONNECTING LINES across the gap ──────────── -->
+  <line x1="345" y1="155" x2="455" y2="155" stroke="rgba(169,199,255,0.15)" stroke-width="0.8" stroke-dasharray="3,4"/>
+  <line x1="345" y1="198" x2="455" y2="198" stroke="rgba(169,199,255,0.15)" stroke-width="0.8" stroke-dasharray="3,4"/>
+  <line x1="345" y1="248" x2="455" y2="248" stroke="rgba(169,199,255,0.15)" stroke-width="0.8" stroke-dasharray="3,4"/>
+  <line x1="345" y1="295" x2="455" y2="295" stroke="rgba(169,199,255,0.15)" stroke-width="0.8" stroke-dasharray="3,4"/>
+
+  <!-- ──────────── REPAIR NODES along center line ──────────── -->
+  <circle cx="400" cy="145" r="3" fill="#a9c7ff" filter="url(#glow)"/>
+  <circle cx="400" cy="175" r="3" fill="#4890f7" filter="url(#glow)"/>
+  <circle cx="400" cy="210" r="3" fill="#a9c7ff" filter="url(#glow)"/>
+  <circle cx="400" cy="245" r="3" fill="#4890f7" filter="url(#glow)"/>
+  <circle cx="400" cy="278" r="3" fill="#a9c7ff" filter="url(#glow)"/>
+  <circle cx="400" cy="310" r="3" fill="#4890f7" filter="url(#glow)"/>
+
+  <!-- Repair zone border line -->
+  <line x1="400" y1="100" x2="400" y2="340" stroke="rgba(72,144,247,0.2)" stroke-width="0.8"/>
+
+  <!-- Section labels -->
+  <text x="88" y="96" font-family="monospace" font-size="9" fill="rgba(72,144,247,0.35)" letter-spacing="2">TISSUE MATRIX</text>
+  <text x="540" y="96" font-family="monospace" font-size="9" fill="rgba(72,144,247,0.35)" letter-spacing="2">TISSUE MATRIX</text>
+  <text x="364" y="96" font-family="monospace" font-size="9" fill="rgba(169,199,255,0.4)" letter-spacing="1">REPAIR</text>
+
+  <!-- Bottom-left label -->
+  <text x="24" y="422" font-family="monospace" font-size="9" fill="rgba(72,144,247,0.25)" letter-spacing="2">INJURY REPAIR &amp; RECOVERY · APEX METABOLIC HEALTH</text>
+</svg>

@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="800" height="440">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0f1e38"/>
+      <stop offset="100%" stop-color="#0c131f"/>
+    </radialGradient>
+
+    <!-- Active hex gradient -->
+    <radialGradient id="activeHex" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="rgba(169,199,255,0.4)"/>
+      <stop offset="100%" stop-color="rgba(72,144,247,0.1)"/>
+    </radialGradient>
+
+    <!-- Center glow -->
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(72,144,247,0.2)"/>
+      <stop offset="100%" stop-color="rgba(72,144,247,0)"/>
+    </radialGradient>
+
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="0.8" fill="rgba(72,144,247,0.1)"/>
+    </pattern>
+
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="800" height="440" fill="url(#bg)"/>
+  <rect width="800" height="440" fill="url(#dots)"/>
+
+  <!-- Ambient center glow -->
+  <ellipse cx="400" cy="220" rx="280" ry="200" fill="url(#centerGlow)"/>
+
+  <!--
+    Hexagonal tessellation
+    Flat-top hex, size s=48 (center-to-vertex)
+    Width W = s*sqrt(3) ≈ 83.1, Height H = 2*s = 96
+    Column offset: W, Row offset: H*3/4=72
+    Center grid at (400, 220)
+    We'll define 5 columns × 5 rows of hexagons
+  -->
+
+  <!-- Helper: flat-top hex at (cx,cy) with size 46 uses polygon points:
+       cx+46, cy
+       cx+23, cy-40
+       cx-23, cy-40
+       cx-46, cy
+       cx-23, cy+40
+       cx+23, cy+40
+  -->
+
+  <!-- ROW 0 (top), y offsets from 220: row -2 = 220-144=76, row -1=148, row 0=220, row 1=292, row 2=364 -->
+  <!-- Col centers from 400: col -2=400-166=234, -1=317, 0=400, 1=483, 2=566 -->
+  <!-- Odd cols offset down by 48 -->
+
+  <!-- ROW y=88, cols at x=152,235,318,401,484,567,650 (7 cols) -->
+  <!-- INACTIVE HEX group -->
+  <!-- Using simplified approach: define hexes row by row -->
+
+  <!-- s=44, W=76.2, colStep=76, rowStep=66, oddColOffset=33 -->
+  <!-- Hex points for s=44: ±44,0; ±22,±38 -->
+
+  <!-- Row A: y=110 -->
+  <polygon points="152,110 174,72 218,72 240,110 218,148 174,148" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="244,110 266,72 310,72 332,110 310,148 266,148" fill="rgba(72,144,247,0.08)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="336,110 358,72 402,72 424,110 402,148 358,148" fill="rgba(72,144,247,0.06)" stroke="rgba(72,144,247,0.14)" stroke-width="0.8"/>
+  <polygon points="428,110 450,72 494,72 516,110 494,148 450,148" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="520,110 542,72 586,72 608,110 586,148 542,148" fill="rgba(72,144,247,0.09)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="612,110 634,72 678,72 700,110 678,148 634,148" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+
+  <!-- Row B: y=176 -->
+  <polygon points="198,176 220,138 264,138 286,176 264,214 220,214" fill="rgba(72,144,247,0.07)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <!-- ACTIVE hex 1 -->
+  <polygon points="290,176 312,138 356,138 378,176 356,214 312,214" fill="url(#activeHex)" stroke="#a9c7ff" stroke-width="1"/>
+  <text x="314" y="180" font-family="monospace" font-size="10" fill="rgba(169,199,255,0.7)" letter-spacing="1">98</text>
+
+  <polygon points="382,176 404,138 448,138 470,176 448,214 404,214" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <!-- ACTIVE hex 2 -->
+  <polygon points="474,176 496,138 540,138 562,176 540,214 496,214" fill="url(#activeHex)" stroke="#a9c7ff" stroke-width="1"/>
+  <text x="498" y="180" font-family="monospace" font-size="10" fill="rgba(169,199,255,0.7)" letter-spacing="1">94</text>
+
+  <polygon points="566,176 588,138 632,138 654,176 632,214 588,214" fill="rgba(72,144,247,0.06)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+
+  <!-- Row C: y=242 (center row) -->
+  <polygon points="152,242 174,204 218,204 240,242 218,280 174,280" fill="rgba(72,144,247,0.08)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="244,242 266,204 310,204 332,242 310,280 266,280" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <!-- CENTER / gold hex -->
+  <polygon points="336,242 358,204 402,204 424,242 402,280 358,280" fill="rgba(72,144,247,0.12)" stroke="rgba(72,144,247,0.2)" stroke-width="0.8"/>
+  <!-- Gold center circle -->
+  <circle cx="380" cy="242" r="6" stroke="#c9a84c" stroke-width="1" fill="none"/>
+  <circle cx="380" cy="242" r="2" fill="#c9a84c" opacity="0.6"/>
+
+  <!-- ACTIVE hex 3 -->
+  <polygon points="428,242 450,204 494,204 516,242 494,280 450,280" fill="url(#activeHex)" stroke="#a9c7ff" stroke-width="1"/>
+  <text x="452" y="246" font-family="monospace" font-size="10" fill="rgba(169,199,255,0.7)" letter-spacing="1">87</text>
+
+  <polygon points="520,242 542,204 586,204 608,242 586,280 542,280" fill="rgba(72,144,247,0.06)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="612,242 634,204 678,204 700,242 678,280 634,280" fill="rgba(72,144,247,0.08)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+
+  <!-- Row D: y=308 -->
+  <polygon points="198,308 220,270 264,270 286,308 264,346 220,346" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="290,308 312,270 356,270 378,308 356,346 312,346" fill="rgba(72,144,247,0.07)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="382,308 404,270 448,270 470,308 448,346 404,346" fill="rgba(72,144,247,0.06)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="474,308 496,270 540,270 562,308 540,346 496,346" fill="rgba(72,144,247,0.09)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+  <polygon points="566,308 588,270 632,270 654,308 632,346 588,346" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.12)" stroke-width="0.8"/>
+
+  <!-- Row E: y=374 -->
+  <polygon points="244,374 266,336 310,336 332,374 310,412 266,412" fill="rgba(72,144,247,0.04)" stroke="rgba(72,144,247,0.08)" stroke-width="0.8"/>
+  <polygon points="336,374 358,336 402,336 424,374 402,412 358,412" fill="rgba(72,144,247,0.06)" stroke="rgba(72,144,247,0.08)" stroke-width="0.8"/>
+  <polygon points="428,374 450,336 494,336 516,374 494,412 450,412" fill="rgba(72,144,247,0.04)" stroke="rgba(72,144,247,0.08)" stroke-width="0.8"/>
+  <polygon points="520,374 542,336 586,336 608,374 586,412 542,412" fill="rgba(72,144,247,0.05)" stroke="rgba(72,144,247,0.08)" stroke-width="0.8"/>
+
+  <!-- FLAGSHIP label top-right -->
+  <text x="640" y="55" font-family="monospace" font-size="9" fill="#c9a84c" letter-spacing="3" opacity="0.8">FLAGSHIP</text>
+  <line x1="638" y1="60" x2="760" y2="60" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+
+  <!-- Bottom-left label -->
+  <text x="24" y="422" font-family="monospace" font-size="9" fill="rgba(72,144,247,0.25)" letter-spacing="2">PERFORMANCE+ · APEX METABOLIC HEALTH</text>
+</svg>
