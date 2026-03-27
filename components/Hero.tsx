@@ -184,9 +184,9 @@ export default function Hero() {
               color: '#f0f4f8',
             }}
           >
-            Not Sick
+            Your Biology
             <br />
-            <span className="text-teal-gradient">Isn&apos;t The Same</span>
+            <span className="text-teal-gradient">Doesn&apos;t Lie.</span>
           </motion.h1>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -199,7 +199,7 @@ export default function Hero() {
               color: '#f0f4f8',
             }}
           >
-            As Optimal.
+            We Know How to Read It.
           </motion.h1>
         </div>
 
