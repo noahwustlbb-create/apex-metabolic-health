@@ -336,7 +336,7 @@ export default function Hero() {
             View Programs
           </a>
           <a
-            href="/get-started"
+            href="/intake/discovery"
             className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold tracking-widest uppercase w-full sm:w-auto transition-all duration-200"
             style={{
               border: '1px solid rgba(169,199,255,0.14)',
