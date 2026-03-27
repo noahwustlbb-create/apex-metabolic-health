@@ -10,15 +10,22 @@ const STATS = [
   { value: 'AHPRA', label: 'Registered Doctors' },
 ]
 
+const TRUST_ITEMS = [
+  { label: 'Doctor-led care' },
+  { label: 'Australia-wide telehealth' },
+  { label: 'Evidence-based protocols' },
+  { label: 'Private & confidential' },
+]
+
 const ease = [0.22, 1, 0.36, 1] as const
 
+/* Animated particle field */
 function HeroGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
@@ -43,7 +50,7 @@ function HeroGrid() {
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.35 + 0.05,
+        opacity: Math.random() * 0.3 + 0.04,
       })
     }
 
@@ -66,7 +73,6 @@ function HeroGrid() {
         ctx.fill()
       })
 
-      // Connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x
@@ -76,7 +82,7 @@ function HeroGrid() {
             ctx.beginPath()
             ctx.moveTo(particles[i].x, particles[i].y)
             ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(72, 144, 247, ${0.06 * (1 - dist / 120)})`
+            ctx.strokeStyle = `rgba(72, 144, 247, ${0.05 * (1 - dist / 120)})`
             ctx.lineWidth = 0.5
             ctx.stroke()
           }
@@ -103,6 +109,61 @@ function HeroGrid() {
   )
 }
 
+/* Faint biometric body-scan overlay — scan lines + contour ellipses */
+function BiometricOverlay() {
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      {/* Outer body contour */}
+      <ellipse
+        cx="50%" cy="44%"
+        rx="96" ry="230"
+        fill="none"
+        stroke="rgba(72,144,247,0.055)"
+        strokeWidth="0.8"
+      />
+      {/* Inner body contour */}
+      <ellipse
+        cx="50%" cy="44%"
+        rx="68" ry="168"
+        fill="none"
+        stroke="rgba(72,144,247,0.035)"
+        strokeWidth="0.5"
+      />
+      {/* Faint centre-line vertical */}
+      <line
+        x1="50%" y1="10%"
+        x2="50%" y2="78%"
+        stroke="rgba(72,144,247,0.025)"
+        strokeWidth="0.5"
+        strokeDasharray="3 14"
+      />
+      {/* Horizontal scan lines — subtle sweep through body area */}
+      {Array.from({ length: 26 }, (_, i) => (
+        <line
+          key={i}
+          x1="28%" y1={`${10 + i * 2.6}%`}
+          x2="72%" y2={`${10 + i * 2.6}%`}
+          stroke="rgba(72,144,247,0.022)"
+          strokeWidth="0.6"
+          strokeDasharray={i % 4 === 0 ? '6 10' : '2 16'}
+        />
+      ))}
+      {/* Corner measurement tick marks */}
+      <line x1="36%" y1="12%" x2="38%" y2="12%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
+      <line x1="62%" y1="12%" x2="64%" y2="12%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
+      <line x1="36%" y1="76%" x2="38%" y2="76%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
+      <line x1="62%" y1="76%" x2="64%" y2="76%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
+      {/* Small crosshair top-center */}
+      <line x1="50%" y1="9.2%" x2="50%" y2="10.8%" stroke="rgba(72,144,247,0.12)" strokeWidth="0.8"/>
+      <line x1="49.2%" y1="10%" x2="50.8%" y2="10%" stroke="rgba(72,144,247,0.12)" strokeWidth="0.8"/>
+    </svg>
+  )
+}
+
 export default function Hero() {
   return (
     <section
@@ -111,47 +172,76 @@ export default function Hero() {
       style={{ backgroundColor: '#0c131f' }}
       aria-label="Hero — Apex Metabolic Health"
     >
-      {/* Dot grid background */}
-      <div className="absolute inset-0 dot-grid opacity-60" aria-hidden="true" />
+      {/* Layer 0 — dot grid base */}
+      <div className="absolute inset-0 dot-grid opacity-50" aria-hidden="true" />
 
-      {/* Particle canvas */}
-      <HeroGrid />
-
-      {/* Radial glow — top center */}
+      {/* Layer 1 — grain / noise texture */}
       <div
+        className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[700px] pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.12) 0%, rgba(72,144,247,0.04) 35%, transparent 65%)',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
         }}
       />
 
-      {/* Radial glow — bottom left */}
+      {/* Layer 2 — particle canvas */}
+      <HeroGrid />
+
+      {/* Layer 3 — biometric scan overlay */}
+      <BiometricOverlay />
+
+      {/* Layer 4 — top radial glow (existing) */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[800px] pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.13) 0%, rgba(72,144,247,0.04) 40%, transparent 68%)',
+        }}
+      />
+
+      {/* Layer 5 — NEW: centered glow anchored behind headline text */}
+      <div
+        aria-hidden="true"
+        className="absolute pointer-events-none"
+        style={{
+          top: '18%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '900px',
+          height: '500px',
+          background:
+            'radial-gradient(ellipse at 50% 40%, rgba(72,144,247,0.10) 0%, rgba(72,144,247,0.04) 35%, transparent 65%)',
+        }}
+      />
+
+      {/* Layer 6 — bottom-left ambient glow */}
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-0 w-[600px] h-[500px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.06) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)',
         }}
       />
 
-      {/* Pulsing rings — CSS-only animation */}
+      {/* Layer 7 — pulsing decorative rings */}
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 600, height: 600, border: '1px solid rgba(72,144,247,0.06)', top: '50%', left: '50%' }}
+        style={{ width: 600, height: 600, border: '1px solid rgba(72,144,247,0.05)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 900, height: 900, border: '1px solid rgba(72,144,247,0.03)', top: '50%', left: '50%' }}
+        style={{ width: 950, height: 950, border: '1px solid rgba(72,144,247,0.025)', top: '50%', left: '50%' }}
       />
 
-      {/* Content */}
+      {/* ── Content ── */}
       <div className="relative z-10 container-tight w-full pt-28 pb-20 text-center">
-        {/* Clinical eyebrow label */}
+
+        {/* Eyebrow badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -161,10 +251,10 @@ export default function Hero() {
           <span
             className="inline-flex items-center gap-2.5 px-5 py-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase"
             style={{
-              border: '1px solid rgba(72,144,247,0.25)',
+              border: '1px solid rgba(72,144,247,0.22)',
               borderRadius: '4px',
               color: '#a9c7ff',
-              backgroundColor: 'rgba(72,144,247,0.08)',
+              backgroundColor: 'rgba(72,144,247,0.07)',
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
@@ -204,49 +294,106 @@ export default function Hero() {
           </motion.h1>
         </div>
 
-        {/* Sub-headline */}
+        {/* Supporting copy */}
         <motion.p
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.48, ease }}
-          className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-11"
+          className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
           style={{ color: '#8899aa' }}
         >
-          Doctor-led hormonal and metabolic medicine. If your tests came back normal but you don&apos;t feel normal — this is where you get real answers.
+          If your results say &lsquo;normal&rsquo; but your body says otherwise — we find out why.
+        </motion.p>
+
+        {/* Positioning line */}
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.56, ease }}
+          className="text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-11"
+          style={{ color: 'rgba(136,153,170,0.6)', letterSpacing: '0.01em' }}
+        >
+          We don&apos;t just check if you&apos;re in range — we optimise for performance.
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          transition={{ duration: 0.7, delay: 0.62, ease }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
         >
           <a
-            href="/intake/hormone"
+            href="/get-started"
             className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
           >
-            Hormone Consult
-          </a>
-          <a
-            href="/intake/general"
-            className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
-          >
-            General Health Check Up
+            Start Your Assessment
           </a>
           <a
             href="/services"
             className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto"
           >
-            Explore Our Programs
+            View Programs
           </a>
+          <a
+            href="/get-started"
+            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold tracking-widest uppercase w-full sm:w-auto transition-all duration-200"
+            style={{
+              border: '1px solid rgba(169,199,255,0.14)',
+              borderRadius: '2px',
+              color: 'rgba(169,199,255,0.5)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(169,199,255,0.28)'
+              e.currentTarget.style.color = 'rgba(169,199,255,0.75)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(169,199,255,0.14)'
+              e.currentTarget.style.color = 'rgba(169,199,255,0.5)'
+            }}
+          >
+            Speak to a Clinician
+          </a>
+        </motion.div>
+
+        {/* Trust strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.72, ease }}
+          className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 mb-16"
+        >
+          {TRUST_ITEMS.map((item) => (
+            <div key={item.label} className="flex items-center gap-2">
+              <svg
+                viewBox="0 0 10 10"
+                fill="none"
+                className="w-2.5 h-2.5 flex-shrink-0"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1.5 5.5L4 8l4.5-5.5"
+                  stroke="#4890f7"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span
+                className="text-[11px] font-medium tracking-[0.14em] uppercase"
+                style={{ color: 'rgba(136,153,170,0.65)' }}
+              >
+                {item.label}
+              </span>
+            </div>
+          ))}
         </motion.div>
 
         {/* Stats strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.75, ease }}
+          transition={{ duration: 0.7, delay: 0.82, ease }}
           className="inline-grid grid-cols-2 sm:grid-cols-4 gap-0 overflow-hidden mx-auto"
           style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '8px' }}
         >
@@ -260,10 +407,7 @@ export default function Hero() {
                 backdropFilter: 'blur(8px)',
               }}
             >
-              <p
-                className="stat-number text-xl md:text-2xl"
-                style={{ color: '#4890f7' }}
-              >
+              <p className="stat-number text-xl md:text-2xl" style={{ color: '#4890f7' }}>
                 {stat.value}
               </p>
               <p
@@ -281,7 +425,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.8 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         aria-hidden="true"
       >
@@ -298,6 +442,15 @@ export default function Hero() {
 
       {/* Bottom glow rule */}
       <div className="absolute bottom-0 left-0 right-0 glow-rule" aria-hidden="true" />
+
+      {/* Bottom fade — smooth transition into next section */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background: 'linear-gradient(to bottom, transparent, rgba(12,19,31,0.6))',
+        }}
+      />
     </section>
   )
 }

@@ -251,7 +251,7 @@ export default function Nav() {
                 <polygon points="10,2 18,17 2,17" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
                 <polygon points="10,7 15,15 5,15" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5" />
               </svg>
-              Get Started
+              Start Assessment
               <svg
                 viewBox="0 0 12 12"
                 fill="none"
@@ -283,7 +283,7 @@ export default function Nav() {
                 >
                   <div className="p-2 flex flex-col gap-0.5">
                     {[
-                      { label: 'Get Started', desc: 'Not sure where to begin', href: '/get-started' },
+                      { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/get-started' },
                       { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
                       { label: 'General Check Up', desc: 'Weight loss, peptides & more', href: '/intake/general' },
                     ].map((item) => (
@@ -387,7 +387,7 @@ export default function Nav() {
                   onClick={() => setMenuOpen(false)}
                   className="btn-teal w-full text-sm tracking-widest uppercase"
                 >
-                  Get Started
+                  Start Assessment
                 </Link>
               </motion.div>
             </div>
