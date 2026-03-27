@@ -59,7 +59,7 @@ export default function StatsBar() {
     <section
       ref={ref}
       className="relative py-16 md:py-20 overflow-hidden"
-      style={{ backgroundColor: '#0d1840' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="Clinical credentials"
     >
       {/* Top and bottom rules */}
@@ -74,7 +74,7 @@ export default function StatsBar() {
         aria-hidden="true"
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, rgba(43,123,224,0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at center, rgba(72,144,247,0.06) 0%, transparent 70%)',
         }}
       />
 
@@ -105,7 +105,7 @@ export default function StatsBar() {
               <p
                 className="stat-number mb-2"
                 style={{
-                  color: i % 2 === 0 ? '#2b7be0' : '#c9a84c',
+                  color: i % 2 === 0 ? '#4890f7' : '#c9a84c',
                   fontSize: stat.isText ? 'clamp(24px, 3.5vw, 40px)' : 'clamp(40px, 6vw, 72px)',
                   letterSpacing: stat.isText ? '0.04em' : '-0.02em',
                 }}

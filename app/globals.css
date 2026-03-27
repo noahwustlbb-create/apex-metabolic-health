@@ -3,16 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --bg: #ffffff;
-  --surface: #f0f5ff;
-  --elevated: #e4edf8;
-  --border: #ccdaec;
-  --teal: #2b7be0;
-  --teal-glow: rgba(43, 123, 224, 0.12);
-  --gold: #c9a84c;
-  --text-primary: #0d1420;
-  --text-secondary: #4a6080;
-  --text-muted: #8299b0;
+  --bg:             #0c131f;
+  --surface:        #151c28;
+  --elevated:       #19202c;
+  --elevated-high:  #2e3542;
+  --border:         rgba(255,255,255,0.06);
+  --teal:           #4890f7;
+  --teal-light:     #a9c7ff;
+  --teal-glow:      rgba(72,144,247,0.15);
+  --gold:           #c9a84c;
+  --text-primary:   #f0f4f8;
+  --text-secondary: #8899aa;
+  --text-muted:     #4a5a6a;
 }
 
 @layer base {
@@ -34,7 +36,7 @@
     background: var(--bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--border);
+    background: #2e3542;
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -49,28 +51,28 @@
 @layer utilities {
   /* Dot-grid background — very subtle */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(43, 123, 224, 0.07) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(72,144,247,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
   /* Fine line grid */
   .line-grid {
     background-image:
-      linear-gradient(rgba(43, 123, 224, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(43, 123, 224, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(72,144,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(72,144,247,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
-  /* Glowing horizontal rule */
+  /* Glowing horizontal rule — decorative brand element */
   .glow-rule {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--teal), transparent);
-    opacity: 0.4;
+    opacity: 0.2;
   }
 
-  /* Brand blue gradient text */
+  /* Signature gradient text — primary accent */
   .text-teal-gradient {
-    background: linear-gradient(90deg, #2b7be0, #5ab4f5);
+    background: linear-gradient(135deg, #a9c7ff 0%, #4890f7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -91,17 +93,16 @@
     font-family: var(--font-space-grotesk), system-ui, sans-serif;
   }
 
-  /* Program / feature card */
+  /* Program / feature card — tonal depth, no structural border */
   .apex-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--elevated);
     border-radius: 12px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
 
   .apex-card:hover {
-    border-color: var(--teal);
-    box-shadow: 0 0 0 1px rgba(43, 123, 224, 0.2), 0 8px 40px rgba(43, 123, 224, 0.1);
+    background: #21293a;
+    box-shadow: 0 12px 32px rgba(7,14,26,0.5);
     transform: translateY(-2px);
   }
 
@@ -115,31 +116,31 @@
     @apply mx-auto max-w-6xl px-6 md:px-10;
   }
 
-  /* Teal button */
+  /* Primary CTA — Signature Texture gradient */
   .btn-teal {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-sm text-sm font-semibold tracking-wide;
-    background: var(--teal);
-    color: var(--bg);
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide;
+    background: linear-gradient(135deg, #a9c7ff 0%, #4890f7 100%);
+    color: #0c131f;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
   }
 
   .btn-teal:hover {
-    background: #1a5fb4;
-    box-shadow: 0 0 30px rgba(43, 123, 224, 0.35);
+    background: linear-gradient(135deg, #bdd4ff 0%, #5a9ff8 100%);
+    box-shadow: 0 12px 32px rgba(7,14,26,0.4);
   }
 
-  /* Ghost button */
+  /* Secondary ghost button */
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-sm text-sm font-semibold tracking-wide;
-    border: 1px solid var(--teal);
-    color: var(--teal);
-    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide;
+    border: 1px solid rgba(72,144,247,0.35);
+    color: #a9c7ff;
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
   .btn-ghost:hover {
-    background: var(--teal);
-    color: var(--bg);
-    box-shadow: 0 0 30px rgba(43, 123, 224, 0.3);
+    background: rgba(72,144,247,0.1);
+    border-color: rgba(72,144,247,0.6);
+    box-shadow: 0 12px 32px rgba(7,14,26,0.3);
   }
 
   /* Stat number style */
@@ -149,7 +150,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* Pulsing ring animation — CSS-only, no Framer Motion */
+  /* Pulsing ring animation */
   @keyframes pulse-ring {
     0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
     50%       { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
@@ -166,12 +167,12 @@
     animation-delay: 2s;
   }
 
-  /* Program card hover — show View Details hint */
+  /* Program card hover */
   .program-card:hover .view-details-hint {
     opacity: 1 !important;
   }
 
-  /* Scroll indicator drip animation */
+  /* Scroll indicator drip */
   @keyframes scroll-drip {
     0%   { top: -40%; }
     100% { top: 140%; }

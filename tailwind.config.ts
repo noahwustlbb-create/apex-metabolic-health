@@ -9,13 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#070a0d',
-        surface: '#0d1117',
-        elevated: '#111820',
-        'apex-border': '#1e2d3d',
+        bg: '#0c131f',
+        surface: '#151c28',
+        elevated: '#19202c',
+        'elevated-high': '#2e3542',
+        'apex-border': 'rgba(255,255,255,0.06)',
         teal: {
-          DEFAULT: '#00c2b8',
-          glow: 'rgba(0,194,184,0.15)',
+          DEFAULT: '#4890f7',
+          light: '#a9c7ff',
+          glow: 'rgba(72,144,247,0.15)',
         },
         gold: '#c9a84c',
         primary: '#f0f4f8',
@@ -27,10 +29,11 @@ const config: Config = {
         grotesk: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'teal-sm': '0 0 20px rgba(0,194,184,0.15)',
-        'teal-md': '0 0 40px rgba(0,194,184,0.25)',
-        'teal-lg': '0 0 80px rgba(0,194,184,0.35)',
-        'card': '0 4px 32px rgba(0,0,0,0.5)',
+        'teal-sm': '0 0 20px rgba(72,144,247,0.15)',
+        'teal-md': '0 0 40px rgba(72,144,247,0.25)',
+        'teal-lg': '0 0 80px rgba(72,144,247,0.35)',
+        'card': '0 12px 32px rgba(7,14,26,0.5)',
+        'ambient': '0 12px 32px rgba(7,14,26,0.4)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

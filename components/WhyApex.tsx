@@ -70,28 +70,28 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="p-7 rounded-sm group cursor-default"
       style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #ccdaec',
-        transition: 'border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease',
+        backgroundColor: '#19202c',
+        transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget
-        el.style.borderColor = 'rgba(43,123,224,0.4)'
-        el.style.boxShadow = '0 4px 24px rgba(43,123,224,0.1)'
+        el.style.background = '#21293a'
+        el.style.boxShadow = '0 12px 32px rgba(7,14,26,0.5)'
+        el.style.transform = 'translateY(-2px)'
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget
-        el.style.borderColor = '#ccdaec'
+        el.style.background = '#19202c'
         el.style.boxShadow = 'none'
+        el.style.transform = 'translateY(0)'
       }}
     >
       {/* Icon */}
       <div
         className="w-14 h-14 rounded-sm flex items-center justify-center mb-6"
         style={{
-          backgroundColor: 'rgba(43,123,224,0.07)',
-          border: '1px solid rgba(43,123,224,0.18)',
-          color: '#2b7be0',
+          backgroundColor: 'rgba(72,144,247,0.1)',
+          color: '#4890f7',
         }}
       >
         {item.icon}
@@ -100,16 +100,16 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       {/* Accent bar */}
       <div
         className="w-8 h-px mb-5"
-        style={{ backgroundColor: '#2b7be0', opacity: 0.5 }}
+        style={{ backgroundColor: '#4890f7', opacity: 0.4 }}
       />
 
       <h3
         className="text-base font-semibold mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#4a6080' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
         {item.description}
       </p>
     </motion.div>
@@ -124,7 +124,7 @@ export default function WhyApex() {
     <section
       id="why-apex"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f4f8ff' }}
+      style={{ backgroundColor: '#0c131f' }}
       aria-label="Why choose Apex"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -154,7 +154,7 @@ export default function WhyApex() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
             Clinical Standards.{' '}
             <span className="text-teal-gradient">No Waiting List.</span>

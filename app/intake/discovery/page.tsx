@@ -31,7 +31,7 @@ function Input({ value, onChange, placeholder, type = 'text', inputMode }: {
       placeholder={placeholder} inputMode={inputMode}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: '#0d1840', border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#19202c', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.2)'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -44,7 +44,7 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
       placeholder={placeholder} rows={4}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: '#0d1840', border: `1px solid ${focused ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`, color: '#f0f4f8' }}
+      style={{ backgroundColor: '#19202c', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.2)'}`, color: '#f0f4f8' }}
     />
   )
 }
@@ -52,7 +52,7 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
     <label className="block text-sm font-medium mb-1.5" style={{ color: '#8899aa' }}>
-      {children}{required && <span style={{ color: '#2b7be0' }}> *</span>}
+      {children}{required && <span style={{ color: '#4890f7' }}> *</span>}
     </label>
   )
 }
@@ -101,12 +101,12 @@ export default function DiscoveryCallPage() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0c131f', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-                style={{ backgroundColor: 'rgba(43,123,224,0.1)', border: '1px solid rgba(43,123,224,0.3)' }}>
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#2b7be0' }}>
+                style={{ backgroundColor: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.3)' }}>
+                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#4890f7' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -129,7 +129,7 @@ export default function DiscoveryCallPage() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#0d1840', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#0c131f', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div className="container-tight max-w-2xl pt-6">
 
           {/* Header */}
@@ -157,7 +157,7 @@ export default function DiscoveryCallPage() {
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="apex-card p-8 space-y-6" style={{ backgroundColor: "#091230", border: "1px solid rgba(43,123,224,0.2)" }}>
+            className="apex-card p-8 space-y-6" style={{ backgroundColor: "#091230", border: "1px solid rgba(72,144,247,0.2)" }}>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -187,13 +187,13 @@ export default function DiscoveryCallPage() {
                   <button key={p} type="button" onClick={() => set('program', p)}
                     className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                     style={{
-                      backgroundColor: form.program === p ? 'rgba(43,123,224,0.08)' : '#0d1840',
-                      border: `1px solid ${form.program === p ? '#2b7be0' : 'rgba(43,123,224,0.2)'}`,
+                      backgroundColor: form.program === p ? 'rgba(72,144,247,0.08)' : '#19202c',
+                      border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.2)'}`,
                       color: form.program === p ? '#f0f4f8' : '#8899aa',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? '#2b7be0' : '#4a5a6a'}`, backgroundColor: form.program === p ? '#2b7be0' : 'transparent' }}>
-                      {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#0d1840' }} />}
+                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : '#4a5a6a'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
+                      {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#19202c' }} />}
                     </span>
                     {p}
                   </button>

@@ -12,7 +12,7 @@ function HowItWorksHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0d1840', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0c131f', paddingTop: '120px' }}
       aria-label="How it works hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -21,7 +21,7 @@ function HowItWorksHero() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -50,7 +50,7 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl mb-10"
-          style={{ color: '#4a6080' }}
+          style={{ color: '#8899aa' }}
         >
           No vague timelines. Here&apos;s every step.
         </motion.p>
@@ -119,7 +119,7 @@ function FullProcess() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f4f8ff' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="The full process"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -139,7 +139,7 @@ function FullProcess() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
             Step by Step
           </motion.h2>
@@ -150,7 +150,7 @@ function FullProcess() {
           {/* Vertical connector line */}
           <div
             className="absolute left-8 top-0 bottom-0 w-px hidden sm:block"
-            style={{ backgroundColor: 'rgba(43,123,224,0.1)' }}
+            style={{ backgroundColor: 'rgba(72,144,247,0.1)' }}
             aria-hidden="true"
           />
 
@@ -168,8 +168,8 @@ function FullProcess() {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
-                      backgroundColor: '#0d1117',
-                      border: '1px solid rgba(43,123,224,0.3)',
+                      backgroundColor: '#19202c',
+                      border: '1px solid rgba(72,144,247,0.3)',
                     }}
                   >
                     <span
@@ -177,7 +177,7 @@ function FullProcess() {
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
                         fontSize: '22px',
-                        color: '#2b7be0',
+                        color: '#4890f7',
                         letterSpacing: '-0.02em',
                       }}
                     >
@@ -191,7 +191,7 @@ function FullProcess() {
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     <h3
                       className="text-xl font-semibold"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                     >
                       {step.title}
                     </h3>
@@ -199,9 +199,9 @@ function FullProcess() {
                       <span
                         className="text-xs font-medium px-2.5 py-1 rounded-sm"
                         style={{
-                          color: '#2b7be0',
-                          backgroundColor: 'rgba(43,123,224,0.08)',
-                          border: '1px solid rgba(43,123,224,0.2)',
+                          color: '#4890f7',
+                          backgroundColor: 'rgba(72,144,247,0.08)',
+                          border: '1px solid rgba(72,144,247,0.2)',
                         }}
                       >
                         {step.subtitle}
@@ -210,7 +210,7 @@ function FullProcess() {
                   </div>
                   <div className="space-y-3">
                     {step.body.split('\n\n').map((para, j) => (
-                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#4a6080' }}>
+                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#8899aa' }}>
                         {para}
                       </p>
                     ))}
@@ -230,7 +230,7 @@ function FullProcess() {
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid #ccdaec' }}>
+    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
       <button
         className="w-full flex items-center justify-between py-5 text-left gap-4"
         onClick={() => setOpen((o) => !o)}
@@ -240,7 +240,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
           style={{
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: 600,
-            color: '#0d1420',
+            color: '#f0f4f8',
             fontSize: '15px',
           }}
         >
@@ -248,7 +248,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
         <span
           style={{
-            color: '#2b7be0',
+            color: '#4890f7',
             fontSize: '22px',
             lineHeight: 1,
             flexShrink: 0,
@@ -259,7 +259,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a6080' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#8899aa' }}>
           {answer}
         </p>
       )}
@@ -307,7 +307,7 @@ function FAQSection() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f4f8ff' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="Common questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -316,7 +316,7 @@ function FAQSection() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -331,7 +331,7 @@ function FAQSection() {
           <p className="label mb-4">COMMON QUESTIONS</p>
           <h2
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
             Quick Answers
           </h2>
@@ -357,7 +357,7 @@ function HowItWorksCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#0c131f' }}
       aria-label="Have more questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -366,7 +366,7 @@ function HowItWorksCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.07) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.07) 0%, transparent 60%)',
         }}
       />
 
@@ -376,7 +376,7 @@ function HowItWorksCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
           Have more questions?
         </motion.h2>

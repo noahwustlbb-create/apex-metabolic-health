@@ -66,8 +66,8 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               maxWidth: '560px',
               width: 'calc(100% - 48px)',
               margin: 'auto',
-              background: '#0d1117',
-              border: '1px solid #1e2d3d',
+              background: '#19202c',
+              border: '1px solid rgba(255,255,255,0.06)',
               borderRadius: '16px',
               maxHeight: '85vh',
               overflowY: 'auto',
@@ -85,7 +85,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 width: '32px',
                 height: '32px',
                 borderRadius: '50%',
-                background: '#1e2d3d',
+                background: '#2e3542',
                 color: '#4a5a6a',
                 fontSize: '20px',
                 lineHeight: '32px',
@@ -111,7 +111,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
             {/* Panel header */}
             <div
               style={{
-                background: '#070a0d',
+                background: '#0c131f',
                 padding: '32px 28px 24px',
                 borderRadius: '16px 16px 0 0',
                 textAlign: 'center',
@@ -127,7 +127,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  background: 'radial-gradient(ellipse at center, rgba(43,123,224,0.15) 0%, transparent 70%)',
+                  background: 'radial-gradient(ellipse at center, rgba(72,144,247,0.15) 0%, transparent 70%)',
                   width: '200px',
                   height: '200px',
                   pointerEvents: 'none',
@@ -147,14 +147,14 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 <svg viewBox="0 0 32 32" fill="none" width={64} height={64} aria-hidden="true">
                   <polygon
                     points="16,2 30,9 30,23 16,30 2,23 2,9"
-                    stroke="#2b7be0"
+                    stroke="#4890f7"
                     strokeWidth="1.5"
-                    fill="rgba(43,123,224,0.06)"
+                    fill="rgba(72,144,247,0.06)"
                   />
-                  <line x1="16" y1="2" x2="16" y2="30" stroke="#2b7be0" strokeWidth="0.8" opacity="0.35" />
-                  <line x1="2" y1="16" x2="30" y2="16" stroke="#2b7be0" strokeWidth="0.8" opacity="0.35" />
-                  <circle cx="16" cy="16" r="2.5" fill="#2b7be0" />
-                  <circle cx="16" cy="16" r="5" stroke="#2b7be0" strokeWidth="0.8" opacity="0.4" />
+                  <line x1="16" y1="2" x2="16" y2="30" stroke="#4890f7" strokeWidth="0.8" opacity="0.35" />
+                  <line x1="2" y1="16" x2="30" y2="16" stroke="#4890f7" strokeWidth="0.8" opacity="0.35" />
+                  <circle cx="16" cy="16" r="2.5" fill="#4890f7" />
+                  <circle cx="16" cy="16" r="5" stroke="#4890f7" strokeWidth="0.8" opacity="0.4" />
                 </svg>
               </div>
 
@@ -189,9 +189,9 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                             textTransform: 'uppercase' as const,
                             padding: '4px 12px',
                             borderRadius: '20px',
-                            background: 'rgba(43,123,224,0.12)',
-                            color: '#2b7be0',
-                            border: '1px solid rgba(43,123,224,0.3)',
+                            background: 'rgba(72,144,247,0.12)',
+                            color: '#4890f7',
+                            border: '1px solid rgba(72,144,247,0.3)',
                           }
                         : {
                             display: 'inline-block',
@@ -229,7 +229,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               </p>
 
               {/* Divider */}
-              <div style={{ height: '1px', background: '#1e2d3d', marginBottom: '20px' }} />
+              <div style={{ height: '1px', background: '#2e3542', marginBottom: '20px' }} />
 
               {/* Bio */}
               <p
@@ -267,7 +267,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          background: '#2b7be0',
+                          background: '#4890f7',
                           flexShrink: 0,
                           marginTop: '5px',
                         }}
@@ -308,7 +308,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                       >
                         <path
                           d="M2 7l3.5 3.5L12 4"
-                          stroke="#2b7be0"
+                          stroke="#4890f7"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"

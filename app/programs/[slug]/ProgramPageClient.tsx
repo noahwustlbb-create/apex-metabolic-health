@@ -25,7 +25,7 @@ function ProgramHero({ program }: { program: Program }) {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
 
@@ -34,7 +34,7 @@ function ProgramHero({ program }: { program: Program }) {
         aria-hidden="true"
         className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -57,9 +57,9 @@ function ProgramHero({ program }: { program: Program }) {
                   style={
                     program.badge === 'Flagship'
                       ? {
-                          color: '#2b7be0',
-                          backgroundColor: 'rgba(43,123,224,0.1)',
-                          border: '1px solid rgba(43,123,224,0.25)',
+                          color: '#4890f7',
+                          backgroundColor: 'rgba(72,144,247,0.1)',
+                          border: '1px solid rgba(72,144,247,0.25)',
                         }
                       : {
                           color: '#c9a84c',
@@ -111,7 +111,7 @@ function ProgramHero({ program }: { program: Program }) {
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-1.5 text-sm font-medium"
-                style={{ color: '#2b7be0' }}
+                style={{ color: '#4890f7' }}
               >
                 View transparent pricing
                 <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
@@ -151,7 +151,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
               className="mt-6 px-4 py-3 rounded-sm text-xs leading-relaxed"
-              style={{ backgroundColor: 'rgba(43,123,224,0.06)', border: '1px solid rgba(43,123,224,0.18)', color: '#8899aa' }}
+              style={{ backgroundColor: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)', color: '#8899aa' }}
             >
               <strong style={{ color: '#f0f4f8' }}>Therapeutic goods disclosure: </strong>
               Some treatment options available through this program involve therapeutic goods not registered on the Australian Register of Therapeutic Goods (ARTG). Your doctor will advise you if this applies to your protocol and will obtain your informed consent before proceeding.
@@ -177,7 +177,7 @@ function ProgramHero({ program }: { program: Program }) {
               />
               <div
                 className="absolute inset-0"
-                style={{ background: 'linear-gradient(135deg, rgba(43,123,224,0.08) 0%, transparent 60%)' }}
+                style={{ background: 'linear-gradient(135deg, rgba(72,144,247,0.08) 0%, transparent 60%)' }}
               />
             </motion.div>
           )}
@@ -198,7 +198,7 @@ function WhatItAddresses({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       aria-label="What this program addresses"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -235,8 +235,8 @@ function WhatItAddresses({ program }: { program: Program }) {
               style={{ borderBottom: '1px solid #1e2d3d' }}
             >
               <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5 flex-shrink-0" aria-hidden="true">
-                <circle cx="10" cy="10" r="9" stroke="#2b7be0" strokeWidth="1.5" fill="rgba(43,123,224,0.07)" />
-                <path d="M6 10l3 3 5-5" stroke="#2b7be0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.5" fill="rgba(72,144,247,0.07)" />
+                <path d="M6 10l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
                 {item}
@@ -269,7 +269,7 @@ function WhatsIncluded({ program }: { program: Program }) {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -305,7 +305,7 @@ function WhatsIncluded({ program }: { program: Program }) {
             >
               <span
                 className="text-sm font-bold flex-shrink-0"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#2b7be0' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -331,7 +331,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       aria-label="How this program works"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -362,7 +362,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
           {/* Vertical line */}
           <div
             className="absolute left-8 top-0 bottom-0 w-px hidden sm:block"
-            style={{ backgroundColor: 'rgba(43,123,224,0.1)' }}
+            style={{ backgroundColor: 'rgba(72,144,247,0.1)' }}
             aria-hidden="true"
           />
 
@@ -380,8 +380,8 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
-                      backgroundColor: '#0d1117',
-                      border: '1px solid rgba(43,123,224,0.3)',
+                      backgroundColor: '#19202c',
+                      border: '1px solid rgba(72,144,247,0.3)',
                     }}
                   >
                     <span
@@ -389,7 +389,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
                         fontSize: '20px',
-                        color: '#2b7be0',
+                        color: '#4890f7',
                         letterSpacing: '-0.02em',
                       }}
                     >
@@ -438,7 +438,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
 

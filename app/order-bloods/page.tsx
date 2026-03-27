@@ -68,8 +68,8 @@ function PanelCard({
         <div
           className="w-11 h-11 flex items-center justify-center rounded-sm flex-shrink-0"
           style={{
-            backgroundColor: 'rgba(43,123,224,0.08)',
-            border: '1px solid rgba(43,123,224,0.2)',
+            backgroundColor: 'rgba(72,144,247,0.08)',
+            border: '1px solid rgba(72,144,247,0.2)',
           }}
         >
           {icon}
@@ -81,7 +81,7 @@ function PanelCard({
           >
             {title}
           </h2>
-          <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#2b7be0' }}>
+          <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#4890f7' }}>
             {subtitle}
           </span>
         </div>
@@ -92,8 +92,8 @@ function PanelCard({
         {items.map((item) => (
           <li key={item} className="flex items-center gap-3">
             <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-              <circle cx="8" cy="8" r="7" stroke="#2b7be0" strokeWidth="1.2" fill="rgba(43,123,224,0.07)" />
-              <path d="M5 8l2.5 2.5 4-4" stroke="#2b7be0" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
+              <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
               {item}
@@ -134,7 +134,7 @@ export default function OrderBloodsPage() {
             aria-hidden="true"
             className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+              background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.08) 0%, transparent 60%)',
             }}
           />
 
@@ -189,9 +189,9 @@ export default function OrderBloodsPage() {
                 ctaHref="https://imedical.com.au/order/blood-tests/apexmeta-trt-panel&tracking=69bae136964db"
                 delay={0}
                 icon={
-                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                     <path d="M12 2C10.5 2 9.5 3 9.5 4.5V13.5C8 14.3 7 15.8 7 17.5C7 20 9.2 22 12 22C14.8 22 17 20 17 17.5C17 15.8 16 14.3 14.5 13.5V4.5C14.5 3 13.5 2 12 2Z" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="12" cy="17.5" r="1.5" fill="#2b7be0" stroke="none" />
+                    <circle cx="12" cy="17.5" r="1.5" fill="#4890f7" stroke="none" />
                   </svg>
                 }
               />
@@ -203,7 +203,7 @@ export default function OrderBloodsPage() {
                 ctaHref="https://imedical.com.au/order/blood-tests/apex-meta-weightloss&tracking=69bae136964db"
                 delay={0.08}
                 icon={
-                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                     <path d="M9 3H15L17 8H7L9 3Z" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7 8C7 8 5 12 5 15.5C5 18.5 8.1 21 12 21C15.9 21 19 18.5 19 15.5C19 12 17 8 17 8H7Z" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M10 14C10 14 10.5 16 12 16C13.5 16 14 14 14 14" strokeLinecap="round" />
@@ -263,7 +263,7 @@ export default function OrderBloodsPage() {
                     className="text-3xl font-bold flex-shrink-0 leading-none"
                     style={{
                       fontFamily: 'var(--font-space-grotesk)',
-                      color: 'rgba(43,123,224,0.25)',
+                      color: 'rgba(72,144,247,0.25)',
                       letterSpacing: '-0.03em',
                     }}
                   >

@@ -24,7 +24,7 @@ function ServicesHero() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
 
@@ -32,7 +32,7 @@ function ServicesHero() {
         aria-hidden="true"
         className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 100%, rgba(43,123,224,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -124,9 +124,9 @@ function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0
             style={{
               background: program.status === 'coming-soon'
                 ? 'rgba(30,45,61,0.9)'
-                : 'rgba(43,123,224,0.15)',
-              border: `1px solid ${program.status === 'coming-soon' ? '#1e2d3d' : 'rgba(43,123,224,0.4)'}`,
-              color: program.status === 'coming-soon' ? '#8899aa' : '#2b7be0',
+                : 'rgba(72,144,247,0.15)',
+              border: `1px solid ${program.status === 'coming-soon' ? 'rgba(255,255,255,0.08)' : 'rgba(72,144,247,0.4)'}`,
+              color: program.status === 'coming-soon' ? '#8899aa' : '#4890f7',
               backdropFilter: 'blur(4px)',
             }}
           >
@@ -157,7 +157,7 @@ function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0
         </h3>
         <p
           className="text-sm mb-4 leading-snug font-medium"
-          style={{ color: '#2b7be0' }}
+          style={{ color: '#4890f7' }}
         >
           {program.tagline}
         </p>
@@ -182,13 +182,13 @@ function ProgramCatalogueCard({ program, index }: { program: (typeof programs)[0
                   cx="8"
                   cy="8"
                   r="7"
-                  stroke="#2b7be0"
+                  stroke="#4890f7"
                   strokeWidth="1.2"
-                  fill="rgba(43,123,224,0.07)"
+                  fill="rgba(72,144,247,0.07)"
                 />
                 <path
                   d="M5 8l2.5 2.5 4-4"
-                  stroke="#2b7be0"
+                  stroke="#4890f7"
                   strokeWidth="1.2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -242,7 +242,7 @@ function ProgramCatalogue() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       aria-label="Program catalogue"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -288,7 +288,7 @@ function ProgramCatalogue() {
               style={
                 activeFilter === tab.value
                   ? {
-                      background: '#2b7be0',
+                      background: '#4890f7',
                       color: '#070a0d',
                     }
                   : {
@@ -425,9 +425,9 @@ function WhatWeTest() {
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"
                 style={{
-                  color: '#2b7be0',
-                  backgroundColor: 'rgba(43,123,224,0.08)',
-                  border: '1px solid rgba(43,123,224,0.2)',
+                  color: '#4890f7',
+                  backgroundColor: 'rgba(72,144,247,0.08)',
+                  border: '1px solid rgba(72,144,247,0.2)',
                 }}
               >
                 Hormone Programs
@@ -438,7 +438,7 @@ function WhatWeTest() {
                 <li key={item} className="flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: '#2b7be0' }}
+                    style={{ backgroundColor: '#4890f7' }}
                     aria-hidden="true"
                   />
                   <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -473,9 +473,9 @@ function WhatWeTest() {
               <span
                 className="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-sm flex-shrink-0"
                 style={{
-                  color: '#2b7be0',
-                  backgroundColor: 'rgba(43,123,224,0.08)',
-                  border: '1px solid rgba(43,123,224,0.2)',
+                  color: '#4890f7',
+                  backgroundColor: 'rgba(72,144,247,0.08)',
+                  border: '1px solid rgba(72,144,247,0.2)',
                 }}
               >
                 Metabolic Programs
@@ -486,7 +486,7 @@ function WhatWeTest() {
                 <li key={item} className="flex items-center gap-3">
                   <span
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: '#2b7be0' }}
+                    style={{ backgroundColor: '#4890f7' }}
                     aria-hidden="true"
                   />
                   <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -531,7 +531,7 @@ function ServicesCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -540,7 +540,7 @@ function ServicesCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />

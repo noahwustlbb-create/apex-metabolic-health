@@ -42,7 +42,7 @@ export default function AgeGate() {
             aria-hidden="true"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at 50% 50%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+              background: 'radial-gradient(ellipse at 50% 50%, rgba(72,144,247,0.08) 0%, transparent 60%)',
             }}
           />
 
@@ -54,7 +54,7 @@ export default function AgeGate() {
             className="relative z-10 flex flex-col items-center text-center px-8 py-12 mx-4"
             style={{
               maxWidth: '480px',
-              background: '#0d1117',
+              background: '#19202c',
               border: '1px solid #1e2d3d',
               borderRadius: '12px',
               boxShadow: '0 32px 80px rgba(0,0,0,0.6)',
@@ -64,11 +64,11 @@ export default function AgeGate() {
             <div
               className="w-14 h-14 flex items-center justify-center rounded-sm mb-8 flex-shrink-0"
               style={{
-                backgroundColor: 'rgba(43,123,224,0.08)',
-                border: '1px solid rgba(43,123,224,0.2)',
+                backgroundColor: 'rgba(72,144,247,0.08)',
+                border: '1px solid rgba(72,144,247,0.2)',
               }}
             >
-              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

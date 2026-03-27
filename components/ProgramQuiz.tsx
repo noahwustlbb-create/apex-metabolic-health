@@ -125,7 +125,7 @@ export default function ProgramQuiz() {
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -175,7 +175,7 @@ export default function ProgramQuiz() {
                     <div
                       key={i}
                       className="flex-1 h-1 rounded-full transition-all duration-300"
-                      style={{ backgroundColor: i <= step ? '#2b7be0' : '#1e2d3d' }}
+                      style={{ backgroundColor: i <= step ? '#4890f7' : 'rgba(255,255,255,0.08)' }}
                     />
                   ))}
                   <span className="text-xs flex-shrink-0" style={{ color: '#4a5a6a' }}>
@@ -197,17 +197,17 @@ export default function ProgramQuiz() {
                       onClick={() => handleAnswer(opt.value)}
                       className="text-left px-5 py-4 rounded-sm transition-all duration-200 group"
                       style={{
-                        background: '#0d1117',
+                        background: '#19202c',
                         border: '1px solid #1e2d3d',
                         color: '#8899aa',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = '#2b7be0'
+                        e.currentTarget.style.borderColor = '#4890f7'
                         e.currentTarget.style.color = '#f0f4f8'
-                        e.currentTarget.style.backgroundColor = 'rgba(43,123,224,0.04)'
+                        e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.04)'
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = '#1e2d3d'
+                        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
                         e.currentTarget.style.color = '#8899aa'
                         e.currentTarget.style.backgroundColor = '#0d1117'
                       }}
@@ -237,13 +237,13 @@ export default function ProgramQuiz() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="apex-card p-8 text-center"
-                style={{ border: '1px solid rgba(43,123,224,0.3)' }}
+                style={{ border: '1px solid rgba(72,144,247,0.3)' }}
               >
                 <div
                   className="w-12 h-12 flex items-center justify-center rounded-sm mx-auto mb-6"
-                  style={{ backgroundColor: 'rgba(43,123,224,0.1)', border: '1px solid rgba(43,123,224,0.25)' }}
+                  style={{ backgroundColor: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}
                 >
-                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#2b7be0" strokeWidth="1.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                     <path d="M9 12l2 2 4-4M12 3l-8 4.5v5C4 17.4 7.4 21.5 12 22c4.6-.5 8-4.6 8-9.5v-5L12 3z" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>

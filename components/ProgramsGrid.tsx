@@ -158,7 +158,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
     >
       {/* Image strip */}
       {fullProgram?.image && (
-        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#070a0d' }}>
+        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#0c131f' }}>
           <Image
             src={fullProgram.image}
             alt={program.name}
@@ -179,9 +179,9 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         <div
           className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
           style={{
-            backgroundColor: 'rgba(43,123,224,0.07)',
-            border: '1px solid rgba(43,123,224,0.18)',
-            color: '#2b7be0',
+            backgroundColor: 'rgba(72,144,247,0.07)',
+            border: '1px solid rgba(72,144,247,0.18)',
+            color: '#4890f7',
           }}
         >
           {program.icon}
@@ -190,7 +190,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Program name */}
         <h3
           className="text-base font-semibold mb-2.5 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
           {program.name}
         </h3>
@@ -198,7 +198,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Description */}
         <p
           className="text-sm leading-relaxed flex-1 mb-5"
-          style={{ color: '#4a6080' }}
+          style={{ color: '#8899aa' }}
         >
           {program.description}
         </p>
@@ -210,7 +210,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         >
           <span
             className="text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
-            style={{ color: '#2b7be0' }}
+            style={{ color: '#4890f7' }}
           >
             Learn More
           </span>
@@ -218,7 +218,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
             viewBox="0 0 16 16"
             fill="none"
             className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
-            style={{ color: '#2b7be0' }}
+            style={{ color: '#4890f7' }}
             aria-hidden="true"
           >
             <path
@@ -245,7 +245,7 @@ export default function ProgramsGrid() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -258,7 +258,7 @@ export default function ProgramsGrid() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -278,7 +278,7 @@ export default function ProgramsGrid() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
             Eight Clinical Programs.
             <br />
@@ -289,7 +289,7 @@ export default function ProgramsGrid() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#4a6080' }}
+            style={{ color: '#8899aa' }}
           >
             Every program starts with doctor assessment. All treatment is clinically indicated.
           </motion.p>

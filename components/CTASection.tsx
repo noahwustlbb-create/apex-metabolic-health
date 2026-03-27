@@ -12,7 +12,7 @@ export default function CTASection() {
       id="cta"
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1840' }}
+      style={{ backgroundColor: '#0c131f' }}
       aria-label="Book a consultation"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -23,7 +23,7 @@ export default function CTASection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.15) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.15) 0%, transparent 60%)',
         }}
       />
 
@@ -34,12 +34,12 @@ export default function CTASection() {
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 500, height: 500, border: '1px solid rgba(43,123,224,0.12)', top: '50%', left: '50%' }}
+        style={{ width: 500, height: 500, border: '1px solid rgba(72,144,247,0.12)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 800, height: 800, border: '1px solid rgba(43,123,224,0.06)', top: '50%', left: '50%' }}
+        style={{ width: 800, height: 800, border: '1px solid rgba(72,144,247,0.06)', top: '50%', left: '50%' }}
       />
 
       <div className="container-tight relative z-10 text-center">
@@ -90,7 +90,7 @@ export default function CTASection() {
           <a
             href="/services"
             className="btn-ghost text-sm font-bold tracking-widest uppercase px-10 py-4"
-            style={{ fontSize: '13px', borderColor: 'rgba(255,255,255,0.3)', color: '#f0f4f8' }}
+            style={{ fontSize: '13px' }}
           >
             View Programs
           </a>
@@ -115,12 +115,12 @@ export default function CTASection() {
               {i > 0 && (
                 <span
                   className="hidden sm:block w-1 h-1 rounded-full"
-                  style={{ backgroundColor: '#1e2d3d' }}
+                  style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
                 />
               )}
               <span
                 className="w-1 h-1 rounded-full sm:hidden"
-                style={{ backgroundColor: '#2b7be0', opacity: 0.6 }}
+                style={{ backgroundColor: '#4890f7', opacity: 0.6 }}
               />
               {item}
             </span>

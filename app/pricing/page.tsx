@@ -15,7 +15,7 @@ function TreatmentOptions() {
       <div className="apex-card p-7 flex flex-col">
         <p
           className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3"
-          style={{ color: '#2b7be0' }}
+          style={{ color: '#4890f7' }}
         >
           RECOMMENDED
         </p>
@@ -42,7 +42,7 @@ function TreatmentOptions() {
             <li key={i} className="flex items-start gap-3">
               <span
                 className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: '#2b7be0' }}
+                style={{ backgroundColor: '#4890f7' }}
                 aria-hidden="true"
               />
               <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -82,7 +82,7 @@ function TreatmentOptions() {
             <li key={i} className="flex items-start gap-3">
               <span
                 className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: '#2b7be0' }}
+                style={{ backgroundColor: '#4890f7' }}
                 aria-hidden="true"
               />
               <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
@@ -129,8 +129,8 @@ function TimelineStep({
         <div
           className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0"
           style={{
-            backgroundColor: 'rgba(43,123,224,0.06)',
-            border: '1px solid rgba(43,123,224,0.25)',
+            backgroundColor: 'rgba(72,144,247,0.06)',
+            border: '1px solid rgba(72,144,247,0.25)',
           }}
         >
           <span
@@ -138,7 +138,7 @@ function TimelineStep({
             style={{
               fontFamily: 'var(--font-space-grotesk)',
               fontSize: '22px',
-              color: '#2b7be0',
+              color: '#4890f7',
               letterSpacing: '-0.02em',
             }}
           >
@@ -148,7 +148,7 @@ function TimelineStep({
         {/* Connector line */}
         <div
           className="flex-1 w-px mt-3"
-          style={{ backgroundColor: 'rgba(43,123,224,0.12)', minHeight: '32px' }}
+          style={{ backgroundColor: 'rgba(72,144,247,0.12)', minHeight: '32px' }}
           aria-hidden="true"
         />
       </div>
@@ -192,7 +192,7 @@ function PricingHero() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117', paddingTop: '120px' }}
+      style={{ backgroundColor: '#19202c', paddingTop: '120px' }}
       aria-label="Pricing hero"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -203,7 +203,7 @@ function PricingHero() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
 
@@ -277,7 +277,7 @@ function Track1Section() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -424,7 +424,7 @@ function Track2Section() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       id="general-track"
       aria-label="Track 2: Weight Loss, Peptide Therapy & General Programs pricing"
     >
@@ -434,7 +434,7 @@ function Track2Section() {
         aria-hidden="true"
         className="absolute bottom-0 left-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 100%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -563,7 +563,7 @@ function PricingBottomCTA() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#19202c' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -572,7 +572,7 @@ function PricingBottomCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(43,123,224,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.08) 0%, transparent 60%)',
         }}
       />
 

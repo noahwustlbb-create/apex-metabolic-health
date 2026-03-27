@@ -74,7 +74,7 @@ export default function HormoneFormPDF() {
         <button
           onClick={handlePrint}
           style={{
-            backgroundColor: '#2b7be0', color: 'white', border: 'none',
+            backgroundColor: '#4890f7', color: 'white', border: 'none',
             padding: '10px 28px', borderRadius: '4px', fontWeight: 700,
             fontSize: '13px', cursor: 'pointer', letterSpacing: '0.08em',
           }}
@@ -93,7 +93,7 @@ export default function HormoneFormPDF() {
             <div style={{ fontSize: '11px', color: '#555', marginTop: '3px' }}>Doctor-Led Telehealth — Australia-Wide</div>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '14px', fontWeight: 700, color: '#2b7be0' }}>HORMONE PROGRAM</div>
+            <div style={{ fontSize: '14px', fontWeight: 700, color: '#4890f7' }}>HORMONE PROGRAM</div>
             <div style={{ fontSize: '10px', color: '#555' }}>Request an Appointment & Pre-Screen Intake Form</div>
             <div style={{ fontSize: '9px', color: '#999', marginTop: '4px' }}>Date: ___________________</div>
           </div>

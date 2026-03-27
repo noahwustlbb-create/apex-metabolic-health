@@ -86,16 +86,15 @@ function SymptomCard({ symptom, index }: { symptom: typeof SYMPTOMS[0]; index: n
       <div
         className="flex-shrink-0 w-9 h-9 rounded-sm flex items-center justify-center transition-colors duration-300"
         style={{
-          backgroundColor: 'rgba(43,123,224,0.08)',
-          color: '#2b7be0',
-          border: '1px solid rgba(43,123,224,0.15)',
+          backgroundColor: 'rgba(72,144,247,0.1)',
+          color: '#4890f7',
         }}
       >
         {symptom.icon}
       </div>
       <p
         className="text-sm font-medium leading-snug pt-1.5"
-        style={{ color: '#4a6080' }}
+        style={{ color: '#8899aa' }}
       >
         {symptom.label}
       </p>
@@ -113,7 +112,7 @@ export default function ProblemSection() {
     <section
       id="problem"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f4f8ff' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="Symptoms section"
     >
       {/* Top glow rule */}
@@ -124,7 +123,7 @@ export default function ProblemSection() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(43,123,224,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -144,7 +143,7 @@ export default function ProblemSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
           >
             Something Is Off.
             <br />
@@ -155,7 +154,7 @@ export default function ProblemSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ color: '#4a6080' }}
+            style={{ color: '#8899aa' }}
           >
             Your GP said normal. You know something&apos;s wrong. We run the panels that find what others miss — and we act on what we find.
           </motion.p>
@@ -179,13 +178,13 @@ export default function ProblemSection() {
           <div
             className="px-8 py-6 rounded-sm"
             style={{
-              backgroundColor: 'rgba(43,123,224,0.05)',
-              border: '1px solid rgba(43,123,224,0.15)',
+              backgroundColor: 'rgba(72,144,247,0.06)',
+              border: '1px solid rgba(255,255,255,0.06)',
             }}
           >
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#4a6080' }}>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#8899aa' }}>
               These are clinical symptoms — not lifestyle problems.{' '}
-              <span className="font-semibold" style={{ color: '#0d1420' }}>
+              <span className="font-semibold" style={{ color: '#f0f4f8' }}>
                 Our doctors run the panels that find the cause.
               </span>
             </p>

@@ -11,8 +11,8 @@ import { programs } from '@/lib/programs'
 
 const inputBase: React.CSSProperties = {
   background: '#ffffff',
-  border: '1px solid #ccdaec',
-  color: '#0d1420',
+  border: '1px solid #rgba(255,255,255,0.06)',
+  color: '#f0f4f8',
   padding: '12px 16px',
   borderRadius: '4px',
   width: '100%',
@@ -27,7 +27,7 @@ function GetStartedHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0d1840', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0c131f', paddingTop: '120px' }}
       aria-label="Get started hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -36,7 +36,7 @@ function GetStartedHero() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(43,123,224,0.07) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)',
         }}
       />
 
@@ -55,7 +55,7 @@ function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
         >
           Three Ways to Book. Choose Yours.
         </motion.h1>
@@ -65,7 +65,7 @@ function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#4a6080' }}
+          style={{ color: '#8899aa' }}
         >
           Three ways to begin. Choose what feels right for where you&apos;re at.
         </motion.p>
@@ -83,7 +83,7 @@ function BookingCards() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f4f8ff' }}
+      style={{ backgroundColor: '#151c28' }}
       aria-label="Booking options"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -96,21 +96,21 @@ function BookingCards() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
             className="apex-card p-8 flex flex-col"
-            style={{ border: '1px solid rgba(43,123,224,0.35)' }}
+            style={{ border: '1px solid rgba(72,144,247,0.35)' }}
           >
             <p
               className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4"
-              style={{ color: '#2b7be0' }}
+              style={{ color: '#4890f7' }}
             >
               RECOMMENDED START
             </p>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
             >
               Free Discovery Call
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
               Unsure which program fits? A 15-minute call with our team. No cost.
             </p>
             <a
@@ -134,11 +134,11 @@ function BookingCards() {
             </div>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
             >
               Hormone Consultation
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
               For hormone or performance programs. Blood work first, then your consultation.
             </p>
             <a
@@ -162,11 +162,11 @@ function BookingCards() {
             </div>
             <h3
               className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
             >
               General Consultation
             </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a6080' }}>
+            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
               For weight management, peptide programs, medical certificates, or a general health
               check-in with one of our doctors.
             </p>
@@ -193,7 +193,7 @@ function EnquiryForm() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#0c131f' }}
       aria-label="Enquiry form"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -209,11 +209,11 @@ function EnquiryForm() {
             <p className="label mb-4">SEND AN ENQUIRY</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0d1420' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
             >
               Send a Direct Enquiry
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#4a6080' }}>
+            <p className="text-base leading-relaxed" style={{ color: '#8899aa' }}>
               Fill out the form below and we&apos;ll get back to you within 1 business day.
             </p>
           </motion.div>
@@ -231,7 +231,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a6080' }}
+                  style={{ color: '#8899aa' }}
                 >
                   Full Name
                 </label>
@@ -240,14 +240,14 @@ function EnquiryForm() {
                   name="fullName"
                   placeholder="Your full name"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a6080' }}
+                  style={{ color: '#8899aa' }}
                 >
                   Email
                 </label>
@@ -256,8 +256,8 @@ function EnquiryForm() {
                   name="email"
                   placeholder="your@email.com"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
             </div>
@@ -267,7 +267,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a6080' }}
+                  style={{ color: '#8899aa' }}
                 >
                   Phone
                 </label>
@@ -276,14 +276,14 @@ function EnquiryForm() {
                   name="phone"
                   placeholder="+61 4xx xxx xxx"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a6080' }}
+                  style={{ color: '#8899aa' }}
                 >
                   Program of Interest
                 </label>
@@ -291,8 +291,8 @@ function EnquiryForm() {
                   name="program"
                   style={{ ...inputBase, cursor: 'pointer' }}
                   defaultValue=""
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 >
                   <option value="" disabled style={{ color: '#8299b0' }}>
                     Select a program
@@ -301,7 +301,7 @@ function EnquiryForm() {
                     <option
                       key={p.slug}
                       value={p.slug}
-                      style={{ background: '#ffffff', color: '#0d1420' }}
+                      style={{ background: '#ffffff', color: '#f0f4f8' }}
                     >
                       {p.name}
                     </option>
@@ -314,7 +314,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#4a6080' }}
+                style={{ color: '#8899aa' }}
               >
                 How did you hear about us?
               </label>
@@ -322,8 +322,8 @@ function EnquiryForm() {
                 name="referral"
                 style={{ ...inputBase, cursor: 'pointer' }}
                 defaultValue=""
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
               >
                 <option value="" disabled style={{ color: '#8299b0' }}>
                   Select an option
@@ -338,7 +338,7 @@ function EnquiryForm() {
                   <option
                     key={option}
                     value={option}
-                    style={{ background: '#ffffff', color: '#0d1420' }}
+                    style={{ background: '#ffffff', color: '#f0f4f8' }}
                   >
                     {option}
                   </option>
@@ -350,7 +350,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#4a6080' }}
+                style={{ color: '#8899aa' }}
               >
                 Message
               </label>
@@ -359,8 +359,8 @@ function EnquiryForm() {
                 rows={5}
                 placeholder="Tell us what you're experiencing or what you'd like to achieve..."
                 style={{ ...inputBase, resize: 'vertical' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#2b7be0')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = '#1e2d3d')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
               />
             </div>
 
@@ -410,10 +410,10 @@ function TrustStrip() {
           {TRUST_ITEMS.map((item, i) => (
             <div key={item} className="flex items-center gap-3">
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                <circle cx="8" cy="8" r="7" stroke="#2b7be0" strokeWidth="1.2" fill="rgba(43,123,224,0.07)" />
-                <path d="M5 8l2.5 2.5 4-4" stroke="#2b7be0" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
+                <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm font-semibold tracking-wide" style={{ color: '#0d1420' }}>
+              <span className="text-sm font-semibold tracking-wide" style={{ color: '#f0f4f8' }}>
                 {item}
               </span>
             </div>
