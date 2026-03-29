@@ -10,6 +10,7 @@ import Affiliations from '@/components/Affiliations'
 import StatsBar from '@/components/StatsBar'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
+import FloatingContact from '@/components/FloatingContact'
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
+      <FloatingContact />
     </>
   )
 }
