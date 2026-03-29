@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid #rgba(255,255,255,0.06)' }}>
+    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
       <button
         className="w-full flex items-center justify-between py-5 text-left gap-4"
         onClick={() => setOpen((o) => !o)}

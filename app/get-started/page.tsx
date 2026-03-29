@@ -9,9 +9,11 @@ import { programs } from '@/lib/programs'
 
 // ─── Input styles ─────────────────────────────────────────────────────────────
 
+const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
+
 const inputBase: React.CSSProperties = {
-  background: '#ffffff',
-  border: '1px solid #rgba(255,255,255,0.06)',
+  background: '#19202c',
+  border: '1px solid rgba(255,255,255,0.08)',
   color: '#f0f4f8',
   padding: '12px 16px',
   borderRadius: '4px',
@@ -36,7 +38,7 @@ function GetStartedHero() {
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 0% 0%, rgba(44,116,232,0.07) 0%, transparent 60%)',
         }}
       />
 
@@ -96,11 +98,11 @@ function BookingCards() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
             className="apex-card p-8 flex flex-col"
-            style={{ border: '1px solid rgba(72,144,247,0.35)' }}
+            style={{ border: '1px solid rgba(44,116,232,0.35)' }}
           >
             <p
               className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4"
-              style={{ color: '#4890f7' }}
+              style={{ color: '#2C74E8' }}
             >
               RECOMMENDED START
             </p>
@@ -189,6 +191,26 @@ function BookingCards() {
 function EnquiryForm() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setError('')
+    const data = new FormData(e.currentTarget)
+    data.append('access_key', WEB3FORMS_KEY)
+    data.append('subject', 'New Enquiry — Apex Metabolic Health')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+      const json = await res.json()
+      if (json.success) { setSubmitted(true) } else { setError('Something went wrong. Please try again.') }
+    } catch {
+      setError('Something went wrong. Please try again.')
+    }
+    setSubmitting(false)
+  }
 
   return (
     <section
@@ -218,11 +240,26 @@ function EnquiryForm() {
             </p>
           </motion.div>
 
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-8 rounded-lg text-center"
+              style={{ background: 'rgba(44,116,232,0.08)', border: '1px solid rgba(44,116,232,0.2)' }}
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10 mx-auto mb-4" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="#2C74E8" strokeWidth="1.5"/>
+                <path d="M7.5 12l3 3 5-5" stroke="#2C74E8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <h3 className="text-xl font-bold mb-2" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
+              <p className="text-sm" style={{ color: '#8899aa' }}>We&apos;ll be in touch within 1 business day.</p>
+            </motion.div>
+          ) : (
           <motion.form
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             className="flex flex-col gap-5"
             noValidate
           >
@@ -240,7 +277,7 @@ function EnquiryForm() {
                   name="fullName"
                   placeholder="Your full name"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
@@ -256,7 +293,7 @@ function EnquiryForm() {
                   name="email"
                   placeholder="your@email.com"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
@@ -276,7 +313,7 @@ function EnquiryForm() {
                   name="phone"
                   placeholder="+61 4xx xxx xxx"
                   style={inputBase}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 />
               </div>
@@ -291,7 +328,7 @@ function EnquiryForm() {
                   name="program"
                   style={{ ...inputBase, cursor: 'pointer' }}
                   defaultValue=""
-                  onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                  onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                   onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
                 >
                   <option value="" disabled style={{ color: '#8299b0' }}>
@@ -322,7 +359,7 @@ function EnquiryForm() {
                 name="referral"
                 style={{ ...inputBase, cursor: 'pointer' }}
                 defaultValue=""
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
               >
                 <option value="" disabled style={{ color: '#8299b0' }}>
@@ -359,19 +396,22 @@ function EnquiryForm() {
                 rows={5}
                 placeholder="Tell us what you're experiencing or what you'd like to achieve..."
                 style={{ ...inputBase, resize: 'vertical' }}
-                onFocus={(e) => (e.currentTarget.style.borderColor = '#4890f7')}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
               />
             </div>
 
-            <button type="submit" className="btn-teal w-full md:w-auto px-12">
-              Send Enquiry
+            <button type="submit" className="btn-teal w-full md:w-auto px-12" disabled={submitting} style={{ opacity: submitting ? 0.7 : 1 }}>
+              {submitting ? 'Sending…' : 'Send Enquiry'}
             </button>
+
+            {error && <p className="text-sm" style={{ color: '#f87171' }}>{error}</p>}
 
             <p className="text-xs" style={{ color: '#8299b0' }}>
               We respond within 1 business day. Your information is kept strictly private.
             </p>
           </motion.form>
+          )}
         </div>
       </div>
     </section>
@@ -410,8 +450,8 @@ function TrustStrip() {
           {TRUST_ITEMS.map((item, i) => (
             <div key={item} className="flex items-center gap-3">
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
-                <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="8" cy="8" r="7" stroke="#2C74E8" strokeWidth="1.2" fill="rgba(44,116,232,0.07)" />
+                <path d="M5 8l2.5 2.5 4-4" stroke="#2C74E8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="text-sm font-semibold tracking-wide" style={{ color: '#f0f4f8' }}>
                 {item}

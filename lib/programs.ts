@@ -313,7 +313,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Join the Waitlist',
-    ctaHref: '#',
+    ctaHref: '/get-started',
   },
 ]
 
