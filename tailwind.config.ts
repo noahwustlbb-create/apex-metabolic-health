@@ -15,9 +15,9 @@ const config: Config = {
         'elevated-high': '#2e3542',
         'apex-border': 'rgba(255,255,255,0.06)',
         teal: {
-          DEFAULT: '#4890f7',
-          light: '#a9c7ff',
-          glow: 'rgba(72,144,247,0.15)',
+          DEFAULT: '#2C74E8',
+          light: '#7AB8FF',
+          glow: 'rgba(44,116,232,0.15)',
         },
         gold: '#c9a84c',
         primary: '#f0f4f8',

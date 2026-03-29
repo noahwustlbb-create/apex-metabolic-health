@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const COMPANY_LINKS = [
@@ -38,24 +39,14 @@ export default function Footer() {
           <div className="lg:col-span-2">
             {/* Logo */}
             <div className="mb-5">
-              <svg
-                viewBox="0 0 88 36"
-                className="w-[110px] h-auto"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-label="Apex Metabolic Health"
-                role="img"
-              >
-                <defs>
-                  <linearGradient id="footer-apx-tg" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#a9c7ff"/>
-                    <stop offset="100%" stopColor="#4890f7"/>
-                  </linearGradient>
-                </defs>
-                <text x="0" y="23" fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif" fontSize="24" fontWeight="800" fill="url(#footer-apx-tg)" letterSpacing="-0.5">APEX</text>
-                <line x1="0" y1="26.5" x2="57" y2="26.5" stroke="#a9c7ff" strokeWidth="0.8" strokeOpacity="0.25"/>
-                <text x="0.5" y="35" fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif" fontSize="6.6" fontWeight="400" fill="#4a5a6a" letterSpacing="1.55">METABOLIC HEALTH</text>
-              </svg>
+              <Image
+                src="/logo.png"
+                alt="Apex Metabolic Health"
+                width={140}
+                height={140}
+                className="h-16 w-auto"
+                unoptimized
+              />
             </div>
 
             <p

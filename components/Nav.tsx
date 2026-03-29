@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
@@ -59,40 +60,15 @@ export default function Nav() {
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
-            <svg
-              viewBox="0 0 88 36"
-              className="w-[100px] md:w-[140px] h-auto"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="apx-tg" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#a9c7ff"/>
-                  <stop offset="100%" stopColor="#4890f7"/>
-                </linearGradient>
-              </defs>
-              {/* APEX — extra bold, signature gradient */}
-              <text
-                x="0" y="23"
-                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="24" fontWeight="800"
-                fill="url(#apx-tg)"
-                letterSpacing="-0.5"
-              >APEX</text>
-              {/* Hairline rule */}
-              <line x1="0" y1="26.5" x2="57" y2="26.5"
-                stroke="#a9c7ff" strokeWidth="0.8" strokeOpacity="0.3"/>
-              {/* METABOLIC HEALTH — light, tracked */}
-              <text
-                x="0.5" y="35"
-                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="6.6" fontWeight="400"
-                fill="#8899aa"
-                letterSpacing="1.55"
-              >METABOLIC HEALTH</text>
-            </svg>
+            <Image
+              src="/logo.png"
+              alt="Apex Metabolic Health"
+              width={120}
+              height={120}
+              className="h-11 w-auto"
+              priority
+              unoptimized
+            />
           </Link>
 
           {/* Desktop nav */}
