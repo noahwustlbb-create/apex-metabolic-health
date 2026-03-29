@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
@@ -55,18 +54,40 @@ export default function Nav() {
           boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
         }}
       >
-        <div className="container-tight flex items-center justify-between h-20 md:h-[84px]">
+        <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
-            <Image
-              src="/logo.png"
-              alt="Apex Metabolic Health"
-              width={120}
-              height={120}
-              className="h-16 w-auto"
-              priority
-              unoptimized
-            />
+            <svg
+              viewBox="0 0 160 36"
+              className="w-[130px] md:w-[160px] h-auto"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="apx-tg" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#7AB8FF"/>
+                  <stop offset="100%" stopColor="#2C74E8"/>
+                </linearGradient>
+              </defs>
+              <text
+                x="0" y="23"
+                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
+                fontSize="24" fontWeight="800"
+                fill="url(#apx-tg)"
+                letterSpacing="-0.5"
+              >APEX</text>
+              <line x1="0" y1="26.5" x2="157" y2="26.5"
+                stroke="#2C74E8" strokeWidth="0.6" strokeOpacity="0.3"/>
+              <text
+                x="0.5" y="35"
+                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
+                fontSize="6.8" fontWeight="400"
+                fill="#4a5a6a"
+                letterSpacing="2.2"
+              >METABOLIC HEALTH</text>
+            </svg>
           </Link>
 
           {/* Desktop nav */}
