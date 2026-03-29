@@ -55,7 +55,7 @@ export default function Nav() {
           boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
         }}
       >
-        <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
+        <div className="container-tight flex items-center justify-between h-20 md:h-[84px]">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
             <Image
@@ -63,7 +63,7 @@ export default function Nav() {
               alt="Apex Metabolic Health"
               width={120}
               height={120}
-              className="h-11 w-auto"
+              className="h-16 w-auto"
               priority
               unoptimized
             />
