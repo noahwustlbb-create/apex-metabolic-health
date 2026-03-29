@@ -50,11 +50,9 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: 'rgba(25,32,44,0.72)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
-          boxShadow: scrolled ? '0 4px 32px rgba(7,14,26,0.4)' : 'none',
+          backgroundColor: '#ffffff',
+          borderBottom: scrolled ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(0,0,0,0.06)',
+          boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
         }}
       >
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
@@ -82,14 +80,16 @@ export default function Nav() {
               <div className="flex items-center gap-0.5">
                 <Link
                   href="/services"
-                  className="text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
-                  style={{ color: '#8899aa' }}
+                  className="text-[13px] font-medium tracking-wide transition-colors duration-200"
+                  style={{ color: '#4a5a6a' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#0c131f' }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 >
                   Programs
                 </Link>
                 <button
                   className="flex items-center p-1 transition-colors duration-200"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#4a5a6a' }}
                   aria-expanded={programsOpen}
                   aria-haspopup="true"
                   aria-label="Open programs menu"
@@ -124,12 +124,10 @@ export default function Nav() {
                     className="absolute top-full left-0 mt-3 z-50"
                     style={{
                       width: '320px',
-                      background: 'rgba(30,40,55,0.92)',
-                      backdropFilter: 'blur(20px)',
-                      WebkitBackdropFilter: 'blur(20px)',
-                      border: '1px solid rgba(255,255,255,0.06)',
+                      background: '#ffffff',
+                      border: '1px solid rgba(0,0,0,0.08)',
                       borderRadius: '8px',
-                      boxShadow: '0 16px 48px rgba(7,14,26,0.6)',
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                     }}
                   >
                     <div className="p-2">
@@ -159,13 +157,13 @@ export default function Nav() {
                             key={program.slug}
                             href={`/programs/${program.slug}`}
                             className="block px-4 py-2.5 rounded-sm text-[13px] transition-all duration-150"
-                            style={{ color: '#8899aa' }}
+                            style={{ color: '#4a5a6a' }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#f0f4f8'
-                              e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.08)'
+                              e.currentTarget.style.color = '#0c131f'
+                              e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.06)'
                             }}
                             onMouseLeave={(e) => {
-                              e.currentTarget.style.color = '#8899aa'
+                              e.currentTarget.style.color = '#4a5a6a'
                               e.currentTarget.style.backgroundColor = 'transparent'
                             }}
                           >
@@ -174,7 +172,7 @@ export default function Nav() {
                         )
                       )}
                       </div>
-                      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: '4px', paddingTop: '4px' }}>
+                      <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', marginTop: '4px', paddingTop: '4px' }}>
                         <Link
                           href="/services"
                           className="flex items-center justify-between px-4 py-2.5 rounded-sm text-[12px] font-semibold tracking-wide transition-all duration-150"
@@ -203,8 +201,10 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] font-medium tracking-wide transition-colors duration-200 hover:text-primary"
-                style={{ color: '#8899aa' }}
+                className="text-[13px] font-medium tracking-wide transition-colors duration-200"
+                style={{ color: '#4a5a6a' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#0c131f' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
               >
                 {link.label}
               </Link>
@@ -220,7 +220,14 @@ export default function Nav() {
           >
             <Link
               href="/get-started"
-              className="btn-ghost text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2.5"
+              className="text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2.5 font-semibold transition-all duration-200"
+              style={{
+                background: '#2C74E8',
+                color: '#ffffff',
+                borderRadius: '4px',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = '#2264CC' }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = '#2C74E8' }}
             >
               {/* Apex triangle icon */}
               <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
@@ -249,12 +256,10 @@ export default function Nav() {
                   className="absolute top-full right-0 mt-2 z-50"
                   style={{
                     width: '220px',
-                    background: 'rgba(30,40,55,0.92)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255,255,255,0.06)',
+                    background: '#ffffff',
+                    border: '1px solid rgba(0,0,0,0.08)',
                     borderRadius: '8px',
-                    boxShadow: '0 16px 48px rgba(7,14,26,0.6)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                   }}
                 >
                   <div className="p-2 flex flex-col gap-0.5">
@@ -267,9 +272,9 @@ export default function Nav() {
                         key={item.href}
                         href={item.href}
                         className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
-                        style={{ color: '#f0f4f8' }}
+                        style={{ color: '#0c131f' }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.08)'
+                          e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.06)'
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = 'transparent'
@@ -295,17 +300,17 @@ export default function Nav() {
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-[#4890f7]"
+              className="block w-5 h-px bg-[#2C74E8]"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.2 }}
-              className="block w-5 h-px bg-[#4890f7]"
+              className="block w-5 h-px bg-[#2C74E8]"
             />
             <motion.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-[#4890f7]"
+              className="block w-5 h-px bg-[#2C74E8]"
             />
           </button>
         </div>
@@ -320,7 +325,7 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden"
-            style={{ backgroundColor: 'rgba(12,19,31,0.97)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }}
+            style={{ backgroundColor: '#ffffff' }}
           >
             <div className="flex flex-col h-full pt-20 pb-10 px-6">
               <nav className="flex flex-col gap-2 flex-1 justify-center">
@@ -343,8 +348,8 @@ export default function Nav() {
                       onClick={() => setMenuOpen(false)}
                       className="block text-left py-4 text-2xl font-semibold transition-colors duration-200 border-b"
                       style={{
-                        color: '#f0f4f8',
-                        borderColor: 'rgba(255,255,255,0.06)',
+                        color: '#0c131f',
+                        borderColor: 'rgba(0,0,0,0.06)',
                         fontFamily: 'var(--font-space-grotesk)',
                       }}
                     >
