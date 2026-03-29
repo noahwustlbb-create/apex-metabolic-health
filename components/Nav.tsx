@@ -58,8 +58,8 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
             <svg
-              viewBox="0 0 160 36"
-              className="w-[130px] md:w-[160px] h-auto"
+              viewBox="0 0 88 36"
+              className="w-[110px] md:w-[130px] h-auto"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               role="img"
@@ -78,14 +78,14 @@ export default function Nav() {
                 fill="url(#apx-tg)"
                 letterSpacing="-0.5"
               >APEX</text>
-              <line x1="0" y1="26.5" x2="157" y2="26.5"
-                stroke="#2C74E8" strokeWidth="0.6" strokeOpacity="0.3"/>
+              <line x1="0" y1="26.5" x2="86" y2="26.5"
+                stroke="#2C74E8" strokeWidth="0.6" strokeOpacity="0.25"/>
               <text
                 x="0.5" y="35"
                 fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="6.8" fontWeight="400"
-                fill="#4a5a6a"
-                letterSpacing="2.2"
+                fontSize="6.6" fontWeight="400"
+                fill="#6b7a8d"
+                letterSpacing="1.55"
               >METABOLIC HEALTH</text>
             </svg>
           </Link>
