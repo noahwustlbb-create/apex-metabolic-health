@@ -11,7 +11,7 @@ const SYMPTOMS = [
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" fill="currentColor" />
       </svg>
     ),
-    label: 'Persistent fatigue despite adequate sleep',
+    label: 'Chronic fatigue unresponsive to rest',
   },
   {
     icon: (
@@ -19,7 +19,7 @@ const SYMPTOMS = [
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor" />
       </svg>
     ),
-    label: 'Brain fog and poor concentration',
+    label: 'Cognitive impairment and reduced mental acuity',
   },
   {
     icon: (
@@ -27,7 +27,7 @@ const SYMPTOMS = [
         <path d="M12 2a5 5 0 100 10A5 5 0 0012 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z" fill="currentColor" />
       </svg>
     ),
-    label: "Weight gain that won't shift",
+    label: 'Metabolic dysregulation and weight resistance',
   },
   {
     icon: (
@@ -35,7 +35,7 @@ const SYMPTOMS = [
         <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z" fill="currentColor" />
       </svg>
     ),
-    label: 'Reduced strength and recovery',
+    label: 'Impaired physical recovery and reduced strength output',
   },
   {
     icon: (
@@ -43,7 +43,7 @@ const SYMPTOMS = [
         <path d="M13 10V3L4 14h7v7l9-11h-7z" fill="currentColor" />
       </svg>
     ),
-    label: 'Low drive and motivation',
+    label: 'Low drive, motivation, and executive function',
   },
   {
     icon: (
@@ -51,7 +51,7 @@ const SYMPTOMS = [
         <path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z" fill="currentColor" />
       </svg>
     ),
-    label: 'Mood instability',
+    label: 'Mood dysregulation and emotional instability',
   },
   {
     icon: (
@@ -67,7 +67,7 @@ const SYMPTOMS = [
         <path d="M12 3a9 9 0 100 18A9 9 0 0012 3zm0 16a7 7 0 110-14 7 7 0 010 14zm-.5-4.5v2h1v-2h-1zm0-8v6h1V6.5h-1z" fill="currentColor" />
       </svg>
     ),
-    label: 'Waking unrefreshed',
+    label: 'Non-restorative sleep and morning fatigue',
   },
 ]
 
@@ -156,7 +156,7 @@ export default function ProblemSection() {
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto"
             style={{ color: '#8899aa' }}
           >
-            Your GP said normal. You know something&apos;s wrong. We run the panels that find what others miss — and we act on what we find.
+            Your GP said normal. Your body disagrees. We run advanced biomarker analysis that finds what standard panels miss — and we act on what we find.
           </motion.p>
         </div>
 
@@ -183,9 +183,9 @@ export default function ProblemSection() {
             }}
           >
             <p className="text-base md:text-lg leading-relaxed" style={{ color: '#8899aa' }}>
-              These are clinical symptoms — not lifestyle problems.{' '}
+              These are clinical indicators of biological dysfunction — not lifestyle problems.{' '}
               <span className="font-semibold" style={{ color: '#f0f4f8' }}>
-                Our doctors run the panels that find the cause.
+                Our doctors run the advanced biomarker panels that find the root cause.
               </span>
             </p>
           </div>

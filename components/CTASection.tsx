@@ -71,7 +71,7 @@ export default function CTASection() {
           className="text-lg leading-relaxed max-w-xl mx-auto mb-10"
           style={{ color: '#8899aa' }}
         >
-          Book a telehealth consultation. Pathology-backed diagnosis. Clinical protocol delivered online.
+          Advanced biomarker analysis. Personalised regenerative protocol. Delivered entirely online.
         </motion.p>
 
         <motion.div

@@ -12,21 +12,21 @@ const STEPS = [
   },
   {
     number: '02',
-    title: 'Complete Pathology Testing',
+    title: 'Advanced Biomarker Analysis',
     description:
-      'We issue the referral. Attend any accredited collection centre. No appointment needed at most locations.',
+      'We issue the doctor&apos;s referral for your full biomarker panel. Attend any accredited pathology centre. No appointment required at most locations.',
   },
   {
     number: '03',
-    title: 'Consult With Your Doctor',
+    title: 'Clinical Assessment & Protocol Design',
     description:
-      'Your doctor reviews results, takes your history, and delivers a clinical assessment. Typically 30–60 minutes.',
+      'Your doctor interprets your biomarker data, takes a detailed clinical history, and delivers a personalised regenerative protocol. Typically 30–60 minutes.',
   },
   {
     number: '04',
-    title: 'Ongoing Protocol Management',
+    title: 'Ongoing Biological Optimisation',
     description:
-      'Medication through our TGA-compliant partner pharmacy. Mandatory 4-month reviews. Clinical support throughout.',
+      'Doctor-prescribed treatment through our TGA-compliant partner pharmacy. Scheduled biological reviews every 4 months. Clinical support throughout.',
   },
 ]
 

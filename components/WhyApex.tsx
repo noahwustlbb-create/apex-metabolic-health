@@ -25,7 +25,7 @@ const DIFFERENTIATORS = [
     ),
     title: 'Evidence-Based Medicine',
     description:
-      'Protocols grounded in peer-reviewed clinical research. No trends. No marketing. Every decision is defensible.',
+      'Regenerative protocols grounded in peer-reviewed clinical research. No wellness trends. No marketing language. Every clinical decision is defensible.',
   },
   {
     icon: (
@@ -46,9 +46,9 @@ const DIFFERENTIATORS = [
         <path d="M8 21c1.2.6 2.6 1 4 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
-    title: 'Ongoing Clinical Relationship',
+    title: 'Ongoing Biological Monitoring',
     description:
-      "We don't disappear after your first consult. Scheduled reviews and clinical support are built into every program.",
+      "We don't disappear after your first consult. Scheduled biological reviews and clinical support are built into every protocol.",
   },
 ]
 

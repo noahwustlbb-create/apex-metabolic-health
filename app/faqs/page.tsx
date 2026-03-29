@@ -82,7 +82,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'Why do I need blood tests before a consultation?',
         answer:
-          'For hormone programs, pathology results are the foundation of every clinical decision. Without objective data, a doctor cannot responsibly prescribe a hormonal protocol. We don\'t guess — we test.',
+          'Advanced biomarker analysis is the foundation of every clinical decision. Without objective biological data, a doctor cannot responsibly design a hormonal protocol. We don\'t guess — we measure.',
       },
       {
         question: 'Where do I get my blood tests done?',
@@ -97,7 +97,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What does the blood panel test for?',
         answer:
-          'Our hormone panels cover a comprehensive range of markers including free and total testosterone, oestradiol, SHBG, FSH/LH, liver and kidney function, full blood count, metabolic markers, thyroid function, and more. Panels are tailored by your doctor based on your program and clinical history.',
+          'Our advanced biomarker panels cover a comprehensive range of markers including free and total testosterone, oestradiol, SHBG, FSH/LH, liver and kidney function, full blood count, metabolic and cellular markers, thyroid function, and more. Panels are tailored by your doctor based on your protocol and clinical history.',
       },
     ],
   },
@@ -137,7 +137,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What programs does Apex Metabolic Health offer?',
         answer:
-          'We currently offer eight clinical programs: Hormone Optimisation, Hormone & Performance, Performance+, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, Metabolic Weight Loss, and the Longevity Protocol (coming soon). Visit our programs pages for full details.',
+          'We currently offer eight clinical programs: Hormone Optimisation, Hormone & Performance, Performance+, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, Metabolic Optimisation, and the Longevity Protocol (coming soon). Visit our programs pages for full details.',
       },
       {
         question: 'Are your services suitable for both men and women?',
@@ -162,7 +162,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'How does the weight management program work?',
         answer:
-          'Our Metabolic Weight Loss program begins with a doctor consultation (no upfront blood work required) to assess your health profile and create a personalised plan. Where clinically appropriate, doctor-prescribed treatment is coordinated through our pharmacy partner. Ongoing monitoring and review consultations are built into the program.',
+          'Our Metabolic Optimisation program begins with a doctor consultation (no upfront biomarker analysis required) to assess your metabolic profile and design a personalised protocol. Where clinically appropriate, doctor-prescribed treatment is coordinated through our pharmacy partner. Ongoing biological monitoring and review consultations are built into the program.',
       },
     ],
   },

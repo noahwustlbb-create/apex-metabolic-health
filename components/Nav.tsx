@@ -281,7 +281,7 @@ export default function Nav() {
                     {[
                       { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/get-started' },
                       { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
-                      { label: 'General Check Up', desc: 'Weight loss, peptides & more', href: '/intake/general' },
+                      { label: 'Metabolic Assessment', desc: 'Metabolic optimisation & more', href: '/intake/general' },
                     ].map((item) => (
                       <Link
                         key={item.href}

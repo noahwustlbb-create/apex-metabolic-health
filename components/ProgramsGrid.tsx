@@ -27,7 +27,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Hormone Optimisation',
     description:
-      'Comprehensive assessment and management of hormonal imbalances affecting energy, body composition, and vitality.',
+      'Comprehensive assessment and optimisation of hormonal pathways affecting cellular energy, body composition, and biological vitality.',
     slug: 'hormone-optimisation',
   },
   {
@@ -38,7 +38,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Performance & Recovery',
     description:
-      'Targeted protocols for adults focused on training output, recovery quality, and sustained physical performance.',
+      'Targeted regenerative protocols focused on training output, mitochondrial recovery, and sustained physical performance.',
     slug: 'hormone-performance',
   },
   {
@@ -50,7 +50,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Metabolic Weight Management',
     description:
-      'Clinically supervised programs addressing the underlying hormonal and metabolic drivers of weight resistance.',
+      'Clinically supervised metabolic optimisation addressing the hormonal and cellular drivers of weight resistance.',
     slug: 'metabolic-weight-loss',
   },
   {
@@ -63,7 +63,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Hair Restoration',
     description:
-      'Evidence-based medical management of androgenic alopecia and other forms of hair loss.',
+      'Evidence-based medical management of androgenic alopecia and follicular miniaturisation — hair regeneration at the biological level.',
     slug: 'hair-restoration',
   },
   {
@@ -76,7 +76,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Skin Regeneration',
     description:
-      'Doctor-prescribed approaches to skin quality, texture, and the visible effects of hormonal changes.',
+      'Doctor-prescribed regenerative protocols targeting skin cellular renewal, texture, collagen architecture, and the visible effects of hormonal ageing.',
     slug: 'skin-regeneration',
   },
   {
@@ -88,7 +88,7 @@ const PROGRAMS: LocalProgram[] = [
     ),
     name: 'Injury Repair & Recovery',
     description:
-      'Medically supervised protocols supporting tissue healing and optimised recovery from injury.',
+      'Medically supervised regenerative protocols accelerating tissue repair, cellular healing, and biological recovery from injury.',
     slug: 'injury-repair',
   },
   {
@@ -99,9 +99,9 @@ const PROGRAMS: LocalProgram[] = [
         <path d="M8 14h1m6 0h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
-    name: 'Comprehensive Blood Panels',
+    name: 'Advanced Biomarker Analysis',
     description:
-      'Advanced pathology testing that goes beyond the standard GP screen — giving you a complete metabolic and hormonal picture.',
+      'Comprehensive biomarker profiling that goes beyond the standard GP screen — delivering a precise metabolic, hormonal, and cellular health picture.',
     href: '/order-bloods',
   },
   {
@@ -292,7 +292,7 @@ export default function ProgramsGrid() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
             style={{ color: '#8899aa' }}
           >
-            Every program starts with doctor assessment. All treatment is clinically indicated.
+            Every protocol begins with advanced biomarker analysis. All treatment is clinically indicated and individually prescribed.
           </motion.p>
         </div>
 

@@ -22,7 +22,7 @@ const STEPS = [
   {
     number: '3',
     title: 'Start With Bloods',
-    description: 'Just need blood tests? No GP referral needed. Order direct through Apex.',
+    description: 'Advanced biomarker analysis. No GP referral required. Doctor-ordered panels through Apex.',
     cta: 'Order bloods',
     href: '/order-bloods',
   },

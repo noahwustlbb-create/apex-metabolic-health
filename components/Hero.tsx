@@ -11,9 +11,9 @@ const STATS = [
 ]
 
 const TRUST_ITEMS = [
-  { label: 'Doctor-led care' },
+  { label: 'Physician-led clinical care' },
   { label: 'Australia-wide telehealth' },
-  { label: 'Evidence-based protocols' },
+  { label: 'Evidence-based regenerative protocols' },
   { label: 'Private & confidential' },
 ]
 
@@ -302,7 +302,7 @@ export default function Hero() {
           className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
           style={{ color: '#8899aa' }}
         >
-          If your results say &lsquo;normal&rsquo; but your body says otherwise — we find out why.
+          Standard panels miss what matters. We run advanced biomarker analysis — and act on what we find.
         </motion.p>
 
         {/* Positioning line */}
@@ -313,7 +313,7 @@ export default function Hero() {
           className="text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-11"
           style={{ color: 'rgba(136,153,170,0.6)', letterSpacing: '0.01em' }}
         >
-          We don&apos;t just check if you&apos;re in range — we optimise for performance.
+          We don&apos;t just check if you&apos;re in range — we optimise your biological function.
         </motion.p>
 
         {/* CTAs */}
