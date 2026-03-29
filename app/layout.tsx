@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import FloatingCTA from '@/components/FloatingCTA'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
 
@@ -59,7 +58,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AgeGate />
         <ReferralCapture />
         {children}
-        <FloatingCTA />
       </body>
     </html>
   )

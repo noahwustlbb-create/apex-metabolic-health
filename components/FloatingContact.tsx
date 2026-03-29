@@ -41,8 +41,8 @@ export default function FloatingContact() {
 
   return (
     <div
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-3"
-      style={{ width: 'min(480px, calc(100vw - 32px))' }}
+      className="fixed bottom-6 right-5 sm:right-8 z-50 flex flex-col items-end gap-3"
+      style={{ width: 'min(420px, calc(100vw - 32px))' }}
     >
       {/* Expanded panel */}
       <AnimatePresence>
