@@ -65,26 +65,20 @@ export default function Nav() {
               role="img"
               aria-hidden="true"
             >
-              <defs>
-                <linearGradient id="apx-tg" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stopColor="#7AB8FF"/>
-                  <stop offset="100%" stopColor="#2C74E8"/>
-                </linearGradient>
-              </defs>
               <text
                 x="0" y="23"
                 fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
                 fontSize="24" fontWeight="800"
-                fill="url(#apx-tg)"
+                fill="#0c131f"
                 letterSpacing="-0.5"
               >APEX</text>
               <line x1="0" y1="26.5" x2="86" y2="26.5"
-                stroke="#2C74E8" strokeWidth="0.6" strokeOpacity="0.25"/>
+                stroke="#0c131f" strokeWidth="0.5" strokeOpacity="0.15"/>
               <text
                 x="0.5" y="35"
                 fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="6.6" fontWeight="400"
-                fill="#6b7a8d"
+                fontSize="6.6" fontWeight="500"
+                fill="#4a5a6a"
                 letterSpacing="1.55"
               >METABOLIC HEALTH</text>
             </svg>
