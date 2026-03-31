@@ -655,7 +655,13 @@ export default function HormoneIntakeForm() {
                       <TextInput value={data.medicareNumber} onChange={(v) => set('medicareNumber', v.replace(/\D/g, '').slice(0, 10))} placeholder="0000000000" inputMode="numeric" maxLength={10} />
                     </div>
                     <div><FieldLabel>Medicare Expiry</FieldLabel><TextInput value={data.medicareExpiry} onChange={(v) => set('medicareExpiry', v.replace(/\D/g, '').slice(0, 4))} placeholder="MMYY" maxLength={4} inputMode="numeric" /></div>
-                    <div><FieldLabel>Medicare Ref No.</FieldLabel><TextInput value={data.medicareRef} onChange={(v) => set('medicareRef', v)} placeholder="1" maxLength={2} inputMode="numeric" /></div>
+                    <div>
+                      <FieldLabel>Medicare Reference Number / IRN</FieldLabel>
+                      <TextInput value={data.medicareRef} onChange={(v) => set('medicareRef', v.replace(/\D/g, '').slice(0, 1))} placeholder="1" maxLength={1} inputMode="numeric" />
+                      <p className="text-xs mt-1.5 leading-relaxed" style={{ color: '#4a5a6a' }}>
+                        The Individual Reference Number (IRN) is the single digit to the left of your name on your Medicare card.
+                      </p>
+                    </div>
                   </div>
                   <div>
                     <FieldLabel required>Are you an Aboriginal or Torres Strait Islander?</FieldLabel>

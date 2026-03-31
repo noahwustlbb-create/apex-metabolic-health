@@ -84,6 +84,7 @@ interface FormData {
   address: string
   medicareNumber: string
   medicareExpiry: string
+  medicareIRN: string
   dlPhotoName: string
   notMultipleClinic: boolean
   healthRecordConsent: string
@@ -125,6 +126,7 @@ const defaultData: FormData = {
   address: '',
   medicareNumber: '',
   medicareExpiry: '',
+  medicareIRN: '',
   dlPhotoName: '',
   notMultipleClinic: false,
   healthRecordConsent: '',
@@ -901,6 +903,20 @@ export default function GeneralIntakeForm() {
                       maxLength={4}
                       inputMode="numeric"
                     />
+                  </div>
+
+                  <div>
+                    <FieldLabel>Medicare Reference Number / IRN</FieldLabel>
+                    <TextInput
+                      value={data.medicareIRN}
+                      onChange={(v) => set('medicareIRN', v.replace(/\D/g, '').slice(0, 1))}
+                      placeholder="1"
+                      maxLength={1}
+                      inputMode="numeric"
+                    />
+                    <p className="text-xs mt-1.5 leading-relaxed" style={{ color: '#4a5a6a' }}>
+                      The Individual Reference Number (IRN) is the single digit to the left of your name on your Medicare card.
+                    </p>
                   </div>
 
                   <FileInput
