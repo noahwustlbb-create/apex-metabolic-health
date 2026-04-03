@@ -11,6 +11,7 @@ import StatsBar from '@/components/StatsBar'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
 import FloatingContact from '@/components/FloatingContact'
+import ChatWidget from '@/components/ChatWidget'
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
       </main>
       <Footer />
       <FloatingContact />
+      <ChatWidget />
     </>
   )
 }
