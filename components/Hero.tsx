@@ -388,7 +388,7 @@ export default function Hero() {
           className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
           style={{ color: '#8899aa' }}
         >
-          Standard panels miss what matters. We run advanced biomarker analysis — and act on what we find.
+          We&apos;ve built a better pathway to advanced clinical care. No referrals. No waitlists. No compromise — just a streamlined process from assessment to treatment, delivered entirely online.
         </motion.p>
 
         {/* Positioning line */}
@@ -399,7 +399,7 @@ export default function Hero() {
           className="text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-11"
           style={{ color: 'rgba(136,153,170,0.6)', letterSpacing: '0.01em' }}
         >
-          We don&apos;t just check if you&apos;re in range — we optimise your biological function.
+          This is what healthcare looks like when it&apos;s built around you — not the system.
         </motion.p>
 
         {/* CTAs */}
