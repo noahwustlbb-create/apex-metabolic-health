@@ -2,6 +2,19 @@
 
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { programs } from '@/lib/programs'
+
+const PROGRAM_COLORS: Record<string, string> = {
+  'hormone-optimisation': '#2C74E8',
+  'hormone-performance':  '#e05252',
+  'performance-plus':     '#e8872c',
+  'metabolic-weight-loss':'#7c52e8',
+  'hair-restoration':     '#2e9e52',
+  'skin-regeneration':    '#c9a84c',
+  'injury-repair':        '#1a9e8f',
+  'longevity':            '#5c2ce8',
+}
 
 const STATS = [
   { value: '8', label: 'Clinical Programs' },
@@ -293,6 +306,80 @@ export default function Hero() {
             You Know It Doesn&apos;t.
           </motion.h1>
         </div>
+
+        {/* Programs strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.42, ease }}
+          className="mb-10 -mx-4 px-4 overflow-x-auto"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          <div className="flex items-center gap-2 w-max mx-auto">
+            {programs.map((program, i) => {
+              const color = PROGRAM_COLORS[program.slug] ?? '#4890f7'
+              const isComingSoon = program.status === 'coming-soon'
+              const inner = (
+                <motion.span
+                  key={program.slug}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.44 + i * 0.05, ease }}
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-medium tracking-wide whitespace-nowrap transition-all duration-200"
+                  style={{
+                    border: `1px solid ${isComingSoon ? 'rgba(255,255,255,0.06)' : `${color}28`}`,
+                    borderRadius: '4px',
+                    color: isComingSoon ? '#3a4a5a' : '#c8d8ea',
+                    backgroundColor: isComingSoon ? 'rgba(255,255,255,0.02)' : `${color}0d`,
+                    cursor: isComingSoon ? 'default' : 'pointer',
+                  }}
+                >
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: isComingSoon ? '#3a4a5a' : color }}
+                  />
+                  {program.name}
+                  {isComingSoon && (
+                    <span
+                      className="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm"
+                      style={{ color: '#c9a84c', backgroundColor: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)' }}
+                    >
+                      Soon
+                    </span>
+                  )}
+                </motion.span>
+              )
+
+              return isComingSoon ? (
+                <span key={program.slug}>{inner}</span>
+              ) : (
+                <Link
+                  key={program.slug}
+                  href={`/programs/${program.slug}`}
+                  className="block"
+                  onMouseEnter={(e) => {
+                    const chip = e.currentTarget.querySelector('span') as HTMLElement
+                    if (chip) {
+                      chip.style.borderColor = `${color}55`
+                      chip.style.backgroundColor = `${color}1a`
+                      chip.style.color = '#f0f4f8'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    const chip = e.currentTarget.querySelector('span') as HTMLElement
+                    if (chip) {
+                      chip.style.borderColor = `${color}28`
+                      chip.style.backgroundColor = `${color}0d`
+                      chip.style.color = '#c8d8ea'
+                    }
+                  }}
+                >
+                  {inner}
+                </Link>
+              )
+            })}
+          </div>
+        </motion.div>
 
         {/* Supporting copy */}
         <motion.p
