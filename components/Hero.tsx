@@ -312,10 +312,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.42, ease }}
-          className="mb-10 -mx-4 px-4 overflow-x-auto"
-          style={{ scrollbarWidth: 'none' }}
+          className="mb-10"
         >
-          <div className="flex items-center gap-2 w-max mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {programs.map((program, i) => {
               const color = PROGRAM_COLORS[program.slug] ?? '#4890f7'
               const isComingSoon = program.status === 'coming-soon'
