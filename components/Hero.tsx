@@ -388,7 +388,7 @@ export default function Hero() {
           className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
           style={{ color: '#8899aa' }}
         >
-          We&apos;ve built a better pathway to advanced clinical care. No referrals. No waitlists. No compromise — just a streamlined process from assessment to treatment, delivered entirely online.
+          Our mission is to simplify access to advanced, clinically guided therapies beyond traditional healthcare.
         </motion.p>
 
         {/* Positioning line */}
@@ -396,10 +396,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.56, ease }}
-          className="text-sm md:text-base leading-relaxed max-w-xl mx-auto mb-11"
+          className="text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-11"
           style={{ color: 'rgba(136,153,170,0.6)', letterSpacing: '0.01em' }}
         >
-          This is what healthcare looks like when it&apos;s built around you — not the system.
+          We&apos;ve built a modern healthcare model that streamlines patient access to prescription treatment and medication designed to support hormonal optimisation, recovery, and performance — positioning us at the forefront of next-generation healthcare.
         </motion.p>
 
         {/* CTAs */}
