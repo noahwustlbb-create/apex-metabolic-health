@@ -131,8 +131,7 @@ export default function ChatWidget() {
                   style={{ backgroundColor: 'rgba(44,116,232,0.15)', border: '1px solid rgba(44,116,232,0.3)' }}
                 >
                   <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-                    <polygon points="10,2 18,17 2,17" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
-                    <polygon points="10,6 15,15 5,15" stroke="#2C74E8" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5" />
+                    <path d="M18 10c0 4.418-3.582 8-8 8a7.96 7.96 0 01-4-.107L2 19l1.107-4A7.96 7.96 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
                   </svg>
                 </div>
                 <div>

@@ -65,10 +65,6 @@ export default function FloatingContact() {
               style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
             >
               <div className="flex items-center gap-2.5">
-                <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                  <polygon points="10,2 18,17 2,17" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>
-                  <polygon points="10,6 15,15 5,15" stroke="#2C74E8" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5"/>
-                </svg>
                 <span
                   className="text-[11px] font-semibold tracking-[0.18em] uppercase"
                   style={{ color: '#f0f4f8' }}
@@ -204,11 +200,6 @@ export default function FloatingContact() {
         aria-label={open ? 'Close appointment menu' : 'Request an appointment'}
         aria-expanded={open}
       >
-        {/* Triangle icon */}
-        <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-          <polygon points="10,2 18,17 2,17" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>
-          <polygon points="10,6 15,15 5,15" stroke="#2C74E8" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5"/>
-        </svg>
         <span className="text-[12px] font-semibold tracking-[0.2em] uppercase whitespace-nowrap">
           {open ? 'Close' : 'Request an Appointment'}
         </span>

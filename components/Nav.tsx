@@ -244,11 +244,6 @@ export default function Nav() {
               onMouseEnter={(e) => { e.currentTarget.style.background = '#2264CC' }}
               onMouseLeave={(e) => { e.currentTarget.style.background = '#2C74E8' }}
             >
-              {/* Apex triangle icon */}
-              <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                <polygon points="10,2 18,17 2,17" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
-                <polygon points="10,7 15,15 5,15" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" fill="none" opacity="0.5" />
-              </svg>
               Start Assessment
               <svg
                 viewBox="0 0 12 12"
