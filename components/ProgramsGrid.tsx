@@ -204,32 +204,34 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
           {program.description}
         </p>
 
-        {/* Link */}
+        {/* Links */}
         <div
-          className="flex items-center gap-1.5 mt-auto"
+          className="flex items-center justify-between mt-auto pt-3 gap-3"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
           onClick={(e) => e.stopPropagation()}
         >
           <span
-            className="text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
+            className="flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
             style={{ color: '#4890f7' }}
           >
             Learn More
+            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" style={{ color: '#4890f7' }} aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </span>
-          <svg
-            viewBox="0 0 16 16"
-            fill="none"
-            className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1"
-            style={{ color: '#4890f7' }}
-            aria-hidden="true"
+          <a
+            href="/assessment"
+            className="flex items-center gap-1 text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap"
+            style={{ color: '#8899aa' }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = '#f0f4f8' }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = '#8899aa' }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <path
-              d="M3 8h10M9 4l4 4-4 4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            Check Eligibility
+            <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </div>
 
