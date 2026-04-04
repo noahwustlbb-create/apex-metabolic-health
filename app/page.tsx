@@ -19,9 +19,9 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <ProgramsGrid />
         <ProblemSection />
         <HowItWorks />
-        <ProgramsGrid />
         <ProgramQuiz />
         <WhyApex />
         <PathologyPanel />
