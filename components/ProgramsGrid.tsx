@@ -15,6 +15,7 @@ interface LocalProgram {
   slug?: string
   href?: string
   buyNow?: boolean
+  ctaLabel?: string
 }
 
 const PROGRAMS: LocalProgram[] = [
@@ -119,6 +120,8 @@ const PROGRAMS: LocalProgram[] = [
     description:
       'Access to our AHPRA-registered doctors for general health consultations, referrals, and medical management.',
     href: '/intake/general',
+    buyNow: true,
+    ctaLabel: 'Book Now',
   },
 ]
 
@@ -221,7 +224,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
               onMouseLeave={(e) => { e.currentTarget.style.color = '#4890f7' }}
               onClick={(e) => e.stopPropagation()}
             >
-              Buy Now
+              {program.ctaLabel ?? 'Buy Now'}
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
