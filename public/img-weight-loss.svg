@@ -1,130 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <radialGradient id="rightCluster" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="brightDot" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#4890f7"/>
-    </radialGradient>
-    <linearGradient id="flowCurve" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0"/>
-      <stop offset="40%" stop-color="#4890f7" stop-opacity="0.12"/>
-      <stop offset="70%" stop-color="#4890f7" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </linearGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#100d1a"/><stop offset="100%" stop-color="#08080f"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="50%" r="55%"><stop offset="0%" stop-color="#7c52e8" stop-opacity="0.26"/><stop offset="100%" stop-color="#7c52e8" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Right side cluster glow -->
-  <circle cx="610" cy="220" r="100" fill="#4890f7" opacity="0.12" filter="url(#heavyblur)"/>
-  <circle cx="610" cy="220" r="50" fill="#4890f7" opacity="0.1" filter="url(#softglow)"/>
-
-  <!-- Left side subtle glow -->
-  <circle cx="150" cy="220" r="180" fill="#4890f7" opacity="0.04" filter="url(#heavyblur)"/>
-
-  <!-- Funnel shape — two bezier curves forming narrowing channel -->
-  <path d="M 50,80 C 150,80 300,160 400,220 C 300,280 150,360 50,360 Z"
-        fill="rgba(72,144,247,0.04)"/>
-  <path d="M 400,220 C 500,180 650,210 760,205"
-        fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.06"/>
-  <path d="M 400,220 C 500,260 650,230 760,235"
-        fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.06"/>
-
-  <!-- Flow curves guiding left particles to waist -->
-  <path d="M 40,95 C 150,100 280,150 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <path d="M 60,130 C 160,132 290,168 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <path d="M 30,170 C 140,168 285,188 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.14"/>
-  <path d="M 40,210 C 150,208 290,210 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-  <path d="M 30,250 C 140,248 288,238 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.14"/>
-  <path d="M 55,290 C 155,288 292,268 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <path d="M 70,330 C 165,322 295,288 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <path d="M 100,355 C 188,342 298,298 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.08"/>
-  <path d="M 120,380 C 200,362 305,308 400,220" fill="none" stroke="#4890f7" stroke-width="0.8" opacity="0.06"/>
-
-  <!-- Left scattered particles — chaotic, with tail lines -->
-  <!-- Each: tail line + circle -->
-  <line x1="55" y1="105" x2="90" y2="105" stroke="#4890f7" stroke-width="1" opacity="0.2"/>
-  <circle cx="55" cy="105" r="3" fill="rgba(72,144,247,0.5)"/>
-
-  <line x1="85" y1="145" x2="120" y2="143" stroke="#4890f7" stroke-width="1" opacity="0.2"/>
-  <circle cx="85" cy="145" r="2.5" fill="rgba(72,144,247,0.45)"/>
-
-  <line x1="40" y1="175" x2="78" y2="174" stroke="#4890f7" stroke-width="1" opacity="0.2"/>
-  <circle cx="40" cy="175" r="4" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="110" y1="125" x2="148" y2="124" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="110" cy="125" r="2.5" fill="rgba(72,144,247,0.5)"/>
-
-  <line x1="70" y1="220" x2="108" y2="219" stroke="#4890f7" stroke-width="1" opacity="0.2"/>
-  <circle cx="70" cy="220" r="3.5" fill="rgba(72,144,247,0.5)"/>
-
-  <line x1="130" y1="190" x2="165" y2="189" stroke="#4890f7" stroke-width="1" opacity="0.18"/>
-  <circle cx="130" cy="190" r="3" fill="rgba(72,144,247,0.45)"/>
-
-  <line x1="45" y1="265" x2="82" y2="263" stroke="#4890f7" stroke-width="1" opacity="0.2"/>
-  <circle cx="45" cy="265" r="2.5" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="90" y1="305" x2="128" y2="302" stroke="#4890f7" stroke-width="1" opacity="0.18"/>
-  <circle cx="90" cy="305" r="3.5" fill="rgba(72,144,247,0.45)"/>
-
-  <line x1="55" y1="345" x2="92" y2="341" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="55" cy="345" r="2.5" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="150" y1="88" x2="185" y2="87" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="150" cy="88" r="2" fill="rgba(72,144,247,0.35)"/>
-
-  <line x1="180" y1="340" x2="214" y2="338" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="180" cy="340" r="2.5" fill="rgba(72,144,247,0.35)"/>
-
-  <line x1="200" y1="155" x2="232" y2="154" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="200" cy="155" r="3" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="220" y1="285" x2="254" y2="283" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="220" cy="285" r="2.5" fill="rgba(72,144,247,0.35)"/>
-
-  <line x1="250" y1="100" x2="280" y2="99" stroke="#4890f7" stroke-width="1" opacity="0.12"/>
-  <circle cx="250" cy="100" r="2" fill="rgba(72,144,247,0.3)"/>
-
-  <line x1="260" y1="355" x2="292" y2="352" stroke="#4890f7" stroke-width="1" opacity="0.12"/>
-  <circle cx="260" cy="355" r="2.5" fill="rgba(72,144,247,0.3)"/>
-
-  <line x1="290" y1="132" x2="318" y2="131" stroke="#4890f7" stroke-width="1" opacity="0.12"/>
-  <circle cx="290" cy="132" r="2" fill="rgba(72,144,247,0.3)"/>
-
-  <line x1="310" y1="320" x2="338" y2="317" stroke="#4890f7" stroke-width="1" opacity="0.12"/>
-  <circle cx="310" cy="320" r="2.5" fill="rgba(72,144,247,0.3)"/>
-
-  <line x1="155" y1="240" x2="186" y2="238" stroke="#4890f7" stroke-width="1" opacity="0.15"/>
-  <circle cx="155" cy="240" r="3" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="100" y1="83" x2="134" y2="82" stroke="#4890f7" stroke-width="1" opacity="0.18"/>
-  <circle cx="100" cy="83" r="2.5" fill="rgba(72,144,247,0.4)"/>
-
-  <line x1="320" y1="175" x2="347" y2="174" stroke="#4890f7" stroke-width="1" opacity="0.1"/>
-  <circle cx="320" cy="175" r="2" fill="rgba(72,144,247,0.25)"/>
-
-  <line x1="335" y1="265" x2="361" y2="263" stroke="#4890f7" stroke-width="1" opacity="0.1"/>
-  <circle cx="335" cy="265" r="2" fill="rgba(72,144,247,0.25)"/>
-
-  <!-- Right side — 5-6 bright optimised particles, tightly clustered -->
-  <circle cx="590" cy="210" r="7" fill="url(#brightDot)" filter="url(#glow)"/>
-  <circle cx="615" cy="225" r="6" fill="url(#brightDot)" filter="url(#glow)"/>
-  <circle cx="598" cy="238" r="5" fill="url(#brightDot)" filter="url(#glow)"/>
-  <circle cx="630" cy="215" r="5" fill="url(#brightDot)" filter="url(#glow)"/>
-  <circle cx="622" cy="238" r="4" fill="url(#brightDot)" filter="url(#glow)"/>
-  <circle cx="606" cy="222" r="8" fill="#a9c7ff" opacity="0.15" filter="url(#softglow)"/>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#7c52e8" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <!-- Metabolic graph — downward trend line -->
+  <polyline points="60,100 100,108 140,115 180,130 220,138 260,148 290,155" fill="none" stroke="#7c52e8" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="60" cy="100" r="4" fill="#7c52e8" fill-opacity="0.8"/>
+  <circle cx="290" cy="155" r="4" fill="#7c52e8" fill-opacity="0.9"/>
+  <!-- Area fill under line -->
+  <path d="M60,100 L100,108 L140,115 L180,130 L220,138 L260,148 L290,155 L290,280 L60,280 Z" fill="#7c52e8" fill-opacity="0.05"/>
+  <!-- Grid for graph -->
+  <line x1="60" y1="80" x2="60" y2="260" stroke="#7c52e8" stroke-opacity="0.15" stroke-width="0.7"/>
+  <line x1="60" y1="260" x2="300" y2="260" stroke="#7c52e8" stroke-opacity="0.15" stroke-width="0.7"/>
+  <!-- Tick marks -->
+  <g stroke="#7c52e8" stroke-opacity="0.2" stroke-width="0.5">
+    <line x1="55" y1="100" x2="65" y2="100"/><line x1="55" y1="140" x2="65" y2="140"/><line x1="55" y1="180" x2="65" y2="180"/><line x1="55" y1="220" x2="65" y2="220"/>
+    <line x1="100" y1="255" x2="100" y2="265"/><line x1="150" y1="255" x2="150" y2="265"/><line x1="200" y1="255" x2="200" y2="265"/><line x1="250" y1="255" x2="250" y2="265"/>
+  </g>
+  <text x="28" y="103" font-family="monospace" font-size="6.5" fill="#7c52e8" fill-opacity="0.4">HIGH</text>
+  <text x="35" y="263" font-family="monospace" font-size="6.5" fill="#7c52e8" fill-opacity="0.4">LOW</text>
+  <!-- Right panel -->
+  <g transform="translate(350,70)">
+    <text font-family="monospace" font-size="7.5" fill="#7c52e8" fill-opacity="0.5" letter-spacing="1.5">METABOLIC MARKERS</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">INSULIN RESISTANCE</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a1428"/><rect x="0" y="6" width="144" height="3" rx="1.5" fill="#7c52e8" fill-opacity="0.7"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">FASTING GLUCOSE</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a1428"/><rect x="0" y="6" width="99" height="3" rx="1.5" fill="#7c52e8" fill-opacity="0.55"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">THYROID (TSH/T4)</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a1428"/><rect x="0" y="6" width="72" height="3" rx="1.5" fill="#7c52e8" fill-opacity="0.48"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">LEPTIN</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a1428"/><rect x="0" y="6" width="126" height="3" rx="1.5" fill="#7c52e8" fill-opacity="0.65"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">HbA1c</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a1428"/><rect x="0" y="6" width="85" height="3" rx="1.5" fill="#7c52e8" fill-opacity="0.52"/></g>
+    <polyline points="0,140 20,140 28,116 38,158 48,120 58,140 100,140 110,130 118,150 128,140 180,140" fill="none" stroke="#7c52e8" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#7c52e8" fill-opacity="0.35" letter-spacing="2">METABOLIC OPTIMISATION · APEX METABOLIC HEALTH</text>
 </svg>

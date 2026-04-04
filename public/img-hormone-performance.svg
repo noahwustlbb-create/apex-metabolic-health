@@ -1,91 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <radialGradient id="mol1" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="mol2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="ekg" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4890f7"/>
-      <stop offset="60%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#a9c7ff"/>
-    </linearGradient>
-    <linearGradient id="leftGlow" x1="100%" y1="50%" x2="0%" y2="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="rightGlow" x1="0%" y1="50%" x2="100%" y2="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0.1"/>
-    </linearGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#1a0d0d"/><stop offset="100%" stop-color="#09080f"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="50%" r="55%"><stop offset="0%" stop-color="#e05252" stop-opacity="0.24"/><stop offset="100%" stop-color="#e05252" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Left side background glow -->
-  <circle cx="200" cy="220" r="130" fill="#4890f7" opacity="0.08" filter="url(#heavyblur)"/>
-  <!-- Right side background glow -->
-  <circle cx="600" cy="220" r="130" fill="#4890f7" opacity="0.08" filter="url(#heavyblur)"/>
-
-  <!-- ===== LEFT SIDE: Molecular cluster ===== -->
-  <!-- Bonds -->
-  <line x1="155" y1="200" x2="210" y2="240" stroke="#4890f7" stroke-width="0.8" opacity="0.3"/>
-  <line x1="210" y1="240" x2="270" y2="225" stroke="#4890f7" stroke-width="0.8" opacity="0.3"/>
-  <line x1="270" y1="225" x2="310" y2="270" stroke="#4890f7" stroke-width="0.8" opacity="0.3"/>
-  <line x1="270" y1="225" x2="290" y2="175" stroke="#4890f7" stroke-width="0.8" opacity="0.3"/>
-  <line x1="155" y1="200" x2="130" y2="255" stroke="#4890f7" stroke-width="0.8" opacity="0.25"/>
-  <line x1="210" y1="240" x2="180" y2="290" stroke="#4890f7" stroke-width="0.8" opacity="0.2"/>
-  <line x1="290" y1="175" x2="330" y2="155" stroke="#4890f7" stroke-width="0.8" opacity="0.2"/>
-
-  <!-- Molecule nodes — varying sizes -->
-  <circle cx="155" cy="200" r="18" fill="url(#mol1)" filter="url(#glow)"/>
-  <circle cx="210" cy="240" r="12" fill="url(#mol1)" filter="url(#glow)"/>
-  <circle cx="270" cy="225" r="16" fill="url(#mol1)" filter="url(#glow)"/>
-  <circle cx="310" cy="270" r="8" fill="url(#mol2)" filter="url(#glow)"/>
-  <circle cx="290" cy="175" r="10" fill="url(#mol2)" filter="url(#glow)"/>
-  <circle cx="130" cy="255" r="6" fill="url(#mol2)" filter="url(#glow)"/>
-  <circle cx="180" cy="290" r="4" fill="url(#mol2)" filter="url(#softglow)"/>
-  <circle cx="330" cy="155" r="7" fill="url(#mol1)" filter="url(#glow)"/>
-
-  <!-- ===== DIVIDER ===== -->
-  <line x1="400" y1="60" x2="400" y2="380" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
-  <!-- Gold glow on divider -->
-  <line x1="400" y1="60" x2="400" y2="380" stroke="#c9a84c" stroke-width="3" opacity="0.08" filter="url(#softglow)"/>
-
-  <!-- ===== RIGHT SIDE: EKG / performance peak ===== -->
-  <!-- Vertical bars building up to peak -->
-  <rect x="440" y="295" width="14" height="45" fill="rgba(72,144,247,0.12)" rx="1"/>
-  <rect x="460" y="278" width="14" height="62" fill="rgba(72,144,247,0.14)" rx="1"/>
-  <rect x="480" y="258" width="14" height="82" fill="rgba(72,144,247,0.16)" rx="1"/>
-  <rect x="500" y="238" width="14" height="102" fill="rgba(72,144,247,0.18)" rx="1"/>
-  <rect x="520" y="215" width="14" height="125" fill="rgba(72,144,247,0.2)" rx="1"/>
-  <rect x="540" y="230" width="14" height="110" fill="rgba(72,144,247,0.17)" rx="1"/>
-  <rect x="560" y="248" width="14" height="92" fill="rgba(72,144,247,0.14)" rx="1"/>
-  <rect x="580" y="262" width="14" height="78" fill="rgba(72,144,247,0.12)" rx="1"/>
-  <rect x="600" y="272" width="14" height="68" fill="rgba(72,144,247,0.1)" rx="1"/>
-  <rect x="620" y="280" width="14" height="60" fill="rgba(72,144,247,0.08)" rx="1"/>
-  <rect x="640" y="286" width="14" height="54" fill="rgba(72,144,247,0.06)" rx="1"/>
-  <rect x="660" y="291" width="14" height="49" fill="rgba(72,144,247,0.05)" rx="1"/>
-
-  <!-- EKG line — flat then spike then plateau -->
-  <path d="M 415 270 L 448 268 L 462 260 L 470 200 L 478 145 L 488 215 L 500 220 L 520 210 L 560 218 L 620 216 L 680 218 L 760 216"
-        fill="none" stroke="url(#ekg)" stroke-width="2" filter="url(#glow)"/>
-
-  <!-- Glow at peak -->
-  <circle cx="478" cy="145" r="30" fill="#4890f7" opacity="0.15" filter="url(#heavyblur)"/>
-  <circle cx="478" cy="145" r="4" fill="#a9c7ff" filter="url(#glow)"/>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#e05252" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <!-- Lightning bolt / performance -->
+  <path d="M210 60 L170 190 L200 190 L175 280 L260 150 L228 150 Z" fill="#e05252" fill-opacity="0.08" stroke="#e05252" stroke-opacity="0.5" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Outer rings -->
+  <circle cx="210" cy="170" r="105" fill="none" stroke="#e05252" stroke-opacity="0.07" stroke-width="1"/>
+  <circle cx="210" cy="170" r="75" fill="none" stroke="#e05252" stroke-opacity="0.1" stroke-width="1"/>
+  <!-- Performance bars right -->
+  <g transform="translate(350,70)">
+    <text font-family="monospace" font-size="7.5" fill="#e05252" fill-opacity="0.5" letter-spacing="1.5">PERFORMANCE PANEL</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">TESTOSTERONE (FREE)</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#2a1a1a"/><rect x="0" y="6" width="148" height="3" rx="1.5" fill="#e05252" fill-opacity="0.75"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">IGF-1</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#2a1a1a"/><rect x="0" y="6" width="108" height="3" rx="1.5" fill="#e05252" fill-opacity="0.6"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">GROWTH HORMONE</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#2a1a1a"/><rect x="0" y="6" width="81" height="3" rx="1.5" fill="#e05252" fill-opacity="0.5"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">CORTISOL</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#2a1a1a"/><rect x="0" y="6" width="63" height="3" rx="1.5" fill="#e05252" fill-opacity="0.45"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">HAEMATOCRIT</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#2a1a1a"/><rect x="0" y="6" width="117" height="3" rx="1.5" fill="#e05252" fill-opacity="0.65"/></g>
+    <polyline points="0,140 18,140 26,112 36,162 46,118 56,140 100,140 108,128 116,152 126,140 180,140" fill="none" stroke="#e05252" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#e05252" fill-opacity="0.35" letter-spacing="2">HORMONE + PERFORMANCE · APEX METABOLIC HEALTH</text>
 </svg>

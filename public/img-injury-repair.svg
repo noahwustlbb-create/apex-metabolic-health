@@ -1,95 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <radialGradient id="coreBurst" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="centerDot" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#4890f7"/>
-    </radialGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#081418"/><stop offset="100%" stop-color="#070b0c"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="50%" r="55%"><stop offset="0%" stop-color="#1a9e8f" stop-opacity="0.26"/><stop offset="100%" stop-color="#1a9e8f" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Core glow -->
-  <circle cx="400" cy="220" r="80" fill="url(#coreBurst)" filter="url(#heavyblur)"/>
-  <circle cx="400" cy="220" r="40" fill="#4890f7" opacity="0.12" filter="url(#softglow)"/>
-
-  <!-- Short spokes (24 total, alternating) -->
-  <!-- Long spokes: length ~150 -->
-  <line x1="400" y1="220" x2="550" y2="220" stroke="#4890f7" stroke-width="1.2" opacity="0.4" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="250" y2="220" stroke="#4890f7" stroke-width="1.2" opacity="0.4" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="400" y2="70" stroke="#4890f7" stroke-width="1.2" opacity="0.4" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="400" y2="370" stroke="#4890f7" stroke-width="1.2" opacity="0.4" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="506" y2="114" stroke="#4890f7" stroke-width="1.2" opacity="0.38" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="294" y2="326" stroke="#4890f7" stroke-width="1.2" opacity="0.38" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="506" y2="326" stroke="#4890f7" stroke-width="1.2" opacity="0.38" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="294" y2="114" stroke="#4890f7" stroke-width="1.2" opacity="0.38" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="536" y2="146" stroke="#4890f7" stroke-width="1.2" opacity="0.32" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="264" y2="294" stroke="#4890f7" stroke-width="1.2" opacity="0.32" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="536" y2="294" stroke="#4890f7" stroke-width="1.2" opacity="0.32" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="264" y2="146" stroke="#4890f7" stroke-width="1.2" opacity="0.32" filter="url(#glow)"/>
-
-  <!-- Short spokes: length ~80 -->
-  <line x1="400" y1="220" x2="473" y2="172" stroke="#a9c7ff" stroke-width="1" opacity="0.7" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="327" y2="268" stroke="#a9c7ff" stroke-width="1" opacity="0.7" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="473" y2="268" stroke="#a9c7ff" stroke-width="1" opacity="0.7" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="327" y2="172" stroke="#a9c7ff" stroke-width="1" opacity="0.7" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="480" y2="220" stroke="#a9c7ff" stroke-width="1" opacity="0.65" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="320" y2="220" stroke="#a9c7ff" stroke-width="1" opacity="0.65" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="400" y2="140" stroke="#a9c7ff" stroke-width="1" opacity="0.65" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="400" y2="300" stroke="#a9c7ff" stroke-width="1" opacity="0.65" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="457" y2="152" stroke="#a9c7ff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="343" y2="288" stroke="#a9c7ff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="457" y2="288" stroke="#a9c7ff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
-  <line x1="400" y1="220" x2="343" y2="152" stroke="#a9c7ff" stroke-width="1" opacity="0.6" filter="url(#glow)"/>
-
-  <!-- Dots at end of long spokes -->
-  <circle cx="550" cy="220" r="3.5" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="250" cy="220" r="3.5" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="400" cy="70" r="3.5" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="400" cy="370" r="3.5" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="506" cy="114" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="294" cy="326" r="3" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="506" cy="326" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="294" cy="114" r="3" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="536" cy="146" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="264" cy="294" r="3" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="536" cy="294" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="264" cy="146" r="3" fill="#4890f7" filter="url(#glow)"/>
-
-  <!-- 8 outer gold nodes arranged in circle r=190 -->
-  <circle cx="590" cy="220" r="9" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="210" cy="220" r="9" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="400" cy="30" r="9" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="400" cy="410" r="9" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="534" cy="86" r="8" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="266" cy="354" r="8" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="534" cy="354" r="8" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-  <circle cx="266" cy="86" r="8" fill="rgba(201,168,76,0.6)" filter="url(#glow)"/>
-
-  <!-- Thin gold lines from outer nodes to center -->
-  <line x1="590" y1="220" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.15"/>
-  <line x1="210" y1="220" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.15"/>
-  <line x1="400" y1="30" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.15"/>
-  <line x1="400" y1="410" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.15"/>
-  <line x1="534" y1="86" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.12"/>
-  <line x1="266" y1="354" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.12"/>
-  <line x1="534" y1="354" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.12"/>
-  <line x1="266" y1="86" x2="400" y2="220" stroke="#c9a84c" stroke-width="0.8" opacity="0.12"/>
-
-  <!-- Center bright dot -->
-  <circle cx="400" cy="220" r="8" fill="url(#centerDot)" filter="url(#glow)"/>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#1a9e8f" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <!-- Cross / recovery symbol -->
+  <rect x="185" y="110" width="30" height="90" rx="4" fill="#1a9e8f" fill-opacity="0.15" stroke="#1a9e8f" stroke-opacity="0.5" stroke-width="1.2"/>
+  <rect x="155" y="140" width="90" height="30" rx="4" fill="#1a9e8f" fill-opacity="0.15" stroke="#1a9e8f" stroke-opacity="0.5" stroke-width="1.2"/>
+  <!-- Pulse rings from cross -->
+  <circle cx="200" cy="170" r="55" fill="none" stroke="#1a9e8f" stroke-opacity="0.15" stroke-width="1"/>
+  <circle cx="200" cy="170" r="80" fill="none" stroke="#1a9e8f" stroke-opacity="0.1" stroke-width="1"/>
+  <circle cx="200" cy="170" r="108" fill="none" stroke="#1a9e8f" stroke-opacity="0.06" stroke-width="1"/>
+  <!-- ECG / vitals line -->
+  <polyline points="60,230 90,230 100,210 112,250 122,205 134,230 290,230" fill="none" stroke="#1a9e8f" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Right panel -->
+  <g transform="translate(350,70)">
+    <text font-family="monospace" font-size="7.5" fill="#1a9e8f" fill-opacity="0.5" letter-spacing="1.5">RECOVERY PANEL</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">INFLAMMATION (CRP)</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#0a1a18"/><rect x="0" y="6" width="126" height="3" rx="1.5" fill="#1a9e8f" fill-opacity="0.7"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">GROWTH HORMONE</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#0a1a18"/><rect x="0" y="6" width="99" height="3" rx="1.5" fill="#1a9e8f" fill-opacity="0.6"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">IGF-1</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#0a1a18"/><rect x="0" y="6" width="117" height="3" rx="1.5" fill="#1a9e8f" fill-opacity="0.65"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">COLLAGEN MARKERS</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#0a1a18"/><rect x="0" y="6" width="81" height="3" rx="1.5" fill="#1a9e8f" fill-opacity="0.52"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">PLATELETS / CBC</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#0a1a18"/><rect x="0" y="6" width="144" height="3" rx="1.5" fill="#1a9e8f" fill-opacity="0.72"/></g>
+    <polyline points="0,140 18,140 27,114 38,160 48,118 58,140 100,140 110,128 118,152 128,140 180,140" fill="none" stroke="#1a9e8f" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#1a9e8f" fill-opacity="0.35" letter-spacing="2">INJURY REPAIR + RECOVERY · APEX METABOLIC HEALTH</text>
 </svg>

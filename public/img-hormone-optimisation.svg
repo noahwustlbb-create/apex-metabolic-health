@@ -1,100 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <radialGradient id="nucleus" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#4890f7"/>
-    </radialGradient>
-    <linearGradient id="og1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#a9c7ff" stop-opacity="0"/>
-      <stop offset="45%" stop-color="#a9c7ff" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#a9c7ff" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="og2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#4890f7" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="og3" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#a9c7ff" stop-opacity="0"/>
-      <stop offset="55%" stop-color="#a9c7ff" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#a9c7ff" stop-opacity="0"/>
-    </linearGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#0d1828"/><stop offset="100%" stop-color="#07090f"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="50%" r="55%"><stop offset="0%" stop-color="#2C74E8" stop-opacity="0.28"/><stop offset="100%" stop-color="#2C74E8" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Atmospheric background haze -->
-  <circle cx="370" cy="218" r="150" fill="#4890f7" opacity="0.1" filter="url(#heavyblur)"/>
-  <circle cx="370" cy="218" r="80" fill="#4890f7" opacity="0.08" filter="url(#heavyblur)"/>
-
-  <!-- Orbital ring 1 — flat -->
-  <ellipse cx="400" cy="220" rx="162" ry="56" fill="none" stroke="url(#og1)" stroke-width="1.2" filter="url(#glow)"/>
-  <!-- Orbital ring 2 — rotated 60° -->
-  <ellipse cx="400" cy="220" rx="162" ry="56" fill="none" stroke="url(#og2)" stroke-width="1.2" transform="rotate(60,400,220)" filter="url(#glow)"/>
-  <!-- Orbital ring 3 — rotated 120° -->
-  <ellipse cx="400" cy="220" rx="162" ry="56" fill="none" stroke="url(#og3)" stroke-width="1.2" transform="rotate(120,400,220)" filter="url(#glow)"/>
-
-  <!-- Connecting hairlines to nucleus -->
-  <line x1="562" y1="220" x2="400" y2="220" stroke="#a9c7ff" stroke-width="0.5" opacity="0.12"/>
-  <line x1="319" y1="172" x2="400" y2="220" stroke="#a9c7ff" stroke-width="0.5" opacity="0.12"/>
-  <line x1="481" y1="268" x2="400" y2="220" stroke="#a9c7ff" stroke-width="0.5" opacity="0.12"/>
-  <line x1="254" y1="236" x2="400" y2="220" stroke="#a9c7ff" stroke-width="0.5" opacity="0.1"/>
-
-  <!-- Nucleus -->
-  <circle cx="400" cy="220" r="14" fill="#4890f7" opacity="0.3" filter="url(#softglow)"/>
-  <circle cx="400" cy="220" r="9" fill="url(#nucleus)" filter="url(#glow)"/>
-
-  <!-- Electron dots -->
-  <circle cx="562" cy="220" r="5" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="319" cy="172" r="5" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="481" cy="268" r="4" fill="#4890f7" filter="url(#glow)"/>
-  <circle cx="254" cy="236" r="4" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Divider -->
-  <line x1="588" y1="90" x2="588" y2="350" stroke="#4890f7" stroke-width="0.5" opacity="0.18"/>
-
-  <!-- Abstract biomarker bars -->
-  <!-- Bar 1 -->
-  <rect x="604" y="122" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="122" width="116" height="6" rx="3" fill="url(#og1)" opacity="0.7"/>
-  <circle cx="720" cy="125" r="3" fill="#a9c7ff" opacity="0.8"/>
-
-  <!-- Bar 2 -->
-  <rect x="604" y="146" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="146" width="98" height="6" rx="3" fill="url(#og2)" opacity="0.6"/>
-  <circle cx="702" cy="149" r="3" fill="#4890f7" opacity="0.8"/>
-
-  <!-- Bar 3 -->
-  <rect x="604" y="170" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="170" width="128" height="6" rx="3" fill="url(#og1)" opacity="0.7"/>
-  <circle cx="732" cy="173" r="3" fill="#a9c7ff" opacity="0.9"/>
-
-  <!-- Bar 4 — gold -->
-  <rect x="604" y="194" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="194" width="85" height="6" rx="3" fill="#c9a84c" opacity="0.45"/>
-  <circle cx="689" cy="197" r="3" fill="#c9a84c" opacity="0.8"/>
-
-  <!-- Bar 5 -->
-  <rect x="604" y="218" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="218" width="110" height="6" rx="3" fill="url(#og2)" opacity="0.6"/>
-  <circle cx="714" cy="221" r="3" fill="#4890f7" opacity="0.8"/>
-
-  <!-- Bar 6 -->
-  <rect x="604" y="242" width="140" height="6" rx="3" fill="rgba(72,144,247,0.12)"/>
-  <rect x="604" y="242" width="132" height="6" rx="3" fill="url(#og1)" opacity="0.65"/>
-  <circle cx="736" cy="245" r="3" fill="#a9c7ff" opacity="0.9"/>
-
-  <!-- Small label above panel -->
-  <text x="604" y="108" font-family="monospace" font-size="8" fill="rgba(72,144,247,0.35)" letter-spacing="2">BIOMARKER PANEL</text>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#2C74E8" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <circle cx="200" cy="170" r="110" fill="none" stroke="#2C74E8" stroke-opacity="0.08" stroke-width="1"/>
+  <circle cx="200" cy="170" r="78" fill="none" stroke="#2C74E8" stroke-opacity="0.13" stroke-width="1"/>
+  <circle cx="200" cy="170" r="46" fill="none" stroke="#2C74E8" stroke-opacity="0.22" stroke-width="1.2"/>
+  <circle cx="200" cy="170" r="16" fill="#2C74E8" fill-opacity="0.12" stroke="#2C74E8" stroke-opacity="0.8" stroke-width="1.5"/>
+  <circle cx="200" cy="92" r="6" fill="#2C74E8" fill-opacity="0.9"/>
+  <circle cx="266" cy="209" r="5" fill="#2C74E8" fill-opacity="0.7"/>
+  <circle cx="134" cy="209" r="5" fill="#2C74E8" fill-opacity="0.6"/>
+  <circle cx="246" cy="108" r="4" fill="#2C74E8" fill-opacity="0.5"/>
+  <circle cx="154" cy="108" r="4" fill="#2C74E8" fill-opacity="0.5"/>
+  <line x1="200" y1="92" x2="266" y2="209" stroke="#2C74E8" stroke-opacity="0.18" stroke-width="0.8"/>
+  <line x1="200" y1="92" x2="134" y2="209" stroke="#2C74E8" stroke-opacity="0.18" stroke-width="0.8"/>
+  <line x1="266" y1="209" x2="134" y2="209" stroke="#2C74E8" stroke-opacity="0.12" stroke-width="0.8"/>
+  <g transform="translate(350,70)">
+    <text font-family="monospace" font-size="7.5" fill="#2C74E8" fill-opacity="0.5" letter-spacing="1.5">BIOMARKER PANEL</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">TESTOSTERONE</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a2540"/><rect x="0" y="6" width="133" height="3" rx="1.5" fill="#2C74E8" fill-opacity="0.75"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">OESTRADIOL</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a2540"/><rect x="0" y="6" width="61" height="3" rx="1.5" fill="#2C74E8" fill-opacity="0.5"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">SHBG</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a2540"/><rect x="0" y="6" width="99" height="3" rx="1.5" fill="#2C74E8" fill-opacity="0.6"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">LH / FSH</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a2540"/><rect x="0" y="6" width="79" height="3" rx="1.5" fill="#2C74E8" fill-opacity="0.55"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">CORTISOL</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#1a2540"/><rect x="0" y="6" width="108" height="3" rx="1.5" fill="#2C74E8" fill-opacity="0.65"/></g>
+    <polyline points="0,140 22,140 29,118 37,158 44,122 52,140 90,140 97,132 104,148 112,140 180,140" fill="none" stroke="#2C74E8" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#2C74E8" fill-opacity="0.35" letter-spacing="2">HORMONE OPTIMISATION · APEX METABOLIC HEALTH</text>
 </svg>

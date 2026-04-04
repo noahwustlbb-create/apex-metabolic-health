@@ -1,194 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <linearGradient id="strand1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="50%" stop-color="#4890f7"/>
-      <stop offset="100%" stop-color="#a9c7ff"/>
-    </linearGradient>
-    <linearGradient id="strand2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4890f7"/>
-      <stop offset="50%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#4890f7"/>
-    </linearGradient>
-    <radialGradient id="helixGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#0c0a1c"/><stop offset="100%" stop-color="#08080e"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="50%" r="55%"><stop offset="0%" stop-color="#5c2ce8" stop-opacity="0.24"/><stop offset="100%" stop-color="#5c2ce8" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Background: elongated radial glow along helix axis (diagonal) -->
-  <ellipse cx="400" cy="220" rx="380" ry="90" fill="url(#helixGlow)" transform="rotate(-28,400,220)" filter="url(#heavyblur)"/>
-  <ellipse cx="400" cy="220" rx="220" ry="50" fill="#4890f7" opacity="0.06" transform="rotate(-28,400,220)" filter="url(#heavyblur)"/>
-
-  <!--
-    DNA double helix: diagonal from bottom-left to top-right.
-    Strand 1: parametric sine wave mapped to diagonal.
-    t goes 0..1, position along diagonal: x = 50 + t*700, y = 390 - t*340
-    Perpendicular oscillation adds the sine wave.
-    Amplitude = 55, wavelength = ~160px along diagonal.
-    Strand 2: phase-shifted by π.
-
-    We'll use a series of bezier curves approximating the sine wave.
-    Diagonal direction vector: (700, -340), normalized ~ (0.9, -0.436)
-    Perpendicular: (0.436, 0.9)
-
-    Pre-calculated control points for ~5 full cycles:
-  -->
-
-  <!-- Background axis glow -->
-  <line x1="50" y1="390" x2="750" y2="50" stroke="#4890f7" stroke-width="18" opacity="0.04" filter="url(#softglow)"/>
-
-  <!-- STRAND 1 — sinusoidal along diagonal -->
-  <path d="M 50,390
-           C 80,358 106,320 120,310
-           C 134,300 150,308 168,290
-           C 186,272 198,238 210,228
-           C 222,218 240,226 258,208
-           C 276,190 286,158 300,148
-           C 314,138 330,146 348,128
-           C 366,110 376,78 390,68
-           C 404,58 420,66 438,48
-           C 456,30 466,14 480,8
-           C 486,5 492,5 496,6"
-        fill="none" stroke="url(#strand1)" stroke-width="2.2" filter="url(#glow)"/>
-  <!-- Extended right section -->
-  <path d="M 50,390
-           C 68,374 92,355 110,342
-           C 128,330 148,330 168,316
-           C 188,302 202,278 220,264
-           C 238,250 258,250 278,236
-           C 298,222 312,198 330,184
-           C 348,170 368,170 388,156
-           C 408,142 422,118 440,104
-           C 458,90 478,90 498,76
-           C 518,62 532,38 550,24
-           C 560,16 570,12 578,10"
-        fill="none" stroke="url(#strand1)" stroke-width="2.2" filter="url(#glow)"/>
-  <!-- Right continuation -->
-  <path d="M 270,244
-           C 298,224 326,200 354,180
-           C 382,160 412,158 440,136
-           C 468,114 494,88 522,68
-           C 550,48 578,44 606,22
-           C 626,8 646,2 666,2
-           C 686,2 706,8 726,14
-           C 740,18 752,24 762,28"
-        fill="none" stroke="url(#strand1)" stroke-width="2.2" filter="url(#glow)"/>
-
-  <!-- STRAND 2 — phase shifted -->
-  <path d="M 50,390
-           C 65,368 85,345 100,338
-           C 115,332 132,338 150,320
-           C 168,302 180,272 196,260
-           C 212,248 228,252 248,234
-           C 268,216 280,186 296,174
-           C 312,162 330,166 350,148
-           C 370,130 382,100 398,88
-           C 414,76 432,80 452,62
-           C 472,44 484,14 500,6
-           C 506,3 512,2 518,2"
-        fill="none" stroke="url(#strand2)" stroke-width="2.2" filter="url(#glow)"/>
-  <path d="M 130,348
-           C 155,328 184,304 212,284
-           C 240,264 268,260 296,240
-           C 324,220 344,194 372,174
-           C 400,154 428,150 456,130
-           C 484,110 504,84 532,64
-           C 560,44 588,40 616,18
-           C 636,4 656,0 676,0
-           C 696,0 716,6 736,12
-           C 746,16 756,22 764,26"
-        fill="none" stroke="url(#strand2)" stroke-width="2.2" filter="url(#glow)"/>
-
-  <!-- BASE PAIRS — short connecting lines at crossing/close points -->
-  <!-- Each base pair: horizontal-ish line between the two strands at that t-value -->
-  <!-- Plus nodes at each end alternating blue/gold -->
-
-  <!-- Pair 1 ~x=95 -->
-  <line x1="88" y1="344" x2="108" y2="354" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="88" cy="344" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="108" cy="354" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 2 ~x=145 -->
-  <line x1="138" y1="318" x2="158" y2="328" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="138" cy="318" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="158" cy="328" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 3 ~x=185 -->
-  <line x1="178" y1="296" x2="200" y2="300" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="178" cy="296" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="200" cy="300" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 4 ~x=230 -->
-  <line x1="222" y1="272" x2="244" y2="276" stroke="#a9c7ff" stroke-width="0.8" opacity="0.35" filter="url(#glow)"/>
-  <circle cx="222" cy="272" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="244" cy="276" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 5 ~x=270 -->
-  <line x1="264" y1="248" x2="286" y2="252" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="264" cy="248" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="286" cy="252" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 6 ~x=315 -->
-  <line x1="308" y1="224" x2="330" y2="228" stroke="#a9c7ff" stroke-width="0.8" opacity="0.35" filter="url(#glow)"/>
-  <circle cx="308" cy="224" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="330" cy="228" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 7 ~x=358 -->
-  <line x1="352" y1="200" x2="374" y2="204" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="352" cy="200" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="374" cy="204" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 8 ~x=400 -->
-  <line x1="394" y1="178" x2="416" y2="182" stroke="#a9c7ff" stroke-width="0.8" opacity="0.35" filter="url(#glow)"/>
-  <circle cx="394" cy="178" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="416" cy="182" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 9 ~x=440 -->
-  <line x1="436" y1="154" x2="458" y2="158" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="436" cy="154" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="458" cy="158" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 10 ~x=484 -->
-  <line x1="478" y1="130" x2="500" y2="134" stroke="#a9c7ff" stroke-width="0.8" opacity="0.35" filter="url(#glow)"/>
-  <circle cx="478" cy="130" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="500" cy="134" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 11 ~x=526 -->
-  <line x1="520" y1="106" x2="542" y2="110" stroke="#a9c7ff" stroke-width="0.8" opacity="0.4" filter="url(#glow)"/>
-  <circle cx="520" cy="106" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="542" cy="110" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 12 ~x=568 -->
-  <line x1="562" y1="82" x2="584" y2="86" stroke="#a9c7ff" stroke-width="0.8" opacity="0.35" filter="url(#glow)"/>
-  <circle cx="562" cy="82" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="584" cy="86" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 13 ~x=610 -->
-  <line x1="604" y1="58" x2="626" y2="62" stroke="#a9c7ff" stroke-width="0.8" opacity="0.3" filter="url(#glow)"/>
-  <circle cx="604" cy="58" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="626" cy="62" r="3" fill="#c9a84c" filter="url(#glow)"/>
-
-  <!-- Pair 14 ~x=652 -->
-  <line x1="648" y1="36" x2="670" y2="40" stroke="#a9c7ff" stroke-width="0.8" opacity="0.25" filter="url(#glow)"/>
-  <circle cx="648" cy="36" r="3" fill="#c9a84c" filter="url(#glow)"/>
-  <circle cx="670" cy="40" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-
-  <!-- Pair 15 ~x=700 -->
-  <line x1="694" y1="18" x2="716" y2="22" stroke="#a9c7ff" stroke-width="0.8" opacity="0.2" filter="url(#glow)"/>
-  <circle cx="694" cy="18" r="3" fill="#a9c7ff" filter="url(#glow)"/>
-  <circle cx="716" cy="22" r="3" fill="#c9a84c" filter="url(#glow)"/>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#5c2ce8" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <!-- Infinity / longevity loop -->
+  <path d="M140,170 C140,130 168,110 200,130 C232,150 248,150 280,130 C312,110 340,130 340,170 C340,210 312,230 280,210 C248,190 232,190 200,210 C168,230 140,210 140,170 Z" fill="none" stroke="#5c2ce8" stroke-opacity="0.45" stroke-width="2"/>
+  <circle cx="200" cy="155" r="8" fill="#5c2ce8" fill-opacity="0.3" stroke="#5c2ce8" stroke-opacity="0.7" stroke-width="1.2"/>
+  <circle cx="280" cy="155" r="8" fill="#5c2ce8" fill-opacity="0.3" stroke="#5c2ce8" stroke-opacity="0.7" stroke-width="1.2"/>
+  <!-- Orbital rings -->
+  <circle cx="200" cy="170" r="108" fill="none" stroke="#5c2ce8" stroke-opacity="0.07" stroke-width="1"/>
+  <circle cx="200" cy="170" r="78" fill="none" stroke="#5c2ce8" stroke-opacity="0.09" stroke-width="1"/>
+  <!-- Coming soon badge -->
+  <rect x="148" y="220" width="104" height="22" rx="3" fill="#5c2ce8" fill-opacity="0.1" stroke="#5c2ce8" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="200" y="235" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#5c2ce8" fill-opacity="0.8" letter-spacing="1.5">COMING SOON</text>
+  <!-- Right panel -->
+  <g transform="translate(370,70)">
+    <text font-family="monospace" font-size="7.5" fill="#5c2ce8" fill-opacity="0.5" letter-spacing="1.5">LONGEVITY PANEL</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">TELOMERE LENGTH</text><rect x="0" y="6" width="170" height="3" rx="1.5" fill="#14102a"/><rect x="0" y="6" width="119" height="3" rx="1.5" fill="#5c2ce8" fill-opacity="0.65"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">NAD+ MARKERS</text><rect x="0" y="6" width="170" height="3" rx="1.5" fill="#14102a"/><rect x="0" y="6" width="85" height="3" rx="1.5" fill="#5c2ce8" fill-opacity="0.55"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">CARDIOVASCULAR</text><rect x="0" y="6" width="170" height="3" rx="1.5" fill="#14102a"/><rect x="0" y="6" width="136" height="3" rx="1.5" fill="#5c2ce8" fill-opacity="0.7"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">HORMONAL AXIS</text><rect x="0" y="6" width="170" height="3" rx="1.5" fill="#14102a"/><rect x="0" y="6" width="102" height="3" rx="1.5" fill="#5c2ce8" fill-opacity="0.6"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">EPIGENETIC AGE</text><rect x="0" y="6" width="170" height="3" rx="1.5" fill="#14102a"/><rect x="0" y="6" width="68" height="3" rx="1.5" fill="#5c2ce8" fill-opacity="0.48"/></g>
+    <polyline points="0,140 18,140 26,116 36,158 46,118 56,140 95,140 104,130 112,150 122,140 170,140" fill="none" stroke="#5c2ce8" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#5c2ce8" fill-opacity="0.35" letter-spacing="2">LONGEVITY PROTOCOL · APEX METABOLIC HEALTH</text>
 </svg>

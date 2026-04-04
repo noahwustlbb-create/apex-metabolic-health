@@ -1,93 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440">
+<svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="softglow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="12" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="heavyblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="30"/>
-    </filter>
-    <radialGradient id="nodeBright" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="100%" stop-color="#4890f7"/>
-    </radialGradient>
-    <radialGradient id="nodeDim" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4890f7" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="centerNode" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a9c7ff"/>
-      <stop offset="50%" stop-color="#4890f7"/>
-      <stop offset="100%" stop-color="#4890f7" stop-opacity="0.3"/>
-    </radialGradient>
+    <radialGradient id="bg" cx="30%" cy="50%" r="80%"><stop offset="0%" stop-color="#160f04"/><stop offset="100%" stop-color="#090808"/></radialGradient>
+    <radialGradient id="glow" cx="25%" cy="45%" r="60%"><stop offset="0%" stop-color="#e8872c" stop-opacity="0.26"/><stop offset="100%" stop-color="#e8872c" stop-opacity="0"/></radialGradient>
   </defs>
-
-  <rect width="800" height="440" fill="#0a1018"/>
-
-  <!-- Background glows -->
-  <circle cx="280" cy="200" r="160" fill="#4890f7" opacity="0.07" filter="url(#heavyblur)"/>
-  <circle cx="560" cy="260" r="140" fill="#4890f7" opacity="0.07" filter="url(#heavyblur)"/>
-
-  <!-- Network connections -->
-  <line x1="400" y1="220" x2="160" y2="130" stroke="#4890f7" stroke-width="0.8" opacity="0.2"/>
-  <line x1="400" y1="220" x2="240" y2="80" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-  <line x1="400" y1="220" x2="100" y2="240" stroke="#4890f7" stroke-width="0.8" opacity="0.18"/>
-  <line x1="400" y1="220" x2="200" y2="340" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <line x1="400" y1="220" x2="340" y2="360" stroke="#4890f7" stroke-width="0.8" opacity="0.2"/>
-  <line x1="400" y1="220" x2="560" y2="100" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-  <line x1="400" y1="220" x2="680" y2="150" stroke="#4890f7" stroke-width="0.8" opacity="0.18"/>
-  <line x1="400" y1="220" x2="700" y2="280" stroke="#4890f7" stroke-width="0.8" opacity="0.22"/>
-  <line x1="400" y1="220" x2="620" y2="360" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-  <line x1="400" y1="220" x2="480" y2="370" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <!-- Inter-node connections -->
-  <line x1="160" y1="130" x2="240" y2="80" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <line x1="160" y1="130" x2="100" y2="240" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <line x1="240" y1="80" x2="560" y2="100" stroke="#4890f7" stroke-width="0.8" opacity="0.08"/>
-  <line x1="560" y1="100" x2="680" y2="150" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <line x1="680" y1="150" x2="700" y2="280" stroke="#4890f7" stroke-width="0.8" opacity="0.12"/>
-  <line x1="700" y1="280" x2="620" y2="360" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <line x1="620" y1="360" x2="480" y2="370" stroke="#4890f7" stroke-width="0.8" opacity="0.08"/>
-  <line x1="480" y1="370" x2="340" y2="360" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <line x1="340" y1="360" x2="200" y2="340" stroke="#4890f7" stroke-width="0.8" opacity="0.08"/>
-  <line x1="200" y1="340" x2="100" y2="240" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <!-- Extra cross connections -->
-  <line x1="160" y1="130" x2="560" y2="100" stroke="#4890f7" stroke-width="0.8" opacity="0.05"/>
-  <line x1="100" y1="240" x2="340" y2="360" stroke="#4890f7" stroke-width="0.8" opacity="0.06"/>
-  <line x1="680" y1="150" x2="480" y2="370" stroke="#4890f7" stroke-width="0.8" opacity="0.05"/>
-  <line x1="300" y1="155" x2="520" y2="180" stroke="#4890f7" stroke-width="0.8" opacity="0.1"/>
-  <line x1="300" y1="155" x2="400" y2="220" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-  <line x1="520" y1="180" x2="400" y2="220" stroke="#4890f7" stroke-width="0.8" opacity="0.15"/>
-
-  <!-- Peripheral nodes — dim -->
-  <circle cx="160" cy="130" r="5" fill="rgba(72,144,247,0.3)"/>
-  <circle cx="240" cy="80" r="4" fill="rgba(72,144,247,0.25)"/>
-  <circle cx="100" cy="240" r="6" fill="rgba(72,144,247,0.3)"/>
-  <circle cx="200" cy="340" r="4" fill="rgba(72,144,247,0.2)"/>
-  <circle cx="340" cy="360" r="5" fill="rgba(72,144,247,0.25)"/>
-  <circle cx="560" cy="100" r="5" fill="rgba(72,144,247,0.25)"/>
-  <circle cx="680" cy="150" r="4" fill="rgba(72,144,247,0.2)"/>
-  <circle cx="700" cy="280" r="6" fill="rgba(72,144,247,0.3)"/>
-  <circle cx="620" cy="360" r="4" fill="rgba(72,144,247,0.2)"/>
-  <circle cx="480" cy="370" r="5" fill="rgba(72,144,247,0.25)"/>
-  <!-- Mid-range nodes — brighter -->
-  <circle cx="300" cy="155" r="8" fill="url(#nodeBright)" filter="url(#glow)"/>
-  <circle cx="520" cy="180" r="7" fill="url(#nodeBright)" filter="url(#glow)"/>
-  <circle cx="280" cy="300" r="6" fill="url(#nodeBright)" filter="url(#glow)"/>
-  <circle cx="550" cy="310" r="7" fill="url(#nodeBright)" filter="url(#glow)"/>
-
-  <!-- Gold-ringed "optimised" nodes -->
-  <circle cx="300" cy="155" r="14" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.8"/>
-  <circle cx="680" cy="150" r="10" fill="url(#nodeBright)" filter="url(#glow)"/>
-  <circle cx="680" cy="150" r="16" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.8"/>
-  <circle cx="480" cy="370" r="9" fill="url(#nodeBright)" filter="url(#glow)"/>
-  <circle cx="480" cy="370" r="15" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.8"/>
-
-  <!-- Central node — largest, gold ring -->
-  <circle cx="400" cy="220" r="24" fill="#4890f7" opacity="0.15" filter="url(#heavyblur)"/>
-  <circle cx="400" cy="220" r="14" fill="url(#centerNode)" filter="url(#glow)"/>
-  <circle cx="400" cy="220" r="22" fill="none" stroke="#c9a84c" stroke-width="1.2" opacity="0.85"/>
+  <rect width="600" height="340" fill="url(#bg)"/>
+  <rect width="600" height="340" fill="url(#glow)"/>
+  <g stroke="#e8872c" stroke-opacity="0.05" stroke-width="0.5">
+    <line x1="0" y1="68" x2="600" y2="68"/><line x1="0" y1="136" x2="600" y2="136"/>
+    <line x1="0" y1="204" x2="600" y2="204"/><line x1="0" y1="272" x2="600" y2="272"/>
+    <line x1="100" y1="0" x2="100" y2="340"/><line x1="200" y1="0" x2="200" y2="340"/>
+    <line x1="300" y1="0" x2="300" y2="340"/><line x1="400" y1="0" x2="400" y2="340"/>
+    <line x1="500" y1="0" x2="500" y2="340"/>
+  </g>
+  <!-- Hexagon target -->
+  <polygon points="200,80 248,107 248,163 200,190 152,163 152,107" fill="#e8872c" fill-opacity="0.06" stroke="#e8872c" stroke-opacity="0.4" stroke-width="1.2"/>
+  <polygon points="200,105 232,123 232,158 200,176 168,158 168,123" fill="none" stroke="#e8872c" stroke-opacity="0.25" stroke-width="1"/>
+  <circle cx="200" cy="135" r="12" fill="#e8872c" fill-opacity="0.2" stroke="#e8872c" stroke-opacity="0.7" stroke-width="1.5"/>
+  <!-- Outer halos -->
+  <circle cx="200" cy="170" r="108" fill="none" stroke="#e8872c" stroke-opacity="0.07" stroke-width="1"/>
+  <circle cx="200" cy="170" r="78" fill="none" stroke="#e8872c" stroke-opacity="0.1" stroke-width="1"/>
+  <!-- Badge -->
+  <rect x="150" y="230" width="100" height="20" rx="3" fill="#e8872c" fill-opacity="0.12" stroke="#e8872c" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="200" y="244" text-anchor="middle" font-family="monospace" font-size="7.5" fill="#e8872c" fill-opacity="0.9" letter-spacing="2">FLAGSHIP</text>
+  <g transform="translate(350,70)">
+    <text font-family="monospace" font-size="7.5" fill="#e8872c" fill-opacity="0.5" letter-spacing="1.5">PERFORMANCE+ PANEL</text>
+    <g transform="translate(0,20)"><text font-family="monospace" font-size="7" fill="#8899aa">TESTOSTERONE (FREE)</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#221a0a"/><rect x="0" y="6" width="157" height="3" rx="1.5" fill="#e8872c" fill-opacity="0.8"/></g>
+    <g transform="translate(0,40)"><text font-family="monospace" font-size="7" fill="#8899aa">IGF-1 / GH AXIS</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#221a0a"/><rect x="0" y="6" width="126" height="3" rx="1.5" fill="#e8872c" fill-opacity="0.65"/></g>
+    <g transform="translate(0,60)"><text font-family="monospace" font-size="7" fill="#8899aa">METABOLIC PANEL</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#221a0a"/><rect x="0" y="6" width="108" height="3" rx="1.5" fill="#e8872c" fill-opacity="0.6"/></g>
+    <g transform="translate(0,80)"><text font-family="monospace" font-size="7" fill="#8899aa">BODY COMPOSITION</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#221a0a"/><rect x="0" y="6" width="144" height="3" rx="1.5" fill="#e8872c" fill-opacity="0.7"/></g>
+    <g transform="translate(0,100)"><text font-family="monospace" font-size="7" fill="#8899aa">CARDIAC MARKERS</text><rect x="0" y="6" width="180" height="3" rx="1.5" fill="#221a0a"/><rect x="0" y="6" width="90" height="3" rx="1.5" fill="#e8872c" fill-opacity="0.55"/></g>
+    <polyline points="0,140 16,140 24,110 34,164 44,114 54,140 100,140 110,126 118,154 128,140 180,140" fill="none" stroke="#e8872c" stroke-opacity="0.55" stroke-width="1.2"/>
+  </g>
+  <text x="24" y="322" font-family="monospace" font-size="7.5" fill="#e8872c" fill-opacity="0.35" letter-spacing="2">PERFORMANCE+ · APEX METABOLIC HEALTH</text>
 </svg>
