@@ -17,7 +17,7 @@ const PROGRAM_COLORS: Record<string, string> = {
 }
 
 const STATS = [
-  { value: '8', label: 'Clinical Programs' },
+  { value: '< 48h', label: 'To First Consult' },
   { value: '50+', label: 'Biomarkers Analysed' },
   { value: '100%', label: 'Online' },
   { value: 'AHPRA', label: 'Registered Doctors' },
