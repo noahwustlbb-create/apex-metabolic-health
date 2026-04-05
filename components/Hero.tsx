@@ -409,36 +409,29 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.62, ease }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
         >
-          <a
-            href="/get-started"
-            className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto"
-          >
+          <a href="/get-started" className="btn-teal w-full sm:w-auto">
             Start Your Assessment
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
-          <a
-            href="/services"
-            className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto"
-          >
+          <a href="/services" className="btn-ghost w-full sm:w-auto">
             View Programs
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
-          <a
-            href="/intake/discovery"
-            className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-semibold tracking-widest uppercase w-full sm:w-auto transition-all duration-200"
-            style={{
-              border: '1px solid rgba(169,199,255,0.14)',
-              borderRadius: '2px',
-              color: 'rgba(169,199,255,0.5)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(169,199,255,0.28)'
-              e.currentTarget.style.color = 'rgba(169,199,255,0.75)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(169,199,255,0.14)'
-              e.currentTarget.style.color = 'rgba(169,199,255,0.5)'
-            }}
-          >
+          <a href="/intake/discovery" className="btn-ghost w-full sm:w-auto">
             Speak to a Clinician
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
         </motion.div>
 

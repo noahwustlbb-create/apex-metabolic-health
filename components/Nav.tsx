@@ -233,27 +233,13 @@ export default function Nav() {
             onMouseEnter={() => setGetStartedOpen(true)}
             onMouseLeave={() => setGetStartedOpen(false)}
           >
-            <Link
-              href="/get-started"
-              className="text-[11px] tracking-[0.18em] uppercase py-3 px-6 flex items-center gap-2.5 font-semibold transition-all duration-200"
-              style={{
-                background: '#2C74E8',
-                color: '#ffffff',
-                borderRadius: '4px',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = '#2264CC' }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = '#2C74E8' }}
-            >
+            <Link href="/get-started" className="btn-teal">
               Start Assessment
-              <svg
-                viewBox="0 0 12 12"
-                fill="none"
-                className="w-3 h-3 transition-transform duration-200"
-                style={{ transform: getStartedOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                aria-hidden="true"
-              >
-                <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <span className="btn-circle">
+                <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
             </Link>
 
             <AnimatePresence>
@@ -378,9 +364,14 @@ export default function Nav() {
                 <Link
                   href="/get-started"
                   onClick={() => setMenuOpen(false)}
-                  className="btn-teal w-full text-sm tracking-widest uppercase"
+                  className="btn-teal w-full"
                 >
                   Start Assessment
+                  <span className="btn-circle">
+                    <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
                 </Link>
               </motion.div>
             </div>

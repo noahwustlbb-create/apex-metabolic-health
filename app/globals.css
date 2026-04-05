@@ -116,31 +116,82 @@
     @apply mx-auto max-w-6xl px-6 md:px-10;
   }
 
-  /* Primary CTA — Signature Texture gradient */
+  /* Primary CTA — pill with circle icon */
   .btn-teal {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide;
-    background: linear-gradient(135deg, #7AB8FF 0%, #2C74E8 100%);
-    color: #0c131f;
-    transition: background 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .btn-teal:hover {
-    background: linear-gradient(135deg, #bdd4ff 0%, #5a9ff8 100%);
-    box-shadow: 0 12px 32px rgba(7,14,26,0.4);
-  }
-
-  /* Secondary ghost button */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-md text-sm font-semibold tracking-wide;
-    border: 1px solid rgba(44,116,232,0.35);
-    color: #7AB8FF;
+    @apply inline-flex items-center justify-between;
+    padding: 5px 5px 5px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(44,116,232,0.45);
+    background: rgba(44,116,232,0.1);
+    color: #f0f4f8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    gap: 18px;
+    white-space: nowrap;
     transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   }
 
+  .btn-teal:hover {
+    background: rgba(44,116,232,0.18);
+    border-color: rgba(44,116,232,0.7);
+    box-shadow: 0 0 36px rgba(44,116,232,0.22);
+  }
+
+  /* Secondary ghost button — pill with circle icon */
+  .btn-ghost {
+    @apply inline-flex items-center justify-between;
+    padding: 5px 5px 5px 22px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: #8899aa;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    gap: 18px;
+    white-space: nowrap;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+
   .btn-ghost:hover {
-    background: rgba(44,116,232,0.1);
-    border-color: rgba(44,116,232,0.6);
-    box-shadow: 0 12px 32px rgba(7,14,26,0.3);
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.22);
+    color: #f0f4f8;
+  }
+
+  /* Circle icon inside pill buttons */
+  .btn-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+  }
+
+  .btn-teal .btn-circle {
+    background: #2C74E8;
+    color: #ffffff;
+  }
+
+  .btn-teal:hover .btn-circle {
+    background: #5a9ff8;
+  }
+
+  .btn-ghost .btn-circle {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #8899aa;
+  }
+
+  .btn-ghost:hover .btn-circle {
+    background: rgba(255,255,255,0.14);
+    color: #f0f4f8;
   }
 
   /* Stat number style */

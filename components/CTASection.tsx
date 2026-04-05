@@ -80,19 +80,21 @@ export default function CTASection() {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="flex flex-wrap justify-center gap-4 mb-8"
         >
-          <a
-            href="/get-started"
-            className="btn-teal text-sm font-bold tracking-widest uppercase px-10 py-4"
-            style={{ fontSize: '13px' }}
-          >
+          <a href="/get-started" className="btn-teal">
             Book Your Consultation
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
-          <a
-            href="/services"
-            className="btn-ghost text-sm font-bold tracking-widest uppercase px-10 py-4"
-            style={{ fontSize: '13px' }}
-          >
+          <a href="/services" className="btn-ghost">
             View Programs
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </a>
         </motion.div>
 
