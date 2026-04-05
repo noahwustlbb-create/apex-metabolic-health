@@ -63,7 +63,7 @@ export default function Nav() {
               alt="Apex Metabolic Health"
               width={130}
               height={53}
-              className="w-[110px] md:w-[130px] h-auto"
+              className="w-[100px] md:w-[120px] h-10 object-contain object-left"
               style={{ mixBlendMode: 'multiply' }}
               priority
             />
@@ -218,7 +218,7 @@ export default function Nav() {
             onMouseEnter={() => setGetStartedOpen(true)}
             onMouseLeave={() => setGetStartedOpen(false)}
           >
-            <Link href="/get-started" className="btn-teal">
+            <Link href="/get-started" className="btn-teal" style={{ color: '#0c131f' }}>
               Start Assessment
               <span className="btn-circle">
                 <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
