@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const navLinks = [
@@ -57,31 +58,15 @@ export default function Nav() {
         <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
-            <svg
-              viewBox="0 0 88 36"
+            <Image
+              src="/logo.png"
+              alt="Apex Metabolic Health"
+              width={130}
+              height={53}
               className="w-[110px] md:w-[130px] h-auto"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              role="img"
-              aria-hidden="true"
-            >
-              <text
-                x="0" y="23"
-                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="24" fontWeight="800"
-                fill="#0c131f"
-                letterSpacing="-0.5"
-              >APEX</text>
-              <line x1="0" y1="26.5" x2="86" y2="26.5"
-                stroke="#0c131f" strokeWidth="0.5" strokeOpacity="0.15"/>
-              <text
-                x="0.5" y="35"
-                fontFamily="var(--font-space-grotesk), 'Space Grotesk', sans-serif"
-                fontSize="6.6" fontWeight="500"
-                fill="#4a5a6a"
-                letterSpacing="1.55"
-              >METABOLIC HEALTH</text>
-            </svg>
+              style={{ mixBlendMode: 'multiply' }}
+              priority
+            />
           </Link>
 
           {/* Desktop nav */}
