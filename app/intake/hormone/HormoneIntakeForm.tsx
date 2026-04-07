@@ -893,10 +893,10 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, liaison with external providers (pharmacy, GP, allied health), order management, and full administrative support. Unlimited contact with our admin and nurse team is available Monday–Friday during business hours.
+                          Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health).
                         </p>
                         <p className="text-xs mt-2" style={{ color: '#4a5a6a' }}>
-                          A single consultation covers one episode of care. Repeat scripting or ongoing management requires a follow-up booking. Terms &amp; Conditions apply — speak to our team or refer to the T&amp;Cs on our website for full details.
+                          Order management, administrative support, and unlimited access to our admin and nurse team (Mon–Fri, business hours) are included as part of your Apex membership. A single consultation covers one episode of care — repeat scripting or ongoing management requires a follow-up booking. Terms &amp; Conditions apply.
                         </p>
                       </div>
                     </label>
