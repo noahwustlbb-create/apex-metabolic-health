@@ -187,8 +187,8 @@ export default function HowItWorks() {
                 </svg>
               </span>
             </a>
-            <a href="/services" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
-              Choose Your Program
+            <a href="/assessment" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
+              Find Your Program
             </a>
             <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
               Hormone Consult
