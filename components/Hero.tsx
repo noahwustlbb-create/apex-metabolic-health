@@ -443,6 +443,22 @@ export default function Hero() {
               </svg>
             </span>
           </a>
+          <a href="/intake/hormone" className="btn-ghost w-full sm:w-auto">
+            Hormone Consult
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
+          <a href="/intake/general" className="btn-ghost w-full sm:w-auto">
+            General Consult
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
           <a href="/intake/discovery" className="btn-ghost w-full sm:w-auto">
             Speak to a Clinician
             <span className="btn-circle">
