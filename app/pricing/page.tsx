@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function TreatmentOptions() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-      {/* Card A: Apex Partner Pharmacy */}
+      {/* Card A: Apex Protocol Membership */}
       <div className="apex-card p-7 flex flex-col">
         <p
           className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3"
@@ -23,21 +23,18 @@ function TreatmentOptions() {
           className="text-base font-semibold mb-1 leading-snug"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
-          Apex Partner Pharmacy
+          Apex Protocol Membership
         </h4>
-        <p className="text-sm mb-1" style={{ color: '#8899aa' }}>
-          Medication invoiced at <span style={{ color: '#f0f4f8', fontWeight: 600 }}>pharmacy rates</span>
+        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+          $99<span className="text-sm font-normal" style={{ color: '#8899aa' }}>/month</span>
         </p>
-        <p className="text-xs mb-5" style={{ color: '#4a5a6a' }}>
-          + Administration, Handling &amp; Infrastructure fee from <span style={{ color: '#8899aa' }}>$50</span>
-        </p>
-        <ul className="space-y-3 flex-1 mb-5">
+        <ul className="space-y-3 flex-1">
           {[
+            'Medication invoiced at pharmacy rates',
             'Medication fulfilled through our accredited compounding pharmacy partner',
-            'Ongoing file management & treatment coordination',
-            'Medication safety reviews',
+            <>Administration, Handling &amp; Infrastructure fee from <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$50</span> — covers file management, treatment coordination, and medication safety reviews</>,
             'Clinical support team access',
-            'Coordinated follow-up consultations',
+            'Coordinated follow-up consultations built in',
             'Admin support 9–5, 7 days a week',
             'Evidence-based supplement guidance',
           ].map((item, i) => (
@@ -53,9 +50,6 @@ function TreatmentOptions() {
             </li>
           ))}
         </ul>
-        <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-          The AHI fee covers the infrastructure required to manage your treatment safely and continuously — file management, safety checks, coordination, and ongoing clinical oversight.
-        </p>
       </div>
 
       {/* Card B: Script Release Only */}
@@ -72,13 +66,14 @@ function TreatmentOptions() {
         >
           Script Release Only
         </h4>
-        <p className="text-sm mb-1" style={{ color: '#8899aa' }}>
-          Prescribing &amp; script release fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span>
+        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+          $145<span className="text-sm font-normal" style={{ color: '#8899aa' }}> one-off</span>
         </p>
-        <p className="text-xs mb-5" style={{ color: '#4a5a6a' }}>One-off. No ongoing fees.</p>
-        <ul className="space-y-3 flex-1 mb-5">
+        <ul className="space-y-3 flex-1">
           {[
-            'Script issued and sent directly to you with your treatment plan and dosing guide',
+            <>Prescribing &amp; script release fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span></>,
+            'No ongoing support fee',
+            'Script sent directly to you with your treatment plan and dosing guide',
             'Fill your prescription at any pharmacy of your choice',
             'Access to our nursing team for dosing advice and clinical support',
             'Access to our admin team as required',
@@ -95,9 +90,6 @@ function TreatmentOptions() {
             </li>
           ))}
         </ul>
-        <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-          Best suited for patients who have an existing pharmacy relationship or prefer to manage their own fulfilment independently.
-        </p>
       </div>
     </div>
   )
