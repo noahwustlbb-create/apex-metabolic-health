@@ -351,7 +351,7 @@ export default function ProgramsGrid() {
             </span>
           </a>
           <a href="/intake/general" className="btn-teal w-full sm:w-auto">
-            General Health Check Up
+            General Consult
             <span className="btn-circle">
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

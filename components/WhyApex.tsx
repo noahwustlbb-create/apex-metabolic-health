@@ -184,7 +184,7 @@ export default function WhyApex() {
             Hormone Consult
           </a>
           <a href="/intake/general" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
-            General Health Check Up
+            General Consult
           </a>
         </div>
       </div>
