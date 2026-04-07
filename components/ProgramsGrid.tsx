@@ -335,7 +335,7 @@ export default function ProgramsGrid() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a href="/assessment" className="btn-ghost w-full sm:w-auto">
-            Find Your Program
+            Health Quiz
             <span className="btn-circle">
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

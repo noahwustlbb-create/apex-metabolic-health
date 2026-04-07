@@ -199,7 +199,7 @@ export default function ProblemSection() {
               </span>
             </a>
             <a href="/assessment" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
-              Find Your Program
+              Health Quiz
             </a>
             <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
               Hormone Consult
