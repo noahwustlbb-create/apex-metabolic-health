@@ -117,7 +117,7 @@ export default function ProgramQuiz() {
     <section
       id="quiz"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Program selector quiz"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -125,7 +125,7 @@ export default function ProgramQuiz() {
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(53,117,198,0.06) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -142,11 +142,11 @@ export default function ProgramQuiz() {
               <p className="label mb-4">FIND YOUR PROGRAM</p>
               <h2
                 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
               >
                 Not Sure Where to Start?
               </h2>
-              <p className="text-base leading-relaxed mb-8" style={{ color: '#8899aa' }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: '#B0B8C5' }}>
                 Answer 3 quick questions and we&apos;ll point you to the right program.
                 Takes under 60 seconds.
               </p>
@@ -175,7 +175,7 @@ export default function ProgramQuiz() {
                     <div
                       key={i}
                       className="flex-1 h-1 rounded-full transition-all duration-300"
-                      style={{ backgroundColor: i <= step ? '#4890f7' : 'rgba(255,255,255,0.08)' }}
+                      style={{ backgroundColor: i <= step ? '#3575C6' : 'rgba(255,255,255,0.08)' }}
                     />
                   ))}
                   <span className="text-xs flex-shrink-0" style={{ color: '#4a5a6a' }}>
@@ -185,7 +185,7 @@ export default function ProgramQuiz() {
 
                 <h3
                   className="text-xl md:text-2xl font-bold mb-7 leading-snug"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
                 >
                   {QUESTIONS[step].question}
                 </h3>
@@ -198,18 +198,18 @@ export default function ProgramQuiz() {
                       className="text-left px-5 py-4 rounded-sm transition-all duration-200 group"
                       style={{
                         background: '#19202c',
-                        border: '1px solid #1e2d3d',
-                        color: '#8899aa',
+                        border: '1px solid #1A3F7A',
+                        color: '#B0B8C5',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = '#4890f7'
-                        e.currentTarget.style.color = '#f0f4f8'
-                        e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.04)'
+                        e.currentTarget.style.borderColor = '#3575C6'
+                        e.currentTarget.style.color = '#F4F4F6'
+                        e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.04)'
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
-                        e.currentTarget.style.color = '#8899aa'
-                        e.currentTarget.style.backgroundColor = '#0d1117'
+                        e.currentTarget.style.color = '#B0B8C5'
+                        e.currentTarget.style.backgroundColor = '#0d1520'
                       }}
                     >
                       <span className="text-sm leading-relaxed">{opt.label}</span>
@@ -237,24 +237,24 @@ export default function ProgramQuiz() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="apex-card p-8 text-center"
-                style={{ border: '1px solid rgba(72,144,247,0.3)' }}
+                style={{ border: '1px solid rgba(53,117,198,0.3)' }}
               >
                 <div
                   className="w-12 h-12 flex items-center justify-center rounded-sm mx-auto mb-6"
-                  style={{ backgroundColor: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}
+                  style={{ backgroundColor: 'rgba(53,117,198,0.1)', border: '1px solid rgba(53,117,198,0.25)' }}
                 >
-                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="#3575C6" strokeWidth="1.5" aria-hidden="true">
                     <path d="M9 12l2 2 4-4M12 3l-8 4.5v5C4 17.4 7.4 21.5 12 22c4.6-.5 8-4.6 8-9.5v-5L12 3z" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
                 <p className="label mb-3">RECOMMENDED FOR YOU</p>
                 <h3
                   className="text-2xl font-bold mb-4"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
                 >
                   {result.title}
                 </h3>
-                <p className="text-sm leading-relaxed mb-7 max-w-md mx-auto" style={{ color: '#8899aa' }}>
+                <p className="text-sm leading-relaxed mb-7 max-w-md mx-auto" style={{ color: '#B0B8C5' }}>
                   {result.description}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">

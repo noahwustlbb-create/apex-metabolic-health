@@ -49,7 +49,7 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
             transition={{ duration: 0.8, delay: index * 0.2 + 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="h-full origin-left"
             style={{
-              background: 'linear-gradient(90deg, rgba(72,144,247,0.4), rgba(72,144,247,0.1))',
+              background: 'linear-gradient(90deg, rgba(53,117,198,0.4), rgba(53,117,198,0.1))',
               transformOrigin: 'left center',
             }}
           />
@@ -63,18 +63,18 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
         transition={{ duration: 0.5, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center mb-6 flex-shrink-0"
         style={{
-          backgroundColor: 'rgba(72,144,247,0.08)',
-          border: '1px solid rgba(72,144,247,0.25)',
+          backgroundColor: 'rgba(53,117,198,0.08)',
+          border: '1px solid rgba(53,117,198,0.25)',
         }}
       >
         {/* Inner ring */}
         <div
           className="absolute inset-2 rounded-full"
-          style={{ border: '1px solid rgba(72,144,247,0.15)' }}
+          style={{ border: '1px solid rgba(53,117,198,0.15)' }}
         />
         <span
           className="stat-number text-2xl"
-          style={{ color: '#4890f7' }}
+          style={{ color: '#3575C6' }}
         >
           {step.number}
         </span>
@@ -87,11 +87,11 @@ function StepCard({ step, index, totalSteps }: { step: typeof STEPS[0]; index: n
       >
         <h3
           className="text-lg font-semibold mb-3"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
         >
           {step.title}
         </h3>
-        <p className="text-sm leading-relaxed max-w-[220px] mx-auto" style={{ color: '#8899aa' }}>
+        <p className="text-sm leading-relaxed max-w-[220px] mx-auto" style={{ color: '#B0B8C5' }}>
           {step.description}
         </p>
       </motion.div>
@@ -109,7 +109,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0c131f' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="How it works"
     >
       {/* Background accent */}
@@ -117,7 +117,7 @@ export default function HowItWorks() {
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(53,117,198,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -137,7 +137,7 @@ export default function HowItWorks() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
           >
             Clinical Medicine.{' '}
             <span className="text-teal-gradient">No Waiting Rooms.</span>
@@ -162,18 +162,18 @@ export default function HowItWorks() {
           <div
             className="inline-flex items-center gap-3 px-7 py-3.5"
             style={{
-              border: '1px solid rgba(72,144,247,0.2)',
+              border: '1px solid rgba(53,117,198,0.2)',
               borderRadius: '2px',
-              backgroundColor: 'rgba(72,144,247,0.05)',
+              backgroundColor: 'rgba(53,117,198,0.05)',
             }}
           >
             <span
               className="w-2 h-2 rounded-full flex-shrink-0"
-              style={{ backgroundColor: '#4890f7' }}
+              style={{ backgroundColor: '#3575C6' }}
             />
             <span
               className="text-sm font-medium tracking-wide"
-              style={{ color: '#4890f7' }}
+              style={{ color: '#3575C6' }}
             >
               100% online. Available Australia-wide.
             </span>

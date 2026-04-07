@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#0a1018', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      style={{ backgroundColor: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.06)' }}
     >
       {/* Logo watermark — top right */}
       <div
@@ -43,7 +43,7 @@ export default function Footer() {
       <div
         className="h-px w-full"
         style={{
-          background: 'linear-gradient(90deg, transparent, rgba(72,144,247,0.2), transparent)',
+          background: 'linear-gradient(90deg, transparent, rgba(53,117,198,0.2), transparent)',
         }}
         aria-hidden="true"
       />
@@ -66,7 +66,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <div style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '18px', fontWeight: 700, color: '#f0f4f8', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+                <div style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '18px', fontWeight: 700, color: '#F4F4F6', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
                   Apex
                 </div>
                 <div style={{ fontSize: '9px', fontWeight: 400, color: '#4a5a6a', letterSpacing: '0.22em', textTransform: 'uppercase', marginTop: '3px' }}>
@@ -104,7 +104,7 @@ export default function Footer() {
           <div>
             <h4
               className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5"
-              style={{ color: '#8899aa' }}
+              style={{ color: '#B0B8C5' }}
             >
               Programs
             </h4>
@@ -127,7 +127,7 @@ export default function Footer() {
           <div>
             <h4
               className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5"
-              style={{ color: '#8899aa' }}
+              style={{ color: '#B0B8C5' }}
             >
               Company
             </h4>
@@ -187,11 +187,11 @@ export default function Footer() {
             are provided by Australian AHPRA-registered medical practitioners.
           </p>
           <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-            <strong style={{ color: '#8899aa' }}>After-hours &amp; emergencies:</strong> Apex
+            <strong style={{ color: '#B0B8C5' }}>After-hours &amp; emergencies:</strong> Apex
             Metabolic Health does not provide emergency medical care. If you are experiencing a
-            medical emergency, call <strong style={{ color: '#f0f4f8' }}>000</strong> immediately.
+            medical emergency, call <strong style={{ color: '#F4F4F6' }}>000</strong> immediately.
             For after-hours GP care, contact the{' '}
-            <strong style={{ color: '#8899aa' }}>National Home Doctor Service on 13 7425</strong>.
+            <strong style={{ color: '#B0B8C5' }}>National Home Doctor Service on 13 7425</strong>.
           </p>
         </div>
 
@@ -200,7 +200,7 @@ export default function Footer() {
           <p className="text-xs" style={{ color: '#4a5a6a' }}>
             © {year} Apex Metabolic Health. All rights reserved.
           </p>
-          <p className="text-xs tracking-wide" style={{ color: '#1e2d3d' }}>
+          <p className="text-xs tracking-wide" style={{ color: '#1A3F7A' }}>
             Doctor-led hormonal health. Evidence-based. Australia-wide.
           </p>
         </div>

@@ -102,7 +102,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 e.currentTarget.style.background = '#2a3d52'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = '#1e2d3d'
+                e.currentTarget.style.background = '#1A3F7A'
               }}
             >
               ×
@@ -111,7 +111,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
             {/* Panel header */}
             <div
               style={{
-                background: '#0c131f',
+                background: '#0A0A0A',
                 padding: '32px 28px 24px',
                 borderRadius: '16px 16px 0 0',
                 textAlign: 'center',
@@ -127,7 +127,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  background: 'radial-gradient(ellipse at center, rgba(72,144,247,0.15) 0%, transparent 70%)',
+                  background: 'radial-gradient(ellipse at center, rgba(53,117,198,0.15) 0%, transparent 70%)',
                   width: '200px',
                   height: '200px',
                   pointerEvents: 'none',
@@ -147,14 +147,14 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 <svg viewBox="0 0 32 32" fill="none" width={64} height={64} aria-hidden="true">
                   <polygon
                     points="16,2 30,9 30,23 16,30 2,23 2,9"
-                    stroke="#4890f7"
+                    stroke="#3575C6"
                     strokeWidth="1.5"
-                    fill="rgba(72,144,247,0.06)"
+                    fill="rgba(53,117,198,0.06)"
                   />
-                  <line x1="16" y1="2" x2="16" y2="30" stroke="#4890f7" strokeWidth="0.8" opacity="0.35" />
-                  <line x1="2" y1="16" x2="30" y2="16" stroke="#4890f7" strokeWidth="0.8" opacity="0.35" />
-                  <circle cx="16" cy="16" r="2.5" fill="#4890f7" />
-                  <circle cx="16" cy="16" r="5" stroke="#4890f7" strokeWidth="0.8" opacity="0.4" />
+                  <line x1="16" y1="2" x2="16" y2="30" stroke="#3575C6" strokeWidth="0.8" opacity="0.35" />
+                  <line x1="2" y1="16" x2="30" y2="16" stroke="#3575C6" strokeWidth="0.8" opacity="0.35" />
+                  <circle cx="16" cy="16" r="2.5" fill="#3575C6" />
+                  <circle cx="16" cy="16" r="5" stroke="#3575C6" strokeWidth="0.8" opacity="0.4" />
                 </svg>
               </div>
 
@@ -164,7 +164,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                   fontFamily: 'var(--font-space-grotesk)',
                   fontSize: '22px',
                   fontWeight: 700,
-                  color: '#f0f4f8',
+                  color: '#F4F4F6',
                   margin: 0,
                   position: 'relative',
                 }}
@@ -189,9 +189,9 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                             textTransform: 'uppercase' as const,
                             padding: '4px 12px',
                             borderRadius: '20px',
-                            background: 'rgba(72,144,247,0.12)',
-                            color: '#4890f7',
-                            border: '1px solid rgba(72,144,247,0.3)',
+                            background: 'rgba(53,117,198,0.12)',
+                            color: '#3575C6',
+                            border: '1px solid rgba(53,117,198,0.3)',
                           }
                         : {
                             display: 'inline-block',
@@ -219,7 +219,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               <p
                 style={{
                   fontSize: '14px',
-                  color: '#8899aa',
+                  color: '#B0B8C5',
                   marginBottom: '20px',
                   marginTop: 0,
                   lineHeight: 1.5,
@@ -236,7 +236,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 style={{
                   fontSize: '15px',
                   lineHeight: 1.75,
-                  color: '#8899aa',
+                  color: '#B0B8C5',
                   marginBottom: '24px',
                   marginTop: 0,
                 }}
@@ -267,12 +267,12 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           width: '6px',
                           height: '6px',
                           borderRadius: '50%',
-                          background: '#4890f7',
+                          background: '#3575C6',
                           flexShrink: 0,
                           marginTop: '5px',
                         }}
                       />
-                      <span style={{ fontSize: '13px', color: '#8899aa', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: '#B0B8C5', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>
@@ -308,13 +308,13 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                       >
                         <path
                           d="M2 7l3.5 3.5L12 4"
-                          stroke="#4890f7"
+                          stroke="#3575C6"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span style={{ fontSize: '13px', color: '#8899aa', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: '#B0B8C5', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>

@@ -163,7 +163,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
     >
       {/* Image strip */}
       {fullProgram?.image && (
-        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#0c131f' }}>
+        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#0A0A0A' }}>
           <Image
             src={fullProgram.image}
             alt={program.name}
@@ -185,9 +185,9 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         <div
           className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
           style={{
-            backgroundColor: 'rgba(72,144,247,0.07)',
-            border: '1px solid rgba(72,144,247,0.18)',
-            color: '#4890f7',
+            backgroundColor: 'rgba(53,117,198,0.07)',
+            border: '1px solid rgba(53,117,198,0.18)',
+            color: '#3575C6',
           }}
         >
           {program.icon}
@@ -196,7 +196,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Program name */}
         <h3
           className="text-base font-semibold mb-2.5 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
         >
           {program.name}
         </h3>
@@ -204,7 +204,7 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
         {/* Description */}
         <p
           className="text-sm leading-relaxed flex-1 mb-5"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#B0B8C5' }}
         >
           {program.description}
         </p>
@@ -219,9 +219,9 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
             <a
               href={program.href}
               className="flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-all duration-200"
-              style={{ color: '#4890f7' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#f0f4f8' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#4890f7' }}
+              style={{ color: '#3575C6' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#3575C6' }}
               onClick={(e) => e.stopPropagation()}
             >
               {program.ctaLabel ?? 'Buy Now'}
@@ -233,19 +233,19 @@ function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
             <>
               <span
                 className="flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
-                style={{ color: '#4890f7' }}
+                style={{ color: '#3575C6' }}
               >
                 Learn More
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" style={{ color: '#4890f7' }} aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" style={{ color: '#3575C6' }} aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
               <a
                 href="/assessment"
                 className="flex items-center gap-1 text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap"
-                style={{ color: '#8899aa' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#f0f4f8' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#8899aa' }}
+                style={{ color: '#B0B8C5' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#B0B8C5' }}
                 onClick={(e) => e.stopPropagation()}
               >
                 Check Eligibility
@@ -284,7 +284,7 @@ export default function ProgramsGrid() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(53,117,198,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -304,7 +304,7 @@ export default function ProgramsGrid() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
           >
             Eight Clinical Programs.
             <br />
@@ -315,7 +315,7 @@ export default function ProgramsGrid() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#B0B8C5' }}
           >
             Every protocol begins with advanced biomarker analysis. All treatment is clinically indicated and individually prescribed.
           </motion.p>

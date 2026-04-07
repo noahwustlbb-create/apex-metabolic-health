@@ -82,7 +82,7 @@ export default function Nav() {
                   href="/services"
                   className="text-[13px] font-medium tracking-wide transition-colors duration-200"
                   style={{ color: '#4a5a6a' }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = '#0c131f' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = '#0A0A0A' }}
                   onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 >
                   Programs
@@ -159,8 +159,8 @@ export default function Nav() {
                             className="block px-4 py-2.5 rounded-sm text-[13px] transition-all duration-150"
                             style={{ color: '#4a5a6a' }}
                             onMouseEnter={(e) => {
-                              e.currentTarget.style.color = '#0c131f'
-                              e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.06)'
+                              e.currentTarget.style.color = '#0A0A0A'
+                              e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.06)'
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.color = '#4a5a6a'
@@ -176,9 +176,9 @@ export default function Nav() {
                         <Link
                           href="/services"
                           className="flex items-center justify-between px-4 py-2.5 rounded-sm text-[12px] font-semibold tracking-wide transition-all duration-150"
-                          style={{ color: '#4890f7' }}
+                          style={{ color: '#3575C6' }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.08)'
+                            e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.08)'
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = 'transparent'
@@ -203,7 +203,7 @@ export default function Nav() {
                 href={link.href}
                 className="text-[13px] font-medium tracking-wide transition-colors duration-200"
                 style={{ color: '#4a5a6a' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#0c131f' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#0A0A0A' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
               >
                 {link.label}
@@ -218,7 +218,7 @@ export default function Nav() {
             onMouseEnter={() => setGetStartedOpen(true)}
             onMouseLeave={() => setGetStartedOpen(false)}
           >
-            <Link href="/get-started" className="btn-teal" style={{ color: '#0c131f' }}>
+            <Link href="/get-started" className="btn-teal" style={{ color: '#0A0A0A' }}>
               Start Assessment
               <span className="btn-circle">
                 <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -255,16 +255,16 @@ export default function Nav() {
                         key={item.href}
                         href={item.href}
                         className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
-                        style={{ color: '#0c131f' }}
+                        style={{ color: '#0A0A0A' }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.06)'
+                          e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.06)'
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = 'transparent'
                         }}
                       >
                         <span className="text-[13px] font-semibold">{item.label}</span>
-                        <span className="text-[11px] mt-0.5" style={{ color: '#8899aa' }}>{item.desc}</span>
+                        <span className="text-[11px] mt-0.5" style={{ color: '#B0B8C5' }}>{item.desc}</span>
                       </Link>
                     ))}
                   </div>
@@ -283,17 +283,17 @@ export default function Nav() {
             <motion.span
               animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-[#2C74E8]"
+              className="block w-5 h-px bg-[#3575C6]"
             />
             <motion.span
               animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.2 }}
-              className="block w-5 h-px bg-[#2C74E8]"
+              className="block w-5 h-px bg-[#3575C6]"
             />
             <motion.span
               animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="block w-5 h-px bg-[#2C74E8]"
+              className="block w-5 h-px bg-[#3575C6]"
             />
           </button>
         </div>
@@ -331,7 +331,7 @@ export default function Nav() {
                       onClick={() => setMenuOpen(false)}
                       className="block text-left py-4 text-2xl font-semibold transition-colors duration-200 border-b"
                       style={{
-                        color: '#0c131f',
+                        color: '#0A0A0A',
                         borderColor: 'rgba(0,0,0,0.06)',
                         fontFamily: 'var(--font-space-grotesk)',
                       }}

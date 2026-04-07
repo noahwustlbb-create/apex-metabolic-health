@@ -115,8 +115,8 @@ export default function ChatWidget() {
             className="w-full mb-3 rounded-2xl overflow-hidden flex flex-col"
             style={{
               background: '#0e1520',
-              border: '1px solid rgba(44,116,232,0.18)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(44,116,232,0.08)',
+              border: '1px solid rgba(53,117,198,0.18)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(53,117,198,0.08)',
               height: '480px',
             }}
           >
@@ -128,19 +128,19 @@ export default function ChatWidget() {
               <div className="flex items-center gap-3">
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: 'rgba(44,116,232,0.15)', border: '1px solid rgba(44,116,232,0.3)' }}
+                  style={{ backgroundColor: 'rgba(53,117,198,0.15)', border: '1px solid rgba(53,117,198,0.3)' }}
                 >
                   <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-                    <path d="M18 10c0 4.418-3.582 8-8 8a7.96 7.96 0 01-4-.107L2 19l1.107-4A7.96 7.96 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+                    <path d="M18 10c0 4.418-3.582 8-8 8a7.96 7.96 0 01-4-.107L2 19l1.107-4A7.96 7.96 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="#3575C6" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>
+                  <p className="text-[13px] font-semibold" style={{ color: '#F4F4F6', fontFamily: 'var(--font-space-grotesk)' }}>
                     Apex Clinical Advisor
                   </p>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[10px]" style={{ color: '#8899aa' }}>Online now</span>
+                    <span className="text-[10px]" style={{ color: '#B0B8C5' }}>Online now</span>
                   </div>
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function ChatWidget() {
                 onClick={() => setOpen(false)}
                 className="w-7 h-7 flex items-center justify-center rounded-full transition-colors duration-150"
                 style={{ color: '#4a5a6a' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#f0f4f8' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 aria-label="Close chat"
               >
@@ -169,7 +169,7 @@ export default function ChatWidget() {
                 >
                   <div
                     className="rounded-xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm leading-relaxed"
-                    style={{ backgroundColor: '#19202c', color: '#f0f4f8' }}
+                    style={{ backgroundColor: '#19202c', color: '#F4F4F6' }}
                   >
                     Hi — I&apos;m the Apex clinical advisor. I can help you find the right program, explain how our process works, or answer any questions before you book.
                   </div>
@@ -180,12 +180,12 @@ export default function ChatWidget() {
                         onClick={() => sendMessage(q)}
                         className="text-left px-3 py-2 rounded-lg text-[12px] transition-all duration-150"
                         style={{
-                          border: '1px solid rgba(44,116,232,0.2)',
-                          color: '#7AB8FF',
-                          backgroundColor: 'rgba(44,116,232,0.05)',
+                          border: '1px solid rgba(53,117,198,0.2)',
+                          color: '#6AAEE8',
+                          backgroundColor: 'rgba(53,117,198,0.05)',
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.12)' }}
-                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(44,116,232,0.05)' }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.12)' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.05)' }}
                       >
                         {q}
                       </button>
@@ -207,8 +207,8 @@ export default function ChatWidget() {
                     className="rounded-xl px-4 py-3 max-w-[85%] text-sm leading-relaxed"
                     style={
                       msg.role === 'user'
-                        ? { backgroundColor: '#2C74E8', color: '#ffffff', borderRadius: '12px 12px 2px 12px' }
-                        : { backgroundColor: '#19202c', color: '#f0f4f8', borderRadius: '12px 12px 12px 2px' }
+                        ? { backgroundColor: '#3575C6', color: '#ffffff', borderRadius: '12px 12px 2px 12px' }
+                        : { backgroundColor: '#19202c', color: '#F4F4F6', borderRadius: '12px 12px 12px 2px' }
                     }
                   >
                     {msg.content || (msg.role === 'assistant' && loading && i === messages.length - 1
@@ -246,14 +246,14 @@ export default function ChatWidget() {
                 placeholder="Ask a question..."
                 disabled={loading}
                 className="flex-1 bg-transparent text-sm outline-none"
-                style={{ color: '#f0f4f8' }}
+                style={{ color: '#F4F4F6' }}
               />
               <button
                 type="submit"
                 disabled={!input.trim() || loading}
                 className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-150"
                 style={{
-                  backgroundColor: input.trim() && !loading ? '#2C74E8' : 'rgba(44,116,232,0.2)',
+                  backgroundColor: input.trim() && !loading ? '#3575C6' : 'rgba(53,117,198,0.2)',
                 }}
                 aria-label="Send message"
               >
@@ -273,18 +273,18 @@ export default function ChatWidget() {
         className="flex items-center gap-3 px-6 py-3.5 transition-all duration-200"
         style={{
           background: '#0e1520',
-          border: '1px solid rgba(44,116,232,0.28)',
+          border: '1px solid rgba(53,117,198,0.28)',
           borderRadius: '999px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(44,116,232,0.06)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)',
           color: '#ffffff',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(44,116,232,0.55)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(44,116,232,0.15)'
+          e.currentTarget.style.borderColor = 'rgba(53,117,198,0.55)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(53,117,198,0.15)'
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(44,116,232,0.28)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(44,116,232,0.06)'
+          e.currentTarget.style.borderColor = 'rgba(53,117,198,0.28)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)'
         }}
         aria-label={open ? 'Close chat' : 'Chat with us'}
         aria-expanded={open}
@@ -299,7 +299,7 @@ export default function ChatWidget() {
               transition={{ duration: 0.18 }}
               viewBox="0 0 12 12" fill="none" className="w-4 h-4" aria-hidden="true"
             >
-              <path d="M1 1l10 10M11 1L1 11" stroke="#2C74E8" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M1 1l10 10M11 1L1 11" stroke="#3575C6" strokeWidth="1.5" strokeLinecap="round" />
             </motion.svg>
           ) : (
             <motion.svg
@@ -310,8 +310,8 @@ export default function ChatWidget() {
               transition={{ duration: 0.18 }}
               viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"
             >
-              <path d="M18 10c0 4.418-3.582 8-8 8a7.96 7.96 0 01-4-.107L2 19l1.107-4A7.96 7.96 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="#2C74E8" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
-              <path d="M6.5 10h.01M10 10h.01M13.5 10h.01" stroke="#2C74E8" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M18 10c0 4.418-3.582 8-8 8a7.96 7.96 0 01-4-.107L2 19l1.107-4A7.96 7.96 0 012 10c0-4.418 3.582-8 8-8s8 3.582 8 8z" stroke="#3575C6" strokeWidth="1.5" strokeLinejoin="round" fill="none" />
+              <path d="M6.5 10h.01M10 10h.01M13.5 10h.01" stroke="#3575C6" strokeWidth="1.8" strokeLinecap="round" />
             </motion.svg>
           )}
         </AnimatePresence>
@@ -319,7 +319,7 @@ export default function ChatWidget() {
           {open ? 'Close' : 'Ask Us Anything'}
         </span>
         {!open && (
-          <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: '#2C74E8' }} />
+          <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: '#3575C6' }} />
         )}
       </motion.button>
     </div>

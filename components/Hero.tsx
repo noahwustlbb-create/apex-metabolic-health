@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const PROGRAM_COLORS: Record<string, string> = {
-  'hormone-optimisation': '#2C74E8',
+  'hormone-optimisation': '#3575C6',
   'hormone-performance':  '#e05252',
   'performance-plus':     '#e8872c',
   'metabolic-weight-loss':'#7c52e8',
@@ -136,7 +136,7 @@ function BiometricOverlay() {
         cx="50%" cy="44%"
         rx="96" ry="230"
         fill="none"
-        stroke="rgba(72,144,247,0.055)"
+        stroke="rgba(53,117,198,0.055)"
         strokeWidth="0.8"
       />
       {/* Inner body contour */}
@@ -144,14 +144,14 @@ function BiometricOverlay() {
         cx="50%" cy="44%"
         rx="68" ry="168"
         fill="none"
-        stroke="rgba(72,144,247,0.035)"
+        stroke="rgba(53,117,198,0.035)"
         strokeWidth="0.5"
       />
       {/* Faint centre-line vertical */}
       <line
         x1="50%" y1="10%"
         x2="50%" y2="78%"
-        stroke="rgba(72,144,247,0.025)"
+        stroke="rgba(53,117,198,0.025)"
         strokeWidth="0.5"
         strokeDasharray="3 14"
       />
@@ -161,19 +161,19 @@ function BiometricOverlay() {
           key={i}
           x1="28%" y1={`${10 + i * 2.6}%`}
           x2="72%" y2={`${10 + i * 2.6}%`}
-          stroke="rgba(72,144,247,0.022)"
+          stroke="rgba(53,117,198,0.022)"
           strokeWidth="0.6"
           strokeDasharray={i % 4 === 0 ? '6 10' : '2 16'}
         />
       ))}
       {/* Corner measurement tick marks */}
-      <line x1="36%" y1="12%" x2="38%" y2="12%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
-      <line x1="62%" y1="12%" x2="64%" y2="12%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
-      <line x1="36%" y1="76%" x2="38%" y2="76%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
-      <line x1="62%" y1="76%" x2="64%" y2="76%" stroke="rgba(72,144,247,0.09)" strokeWidth="0.8"/>
+      <line x1="36%" y1="12%" x2="38%" y2="12%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
+      <line x1="62%" y1="12%" x2="64%" y2="12%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
+      <line x1="36%" y1="76%" x2="38%" y2="76%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
+      <line x1="62%" y1="76%" x2="64%" y2="76%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
       {/* Small crosshair top-center */}
-      <line x1="50%" y1="9.2%" x2="50%" y2="10.8%" stroke="rgba(72,144,247,0.12)" strokeWidth="0.8"/>
-      <line x1="49.2%" y1="10%" x2="50.8%" y2="10%" stroke="rgba(72,144,247,0.12)" strokeWidth="0.8"/>
+      <line x1="50%" y1="9.2%" x2="50%" y2="10.8%" stroke="rgba(53,117,198,0.12)" strokeWidth="0.8"/>
+      <line x1="49.2%" y1="10%" x2="50.8%" y2="10%" stroke="rgba(53,117,198,0.12)" strokeWidth="0.8"/>
     </svg>
   )
 }
@@ -183,7 +183,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0c131f' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Hero — Apex Metabolic Health"
     >
       {/* Layer 0 — dot grid base */}
@@ -228,7 +228,7 @@ export default function Hero() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[800px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.13) 0%, rgba(72,144,247,0.04) 40%, transparent 68%)',
+            'radial-gradient(ellipse at 50% 0%, rgba(53,117,198,0.13) 0%, rgba(53,117,198,0.04) 40%, transparent 68%)',
         }}
       />
 
@@ -243,7 +243,7 @@ export default function Hero() {
           width: '900px',
           height: '500px',
           background:
-            'radial-gradient(ellipse at 50% 40%, rgba(72,144,247,0.10) 0%, rgba(72,144,247,0.04) 35%, transparent 65%)',
+            'radial-gradient(ellipse at 50% 40%, rgba(53,117,198,0.10) 0%, rgba(53,117,198,0.04) 35%, transparent 65%)',
         }}
       />
 
@@ -253,7 +253,7 @@ export default function Hero() {
         className="absolute bottom-0 left-0 w-[600px] h-[500px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)',
+            'radial-gradient(ellipse at 0% 100%, rgba(53,117,198,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -261,12 +261,12 @@ export default function Hero() {
       <div
         aria-hidden="true"
         className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 600, height: 600, border: '1px solid rgba(72,144,247,0.05)', top: '50%', left: '50%' }}
+        style={{ width: 600, height: 600, border: '1px solid rgba(53,117,198,0.05)', top: '50%', left: '50%' }}
       />
       <div
         aria-hidden="true"
         className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 950, height: 950, border: '1px solid rgba(72,144,247,0.025)', top: '50%', left: '50%' }}
+        style={{ width: 950, height: 950, border: '1px solid rgba(53,117,198,0.025)', top: '50%', left: '50%' }}
       />
 
       {/* ── Content ── */}
@@ -282,10 +282,10 @@ export default function Hero() {
           <span
             className="inline-flex items-center gap-2.5 px-5 py-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase"
             style={{
-              border: '1px solid rgba(72,144,247,0.22)',
+              border: '1px solid rgba(53,117,198,0.22)',
               borderRadius: '4px',
               color: '#a9c7ff',
-              backgroundColor: 'rgba(72,144,247,0.07)',
+              backgroundColor: 'rgba(53,117,198,0.07)',
             }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
@@ -303,7 +303,7 @@ export default function Hero() {
             style={{
               fontFamily: 'var(--font-space-grotesk)',
               fontSize: 'clamp(42px, 7.5vw, 88px)',
-              color: '#f0f4f8',
+              color: '#F4F4F6',
             }}
           >
             Your GP Said
@@ -318,7 +318,7 @@ export default function Hero() {
             style={{
               fontFamily: 'var(--font-space-grotesk)',
               fontSize: 'clamp(42px, 7.5vw, 88px)',
-              color: '#f0f4f8',
+              color: '#F4F4F6',
             }}
           >
             You Know It Doesn&apos;t.
@@ -334,7 +334,7 @@ export default function Hero() {
         >
           <div className="flex flex-wrap items-center justify-center gap-2">
             {programs.map((program, i) => {
-              const color = PROGRAM_COLORS[program.slug] ?? '#4890f7'
+              const color = PROGRAM_COLORS[program.slug] ?? '#3575C6'
               const isComingSoon = program.status === 'coming-soon'
               const inner = (
                 <motion.span
@@ -379,7 +379,7 @@ export default function Hero() {
                     if (chip) {
                       chip.style.borderColor = `${color}55`
                       chip.style.backgroundColor = `${color}1a`
-                      chip.style.color = '#f0f4f8'
+                      chip.style.color = '#F4F4F6'
                     }
                   }}
                   onMouseLeave={(e) => {
@@ -404,7 +404,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.48, ease }}
           className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
-          style={{ color: '#8899aa' }}
+          style={{ color: '#B0B8C5' }}
         >
           Our mission is to simplify access to advanced, clinically guided therapies beyond traditional healthcare.
         </motion.p>
@@ -470,7 +470,7 @@ export default function Hero() {
               >
                 <path
                   d="M1.5 5.5L4 8l4.5-5.5"
-                  stroke="#4890f7"
+                  stroke="#3575C6"
                   strokeWidth="1.4"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -504,7 +504,7 @@ export default function Hero() {
                 backdropFilter: 'blur(8px)',
               }}
             >
-              <p className="stat-number text-xl md:text-2xl" style={{ color: '#4890f7' }}>
+              <p className="stat-number text-xl md:text-2xl" style={{ color: '#3575C6' }}>
                 {stat.value}
               </p>
               <p
@@ -532,7 +532,7 @@ export default function Hero() {
         <div className="w-px h-8 relative overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
           <div
             className="scroll-drip absolute left-0 w-full"
-            style={{ backgroundColor: '#4890f7', height: '40%' }}
+            style={{ backgroundColor: '#3575C6', height: '40%' }}
           />
         </div>
       </motion.div>

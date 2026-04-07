@@ -90,8 +90,8 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       <div
         className="w-14 h-14 rounded-sm flex items-center justify-center mb-6"
         style={{
-          backgroundColor: 'rgba(72,144,247,0.1)',
-          color: '#4890f7',
+          backgroundColor: 'rgba(53,117,198,0.1)',
+          color: '#3575C6',
         }}
       >
         {item.icon}
@@ -100,16 +100,16 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       {/* Accent bar */}
       <div
         className="w-8 h-px mb-5"
-        style={{ backgroundColor: '#4890f7', opacity: 0.4 }}
+        style={{ backgroundColor: '#3575C6', opacity: 0.4 }}
       />
 
       <h3
         className="text-base font-semibold mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#B0B8C5' }}>
         {item.description}
       </p>
     </motion.div>
@@ -124,7 +124,7 @@ export default function WhyApex() {
     <section
       id="why-apex"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0c131f' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Why choose Apex"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -154,7 +154,7 @@ export default function WhyApex() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
           >
             Clinical Standards.{' '}
             <span className="text-teal-gradient">No Waiting List.</span>

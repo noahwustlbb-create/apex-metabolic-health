@@ -55,8 +55,8 @@ export default function FloatingContact() {
             className="w-full rounded-2xl overflow-hidden"
             style={{
               background: '#0e1520',
-              border: '1px solid rgba(44,116,232,0.18)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(44,116,232,0.08)',
+              border: '1px solid rgba(53,117,198,0.18)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(53,117,198,0.08)',
             }}
           >
             {/* Panel header */}
@@ -67,7 +67,7 @@ export default function FloatingContact() {
               <div className="flex items-center gap-2.5">
                 <span
                   className="text-[11px] font-semibold tracking-[0.18em] uppercase"
-                  style={{ color: '#f0f4f8' }}
+                  style={{ color: '#F4F4F6' }}
                 >
                   Get Started
                 </span>
@@ -76,7 +76,7 @@ export default function FloatingContact() {
                 onClick={() => setOpen(false)}
                 className="w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-150"
                 style={{ color: '#4a5a6a' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#f0f4f8' }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 aria-label="Close"
               >
@@ -96,21 +96,21 @@ export default function FloatingContact() {
                     <button
                       className="w-full flex items-center gap-4 px-5 py-4 text-left transition-colors duration-150"
                       onClick={() => setExpanded(isOpen ? null : step.number)}
-                      style={{ background: isOpen ? 'rgba(44,116,232,0.05)' : 'transparent' }}
+                      style={{ background: isOpen ? 'rgba(53,117,198,0.05)' : 'transparent' }}
                     >
                       <span
                         className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-shrink-0"
                         style={{
-                          backgroundColor: isOpen ? 'rgba(44,116,232,0.2)' : 'rgba(255,255,255,0.06)',
-                          color: isOpen ? '#7AB8FF' : '#4a5a6a',
-                          border: isOpen ? '1px solid rgba(44,116,232,0.3)' : '1px solid rgba(255,255,255,0.08)',
+                          backgroundColor: isOpen ? 'rgba(53,117,198,0.2)' : 'rgba(255,255,255,0.06)',
+                          color: isOpen ? '#6AAEE8' : '#4a5a6a',
+                          border: isOpen ? '1px solid rgba(53,117,198,0.3)' : '1px solid rgba(255,255,255,0.08)',
                         }}
                       >
                         {step.number}
                       </span>
                       <span
                         className="text-sm font-semibold flex-1 text-left"
-                        style={{ color: isOpen ? '#f0f4f8' : '#8899aa', fontFamily: 'var(--font-space-grotesk)' }}
+                        style={{ color: isOpen ? '#F4F4F6' : '#B0B8C5', fontFamily: 'var(--font-space-grotesk)' }}
                       >
                         {step.title}
                       </span>
@@ -141,7 +141,7 @@ export default function FloatingContact() {
                           <div className="px-5 pb-5 pt-1 pl-16">
                             <p
                               className="text-sm leading-relaxed mb-4"
-                              style={{ color: '#8899aa' }}
+                              style={{ color: '#B0B8C5' }}
                             >
                               {step.description}
                             </p>
@@ -150,11 +150,11 @@ export default function FloatingContact() {
                               onClick={() => setOpen(false)}
                               className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-200"
                               style={{
-                                background: 'linear-gradient(135deg, #7AB8FF 0%, #2C74E8 100%)',
+                                background: 'linear-gradient(135deg, #6AAEE8 0%, #3575C6 100%)',
                                 color: '#ffffff',
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(44,116,232,0.4)'
+                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(53,117,198,0.4)'
                               }}
                               onMouseLeave={(e) => {
                                 e.currentTarget.style.boxShadow = 'none'
@@ -184,18 +184,18 @@ export default function FloatingContact() {
         className="flex items-center gap-3 px-7 py-4 transition-all duration-200"
         style={{
           background: '#0e1520',
-          border: '1px solid rgba(44,116,232,0.28)',
+          border: '1px solid rgba(53,117,198,0.28)',
           borderRadius: '999px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(44,116,232,0.06)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)',
           color: '#ffffff',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(44,116,232,0.55)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(44,116,232,0.15)'
+          e.currentTarget.style.borderColor = 'rgba(53,117,198,0.55)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(53,117,198,0.15)'
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(44,116,232,0.28)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(44,116,232,0.06)'
+          e.currentTarget.style.borderColor = 'rgba(53,117,198,0.28)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)'
         }}
         aria-label={open ? 'Close appointment menu' : 'Request an appointment'}
         aria-expanded={open}
@@ -206,7 +206,7 @@ export default function FloatingContact() {
         {!open && (
           <span
             className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-            style={{ backgroundColor: '#2C74E8' }}
+            style={{ backgroundColor: '#3575C6' }}
           />
         )}
       </motion.button>

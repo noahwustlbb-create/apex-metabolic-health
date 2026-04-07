@@ -56,7 +56,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0d1520' }}
       aria-label="Patient experiences"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -84,7 +84,7 @@ export default function Testimonials() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
           >
             What Patients Say
           </motion.h2>
@@ -93,7 +93,7 @@ export default function Testimonials() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18 }}
             className="text-base leading-relaxed max-w-xl mx-auto"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#B0B8C5' }}
           >
             Real experiences from real patients. Names withheld for privacy.
           </motion.p>
@@ -110,7 +110,7 @@ export default function Testimonials() {
             >
               <StarRating />
 
-              <p className="text-sm leading-relaxed flex-1" style={{ color: '#8899aa' }}>
+              <p className="text-sm leading-relaxed flex-1" style={{ color: '#B0B8C5' }}>
                 &ldquo;{t.quote}&rdquo;
               </p>
 
@@ -128,7 +128,7 @@ export default function Testimonials() {
                     {t.initials.split('.')[0]}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold" style={{ color: '#f0f4f8' }}>{t.initials}</p>
+                    <p className="text-xs font-semibold" style={{ color: '#F4F4F6' }}>{t.initials}</p>
                     <p className="text-[11px]" style={{ color: '#4a5a6a' }}>{t.location}</p>
                   </div>
                 </div>

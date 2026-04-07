@@ -86,15 +86,15 @@ function SymptomCard({ symptom, index }: { symptom: typeof SYMPTOMS[0]; index: n
       <div
         className="flex-shrink-0 w-9 h-9 rounded-sm flex items-center justify-center transition-colors duration-300"
         style={{
-          backgroundColor: 'rgba(72,144,247,0.1)',
-          color: '#4890f7',
+          backgroundColor: 'rgba(53,117,198,0.1)',
+          color: '#3575C6',
         }}
       >
         {symptom.icon}
       </div>
       <p
         className="text-sm font-medium leading-snug pt-1.5"
-        style={{ color: '#8899aa' }}
+        style={{ color: '#B0B8C5' }}
       >
         {symptom.label}
       </p>
@@ -123,7 +123,7 @@ export default function ProblemSection() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(53,117,198,0.06) 0%, transparent 60%)',
         }}
       />
 
@@ -143,7 +143,7 @@ export default function ProblemSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
           >
             Something Is Off.
             <br />
@@ -154,7 +154,7 @@ export default function ProblemSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#B0B8C5' }}
           >
             Your GP said normal. Your body disagrees. We run advanced biomarker analysis that finds what standard panels miss — and we act on what we find.
           </motion.p>
@@ -178,13 +178,13 @@ export default function ProblemSection() {
           <div
             className="px-8 py-6 rounded-sm"
             style={{
-              backgroundColor: 'rgba(72,144,247,0.06)',
+              backgroundColor: 'rgba(53,117,198,0.06)',
               border: '1px solid rgba(255,255,255,0.06)',
             }}
           >
-            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#8899aa' }}>
+            <p className="text-base md:text-lg leading-relaxed" style={{ color: '#B0B8C5' }}>
               These are clinical indicators of biological dysfunction — not lifestyle problems.{' '}
-              <span className="font-semibold" style={{ color: '#f0f4f8' }}>
+              <span className="font-semibold" style={{ color: '#F4F4F6' }}>
                 Our doctors run the advanced biomarker panels that find the root cause.
               </span>
             </p>

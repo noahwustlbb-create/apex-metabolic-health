@@ -3,17 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --bg:             #0c131f;
-  --surface:        #151c28;
-  --elevated:       #19202c;
-  --elevated-high:  #2e3542;
-  --border:         rgba(255,255,255,0.06);
-  --teal:           #2C74E8;
-  --teal-light:     #7AB8FF;
-  --teal-glow:      rgba(44,116,232,0.15);
+  /* ── Brand palette — extracted from logo ── */
+  --apex-blue:      #3575C6;   /* primary accent */
+  --deep-navy:      #1A3F7A;   /* depth & shadow */
+  --electric-blue:  #6AAEE8;   /* highlights & line work */
+  --apex-black:     #0A0A0A;   /* dark backgrounds */
+  --steel-silver:   #B0B8C5;   /* metallic accents */
+  --off-white:      #F4F4F6;   /* light text */
+
+  /* ── Surface scale ── */
+  --bg:             #0A0A0A;
+  --surface:        #0d1520;
+  --elevated:       #121c30;
+  --elevated-high:  #1a2a48;
+  --border:         rgba(255,255,255,0.07);
+
+  /* ── Semantic aliases ── */
+  --teal:           #3575C6;
+  --teal-light:     #6AAEE8;
+  --teal-glow:      rgba(53,117,198,0.15);
   --gold:           #c9a84c;
-  --text-primary:   #f0f4f8;
-  --text-secondary: #8899aa;
+  --text-primary:   #F4F4F6;
+  --text-secondary: #B0B8C5;
   --text-muted:     #4a5a6a;
 }
 
@@ -36,7 +47,7 @@
     background: var(--bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: #2e3542;
+    background: #1A3F7A;
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -51,15 +62,15 @@
 @layer utilities {
   /* Dot-grid background — very subtle */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(44,116,232,0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(53,117,198,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
   /* Fine line grid */
   .line-grid {
     background-image:
-      linear-gradient(rgba(44,116,232,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(44,116,232,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(53,117,198,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(53,117,198,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -72,7 +83,7 @@
 
   /* Signature gradient text — primary accent */
   .text-teal-gradient {
-    background: linear-gradient(135deg, #7AB8FF 0%, #2C74E8 100%);
+    background: linear-gradient(135deg, #6AAEE8 0%, #3575C6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -101,8 +112,8 @@
   }
 
   .apex-card:hover {
-    background: #21293a;
-    box-shadow: 0 12px 32px rgba(7,14,26,0.5);
+    background: #162038;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
     transform: translateY(-2px);
   }
 
@@ -121,9 +132,9 @@
     @apply inline-flex items-center justify-between;
     padding: 5px 5px 5px 22px;
     border-radius: 999px;
-    border: 1px solid rgba(44,116,232,0.45);
-    background: rgba(44,116,232,0.1);
-    color: #f0f4f8;
+    border: 1px solid rgba(53,117,198,0.45);
+    background: rgba(53,117,198,0.1);
+    color: #F4F4F6;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -134,9 +145,9 @@
   }
 
   .btn-teal:hover {
-    background: rgba(44,116,232,0.18);
-    border-color: rgba(44,116,232,0.7);
-    box-shadow: 0 0 36px rgba(44,116,232,0.22);
+    background: rgba(53,117,198,0.18);
+    border-color: rgba(53,117,198,0.7);
+    box-shadow: 0 0 36px rgba(53,117,198,0.25);
   }
 
   /* Secondary ghost button — pill with circle icon */
@@ -175,12 +186,12 @@
   }
 
   .btn-teal .btn-circle {
-    background: #2C74E8;
+    background: #3575C6;
     color: #ffffff;
   }
 
   .btn-teal:hover .btn-circle {
-    background: #5a9ff8;
+    background: #6AAEE8;
   }
 
   .btn-ghost .btn-circle {

@@ -49,8 +49,8 @@ export default function FloatingCTA() {
             borderRadius: '40px',
             background: hovered
               ? 'linear-gradient(135deg, #2b7be0 0%, #1a5fb4 100%)'
-              : 'linear-gradient(135deg, #111820 0%, #0d1117 100%)',
-            border: `1px solid ${hovered ? 'rgba(43,123,224,0.8)' : '#1e2d3d'}`,
+              : 'linear-gradient(135deg, #121c30 0%, #0d1520 100%)',
+            border: `1px solid ${hovered ? 'rgba(43,123,224,0.8)' : '#1A3F7A'}`,
             boxShadow: hovered
               ? '0 0 28px rgba(43,123,224,0.45), 0 8px 32px rgba(0,0,0,0.6)'
               : '0 4px 24px rgba(0,0,0,0.5)',
@@ -88,7 +88,7 @@ export default function FloatingCTA() {
               fontWeight: 700,
               letterSpacing: '0.16em',
               textTransform: 'uppercase',
-              color: hovered ? '#ffffff' : '#f0f4f8',
+              color: hovered ? '#ffffff' : '#F4F4F6',
               transition: 'color 0.25s',
             }}
           >
