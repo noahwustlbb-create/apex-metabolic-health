@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function TreatmentOptions() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
-      {/* Card A: Apex Protocol Membership */}
+      {/* Card A: Apex Partner Pharmacy */}
       <div className="apex-card p-7 flex flex-col">
         <p
           className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3"
@@ -23,21 +23,23 @@ function TreatmentOptions() {
           className="text-base font-semibold mb-1 leading-snug"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
-          Apex Protocol Membership
+          Apex Partner Pharmacy
         </h4>
-        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
-          $99<span className="text-sm font-normal" style={{ color: '#8899aa' }}>/month</span>
+        <p className="text-sm mb-1" style={{ color: '#8899aa' }}>
+          Medication invoiced at <span style={{ color: '#f0f4f8', fontWeight: 600 }}>pharmacy rates</span>
         </p>
-        <ul className="space-y-3 flex-1">
+        <p className="text-xs mb-5" style={{ color: '#4a5a6a' }}>
+          + Administration, Handling &amp; Infrastructure fee from <span style={{ color: '#8899aa' }}>$50</span>
+        </p>
+        <ul className="space-y-3 flex-1 mb-5">
           {[
-            'Medication priced at pharmacy rates',
-            'Medication fulfilment access through our partner pharmacy',
-            'File management & treatment coordination',
-            'Medication safety review',
+            'Medication fulfilled through our accredited compounding pharmacy partner',
+            'Ongoing file management & treatment coordination',
+            'Medication safety reviews',
             'Clinical support team access',
-            'Coordinated review consultations built in',
+            'Coordinated follow-up consultations',
             'Admin support 9–5, 7 days a week',
-            'Evidence-based supplement recommendations',
+            'Evidence-based supplement guidance',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span
@@ -51,33 +53,35 @@ function TreatmentOptions() {
             </li>
           ))}
         </ul>
+        <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
+          The AHI fee covers the infrastructure required to manage your treatment safely and continuously — file management, safety checks, coordination, and ongoing clinical oversight.
+        </p>
       </div>
 
       {/* Card B: Script Release Only */}
       <div className="apex-card p-7 flex flex-col">
-        <div className="mb-4">
-          <div
-            className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3 opacity-0 select-none"
-            aria-hidden="true"
-          >
-            OPTION
-          </div>
-          <h4
-            className="text-base font-semibold mb-1 leading-snug"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-          >
-            Script Release Only
-          </h4>
-          <p className="text-2xl font-bold mb-0" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
-            $145<span className="text-sm font-normal" style={{ color: '#8899aa' }}> one-off</span>
-          </p>
+        <div
+          className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-3 opacity-0 select-none"
+          aria-hidden="true"
+        >
+          OPTION
         </div>
-        <ul className="space-y-3 flex-1">
+        <h4
+          className="text-base font-semibold mb-1 leading-snug"
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        >
+          Script Release Only
+        </h4>
+        <p className="text-sm mb-1" style={{ color: '#8899aa' }}>
+          Prescribing &amp; script release fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span>
+        </p>
+        <p className="text-xs mb-5" style={{ color: '#4a5a6a' }}>One-off. No ongoing fees.</p>
+        <ul className="space-y-3 flex-1 mb-5">
           {[
-            <>Script release &amp; prescribing fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span></>,
-            'No ongoing support fee',
-            'Access to our clinical team for dosing guidance as needed',
-            'You fill your prescription at any pharmacy',
+            'Script issued and sent directly to you with your treatment plan and dosing guide',
+            'Fill your prescription at any pharmacy of your choice',
+            'Access to our nursing team for dosing advice and clinical support',
+            'Access to our admin team as required',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span
@@ -91,6 +95,9 @@ function TreatmentOptions() {
             </li>
           ))}
         </ul>
+        <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
+          Best suited for patients who have an existing pharmacy relationship or prefer to manage their own fulfilment independently.
+        </p>
       </div>
     </div>
   )
