@@ -893,7 +893,10 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          A consult consists of the intake, onboarding, review, recommendations and possible scripting of medications as well as phone consultations with your Dr and our team if necessary. A single consultation is conducted once only with any further communication of repeat scripting needing to be booked in as another consult. Unlimited touchpoints with our admin and Nurse team are available during business hours 5 days a week. The Fee includes but is not limited to: phone consults with the team · phone consult with an Australian Doctor · Clinic Liaison with external and allied professionals (pharmacy, GP, Physiotherapist, Dietician) · Sending orders · Posting paperwork or scripts if required · Uploading files and record keeping · Managing bookings and requests. *Terms and Conditions Apply — Enquire with team for full details and refer to the Terms and Conditions and FAQs on Website.
+                          Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, liaison with external providers (pharmacy, GP, allied health), order management, and full administrative support. Unlimited contact with our admin and nurse team is available Monday–Friday during business hours.
+                        </p>
+                        <p className="text-xs mt-2" style={{ color: '#4a5a6a' }}>
+                          A single consultation covers one episode of care. Repeat scripting or ongoing management requires a follow-up booking. Terms &amp; Conditions apply — speak to our team or refer to the T&amp;Cs on our website for full details.
                         </p>
                       </div>
                     </label>
