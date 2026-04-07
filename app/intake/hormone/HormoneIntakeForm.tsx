@@ -107,6 +107,7 @@ interface FormData {
   stressScore: string
   stressEvents: string
   conditions: string[]
+  conditionsNote: string
   // Step 6
   mainCondition: string
   signatureType: 'draw' | 'type'
@@ -138,6 +139,7 @@ const defaultData: FormData = {
   healthScore: '', energyScore: '', energyLowest: '', energyHighest: '',
   stressScore: '', stressEvents: '',
   conditions: [],
+  conditionsNote: '',
   mainCondition: '', signatureType: 'draw', typedSignature: '', printName: '',
   isOver18: false, notProhibited: false, promoCode: '', consultOption: 'single',
 }
@@ -793,6 +795,22 @@ export default function HormoneIntakeForm() {
                   <div>
                     <p className="text-xs font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#4890f7' }}>Have You Had Any of the Following? (tick all that apply)</p>
                     <CheckboxGroup options={MEDICAL_CONDITIONS} value={data.conditions} onChange={(v) => set('conditions', v)} />
+                    <textarea
+                      value={data.conditionsNote}
+                      onChange={(e) => set('conditionsNote', e.target.value)}
+                      placeholder="Any additional context, diagnoses, or medical history you'd like your doctor to know..."
+                      rows={3}
+                      className="w-full mt-4 px-4 py-3 rounded-sm text-sm resize-none"
+                      style={{
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        color: '#F4F4F6',
+                        outline: 'none',
+                        fontFamily: 'inherit',
+                      }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = '#3575C6')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                    />
                   </div>
                 </div>
               )}
