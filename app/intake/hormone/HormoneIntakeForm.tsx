@@ -881,6 +881,26 @@ export default function HormoneIntakeForm() {
                     </label>
                   </div>
 
+                  {/* Pathology disclaimer */}
+                  <div
+                    className="flex gap-3 p-4 rounded-lg"
+                    style={{
+                      background: 'rgba(201,168,76,0.06)',
+                      border: '1px solid rgba(201,168,76,0.2)',
+                    }}
+                  >
+                    <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="#c9a84c" strokeWidth="1.2"/>
+                      <path d="M10 6v4.5M10 13.5v.5" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round"/>
+                    </svg>
+                    <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
+                      <span className="font-semibold" style={{ color: '#c9a84c' }}>Pathology Requirement — </span>
+                      To proceed with your consultation, current bloodwork is required. Results must be dated within the last 3 months. If you do not have recent results, we can arrange a comprehensive pathology panel through our accredited pathology partner prior to your appointment.{' '}
+                      <span className="font-semibold" style={{ color: '#F4F4F6' }}>An Apex pathology panel is available for $280</span>{' '}
+                      and can be ordered directly through our website — no GP referral required. Your doctor will review your results as part of your consultation.
+                    </p>
+                  </div>
+
                   <div>
                     <FieldLabel>Promo Code (optional)</FieldLabel>
                     <div className="flex gap-3 max-w-xs">
