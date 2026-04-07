@@ -249,7 +249,7 @@ export default function Nav() {
                       { label: 'Health Quiz', desc: 'Find your program in 2 min', href: '/assessment' },
                       { label: 'Hormone Check', desc: 'Clinically validated score', href: '/hormone-check' },
                       { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
-                      { label: 'Metabolic Assessment', desc: 'Metabolic optimisation & more', href: '/intake/general' },
+                      { label: 'Metabolic Assessment', desc: 'Metabolic symptom score', href: '/metabolic-check' },
                     ].map((item) => (
                       <Link
                         key={item.href}
