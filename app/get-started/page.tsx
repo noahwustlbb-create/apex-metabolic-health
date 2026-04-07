@@ -408,6 +408,14 @@ function EnquiryForm() {
                   </option>
                 ))}
               </select>
+              <input
+                type="text"
+                name="referralDetail"
+                placeholder="Please specify (optional)"
+                style={{ ...inputBase, marginTop: '8px' }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = '#3575C6')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+              />
             </div>
 
             {/* Message */}
