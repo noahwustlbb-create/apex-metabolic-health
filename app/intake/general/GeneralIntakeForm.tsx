@@ -991,7 +991,7 @@ export default function GeneralIntakeForm() {
                         <div>
                           <p className="text-sm font-semibold mb-2" style={{ color: '#f0f4f8' }}>GENERAL SINGLE CONSULT — $125</p>
                           <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-                            Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health). Order management, administrative support, and unlimited admin and nurse access (Mon–Fri) are included as part of your Apex membership. A single consultation covers one episode of care — repeat scripting or ongoing management requires a follow-up booking. Terms &amp; Conditions apply.
+                            A structured telehealth consultation with your AHPRA-registered doctor. Your doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan. Typically 30–45 minutes. Medication scripting where clinically appropriate.
                           </p>
                         </div>
                       </div>
@@ -1276,7 +1276,7 @@ export default function GeneralIntakeForm() {
                           SINGLE CONSULT $125
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health).
+                          A structured telehealth consultation with your AHPRA-registered doctor. Your doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan. Typically 30–45 minutes. Medication scripting where clinically appropriate.
                         </p>
                       </div>
                     </label>

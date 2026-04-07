@@ -893,7 +893,7 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          Your consultation fee covers intake review, clinical assessment, personalised recommendations, and where clinically appropriate, medication scripting — delivered by an AHPRA-registered Australian doctor. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health).
+                          A structured telehealth consultation with your AHPRA-registered doctor. Your doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan. Typically 45–60 minutes. Medication scripting where clinically appropriate.
                         </p>
                       </div>
                     </label>
