@@ -8,6 +8,7 @@ import PathologyPanel from '@/components/PathologyPanel'
 import ProgramQuiz from '@/components/ProgramQuiz'
 import Affiliations from '@/components/Affiliations'
 import StatsBar from '@/components/StatsBar'
+import BookingOptions from '@/components/BookingOptions'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
 import FloatingContact from '@/components/FloatingContact'
@@ -27,6 +28,7 @@ export default function Home() {
         <PathologyPanel />
         <Affiliations />
         <StatsBar />
+        <BookingOptions />
         <CTASection />
       </main>
       <Footer />

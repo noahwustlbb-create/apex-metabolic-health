@@ -10,7 +10,7 @@ const STEPS = [
     title: 'Start Your Assessment',
     description: 'Answer a short health questionnaire. We\'ll match you to the right program and doctor.',
     cta: 'Begin assessment',
-    href: '/get-started',
+    href: '/assessment',
   },
   {
     number: '2',

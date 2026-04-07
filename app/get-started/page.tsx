@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import BookingOptions from '@/components/BookingOptions'
 import { programs } from '@/lib/programs'
 
 // ─── Input styles ─────────────────────────────────────────────────────────────
@@ -57,20 +58,46 @@ function GetStartedHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6', lineHeight: '1.06' }}
         >
-          Three Ways to Book. Choose Yours.
+          Four Ways to Begin.{' '}
+          <span className="text-teal-gradient">Choose Yours.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
-          className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#8899aa' }}
+          className="text-lg leading-relaxed max-w-xl mb-8"
+          style={{ color: '#B0B8C5' }}
         >
-          Three ways to begin. Choose what feels right for where you&apos;re at.
+          Not sure where to start? Take the quiz and find your program in 2 minutes. Or jump straight in.
         </motion.p>
+
+        {/* Quick CTA strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.32 }}
+          className="flex flex-wrap gap-3"
+        >
+          <Link href="/assessment" className="btn-teal">
+            Find My Program
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </Link>
+          <Link href="/intake/discovery" className="btn-ghost">
+            Free Discovery Call
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </Link>
+        </motion.div>
       </div>
     </section>
   )
@@ -472,7 +499,11 @@ export default function GetStartedPage() {
       <Nav />
       <main>
         <GetStartedHero />
-        <BookingCards />
+        <BookingOptions
+          eyebrow="YOUR OPTIONS"
+          heading="Four Ways to Begin. Choose Yours."
+          subheading="Choose what feels right for where you're at."
+        />
         <EnquiryForm />
         <TrustStrip />
       </main>
