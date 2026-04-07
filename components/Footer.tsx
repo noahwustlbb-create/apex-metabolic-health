@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
+
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
@@ -20,9 +21,24 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative"
+      className="relative overflow-hidden"
       style={{ backgroundColor: '#0a1018', borderTop: '1px solid rgba(255,255,255,0.06)' }}
     >
+      {/* Logo watermark — top right */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-0 pointer-events-none select-none"
+        style={{ width: '320px', height: '320px', transform: 'translate(25%, -15%)' }}
+      >
+        <Image
+          src="/logo-icon.png"
+          alt=""
+          fill
+          className="object-contain"
+          style={{ mixBlendMode: 'screen', opacity: 0.06 }}
+          unoptimized
+        />
+      </div>
       {/* Top glow rule */}
       <div
         className="h-px w-full"
@@ -38,15 +54,25 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             {/* Logo */}
-            <div className="mb-5">
-              <Image
-                src="/logo.png"
-                alt="Apex Metabolic Health"
-                width={140}
-                height={140}
-                className="h-16 w-auto"
-                unoptimized
-              />
+            <div className="mb-5 flex items-center gap-4">
+              <div className="relative w-14 h-14 shrink-0">
+                <Image
+                  src="/logo-icon.png"
+                  alt="Apex Metabolic Health"
+                  fill
+                  className="object-contain"
+                  style={{ mixBlendMode: 'screen' }}
+                  unoptimized
+                />
+              </div>
+              <div>
+                <div style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '18px', fontWeight: 700, color: '#f0f4f8', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+                  Apex
+                </div>
+                <div style={{ fontSize: '9px', fontWeight: 400, color: '#4a5a6a', letterSpacing: '0.22em', textTransform: 'uppercase', marginTop: '3px' }}>
+                  Metabolic Health
+                </div>
+              </div>
             </div>
 
             <p

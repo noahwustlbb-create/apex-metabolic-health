@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { programs } from '@/lib/programs'
 
 const PROGRAM_COLORS: Record<string, string> = {
@@ -203,6 +204,23 @@ export default function Hero() {
 
       {/* Layer 3 — biometric scan overlay */}
       <BiometricOverlay />
+
+      {/* Layer 3b — logo watermark, bottom-right */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 right-0 pointer-events-none select-none"
+        style={{ width: '560px', height: '560px', transform: 'translate(18%, 18%)' }}
+      >
+        <Image
+          src="/logo-icon.png"
+          alt=""
+          fill
+          className="object-contain"
+          style={{ mixBlendMode: 'screen', opacity: 0.055 }}
+          priority
+          unoptimized
+        />
+      </div>
 
       {/* Layer 4 — top radial glow (existing) */}
       <div

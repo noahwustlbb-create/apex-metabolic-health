@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 export default function CTASection() {
   const ref = useRef(null)
@@ -29,6 +30,23 @@ export default function CTASection() {
 
       {/* Dot grid */}
       <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
+
+      {/* Logo watermark — centered behind headline */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+      >
+        <div className="relative w-[420px] h-[420px]">
+          <Image
+            src="/logo-icon.png"
+            alt=""
+            fill
+            className="object-contain"
+            style={{ mixBlendMode: 'screen', opacity: 0.04 }}
+            unoptimized
+          />
+        </div>
+      </div>
 
       {/* Pulsing rings */}
       <div
