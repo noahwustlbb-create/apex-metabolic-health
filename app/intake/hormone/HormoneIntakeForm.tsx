@@ -893,7 +893,7 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          A structured telehealth consultation with your AHPRA-registered doctor. Your doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan. Typically 45–60 minutes. Medication scripting where clinically appropriate.
+                          A structured telehealth consultation — not a quick check-in. Your AHPRA-registered doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan with clinical recommendations. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) where required. Typically 45–60 minutes. Medication scripting where clinically appropriate.
                         </p>
                       </div>
                     </label>
