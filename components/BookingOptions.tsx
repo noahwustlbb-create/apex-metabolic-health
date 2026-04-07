@@ -64,6 +64,7 @@ interface BookingOptionsProps {
   eyebrow?: string
   heading?: string
   subheading?: string
+  showViewAll?: boolean
   className?: string
 }
 
@@ -71,6 +72,7 @@ export default function BookingOptions({
   eyebrow = 'GET STARTED',
   heading = 'Three Ways to Begin. Choose Yours.',
   subheading = 'Choose what feels right for where you\'re at.',
+  showViewAll = false,
   className = '',
 }: BookingOptionsProps) {
   const ref = useRef(null)
@@ -205,16 +207,34 @@ export default function BookingOptions({
           ))}
         </div>
 
-        {/* Bottom trust line */}
-        <motion.p
+        {/* View all / trust line */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center text-[11px] tracking-[0.18em] uppercase mt-10"
-          style={{ color: '#4a5a6a' }}
+          className="flex flex-col items-center gap-4 mt-10"
         >
-          All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
-        </motion.p>
+          {showViewAll && (
+            <Link
+              href="/get-started"
+              className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200"
+              style={{ color: '#3575C6' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#6AAEE8' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#3575C6' }}
+            >
+              Three Ways to Book — See All Options
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          )}
+          <p
+            className="text-center text-[11px] tracking-[0.18em] uppercase"
+            style={{ color: '#4a5a6a' }}
+          >
+            All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
+          </p>
+        </motion.div>
       </div>
     </section>
   )

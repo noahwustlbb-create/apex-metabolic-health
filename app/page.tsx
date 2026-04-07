@@ -28,7 +28,7 @@ export default function Home() {
         <PathologyPanel />
         <Affiliations />
         <StatsBar />
-        <BookingOptions />
+        <BookingOptions showViewAll />
         <CTASection />
       </main>
       <Footer />
