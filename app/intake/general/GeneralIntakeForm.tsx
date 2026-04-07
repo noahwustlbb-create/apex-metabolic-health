@@ -991,7 +991,7 @@ export default function GeneralIntakeForm() {
                         <div>
                           <p className="text-sm font-semibold mb-2" style={{ color: '#f0f4f8' }}>GENERAL SINGLE CONSULT — $125</p>
                           <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-                            A structured telehealth consultation — not a quick check-in. Your AHPRA-registered doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan with clinical recommendations. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) where required. Typically 30–45 minutes. Medication scripting where clinically appropriate.
+                            This is a real medical consultation. Your AHPRA-registered doctor reviews your health history in full and provides clinical recommendations — not a generic health check, not a referral letter. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 30–45 minutes.
                           </p>
                         </div>
                       </div>
@@ -1276,7 +1276,7 @@ export default function GeneralIntakeForm() {
                           SINGLE CONSULT $125
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          A structured telehealth consultation — not a quick check-in. Your AHPRA-registered doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan with clinical recommendations. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) where required. Typically 30–45 minutes. Medication scripting where clinically appropriate.
+                          This is a real medical consultation. Your AHPRA-registered doctor reviews your health history in full and provides clinical recommendations — not a generic health check, not a referral letter. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 30–45 minutes.
                         </p>
                       </div>
                     </label>

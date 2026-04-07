@@ -893,7 +893,7 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          A structured telehealth consultation — not a quick check-in. Your AHPRA-registered doctor reviews your full results, takes a detailed health history, and builds a personalised treatment plan with clinical recommendations. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) where required. Typically 45–60 minutes. Medication scripting where clinically appropriate.
+                          This is a real medical consultation. Your AHPRA-registered doctor reviews your pathology in full, takes a comprehensive health history, and where clinically indicated, prescribes a personalised treatment protocol. Not a referral. Not a second opinion. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 45–60 minutes.
                         </p>
                       </div>
                     </label>
