@@ -169,13 +169,21 @@ export default function WhyApex() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="/assessment" className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto">
+            Find My Program
+            <span className="btn-circle">
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </a>
           <a href="/services" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             Choose Your Program
           </a>
-          <a href="/intake/hormone" className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto">
+          <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             Hormone Consult
           </a>
-          <a href="/intake/general" className="btn-teal text-sm tracking-widest uppercase w-full sm:w-auto">
+          <a href="/intake/general" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             General Health Check Up
           </a>
         </div>
