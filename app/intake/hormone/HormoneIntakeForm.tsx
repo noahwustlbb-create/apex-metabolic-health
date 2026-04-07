@@ -115,6 +115,7 @@ interface FormData {
   isOver18: boolean
   notProhibited: boolean
   promoCode: string
+  consultOption: string
 }
 
 const defaultData: FormData = {
@@ -138,7 +139,7 @@ const defaultData: FormData = {
   stressScore: '', stressEvents: '',
   conditions: [],
   mainCondition: '', signatureType: 'draw', typedSignature: '', printName: '',
-  isOver18: false, notProhibited: false, promoCode: '',
+  isOver18: false, notProhibited: false, promoCode: '', consultOption: 'single',
 }
 
 // ─── Reusable Components ──────────────────────────────────────────────────────
@@ -511,6 +512,7 @@ export default function HormoneIntakeForm() {
       formType: 'Hormone Program Pre-Screen Intake',
       referredBy: getReferral() || 'Direct',
       promoCode: data.promoCode.trim() || 'None',
+      consultOption: data.consultOption,
     }
 
     try {
@@ -845,6 +847,38 @@ export default function HormoneIntakeForm() {
                     ) : (
                       <TextInput value={data.typedSignature} onChange={(v) => set('typedSignature', v)} placeholder="Type your full name" />
                     )}
+                  </div>
+
+                  {/* Consult Option */}
+                  <div>
+                    <p className="text-sm font-semibold mb-3" style={{ color: '#F4F4F6' }}>
+                      Please choose a consult option: <span style={{ color: '#e05c5c' }}>*</span>
+                    </p>
+                    <label
+                      className="flex items-start gap-3 p-4 rounded-lg cursor-pointer transition-all duration-150"
+                      style={{
+                        background: data.consultOption === 'single' ? 'rgba(53,117,198,0.1)' : 'rgba(255,255,255,0.03)',
+                        border: `1px solid ${data.consultOption === 'single' ? 'rgba(53,117,198,0.4)' : 'rgba(255,255,255,0.08)'}`,
+                      }}
+                    >
+                      <input
+                        type="radio"
+                        name="consultOption"
+                        value="single"
+                        checked={data.consultOption === 'single'}
+                        onChange={() => set('consultOption', 'single')}
+                        className="mt-0.5 flex-shrink-0"
+                        style={{ accentColor: '#3575C6' }}
+                      />
+                      <div>
+                        <p className="text-sm font-bold mb-2" style={{ color: '#F4F4F6', fontFamily: 'var(--font-space-grotesk)' }}>
+                          SINGLE CONSULT $275
+                        </p>
+                        <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
+                          A consult consists of the intake, onboarding, review, recommendations and possible scripting of medications as well as phone consultations with your Dr and our team if necessary. A single consultation is conducted once only with any further communication of repeat scripting needing to be booked in as another consult. Unlimited touchpoints with our admin and Nurse team are available during business hours 5 days a week. The Fee includes but is not limited to: phone consults with the team · phone consult with an Australian Doctor · Clinic Liaison with external and allied professionals (pharmacy, GP, Physiotherapist, Dietician) · Sending orders · Posting paperwork or scripts if required · Uploading files and record keeping · Managing bookings and requests. *Terms and Conditions Apply — Enquire with team for full details and refer to the Terms and Conditions and FAQs on Website.
+                        </p>
+                      </div>
+                    </label>
                   </div>
 
                   <div>
