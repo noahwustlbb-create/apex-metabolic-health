@@ -991,7 +991,7 @@ export default function GeneralIntakeForm() {
                         <div>
                           <p className="text-sm font-semibold mb-2" style={{ color: '#f0f4f8' }}>GENERAL SINGLE CONSULT — $125</p>
                           <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
-                            This is a real medical consultation. Your AHPRA-registered doctor reviews your health history in full and provides clinical recommendations — not a generic health check, not a referral letter. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 30–45 minutes.
+                            Your consultation fee covers intake review, clinical assessment, and personalised treatment recommendations — delivered by an AHPRA-registered Australian doctor. Where clinically appropriate, medication scripting is included. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) as required. Typically 30–45 minutes.
                           </p>
                         </div>
                       </div>
@@ -1276,7 +1276,7 @@ export default function GeneralIntakeForm() {
                           SINGLE CONSULT $125
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          This is a real medical consultation. Your AHPRA-registered doctor reviews your health history in full and provides clinical recommendations — not a generic health check, not a referral letter. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 30–45 minutes.
+                          Your consultation fee covers intake review, clinical assessment, and personalised treatment recommendations — delivered by an AHPRA-registered Australian doctor. Where clinically appropriate, medication scripting is included. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) as required. Typically 30–45 minutes.
                         </p>
                       </div>
                     </label>

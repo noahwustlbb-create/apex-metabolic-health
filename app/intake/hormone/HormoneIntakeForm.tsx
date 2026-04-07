@@ -893,7 +893,7 @@ export default function HormoneIntakeForm() {
                           SINGLE CONSULT $275
                         </p>
                         <p className="text-xs leading-relaxed" style={{ color: '#B0B8C5' }}>
-                          This is a real medical consultation. Your AHPRA-registered doctor reviews your pathology in full, takes a comprehensive health history, and where clinically indicated, prescribes a personalised treatment protocol. Not a referral. Not a second opinion. A plan. Direct phone access to your doctor and clinical team is included, along with coordination with your pharmacy, GP, or allied health providers as needed. Typically 45–60 minutes.
+                          Your consultation fee covers intake review, full pathology assessment, clinical history, and personalised treatment recommendations — delivered by an AHPRA-registered Australian doctor. Where clinically appropriate, medication scripting is included. Includes phone access to your treating doctor and our clinical team, and liaison with external providers (pharmacy, GP, allied health) as required. Typically 45–60 minutes.
                         </p>
                       </div>
                     </label>
