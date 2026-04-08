@@ -246,8 +246,8 @@ export default function Nav() {
                   <div className="p-2 flex flex-col gap-0.5">
                     {[
                       { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/get-started' },
-                      { label: 'Health Quiz', desc: 'Find your program in 2 min', href: '/assessment' },
-                      { label: 'Hormone Check', desc: 'Clinically validated score', href: '/hormone-check' },
+                      { label: 'Health Quiz', desc: 'Find your program in 2 min', href: '/quiz' },
+{ label: 'Hormone Check', desc: 'Clinically validated score', href: '/hormone-check' },
                       { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
                       { label: 'Metabolic Assessment', desc: 'Metabolic symptom score', href: '/metabolic-check' },
                     ].map((item) => (
