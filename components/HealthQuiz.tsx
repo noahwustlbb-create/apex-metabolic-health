@@ -91,6 +91,13 @@ const AGES = [
   { id: '56+',   label: '56+',     w: { hormone:2, metabolic:2, bloodpanel:2 } as W },
 ]
 
+const GENDERS = [
+  { id: 'male',           label: 'Male',                        w: {} as W },
+  { id: 'female',         label: 'Female',                      w: {} as W },
+  { id: 'non_binary',     label: 'Non-binary',                  w: {} as W },
+  { id: 'prefer_not',     label: 'Prefer not to say',           w: {} as W },
+]
+
 const CONDITIONS = [
   { id: 'diabetes',   label: 'Diabetes or pre-diabetes',           w: { metabolic:3 } as W },
   { id: 'thyroid',    label: 'Thyroid condition',                  w: { hormone:2, metabolic:1 } as W },
@@ -108,10 +115,10 @@ const READINESS = [
 
 // ─── Step types ───────────────────────────────────────────────────────────────
 
-type Step = 'intro' | 'goal' | 'symptoms' | 'duration' | 'training' | 'age' | 'conditions' | 'readiness' | 'analysing' | 'capture' | 'results'
+type Step = 'intro' | 'goal' | 'symptoms' | 'duration' | 'training' | 'age' | 'gender' | 'conditions' | 'readiness' | 'analysing' | 'capture' | 'results'
 
-const STEPS: Step[] = ['intro','goal','symptoms','duration','training','age','conditions','readiness','analysing','capture','results']
-const Q_STEPS: Step[] = ['goal','symptoms','duration','training','age','conditions','readiness']
+const STEPS: Step[] = ['intro','goal','symptoms','duration','training','age','gender','conditions','readiness','analysing','capture','results']
+const Q_STEPS: Step[] = ['goal','symptoms','duration','training','age','gender','conditions','readiness']
 
 // ─── Motion variants ──────────────────────────────────────────────────────────
 
@@ -278,7 +285,7 @@ function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; o
     <div className="w-full max-w-2xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         {onBack ? <BackBtn onClick={onBack} /> : <span />}
-        <StepLabel n={1} total={7} />
+        <StepLabel n={1} total={8} />
       </div>
       <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select all that apply — we'll build your profile from there." />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -338,7 +345,7 @@ function SymptomsStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => voi
     <div className="w-full max-w-xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={2} total={7} />
+        <StepLabel n={2} total={8} />
       </div>
       <QHead eyebrow="Symptoms" heading="Which of these do you experience?" sub="Select all that apply — this shapes your program match." />
       <div className="flex flex-col gap-2.5">
@@ -361,7 +368,7 @@ function DurationStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => vo
     <div className="w-full max-w-xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={3} total={7} />
+        <StepLabel n={3} total={8} />
       </div>
       <QHead eyebrow="Timeline" heading="How long have you felt this way?" sub="Duration helps determine the likely cause and appropriate intervention." />
       <div className="flex flex-col gap-2.5">
@@ -380,7 +387,7 @@ function TrainingStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => vo
     <div className="w-full max-w-xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={4} total={7} />
+        <StepLabel n={4} total={8} />
       </div>
       <QHead eyebrow="Lifestyle" heading="How often do you currently train?" sub="Physical activity levels directly influence hormone and recovery protocols." />
       <div className="flex flex-col gap-2.5">
@@ -400,7 +407,7 @@ function AgeStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; o
     <div className="w-full max-w-lg mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={5} total={7} />
+        <StepLabel n={5} total={8} />
       </div>
       <QHead eyebrow="Profile" heading="What is your age range?" sub="Hormonal and metabolic baselines shift significantly across decades." />
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -413,6 +420,25 @@ function AgeStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; o
           >
             {a.label}
           </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function GenderStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
+  return (
+    <div className="w-full max-w-lg mx-auto px-4">
+      <div className="flex items-center justify-between mb-8">
+        <BackBtn onClick={onBack} />
+        <StepLabel n={6} total={8} />
+      </div>
+      <QHead eyebrow="Profile" heading="What is your gender?" />
+      <div className="flex flex-col gap-2.5">
+        {GENDERS.map(g => (
+          <Card key={g.id} onClick={() => onSelect(g.id, g.w)}>
+            <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>{g.label}</span>
+          </Card>
         ))}
       </div>
     </div>
@@ -443,7 +469,7 @@ function ConditionsStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => v
     <div className="w-full max-w-xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={6} total={7} />
+        <StepLabel n={7} total={8} />
       </div>
       <QHead eyebrow="Medical Context" heading="Any existing medical conditions?" sub="This ensures we route you to the correct clinical pathway safely." />
       <div className="flex flex-col gap-2.5">
@@ -466,7 +492,7 @@ function ReadinessStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => v
     <div className="w-full max-w-xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         <BackBtn onClick={onBack} />
-        <StepLabel n={7} total={7} />
+        <StepLabel n={8} total={8} />
       </div>
       <QHead eyebrow="Commitment" heading="How ready are you to take action?" sub="We personalise your next steps based on where you're at right now." />
       <div className="flex flex-col gap-2.5">
@@ -691,6 +717,7 @@ interface Answers {
   duration?: string
   training?: string
   age?: string
+  gender?: string
   conditions?: string[]
   readiness?: string
 }
@@ -751,8 +778,9 @@ export default function HealthQuiz() {
         `3. Duration:    ${label1(answers.duration, DURATIONS)}`,
         `4. Training:    ${label1(answers.training, TRAINING)}`,
         `5. Age:         ${label1(answers.age, AGES)}`,
-        `6. Conditions:  ${labels(answers.conditions, CONDITIONS)}`,
-        `7. Readiness:   ${label1(answers.readiness, READINESS)}`,
+        `6. Gender:      ${label1(answers.gender, GENDERS)}`,
+        `7. Conditions:  ${labels(answers.conditions, CONDITIONS)}`,
+        `8. Readiness:   ${label1(answers.readiness, READINESS)}`,
       ].join('\n')
 
       await fetch('https://api.web3forms.com/submit', {
@@ -795,8 +823,9 @@ export default function HealthQuiz() {
               {step === 'symptoms'   && <SymptomsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, symptoms: ids })); applyAndGo(w, 'duration') }} onBack={() => go('goal', -1)} />}
               {step === 'duration'   && <DurationStep onSelect={(id, w) => { setAnswers(a => ({ ...a, duration: id })); applyAndGo(w, 'training') }} onBack={() => go('symptoms', -1)} />}
               {step === 'training'   && <TrainingStep onSelect={(id, w) => { setAnswers(a => ({ ...a, training: id })); applyAndGo(w, 'age') }} onBack={() => go('duration', -1)} />}
-              {step === 'age'        && <AgeStep onSelect={(id, w) => { setAnswers(a => ({ ...a, age: id })); applyAndGo(w, 'conditions') }} onBack={() => go('training', -1)} />}
-              {step === 'conditions' && <ConditionsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, conditions: ids })); applyAndGo(w, 'readiness') }} onBack={() => go('age', -1)} />}
+              {step === 'age'        && <AgeStep onSelect={(id, w) => { setAnswers(a => ({ ...a, age: id })); applyAndGo(w, 'gender') }} onBack={() => go('training', -1)} />}
+              {step === 'gender'     && <GenderStep onSelect={(id, w) => { setAnswers(a => ({ ...a, gender: id })); applyAndGo(w, 'conditions') }} onBack={() => go('age', -1)} />}
+              {step === 'conditions' && <ConditionsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, conditions: ids })); applyAndGo(w, 'readiness') }} onBack={() => go('gender', -1)} />}
               {step === 'readiness'  && <ReadinessStep onSelect={(id, w) => { setAnswers(a => ({ ...a, readiness: id })); applyAndGo(w, 'analysing') }} onBack={() => go('conditions', -1)} />}
               {step === 'analysing'  && <Analysing onDone={() => go('capture')} />}
               {step === 'capture'    && <Capture onSubmit={handleCapture} submitting={submitting} onBack={() => go('readiness', -1)} />}
