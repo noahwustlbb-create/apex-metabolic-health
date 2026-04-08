@@ -71,7 +71,7 @@ function GetStartedHero() {
           className="text-lg leading-relaxed max-w-xl mb-8"
           style={{ color: '#B0B8C5' }}
         >
-          Not sure where to start? Take the quiz and find your program in 2 minutes. Or jump straight in.
+          Not sure where to start? Book a consultation and speak directly with one of our doctors.
         </motion.p>
 
         {/* Quick CTA strip */}

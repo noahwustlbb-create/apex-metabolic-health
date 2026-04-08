@@ -576,7 +576,7 @@ function ServicesCTA() {
           <Link href="/intake/discovery" className="btn-teal">
             Book a Free Discovery Call
           </Link>
-          <Link href="/get-started" className="btn-ghost">
+          <Link href="/assessment" className="btn-ghost">
             Get Started
           </Link>
         </motion.div>

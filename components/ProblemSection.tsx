@@ -198,9 +198,6 @@ export default function ProblemSection() {
                 </svg>
               </span>
             </a>
-            <a href="/assessment" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
-              Health Quiz
-            </a>
             <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
               Hormone Consult
             </a>

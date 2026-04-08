@@ -216,7 +216,7 @@ export default function BookingOptions({
         >
           {showViewAll && (
             <Link
-              href="/get-started"
+              href="/assessment"
               className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200"
               style={{ color: '#3575C6' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#6AAEE8' }}

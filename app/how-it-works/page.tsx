@@ -60,7 +60,7 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
-          <Link href="/get-started" className="btn-teal">
+          <Link href="/assessment" className="btn-teal">
             Book a Consult
           </Link>
         </motion.div>
@@ -390,7 +390,7 @@ function HowItWorksCTA() {
           <Link href="/faqs" className="btn-ghost">
             Browse FAQs
           </Link>
-          <Link href="/get-started" className="btn-teal">
+          <Link href="/assessment" className="btn-teal">
             Get Started
           </Link>
         </motion.div>

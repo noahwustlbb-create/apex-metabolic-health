@@ -427,7 +427,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.62, ease }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
         >
-          <a href="/get-started" className="btn-teal w-full sm:w-auto">
+          <a href="/assessment" className="btn-teal w-full sm:w-auto">
             Start Your Assessment
             <span className="btn-circle">
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">

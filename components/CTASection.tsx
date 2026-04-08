@@ -98,7 +98,7 @@ export default function CTASection() {
           transition={{ duration: 0.6, delay: 0.35 }}
           className="flex flex-wrap justify-center gap-4 mb-8"
         >
-          <a href="/get-started" className="btn-teal">
+          <a href="/assessment" className="btn-teal">
             Book Your Consultation
             <span className="btn-circle">
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">

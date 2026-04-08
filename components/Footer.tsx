@@ -11,7 +11,7 @@ const COMPANY_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
-  { label: 'Get Started', href: '/get-started' },
+  { label: 'Get Started', href: '/assessment' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms' },
 ]
@@ -147,7 +147,7 @@ export default function Footer() {
 
             <div className="mt-8">
               <Link
-                href="/get-started"
+                href="/assessment"
                 className="btn-teal text-[11px] tracking-widest uppercase py-3 px-5"
               >
                 Book a Consultation

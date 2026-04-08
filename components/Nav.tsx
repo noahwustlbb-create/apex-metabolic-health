@@ -218,7 +218,7 @@ export default function Nav() {
             onMouseEnter={() => setGetStartedOpen(true)}
             onMouseLeave={() => setGetStartedOpen(false)}
           >
-            <Link href="/get-started" className="btn-teal" style={{ color: '#0A0A0A' }}>
+            <Link href="/assessment" className="btn-teal" style={{ color: '#0A0A0A' }}>
               Start Assessment
               <span className="btn-circle">
                 <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -245,7 +245,7 @@ export default function Nav() {
                 >
                   <div className="p-2 flex flex-col gap-0.5">
                     {[
-                      { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/get-started' },
+                      { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/assessment' },
                       { label: 'Health Quiz', desc: 'Find your program in 2 min', href: '/quiz' },
 { label: 'Hormone Check', desc: 'Clinically validated score', href: '/hormone-check' },
                       { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
@@ -347,7 +347,7 @@ export default function Nav() {
                 transition={{ delay: 0.4 }}
               >
                 <Link
-                  href="/get-started"
+                  href="/assessment"
                   onClick={() => setMenuOpen(false)}
                   className="btn-teal w-full"
                 >

@@ -25,18 +25,22 @@ function TreatmentOptions() {
         >
           Apex Protocol Membership
         </h4>
-        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+        <p className="text-2xl font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
           $99<span className="text-sm font-normal" style={{ color: '#8899aa' }}>/month</span>
+        </p>
+        <p className="text-xs mb-5 leading-relaxed" style={{ color: '#4a5a6a' }}>
+          Medication fulfilled at pharmacy rates through our partner pharmacy. A clinic administration, handling and infrastructure fee applies per invoice — from $50 — covering file management, treatment guidance, and medication safety review.
         </p>
         <ul className="space-y-3 flex-1">
           {[
-            'Medication invoiced at pharmacy rates',
-            'Medication fulfilled through our accredited compounding pharmacy partner',
-            'File management, treatment coordination & medication safety reviews',
+            'Medication priced at pharmacy rates',
+            'Fulfilment through our TGA-compliant partner pharmacy',
+            'File management & treatment coordination',
+            'Medication safety review',
             'Clinical support team access',
-            'Coordinated follow-up consultations built in',
+            'Coordinated review consultations built in',
             'Admin support 9–5, 7 days a week',
-            'Evidence-based supplement guidance',
+            'Evidence-based supplement recommendations',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span
@@ -66,17 +70,19 @@ function TreatmentOptions() {
         >
           Script Release Only
         </h4>
-        <p className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
+        <p className="text-2xl font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#00c2b8' }}>
           $145<span className="text-sm font-normal" style={{ color: '#8899aa' }}> one-off</span>
+        </p>
+        <p className="text-xs mb-5 leading-relaxed" style={{ color: '#4a5a6a' }}>
+          Your prescription is released directly to you — take it to any pharmacy of your choice. No ongoing membership fee. Our nursing and admin team remain accessible for support as needed.
         </p>
         <ul className="space-y-3 flex-1">
           {[
             <>Prescribing &amp; script release fee: <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$145</span></>,
             'No ongoing support fee',
-            'Script sent directly to you with your treatment plan and dosing guide',
-            'Fill your prescription at any pharmacy of your choice',
-            'Access to our nursing team for dosing advice and clinical support',
-            'Access to our admin team as required',
+            'Nursing team access for dosing guidance',
+            'Admin team access as required',
+            'Fill your prescription at any pharmacy',
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span
@@ -330,7 +336,7 @@ function Track1Section() {
           <TimelineStep
             stepNumber="2"
             title="Blood Work"
-            costBadge="$280"
+            costBadge="From $264"
             index={1}
           >
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#8899aa' }}>
@@ -356,7 +362,7 @@ function Track1Section() {
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $280
+                  $264
                 </span>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 py-4">
@@ -372,7 +378,7 @@ function Track1Section() {
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $280
+                  $296
                 </span>
               </div>
             </div>
@@ -604,7 +610,7 @@ function PricingBottomCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
-          <Link href="/get-started" className="btn-teal">
+          <Link href="/assessment" className="btn-teal">
             Book a Discovery Call
           </Link>
         </motion.div>
