@@ -685,10 +685,31 @@ function Results({ matches, firstName }: { matches: PK[]; firstName: string }) {
 
 // ─── Root ──────────────────────────────────────────────────────────────────────
 
+interface Answers {
+  goals?: string[]
+  symptoms?: string[]
+  duration?: string
+  training?: string
+  age?: string
+  conditions?: string[]
+  readiness?: string
+}
+
+function labels(ids: string[] | undefined, source: { id: string; label: string }[]): string {
+  if (!ids?.length) return '—'
+  return ids.map(id => source.find(x => x.id === id)?.label ?? id).join(', ')
+}
+
+function label1(id: string | undefined, source: { id: string; label: string }[]): string {
+  if (!id) return '—'
+  return source.find(x => x.id === id)?.label ?? id
+}
+
 export default function HealthQuiz() {
   const [step, setStep]       = useState<Step>('intro')
   const [dir, setDir]         = useState(1)
   const [scores, setScores]   = useState<Scores>(zero())
+  const [answers, setAnswers] = useState<Answers>({})
   const [matches, setMatches] = useState<PK[]>([])
   const [firstName, setFirstName] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -714,15 +735,35 @@ export default function HealthQuiz() {
     const m = top(scores)
     setMatches(m)
     try {
+      const body = [
+        `CONTACT`,
+        `Name:    ${first}`,
+        `Email:   ${email}`,
+        `Mobile:  ${mobile}`,
+        ``,
+        `PROGRAM MATCHES`,
+        `Primary:    ${m[0] ? PROGRAMS[m[0]].name : '—'}`,
+        `Secondary:  ${m.slice(1).map(k => PROGRAMS[k].name).join(', ') || '—'}`,
+        ``,
+        `QUIZ ANSWERS`,
+        `1. Goals:       ${labels(answers.goals, GOALS)}`,
+        `2. Symptoms:    ${labels(answers.symptoms, SYMPTOMS)}`,
+        `3. Duration:    ${label1(answers.duration, DURATIONS)}`,
+        `4. Training:    ${label1(answers.training, TRAINING)}`,
+        `5. Age:         ${label1(answers.age, AGES)}`,
+        `6. Conditions:  ${labels(answers.conditions, CONDITIONS)}`,
+        `7. Readiness:   ${label1(answers.readiness, READINESS)}`,
+      ].join('\n')
+
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `Quiz Lead — ${m.map(k => PROGRAMS[k].name).join(', ')}`,
+          subject: `Quiz Lead — ${first} — ${m.map(k => PROGRAMS[k].name).join(', ')}`,
           from_name: first || 'Quiz Lead',
           email,
-          message: `Programs matched: ${m.map(k => PROGRAMS[k].name).join(', ')}\nMobile: ${mobile}`,
+          message: body,
         }),
       })
     } catch {}
@@ -750,13 +791,13 @@ export default function HealthQuiz() {
               transition={{ duration: 0.28, ease }}>
 
               {step === 'intro'      && <Intro onStart={() => go('goal')} />}
-              {step === 'goal'       && <GoalStep onNext={(_, w) => applyAndGo(w, 'symptoms')} />}
-              {step === 'symptoms'   && <SymptomsStep onNext={(_, w) => applyAndGo(w, 'duration')} onBack={() => go('goal', -1)} />}
-              {step === 'duration'   && <DurationStep onSelect={(_, w) => applyAndGo(w, 'training')} onBack={() => go('symptoms', -1)} />}
-              {step === 'training'   && <TrainingStep onSelect={(_, w) => applyAndGo(w, 'age')} onBack={() => go('duration', -1)} />}
-              {step === 'age'        && <AgeStep onSelect={(_, w) => applyAndGo(w, 'conditions')} onBack={() => go('training', -1)} />}
-              {step === 'conditions' && <ConditionsStep onNext={(_, w) => applyAndGo(w, 'readiness')} onBack={() => go('age', -1)} />}
-              {step === 'readiness'  && <ReadinessStep onSelect={(_, w) => applyAndGo(w, 'analysing')} onBack={() => go('conditions', -1)} />}
+              {step === 'goal'       && <GoalStep onNext={(ids, w) => { setAnswers(a => ({ ...a, goals: ids })); applyAndGo(w, 'symptoms') }} />}
+              {step === 'symptoms'   && <SymptomsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, symptoms: ids })); applyAndGo(w, 'duration') }} onBack={() => go('goal', -1)} />}
+              {step === 'duration'   && <DurationStep onSelect={(id, w) => { setAnswers(a => ({ ...a, duration: id })); applyAndGo(w, 'training') }} onBack={() => go('symptoms', -1)} />}
+              {step === 'training'   && <TrainingStep onSelect={(id, w) => { setAnswers(a => ({ ...a, training: id })); applyAndGo(w, 'age') }} onBack={() => go('duration', -1)} />}
+              {step === 'age'        && <AgeStep onSelect={(id, w) => { setAnswers(a => ({ ...a, age: id })); applyAndGo(w, 'conditions') }} onBack={() => go('training', -1)} />}
+              {step === 'conditions' && <ConditionsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, conditions: ids })); applyAndGo(w, 'readiness') }} onBack={() => go('age', -1)} />}
+              {step === 'readiness'  && <ReadinessStep onSelect={(id, w) => { setAnswers(a => ({ ...a, readiness: id })); applyAndGo(w, 'analysing') }} onBack={() => go('conditions', -1)} />}
               {step === 'analysing'  && <Analysing onDone={() => go('capture')} />}
               {step === 'capture'    && <Capture onSubmit={handleCapture} submitting={submitting} onBack={() => go('readiness', -1)} />}
               {step === 'results'    && <Results matches={matches} firstName={firstName} />}
