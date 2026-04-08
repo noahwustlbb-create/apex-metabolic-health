@@ -5,7 +5,6 @@ import HowItWorks from '@/components/HowItWorks'
 import ProgramsGrid from '@/components/ProgramsGrid'
 import WhyApex from '@/components/WhyApex'
 import PathologyPanel from '@/components/PathologyPanel'
-import ProgramQuiz from '@/components/ProgramQuiz'
 import Affiliations from '@/components/Affiliations'
 import StatsBar from '@/components/StatsBar'
 import BookingOptions from '@/components/BookingOptions'
@@ -23,8 +22,7 @@ export default function Home() {
         <ProgramsGrid />
         <ProblemSection />
         <HowItWorks />
-        <ProgramQuiz />
-        <WhyApex />
+<WhyApex />
         <PathologyPanel />
         <Affiliations />
         <StatsBar />
