@@ -546,7 +546,7 @@ export default function HealthQuiz() {
               {/* ─── Q: BLOOD WORK ─────────────────────────────────────── */}
               {screen === 'bloodwork' && (
                 <QuestionScreen
-                  question="Have you had blood work done in the last 12 months?"
+                  question="Have you had blood work done in the last 3 months?"
                   subtext=""
                   fact="Standard GP panels often miss the hormonal and metabolic markers that matter most to men's health. Our comprehensive panels go further."
                   options={[
