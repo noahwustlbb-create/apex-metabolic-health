@@ -122,51 +122,144 @@ const MAIN_FLOW: Screen[] = [
 ]
 
 // ─── Recommendation Engine ────────────────────────────────────────────────────
+//
+// Scoring philosophy:
+//   Goals        = explicit user intent → highest weight (5–6 pts)
+//   Daily impact = lived experience signals → medium weight (2–4 pts)
+//   Success goal = outcome framing → confirmatory (2–3 pts)
+//   Conditions   = medical context → modifier (1–3 pts)
+//   Age          = soft prior (1–2 pts)
+//   Doctor prior = GP pathway signal (1–2 pts)
+//
+// Minimum threshold of 4 pts required to appear in results.
+// Programs score independently — hormone, performance, metabolic, targeted
+// signals are kept separate to prevent hormone-optimisation from dominating.
 
 function getRecommendedPrograms(answers: QuizAnswers): Program[] {
-  const goals = answers.goal ?? []
-  const impact = answers.dailyImpact ?? []
+  const goals      = answers.goal        ?? []
+  const impact     = answers.dailyImpact ?? []
   const successGoal = answers.successGoal ?? ''
-  const conditions = answers.conditions ?? []
+  const conditions = answers.conditions  ?? []
+  const age        = answers.age         ?? ''
 
   const activePrograms = programs.filter((p) => p.status === 'active')
-  const scores: Record<string, number> = {}
-  for (const p of activePrograms) scores[p.slug] = 0
+  const s: Record<string, number> = {}
+  for (const p of activePrograms) s[p.slug] = 0
 
-  // Goal selections — strongest signal (3 pts)
-  if (goals.includes('hormone') || goals.includes('general')) scores['hormone-optimisation'] += 3
-  if (goals.includes('performance')) { scores['hormone-performance'] += 3; scores['performance-plus'] += 2 }
-  if (goals.includes('metabolic')) scores['metabolic-weight-loss'] += 3
-  if (goals.includes('hair')) scores['hair-restoration'] += 3
-  if (goals.includes('skin')) scores['skin-regeneration'] += 3
-  if (goals.includes('injury')) scores['injury-repair'] += 3
+  // ── HORMONE OPTIMISATION ──────────────────────────────────────────────────
+  // Core presentation: fatigue, brain fog, mood, low drive, GP dismissal
+  if (goals.includes('hormone'))          s['hormone-optimisation'] += 5
+  if (goals.includes('general'))          s['hormone-optimisation'] += 3
+  if (impact.includes('mood'))            s['hormone-optimisation'] += 4
+  if (impact.includes('focus'))           s['hormone-optimisation'] += 3
+  if (impact.includes('intimacy'))        s['hormone-optimisation'] += 4
+  if (impact.includes('sleep'))           s['hormone-optimisation'] += 2
+  if (impact.includes('wellbeing'))       s['hormone-optimisation'] += 1
+  if (successGoal === 'hormone')          s['hormone-optimisation'] += 3
+  if (successGoal === 'relationships')    s['hormone-optimisation'] += 3  // libido/confidence
+  if (successGoal === 'general')          s['hormone-optimisation'] += 2
+  if (answers.doctorPrior === 'normal')   s['hormone-optimisation'] += 2  // told "normal" = classic undiagnosed
+  if (answers.doctorPrior === 'blocked')  s['hormone-optimisation'] += 2  // couldn't get referral
+  if (answers.bloodwork === 'normal')     s['hormone-optimisation'] += 1  // results dismissed
+  if (['41-50', '51-60', '61+'].includes(age))  s['hormone-optimisation'] += 2
+  if (age === '31-40')                    s['hormone-optimisation'] += 1
+  if (conditions.includes('mentalhealth')) s['hormone-optimisation'] += 2  // mood/hormonal overlap
 
-  // Daily impact signals (2 pts)
-  if (impact.includes('focus') || impact.includes('mood') || impact.includes('intimacy') || impact.includes('sleep')) {
-    scores['hormone-optimisation'] += 2
+  // ── HORMONE & PERFORMANCE ─────────────────────────────────────────────────
+  // Gym-goers hitting a wall: training plateau, recovery, body comp
+  if (goals.includes('performance'))      s['hormone-performance'] += 5
+  if (impact.includes('training'))        s['hormone-performance'] += 5
+  if (successGoal === 'performance')      s['hormone-performance'] += 3
+  if (goals.includes('hormone'))          s['hormone-performance'] += 1   // hormonal overlap
+  if (impact.includes('focus'))           s['hormone-performance'] += 1   // cognitive output overlap
+  if (impact.includes('sleep'))           s['hormone-performance'] += 2   // recovery signal
+  if (['31-40', '41-50'].includes(age))   s['hormone-performance'] += 1
+
+  // ── PERFORMANCE+ (FLAGSHIP) ───────────────────────────────────────────────
+  // Only triggered when user exhibits BOTH hormonal AND performance signals.
+  // Must not appear for single-domain users.
+  const hormoneDepth = (
+    (goals.includes('hormone')       ? 1 : 0) +
+    (impact.includes('mood')         ? 1 : 0) +
+    (impact.includes('focus')        ? 1 : 0) +
+    (impact.includes('intimacy')     ? 1 : 0) +
+    (successGoal === 'hormone'       ? 1 : 0) +
+    (successGoal === 'relationships' ? 1 : 0)
+  )
+  const perfDepth = (
+    (goals.includes('performance')   ? 1 : 0) +
+    (impact.includes('training')     ? 1 : 0) +
+    (successGoal === 'performance'   ? 1 : 0)
+  )
+  // Require meaningful signals in BOTH domains
+  if (hormoneDepth >= 2 && perfDepth >= 2) {
+    s['performance-plus'] += hormoneDepth * 2 + perfDepth * 3
+  } else if (hormoneDepth >= 1 && perfDepth >= 2) {
+    s['performance-plus'] += perfDepth * 3
   }
-  if (impact.includes('training')) { scores['hormone-performance'] += 2; scores['performance-plus'] += 1 }
-  if (impact.includes('weight')) scores['metabolic-weight-loss'] += 2
-
-  // Success goal (2 pts)
-  if (successGoal === 'hormone') scores['hormone-optimisation'] += 2
-  if (successGoal === 'performance') { scores['hormone-performance'] += 2; scores['performance-plus'] += 1 }
-  if (successGoal === 'metabolic') scores['metabolic-weight-loss'] += 2
-
-  // Conditions (1 pt)
-  if (conditions.includes('hairloss')) scores['hair-restoration'] += 1
-
-  // When both hormone + performance are strong, upgrade to Performance+ flagship
-  if (scores['hormone-optimisation'] >= 3 && scores['hormone-performance'] >= 3) {
-    scores['performance-plus'] += Math.min(scores['hormone-optimisation'], scores['hormone-performance'])
-    // Demote the two sub-programs so Performance+ ranks first
-    scores['hormone-optimisation'] = Math.max(0, scores['hormone-optimisation'] - 2)
-    scores['hormone-performance'] = Math.max(0, scores['hormone-performance'] - 2)
+  // Explicit dual-goal selection — strongest possible signal for flagship
+  if (goals.includes('performance') && goals.includes('hormone')) {
+    s['performance-plus'] += 5
   }
+
+  // ── METABOLIC WEIGHT LOSS ─────────────────────────────────────────────────
+  // Weight resistance, metabolic dysfunction — should dominate when selected
+  if (goals.includes('metabolic'))        s['metabolic-weight-loss'] += 6
+  if (impact.includes('weight'))          s['metabolic-weight-loss'] += 5
+  if (successGoal === 'metabolic')        s['metabolic-weight-loss'] += 3
+  if (conditions.includes('diabetes'))    s['metabolic-weight-loss'] += 3
+  if (conditions.includes('cholesterol')) s['metabolic-weight-loss'] += 2
+  if (conditions.includes('hbp'))         s['metabolic-weight-loss'] += 1
+  if (['41-50', '51-60'].includes(age))   s['metabolic-weight-loss'] += 1
+
+  // ── HAIR RESTORATION ─────────────────────────────────────────────────────
+  // Explicit intent or confirmed condition
+  if (goals.includes('hair'))             s['hair-restoration'] += 6
+  if (conditions.includes('hairloss'))    s['hair-restoration'] += 4
+  if (goals.includes('hair') && ['31-40', '41-50', '51-60'].includes(age)) {
+    s['hair-restoration'] += 1
+  }
+
+  // ── SKIN REGENERATION ────────────────────────────────────────────────────
+  if (goals.includes('skin'))             s['skin-regeneration'] += 6
+
+  // ── INJURY REPAIR ────────────────────────────────────────────────────────
+  if (goals.includes('injury'))           s['injury-repair'] += 6
+  // Training impact + injury goal = active recovery seeker
+  if (goals.includes('injury') && impact.includes('training')) s['injury-repair'] += 2
+
+  // ── SUPPRESSION RULES ────────────────────────────────────────────────────
+  // When Performance+ is the strongest signal, collapse the two sub-programs
+  // so we don't show all three hormone-track programs simultaneously.
+  if (s['performance-plus'] > 0 && s['performance-plus'] >= s['hormone-performance']) {
+    s['hormone-optimisation'] = Math.max(0, s['hormone-optimisation'] - 3)
+    s['hormone-performance']  = Math.max(0, s['hormone-performance']  - 3)
+  }
+  // If metabolic is clearly the primary concern and user didn't explicitly
+  // add a hormone goal, don't co-recommend hormone-optimisation.
+  if (s['metabolic-weight-loss'] >= 6 && !goals.includes('hormone') && !goals.includes('general')) {
+    s['hormone-optimisation'] = Math.max(0, s['hormone-optimisation'] - 3)
+  }
+  // Targeted programs (hair/skin/injury) should only appear when explicitly
+  // signalled — already handled by their high base scores, but ensure they
+  // don't get bumped in by incidental overlap signals.
+  if (!goals.includes('hair') && !conditions.includes('hairloss')) {
+    s['hair-restoration'] = 0
+  }
+  if (!goals.includes('skin')) {
+    s['skin-regeneration'] = 0
+  }
+  if (!goals.includes('injury')) {
+    s['injury-repair'] = 0
+  }
+
+  // ── RANK & FILTER ────────────────────────────────────────────────────────
+  // Minimum threshold of 4 required to appear in results
+  const THRESHOLD = 4
 
   const ranked = activePrograms
-    .filter((p) => scores[p.slug] > 0)
-    .sort((a, b) => scores[b.slug] - scores[a.slug])
+    .filter((p) => s[p.slug] >= THRESHOLD)
+    .sort((a, b) => s[b.slug] - s[a.slug])
 
   if (ranked.length === 0) {
     return [activePrograms.find((p) => p.slug === 'hormone-optimisation')!]
@@ -593,7 +686,7 @@ export default function HealthQuiz() {
                     { label: 'Feeling like myself again — energy, drive, clarity', value: 'hormone' },
                     { label: 'Better performance in training and faster recovery', value: 'performance' },
                     { label: 'Losing weight and keeping it off for good', value: 'metabolic' },
-                    { label: 'Stronger relationships and confidence', value: 'hormone' },
+                    { label: 'Stronger relationships, libido, and confidence', value: 'relationships' },
                     { label: 'Long-term health protection and peace of mind', value: 'general' },
                   ]}
                   selected={answers.successGoal ? [answers.successGoal] : []}
