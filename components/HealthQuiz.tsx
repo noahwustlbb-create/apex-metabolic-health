@@ -82,13 +82,13 @@ interface QuizAnswers {
   goal?: string[]
   age?: string
   duration?: string
-  symptoms?: string[]
+  dailyImpact?: string[]   // how concerns affect daily life
   illness?: string
   bloodwork?: string
-  energy?: string
-  exercise?: string
+  doctorPrior?: string     // prior GP/doctor experience
+  successGoal?: string     // what success looks like
   conditions?: string[]
-  familyHistory?: string[]
+  actionTrigger?: string   // what prompted action now
 }
 
 type Screen =
@@ -124,7 +124,18 @@ const MAIN_FLOW: Screen[] = [
 
 function getRecommendation(answers: QuizAnswers) {
   const goals = answers.goal ?? []
-  if (goals.includes('hormone') || goals.includes('performance')) {
+  const impact = answers.dailyImpact ?? []
+  const successGoal = answers.successGoal ?? ''
+
+  // successGoal acts as a strong secondary signal for routing
+  const wantsHormone = goals.includes('hormone') || goals.includes('performance')
+    || successGoal === 'hormone' || successGoal === 'performance'
+    || impact.includes('focus') || impact.includes('mood') || impact.includes('intimacy')
+  const wantsMetabolic = goals.includes('metabolic') || successGoal === 'metabolic'
+    || impact.includes('weight')
+  const wantsTargeted = goals.includes('hair') || goals.includes('skin') || goals.includes('injury')
+
+  if (wantsHormone && !wantsMetabolic) {
     return {
       program: 'Hormone & Performance Program',
       description: "Based on your answers, our Hormone Program is the recommended starting point. You'll complete a comprehensive blood panel followed by a telehealth consultation with one of our doctors.",
@@ -132,7 +143,7 @@ function getRecommendation(answers: QuizAnswers) {
       href: '/intake/hormone',
     }
   }
-  if (goals.includes('metabolic')) {
+  if (wantsMetabolic) {
     return {
       program: 'Metabolic Weight Management',
       description: 'Your answers point toward a metabolic assessment. Your doctor will review your markers and build a personalised protocol targeting the drivers behind your body composition.',
@@ -140,7 +151,7 @@ function getRecommendation(answers: QuizAnswers) {
       href: '/intake/general',
     }
   }
-  if (goals.includes('hair') || goals.includes('skin') || goals.includes('injury')) {
+  if (wantsTargeted) {
     return {
       program: 'Targeted Clinical Program',
       description: 'Based on your answers, a general consultation is your best starting point. Your doctor will assess the relevant markers and build a protocol specific to your concern.',
@@ -157,38 +168,37 @@ function getRecommendation(answers: QuizAnswers) {
 }
 
 function getRiskAreas(answers: QuizAnswers) {
-  const symptoms = answers.symptoms ?? []
+  const impact = answers.dailyImpact ?? []
   const conditions = answers.conditions ?? []
-  const family = answers.familyHistory ?? []
   const goals = answers.goal ?? []
   const areas: { label: string; desc: string }[] = []
 
-  if (symptoms.includes('fatigue') || symptoms.includes('brainfog') || symptoms.includes('libido') || goals.includes('hormone')) {
+  if (impact.includes('focus') || impact.includes('mood') || impact.includes('confidence') || goals.includes('hormone')) {
     areas.push({ label: 'Hormonal Health Assessment', desc: 'Assess key hormone levels to identify the imbalances driving your energy, mood, and performance.' })
   }
-  if (symptoms.includes('weight') || goals.includes('metabolic')) {
+  if (impact.includes('training') || goals.includes('performance')) {
+    areas.push({ label: 'Performance & Recovery Optimisation', desc: 'Clinical protocols to restore your capacity to train hard, recover fully, and perform consistently.' })
+  }
+  if (impact.includes('intimacy') || goals.includes('hormone')) {
+    areas.push({ label: 'Hormonal & Sexual Health Panel', desc: 'Targeted assessment of the hormonal markers that drive libido, function, and vitality.' })
+  }
+  if (goals.includes('metabolic') || impact.includes('weight')) {
     areas.push({ label: 'Metabolic & Body Composition', desc: 'Identify the metabolic drivers behind weight gain and resistance to change.' })
   }
-  if (symptoms.includes('sleep') || symptoms.includes('recovery') || goals.includes('performance')) {
-    areas.push({ label: 'Sleep & Recovery Optimisation', desc: 'Poor sleep and slow recovery are often symptoms of deeper hormonal disruption.' })
-  }
-  if (conditions.includes('heart') || family.includes('heart') || conditions.includes('hbp') || conditions.includes('cholesterol') || family.includes('hbp') || family.includes('cholesterol')) {
+  if (conditions.includes('heart') || conditions.includes('hbp') || conditions.includes('cholesterol')) {
     areas.push({ label: 'Cardiac Risk Assessment', desc: 'Assessment of cardiovascular risk factors to protect your long-term heart health.' })
   }
-  if (conditions.includes('diabetes') || family.includes('diabetes')) {
+  if (conditions.includes('diabetes')) {
     areas.push({ label: 'Metabolic Risk Screening', desc: 'Comprehensive panel to assess insulin resistance and glucose regulation.' })
   }
-  if (symptoms.includes('hair') || goals.includes('hair')) {
+  if (goals.includes('hair')) {
     areas.push({ label: 'Hair Restoration Program', desc: 'Clinical assessment of the hormonal and genetic drivers of hair loss.' })
   }
-  if (symptoms.includes('skin') || goals.includes('skin')) {
+  if (goals.includes('skin')) {
     areas.push({ label: 'Skin Regeneration', desc: 'Doctor-guided skin protocol targeting the underlying hormonal causes of skin decline.' })
   }
-  if (goals.includes('injury') || symptoms.includes('recovery')) {
+  if (goals.includes('injury')) {
     areas.push({ label: 'Injury Repair & Recovery', desc: 'Clinical protocols to accelerate healing and address chronic pain or slow recovery.' })
-  }
-  if (family.includes('cancer')) {
-    areas.push({ label: 'Cancer Risk Screening', desc: 'Family history increases your risk. Early detection remains your most powerful clinical tool.' })
   }
 
   return areas.slice(0, 4)
@@ -276,12 +286,12 @@ export default function HealthQuiz() {
           goal: answers.goal?.join(', '),
           age: answers.age,
           duration: answers.duration,
-          symptoms: answers.symptoms?.join(', '),
+          daily_impact: answers.dailyImpact?.join(', '),
           bloodwork: answers.bloodwork,
-          energy: answers.energy,
-          exercise: answers.exercise,
+          doctor_prior: answers.doctorPrior,
+          success_goal: answers.successGoal,
           conditions: answers.conditions?.join(', '),
-          family_history: answers.familyHistory?.join(', '),
+          action_trigger: answers.actionTrigger,
         }),
       })
     } catch { /* silent */ }
@@ -458,28 +468,26 @@ export default function HealthQuiz() {
                 />
               )}
 
-              {/* ─── Q: SYMPTOMS ───────────────────────────────────────── */}
+              {/* ─── Q: DAILY IMPACT ───────────────────────────────────── */}
               {screen === 'symptoms' && (
                 <QuestionScreen
-                  question="Which of these have you noticed?"
-                  subtext="Select everything that applies — we'll explore each in more detail."
-                  fact="These symptoms are frequently driven by measurable, treatable hormonal and metabolic imbalances — not just 'getting older'."
+                  question="Where are you feeling the impact most?"
+                  subtext="Select everything that applies — this helps us understand which areas matter most to you."
+                  fact="Most men don't realise their concerns in the gym, at work, and at home often share the same root cause."
                   multiSelect
                   options={[
-                    { label: 'Low energy or persistent fatigue', value: 'fatigue' },
-                    { label: 'Brain fog or difficulty concentrating', value: 'brainfog' },
-                    { label: 'Low libido or reduced sex drive', value: 'libido' },
-                    { label: 'Poor sleep quality', value: 'sleep' },
-                    { label: 'Weight gain or difficulty losing weight', value: 'weight' },
-                    { label: 'Hair thinning or loss', value: 'hair' },
-                    { label: 'Mood changes or irritability', value: 'mood' },
-                    { label: 'Slow recovery from training or injury', value: 'recovery' },
-                    { label: 'Skin concerns', value: 'skin' },
+                    { label: 'Work performance or mental focus', value: 'focus' },
+                    { label: 'Physical training or sport', value: 'training' },
+                    { label: 'Relationships or intimacy', value: 'intimacy' },
+                    { label: 'Mood, motivation, or confidence', value: 'mood' },
+                    { label: 'Body composition or weight', value: 'weight' },
+                    { label: 'Sleep and daily energy levels', value: 'sleep' },
+                    { label: 'Overall sense of wellbeing', value: 'wellbeing' },
                   ]}
-                  selected={answers.symptoms ?? []}
-                  onToggle={(v) => toggleMulti('symptoms', v)}
+                  selected={answers.dailyImpact ?? []}
+                  onToggle={(v) => toggleMulti('dailyImpact', v)}
                   onContinue={goNext}
-                  canContinue={(answers.symptoms?.length ?? 0) > 0}
+                  canContinue={(answers.dailyImpact?.length ?? 0) > 0}
                   onBack={goBack}
                 />
               )}
@@ -585,42 +593,42 @@ export default function HealthQuiz() {
                 </div>
               )}
 
-              {/* ─── Q: ENERGY ─────────────────────────────────────────── */}
+              {/* ─── Q: PRIOR DOCTOR EXPERIENCE ────────────────────────── */}
               {screen === 'energy' && (
                 <QuestionScreen
-                  question="How would you rate your current energy levels?"
+                  question="Have you spoken to a doctor about these concerns before?"
                   subtext=""
-                  grid
+                  fact="Men are often told their results are 'normal' when the real issue is that the wrong markers are being tested."
                   options={[
-                    { label: 'Very poor', value: '1-2' },
-                    { label: 'Below average', value: '3-4' },
-                    { label: 'Average', value: '5-6' },
-                    { label: 'Good', value: '7-8' },
-                    { label: 'Excellent', value: '9-10' },
+                    { label: "Yes — told everything was normal", value: 'normal' },
+                    { label: "Yes — something was flagged but I didn't get clear answers", value: 'flagged' },
+                    { label: "No — this is my first step", value: 'first' },
+                    { label: "I've tried but struggled to get the right referral", value: 'blocked' },
                   ]}
-                  selected={answers.energy ? [answers.energy] : []}
-                  onToggle={(v) => { setAnswer('energy', v); setTimeout(goNext, 260) }}
+                  selected={answers.doctorPrior ? [answers.doctorPrior] : []}
+                  onToggle={(v) => { setAnswer('doctorPrior', v); setTimeout(goNext, 260) }}
                   onContinue={goNext}
-                  canContinue={!!answers.energy}
+                  canContinue={!!answers.doctorPrior}
                   onBack={goBack}
                 />
               )}
 
-              {/* ─── Q: EXERCISE ───────────────────────────────────────── */}
+              {/* ─── Q: SUCCESS GOAL ───────────────────────────────────── */}
               {screen === 'exercise' && (
                 <QuestionScreen
-                  question="How often do you currently exercise?"
+                  question="What would getting this right look like for you?"
                   subtext=""
                   options={[
-                    { label: 'Never', value: 'never' },
-                    { label: 'Once or twice a week', value: '1-2pw' },
-                    { label: 'Every other day', value: 'eod' },
-                    { label: 'Daily', value: 'daily' },
+                    { label: 'Feeling like myself again — energy, drive, clarity', value: 'hormone' },
+                    { label: 'Better performance in training and faster recovery', value: 'performance' },
+                    { label: 'Losing weight and keeping it off for good', value: 'metabolic' },
+                    { label: 'Stronger relationships and confidence', value: 'hormone' },
+                    { label: 'Long-term health protection and peace of mind', value: 'general' },
                   ]}
-                  selected={answers.exercise ? [answers.exercise] : []}
-                  onToggle={(v) => { setAnswer('exercise', v); setTimeout(goNext, 260) }}
+                  selected={answers.successGoal ? [answers.successGoal] : []}
+                  onToggle={(v) => { setAnswer('successGoal', v); setTimeout(goNext, 260) }}
                   onContinue={goNext}
-                  canContinue={!!answers.exercise}
+                  canContinue={!!answers.successGoal}
                   onBack={goBack}
                 />
               )}
@@ -659,37 +667,22 @@ export default function HealthQuiz() {
                 />
               )}
 
-              {/* ─── Q: FAMILY HISTORY ────────────────────────────────── */}
+              {/* ─── Q: ACTION TRIGGER ────────────────────────────────── */}
               {screen === 'family_history' && (
                 <QuestionScreen
-                  question="Do you have a family history of any of the following?"
-                  subtext="Family health history can influence your own risk for certain conditions and knowing this helps us tailor screening."
-                  multiSelect
+                  question="What's prompted you to take action now?"
+                  subtext=""
                   options={[
-                    { label: 'Heart disease or cardiovascular conditions', value: 'heart' },
-                    { label: 'Diabetes', value: 'diabetes' },
-                    { label: 'Cancer (including prostate cancer)', value: 'cancer' },
-                    { label: 'High blood pressure', value: 'hbp' },
-                    { label: 'High cholesterol', value: 'cholesterol' },
-                    { label: 'Mental health conditions', value: 'mentalhealth' },
-                    { label: 'Hair loss', value: 'hairloss' },
-                    { label: 'Thyroid conditions', value: 'thyroid' },
-                    { label: 'None of the above', value: 'none' },
+                    { label: "Things have gotten worse and I can't ignore it", value: 'worse' },
+                    { label: "I've been putting this off for too long", value: 'delayed' },
+                    { label: 'I want to be proactive before it gets worse', value: 'proactive' },
+                    { label: 'A health scare made me take it seriously', value: 'scare' },
+                    { label: 'Someone close to me encouraged me to act', value: 'encouraged' },
                   ]}
-                  selected={answers.familyHistory ?? []}
-                  onToggle={(v) => {
-                    if (v === 'none') {
-                      setAnswer('familyHistory', ['none'])
-                    } else {
-                      setAnswers(prev => {
-                        const current = (prev.familyHistory ?? []).filter(x => x !== 'none')
-                        if (current.includes(v)) return { ...prev, familyHistory: current.filter(x => x !== v) }
-                        return { ...prev, familyHistory: [...current, v] }
-                      })
-                    }
-                  }}
+                  selected={answers.actionTrigger ? [answers.actionTrigger] : []}
+                  onToggle={(v) => { setAnswer('actionTrigger', v); setTimeout(goNext, 260) }}
                   onContinue={goNext}
-                  canContinue={(answers.familyHistory?.length ?? 0) > 0}
+                  canContinue={!!answers.actionTrigger}
                   onBack={goBack}
                 />
               )}
