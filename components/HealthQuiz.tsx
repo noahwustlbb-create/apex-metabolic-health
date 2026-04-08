@@ -521,13 +521,14 @@ function Analysing({ onDone }: { onDone: () => void }) {
 }
 
 function Capture({ onSubmit, submitting, onBack }: {
-  onSubmit: (first: string, email: string) => void
+  onSubmit: (first: string, email: string, mobile: string) => void
   submitting: boolean
   onBack: () => void
 }) {
   const [first, setFirst] = useState('')
   const [email, setEmail] = useState('')
-  const valid = first.trim().length > 1 && email.includes('@') && email.includes('.')
+  const [mobile, setMobile] = useState('')
+  const valid = first.trim().length > 1 && email.includes('@') && email.includes('.') && mobile.trim().length >= 8
 
   const inputStyle = {
     background: 'rgba(255,255,255,0.03)',
@@ -569,9 +570,14 @@ function Capture({ onSubmit, submitting, onBack }: {
           onFocus={e => (e.target.style.border = '1px solid rgba(0,194,184,0.4)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         />
+        <input type="tel" placeholder="Mobile number" value={mobile} onChange={e => setMobile(e.target.value)}
+          style={inputStyle}
+          onFocus={e => (e.target.style.border = '1px solid rgba(0,194,184,0.4)')}
+          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
+        />
       </div>
 
-      <button onClick={() => onSubmit(first.trim(), email.trim())} disabled={!valid || submitting}
+      <button onClick={() => onSubmit(first.trim(), email.trim(), mobile.trim())} disabled={!valid || submitting}
         className="btn-teal w-full justify-center"
         style={{ opacity: !valid || submitting ? 0.4 : 1, cursor: !valid || submitting ? 'not-allowed' : 'pointer' }}>
         {submitting ? 'Loading…' : 'Unlock My Results'}
@@ -702,7 +708,7 @@ export default function HealthQuiz() {
     return Math.round(((i + 1) / Q_STEPS.length) * 90)
   }
 
-  async function handleCapture(first: string, email: string) {
+  async function handleCapture(first: string, email: string, mobile: string) {
     setSubmitting(true)
     setFirstName(first)
     const m = top(scores)
@@ -716,7 +722,7 @@ export default function HealthQuiz() {
           subject: `Quiz Lead — ${m.map(k => PROGRAMS[k].name).join(', ')}`,
           from_name: first || 'Quiz Lead',
           email,
-          message: `Programs matched: ${m.map(k => PROGRAMS[k].name).join(', ')}`,
+          message: `Programs matched: ${m.map(k => PROGRAMS[k].name).join(', ')}\nMobile: ${mobile}`,
         }),
       })
     } catch {}
