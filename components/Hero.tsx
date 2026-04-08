@@ -435,19 +435,6 @@ export default function Hero() {
               </svg>
             </span>
           </a>
-          <a
-            href="/quiz"
-            className="btn-ghost w-full sm:w-auto"
-            style={{ borderColor: 'rgba(201,168,76,0.4)', color: '#c9a84c' }}
-          >
-            Health Quiz
-            <span
-              className="text-[9px] font-bold tracking-wider uppercase px-1.5 py-0.5 rounded-sm"
-              style={{ backgroundColor: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.25)', color: '#c9a84c' }}
-            >
-              TESTING
-            </span>
-          </a>
           <a href="/services" className="btn-ghost w-full sm:w-auto">
             View Programs
             <span className="btn-circle">
