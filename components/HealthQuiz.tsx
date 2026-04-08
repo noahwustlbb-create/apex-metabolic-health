@@ -96,6 +96,7 @@ const CONDITIONS = [
   { id: 'thyroid',    label: 'Thyroid condition',                  w: { hormone:2, metabolic:1 } as W },
   { id: 'heart',      label: 'Heart or cardiovascular condition',  w: { bloodpanel:2, general:2 } as W },
   { id: 'autoimmune', label: 'Autoimmune condition',               w: { general:2, bloodpanel:1 } as W },
+  { id: 'cancer',     label: 'Cancer or history of cancer',        w: { general:3, bloodpanel:2 } as W },
   { id: 'none',       label: 'None of the above',                  w: {} as W },
 ]
 
@@ -257,27 +258,58 @@ function Intro({ onStart }: { onStart: () => void }) {
   )
 }
 
-function GoalStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack?: () => void }) {
+function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; onBack?: () => void }) {
+  const [sel, setSel] = useState<string[]>([])
+
+  function toggle(id: string) {
+    setSel(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])
+  }
+
+  function handleNext() {
+    const w = zero()
+    for (const id of sel) {
+      const g = GOALS.find(x => x.id === id)!
+      for (const k in g.w) w[k as PK] += g.w[k as PK]!
+    }
+    onNext(sel, w)
+  }
+
   return (
     <div className="w-full max-w-2xl mx-auto px-4">
       <div className="flex items-center justify-between mb-8">
         {onBack ? <BackBtn onClick={onBack} /> : <span />}
         <StepLabel n={1} total={7} />
       </div>
-      <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select your main priority — we'll build your profile from there." />
+      <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select all that apply — we'll build your profile from there." />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {GOALS.map(g => (
-          <button key={g.id} onClick={() => onSelect(g.id, g.w)}
-            className="text-left rounded-2xl px-6 py-5 transition-all duration-200 group"
-            style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
-            onMouseEnter={e => { e.currentTarget.style.border = '1px solid rgba(0,194,184,0.3)'; e.currentTarget.style.background = 'rgba(0,194,184,0.05)' }}
-            onMouseLeave={e => { e.currentTarget.style.border = '1px solid rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.025)' }}
-          >
-            <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{g.label}</p>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{g.sub}</p>
-          </button>
-        ))}
+        {GOALS.map(g => {
+          const selected = sel.includes(g.id)
+          return (
+            <button key={g.id} onClick={() => toggle(g.id)}
+              className="text-left rounded-2xl px-6 py-5 transition-all duration-200 flex items-start gap-4"
+              style={{
+                background: selected ? 'rgba(0,194,184,0.07)' : 'rgba(255,255,255,0.025)',
+                border: `1px solid ${selected ? 'rgba(0,194,184,0.45)' : 'rgba(255,255,255,0.07)'}`,
+                boxShadow: selected ? '0 0 0 1px rgba(0,194,184,0.12)' : 'none',
+              }}
+            >
+              <span className="flex-shrink-0 flex items-center justify-center rounded-md mt-0.5 transition-all duration-150"
+                style={{ width: 20, height: 20, background: selected ? 'var(--teal)' : 'transparent', border: `1.5px solid ${selected ? 'var(--teal)' : 'rgba(255,255,255,0.18)'}` }}>
+                {selected && (
+                  <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
+                    <path d="M1.5 5.5L4 8l4.5-5.5" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </span>
+              <span>
+                <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{g.label}</p>
+                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{g.sub}</p>
+              </span>
+            </button>
+          )
+        })}
       </div>
+      <ContinueBtn onClick={handleNext} disabled={sel.length === 0} />
     </div>
   )
 }
@@ -712,7 +744,7 @@ export default function HealthQuiz() {
               transition={{ duration: 0.28, ease }}>
 
               {step === 'intro'      && <Intro onStart={() => go('goal')} />}
-              {step === 'goal'       && <GoalStep onSelect={(_, w) => applyAndGo(w, 'symptoms')} />}
+              {step === 'goal'       && <GoalStep onNext={(_, w) => applyAndGo(w, 'symptoms')} />}
               {step === 'symptoms'   && <SymptomsStep onNext={(_, w) => applyAndGo(w, 'duration')} onBack={() => go('goal', -1)} />}
               {step === 'duration'   && <DurationStep onSelect={(_, w) => applyAndGo(w, 'training')} onBack={() => go('symptoms', -1)} />}
               {step === 'training'   && <TrainingStep onSelect={(_, w) => applyAndGo(w, 'age')} onBack={() => go('duration', -1)} />}
