@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { programs, type Program } from '@/lib/programs'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
@@ -122,86 +123,56 @@ const MAIN_FLOW: Screen[] = [
 
 // ─── Recommendation Engine ────────────────────────────────────────────────────
 
-function getRecommendation(answers: QuizAnswers) {
+function getRecommendedPrograms(answers: QuizAnswers): Program[] {
   const goals = answers.goal ?? []
   const impact = answers.dailyImpact ?? []
   const successGoal = answers.successGoal ?? ''
-
-  // successGoal acts as a strong secondary signal for routing
-  const wantsHormone = goals.includes('hormone') || goals.includes('performance')
-    || successGoal === 'hormone' || successGoal === 'performance'
-    || impact.includes('focus') || impact.includes('mood') || impact.includes('intimacy')
-  const wantsMetabolic = goals.includes('metabolic') || successGoal === 'metabolic'
-    || impact.includes('weight')
-  const wantsTargeted = goals.includes('hair') || goals.includes('skin') || goals.includes('injury')
-
-  if (wantsHormone && !wantsMetabolic) {
-    return {
-      program: 'Hormone & Performance Program',
-      description: "Based on your answers, our Hormone Program is the recommended starting point. You'll complete a comprehensive blood panel followed by a telehealth consultation with one of our doctors.",
-      cta: 'Begin Hormone Intake',
-      href: '/intake/hormone',
-    }
-  }
-  if (wantsMetabolic) {
-    return {
-      program: 'Metabolic Weight Management',
-      description: 'Your answers point toward a metabolic assessment. Your doctor will review your markers and build a personalised protocol targeting the drivers behind your body composition.',
-      cta: 'Begin General Intake',
-      href: '/intake/general',
-    }
-  }
-  if (wantsTargeted) {
-    return {
-      program: 'Targeted Clinical Program',
-      description: 'Based on your answers, a general consultation is your best starting point. Your doctor will assess the relevant markers and build a protocol specific to your concern.',
-      cta: 'Begin General Intake',
-      href: '/intake/general',
-    }
-  }
-  return {
-    program: 'Discovery Consultation',
-    description: "Not sure where to start — that's exactly what the discovery call is for. A free 15-minute call with our team to understand your goals and point you in the right direction.",
-    cta: 'Book a Discovery Call',
-    href: '/intake/discovery',
-  }
-}
-
-function getRiskAreas(answers: QuizAnswers) {
-  const impact = answers.dailyImpact ?? []
   const conditions = answers.conditions ?? []
-  const goals = answers.goal ?? []
-  const areas: { label: string; desc: string }[] = []
 
-  if (impact.includes('focus') || impact.includes('mood') || impact.includes('confidence') || goals.includes('hormone')) {
-    areas.push({ label: 'Hormonal Health Assessment', desc: 'Assess key hormone levels to identify the imbalances driving your energy, mood, and performance.' })
+  const activePrograms = programs.filter((p) => p.status === 'active')
+  const scores: Record<string, number> = {}
+  for (const p of activePrograms) scores[p.slug] = 0
+
+  // Goal selections — strongest signal (3 pts)
+  if (goals.includes('hormone') || goals.includes('general')) scores['hormone-optimisation'] += 3
+  if (goals.includes('performance')) { scores['hormone-performance'] += 3; scores['performance-plus'] += 2 }
+  if (goals.includes('metabolic')) scores['metabolic-weight-loss'] += 3
+  if (goals.includes('hair')) scores['hair-restoration'] += 3
+  if (goals.includes('skin')) scores['skin-regeneration'] += 3
+  if (goals.includes('injury')) scores['injury-repair'] += 3
+
+  // Daily impact signals (2 pts)
+  if (impact.includes('focus') || impact.includes('mood') || impact.includes('intimacy') || impact.includes('sleep')) {
+    scores['hormone-optimisation'] += 2
   }
-  if (impact.includes('training') || goals.includes('performance')) {
-    areas.push({ label: 'Performance & Recovery Optimisation', desc: 'Clinical protocols to restore your capacity to train hard, recover fully, and perform consistently.' })
-  }
-  if (impact.includes('intimacy') || goals.includes('hormone')) {
-    areas.push({ label: 'Hormonal & Sexual Health Panel', desc: 'Targeted assessment of the hormonal markers that drive libido, function, and vitality.' })
-  }
-  if (goals.includes('metabolic') || impact.includes('weight')) {
-    areas.push({ label: 'Metabolic & Body Composition', desc: 'Identify the metabolic drivers behind weight gain and resistance to change.' })
-  }
-  if (conditions.includes('heart') || conditions.includes('hbp') || conditions.includes('cholesterol')) {
-    areas.push({ label: 'Cardiac Risk Assessment', desc: 'Assessment of cardiovascular risk factors to protect your long-term heart health.' })
-  }
-  if (conditions.includes('diabetes')) {
-    areas.push({ label: 'Metabolic Risk Screening', desc: 'Comprehensive panel to assess insulin resistance and glucose regulation.' })
-  }
-  if (goals.includes('hair')) {
-    areas.push({ label: 'Hair Restoration Program', desc: 'Clinical assessment of the hormonal and genetic drivers of hair loss.' })
-  }
-  if (goals.includes('skin')) {
-    areas.push({ label: 'Skin Regeneration', desc: 'Doctor-guided skin protocol targeting the underlying hormonal causes of skin decline.' })
-  }
-  if (goals.includes('injury')) {
-    areas.push({ label: 'Injury Repair & Recovery', desc: 'Clinical protocols to accelerate healing and address chronic pain or slow recovery.' })
+  if (impact.includes('training')) { scores['hormone-performance'] += 2; scores['performance-plus'] += 1 }
+  if (impact.includes('weight')) scores['metabolic-weight-loss'] += 2
+
+  // Success goal (2 pts)
+  if (successGoal === 'hormone') scores['hormone-optimisation'] += 2
+  if (successGoal === 'performance') { scores['hormone-performance'] += 2; scores['performance-plus'] += 1 }
+  if (successGoal === 'metabolic') scores['metabolic-weight-loss'] += 2
+
+  // Conditions (1 pt)
+  if (conditions.includes('hairloss')) scores['hair-restoration'] += 1
+
+  // When both hormone + performance are strong, upgrade to Performance+ flagship
+  if (scores['hormone-optimisation'] >= 3 && scores['hormone-performance'] >= 3) {
+    scores['performance-plus'] += Math.min(scores['hormone-optimisation'], scores['hormone-performance'])
+    // Demote the two sub-programs so Performance+ ranks first
+    scores['hormone-optimisation'] = Math.max(0, scores['hormone-optimisation'] - 2)
+    scores['hormone-performance'] = Math.max(0, scores['hormone-performance'] - 2)
   }
 
-  return areas.slice(0, 4)
+  const ranked = activePrograms
+    .filter((p) => scores[p.slug] > 0)
+    .sort((a, b) => scores[b.slug] - scores[a.slug])
+
+  if (ranked.length === 0) {
+    return [activePrograms.find((p) => p.slug === 'hormone-optimisation')!]
+  }
+
+  return ranked.slice(0, 3)
 }
 
 // ─── Animation Variants ───────────────────────────────────────────────────────
@@ -270,19 +241,19 @@ export default function HealthQuiz() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true)
-    const rec = getRecommendation(answers)
+    const recs = getRecommendedPrograms(answers)
     try {
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Quiz Lead — ${rec.program}`,
+          subject: `Quiz Lead — ${recs.map((p) => p.name).join(', ')}`,
           from_name: capture.firstName || 'Quiz Lead',
           name: capture.firstName,
           email: capture.email,
           phone: capture.phone,
-          recommended_program: rec.program,
+          recommended_programs: recs.map((p) => p.slug).join(', '),
           goal: answers.goal?.join(', '),
           age: answers.age,
           duration: answers.duration,
@@ -299,7 +270,7 @@ export default function HealthQuiz() {
     goTo('submitted')
   }
 
-  const rec = getRecommendation(answers)
+  const recs = getRecommendedPrograms(answers)
   const ageInsight = AGE_INSIGHTS[answers.age ?? '31-40'] ?? AGE_INSIGHTS['31-40']
 
   const showBackButton = MAIN_FLOW.indexOf(screen) > 1
@@ -733,56 +704,54 @@ export default function HealthQuiz() {
               {/* ─── RESULT SUMMARY ────────────────────────────────────────── */}
               {screen === 'result_summary' && (
                 <div>
-                  <p className="text-sm font-medium mb-1" style={{ color: 'var(--teal)' }}>Thanks!</p>
+                  <p className="text-sm font-medium mb-1" style={{ color: 'var(--teal)' }}>Your personalised plan</p>
                   <h2
                     className="text-2xl md:text-3xl font-bold tracking-tight mb-3"
                     style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                   >
-                    Below are your recommended areas of focus with Apex
+                    {recs.length === 1 ? 'Your recommended program' : `Your top ${recs.length} recommended programs`}
                   </h2>
                   <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                    Based on what you&apos;ve shared, we&apos;ve built your recommended plan around the below focus areas. You can discuss, customise, and finalise your plan with your doctor.
+                    Based on what you&apos;ve shared, we&apos;ve matched you to the programs most likely to address your concerns. Your doctor will review and finalise your protocol.
                   </p>
 
-                  {/* Primary program */}
-                  <div
-                    className="rounded-sm p-5 mb-3"
-                    style={{ backgroundColor: 'rgba(0,194,184,0.07)', border: '1px solid rgba(0,194,184,0.3)' }}
-                  >
-                    <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>Your health goal</p>
-                    <div className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style={{ backgroundColor: 'var(--teal)' }}>
-                        <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2"><path d="M1 4l3 3 5-6" stroke="#070a0d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>{rec.program}</p>
-                        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{rec.description}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Risk areas */}
-                  {getRiskAreas(answers).length > 0 && (
-                    <div
-                      className="rounded-sm p-5 mb-6"
-                      style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)' }}
-                    >
-                      <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>Risk factors to explore</p>
-                      <div className="flex flex-col gap-4">
-                        {getRiskAreas(answers).map((area) => (
-                          <div key={area.label} className="flex items-start gap-3">
-                            <div className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5" style={{ backgroundColor: 'rgba(201,168,76,0.2)', border: '1px solid rgba(201,168,76,0.4)' }}>
-                              <svg viewBox="0 0 10 8" fill="none" className="w-2.5 h-2"><path d="M1 4l3 3 5-6" stroke="#c9a84c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                            </div>
-                            <div>
-                              <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{area.label}</p>
-                              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{area.desc}</p>
-                            </div>
+                  {/* Numbered program cards */}
+                  <div className="flex flex-col gap-3 mb-6">
+                    {recs.map((program, i) => (
+                      <div
+                        key={program.slug}
+                        className="rounded-sm p-5 flex items-start gap-4"
+                        style={{
+                          backgroundColor: i === 0 ? 'rgba(0,194,184,0.07)' : 'var(--surface)',
+                          border: i === 0 ? '1px solid rgba(0,194,184,0.3)' : '1px solid var(--border)',
+                        }}
+                      >
+                        <div
+                          className="w-7 h-7 rounded-sm flex-shrink-0 flex items-center justify-center text-xs font-bold"
+                          style={{
+                            backgroundColor: i === 0 ? 'var(--teal)' : 'var(--elevated)',
+                            color: i === 0 ? '#070a0d' : 'var(--text-muted)',
+                          }}
+                        >
+                          {i + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1 flex-wrap">
+                            <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{program.name}</p>
+                            {program.badge && (
+                              <span
+                                className="text-[10px] font-semibold px-1.5 py-0.5 rounded-sm"
+                                style={{ backgroundColor: 'rgba(201,168,76,0.15)', border: '1px solid rgba(201,168,76,0.3)', color: '#c9a84c' }}
+                              >
+                                {program.badge}
+                              </span>
+                            )}
                           </div>
-                        ))}
+                          <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{program.tagline}</p>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    ))}
+                  </div>
 
                   <NavButtons onBack={goBack} onContinue={goNext} />
                 </div>
@@ -904,21 +873,19 @@ export default function HealthQuiz() {
                     {capture.firstName ? `${capture.firstName}'s` : 'Your'} personalised clinical protocol
                   </h1>
 
-                  {/* Focus area tags */}
+                  {/* Program tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
-                    <span
-                      className="px-3 py-1 rounded-full text-xs font-medium"
-                      style={{ backgroundColor: 'rgba(0,194,184,0.1)', border: '1px solid rgba(0,194,184,0.3)', color: 'var(--teal)' }}
-                    >
-                      {rec.program}
-                    </span>
-                    {getRiskAreas(answers).map((area) => (
+                    {recs.map((program, i) => (
                       <span
-                        key={area.label}
+                        key={program.slug}
                         className="px-3 py-1 rounded-full text-xs font-medium"
-                        style={{ backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
+                        style={
+                          i === 0
+                            ? { backgroundColor: 'rgba(0,194,184,0.1)', border: '1px solid rgba(0,194,184,0.3)', color: 'var(--teal)' }
+                            : { backgroundColor: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }
+                        }
                       >
-                        {area.label}
+                        {program.name}
                       </span>
                     ))}
                   </div>
@@ -928,7 +895,7 @@ export default function HealthQuiz() {
                     className="rounded-sm overflow-hidden mb-4"
                     style={{ border: '1px solid var(--border)', backgroundColor: 'var(--surface)' }}
                   >
-                    <div className="p-5 border-b flex items-center justify-between" style={{ borderColor: 'var(--border)' }}>
+                    <div className="p-5 border-b" style={{ borderColor: 'var(--border)' }}>
                       <span
                         className="text-xs font-semibold px-2.5 py-1 rounded-sm"
                         style={{ backgroundColor: 'var(--elevated)', color: 'var(--text-secondary)' }}
@@ -964,30 +931,62 @@ export default function HealthQuiz() {
                     </div>
                   </div>
 
-                  {/* Step 2 */}
+                  {/* Step 2 — recommended programs */}
                   <div
-                    className="rounded-sm p-5 mb-6"
+                    className="rounded-sm overflow-hidden mb-6"
                     style={{ border: '1px solid var(--border)', backgroundColor: 'var(--surface)' }}
                   >
-                    <span
-                      className="text-xs font-semibold px-2.5 py-1 rounded-sm inline-block mb-4"
-                      style={{ backgroundColor: 'var(--elevated)', color: 'var(--text-secondary)' }}
-                    >
-                      STEP 2
-                    </span>
-                    <h3
-                      className="text-base font-bold mb-2 leading-snug"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
-                    >
-                      Based on what you&apos;ve shared, we&apos;ve recommended the program below. Finalise together with your doctor.
-                    </h3>
-                    <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{rec.description}</p>
+                    <div className="p-5 border-b" style={{ borderColor: 'var(--border)' }}>
+                      <span
+                        className="text-xs font-semibold px-2.5 py-1 rounded-sm"
+                        style={{ backgroundColor: 'var(--elevated)', color: 'var(--text-secondary)' }}
+                      >
+                        STEP 2
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3
+                        className="text-base font-bold mb-1 leading-snug"
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+                      >
+                        Your matched {recs.length === 1 ? 'program' : 'programs'}
+                      </h3>
+                      <p className="text-xs mb-4" style={{ color: 'var(--text-secondary)' }}>
+                        Your doctor will review these recommendations and finalise your protocol during your consultation.
+                      </p>
+                      <div className="flex flex-col gap-3">
+                        {recs.map((program, i) => (
+                          <div
+                            key={program.slug}
+                            className="flex items-start gap-3 p-3.5 rounded-sm"
+                            style={{
+                              backgroundColor: i === 0 ? 'rgba(0,194,184,0.05)' : 'var(--elevated)',
+                              border: i === 0 ? '1px solid rgba(0,194,184,0.2)' : '1px solid var(--border)',
+                            }}
+                          >
+                            <div
+                              className="w-6 h-6 rounded-sm flex-shrink-0 flex items-center justify-center text-[10px] font-bold mt-0.5"
+                              style={{
+                                backgroundColor: i === 0 ? 'var(--teal)' : 'var(--surface)',
+                                color: i === 0 ? '#070a0d' : 'var(--text-muted)',
+                              }}
+                            >
+                              {i + 1}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{program.name}</p>
+                              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{program.tagline}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
 
                   {/* CTAs */}
                   <div className="flex flex-col gap-3 mb-5">
-                    <Link href={rec.href} className="btn-teal w-full justify-center">
-                      {rec.cta}
+                    <Link href={recs[0].ctaHref} className="btn-teal w-full justify-center">
+                      {recs[0].ctaLabel} — {recs[0].name}
                       <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
