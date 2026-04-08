@@ -32,7 +32,7 @@ function TreatmentOptions() {
           {[
             'Medication invoiced at pharmacy rates',
             'Medication fulfilled through our accredited compounding pharmacy partner',
-            <>Administration, Handling &amp; Infrastructure fee from <span style={{ color: '#f0f4f8', fontWeight: 600 }}>$50</span> — covers file management, treatment coordination, and medication safety reviews</>,
+            'File management, treatment coordination & medication safety reviews',
             'Clinical support team access',
             'Coordinated follow-up consultations built in',
             'Admin support 9–5, 7 days a week',
@@ -330,7 +330,7 @@ function Track1Section() {
           <TimelineStep
             stepNumber="2"
             title="Blood Work"
-            costBadge="From $264"
+            costBadge="$280"
             index={1}
           >
             <p className="text-sm leading-relaxed mb-4" style={{ color: '#8899aa' }}>
@@ -356,7 +356,7 @@ function Track1Section() {
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $264
+                  $280
                 </span>
               </div>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-5 py-4">
@@ -372,7 +372,7 @@ function Track1Section() {
                   className="text-lg font-bold flex-shrink-0"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
                 >
-                  $296
+                  $280
                 </span>
               </div>
             </div>
