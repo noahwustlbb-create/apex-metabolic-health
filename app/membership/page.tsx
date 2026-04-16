@@ -98,10 +98,10 @@ const FEATURES = [
   },
   {
     number: '08',
-    title: 'Access to the Apex App',
-    body: 'Members will receive access to the Apex App upon release. A system built for clarity, continuity, and control.',
-    callout: 'In Development — included with all memberships at launch.',
-    bullets: ['Centralised access to your health data', 'Biomarker tracking over time', 'Visibility over your protocol and progress', 'Ongoing communication with the clinical team'],
+    title: 'Apex App — Protocol in Your Pocket',
+    body: 'Members receive access to the Apex App at launch. See your biomarkers over time, track protocol changes, and stay connected with your clinical team — everything in one place.',
+    callout: 'In development — included with all active memberships at launch.',
+    bullets: ['Full biomarker history and trend visualisation', 'Protocol and dosing visibility at any time', 'Direct clinical team messaging', 'Continuous progress tracking between reviews'],
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <rect x="5" y="2" width="14" height="20" rx="2" />
@@ -237,9 +237,9 @@ export default function MembershipPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#8899aa', maxWidth: '520px', marginBottom: '2rem' }}
+              style={{ color: '#8899aa', maxWidth: '500px', marginBottom: '2rem' }}
             >
-              A structured, doctor-led clinical system that tracks, adjusts, and improves your protocol as your biology responds. Not a one-time script. An ongoing program.
+              A structured, doctor-led clinical system that tracks, adjusts, and improves your protocol as your biology responds.
             </motion.p>
 
             <motion.div
@@ -333,27 +333,23 @@ export default function MembershipPage() {
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed mb-5" style={{ color: '#6b7a8d', maxWidth: '520px' }}>
-                    Ongoing doctor-led optimisation designed to improve how your body functions over time — not just manage symptoms. Your protocol evolves as your biology responds.
-                  </p>
-
-                  <p className="text-sm leading-relaxed mb-6 pl-4" style={{ color: '#4a6070', borderLeft: '2px solid rgba(72,144,247,0.25)', fontStyle: 'italic' }}>
-                    Not a one-off prescription pathway. Built for ongoing oversight, clearer data, and a more complete standard of care.
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: '#6b7a8d', maxWidth: '520px' }}>
+                    Your protocol evolves as your biology responds — not a one-off script, but a living clinical system with ongoing oversight, tracked data, and regular refinement.
                   </p>
 
                   <div className="h-px mb-6" style={{ background: 'linear-gradient(to right, rgba(72,144,247,0.15), transparent)' }} />
 
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-8">
                     {[
-                      { text: 'Continuous doctor-led optimisation', highlight: true },
+                      { text: 'Doctor oversight across every review cycle', highlight: true },
                       { text: 'Discounted review consultations', highlight: true },
-                      { text: 'Follow-up blood work included in ongoing care', highlight: true },
-                      { text: 'Comprehensive biomarker tracking over time', highlight: false },
-                      { text: 'Protocol adjustments based on your results', highlight: false },
+                      { text: 'Blood work included every cycle', highlight: true },
+                      { text: 'Biomarker trends tracked over time', highlight: false },
+                      { text: 'Protocol refined as your biology responds', highlight: false },
                       { text: 'Priority clinical support between reviews', highlight: false },
-                      { text: 'Medication management & safety oversight', highlight: false },
-                      { text: 'Clinically guided nutrition & lifestyle strategy', highlight: false },
-                      { text: 'Apex App — centralised health data & tracking', highlight: false, badge: 'Coming soon' },
+                      { text: 'Medication safety & script management', highlight: false },
+                      { text: 'Nutrition & lifestyle clinically calibrated', highlight: false },
+                      { text: 'Apex App — full protocol visibility & tracking', highlight: false, badge: 'Coming soon' },
                     ].map((item) => (
                       <li key={item.text} className="flex items-start gap-3">
                         <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true">
@@ -389,21 +385,21 @@ export default function MembershipPage() {
               {/* ── Script Release — secondary ── */}
               <div
                 className="rounded-2xl p-7"
-                style={{ background: 'rgba(10,13,17,0.8)', border: '1px solid rgba(255,255,255,0.05)' }}
+                style={{ background: '#0a0e14', border: '1px solid rgba(255,255,255,0.07)' }}
               >
-                <p className="text-[9px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: '#2e3d4d' }}>
+                <p className="text-[9px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: '#3a4a5a' }}>
                   Alternative
                 </p>
-                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#5a6a7a' }}>
+                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#6b7a8d' }}>
                   Script Release Only
                 </h3>
                 <div className="flex items-baseline gap-1.5 mb-4">
-                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#5a6a7a' }}>$145</span>
-                  <span className="text-sm" style={{ color: '#2e3d4d' }}>one-off</span>
+                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#6b7a8d' }}>$145</span>
+                  <span className="text-sm" style={{ color: '#3a4a5a' }}>one-off</span>
                 </div>
 
-                <p className="text-xs leading-relaxed mb-5" style={{ color: '#3a4a5a' }}>
-                  A prescription is issued and released directly to you. No ongoing clinical management, reviews, or biomarker tracking included.
+                <p className="text-xs leading-relaxed mb-5" style={{ color: '#4a5a6a' }}>
+                  Prescription issued and released directly to you. No ongoing clinical management, reviews, or biomarker tracking included.
                 </p>
 
                 <ul className="flex flex-col gap-2.5 mb-6">
@@ -419,21 +415,21 @@ export default function MembershipPage() {
                     <li key={item.text} className="flex items-center gap-2.5">
                       {item.included ? (
                         <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true">
-                          <circle cx="8" cy="8" r="7" stroke="rgba(255,255,255,0.1)" strokeWidth="1.2" />
-                          <path d="M5 8l2.5 2.5 4-4" stroke="rgba(255,255,255,0.2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                          <circle cx="8" cy="8" r="7" stroke="rgba(255,255,255,0.15)" strokeWidth="1.2" />
+                          <path d="M5 8l2.5 2.5 4-4" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       ) : (
                         <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true">
-                          <circle cx="8" cy="8" r="7" stroke="rgba(255,80,80,0.15)" strokeWidth="1.2" />
-                          <path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="rgba(255,80,80,0.25)" strokeWidth="1.2" strokeLinecap="round" />
+                          <circle cx="8" cy="8" r="7" stroke="rgba(255,80,80,0.2)" strokeWidth="1.2" />
+                          <path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="rgba(255,80,80,0.3)" strokeWidth="1.2" strokeLinecap="round" />
                         </svg>
                       )}
-                      <span className="text-xs leading-relaxed" style={{ color: item.included ? '#3a4a5a' : '#263340' }}>{item.text}</span>
+                      <span className="text-xs leading-relaxed" style={{ color: item.included ? '#4a5a6a' : '#3a4a5a' }}>{item.text}</span>
                     </li>
                   ))}
                 </ul>
 
-                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#263340', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.03)' }}>
+                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#3a4a5a', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
                   Script release does not include ongoing clinical oversight. Not recommended for patients on active hormonal or metabolic protocols requiring monitoring.
                 </p>
               </div>
@@ -498,17 +494,57 @@ export default function MembershipPage() {
                 Not a static prescription. A living, evolving protocol that responds to your biology.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-px" style={{ background: 'rgba(255,255,255,0.06)', borderRadius: '12px', overflow: 'hidden' }}>
+            {/* Desktop: horizontal with connectors */}
+            <div className="hidden md:grid grid-cols-4 gap-0 rounded-2xl overflow-hidden relative" style={{ border: '1px solid rgba(148,163,184,0.08)' }}>
               {[
-                { phase: 'Month 1', label: 'Baseline', desc: 'Comprehensive blood work. Full biomarker baseline established. Initial protocol built by your doctor.' },
-                { phase: 'Month 2', label: 'Optimise', desc: 'Treatment underway. Early feedback reviewed. Dosing and protocol refined based on response.' },
-                { phase: 'Month 3', label: 'Refine', desc: 'Mid-cycle check-in. Lifestyle and nutrition strategy calibrated. Progress tracked against targets.' },
-                { phase: 'Month 4', label: 'Review', desc: 'Full clinical review. Follow-up blood work. Protocol reassessed and next cycle begins.' },
+                { n: '01', phase: 'Month 1', label: 'Baseline', desc: 'Comprehensive blood work. Full biomarker baseline established. Initial protocol built by your doctor.' },
+                { n: '02', phase: 'Month 2', label: 'Optimise', desc: 'Treatment underway. Early response reviewed. Dosing and protocol refined to your feedback.' },
+                { n: '03', phase: 'Month 3', label: 'Refine', desc: 'Mid-cycle check-in. Nutrition and lifestyle calibrated. Progress tracked against clinical targets.' },
+                { n: '04', phase: 'Month 4', label: 'Review', desc: 'Full clinical review. Follow-up blood work completed. Protocol reassessed. Next cycle begins.' },
+              ].map((phase, i) => (
+                <div key={phase.phase} className="flex flex-col p-8 relative"
+                  style={{ background: i % 2 === 0 ? '#0a0e14' : '#0d1117', borderRight: i < 3 ? '1px solid rgba(148,163,184,0.07)' : 'none' }}>
+                  {/* Connector arrow */}
+                  {i < 3 && (
+                    <div className="absolute top-8 -right-3 z-10 w-6 h-6 rounded-full flex items-center justify-center"
+                      style={{ background: '#0d1117', border: '1px solid rgba(72,144,247,0.2)' }}>
+                      <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
+                        <path d="M2 6h8M7 3l3 3-3 3" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
+                      <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.n}</span>
+                    </div>
+                    <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: '#3a4a5a' }}>{phase.phase}</span>
+                  </div>
+                  <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c8d4e0' }}>{phase.label}</span>
+                  <p className="text-xs leading-relaxed" style={{ color: '#5a6a7a' }}>{phase.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile: vertical stack */}
+            <div className="md:hidden flex flex-col gap-3">
+              {[
+                { n: '01', phase: 'Month 1', label: 'Baseline', desc: 'Blood work. Full biomarker baseline. Initial protocol built by your doctor.' },
+                { n: '02', phase: 'Month 2', label: 'Optimise', desc: 'Treatment underway. Dosing refined based on early response.' },
+                { n: '03', phase: 'Month 3', label: 'Refine', desc: 'Mid-cycle check-in. Nutrition and lifestyle calibrated. Progress tracked.' },
+                { n: '04', phase: 'Month 4', label: 'Review', desc: 'Full clinical review. Follow-up blood work. Next cycle begins.' },
               ].map((phase) => (
-                <div key={phase.phase} className="flex flex-col p-7" style={{ background: '#0d1117' }}>
-                  <span className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-2" style={{ color: '#4a5a6a' }}>{phase.phase}</span>
-                  <span className="text-xl font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.label}</span>
-                  <p className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{phase.desc}</p>
+                <div key={phase.phase} className="flex gap-4 rounded-xl p-5"
+                  style={{ background: '#0a0e14', border: '1px solid rgba(148,163,184,0.07)' }}>
+                  <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+                    style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
+                    <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.n}</span>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: '#3a4a5a' }}>{phase.phase}</p>
+                    <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c8d4e0' }}>{phase.label}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#5a6a7a' }}>{phase.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
