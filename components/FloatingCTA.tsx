@@ -19,7 +19,7 @@ export default function FloatingCTA() {
     <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6">
       <Link
         href="/assessment"
-        aria-label="Request an Appointment"
+        aria-label="Get Started"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{ display: 'block', position: 'relative' }}
@@ -92,7 +92,7 @@ export default function FloatingCTA() {
               transition: 'color 0.25s',
             }}
           >
-            Request an Appointment
+            Get Started
           </span>
         </motion.div>
       </Link>

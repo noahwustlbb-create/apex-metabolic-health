@@ -1,24 +1,9 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
-import ProgramModal from './ProgramModal'
-import { programs } from '@/lib/programs'
-import type { Program } from '@/lib/programs'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
-interface LocalProgram {
-  icon: React.ReactNode
-  name: string
-  description: string
-  slug?: string
-  href?: string
-  buyNow?: boolean
-  ctaLabel?: string
-}
-
-const PROGRAMS: LocalProgram[] = [
+const PROGRAMS = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
@@ -28,9 +13,9 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Hormone Optimisation',
-    description:
-      'Comprehensive assessment and optimisation of hormonal pathways affecting cellular energy, body composition, and biological vitality.',
-    slug: 'hormone-optimisation',
+    description: 'Restore and optimise testosterone, DHEA, thyroid, and other key hormonal pathways driving energy, body composition, and drive.',
+    bloodsHref: '/intake/bloods-hormone',
+    consultHref: '/intake/hormone',
   },
   {
     icon: (
@@ -39,9 +24,9 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Performance & Recovery',
-    description:
-      'Targeted regenerative protocols focused on training output, mitochondrial recovery, and sustained physical performance.',
-    slug: 'hormone-performance',
+    description: 'Maximise training output, reduce recovery time, and optimise the biological systems that drive physical performance.',
+    bloodsHref: '/intake/bloods-performance',
+    consultHref: '/intake/hormone',
   },
   {
     icon: (
@@ -51,9 +36,9 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Metabolic Weight Management',
-    description:
-      'Clinically supervised metabolic optimisation addressing the hormonal and cellular drivers of weight resistance.',
-    slug: 'metabolic-weight-loss',
+    description: 'Address the hormonal and metabolic drivers of weight resistance — not just calories. A clinical approach to lasting body composition change.',
+    bloodsHref: '/intake/bloods-metabolic',
+    consultHref: '/intake/general',
   },
   {
     icon: (
@@ -64,9 +49,9 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Hair Restoration',
-    description:
-      'Evidence-based medical management of androgenic alopecia and follicular miniaturisation — hair regeneration at the biological level.',
-    slug: 'hair-restoration',
+    description: 'Medical management of androgenic alopecia targeting the hormonal and follicular causes of hair loss — not just the symptoms.',
+    bloodsHref: '/intake/bloods-hair',
+    consultHref: '/intake/hormone',
   },
   {
     icon: (
@@ -77,9 +62,9 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Skin Regeneration',
-    description:
-      'Doctor-prescribed regenerative protocols targeting skin cellular renewal, texture, collagen architecture, and the visible effects of hormonal ageing.',
-    slug: 'skin-regeneration',
+    description: 'Doctor-prescribed protocols targeting skin cellular renewal, collagen architecture, and the visible effects of hormonal ageing.',
+    bloodsHref: '/intake/bloods-skin',
+    consultHref: '/intake/general',
   },
   {
     icon: (
@@ -89,278 +74,124 @@ const PROGRAMS: LocalProgram[] = [
       </svg>
     ),
     name: 'Injury Repair & Recovery',
-    description:
-      'Medically supervised regenerative protocols accelerating tissue repair, cellular healing, and biological recovery from injury.',
-    slug: 'injury-repair',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
-        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="currentColor" strokeWidth="1.5" fill="none" />
-        <circle cx="12" cy="14" r="2" stroke="currentColor" strokeWidth="1.5" fill="none" />
-        <path d="M8 14h1m6 0h1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-    name: 'Advanced Biomarker Analysis',
-    description:
-      'Comprehensive biomarker profiling that goes beyond the standard GP screen — delivering a precise metabolic, hormonal, and cellular health picture.',
-    href: '/order-bloods',
-    buyNow: true,
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
-        <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="none" />
-        <path d="M8 21h8M12 17v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
-        <path d="M7 10h1.5M15.5 10H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-    name: 'General Telehealth',
-    description:
-      'Access to our AHPRA-registered doctors for general health consultations, referrals, and medical management.',
-    href: '/intake/general',
-    buyNow: true,
-    ctaLabel: 'Book Now',
+    description: 'Medically supervised regenerative protocols accelerating tissue repair and biological recovery from acute or chronic injury.',
+    bloodsHref: '/intake/bloods-injury',
+    consultHref: '/intake/general',
   },
 ]
 
-interface ProgramCardProps {
-  program: LocalProgram
-  index: number
-  onOpen: (p: Program) => void
-}
-
-function ProgramCard({ program, index, onOpen }: ProgramCardProps) {
-  const ref = useRef(null)
-  const router = useRouter()
-  const isInView = useInView(ref, { once: true, margin: '-50px' })
-
-  const fullProgram = program.slug
-    ? programs.find((p) => p.slug === program.slug) ?? null
-    : null
-
-  const handleCardClick = () => {
-    if (program.href) {
-      router.push(program.href)
-    } else if (fullProgram) {
-      onOpen(fullProgram)
-    }
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="apex-card program-card flex flex-col group h-full overflow-hidden"
-      style={{
-        cursor: fullProgram ? 'pointer' : 'default',
-        position: 'relative',
-      }}
-      onClick={handleCardClick}
-    >
-      {/* Image strip */}
-      {fullProgram?.image && (
-        <div className="relative w-full h-44 flex-shrink-0 overflow-hidden" style={{ background: '#0A0A0A' }}>
-          <Image
-            src={fullProgram.image}
-            alt={program.name}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            unoptimized
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to bottom, transparent 50%, rgba(13,17,23,0.7) 100%)' }}
-          />
-        </div>
-      )}
-
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
-        {/* Icon */}
-        <div
-          className="w-12 h-12 flex items-center justify-center rounded-sm mb-5 flex-shrink-0 transition-all duration-300 group-hover:border-teal"
-          style={{
-            backgroundColor: 'rgba(53,117,198,0.07)',
-            border: '1px solid rgba(53,117,198,0.18)',
-            color: '#3575C6',
-          }}
-        >
-          {program.icon}
-        </div>
-
-        {/* Program name */}
-        <h3
-          className="text-base font-semibold mb-2.5 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
-        >
-          {program.name}
-        </h3>
-
-        {/* Description */}
-        <p
-          className="text-sm leading-relaxed flex-1 mb-5"
-          style={{ color: '#B0B8C5' }}
-        >
-          {program.description}
-        </p>
-
-        {/* Links */}
-        <div
-          className="flex items-center justify-between mt-auto pt-3 gap-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {program.buyNow ? (
-            <a
-              href={program.href}
-              className="flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-all duration-200"
-              style={{ color: '#3575C6' }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = '#3575C6' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {program.ctaLabel ?? 'Buy Now'}
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          ) : (
-            <>
-              <span
-                className="flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-colors duration-200 group-hover:text-primary"
-                style={{ color: '#3575C6' }}
-              >
-                Learn More
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" style={{ color: '#3575C6' }} aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-              <a
-                href="/assessment"
-                className="flex items-center gap-1 text-xs font-semibold tracking-wide transition-all duration-200 whitespace-nowrap"
-                style={{ color: '#B0B8C5' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#B0B8C5' }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                Check Eligibility
-                <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-            </>
-          )}
-        </div>
-      </div>
-
-    </motion.div>
-  )
-}
-
 export default function ProgramsGrid() {
-  const headingRef = useRef(null)
-  const headingInView = useInView(headingRef, { once: true, margin: '-80px' })
-  const [activeProgram, setActiveProgram] = useState<Program | null>(null)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#151c28' }}
+      style={{ backgroundColor: '#0d1117' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
 
-      {/* Background texture */}
-      <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
+      <div ref={ref} className="container-tight relative z-10">
 
-      {/* Top-right accent */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(53,117,198,0.06) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="container-tight relative z-10">
-        {/* Heading */}
-        <div ref={headingRef} className="text-center mb-12 md:mb-16">
+        {/* Header */}
+        <div className="mb-12">
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
             className="label mb-4"
           >
-            Clinical Programs
+            CLINICAL PROGRAMS
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="text-3xl md:text-4xl font-bold tracking-tight max-w-xl"
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: 1.1 }}
           >
-            Eight Clinical Programs.
-            <br />
-            <span className="text-teal-gradient">Evidence-Based Protocols.</span>
+            Pick your program.{' '}
+            <span className="text-teal-gradient">Start with bloods.</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#B0B8C5' }}
-          >
-            Every protocol begins with advanced biomarker analysis. All treatment is clinically indicated and individually prescribed.
-          </motion.p>
         </div>
 
-        {/* Programs grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {PROGRAMS.map((program, i) => (
-            <ProgramCard
+            <motion.div
               key={program.name}
-              program={program}
-              index={i}
-              onOpen={setActiveProgram}
-            />
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="apex-card p-6 flex flex-col"
+            >
+              {/* Icon */}
+              <div
+                className="w-10 h-10 flex items-center justify-center rounded-sm mb-4 flex-shrink-0"
+                style={{
+                  backgroundColor: 'rgba(72,144,247,0.08)',
+                  border: '1px solid rgba(72,144,247,0.18)',
+                  color: '#4890f7',
+                }}
+              >
+                {program.icon}
+              </div>
+
+              {/* Name + description */}
+              <h3
+                className="text-base font-bold mb-2"
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              >
+                {program.name}
+              </h3>
+              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#6b7a8d' }}>
+                {program.description}
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col gap-2">
+                <a
+                  href={program.bloodsHref}
+                  className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs font-semibold tracking-wide transition-all duration-150"
+                  style={{
+                    background: 'rgba(72,144,247,0.1)',
+                    border: '1px solid rgba(72,144,247,0.25)',
+                    color: '#4890f7',
+                  }}
+                >
+                  Order Bloods — $99
+                </a>
+                <a
+                  href={program.consultHref}
+                  className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs font-semibold tracking-wide transition-all duration-150"
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.07)',
+                    color: '#8899aa',
+                  }}
+                >
+                  Book Consultation
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a href="/intake/hormone" className="btn-teal w-full sm:w-auto">
-            Hormone Consult
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-          <a href="/intake/general" className="btn-teal w-full sm:w-auto">
-            General Consult
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-        </div>
-      </div>
+        {/* Bottom note */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-xs text-center mt-10"
+          style={{ color: '#3a4a5a' }}
+        >
+          Not sure which program fits? <a href="/intake/discovery" style={{ color: '#4890f7' }} className="hover:underline">Book a free discovery call →</a>
+        </motion.p>
 
-      <AnimatePresence>
-        {activeProgram && (
-          <ProgramModal
-            program={activeProgram}
-            onClose={() => setActiveProgram(null)}
-          />
-        )}
-      </AnimatePresence>
+      </div>
     </section>
   )
 }

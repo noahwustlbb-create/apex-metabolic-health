@@ -50,9 +50,7 @@ export async function POST(req: Request) {
         <!-- Brand -->
         <tr>
           <td style="padding-bottom:32px;text-align:center;">
-            <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#00c2b8;">
-              APEX METABOLIC HEALTH
-            </p>
+            <img src="https://www.apexmetabolichealth.com.au/logo-new.png" alt="Apex Metabolic Health" width="180" style="display:inline-block;max-width:180px;height:auto;" />
           </td>
         </tr>
 

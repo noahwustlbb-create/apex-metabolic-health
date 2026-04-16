@@ -10,8 +10,7 @@ const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 const PROGRAMS = [
   'Hormone Optimisation',
-  'Hormone & Performance',
-  'Performance+',
+  'Performance & Recovery',
   'Metabolic Weight Loss',
   'Hair Restoration',
   'Skin Regeneration',

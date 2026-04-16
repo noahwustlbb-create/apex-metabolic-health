@@ -178,7 +178,7 @@ export default function WhyApex() {
             </span>
           </a>
           <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
-            Hormone Consult
+            Get Started Hormone Consult
           </a>
           <a href="/intake/general" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             General Consult

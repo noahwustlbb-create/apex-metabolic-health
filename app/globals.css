@@ -3,29 +3,39 @@
 @tailwind utilities;
 
 :root {
-  /* ── Brand palette — extracted from logo ── */
-  --apex-blue:      #3575C6;   /* primary accent */
-  --deep-navy:      #1A3F7A;   /* depth & shadow */
-  --electric-blue:  #6AAEE8;   /* highlights & line work */
-  --apex-black:     #0A0A0A;   /* dark backgrounds */
-  --steel-silver:   #B0B8C5;   /* metallic accents */
-  --off-white:      #F4F4F6;   /* light text */
+  /* ── Primary brand accent — Apex blue ── */
+  --blue:           #4890f7;   /* primary accent — electric clinical blue */
+  --blue-light:     #6ba8ff;   /* lighter blue for gradients */
+  --blue-glow:      rgba(72,144,247,0.08);
+
+  /* ── Secondary accent — teal, limited use ── */
+  --teal:           #00a89e;   /* secondary — metabolic program, clinical context only */
+  --teal-light:     #33bdb5;
+  --teal-glow:      rgba(0,168,158,0.06);
 
   /* ── Surface scale ── */
-  --bg:             #0A0A0A;
-  --surface:        #0d1520;
-  --elevated:       #121c30;
-  --elevated-high:  #1a2a48;
-  --border:         rgba(255,255,255,0.07);
+  --bg:             #070a0d;
+  --surface:        #0d1117;
+  --elevated:       #111820;
+  --elevated-high:  #161f2c;
 
-  /* ── Semantic aliases ── */
-  --teal:           #3575C6;
-  --teal-light:     #6AAEE8;
-  --teal-glow:      rgba(53,117,198,0.15);
+  /* ── Steel / silver neutral borders ── */
+  --border:         rgba(148,163,184,0.1);   /* cool steel-tinted border */
+  --border-dim:     rgba(148,163,184,0.07);  /* subtler dividers */
+  --steel:          rgba(148,163,184,0.1);
+
+  /* ── Typography ── */
   --gold:           #c9a84c;
-  --text-primary:   #F4F4F6;
-  --text-secondary: #B0B8C5;
+  --text-primary:   #f0f4f8;
+  --text-secondary: #8899aa;
   --text-muted:     #4a5a6a;
+
+  /* ── Legacy aliases kept for backward compat ── */
+  --apex-black:     #070a0d;
+  --steel-silver:   #8899aa;
+  --off-white:      #f0f4f8;
+  --electric-blue:  #4890f7;
+  --apex-blue:      #4890f7;
 }
 
 @layer base {
@@ -47,11 +57,11 @@
     background: var(--bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: #1A3F7A;
+    background: #1a2a3a;
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--teal);
+    background: var(--blue);
   }
 
   * {
@@ -60,30 +70,30 @@
 }
 
 @layer utilities {
-  /* Dot-grid background — very subtle */
+  /* Dot-grid background — very subtle blue cast */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(53,117,198,0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(72,144,247,0.025) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
   /* Fine line grid */
   .line-grid {
     background-image:
-      linear-gradient(rgba(53,117,198,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(53,117,198,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(72,144,247,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(72,144,247,0.02) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
-  /* Glowing horizontal rule — decorative brand element */
+  /* Glowing horizontal rule — blue brand element */
   .glow-rule {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--teal), transparent);
-    opacity: 0.2;
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    opacity: 0.12;
   }
 
-  /* Signature gradient text — primary accent */
+  /* Signature gradient text — blue */
   .text-teal-gradient {
-    background: linear-gradient(135deg, #6AAEE8 0%, #3575C6 100%);
+    background: linear-gradient(135deg, #4890f7 0%, #6ba8ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -97,14 +107,14 @@
     background-clip: text;
   }
 
-  /* Clinical label style */
+  /* Clinical label style — blue primary */
   .label {
     @apply text-xs font-semibold tracking-[0.2em] uppercase;
-    color: var(--teal);
+    color: var(--blue);
     font-family: var(--font-space-grotesk), system-ui, sans-serif;
   }
 
-  /* Program / feature card — tonal depth, no structural border */
+  /* Program / feature card */
   .apex-card {
     background: var(--elevated);
     border-radius: 12px;
@@ -112,7 +122,7 @@
   }
 
   .apex-card:hover {
-    background: #162038;
+    background: #141e2a;
     box-shadow: 0 12px 32px rgba(0,0,0,0.5);
     transform: translateY(-2px);
   }
@@ -127,14 +137,14 @@
     @apply mx-auto max-w-6xl px-6 md:px-10;
   }
 
-  /* Primary CTA — pill with circle icon */
+  /* Primary CTA — pill with circle icon — blue */
   .btn-teal {
     @apply inline-flex items-center justify-between;
     padding: 5px 5px 5px 22px;
     border-radius: 999px;
-    border: 1px solid rgba(53,117,198,0.45);
-    background: rgba(53,117,198,0.1);
-    color: #F4F4F6;
+    border: 1px solid rgba(72,144,247,0.3);
+    background: rgba(72,144,247,0.07);
+    color: #f0f4f8;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -145,9 +155,9 @@
   }
 
   .btn-teal:hover {
-    background: rgba(53,117,198,0.18);
-    border-color: rgba(53,117,198,0.7);
-    box-shadow: 0 0 36px rgba(53,117,198,0.25);
+    background: rgba(72,144,247,0.12);
+    border-color: rgba(72,144,247,0.5);
+    box-shadow: 0 0 28px rgba(72,144,247,0.14);
   }
 
   /* Secondary ghost button — pill with circle icon */
@@ -186,12 +196,12 @@
   }
 
   .btn-teal .btn-circle {
-    background: #3575C6;
+    background: #4890f7;
     color: #ffffff;
   }
 
   .btn-teal:hover .btn-circle {
-    background: #6AAEE8;
+    background: #6ba8ff;
   }
 
   .btn-ghost .btn-circle {

@@ -4,12 +4,22 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { programs } from '@/lib/programs'
+const NAV_PROGRAMS = [
+  { name: 'Hormone Optimisation',     slug: 'hormone-optimisation',  comingSoon: false },
+  { name: 'Performance & Recovery',   slug: 'performance-plus',      comingSoon: false },
+  { name: 'Metabolic & Weight',       slug: 'metabolic-weight-loss', comingSoon: false },
+  { name: 'Hair Restoration',          slug: 'hair-restoration',      comingSoon: false },
+  { name: 'Skin Regeneration',         slug: 'skin-regeneration',     comingSoon: false },
+  { name: 'Injury Repair & Recovery',  slug: 'injury-repair',         comingSoon: false },
+  { name: 'Longevity Protocol',       slug: 'longevity',             comingSoon: true  },
+]
 
 const navLinks = [
-  { label: 'Start With Bloods', href: '/order-bloods' },
-  { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Apex Membership', href: '/membership' },
+  { label: 'What We Treat', href: '/what-we-treat' },
+  { label: 'Our Approach', href: '/our-approach' },
+  { label: 'Order Bloods', href: '/order-bloods' },
   { label: 'FAQs', href: '/faqs' },
 ]
 
@@ -55,7 +65,7 @@ export default function Nav() {
           boxShadow: scrolled ? '0 2px 20px rgba(0,0,0,0.08)' : 'none',
         }}
       >
-        <div className="container-tight flex items-center justify-between h-16 md:h-[72px]">
+        <div className="mx-auto w-full max-w-[1440px] px-6 md:px-8 flex items-center justify-between h-16 md:h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Apex Metabolic Health">
             <Image
@@ -70,8 +80,19 @@ export default function Nav() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-7" aria-label="Primary navigation">
-            {/* Programs dropdown */}
+          <nav className="hidden md:flex items-center gap-5" aria-label="Primary navigation">
+            {/* Start Here */}
+            <Link
+              href="/get-started"
+              className="text-[12px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
+              style={{ color: '#4a5a6a' }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = '#0A0A0A' }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
+            >
+              Start Here
+            </Link>
+
+            {/* Clinical Programs dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setProgramsOpen(true)}
@@ -80,12 +101,12 @@ export default function Nav() {
               <div className="flex items-center gap-0.5">
                 <Link
                   href="/services"
-                  className="text-[13px] font-medium tracking-wide transition-colors duration-200"
+                  className="text-[12px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
                   style={{ color: '#4a5a6a' }}
                   onMouseEnter={(e) => { e.currentTarget.style.color = '#0A0A0A' }}
                   onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 >
-                  Programs
+                  Clinical Programs
                 </Link>
                 <button
                   className="flex items-center p-1 transition-colors duration-200"
@@ -132,13 +153,12 @@ export default function Nav() {
                   >
                     <div className="p-2">
                       <div className="grid grid-cols-2 gap-0.5">
-                      {programs.map((program) =>
-                        program.status === 'coming-soon' ? (
+                      {NAV_PROGRAMS.map((program) =>
+                        program.comingSoon ? (
                           <div
                             key={program.slug}
                             className="px-4 py-2.5 rounded-sm text-[13px] flex items-center justify-between gap-2"
                             style={{ color: '#4a5a6a', cursor: 'default' }}
-
                           >
                             <span>{program.name}</span>
                             <span
@@ -201,7 +221,7 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-[13px] font-medium tracking-wide transition-colors duration-200"
+                className="text-[12px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
                 style={{ color: '#4a5a6a' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#0A0A0A' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
@@ -215,17 +235,27 @@ export default function Nav() {
           {/* Desktop CTA with dropdown */}
           <div
             className="hidden md:block relative"
+            style={{ display: menuOpen ? 'none' : undefined }}
             onMouseEnter={() => setGetStartedOpen(true)}
             onMouseLeave={() => setGetStartedOpen(false)}
           >
-            <Link href="/assessment" className="btn-teal" style={{ color: '#0A0A0A' }}>
-              Start Assessment
-              <span className="btn-circle">
-                <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </Link>
+            <button
+              className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-200"
+              style={{
+                background: '#0A0A0A',
+                color: '#ffffff',
+                padding: '11px 22px',
+                borderRadius: '999px',
+                letterSpacing: '0.01em',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#1a2a3a' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#0A0A0A' }}
+            >
+              Get Started
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
 
             <AnimatePresence>
               {getStartedOpen && (
@@ -243,25 +273,58 @@ export default function Nav() {
                     boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                   }}
                 >
-                  <div className="p-2 flex flex-col gap-0.5">
+                  <div className="p-2">
+                    {/* Group 1 */}
+                    <p className="px-4 pt-2 pb-1.5 text-[10px] font-semibold tracking-[0.14em] uppercase" style={{ color: '#B0B8C5' }}>
+                      Find the right pathway
+                    </p>
+                    <Link
+                      href="/intake/pre-screen"
+                      className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
+                      style={{ color: '#0A0A0A' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.06)' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent' }}
+                    >
+                      <span className="text-[13px] font-semibold">Start Your Assessment</span>
+                      <span className="text-[11px] mt-0.5" style={{ color: '#B0B8C5' }}>Answer 6 quick questions. We&apos;ll show you the most relevant next step.</span>
+                    </Link>
+
+                    {/* Divider */}
+                    <div style={{ borderTop: '1px solid rgba(0,0,0,0.06)', margin: '4px 0' }} />
+
+                    {/* Group 2 */}
+                    <p className="px-4 pt-2 pb-1.5 text-[10px] font-semibold tracking-[0.14em] uppercase" style={{ color: '#B0B8C5' }}>
+                      Already know what you need?
+                    </p>
                     {[
-                      { label: 'Start Assessment', desc: 'Not sure where to begin', href: '/assessment' },
-                      { label: 'Health Quiz', desc: 'Find your program in 2 min', href: '/quiz' },
-{ label: 'Hormone Check', desc: 'Clinically validated score', href: '/hormone-check' },
-                      { label: 'Hormone Consult', desc: 'TRT & hormone programs', href: '/intake/hormone' },
-                      { label: 'Metabolic Assessment', desc: 'Metabolic symptom score', href: '/metabolic-check' },
+                      {
+                        label: 'Get Started Hormone Consult',
+                        desc: 'Complete the hormone intake directly if you already know this is your focus.',
+                        href: '/intake/hormone-consult',
+                      },
+                      {
+                        label: 'General Appointment',
+                        desc: 'For broader health concerns that don\'t fit a specific program pathway.',
+                        href: '/intake/general-consult',
+                      },
+                      {
+                        label: 'Order Blood Panel',
+                        desc: 'Already know your program? Order your doctor-issued pathology referral directly.',
+                        href: '/order-bloods',
+                      },
+                      {
+                        label: 'Free Discovery Call',
+                        desc: 'Not sure if Apex is right for you? Speak with our team before committing.',
+                        href: '/intake/discovery',
+                      },
                     ].map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
                         className="flex flex-col px-4 py-3 rounded-sm transition-all duration-150"
                         style={{ color: '#0A0A0A' }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.06)'
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = 'transparent'
-                        }}
+                        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(53,117,198,0.06)' }}
+                        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent' }}
                       >
                         <span className="text-[13px] font-semibold">{item.label}</span>
                         <span className="text-[11px] mt-0.5" style={{ color: '#B0B8C5' }}>{item.desc}</span>
@@ -313,9 +376,12 @@ export default function Nav() {
             <div className="flex flex-col h-full pt-20 pb-10 px-6">
               <nav className="flex flex-col gap-2 flex-1 justify-center">
                 {[
-                  { label: 'Programs', href: '/services' },
-                  { label: 'Start With Bloods', href: '/order-bloods' },
-                  { label: 'How It Works', href: '/how-it-works' },
+                  { label: 'Start Here', href: '/intake/pre-screen' },
+                  { label: 'Clinical Programs', href: '/services' },
+                  { label: 'Apex Membership', href: '/membership' },
+                  { label: 'Our Approach', href: '/our-approach' },
+                  { label: 'What We Treat', href: '/what-we-treat' },
+                  { label: 'Order Bloods', href: '/order-bloods' },
                   { label: 'Pricing', href: '/pricing' },
                   { label: 'FAQs', href: '/faqs' },
                 ].map((link, i) => (
@@ -340,6 +406,33 @@ export default function Nav() {
                     </Link>
                   </motion.div>
                 ))}
+
+                {/* Intake CTAs */}
+                {[
+                  { label: 'Get Started Hormone Consult', href: '/intake/hormone-consult' },
+                  { label: 'General Consult', href: '/intake/general-consult' },
+                ].map((link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ delay: (i + 5) * 0.07 + 0.05 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="block text-left py-4 text-lg font-semibold transition-colors duration-200 border-b"
+                      style={{
+                        color: '#3575C6',
+                        borderColor: 'rgba(0,0,0,0.06)',
+                        fontFamily: 'var(--font-space-grotesk)',
+                      }}
+                    >
+                      {link.label} →
+                    </Link>
+                  </motion.div>
+                ))}
               </nav>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -347,16 +440,20 @@ export default function Nav() {
                 transition={{ delay: 0.4 }}
               >
                 <Link
-                  href="/assessment"
+                  href="/intake/pre-screen"
                   onClick={() => setMenuOpen(false)}
-                  className="btn-teal w-full"
+                  className="flex items-center justify-center gap-2 w-full font-semibold text-sm"
+                  style={{
+                    background: '#0A0A0A',
+                    color: '#ffffff',
+                    padding: '14px 24px',
+                    borderRadius: '999px',
+                  }}
                 >
-                  Start Assessment
-                  <span className="btn-circle">
-                    <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
+                  Start your assessment
+                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
                 </Link>
               </motion.div>
             </div>

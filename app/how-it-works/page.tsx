@@ -12,7 +12,7 @@ function HowItWorksHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0c131f', paddingTop: '120px' }}
+      style={{ backgroundColor: '#070a0d', paddingTop: '120px' }}
       aria-label="How it works hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -39,30 +39,63 @@ function HowItWorksHero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.06' }}
+          style={{
+            fontFamily: 'var(--font-space-grotesk)',
+            fontSize: 'clamp(32px, 4.5vw, 64px)',
+            fontWeight: 700,
+            lineHeight: 1.06,
+            letterSpacing: '-0.02em',
+            color: '#f0f4f8',
+            maxWidth: '760px',
+            marginBottom: '1.25rem',
+          }}
         >
-          From First Contact to Ongoing Protocol.
+          From first message
+          <br />
+          <span style={{
+            background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>to active protocol.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
-          className="text-lg leading-relaxed max-w-xl mb-10"
+          className="text-lg leading-relaxed max-w-xl mb-8"
           style={{ color: '#8899aa' }}
         >
-          No vague timelines. Here&apos;s every step.
+          No vague timelines. No hidden steps. Every stage of care, explained.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
+          transition={{ duration: 0.6, delay: 0.32 }}
+          className="flex flex-wrap items-center gap-4 mb-8"
         >
-          <Link href="/assessment" className="btn-teal">
-            Book a Consult
+          <Link href="/intake/pre-screen" className="btn-teal">
+            Get your clinical plan
+            <span className="btn-circle" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
           </Link>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.48 }}
+          className="flex flex-wrap gap-x-6 gap-y-2"
+        >
+          {['No GP referral required', 'AHPRA-registered doctors', 'Australia-wide telehealth'].map(t => (
+            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#3a4a5a' }}>
+              <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(72,144,247,0.5)' }} />
+              {t}
+            </span>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -74,19 +107,15 @@ function HowItWorksHero() {
 const FULL_STEPS = [
   {
     number: '1',
-    title: 'Request an Appointment and Consent Form',
-    subtitle: 'Appointment & Consent Form',
-    body: `Fill out the form. Tell us your symptoms and goals. No commitment at this point.
-
-Our team will call to confirm your appointment and pathology referral.`,
+    title: 'Complete the clinical assessment',
+    subtitle: 'Takes 60 seconds',
+    body: `Answer a few questions about your symptoms and goals. No commitment. An Apex doctor reviews your submission and contacts you directly — the same day.`,
   },
   {
     number: '2',
-    title: 'Pathology Collection',
+    title: 'Your blood panel referral is arranged',
     subtitle: '',
-    body: `For hormone programs: we issue a blood panel referral. Attend any accredited collection centre — no appointment required at most locations.
-
-Weight loss and general programs may not need upfront bloods. Your doctor advises.`,
+    body: `Your doctor issues a pathology referral. Attend any accredited collection centre near you — no appointment required at most locations. Fasted morning collection is standard for hormone panels.`,
   },
   {
     number: '3',
@@ -119,7 +148,7 @@ function FullProcess() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#151c28' }}
+      style={{ backgroundColor: '#0d1117' }}
       aria-label="The full process"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -168,7 +197,7 @@ function FullProcess() {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
-                      backgroundColor: '#19202c',
+                      backgroundColor: '#111820',
                       border: '1px solid rgba(72,144,247,0.3)',
                     }}
                   >
@@ -307,7 +336,7 @@ function FAQSection() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#151c28' }}
+      style={{ backgroundColor: '#0d1117' }}
       aria-label="Common questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -357,7 +386,7 @@ function HowItWorksCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0c131f' }}
+      style={{ backgroundColor: '#070a0d' }}
       aria-label="Have more questions"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -378,7 +407,7 @@ function HowItWorksCTA() {
           className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
         >
-          Have more questions?
+          Ready to begin?
         </motion.h2>
 
         <motion.div
@@ -389,9 +418,15 @@ function HowItWorksCTA() {
         >
           <Link href="/faqs" className="btn-ghost">
             Browse FAQs
+            <span className="btn-circle" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
           </Link>
-          <Link href="/assessment" className="btn-teal">
-            Get Started
+          <Link href="/intake/pre-screen" className="btn-teal">
+            Get your clinical plan
+            <span className="btn-circle" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </span>
           </Link>
         </motion.div>
       </div>

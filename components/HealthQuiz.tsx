@@ -16,7 +16,7 @@ const PROGRAMS: Record<PK, { name: string; desc: string; href: string; cta: stri
   hair:       { name: 'Hair Restoration',            color: '#2e9e52', href: '/intake/general',  cta: 'Begin Hair Assessment',        desc: 'Doctor-prescribed treatment addressing the hormonal and genetic drivers of male pattern hair loss — clinically validated and TGA-compliant.' },
   skin:       { name: 'Skin Regeneration',           color: '#c9a84c', href: '/intake/general',  cta: 'Begin Skin Assessment',        desc: 'Clinical skin protocols combining advanced diagnostics with evidence-based regenerative treatments for lasting skin quality improvement.' },
   injury:     { name: 'Injury Repair & Recovery',    color: '#1a9e8f', href: '/intake/general',  cta: 'Begin Injury Assessment',      desc: 'Targeted repair protocols for chronic injuries, joint issues, and musculoskeletal conditions that have not responded to standard treatment.' },
-  bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#00c2b8', href: '/order-bloods',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
+  bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/order-bloods',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
   general:    { name: 'General Telehealth',          color: '#8899aa', href: '/intake/general',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
 }
 
@@ -92,10 +92,8 @@ const AGES = [
 ]
 
 const GENDERS = [
-  { id: 'male',           label: 'Male',                        w: {} as W },
-  { id: 'female',         label: 'Female',                      w: {} as W },
-  { id: 'non_binary',     label: 'Non-binary',                  w: {} as W },
-  { id: 'prefer_not',     label: 'Prefer not to say',           w: {} as W },
+  { id: 'male',   label: 'Male',   w: {} as W },
+  { id: 'female', label: 'Female', w: {} as W },
 ]
 
 const CONDITIONS = [
@@ -137,9 +135,9 @@ function Card({ children, selected, onClick }: { children: React.ReactNode; sele
       onClick={onClick}
       className="w-full text-left rounded-2xl px-6 py-5 transition-all duration-200"
       style={{
-        background: selected ? 'rgba(0,194,184,0.07)' : 'rgba(255,255,255,0.025)',
-        border: `1px solid ${selected ? 'rgba(0,194,184,0.45)' : 'rgba(255,255,255,0.07)'}`,
-        boxShadow: selected ? '0 0 0 1px rgba(0,194,184,0.12), inset 0 0 20px rgba(0,194,184,0.04)' : 'none',
+        background: selected ? 'rgba(72,144,247,0.07)' : 'rgba(255,255,255,0.025)',
+        border: `1px solid ${selected ? 'rgba(72,144,247,0.45)' : 'rgba(255,255,255,0.07)'}`,
+        boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.12), inset 0 0 20px rgba(72,144,247,0.04)' : 'none',
         transform: selected ? 'translateY(-1px)' : 'none',
       }}
     >
@@ -227,7 +225,7 @@ function Intro({ onStart }: { onStart: () => void }) {
   return (
     <div className="text-center max-w-lg mx-auto px-4">
       <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-bold tracking-widest"
-        style={{ background: 'rgba(0,194,184,0.07)', border: '1px solid rgba(0,194,184,0.2)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
+        style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.2)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
         <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--teal)' }} />
         PERFORMANCE HEALTH ASSESSMENT
       </div>
@@ -295,9 +293,9 @@ function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; o
             <button key={g.id} onClick={() => toggle(g.id)}
               className="text-left rounded-2xl px-6 py-5 transition-all duration-200 flex items-start gap-4"
               style={{
-                background: selected ? 'rgba(0,194,184,0.07)' : 'rgba(255,255,255,0.025)',
-                border: `1px solid ${selected ? 'rgba(0,194,184,0.45)' : 'rgba(255,255,255,0.07)'}`,
-                boxShadow: selected ? '0 0 0 1px rgba(0,194,184,0.12)' : 'none',
+                background: selected ? 'rgba(72,144,247,0.07)' : 'rgba(255,255,255,0.025)',
+                border: `1px solid ${selected ? 'rgba(72,144,247,0.45)' : 'rgba(255,255,255,0.07)'}`,
+                boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.12)' : 'none',
               }}
             >
               <span className="flex-shrink-0 flex items-center justify-center rounded-md mt-0.5 transition-all duration-150"
@@ -415,7 +413,7 @@ function AgeStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; o
           <button key={a.id} onClick={() => onSelect(a.id, a.w)}
             className="rounded-2xl py-6 text-center font-bold text-xl transition-all duration-200"
             style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', background: 'rgba(255,255,255,0.025)', border: '1px solid rgba(255,255,255,0.07)' }}
-            onMouseEnter={e => { e.currentTarget.style.border = '1px solid rgba(0,194,184,0.35)'; e.currentTarget.style.background = 'rgba(0,194,184,0.06)'; e.currentTarget.style.color = 'var(--teal)' }}
+            onMouseEnter={e => { e.currentTarget.style.border = '1px solid rgba(72,144,247,0.35)'; e.currentTarget.style.background = 'rgba(72,144,247,0.06)'; e.currentTarget.style.color = 'var(--teal)' }}
             onMouseLeave={e => { e.currentTarget.style.border = '1px solid rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.025)'; e.currentTarget.style.color = 'var(--text-primary)' }}
           >
             {a.label}
@@ -433,7 +431,7 @@ function GenderStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void
         <BackBtn onClick={onBack} />
         <StepLabel n={6} total={8} />
       </div>
-      <QHead eyebrow="Profile" heading="What is your gender?" />
+      <QHead eyebrow="Profile" heading="What is your gender assigned at birth?" />
       <div className="flex flex-col gap-2.5">
         {GENDERS.map(g => (
           <Card key={g.id} onClick={() => onSelect(g.id, g.w)}>
@@ -571,7 +569,7 @@ function Capture({ onSubmit, submitting, onBack }: {
   return (
     <div className="w-full max-w-md mx-auto px-4 text-center">
       <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-bold tracking-widest"
-        style={{ background: 'rgba(0,194,184,0.07)', border: '1px solid rgba(0,194,184,0.25)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
+        style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.25)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
         <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
           <path d="M13 4L6 11l-3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -588,17 +586,17 @@ function Capture({ onSubmit, submitting, onBack }: {
       <div className="flex flex-col gap-3 mb-4 text-left">
         <input type="text" placeholder="First name" value={first} onChange={e => setFirst(e.target.value)}
           style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(0,194,184,0.4)')}
+          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         />
         <input type="email" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)}
           style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(0,194,184,0.4)')}
+          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         />
         <input type="tel" placeholder="Mobile number" value={mobile} onChange={e => setMobile(e.target.value)}
           style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(0,194,184,0.4)')}
+          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         />
       </div>
@@ -638,7 +636,7 @@ function Results({ matches, firstName }: { matches: PK[]; firstName: string }) {
     <div className="w-full max-w-2xl mx-auto px-4">
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-xs font-bold tracking-widest"
-          style={{ background: 'rgba(0,194,184,0.07)', border: '1px solid rgba(0,194,184,0.25)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
+          style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.25)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
             <path d="M13 4L6 11l-3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

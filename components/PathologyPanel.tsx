@@ -139,12 +139,10 @@ export default function PathologyPanel() {
               ))}
             </ul>
             <a
-              href="https://imedical.com.au/order/blood-tests/apexmeta-trt-panel&tracking=69bae136964db"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/intake/hormone"
               className="btn-teal w-full text-center text-xs"
             >
-              Order Hormone Panel
+              Get Started — Hormone Consult
             </a>
           </motion.div>
 
@@ -199,12 +197,10 @@ export default function PathologyPanel() {
               ))}
             </ul>
             <a
-              href="https://imedical.com.au/order/blood-tests/apex-meta-weightloss&tracking=69bae136964db"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/intake/general"
               className="btn-teal w-full text-center text-xs"
             >
-              Order Metabolic Panel
+              Get Started — General Consult
             </a>
           </motion.div>
         </div>

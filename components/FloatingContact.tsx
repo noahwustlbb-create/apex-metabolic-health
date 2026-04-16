@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
@@ -38,9 +38,23 @@ const STEPS = [
 export default function FloatingContact() {
   const [open, setOpen] = useState(false)
   const [expanded, setExpanded] = useState<string | null>('1')
+  const [heroVisible, setHeroVisible] = useState(true)
+
+  useEffect(() => {
+    const hero = document.getElementById('hero')
+    if (!hero) { setHeroVisible(false); return }
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div
+    <motion.div
+      animate={{ opacity: heroVisible ? 0 : 1, pointerEvents: heroVisible ? 'none' : 'auto' }}
+      transition={{ duration: 0.4, ease: 'easeInOut' }}
       className="fixed bottom-6 right-5 sm:right-8 z-50 flex flex-col items-end gap-3"
       style={{ width: 'min(420px, calc(100vw - 32px))' }}
     >
@@ -69,7 +83,7 @@ export default function FloatingContact() {
                   className="text-[11px] font-semibold tracking-[0.18em] uppercase"
                   style={{ color: '#F4F4F6' }}
                 >
-                  Get Started
+                  Start Health Assessment
                 </span>
               </div>
               <button
@@ -178,9 +192,8 @@ export default function FloatingContact() {
       </AnimatePresence>
 
       {/* Pill trigger button */}
-      <motion.button
-        onClick={() => setOpen(v => !v)}
-        whileTap={{ scale: 0.97 }}
+      <Link
+        href="/assessment"
         className="flex items-center gap-3 px-7 py-4 transition-all duration-200"
         style={{
           background: '#0e1520',
@@ -197,19 +210,16 @@ export default function FloatingContact() {
           e.currentTarget.style.borderColor = 'rgba(53,117,198,0.28)'
           e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)'
         }}
-        aria-label={open ? 'Close appointment menu' : 'Request an appointment'}
-        aria-expanded={open}
+        aria-label="Start Health Assessment"
       >
         <span className="text-[12px] font-semibold tracking-[0.2em] uppercase whitespace-nowrap">
-          {open ? 'Close' : 'Request an Appointment'}
+          Start Health Assessment
         </span>
-        {!open && (
-          <span
-            className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-            style={{ backgroundColor: '#3575C6' }}
-          />
-        )}
-      </motion.button>
-    </div>
+        <span
+          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
+          style={{ backgroundColor: '#3575C6' }}
+        />
+      </Link>
+    </motion.div>
   )
 }

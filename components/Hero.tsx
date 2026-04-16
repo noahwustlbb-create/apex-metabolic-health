@@ -1,568 +1,335 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import Image from 'next/image'
-import { programs } from '@/lib/programs'
-
-const PROGRAM_COLORS: Record<string, string> = {
-  'hormone-optimisation': '#3575C6',
-  'hormone-performance':  '#e05252',
-  'performance-plus':     '#e8872c',
-  'metabolic-weight-loss':'#7c52e8',
-  'hair-restoration':     '#2e9e52',
-  'skin-regeneration':    '#c9a84c',
-  'injury-repair':        '#1a9e8f',
-  'longevity':            '#5c2ce8',
-}
-
-const STATS = [
-  { value: '< 48h', label: 'To First Consult' },
-  { value: '50+', label: 'Biomarkers Analysed' },
-  { value: '100%', label: 'Online' },
-  { value: 'AHPRA', label: 'Registered Doctors' },
-]
-
-const TRUST_ITEMS = [
-  { label: 'Physician-led clinical care' },
-  { label: 'Australia-wide telehealth' },
-  { label: 'Evidence-based regenerative protocols' },
-  { label: 'Private & confidential' },
-]
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-/* Animated particle field */
-function HeroGrid() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+const TRUST = [
+  'AHPRA-registered doctors',
+  'No GP referral required',
+  'Australia-wide telehealth',
+]
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    let animationId: number
-    let time = 0
-
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-    resize()
-    window.addEventListener('resize', resize)
-
-    const particles: Array<{
-      x: number; y: number; vx: number; vy: number; size: number; opacity: number
-    }> = []
-
-    for (let i = 0; i < 55; i++) {
-      particles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 1.5 + 0.5,
-        opacity: Math.random() * 0.3 + 0.04,
-      })
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      time += 0.005
-
-      particles.forEach((p) => {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
-
-        const pulse = Math.sin(time + p.x * 0.01) * 0.5 + 0.5
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(72, 144, 247, ${p.opacity * pulse})`
-        ctx.fill()
-      })
-
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < 120) {
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.strokeStyle = `rgba(72, 144, 247, ${0.05 * (1 - dist / 120)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resize)
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
-      aria-hidden="true"
-    />
-  )
-}
-
-/* Faint biometric body-scan overlay — scan lines + contour ellipses */
-function BiometricOverlay() {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-    >
-      {/* Outer body contour */}
-      <ellipse
-        cx="50%" cy="44%"
-        rx="96" ry="230"
-        fill="none"
-        stroke="rgba(53,117,198,0.055)"
-        strokeWidth="0.8"
-      />
-      {/* Inner body contour */}
-      <ellipse
-        cx="50%" cy="44%"
-        rx="68" ry="168"
-        fill="none"
-        stroke="rgba(53,117,198,0.035)"
-        strokeWidth="0.5"
-      />
-      {/* Faint centre-line vertical */}
-      <line
-        x1="50%" y1="10%"
-        x2="50%" y2="78%"
-        stroke="rgba(53,117,198,0.025)"
-        strokeWidth="0.5"
-        strokeDasharray="3 14"
-      />
-      {/* Horizontal scan lines — subtle sweep through body area */}
-      {Array.from({ length: 26 }, (_, i) => (
-        <line
-          key={i}
-          x1="28%" y1={`${10 + i * 2.6}%`}
-          x2="72%" y2={`${10 + i * 2.6}%`}
-          stroke="rgba(53,117,198,0.022)"
-          strokeWidth="0.6"
-          strokeDasharray={i % 4 === 0 ? '6 10' : '2 16'}
-        />
-      ))}
-      {/* Corner measurement tick marks */}
-      <line x1="36%" y1="12%" x2="38%" y2="12%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
-      <line x1="62%" y1="12%" x2="64%" y2="12%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
-      <line x1="36%" y1="76%" x2="38%" y2="76%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
-      <line x1="62%" y1="76%" x2="64%" y2="76%" stroke="rgba(53,117,198,0.09)" strokeWidth="0.8"/>
-      {/* Small crosshair top-center */}
-      <line x1="50%" y1="9.2%" x2="50%" y2="10.8%" stroke="rgba(53,117,198,0.12)" strokeWidth="0.8"/>
-      <line x1="49.2%" y1="10%" x2="50.8%" y2="10%" stroke="rgba(53,117,198,0.12)" strokeWidth="0.8"/>
-    </svg>
-  )
-}
+const STEPS = [
+  {
+    n: '01',
+    title: 'Complete assessment',
+    body: 'Answer questions about your symptoms, goals, and health history.',
+  },
+  {
+    n: '02',
+    title: 'Pathology partner',
+    body: 'Comprehensive biomarker panel at an Apex-partnered accredited pathology collector.',
+  },
+  {
+    n: '03',
+    title: 'Doctor consultation',
+    body: 'AHPRA-registered doctor reviews results and designs your protocol.',
+  },
+  {
+    n: '04',
+    title: 'Ongoing review',
+    body: 'Structured monitoring and adjustments every four months.',
+  },
+]
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A' }}
+      className="relative w-full overflow-hidden flex items-center"
+      style={{ minHeight: '100svh', backgroundColor: '#070a0d' }}
       aria-label="Hero — Apex Metabolic Health"
     >
-      {/* Layer 0 — dot grid base */}
-      <div className="absolute inset-0 dot-grid opacity-50" aria-hidden="true" />
-
-      {/* Layer 1 — grain / noise texture */}
+      {/* Background layers */}
+      <div className="absolute inset-0 dot-grid opacity-[0.18]" aria-hidden="true" />
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat',
+          background: 'radial-gradient(ellipse 70% 60% at 15% 50%, rgba(72,144,247,0.025) 0%, transparent 65%)',
         }}
       />
-
-      {/* Layer 2 — particle canvas */}
-      <HeroGrid />
-
-      {/* Layer 3 — biometric scan overlay */}
-      <BiometricOverlay />
-
-      {/* Layer 3b — logo watermark, bottom-right */}
       <div
+        className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
-        className="absolute bottom-0 right-0 pointer-events-none select-none"
-        style={{ width: '560px', height: '560px', transform: 'translate(18%, 18%)' }}
-      >
-        <Image
-          src="/logo-icon.png"
-          alt=""
-          fill
-          className="object-contain"
-          style={{ mixBlendMode: 'screen', opacity: 0.055 }}
-          priority
-          unoptimized
-        />
-      </div>
-
-      {/* Layer 4 — top radial glow (existing) */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[800px] pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse at 50% 0%, rgba(53,117,198,0.13) 0%, rgba(53,117,198,0.04) 40%, transparent 68%)',
+          background: 'radial-gradient(ellipse 55% 70% at 85% 30%, rgba(72,144,247,0.06) 0%, transparent 60%)',
         }}
       />
-
-      {/* Layer 5 — NEW: centered glow anchored behind headline text */}
+      {/* Subtle horizontal rule at mid-height for depth */}
       <div
+        className="absolute left-0 right-0 pointer-events-none hidden lg:block"
         aria-hidden="true"
-        className="absolute pointer-events-none"
         style={{
-          top: '18%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '900px',
-          height: '500px',
-          background:
-            'radial-gradient(ellipse at 50% 40%, rgba(53,117,198,0.10) 0%, rgba(53,117,198,0.04) 35%, transparent 65%)',
+          top: '50%',
+          height: '1px',
+          background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.025) 30%, rgba(255,255,255,0.025) 70%, transparent)',
         }}
       />
 
-      {/* Layer 6 — bottom-left ambient glow */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 w-[600px] h-[500px] pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at 0% 100%, rgba(53,117,198,0.05) 0%, transparent 60%)',
-        }}
-      />
+      {/* Content */}
+      <div className="relative z-10 w-full mx-auto max-w-[1440px] px-6 md:px-12 lg:px-20 py-32 md:py-36">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] xl:grid-cols-[1fr_440px] gap-12 lg:gap-16 xl:gap-20 items-center">
 
-      {/* Layer 7 — pulsing decorative rings */}
-      <div
-        aria-hidden="true"
-        className="pulse-ring absolute rounded-full pointer-events-none"
-        style={{ width: 600, height: 600, border: '1px solid rgba(53,117,198,0.05)', top: '50%', left: '50%' }}
-      />
-      <div
-        aria-hidden="true"
-        className="pulse-ring-slow absolute rounded-full pointer-events-none"
-        style={{ width: 950, height: 950, border: '1px solid rgba(53,117,198,0.025)', top: '50%', left: '50%' }}
-      />
+          {/* ── LEFT COLUMN ────────────────────────────────────────────────── */}
+          <div>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 container-tight w-full pt-28 pb-20 text-center">
-
-        {/* Eyebrow badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
-          className="flex justify-center mb-8"
-        >
-          <span
-            className="inline-flex items-center gap-2.5 px-5 py-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase"
-            style={{
-              border: '1px solid rgba(53,117,198,0.22)',
-              borderRadius: '4px',
-              color: '#a9c7ff',
-              backgroundColor: 'rgba(53,117,198,0.07)',
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-teal animate-pulse" />
-            Doctor-Led Telehealth — Australia-Wide
-          </span>
-        </motion.div>
-
-        {/* Main headline */}
-        <div className="max-w-4xl mx-auto mb-7">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease }}
-            className="font-bold leading-[1.02] tracking-tight"
-            style={{
-              fontFamily: 'var(--font-space-grotesk)',
-              fontSize: 'clamp(42px, 7.5vw, 88px)',
-              color: '#F4F4F6',
-            }}
-          >
-            Your GP Said
-            <br />
-            <span className="text-teal-gradient">Everything Looks Normal.</span>
-          </motion.h1>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease }}
-            className="font-bold leading-[1.02] tracking-tight mt-2"
-            style={{
-              fontFamily: 'var(--font-space-grotesk)',
-              fontSize: 'clamp(42px, 7.5vw, 88px)',
-              color: '#F4F4F6',
-            }}
-          >
-            You Know It Doesn&apos;t.
-          </motion.h1>
-        </div>
-
-        {/* Programs strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.42, ease }}
-          className="mb-10"
-        >
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {programs.map((program, i) => {
-              const color = PROGRAM_COLORS[program.slug] ?? '#3575C6'
-              const isComingSoon = program.status === 'coming-soon'
-              const inner = (
-                <motion.span
-                  key={program.slug}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.44 + i * 0.05, ease }}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 text-[11px] font-medium tracking-wide whitespace-nowrap transition-all duration-200"
-                  style={{
-                    border: `1px solid ${isComingSoon ? 'rgba(255,255,255,0.06)' : `${color}28`}`,
-                    borderRadius: '4px',
-                    color: isComingSoon ? '#3a4a5a' : '#c8d8ea',
-                    backgroundColor: isComingSoon ? 'rgba(255,255,255,0.02)' : `${color}0d`,
-                    cursor: isComingSoon ? 'default' : 'pointer',
-                  }}
-                >
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: isComingSoon ? '#3a4a5a' : color }}
-                  />
-                  {program.name}
-                  {isComingSoon && (
-                    <span
-                      className="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm"
-                      style={{ color: '#c9a84c', backgroundColor: 'rgba(201,168,76,0.1)', border: '1px solid rgba(201,168,76,0.2)' }}
-                    >
-                      Soon
-                    </span>
-                  )}
-                </motion.span>
-              )
-
-              return isComingSoon ? (
-                <span key={program.slug}>{inner}</span>
-              ) : (
-                <Link
-                  key={program.slug}
-                  href={`/programs/${program.slug}`}
-                  className="block"
-                  onMouseEnter={(e) => {
-                    const chip = e.currentTarget.querySelector('span') as HTMLElement
-                    if (chip) {
-                      chip.style.borderColor = `${color}55`
-                      chip.style.backgroundColor = `${color}1a`
-                      chip.style.color = '#F4F4F6'
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    const chip = e.currentTarget.querySelector('span') as HTMLElement
-                    if (chip) {
-                      chip.style.borderColor = `${color}28`
-                      chip.style.backgroundColor = `${color}0d`
-                      chip.style.color = '#c8d8ea'
-                    }
-                  }}
-                >
-                  {inner}
-                </Link>
-              )
-            })}
-          </div>
-        </motion.div>
-
-        {/* Supporting copy */}
-        <motion.p
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.48, ease }}
-          className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4"
-          style={{ color: '#B0B8C5' }}
-        >
-          Our mission is to simplify access to advanced, clinically guided therapies beyond traditional healthcare.
-        </motion.p>
-
-        {/* Positioning line */}
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.56, ease }}
-          className="text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-11"
-          style={{ color: 'rgba(136,153,170,0.6)', letterSpacing: '0.01em' }}
-        >
-          We&apos;ve built a modern healthcare model that streamlines patient access to prescription treatment and medication designed to support hormonal optimisation, recovery, and performance — positioning us at the forefront of next-generation healthcare.
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.62, ease }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8"
-        >
-          <a href="/assessment" className="btn-teal w-full sm:w-auto">
-            Start Your Assessment
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-          <a href="/services" className="btn-ghost w-full sm:w-auto">
-            View Programs
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-          <a href="/intake/hormone" className="btn-ghost w-full sm:w-auto">
-            Hormone Consult
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-          <a href="/intake/general" className="btn-ghost w-full sm:w-auto">
-            General Consult
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-          <a href="/intake/discovery" className="btn-ghost w-full sm:w-auto">
-            Speak to a Clinician
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </a>
-        </motion.div>
-
-        {/* Trust strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.72, ease }}
-          className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 mb-16"
-        >
-          {TRUST_ITEMS.map((item) => (
-            <div key={item.label} className="flex items-center gap-2">
-              <svg
-                viewBox="0 0 10 10"
-                fill="none"
-                className="w-2.5 h-2.5 flex-shrink-0"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1.5 5.5L4 8l4.5-5.5"
-                  stroke="#3575C6"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span
-                className="text-[11px] font-medium tracking-[0.14em] uppercase"
-                style={{ color: 'rgba(136,153,170,0.65)' }}
-              >
-                {item.label}
+            {/* Eyebrow */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease }}
+              className="flex items-center gap-2.5 mb-7"
+            >
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#4890f7', opacity: 0.7 }} />
+              <span className="text-[10px] font-semibold tracking-[0.28em] uppercase" style={{ color: '#4890f7' }}>
+                Doctor-Led Men's Health — Australia-Wide
               </span>
-            </div>
-          ))}
-        </motion.div>
+            </motion.div>
 
-        {/* Stats strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.82, ease }}
-          className="inline-grid grid-cols-2 sm:grid-cols-4 gap-0 overflow-hidden mx-auto"
-          style={{ border: '1px solid rgba(255,255,255,0.06)', borderRadius: '8px' }}
-        >
-          {STATS.map((stat, i) => (
-            <div
-              key={stat.label}
-              className="px-6 py-4 text-center"
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.18, ease }}
               style={{
-                borderRight: i < STATS.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                backgroundColor: 'rgba(21,28,40,0.7)',
-                backdropFilter: 'blur(8px)',
+                fontFamily: 'var(--font-space-grotesk)',
+                fontSize: 'clamp(34px, 3.8vw, 58px)',
+                lineHeight: 1.1,
+                fontWeight: 700,
+                letterSpacing: '-0.025em',
+                color: '#f0f4f8',
+                marginBottom: '1.5rem',
+                maxWidth: '560px',
               }}
             >
-              <p className="stat-number text-xl md:text-2xl" style={{ color: '#3575C6' }}>
-                {stat.value}
-              </p>
-              <p
-                className="text-[10px] tracking-[0.18em] uppercase font-medium mt-1"
-                style={{ color: '#4a5a6a' }}
+              Most men get reassurance.
+              <br />
+              <span style={{ color: 'rgba(240,244,248,0.65)' }}>We look deeper.</span>
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease }}
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: 'clamp(14px, 1.05vw, 16px)',
+                lineHeight: 1.8,
+                color: '#6b7d91',
+                maxWidth: '440px',
+                marginBottom: '2.5rem',
+              }}
+            >
+              Doctor-led assessments for men dealing with low energy, poor recovery,
+              body composition changes, brain fog, and reduced drive.
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease }}
+              className="mb-9"
+            >
+              <a
+                href="/intake/pre-screen"
+                className="inline-flex items-center gap-2.5 transition-all duration-200"
+                style={{
+                  background: '#f0f4f8',
+                  color: '#070a0d',
+                  padding: '13px 26px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = '#ffffff'
+                  e.currentTarget.style.boxShadow = '0 0 20px rgba(72,144,247,0.1)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = '#f0f4f8'
+                  e.currentTarget.style.boxShadow = 'none'
+                }}
               >
-                {stat.label}
-              </p>
+                Start Health Assessment
+                <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </motion.div>
+
+            {/* Trust strip */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.52, ease }}
+              className="flex flex-wrap items-center gap-x-5 gap-y-2"
+            >
+              {TRUST.map((item, i) => (
+                <span
+                  key={item}
+                  className="flex items-center gap-1.5 text-[10px] font-medium tracking-[0.14em] uppercase"
+                  style={{ color: '#3d5166' }}
+                >
+                  {i > 0 && (
+                    <span className="hidden sm:block w-px h-3 flex-shrink-0" style={{ background: 'rgba(255,255,255,0.08)' }} />
+                  )}
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+
+          </div>
+
+          {/* ── RIGHT COLUMN — Clinical process card ───────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.35, ease }}
+            className="relative"
+          >
+            {/* Outer glow */}
+            <div
+              className="absolute -inset-px rounded-2xl pointer-events-none"
+              aria-hidden="true"
+              style={{ boxShadow: '0 0 28px rgba(72,144,247,0.04)' }}
+            />
+
+            <div
+              className="relative rounded-2xl overflow-hidden"
+              style={{
+                background: '#0d1117',
+                border: '1px solid rgba(148,163,184,0.1)',
+              }}
+            >
+              {/* Card header */}
+              <div
+                className="px-6 pt-6 pb-5"
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-semibold tracking-[0.22em] uppercase mb-1.5" style={{ color: '#4890f7' }}>
+                      Clinical pathway
+                    </p>
+                    <h2
+                      className="text-base font-semibold"
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', letterSpacing: '-0.01em' }}
+                    >
+                      How Apex works
+                    </h2>
+                  </div>
+                  {/* Status pill */}
+                  <div
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-full"
+                    style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.1)' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#4890f7' }} />
+                    <span className="text-[9px] font-semibold tracking-[0.14em] uppercase" style={{ color: '#4890f7' }}>
+                      Active
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Steps */}
+              <div className="px-6 py-5">
+                <div className="relative">
+                  {/* Vertical connector */}
+                  <div
+                    className="absolute left-[18px] top-7 bottom-7 w-px"
+                    aria-hidden="true"
+                    style={{ background: 'linear-gradient(to bottom, rgba(72,144,247,0.12), rgba(72,144,247,0.06) 60%, transparent)' }}
+                  />
+
+                  <div className="flex flex-col gap-0">
+                    {STEPS.map((step, i) => (
+                      <div key={step.n} className="flex gap-4 pb-5 last:pb-0">
+                        {/* Number node */}
+                        <div className="flex flex-col items-center flex-shrink-0">
+                          <div
+                            className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
+                            style={{
+                              background: '#111820',
+                              border: `1px solid ${i === 0 ? 'rgba(72,144,247,0.22)' : 'rgba(255,255,255,0.06)'}`,
+                            }}
+                          >
+                            <span
+                              className="text-[11px] font-bold"
+                              style={{
+                                fontFamily: 'var(--font-space-grotesk)',
+                                color: i === 0 ? '#4890f7' : '#3a4d61',
+                                letterSpacing: '0.04em',
+                              }}
+                            >
+                              {step.n}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="pt-1.5 pb-1">
+                          <p
+                            className="text-sm font-semibold mb-0.5 leading-snug"
+                            style={{
+                              fontFamily: 'var(--font-space-grotesk)',
+                              color: i === 0 ? '#e8f0f8' : '#8899aa',
+                              letterSpacing: '-0.01em',
+                            }}
+                          >
+                            {step.title}
+                          </p>
+                          <p
+                            className="text-xs leading-relaxed"
+                            style={{ color: i === 0 ? '#4a6070' : '#2e3d4d' }}
+                          >
+                            {step.body}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Card footer */}
+              <div
+                className="px-6 py-4"
+                style={{ borderTop: '1px solid rgba(255,255,255,0.04)', background: 'rgba(255,255,255,0.01)' }}
+              >
+                <p className="text-[11px] leading-relaxed" style={{ color: '#2e3d4d' }}>
+                  Assessment-first. Treatment only where clinically appropriate.
+                </p>
+              </div>
+
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ delay: 1.4, duration: 0.8 }}
+        className="absolute bottom-7 left-1/2 -translate-x-1/2"
         aria-hidden="true"
       >
-        <span className="text-[9px] tracking-[0.3em] uppercase" style={{ color: '#4a5a6a' }}>
-          Scroll
-        </span>
-        <div className="w-px h-8 relative overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
-          <div
-            className="scroll-drip absolute left-0 w-full"
-            style={{ backgroundColor: '#3575C6', height: '40%' }}
-          />
+        <div className="w-px h-9 relative overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}>
+          <div className="scroll-drip absolute left-0 w-full" style={{ backgroundColor: '#4890f7', height: '40%' }} />
         </div>
       </motion.div>
 
-      {/* Bottom glow rule */}
-      <div className="absolute bottom-0 left-0 right-0 glow-rule" aria-hidden="true" />
-
-      {/* Bottom fade — smooth transition into next section */}
+      {/* Bottom fade into next section */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
         aria-hidden="true"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(12,19,31,0.6))',
-        }}
+        style={{ background: 'linear-gradient(to bottom, transparent, rgba(7,10,13,0.6))' }}
       />
     </section>
   )

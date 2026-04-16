@@ -5,7 +5,6 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import BookingOptions from '@/components/BookingOptions'
 import { programs } from '@/lib/programs'
 
 // ─── Input styles ─────────────────────────────────────────────────────────────
@@ -60,7 +59,7 @@ function GetStartedHero() {
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6', lineHeight: '1.06' }}
         >
-          Four Ways to Begin.{' '}
+          Every Way to Begin.{' '}
           <span className="text-teal-gradient">Choose Yours.</span>
         </motion.h1>
 
@@ -81,132 +80,338 @@ function GetStartedHero() {
           transition={{ duration: 0.6, delay: 0.32 }}
           className="flex flex-wrap gap-3"
         >
-          <Link href="/assessment" className="btn-teal">
-            Find My Program
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
-          </Link>
-          <Link href="/intake/discovery" className="btn-ghost">
-            Free Discovery Call
-            <span className="btn-circle">
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </span>
-          </Link>
+          {[
+            { label: 'Start Assessment', href: '/intake/pre-screen', primary: true },
+            { label: 'Hormone Consultation', href: '/intake/hormone' },
+            { label: 'Performance Consultation', href: '/intake/performance' },
+            { label: 'Metabolic Consultation', href: '/intake/metabolic' },
+            { label: 'Hair Restoration', href: '/intake/hair' },
+            { label: 'Skin Regeneration', href: '/intake/skin' },
+            { label: 'Injury Repair', href: '/intake/injury' },
+            { label: 'General Check Up', href: '/intake/general' },
+            { label: 'Order Blood Panel', href: '/order-bloods' },
+            { label: 'Free Discovery Call', href: '/intake/discovery' },
+            { label: 'View All Programs', href: '/services' },
+          ].map(({ label, href, primary }) => (
+            <Link
+              key={href}
+              href={href}
+              className={primary ? 'btn-teal' : 'btn-ghost'}
+            >
+              {label}
+              <span className="btn-circle">
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </Link>
+          ))}
         </motion.div>
       </div>
     </section>
   )
 }
 
-// ─── Booking Cards ─────────────────────────────────────────────────────────────
+// ─── All Pathways ─────────────────────────────────────────────────────────────
 
-function BookingCards() {
+const ALL_PATHWAYS = [
+  {
+    tag: 'Not Sure Where to Start',
+    title: 'Start Assessment',
+    desc: 'Answer a few questions. Get matched to the right clinical pathway in under 2 minutes.',
+    href: '/assessment',
+    cta: 'Start Assessment',
+    featured: true,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="11" cy="11" r="7" strokeLinecap="round"/>
+        <path d="M20 20l-3-3M11 8v3l2 2" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Quick 2-Min Quiz',
+    title: 'Health Assessment Quiz',
+    desc: 'Take our short health quiz to understand your symptoms and find the most suitable program.',
+    href: '/quiz',
+    cta: 'Take the Quiz',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 12h6M9 16h4" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Hormone & TRT Programs',
+    title: 'Get Started Hormone Consult',
+    desc: 'Hormone optimisation, TRT, and performance-focused treatment. Advanced blood work first, then your dedicated consultation.',
+    href: '/intake/hormone',
+    cta: 'Get Started Hormone Consult',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2C10.5 2 9.5 3 9.5 4.5V13.5C8 14.3 7 15.8 7 17.5C7 20 9.2 22 12 22C14.8 22 17 20 17 17.5C17 15.8 16 14.3 14.5 13.5V4.5C14.5 3 13.5 2 12 2Z" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="12" cy="17.5" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Weight, Peptides & More',
+    title: 'General Check Up',
+    desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and general consultation programs.',
+    href: '/intake/general',
+    cta: 'Book General Check Up',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="18" height="18" rx="3" strokeLinecap="round"/>
+        <path d="M9 12h6M12 9v6" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Speak to Our Team',
+    title: 'Free Discovery Call',
+    desc: '15 minutes with our clinical team. Understand your options and whether Apex is the right fit — no cost.',
+    href: '/intake/discovery',
+    cta: 'Book Discovery Call',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M6.5 4h11a2 2 0 012 2v8a2 2 0 01-2 2H13l-4 4v-4H6.5a2 2 0 01-2-2V6a2 2 0 012-2z" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'No GP Referral Needed',
+    title: 'Start With Bloods',
+    desc: 'Doctor-ordered blood panels issued directly through Apex — collect at any accredited centre near you.',
+    href: '/order-bloods',
+    cta: 'Order Blood Panel',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M8 3l-1 6H5l3 8a3 3 0 006 0l3-8h-2L14 3H8z" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Performance & Recovery',
+    title: 'Performance Consultation',
+    desc: 'Optimise recovery, strength output, endurance, and mental performance. Advanced panel with IGF-1, cortisol, testosterone and more.',
+    href: '/intake/performance',
+    cta: 'Start Performance Intake',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M13 10V3L4 14h7v7l9-11h-7z" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Metabolic & Weight Management',
+    title: 'Metabolic Consultation',
+    desc: 'Comprehensive metabolic panel covering insulin resistance, thyroid, inflammation and fat metabolism markers.',
+    href: '/intake/metabolic',
+    cta: 'Start Metabolic Intake',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 3" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Hair Restoration',
+    title: 'Hair Restoration Consultation',
+    desc: 'DHT, SHBG, ferritin, thyroid and more. Identify the hormonal and nutritional root causes of hair loss.',
+    href: '/intake/hair',
+    cta: 'Start Hair Intake',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 3c0 0-6 4-6 10a6 6 0 0012 0c0-6-6-10-6-10z" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Skin Regeneration',
+    title: 'Skin Regeneration Consultation',
+    desc: 'Cortisol, DHEA-S, thyroid and inflammatory markers. Address skin ageing, texture and conditions from the inside out.',
+    href: '/intake/skin',
+    cta: 'Start Skin Intake',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="9"/>
+        <circle cx="12" cy="12" r="4"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Injury Repair & Recovery',
+    title: 'Injury Repair Consultation',
+    desc: 'IGF-1, cortisol, Vit D, CK and inflammatory markers. Understand what\'s slowing your recovery and how to fix it.',
+    href: '/intake/injury',
+    cta: 'Start Injury Intake',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    tag: 'Explore All Services',
+    title: 'View All Programs',
+    desc: 'Browse our full range of clinical programs — hormone optimisation, metabolic health, hair, skin, injury and more.',
+    href: '/services',
+    cta: 'View Programs',
+    featured: false,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+      </svg>
+    ),
+  },
+]
+
+function AllPathways() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#151c28' }}
-      aria-label="Booking options"
+      style={{ backgroundColor: '#0d1117' }}
+      aria-label="All pathways"
     >
       <div className="glow-rule" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 0%, rgba(44,116,232,0.06) 0%, transparent 60%)',
+        }}
+      />
 
       <div className="container-tight relative z-10">
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card A — Free Discovery Call */}
+        <div ref={ref}>
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8 flex flex-col"
-            style={{ border: '1px solid rgba(44,116,232,0.35)' }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
           >
-            <p
-              className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-4"
-              style={{ color: '#2C74E8' }}
+            <p className="label mb-4">YOUR OPTIONS</p>
+            <h2
+              className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.08' }}
             >
-              RECOMMENDED START
+              Every way to{' '}
+              <span className="text-teal-gradient">get started.</span>
+            </h2>
+            <p className="text-base md:text-lg" style={{ color: '#8899aa' }}>
+              Choose what fits where you&apos;re at right now.
             </p>
-            <h3
-              className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-            >
-              Free Discovery Call
-            </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
-              Unsure which program fits? A 15-minute call with our team. No cost.
-            </p>
-            <a
-              href="/intake/discovery"
-              data-cta="book-discovery-call"
-              className="btn-teal w-full block text-center"
-            >
-              Book a Discovery Call
-            </a>
           </motion.div>
 
-          {/* Card B — Hormone Consultation */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8 flex flex-col"
-          >
-            <div className="mb-4 opacity-0 text-[10px]" aria-hidden="true">
-              SPACER
-            </div>
-            <h3
-              className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-            >
-              Hormone Consultation
-            </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
-              For hormone or performance programs. Blood work first, then your consultation.
-            </p>
-            <a
-              href="/intake/hormone"
-              data-cta="book-hormone-consult"
-              className="btn-ghost w-full block text-center"
-            >
-              Book Hormone Consult
-            </a>
-          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {ALL_PATHWAYS.map((path, i) => (
+              <motion.div
+                key={path.href}
+                initial={{ opacity: 0, y: 24 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  href={path.href}
+                  className="group flex flex-col h-full p-6 rounded-xl transition-all duration-300"
+                  style={{
+                    background: path.featured ? 'rgba(44,116,232,0.1)' : '#111820',
+                    border: path.featured
+                      ? '1px solid rgba(44,116,232,0.4)'
+                      : '1px solid rgba(255,255,255,0.07)',
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget
+                    el.style.transform = 'translateY(-3px)'
+                    el.style.borderColor = path.featured
+                      ? 'rgba(44,116,232,0.7)'
+                      : 'rgba(72,144,247,0.35)'
+                    el.style.boxShadow = path.featured
+                      ? '0 12px 40px rgba(44,116,232,0.18)'
+                      : '0 8px 30px rgba(0,0,0,0.3)'
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget
+                    el.style.transform = 'translateY(0)'
+                    el.style.borderColor = path.featured
+                      ? 'rgba(44,116,232,0.4)'
+                      : 'rgba(255,255,255,0.07)'
+                    el.style.boxShadow = 'none'
+                  }}
+                >
+                  <p
+                    className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-4"
+                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                  >
+                    {path.tag}
+                  </p>
 
-          {/* Card C — General Consultation */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-            className="apex-card p-8 flex flex-col"
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
+                    style={{
+                      background: path.featured ? 'rgba(44,116,232,0.15)' : 'rgba(255,255,255,0.05)',
+                      color: path.featured ? '#4890f7' : '#8899aa',
+                    }}
+                  >
+                    {path.icon}
+                  </div>
+
+                  <h3
+                    className="text-base font-bold mb-2"
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                  >
+                    {path.title}
+                  </h3>
+
+                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#8899aa' }}>
+                    {path.desc}
+                  </p>
+
+                  <div
+                    className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-200"
+                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                  >
+                    <span className="group-hover:text-[#4890f7] transition-colors duration-200">
+                      {path.cta}
+                    </span>
+                    <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-center text-[11px] tracking-[0.16em] uppercase mt-10"
+            style={{ color: '#4a5a6a' }}
           >
-            <div className="mb-4 opacity-0 text-[10px]" aria-hidden="true">
-              SPACER
-            </div>
-            <h3
-              className="text-xl font-bold mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-            >
-              General Consultation
-            </h3>
-            <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#8899aa' }}>
-              For weight management, peptide programs, medical certificates, or a general health
-              check-in with one of our doctors.
-            </p>
-            <a
-              href="/intake/general"
-              data-cta="book-general-consult"
-              className="btn-ghost w-full block text-center"
-            >
-              Book General Consult
-            </a>
-          </motion.div>
+            All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
+          </motion.p>
         </div>
       </div>
     </section>
@@ -507,11 +712,7 @@ export default function GetStartedPage() {
       <Nav />
       <main>
         <GetStartedHero />
-        <BookingOptions
-          eyebrow="YOUR OPTIONS"
-          heading="Four Ways to Begin. Choose Yours."
-          subheading="Choose what feels right for where you're at."
-        />
+        <AllPathways />
         <EnquiryForm />
         <TrustStrip />
       </main>

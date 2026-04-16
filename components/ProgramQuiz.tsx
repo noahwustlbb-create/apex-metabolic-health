@@ -30,12 +30,12 @@ export default function ProgramQuiz() {
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(0,194,184,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
       />
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 0% 100%, rgba(0,194,184,0.04) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -75,8 +75,8 @@ export default function ProgramQuiz() {
                 transition={{ duration: 0.35, delay: 0.2 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                 className="px-3.5 py-1.5 text-xs font-medium rounded-sm"
                 style={{
-                  backgroundColor: 'rgba(0,194,184,0.05)',
-                  border: '1px solid rgba(0,194,184,0.2)',
+                  backgroundColor: 'rgba(72,144,247,0.05)',
+                  border: '1px solid rgba(72,144,247,0.2)',
                   color: 'var(--text-secondary)',
                 }}
               >
@@ -91,7 +91,7 @@ export default function ProgramQuiz() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="apex-card p-8 md:p-10 text-center"
-            style={{ border: '1px solid rgba(0,194,184,0.2)' }}
+            style={{ border: '1px solid rgba(72,144,247,0.2)' }}
           >
             {/* Stats row */}
             <div className="flex items-center justify-center gap-6 md:gap-10 mb-8">
