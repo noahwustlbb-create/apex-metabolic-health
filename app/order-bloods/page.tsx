@@ -239,7 +239,7 @@ export default function OrderBloodsPage() {
                 subtitle="Initial hormone baseline panel"
                 items={MENS_PANEL}
                 ctaLabel="Get Started — Hormone Panel"
-                ctaHref="/intake/bloods-hormone"
+                ctaHref="/intake/hormone-consult"
                 delay={0}
                 price="$235.38"
                 priceNote="inc. GST"
@@ -260,7 +260,7 @@ export default function OrderBloodsPage() {
                 subtitle="Comprehensive metabolic panel"
                 items={WOMENS_PANEL}
                 ctaLabel="Get Started — Metabolic Panel"
-                ctaHref="/intake/bloods-metabolic"
+                ctaHref="/intake/general-consult"
                 delay={0.08}
                 price="From $73.66"
                 priceNote="program-specific"
