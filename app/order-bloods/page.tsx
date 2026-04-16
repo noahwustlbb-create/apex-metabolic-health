@@ -57,6 +57,9 @@ function PanelCard({
   ctaHref,
   icon,
   delay = 0,
+  price,
+  priceNote,
+  pricingContext,
 }: {
   title: string
   subtitle: string
@@ -65,7 +68,9 @@ function PanelCard({
   ctaHref: string
   icon: React.ReactNode
   delay?: number
-  price?: string
+  price: string
+  priceNote: string
+  pricingContext?: string[]
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
@@ -79,38 +84,43 @@ function PanelCard({
       className="apex-card p-8 flex flex-col"
     >
       {/* Header */}
-      <div className="flex items-center gap-4 mb-7">
+      <div className="flex items-start gap-4 mb-6">
         <div
-          className="w-11 h-11 flex items-center justify-center rounded-sm flex-shrink-0"
-          style={{
-            backgroundColor: 'rgba(72,144,247,0.08)',
-            border: '1px solid rgba(72,144,247,0.2)',
-          }}
+          className="w-11 h-11 flex items-center justify-center rounded-sm flex-shrink-0 mt-0.5"
+          style={{ backgroundColor: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}
         >
           {icon}
         </div>
-          <div className="flex-1">
-            <h2
-              className="text-lg font-bold leading-snug"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
-            >
-              {title}
-            </h2>
-            <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#4890f7' }}>
-              {subtitle}
-            </span>
-          </div>
-          <div className="text-right flex-shrink-0">
-            <p className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>From $73.66</p>
-            <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: '#4a5a6a' }}>program-specific</p>
-          </div>
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+            {title}
+          </h2>
+          <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#4890f7' }}>
+            {subtitle}
+          </span>
+        </div>
+        <div className="text-right flex-shrink-0">
+          <p className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{price}</p>
+          <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: '#4a5a6a' }}>{priceNote}</p>
+        </div>
       </div>
 
+      {/* Pricing context notes (hormone-specific) */}
+      {pricingContext && (
+        <div className="flex flex-col gap-1.5 mb-5 px-4 py-3.5 rounded-lg"
+          style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.14)' }}>
+          {pricingContext.map((note) => (
+            <div key={note} className="flex items-start gap-2">
+              <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: '#4890f7', opacity: 0.6 }} />
+              <p className="text-[11px] leading-relaxed" style={{ color: '#6b7a8d' }}>{note}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Morning collection notice */}
-      <div
-        className="flex items-start gap-2 px-3 py-2.5 rounded-sm mb-5"
-        style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.18)' }}
-      >
+      <div className="flex items-start gap-2 px-3 py-2.5 rounded-sm mb-5"
+        style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.18)' }}>
         <svg viewBox="0 0 20 20" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true">
           <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.2"/>
           <path d="M10 5v5l3 3" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -129,18 +139,13 @@ function PanelCard({
               <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
               <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>
-              {item}
-            </span>
+            <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{item}</span>
           </li>
         ))}
       </ul>
 
       {/* CTA */}
-      <a
-        href={ctaHref}
-        className="btn-teal w-full text-center"
-      >
+      <a href={ctaHref} className="btn-teal w-full text-center">
         {ctaLabel}
       </a>
     </motion.div>
@@ -231,11 +236,18 @@ export default function OrderBloodsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <PanelCard
                 title="Hormone Health Panel"
-                subtitle="Comprehensive Hormone Panel"
+                subtitle="Initial hormone baseline panel"
                 items={MENS_PANEL}
                 ctaLabel="Get Started — Hormone Panel"
                 ctaHref="/intake/bloods-hormone"
                 delay={0}
+                price="$235.38"
+                priceNote="inc. GST"
+                pricingContext={[
+                  'Initial hormone baseline panel required before your doctor-led hormone assessment',
+                  'Follow-up hormone monitoring panel from $150.73 inc. GST where applicable',
+                  'Results reviewed directly by your Apex doctor',
+                ]}
                 icon={
                   <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                     <path d="M12 2C10.5 2 9.5 3 9.5 4.5V13.5C8 14.3 7 15.8 7 17.5C7 20 9.2 22 12 22C14.8 22 17 20 17 17.5C17 15.8 16 14.3 14.5 13.5V4.5C14.5 3 13.5 2 12 2Z" strokeLinecap="round" strokeLinejoin="round" />
@@ -245,11 +257,13 @@ export default function OrderBloodsPage() {
               />
               <PanelCard
                 title="Metabolic Health Panel"
-                subtitle="Comprehensive Metabolic Panel"
+                subtitle="Comprehensive metabolic panel"
                 items={WOMENS_PANEL}
                 ctaLabel="Get Started — Metabolic Panel"
                 ctaHref="/intake/bloods-metabolic"
                 delay={0.08}
+                price="From $73.66"
+                priceNote="program-specific"
                 icon={
                   <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
                     <circle cx="12" cy="10" r="5" strokeLinecap="round" strokeLinejoin="round" />
