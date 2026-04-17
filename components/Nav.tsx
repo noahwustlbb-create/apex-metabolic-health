@@ -369,94 +369,133 @@ export default function Nav() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden"
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-40 md:hidden flex flex-col"
             style={{ backgroundColor: '#ffffff' }}
           >
-            <div className="flex flex-col h-full pt-20 pb-10 px-6">
-              <nav className="flex flex-col gap-2 flex-1 justify-center">
-                {[
-                  { label: 'Start Here', href: '/intake/pre-screen' },
-                  { label: 'Clinical Programs', href: '/services' },
-                  { label: 'Apex Membership', href: '/membership' },
-                  { label: 'Our Approach', href: '/our-approach' },
-                  { label: 'What We Treat', href: '/what-we-treat' },
-                  { label: 'Order Bloods', href: '/order-bloods' },
-                  { label: 'Pricing', href: '/pricing' },
-                  { label: 'FAQs', href: '/faqs' },
-                ].map((link, i) => (
-                  <motion.div
-                    key={link.label + link.href + i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: i * 0.07 + 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="block text-left py-4 text-2xl font-semibold transition-colors duration-200 border-b"
-                      style={{
-                        color: '#0A0A0A',
-                        borderColor: 'rgba(0,0,0,0.06)',
-                        fontFamily: 'var(--font-space-grotesk)',
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
+            {/* Content area */}
+            <div className="flex flex-col flex-1 overflow-y-auto" style={{ paddingTop: '72px' }}>
 
-                {/* Intake CTAs */}
+              {/* ── Primary nav ── */}
+              <nav className="flex flex-col px-6 pt-6" aria-label="Primary navigation">
                 {[
-                  { label: 'Get Started Hormone Consult', href: '/intake/hormone-consult' },
-                  { label: 'General Consult', href: '/intake/general-consult' },
+                  { label: 'Clinical Programs', href: '/services' },
+                  { label: 'What We Treat',     href: '/what-we-treat' },
+                  { label: 'Our Approach',       href: '/our-approach' },
+                  { label: 'Apex Membership',    href: '/membership' },
                 ].map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ delay: (i + 5) * 0.07 + 0.05 }}
+                    exit={{ opacity: 0, x: -16 }}
+                    transition={{ duration: 0.28, delay: i * 0.06 + 0.04 }}
                   >
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="block text-left py-4 text-lg font-semibold transition-colors duration-200 border-b"
+                      className="flex items-center justify-between py-4 text-[22px] font-semibold border-b transition-colors duration-150"
                       style={{
-                        color: '#3575C6',
-                        borderColor: 'rgba(0,0,0,0.06)',
+                        color: '#0A0A0A',
+                        borderColor: 'rgba(0,0,0,0.07)',
                         fontFamily: 'var(--font-space-grotesk)',
+                        letterSpacing: '-0.01em',
                       }}
+                      onMouseEnter={e => { e.currentTarget.style.color = '#3575C6' }}
+                      onMouseLeave={e => { e.currentTarget.style.color = '#0A0A0A' }}
                     >
-                      {link.label} →
+                      {link.label}
+                      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 opacity-20 flex-shrink-0" aria-hidden="true">
+                        <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                     </Link>
                   </motion.div>
                 ))}
               </nav>
+
+              {/* ── Utility row ── */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, delay: 0.28 }}
+                className="px-6 pt-5 pb-2"
               >
-                <Link
-                  href="/intake/pre-screen"
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full font-semibold text-sm"
-                  style={{
-                    background: '#0A0A0A',
-                    color: '#ffffff',
-                    padding: '14px 24px',
-                    borderRadius: '999px',
-                  }}
-                >
-                  Start your assessment
-                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
+                <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#C5CDD6' }}>
+                  More
+                </p>
+                <div className="flex items-center gap-5">
+                  {[
+                    { label: 'Pricing',      href: '/pricing' },
+                    { label: 'Order Bloods', href: '/order-bloods' },
+                    { label: 'FAQs',         href: '/faqs' },
+                  ].map(link => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-medium transition-colors duration-150"
+                      style={{ color: '#8899aa' }}
+                      onMouseEnter={e => { e.currentTarget.style.color = '#0A0A0A' }}
+                      onMouseLeave={e => { e.currentTarget.style.color = '#8899aa' }}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
               </motion.div>
             </div>
+
+            {/* ── CTA block — pinned bottom ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.32, delay: 0.22 }}
+              className="px-6 pb-10 pt-5 flex flex-col gap-4"
+              style={{ borderTop: '1px solid rgba(0,0,0,0.07)' }}
+            >
+              {/* Primary CTA */}
+              <Link
+                href="/intake/pre-screen"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full font-semibold text-[15px]"
+                style={{
+                  background: '#0A0A0A',
+                  color: '#ffffff',
+                  padding: '15px 24px',
+                  borderRadius: '999px',
+                  letterSpacing: '-0.01em',
+                  fontFamily: 'var(--font-space-grotesk)',
+                }}
+              >
+                Start My Assessment
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+
+              {/* Secondary text CTAs */}
+              <div className="flex items-center justify-center gap-6">
+                <Link
+                  href="/intake/hormone-consult"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-sm font-semibold transition-colors duration-150"
+                  style={{ color: '#3575C6' }}
+                >
+                  Hormone Consult →
+                </Link>
+                <span style={{ color: 'rgba(0,0,0,0.12)', fontSize: '12px' }}>|</span>
+                <Link
+                  href="/intake/general-consult"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-sm font-semibold transition-colors duration-150"
+                  style={{ color: '#3575C6' }}
+                >
+                  General Appointment →
+                </Link>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
