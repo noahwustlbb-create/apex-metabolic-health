@@ -380,9 +380,9 @@ export default function Nav() {
               <nav className="flex flex-col px-6 pt-6" aria-label="Primary navigation">
                 {[
                   { label: 'Clinical Programs', href: '/services' },
-                  { label: 'What We Treat',     href: '/what-we-treat' },
-                  { label: 'Our Approach',       href: '/our-approach' },
                   { label: 'Apex Membership',    href: '/membership' },
+                  { label: 'Our Approach',       href: '/our-approach' },
+                  { label: 'What We Treat',      href: '/what-we-treat' },
                 ].map((link, i) => (
                   <motion.div
                     key={link.href}
@@ -421,9 +421,6 @@ export default function Nav() {
                 transition={{ duration: 0.3, delay: 0.28 }}
                 className="px-6 pt-5 pb-2"
               >
-                <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: '#C5CDD6' }}>
-                  More
-                </p>
                 <div className="flex items-center gap-5">
                   {[
                     { label: 'Pricing',      href: '/pricing' },
@@ -483,7 +480,7 @@ export default function Nav() {
                   className="text-sm font-semibold transition-colors duration-150"
                   style={{ color: '#3575C6' }}
                 >
-                  Hormone Consult →
+                  Book Initial Consult →
                 </Link>
                 <span style={{ color: 'rgba(0,0,0,0.12)', fontSize: '12px' }}>|</span>
                 <Link
@@ -492,7 +489,7 @@ export default function Nav() {
                   className="text-sm font-semibold transition-colors duration-150"
                   style={{ color: '#3575C6' }}
                 >
-                  General Appointment →
+                  General Clinical Consult →
                 </Link>
               </div>
             </motion.div>
