@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { AppPhoneMockup } from '@/components/AppFeature'
 
 // ─── Feature data ─────────────────────────────────────────────────────────────
 
@@ -99,9 +100,9 @@ const FEATURES = [
   {
     number: '08',
     title: 'Apex App — Protocol in Your Pocket',
-    body: 'Members receive access to the Apex App at launch. See your biomarkers over time, track protocol changes, and stay connected with your clinical team — everything in one place.',
+    body: 'Members receive access to the Apex App at launch — biomarker history, protocol visibility, and clinical team access in one place.',
     callout: 'In development — included with all active memberships at launch.',
-    bullets: ['Full biomarker history and trend visualisation', 'Protocol and dosing visibility at any time', 'Direct clinical team messaging', 'Continuous progress tracking between reviews'],
+    bullets: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <rect x="5" y="2" width="14" height="20" rx="2" />
@@ -175,6 +176,145 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
         </p>
       )}
     </motion.div>
+  )
+}
+
+// ─── App Section ──────────────────────────────────────────────────────────────
+
+function AppSection() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const ease = [0.22, 1, 0.36, 1] as const
+
+  return (
+    <section
+      className="relative section-pad overflow-hidden"
+      style={{ backgroundColor: '#070a0d' }}
+      aria-label="Apex App"
+    >
+      <div className="glow-rule" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
+      />
+
+      <div ref={ref} className="container-tight relative z-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Phone — left */}
+          <div className="flex justify-center lg:justify-start">
+            <AppPhoneMockup inView={inView} delay={0.1} />
+          </div>
+
+          {/* Text — right */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, ease }}
+              className="label mb-5"
+            >
+              Apex App
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.7, delay: 0.08, ease }}
+              style={{
+                fontFamily: 'var(--font-space-grotesk)',
+                fontSize: 'clamp(24px, 2.8vw, 40px)',
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                color: '#f0f4f8',
+                lineHeight: 1.1,
+                marginBottom: '1rem',
+              }}
+            >
+              Membership gives you{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                visibility.
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.16, ease }}
+              className="text-base leading-relaxed mb-8"
+              style={{ color: '#6b7a8d', maxWidth: '440px' }}
+            >
+              Most clinics manage your treatment. We give you a window into it. The Apex App puts your biomarker history, protocol, and clinical progress in your hands — between consultations, not just at them.
+            </motion.p>
+
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.28, ease }}
+              className="flex flex-col gap-4 mb-9"
+            >
+              {[
+                { label: 'Biomarker trends over time', sub: 'Not just the last result — the full picture across every draw.' },
+                { label: 'Protocol & dosing visibility', sub: 'See your active protocol, schedule, and doctor notes at any time.' },
+                { label: 'Biological age tracking', sub: 'A running measure of how your body responds to treatment.' },
+                { label: 'Clinical team access', sub: 'Message your care team directly without leaving the app.' },
+              ].map((item, i) => (
+                <motion.li
+                  key={item.label}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.45, delay: 0.32 + i * 0.07, ease }}
+                  className="flex items-start gap-3.5"
+                >
+                  <div
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
+                    style={{ background: '#4890f7', opacity: 0.7 }}
+                  />
+                  <div>
+                    <p
+                      className="text-sm font-semibold mb-0.5"
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}
+                    >
+                      {item.label}
+                    </p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
+                      {item.sub}
+                    </p>
+                  </div>
+                </motion.li>
+              ))}
+            </motion.ul>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.62, ease }}
+              className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-lg"
+              style={{
+                background: 'rgba(72,144,247,0.06)',
+                border: '1px solid rgba(72,144,247,0.15)',
+              }}
+            >
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: '#4890f7', opacity: 0.8 }} />
+              <span className="text-xs font-semibold" style={{ color: '#4890f7' }}>
+                In development — included with all active memberships at launch
+              </span>
+            </motion.div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -550,6 +690,9 @@ export default function MembershipPage() {
             </div>
           </div>
         </section>
+
+        {/* ── Apex App ── */}
+        <AppSection />
 
         {/* ── Closing CTA ── */}
         <section
