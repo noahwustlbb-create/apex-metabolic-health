@@ -60,7 +60,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(201,168,76,0.25)',
     heading: 'Your results suggest possible androgen deficiency.',
     body: 'Your symptom profile is consistent with suboptimal testosterone levels. A clinical assessment and advanced biomarker panel will confirm whether hormonal intervention is appropriate for you.',
-    primaryCTA: { label: 'Get Started Hormone Consult', href: '/intake/hormone' },
+    primaryCTA: { label: 'Get Started Hormone Consult', href: '/intake/hormone-consult' },
     secondaryCTA: { label: 'Start Full Assessment', href: '/assessment' },
   },
   high: {
@@ -69,7 +69,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(224,92,92,0.25)',
     heading: 'Your results are strongly consistent with androgen deficiency.',
     body: 'A significant number of your responses align with clinically established indicators of low testosterone. We strongly recommend a full hormone panel and clinical consultation with one of our AHPRA-registered doctors.',
-    primaryCTA: { label: 'Get Started Hormone Consult Now', href: '/intake/hormone' },
+    primaryCTA: { label: 'Get Started Hormone Consult Now', href: '/intake/hormone-consult' },
     secondaryCTA: { label: 'Speak to a Clinician', href: '/intake/discovery' },
   },
 }
@@ -749,7 +749,7 @@ function BottomCTA() {
         Advanced biomarker analysis. Personalised clinical protocol. 100% online.
       </p>
       <a
-        href="/intake/hormone"
+        href="/intake/hormone-consult"
         className="btn-teal inline-flex"
         style={{ fontSize: 15, padding: '14px 36px' }}
       >

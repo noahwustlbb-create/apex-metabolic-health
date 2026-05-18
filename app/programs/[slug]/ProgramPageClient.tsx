@@ -133,11 +133,11 @@ function ProgramHero({ program }: { program: Program }) {
               className="flex flex-wrap gap-4"
             >
               {program.status === 'coming-soon' ? (
-                <a href="/intake/hormone" className="btn-ghost">
+                <a href="/intake/hormone-consult" className="btn-ghost">
                   Join the Waitlist
                 </a>
               ) : (
-                <Link href={program.track === 'hormone' ? '/intake/hormone' : '/intake/general'} className="btn-teal">
+                <Link href={program.track === 'hormone' ? '/intake/hormone-consult' : '/intake/general-consult'} className="btn-teal">
                   {program.ctaLabel}
                 </Link>
               )}
@@ -461,7 +461,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
           transition={{ duration: 0.6, delay: 0.22 }}
           className="mb-10"
         >
-          <Link href={program.track === 'hormone' ? '/intake/hormone' : '/intake/general'} className="btn-teal">
+          <Link href={program.track === 'hormone' ? '/intake/hormone-consult' : '/intake/general-consult'} className="btn-teal">
             Book a Consultation
           </Link>
         </motion.div>

@@ -177,10 +177,10 @@ export default function WhyApex() {
               </svg>
             </span>
           </a>
-          <a href="/intake/hormone" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
+          <a href="/intake/hormone-consult" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             Get Started Hormone Consult
           </a>
-          <a href="/intake/general" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
+          <a href="/intake/general-consult" className="btn-ghost text-sm tracking-widest uppercase w-full sm:w-auto">
             General Consult
           </a>
         </div>

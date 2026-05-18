@@ -59,7 +59,7 @@ const CARDS = [
       'Prescription management where indicated',
     ],
     cta: 'Book hormone consult',
-    href: '/intake/hormone',
+    href: '/intake/hormone-consult',
     featured: false,
   },
   {
@@ -77,7 +77,7 @@ const CARDS = [
       'Referrals and further testing if needed',
     ],
     cta: 'Book general consult',
-    href: '/intake/general',
+    href: '/intake/general-consult',
     featured: false,
   },
 ]

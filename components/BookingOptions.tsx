@@ -36,7 +36,7 @@ const OPTIONS = [
     tag: 'Hormone & TRT Programs',
     title: 'Hormone Consultation',
     desc: 'Advanced blood testing first, then your dedicated consultation with our doctor.',
-    href: '/intake/hormone',
+    href: '/intake/hormone-consult',
     featured: false,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
@@ -49,7 +49,7 @@ const OPTIONS = [
     tag: 'Weight, Peptides & More',
     title: 'General Consultation',
     desc: 'Weight management, peptide protocols, medical certificates, or a general health review.',
-    href: '/intake/general',
+    href: '/intake/general-consult',
     featured: false,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">

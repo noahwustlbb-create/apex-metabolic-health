@@ -248,7 +248,7 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
           ))}
         </div>
       </div>
-      <a href="/intake/hormone" className="btn-teal inline-flex">Book your consultation →</a>
+      <a href="/intake/hormone-consult" className="btn-teal inline-flex">Book your consultation →</a>
     </motion.div>
   )
 }

@@ -26,7 +26,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(72,144,247,0.18)',
     glowColor: 'rgba(72,144,247,0.05)',
     href: '/programs/hormone-optimisation',
-    intakeHref: '/intake/hormone',
+    intakeHref: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 2v4M10 14v4M2 10h4M14 10h4" strokeLinecap="round" />
@@ -50,7 +50,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(249,115,22,0.18)',
     glowColor: 'rgba(249,115,22,0.04)',
     href: '/programs/performance-plus',
-    intakeHref: '/intake/performance',
+    intakeHref: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M2 10h3l2-5 3 10 2-7 2 4 2-2h2" strokeLinecap="round" strokeLinejoin="round" />
@@ -73,7 +73,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(0,168,158,0.18)',
     glowColor: 'rgba(0,168,158,0.05)',
     href: '/programs/metabolic-weight-loss',
-    intakeHref: '/intake/metabolic',
+    intakeHref: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M3 17l4-8 4 4 3-6 3 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -97,7 +97,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(167,139,250,0.18)',
     glowColor: 'rgba(167,139,250,0.04)',
     href: '/programs/hair-restoration',
-    intakeHref: '/intake/hair',
+    intakeHref: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 3c0 0-5 4-5 8a5 5 0 0010 0c0-4-5-8-5-8z" strokeLinejoin="round" />
@@ -121,7 +121,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(56,189,248,0.18)',
     glowColor: 'rgba(56,189,248,0.04)',
     href: '/programs/skin-regeneration',
-    intakeHref: '/intake/skin',
+    intakeHref: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="10" cy="10" r="7" />
@@ -145,7 +145,7 @@ const PROGRAMS = [
     accentBorder: 'rgba(74,222,128,0.18)',
     glowColor: 'rgba(74,222,128,0.04)',
     href: '/programs/injury-repair',
-    intakeHref: '/intake/injury',
+    intakeHref: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M6 10h8M10 6v8" strokeLinecap="round" />

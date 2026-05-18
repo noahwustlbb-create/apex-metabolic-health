@@ -82,13 +82,13 @@ function GetStartedHero() {
         >
           {[
             { label: 'Start Assessment', href: '/intake/pre-screen', primary: true },
-            { label: 'Hormone Consultation', href: '/intake/hormone' },
-            { label: 'Performance Consultation', href: '/intake/performance' },
-            { label: 'Metabolic Consultation', href: '/intake/metabolic' },
-            { label: 'Hair Restoration', href: '/intake/hair' },
-            { label: 'Skin Regeneration', href: '/intake/skin' },
-            { label: 'Injury Repair', href: '/intake/injury' },
-            { label: 'General Check Up', href: '/intake/general' },
+            { label: 'Hormone Consultation', href: '/intake/hormone-consult' },
+            { label: 'Performance Consultation', href: '/intake/hormone-consult' },
+            { label: 'Metabolic Consultation', href: '/intake/general-consult' },
+            { label: 'Hair Restoration', href: '/intake/hormone-consult' },
+            { label: 'Skin Regeneration', href: '/intake/general-consult' },
+            { label: 'Injury Repair', href: '/intake/general-consult' },
+            { label: 'General Check Up', href: '/intake/general-consult' },
             { label: 'Order Blood Panel', href: '/order-bloods' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
@@ -147,7 +147,7 @@ const ALL_PATHWAYS = [
     tag: 'Hormone & TRT Programs',
     title: 'Get Started Hormone Consult',
     desc: 'Hormone optimisation, TRT, and performance-focused treatment. Advanced blood work first, then your dedicated consultation.',
-    href: '/intake/hormone',
+    href: '/intake/hormone-consult',
     cta: 'Get Started Hormone Consult',
     featured: false,
     icon: (
@@ -161,7 +161,7 @@ const ALL_PATHWAYS = [
     tag: 'Weight, Peptides & More',
     title: 'General Check Up',
     desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and general consultation programs.',
-    href: '/intake/general',
+    href: '/intake/general-consult',
     cta: 'Book General Check Up',
     featured: false,
     icon: (
@@ -201,7 +201,7 @@ const ALL_PATHWAYS = [
     tag: 'Performance & Recovery',
     title: 'Performance Consultation',
     desc: 'Optimise recovery, strength output, endurance, and mental performance. Advanced panel with IGF-1, cortisol, testosterone and more.',
-    href: '/intake/performance',
+    href: '/intake/hormone-consult',
     cta: 'Start Performance Intake',
     featured: false,
     icon: (
@@ -214,7 +214,7 @@ const ALL_PATHWAYS = [
     tag: 'Metabolic & Weight Management',
     title: 'Metabolic Consultation',
     desc: 'Comprehensive metabolic panel covering insulin resistance, thyroid, inflammation and fat metabolism markers.',
-    href: '/intake/metabolic',
+    href: '/intake/general-consult',
     cta: 'Start Metabolic Intake',
     featured: false,
     icon: (
@@ -228,7 +228,7 @@ const ALL_PATHWAYS = [
     tag: 'Hair Restoration',
     title: 'Hair Restoration Consultation',
     desc: 'DHT, SHBG, ferritin, thyroid and more. Identify the hormonal and nutritional root causes of hair loss.',
-    href: '/intake/hair',
+    href: '/intake/hormone-consult',
     cta: 'Start Hair Intake',
     featured: false,
     icon: (
@@ -241,7 +241,7 @@ const ALL_PATHWAYS = [
     tag: 'Skin Regeneration',
     title: 'Skin Regeneration Consultation',
     desc: 'Cortisol, DHEA-S, thyroid and inflammatory markers. Address skin ageing, texture and conditions from the inside out.',
-    href: '/intake/skin',
+    href: '/intake/general-consult',
     cta: 'Start Skin Intake',
     featured: false,
     icon: (
@@ -255,7 +255,7 @@ const ALL_PATHWAYS = [
     tag: 'Injury Repair & Recovery',
     title: 'Injury Repair Consultation',
     desc: 'IGF-1, cortisol, Vit D, CK and inflammatory markers. Understand what\'s slowing your recovery and how to fix it.',
-    href: '/intake/injury',
+    href: '/intake/general-consult',
     cta: 'Start Injury Intake',
     featured: false,
     icon: (

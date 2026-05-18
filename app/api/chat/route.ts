@@ -40,8 +40,8 @@ PROCESS:
 
 BOOKING LINKS (direct patients to these):
 - Free Discovery Call: /intake/discovery
-- Hormone Consult: /intake/hormone
-- General / Metabolic Consult: /intake/general
+- Hormone Consult: /intake/hormone-consult
+- General / Metabolic Consult: /intake/general-consult
 - Full Assessment Quiz: /assessment
 - Hormone Symptom Check: /hormone-check
 - Start With Bloods: /order-bloods

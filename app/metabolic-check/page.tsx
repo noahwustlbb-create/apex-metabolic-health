@@ -58,7 +58,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(201,168,76,0.22)',
     heading: 'Your results suggest signs of metabolic dysregulation.',
     body: 'Several of your responses align with early-stage metabolic dysfunction — including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
-    primaryCTA: { label: 'Book a Metabolic Consult', href: '/intake/general' },
+    primaryCTA: { label: 'Book a Metabolic Consult', href: '/intake/general-consult' },
     secondaryCTA: { label: 'Order Blood Panel', href: '/order-bloods' },
   },
   high: {
@@ -67,7 +67,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(224,92,92,0.22)',
     heading: 'Your results indicate significant metabolic dysfunction.',
     body: 'Your symptom profile is strongly consistent with metabolic syndrome indicators — including insulin resistance, visceral fat accumulation, hormonal dysregulation, and systemic inflammation. We strongly recommend a comprehensive metabolic panel and clinical consultation.',
-    primaryCTA: { label: 'Book Metabolic Consult Now', href: '/intake/general' },
+    primaryCTA: { label: 'Book Metabolic Consult Now', href: '/intake/general-consult' },
     secondaryCTA: { label: 'Speak to a Clinician', href: '/intake/discovery' },
   },
 }
@@ -535,7 +535,7 @@ function BottomCTA() {
             Advanced metabolic panel. Personalised clinical protocol. 100% online.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <a href="/intake/general" className="btn-teal">
+            <a href="/intake/general-consult" className="btn-teal">
               Book Metabolic Consult
               <span className="btn-circle">
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">

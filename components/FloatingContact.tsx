@@ -17,7 +17,7 @@ const STEPS = [
     title: 'Book a Consultation',
     description: 'Speak with an AHPRA-registered doctor via telehealth — hormone, metabolic, or general.',
     cta: 'Book now',
-    href: '/intake/hormone',
+    href: '/intake/hormone-consult',
   },
   {
     number: '3',
