@@ -26,7 +26,7 @@ const PROGRAMS = [
     name: 'Performance & Recovery',
     description: 'Maximise training output, reduce recovery time, and optimise the biological systems that drive physical performance.',
     bloodsHref: '/intake/bloods-performance',
-    consultHref: '/intake/hormone',
+    consultHref: '/intake/performance',
   },
   {
     icon: (
@@ -38,7 +38,7 @@ const PROGRAMS = [
     name: 'Metabolic Weight Management',
     description: 'Address the hormonal and metabolic drivers of weight resistance — not just calories. A clinical approach to lasting body composition change.',
     bloodsHref: '/intake/bloods-metabolic',
-    consultHref: '/intake/general',
+    consultHref: '/intake/metabolic',
   },
   {
     icon: (
@@ -51,7 +51,7 @@ const PROGRAMS = [
     name: 'Hair Restoration',
     description: 'Medical management of androgenic alopecia targeting the hormonal and follicular causes of hair loss — not just the symptoms.',
     bloodsHref: '/intake/bloods-hair',
-    consultHref: '/intake/hormone',
+    consultHref: '/intake/hair',
   },
   {
     icon: (
@@ -64,7 +64,7 @@ const PROGRAMS = [
     name: 'Skin Regeneration',
     description: 'Doctor-prescribed protocols targeting skin cellular renewal, collagen architecture, and the visible effects of hormonal ageing.',
     bloodsHref: '/intake/bloods-skin',
-    consultHref: '/intake/general',
+    consultHref: '/intake/skin',
   },
   {
     icon: (
@@ -76,7 +76,7 @@ const PROGRAMS = [
     name: 'Injury Repair & Recovery',
     description: 'Medically supervised regenerative protocols accelerating tissue repair and biological recovery from acute or chronic injury.',
     bloodsHref: '/intake/bloods-injury',
-    consultHref: '/intake/general',
+    consultHref: '/intake/injury',
   },
 ]
 
