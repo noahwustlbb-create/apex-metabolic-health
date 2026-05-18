@@ -70,7 +70,7 @@ interface D {
   smokingStatus: string; smokingPerDay: string; pastSmoker: string; quitYear: string
   weightLoss: string; weightGain: string
   stressScore: string; stressEvents: string; hobbies: string
-  majorGoal: string; pharmacyPreference: string
+  majorGoal: string; pharmacyPreference: string; pathway: string
   notMultipleClinics: boolean
   agentAgreement: boolean; waiverConsent: boolean
   gpCheckAgreement: boolean; privacyConsent: boolean
@@ -99,7 +99,7 @@ const init = (): D => ({
   smokingStatus: '', smokingPerDay: '', pastSmoker: '', quitYear: '',
   weightLoss: '', weightGain: '',
   stressScore: '', stressEvents: '', hobbies: '',
-  majorGoal: '', pharmacyPreference: '',
+  majorGoal: '', pharmacyPreference: '', pathway: '',
   notMultipleClinics: false,
   agentAgreement: false, waiverConsent: false,
   gpCheckAgreement: false, privacyConsent: false,
@@ -275,6 +275,107 @@ function CheckGrid({ items, selected, toggle }: { items: string[]; selected: str
   )
 }
 
+// ─── Pathway Cards ───────────────────────────────────────────────────────────
+
+function PathwayCards({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+  const memberFeatures = [
+    'No clinic or admin fees after enrolment',
+    'Medications at cost price through our partner pharmacy — zero mark-up',
+    'Nursing team support and review cycles every 6–8 weeks',
+    'VIP admin support 9am–4pm weekdays',
+    'Treatment protocols updated at every review',
+  ]
+  const casualPath1 = [
+    'You pay the pharmacy price for all medications',
+    'Medication invoices include an admin, handling and safety fee',
+  ]
+  const casualPath2 = [
+    'Script and treatment plan sent directly to you',
+    'Dosing guides included',
+    'Nursing team access for ongoing support',
+  ]
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {/* Membership */}
+      <button type="button" onClick={() => onChange('member')}
+        className="text-left p-5 rounded-sm transition-all duration-200"
+        style={{
+          background: value === 'member' ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.02)',
+          border: `1px solid ${value === 'member' ? 'rgba(72,144,247,0.5)' : 'rgba(255,255,255,0.08)'}`,
+        }}>
+        <span className="inline-block text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-sm mb-4"
+          style={{ background: 'rgba(72,144,247,0.12)', border: '1px solid rgba(72,144,247,0.3)', color: '#4890f7' }}>
+          Recommended
+        </span>
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+          Apex Clinical Program
+        </h3>
+        <p className="text-xs mb-4" style={{ color: '#6b7a8d' }}>
+          Complete care pathway from consultation through to ongoing treatment.
+        </p>
+        <ul className="flex flex-col gap-2 mb-6">
+          {memberFeatures.map(f => (
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#8899aa' }}>
+              <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
+            </li>
+          ))}
+        </ul>
+        <div className="w-full py-2.5 rounded-sm text-center text-xs font-bold tracking-[0.1em] uppercase transition-all duration-150"
+          style={{
+            background: value === 'member' ? '#4890f7' : 'rgba(72,144,247,0.1)',
+            color: value === 'member' ? '#fff' : '#4890f7',
+            border: '1px solid rgba(72,144,247,0.4)',
+          }}>
+          {value === 'member' ? '✓ Selected' : 'Select Program'}
+        </div>
+      </button>
+
+      {/* Casual */}
+      <button type="button" onClick={() => onChange('casual')}
+        className="text-left p-5 rounded-sm transition-all duration-200"
+        style={{
+          background: value === 'casual' ? 'rgba(72,144,247,0.04)' : 'rgba(255,255,255,0.02)',
+          border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+        }}>
+        <div className="mb-4" style={{ height: 28 }} />
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+          Single Consultation
+        </h3>
+        <p className="text-xs mb-4" style={{ color: '#6b7a8d' }}>
+          One-time consultation. Script issued if clinically appropriate.
+        </p>
+        <p className="text-xs font-semibold mb-1.5" style={{ color: '#6b7a8d' }}>Pathway 1 — Partner Pharmacy</p>
+        <ul className="flex flex-col gap-1.5 mb-4">
+          {casualPath1.map(f => (
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5a6a' }}>
+              <span style={{ color: '#3a4a5a', flexShrink: 0 }}>—</span>{f}
+            </li>
+          ))}
+        </ul>
+        <p className="text-xs font-semibold mb-1.5" style={{ color: '#6b7a8d' }}>Pathway 2 — Own Pharmacy</p>
+        <ul className="flex flex-col gap-1.5 mb-4">
+          {casualPath2.map(f => (
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5a6a' }}>
+              <span style={{ color: '#3a4a5a', flexShrink: 0 }}>—</span>{f}
+            </li>
+          ))}
+        </ul>
+        <p className="text-[11px] mb-4" style={{ color: '#2a3a4a' }}>
+          Note: Script release excludes NSW patients due to state regulations.
+        </p>
+        <div className="w-full py-2.5 rounded-sm text-center text-xs font-bold tracking-[0.1em] uppercase transition-all duration-150"
+          style={{
+            background: value === 'casual' ? 'rgba(72,144,247,0.1)' : 'rgba(255,255,255,0.03)',
+            color: value === 'casual' ? '#4890f7' : '#4a5a6a',
+            border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+          }}>
+          {value === 'casual' ? '✓ Selected' : 'Single Consult'}
+        </div>
+      </button>
+    </div>
+  )
+}
+
 // ─── Success ─────────────────────────────────────────────────────────────────
 
 function Success({ name }: { name: string }) {
@@ -415,6 +516,7 @@ export default function GeneralConsultForm() {
           hobbies: data.hobbies,
           health_goals: data.majorGoal,
           pharmacy_preference: data.pharmacyPreference,
+          pathway: data.pathway === 'member' ? 'Apex Clinical Program' : data.pathway === 'casual' ? 'Single Consultation' : 'Not selected',
           print_name: data.printName,
           consents_accepted: 'Age 18+, Medical consent, Sporting code, Not multiple clinics, Agent agreement, Waiver, GP check, Privacy consent',
         }),
@@ -720,9 +822,18 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 11 — Declaration & Consents */}
+                  {/* 11 — Choose Your Path */}
+                  <div className="flex flex-col gap-4">
+                    <SectionHead num="11" title="Choose Your Path" sub="After your consultation, two pathways are available. One is a complete clinical program. The other is a prescription only." />
+                    <PathwayCards value={data.pathway} onChange={v => set('pathway', v)} />
+                    <p className="text-xs" style={{ color: '#3a4a5a' }}>
+                      Our team will confirm consultation fees and program details based on your selected pathway. You can change your selection at any time before your consultation.
+                    </p>
+                  </div>
+
+                  {/* 12 — Declaration & Consents */}
                   <div className="flex flex-col gap-5">
-                    <SectionHead num="11" title="Declaration & Consents" sub="Please read each statement carefully before submitting." />
+                    <SectionHead num="12" title="Declaration & Consents" sub="Please read each statement carefully before submitting." />
 
                     {/* Not multiple clinics */}
                     <div className="p-4 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
