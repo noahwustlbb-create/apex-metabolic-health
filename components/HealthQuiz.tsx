@@ -544,14 +544,28 @@ function Analysing({ onDone }: { onDone: () => void }) {
   )
 }
 
+const REFERRAL_SOURCES = [
+  'Google / Search',
+  'Instagram',
+  'Facebook',
+  'TikTok',
+  'YouTube',
+  'Podcast',
+  'Referred by a friend',
+  'Referred by a doctor or health professional',
+  'Other',
+]
+
 function Capture({ onSubmit, submitting, onBack }: {
-  onSubmit: (first: string, email: string, mobile: string) => void
+  onSubmit: (first: string, email: string, mobile: string, referralSource: string, referralCode: string) => void
   submitting: boolean
   onBack: () => void
 }) {
   const [first, setFirst] = useState('')
   const [email, setEmail] = useState('')
   const [mobile, setMobile] = useState('')
+  const [referralSource, setReferralSource] = useState('')
+  const [referralCode, setReferralCode] = useState('')
   const valid = first.trim().length > 1 && email.includes('@') && email.includes('.') && mobile.trim().length >= 8
 
   const inputStyle = {
@@ -599,9 +613,27 @@ function Capture({ onSubmit, submitting, onBack }: {
           onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         />
+        <select
+          value={referralSource}
+          onChange={e => setReferralSource(e.target.value)}
+          style={{ ...inputStyle, color: referralSource ? 'var(--text-primary)' : 'var(--text-muted)', cursor: 'pointer' }}
+          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
+          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
+        >
+          <option value="" style={{ background: '#0d1117', color: '#8899aa' }}>How did you hear about us? (optional)</option>
+          {REFERRAL_SOURCES.map(s => (
+            <option key={s} value={s} style={{ background: '#0d1117', color: '#f0f4f8' }}>{s}</option>
+          ))}
+        </select>
+        <input type="text" placeholder="Referral or access code (optional)" value={referralCode}
+          onChange={e => setReferralCode(e.target.value.toUpperCase())}
+          style={{ ...inputStyle, letterSpacing: '0.06em', fontFamily: 'var(--font-space-grotesk)' }}
+          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.4)')}
+          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
+        />
       </div>
 
-      <button onClick={() => onSubmit(first.trim(), email.trim(), mobile.trim())} disabled={!valid || submitting}
+      <button onClick={() => onSubmit(first.trim(), email.trim(), mobile.trim(), referralSource, referralCode)} disabled={!valid || submitting}
         className="btn-teal w-full justify-center"
         style={{ opacity: !valid || submitting ? 0.4 : 1, cursor: !valid || submitting ? 'not-allowed' : 'pointer' }}>
         {submitting ? 'Loading…' : 'Unlock My Results'}
@@ -754,7 +786,7 @@ export default function HealthQuiz() {
     return Math.round(((i + 1) / Q_STEPS.length) * 90)
   }
 
-  async function handleCapture(first: string, email: string, mobile: string) {
+  async function handleCapture(first: string, email: string, mobile: string, referralSource: string, referralCode: string) {
     setSubmitting(true)
     setFirstName(first)
     const m = top(scores)
@@ -779,6 +811,10 @@ export default function HealthQuiz() {
         `6. Gender:      ${label1(answers.gender, GENDERS)}`,
         `7. Conditions:  ${labels(answers.conditions, CONDITIONS)}`,
         `8. Readiness:   ${label1(answers.readiness, READINESS)}`,
+        ``,
+        `REFERRAL`,
+        `Source:  ${referralSource || 'Not specified'}`,
+        `Code:    ${referralCode || '—'}`,
       ].join('\n')
 
       await fetch('https://api.web3forms.com/submit', {

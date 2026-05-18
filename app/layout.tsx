@@ -1,8 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
+
+const GA_ID = 'G-DFH5B44HVQ'
+const AW_ID = 'AW-18089713060'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -55,6 +59,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="antialiased overflow-x-hidden"
         style={{ backgroundColor: '#070a0d', color: '#f0f4f8' }}
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+            gtag('config', '${AW_ID}');
+          `}
+        </Script>
         <AgeGate />
         <ReferralCapture />
         {children}

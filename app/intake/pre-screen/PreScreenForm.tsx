@@ -16,6 +16,8 @@ interface FormData {
   firstName: string
   email: string
   phone: string
+  referralSource: string
+  referralCode: string
   // Step 1
   ageRange: string
   goals: string[]
@@ -30,10 +32,22 @@ interface FormData {
 }
 
 const INITIAL: FormData = {
-  firstName: '', email: '', phone: '',
+  firstName: '', email: '', phone: '', referralSource: '', referralCode: '',
   ageRange: '', goals: [], symptoms: [], recentBloods: '',
   duration: '', impact: '', tried: '', lookingFor: '', urgency: '',
 }
+
+const REFERRAL_SOURCES = [
+  'Google / Search',
+  'Instagram',
+  'Facebook',
+  'TikTok',
+  'YouTube',
+  'Podcast',
+  'Referred by a friend',
+  'Referred by a doctor or health professional',
+  'Other',
+]
 
 // ─── Question data ────────────────────────────────────────────────────────────
 
@@ -552,6 +566,43 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
         <Field label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" />
         <Field label="Email" type="email" value={data.email} onChange={v => set('email', v)} placeholder="you@email.com" />
         <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" />
+
+        {/* Referral source */}
+        <div>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5a6a' }}>
+            How did you hear about us? <span style={{ color: '#2e3d4d', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          </label>
+          <select
+            value={data.referralSource}
+            onChange={e => set('referralSource', e.target.value)}
+            className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150 appearance-none"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#f0f4f8' : '#4a5a6a', caretColor: '#4890f7', cursor: 'pointer' }}
+            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.45)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
+          >
+            <option value="" style={{ background: '#0d1117', color: '#8899aa' }}>Select…</option>
+            {REFERRAL_SOURCES.map(s => (
+              <option key={s} value={s} style={{ background: '#0d1117', color: '#f0f4f8' }}>{s}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Referral / access code */}
+        <div>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5a6a' }}>
+            Referral or access code <span style={{ color: '#2e3d4d', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          </label>
+          <input
+            type="text"
+            value={data.referralCode}
+            onChange={e => set('referralCode', e.target.value.toUpperCase())}
+            placeholder="e.g. APEX25"
+            className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: '#4890f7', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
+            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.45)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
+          />
+        </div>
       </div>
 
       {/* CTAs */}
@@ -864,6 +915,8 @@ export default function PreScreenForm() {
           tried: data.tried,
           looking_for: data.lookingFor,
           urgency: data.urgency,
+          referral_source: data.referralSource || 'Not specified',
+          referral_code: data.referralCode || '',
           matched_pathway: PATHWAY_LABELS[pathway],
           formType: 'Clinical Assessment',
         }),
