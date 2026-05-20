@@ -36,24 +36,24 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#07080a' }}
       aria-label="How it works"
     >
-      <div className="glow-rule" aria-hidden="true" />
+      <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight">
-        {/* Heading */}
+
         <div className="max-w-2xl mb-16 md:mb-20">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease }}
-            className="label mb-4"
+            className="label mb-5"
           >
             The Process
           </motion.p>
@@ -61,28 +61,16 @@ export default function HowItWorks() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="font-bold tracking-tight"
-            style={{
-              fontFamily: 'var(--font-space-grotesk)',
-              fontSize: 'clamp(32px, 3.5vw, 54px)',
-              lineHeight: 1.06,
-              color: '#f0f4f8',
-              letterSpacing: '-0.02em',
-            }}
+            className="display-serif"
+            style={{ fontSize: 'clamp(36px, 4vw, 62px)' }}
           >
             Clinical medicine.{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.45)' }}>
               No waiting rooms.
             </span>
           </motion.h2>
         </div>
 
-        {/* Steps */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
           {STEPS.map((step, i) => (
             <motion.div
@@ -91,58 +79,48 @@ export default function HowItWorks() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="relative p-6 rounded-2xl flex flex-col"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+              style={{
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.045)',
+              }}
             >
-              {/* Connector line (desktop) */}
               {i < STEPS.length - 1 && (
                 <div
                   aria-hidden="true"
                   className="hidden lg:block absolute top-9 left-full w-4 h-px"
-                  style={{ background: 'linear-gradient(90deg, rgba(72,144,247,0.3), transparent)', zIndex: 10 }}
+                  style={{ background: 'linear-gradient(90deg, rgba(72,144,247,0.25), transparent)', zIndex: 10 }}
                 />
               )}
               <span
                 className="text-4xl font-bold mb-5 leading-none"
                 style={{
                   fontFamily: 'var(--font-space-grotesk)',
-                  background: 'linear-gradient(135deg, rgba(72,144,247,0.4), rgba(72,144,247,0.2))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: 'rgba(72,144,247,0.25)',
                   letterSpacing: '-0.03em',
                 }}
               >
                 {step.number}
               </span>
-              <h3 className="text-base font-semibold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+              <h3
+                className="text-base font-semibold mb-2"
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f2efe9' }}
+              >
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: '#6b7a8d' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#7a8a9a' }}>
                 {step.description}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5, ease }}
           className="flex flex-wrap items-center gap-4"
         >
-          <a
-            href="/intake/pre-screen"
-            className="inline-flex items-center gap-2 font-semibold text-sm transition-all duration-200"
-            style={{
-              background: '#f0f4f8',
-              color: '#070a0d',
-              padding: '14px 28px',
-              borderRadius: '999px',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#ffffff' }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#f0f4f8' }}
-          >
+          <a href="/intake/pre-screen" className="btn-primary">
             Start your assessment
             <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -150,14 +128,15 @@ export default function HowItWorks() {
           </a>
           <a
             href="/how-it-works"
-            className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
+            className="text-sm font-medium transition-colors duration-200"
             style={{ color: '#4a5a6a' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#8899aa' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#7a8a9a' }}
             onMouseLeave={e => { e.currentTarget.style.color = '#4a5a6a' }}
           >
             Learn more about our process →
           </a>
         </motion.div>
+
       </div>
     </section>
   )

@@ -22,7 +22,7 @@ export default function Footer() {
   return (
     <footer
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      style={{ backgroundColor: '#07080a', borderTop: '1px solid rgba(255,255,255,0.06)' }}
     >
       {/* Logo watermark — top right */}
       <div

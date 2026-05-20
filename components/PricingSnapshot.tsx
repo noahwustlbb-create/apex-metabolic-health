@@ -80,25 +80,24 @@ export default function PricingSnapshot() {
     <section
       id="pricing"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#07080a' }}
       aria-label="Transparent pricing"
     >
-      <div className="glow-rule" aria-hidden="true" />
+      <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div className="container-tight relative z-10">
 
-        {/* Heading */}
         <div ref={headingRef} className="mb-12 md:mb-14">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, ease }}
-            className="label mb-4"
+            className="label mb-5"
           >
             Pricing
           </motion.p>
@@ -106,30 +105,25 @@ export default function PricingSnapshot() {
             initial={{ opacity: 0, y: 24 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            style={{
-              fontFamily: 'var(--font-space-grotesk)',
-              fontSize: 'clamp(26px, 3.5vw, 48px)',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              color: '#f0f4f8',
-              lineHeight: 1.08,
-              marginBottom: '0.75rem',
-            }}
+            className="display-serif mb-4"
+            style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
           >
-            Three components. That&apos;s it.
+            Three components.{' '}
+            <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
+              That&apos;s it.
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-lg"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#7a8a9a' }}
           >
             Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
           </motion.p>
         </div>
 
-        {/* Cards */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 items-start"
@@ -142,24 +136,20 @@ export default function PricingSnapshot() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="flex flex-col rounded-2xl overflow-hidden"
               style={{
-                background: card.featured ? '#111820' : '#0a0e14',
+                background: card.featured ? 'rgba(255,255,255,0.035)' : 'rgba(255,255,255,0.02)',
                 border: card.featured
-                  ? '1px solid rgba(72,144,247,0.28)'
-                  : '1px solid rgba(148,163,184,0.09)',
-                boxShadow: card.featured
-                  ? '0 0 48px rgba(72,144,247,0.07)'
-                  : 'none',
+                  ? '1px solid rgba(72,144,247,0.25)'
+                  : '1px solid rgba(255,255,255,0.055)',
+                boxShadow: card.featured ? '0 0 56px rgba(72,144,247,0.06)' : 'none',
               }}
             >
-              {/* Featured top bar */}
               {card.featured && (
                 <div
-                  className="h-0.5 w-full"
-                  style={{ background: 'linear-gradient(90deg, #4890f7, #6ba8ff 60%, transparent)' }}
+                  className="h-px w-full"
+                  style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(72,144,247,0.6) 40%, rgba(72,144,247,0.3) 70%, transparent 100%)' }}
                 />
               )}
 
-              {/* Header */}
               <div
                 className="px-6 pt-6 pb-5"
                 style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
@@ -180,7 +170,7 @@ export default function PricingSnapshot() {
                     {card.featured && (
                       <span
                         className="text-[8px] font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-sm"
-                        style={{ color: '#4890f7', background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}
+                        style={{ color: '#4890f7', background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.22)' }}
                       >
                         Recommended
                       </span>
@@ -195,13 +185,12 @@ export default function PricingSnapshot() {
                 </div>
 
                 <h3
-                  className="text-lg font-bold mb-3"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                  className="text-lg font-semibold mb-3"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f2efe9' }}
                 >
                   {card.title}
                 </h3>
 
-                {/* Price */}
                 <div className="flex flex-col gap-1">
                   <div className="flex items-baseline gap-1.5">
                     <span
@@ -210,13 +199,13 @@ export default function PricingSnapshot() {
                     >
                       {card.price}
                     </span>
-                    <span className="text-xs" style={{ color: '#5a6a7a' }}>{card.priceNote}</span>
+                    <span className="text-xs" style={{ color: '#4a5a6a' }}>{card.priceNote}</span>
                   </div>
                   {card.price2 && (
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="text-lg font-bold"
-                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#8899aa' }}
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#7a8a9a' }}
                       >
                         {card.price2}
                       </span>
@@ -231,9 +220,8 @@ export default function PricingSnapshot() {
                 </div>
               </div>
 
-              {/* Body */}
               <div className="flex flex-col flex-1 px-6 py-5">
-                <p className="text-xs leading-relaxed mb-4" style={{ color: '#6b7a8d' }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: '#7a8a9a' }}>
                   {card.body}
                 </p>
 
@@ -246,7 +234,7 @@ export default function PricingSnapshot() {
                       </svg>
                       <span
                         className="text-xs leading-relaxed"
-                        style={{ color: card.featured && j < 3 ? '#a8b8c8' : '#5a6a7a' }}
+                        style={{ color: card.featured && j < 3 ? '#9aacbc' : '#5a6a7a' }}
                       >
                         {b}
                       </span>
@@ -267,20 +255,21 @@ export default function PricingSnapshot() {
           ))}
         </div>
 
-        {/* Footer link */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={cardsInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.45, ease }}
           className="mt-8 flex items-center justify-between flex-wrap gap-4"
         >
-          <p className="text-xs" style={{ color: '#2e3d4d' }}>
+          <p className="text-xs" style={{ color: '#2d3d4e' }}>
             Membership activates after your initial consultation where treatment is clinically appropriate. No lock-in contracts.
           </p>
           <Link
             href="/pricing"
             className="text-xs font-medium flex items-center gap-1.5 transition-colors"
             style={{ color: '#4890f7' }}
+            onMouseEnter={e => { e.currentTarget.style.opacity = '0.75' }}
+            onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >
             Full pricing breakdown
             <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">

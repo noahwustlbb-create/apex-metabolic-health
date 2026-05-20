@@ -4,9 +4,9 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const SYMPTOMS = [
-  "Chronic fatigue that rest doesn't fix",
+  'Chronic fatigue that rest doesn\'t fix',
   'Brain fog and reduced mental clarity',
-  "Weight gain you can't explain",
+  'Weight gain you can\'t explain',
   'Poor recovery from training',
   'Low drive, motivation, and focus',
   'Declining libido',
@@ -24,82 +24,62 @@ export default function ProblemSection() {
     <section
       id="problem"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0d0f12' }}
       aria-label="Symptoms section"
     >
-      <div className="glow-rule" aria-hidden="true" />
-
+      <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
+        className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 65%)' }}
       />
 
       <div ref={ref} className="container-tight">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
 
-          {/* Left — copy */}
+          {/* Left */}
           <div>
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease }}
-              className="label mb-4"
+              className="label mb-5"
             >
               The Reality
             </motion.p>
+
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.08, ease }}
-              className="font-bold tracking-tight mb-6"
-              style={{
-                fontFamily: 'var(--font-space-grotesk)',
-                fontSize: 'clamp(32px, 3.5vw, 54px)',
-                lineHeight: 1.06,
-                color: '#f0f4f8',
-                letterSpacing: '-0.02em',
-              }}
+              transition={{ duration: 0.75, delay: 0.08, ease }}
+              className="display-serif mb-6"
+              style={{ fontSize: 'clamp(36px, 4vw, 60px)' }}
             >
               Your GP said normal.
               <br />
-              <span style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.5)' }}>
                 Your body disagrees.
               </span>
             </motion.h2>
+
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.16, ease }}
-              className="text-base md:text-lg leading-relaxed mb-8"
-              style={{ color: '#8899aa', maxWidth: '440px' }}
+              className="text-base leading-relaxed mb-8"
+              style={{ color: '#7a8a9a', maxWidth: '420px' }}
             >
-              Standard blood panels are designed to rule out disease — not optimise performance. We run advanced diagnostics that measure what your GP never tested, interpreted by doctors who specialise in exactly this.
+              Standard blood panels are designed to rule out disease — not optimise how you function. We run advanced diagnostics interpreted by doctors who specialise in exactly this.
             </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.28, ease }}
             >
-              <a
-                href="/intake/pre-screen"
-                className="inline-flex items-center gap-2 font-semibold text-sm transition-all duration-200"
-                style={{
-                  background: '#f0f4f8',
-                  color: '#070a0d',
-                  padding: '14px 28px',
-                  borderRadius: '999px',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#ffffff' }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#f0f4f8' }}
-              >
+              <a href="/intake/pre-screen" className="btn-primary" style={{ display: 'inline-flex' }}>
                 Find out what is actually wrong
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
@@ -112,32 +92,42 @@ export default function ProblemSection() {
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2, ease }}
-              className="text-[10px] font-bold tracking-[0.2em] uppercase mb-5"
-              style={{ color: '#3a4a5a' }}
+              className="text-[10px] font-semibold tracking-[0.22em] uppercase mb-5"
+              style={{ color: '#2d3d4e' }}
             >
               Sound familiar?
             </motion.p>
+
             <div className="flex flex-col gap-2">
               {SYMPTOMS.map((symptom, i) => (
                 <motion.div
                   key={symptom}
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 16 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.45, delay: 0.2 + i * 0.055, ease }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl"
-                  style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}
+                  transition={{ duration: 0.45, delay: 0.22 + i * 0.05, ease }}
+                  className="flex items-center gap-3.5 px-4 py-3.5 rounded-xl"
+                  style={{
+                    background: 'rgba(255,255,255,0.025)',
+                    border: '1px solid rgba(255,255,255,0.045)',
+                  }}
                 >
-                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#4890f7', opacity: 0.7 }} />
-                  <p className="text-sm font-medium" style={{ color: '#b0bcc8' }}>{symptom}</p>
+                  <div
+                    className="w-1 h-1 rounded-full flex-shrink-0"
+                    style={{ background: 'rgba(72,144,247,0.6)' }}
+                  />
+                  <p className="text-sm" style={{ color: '#9aacbc', fontFamily: 'var(--font-inter)' }}>
+                    {symptom}
+                  </p>
                 </motion.div>
               ))}
             </div>
+
             <motion.p
               initial={{ opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.75, ease }}
+              transition={{ duration: 0.6, delay: 0.7, ease }}
               className="text-xs mt-5 leading-relaxed"
-              style={{ color: '#3a4a5a' }}
+              style={{ color: '#2d3d4e' }}
             >
               These are clinical indicators — not lifestyle problems. Most people are never tested for them. We are.
             </motion.p>

@@ -6,7 +6,6 @@ import Link from 'next/link'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-/* ─── Callout data ───────────────────────────────────────── */
 const LEFT_CALLOUTS = [
   {
     title: 'Biomarker Trends',
@@ -37,7 +36,6 @@ const RIGHT_CALLOUTS = [
   },
 ]
 
-/* ─── Phone mockup ───────────────────────────────────────── */
 export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay?: number }) {
   return (
     <motion.div
@@ -50,28 +48,26 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
         style={{
           width: 240,
           borderRadius: 32,
-          background: '#080c10',
-          border: '1.5px solid rgba(72,144,247,0.2)',
+          background: '#08090b',
+          border: '1.5px solid rgba(72,144,247,0.18)',
           boxShadow:
-            '0 48px 80px rgba(0,0,0,0.7), 0 0 80px rgba(72,144,247,0.1), 0 0 160px rgba(72,144,247,0.04)',
+            '0 48px 80px rgba(0,0,0,0.7), 0 0 80px rgba(72,144,247,0.08), 0 0 160px rgba(72,144,247,0.03)',
           padding: '10px 10px 16px',
           flexShrink: 0,
         }}
       >
-        {/* Dynamic island */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
           <div
             style={{
               width: 72,
               height: 6,
               borderRadius: 3,
-              background: '#0a0e14',
-              border: '1px solid rgba(255,255,255,0.06)',
+              background: '#0d0f12',
+              border: '1px solid rgba(255,255,255,0.05)',
             }}
           />
         </div>
 
-        {/* Status bar */}
         <div
           style={{
             display: 'flex',
@@ -120,7 +116,6 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           </div>
         </div>
 
-        {/* App header */}
         <div
           style={{
             padding: '0 8px 10px',
@@ -144,7 +139,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             style={{
               fontSize: 12,
               fontWeight: 800,
-              color: '#f0f4f8',
+              color: '#f2efe9',
               fontFamily: 'var(--font-space-grotesk)',
               letterSpacing: '-0.02em',
             }}
@@ -153,14 +148,13 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           </p>
         </div>
 
-        {/* Biological Age widget */}
         <div
           style={{
             margin: '0 6px 8px',
             padding: '10px',
             borderRadius: 10,
             background: 'rgba(72,144,247,0.05)',
-            border: '1px solid rgba(72,144,247,0.15)',
+            border: '1px solid rgba(72,144,247,0.14)',
           }}
         >
           <p
@@ -188,7 +182,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 style={{
                   fontSize: 30,
                   fontWeight: 800,
-                  color: '#f0f4f8',
+                  color: '#f2efe9',
                   fontFamily: 'var(--font-space-grotesk)',
                   lineHeight: 1,
                   letterSpacing: '-0.04em',
@@ -233,14 +227,13 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           </div>
         </div>
 
-        {/* Testosterone sparkline */}
         <div
           style={{
             margin: '0 6px 8px',
             padding: '8px 10px',
             borderRadius: 8,
             background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.04)',
           }}
         >
           <div
@@ -251,7 +244,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               marginBottom: 6,
             }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#6b7a8d' }}>Testosterone</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#5a6a7a' }}>Testosterone</p>
             <span style={{ fontSize: 8, color: '#4890f7', fontWeight: 700 }}>22.4 nmol/L</span>
           </div>
           <svg
@@ -263,7 +256,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           >
             <defs>
               <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#4890f7" stopOpacity="0.25" />
+                <stop offset="0%" stopColor="#4890f7" stopOpacity="0.22" />
                 <stop offset="100%" stopColor="#4890f7" stopOpacity="0" />
               </linearGradient>
             </defs>
@@ -285,22 +278,21 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           </div>
         </div>
 
-        {/* Active Protocol row */}
         <div
           style={{
             margin: '0 6px',
             padding: '8px 10px',
             borderRadius: 8,
             background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.04)',
           }}
         >
           <div
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#6b7a8d' }}>Active Protocol</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#5a6a7a' }}>Active Protocol</p>
             <div
-              style={{ width: 5, height: 5, borderRadius: '50%', background: '#4890f7', opacity: 0.8 }}
+              style={{ width: 5, height: 5, borderRadius: '50%', background: '#4890f7', opacity: 0.7 }}
             />
           </div>
           <p style={{ fontSize: 7.5, color: '#3a4a5a', marginTop: 3 }}>
@@ -308,7 +300,6 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           </p>
         </div>
 
-        {/* Bottom nav */}
         <div
           style={{
             marginTop: 12,
@@ -332,7 +323,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                   width: 14,
                   height: 14,
                   borderRadius: 3,
-                  background: i === 0 ? 'rgba(72,144,247,0.15)' : 'transparent',
+                  background: i === 0 ? 'rgba(72,144,247,0.12)' : 'transparent',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -364,18 +355,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
   )
 }
 
-/* ─── Left callout (right-aligned, dot on right) ─────────── */
-function LeftCallout({
-  title,
-  body,
-  index,
-  inView,
-}: {
-  title: string
-  body: string
-  index: number
-  inView: boolean
-}) {
+function LeftCallout({ title, body, index, inView }: { title: string; body: string; index: number; inView: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -385,14 +365,14 @@ function LeftCallout({
     >
       <div className="flex items-center gap-2.5">
         <p
-          className="text-sm font-bold"
+          className="text-sm font-semibold"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}
         >
           {title}
         </p>
         <div
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.65)' }}
+          style={{ background: 'rgba(72,144,247,0.55)' }}
         />
       </div>
       <p
@@ -405,18 +385,7 @@ function LeftCallout({
   )
 }
 
-/* ─── Right callout (left-aligned, dot on left) ──────────── */
-function RightCallout({
-  title,
-  body,
-  index,
-  inView,
-}: {
-  title: string
-  body: string
-  index: number
-  inView: boolean
-}) {
+function RightCallout({ title, body, index, inView }: { title: string; body: string; index: number; inView: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 20 }}
@@ -427,10 +396,10 @@ function RightCallout({
       <div className="flex items-center gap-2.5">
         <div
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.65)' }}
+          style={{ background: 'rgba(72,144,247,0.55)' }}
         />
         <p
-          className="text-sm font-bold"
+          className="text-sm font-semibold"
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}
         >
           {title}
@@ -446,7 +415,6 @@ function RightCallout({
   )
 }
 
-/* ─── Main export ────────────────────────────────────────── */
 export default function AppFeature() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
@@ -455,22 +423,20 @@ export default function AppFeature() {
     <section
       id="app-feature"
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0d0f12' }}
       aria-label="Apex app"
     >
-      <div className="glow-rule" aria-hidden="true" />
+      <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            'radial-gradient(ellipse at 50% 60%, rgba(72,144,247,0.06) 0%, transparent 55%)',
+          background: 'radial-gradient(ellipse at 50% 60%, rgba(72,144,247,0.05) 0%, transparent 55%)',
         }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
 
-        {/* ── Header ── */}
         <div className="text-center mb-14">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -484,24 +450,11 @@ export default function AppFeature() {
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            style={{
-              fontFamily: 'var(--font-space-grotesk)',
-              fontSize: 'clamp(26px, 3vw, 44px)',
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-              color: '#f0f4f8',
-              lineHeight: 1.1,
-            }}
+            className="display-serif mx-auto"
+            style={{ fontSize: 'clamp(32px, 3.5vw, 56px)', maxWidth: '600px' }}
           >
             Your care,{' '}
-            <span
-              style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
+            <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
               visible over time.
             </span>
           </motion.h2>
@@ -510,36 +463,26 @@ export default function AppFeature() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
             className="text-base leading-relaxed mt-4 mx-auto"
-            style={{ color: '#6b7a8d', maxWidth: '480px' }}
+            style={{ color: '#7a8a9a', maxWidth: '480px' }}
           >
-            Biomarkers, protocols, and clinical progress — in one place. Built for continuity, not
-            just your next appointment.
+            Biomarkers, protocols, and clinical progress — in one place. Built for continuity, not just your next appointment.
           </motion.p>
         </div>
 
-        {/* ── Desktop: 3-column editorial layout ── */}
         <div className="hidden lg:grid grid-cols-[1fr_auto_1fr] gap-12 items-center mb-14">
-
-          {/* Left callouts */}
           <div className="flex flex-col gap-10 justify-center">
             {LEFT_CALLOUTS.map((c, i) => (
               <LeftCallout key={c.title} title={c.title} body={c.body} index={i} inView={isInView} />
             ))}
           </div>
-
-          {/* Phone — center */}
           <AppPhoneMockup inView={isInView} delay={0.2} />
-
-          {/* Right callouts */}
           <div className="flex flex-col gap-10 justify-center">
             {RIGHT_CALLOUTS.map((c, i) => (
               <RightCallout key={c.title} title={c.title} body={c.body} index={i} inView={isInView} />
             ))}
           </div>
-
         </div>
 
-        {/* ── Mobile: phone + 2-col callout grid ── */}
         <div className="lg:hidden flex flex-col items-center gap-10 mb-10">
           <AppPhoneMockup inView={isInView} delay={0.2} />
           <div className="grid grid-cols-2 gap-5 w-full">
@@ -554,10 +497,10 @@ export default function AppFeature() {
                 <div className="flex items-center gap-2">
                   <div
                     className="w-1 h-1 rounded-full flex-shrink-0"
-                    style={{ background: 'rgba(72,144,247,0.65)' }}
+                    style={{ background: 'rgba(72,144,247,0.55)' }}
                   />
                   <p
-                    className="text-xs font-bold"
+                    className="text-xs font-semibold"
                     style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}
                   >
                     {c.title}
@@ -574,28 +517,19 @@ export default function AppFeature() {
           </div>
         </div>
 
-        {/* ── CTA ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.75, ease }}
           className="flex flex-col items-center gap-3"
         >
-          <Link href="/membership" className="btn-teal">
+          <Link href="/membership" className="btn-primary">
             Join Apex Membership
-            <span className="btn-circle" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
-                <path
-                  d="M3 8h10M9 4l4 4-4 4"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </Link>
-          <p className="text-xs" style={{ color: '#3a4a5a' }}>
+          <p className="text-xs" style={{ color: '#2d3d4e' }}>
             App included with all active memberships at launch
           </p>
         </motion.div>

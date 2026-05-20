@@ -22,7 +22,7 @@ const PROGRAMS = [
       'Body composition changes — fat gain, muscle loss',
       'Brain fog and reduced motivation',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 2v4M10 14v4M2 10h4M14 10h4" strokeLinecap="round" />
@@ -45,7 +45,7 @@ const PROGRAMS = [
       'Declining strength or endurance output',
       'Suboptimal body composition despite diet and training',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M2 10h3l2-5 3 10 2-7 2 4 2-2h2" strokeLinecap="round" strokeLinejoin="round" />
@@ -67,7 +67,7 @@ const PROGRAMS = [
       'Low energy despite adequate sleep',
       'Weight that doesn\'t respond to diet or exercise',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M3 17l4-8 4 4 3-6 3 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -90,7 +90,7 @@ const PROGRAMS = [
       'Hairline recession',
       'Hormonally driven scalp changes',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 3c0 0-5 4-5 8a5 5 0 0010 0c0-4-5-8-5-8z" strokeLinejoin="round" />
@@ -113,7 +113,7 @@ const PROGRAMS = [
       'Acne or persistent skin conditions',
       'Post-injury or post-procedural skin repair',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="10" cy="10" r="7" />
@@ -136,7 +136,7 @@ const PROGRAMS = [
       'Recurring injury at the same sites',
       'Return-to-training clinical support',
     ],
-    href: '/intake/pre-screen',
+    href: '/intake/general-consult',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M6 10h8M10 6v8" strokeLinecap="round" />
@@ -152,29 +152,23 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: i * 0.08, ease }}
-      className="group flex flex-col rounded-xl overflow-hidden relative"
+      className="group flex flex-col rounded-2xl overflow-hidden relative"
       style={{
-        background: '#0a0e14',
-        border: '1px solid rgba(148,163,184,0.09)',
+        background: 'rgba(255,255,255,0.02)',
+        border: '1px solid rgba(255,255,255,0.055)',
         borderLeft: `2px solid ${prog.accent}`,
-        transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
-        opacity: 1,
+        transition: 'box-shadow 0.25s ease',
       }}
       onMouseEnter={e => {
-        const el = e.currentTarget
-        el.style.boxShadow = `0 0 32px ${prog.glowColor}, 0 8px 24px rgba(0,0,0,0.3)`
-        el.style.borderColor = `rgba(148,163,184,0.14)`
+        e.currentTarget.style.boxShadow = `0 0 40px ${prog.glowColor}, 0 8px 32px rgba(0,0,0,0.35)`
       }}
       onMouseLeave={e => {
-        const el = e.currentTarget
-        el.style.boxShadow = 'none'
-        el.style.borderColor = 'rgba(148,163,184,0.09)'
+        e.currentTarget.style.boxShadow = 'none'
       }}
     >
       {/* Header */}
-      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(148,163,184,0.07)' }}>
+      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="flex items-center justify-between gap-3 mb-3.5">
-          {/* Icon + category */}
           <div className="flex items-center gap-2">
             <div
               className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
@@ -200,8 +194,8 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
         </div>
 
         <h3
-          className="text-[15px] font-bold leading-snug mb-2"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#e8f0f8', letterSpacing: '-0.01em' }}
+          className="text-[15px] font-semibold leading-snug mb-2"
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f2efe9', letterSpacing: '-0.01em' }}
         >
           {prog.name}
         </h3>
@@ -217,21 +211,20 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
             <li key={j} className="flex items-start gap-2">
               <div
                 className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
-                style={{ background: prog.accent, opacity: 0.6 }}
+                style={{ background: prog.accent, opacity: 0.55 }}
               />
               <span className="text-xs leading-relaxed" style={{ color: '#5a6a7a' }}>{item}</span>
             </li>
           ))}
         </ul>
 
-        {/* CTA */}
         <Link
           href={prog.href}
           className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
           style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(148,163,184,0.1)',
-            color: '#6b7a8d',
+            background: 'rgba(255,255,255,0.02)',
+            border: '1px solid rgba(255,255,255,0.07)',
+            color: '#5a6a7a',
           }}
           onMouseEnter={e => {
             const el = e.currentTarget as HTMLElement
@@ -241,9 +234,9 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           }}
           onMouseLeave={e => {
             const el = e.currentTarget as HTMLElement
-            el.style.background = 'rgba(255,255,255,0.03)'
-            el.style.borderColor = 'rgba(148,163,184,0.1)'
-            el.style.color = '#6b7a8d'
+            el.style.background = 'rgba(255,255,255,0.02)'
+            el.style.borderColor = 'rgba(255,255,255,0.07)'
+            el.style.color = '#5a6a7a'
           }}
         >
           Check eligibility
@@ -268,11 +261,11 @@ export default function ProgramsSection() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#070a0d' }}
+      style={{ backgroundColor: '#0d0f12' }}
       aria-label="Clinical programs"
     >
-      <div className="glow-rule" aria-hidden="true" />
-      <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
+      <div className="warm-rule" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
@@ -281,14 +274,13 @@ export default function ProgramsSection() {
 
       <div className="container-tight relative z-10">
 
-        {/* Heading */}
         <div ref={headingRef} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end mb-12 md:mb-14">
           <div>
             <motion.p
               initial={{ opacity: 0, y: 12 }}
               animate={headingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, ease }}
-              className="label mb-4"
+              className="label mb-5"
             >
               Clinical Programs
             </motion.p>
@@ -296,38 +288,26 @@ export default function ProgramsSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={headingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{
-                fontFamily: 'var(--font-space-grotesk)',
-                fontSize: 'clamp(28px, 3.5vw, 50px)',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: '#f0f4f8',
-                lineHeight: 1.08,
-              }}
+              className="display-serif"
+              style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Six programs.{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
                 One clinic.
               </span>
             </motion.h2>
           </div>
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
+            className="text-base leading-relaxed"
+            style={{ color: '#7a8a9a' }}
           >
-            <p className="text-base leading-relaxed" style={{ color: '#6b7a8d' }}>
-              Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
-            </p>
-          </motion.div>
+            Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
+          </motion.p>
         </div>
 
-        {/* Program grid */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"
@@ -337,14 +317,13 @@ export default function ProgramsSection() {
           ))}
         </div>
 
-        {/* Helper strip */}
         <motion.div
           ref={footerRef}
           initial={{ opacity: 0, y: 16 }}
           animate={footerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1, ease }}
           className="mt-8 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(148,163,184,0.07)' }}
+          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
         >
           <div>
             <p className="text-sm font-medium mb-0.5" style={{ color: '#8899aa' }}>
@@ -356,7 +335,7 @@ export default function ProgramsSection() {
           </div>
           <Link
             href="/intake/pre-screen"
-            className="inline-flex items-center gap-2 text-sm font-semibold flex-shrink-0 px-5 py-2.5 rounded-lg transition-all duration-150"
+            className="inline-flex items-center gap-2 text-sm font-semibold flex-shrink-0 px-5 py-2.5 rounded-full transition-all duration-150"
             style={{
               background: 'rgba(72,144,247,0.08)',
               border: '1px solid rgba(72,144,247,0.2)',
@@ -364,8 +343,8 @@ export default function ProgramsSection() {
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement
-              el.style.background = 'rgba(72,144,247,0.12)'
-              el.style.borderColor = 'rgba(72,144,247,0.35)'
+              el.style.background = 'rgba(72,144,247,0.14)'
+              el.style.borderColor = 'rgba(72,144,247,0.38)'
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement
