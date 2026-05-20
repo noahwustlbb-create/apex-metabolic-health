@@ -21,19 +21,19 @@ export default function Hero() {
       id="hero"
       ref={ref}
       className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Hero"
     >
-      <div className="absolute inset-0 dot-grid opacity-60" aria-hidden="true" />
+      <div className="absolute inset-0 dot-grid opacity-100" aria-hidden="true" />
       <div
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[700px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.1) 0%, transparent 65%)' }}
+        className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.07) 0%, transparent 65%)' }}
       />
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 0% 100%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 0% 100%, rgba(200,169,110,0.04) 0%, transparent 60%)' }}
       />
 
       <div className="container-tight relative z-10 pt-32 pb-24">
@@ -56,7 +56,7 @@ export default function Hero() {
             style={{ fontSize: 'clamp(48px, 8vw, 108px)' }}
           >
             Real answers.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.22)' }}>
+            <span style={{ color: 'rgba(245,245,245,0.2)' }}>
               Not reassurance.
             </span>
           </motion.h1>
@@ -66,7 +66,7 @@ export default function Hero() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.22, ease }}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#888888' }}
           >
             Advanced diagnostics, a specialist doctor, and a clinical protocol built around your biology — not a GP referral.
           </motion.p>
@@ -77,13 +77,13 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.34, ease }}
             className="flex flex-wrap justify-center gap-3 mb-16"
           >
-            <a href="/intake/pre-screen" className="btn-primary" style={{ fontSize: '14px', padding: '16px 36px' }}>
+            <a href="/intake/pre-screen" className="btn-primary" style={{ fontSize: '12px', padding: '16px 36px' }}>
               Start your assessment
-              <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-            <a href="/intake/discovery" className="btn-outline" style={{ fontSize: '14px', padding: '16px 28px' }}>
+            <a href="/intake/discovery" className="btn-outline" style={{ fontSize: '12px', padding: '16px 28px' }}>
               Free discovery call
             </a>
           </motion.div>
@@ -92,15 +92,18 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.7, delay: 0.5, ease }}
-            className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3"
+            className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
           >
-            {TRUST.map((item, i) => (
+            {TRUST.map((item) => (
               <span
                 key={item}
-                className="flex items-center gap-2 text-[11px] font-medium tracking-[0.12em] uppercase"
-                style={{ color: '#7a90a8' }}
+                className="text-[10px] font-medium tracking-[0.12em] uppercase px-3 py-1.5"
+                style={{
+                  color: '#888888',
+                  background: '#111111',
+                  border: '1px solid #1E1E1E',
+                }}
               >
-                {i > 0 && <span className="hidden sm:block w-1 h-1 rounded-full" style={{ background: 'rgba(72,144,247,0.4)' }} />}
                 {item}
               </span>
             ))}
@@ -109,8 +112,8 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" aria-hidden="true">
-        <div className="w-px h-12 relative overflow-hidden" style={{ background: 'rgba(72,144,247,0.15)' }}>
-          <div className="absolute w-full scroll-drip" style={{ height: '40%', background: 'linear-gradient(to bottom, transparent, #4890f7, transparent)' }} />
+        <div className="w-px h-12 relative overflow-hidden" style={{ background: '#1E1E1E' }}>
+          <div className="absolute w-full scroll-drip" style={{ height: '40%', background: 'linear-gradient(to bottom, transparent, #C8A96E, transparent)' }} />
         </div>
       </div>
     </section>
