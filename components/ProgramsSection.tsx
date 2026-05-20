@@ -292,7 +292,7 @@ export default function ProgramsSection() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Six programs.{' '}
-              <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.28)' }}>
                 One clinic.
               </span>
             </motion.h2>

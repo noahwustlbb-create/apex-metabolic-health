@@ -140,7 +140,7 @@ export default function ClinicalJourney() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Simple from{' '}
-              <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.28)' }}>
                 start to finish.
               </span>
             </motion.h2>

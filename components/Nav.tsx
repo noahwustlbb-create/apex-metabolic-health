@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const NAV_PROGRAMS = [
   { name: 'Hormone Optimisation',    slug: 'hormone-optimisation',  comingSoon: false },
@@ -23,8 +22,8 @@ const navLinks = [
   { label: 'FAQs',          href: '/faqs'          },
 ]
 
-const LINK_STYLE = { color: 'rgba(242,239,233,0.5)' }
-const LINK_HOVER = { color: '#f2efe9' }
+const LINK_STYLE = { color: 'rgba(255,255,255,0.45)' }
+const LINK_HOVER = { color: '#ffffff' }
 
 export default function Nav() {
   const [scrolled, setScrolled]     = useState(false)
@@ -59,16 +58,14 @@ export default function Nav() {
         <div className="mx-auto w-full max-w-[1440px] px-6 md:px-8 flex items-center justify-between h-[68px] md:h-[76px]">
 
           {/* Logo */}
-          <Link href="/" className="flex items-center flex-shrink-0" aria-label="Apex Metabolic Health">
-            <Image
-              src="/logo.png"
-              alt="Apex Metabolic Health"
-              width={794}
-              height={319}
-              className="w-[130px] md:w-[155px] h-auto"
-              style={{ mixBlendMode: 'screen', filter: 'brightness(1.1)' }}
-              priority
-            />
+          <Link href="/" className="flex flex-col flex-shrink-0 select-none" aria-label="Apex Metabolic Health" style={{ textDecoration: 'none' }}>
+            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.03em', color: '#ffffff', lineHeight: 1 }}>
+              APEX
+            </span>
+            <span style={{ display: 'block', height: '1px', background: 'rgba(255,255,255,0.18)', margin: '3px 0 4px' }} />
+            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 400, fontSize: '7px', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', lineHeight: 1 }}>
+              Metabolic Health
+            </span>
           </Link>
 
           {/* Desktop nav */}

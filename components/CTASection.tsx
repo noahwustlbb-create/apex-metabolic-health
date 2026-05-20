@@ -47,7 +47,7 @@ export default function CTASection() {
           }}
         >
           Get answers.{' '}
-          <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.45)' }}>
+          <span style={{ color: 'rgba(255,255,255,0.28)' }}>
             Not reassurance.
           </span>
         </motion.h2>

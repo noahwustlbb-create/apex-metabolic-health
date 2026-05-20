@@ -109,7 +109,7 @@ export default function PricingSnapshot() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
           >
             Three components.{' '}
-            <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.4)' }}>
+            <span style={{ color: 'rgba(255,255,255,0.28)' }}>
               That&apos;s it.
             </span>
           </motion.h2>

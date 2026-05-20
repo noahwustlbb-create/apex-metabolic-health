@@ -22,9 +22,9 @@
   --border-dim:     rgba(255,255,255,0.04);
 
   /* ── Typography ── */
-  --text-primary:   #f2efe9;
-  --text-secondary: #8a9aaa;
-  --text-muted:     #48586a;
+  --text-primary:   #f8f9fa;
+  --text-secondary: #9aaabb;
+  --text-muted:     #52637a;
   --gold:           #c9a84c;
 
   /* ── Legacy aliases ── */
@@ -110,17 +110,17 @@
   /* ── Typography ── */
   .label {
     @apply text-[10px] font-semibold tracking-[0.22em] uppercase;
-    color: var(--blue);
+    color: rgba(255,255,255,0.35);
     font-family: var(--font-space-grotesk), system-ui, sans-serif;
     letter-spacing: 0.22em;
   }
 
   .display-serif {
-    font-family: var(--font-cormorant), Georgia, serif;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.05;
-    color: var(--text-primary);
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+    color: #ffffff;
   }
 
   /* ── Cards ── */

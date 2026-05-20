@@ -57,7 +57,7 @@ export default function ProblemSection() {
             >
               Your GP said normal.
               <br />
-              <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.5)' }}>
+              <span style={{ color: 'rgba(255,255,255,0.28)' }}>
                 Your body disagrees.
               </span>
             </motion.h2>

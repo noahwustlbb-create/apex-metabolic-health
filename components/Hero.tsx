@@ -63,7 +63,7 @@ export default function Hero() {
           }}
         >
           Real answers.<br />
-          <span style={{ fontStyle: 'italic', color: 'rgba(242,239,233,0.6)' }}>
+          <span style={{ color: 'rgba(255,255,255,0.28)' }}>
             Not reassurance.
           </span>
         </motion.h1>

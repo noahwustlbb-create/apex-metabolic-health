@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk, Cormorant_Garamond } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import AgeGate from '@/components/AgeGate'
@@ -22,13 +22,6 @@ const spaceGrotesk = Space_Grotesk({
   weight: ['400', '500', '600', '700'],
 })
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-cormorant',
-  display: 'swap',
-  weight: ['300', '400', '500', '600'],
-  style: ['normal', 'italic'],
-})
 
 export const metadata: Metadata = {
   title: "Apex Metabolic Health | Doctor-Led Telehealth — Australia",
@@ -62,7 +55,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable}`}>
+    <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body
         className="antialiased overflow-x-hidden"
         style={{ backgroundColor: '#070a0d', color: '#f0f4f8' }}
