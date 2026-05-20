@@ -12,9 +12,9 @@ import { programs } from '@/lib/programs'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 const inputBase: React.CSSProperties = {
-  background: '#19202c',
+  background: '#161616',
   border: '1px solid rgba(255,255,255,0.08)',
-  color: '#f0f4f8',
+  color: '#F5F5F5',
   padding: '12px 16px',
   borderRadius: '4px',
   width: '100%',
@@ -29,7 +29,7 @@ function GetStartedHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0c131f', paddingTop: '120px' }}
+      style={{ backgroundColor: '#0A0A0A', paddingTop: '120px' }}
       aria-label="Get started hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -289,7 +289,7 @@ function AllPathways() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0D0D0D' }}
       aria-label="All pathways"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -313,12 +313,12 @@ function AllPathways() {
             <p className="label mb-4">YOUR OPTIONS</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: '1.08' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: '1.08' }}
             >
               Every way to{' '}
               <span className="text-teal-gradient">get started.</span>
             </h2>
-            <p className="text-base md:text-lg" style={{ color: '#8899aa' }}>
+            <p className="text-base md:text-lg" style={{ color: '#888888' }}>
               Choose what fits where you&apos;re at right now.
             </p>
           </motion.div>
@@ -335,7 +335,7 @@ function AllPathways() {
                   href={path.href}
                   className="group flex flex-col h-full p-6 rounded-xl transition-all duration-300"
                   style={{
-                    background: path.featured ? 'rgba(44,116,232,0.1)' : '#111820',
+                    background: path.featured ? 'rgba(44,116,232,0.1)' : '#111111',
                     border: path.featured
                       ? '1px solid rgba(44,116,232,0.4)'
                       : '1px solid rgba(255,255,255,0.07)',
@@ -345,7 +345,7 @@ function AllPathways() {
                     el.style.transform = 'translateY(-3px)'
                     el.style.borderColor = path.featured
                       ? 'rgba(44,116,232,0.7)'
-                      : 'rgba(72,144,247,0.35)'
+                      : 'rgba(200,169,110,0.35)'
                     el.style.boxShadow = path.featured
                       ? '0 12px 40px rgba(44,116,232,0.18)'
                       : '0 8px 30px rgba(0,0,0,0.3)'
@@ -361,7 +361,7 @@ function AllPathways() {
                 >
                   <p
                     className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-4"
-                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                    style={{ color: path.featured ? '#C8A96E' : '#4a5a6a' }}
                   >
                     {path.tag}
                   </p>
@@ -370,7 +370,7 @@ function AllPathways() {
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
                       background: path.featured ? 'rgba(44,116,232,0.15)' : 'rgba(255,255,255,0.05)',
-                      color: path.featured ? '#4890f7' : '#8899aa',
+                      color: path.featured ? '#C8A96E' : '#8899aa',
                     }}
                   >
                     {path.icon}
@@ -378,20 +378,20 @@ function AllPathways() {
 
                   <h3
                     className="text-base font-bold mb-2"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
                   >
                     {path.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#8899aa' }}>
+                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#888888' }}>
                     {path.desc}
                   </p>
 
                   <div
                     className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-200"
-                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                    style={{ color: path.featured ? '#C8A96E' : '#4a5a6a' }}
                   >
-                    <span className="group-hover:text-[#4890f7] transition-colors duration-200">
+                    <span className="group-hover:text-[#C8A96E] transition-colors duration-200">
                       {path.cta}
                     </span>
                     <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
@@ -408,7 +408,7 @@ function AllPathways() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center text-[11px] tracking-[0.16em] uppercase mt-10"
-            style={{ color: '#4a5a6a' }}
+            style={{ color: '#888888' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </motion.p>
@@ -447,7 +447,7 @@ function EnquiryForm() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0c131f' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Enquiry form"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -463,11 +463,11 @@ function EnquiryForm() {
             <p className="label mb-4">SEND AN ENQUIRY</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
             >
               Send a Direct Enquiry
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#8899aa' }}>
+            <p className="text-base leading-relaxed" style={{ color: '#888888' }}>
               Fill out the form below and we&apos;ll get back to you within 1 business day.
             </p>
           </motion.div>
@@ -483,8 +483,8 @@ function EnquiryForm() {
                 <circle cx="12" cy="12" r="10" stroke="#2C74E8" strokeWidth="1.5"/>
                 <path d="M7.5 12l3 3 5-5" stroke="#2C74E8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <h3 className="text-xl font-bold mb-2" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
-              <p className="text-sm" style={{ color: '#8899aa' }}>We&apos;ll be in touch within 1 business day.</p>
+              <h3 className="text-xl font-bold mb-2" style={{ color: '#F5F5F5', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
+              <p className="text-sm" style={{ color: '#888888' }}>We&apos;ll be in touch within 1 business day.</p>
             </motion.div>
           ) : (
           <motion.form
@@ -500,7 +500,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#888888' }}
                 >
                   Full Name
                 </label>
@@ -516,7 +516,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#888888' }}
                 >
                   Email
                 </label>
@@ -536,7 +536,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#888888' }}
                 >
                   Phone
                 </label>
@@ -552,7 +552,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#8899aa' }}
+                  style={{ color: '#888888' }}
                 >
                   Program of Interest
                 </label>
@@ -570,7 +570,7 @@ function EnquiryForm() {
                     <option
                       key={p.slug}
                       value={p.slug}
-                      style={{ background: '#ffffff', color: '#f0f4f8' }}
+                      style={{ background: '#111111', color: '#F5F5F5' }}
                     >
                       {p.name}
                     </option>
@@ -583,7 +583,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#8899aa' }}
+                style={{ color: '#888888' }}
               >
                 How did you hear about us?
               </label>
@@ -607,7 +607,7 @@ function EnquiryForm() {
                   <option
                     key={option}
                     value={option}
-                    style={{ background: '#ffffff', color: '#f0f4f8' }}
+                    style={{ background: '#111111', color: '#F5F5F5' }}
                   >
                     {option}
                   </option>
@@ -627,7 +627,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#8899aa' }}
+                style={{ color: '#888888' }}
               >
                 Message
               </label>
@@ -693,7 +693,7 @@ function TrustStrip() {
                 <circle cx="8" cy="8" r="7" stroke="#2C74E8" strokeWidth="1.2" fill="rgba(44,116,232,0.07)" />
                 <path d="M5 8l2.5 2.5 4-4" stroke="#2C74E8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm font-semibold tracking-wide" style={{ color: '#f0f4f8' }}>
+              <span className="text-sm font-semibold tracking-wide" style={{ color: '#F5F5F5' }}>
                 {item}
               </span>
             </div>

@@ -17,14 +17,14 @@ function PricingHero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
+      style={{ backgroundColor: '#0A0A0A', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Pricing hero"
     >
       <div className="absolute inset-0 dot-grid opacity-60" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.1) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.1) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -39,13 +39,13 @@ function PricingHero() {
           style={{ fontSize: 'clamp(32px, 4.5vw, 64px)', maxWidth: '780px' }}
         >
           Simple. Transparent.{' '}
-          <span style={{ color: 'rgba(10,14,26,0.22)' }}>Nothing forced.</span>
+          <span style={{ color: 'rgba(245,245,245,0.2)' }}>Nothing forced.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22, ease }}
-          style={{ color: '#4a5878', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: '#888888', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           Three components. Published upfront. No discovery calls to unlock a price.
         </motion.p>
@@ -56,8 +56,8 @@ function PricingHero() {
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
           {['No hidden fees', 'No lock-in contracts', 'AHPRA-registered doctors'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
+            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#888888' }}>
+              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
               {t}
             </span>
           ))}
@@ -124,9 +124,9 @@ const STEPS = [
 ]
 
 function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inView: boolean }) {
-  const accent = '#4890f7'
-  const accentBg = 'rgba(72,144,247,0.07)'
-  const accentBorder = 'rgba(72,144,247,0.2)'
+  const accent = '#C8A96E'
+  const accentBg = 'rgba(200,169,110,0.07)'
+  const accentBorder = 'rgba(200,169,110,0.2)'
 
   return (
     <motion.div
@@ -135,17 +135,17 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
       transition={{ duration: 0.55, delay: i * 0.1, ease }}
       className="flex flex-col rounded-2xl overflow-hidden"
       style={{
-        background: '#ffffff',
-        border: step.featured ? '1px solid rgba(72,144,247,0.3)' : '1px solid rgba(72,144,247,0.12)',
-        boxShadow: step.featured ? '0 8px 40px rgba(72,144,247,0.1)' : '0 2px 12px rgba(0,0,0,0.04)',
+        background: '#111111',
+        border: step.featured ? '1px solid rgba(200,169,110,0.3)' : '1px solid rgba(200,169,110,0.12)',
+        boxShadow: step.featured ? '0 8px 40px rgba(200,169,110,0.1)' : '0 2px 12px rgba(0,0,0,0.04)',
       }}
     >
       {step.featured && (
-        <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #4890f7, #6ba8ff 60%, transparent)' }} />
+        <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #C8A96E, #D4B97E 60%, transparent)' }} />
       )}
 
       {/* Header */}
-      <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+      <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(200,169,110,0.08)' }}>
         <div className="flex items-start justify-between gap-4 mb-4">
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
@@ -167,7 +167,7 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
           </div>
         </div>
 
-        <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+        <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
           {step.title}
         </h3>
 
@@ -189,17 +189,17 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
         ) : (
           <div className="flex items-baseline gap-1.5">
             <span className="text-3xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>{step.price}</span>
-            <span className="text-sm" style={{ color: '#7a90a8' }}>{step.priceNote}</span>
+            <span className="text-sm" style={{ color: '#888888' }}>{step.priceNote}</span>
           </div>
         )}
       </div>
 
       {/* Body */}
       <div className="flex flex-col flex-1 px-6 py-5">
-        <p className="text-xs leading-relaxed mb-4" style={{ color: '#4a5878' }}>{step.body}</p>
+        <p className="text-xs leading-relaxed mb-4" style={{ color: '#888888' }}>{step.body}</p>
         <ul className="flex flex-col gap-2 flex-1">
           {step.includes.map((item, j) => (
-            <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+            <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#888888' }}>
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true">
                 <circle cx="8" cy="8" r="6.5" stroke={accent} strokeWidth="1" fill={accentBg} />
                 <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -209,7 +209,7 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
           ))}
         </ul>
         {step.note && (
-          <p className="text-[11px] leading-relaxed mt-4 pt-4" style={{ color: '#7a90a8', borderTop: '1px solid rgba(72,144,247,0.1)' }}>
+          <p className="text-[11px] leading-relaxed mt-4 pt-4" style={{ color: '#888888', borderTop: '1px solid rgba(200,169,110,0.1)' }}>
             {step.note}
           </p>
         )}
@@ -225,7 +225,7 @@ function PricingSteps() {
   const cardsInView = useInView(cardsRef, { once: true, margin: '-60px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f0f5ff' }} aria-label="Pricing steps">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0D0D0D' }} aria-label="Pricing steps">
       <div className="warm-rule" aria-hidden="true" />
       <div className="container-tight relative z-10">
         <div ref={headingRef} className="mb-12">
@@ -240,10 +240,10 @@ function PricingSteps() {
             style={{ fontSize: 'clamp(26px, 3.5vw, 48px)' }}
           >
             Three components.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.22)' }}>That&apos;s it.</span>
+            <span style={{ color: 'rgba(245,245,245,0.2)' }}>That&apos;s it.</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-base leading-relaxed max-w-lg" style={{ color: '#4a5878' }}>
+            className="text-base leading-relaxed max-w-lg" style={{ color: '#888888' }}>
             Blood panel. Consultation. Ongoing membership if you want it. Nothing bundled to obscure what you&apos;re paying for.
           </motion.p>
         </div>
@@ -294,12 +294,12 @@ function MembershipComparison() {
   ]
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Ongoing pathway options">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0A0A0A' }} aria-label="Ongoing pathway options">
       <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.06) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -318,14 +318,14 @@ function MembershipComparison() {
               style={{ fontSize: 'clamp(24px, 3vw, 42px)' }}
             >
               Membership or script release.{' '}
-              <span style={{ color: 'rgba(10,14,26,0.22)' }}>Your choice.</span>
+              <span style={{ color: 'rgba(245,245,245,0.2)' }}>Your choice.</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18 }}
               className="text-sm leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '400px' }}
+              style={{ color: '#888888', maxWidth: '400px' }}
             >
               After your initial consultation, you choose your ongoing pathway. Membership is the more complete standard of care. Script release is there if you prefer to manage independently.
             </motion.p>
@@ -341,28 +341,28 @@ function MembershipComparison() {
                 transition={{ duration: 0.55, delay: 0.25 + i * 0.1, ease }}
                 className="flex-1 rounded-xl p-5"
                 style={{
-                  background: '#ffffff',
-                  border: opt.featured ? '1px solid rgba(72,144,247,0.3)' : '1px solid rgba(72,144,247,0.12)',
-                  boxShadow: opt.featured ? '0 8px 32px rgba(72,144,247,0.1)' : '0 2px 8px rgba(0,0,0,0.04)',
+                  background: '#111111',
+                  border: opt.featured ? '1px solid rgba(200,169,110,0.3)' : '1px solid rgba(200,169,110,0.12)',
+                  boxShadow: opt.featured ? '0 8px 32px rgba(200,169,110,0.1)' : '0 2px 8px rgba(0,0,0,0.04)',
                 }}
               >
                 {opt.tag && (
                   <span className="inline-block text-[8px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded-sm mb-2.5"
-                    style={{ color: '#4890f7', background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
+                    style={{ color: '#C8A96E', background: 'rgba(200,169,110,0.08)', border: '1px solid rgba(200,169,110,0.2)' }}>
                     {opt.tag}
                   </span>
                 )}
-                <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+                <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
                   {opt.title}
                 </p>
-                <p className="text-base font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: opt.featured ? '#4890f7' : '#7a90a8' }}>
+                <p className="text-base font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: opt.featured ? '#C8A96E' : '#7a90a8' }}>
                   {opt.price}
                 </p>
                 <ul className="flex flex-col gap-2">
                   {opt.bullets.map((b, j) => (
-                    <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                    <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#888888' }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
-                        style={{ background: opt.featured ? '#4890f7' : 'rgba(72,144,247,0.3)' }} />
+                        style={{ background: opt.featured ? '#C8A96E' : 'rgba(200,169,110,0.3)' }} />
                       {b}
                     </li>
                   ))}
@@ -407,7 +407,7 @@ function NotIncluded() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f0f5ff' }} aria-label="What's not included">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0D0D0D' }} aria-label="What's not included">
       <div className="warm-rule" aria-hidden="true" />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -425,11 +425,11 @@ function NotIncluded() {
             What&apos;s NOT included.
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-sm leading-relaxed mb-10" style={{ color: '#4a5878' }}>
+            className="text-sm leading-relaxed mb-10" style={{ color: '#888888' }}>
             Most clinics hide fees until you&apos;re committed. We&apos;d rather tell you what you won&apos;t be paying for.
           </motion.p>
 
-          <div className="flex flex-col" style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}>
+          <div className="flex flex-col" style={{ borderTop: '1px solid rgba(200,169,110,0.1)' }}>
             {NOT_INCLUDED.map((item, i) => (
               <motion.div
                 key={item.label}
@@ -437,7 +437,7 @@ function NotIncluded() {
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + i * 0.07, ease }}
                 className="flex items-start gap-4 py-4"
-                style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
+                style={{ borderBottom: '1px solid rgba(200,169,110,0.08)' }}
               >
                 <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                   style={{ background: 'rgba(255,80,80,0.06)', border: '1px solid rgba(255,80,80,0.2)' }}>
@@ -446,8 +446,8 @@ function NotIncluded() {
                   </svg>
                 </div>
                 <div>
-                  <span className="text-sm font-semibold mr-2" style={{ color: '#0a0e1a' }}>{item.label}.</span>
-                  <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.detail}</span>
+                  <span className="text-sm font-semibold mr-2" style={{ color: '#F5F5F5' }}>{item.label}.</span>
+                  <span className="text-sm leading-relaxed" style={{ color: '#888888' }}>{item.detail}</span>
                 </div>
               </motion.div>
             ))}
@@ -468,7 +468,7 @@ function PricingCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4890f7 55%, #6ba8ff 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #B8935A 0%, #C8A96E 55%, #D4B97E 100%)' }}
       aria-label="Get started"
     >
       <div className="absolute inset-0 dot-grid opacity-30" style={{ filter: 'invert(1)' }} aria-hidden="true" />

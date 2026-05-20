@@ -239,7 +239,7 @@ function computePathway(data: FormData): Pathway {
 
 // ─── Reusable UI ──────────────────────────────────────────────────────────────
 
-function MultiPill({ label, selected, onClick, accent = '#4890f7' }: {
+function MultiPill({ label, selected, onClick, accent = '#C8A96E' }: {
   label: string; selected: boolean; onClick: () => void; accent?: string
 }) {
   return (
@@ -258,7 +258,7 @@ function MultiPill({ label, selected, onClick, accent = '#4890f7' }: {
   )
 }
 
-function RadioCard({ label, selected, onClick, accent = '#4890f7' }: {
+function RadioCard({ label, selected, onClick, accent = '#C8A96E' }: {
   label: string; selected: boolean; onClick: () => void; accent?: string
 }) {
   return (
@@ -269,7 +269,7 @@ function RadioCard({ label, selected, onClick, accent = '#4890f7' }: {
       style={{
         background: selected ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)',
         border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 45%, transparent)` : 'rgba(255,255,255,0.06)'}`,
-        color: selected ? '#f0f4f8' : '#8899aa',
+        color: selected ? '#F5F5F5' : '#8899aa',
         fontWeight: selected ? 500 : 400,
       }}
     >
@@ -293,15 +293,15 @@ function Field({ label, value, onChange, type = 'text', placeholder }: {
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5a6a' }}>{label}</label>
+      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#888888' }}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: '#4890f7' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.45)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#F5F5F5', caretColor: '#C8A96E' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.45)'; e.target.style.background = 'rgba(200,169,110,0.04)' }}
         onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
       />
     </div>
@@ -309,7 +309,7 @@ function Field({ label, value, onChange, type = 'text', placeholder }: {
 }
 
 function QLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#4a5a6a' }}>{children}</p>
+  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#888888' }}>{children}</p>
 }
 
 // ─── Step 1: Symptoms & goals ─────────────────────────────────────────────────
@@ -324,11 +324,11 @@ function StepOne({ data, set, toggle }: {
       <p className="label mb-4">STEP 1 OF 2</p>
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#f0f4f8', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#F5F5F5', lineHeight: 1.1 }}
       >
         What&apos;s been going on?
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#6b7a8d' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#888888' }}>
         Tell us what you&apos;re dealing with. We&apos;ll use this to identify your likely clinical pathway.
       </p>
 
@@ -343,9 +343,9 @@ function StepOne({ data, set, toggle }: {
               onClick={() => set('ageRange', a)}
               className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150"
               style={{
-                background: data.ageRange === a ? 'rgba(72,144,247,0.1)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.ageRange === a ? 'rgba(72,144,247,0.45)' : 'rgba(255,255,255,0.07)'}`,
-                color: data.ageRange === a ? '#4890f7' : '#8899aa',
+                background: data.ageRange === a ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${data.ageRange === a ? 'rgba(200,169,110,0.45)' : 'rgba(255,255,255,0.07)'}`,
+                color: data.ageRange === a ? '#C8A96E' : '#8899aa',
                 fontFamily: 'var(--font-space-grotesk)',
               }}
             >
@@ -360,7 +360,7 @@ function StepOne({ data, set, toggle }: {
         <QLabel>Primary concern — select all that apply</QLabel>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {GOALS.map(g => (
-            <MultiPill key={g} label={g} selected={data.goals.includes(g)} onClick={() => toggle('goals', g)} accent="#4890f7" />
+            <MultiPill key={g} label={g} selected={data.goals.includes(g)} onClick={() => toggle('goals', g)} accent="#C8A96E" />
           ))}
         </div>
       </div>
@@ -370,7 +370,7 @@ function StepOne({ data, set, toggle }: {
         <QLabel>Symptoms you&apos;ve noticed</QLabel>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {SYMPTOMS.map(s => (
-            <MultiPill key={s} label={s} selected={data.symptoms.includes(s)} onClick={() => toggle('symptoms', s)} accent="#4890f7" />
+            <MultiPill key={s} label={s} selected={data.symptoms.includes(s)} onClick={() => toggle('symptoms', s)} accent="#C8A96E" />
           ))}
         </div>
       </div>
@@ -390,9 +390,9 @@ function StepOne({ data, set, toggle }: {
               onClick={() => set('recentBloods', val)}
               className="flex-1 px-4 py-2.5 rounded-lg text-xs font-medium transition-all duration-150 text-left sm:text-center"
               style={{
-                background: data.recentBloods === val ? 'rgba(72,144,247,0.1)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.recentBloods === val ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                color: data.recentBloods === val ? '#4890f7' : '#8899aa',
+                background: data.recentBloods === val ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${data.recentBloods === val ? 'rgba(200,169,110,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                color: data.recentBloods === val ? '#C8A96E' : '#8899aa',
               }}
             >
               {label}
@@ -412,18 +412,18 @@ function StepTwo({ data, set }: {
 }) {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-      <p className="label mb-4" style={{ color: '#4890f7' }}>STEP 2 OF 2</p>
+      <p className="label mb-4" style={{ color: '#C8A96E' }}>STEP 2 OF 2</p>
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#f0f4f8', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#F5F5F5', lineHeight: 1.1 }}
       >
         A bit more context.
         <br />
-        <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+        <span style={{ background: 'linear-gradient(135deg, #C8A96E, #D4B97E)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
           This helps us be specific.
         </span>
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#6b7a8d' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#888888' }}>
         These questions go beyond a generic match — and help us identify what&apos;s likely driving this for you specifically.
       </p>
 
@@ -434,7 +434,7 @@ function StepTwo({ data, set }: {
           <QLabel>How long has this been going on?</QLabel>
           <div className="flex flex-col gap-2">
             {DURATIONS.map(d => (
-              <RadioCard key={d} label={d} selected={data.duration === d} onClick={() => set('duration', d)} accent="#4890f7" />
+              <RadioCard key={d} label={d} selected={data.duration === d} onClick={() => set('duration', d)} accent="#C8A96E" />
             ))}
           </div>
         </div>
@@ -444,7 +444,7 @@ function StepTwo({ data, set }: {
           <QLabel>What&apos;s it affecting most right now?</QLabel>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {IMPACTS.map(i => (
-              <RadioCard key={i} label={i} selected={data.impact === i} onClick={() => set('impact', i)} accent="#4890f7" />
+              <RadioCard key={i} label={i} selected={data.impact === i} onClick={() => set('impact', i)} accent="#C8A96E" />
             ))}
           </div>
         </div>
@@ -454,7 +454,7 @@ function StepTwo({ data, set }: {
           <QLabel>Have you tried to address this already?</QLabel>
           <div className="flex flex-col gap-2">
             {TRIED.map(t => (
-              <RadioCard key={t} label={t} selected={data.tried === t} onClick={() => set('tried', t)} accent="#4890f7" />
+              <RadioCard key={t} label={t} selected={data.tried === t} onClick={() => set('tried', t)} accent="#C8A96E" />
             ))}
           </div>
         </div>
@@ -464,7 +464,7 @@ function StepTwo({ data, set }: {
           <QLabel>What are you looking for from a clinic?</QLabel>
           <div className="flex flex-col gap-2">
             {LOOKING_FOR.map(l => (
-              <RadioCard key={l} label={l} selected={data.lookingFor === l} onClick={() => set('lookingFor', l)} accent="#4890f7" />
+              <RadioCard key={l} label={l} selected={data.lookingFor === l} onClick={() => set('lookingFor', l)} accent="#C8A96E" />
             ))}
           </div>
         </div>
@@ -480,9 +480,9 @@ function StepTwo({ data, set }: {
                 onClick={() => set('urgency', u)}
                 className="flex-1 px-4 py-3 rounded-lg text-xs font-medium transition-all duration-150 text-center"
                 style={{
-                  background: data.urgency === u ? 'rgba(72,144,247,0.1)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${data.urgency === u ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                  color: data.urgency === u ? '#4890f7' : '#8899aa',
+                  background: data.urgency === u ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)',
+                  border: `1px solid ${data.urgency === u ? 'rgba(200,169,110,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                  color: data.urgency === u ? '#C8A96E' : '#8899aa',
                 }}
               >
                 {u}
@@ -517,26 +517,26 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
       {/* Badge */}
       <div className="flex items-center gap-2.5 mb-6">
         <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.12)', border: '1px solid rgba(72,144,247,0.3)' }}>
+          style={{ background: 'rgba(200,169,110,0.12)', border: '1px solid rgba(200,169,110,0.3)' }}>
           <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-            <path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M2 6l3 3 5-5" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
-        <p className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>Assessment complete</p>
+        <p className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#C8A96E' }}>Assessment complete</p>
       </div>
 
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#f0f4f8', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#F5F5F5', lineHeight: 1.1 }}
       >
         Your result is ready.
       </h2>
-      <p className="text-sm mb-7 leading-relaxed" style={{ color: '#6b7a8d' }}>
+      <p className="text-sm mb-7 leading-relaxed" style={{ color: '#888888' }}>
         We&apos;ve identified your likely clinical pathway. Enter your details to unlock your result and speak with an Apex doctor.
       </p>
 
       {/* Blurred pathway card */}
-      <div className="relative rounded-xl overflow-hidden mb-7" style={{ border: '1px solid rgba(72,144,247,0.22)' }}>
+      <div className="relative rounded-xl overflow-hidden mb-7" style={{ border: '1px solid rgba(200,169,110,0.22)' }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(10,28,80,0.9) 0%, rgba(20,60,180,0.6) 100%)' }} />
 
         {/* Blurred content */}
@@ -554,8 +554,8 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
         {/* Lock bar */}
         <div className="relative px-5 py-3 flex items-center gap-2.5" style={{ background: 'rgba(5,8,14,0.7)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true">
-            <rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#4890f7" strokeWidth="1.3" />
-            <path d="M5 7V5.5a3 3 0 016 0V7" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" />
+            <rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#C8A96E" strokeWidth="1.3" />
+            <path d="M5 7V5.5a3 3 0 016 0V7" stroke="#C8A96E" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
           <p className="text-[11px] font-medium" style={{ color: '#6b8fd4' }}>Enter your details below to unlock your result</p>
         </div>
@@ -569,28 +569,28 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
         {/* Referral source */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5a6a' }}>
-            How did you hear about us? <span style={{ color: '#2e3d4d', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#888888' }}>
+            How did you hear about us? <span style={{ color: '#555555', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <select
             value={data.referralSource}
             onChange={e => set('referralSource', e.target.value)}
             className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#f0f4f8' : '#4a5a6a', caretColor: '#4890f7', cursor: 'pointer' }}
-            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.45)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#4a5a6a', caretColor: '#C8A96E', cursor: 'pointer' }}
+            onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.45)'; e.target.style.background = 'rgba(200,169,110,0.04)' }}
             onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
           >
-            <option value="" style={{ background: '#0d1117', color: '#8899aa' }}>Select…</option>
+            <option value="" style={{ background: '#0D0D0D', color: '#888888' }}>Select…</option>
             {REFERRAL_SOURCES.map(s => (
-              <option key={s} value={s} style={{ background: '#0d1117', color: '#f0f4f8' }}>{s}</option>
+              <option key={s} value={s} style={{ background: '#0D0D0D', color: '#F5F5F5' }}>{s}</option>
             ))}
           </select>
         </div>
 
         {/* Referral / access code */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5a6a' }}>
-            Referral or access code <span style={{ color: '#2e3d4d', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#888888' }}>
+            Referral or access code <span style={{ color: '#555555', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <input
             type="text"
@@ -598,8 +598,8 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
             onChange={e => set('referralCode', e.target.value.toUpperCase())}
             placeholder="e.g. APEX25"
             className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: '#4890f7', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
-            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.45)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#F5F5F5', caretColor: '#C8A96E', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
+            onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.45)'; e.target.style.background = 'rgba(200,169,110,0.04)' }}
             onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
           />
         </div>
@@ -609,7 +609,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
       <div className="flex items-center gap-3">
         <button type="button" onClick={onBack}
           className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150 flex-shrink-0"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#6b7a8d' }}>
+          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#888888' }}>
           ← Back
         </button>
         <button
@@ -625,7 +625,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
       {error && <p className="text-sm mt-3" style={{ color: '#e05c5c' }}>{error}</p>}
 
-      <p className="text-[11px] mt-4" style={{ color: '#3a4a5a' }}>
+      <p className="text-[11px] mt-4" style={{ color: '#666666' }}>
         100% private. No spam. An Apex doctor contacts you the same day.
       </p>
     </motion.div>
@@ -642,22 +642,22 @@ function Success({ data }: { data: FormData }) {
 
   const FEATURES = [
     {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="#4890f7" strokeWidth="1.4" /><path d="M6 10a4 4 0 014-4" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="1.5" fill="#4890f7" /></svg>,
+      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="#C8A96E" strokeWidth="1.4" /><path d="M6 10a4 4 0 014-4" stroke="#C8A96E" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="1.5" fill="#C8A96E" /></svg>,
       title: 'Biological Age Tracking',
       body: 'See your biological age vs chronological age, updated with every panel.',
     },
     {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><rect x="3" y="5" width="14" height="11" rx="1.5" stroke="#4890f7" strokeWidth="1.4" /><path d="M6 9h2m0 0l1.5 2L11 8l1.5 3H14" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>,
+      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><rect x="3" y="5" width="14" height="11" rx="1.5" stroke="#C8A96E" strokeWidth="1.4" /><path d="M6 9h2m0 0l1.5 2L11 8l1.5 3H14" stroke="#C8A96E" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>,
       title: '54+ Biomarker Dashboard',
       body: 'Every marker displayed clearly — with context, trends, and what it means for you.',
     },
     {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="7" stroke="#4890f7" strokeWidth="1.4" /></svg>,
+      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#C8A96E" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="7" stroke="#C8A96E" strokeWidth="1.4" /></svg>,
       title: 'Doctor-Built Protocol',
       body: 'An AHPRA-registered doctor reviews your results and builds a personalised programme.',
     },
     {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.5 5.1 17.2l.9-5.5L2 7.8l5.5-.8L10 2z" stroke="#4890f7" strokeWidth="1.4" strokeLinejoin="round" /></svg>,
+      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.5 5.1 17.2l.9-5.5L2 7.8l5.5-.8L10 2z" stroke="#C8A96E" strokeWidth="1.4" strokeLinejoin="round" /></svg>,
       title: 'Ongoing Optimisation',
       body: 'Scheduled reviews, protocol adjustments, and real clinical support — not a one-off.',
     },
@@ -673,22 +673,22 @@ function Success({ data }: { data: FormData }) {
       {/* Header */}
       <div className="flex items-center gap-3 mb-7">
         <div className="w-10 h-10 flex items-center justify-center rounded-xl flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
+          style={{ background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.25)' }}>
           <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-            <path d="M5 12l5 5L19 7" stroke="#4890f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 12l5 5L19 7" stroke="#C8A96E" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         <div>
           <p className="label">Assessment complete</p>
-          <p className="text-[11px]" style={{ color: '#3a4a5a' }}>Matched to your recommended pathway</p>
+          <p className="text-[11px]" style={{ color: '#666666' }}>Matched to your recommended pathway</p>
         </div>
       </div>
 
       <h2 className="font-bold tracking-tight mb-3"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: '#f0f4f8', lineHeight: 1.15 }}>
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: '#F5F5F5', lineHeight: 1.15 }}>
         {data.firstName ? `Here's your next step, ${data.firstName}.` : "Here's your next step."}
       </h2>
-      <p className="text-sm leading-relaxed mb-6" style={{ color: '#8899aa' }}>
+      <p className="text-sm leading-relaxed mb-6" style={{ color: '#888888' }}>
         {hasBloods
           ? `You have recent blood results — our team will review your submission and an Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} to arrange your consultation.`
           : `Based on your full profile, we've matched you to the ${label} program. An Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} with your blood panel referral and next steps.`}
@@ -700,14 +700,14 @@ function Success({ data }: { data: FormData }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
         className="rounded-xl p-5 mb-7"
-        style={{ background: 'linear-gradient(135deg, rgba(10,28,80,0.6) 0%, rgba(20,60,180,0.35) 100%)', border: '1px solid rgba(72,144,247,0.25)' }}
+        style={{ background: 'linear-gradient(135deg, rgba(10,28,80,0.6) 0%, rgba(20,60,180,0.35) 100%)', border: '1px solid rgba(200,169,110,0.25)' }}
       >
         <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-2" style={{ color: 'rgba(255,255,255,0.4)' }}>YOUR MATCHED PATHWAY</p>
         <p className="text-base font-bold mb-1.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#ffffff' }}>{label}</p>
         <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.55)' }}>{PATHWAY_INFO[pathway].description}</p>
         <div className="flex gap-1.5 flex-wrap">
           {PATHWAY_INFO[pathway].tags.map(t => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(72,144,247,0.15)', color: 'rgba(160,190,255,0.8)', border: '1px solid rgba(72,144,247,0.2)' }}>{t}</span>
+            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(200,169,110,0.15)', color: 'rgba(160,190,255,0.8)', border: '1px solid rgba(200,169,110,0.2)' }}>{t}</span>
           ))}
         </div>
       </motion.div>
@@ -721,30 +721,30 @@ function Success({ data }: { data: FormData }) {
           className="rounded-xl p-5 mb-7"
           style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
         >
-          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#3a4a5a' }}>
+          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#666666' }}>
             PATHOLOGY
           </p>
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c8d4e0' }}>
+              <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
                 {PATHWAY_INFO[pathway].bloodLabel}
               </p>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5a6a' }}>
+              <p className="text-xs leading-relaxed" style={{ color: '#888888' }}>
                 {PATHWAY_INFO[pathway].bloodNote}
               </p>
             </div>
             <div className="flex-shrink-0 text-right">
-              <p className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: PATHWAY_INFO[pathway].bloodConditional ? '#8899aa' : '#4890f7' }}>
+              <p className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: PATHWAY_INFO[pathway].bloodConditional ? '#8899aa' : '#C8A96E' }}>
                 {PATHWAY_INFO[pathway].bloodPrice}
               </p>
               {PATHWAY_INFO[pathway].bloodConditional && (
-                <p className="text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: '#3a4a5a' }}>if required</p>
+                <p className="text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: '#666666' }}>if required</p>
               )}
             </div>
           </div>
           <div className="mt-3 pt-3 flex items-center gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
-            <p className="text-[10px]" style={{ color: '#3a4a5a' }}>
+            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
+            <p className="text-[10px]" style={{ color: '#666666' }}>
               Ongoing monitoring bloods are included as part of your Apex Membership review cycle — not charged separately.
             </p>
           </div>
@@ -757,18 +757,18 @@ function Success({ data }: { data: FormData }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.15 }}
         className="flex items-start gap-4 p-5 rounded-xl mb-7"
-        style={{ background: 'linear-gradient(135deg, rgba(72,144,247,0.07) 0%, rgba(72,144,247,0.07) 100%)', border: '1px solid rgba(72,144,247,0.18)' }}
+        style={{ background: 'linear-gradient(135deg, rgba(200,169,110,0.07) 0%, rgba(200,169,110,0.07) 100%)', border: '1px solid rgba(200,169,110,0.18)' }}
       >
         <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center mt-0.5"
-          style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
+          style={{ background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.25)' }}>
           <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-            <path d="M10 2a6 6 0 016 6c0 2.5-1 4.5-3 5.5V15a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5C5 12.5 4 10.5 4 8a6 6 0 016-6z" stroke="#4890f7" strokeWidth="1.3" />
-            <path d="M8 18h4" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" />
+            <path d="M10 2a6 6 0 016 6c0 2.5-1 4.5-3 5.5V15a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5C5 12.5 4 10.5 4 8a6 6 0 016-6z" stroke="#C8A96E" strokeWidth="1.3" />
+            <path d="M8 18h4" stroke="#C8A96E" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
         </div>
         <div>
-          <p className="text-sm font-semibold mb-1" style={{ color: '#f0f4f8' }}>An Apex doctor will contact you today</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#6b7a8d' }}>
+          <p className="text-sm font-semibold mb-1" style={{ color: '#F5F5F5' }}>An Apex doctor will contact you today</p>
+          <p className="text-sm leading-relaxed" style={{ color: '#888888' }}>
             Our clinical team reviews your submission and a doctor reaches out directly — no portal, no waiting room, no queue. We handle your referral and next steps.
           </p>
         </div>
@@ -776,7 +776,7 @@ function Success({ data }: { data: FormData }) {
 
       {/* What's included */}
       <div className="mb-7">
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#3a4a5a' }}>WHAT YOU GET WITH APEX</p>
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#666666' }}>WHAT YOU GET WITH APEX</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {FEATURES.map((f, i) => (
             <motion.div
@@ -787,8 +787,8 @@ function Success({ data }: { data: FormData }) {
               className="p-4 rounded-xl"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
             >
-              <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: '#f0f4f8' }}>{f.title}</p></div>
-              <p className="text-xs leading-relaxed" style={{ color: '#6b7a8d' }}>{f.body}</p>
+              <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: '#F5F5F5' }}>{f.title}</p></div>
+              <p className="text-xs leading-relaxed" style={{ color: '#888888' }}>{f.body}</p>
             </motion.div>
           ))}
         </div>
@@ -800,11 +800,11 @@ function Success({ data }: { data: FormData }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.45 }}
         className="p-5 rounded-xl mb-7 overflow-hidden relative"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.14)' }}
+        style={{ background: 'rgba(200,169,110,0.04)', border: '1px solid rgba(200,169,110,0.14)' }}
       >
         <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.08) 0%, transparent 70%)' }} />
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>SAMPLE — YOUR RESULTS DASHBOARD</p>
+          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.08) 0%, transparent 70%)' }} />
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#C8A96E' }}>SAMPLE — YOUR RESULTS DASHBOARD</p>
         <div className="flex flex-col gap-2.5">
           {[
             { label: 'Total Testosterone', value: '22.4 nmol/L', status: 'optimal', pct: 78 },
@@ -814,20 +814,20 @@ function Success({ data }: { data: FormData }) {
             { label: 'hsCRP', value: '0.4 mg/L', status: 'optimal', pct: 88 },
           ].map(row => (
             <div key={row.label} className="flex items-center gap-3">
-              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: '#4a5a6a' }}>{row.label}</p></div>
+              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: '#888888' }}>{row.label}</p></div>
               <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
-                <div className="h-full rounded-full" style={{ width: `${row.pct}%`, background: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }} />
+                <div className="h-full rounded-full" style={{ width: `${row.pct}%`, background: row.status === 'optimal' ? '#C8A96E' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }} />
               </div>
-              <p className="text-[10px] font-mono w-20 text-right" style={{ color: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }}>{row.value}</p>
+              <p className="text-[10px] font-mono w-20 text-right" style={{ color: row.status === 'optimal' ? '#C8A96E' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }}>{row.value}</p>
             </div>
           ))}
         </div>
-        <p className="text-[10px] mt-3" style={{ color: '#3a4a5a' }}>54 biomarkers tracked · Updated with every panel · Doctor-reviewed</p>
+        <p className="text-[10px] mt-3" style={{ color: '#666666' }}>54 biomarkers tracked · Updated with every panel · Doctor-reviewed</p>
       </motion.div>
 
       {/* Pathway steps */}
       <div className="p-5 rounded-xl mb-7" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#3a4a5a' }}>YOUR NEXT STEPS</p>
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#666666' }}>YOUR NEXT STEPS</p>
         <div className="flex flex-col gap-0">
           {(hasBloods
             ? [
@@ -845,10 +845,10 @@ function Success({ data }: { data: FormData }) {
           ).map((step, i, arr) => (
             <div key={step.n} className="flex gap-4">
               <div className="flex flex-col items-center">
-                <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{step.n}</div>
-                {i < arr.length - 1 && <div style={{ width: 1, flex: 1, minHeight: 12, background: 'rgba(72,144,247,0.1)', marginTop: 2, marginBottom: 2 }} />}
+                <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, background: 'rgba(200,169,110,0.08)', border: '1px solid rgba(200,169,110,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#C8A96E', fontFamily: 'var(--font-space-grotesk)' }}>{step.n}</div>
+                {i < arr.length - 1 && <div style={{ width: 1, flex: 1, minHeight: 12, background: 'rgba(200,169,110,0.1)', marginTop: 2, marginBottom: 2 }} />}
               </div>
-              <p className="text-sm leading-relaxed pb-3" style={{ color: '#6b7a8d' }}>{step.label}</p>
+              <p className="text-sm leading-relaxed pb-3" style={{ color: '#888888' }}>{step.label}</p>
             </div>
           ))}
         </div>
@@ -857,8 +857,8 @@ function Success({ data }: { data: FormData }) {
       {/* Trust signals */}
       <div className="flex flex-wrap gap-x-6 gap-y-2">
         {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential', 'No lock-in contracts'].map(t => (
-          <span key={t} className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase" style={{ color: '#3a4a5a' }}>
-            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
+          <span key={t} className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase" style={{ color: '#666666' }}>
+            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
             {t}
           </span>
         ))}
@@ -959,11 +959,11 @@ export default function PreScreenForm() {
       <main>
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}
+          style={{ backgroundColor: '#0A0A0A', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}
         >
           <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 left-0 w-[600px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)' }} />
+            style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(200,169,110,0.07) 0%, transparent 60%)' }} />
 
           <div ref={topRef} className="container-tight relative z-10" style={{ maxWidth: 680 }}>
 
@@ -971,14 +971,14 @@ export default function PreScreenForm() {
             {!submitted && (
               <div className="mb-10">
                 <div className="flex justify-between mb-2">
-                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: step === 3 ? '#4890f7' : '#4890f7' }}>
+                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: step === 3 ? '#C8A96E' : '#C8A96E' }}>
                     {step === 1 ? 'STEP 1 OF 2' : step === 2 ? 'STEP 2 OF 2' : 'RESULT READY'}
                   </span>
-                  <span className="text-xs" style={{ color: '#3a4a5a' }}>{progressPct}</span>
+                  <span className="text-xs" style={{ color: '#666666' }}>{progressPct}</span>
                 </div>
                 <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <motion.div
-                    style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
+                    style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #C8A96E, #C8A96E)' }}
                     initial={false}
                     animate={{ width: progressPct }}
                     transition={{ duration: 0.5, ease }}
@@ -1020,7 +1020,7 @@ export default function PreScreenForm() {
                     {step === 2 && (
                       <button type="button" onClick={() => { setStep(1); scrollTop() }}
                         className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#6b7a8d' }}>
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#888888' }}>
                         ← Back
                       </button>
                     )}
@@ -1037,8 +1037,8 @@ export default function PreScreenForm() {
                 )}
 
                 {step === 1 && (
-                  <p className="text-xs mt-5 flex items-center gap-2" style={{ color: '#3a4a5a' }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.4)' }} />
+                  <p className="text-xs mt-5 flex items-center gap-2" style={{ color: '#666666' }}>
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.4)' }} />
                     Trusted by 2,000+ Australian men
                   </p>
                 )}

@@ -11,10 +11,10 @@ const PROGRAMS = [
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
     tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
-    accent: '#4890f7',
-    accentBg: 'rgba(72,144,247,0.06)',
-    accentBorder: 'rgba(72,144,247,0.18)',
-    glowColor: 'rgba(72,144,247,0.05)',
+    accent: '#C8A96E',
+    accentBg: 'rgba(200,169,110,0.06)',
+    accentBorder: 'rgba(200,169,110,0.18)',
+    glowColor: 'rgba(200,169,110,0.05)',
     tag: 'Most common',
     focus: [
       'Low testosterone, libido, and drive',
@@ -154,8 +154,8 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
       transition={{ duration: 0.55, delay: i * 0.08, ease }}
       className="group flex flex-col rounded-2xl overflow-hidden relative"
       style={{
-        background: '#ffffff',
-        border: '1px solid rgba(72,144,247,0.14)',
+        background: '#111111',
+        border: '1px solid rgba(200,169,110,0.14)',
         borderLeft: `2px solid ${prog.accent}`,
         transition: 'box-shadow 0.25s ease',
       }}
@@ -167,7 +167,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
       }}
     >
       {/* Header */}
-      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(200,169,110,0.08)' }}>
         <div className="flex items-center justify-between gap-3 mb-3.5">
           <div className="flex items-center gap-2">
             <div
@@ -195,11 +195,11 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
 
         <h3
           className="text-[15px] font-semibold leading-snug mb-2"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', letterSpacing: '-0.01em' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', letterSpacing: '-0.01em' }}
         >
           {prog.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#7a90a8' }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#888888' }}>
           {prog.tagline}
         </p>
       </div>
@@ -213,7 +213,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
                 className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
                 style={{ background: prog.accent, opacity: 0.55 }}
               />
-              <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
+              <span className="text-xs leading-relaxed" style={{ color: '#888888' }}>{item}</span>
             </li>
           ))}
         </ul>
@@ -222,9 +222,9 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           href={prog.href}
           className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
           style={{
-            background: '#ffffff',
-            border: '1px solid rgba(72,144,247,0.12)',
-            color: '#4a5878',
+            background: '#111111',
+            border: '1px solid rgba(200,169,110,0.12)',
+            color: '#888888',
           }}
           onMouseEnter={e => {
             const el = e.currentTarget as HTMLElement
@@ -261,7 +261,7 @@ export default function ProgramsSection() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f0f5ff' }}
+      style={{ backgroundColor: '#0D0D0D' }}
       aria-label="Clinical programs"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -269,7 +269,7 @@ export default function ProgramsSection() {
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.04) 0%, transparent 60%)' }}
       />
 
       <div className="container-tight relative z-10">
@@ -292,7 +292,7 @@ export default function ProgramsSection() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Six programs.{' '}
-              <span style={{ color: 'rgba(10,14,26,0.22)' }}>
+              <span style={{ color: 'rgba(245,245,245,0.2)' }}>
                 One clinic.
               </span>
             </motion.h2>
@@ -302,7 +302,7 @@ export default function ProgramsSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#888888' }}
           >
             Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
           </motion.p>
@@ -323,13 +323,13 @@ export default function ProgramsSection() {
           animate={footerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.1, ease }}
           className="mt-8 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
+          style={{ borderTop: '1px solid rgba(200,169,110,0.1)' }}
         >
           <div>
-            <p className="text-sm font-medium mb-0.5" style={{ color: '#4a5878' }}>
+            <p className="text-sm font-medium mb-0.5" style={{ color: '#888888' }}>
               Not sure which program fits?
             </p>
-            <p className="text-xs" style={{ color: '#9ab0c8' }}>
+            <p className="text-xs" style={{ color: '#666666' }}>
               Complete the pre-screen and we&apos;ll identify the right clinical pathway for you.
             </p>
           </div>
@@ -337,19 +337,19 @@ export default function ProgramsSection() {
             href="/intake/pre-screen"
             className="inline-flex items-center gap-2 text-sm font-semibold flex-shrink-0 px-5 py-2.5 rounded-full transition-all duration-150"
             style={{
-              background: 'rgba(72,144,247,0.08)',
-              border: '1px solid rgba(72,144,247,0.2)',
-              color: '#4890f7',
+              background: 'rgba(200,169,110,0.08)',
+              border: '1px solid rgba(200,169,110,0.2)',
+              color: '#C8A96E',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement
-              el.style.background = 'rgba(72,144,247,0.14)'
+              el.style.background = 'rgba(200,169,110,0.14)'
               el.style.borderColor = 'rgba(72,144,247,0.38)'
             }}
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement
-              el.style.background = 'rgba(72,144,247,0.08)'
-              el.style.borderColor = 'rgba(72,144,247,0.2)'
+              el.style.background = 'rgba(200,169,110,0.08)'
+              el.style.borderColor = 'rgba(200,169,110,0.2)'
             }}
           >
             Start pre-screen assessment

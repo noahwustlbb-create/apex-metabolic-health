@@ -143,12 +143,12 @@ function DonutChart({
       >
         <span
           className="font-bold leading-none"
-          style={{ fontSize: 36, color: '#f0f4f8' }}
+          style={{ fontSize: 36, color: '#F5F5F5' }}
         >
           {yesCount}
-          <span style={{ fontSize: 18, color: '#8899aa' }}>/10</span>
+          <span style={{ fontSize: 18, color: '#888888' }}>/10</span>
         </span>
-        <span style={{ fontSize: 11, color: '#8899aa', letterSpacing: '0.12em', marginTop: 4 }}>
+        <span style={{ fontSize: 11, color: '#888888', letterSpacing: '0.12em', marginTop: 4 }}>
           SYMPTOMS
         </span>
       </div>
@@ -181,7 +181,7 @@ function QuestionCard({
       transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="rounded-xl p-5 md:p-6"
       style={{
-        background: '#19202c',
+        background: '#161616',
         border: `1px solid ${answer ? 'rgba(44,116,232,0.3)' : 'rgba(255,255,255,0.06)'}`,
         transition: 'border-color 0.25s',
       }}
@@ -204,7 +204,7 @@ function QuestionCard({
           >
             {question.id}
           </span>
-          <p className="text-sm md:text-base leading-relaxed" style={{ color: '#f0f4f8' }}>
+          <p className="text-sm md:text-base leading-relaxed" style={{ color: '#F5F5F5' }}>
             {question.text}
           </p>
         </div>
@@ -227,7 +227,7 @@ function QuestionCard({
                     ? isYes
                       ? '#2C74E8'
                       : 'transparent'
-                    : '#19202c',
+                    : '#161616',
                   border: selected
                     ? isYes
                       ? '1px solid #2C74E8'
@@ -299,7 +299,7 @@ export default function HormoneCheckPage() {
       {/* ------------------------------------------------------------------ */}
       <section
         className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
-        style={{ backgroundColor: '#0c131f' }}
+        style={{ backgroundColor: '#0A0A0A' }}
       >
         {/* Dot grid */}
         <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -319,7 +319,7 @@ export default function HormoneCheckPage() {
           aria-hidden="true"
           className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
           style={{
-            background: 'linear-gradient(to bottom, transparent, #0c131f)',
+            background: 'linear-gradient(to bottom, transparent, #0A0A0A)',
           }}
         />
 
@@ -344,7 +344,7 @@ export default function HormoneCheckPage() {
             {/* Heading */}
             <h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: 1.1 }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: 1.1 }}
             >
               Is Your Testosterone{' '}
               <span className="text-teal-gradient">Optimised?</span>
@@ -353,7 +353,7 @@ export default function HormoneCheckPage() {
             {/* Subtext */}
             <p
               className="text-base md:text-lg leading-relaxed mb-8 mx-auto max-w-xl"
-              style={{ color: '#8899aa' }}
+              style={{ color: '#888888' }}
             >
               The ADAM questionnaire is a clinically validated screening tool used to
               assess androgen deficiency in men. Takes 2 minutes.
@@ -368,7 +368,7 @@ export default function HormoneCheckPage() {
                   letterSpacing: '0.06em',
                   background: 'rgba(44,116,232,0.08)',
                   border: '1px solid rgba(44,116,232,0.2)',
-                  color: '#7AB8FF',
+                  color: '#D4B97E',
                 }}
               >
                 <span
@@ -387,7 +387,7 @@ export default function HormoneCheckPage() {
       {/* ------------------------------------------------------------------ */}
       <section
         className="relative section-pad"
-        style={{ backgroundColor: '#151c28' }}
+        style={{ backgroundColor: '#111111' }}
       >
         {/* Top glow rule */}
         <div className="glow-rule mb-0" />
@@ -410,7 +410,7 @@ export default function HormoneCheckPage() {
               </p>
               <h2
                 className="text-xl md:text-2xl font-bold"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
               >
                 Answer all 10 questions
               </h2>
@@ -419,7 +419,7 @@ export default function HormoneCheckPage() {
             <div
               className="flex flex-col items-center justify-center rounded-xl px-5 py-3"
               style={{
-                background: '#19202c',
+                background: '#161616',
                 border: '1px solid rgba(255,255,255,0.06)',
                 minWidth: 80,
               }}
@@ -428,14 +428,14 @@ export default function HormoneCheckPage() {
                 className="font-bold text-2xl leading-none"
                 style={{
                   fontFamily: 'var(--font-space-grotesk)',
-                  color: answeredCount === 10 ? '#2C74E8' : '#f0f4f8',
+                  color: answeredCount === 10 ? '#2C74E8' : '#F5F5F5',
                   transition: 'color 0.3s',
                 }}
               >
                 {answeredCount}
-                <span style={{ color: '#4a5a6a', fontSize: 16 }}>/10</span>
+                <span style={{ color: '#888888', fontSize: 16 }}>/10</span>
               </span>
-              <span style={{ fontSize: 10, color: '#4a5a6a', letterSpacing: '0.1em', marginTop: 2 }}>
+              <span style={{ fontSize: 10, color: '#888888', letterSpacing: '0.1em', marginTop: 2 }}>
                 ANSWERED
               </span>
             </div>
@@ -448,7 +448,7 @@ export default function HormoneCheckPage() {
           >
             <motion.div
               className="h-full rounded-full"
-              style={{ background: 'linear-gradient(90deg, #2C74E8, #7AB8FF)' }}
+              style={{ background: 'linear-gradient(90deg, #2C74E8, #D4B97E)' }}
               initial={{ width: '0%' }}
               animate={{ width: `${(answeredCount / 10) * 100}%` }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
@@ -502,7 +502,7 @@ export default function HormoneCheckPage() {
           <section
             ref={resultRef}
             className="relative section-pad overflow-hidden scroll-mt-20"
-            style={{ backgroundColor: '#0c131f' }}
+            style={{ backgroundColor: '#0A0A0A' }}
           >
             {/* Dot grid */}
             <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
@@ -537,7 +537,7 @@ export default function HormoneCheckPage() {
                   </p>
                   <h2
                     className="text-3xl md:text-4xl font-bold"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
                   >
                     Score Analysis
                   </h2>
@@ -547,7 +547,7 @@ export default function HormoneCheckPage() {
                 <div
                   className="rounded-2xl overflow-hidden"
                   style={{
-                    background: '#151c28',
+                    background: '#111111',
                     border: `1px solid ${tier.color}33`,
                     boxShadow: `0 0 60px ${tier.glowColor}, 0 0 0 1px ${tier.color}22`,
                   }}
@@ -588,7 +588,7 @@ export default function HormoneCheckPage() {
 
                         <h3
                           className="text-lg md:text-xl font-bold mb-3 leading-snug"
-                          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+                          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
                         >
                           {tier.heading}
                         </h3>
@@ -614,7 +614,7 @@ export default function HormoneCheckPage() {
                           >
                             ADAM {result.adamPositive ? 'POSITIVE' : 'NEGATIVE'}
                           </span>
-                          <span style={{ color: '#4a5a6a', fontSize: 11 }}>
+                          <span style={{ color: '#888888', fontSize: 11 }}>
                             · {result.yesCount} out of 10 symptoms reported
                           </span>
                         </div>
@@ -630,7 +630,7 @@ export default function HormoneCheckPage() {
                     {/* Body copy */}
                     <p
                       className="text-sm md:text-base leading-relaxed mb-8"
-                      style={{ color: '#8899aa' }}
+                      style={{ color: '#888888' }}
                     >
                       {tier.body}
                     </p>
@@ -662,10 +662,10 @@ export default function HormoneCheckPage() {
                       style={{
                         background: 'rgba(255,255,255,0.02)',
                         border: '1px solid rgba(255,255,255,0.05)',
-                        color: '#4a5a6a',
+                        color: '#888888',
                       }}
                     >
-                      <span style={{ color: '#8899aa', fontWeight: 600 }}>Disclaimer: </span>
+                      <span style={{ color: '#888888', fontWeight: 600 }}>Disclaimer: </span>
                       This tool is a screening aid only and does not constitute medical advice.
                       Clinical assessment by an AHPRA-registered practitioner is required for
                       diagnosis.
@@ -678,7 +678,7 @@ export default function HormoneCheckPage() {
                   <button
                     onClick={handleRetake}
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: '#4a5a6a', letterSpacing: '0.04em' }}
+                    style={{ color: '#888888', letterSpacing: '0.04em' }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#8899aa')}
                     onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#4a5a6a')}
                   >
@@ -696,7 +696,7 @@ export default function HormoneCheckPage() {
       {/* ------------------------------------------------------------------ */}
       <section
         className="relative section-pad overflow-hidden"
-        style={{ backgroundColor: '#0c131f' }}
+        style={{ backgroundColor: '#0A0A0A' }}
       >
         {/* Glow */}
         <div
@@ -737,14 +737,14 @@ function BottomCTA() {
     >
       <h2
         className="text-3xl md:text-4xl font-bold mb-4"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
       >
         Ready for Real{' '}
         <span className="text-teal-gradient">Answers?</span>
       </h2>
       <p
         className="text-base md:text-lg leading-relaxed mb-8"
-        style={{ color: '#8899aa' }}
+        style={{ color: '#888888' }}
       >
         Advanced biomarker analysis. Personalised clinical protocol. 100% online.
       </p>

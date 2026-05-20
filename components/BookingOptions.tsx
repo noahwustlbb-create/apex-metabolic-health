@@ -82,7 +82,7 @@ export default function BookingOptions({
     <section
       ref={ref}
       className={`relative section-pad overflow-hidden ${className}`}
-      style={{ backgroundColor: '#0d1520' }}
+      style={{ backgroundColor: '#111111' }}
       aria-label="Booking options"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -106,11 +106,11 @@ export default function BookingOptions({
           <p className="label mb-4">{eyebrow}</p>
           <h2
             className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: '1.08' }}
           >
             {heading}
           </h2>
-          <p className="text-base md:text-lg" style={{ color: '#4a5878' }}>
+          <p className="text-base md:text-lg" style={{ color: '#888888' }}>
             {subheading}
           </p>
         </motion.div>
@@ -176,7 +176,7 @@ export default function BookingOptions({
                   className="text-base font-bold mb-2"
                   style={{
                     fontFamily: 'var(--font-space-grotesk)',
-                    color: '#0a0e1a',
+                    color: '#F5F5F5',
                   }}
                 >
                   {opt.title}
@@ -185,7 +185,7 @@ export default function BookingOptions({
                 {/* Desc */}
                 <p
                   className="text-sm leading-relaxed flex-1 mb-5"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#888888' }}
                 >
                   {opt.desc}
                 </p>
@@ -230,7 +230,7 @@ export default function BookingOptions({
           )}
           <p
             className="text-center text-[11px] tracking-[0.18em] uppercase"
-            style={{ color: '#7a90a8' }}
+            style={{ color: '#888888' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </p>

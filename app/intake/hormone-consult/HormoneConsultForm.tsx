@@ -8,9 +8,9 @@ import Nav from '@/components/Nav'
 const STORAGE_KEY = 'apex-hormone-consult-v1'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const TOTAL = 6
-const ACCENT = '#4890f7'
-const ACCENT_BG = 'rgba(72,144,247,0.07)'
-const ACCENT_BORDER = 'rgba(72,144,247,0.2)'
+const ACCENT = '#C8A96E'
+const ACCENT_BG = 'rgba(200,169,110,0.07)'
+const ACCENT_BORDER = 'rgba(200,169,110,0.2)'
 
 const STEP_LABELS = [
   'Personal Details',
@@ -131,10 +131,10 @@ function F({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#8899aa' }}>
+      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#888888' }}>
         {label}{required && <span style={{ color: ACCENT }}> *</span>}
       </label>
-      {hint && <p className="text-[11px]" style={{ color: '#4a5a6a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: '#888888' }}>{hint}</p>}
       <input
         type={type}
         name={name}
@@ -143,12 +143,12 @@ function F({
         placeholder={placeholder}
         className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-all duration-150"
         style={{
-          background: '#0d1520',
-          border: '1px solid rgba(148,163,184,0.1)',
-          color: '#f0f4f8',
+          background: '#111111',
+          border: '1px solid #1E1E1E',
+          color: '#F5F5F5',
         }}
         onFocus={e => { e.currentTarget.style.borderColor = ACCENT_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px ${ACCENT_BG}` }}
-        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(148,163,184,0.1)'; e.currentTarget.style.boxShadow = 'none' }}
+        onBlur={e => { e.currentTarget.style.borderColor = '#1E1E1E'; e.currentTarget.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -162,10 +162,10 @@ function TA({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#8899aa' }}>
+      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#888888' }}>
         {label}
       </label>
-      {hint && <p className="text-[11px]" style={{ color: '#4a5a6a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: '#888888' }}>{hint}</p>}
       <textarea
         name={name}
         value={value}
@@ -174,12 +174,12 @@ function TA({
         rows={rows}
         className="w-full rounded-lg px-4 py-3 text-sm outline-none resize-none transition-all duration-150"
         style={{
-          background: '#0d1520',
-          border: '1px solid rgba(148,163,184,0.1)',
-          color: '#f0f4f8',
+          background: '#111111',
+          border: '1px solid #1E1E1E',
+          color: '#F5F5F5',
         }}
         onFocus={e => { e.currentTarget.style.borderColor = ACCENT_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px ${ACCENT_BG}` }}
-        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(148,163,184,0.1)'; e.currentTarget.style.boxShadow = 'none' }}
+        onBlur={e => { e.currentTarget.style.borderColor = '#1E1E1E'; e.currentTarget.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -202,7 +202,7 @@ function Cards({
   }
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#8899aa' }}>{label}</p>
+      <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#888888' }}>{label}</p>
       <div className="flex flex-wrap gap-2">
         {options.map(opt => {
           const active = selected.includes(opt)
@@ -213,8 +213,8 @@ function Cards({
               onClick={() => toggle(opt)}
               className="px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-150"
               style={{
-                background: active ? ACCENT_BG : '#0d1520',
-                border: `1px solid ${active ? ACCENT : 'rgba(148,163,184,0.1)'}`,
+                background: active ? ACCENT_BG : '#111111',
+                border: `1px solid ${active ? ACCENT : '#1E1E1E'}`,
                 color: active ? ACCENT : '#8899aa',
               }}
             >
@@ -235,12 +235,12 @@ function Score({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-baseline justify-between">
-        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#8899aa' }}>{label}</p>
+        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#888888' }}>{label}</p>
         {value !== '' && (
           <span className="text-sm font-bold" style={{ color: ACCENT }}>{value} / 10</span>
         )}
       </div>
-      {hint && <p className="text-[11px]" style={{ color: '#4a5a6a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: '#888888' }}>{hint}</p>}
       <div className="flex gap-1.5">
         {Array.from({ length: 11 }, (_, i) => (
           <button
@@ -249,8 +249,8 @@ function Score({
             onClick={() => onChange(String(i))}
             className="flex-1 py-2.5 rounded-md text-xs font-semibold transition-all duration-150"
             style={{
-              background: value === String(i) ? ACCENT : '#0d1520',
-              border: `1px solid ${value === String(i) ? ACCENT : 'rgba(148,163,184,0.08)'}`,
+              background: value === String(i) ? ACCENT : '#111111',
+              border: `1px solid ${value === String(i) ? ACCENT : '#1E1E1E'}`,
               color: value === String(i) ? '#fff' : '#4a5a6a',
             }}
           >
@@ -258,7 +258,7 @@ function Score({
           </button>
         ))}
       </div>
-      <div className="flex justify-between text-[10px]" style={{ color: '#3a4a5a' }}>
+      <div className="flex justify-between text-[10px]" style={{ color: '#666666' }}>
         <span>Very low</span>
         <span>Very high</span>
       </div>
@@ -269,9 +269,9 @@ function Score({
 function Div({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 py-1">
-      <div className="flex-1 h-px" style={{ background: 'rgba(148,163,184,0.07)' }} />
-      <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#2e3d4d' }}>{label}</span>
-      <div className="flex-1 h-px" style={{ background: 'rgba(148,163,184,0.07)' }} />
+      <div className="flex-1 h-px" style={{ background: '#1E1E1E' }} />
+      <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#555555' }}>{label}</span>
+      <div className="flex-1 h-px" style={{ background: '#1E1E1E' }} />
     </div>
   )
 }
@@ -282,10 +282,10 @@ function Head({ step, title, sub }: { step: number; title: string; sub?: string 
       <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-2" style={{ color: ACCENT }}>
         Step {step} of {TOTAL} — {STEP_LABELS[step - 1]}
       </p>
-      <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#f0f4f8', lineHeight: 1.2 }}>
+      <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#F5F5F5', lineHeight: 1.2 }}>
         {title}
       </h2>
-      {sub && <p className="mt-2 text-sm leading-relaxed" style={{ color: '#6b7a8d', maxWidth: '500px' }}>{sub}</p>}
+      {sub && <p className="mt-2 text-sm leading-relaxed" style={{ color: '#888888', maxWidth: '500px' }}>{sub}</p>}
     </div>
   )
 }
@@ -310,7 +310,7 @@ function Chk({ checked, onChange, children }: { checked: boolean; onChange: (v: 
           </svg>
         )}
       </button>
-      <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{children}</span>
+      <span className="text-sm leading-relaxed" style={{ color: '#888888' }}>{children}</span>
     </label>
   )
 }
@@ -340,22 +340,22 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('member')}
         className="text-left p-5 rounded-xl transition-all duration-200"
         style={{
-          background: value === 'member' ? ACCENT_BG : '#0d1520',
-          border: `1px solid ${value === 'member' ? ACCENT : 'rgba(148,163,184,0.1)'}`,
+          background: value === 'member' ? ACCENT_BG : '#111111',
+          border: `1px solid ${value === 'member' ? ACCENT : '#1E1E1E'}`,
         }}>
         <span className="inline-block text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-md mb-4"
           style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}`, color: ACCENT }}>
           Recommended
         </span>
-        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
           Apex Clinical Program
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#6b7a8d' }}>
+        <p className="text-xs mb-4" style={{ color: '#888888' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#8899aa' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#888888' }}>
               <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -374,32 +374,32 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('casual')}
         className="text-left p-5 rounded-xl transition-all duration-200"
         style={{
-          background: value === 'casual' ? ACCENT_BG : '#0d1520',
-          border: `1px solid ${value === 'casual' ? ACCENT : 'rgba(148,163,184,0.1)'}`,
+          background: value === 'casual' ? ACCENT_BG : '#111111',
+          border: `1px solid ${value === 'casual' ? ACCENT : '#1E1E1E'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
-        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
           Single Consultation
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#6b7a8d' }}>
+        <p className="text-xs mb-4" style={{ color: '#888888' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
-        <p className="text-xs font-semibold mb-1.5" style={{ color: '#6b7a8d' }}>Pathway 1 — Partner Pharmacy</p>
+        <p className="text-xs font-semibold mb-1.5" style={{ color: '#888888' }}>Pathway 1 — Partner Pharmacy</p>
         <ul className="flex flex-col gap-1.5 mb-4">
           {casualPath1.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5a6a' }}>
-              <span style={{ color: '#3a4a5a', flexShrink: 0 }}>—</span>{f}
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#888888' }}>
+              <span style={{ color: '#666666', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
         </ul>
         <div className="flex items-center justify-between mb-1.5">
-          <p className="text-xs font-semibold" style={{ color: '#6b7a8d' }}>Pathway 2 — Own Pharmacy</p>
-          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125 <span className="text-[10px] font-normal" style={{ color: '#6b7a8d' }}>one-off</span></span>
+          <p className="text-xs font-semibold" style={{ color: '#888888' }}>Pathway 2 — Own Pharmacy</p>
+          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125 <span className="text-[10px] font-normal" style={{ color: '#888888' }}>one-off</span></span>
         </div>
         <ul className="flex flex-col gap-1.5 mb-4">
           {casualPath2.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5a6a' }}>
-              <span style={{ color: '#3a4a5a', flexShrink: 0 }}>—</span>{f}
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#888888' }}>
+              <span style={{ color: '#666666', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
         </ul>
@@ -408,9 +408,9 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         <div className="w-full py-2.5 rounded-lg text-center text-xs font-bold tracking-[0.1em] uppercase transition-all"
           style={{
-            background: value === 'casual' ? ACCENT_BG : '#0d1520',
+            background: value === 'casual' ? ACCENT_BG : '#111111',
             color: value === 'casual' ? ACCENT : '#4a5a6a',
-            border: `1px solid ${value === 'casual' ? ACCENT_BORDER : 'rgba(148,163,184,0.08)'}`,
+            border: `1px solid ${value === 'casual' ? ACCENT_BORDER : '#1E1E1E'}`,
           }}>
           {value === 'casual' ? '✓ Selected' : 'Single Consult'}
         </div>
@@ -501,7 +501,7 @@ export default function HormoneConsultForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0A0A0A', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -514,16 +514,16 @@ export default function HormoneConsultForm() {
                   <path d="M5 12l5 5L20 7" stroke={ACCENT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 700, color: '#f0f4f8', marginBottom: '1rem' }}>
+              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 700, color: '#F5F5F5', marginBottom: '1rem' }}>
                 Form submitted.
               </h1>
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#6b7a8d' }}>
+              <p className="text-sm leading-relaxed mb-8" style={{ color: '#888888' }}>
                 Thank you, {d.firstName}. Your hormone consult intake has been received by our clinical team. You&apos;ll hear from us within 1 business day to confirm next steps.
               </p>
 
               <div className="rounded-xl p-5 text-left mb-8"
-                style={{ background: '#0d1117', border: '1px solid rgba(148,163,184,0.08)' }}>
-                <p className="text-xs font-semibold tracking-[0.14em] uppercase mb-4" style={{ color: '#4a5a6a' }}>What happens next</p>
+                style={{ background: '#0D0D0D', border: '1px solid #1E1E1E' }}>
+                <p className="text-xs font-semibold tracking-[0.14em] uppercase mb-4" style={{ color: '#888888' }}>What happens next</p>
                 <div className="flex flex-col gap-3">
                   {[
                     ['Review', 'Your intake is reviewed by our clinical team.'],
@@ -538,7 +538,7 @@ export default function HormoneConsultForm() {
                       </div>
                       <div>
                         <p className="text-xs font-semibold" style={{ color: '#c5cdd6' }}>{title}</p>
-                        <p className="text-xs mt-0.5" style={{ color: '#4a5a6a' }}>{desc}</p>
+                        <p className="text-xs mt-0.5" style={{ color: '#888888' }}>{desc}</p>
                       </div>
                     </div>
                   ))}
@@ -558,7 +558,7 @@ export default function HormoneConsultForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: '#0A0A0A', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -576,19 +576,19 @@ export default function HormoneConsultForm() {
                 Hormone Consult Intake
               </p>
 
-              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 700, letterSpacing: '-0.025em', color: '#f0f4f8', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 700, letterSpacing: '-0.025em', color: '#F5F5F5', lineHeight: 1.15, marginBottom: '1.25rem' }}>
                 Your hormone health,<br />
                 <span style={{ background: `linear-gradient(135deg, ${ACCENT}, #7bb3ff)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   assessed properly.
                 </span>
               </h1>
 
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#6b7a8d', maxWidth: '440px' }}>
+              <p className="text-sm leading-relaxed mb-8" style={{ color: '#888888', maxWidth: '440px' }}>
                 This intake form takes approximately 8–10 minutes to complete. Your responses are reviewed by an AHPRA-registered doctor before your consultation.
               </p>
 
               <div className="rounded-xl p-5 mb-8"
-                style={{ background: '#0d1117', border: '1px solid rgba(148,163,184,0.07)' }}>
+                style={{ background: '#0D0D0D', border: '1px solid #1E1E1E' }}>
                 <div className="grid grid-cols-3 gap-4">
                   {[
                     ['6 sections', 'Thorough clinical picture'],
@@ -596,8 +596,8 @@ export default function HormoneConsultForm() {
                     ['Saved progress', 'Resume where you left off'],
                   ].map(([stat, label]) => (
                     <div key={stat}>
-                      <p className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>{stat}</p>
-                      <p className="text-[11px] mt-0.5" style={{ color: '#4a5a6a' }}>{label}</p>
+                      <p className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>{stat}</p>
+                      <p className="text-[11px] mt-0.5" style={{ color: '#888888' }}>{label}</p>
                     </div>
                   ))}
                 </div>
@@ -614,7 +614,7 @@ export default function HormoneConsultForm() {
                       style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}` }}>
                       <div className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
                     </div>
-                    <p className="text-xs" style={{ color: '#4a5a6a' }}>{note}</p>
+                    <p className="text-xs" style={{ color: '#888888' }}>{note}</p>
                   </div>
                 ))}
               </div>
@@ -644,17 +644,17 @@ export default function HormoneConsultForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: '80px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#0A0A0A', minHeight: '100vh', paddingTop: '80px', paddingBottom: '80px' }}>
         {/* Progress */}
-        <div className="sticky top-16 z-30" style={{ backgroundColor: '#070a0d', borderBottom: '1px solid rgba(148,163,184,0.06)' }}>
+        <div className="sticky top-16 z-30" style={{ backgroundColor: '#0A0A0A', borderBottom: '1px solid #1E1E1E' }}>
           <div className="container-tight max-w-2xl mx-auto py-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#4a5a6a' }}>
+              <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#888888' }}>
                 {STEP_LABELS[step - 1]}
               </p>
               <p className="text-[11px] font-semibold" style={{ color: ACCENT }}>{pct}%</p>
             </div>
-            <div className="w-full h-1 rounded-full" style={{ background: 'rgba(148,163,184,0.08)' }}>
+            <div className="w-full h-1 rounded-full" style={{ background: '#1E1E1E' }}>
               <motion.div
                 className="h-full rounded-full"
                 style={{ background: ACCENT }}
@@ -732,15 +732,15 @@ export default function HormoneConsultForm() {
                   <Head step={3} title="Medical History" sub="Accurate medical history allows us to design a safe, appropriate protocol." />
 
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#8899aa' }}>
+                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#888888' }}>
                       Existing conditions — select all that apply
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {CONDITIONS.map(cond => (
                         <label key={cond} className="flex items-center gap-3 cursor-pointer rounded-lg px-4 py-3 transition-all duration-150"
                           style={{
-                            background: d.conditions.includes(cond) ? ACCENT_BG : '#0d1520',
-                            border: `1px solid ${d.conditions.includes(cond) ? ACCENT_BORDER : 'rgba(148,163,184,0.07)'}`,
+                            background: d.conditions.includes(cond) ? ACCENT_BG : '#111111',
+                            border: `1px solid ${d.conditions.includes(cond) ? ACCENT_BORDER : '#1E1E1E'}`,
                           }}>
                           <button
                             type="button"
@@ -836,9 +836,9 @@ export default function HormoneConsultForm() {
 
                   <TA label="Current supplements" name="supplementsCurrent" value={d.supplementsCurrent} onChange={v => set('supplementsCurrent', v)} placeholder="e.g. Zinc, Vitamin D, Magnesium, Ashwagandha, Creatine..." rows={2} />
 
-                  <div className="rounded-xl p-4" style={{ background: '#0a0e14', border: '1px solid rgba(148,163,184,0.07)' }}>
-                    <p className="text-xs font-semibold mb-1" style={{ color: '#4a5a6a' }}>Don&apos;t have recent bloods?</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#3a4a5a' }}>
+                  <div className="rounded-xl p-4" style={{ background: '#111111', border: '1px solid #1E1E1E' }}>
+                    <p className="text-xs font-semibold mb-1" style={{ color: '#888888' }}>Don&apos;t have recent bloods?</p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#666666' }}>
                       No problem — we&apos;ll issue a referral for your hormone panel after reviewing this intake. Testing is available at thousands of collection centres nationally.
                     </p>
                   </div>
@@ -852,19 +852,19 @@ export default function HormoneConsultForm() {
 
                   {/* Pathway selection */}
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: '#8899aa' }}>Choose Your Path</p>
-                    <p className="text-xs mb-4" style={{ color: '#4a5a6a' }}>After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.</p>
+                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: '#888888' }}>Choose Your Path</p>
+                    <p className="text-xs mb-4" style={{ color: '#888888' }}>After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.</p>
                     <PathwayCards value={d.pathway} onChange={v => set('pathway', v)} />
-                    <p className="text-xs mt-3" style={{ color: '#2e3d4d' }}>
+                    <p className="text-xs mt-3" style={{ color: '#555555' }}>
                       Our team will confirm consultation fees based on your selected pathway. You can change your selection before your consultation.
                     </p>
                   </div>
 
-                  <div className="h-px" style={{ background: 'rgba(148,163,184,0.07)' }} />
+                  <div className="h-px" style={{ background: '#1E1E1E' }} />
 
                   {/* Summary card */}
-                  <div className="rounded-xl p-5" style={{ background: '#0d1117', border: '1px solid rgba(148,163,184,0.07)' }}>
-                    <p className="text-xs font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#4a5a6a' }}>Summary</p>
+                  <div className="rounded-xl p-5" style={{ background: '#0D0D0D', border: '1px solid #1E1E1E' }}>
+                    <p className="text-xs font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#888888' }}>Summary</p>
                     <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                       {[
                         ['Name', `${d.firstName} ${d.lastName}`],
@@ -875,14 +875,14 @@ export default function HormoneConsultForm() {
                         ['GP', d.gpName || '—'],
                       ].map(([label, val]) => (
                         <div key={label}>
-                          <p className="text-[10px] uppercase tracking-wider" style={{ color: '#3a4a5a' }}>{label}</p>
-                          <p className="text-sm mt-0.5 truncate" style={{ color: '#8899aa' }}>{val || '—'}</p>
+                          <p className="text-[10px] uppercase tracking-wider" style={{ color: '#666666' }}>{label}</p>
+                          <p className="text-sm mt-0.5 truncate" style={{ color: '#888888' }}>{val || '—'}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4 p-5 rounded-xl" style={{ background: '#0a0e14', border: '1px solid rgba(148,163,184,0.07)' }}>
+                  <div className="flex flex-col gap-4 p-5 rounded-xl" style={{ background: '#111111', border: '1px solid #1E1E1E' }}>
                     <Chk checked={d.ageConfirm} onChange={v => set('ageConfirm', v)}>
                       I confirm I am 18 years of age or older. *
                     </Chk>
@@ -898,7 +898,7 @@ export default function HormoneConsultForm() {
                     onChange={v => set('printName', v)}
                     placeholder="Type your full legal name"
                   />
-                  <p className="text-[11px]" style={{ color: '#2e3d4d' }}>
+                  <p className="text-[11px]" style={{ color: '#555555' }}>
                     Date: {new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}
                   </p>
 
@@ -913,11 +913,11 @@ export default function HormoneConsultForm() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-10 pt-6" style={{ borderTop: '1px solid rgba(148,163,184,0.07)' }}>
+          <div className="flex items-center justify-between mt-10 pt-6" style={{ borderTop: '1px solid #1E1E1E' }}>
             <button
               onClick={() => go(-1)}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-150"
-              style={{ color: '#6b7a8d', background: '#0d1520', border: '1px solid rgba(148,163,184,0.08)' }}
+              style={{ color: '#888888', background: '#111111', border: '1px solid #1E1E1E' }}
             >
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
                 <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

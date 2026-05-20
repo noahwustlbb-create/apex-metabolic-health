@@ -52,8 +52,8 @@ function StepBlock({ step, index, isInView }: {
             width: 40,
             height: 40,
             borderRadius: '50%',
-            background: 'rgba(72,144,247,0.06)',
-            border: '1px solid rgba(72,144,247,0.2)',
+            background: 'rgba(200,169,110,0.06)',
+            border: '1px solid rgba(200,169,110,0.2)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -65,7 +65,7 @@ function StepBlock({ step, index, isInView }: {
               fontFamily: 'var(--font-space-grotesk)',
               fontSize: 11,
               fontWeight: 700,
-              color: 'rgba(72,144,247,0.7)',
+              color: 'rgba(200,169,110,0.7)',
               letterSpacing: '0.05em',
             }}
           >
@@ -79,7 +79,7 @@ function StepBlock({ step, index, isInView }: {
               width: 1,
               minHeight: 40,
               marginTop: 6,
-              background: 'linear-gradient(to bottom, rgba(72,144,247,0.18), rgba(72,144,247,0.03))',
+              background: 'linear-gradient(to bottom, rgba(200,169,110,0.18), rgba(200,169,110,0.03))',
             }}
           />
         )}
@@ -89,11 +89,11 @@ function StepBlock({ step, index, isInView }: {
       <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-10 md:pb-12'}`}>
         <h3
           className="text-xl md:text-2xl font-semibold mb-2 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', marginTop: 8 }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', marginTop: 8 }}
         >
           {step.title}
         </h3>
-        <p className="text-sm md:text-base leading-relaxed" style={{ color: '#4a5878', maxWidth: 560 }}>
+        <p className="text-sm md:text-base leading-relaxed" style={{ color: '#888888', maxWidth: 560 }}>
           {step.description}
         </p>
       </div>
@@ -109,7 +109,7 @@ export default function ClinicalJourney() {
     <section
       id="clinical-journey"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f0f5ff' }}
+      style={{ backgroundColor: '#0D0D0D' }}
       aria-label="Clinical journey"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -117,7 +117,7 @@ export default function ClinicalJourney() {
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.04) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -140,7 +140,7 @@ export default function ClinicalJourney() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Simple from{' '}
-              <span style={{ color: 'rgba(10,14,26,0.22)' }}>
+              <span style={{ color: 'rgba(245,245,245,0.2)' }}>
                 start to finish.
               </span>
             </motion.h2>
@@ -150,7 +150,7 @@ export default function ClinicalJourney() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-base md:text-lg leading-relaxed"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#888888' }}
           >
             Five steps from not knowing your numbers to having a doctor-built protocol working in your favour.
           </motion.p>
@@ -177,12 +177,12 @@ export default function ClinicalJourney() {
           <a
             href="/intake/discovery"
             className="text-sm font-medium flex items-center gap-2 transition-colors duration-150"
-            style={{ color: '#7a90a8' }}
+            style={{ color: '#888888' }}
             onMouseEnter={e => (e.currentTarget.style.color = '#7a8a9a')}
             onMouseLeave={e => (e.currentTarget.style.color = '#4a5a6a')}
           >
             Not sure where to start?{' '}
-            <span style={{ color: '#4890f7' }}>Book a free discovery call →</span>
+            <span style={{ color: '#C8A96E' }}>Book a free discovery call →</span>
           </a>
         </motion.div>
 

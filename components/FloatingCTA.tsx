@@ -49,7 +49,7 @@ export default function FloatingCTA() {
             borderRadius: '40px',
             background: hovered
               ? 'linear-gradient(135deg, #2b7be0 0%, #1a5fb4 100%)'
-              : 'linear-gradient(135deg, #121c30 0%, #0d1520 100%)',
+              : 'linear-gradient(135deg, #121c30 0%, #111111 100%)',
             border: `1px solid ${hovered ? 'rgba(43,123,224,0.8)' : '#1A3F7A'}`,
             boxShadow: hovered
               ? '0 0 28px rgba(43,123,224,0.45), 0 8px 32px rgba(0,0,0,0.6)'

@@ -72,7 +72,7 @@ export default function PathologyPanel() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
           >
             What We Test
           </motion.h2>
@@ -81,7 +81,7 @@ export default function PathologyPanel() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18 }}
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#888888' }}
           >
             Every clinical decision is built on objective pathology data — not guesswork, not
             GP-standard screens. We test what&apos;s actually relevant.
@@ -112,7 +112,7 @@ export default function PathologyPanel() {
               <div>
                 <h3
                   className="text-base font-semibold leading-snug"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
                 >
                   Hormone Health Panel
                 </h3>
@@ -132,7 +132,7 @@ export default function PathologyPanel() {
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
-                  <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                  <span className="text-xs leading-relaxed" style={{ color: '#888888' }}>
                     {item}
                   </span>
                 </li>
@@ -170,7 +170,7 @@ export default function PathologyPanel() {
               <div>
                 <h3
                   className="text-base font-semibold leading-snug"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
                 >
                   Metabolic Health Panel
                 </h3>
@@ -190,7 +190,7 @@ export default function PathologyPanel() {
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
-                  <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                  <span className="text-xs leading-relaxed" style={{ color: '#888888' }}>
                     {item}
                   </span>
                 </li>
@@ -210,7 +210,7 @@ export default function PathologyPanel() {
           animate={panelsInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22 }}
           className="text-center text-xs mt-8"
-          style={{ color: '#7a90a8' }}
+          style={{ color: '#888888' }}
         >
           Panels are tailored by your doctor based on your program and clinical history. Additional
           markers may be requested where clinically indicated.

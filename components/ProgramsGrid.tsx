@@ -88,7 +88,7 @@ export default function ProgramsGrid() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d1117' }}
+      style={{ backgroundColor: '#0D0D0D' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -111,7 +111,7 @@ export default function ProgramsGrid() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="text-3xl md:text-4xl font-bold tracking-tight max-w-xl"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: 1.1 }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: 1.1 }}
           >
             Pick your program.{' '}
             <span className="text-teal-gradient">Start with bloods.</span>
@@ -132,9 +132,9 @@ export default function ProgramsGrid() {
               <div
                 className="w-10 h-10 flex items-center justify-center rounded-sm mb-4 flex-shrink-0"
                 style={{
-                  backgroundColor: 'rgba(72,144,247,0.08)',
-                  border: '1px solid rgba(72,144,247,0.18)',
-                  color: '#4890f7',
+                  backgroundColor: 'rgba(200,169,110,0.08)',
+                  border: '1px solid rgba(200,169,110,0.18)',
+                  color: '#C8A96E',
                 }}
               >
                 {program.icon}
@@ -143,11 +143,11 @@ export default function ProgramsGrid() {
               {/* Name + description */}
               <h3
                 className="text-base font-bold mb-2"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
               >
                 {program.name}
               </h3>
-              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#888888' }}>
                 {program.description}
               </p>
 
@@ -157,9 +157,9 @@ export default function ProgramsGrid() {
                   href={program.bloodsHref}
                   className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs font-semibold tracking-wide transition-all duration-150"
                   style={{
-                    background: 'rgba(72,144,247,0.1)',
-                    border: '1px solid rgba(72,144,247,0.25)',
-                    color: '#4890f7',
+                    background: 'rgba(200,169,110,0.1)',
+                    border: '1px solid rgba(200,169,110,0.25)',
+                    color: '#C8A96E',
                   }}
                 >
                   Order Bloods — $99
@@ -168,9 +168,9 @@ export default function ProgramsGrid() {
                   href={program.consultHref}
                   className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs font-semibold tracking-wide transition-all duration-150"
                   style={{
-                    background: '#ffffff',
-                    border: '1px solid rgba(72,144,247,0.12)',
-                    color: '#4a5878',
+                    background: '#111111',
+                    border: '1px solid rgba(200,169,110,0.12)',
+                    color: '#888888',
                   }}
                 >
                   Book Consultation
@@ -186,9 +186,9 @@ export default function ProgramsGrid() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs text-center mt-10"
-          style={{ color: '#9ab0c8' }}
+          style={{ color: '#666666' }}
         >
-          Not sure which program fits? <a href="/intake/discovery" style={{ color: '#4890f7' }} className="hover:underline">Book a free discovery call →</a>
+          Not sure which program fits? <a href="/intake/discovery" style={{ color: '#C8A96E' }} className="hover:underline">Book a free discovery call →</a>
         </motion.p>
 
       </div>

@@ -7,9 +7,9 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
-const ACCENT_BG = 'rgba(72,144,247,0.07)'
-const ACCENT_BORDER = 'rgba(72,144,247,0.18)'
+const ACCENT = '#C8A96E'
+const ACCENT_BG = 'rgba(200,169,110,0.07)'
+const ACCENT_BORDER = 'rgba(200,169,110,0.18)'
 
 // ─── Symptoms ─────────────────────────────────────────────────────────────────
 
@@ -174,7 +174,7 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
       <Link
         href={area.href}
         className="group flex flex-col h-full p-6 rounded-xl transition-all duration-300"
-        style={{ background: '#0a0e14', border: '1px solid rgba(255,255,255,0.07)' }}
+        style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.07)' }}
         onMouseEnter={(e) => {
           const el = e.currentTarget
           el.style.transform = 'translateY(-2px)'
@@ -194,29 +194,29 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
         </div>
 
         <h3 className="text-sm font-bold mb-3 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
           {area.title}
         </h3>
 
         <p className="text-xs leading-relaxed mb-2" style={{ color: '#c5cdd6' }}>
           {area.recognition}
         </p>
-        <p className="text-xs leading-relaxed flex-1 mb-4" style={{ color: '#5a6a7a' }}>
+        <p className="text-xs leading-relaxed flex-1 mb-4" style={{ color: '#888888' }}>
           {area.clinical}
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {area.tags.map((tag) => (
             <span key={tag} className="text-[9px] font-semibold tracking-[0.1em] uppercase px-2 py-1 rounded-sm"
-              style={{ color: '#3a4a5a', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              style={{ color: '#666666', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               {tag}
             </span>
           ))}
         </div>
 
         <div className="flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase transition-colors duration-200"
-          style={{ color: '#3a4a5a' }}>
-          <span className="group-hover:text-[#4890f7] transition-colors duration-200">Start assessment</span>
+          style={{ color: '#666666' }}>
+          <span className="group-hover:text-[#C8A96E] transition-colors duration-200">Start assessment</span>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -235,11 +235,11 @@ function SectionHead({ label, title, sub, inView }: { label: string; title: stri
         {label}
       </motion.p>
       <motion.h2 initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.65, delay: 0.07, ease }}
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.8vw, 36px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#f0f4f8', lineHeight: 1.12, marginBottom: '0.5rem' }}>
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.8vw, 36px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#F5F5F5', lineHeight: 1.12, marginBottom: '0.5rem' }}>
         {title}
       </motion.h2>
       <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: 0.15, ease }}
-        className="text-sm leading-relaxed max-w-lg" style={{ color: '#6b7a8d' }}>
+        className="text-sm leading-relaxed max-w-lg" style={{ color: '#888888' }}>
         {sub}
       </motion.p>
     </div>
@@ -264,28 +264,28 @@ export default function WhatWeTreatPage() {
         {/* ── Hero ── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#070a0d', paddingTop: '140px', paddingBottom: '80px' }}
+          style={{ backgroundColor: '#0A0A0A', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="What we treat hero"
         >
           <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)' }} />
+            style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(200,169,110,0.07) 0%, transparent 60%)' }} />
 
           <div ref={heroRef} className="container-tight relative z-10">
             <motion.p initial={{ opacity: 0, y: 12 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }} className="label mb-5">
               Focus Areas
             </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 28 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.75, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: '#f0f4f8', maxWidth: '780px', marginBottom: '1.25rem' }}>
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: '#F5F5F5', maxWidth: '780px', marginBottom: '1.25rem' }}>
               Your symptoms are signals.
               <br />
-              <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ background: 'linear-gradient(135deg, #C8A96E, #D4B97E)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 We read them clinically.
               </span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#8899aa', maxWidth: '520px', marginBottom: '2rem' }}>
+              style={{ color: '#888888', maxWidth: '520px', marginBottom: '2rem' }}>
               You&apos;ve been told your bloods are &ldquo;normal.&rdquo; Normal is not optimal. We investigate what&apos;s actually behind your low energy, poor recovery, weight gain, and lost drive.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
@@ -300,8 +300,8 @@ export default function WhatWeTreatPage() {
             <motion.div initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }}
               className="flex flex-wrap gap-x-6 gap-y-2">
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#3a4a5a' }}>
-                  <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#666666' }}>
+                  <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
               ))}
@@ -310,7 +310,7 @@ export default function WhatWeTreatPage() {
         </section>
 
         {/* ── Symptoms ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0d1117' }} aria-label="Symptoms we assess">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0D0D0D' }} aria-label="Symptoms we assess">
           <div className="glow-rule" aria-hidden="true" />
           <div ref={symptomsRef} className="container-tight relative z-10">
             <SectionHead
@@ -328,10 +328,10 @@ export default function WhatWeTreatPage() {
         </section>
 
         {/* ── Clinical Areas ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#070a0d' }} aria-label="Clinical areas we investigate">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0A0A0A' }} aria-label="Clinical areas we investigate">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }} />
+            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.05) 0%, transparent 60%)' }} />
           <div ref={clinicalRef} className="container-tight relative z-10">
             <SectionHead
               label="Clinical Areas"
@@ -348,21 +348,21 @@ export default function WhatWeTreatPage() {
         </section>
 
         {/* ── CTA ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0d1117' }} aria-label="Not sure where you fit">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0D0D0D' }} aria-label="Not sure where you fit">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
+            style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.06) 0%, transparent 55%)' }} />
           <div className="container-tight relative z-10">
             <div className="max-w-2xl mx-auto text-center">
               <p className="label mb-5">Not sure where you fit</p>
-              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 48px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#f0f4f8', marginBottom: '1rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 48px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#F5F5F5', marginBottom: '1rem' }}>
                 60 seconds will point you
                 <br />
-                <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span style={{ background: 'linear-gradient(135deg, #C8A96E, #D4B97E)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   in the right direction.
                 </span>
               </h2>
-              <p className="text-sm leading-relaxed mb-8 mx-auto" style={{ color: '#6b7a8d', maxWidth: '400px' }}>
+              <p className="text-sm leading-relaxed mb-8 mx-auto" style={{ color: '#888888', maxWidth: '400px' }}>
                 Our clinical pre-screen identifies the most relevant pathway for your situation — no commitment, no GP referral required.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -376,7 +376,7 @@ export default function WhatWeTreatPage() {
                   General Appointment
                 </Link>
               </div>
-              <p className="text-xs mt-8" style={{ color: '#2e3d4d' }}>
+              <p className="text-xs mt-8" style={{ color: '#555555' }}>
                 All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
               </p>
             </div>

@@ -22,7 +22,7 @@ export default function StatsBar() {
     <section
       ref={ref}
       className="relative section-pad-sm overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#0A0A0A' }}
       aria-label="Clinical credentials"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -50,7 +50,7 @@ export default function StatsBar() {
                 className="stat-number mb-2"
                 style={{
                   fontSize: 'clamp(18px, 2vw, 26px)',
-                  background: 'linear-gradient(135deg, #4890f7, #7bb4ff)',
+                  background: 'linear-gradient(135deg, #C8A96E, #D4B97E)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
@@ -60,7 +60,7 @@ export default function StatsBar() {
               </p>
               <p
                 className="text-[10px] font-medium leading-snug tracking-[0.1em] uppercase"
-                style={{ color: '#374858' }}
+                style={{ color: '#888888' }}
               >
                 {stat.label}
               </p>
