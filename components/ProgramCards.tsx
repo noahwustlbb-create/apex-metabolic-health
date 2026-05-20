@@ -14,7 +14,7 @@ const PROGRAMS = [
     bloodsHref: '/intake/bloods-hormone',
     color: '#1a4fd6',
     bg: 'linear-gradient(145deg, #0f2a6e 0%, #1a4fd6 60%, #3b82f6 100%)',
-    accent: '#C8A96E',
+    accent: '#4890f7',
     tag: 'Most Popular',
     comingSoon: false,
   },
@@ -74,7 +74,7 @@ const PROGRAMS = [
     bloodsHref: '/programs/longevity',
     color: '#0f766e',
     bg: 'linear-gradient(145deg, #042f2e 0%, #0f766e 60%, #14b8a6 100%)',
-    accent: '#C8A96E',
+    accent: '#4890f7',
     tag: 'Coming Soon',
     comingSoon: true,
   },
@@ -91,7 +91,7 @@ function ProgramCard({ program, index, inView }: {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.08, ease }}
       className="flex flex-col rounded-2xl overflow-hidden"
-      style={{ background: '#f8fbff', border: '1px solid rgba(200,169,110,0.12)' }}
+      style={{ background: '#f8fbff', border: '1px solid rgba(72,144,247,0.1)' }}
     >
       {/* Visual area */}
       <div
@@ -135,7 +135,7 @@ function ProgramCard({ program, index, inView }: {
 
       {/* Content area */}
       <div className="flex flex-col flex-1 p-5">
-        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: '#888888' }}>
+        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: '#4a5878' }}>
           {program.description}
         </p>
 
@@ -143,7 +143,7 @@ function ProgramCard({ program, index, inView }: {
         {program.comingSoon ? (
           <div
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold mb-3"
-            style={{ background: 'rgba(255,255,255,0.05)', color: '#888888', border: '1px solid rgba(200,169,110,0.12)', cursor: 'default' }}
+            style={{ background: 'rgba(255,255,255,0.05)', color: '#4a5878', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
           >
             Joining waitlist soon
           </div>
@@ -175,14 +175,14 @@ export default function ProgramCards() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0D0D0D' }}
+      style={{ backgroundColor: '#f8f9ff' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.05) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -206,14 +206,14 @@ export default function ProgramCards() {
                 fontFamily: 'var(--font-space-grotesk)',
                 fontSize: 'clamp(32px, 3.5vw, 54px)',
                 lineHeight: 1.06,
-                color: '#F5F5F5',
+                color: '#0a0e1a',
                 letterSpacing: '-0.02em',
               }}
             >
               Six programs.
               <br />
               <span style={{
-                background: 'linear-gradient(135deg, #C8A96E, #D4B97E)',
+                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -227,7 +227,7 @@ export default function ProgramCards() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-sm md:text-right"
-            style={{ color: '#888888' }}
+            style={{ color: '#4a5878' }}
           >
             Doctor-led, evidence-based protocols for each of the six biological systems that most affect how men look, feel, and perform.
           </motion.p>
@@ -248,15 +248,15 @@ export default function ProgramCards() {
           className="flex flex-wrap items-center justify-between gap-4 mt-10 pt-8"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <p className="text-sm" style={{ color: '#888888' }}>
+          <p className="text-sm" style={{ color: '#4a5878' }}>
             Not sure which program is right for you?
           </p>
           <a
             href="/intake/pre-screen"
             className="inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-150"
-            style={{ color: '#C8A96E' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C8A96E' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#C8A96E' }}
+            style={{ color: '#4890f7' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#4890f7' }}
           >
             Take the 60-second assessment →
           </a>

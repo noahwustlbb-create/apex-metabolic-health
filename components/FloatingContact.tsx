@@ -67,25 +67,25 @@ export default function FloatingContact() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="w-full rounded-2xl overflow-hidden"
             style={{
-              background: '#0D0D0D',
+              background: '#f8f9ff',
               border: '1px solid rgba(72,144,247,0.16)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,169,110,0.06)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(72,144,247,0.05)',
             }}
           >
             <div
               className="px-5 py-4 flex items-center justify-between"
-              style={{ borderBottom: '1px solid rgba(200,169,110,0.1)' }}
+              style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
             >
               <span
                 className="text-[11px] font-semibold tracking-[0.18em] uppercase"
-                style={{ color: '#F5F5F5' }}
+                style={{ color: '#0a0e1a' }}
               >
                 Start Health Assessment
               </span>
               <button
                 onClick={() => setOpen(false)}
                 className="w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ color: '#888888' }}
+                style={{ color: '#4a5878' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#f2efe9' }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
                 aria-label="Close"
@@ -104,13 +104,13 @@ export default function FloatingContact() {
                     <button
                       className="w-full flex items-center gap-4 px-5 py-4 text-left transition-colors duration-150"
                       onClick={() => setExpanded(isOpen ? null : step.number)}
-                      style={{ background: isOpen ? 'rgba(200,169,110,0.04)' : 'transparent' }}
+                      style={{ background: isOpen ? 'rgba(72,144,247,0.04)' : 'transparent' }}
                     >
                       <span
                         className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-shrink-0"
                         style={{
-                          backgroundColor: isOpen ? 'rgba(200,169,110,0.15)' : 'rgba(255,255,255,0.04)',
-                          color: isOpen ? '#C8A96E' : '#4a5a6a',
+                          backgroundColor: isOpen ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.04)',
+                          color: isOpen ? '#4890f7' : '#4a5a6a',
                           border: isOpen ? '1px solid rgba(72,144,247,0.28)' : '1px solid rgba(255,255,255,0.07)',
                         }}
                       >
@@ -127,7 +127,7 @@ export default function FloatingContact() {
                         fill="none"
                         className="w-3 h-3 flex-shrink-0 transition-transform duration-200"
                         style={{
-                          color: '#888888',
+                          color: '#4a5878',
                           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                         }}
                         aria-hidden="true"
@@ -148,7 +148,7 @@ export default function FloatingContact() {
                           <div className="px-5 pb-5 pt-1 pl-16">
                             <p
                               className="text-sm leading-relaxed mb-4"
-                              style={{ color: '#888888' }}
+                              style={{ color: '#4a5878' }}
                             >
                               {step.description}
                             </p>
@@ -191,15 +191,15 @@ export default function FloatingContact() {
         onClick={() => setOpen(!open)}
         className="flex items-center gap-3 px-7 py-4 transition-all duration-200"
         style={{
-          background: '#0D0D0D',
+          background: '#f8f9ff',
           border: '1px solid rgba(255,255,255,0.1)',
           borderRadius: '999px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-          color: '#F5F5F5',
+          color: '#0a0e1a',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(200,169,110,0.1)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(72,144,247,0.08)'
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
@@ -213,7 +213,7 @@ export default function FloatingContact() {
         </span>
         <span
           className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-          style={{ backgroundColor: '#C8A96E' }}
+          style={{ backgroundColor: '#4890f7' }}
         />
       </button>
     </motion.div>

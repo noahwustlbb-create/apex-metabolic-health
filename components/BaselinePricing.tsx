@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion'
 const CARDS = [
   {
     tag: 'BLOOD PANEL',
-    tagColor: '#C8A96E',
+    tagColor: '#4890f7',
     title: 'Baseline Blood Panel',
     price: '$99',
     priceLabel: 'one-off',
@@ -25,11 +25,11 @@ const CARDS = [
   },
   {
     tag: 'ONGOING',
-    tagColor: '#C8A96E',
+    tagColor: '#4890f7',
     title: 'Apex Membership',
     price: '$99',
     priceLabel: '/month',
-    priceColor: '#C8A96E',
+    priceColor: '#4890f7',
     description: 'Ongoing clinical oversight with regular bloods, protocol refinement, and Biological Age tracked over time.',
     includes: [
       'Blood draws every 7–8 weeks',
@@ -46,7 +46,7 @@ const CARDS = [
   },
   {
     tag: 'CONSULTATION',
-    tagColor: '#C8A96E',
+    tagColor: '#4890f7',
     title: 'Hormone Consultation',
     price: null,
     priceLabel: null,
@@ -64,7 +64,7 @@ const CARDS = [
   },
   {
     tag: 'CONSULTATION',
-    tagColor: '#C8A96E',
+    tagColor: '#4890f7',
     title: 'General Health Consult',
     price: null,
     priceLabel: null,
@@ -86,7 +86,7 @@ const TRUST_SIGNALS = [
   {
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-        <path d="M10 2l1.5 4.5H16l-3.5 2.5 1.5 4.5L10 11l-4 2.5 1.5-4.5L4 6.5h4.5L10 2z" stroke="#C8A96E" strokeWidth="1.2" strokeLinejoin="round" fill="rgba(200,169,110,0.08)" />
+        <path d="M10 2l1.5 4.5H16l-3.5 2.5 1.5 4.5L10 11l-4 2.5 1.5-4.5L4 6.5h4.5L10 2z" stroke="#4890f7" strokeWidth="1.2" strokeLinejoin="round" fill="rgba(72,144,247,0.07)" />
       </svg>
     ),
     text: 'AHPRA-registered doctors',
@@ -94,8 +94,8 @@ const TRUST_SIGNALS = [
   {
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-        <rect x="3" y="3" width="14" height="14" rx="3" stroke="#C8A96E" strokeWidth="1.2" fill="rgba(200,169,110,0.08)" />
-        <path d="M7 10l2 2 4-4" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="3" y="3" width="14" height="14" rx="3" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
+        <path d="M7 10l2 2 4-4" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     text: 'NATA-accredited labs',
@@ -103,8 +103,8 @@ const TRUST_SIGNALS = [
   {
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-        <circle cx="10" cy="10" r="8" stroke="#C8A96E" strokeWidth="1.2" fill="rgba(200,169,110,0.08)" />
-        <path d="M10 6v4l2.5 2" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="10" cy="10" r="8" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.07)" />
+        <path d="M10 6v4l2.5 2" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
     text: '4,000+ collection centres nationally',
@@ -119,7 +119,7 @@ export default function BaselinePricing() {
     <section
       id="baseline-pricing"
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0D0D0D' }}
+      style={{ backgroundColor: '#f8f9ff' }}
       aria-label="Pricing and membership"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -127,7 +127,7 @@ export default function BaselinePricing() {
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.06) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -147,7 +147,7 @@ export default function BaselinePricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: 1.08 }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: 1.08 }}
           >
             Start with your baseline —{' '}
             <span className="text-teal-gradient">$99</span>
@@ -157,7 +157,7 @@ export default function BaselinePricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-lg leading-relaxed"
-            style={{ color: '#888888' }}
+            style={{ color: '#4a5878' }}
           >
             One blood test. A full picture of where you stand.
           </motion.p>
@@ -174,7 +174,7 @@ export default function BaselinePricing() {
               className="flex flex-col p-7 rounded-sm"
               style={{
                 background: card.featured
-                  ? 'linear-gradient(145deg, rgba(200,169,110,0.07) 0%, rgba(200,169,110,0.02) 100%)'
+                  ? 'linear-gradient(145deg, rgba(72,144,247,0.06) 0%, rgba(72,144,247,0.02) 100%)'
                   : 'rgba(13,17,23,1)',
                 border: card.featured
                   ? '1px solid rgba(72,144,247,0.28)'
@@ -187,10 +187,10 @@ export default function BaselinePricing() {
                 <div
                   className="absolute top-0 right-0 px-3 py-1 text-[9px] font-bold tracking-[0.18em] uppercase"
                   style={{
-                    background: 'rgba(200,169,110,0.15)',
-                    borderLeft: '1px solid rgba(200,169,110,0.3)',
-                    borderBottom: '1px solid rgba(200,169,110,0.3)',
-                    color: '#C8A96E',
+                    background: 'rgba(72,144,247,0.12)',
+                    borderLeft: '1px solid rgba(72,144,247,0.25)',
+                    borderBottom: '1px solid rgba(72,144,247,0.25)',
+                    color: '#4890f7',
                     borderBottomLeftRadius: 6,
                   }}
                 >
@@ -204,35 +204,35 @@ export default function BaselinePricing() {
                   <p className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-1.5" style={{ color: card.tagColor }}>
                     {card.tag}
                   </p>
-                  <h3 className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>
+                  <h3 className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                     {card.title}
                   </h3>
                 </div>
                 {card.price && (
                   <div className="text-right flex-shrink-0 ml-4">
                     <p className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: card.priceColor }}>{card.price}</p>
-                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#888888' }}>{card.priceLabel}</p>
+                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#4a5878' }}>{card.priceLabel}</p>
                   </div>
                 )}
               </div>
 
-              <p className="text-sm leading-relaxed mb-5" style={{ color: '#888888' }}>{card.description}</p>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: '#4a5878' }}>{card.description}</p>
 
               <ul className="space-y-2.5 flex-1 mb-5">
                 {card.includes.map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true">
-                      <circle cx="8" cy="8" r="7" stroke={card.featured ? '#C8A96E' : '#C8A96E'} strokeWidth="1.2" fill={card.featured ? 'rgba(200,169,110,0.08)' : 'rgba(200,169,110,0.07)'} />
-                      <path d="M5 8l2 2 4-4" stroke={card.featured ? '#C8A96E' : '#C8A96E'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="8" cy="8" r="7" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.2" fill={card.featured ? 'rgba(72,144,247,0.07)' : 'rgba(72,144,247,0.06)'} />
+                      <path d="M5 8l2 2 4-4" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-sm leading-relaxed" style={{ color: '#888888' }}>{item}</span>
+                    <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
                   </li>
                 ))}
               </ul>
 
               {/* Note (e.g. for blood panel) */}
               {'note' in card && card.note && (
-                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#888888', background: '#111111', border: '1px solid rgba(200,169,110,0.1)' }}>
+                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#4a5878', background: '#ffffff', border: '1px solid rgba(72,144,247,0.08)' }}>
                   ⓘ {card.note}
                 </p>
               )}
@@ -241,8 +241,8 @@ export default function BaselinePricing() {
                 href={card.href}
                 className="w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm text-sm font-semibold tracking-wide transition-all duration-200"
                 style={card.featured
-                  ? { background: '#C8A96E', color: '#0A0A0A', border: '1px solid #C8A96E' }
-                  : { background: 'rgba(200,169,110,0.08)', color: '#C8A96E', border: '1px solid rgba(200,169,110,0.25)' }
+                  ? { background: '#4890f7', color: '#0A0A0A', border: '1px solid #4890f7' }
+                  : { background: 'rgba(72,144,247,0.07)', color: '#4890f7', border: '1px solid rgba(72,144,247,0.2)' }
                 }
               >
                 {card.cta}
@@ -261,7 +261,7 @@ export default function BaselinePricing() {
           {TRUST_SIGNALS.map((signal) => (
             <div key={signal.text} className="flex items-center gap-2">
               {signal.icon}
-              <span className="text-xs font-medium" style={{ color: '#888888' }}>{signal.text}</span>
+              <span className="text-xs font-medium" style={{ color: '#4a5878' }}>{signal.text}</span>
             </div>
           ))}
         </motion.div>

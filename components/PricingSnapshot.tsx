@@ -13,9 +13,9 @@ const CARDS = [
     title: 'Blood Panels',
     price: 'From $73.66',
     priceNote: 'program-specific pathology',
-    accent: '#C8A96E',
-    accentBg: 'rgba(200,169,110,0.07)',
-    accentBorder: 'rgba(200,169,110,0.18)',
+    accent: '#4890f7',
+    accentBg: 'rgba(72,144,247,0.06)',
+    accentBorder: 'rgba(72,144,247,0.15)',
     body: 'The panel depends on your clinical pathway. Some programs require a comprehensive baseline. Others need limited monitoring, or none at all.',
     bullets: [
       'Doctor-issued referral — no GP required',
@@ -33,9 +33,9 @@ const CARDS = [
     priceNote: 'Hormone Optimisation',
     price2: '$125',
     priceNote2: 'General Health, Weight Loss & Peptide Therapy',
-    accent: '#C8A96E',
-    accentBg: 'rgba(200,169,110,0.07)',
-    accentBorder: 'rgba(200,169,110,0.18)',
+    accent: '#4890f7',
+    accentBg: 'rgba(72,144,247,0.06)',
+    accentBorder: 'rgba(72,144,247,0.15)',
     body: 'Not a quick prescription call. Your AHPRA-registered doctor reviews your full results, takes a detailed history, and builds a personalised clinical protocol.',
     bullets: [
       'Full pathology review and interpretation',
@@ -53,9 +53,9 @@ const CARDS = [
     priceNote: '/month',
     price2: null,
     priceNote2: null,
-    accent: '#C8A96E',
-    accentBg: 'rgba(200,169,110,0.07)',
-    accentBorder: 'rgba(200,169,110,0.25)',
+    accent: '#4890f7',
+    accentBg: 'rgba(72,144,247,0.06)',
+    accentBorder: 'rgba(72,144,247,0.2)',
     body: 'Not a one-off prescription pathway. Built for ongoing oversight, clearer data, and a more complete standard of care.',
     bullets: [
       'Continuous doctor-led optimisation',
@@ -80,14 +80,14 @@ export default function PricingSnapshot() {
     <section
       id="pricing"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Transparent pricing"
     >
       <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.04) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div className="container-tight relative z-10">
@@ -109,7 +109,7 @@ export default function PricingSnapshot() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
           >
             Three components.{' '}
-            <span style={{ color: 'rgba(245,245,245,0.2)' }}>
+            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
               That&apos;s it.
             </span>
           </motion.h2>
@@ -118,7 +118,7 @@ export default function PricingSnapshot() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-lg"
-            style={{ color: '#888888' }}
+            style={{ color: '#4a5878' }}
           >
             Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
           </motion.p>
@@ -136,23 +136,23 @@ export default function PricingSnapshot() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="flex flex-col rounded-2xl overflow-hidden"
               style={{
-                background: '#111111',
+                background: '#ffffff',
                 border: card.featured
-                  ? '1px solid rgba(200,169,110,0.3)'
-                  : '1px solid rgba(200,169,110,0.12)',
-                boxShadow: card.featured ? '0 8px 40px rgba(200,169,110,0.1)' : '0 2px 12px rgba(0,0,0,0.04)',
+                  ? '1px solid rgba(72,144,247,0.25)'
+                  : '1px solid rgba(72,144,247,0.1)',
+                boxShadow: card.featured ? '0 8px 40px rgba(72,144,247,0.08)' : '0 2px 12px rgba(0,0,0,0.04)',
               }}
             >
               {card.featured && (
                 <div
                   className="h-px w-full"
-                  style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(200,169,110,0.6) 40%, rgba(200,169,110,0.3) 70%, transparent 100%)' }}
+                  style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(200,169,110,0.6) 40%, rgba(72,144,247,0.25) 70%, transparent 100%)' }}
                 />
               )}
 
               <div
                 className="px-6 pt-6 pb-5"
-                style={{ borderBottom: '1px solid rgba(200,169,110,0.08)' }}
+                style={{ borderBottom: '1px solid rgba(72,144,247,0.07)' }}
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div
@@ -170,7 +170,7 @@ export default function PricingSnapshot() {
                     {card.featured && (
                       <span
                         className="text-[8px] font-bold tracking-[0.18em] uppercase px-2 py-0.5 rounded-sm"
-                        style={{ color: '#C8A96E', background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.22)' }}
+                        style={{ color: '#4890f7', background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}
                       >
                         Recommended
                       </span>
@@ -186,7 +186,7 @@ export default function PricingSnapshot() {
 
                 <h3
                   className="text-lg font-semibold mb-3"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
                 >
                   {card.title}
                 </h3>
@@ -199,21 +199,21 @@ export default function PricingSnapshot() {
                     >
                       {card.price}
                     </span>
-                    <span className="text-xs" style={{ color: '#888888' }}>{card.priceNote}</span>
+                    <span className="text-xs" style={{ color: '#4a5878' }}>{card.priceNote}</span>
                   </div>
                   {card.price2 && (
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="text-lg font-bold"
-                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#888888' }}
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4a5878' }}
                       >
                         {card.price2}
                       </span>
-                      <span className="text-xs" style={{ color: '#666666' }}>{card.priceNote2}</span>
+                      <span className="text-xs" style={{ color: '#7a90a8' }}>{card.priceNote2}</span>
                     </div>
                   )}
                   {card.featured && (
-                    <p className="text-[10px] mt-0.5" style={{ color: '#666666' }}>
+                    <p className="text-[10px] mt-0.5" style={{ color: '#7a90a8' }}>
                       Doctor-led care, reviewed over time
                     </p>
                   )}
@@ -221,7 +221,7 @@ export default function PricingSnapshot() {
               </div>
 
               <div className="flex flex-col flex-1 px-6 py-5">
-                <p className="text-xs leading-relaxed mb-4" style={{ color: '#888888' }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: '#4a5878' }}>
                   {card.body}
                 </p>
 
@@ -245,7 +245,7 @@ export default function PricingSnapshot() {
                 {card.note && (
                   <p
                     className="text-[10px] leading-relaxed mt-4 pt-4"
-                    style={{ color: '#666666', borderTop: '1px solid rgba(200,169,110,0.08)' }}
+                    style={{ color: '#7a90a8', borderTop: '1px solid rgba(72,144,247,0.07)' }}
                   >
                     {card.note}
                   </p>
@@ -261,13 +261,13 @@ export default function PricingSnapshot() {
           transition={{ duration: 0.5, delay: 0.45, ease }}
           className="mt-8 flex items-center justify-between flex-wrap gap-4"
         >
-          <p className="text-xs" style={{ color: '#666666' }}>
+          <p className="text-xs" style={{ color: '#7a90a8' }}>
             Membership activates after your initial consultation where treatment is clinically appropriate. No lock-in contracts.
           </p>
           <Link
             href="/pricing"
             className="text-xs font-medium flex items-center gap-1.5 transition-colors"
-            style={{ color: '#C8A96E' }}
+            style={{ color: '#4890f7' }}
             onMouseEnter={e => { e.currentTarget.style.opacity = '0.75' }}
             onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >

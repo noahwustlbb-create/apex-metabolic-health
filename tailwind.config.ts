@@ -9,31 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: '#0A0A0A',
-        surface: '#111111',
-        elevated: '#161616',
-        'elevated-high': '#1E1E1E',
-        'apex-border': '#1E1E1E',
-        gold: {
-          DEFAULT: '#C8A96E',
-          dark: '#B8935A',
-          light: '#D4B97E',
-          glow: 'rgba(200,169,110,0.15)',
+        bg: '#ffffff',
+        surface: '#f8f9ff',
+        elevated: '#ffffff',
+        'elevated-high': '#f0f5ff',
+        'apex-border': 'rgba(72,144,247,0.14)',
+        blue: {
+          DEFAULT: '#4890f7',
+          dark: '#2563eb',
+          light: '#6ba8ff',
+          glow: 'rgba(72,144,247,0.15)',
         },
-        primary: '#F5F5F5',
-        secondary: '#888888',
-        muted: '#555555',
+        primary: '#0a0e1a',
+        secondary: '#4a5878',
+        muted: '#7a90a8',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         grotesk: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'gold-sm': '0 0 20px rgba(200,169,110,0.12)',
-        'gold-md': '0 0 40px rgba(200,169,110,0.2)',
-        'gold-lg': '0 0 80px rgba(200,169,110,0.3)',
-        'card': '0 12px 32px rgba(0,0,0,0.6)',
-        'ambient': '0 12px 32px rgba(0,0,0,0.5)',
+        'blue-sm': '0 0 20px rgba(72,144,247,0.12)',
+        'blue-md': '0 0 40px rgba(72,144,247,0.2)',
+        'card': '0 4px 24px rgba(72,144,247,0.08)',
+        'ambient': '0 8px 32px rgba(0,0,0,0.06)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

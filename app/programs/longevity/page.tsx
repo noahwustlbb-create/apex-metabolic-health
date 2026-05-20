@@ -38,7 +38,7 @@ function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A', paddingTop: '140px', paddingBottom: '80px' }}
+      style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Longevity Protocol program"
     >
       <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
@@ -55,7 +55,7 @@ function Hero() {
           transition={{ duration: 0.5, ease }}
           className="flex items-center gap-2.5 mb-5"
         >
-          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#666666' }}
+          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#7a90a8' }}
             onMouseEnter={e => { e.currentTarget.style.color = ACCENT }}
             onMouseLeave={e => { e.currentTarget.style.color = '#3a4a5a' }}
           >
@@ -92,7 +92,7 @@ function Hero() {
             fontWeight: 700,
             lineHeight: 1.06,
             letterSpacing: '-0.025em',
-            color: '#F5F5F5',
+            color: '#0a0e1a',
             maxWidth: '720px',
             marginBottom: '1.25rem',
           }}
@@ -108,7 +108,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          style={{ color: '#888888', maxWidth: '520px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: '#4a5878', maxWidth: '520px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           The Apex Longevity Protocol is our most comprehensive program — a multi-system biological assessment, ongoing tracking, and a doctor-led protocol built for men who are thinking proactively about the next decade, not just the next checkup.
         </motion.p>
@@ -133,7 +133,7 @@ function PillarsSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0D0D0D' }} aria-label="Program pillars">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="Program pillars">
       <div className="glow-rule" aria-hidden="true" />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -146,7 +146,7 @@ function PillarsSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#F5F5F5', lineHeight: 1.1, marginBottom: '1rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '1rem' }}
             >
               Proactive.{' '}
               <span style={{ color: ACCENT }}>Not reactive.</span>
@@ -156,7 +156,7 @@ function PillarsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed"
-              style={{ color: '#888888', maxWidth: '420px' }}
+              style={{ color: '#4a5878', maxWidth: '420px' }}
             >
               Most medicine waits for disease to declare itself. The Longevity Protocol is built around a different premise: that the best time to identify and address biological decline is before it becomes symptomatic.
             </motion.p>
@@ -170,7 +170,7 @@ function PillarsSection() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08, ease }}
                 className="rounded-xl p-4 flex gap-4"
-                style={{ background: '#111111', border: '1px solid #1E1E1E', borderLeft: `2px solid ${ACCENT}` }}
+                style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)', borderLeft: `2px solid ${ACCENT}` }}
               >
                 <div
                   className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
@@ -180,7 +180,7 @@ function PillarsSection() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}>{p.title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: '#888888' }}>{p.body}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{p.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -196,7 +196,7 @@ function NotifySection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0A0A0A' }} aria-label="Get notified">
+    <section ref={ref} className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Get notified">
       <div className="glow-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
@@ -218,7 +218,7 @@ function NotifySection() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease }}
-          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 50px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#F5F5F5', marginBottom: '1rem' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 50px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#0a0e1a', marginBottom: '1rem' }}
         >
           Existing members get first access.
         </motion.h2>
@@ -227,7 +227,7 @@ function NotifySection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1, ease }}
-          style={{ color: '#888888', maxWidth: '460px', margin: '0 auto 2.5rem', fontSize: '14px', lineHeight: 1.7 }}
+          style={{ color: '#4a5878', maxWidth: '460px', margin: '0 auto 2.5rem', fontSize: '14px', lineHeight: 1.7 }}
         >
           The Longevity Protocol launches to Apex members first. If you&apos;re on an active program, you&apos;ll be contacted when enrollment opens. If you&apos;re not yet a member, starting any program now puts you at the front of the queue.
         </motion.p>
@@ -256,7 +256,7 @@ function NotifySection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs mt-10 max-w-xl mx-auto"
-          style={{ color: '#555555' }}
+          style={{ color: '#7a90a8' }}
         >
           All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
         </motion.p>

@@ -36,14 +36,14 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="How it works"
     >
       <div className="warm-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.04) 0%, transparent 60%)' }}
+        style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
       />
 
       <div ref={ref} className="container-tight">
@@ -65,7 +65,7 @@ export default function HowItWorks() {
             style={{ fontSize: 'clamp(36px, 4vw, 62px)' }}
           >
             Clinical medicine.{' '}
-            <span style={{ color: 'rgba(245,245,245,0.2)' }}>
+            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
               No waiting rooms.
             </span>
           </motion.h2>
@@ -80,22 +80,22 @@ export default function HowItWorks() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="relative p-6 rounded-2xl flex flex-col"
               style={{
-                background: '#111111',
-                border: '1px solid rgba(200,169,110,0.14)',
+                background: '#ffffff',
+                border: '1px solid rgba(72,144,247,0.12)',
               }}
             >
               {i < STEPS.length - 1 && (
                 <div
                   aria-hidden="true"
                   className="hidden lg:block absolute top-9 left-full w-4 h-px"
-                  style={{ background: 'linear-gradient(90deg, rgba(200,169,110,0.25), transparent)', zIndex: 10 }}
+                  style={{ background: 'linear-gradient(90deg, rgba(72,144,247,0.2), transparent)', zIndex: 10 }}
                 />
               )}
               <span
                 className="text-4xl font-bold mb-5 leading-none"
                 style={{
                   fontFamily: 'var(--font-space-grotesk)',
-                  color: 'rgba(200,169,110,0.25)',
+                  color: 'rgba(72,144,247,0.2)',
                   letterSpacing: '-0.03em',
                 }}
               >
@@ -103,11 +103,11 @@ export default function HowItWorks() {
               </span>
               <h3
                 className="text-base font-semibold mb-2"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
               >
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: '#888888' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
                 {step.description}
               </p>
             </motion.div>
@@ -129,7 +129,7 @@ export default function HowItWorks() {
           <a
             href="/how-it-works"
             className="text-sm font-medium transition-colors duration-200"
-            style={{ color: '#888888' }}
+            style={{ color: '#4a5878' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#7a8a9a' }}
             onMouseLeave={e => { e.currentTarget.style.color = '#4a5a6a' }}
           >

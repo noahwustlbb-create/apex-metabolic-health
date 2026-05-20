@@ -14,7 +14,7 @@ export default function CTASection() {
       id="cta"
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0D0D0D' }}
+      style={{ backgroundColor: '#f8f9ff' }}
       aria-label="Get started"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -22,7 +22,7 @@ export default function CTASection() {
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(200,169,110,0.06) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(72,144,247,0.05) 0%, transparent 70%)' }}
       />
 
       <div className="container-tight relative z-10 text-center">
@@ -44,7 +44,7 @@ export default function CTASection() {
           style={{ fontSize: 'clamp(42px, 6vw, 88px)', maxWidth: '740px' }}
         >
           Get answers.{' '}
-          <span style={{ color: 'rgba(245,245,245,0.2)' }}>
+          <span style={{ color: 'rgba(10,14,26,0.2)' }}>
             Not reassurance.
           </span>
         </motion.h2>
@@ -54,7 +54,7 @@ export default function CTASection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2, ease }}
           className="text-base leading-relaxed max-w-lg mx-auto mb-10"
-          style={{ color: '#888888' }}
+          style={{ color: '#4a5878' }}
         >
           Advanced diagnostics. A doctor who specialises in this. A personalised protocol built around your results. No GP referral. No waiting rooms.
         </motion.p>
@@ -86,9 +86,9 @@ export default function CTASection() {
             <span
               key={item}
               className="flex items-center gap-2"
-              style={{ fontSize: '10px', color: '#555555', letterSpacing: '0.14em', textTransform: 'uppercase' }}
+              style={{ fontSize: '10px', color: '#7a90a8', letterSpacing: '0.14em', textTransform: 'uppercase' }}
             >
-              {i > 0 && <span className="hidden sm:block w-px h-3" style={{ background: '#1E1E1E' }} />}
+              {i > 0 && <span className="hidden sm:block w-px h-3" style={{ background: 'rgba(72,144,247,0.12)' }} />}
               {item}
             </span>
           ))}

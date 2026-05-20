@@ -70,7 +70,7 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="p-7 rounded-sm group cursor-default"
       style={{
-        backgroundColor: '#161616',
+        backgroundColor: '#f0f5ff',
         transition: 'background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
       }}
       onMouseEnter={(e) => {
@@ -81,7 +81,7 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget
-        el.style.background = '#161616'
+        el.style.background = '#f0f5ff'
         el.style.boxShadow = 'none'
         el.style.transform = 'translateY(0)'
       }}
@@ -105,11 +105,11 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
 
       <h3
         className="text-base font-semibold mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#888888' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
         {item.description}
       </p>
     </motion.div>
@@ -124,7 +124,7 @@ export default function WhyApex() {
     <section
       id="why-apex"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Why choose Apex"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -154,7 +154,7 @@ export default function WhyApex() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
           >
             Clinical Standards.{' '}
             <span className="text-teal-gradient">No Waiting List.</span>

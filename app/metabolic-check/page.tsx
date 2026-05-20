@@ -237,7 +237,7 @@ export default function MetabolicCheckPage() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" style={{ backgroundColor: '#0A0A0A' }}>
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" style={{ backgroundColor: '#ffffff' }}>
         <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
         <div
           aria-hidden="true"
@@ -294,7 +294,7 @@ export default function MetabolicCheckPage() {
       </section>
 
       {/* QUIZ */}
-      <section className="relative section-pad" style={{ backgroundColor: '#111111' }}>
+      <section className="relative section-pad" style={{ backgroundColor: '#ffffff' }}>
         <div className="glow-rule mb-0" />
 
         <div className="container-tight pt-10 md:pt-14">
@@ -320,9 +320,9 @@ export default function MetabolicCheckPage() {
                 className="font-bold text-2xl leading-none"
                 style={{ fontFamily: 'var(--font-space-grotesk)', color: answeredCount === 10 ? '#3575C6' : '#F4F4F6', transition: 'color 0.3s' }}
               >
-                {answeredCount}<span style={{ color: '#888888', fontSize: 16 }}>/10</span>
+                {answeredCount}<span style={{ color: '#4a5878', fontSize: 16 }}>/10</span>
               </span>
-              <span style={{ fontSize: 10, color: '#888888', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
+              <span style={{ fontSize: 10, color: '#4a5878', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
             </div>
           </motion.div>
 
@@ -372,7 +372,7 @@ export default function MetabolicCheckPage() {
           <section
             ref={resultRef}
             className="relative section-pad overflow-hidden scroll-mt-20"
-            style={{ backgroundColor: '#0A0A0A' }}
+            style={{ backgroundColor: '#ffffff' }}
           >
             <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
             <div
@@ -401,7 +401,7 @@ export default function MetabolicCheckPage() {
                 <div
                   className="rounded-2xl overflow-hidden"
                   style={{
-                    background: '#111111',
+                    background: '#ffffff',
                     border: `1px solid ${tier.color}33`,
                     boxShadow: `0 0 60px ${tier.glowColor}, 0 0 0 1px ${tier.color}22`,
                   }}
@@ -445,7 +445,7 @@ export default function MetabolicCheckPage() {
                           >
                             METABOLIC SCORE — {SCORE_LABEL[result.tier]}
                           </span>
-                          <span style={{ color: '#888888', fontSize: 11 }}>
+                          <span style={{ color: '#4a5878', fontSize: 11 }}>
                             · {result.yesCount} of 10 symptoms present
                           </span>
                         </div>
@@ -479,7 +479,7 @@ export default function MetabolicCheckPage() {
 
                     <div
                       className="rounded-lg p-4 text-xs leading-relaxed"
-                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: '#888888' }}
+                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: '#4a5878' }}
                     >
                       <span style={{ color: '#B0B8C5', fontWeight: 600 }}>Disclaimer: </span>
                       This tool is a screening aid only and does not constitute medical advice. Clinical assessment by an AHPRA-registered practitioner is required for diagnosis and treatment.
@@ -491,7 +491,7 @@ export default function MetabolicCheckPage() {
                   <button
                     onClick={handleRetake}
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: '#888888', letterSpacing: '0.04em' }}
+                    style={{ color: '#4a5878', letterSpacing: '0.04em' }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#B0B8C5')}
                     onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#4a5a6a')}
                   >
@@ -517,7 +517,7 @@ function BottomCTA() {
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }}>
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(53,117,198,0.07) 0%, transparent 65%)' }} />
       <div className="glow-rule mb-0" />
       <div className="container-tight pt-10 md:pt-14">

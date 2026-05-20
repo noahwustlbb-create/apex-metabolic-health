@@ -45,13 +45,13 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#888888' }}>
-        {label}{required && <span style={{ color: '#C8A96E' }}> *</span>}
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>
+        {label}{required && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(200,169,110,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#F5F5F5', caretColor: '#C8A96E' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(200,169,110,0.04)' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
         onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
     </div>
   )
@@ -62,11 +62,11 @@ function TextArea({ label, value, onChange, placeholder, rows = 3 }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#888888' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>{label}</label>
       <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
-        style={{ background: 'rgba(200,169,110,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#F5F5F5', caretColor: '#C8A96E' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(200,169,110,0.04)' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
         onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
     </div>
   )
@@ -77,15 +77,15 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#888888' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>{label}</label>
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onChange(opt)}
             className="px-4 py-2 rounded-sm text-xs font-semibold transition-all duration-150"
             style={{
-              background: value === opt ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${value === opt ? 'rgba(200,169,110,0.45)' : 'rgba(255,255,255,0.07)'}`,
-              color: value === opt ? '#C8A96E' : '#8899aa',
+              background: value === opt ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
+              border: `1px solid ${value === opt ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
+              color: value === opt ? '#4890f7' : '#8899aa',
             }}>{opt}</button>
         ))}
       </div>
@@ -98,8 +98,8 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 1 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>Your details</h2>
-      <p className="text-sm mb-8" style={{ color: '#888888' }}>Basic information to set up your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Your details</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Basic information to set up your consultation.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" required />
         <Field label="Last name" value={data.lastName} onChange={v => set('lastName', v)} placeholder="Smith" required />
@@ -107,12 +107,12 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
         <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" required />
         <Field label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} required />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#888888' }}>State <span style={{ color: '#C8A96E' }}>*</span></label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
           <select value={data.state} onChange={e => set('state', e.target.value)}
             className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(200,169,110,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#F5F5F5' : '#4a5a6a' }}>
+            style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#F5F5F5' : '#4a5a6a' }}>
             <option value="" disabled>Select state</option>
-            {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#0D0D0D', color: '#F5F5F5' }}>{s}</option>)}
+            {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>)}
           </select>
         </div>
         <Field label="GP name (optional)" value={data.gpName} onChange={v => set('gpName', v)} placeholder="Dr. surname" />
@@ -128,21 +128,21 @@ function Step2({ data, set, toggleCondition, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 2 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>Medical info</h2>
-      <p className="text-sm mb-8" style={{ color: '#888888' }}>Your doctor reviews this before your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Medical info</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Your doctor reviews this before your consultation.</p>
       <div className="flex flex-col gap-6">
         <TextArea label="What's your main concern?" value={data.mainConcern} onChange={v => set('mainConcern', v)}
           placeholder={config.concern} rows={3} />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#888888' }}>Medical conditions (select all that apply)</label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>Medical conditions (select all that apply)</label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {CONDITIONS.map(c => (
               <button key={c} type="button" onClick={() => toggleCondition(c)}
                 className="px-3 py-2 rounded-sm text-xs font-medium transition-all duration-150 text-left"
                 style={{
-                  background: data.conditions.includes(c) ? 'rgba(200,169,110,0.1)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${data.conditions.includes(c) ? 'rgba(200,169,110,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                  color: data.conditions.includes(c) ? '#C8A96E' : '#8899aa',
+                  background: data.conditions.includes(c) ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
+                  border: `1px solid ${data.conditions.includes(c) ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+                  color: data.conditions.includes(c) ? '#4890f7' : '#8899aa',
                 }}>{c}</button>
             ))}
           </div>
@@ -164,15 +164,15 @@ function Step3({ data, set, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 3 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}>Confirm & submit</h2>
-      <p className="text-sm mb-8" style={{ color: '#888888' }}>Review your details and confirm consent.</p>
-      <div className="p-5 rounded-sm mb-6" style={{ background: '#111111', border: '1px solid rgba(200,169,110,0.12)' }}>
-        <p className="text-xs font-bold tracking-[0.16em] uppercase mb-4" style={{ color: '#666666' }}>YOUR BOOKING SUMMARY</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Confirm & submit</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Review your details and confirm consent.</p>
+      <div className="p-5 rounded-sm mb-6" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.1)' }}>
+        <p className="text-xs font-bold tracking-[0.16em] uppercase mb-4" style={{ color: '#7a90a8' }}>YOUR BOOKING SUMMARY</p>
         <div className="flex flex-col gap-2">
           {[['Name', `${data.firstName} ${data.lastName}`], ['Email', data.email], ['Phone', data.phone], ['State', data.state], ['Program', config.programName]].map(([k, v]) => v ? (
             <div key={k} className="flex justify-between text-sm">
-              <span style={{ color: '#888888' }}>{k}</span>
-              <span style={{ color: '#888888' }}>{v}</span>
+              <span style={{ color: '#4a5878' }}>{k}</span>
+              <span style={{ color: '#4a5878' }}>{v}</span>
             </div>
           ) : null)}
         </div>
@@ -186,12 +186,12 @@ function Step3({ data, set, config }: {
             <div onClick={() => set(key, !(data[key] as boolean))}
               className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-sm flex items-center justify-center transition-all duration-150"
               style={{
-                background: data[key] ? 'rgba(200,169,110,0.15)' : 'rgba(255,255,255,0.03)',
+                background: data[key] ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.03)',
                 border: `1px solid ${data[key] ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.1)'}`,
               }}>
-              {data[key] && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#C8A96E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+              {data[key] && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </div>
-            <span className="text-sm leading-relaxed" style={{ color: '#888888' }}>{label}</span>
+            <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{label}</span>
           </label>
         ))}
       </div>
@@ -216,13 +216,13 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         className="mb-10"
         style={{
           width: 40, height: 40, borderRadius: '50%',
-          border: '1px solid rgba(200,169,110,0.3)',
+          border: '1px solid rgba(72,144,247,0.25)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          background: 'rgba(200,169,110,0.06)',
+          background: 'rgba(72,144,247,0.05)',
         }}
       >
         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" aria-hidden="true">
-          <path d="M5 12l5 5L19 7" stroke="#C8A96E" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M5 12l5 5L19 7" stroke="#4890f7" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </motion.div>
 
@@ -246,14 +246,14 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           fontFamily: 'var(--font-space-grotesk)',
           fontSize: 'clamp(28px, 3vw, 42px)',
           lineHeight: 1.1,
-          color: '#F5F5F5',
+          color: '#0a0e1a',
           letterSpacing: '-0.02em',
         }}
       >
         {firstName ? `Thank you, ${firstName}.` : 'Thank you.'}
         <br />
         <span style={{
-          background: 'linear-gradient(135deg, #C8A96E, #D4B97E)',
+          background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
@@ -268,7 +268,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.58, ease: [0.22, 1, 0.36, 1] }}
         className="text-base leading-relaxed mb-10"
-        style={{ color: '#888888', maxWidth: 440 }}
+        style={{ color: '#4a5878', maxWidth: 440 }}
       >
         Your {config.programName} intake has been received by our clinical team.
         We will review your details and be in touch within one business day with everything you need for your next step.
@@ -281,7 +281,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         transition={{ duration: 0.7, delay: 0.72, ease: [0.22, 1, 0.36, 1] }}
         style={{
           width: '100%', height: 1, transformOrigin: 'left',
-          background: 'linear-gradient(90deg, rgba(200,169,110,0.15) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)',
+          background: 'linear-gradient(90deg, rgba(72,144,247,0.12) 0%, rgba(255,255,255,0.04) 60%, transparent 100%)',
           marginBottom: 32,
         }}
       />
@@ -302,17 +302,17 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           <div key={i} className="flex gap-4 items-start">
             <div style={{
               minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2,
-              background: '#111111',
-              border: '1px solid rgba(200,169,110,0.12)',
+              background: '#ffffff',
+              border: '1px solid rgba(72,144,247,0.1)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 9, fontWeight: 700, color: '#666666',
+              fontSize: 9, fontWeight: 700, color: '#7a90a8',
               fontFamily: 'var(--font-space-grotesk)',
             }}>
               {i + 1}
             </div>
             <div>
-              <p className="text-sm font-semibold mb-0.5" style={{ color: '#F5F5F5' }}>{item.step}</p>
-              <p className="text-sm leading-relaxed" style={{ color: '#888888' }}>{item.detail}</p>
+              <p className="text-sm font-semibold mb-0.5" style={{ color: '#0a0e1a' }}>{item.step}</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.detail}</p>
             </div>
           </div>
         ))}
@@ -388,25 +388,25 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
     <>
       <Nav />
       <main>
-        <section className="relative overflow-hidden" style={{ backgroundColor: '#0A0A0A', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <section className="relative overflow-hidden" style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 right-0 w-[500px] h-[400px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.07) 0%, transparent 60%)' }} />
+            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }} />
           <div ref={topRef} className="container-tight relative z-10" style={{ maxWidth: 680 }}>
             {!submitted && (
               <div className="mb-10">
                 <div className="flex justify-between mb-2">
-                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#C8A96E' }}>
+                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>
                     {config.formTitle}
                   </span>
-                  <span className="text-xs" style={{ color: '#666666' }}>{progress}%</span>
+                  <span className="text-xs" style={{ color: '#7a90a8' }}>{progress}%</span>
                 </div>
                 <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
-                  <motion.div style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #C8A96E, #C8A96E)' }}
+                  <motion.div style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
                     initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} />
                 </div>
                 <div className="flex gap-3 mt-3">
-                  {STEPS.map((s, i) => <span key={s} className="text-[10px] tracking-wide" style={{ color: i + 1 <= step ? '#C8A96E' : '#2a3a4a' }}>{s}</span>)}
+                  {STEPS.map((s, i) => <span key={s} className="text-[10px] tracking-wide" style={{ color: i + 1 <= step ? '#4890f7' : '#2a3a4a' }}>{s}</span>)}
                 </div>
               </div>
             )}
@@ -423,7 +423,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   {step > 1 && (
                     <button type="button" onClick={() => { setStep(s => s - 1); scrollTop() }}
                       className="px-5 py-3 rounded-sm text-sm font-semibold transition-all duration-150"
-                      style={{ background: 'rgba(200,169,110,0.04)', border: '1px solid rgba(200,169,110,0.12)', color: '#888888' }}>← Back</button>
+                      style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)', color: '#4a5878' }}>← Back</button>
                   )}
                   {step < 3 ? (
                     <button type="button" onClick={() => { setStep(s => s + 1); scrollTop() }}
@@ -436,7 +436,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   )}
                 </div>
                 {error && <p className="text-sm mt-4" style={{ color: '#e05c5c' }}>{error}</p>}
-                <p className="text-xs mt-5" style={{ color: '#666666' }}>Your information is private and confidential. Used only for your clinical consultation.</p>
+                <p className="text-xs mt-5" style={{ color: '#7a90a8' }}>Your information is private and confidential. Used only for your clinical consultation.</p>
               </>
             )}
           </div>

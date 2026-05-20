@@ -21,7 +21,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
           style={{
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: 600,
-            color: '#F5F5F5',
+            color: '#0a0e1a',
             fontSize: '15px',
           }}
         >
@@ -29,7 +29,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
         <span
           style={{
-            color: '#C8A96E',
+            color: '#4890f7',
             fontSize: '22px',
             lineHeight: 1,
             flexShrink: 0,
@@ -40,7 +40,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#888888' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a5878' }}>
           {answer}
         </p>
       )}
@@ -199,7 +199,7 @@ function FAQHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#0A0A0A', paddingTop: '120px' }}
+      style={{ backgroundColor: '#ffffff', paddingTop: '120px' }}
       aria-label="FAQs hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -208,7 +208,7 @@ function FAQHero() {
         aria-hidden="true"
         className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.06) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)',
         }}
       />
 
@@ -227,7 +227,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.06' }}
         >
           Straight Answers.
         </motion.h1>
@@ -237,7 +237,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#888888' }}
+          style={{ color: '#4a5878' }}
         >
           Not on this list? Contact us through the Get Started page.
         </motion.p>
@@ -276,7 +276,7 @@ function FAQCategory({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
         >
           {category}
         </motion.h2>
@@ -306,7 +306,7 @@ function FAQBottomCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0A0A0A' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -315,7 +315,7 @@ function FAQBottomCTA() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.07) 0%, transparent 60%)',
         }}
       />
 
@@ -325,7 +325,7 @@ function FAQBottomCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F5F5F5' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
         >
           Still have questions?
         </motion.h2>

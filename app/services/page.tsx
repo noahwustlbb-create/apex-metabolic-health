@@ -21,10 +21,10 @@ const PROGRAMS = [
       'Brain fog and reduced motivation',
     ],
     tag: 'Most common',
-    accent: '#C8A96E',
-    accentBg: 'rgba(200,169,110,0.06)',
-    accentBorder: 'rgba(200,169,110,0.18)',
-    glowColor: 'rgba(200,169,110,0.05)',
+    accent: '#4890f7',
+    accentBg: 'rgba(72,144,247,0.05)',
+    accentBorder: 'rgba(72,144,247,0.15)',
+    glowColor: 'rgba(72,144,247,0.04)',
     href: '/programs/hormone-optimisation',
     intakeHref: '/intake/hormone-consult',
     icon: (
@@ -189,8 +189,8 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
       transition={{ duration: 0.55, delay: i * 0.07, ease }}
       className="group flex flex-col rounded-xl overflow-hidden"
       style={{
-        background: '#111111',
-        border: '1px solid #1E1E1E',
+        background: '#ffffff',
+        border: '1px solid rgba(72,144,247,0.14)',
         borderLeft: `2px solid ${p.accent}`,
         opacity: isComingSoon ? 0.75 : 1,
         transition: 'box-shadow 0.2s ease',
@@ -205,7 +205,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
       }}
     >
       {/* Header */}
-      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid #1E1E1E' }}>
+      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.1)' }}>
         <div className="flex items-center justify-between gap-3 mb-3.5">
           <div className="flex items-center gap-2">
             <div
@@ -234,7 +234,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         >
           {p.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#888888' }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
           {p.tagline}
         </p>
       </div>
@@ -245,7 +245,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           {p.bullets.map((b, j) => (
             <li key={j} className="flex items-start gap-2">
               <div className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent, opacity: 0.6 }} />
-              <span className="text-xs leading-relaxed" style={{ color: '#888888' }}>{b}</span>
+              <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{b}</span>
             </li>
           ))}
         </ul>
@@ -254,7 +254,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         {isComingSoon ? (
           <div
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid #1E1E1E', color: '#666666', cursor: 'default' }}
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(72,144,247,0.14)', color: '#7a90a8', cursor: 'default' }}
           >
             Joining soon
             <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -266,7 +266,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           <Link
             href={p.intakeHref}
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid #1E1E1E', color: '#888888' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.14)', color: '#4a5878' }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement
               el.style.background = p.accentBg
@@ -276,7 +276,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
             onMouseLeave={e => {
               const el = e.currentTarget as HTMLElement
               el.style.background = 'rgba(255,255,255,0.03)'
-              el.style.borderColor = '#1E1E1E'
+              el.style.borderColor = 'rgba(72,144,247,0.12)'
               el.style.color = '#6b7a8d'
             }}
           >
@@ -309,14 +309,14 @@ export default function ServicesPage() {
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#0A0A0A', paddingTop: '140px', paddingBottom: '80px' }}
+          style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="Clinical programs"
         >
           <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
           <div
             aria-hidden="true"
             className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(200,169,110,0.05) 0%, transparent 60%)' }}
+            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }}
           />
 
           <div ref={heroRef} className="container-tight relative z-10">
@@ -339,7 +339,7 @@ export default function ServicesPage() {
                 fontWeight: 700,
                 lineHeight: 1.06,
                 letterSpacing: '-0.025em',
-                color: '#F5F5F5',
+                color: '#0a0e1a',
                 maxWidth: '720px',
                 marginBottom: '1.25rem',
               }}
@@ -347,7 +347,7 @@ export default function ServicesPage() {
               Most clinics treat symptoms.
               <br />
               <span style={{
-                background: 'linear-gradient(135deg, #C8A96E, #D4B97E)',
+                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -360,7 +360,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2, ease }}
-              style={{ color: '#888888', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+              style={{ color: '#4a5878', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
             >
               Six doctor-led protocols — each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
             </motion.p>
@@ -373,7 +373,7 @@ export default function ServicesPage() {
               className="flex flex-wrap gap-x-6 gap-y-2"
             >
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#666666' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -385,7 +385,7 @@ export default function ServicesPage() {
         {/* ── Program Cards ─────────────────────────────────────── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#0D0D0D', paddingTop: '64px', paddingBottom: '48px' }}
+          style={{ backgroundColor: '#f8f9ff', paddingTop: '64px', paddingBottom: '48px' }}
           aria-label="Programs"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -404,13 +404,13 @@ export default function ServicesPage() {
               animate={helperInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1, ease }}
               className="mt-8 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-              style={{ borderTop: '1px solid #1E1E1E' }}
+              style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
               <div>
-                <p className="text-sm font-medium mb-0.5" style={{ color: '#888888' }}>
+                <p className="text-sm font-medium mb-0.5" style={{ color: '#4a5878' }}>
                   Not sure which program fits?
                 </p>
-                <p className="text-xs" style={{ color: '#666666' }}>
+                <p className="text-xs" style={{ color: '#7a90a8' }}>
                   Complete the 60-second pre-screen — we&apos;ll identify the right clinical pathway for you.
                 </p>
               </div>
@@ -418,19 +418,19 @@ export default function ServicesPage() {
                 href="/intake/pre-screen"
                 className="inline-flex items-center gap-2 text-sm font-semibold flex-shrink-0 px-5 py-2.5 rounded-lg transition-all duration-150"
                 style={{
-                  background: 'rgba(200,169,110,0.08)',
-                  border: '1px solid rgba(200,169,110,0.2)',
-                  color: '#C8A96E',
+                  background: 'rgba(72,144,247,0.07)',
+                  border: '1px solid rgba(72,144,247,0.18)',
+                  color: '#4890f7',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLElement
                   el.style.background = 'rgba(72,144,247,0.13)'
-                  el.style.borderColor = 'rgba(200,169,110,0.35)'
+                  el.style.borderColor = 'rgba(72,144,247,0.3)'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLElement
-                  el.style.background = 'rgba(200,169,110,0.08)'
-                  el.style.borderColor = 'rgba(200,169,110,0.2)'
+                  el.style.background = 'rgba(72,144,247,0.07)'
+                  el.style.borderColor = 'rgba(72,144,247,0.18)'
                 }}
               >
                 Start pre-screen assessment
@@ -449,14 +449,14 @@ export default function ServicesPage() {
         <section
           ref={ctaRef}
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#0A0A0A', paddingTop: '80px', paddingBottom: '100px' }}
+          style={{ backgroundColor: '#ffffff', paddingTop: '80px', paddingBottom: '100px' }}
           aria-label="Get started"
         >
           <div className="glow-rule" aria-hidden="true" />
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(200,169,110,0.06) 0%, transparent 55%)' }}
+            style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.05) 0%, transparent 55%)' }}
           />
 
           <div className="container-tight relative z-10 text-center">
@@ -479,13 +479,13 @@ export default function ServicesPage() {
                 fontWeight: 700,
                 lineHeight: 1.08,
                 letterSpacing: '-0.02em',
-                color: '#F5F5F5',
+                color: '#0a0e1a',
                 marginBottom: '1.5rem',
               }}
             >
               Get answers.{' '}
               <span style={{
-                background: 'linear-gradient(135deg, #C8A96E, #D4B97E)',
+                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -498,7 +498,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={ctaInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
-              style={{ color: '#888888', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
+              style={{ color: '#4a5878', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
             >
               Doctor-led assessment. Advanced diagnostics. A protocol built around your biology — not a generic plan.
             </motion.p>
@@ -520,7 +520,7 @@ export default function ServicesPage() {
               <Link
                 href="/intake/discovery"
                 className="text-sm font-medium transition-colors duration-150"
-                style={{ color: '#888888' }}
+                style={{ color: '#4a5878' }}
                 onMouseEnter={e => { e.currentTarget.style.color = '#8899aa' }}
                 onMouseLeave={e => { e.currentTarget.style.color = '#4a5a6a' }}
               >
@@ -533,7 +533,7 @@ export default function ServicesPage() {
               animate={ctaInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-xs mt-10"
-              style={{ color: '#555555' }}
+              style={{ color: '#7a90a8' }}
             >
               All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
             </motion.p>
