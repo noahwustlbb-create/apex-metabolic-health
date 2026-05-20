@@ -105,11 +105,11 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
 
       <h3
         className="text-base font-semibold mb-3 leading-snug"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#B0B8C5' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
         {item.description}
       </p>
     </motion.div>
@@ -154,7 +154,7 @@ export default function WhyApex() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
           >
             Clinical Standards.{' '}
             <span className="text-teal-gradient">No Waiting List.</span>

@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body
         className="antialiased overflow-x-hidden"
-        style={{ backgroundColor: '#070a0d', color: '#f0f4f8' }}
+        style={{ backgroundColor: '#ffffff', color: '#0a0e1a' }}
       >
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

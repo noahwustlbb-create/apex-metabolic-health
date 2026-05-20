@@ -45,12 +45,12 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5a6a' }}>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#7a90a8' }}>
         {label}{required && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: '#4890f7' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
         onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
         onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
     </div>
@@ -62,10 +62,10 @@ function TextArea({ label, value, onChange, placeholder, rows = 3 }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5a6a' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#7a90a8' }}>{label}</label>
       <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
-        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: '#4890f7' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
         onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
         onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
     </div>
@@ -77,7 +77,7 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5a6a' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#7a90a8' }}>{label}</label>
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onChange(opt)}
@@ -98,8 +98,8 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 1 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>Your details</h2>
-      <p className="text-sm mb-8" style={{ color: '#6b7a8d' }}>Basic information to set up your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Your details</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Basic information to set up your consultation.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" required />
         <Field label="Last name" value={data.lastName} onChange={v => set('lastName', v)} placeholder="Smith" required />
@@ -107,12 +107,12 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
         <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" required />
         <Field label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} required />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5a6a' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#7a90a8' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
           <select value={data.state} onChange={e => set('state', e.target.value)}
             className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#f0f4f8' : '#4a5a6a' }}>
+            style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#f0f4f8' : '#4a5a6a' }}>
             <option value="" disabled>Select state</option>
-            {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#0d1117', color: '#f0f4f8' }}>{s}</option>)}
+            {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#0d1117', color: '#0a0e1a' }}>{s}</option>)}
           </select>
         </div>
         <Field label="GP name (optional)" value={data.gpName} onChange={v => set('gpName', v)} placeholder="Dr. surname" />
@@ -128,13 +128,13 @@ function Step2({ data, set, toggleCondition, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 2 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>Medical info</h2>
-      <p className="text-sm mb-8" style={{ color: '#6b7a8d' }}>Your doctor reviews this before your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Medical info</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Your doctor reviews this before your consultation.</p>
       <div className="flex flex-col gap-6">
         <TextArea label="What's your main concern?" value={data.mainConcern} onChange={v => set('mainConcern', v)}
           placeholder={config.concern} rows={3} />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5a6a' }}>Medical conditions (select all that apply)</label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#7a90a8' }}>Medical conditions (select all that apply)</label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {CONDITIONS.map(c => (
               <button key={c} type="button" onClick={() => toggleCondition(c)}
@@ -164,15 +164,15 @@ function Step3({ data, set, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 3 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>Confirm & submit</h2>
-      <p className="text-sm mb-8" style={{ color: '#6b7a8d' }}>Review your details and confirm consent.</p>
-      <div className="p-5 rounded-sm mb-6" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-        <p className="text-xs font-bold tracking-[0.16em] uppercase mb-4" style={{ color: '#3a4a5a' }}>YOUR BOOKING SUMMARY</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Confirm & submit</h2>
+      <p className="text-sm mb-8" style={{ color: '#4a5878' }}>Review your details and confirm consent.</p>
+      <div className="p-5 rounded-sm mb-6" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.12)' }}>
+        <p className="text-xs font-bold tracking-[0.16em] uppercase mb-4" style={{ color: '#9ab0c8' }}>YOUR BOOKING SUMMARY</p>
         <div className="flex flex-col gap-2">
           {[['Name', `${data.firstName} ${data.lastName}`], ['Email', data.email], ['Phone', data.phone], ['State', data.state], ['Program', config.programName]].map(([k, v]) => v ? (
             <div key={k} className="flex justify-between text-sm">
-              <span style={{ color: '#4a5a6a' }}>{k}</span>
-              <span style={{ color: '#8899aa' }}>{v}</span>
+              <span style={{ color: '#7a90a8' }}>{k}</span>
+              <span style={{ color: '#4a5878' }}>{v}</span>
             </div>
           ) : null)}
         </div>
@@ -191,7 +191,7 @@ function Step3({ data, set, config }: {
               }}>
               {data[key] && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </div>
-            <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{label}</span>
+            <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{label}</span>
           </label>
         ))}
       </div>
@@ -246,7 +246,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           fontFamily: 'var(--font-space-grotesk)',
           fontSize: 'clamp(28px, 3vw, 42px)',
           lineHeight: 1.1,
-          color: '#f0f4f8',
+          color: '#0a0e1a',
           letterSpacing: '-0.02em',
         }}
       >
@@ -268,7 +268,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.58, ease: [0.22, 1, 0.36, 1] }}
         className="text-base leading-relaxed mb-10"
-        style={{ color: '#8899aa', maxWidth: 440 }}
+        style={{ color: '#4a5878', maxWidth: 440 }}
       >
         Your {config.programName} intake has been received by our clinical team.
         We will review your details and be in touch within one business day with everything you need for your next step.
@@ -302,17 +302,17 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           <div key={i} className="flex gap-4 items-start">
             <div style={{
               minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2,
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: '#ffffff',
+              border: '1px solid rgba(72,144,247,0.12)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 9, fontWeight: 700, color: '#3a4a5a',
+              fontSize: 9, fontWeight: 700, color: '#9ab0c8',
               fontFamily: 'var(--font-space-grotesk)',
             }}>
               {i + 1}
             </div>
             <div>
               <p className="text-sm font-semibold mb-0.5" style={{ color: '#c8d4e0' }}>{item.step}</p>
-              <p className="text-sm leading-relaxed" style={{ color: '#4a5a6a' }}>{item.detail}</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#7a90a8' }}>{item.detail}</p>
             </div>
           </div>
         ))}
@@ -399,7 +399,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>
                     {config.formTitle}
                   </span>
-                  <span className="text-xs" style={{ color: '#3a4a5a' }}>{progress}%</span>
+                  <span className="text-xs" style={{ color: '#9ab0c8' }}>{progress}%</span>
                 </div>
                 <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <motion.div style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
@@ -423,7 +423,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   {step > 1 && (
                     <button type="button" onClick={() => { setStep(s => s - 1); scrollTop() }}
                       className="px-5 py-3 rounded-sm text-sm font-semibold transition-all duration-150"
-                      style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#6b7a8d' }}>← Back</button>
+                      style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)', color: '#4a5878' }}>← Back</button>
                   )}
                   {step < 3 ? (
                     <button type="button" onClick={() => { setStep(s => s + 1); scrollTop() }}
@@ -436,7 +436,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   )}
                 </div>
                 {error && <p className="text-sm mt-4" style={{ color: '#e05c5c' }}>{error}</p>}
-                <p className="text-xs mt-5" style={{ color: '#3a4a5a' }}>Your information is private and confidential. Used only for your clinical consultation.</p>
+                <p className="text-xs mt-5" style={{ color: '#9ab0c8' }}>Your information is private and confidential. Used only for your clinical consultation.</p>
               </>
             )}
           </div>

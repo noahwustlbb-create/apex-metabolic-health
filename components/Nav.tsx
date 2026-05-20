@@ -22,12 +22,12 @@ const navLinks = [
   { label: 'FAQs',          href: '/faqs'          },
 ]
 
-const LINK_STYLE = { color: 'rgba(255,255,255,0.45)' }
-const LINK_HOVER = { color: '#ffffff' }
+const LINK_STYLE = { color: 'rgba(10,14,26,0.5)' }
+const LINK_HOVER = { color: '#0a0e1a' }
 
 export default function Nav() {
-  const [scrolled, setScrolled]     = useState(false)
-  const [menuOpen, setMenuOpen]     = useState(false)
+  const [scrolled, setScrolled]         = useState(false)
+  const [menuOpen, setMenuOpen]         = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
 
   useEffect(() => {
@@ -49,21 +49,21 @@ export default function Nav() {
         transition={{ duration: 0.7, ease: 'easeOut' }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
         style={{
-          backgroundColor: scrolled ? 'rgba(7,8,10,0.9)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(16px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          backgroundColor: scrolled ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.85)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: scrolled ? '1px solid rgba(72,144,247,0.12)' : '1px solid rgba(72,144,247,0.06)',
         }}
       >
         <div className="mx-auto w-full max-w-[1440px] px-6 md:px-8 flex items-center justify-between h-[68px] md:h-[76px]">
 
           {/* Logo */}
           <Link href="/" className="flex flex-col flex-shrink-0 select-none" aria-label="Apex Metabolic Health" style={{ textDecoration: 'none' }}>
-            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.03em', color: '#ffffff', lineHeight: 1 }}>
+            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 700, fontSize: '20px', letterSpacing: '-0.03em', color: '#4890f7', lineHeight: 1 }}>
               APEX
             </span>
-            <span style={{ display: 'block', height: '1px', background: 'rgba(255,255,255,0.18)', margin: '3px 0 4px' }} />
-            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 400, fontSize: '7px', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', lineHeight: 1 }}>
+            <span style={{ display: 'block', height: '1px', background: 'rgba(72,144,247,0.25)', margin: '3px 0 4px' }} />
+            <span style={{ fontFamily: 'var(--font-space-grotesk)', fontWeight: 400, fontSize: '7px', letterSpacing: '0.24em', textTransform: 'uppercase', color: 'rgba(10,14,26,0.38)', lineHeight: 1 }}>
               Metabolic Health
             </span>
           </Link>
@@ -116,10 +116,10 @@ export default function Nav() {
                     className="absolute top-full left-0 mt-4 z-50"
                     style={{
                       width: 300,
-                      background: '#0f1115',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      background: '#ffffff',
+                      border: '1px solid rgba(72,144,247,0.14)',
                       borderRadius: 12,
-                      boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
+                      boxShadow: '0 16px 48px rgba(72,144,247,0.12), 0 2px 12px rgba(0,0,0,0.06)',
                       padding: '8px',
                     }}
                   >
@@ -128,12 +128,12 @@ export default function Nav() {
                         <div
                           key={program.slug}
                           className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-[13px]"
-                          style={{ color: '#3a4a5a', cursor: 'default' }}
+                          style={{ color: '#b0c0d0', cursor: 'default' }}
                         >
                           <span>{program.name}</span>
                           <span
                             className="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm"
-                            style={{ color: '#c9a84c', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.15)' }}
+                            style={{ color: '#c9a84c', background: 'rgba(201,168,76,0.08)', border: '1px solid rgba(201,168,76,0.2)' }}
                           >
                             Soon
                           </span>
@@ -143,13 +143,13 @@ export default function Nav() {
                           key={program.slug}
                           href={`/programs/${program.slug}`}
                           className="block px-3.5 py-2.5 rounded-lg text-[13px] transition-all duration-150"
-                          style={{ color: 'rgba(242,239,233,0.55)' }}
+                          style={{ color: '#4a5878' }}
                           onMouseEnter={e => {
-                            e.currentTarget.style.color = '#f2efe9'
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+                            e.currentTarget.style.color = '#0a0e1a'
+                            e.currentTarget.style.background = '#f0f5ff'
                           }}
                           onMouseLeave={e => {
-                            e.currentTarget.style.color = 'rgba(242,239,233,0.55)'
+                            e.currentTarget.style.color = '#4a5878'
                             e.currentTarget.style.background = 'transparent'
                           }}
                         >
@@ -157,12 +157,12 @@ export default function Nav() {
                         </Link>
                       )
                     )}
-                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: 4, paddingTop: 4 }}>
+                    <div style={{ borderTop: '1px solid rgba(72,144,247,0.1)', marginTop: 4, paddingTop: 4 }}>
                       <Link
                         href="/services"
                         className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-[12px] font-semibold transition-all duration-150"
                         style={{ color: '#4890f7' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.06)' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = '#f0f5ff' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                       >
                         View all programs
@@ -195,9 +195,9 @@ export default function Nav() {
             <Link
               href="/order-bloods"
               className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-              style={{ color: 'rgba(242,239,233,0.3)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(242,239,233,0.7)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(242,239,233,0.3)' }}
+              style={{ color: 'rgba(10,14,26,0.3)' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.7)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.3)' }}
             >
               Order Bloods
             </Link>
@@ -205,18 +205,18 @@ export default function Nav() {
               href="/intake/pre-screen"
               className="inline-flex items-center gap-2 text-[12.5px] font-semibold transition-all duration-200 whitespace-nowrap"
               style={{
-                background: '#f2efe9',
-                color: '#07080a',
+                background: '#4890f7',
+                color: '#ffffff',
                 padding: '9px 20px',
                 borderRadius: '999px',
                 letterSpacing: '0.01em',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = '#ffffff'
-                e.currentTarget.style.boxShadow = '0 0 28px rgba(72,144,247,0.15)'
+                e.currentTarget.style.background = '#2563eb'
+                e.currentTarget.style.boxShadow = '0 4px 16px rgba(72,144,247,0.4)'
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.background = '#f2efe9'
+                e.currentTarget.style.background = '#4890f7'
                 e.currentTarget.style.boxShadow = 'none'
               }}
             >
@@ -234,24 +234,9 @@ export default function Nav() {
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
-            <motion.span
-              animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="block w-5 h-px"
-              style={{ background: '#f2efe9' }}
-            />
-            <motion.span
-              animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.2 }}
-              className="block w-5 h-px"
-              style={{ background: '#f2efe9' }}
-            />
-            <motion.span
-              animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="block w-5 h-px"
-              style={{ background: '#f2efe9' }}
-            />
+            <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.25 }} className="block w-5 h-px" style={{ background: '#0a0e1a' }} />
+            <motion.span animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }} transition={{ duration: 0.2 }} className="block w-5 h-px" style={{ background: '#0a0e1a' }} />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.25 }} className="block w-5 h-px" style={{ background: '#0a0e1a' }} />
           </button>
         </div>
       </motion.header>
@@ -265,10 +250,9 @@ export default function Nav() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.22 }}
             className="fixed inset-0 z-40 md:hidden flex flex-col"
-            style={{ backgroundColor: '#07080a' }}
+            style={{ backgroundColor: '#ffffff' }}
           >
             <div className="flex flex-col flex-1 overflow-y-auto" style={{ paddingTop: '76px' }}>
-
               <nav className="flex flex-col px-6 pt-6" aria-label="Primary navigation">
                 {[
                   { label: 'Clinical Programs', href: '/services'       },
@@ -290,16 +274,16 @@ export default function Nav() {
                       onClick={() => setMenuOpen(false)}
                       className="flex items-center justify-between py-4 text-[22px] font-semibold border-b transition-colors duration-150"
                       style={{
-                        color: 'rgba(242,239,233,0.75)',
-                        borderColor: 'rgba(255,255,255,0.06)',
+                        color: 'rgba(10,14,26,0.75)',
+                        borderColor: 'rgba(72,144,247,0.1)',
                         fontFamily: 'var(--font-space-grotesk)',
                         letterSpacing: '-0.01em',
                       }}
-                      onMouseEnter={e => { e.currentTarget.style.color = '#f2efe9' }}
-                      onMouseLeave={e => { e.currentTarget.style.color = 'rgba(242,239,233,0.75)' }}
+                      onMouseEnter={e => { e.currentTarget.style.color = '#0a0e1a' }}
+                      onMouseLeave={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.75)' }}
                     >
                       {link.label}
-                      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" style={{ opacity: 0.2 }} aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" style={{ opacity: 0.25 }} aria-hidden="true">
                         <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Link>
@@ -314,12 +298,7 @@ export default function Nav() {
                 transition={{ duration: 0.3, delay: 0.3 }}
                 className="px-6 pt-5"
               >
-                <Link
-                  href="/order-bloods"
-                  onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium transition-colors duration-150"
-                  style={{ color: '#3a4a5a' }}
-                >
+                <Link href="/order-bloods" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#b0c0d0' }}>
                   Order Bloods →
                 </Link>
               </motion.div>
@@ -331,37 +310,18 @@ export default function Nav() {
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.32, delay: 0.22 }}
               className="px-6 pb-10 pt-5 flex flex-col gap-3"
-              style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+              style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
-              <Link
-                href="/intake/pre-screen"
-                onClick={() => setMenuOpen(false)}
-                className="btn-primary justify-center w-full text-[14px]"
-                style={{ padding: '15px 24px' }}
-              >
+              <Link href="/intake/pre-screen" onClick={() => setMenuOpen(false)} className="btn-primary justify-center w-full text-[14px]" style={{ padding: '15px 24px' }}>
                 Start My Assessment
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
               <div className="flex items-center justify-center gap-6">
-                <Link
-                  href="/intake/hormone-consult"
-                  onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium transition-colors duration-150"
-                  style={{ color: '#4890f7' }}
-                >
-                  Hormone Consult →
-                </Link>
-                <span style={{ color: 'rgba(255,255,255,0.08)' }}>|</span>
-                <Link
-                  href="/intake/general-consult"
-                  onClick={() => setMenuOpen(false)}
-                  className="text-sm font-medium transition-colors duration-150"
-                  style={{ color: '#4890f7' }}
-                >
-                  General Consult →
-                </Link>
+                <Link href="/intake/hormone-consult" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>Hormone Consult →</Link>
+                <span style={{ color: 'rgba(72,144,247,0.2)' }}>|</span>
+                <Link href="/intake/general-consult" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>General Consult →</Link>
               </div>
             </motion.div>
           </motion.div>

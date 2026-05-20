@@ -24,7 +24,7 @@ export default function ProblemSection() {
     <section
       id="problem"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#0d0f12' }}
+      style={{ backgroundColor: '#f0f5ff' }}
       aria-label="Symptoms section"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -57,7 +57,7 @@ export default function ProblemSection() {
             >
               Your GP said normal.
               <br />
-              <span style={{ color: 'rgba(255,255,255,0.28)' }}>
+              <span style={{ color: 'rgba(10,14,26,0.22)' }}>
                 Your body disagrees.
               </span>
             </motion.h2>
@@ -67,7 +67,7 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.16, ease }}
               className="text-base leading-relaxed mb-8"
-              style={{ color: '#7a8a9a', maxWidth: '420px' }}
+              style={{ color: '#4a5878', maxWidth: '420px' }}
             >
               Standard blood panels are designed to rule out disease — not optimise how you function. We run advanced diagnostics interpreted by doctors who specialise in exactly this.
             </motion.p>
@@ -93,7 +93,7 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2, ease }}
               className="text-[10px] font-semibold tracking-[0.22em] uppercase mb-5"
-              style={{ color: '#2d3d4e' }}
+              style={{ color: '#9ab0c8' }}
             >
               Sound familiar?
             </motion.p>
@@ -107,15 +107,15 @@ export default function ProblemSection() {
                   transition={{ duration: 0.45, delay: 0.22 + i * 0.05, ease }}
                   className="flex items-center gap-3.5 px-4 py-3.5 rounded-xl"
                   style={{
-                    background: 'rgba(255,255,255,0.025)',
-                    border: '1px solid rgba(255,255,255,0.045)',
+                    background: '#ffffff',
+                    border: '1px solid rgba(72,144,247,0.14)',
                   }}
                 >
                   <div
                     className="w-1 h-1 rounded-full flex-shrink-0"
                     style={{ background: 'rgba(72,144,247,0.6)' }}
                   />
-                  <p className="text-sm" style={{ color: '#9aacbc', fontFamily: 'var(--font-inter)' }}>
+                  <p className="text-sm" style={{ color: '#4a5878', fontFamily: 'var(--font-inter)' }}>
                     {symptom}
                   </p>
                 </motion.div>
@@ -127,7 +127,7 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.7, ease }}
               className="text-xs mt-5 leading-relaxed"
-              style={{ color: '#2d3d4e' }}
+              style={{ color: '#9ab0c8' }}
             >
               These are clinical indicators — not lifestyle problems. Most people are never tested for them. We are.
             </motion.p>

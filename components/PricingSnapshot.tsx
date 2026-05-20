@@ -80,7 +80,7 @@ export default function PricingSnapshot() {
     <section
       id="pricing"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#07080a' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Transparent pricing"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -109,7 +109,7 @@ export default function PricingSnapshot() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
           >
             Three components.{' '}
-            <span style={{ color: 'rgba(255,255,255,0.28)' }}>
+            <span style={{ color: 'rgba(10,14,26,0.22)' }}>
               That&apos;s it.
             </span>
           </motion.h2>
@@ -118,7 +118,7 @@ export default function PricingSnapshot() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-lg"
-            style={{ color: '#7a8a9a' }}
+            style={{ color: '#4a5878' }}
           >
             Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
           </motion.p>
@@ -152,7 +152,7 @@ export default function PricingSnapshot() {
 
               <div
                 className="px-6 pt-6 pb-5"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+                style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
                   <div
@@ -186,7 +186,7 @@ export default function PricingSnapshot() {
 
                 <h3
                   className="text-lg font-semibold mb-3"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f2efe9' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
                 >
                   {card.title}
                 </h3>
@@ -199,21 +199,21 @@ export default function PricingSnapshot() {
                     >
                       {card.price}
                     </span>
-                    <span className="text-xs" style={{ color: '#4a5a6a' }}>{card.priceNote}</span>
+                    <span className="text-xs" style={{ color: '#7a90a8' }}>{card.priceNote}</span>
                   </div>
                   {card.price2 && (
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="text-lg font-bold"
-                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#7a8a9a' }}
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4a5878' }}
                       >
                         {card.price2}
                       </span>
-                      <span className="text-xs" style={{ color: '#3a4a5a' }}>{card.priceNote2}</span>
+                      <span className="text-xs" style={{ color: '#9ab0c8' }}>{card.priceNote2}</span>
                     </div>
                   )}
                   {card.featured && (
-                    <p className="text-[10px] mt-0.5" style={{ color: '#3a4a5a' }}>
+                    <p className="text-[10px] mt-0.5" style={{ color: '#9ab0c8' }}>
                       Doctor-led care, reviewed over time
                     </p>
                   )}
@@ -221,7 +221,7 @@ export default function PricingSnapshot() {
               </div>
 
               <div className="flex flex-col flex-1 px-6 py-5">
-                <p className="text-xs leading-relaxed mb-4" style={{ color: '#7a8a9a' }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: '#4a5878' }}>
                   {card.body}
                 </p>
 
@@ -245,7 +245,7 @@ export default function PricingSnapshot() {
                 {card.note && (
                   <p
                     className="text-[10px] leading-relaxed mt-4 pt-4"
-                    style={{ color: '#3a4a5a', borderTop: '1px solid rgba(255,255,255,0.04)' }}
+                    style={{ color: '#9ab0c8', borderTop: '1px solid rgba(72,144,247,0.08)' }}
                   >
                     {card.note}
                   </p>
@@ -261,7 +261,7 @@ export default function PricingSnapshot() {
           transition={{ duration: 0.5, delay: 0.45, ease }}
           className="mt-8 flex items-center justify-between flex-wrap gap-4"
         >
-          <p className="text-xs" style={{ color: '#2d3d4e' }}>
+          <p className="text-xs" style={{ color: '#9ab0c8' }}>
             Membership activates after your initial consultation where treatment is clinically appropriate. No lock-in contracts.
           </p>
           <Link

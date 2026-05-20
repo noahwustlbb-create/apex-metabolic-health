@@ -22,7 +22,7 @@ export default function StatsBar() {
     <section
       ref={ref}
       className="relative section-pad-sm overflow-hidden"
-      style={{ backgroundColor: '#07080a' }}
+      style={{ backgroundColor: '#ffffff' }}
       aria-label="Clinical credentials"
     >
       <div className="warm-rule" aria-hidden="true" />

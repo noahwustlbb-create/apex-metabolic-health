@@ -50,11 +50,11 @@ export default function ProgramQuiz() {
             <p className="label mb-4">HEALTH ASSESSMENT</p>
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
             >
               Not Sure Where to Start?
             </h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: '#B0B8C5' }}>
+            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: '#4a5878' }}>
               Answer a few quick questions and we&apos;ll recommend the right program for your goals.
               Takes 2 minutes.
             </p>

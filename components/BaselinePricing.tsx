@@ -147,7 +147,7 @@ export default function BaselinePricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8', lineHeight: 1.08 }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: 1.08 }}
           >
             Start with your baseline —{' '}
             <span className="text-teal-gradient">$99</span>
@@ -157,7 +157,7 @@ export default function BaselinePricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-lg leading-relaxed"
-            style={{ color: '#8899aa' }}
+            style={{ color: '#4a5878' }}
           >
             One blood test. A full picture of where you stand.
           </motion.p>
@@ -204,19 +204,19 @@ export default function BaselinePricing() {
                   <p className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-1.5" style={{ color: card.tagColor }}>
                     {card.tag}
                   </p>
-                  <h3 className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f4f8' }}>
+                  <h3 className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                     {card.title}
                   </h3>
                 </div>
                 {card.price && (
                   <div className="text-right flex-shrink-0 ml-4">
                     <p className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: card.priceColor }}>{card.price}</p>
-                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#4a5a6a' }}>{card.priceLabel}</p>
+                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#7a90a8' }}>{card.priceLabel}</p>
                   </div>
                 )}
               </div>
 
-              <p className="text-sm leading-relaxed mb-5" style={{ color: '#8899aa' }}>{card.description}</p>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: '#4a5878' }}>{card.description}</p>
 
               <ul className="space-y-2.5 flex-1 mb-5">
                 {card.includes.map((item) => (
@@ -225,14 +225,14 @@ export default function BaselinePricing() {
                       <circle cx="8" cy="8" r="7" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.2" fill={card.featured ? 'rgba(72,144,247,0.08)' : 'rgba(72,144,247,0.07)'} />
                       <path d="M5 8l2 2 4-4" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-sm leading-relaxed" style={{ color: '#8899aa' }}>{item}</span>
+                    <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
                   </li>
                 ))}
               </ul>
 
               {/* Note (e.g. for blood panel) */}
               {'note' in card && card.note && (
-                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#5a6a7a', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#4a5878', background: '#ffffff', border: '1px solid rgba(72,144,247,0.1)' }}>
                   ⓘ {card.note}
                 </p>
               )}
@@ -261,7 +261,7 @@ export default function BaselinePricing() {
           {TRUST_SIGNALS.map((signal) => (
             <div key={signal.text} className="flex items-center gap-2">
               {signal.icon}
-              <span className="text-xs font-medium" style={{ color: '#6b7a8d' }}>{signal.text}</span>
+              <span className="text-xs font-medium" style={{ color: '#4a5878' }}>{signal.text}</span>
             </div>
           ))}
         </motion.div>
