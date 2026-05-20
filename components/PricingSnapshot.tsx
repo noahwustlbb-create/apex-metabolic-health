@@ -65,7 +65,7 @@ const CARDS = [
       'Protocol adjustments based on results',
       'Priority clinical support between reviews',
     ],
-    note: 'Script release available: $145 one-off. Prescription released to you — fill at any pharmacy. No ongoing membership.',
+    note: 'Script release available: $125 one-off. Prescription released to you — fill at any pharmacy. No ongoing membership.',
     featured: true,
   },
 ]
@@ -136,11 +136,11 @@ export default function PricingSnapshot() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="flex flex-col rounded-2xl overflow-hidden"
               style={{
-                background: card.featured ? 'rgba(255,255,255,0.035)' : 'rgba(255,255,255,0.02)',
+                background: '#ffffff',
                 border: card.featured
-                  ? '1px solid rgba(72,144,247,0.25)'
-                  : '1px solid rgba(255,255,255,0.055)',
-                boxShadow: card.featured ? '0 0 56px rgba(72,144,247,0.06)' : 'none',
+                  ? '1px solid rgba(72,144,247,0.3)'
+                  : '1px solid rgba(72,144,247,0.12)',
+                boxShadow: card.featured ? '0 8px 40px rgba(72,144,247,0.1)' : '0 2px 12px rgba(0,0,0,0.04)',
               }}
             >
               {card.featured && (

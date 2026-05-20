@@ -195,7 +195,7 @@ export async function POST(req: Request) {
                         <p style="margin:0;font-size:12px;color:#4a5a6a;">One-off prescribing — no ongoing support</p>
                       </td>
                       <td align="right">
-                        <p style="margin:0;font-size:16px;font-weight:700;color:#f0f4f8;">$145<span style="font-size:12px;font-weight:400;color:#4a5a6a;"> one-off</span></p>
+                        <p style="margin:0;font-size:16px;font-weight:700;color:#f0f4f8;">$125<span style="font-size:12px;font-weight:400;color:#4a5a6a;"> one-off</span></p>
                       </td>
                     </tr>
                   </table>

@@ -534,7 +534,7 @@ export default function MembershipPage() {
                   Script Release Only
                 </h3>
                 <div className="flex items-baseline gap-1.5 mb-4">
-                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#6b7a8d' }}>$145</span>
+                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#6b7a8d' }}>$125</span>
                   <span className="text-sm" style={{ color: '#3a4a5a' }}>one-off</span>
                 </div>
 

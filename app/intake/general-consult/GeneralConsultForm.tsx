@@ -352,7 +352,10 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
             </li>
           ))}
         </ul>
-        <p className="text-xs font-semibold mb-1.5" style={{ color: '#6b7a8d' }}>Pathway 2 — Own Pharmacy</p>
+        <div className="flex items-center justify-between mb-1.5">
+          <p className="text-xs font-semibold" style={{ color: '#6b7a8d' }}>Pathway 2 — Own Pharmacy</p>
+          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$125 <span className="text-[10px] font-normal" style={{ color: '#6b7a8d' }}>one-off</span></span>
+        </div>
         <ul className="flex flex-col gap-1.5 mb-4">
           {casualPath2.map(f => (
             <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5a6a' }}>
