@@ -104,7 +104,7 @@ export default function Hero() {
                 maxWidth: '560px',
               }}
             >
-              Most men get reassurance.
+              Most people get reassurance.
               <br />
               <span style={{ color: 'rgba(240,244,248,0.65)' }}>We look deeper.</span>
             </motion.h1>

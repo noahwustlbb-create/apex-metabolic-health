@@ -57,7 +57,16 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-semibold mb-3" style={{ color: '#0d1420', fontFamily: 'var(--font-space-grotesk)' }}>8. Cancellations and Refunds</h2>
-              <p>Consultation fees are non-refundable once a consultation has been conducted. If you need to reschedule, please contact us at least 24 hours before your scheduled appointment. Missed appointments without notice may forfeit the consultation fee. Medication fees are subject to the terms of our pharmacy partner and are non-refundable once dispensed.</p>
+              <p>The following cancellation and refund terms apply to all services provided by Apex Metabolic Health (Imperial Equity Investments Pty Ltd):</p>
+              <ul className="list-disc pl-5 mt-3 flex flex-col gap-2">
+                <li><strong>Pre-consultation cancellation:</strong> If you cancel more than 24 hours before your scheduled consultation, you are entitled to a full refund of any consultation fee paid. Cancellations within 24 hours of the appointment are non-refundable.</li>
+                <li><strong>Post-consultation:</strong> Consultation fees are non-refundable once a consultation has been conducted, regardless of clinical outcome.</li>
+                <li><strong>Missed appointments (patient no-show):</strong> Missed appointments without at least 24 hours' notice forfeit the consultation fee. A rescheduling fee may apply.</li>
+                <li><strong>Appointment cancelled by Apex:</strong> If we cancel or are unable to attend a scheduled appointment, you will be offered a full refund or a rescheduled appointment at no additional cost.</li>
+                <li><strong>Clinical decline:</strong> If a consultation is conducted and the treating doctor determines you are not clinically suitable for treatment, the consultation fee is non-refundable. This reflects the clinical service rendered. No treatment obligation arises from completing a consultation.</li>
+                <li><strong>Medications:</strong> Medication fees are governed by our pharmacy partner's terms and are non-refundable once dispensed or compounded.</li>
+                <li><strong>Australian Consumer Law:</strong> Nothing in these terms limits any right or guarantee you have under the Australian Consumer Law, including that services be rendered with due care and skill and be fit for the purpose for which they are supplied.</li>
+              </ul>
             </section>
 
             <section>

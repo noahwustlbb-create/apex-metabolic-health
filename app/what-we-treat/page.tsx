@@ -121,7 +121,7 @@ const CLINICAL = [
   },
   {
     title: 'Cardiovascular & Metabolic Risk',
-    recognition: 'Most men don\'t know their metabolic risk numbers until something goes wrong. We give you the full picture.',
+    recognition: 'Most people don\'t know their metabolic risk numbers until something goes wrong. We give you the full picture.',
     clinical: 'Lipids, glucose, HbA1c, inflammation, and cardiovascular markers — assessed, interpreted, and explained.',
     tags: ['Lipids', 'HbA1c', 'CRP', 'Metabolic'],
     href: '/intake/general-consult',

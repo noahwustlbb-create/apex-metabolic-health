@@ -286,13 +286,13 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
     'Treatment protocols updated at every review',
   ]
   const casualPath1 = [
-    'You pay the pharmacy price for all medications',
-    'Medication invoices include an admin, handling and safety fee',
+    'Fulfilled through our TGA-compliant partner pharmacy',
+    'Medication fees apply — our team will confirm before dispensing',
   ]
   const casualPath2 = [
     'Script and treatment plan sent directly to you',
+    'Fill at any pharmacy of your choice',
     'Dosing guides included',
-    'Nursing team access for ongoing support',
   ]
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -360,8 +360,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
             </li>
           ))}
         </ul>
-        <p className="text-[11px] mb-4" style={{ color: '#2a3a4a' }}>
-          Note: Script release excludes NSW patients due to state regulations.
+        <p className="text-[11px] mb-4 px-3 py-2 rounded-sm" style={{ color: '#f0a84a', background: 'rgba(240,168,74,0.08)', border: '1px solid rgba(240,168,74,0.2)' }}>
+          ⚠ NSW patients: Script release (Pathway 2) is not available under NSW Poisons and Therapeutic Goods Regulation 2008 for certain Schedule 4 medications prescribed via telehealth. Partner Pharmacy (Pathway 1) remains available.
         </p>
         <div className="w-full py-2.5 rounded-sm text-center text-xs font-bold tracking-[0.1em] uppercase transition-all duration-150"
           style={{
