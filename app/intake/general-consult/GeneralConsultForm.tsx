@@ -109,18 +109,20 @@ const init = (): D => ({
 // ─── Primitives ───────────────────────────────────────────────────────────────
 
 const inputBase: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.04)',
-  border: '1px solid rgba(255,255,255,0.09)',
+  background: '#ffffff',
+  border: '1px solid #d1d9e6',
   color: '#0a0e1a',
   caretColor: '#4890f7',
 }
 const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  e.target.style.borderColor = 'rgba(200,169,110,0.5)'
-  e.target.style.background = 'rgba(72,144,247,0.04)'
+  e.target.style.borderColor = '#4890f7'
+  e.target.style.background = '#ffffff'
+  e.target.style.boxShadow = '0 0 0 3px rgba(72,144,247,0.1)'
 }
 const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  e.target.style.borderColor = 'rgba(255,255,255,0.09)'
-  e.target.style.background = 'rgba(255,255,255,0.04)'
+  e.target.style.borderColor = '#d1d9e6'
+  e.target.style.background = '#ffffff'
+  e.target.style.boxShadow = 'none'
 }
 
 function F({ label, value, onChange, type = 'text', placeholder, req, hint }: {
@@ -172,9 +174,9 @@ function Cards({ label, opts, value, onChange, hint, req }: {
           <button key={o} type="button" onClick={() => onChange(value === o ? '' : o)}
             className="px-4 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
             style={{
-              background: value === o ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${value === o ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-              color: value === o ? '#4890f7' : '#8899aa',
+              background: value === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
+              border: `1px solid ${value === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+              color: value === o ? '#4890f7' : '#4a5878',
             }}>{o}</button>
         ))}
       </div>
@@ -194,9 +196,9 @@ function Score({ label, value, onChange, hint }: {
           <button key={s} type="button" onClick={() => onChange(s)}
             className="w-9 h-9 rounded-sm text-xs font-bold transition-all duration-150"
             style={{
-              background: value === s ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${value === s ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.07)'}`,
-              color: value === s ? '#4890f7' : '#5a6a7a',
+              background: value === s ? '#4890f7' : '#f1f5fb',
+              border: `1px solid ${value === s ? '#4890f7' : '#d1d9e6'}`,
+              color: value === s ? '#ffffff' : '#7a90a8',
             }}>{s}</button>
         ))}
       </div>
@@ -207,9 +209,9 @@ function Score({ label, value, onChange, hint }: {
 function Divider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 py-1">
-      <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.05)' }} />
-      <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: '#2a3a4a' }}>{label}</span>
-      <div className="h-px flex-1" style={{ background: 'rgba(255,255,255,0.05)' }} />
+      <div className="h-px flex-1" style={{ background: 'rgba(10,14,26,0.1)' }} />
+      <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: '#7a90a8' }}>{label}</span>
+      <div className="h-px flex-1" style={{ background: 'rgba(10,14,26,0.1)' }} />
     </div>
   )
 }
@@ -219,8 +221,8 @@ function Chk({ checked, toggle, label }: { checked: boolean; toggle: () => void;
     <label className="flex items-start gap-3 cursor-pointer" onClick={toggle}>
       <div className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-sm flex items-center justify-center transition-all duration-150"
         style={{
-          background: checked ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.03)',
-          border: `1px solid ${checked ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.1)'}`,
+          background: checked ? 'rgba(72,144,247,0.1)' : '#ffffff',
+          border: `1px solid ${checked ? '#4890f7' : 'rgba(10,14,26,0.2)'}`,
         }}>
         {checked && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       </div>
@@ -231,7 +233,7 @@ function Chk({ checked, toggle, label }: { checked: boolean; toggle: () => void;
 
 function SectionHead({ num, title, sub }: { num: string; title: string; sub?: string }) {
   return (
-    <div className="flex items-start gap-4 pb-5 mb-2" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+    <div className="flex items-start gap-4 pb-5 mb-2" style={{ borderBottom: '1px solid rgba(10,14,26,0.08)' }}>
       <span className="font-bold flex-shrink-0 tabular-nums leading-none"
         style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '2.8rem', color: 'rgba(72,144,247,0.09)', letterSpacing: '-0.04em', marginTop: '-4px' }}>
         {num}
@@ -253,14 +255,14 @@ function CheckGrid({ items, selected, toggle }: { items: string[]; selected: str
         <button key={c} type="button" onClick={() => toggle(c)}
           className="flex items-center gap-3 px-4 py-3 rounded-sm text-xs font-medium text-left transition-all duration-150"
           style={{
-            background: selected.includes(c) ? 'rgba(72,144,247,0.07)' : 'rgba(255,255,255,0.03)',
-            border: `1px solid ${selected.includes(c) ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.07)'}`,
-            color: selected.includes(c) ? '#4890f7' : '#8899aa',
+            background: selected.includes(c) ? 'rgba(72,144,247,0.07)' : '#f1f5fb',
+            border: `1px solid ${selected.includes(c) ? 'rgba(72,144,247,0.3)' : '#d1d9e6'}`,
+            color: selected.includes(c) ? '#4890f7' : '#4a5878',
           }}>
           <div className="w-4 h-4 rounded-sm flex-shrink-0 flex items-center justify-center transition-all"
             style={{
-              background: selected.includes(c) ? 'rgba(72,144,247,0.18)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${selected.includes(c) ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.1)'}`,
+              background: selected.includes(c) ? 'rgba(72,144,247,0.15)' : '#ffffff',
+              border: `1px solid ${selected.includes(c) ? '#4890f7' : '#d1d9e6'}`,
             }}>
             {selected.includes(c) && (
               <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
@@ -300,8 +302,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('member')}
         className="text-left p-5 rounded-sm transition-all duration-200"
         style={{
-          background: value === 'member' ? 'rgba(72,144,247,0.07)' : 'rgba(255,255,255,0.02)',
-          border: `1px solid ${value === 'member' ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.08)'}`,
+          background: value === 'member' ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
+          border: `1px solid ${value === 'member' ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
         }}>
         <span className="inline-block text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-sm mb-4"
           style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)', color: '#4890f7' }}>
@@ -334,8 +336,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('casual')}
         className="text-left p-5 rounded-sm transition-all duration-200"
         style={{
-          background: value === 'casual' ? 'rgba(72,144,247,0.04)' : 'rgba(255,255,255,0.02)',
-          border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.07)'}`,
+          background: value === 'casual' ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
+          border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
         <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
@@ -368,9 +370,9 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         <div className="w-full py-2.5 rounded-sm text-center text-xs font-bold tracking-[0.1em] uppercase transition-all duration-150"
           style={{
-            background: value === 'casual' ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-            color: value === 'casual' ? '#4890f7' : '#4a5a6a',
-            border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.07)'}`,
+            background: value === 'casual' ? 'rgba(72,144,247,0.08)' : '#ffffff',
+            color: value === 'casual' ? '#4890f7' : '#7a90a8',
+            border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.3)' : '#d1d9e6'}`,
           }}>
           {value === 'casual' ? '✓ Selected' : 'Single Consult'}
         </div>
@@ -600,7 +602,7 @@ export default function GeneralConsultForm() {
                         <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>State</label>
                         <select value={data.state} onChange={e => set('state', e.target.value)}
                           className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-                          style={{ ...inputBase, color: data.state ? '#F5F5F5' : '#4a5a6a' }}
+                          style={{ ...inputBase, color: data.state ? '#0a0e1a' : '#7a90a8' }}
                           onFocus={onFocus} onBlur={onBlur}>
                           <option value="" disabled style={{ background: '#f8f9ff' }}>State</option>
                           {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>)}
@@ -621,7 +623,7 @@ export default function GeneralConsultForm() {
                       <F label="Medicare expiry" value={data.medicareExp} onChange={v => set('medicareExp', v)} placeholder="MMYY" />
                     </div>
                     <F label="Medicare reference number" value={data.medicareRef} onChange={v => set('medicareRef', v)} placeholder="e.g. 1" />
-                    <div className="p-4 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="p-4 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <p className="text-xs font-semibold mb-1.5" style={{ color: '#4a5878' }}>Driver&apos;s licence — identity verification</p>
                       <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
                         Please email a photo of your driver&apos;s licence (name and date of birth only — no licence number required) to{' '}
@@ -642,9 +644,9 @@ export default function GeneralConsultForm() {
                           <button key={o} type="button" onClick={() => set('myHealthRecord', data.myHealthRecord === o ? '' : o)}
                             className="px-8 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
-                              background: data.myHealthRecord === o ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                              border: `1px solid ${data.myHealthRecord === o ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                              color: data.myHealthRecord === o ? '#4890f7' : '#8899aa',
+                              background: data.myHealthRecord === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
+                              border: `1px solid ${data.myHealthRecord === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+                              color: data.myHealthRecord === o ? '#4890f7' : '#4a5878',
                             }}>{o}</button>
                         ))}
                       </div>
@@ -663,9 +665,9 @@ export default function GeneralConsultForm() {
                           <button key={c} type="button" onClick={() => set('healthCondition', data.healthCondition === c ? '' : c)}
                             className="px-4 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
-                              background: data.healthCondition === c ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                              border: `1px solid ${data.healthCondition === c ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                              color: data.healthCondition === c ? '#4890f7' : '#8899aa',
+                              background: data.healthCondition === c ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
+                              border: `1px solid ${data.healthCondition === c ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+                              color: data.healthCondition === c ? '#4890f7' : '#4a5878',
                             }}>{c}</button>
                         ))}
                       </div>
@@ -802,9 +804,9 @@ export default function GeneralConsultForm() {
                           <button key={o} type="button" onClick={() => set('pharmacyPreference', data.pharmacyPreference === o ? '' : o)}
                             className="px-5 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
-                              background: data.pharmacyPreference === o ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                              border: `1px solid ${data.pharmacyPreference === o ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                              color: data.pharmacyPreference === o ? '#4890f7' : '#8899aa',
+                              background: data.pharmacyPreference === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
+                              border: `1px solid ${data.pharmacyPreference === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+                              color: data.pharmacyPreference === o ? '#4890f7' : '#4a5878',
                             }}>{o}</button>
                         ))}
                       </div>
@@ -825,13 +827,13 @@ export default function GeneralConsultForm() {
                     <SectionHead num="12" title="Declaration & Consents" sub="Please read each statement carefully before submitting." />
 
                     {/* Not multiple clinics */}
-                    <div className="p-4 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="p-4 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <Chk checked={data.notMultipleClinics} toggle={() => set('notMultipleClinics', !data.notMultipleClinics)}
                         label="I confirm and agree that I am not procuring medication or treatments through multiple clinics for the same conditions for either personal use or on-selling, and understand that it would be illegal to do so and would result in immediate termination of any relationship with Apex Metabolic Health." />
                     </div>
 
                     {/* Agent Agreement */}
-                    <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>Agent Agreement</p>
                       <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
                         The individual filling out this form consents and agrees to Apex Metabolic Health, its Directors, Staff, Contractors and associated partners to act as their agent. You agree to giving consent for the agent to act on your behalf with AHPRA-registered Doctors, Pharmacists, and Allied Health Professionals within the interest of your enquiries and in accordance with the Australian Privacy Act. You acknowledge that the Apex Metabolic Health team comprises contractors and admin staff who are not Doctors and cannot provide medical advice. You agree for the team to act as an agent in liaising with your Doctor/s, the pharmacies and other parties at your instruction and in your best interests.
@@ -844,19 +846,19 @@ export default function GeneralConsultForm() {
                     </div>
 
                     {/* GP check agreement */}
-                    <div className="p-4 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="p-4 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <Chk checked={data.gpCheckAgreement} toggle={() => set('gpCheckAgreement', !data.gpCheckAgreement)}
                         label="I agree to attend my regular GP or Specialist for full health checks and agree to have any checks they deem necessary, including but not limited to blood pressure, cholesterol, heart check, ECG, physical examination, and pathology requests." />
                     </div>
 
                     {/* Privacy consent */}
-                    <div className="p-4 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="p-4 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <Chk checked={data.privacyConsent} toggle={() => set('privacyConsent', !data.privacyConsent)}
                         label="I confirm I have read and agree to the terms in Apex Metabolic Health's Medical Practice Privacy and Consent Policy." />
                     </div>
 
                     {/* Waiver */}
-                    <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>Waiver & Disclaimer</p>
                       <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
                         By submitting this form, I agree to only use any medication or treatment prescribed to me, if any, in the correct and safe manner as ordered by the Doctor. I agree that the information and any prescribed protocols are only for me and that I will not sell, share or distribute medication or protocols to any other parties. I agree to use any medication at the prescribed dose only and to report any side effects or adverse reactions to the pharmacy and clinical team promptly.
@@ -876,7 +878,7 @@ export default function GeneralConsultForm() {
                     </div>
 
                     {/* Submission summary + signature */}
-                    <div className="p-4 rounded-sm mt-2" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div className="p-4 rounded-sm mt-2" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
                       <p className="text-xs font-bold tracking-[0.12em] uppercase mb-3" style={{ color: '#7a90a8' }}>Submission Summary</p>
                       {[
                         ['Name', `${data.firstName} ${data.lastName}`],
@@ -885,7 +887,7 @@ export default function GeneralConsultForm() {
                         ['Date of birth', data.dob],
                         ['State', data.state],
                       ].filter(([, v]) => v?.trim()).map(([k, v]) => (
-                        <div key={k} className="flex justify-between text-xs py-2" style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+                        <div key={k} className="flex justify-between text-xs py-2" style={{ borderBottom: '1px solid rgba(10,14,26,0.06)' }}>
                           <span style={{ color: '#7a90a8' }}>{k}</span>
                           <span style={{ color: '#4a5878' }}>{v}</span>
                         </div>

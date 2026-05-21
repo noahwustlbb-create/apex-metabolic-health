@@ -213,9 +213,9 @@ function Cards({
               onClick={() => toggle(opt)}
               className="px-3.5 py-2 rounded-lg text-xs font-medium transition-all duration-150"
               style={{
-                background: active ? ACCENT_BG : '#111111',
-                border: `1px solid ${active ? ACCENT : 'rgba(72,144,247,0.12)'}`,
-                color: active ? ACCENT : '#8899aa',
+                background: active ? ACCENT_BG : '#f1f5fb',
+                border: `1px solid ${active ? ACCENT : '#d1d9e6'}`,
+                color: active ? ACCENT : '#4a5878',
               }}
             >
               {opt}
@@ -249,9 +249,9 @@ function Score({
             onClick={() => onChange(String(i))}
             className="flex-1 py-2.5 rounded-md text-xs font-semibold transition-all duration-150"
             style={{
-              background: value === String(i) ? ACCENT : '#111111',
-              border: `1px solid ${value === String(i) ? ACCENT : 'rgba(72,144,247,0.12)'}`,
-              color: value === String(i) ? '#fff' : '#4a5a6a',
+              background: value === String(i) ? ACCENT : '#f1f5fb',
+              border: `1px solid ${value === String(i) ? ACCENT : '#d1d9e6'}`,
+              color: value === String(i) ? '#fff' : '#7a90a8',
             }}
           >
             {i}
@@ -340,8 +340,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('member')}
         className="text-left p-5 rounded-xl transition-all duration-200"
         style={{
-          background: value === 'member' ? ACCENT_BG : '#111111',
-          border: `1px solid ${value === 'member' ? ACCENT : 'rgba(72,144,247,0.12)'}`,
+          background: value === 'member' ? ACCENT_BG : '#f8f9ff',
+          border: `1px solid ${value === 'member' ? ACCENT : '#d1d9e6'}`,
         }}>
         <span className="inline-block text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-md mb-4"
           style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}`, color: ACCENT }}>
@@ -374,8 +374,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
       <button type="button" onClick={() => onChange('casual')}
         className="text-left p-5 rounded-xl transition-all duration-200"
         style={{
-          background: value === 'casual' ? ACCENT_BG : '#111111',
-          border: `1px solid ${value === 'casual' ? ACCENT : 'rgba(72,144,247,0.12)'}`,
+          background: value === 'casual' ? ACCENT_BG : '#f8f9ff',
+          border: `1px solid ${value === 'casual' ? ACCENT : '#d1d9e6'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
         <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
@@ -408,9 +408,9 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         <div className="w-full py-2.5 rounded-lg text-center text-xs font-bold tracking-[0.1em] uppercase transition-all"
           style={{
-            background: value === 'casual' ? ACCENT_BG : '#111111',
-            color: value === 'casual' ? ACCENT : '#4a5a6a',
-            border: `1px solid ${value === 'casual' ? ACCENT_BORDER : 'rgba(72,144,247,0.12)'}`,
+            background: value === 'casual' ? ACCENT_BG : '#ffffff',
+            color: value === 'casual' ? ACCENT : '#7a90a8',
+            border: `1px solid ${value === 'casual' ? ACCENT_BORDER : '#d1d9e6'}`,
           }}>
           {value === 'casual' ? '✓ Selected' : 'Single Consult'}
         </div>
@@ -531,7 +531,7 @@ export default function HormoneConsultForm() {
                         <span className="text-[10px] font-bold" style={{ color: ACCENT }}>{i + 1}</span>
                       </div>
                       <div>
-                        <p className="text-xs font-semibold" style={{ color: '#c5cdd6' }}>{title}</p>
+                        <p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>{title}</p>
                         <p className="text-xs mt-0.5" style={{ color: '#4a5878' }}>{desc}</p>
                       </div>
                     </div>
@@ -733,8 +733,8 @@ export default function HormoneConsultForm() {
                       {CONDITIONS.map(cond => (
                         <label key={cond} className="flex items-center gap-3 cursor-pointer rounded-lg px-4 py-3 transition-all duration-150"
                           style={{
-                            background: d.conditions.includes(cond) ? ACCENT_BG : '#111111',
-                            border: `1px solid ${d.conditions.includes(cond) ? ACCENT_BORDER : 'rgba(72,144,247,0.12)'}`,
+                            background: d.conditions.includes(cond) ? ACCENT_BG : '#f1f5fb',
+                            border: `1px solid ${d.conditions.includes(cond) ? ACCENT_BORDER : '#d1d9e6'}`,
                           }}>
                           <button
                             type="button"
@@ -756,7 +756,7 @@ export default function HormoneConsultForm() {
                               </svg>
                             )}
                           </button>
-                          <span className="text-sm" style={{ color: d.conditions.includes(cond) ? '#c5cdd6' : '#6b7a8d' }}>{cond}</span>
+                          <span className="text-sm" style={{ color: d.conditions.includes(cond) ? ACCENT : '#4a5878' }}>{cond}</span>
                         </label>
                       ))}
                     </div>
