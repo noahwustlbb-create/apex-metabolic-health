@@ -447,13 +447,7 @@ export default function HormoneConsultForm() {
     }
   }, [d, step])
 
-  // Validation per step
-  const canNext = (() => {
-    if (step === 1) return !!(d.firstName && d.lastName && d.mobile && d.email && d.dob && d.state)
-    if (step === 2) return !!(d.mainConcern && d.symptomDuration)
-    if (step === 6) return !!(d.ageConfirm && d.consent && d.printName)
-    return true
-  })()
+  const canNext = true
 
   const go = (delta: number) => {
     setDir(delta)
@@ -683,17 +677,17 @@ export default function HormoneConsultForm() {
                   <Head step={1} title="Personal Details" sub="We need these to prepare your consultation and clinical file." />
                   <Div label="Name & Contact" />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <F label="First name" name="firstName" value={d.firstName} onChange={v => set('firstName', v)} required />
-                    <F label="Last name" name="lastName" value={d.lastName} onChange={v => set('lastName', v)} required />
+                    <F label="First name" name="firstName" value={d.firstName} onChange={v => set('firstName', v)} />
+                    <F label="Last name" name="lastName" value={d.lastName} onChange={v => set('lastName', v)} />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <F label="Date of birth" name="dob" type="date" value={d.dob} onChange={v => set('dob', v)} required />
-                    <F label="Mobile number" name="mobile" type="tel" value={d.mobile} onChange={v => set('mobile', v)} placeholder="04XX XXX XXX" required />
+                    <F label="Date of birth" name="dob" type="date" value={d.dob} onChange={v => set('dob', v)} />
+                    <F label="Mobile number" name="mobile" type="tel" value={d.mobile} onChange={v => set('mobile', v)} placeholder="04XX XXX XXX" />
                   </div>
-                  <F label="Email address" name="email" type="email" value={d.email} onChange={v => set('email', v)} placeholder="you@email.com" required />
+                  <F label="Email address" name="email" type="email" value={d.email} onChange={v => set('email', v)} placeholder="you@email.com" />
 
                   <Div label="Location & Profile" />
-                  <Cards label="State / Territory *" options={AU_STATES} value={d.state} onChange={v => set('state', v as string)} />
+                  <Cards label="State / Territory" options={AU_STATES} value={d.state} onChange={v => set('state', v as string)} />
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <F label="Weight (kg)" name="weightKg" type="number" value={d.weightKg} onChange={v => set('weightKg', v)} placeholder="e.g. 85" />
                     <F label="Height (cm)" name="heightCm" type="number" value={d.heightCm} onChange={v => set('heightCm', v)} placeholder="e.g. 180" />
@@ -710,9 +704,9 @@ export default function HormoneConsultForm() {
                 <div className="flex flex-col gap-6">
                   <Head step={2} title="Symptoms & Goals" sub="Tell us what you're experiencing and what you'd like to achieve." />
 
-                  <TA label="Main concern *" name="mainConcern" value={d.mainConcern} onChange={v => set('mainConcern', v)} placeholder="Describe your main symptoms and what's been affecting you..." rows={4} />
+                  <TA label="Main concern" name="mainConcern" value={d.mainConcern} onChange={v => set('mainConcern', v)} placeholder="Describe your main symptoms and what's been affecting you..." rows={4} />
 
-                  <Cards label="How long have you been experiencing these symptoms? *" options={DURATION_OPTIONS} value={d.symptomDuration} onChange={v => set('symptomDuration', v as string)} />
+                  <Cards label="How long have you been experiencing these symptoms?" options={DURATION_OPTIONS} value={d.symptomDuration} onChange={v => set('symptomDuration', v as string)} />
 
                   <Div label="Symptom Checklist" />
                   <Cards label="Select all that apply" options={SYMPTOMS} value={d.symptoms} onChange={v => set('symptoms', v)} multi />
@@ -884,15 +878,15 @@ export default function HormoneConsultForm() {
 
                   <div className="flex flex-col gap-4 p-5 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}>
                     <Chk checked={d.ageConfirm} onChange={v => set('ageConfirm', v)}>
-                      I confirm I am 18 years of age or older. *
+                      I confirm I am 18 years of age or older.
                     </Chk>
                     <Chk checked={d.consent} onChange={v => set('consent', v)}>
-                      I consent to my information being used by Apex Metabolic Health clinical staff to assess my suitability for treatment and facilitate my consultation. I understand this form does not constitute a diagnosis or guarantee of treatment. *
+                      I consent to my information being used by Apex Metabolic Health clinical staff to assess my suitability for treatment and facilitate my consultation. I understand this form does not constitute a diagnosis or guarantee of treatment.
                     </Chk>
                   </div>
 
                   <F
-                    label="Full name (digital signature) *"
+                    label="Full name (digital signature)"
                     name="printName"
                     value={d.printName}
                     onChange={v => set('printName', v)}

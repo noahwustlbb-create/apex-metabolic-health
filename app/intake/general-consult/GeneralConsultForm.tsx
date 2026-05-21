@@ -456,21 +456,7 @@ export default function GeneralConsultForm() {
         : p.currentSymptoms.filter(x => x !== 'None of the Above').concat(s),
   }))
 
-  const isValid = !!(
-    data.firstName.trim() && data.lastName.trim() && data.dob &&
-    data.mobile.trim() && data.email.trim() && data.medicareNum.trim() &&
-    data.myHealthRecord && data.notMultipleClinics &&
-    data.agentAgreement && data.waiverConsent && data.gpCheckAgreement &&
-    data.privacyConsent && data.consent && data.ageConfirm && data.sportingCode &&
-    data.printName.trim()
-  )
-
   const submit = async () => {
-    if (!isValid) {
-      setError('Please complete all required fields and accept all declarations before submitting.')
-      topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      return
-    }
     setSubmitting(true); setError('')
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -581,11 +567,11 @@ export default function GeneralConsultForm() {
                   <div className="flex flex-col gap-4">
                     <SectionHead num="01" title="Personal Information" sub="Your basic registration details for our clinical records." />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <F label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" req />
-                      <F label="Last name" value={data.lastName} onChange={v => set('lastName', v)} placeholder="Smith" req />
+                      <F label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" />
+                      <F label="Last name" value={data.lastName} onChange={v => set('lastName', v)} placeholder="Smith" />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <F label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} req />
+                      <F label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} />
                       <F label="Nationality" value={data.nationality} onChange={v => set('nationality', v)} placeholder="Australian" />
                     </div>
                     <Cards label="Biological gender" opts={['Male', 'Female', 'Non-binary', 'Prefer not to say']} value={data.gender} onChange={v => set('gender', v)} />
@@ -596,12 +582,12 @@ export default function GeneralConsultForm() {
                   <div className="flex flex-col gap-4">
                     <SectionHead num="02" title="Contact & Address" sub="How we reach you and your registered address." />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <F label="Mobile" type="tel" value={data.mobile} onChange={v => set('mobile', v)} placeholder="04XX XXX XXX" req />
+                      <F label="Mobile" type="tel" value={data.mobile} onChange={v => set('mobile', v)} placeholder="04XX XXX XXX" />
                       <F label="Home phone" type="tel" value={data.homePh} onChange={v => set('homePh', v)} placeholder="07 XXXX XXXX" />
                       <F label="Work phone" type="tel" value={data.workPh} onChange={v => set('workPh', v)} placeholder="Optional" />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <F label="Email" type="email" value={data.email} onChange={v => set('email', v)} placeholder="you@email.com" req />
+                      <F label="Email" type="email" value={data.email} onChange={v => set('email', v)} placeholder="you@email.com" />
                       <F label="Second email (optional)" type="email" value={data.email2} onChange={v => set('email2', v)} placeholder="Optional" />
                     </div>
                     <Divider label="Address" />
@@ -629,7 +615,7 @@ export default function GeneralConsultForm() {
                     <SectionHead num="03" title="Medicare & Identification" sub="Required for safe prescribing and monitored medicine compliance." />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div className="sm:col-span-2">
-                        <F label="Medicare number" value={data.medicareNum} onChange={v => set('medicareNum', v)} placeholder="XXXX XXXXX X" req
+                        <F label="Medicare number" value={data.medicareNum} onChange={v => set('medicareNum', v)} placeholder="XXXX XXXXX X"
                           hint="10 digits. Required to verify use of monitored medicines via QSCRIPTS. If you do not have a Medicare number, enter 10 zeros." />
                       </div>
                       <F label="Medicare expiry" value={data.medicareExp} onChange={v => set('medicareExp', v)} placeholder="MMYY" />
@@ -646,7 +632,7 @@ export default function GeneralConsultForm() {
                     <Cards label="Aboriginal or Torres Strait Islander?" opts={['Yes', 'No', 'Prefer not to say']} value={data.atsi} onChange={v => set('atsi', v)} />
                     <div>
                       <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>
-                        Consent to access My Health Record <span style={{ color: '#4890f7' }}>*</span>
+                        Consent to access My Health Record
                       </label>
                       <p className="text-[11px] mb-3 leading-relaxed" style={{ color: '#7a90a8' }}>
                         Access allows your doctor to view your medical records and current medications to make an informed diagnosis and prescribe appropriate treatment. Access is obtained only during consultation and while you are a current patient. Your file is kept completely confidential throughout.
@@ -907,7 +893,7 @@ export default function GeneralConsultForm() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <F label="Print full name (signature)" value={data.printName} onChange={v => set('printName', v as string)} placeholder="Your full legal name" req />
+                      <F label="Print full name (signature)" value={data.printName} onChange={v => set('printName', v as string)} placeholder="Your full legal name" />
                       <div>
                         <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>Date</label>
                         <div className="w-full px-4 py-3 rounded-sm text-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#4a5878' }}>
