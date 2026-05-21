@@ -154,7 +154,7 @@ function QuestionCard({
               width: 26, height: 26, marginTop: 1,
               background: answer ? 'rgba(53,117,198,0.2)' : 'rgba(255,255,255,0.04)',
               border: `1px solid ${answer ? 'rgba(53,117,198,0.4)' : 'rgba(255,255,255,0.08)'}`,
-              color: answer ? '#6AAEE8' : '#4a5a6a',
+              color: answer ? '#6AAEE8' : '#0a0e1a',
               fontFamily: 'var(--font-space-grotesk)',
               transition: 'all 0.25s',
             }}
@@ -320,9 +320,9 @@ export default function MetabolicCheckPage() {
                 className="font-bold text-2xl leading-none"
                 style={{ fontFamily: 'var(--font-space-grotesk)', color: answeredCount === 10 ? '#3575C6' : '#F4F4F6', transition: 'color 0.3s' }}
               >
-                {answeredCount}<span style={{ color: '#4a5878', fontSize: 16 }}>/10</span>
+                {answeredCount}<span style={{ color: '#0a0e1a', fontSize: 16 }}>/10</span>
               </span>
-              <span style={{ fontSize: 10, color: '#4a5878', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
+              <span style={{ fontSize: 10, color: '#0a0e1a', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
             </div>
           </motion.div>
 
@@ -445,7 +445,7 @@ export default function MetabolicCheckPage() {
                           >
                             METABOLIC SCORE — {SCORE_LABEL[result.tier]}
                           </span>
-                          <span style={{ color: '#4a5878', fontSize: 11 }}>
+                          <span style={{ color: '#0a0e1a', fontSize: 11 }}>
                             · {result.yesCount} of 10 symptoms present
                           </span>
                         </div>
@@ -479,7 +479,7 @@ export default function MetabolicCheckPage() {
 
                     <div
                       className="rounded-lg p-4 text-xs leading-relaxed"
-                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: '#4a5878' }}
+                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: '#0a0e1a' }}
                     >
                       <span style={{ color: '#B0B8C5', fontWeight: 600 }}>Disclaimer: </span>
                       This tool is a screening aid only and does not constitute medical advice. Clinical assessment by an AHPRA-registered practitioner is required for diagnosis and treatment.
@@ -491,9 +491,9 @@ export default function MetabolicCheckPage() {
                   <button
                     onClick={handleRetake}
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: '#4a5878', letterSpacing: '0.04em' }}
+                    style={{ color: '#0a0e1a', letterSpacing: '0.04em' }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#B0B8C5')}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#4a5a6a')}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#0a0e1a')}
                   >
                     ↺ Retake Quiz
                   </button>

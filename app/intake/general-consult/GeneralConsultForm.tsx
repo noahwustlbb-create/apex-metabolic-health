@@ -110,7 +110,7 @@ const init = (): D => ({
 
 const inputBase: React.CSSProperties = {
   background: '#ffffff',
-  border: '1px solid #d1d9e6',
+  border: '1px solid rgba(72,144,247,0.25)',
   color: '#0a0e1a',
   caretColor: '#4890f7',
 }
@@ -120,7 +120,7 @@ const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HT
   e.target.style.boxShadow = '0 0 0 3px rgba(72,144,247,0.1)'
 }
 const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  e.target.style.borderColor = '#d1d9e6'
+  e.target.style.borderColor = 'rgba(72,144,247,0.25)'
   e.target.style.background = '#ffffff'
   e.target.style.boxShadow = 'none'
 }
@@ -131,10 +131,10 @@ function F({ label, value, onChange, type = 'text', placeholder, req, hint }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>
         {label}{req && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
-      {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#7a90a8' }}>{hint}</p>}
+      {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#4890f7' }}>{hint}</p>}
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
         style={inputBase} onFocus={onFocus} onBlur={onBlur} />
@@ -148,10 +148,10 @@ function TA({ label, value, onChange, placeholder, rows = 3, hint, req }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>
         {label}{req && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
-      {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#7a90a8' }}>{hint}</p>}
+      {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#4890f7' }}>{hint}</p>}
       <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
         style={inputBase} onFocus={onFocus} onBlur={onBlur} />
@@ -165,18 +165,18 @@ function Cards({ label, opts, value, onChange, hint, req }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>
         {label}{req && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
-      {hint && <p className="text-[11px] mb-2" style={{ color: '#7a90a8' }}>{hint}</p>}
+      {hint && <p className="text-[11px] mb-2" style={{ color: '#4890f7' }}>{hint}</p>}
       <div className="flex flex-wrap gap-2">
         {opts.map(o => (
           <button key={o} type="button" onClick={() => onChange(value === o ? '' : o)}
             className="px-4 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
             style={{
               background: value === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
-              border: `1px solid ${value === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
-              color: value === o ? '#4890f7' : '#4a5878',
+              border: `1px solid ${value === o ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
+              color: value === o ? '#4890f7' : '#0a0e1a',
             }}>{o}</button>
         ))}
       </div>
@@ -189,16 +189,16 @@ function Score({ label, value, onChange, hint }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>{label}</label>
-      {hint && <p className="text-[11px] mb-2" style={{ color: '#7a90a8' }}>{hint}</p>}
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>{label}</label>
+      {hint && <p className="text-[11px] mb-2" style={{ color: '#4890f7' }}>{hint}</p>}
       <div className="flex gap-1.5 flex-wrap">
         {Array.from({ length: 11 }, (_, i) => String(i)).map(s => (
           <button key={s} type="button" onClick={() => onChange(s)}
             className="w-9 h-9 rounded-sm text-xs font-bold transition-all duration-150"
             style={{
               background: value === s ? '#4890f7' : '#f1f5fb',
-              border: `1px solid ${value === s ? '#4890f7' : '#d1d9e6'}`,
-              color: value === s ? '#ffffff' : '#7a90a8',
+              border: `1px solid ${value === s ? '#4890f7' : 'rgba(72,144,247,0.25)'}`,
+              color: value === s ? '#ffffff' : '#4890f7',
             }}>{s}</button>
         ))}
       </div>
@@ -210,7 +210,7 @@ function Divider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 py-1">
       <div className="h-px flex-1" style={{ background: 'rgba(10,14,26,0.1)' }} />
-      <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: '#7a90a8' }}>{label}</span>
+      <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: '#4890f7' }}>{label}</span>
       <div className="h-px flex-1" style={{ background: 'rgba(10,14,26,0.1)' }} />
     </div>
   )
@@ -226,7 +226,7 @@ function Chk({ checked, toggle, label }: { checked: boolean; toggle: () => void;
         }}>
         {checked && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
       </div>
-      <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{label}</span>
+      <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{label}</span>
     </label>
   )
 }
@@ -242,7 +242,7 @@ function SectionHead({ num, title, sub }: { num: string; title: string; sub?: st
         <h3 className="font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(15px, 1.8vw, 18px)', color: '#0a0e1a', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
           {title}
         </h3>
-        {sub && <p className="text-xs mt-1 leading-relaxed" style={{ color: '#4a5878' }}>{sub}</p>}
+        {sub && <p className="text-xs mt-1 leading-relaxed" style={{ color: '#0a0e1a' }}>{sub}</p>}
       </div>
     </div>
   )
@@ -256,13 +256,13 @@ function CheckGrid({ items, selected, toggle }: { items: string[]; selected: str
           className="flex items-center gap-3 px-4 py-3 rounded-sm text-xs font-medium text-left transition-all duration-150"
           style={{
             background: selected.includes(c) ? 'rgba(72,144,247,0.07)' : '#f1f5fb',
-            border: `1px solid ${selected.includes(c) ? 'rgba(72,144,247,0.3)' : '#d1d9e6'}`,
-            color: selected.includes(c) ? '#4890f7' : '#4a5878',
+            border: `1px solid ${selected.includes(c) ? 'rgba(72,144,247,0.3)' : 'rgba(72,144,247,0.25)'}`,
+            color: selected.includes(c) ? '#4890f7' : '#0a0e1a',
           }}>
           <div className="w-4 h-4 rounded-sm flex-shrink-0 flex items-center justify-center transition-all"
             style={{
               background: selected.includes(c) ? 'rgba(72,144,247,0.15)' : '#ffffff',
-              border: `1px solid ${selected.includes(c) ? '#4890f7' : '#d1d9e6'}`,
+              border: `1px solid ${selected.includes(c) ? '#4890f7' : 'rgba(72,144,247,0.25)'}`,
             }}>
             {selected.includes(c) && (
               <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
@@ -303,7 +303,7 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         className="text-left p-5 rounded-sm transition-all duration-200"
         style={{
           background: value === 'member' ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
-          border: `1px solid ${value === 'member' ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+          border: `1px solid ${value === 'member' ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
         }}>
         <span className="inline-block text-[10px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-sm mb-4"
           style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)', color: '#4890f7' }}>
@@ -312,12 +312,12 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Apex Clinical Program
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#4a5878' }}>
+        <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5878' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
               <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -337,31 +337,31 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         className="text-left p-5 rounded-sm transition-all duration-200"
         style={{
           background: value === 'casual' ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
-          border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
+          border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
         <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Single Consultation
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#4a5878' }}>
+        <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
-        <p className="text-xs font-semibold mb-1.5" style={{ color: '#4a5878' }}>Pathway 1 — Partner Pharmacy</p>
+        <p className="text-xs font-semibold mb-1.5" style={{ color: '#0a0e1a' }}>Pathway 1 — Partner Pharmacy</p>
         <ul className="flex flex-col gap-1.5 mb-4">
           {casualPath1.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5878' }}>
-              <span style={{ color: '#7a90a8', flexShrink: 0 }}>—</span>{f}
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+              <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
         </ul>
         <div className="flex items-center justify-between mb-1.5">
-          <p className="text-xs font-semibold" style={{ color: '#4a5878' }}>Pathway 2 — Own Pharmacy</p>
-          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$125 <span className="text-[10px] font-normal" style={{ color: '#4a5878' }}>one-off</span></span>
+          <p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>Pathway 2 — Own Pharmacy</p>
+          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$125 <span className="text-[10px] font-normal" style={{ color: '#0a0e1a' }}>one-off</span></span>
         </div>
         <ul className="flex flex-col gap-1.5 mb-4">
           {casualPath2.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#4a5878' }}>
-              <span style={{ color: '#7a90a8', flexShrink: 0 }}>—</span>{f}
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+              <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
         </ul>
@@ -371,8 +371,8 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <div className="w-full py-2.5 rounded-sm text-center text-xs font-bold tracking-[0.1em] uppercase transition-all duration-150"
           style={{
             background: value === 'casual' ? 'rgba(72,144,247,0.08)' : '#ffffff',
-            color: value === 'casual' ? '#4890f7' : '#7a90a8',
-            border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.3)' : '#d1d9e6'}`,
+            color: value === 'casual' ? '#4890f7' : '#4890f7',
+            border: `1px solid ${value === 'casual' ? 'rgba(72,144,247,0.3)' : 'rgba(72,144,247,0.25)'}`,
           }}>
           {value === 'casual' ? '✓ Selected' : 'Single Consult'}
         </div>
@@ -400,7 +400,7 @@ function Success({ name }: { name: string }) {
         </span>
       </motion.h2>
       <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.58, ease }}
-        className="text-base leading-relaxed mb-10" style={{ color: '#4a5878', maxWidth: 440 }}>
+        className="text-base leading-relaxed mb-10" style={{ color: '#0a0e1a', maxWidth: 440 }}>
         Your General Consult intake has been received. Our clinical team will review your details and be in touch within one business day to confirm your appointment.
       </motion.p>
       <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }} transition={{ duration: 0.7, delay: 0.72, ease }}
@@ -413,15 +413,15 @@ function Success({ name }: { name: string }) {
           { step: 'Your care protocol', detail: 'Treatment is coordinated through our TGA-compliant compounding pharmacy partner. Ongoing reviews are scheduled from day one.' },
         ].map((item, i) => (
           <div key={i} className="flex gap-4 items-start">
-            <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#7a90a8', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
+            <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
             <div>
               <p className="text-sm font-semibold mb-0.5" style={{ color: '#0a0e1a' }}>{item.step}</p>
-              <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.detail}</p>
+              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.detail}</p>
             </div>
           </div>
         ))}
       </motion.div>
-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 1.0, ease }} className="text-[11px]" style={{ color: '#2a3a4a' }}>
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 1.0, ease }} className="text-[11px]" style={{ color: '#0a0e1a' }}>
         Apex Metabolic Health &nbsp;·&nbsp; AHPRA-registered practitioners &nbsp;·&nbsp; Private &amp; confidential
       </motion.p>
     </motion.div>
@@ -548,14 +548,14 @@ export default function GeneralConsultForm() {
                       & consent form.
                     </span>
                   </h1>
-                  <p className="text-sm leading-relaxed mb-5" style={{ color: '#4a5878', maxWidth: 520 }}>
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: '#0a0e1a', maxWidth: 520 }}>
                     Complete this intake before your consultation. Your doctor reviews all information prior to your appointment — the more detail you provide, the better prepared they will be.
                   </p>
                   <div className="flex flex-wrap gap-5">
                     {[['⏱', '10–15 min'], ['🔒', 'Private & confidential'], ['💾', 'Auto-saved'], ['🩺', 'Doctor reviewed']].map(([icon, text]) => (
                       <div key={text} className="flex items-center gap-2">
                         <span className="text-xs">{icon}</span>
-                        <span className="text-xs" style={{ color: '#4a5878' }}>{text}</span>
+                        <span className="text-xs" style={{ color: '#0a0e1a' }}>{text}</span>
                       </div>
                     ))}
                   </div>
@@ -599,10 +599,10 @@ export default function GeneralConsultForm() {
                         <F label="Suburb" value={data.suburb} onChange={v => set('suburb', v)} placeholder="Brisbane City" />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>State</label>
+                        <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>State</label>
                         <select value={data.state} onChange={e => set('state', e.target.value)}
                           className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-                          style={{ ...inputBase, color: data.state ? '#0a0e1a' : '#7a90a8' }}
+                          style={{ ...inputBase, color: data.state ? '#0a0e1a' : '#4890f7' }}
                           onFocus={onFocus} onBlur={onBlur}>
                           <option value="" disabled style={{ background: '#f8f9ff' }}>State</option>
                           {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>)}
@@ -624,19 +624,19 @@ export default function GeneralConsultForm() {
                     </div>
                     <F label="Medicare reference number" value={data.medicareRef} onChange={v => set('medicareRef', v)} placeholder="e.g. 1" />
                     <div className="p-4 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
-                      <p className="text-xs font-semibold mb-1.5" style={{ color: '#4a5878' }}>Driver&apos;s licence — identity verification</p>
-                      <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: '#0a0e1a' }}>Driver&apos;s licence — identity verification</p>
+                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                         Please email a photo of your driver&apos;s licence (name and date of birth only — no licence number required) to{' '}
-                        <strong style={{ color: '#4a5878' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line.
+                        <strong style={{ color: '#0a0e1a' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line.
                         This is collected for identity verification only and destroyed once confirmed.
                       </p>
                     </div>
                     <Cards label="Aboriginal or Torres Strait Islander?" opts={['Yes', 'No', 'Prefer not to say']} value={data.atsi} onChange={v => set('atsi', v)} />
                     <div>
-                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>
+                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>
                         Consent to access My Health Record
                       </label>
-                      <p className="text-[11px] mb-3 leading-relaxed" style={{ color: '#7a90a8' }}>
+                      <p className="text-[11px] mb-3 leading-relaxed" style={{ color: '#4890f7' }}>
                         Access allows your doctor to view your medical records and current medications to make an informed diagnosis and prescribe appropriate treatment. Access is obtained only during consultation and while you are a current patient. Your file is kept completely confidential throughout.
                       </p>
                       <div className="flex gap-3">
@@ -645,8 +645,8 @@ export default function GeneralConsultForm() {
                             className="px-8 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
                               background: data.myHealthRecord === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
-                              border: `1px solid ${data.myHealthRecord === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
-                              color: data.myHealthRecord === o ? '#4890f7' : '#4a5878',
+                              border: `1px solid ${data.myHealthRecord === o ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
+                              color: data.myHealthRecord === o ? '#4890f7' : '#0a0e1a',
                             }}>{o}</button>
                         ))}
                       </div>
@@ -657,7 +657,7 @@ export default function GeneralConsultForm() {
                   <div className="flex flex-col gap-4">
                     <SectionHead num="04" title="Reason for Consultation" sub="Tell us what you'd like help with. The more detail you provide, the more prepared your doctor will be." />
                     <div>
-                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>
+                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>
                         Please select the health condition you would like to discuss
                       </label>
                       <div className="flex flex-wrap gap-2">
@@ -666,8 +666,8 @@ export default function GeneralConsultForm() {
                             className="px-4 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
                               background: data.healthCondition === c ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
-                              border: `1px solid ${data.healthCondition === c ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
-                              color: data.healthCondition === c ? '#4890f7' : '#4a5878',
+                              border: `1px solid ${data.healthCondition === c ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
+                              color: data.healthCondition === c ? '#4890f7' : '#0a0e1a',
                             }}>{c}</button>
                         ))}
                       </div>
@@ -685,9 +685,9 @@ export default function GeneralConsultForm() {
                       opts={['Yes', 'No', 'Not sure']} value={data.recentBloods} onChange={v => set('recentBloods', v)} />
                     <div className="p-4 rounded-sm" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
                       <p className="text-xs font-semibold mb-1" style={{ color: '#4890f7' }}>Forward previous test results</p>
-                      <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                         Email previous blood tests, DEXA scans, or other relevant results to{' '}
-                        <strong style={{ color: '#4a5878' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line. Your doctor will review them before your consultation.
+                        <strong style={{ color: '#0a0e1a' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line. Your doctor will review them before your consultation.
                       </p>
                     </div>
                   </div>
@@ -718,7 +718,7 @@ export default function GeneralConsultForm() {
                       placeholder="Please state each allergen and your reaction (e.g. Penicillin → anaphylaxis). Write 'None' if not applicable."
                       rows={3} hint="Medications, vitamins, minerals, food, latex, etc." />
                     <div>
-                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>
+                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>
                         Please tick relating to your current health — select all that apply
                       </label>
                       <CheckGrid items={CURRENT_SYMPTOMS} selected={data.currentSymptoms} toggle={toggleSymptom} />
@@ -795,8 +795,8 @@ export default function GeneralConsultForm() {
                     <TA label="What are your health goals?" value={data.majorGoal} onChange={v => set('majorGoal', v)}
                       placeholder="What do you want to achieve through this consultation and ongoing care? Be as specific as possible." rows={4} />
                     <div>
-                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#4a5878' }}>Pharmacy preference</label>
-                      <p className="text-[11px] mb-2 leading-relaxed" style={{ color: '#7a90a8' }}>
+                      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>Pharmacy preference</label>
+                      <p className="text-[11px] mb-2 leading-relaxed" style={{ color: '#4890f7' }}>
                         If treatment is prescribed, where would you prefer your protocol to be fulfilled?
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -805,8 +805,8 @@ export default function GeneralConsultForm() {
                             className="px-5 py-2.5 rounded-sm text-xs font-semibold transition-all duration-150"
                             style={{
                               background: data.pharmacyPreference === o ? 'rgba(72,144,247,0.08)' : '#f1f5fb',
-                              border: `1px solid ${data.pharmacyPreference === o ? 'rgba(72,144,247,0.4)' : '#d1d9e6'}`,
-                              color: data.pharmacyPreference === o ? '#4890f7' : '#4a5878',
+                              border: `1px solid ${data.pharmacyPreference === o ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.25)'}`,
+                              color: data.pharmacyPreference === o ? '#4890f7' : '#0a0e1a',
                             }}>{o}</button>
                         ))}
                       </div>
@@ -817,7 +817,7 @@ export default function GeneralConsultForm() {
                   <div className="flex flex-col gap-4">
                     <SectionHead num="11" title="Choose Your Path" sub="After your consultation, two pathways are available. One is a complete clinical program. The other is a prescription only." />
                     <PathwayCards value={data.pathway} onChange={v => set('pathway', v)} />
-                    <p className="text-xs" style={{ color: '#7a90a8' }}>
+                    <p className="text-xs" style={{ color: '#4890f7' }}>
                       Our team will confirm consultation fees and program details based on your selected pathway. You can change your selection at any time before your consultation.
                     </p>
                   </div>
@@ -834,11 +834,11 @@ export default function GeneralConsultForm() {
 
                     {/* Agent Agreement */}
                     <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
-                      <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>Agent Agreement</p>
-                      <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                      <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>Agent Agreement</p>
+                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                         The individual filling out this form consents and agrees to Apex Metabolic Health, its Directors, Staff, Contractors and associated partners to act as their agent. You agree to giving consent for the agent to act on your behalf with AHPRA-registered Doctors, Pharmacists, and Allied Health Professionals within the interest of your enquiries and in accordance with the Australian Privacy Act. You acknowledge that the Apex Metabolic Health team comprises contractors and admin staff who are not Doctors and cannot provide medical advice. You agree for the team to act as an agent in liaising with your Doctor/s, the pharmacies and other parties at your instruction and in your best interests.
                       </p>
-                      <p className="text-xs leading-relaxed font-semibold" style={{ color: '#4a5878' }}>
+                      <p className="text-xs leading-relaxed font-semibold" style={{ color: '#0a0e1a' }}>
                         Note: Body enhancement or performance enhancement for purely aesthetic or competitive purposes is not a clinical treatment goal and will not be prescribed by a Doctor for this purpose.
                       </p>
                       <Chk checked={data.agentAgreement} toggle={() => set('agentAgreement', !data.agentAgreement)}
@@ -859,8 +859,8 @@ export default function GeneralConsultForm() {
 
                     {/* Waiver */}
                     <div className="flex flex-col gap-3 p-5 rounded-sm" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
-                      <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>Waiver & Disclaimer</p>
-                      <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                      <p className="text-xs font-bold tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>Waiver & Disclaimer</p>
+                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                         By submitting this form, I agree to only use any medication or treatment prescribed to me, if any, in the correct and safe manner as ordered by the Doctor. I agree that the information and any prescribed protocols are only for me and that I will not sell, share or distribute medication or protocols to any other parties. I agree to use any medication at the prescribed dose only and to report any side effects or adverse reactions to the pharmacy and clinical team promptly.
                       </p>
                       <Chk checked={data.waiverConsent} toggle={() => set('waiverConsent', !data.waiverConsent)}
@@ -879,7 +879,7 @@ export default function GeneralConsultForm() {
 
                     {/* Submission summary + signature */}
                     <div className="p-4 rounded-sm mt-2" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.12)' }}>
-                      <p className="text-xs font-bold tracking-[0.12em] uppercase mb-3" style={{ color: '#7a90a8' }}>Submission Summary</p>
+                      <p className="text-xs font-bold tracking-[0.12em] uppercase mb-3" style={{ color: '#4890f7' }}>Submission Summary</p>
                       {[
                         ['Name', `${data.firstName} ${data.lastName}`],
                         ['Email', data.email],
@@ -888,8 +888,8 @@ export default function GeneralConsultForm() {
                         ['State', data.state],
                       ].filter(([, v]) => v?.trim()).map(([k, v]) => (
                         <div key={k} className="flex justify-between text-xs py-2" style={{ borderBottom: '1px solid rgba(10,14,26,0.06)' }}>
-                          <span style={{ color: '#7a90a8' }}>{k}</span>
-                          <span style={{ color: '#4a5878' }}>{v}</span>
+                          <span style={{ color: '#4890f7' }}>{k}</span>
+                          <span style={{ color: '#0a0e1a' }}>{v}</span>
                         </div>
                       ))}
                     </div>
@@ -897,8 +897,8 @@ export default function GeneralConsultForm() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <F label="Print full name (signature)" value={data.printName} onChange={v => set('printName', v as string)} placeholder="Your full legal name" />
                       <div>
-                        <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#4a5878' }}>Date</label>
-                        <div className="w-full px-4 py-3 rounded-sm text-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#4a5878' }}>
+                        <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>Date</label>
+                        <div className="w-full px-4 py-3 rounded-sm text-sm" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', color: '#0a0e1a' }}>
                           {today}
                         </div>
                       </div>
@@ -917,7 +917,7 @@ export default function GeneralConsultForm() {
                       style={{ opacity: submitting ? 0.6 : 1, cursor: submitting ? 'not-allowed' : 'pointer' }}>
                       {submitting ? 'Submitting…' : 'Submit intake form →'}
                     </button>
-                    <p className="text-xs mt-4" style={{ color: '#7a90a8' }}>
+                    <p className="text-xs mt-4" style={{ color: '#4890f7' }}>
                       Your progress is saved automatically. All information is private and confidential. This is not a substitute for emergency medical care.
                     </p>
                   </div>

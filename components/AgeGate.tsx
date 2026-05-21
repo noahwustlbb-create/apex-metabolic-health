@@ -83,7 +83,7 @@ export default function AgeGate() {
               This website contains medical health information
             </h2>
 
-            <p className="text-sm leading-relaxed mb-8" style={{ color: '#4a5878' }}>
+            <p className="text-sm leading-relaxed mb-8" style={{ color: '#0a0e1a' }}>
               Apex Metabolic Health provides clinical health services for adults. By entering this
               site you confirm that you are <strong style={{ color: '#0a0e1a' }}>18 years of age or older</strong> and
               consent to viewing medical health information.
@@ -105,7 +105,7 @@ export default function AgeGate() {
               </button>
             </div>
 
-            <p className="text-xs mt-6 leading-relaxed" style={{ color: '#4a5878' }}>
+            <p className="text-xs mt-6 leading-relaxed" style={{ color: '#0a0e1a' }}>
               This site is intended for Australian adults seeking medical health information only.
               It does not constitute medical advice.
             </p>

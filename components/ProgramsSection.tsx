@@ -199,7 +199,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
         >
           {prog.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
           {prog.tagline}
         </p>
       </div>
@@ -213,7 +213,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
                 className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
                 style={{ background: prog.accent, opacity: 0.55 }}
               />
-              <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
+              <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item}</span>
             </li>
           ))}
         </ul>
@@ -224,7 +224,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           style={{
             background: '#ffffff',
             border: '1px solid rgba(72,144,247,0.1)',
-            color: '#4a5878',
+            color: '#0a0e1a',
           }}
           onMouseEnter={e => {
             const el = e.currentTarget as HTMLElement
@@ -236,7 +236,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
             const el = e.currentTarget as HTMLElement
             el.style.background = 'rgba(255,255,255,0.02)'
             el.style.borderColor = 'rgba(255,255,255,0.07)'
-            el.style.color = '#5a6a7a'
+            el.style.color = '#4890f7'
           }}
         >
           Check eligibility
@@ -302,7 +302,7 @@ export default function ProgramsSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
           </motion.p>
@@ -326,10 +326,10 @@ export default function ProgramsSection() {
           style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}
         >
           <div>
-            <p className="text-sm font-medium mb-0.5" style={{ color: '#4a5878' }}>
+            <p className="text-sm font-medium mb-0.5" style={{ color: '#0a0e1a' }}>
               Not sure which program fits?
             </p>
-            <p className="text-xs" style={{ color: '#7a90a8' }}>
+            <p className="text-xs" style={{ color: '#4890f7' }}>
               Complete the pre-screen and we&apos;ll identify the right clinical pathway for you.
             </p>
           </div>

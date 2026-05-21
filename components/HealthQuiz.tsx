@@ -17,7 +17,7 @@ const PROGRAMS: Record<PK, { name: string; desc: string; href: string; cta: stri
   skin:       { name: 'Skin Regeneration',           color: '#c9a84c', href: '/intake/general-consult',  cta: 'Begin Skin Assessment',        desc: 'Clinical skin protocols combining advanced diagnostics with evidence-based regenerative treatments for lasting skin quality improvement.' },
   injury:     { name: 'Injury Repair & Recovery',    color: '#1a9e8f', href: '/intake/general-consult',  cta: 'Begin Injury Assessment',      desc: 'Targeted repair protocols for chronic injuries, joint issues, and musculoskeletal conditions that have not responded to standard treatment.' },
   bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/order-bloods',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
-  general:    { name: 'General Telehealth',          color: '#4a5878', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
+  general:    { name: 'General Telehealth',          color: '#0a0e1a', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
 }
 
 // ─── Scoring ──────────────────────────────────────────────────────────────────
@@ -620,7 +620,7 @@ function Capture({ onSubmit, submitting, onBack }: {
           onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         >
-          <option value="" style={{ background: '#f8f9ff', color: '#4a5878' }}>How did you hear about us? (optional)</option>
+          <option value="" style={{ background: '#f8f9ff', color: '#0a0e1a' }}>How did you hear about us? (optional)</option>
           {REFERRAL_SOURCES.map(s => (
             <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>
           ))}

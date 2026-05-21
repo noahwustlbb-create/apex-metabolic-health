@@ -22,7 +22,7 @@ function TypingIndicator() {
         <motion.span
           key={i}
           className="w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: '#4a5a6a' }}
+          style={{ backgroundColor: '#0a0e1a' }}
           animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
           transition={{ duration: 1, repeat: Infinity, delay: i * 0.18 }}
         />
@@ -140,16 +140,16 @@ export default function ChatWidget() {
                   </p>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[10px]" style={{ color: '#4a5878' }}>Online now</span>
+                    <span className="text-[10px]" style={{ color: '#0a0e1a' }}>Online now</span>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
                 className="w-7 h-7 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ color: '#4a5878' }}
+                style={{ color: '#0a0e1a' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#0a0e1a' }}
                 aria-label="Close chat"
               >
                 <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">

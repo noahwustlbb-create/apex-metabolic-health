@@ -109,7 +109,7 @@ function DifferentiatorCard({ item, index }: { item: DifferentiatorItem; index: 
       >
         {item.title}
       </h3>
-      <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
         {item.description}
       </p>
     </motion.div>

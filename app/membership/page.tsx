@@ -136,7 +136,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
         <div className="flex-1 min-w-0">
           <span
             className="text-[10px] font-semibold tracking-[0.2em] uppercase block mb-1"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             {feature.number}
           </span>
@@ -149,7 +149,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
         </div>
       </div>
 
-      <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+      <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
         {feature.body}
       </p>
 
@@ -161,7 +161,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
                 <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.06)" />
                 <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{b}</span>
+              <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{b}</span>
             </li>
           ))}
         </ul>
@@ -170,7 +170,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
       {feature.callout && (
         <p
           className="text-xs leading-relaxed italic border-l-2 pl-4"
-          style={{ color: '#4a5878', borderColor: 'rgba(72,144,247,0.25)' }}
+          style={{ color: '#0a0e1a', borderColor: 'rgba(72,144,247,0.25)' }}
         >
           {feature.callout}
         </p>
@@ -252,7 +252,7 @@ function AppSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
               className="text-base leading-relaxed mb-8"
-              style={{ color: '#4a5878', maxWidth: '440px' }}
+              style={{ color: '#0a0e1a', maxWidth: '440px' }}
             >
               Most clinics manage your treatment. We give you a window into it. The Apex App puts your biomarker history, protocol, and clinical progress in your hands — between consultations, not just at them.
             </motion.p>
@@ -283,11 +283,11 @@ function AppSection() {
                   <div>
                     <p
                       className="text-sm font-semibold mb-0.5"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}
                     >
                       {item.label}
                     </p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                       {item.sub}
                     </p>
                   </div>
@@ -377,7 +377,7 @@ export default function MembershipPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '500px', marginBottom: '2rem' }}
+              style={{ color: '#0a0e1a', maxWidth: '500px', marginBottom: '2rem' }}
             >
               A structured, doctor-led clinical system that tracks, adjusts, and improves your protocol as your biology responds.
             </motion.p>
@@ -399,7 +399,7 @@ export default function MembershipPage() {
                 style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)' }}
               >
                 <span className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$99</span>
-                <span className="text-sm" style={{ color: '#4a5878' }}>/month</span>
+                <span className="text-sm" style={{ color: '#0a0e1a' }}>/month</span>
               </div>
             </motion.div>
 
@@ -410,7 +410,7 @@ export default function MembershipPage() {
               className="flex flex-wrap gap-x-6 gap-y-2"
             >
               {['AHPRA-registered doctors', 'No lock-in contracts', 'Review every 4 months', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -436,7 +436,7 @@ export default function MembershipPage() {
               <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '0.75rem' }}>
                 Ongoing system vs. script only.
               </h2>
-              <p className="text-base leading-relaxed max-w-xl" style={{ color: '#4a5878' }}>
+              <p className="text-base leading-relaxed max-w-xl" style={{ color: '#0a0e1a' }}>
                 After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.
               </p>
             </div>
@@ -468,12 +468,12 @@ export default function MembershipPage() {
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="text-4xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$99</p>
-                      <p className="text-sm" style={{ color: '#4a5878' }}>/month</p>
-                      <p className="text-[10px] mt-0.5" style={{ color: '#7a90a8' }}>Doctor-led care, reviewed over time</p>
+                      <p className="text-sm" style={{ color: '#0a0e1a' }}>/month</p>
+                      <p className="text-[10px] mt-0.5" style={{ color: '#4890f7' }}>Doctor-led care, reviewed over time</p>
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed mb-6" style={{ color: '#4a5878', maxWidth: '520px' }}>
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: '#0a0e1a', maxWidth: '520px' }}>
                     Your protocol evolves as your biology responds — not a one-off script, but a living clinical system with ongoing oversight, tracked data, and regular refinement.
                   </p>
 
@@ -496,7 +496,7 @@ export default function MembershipPage() {
                           <circle cx="8" cy="8" r="7" stroke={item.badge ? '#4890f7' : '#4890f7'} strokeWidth="1.2" fill={item.badge ? 'rgba(72,144,247,0.06)' : 'rgba(72,144,247,0.06)'} />
                           <path d="M5 8l2.5 2.5 4-4" stroke={item.badge ? '#4890f7' : '#4890f7'} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span className="text-sm leading-relaxed flex items-center flex-wrap gap-2" style={{ color: item.highlight ? '#c8d4e0' : '#8899aa' }}>
+                        <span className="text-sm leading-relaxed flex items-center flex-wrap gap-2" style={{ color: item.highlight ? '#c8d4e0' : '#4890f7' }}>
                           {item.text}
                           {item.badge && (
                             <span className="text-[8px] font-bold tracking-[0.14em] uppercase px-1.5 py-0.5 rounded-sm flex-shrink-0"
@@ -516,7 +516,7 @@ export default function MembershipPage() {
                     </span>
                   </Link>
 
-                  <p className="text-xs mt-4 text-center" style={{ color: '#7a90a8' }}>
+                  <p className="text-xs mt-4 text-center" style={{ color: '#4890f7' }}>
                     No lock-in contracts. Activates after your initial consultation, where treatment is clinically appropriate.
                   </p>
                 </div>
@@ -527,18 +527,18 @@ export default function MembershipPage() {
                 className="rounded-2xl p-7"
                 style={{ background: '#ffffff', border: '1px solid rgba(255,255,255,0.07)' }}
               >
-                <p className="text-[9px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: '#7a90a8' }}>
+                <p className="text-[9px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: '#4890f7' }}>
                   Alternative
                 </p>
-                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4a5878' }}>
+                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                   Script Release Only
                 </h3>
                 <div className="flex items-baseline gap-1.5 mb-4">
-                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4a5878' }}>$125</span>
-                  <span className="text-sm" style={{ color: '#7a90a8' }}>one-off</span>
+                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>$125</span>
+                  <span className="text-sm" style={{ color: '#4890f7' }}>one-off</span>
                 </div>
 
-                <p className="text-xs leading-relaxed mb-5" style={{ color: '#4a5878' }}>
+                <p className="text-xs leading-relaxed mb-5" style={{ color: '#0a0e1a' }}>
                   Prescription issued and released directly to you. No ongoing clinical management, reviews, or biomarker tracking included.
                 </p>
 
@@ -564,12 +564,12 @@ export default function MembershipPage() {
                           <path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="rgba(255,80,80,0.3)" strokeWidth="1.2" strokeLinecap="round" />
                         </svg>
                       )}
-                      <span className="text-xs leading-relaxed" style={{ color: item.included ? '#4a5a6a' : '#3a4a5a' }}>{item.text}</span>
+                      <span className="text-xs leading-relaxed" style={{ color: item.included ? '#0a0e1a' : '#3a4a5a' }}>{item.text}</span>
                     </li>
                   ))}
                 </ul>
 
-                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#7a90a8', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#4890f7', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
                   Script release does not include ongoing clinical oversight. Not recommended for patients on active hormonal or metabolic protocols requiring monitoring.
                 </p>
               </div>
@@ -596,7 +596,7 @@ export default function MembershipPage() {
                   <span className="text-teal-gradient">Apex Protocol</span>
                 </h2>
               </div>
-              <p className="text-sm leading-relaxed max-w-sm md:text-right" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed max-w-sm md:text-right" style={{ color: '#0a0e1a' }}>
                 8 core pillars. One continuous system. Built to deliver results that compound over time.
               </p>
             </div>
@@ -630,7 +630,7 @@ export default function MembershipPage() {
               >
                 How the 4-month cycle works
               </h2>
-              <p className="text-base leading-relaxed max-w-xl mx-auto" style={{ color: '#4a5878' }}>
+              <p className="text-base leading-relaxed max-w-xl mx-auto" style={{ color: '#0a0e1a' }}>
                 Not a static prescription. A living, evolving protocol that responds to your biology.
               </p>
             </div>
@@ -658,10 +658,10 @@ export default function MembershipPage() {
                       style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
                       <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.n}</span>
                     </div>
-                    <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: '#7a90a8' }}>{phase.phase}</span>
+                    <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>{phase.phase}</span>
                   </div>
                   <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{phase.label}</span>
-                  <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{phase.desc}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{phase.desc}</p>
                 </div>
               ))}
             </div>
@@ -681,9 +681,9 @@ export default function MembershipPage() {
                     <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.n}</span>
                   </div>
                   <div>
-                    <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: '#7a90a8' }}>{phase.phase}</p>
+                    <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: '#4890f7' }}>{phase.phase}</p>
                     <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{phase.label}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{phase.desc}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{phase.desc}</p>
                   </div>
                 </div>
               ))}
@@ -723,9 +723,9 @@ export default function MembershipPage() {
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
               </Link>
-              <p className="text-xs" style={{ color: '#7a90a8' }}>Takes 60 seconds. No commitment.</p>
+              <p className="text-xs" style={{ color: '#4890f7' }}>Takes 60 seconds. No commitment.</p>
             </div>
-            <p className="text-sm mt-10" style={{ color: '#7a90a8' }}>
+            <p className="text-sm mt-10" style={{ color: '#4890f7' }}>
               Next: <Link href="/our-approach" style={{ color: '#4890f7' }} className="hover:underline">see how we approach your care →</Link>
             </p>
           </div>

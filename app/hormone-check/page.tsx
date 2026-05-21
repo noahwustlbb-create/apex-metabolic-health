@@ -146,9 +146,9 @@ function DonutChart({
           style={{ fontSize: 36, color: '#0a0e1a' }}
         >
           {yesCount}
-          <span style={{ fontSize: 18, color: '#4a5878' }}>/10</span>
+          <span style={{ fontSize: 18, color: '#0a0e1a' }}>/10</span>
         </span>
-        <span style={{ fontSize: 11, color: '#4a5878', letterSpacing: '0.12em', marginTop: 4 }}>
+        <span style={{ fontSize: 11, color: '#0a0e1a', letterSpacing: '0.12em', marginTop: 4 }}>
           SYMPTOMS
         </span>
       </div>
@@ -196,7 +196,7 @@ function QuestionCard({
               height: 26,
               background: answer ? 'rgba(44,116,232,0.2)' : 'rgba(255,255,255,0.04)',
               border: `1px solid ${answer ? 'rgba(44,116,232,0.4)' : 'rgba(255,255,255,0.08)'}`,
-              color: answer ? '#2C74E8' : '#4a5a6a',
+              color: answer ? '#2C74E8' : '#0a0e1a',
               fontFamily: 'var(--font-space-grotesk)',
               marginTop: 1,
               transition: 'all 0.25s',
@@ -237,7 +237,7 @@ function QuestionCard({
                     ? isYes
                       ? '#ffffff'
                       : '#2C74E8'
-                    : '#8899aa',
+                    : '#4890f7',
                   boxShadow: selected && isYes ? '0 0 16px rgba(44,116,232,0.4)' : 'none',
                   transform: selected ? 'scale(1.03)' : 'scale(1)',
                 }}
@@ -353,7 +353,7 @@ export default function HormoneCheckPage() {
             {/* Subtext */}
             <p
               className="text-base md:text-lg leading-relaxed mb-8 mx-auto max-w-xl"
-              style={{ color: '#4a5878' }}
+              style={{ color: '#0a0e1a' }}
             >
               The ADAM questionnaire is a clinically validated screening tool used to
               assess androgen deficiency in men. Takes 2 minutes.
@@ -433,9 +433,9 @@ export default function HormoneCheckPage() {
                 }}
               >
                 {answeredCount}
-                <span style={{ color: '#4a5878', fontSize: 16 }}>/10</span>
+                <span style={{ color: '#0a0e1a', fontSize: 16 }}>/10</span>
               </span>
-              <span style={{ fontSize: 10, color: '#4a5878', letterSpacing: '0.1em', marginTop: 2 }}>
+              <span style={{ fontSize: 10, color: '#0a0e1a', letterSpacing: '0.1em', marginTop: 2 }}>
                 ANSWERED
               </span>
             </div>
@@ -614,7 +614,7 @@ export default function HormoneCheckPage() {
                           >
                             ADAM {result.adamPositive ? 'POSITIVE' : 'NEGATIVE'}
                           </span>
-                          <span style={{ color: '#4a5878', fontSize: 11 }}>
+                          <span style={{ color: '#0a0e1a', fontSize: 11 }}>
                             · {result.yesCount} out of 10 symptoms reported
                           </span>
                         </div>
@@ -630,7 +630,7 @@ export default function HormoneCheckPage() {
                     {/* Body copy */}
                     <p
                       className="text-sm md:text-base leading-relaxed mb-8"
-                      style={{ color: '#4a5878' }}
+                      style={{ color: '#0a0e1a' }}
                     >
                       {tier.body}
                     </p>
@@ -662,10 +662,10 @@ export default function HormoneCheckPage() {
                       style={{
                         background: 'rgba(255,255,255,0.02)',
                         border: '1px solid rgba(255,255,255,0.05)',
-                        color: '#4a5878',
+                        color: '#0a0e1a',
                       }}
                     >
-                      <span style={{ color: '#4a5878', fontWeight: 600 }}>Disclaimer: </span>
+                      <span style={{ color: '#0a0e1a', fontWeight: 600 }}>Disclaimer: </span>
                       This tool is a screening aid only and does not constitute medical advice.
                       Clinical assessment by an AHPRA-registered practitioner is required for
                       diagnosis.
@@ -678,9 +678,9 @@ export default function HormoneCheckPage() {
                   <button
                     onClick={handleRetake}
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: '#4a5878', letterSpacing: '0.04em' }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#8899aa')}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#4a5a6a')}
+                    style={{ color: '#0a0e1a', letterSpacing: '0.04em' }}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#4890f7')}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#0a0e1a')}
                   >
                     ↺ Retake Quiz
                   </button>
@@ -744,7 +744,7 @@ function BottomCTA() {
       </h2>
       <p
         className="text-base md:text-lg leading-relaxed mb-8"
-        style={{ color: '#4a5878' }}
+        style={{ color: '#0a0e1a' }}
       >
         Advanced biomarker analysis. Personalised clinical protocol. 100% online.
       </p>

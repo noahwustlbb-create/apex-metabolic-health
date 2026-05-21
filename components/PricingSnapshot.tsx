@@ -118,7 +118,7 @@ export default function PricingSnapshot() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-lg"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
           </motion.p>
@@ -199,21 +199,21 @@ export default function PricingSnapshot() {
                     >
                       {card.price}
                     </span>
-                    <span className="text-xs" style={{ color: '#4a5878' }}>{card.priceNote}</span>
+                    <span className="text-xs" style={{ color: '#0a0e1a' }}>{card.priceNote}</span>
                   </div>
                   {card.price2 && (
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="text-lg font-bold"
-                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4a5878' }}
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
                       >
                         {card.price2}
                       </span>
-                      <span className="text-xs" style={{ color: '#7a90a8' }}>{card.priceNote2}</span>
+                      <span className="text-xs" style={{ color: '#4890f7' }}>{card.priceNote2}</span>
                     </div>
                   )}
                   {card.featured && (
-                    <p className="text-[10px] mt-0.5" style={{ color: '#7a90a8' }}>
+                    <p className="text-[10px] mt-0.5" style={{ color: '#4890f7' }}>
                       Doctor-led care, reviewed over time
                     </p>
                   )}
@@ -221,7 +221,7 @@ export default function PricingSnapshot() {
               </div>
 
               <div className="flex flex-col flex-1 px-6 py-5">
-                <p className="text-xs leading-relaxed mb-4" style={{ color: '#4a5878' }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: '#0a0e1a' }}>
                   {card.body}
                 </p>
 
@@ -234,7 +234,7 @@ export default function PricingSnapshot() {
                       </svg>
                       <span
                         className="text-xs leading-relaxed"
-                        style={{ color: card.featured && j < 3 ? '#9aacbc' : '#5a6a7a' }}
+                        style={{ color: card.featured && j < 3 ? '#9aacbc' : '#4890f7' }}
                       >
                         {b}
                       </span>
@@ -245,7 +245,7 @@ export default function PricingSnapshot() {
                 {card.note && (
                   <p
                     className="text-[10px] leading-relaxed mt-4 pt-4"
-                    style={{ color: '#7a90a8', borderTop: '1px solid rgba(72,144,247,0.07)' }}
+                    style={{ color: '#4890f7', borderTop: '1px solid rgba(72,144,247,0.07)' }}
                   >
                     {card.note}
                   </p>
@@ -261,7 +261,7 @@ export default function PricingSnapshot() {
           transition={{ duration: 0.5, delay: 0.45, ease }}
           className="mt-8 flex items-center justify-between flex-wrap gap-4"
         >
-          <p className="text-xs" style={{ color: '#7a90a8' }}>
+          <p className="text-xs" style={{ color: '#4890f7' }}>
             Membership activates after your initial consultation where treatment is clinically appropriate. No lock-in contracts.
           </p>
           <Link

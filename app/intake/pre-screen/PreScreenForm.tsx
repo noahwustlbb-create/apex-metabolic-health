@@ -250,7 +250,7 @@ function MultiPill({ label, selected, onClick, accent = '#4890f7' }: {
       style={{
         background: selected ? `color-mix(in srgb, ${accent} 12%, transparent)` : 'rgba(255,255,255,0.03)',
         border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 50%, transparent)` : 'rgba(255,255,255,0.07)'}`,
-        color: selected ? accent : '#8899aa',
+        color: selected ? accent : '#4890f7',
       }}
     >
       {label}
@@ -269,7 +269,7 @@ function RadioCard({ label, selected, onClick, accent = '#4890f7' }: {
       style={{
         background: selected ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)',
         border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 45%, transparent)` : 'rgba(255,255,255,0.06)'}`,
-        color: selected ? '#F5F5F5' : '#8899aa',
+        color: selected ? '#F5F5F5' : '#4890f7',
         fontWeight: selected ? 500 : 400,
       }}
     >
@@ -293,7 +293,7 @@ function Field({ label, value, onChange, type = 'text', placeholder }: {
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5878' }}>{label}</label>
+      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>{label}</label>
       <input
         type={type}
         value={value}
@@ -309,7 +309,7 @@ function Field({ label, value, onChange, type = 'text', placeholder }: {
 }
 
 function QLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#4a5878' }}>{children}</p>
+  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#0a0e1a' }}>{children}</p>
 }
 
 // ─── Step 1: Symptoms & goals ─────────────────────────────────────────────────
@@ -328,7 +328,7 @@ function StepOne({ data, set, toggle }: {
       >
         What&apos;s been going on?
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#4a5878' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#0a0e1a' }}>
         Tell us what you&apos;re dealing with. We&apos;ll use this to identify your likely clinical pathway.
       </p>
 
@@ -345,7 +345,7 @@ function StepOne({ data, set, toggle }: {
               style={{
                 background: data.ageRange === a ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
                 border: `1px solid ${data.ageRange === a ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
-                color: data.ageRange === a ? '#4890f7' : '#8899aa',
+                color: data.ageRange === a ? '#4890f7' : '#4890f7',
                 fontFamily: 'var(--font-space-grotesk)',
               }}
             >
@@ -392,7 +392,7 @@ function StepOne({ data, set, toggle }: {
               style={{
                 background: data.recentBloods === val ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
                 border: `1px solid ${data.recentBloods === val ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
-                color: data.recentBloods === val ? '#4890f7' : '#8899aa',
+                color: data.recentBloods === val ? '#4890f7' : '#4890f7',
               }}
             >
               {label}
@@ -423,7 +423,7 @@ function StepTwo({ data, set }: {
           This helps us be specific.
         </span>
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#4a5878' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#0a0e1a' }}>
         These questions go beyond a generic match — and help us identify what&apos;s likely driving this for you specifically.
       </p>
 
@@ -482,7 +482,7 @@ function StepTwo({ data, set }: {
                 style={{
                   background: data.urgency === u ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
                   border: `1px solid ${data.urgency === u ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
-                  color: data.urgency === u ? '#4890f7' : '#8899aa',
+                  color: data.urgency === u ? '#4890f7' : '#4890f7',
                 }}
               >
                 {u}
@@ -531,7 +531,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
       >
         Your result is ready.
       </h2>
-      <p className="text-sm mb-7 leading-relaxed" style={{ color: '#4a5878' }}>
+      <p className="text-sm mb-7 leading-relaxed" style={{ color: '#0a0e1a' }}>
         We&apos;ve identified your likely clinical pathway. Enter your details to unlock your result and speak with an Apex doctor.
       </p>
 
@@ -569,18 +569,18 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
         {/* Referral source */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5878' }}>
-            How did you hear about us? <span style={{ color: '#7a90a8', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>
+            How did you hear about us? <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <select
             value={data.referralSource}
             onChange={e => set('referralSource', e.target.value)}
             className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#4a5a6a', caretColor: '#4890f7', cursor: 'pointer' }}
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#0a0e1a', caretColor: '#4890f7', cursor: 'pointer' }}
             onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
             onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
           >
-            <option value="" style={{ background: '#f8f9ff', color: '#4a5878' }}>Select…</option>
+            <option value="" style={{ background: '#f8f9ff', color: '#0a0e1a' }}>Select…</option>
             {REFERRAL_SOURCES.map(s => (
               <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>
             ))}
@@ -589,8 +589,8 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
         {/* Referral / access code */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#4a5878' }}>
-            Referral or access code <span style={{ color: '#7a90a8', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>
+            Referral or access code <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <input
             type="text"
@@ -609,7 +609,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
       <div className="flex items-center gap-3">
         <button type="button" onClick={onBack}
           className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150 flex-shrink-0"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#4a5878' }}>
+          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#0a0e1a' }}>
           ← Back
         </button>
         <button
@@ -625,7 +625,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
       {error && <p className="text-sm mt-3" style={{ color: '#e05c5c' }}>{error}</p>}
 
-      <p className="text-[11px] mt-4" style={{ color: '#7a90a8' }}>
+      <p className="text-[11px] mt-4" style={{ color: '#4890f7' }}>
         100% private. No spam. An Apex doctor contacts you the same day.
       </p>
     </motion.div>
@@ -680,7 +680,7 @@ function Success({ data }: { data: FormData }) {
         </div>
         <div>
           <p className="label">Assessment complete</p>
-          <p className="text-[11px]" style={{ color: '#7a90a8' }}>Matched to your recommended pathway</p>
+          <p className="text-[11px]" style={{ color: '#4890f7' }}>Matched to your recommended pathway</p>
         </div>
       </div>
 
@@ -688,7 +688,7 @@ function Success({ data }: { data: FormData }) {
         style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: '#0a0e1a', lineHeight: 1.15 }}>
         {data.firstName ? `Here's your next step, ${data.firstName}.` : "Here's your next step."}
       </h2>
-      <p className="text-sm leading-relaxed mb-6" style={{ color: '#4a5878' }}>
+      <p className="text-sm leading-relaxed mb-6" style={{ color: '#0a0e1a' }}>
         {hasBloods
           ? `You have recent blood results — our team will review your submission and an Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} to arrange your consultation.`
           : `Based on your full profile, we've matched you to the ${label} program. An Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} with your blood panel referral and next steps.`}
@@ -721,7 +721,7 @@ function Success({ data }: { data: FormData }) {
           className="rounded-xl p-5 mb-7"
           style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
         >
-          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#7a90a8' }}>
+          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#4890f7' }}>
             PATHOLOGY
           </p>
           <div className="flex items-start justify-between gap-4">
@@ -729,22 +729,22 @@ function Success({ data }: { data: FormData }) {
               <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                 {PATHWAY_INFO[pathway].bloodLabel}
               </p>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                 {PATHWAY_INFO[pathway].bloodNote}
               </p>
             </div>
             <div className="flex-shrink-0 text-right">
-              <p className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: PATHWAY_INFO[pathway].bloodConditional ? '#8899aa' : '#4890f7' }}>
+              <p className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: PATHWAY_INFO[pathway].bloodConditional ? '#4890f7' : '#4890f7' }}>
                 {PATHWAY_INFO[pathway].bloodPrice}
               </p>
               {PATHWAY_INFO[pathway].bloodConditional && (
-                <p className="text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: '#7a90a8' }}>if required</p>
+                <p className="text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: '#4890f7' }}>if required</p>
               )}
             </div>
           </div>
           <div className="mt-3 pt-3 flex items-center gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
             <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
-            <p className="text-[10px]" style={{ color: '#7a90a8' }}>
+            <p className="text-[10px]" style={{ color: '#4890f7' }}>
               Ongoing monitoring bloods are included as part of your Apex Membership review cycle — not charged separately.
             </p>
           </div>
@@ -768,7 +768,7 @@ function Success({ data }: { data: FormData }) {
         </div>
         <div>
           <p className="text-sm font-semibold mb-1" style={{ color: '#0a0e1a' }}>An Apex doctor will contact you today</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+          <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
             Our clinical team reviews your submission and a doctor reaches out directly — no portal, no waiting room, no queue. We handle your referral and next steps.
           </p>
         </div>
@@ -776,7 +776,7 @@ function Success({ data }: { data: FormData }) {
 
       {/* What's included */}
       <div className="mb-7">
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#7a90a8' }}>WHAT YOU GET WITH APEX</p>
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>WHAT YOU GET WITH APEX</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {FEATURES.map((f, i) => (
             <motion.div
@@ -788,7 +788,7 @@ function Success({ data }: { data: FormData }) {
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
             >
               <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>{f.title}</p></div>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{f.body}</p>
+              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{f.body}</p>
             </motion.div>
           ))}
         </div>
@@ -814,7 +814,7 @@ function Success({ data }: { data: FormData }) {
             { label: 'hsCRP', value: '0.4 mg/L', status: 'optimal', pct: 88 },
           ].map(row => (
             <div key={row.label} className="flex items-center gap-3">
-              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: '#4a5878' }}>{row.label}</p></div>
+              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: '#0a0e1a' }}>{row.label}</p></div>
               <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
                 <div className="h-full rounded-full" style={{ width: `${row.pct}%`, background: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }} />
               </div>
@@ -822,12 +822,12 @@ function Success({ data }: { data: FormData }) {
             </div>
           ))}
         </div>
-        <p className="text-[10px] mt-3" style={{ color: '#7a90a8' }}>54 biomarkers tracked · Updated with every panel · Doctor-reviewed</p>
+        <p className="text-[10px] mt-3" style={{ color: '#4890f7' }}>54 biomarkers tracked · Updated with every panel · Doctor-reviewed</p>
       </motion.div>
 
       {/* Pathway steps */}
       <div className="p-5 rounded-xl mb-7" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#7a90a8' }}>YOUR NEXT STEPS</p>
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#4890f7' }}>YOUR NEXT STEPS</p>
         <div className="flex flex-col gap-0">
           {(hasBloods
             ? [
@@ -848,7 +848,7 @@ function Success({ data }: { data: FormData }) {
                 <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{step.n}</div>
                 {i < arr.length - 1 && <div style={{ width: 1, flex: 1, minHeight: 12, background: 'rgba(72,144,247,0.08)', marginTop: 2, marginBottom: 2 }} />}
               </div>
-              <p className="text-sm leading-relaxed pb-3" style={{ color: '#4a5878' }}>{step.label}</p>
+              <p className="text-sm leading-relaxed pb-3" style={{ color: '#0a0e1a' }}>{step.label}</p>
             </div>
           ))}
         </div>
@@ -857,7 +857,7 @@ function Success({ data }: { data: FormData }) {
       {/* Trust signals */}
       <div className="flex flex-wrap gap-x-6 gap-y-2">
         {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential', 'No lock-in contracts'].map(t => (
-          <span key={t} className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+          <span key={t} className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
             <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
             {t}
           </span>
@@ -974,7 +974,7 @@ export default function PreScreenForm() {
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: step === 3 ? '#4890f7' : '#4890f7' }}>
                     {step === 1 ? 'STEP 1 OF 2' : step === 2 ? 'STEP 2 OF 2' : 'RESULT READY'}
                   </span>
-                  <span className="text-xs" style={{ color: '#7a90a8' }}>{progressPct}</span>
+                  <span className="text-xs" style={{ color: '#4890f7' }}>{progressPct}</span>
                 </div>
                 <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
                   <motion.div
@@ -1020,7 +1020,7 @@ export default function PreScreenForm() {
                     {step === 2 && (
                       <button type="button" onClick={() => { setStep(1); scrollTop() }}
                         className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#4a5878' }}>
+                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#0a0e1a' }}>
                         ← Back
                       </button>
                     )}
@@ -1037,7 +1037,7 @@ export default function PreScreenForm() {
                 )}
 
                 {step === 1 && (
-                  <p className="text-xs mt-5 flex items-center gap-2" style={{ color: '#7a90a8' }}>
+                  <p className="text-xs mt-5 flex items-center gap-2" style={{ color: '#4890f7' }}>
                     <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.35)' }} />
                     Trusted by 2,000+ Australian men
                   </p>

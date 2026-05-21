@@ -157,7 +157,7 @@ export default function BaselinePricing() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-lg leading-relaxed"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             One blood test. A full picture of where you stand.
           </motion.p>
@@ -211,12 +211,12 @@ export default function BaselinePricing() {
                 {card.price && (
                   <div className="text-right flex-shrink-0 ml-4">
                     <p className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: card.priceColor }}>{card.price}</p>
-                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#4a5878' }}>{card.priceLabel}</p>
+                    <p className="text-[10px] tracking-[0.1em] uppercase" style={{ color: '#0a0e1a' }}>{card.priceLabel}</p>
                   </div>
                 )}
               </div>
 
-              <p className="text-sm leading-relaxed mb-5" style={{ color: '#4a5878' }}>{card.description}</p>
+              <p className="text-sm leading-relaxed mb-5" style={{ color: '#0a0e1a' }}>{card.description}</p>
 
               <ul className="space-y-2.5 flex-1 mb-5">
                 {card.includes.map((item) => (
@@ -225,14 +225,14 @@ export default function BaselinePricing() {
                       <circle cx="8" cy="8" r="7" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.2" fill={card.featured ? 'rgba(72,144,247,0.07)' : 'rgba(72,144,247,0.06)'} />
                       <path d="M5 8l2 2 4-4" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
+                    <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item}</span>
                   </li>
                 ))}
               </ul>
 
               {/* Note (e.g. for blood panel) */}
               {'note' in card && card.note && (
-                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#4a5878', background: '#ffffff', border: '1px solid rgba(72,144,247,0.08)' }}>
+                <p className="text-xs leading-relaxed mb-5 px-3 py-2.5 rounded-sm" style={{ color: '#0a0e1a', background: '#ffffff', border: '1px solid rgba(72,144,247,0.08)' }}>
                   ⓘ {card.note}
                 </p>
               )}
@@ -261,7 +261,7 @@ export default function BaselinePricing() {
           {TRUST_SIGNALS.map((signal) => (
             <div key={signal.text} className="flex items-center gap-2">
               {signal.icon}
-              <span className="text-xs font-medium" style={{ color: '#4a5878' }}>{signal.text}</span>
+              <span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>{signal.text}</span>
             </div>
           ))}
         </motion.div>

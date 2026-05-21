@@ -72,7 +72,7 @@ export default function Nav() {
               fontWeight: 300,
               fontSize: '10px',
               letterSpacing: '0.15em',
-              color: '#7a90a8',
+              color: '#4890f7',
               lineHeight: 1,
               marginTop: '3px',
               textTransform: 'uppercase',
@@ -88,13 +88,13 @@ export default function Nav() {
                 <Link
                   href="/services"
                   className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-                  style={{ color: 'rgba(10,14,26,0.5)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = '#0a0e1a' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.5)' }}
+                  style={{ color: '#0a0e1a' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
                 >
                   Clinical Programs
                 </Link>
-                <button className="flex items-center p-1" style={{ color: 'rgba(10,14,26,0.4)' }} aria-expanded={programsOpen} aria-haspopup="true" aria-label="Open programs menu">
+                <button className="flex items-center p-1" style={{ color: '#0a0e1a' }} aria-expanded={programsOpen} aria-haspopup="true" aria-label="Open programs menu">
                   <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5 transition-transform duration-200" style={{ transform: programsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} aria-hidden="true">
                     <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -111,16 +111,16 @@ export default function Nav() {
                   >
                     {NAV_PROGRAMS.map((program) =>
                       program.comingSoon ? (
-                        <div key={program.slug} className="flex items-center justify-between px-3.5 py-2.5 text-[13px]" style={{ color: '#c0ccd8', cursor: 'default' }}>
+                        <div key={program.slug} className="flex items-center justify-between px-3.5 py-2.5 text-[13px]" style={{ color: 'rgba(72,144,247,0.4)', cursor: 'default' }}>
                           <span>{program.name}</span>
                           <span className="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm" style={{ color: '#4890f7', background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.18)' }}>Soon</span>
                         </div>
                       ) : (
                         <Link key={program.slug} href={`/programs/${program.slug}`}
                           className="block px-3.5 py-2.5 rounded-lg text-[13px] transition-all duration-150"
-                          style={{ color: '#4a5878' }}
+                          style={{ color: '#0a0e1a' }}
                           onMouseEnter={e => { e.currentTarget.style.color = '#0a0e1a'; e.currentTarget.style.background = '#f0f5ff' }}
-                          onMouseLeave={e => { e.currentTarget.style.color = '#4a5878'; e.currentTarget.style.background = 'transparent' }}
+                          onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a'; e.currentTarget.style.background = 'transparent' }}
                         >{program.name}</Link>
                       )
                     )}
@@ -145,9 +145,9 @@ export default function Nav() {
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}
                 className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-                style={{ color: 'rgba(10,14,26,0.5)' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#0a0e1a' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.5)' }}
+                style={{ color: '#0a0e1a' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
               >{link.label}</Link>
             ))}
           </nav>
@@ -156,9 +156,9 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-3">
             <Link href="/order-bloods"
               className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-              style={{ color: 'rgba(10,14,26,0.3)' }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.7)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(10,14,26,0.3)' }}
+              style={{ color: '#4890f7' }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#2563eb' }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#4890f7' }}
             >Order Bloods</Link>
             <Link href="/intake/pre-screen"
               className="inline-flex items-center gap-2 text-[12.5px] font-semibold transition-all duration-200 whitespace-nowrap"
@@ -215,7 +215,7 @@ export default function Nav() {
                 ))}
               </nav>
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, delay: 0.3 }} className="px-6 pt-5">
-                <Link href="/order-bloods" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#b0c0d0' }}>Order Bloods →</Link>
+                <Link href="/order-bloods" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>Order Bloods →</Link>
               </motion.div>
             </div>
 

@@ -54,7 +54,7 @@ export default function ProgramQuiz() {
             >
               Not Sure Where to Start?
             </h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: '#4a5878' }}>
+            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: '#0a0e1a' }}>
               Answer a few quick questions and we&apos;ll recommend the right program for your goals.
               Takes 2 minutes.
             </p>

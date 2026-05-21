@@ -60,7 +60,7 @@ export default function StatsBar() {
               </p>
               <p
                 className="text-[10px] font-medium leading-snug tracking-[0.1em] uppercase"
-                style={{ color: '#4a5878' }}
+                style={{ color: '#0a0e1a' }}
               >
                 {stat.label}
               </p>

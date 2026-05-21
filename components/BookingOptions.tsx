@@ -110,7 +110,7 @@ export default function BookingOptions({
           >
             {heading}
           </h2>
-          <p className="text-base md:text-lg" style={{ color: '#4a5878' }}>
+          <p className="text-base md:text-lg" style={{ color: '#0a0e1a' }}>
             {subheading}
           </p>
         </motion.div>
@@ -155,7 +155,7 @@ export default function BookingOptions({
                 {/* Tag */}
                 <p
                   className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-4"
-                  style={{ color: opt.featured ? '#6AAEE8' : '#4a5a6a' }}
+                  style={{ color: opt.featured ? '#6AAEE8' : '#0a0e1a' }}
                 >
                   {opt.tag}
                 </p>
@@ -185,7 +185,7 @@ export default function BookingOptions({
                 {/* Desc */}
                 <p
                   className="text-sm leading-relaxed flex-1 mb-5"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   {opt.desc}
                 </p>
@@ -193,7 +193,7 @@ export default function BookingOptions({
                 {/* Arrow */}
                 <div
                   className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-200"
-                  style={{ color: opt.featured ? '#6AAEE8' : '#4a5a6a' }}
+                  style={{ color: opt.featured ? '#6AAEE8' : '#0a0e1a' }}
                 >
                   <span className="group-hover:text-[#6AAEE8] transition-colors duration-200">
                     {opt.featured ? 'Take the Quiz' : 'Get Started'}
@@ -230,7 +230,7 @@ export default function BookingOptions({
           )}
           <p
             className="text-center text-[11px] tracking-[0.18em] uppercase"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </p>

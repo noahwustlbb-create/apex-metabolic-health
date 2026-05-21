@@ -45,7 +45,7 @@ function PricingHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22, ease }}
-          style={{ color: '#4a5878', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: '#0a0e1a', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           Three components. Published upfront. No discovery calls to unlock a price.
         </motion.p>
@@ -56,7 +56,7 @@ function PricingHero() {
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
           {['No hidden fees', 'No lock-in contracts', 'AHPRA-registered doctors'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4a5878' }}>
+            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
               {t}
             </span>
@@ -178,28 +178,28 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
               <div key={j} className="flex items-baseline gap-2">
                 <span
                   className="font-bold"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: j === 0 ? '26px' : '20px', color: j === 0 ? accent : '#4a5878', lineHeight: 1 }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: j === 0 ? '26px' : '20px', color: j === 0 ? accent : '#0a0e1a', lineHeight: 1 }}
                 >
                   {p.price}
                 </span>
-                <span className="text-xs" style={{ color: j === 0 ? '#7a90a8' : '#9ab0c8' }}>{p.note}</span>
+                <span className="text-xs" style={{ color: j === 0 ? '#4890f7' : '#9ab0c8' }}>{p.note}</span>
               </div>
             ))}
           </div>
         ) : (
           <div className="flex items-baseline gap-1.5">
             <span className="text-3xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>{step.price}</span>
-            <span className="text-sm" style={{ color: '#4a5878' }}>{step.priceNote}</span>
+            <span className="text-sm" style={{ color: '#0a0e1a' }}>{step.priceNote}</span>
           </div>
         )}
       </div>
 
       {/* Body */}
       <div className="flex flex-col flex-1 px-6 py-5">
-        <p className="text-xs leading-relaxed mb-4" style={{ color: '#4a5878' }}>{step.body}</p>
+        <p className="text-xs leading-relaxed mb-4" style={{ color: '#0a0e1a' }}>{step.body}</p>
         <ul className="flex flex-col gap-2 flex-1">
           {step.includes.map((item, j) => (
-            <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+            <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true">
                 <circle cx="8" cy="8" r="6.5" stroke={accent} strokeWidth="1" fill={accentBg} />
                 <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -209,7 +209,7 @@ function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inVie
           ))}
         </ul>
         {step.note && (
-          <p className="text-[11px] leading-relaxed mt-4 pt-4" style={{ color: '#4a5878', borderTop: '1px solid rgba(72,144,247,0.08)' }}>
+          <p className="text-[11px] leading-relaxed mt-4 pt-4" style={{ color: '#0a0e1a', borderTop: '1px solid rgba(72,144,247,0.08)' }}>
             {step.note}
           </p>
         )}
@@ -243,7 +243,7 @@ function PricingSteps() {
             <span style={{ color: 'rgba(10,14,26,0.2)' }}>That&apos;s it.</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-base leading-relaxed max-w-lg" style={{ color: '#4a5878' }}>
+            className="text-base leading-relaxed max-w-lg" style={{ color: '#0a0e1a' }}>
             Blood panel. Consultation. Ongoing membership if you want it. Nothing bundled to obscure what you&apos;re paying for.
           </motion.p>
         </div>
@@ -325,7 +325,7 @@ function MembershipComparison() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18 }}
               className="text-sm leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '400px' }}
+              style={{ color: '#0a0e1a', maxWidth: '400px' }}
             >
               After your initial consultation, you choose your ongoing pathway. Membership is the more complete standard of care. Script release is there if you prefer to manage independently.
             </motion.p>
@@ -355,12 +355,12 @@ function MembershipComparison() {
                 <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                   {opt.title}
                 </p>
-                <p className="text-base font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: opt.featured ? '#4890f7' : '#7a90a8' }}>
+                <p className="text-base font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: opt.featured ? '#4890f7' : '#4890f7' }}>
                   {opt.price}
                 </p>
                 <ul className="flex flex-col gap-2">
                   {opt.bullets.map((b, j) => (
-                    <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                    <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                       <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
                         style={{ background: opt.featured ? '#4890f7' : 'rgba(72,144,247,0.25)' }} />
                       {b}
@@ -425,7 +425,7 @@ function NotIncluded() {
             What&apos;s NOT included.
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-sm leading-relaxed mb-10" style={{ color: '#4a5878' }}>
+            className="text-sm leading-relaxed mb-10" style={{ color: '#0a0e1a' }}>
             Most clinics hide fees until you&apos;re committed. We&apos;d rather tell you what you won&apos;t be paying for.
           </motion.p>
 
@@ -447,7 +447,7 @@ function NotIncluded() {
                 </div>
                 <div>
                   <span className="text-sm font-semibold mr-2" style={{ color: '#0a0e1a' }}>{item.label}.</span>
-                  <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.detail}</span>
+                  <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.detail}</span>
                 </div>
               </motion.div>
             ))}

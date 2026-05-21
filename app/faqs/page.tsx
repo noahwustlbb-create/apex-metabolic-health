@@ -40,7 +40,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
           {answer}
         </p>
       )}
@@ -237,7 +237,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           Not on this list? Contact us through the Get Started page.
         </motion.p>

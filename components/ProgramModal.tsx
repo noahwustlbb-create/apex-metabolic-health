@@ -86,7 +86,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 height: '32px',
                 borderRadius: '50%',
                 background: '#2e3542',
-                color: '#4a5878',
+                color: '#0a0e1a',
                 fontSize: '20px',
                 lineHeight: '32px',
                 textAlign: 'center',
@@ -219,7 +219,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               <p
                 style={{
                   fontSize: '14px',
-                  color: '#4a5878',
+                  color: '#0a0e1a',
                   marginBottom: '20px',
                   marginTop: 0,
                   lineHeight: 1.5,
@@ -236,7 +236,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 style={{
                   fontSize: '15px',
                   lineHeight: 1.75,
-                  color: '#4a5878',
+                  color: '#0a0e1a',
                   marginBottom: '24px',
                   marginTop: 0,
                 }}
@@ -251,7 +251,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     fontSize: '10px',
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: '#4a5878',
+                    color: '#0a0e1a',
                     marginBottom: '10px',
                     fontFamily: 'var(--font-space-grotesk)',
                     marginTop: 0,
@@ -272,7 +272,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           marginTop: '5px',
                         }}
                       />
-                      <span style={{ fontSize: '13px', color: '#4a5878', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: '#0a0e1a', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>
@@ -287,7 +287,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     fontSize: '10px',
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: '#4a5878',
+                    color: '#0a0e1a',
                     marginBottom: '10px',
                     fontFamily: 'var(--font-space-grotesk)',
                     marginTop: 0,
@@ -314,7 +314,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span style={{ fontSize: '13px', color: '#4a5878', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: '#0a0e1a', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>
@@ -343,7 +343,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 style={{
                   textAlign: 'center',
                   fontSize: '11px',
-                  color: '#4a5878',
+                  color: '#0a0e1a',
                   letterSpacing: '0.12em',
                   marginTop: '16px',
                   marginBottom: 0,

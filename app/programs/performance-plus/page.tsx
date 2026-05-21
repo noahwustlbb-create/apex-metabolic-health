@@ -83,13 +83,13 @@ function Hero() {
           transition={{ duration: 0.5, ease }}
           className="flex items-center gap-2.5 mb-5"
         >
-          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#7a90a8' }}
+          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#4890f7' }}
             onMouseEnter={e => { e.currentTarget.style.color = ACCENT }}
             onMouseLeave={e => { e.currentTarget.style.color = '#3a4a5a' }}
           >
             Clinical Programs
           </Link>
-          <span style={{ color: '#2a3a4a' }}>›</span>
+          <span style={{ color: '#0a0e1a' }}>›</span>
           <span className="text-[11px] tracking-[0.14em] uppercase font-semibold" style={{ color: ACCENT }}>
             Performance & Recovery
           </span>
@@ -130,7 +130,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          style={{ color: '#4a5878', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: '#0a0e1a', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           Plateaus, slow recovery, and declining output are often clinical problems with clinical solutions. We assess the hormonal and metabolic variables limiting what your training can produce.
         </motion.p>
@@ -142,7 +142,7 @@ function Hero() {
           className="flex flex-wrap gap-x-6 gap-y-2 mb-8"
         >
           {['AHPRA-registered doctors', 'Performance-focused blood panel', 'Doctor-prescribed protocol', 'Australia-wide telehealth'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: `rgba(249,115,22,0.5)` }} />
               {t}
             </span>
@@ -200,7 +200,7 @@ function SymptomsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '420px' }}
+              style={{ color: '#0a0e1a', maxWidth: '420px' }}
             >
               When training load is consistent but results aren&apos;t — and recovery is taking longer than it should — there&apos;s usually a clinical variable limiting the output. Standard blood tests won&apos;t catch it.
             </motion.p>
@@ -216,8 +216,8 @@ function SymptomsSection() {
                 className="rounded-xl p-4"
                 style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)', borderLeft: `2px solid ${ACCENT}` }}
               >
-                <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}>{s.title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{s.body}</p>
+                <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{s.title}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{s.body}</p>
               </motion.div>
             ))}
           </div>
@@ -258,7 +258,7 @@ function PathwaySection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-sm leading-relaxed max-w-lg"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             A clinical process built around your training context — not a generic wellness checklist.
           </motion.p>
@@ -281,7 +281,7 @@ function PathwaySection() {
                 <span className="text-[11px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{p.step}</span>
               </div>
               <h3 className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#e8f0f8' }}>{p.title}</h3>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{p.body}</p>
+              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{p.body}</p>
             </motion.div>
           ))}
         </div>
@@ -317,7 +317,7 @@ function PanelSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed mb-6"
-              style={{ color: '#4a5878', maxWidth: '400px' }}
+              style={{ color: '#0a0e1a', maxWidth: '400px' }}
             >
               The performance panel assesses the hormonal, metabolic, and recovery-relevant biomarkers that determine your ceiling — not just whether you&apos;re in a disease range.
             </motion.p>
@@ -329,7 +329,7 @@ function PanelSection() {
               style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}` }}
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                 Have recent bloods? Submit them during the pre-screen — we&apos;ll review whether they meet the panel requirements. You may be able to move directly to consultation.
               </p>
             </motion.div>
@@ -347,14 +347,14 @@ function PanelSection() {
             </div>
             <ul className="p-5 flex flex-col gap-2">
               {PANEL_MARKERS.map((m, i) => (
-                <li key={i} className="flex items-center gap-3 text-xs" style={{ color: '#4a5878' }}>
+                <li key={i} className="flex items-center gap-3 text-xs" style={{ color: '#0a0e1a' }}>
                   <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: ACCENT, opacity: 0.5 }} />
                   {m}
                 </li>
               ))}
             </ul>
             <div className="px-5 pb-5">
-              <p className="text-[11px]" style={{ color: '#7a90a8' }}>
+              <p className="text-[11px]" style={{ color: '#4890f7' }}>
                 Final panel confirmed after pre-screen assessment. Pricing from $73.66 at accredited collection centres.
               </p>
             </div>
@@ -392,7 +392,7 @@ function CTASection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1, ease }}
-          style={{ color: '#4a5878', maxWidth: '420px', margin: '0 auto 2rem', fontSize: '14px', lineHeight: 1.7 }}
+          style={{ color: '#0a0e1a', maxWidth: '420px', margin: '0 auto 2rem', fontSize: '14px', lineHeight: 1.7 }}
         >
           Complete the pre-screen. We&apos;ll confirm your suitability and walk you through what happens next.
         </motion.p>
@@ -411,7 +411,7 @@ function CTASection() {
               </svg>
             </span>
           </Link>
-          <p className="text-xs" style={{ color: '#7a90a8' }}>60 seconds. No commitment.</p>
+          <p className="text-xs" style={{ color: '#4890f7' }}>60 seconds. No commitment.</p>
         </motion.div>
 
         <motion.p
@@ -419,7 +419,7 @@ function CTASection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-xs mt-10 max-w-xl mx-auto"
-          style={{ color: '#7a90a8' }}
+          style={{ color: '#4890f7' }}
         >
           All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
         </motion.p>

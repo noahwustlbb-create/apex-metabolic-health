@@ -55,13 +55,13 @@ function Hero() {
           transition={{ duration: 0.5, ease }}
           className="flex items-center gap-2.5 mb-5"
         >
-          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#7a90a8' }}
+          <Link href="/services" className="text-[11px] tracking-[0.14em] uppercase font-semibold transition-colors duration-150" style={{ color: '#4890f7' }}
             onMouseEnter={e => { e.currentTarget.style.color = ACCENT }}
             onMouseLeave={e => { e.currentTarget.style.color = '#3a4a5a' }}
           >
             Clinical Programs
           </Link>
-          <span style={{ color: '#2a3a4a' }}>›</span>
+          <span style={{ color: '#0a0e1a' }}>›</span>
           <span className="text-[11px] tracking-[0.14em] uppercase font-semibold" style={{ color: ACCENT }}>
             Longevity Protocol
           </span>
@@ -108,7 +108,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          style={{ color: '#4a5878', maxWidth: '520px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: '#0a0e1a', maxWidth: '520px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           The Apex Longevity Protocol is our most comprehensive program — a multi-system biological assessment, ongoing tracking, and a doctor-led protocol built for men who are thinking proactively about the next decade, not just the next checkup.
         </motion.p>
@@ -156,7 +156,7 @@ function PillarsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '420px' }}
+              style={{ color: '#0a0e1a', maxWidth: '420px' }}
             >
               Most medicine waits for disease to declare itself. The Longevity Protocol is built around a different premise: that the best time to identify and address biological decline is before it becomes symptomatic.
             </motion.p>
@@ -179,8 +179,8 @@ function PillarsSection() {
                   <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}>{p.title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{p.body}</p>
+                  <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{p.title}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{p.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -227,7 +227,7 @@ function NotifySection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1, ease }}
-          style={{ color: '#4a5878', maxWidth: '460px', margin: '0 auto 2.5rem', fontSize: '14px', lineHeight: 1.7 }}
+          style={{ color: '#0a0e1a', maxWidth: '460px', margin: '0 auto 2.5rem', fontSize: '14px', lineHeight: 1.7 }}
         >
           The Longevity Protocol launches to Apex members first. If you&apos;re on an active program, you&apos;ll be contacted when enrollment opens. If you&apos;re not yet a member, starting any program now puts you at the front of the queue.
         </motion.p>
@@ -256,7 +256,7 @@ function NotifySection() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs mt-10 max-w-xl mx-auto"
-          style={{ color: '#7a90a8' }}
+          style={{ color: '#4890f7' }}
         >
           All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
         </motion.p>

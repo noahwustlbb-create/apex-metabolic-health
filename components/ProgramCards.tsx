@@ -135,7 +135,7 @@ function ProgramCard({ program, index, inView }: {
 
       {/* Content area */}
       <div className="flex flex-col flex-1 p-5">
-        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: '#4a5878' }}>
+        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: '#0a0e1a' }}>
           {program.description}
         </p>
 
@@ -143,7 +143,7 @@ function ProgramCard({ program, index, inView }: {
         {program.comingSoon ? (
           <div
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold mb-3"
-            style={{ background: 'rgba(255,255,255,0.05)', color: '#4a5878', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
+            style={{ background: 'rgba(255,255,255,0.05)', color: '#0a0e1a', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
           >
             Joining waitlist soon
           </div>
@@ -227,7 +227,7 @@ export default function ProgramCards() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-sm md:text-right"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Doctor-led, evidence-based protocols for each of the six biological systems that most affect how men look, feel, and perform.
           </motion.p>
@@ -248,7 +248,7 @@ export default function ProgramCards() {
           className="flex flex-wrap items-center justify-between gap-4 mt-10 pt-8"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <p className="text-sm" style={{ color: '#4a5878' }}>
+          <p className="text-sm" style={{ color: '#0a0e1a' }}>
             Not sure which program is right for you?
           </p>
           <a

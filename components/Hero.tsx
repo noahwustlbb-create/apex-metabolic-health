@@ -56,7 +56,7 @@ export default function Hero() {
             style={{ fontSize: 'clamp(48px, 8vw, 108px)' }}
           >
             Real answers.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
+            <span style={{ color: 'rgba(72,144,247,0.4)' }}>
               Not reassurance.
             </span>
           </motion.h1>
@@ -66,7 +66,7 @@ export default function Hero() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.22, ease }}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Advanced diagnostics, a specialist doctor, and a clinical protocol built around your biology — not a GP referral.
           </motion.p>
@@ -97,11 +97,11 @@ export default function Hero() {
             {TRUST.map((item) => (
               <span
                 key={item}
-                className="text-[10px] font-medium tracking-[0.12em] uppercase px-3 py-1.5"
+                className="text-[10px] font-semibold tracking-[0.14em] uppercase px-3 py-1.5"
                 style={{
-                  color: '#4a5878',
-                  background: '#ffffff',
-                  border: '1px solid rgba(72,144,247,0.14)',
+                  color: '#4890f7',
+                  background: 'rgba(72,144,247,0.05)',
+                  border: '1px solid rgba(72,144,247,0.3)',
                 }}
               >
                 {item}

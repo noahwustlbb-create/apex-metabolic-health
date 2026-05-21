@@ -54,7 +54,7 @@ export default function CTASection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2, ease }}
           className="text-base leading-relaxed max-w-lg mx-auto mb-10"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           Advanced diagnostics. A doctor who specialises in this. A personalised protocol built around your results. No GP referral. No waiting rooms.
         </motion.p>
@@ -86,7 +86,7 @@ export default function CTASection() {
             <span
               key={item}
               className="flex items-center gap-2"
-              style={{ fontSize: '10px', color: '#7a90a8', letterSpacing: '0.14em', textTransform: 'uppercase' }}
+              style={{ fontSize: '10px', color: '#4890f7', letterSpacing: '0.14em', textTransform: 'uppercase' }}
             >
               {i > 0 && <span className="hidden sm:block w-px h-3" style={{ background: 'rgba(72,144,247,0.12)' }} />}
               {item}

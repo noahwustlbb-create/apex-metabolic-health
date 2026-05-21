@@ -50,7 +50,7 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
 
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
-    <label className="block text-sm font-medium mb-1.5" style={{ color: '#4a5878' }}>
+    <label className="block text-sm font-medium mb-1.5" style={{ color: '#0a0e1a' }}>
       {children}{required && <span style={{ color: '#4890f7' }}> *</span>}
     </label>
   )
@@ -113,7 +113,7 @@ export default function DiscoveryCallPage() {
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                 We&apos;ll be in touch, {form.firstName}.
               </h1>
-              <p className="text-base leading-relaxed mb-10" style={{ color: '#4a5878' }}>
+              <p className="text-base leading-relaxed mb-10" style={{ color: '#0a0e1a' }}>
                 Our team will contact you within one business day to schedule your free discovery call.
               </p>
               <Link href="/" className="btn-teal">Back to Home</Link>
@@ -137,7 +137,7 @@ export default function DiscoveryCallPage() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
               Book a Discovery Call
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
               Not sure where to start? A 15-minute call with our team to understand your goals and find the right program. No cost, no commitment.
             </p>
           </motion.div>
@@ -149,7 +149,7 @@ export default function DiscoveryCallPage() {
               style={{ backgroundColor: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.3)' }}>
               <p className="text-sm font-semibold mb-2" style={{ color: '#dc3545' }}>Please fix the following:</p>
               <ul className="space-y-1">
-                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: '#4a5878' }}>— {e}</li>)}
+                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: '#0a0e1a' }}>— {e}</li>)}
               </ul>
             </motion.div>
           )}
@@ -188,10 +188,10 @@ export default function DiscoveryCallPage() {
                     style={{
                       backgroundColor: form.program === p ? 'rgba(72,144,247,0.07)' : '#f0f5ff',
                       border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.18)'}`,
-                      color: form.program === p ? '#F5F5F5' : '#8899aa',
+                      color: form.program === p ? '#F5F5F5' : '#4890f7',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : '#4a5a6a'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
+                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : '#0a0e1a'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
                       {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#f0f5ff' }} />}
                     </span>
                     {p}
@@ -210,7 +210,7 @@ export default function DiscoveryCallPage() {
               {submitting ? 'Submitting…' : 'Request My Discovery Call'}
             </button>
 
-            <p className="text-xs text-center leading-relaxed" style={{ color: '#4a5878' }}>
+            <p className="text-xs text-center leading-relaxed" style={{ color: '#0a0e1a' }}>
               Our team will contact you within one business day. All consultations are conducted by AHPRA-registered medical practitioners.
             </p>
           </motion.div>

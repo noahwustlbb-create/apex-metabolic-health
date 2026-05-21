@@ -107,7 +107,7 @@ export default function HowItWorks() {
               >
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
                 {step.description}
               </p>
             </motion.div>
@@ -129,9 +129,9 @@ export default function HowItWorks() {
           <a
             href="/how-it-works"
             className="text-sm font-medium transition-colors duration-200"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#7a8a9a' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#4a5a6a' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
           >
             Learn more about our process →
           </a>

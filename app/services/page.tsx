@@ -234,7 +234,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         >
           {p.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+        <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
           {p.tagline}
         </p>
       </div>
@@ -245,7 +245,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           {p.bullets.map((b, j) => (
             <li key={j} className="flex items-start gap-2">
               <div className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent, opacity: 0.6 }} />
-              <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{b}</span>
+              <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{b}</span>
             </li>
           ))}
         </ul>
@@ -254,7 +254,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         {isComingSoon ? (
           <div
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(72,144,247,0.14)', color: '#7a90a8', cursor: 'default' }}
+            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(72,144,247,0.14)', color: '#4890f7', cursor: 'default' }}
           >
             Joining soon
             <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -266,7 +266,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           <Link
             href={p.intakeHref}
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.14)', color: '#4a5878' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.14)', color: '#0a0e1a' }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement
               el.style.background = p.accentBg
@@ -277,7 +277,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
               const el = e.currentTarget as HTMLElement
               el.style.background = 'rgba(255,255,255,0.03)'
               el.style.borderColor = 'rgba(72,144,247,0.12)'
-              el.style.color = '#6b7a8d'
+              el.style.color = '#4890f7'
             }}
           >
             Check eligibility
@@ -360,7 +360,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2, ease }}
-              style={{ color: '#4a5878', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+              style={{ color: '#0a0e1a', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
             >
               Six doctor-led protocols — each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
             </motion.p>
@@ -373,7 +373,7 @@ export default function ServicesPage() {
               className="flex flex-wrap gap-x-6 gap-y-2"
             >
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -407,10 +407,10 @@ export default function ServicesPage() {
               style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
               <div>
-                <p className="text-sm font-medium mb-0.5" style={{ color: '#4a5878' }}>
+                <p className="text-sm font-medium mb-0.5" style={{ color: '#0a0e1a' }}>
                   Not sure which program fits?
                 </p>
-                <p className="text-xs" style={{ color: '#7a90a8' }}>
+                <p className="text-xs" style={{ color: '#4890f7' }}>
                   Complete the 60-second pre-screen — we&apos;ll identify the right clinical pathway for you.
                 </p>
               </div>
@@ -498,7 +498,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={ctaInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
-              style={{ color: '#4a5878', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
+              style={{ color: '#0a0e1a', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
             >
               Doctor-led assessment. Advanced diagnostics. A protocol built around your biology — not a generic plan.
             </motion.p>
@@ -520,9 +520,9 @@ export default function ServicesPage() {
               <Link
                 href="/intake/discovery"
                 className="text-sm font-medium transition-colors duration-150"
-                style={{ color: '#4a5878' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#8899aa' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#4a5a6a' }}
+                style={{ color: '#0a0e1a' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
               >
                 Book a free discovery call
               </Link>
@@ -533,7 +533,7 @@ export default function ServicesPage() {
               animate={ctaInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-xs mt-10"
-              style={{ color: '#7a90a8' }}
+              style={{ color: '#4890f7' }}
             >
               All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
             </motion.p>

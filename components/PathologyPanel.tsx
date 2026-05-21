@@ -81,7 +81,7 @@ export default function PathologyPanel() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18 }}
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Every clinical decision is built on objective pathology data — not guesswork, not
             GP-standard screens. We test what&apos;s actually relevant.
@@ -132,7 +132,7 @@ export default function PathologyPanel() {
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
-                  <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                  <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                     {item}
                   </span>
                 </li>
@@ -190,7 +190,7 @@ export default function PathologyPanel() {
                     style={{ backgroundColor: '#2b7be0' }}
                     aria-hidden="true"
                   />
-                  <span className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+                  <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                     {item}
                   </span>
                 </li>
@@ -210,7 +210,7 @@ export default function PathologyPanel() {
           animate={panelsInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22 }}
           className="text-center text-xs mt-8"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           Panels are tailored by your doctor based on your program and clinical history. Additional
           markers may be requested where clinically indicated.

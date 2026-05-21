@@ -77,7 +77,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             marginBottom: 10,
           }}
         >
-          <span style={{ fontSize: 7, color: '#2a3a4a', fontWeight: 700 }}>9:41</span>
+          <span style={{ fontSize: 7, color: '#0a0e1a', fontWeight: 700 }}>9:41</span>
           <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
             {[3, 4, 5, 6].map((h) => (
               <div
@@ -126,7 +126,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <p
             style={{
               fontSize: 6.5,
-              color: '#2a3a4a',
+              color: '#0a0e1a',
               letterSpacing: '0.18em',
               fontWeight: 700,
               textTransform: 'uppercase',
@@ -190,7 +190,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               >
                 31
               </span>
-              <span style={{ fontSize: 7.5, color: '#4a5878', display: 'block', marginTop: 1 }}>
+              <span style={{ fontSize: 7.5, color: '#0a0e1a', display: 'block', marginTop: 1 }}>
                 biological
               </span>
             </div>
@@ -199,14 +199,14 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 style={{
                   fontSize: 18,
                   fontWeight: 700,
-                  color: '#2a3a4a',
+                  color: '#0a0e1a',
                   fontFamily: 'var(--font-space-grotesk)',
                   lineHeight: 1,
                 }}
               >
                 38
               </span>
-              <span style={{ fontSize: 7.5, color: '#7a90a8', display: 'block', marginTop: 1 }}>
+              <span style={{ fontSize: 7.5, color: '#4890f7', display: 'block', marginTop: 1 }}>
                 chronological
               </span>
             </div>
@@ -244,7 +244,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               marginBottom: 6,
             }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#4a5878' }}>Testosterone</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#0a0e1a' }}>Testosterone</p>
             <span style={{ fontSize: 8, color: '#4890f7', fontWeight: 700 }}>22.4 nmol/L</span>
           </div>
           <svg
@@ -272,8 +272,8 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             />
           </svg>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
-            <span style={{ fontSize: 6.5, color: '#2a3a4a' }}>Jan</span>
-            <span style={{ fontSize: 6.5, color: '#2a3a4a' }}>Apr</span>
+            <span style={{ fontSize: 6.5, color: '#0a0e1a' }}>Jan</span>
+            <span style={{ fontSize: 6.5, color: '#0a0e1a' }}>Apr</span>
             <span style={{ fontSize: 6.5, color: '#4890f7', fontWeight: 600 }}>Now</span>
           </div>
         </div>
@@ -290,12 +290,12 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <div
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#4a5878' }}>Active Protocol</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#0a0e1a' }}>Active Protocol</p>
             <div
               style={{ width: 5, height: 5, borderRadius: '50%', background: '#4890f7', opacity: 0.7 }}
             />
           </div>
-          <p style={{ fontSize: 7.5, color: '#7a90a8', marginTop: 3 }}>
+          <p style={{ fontSize: 7.5, color: '#4890f7', marginTop: 3 }}>
             Next review: 14 Aug 2025
           </p>
         </div>
@@ -334,14 +334,14 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                     width: 6,
                     height: 6,
                     borderRadius: 1,
-                    background: i === 0 ? '#4890f7' : '#2a3a4a',
+                    background: i === 0 ? '#4890f7' : '#0a0e1a',
                   }}
                 />
               </div>
               <span
                 style={{
                   fontSize: 5.5,
-                  color: i === 0 ? '#4890f7' : '#2a3a4a',
+                  color: i === 0 ? '#4890f7' : '#0a0e1a',
                   fontWeight: i === 0 ? 700 : 400,
                 }}
               >
@@ -377,7 +377,7 @@ function LeftCallout({ title, body, index, inView }: { title: string; body: stri
       </div>
       <p
         className="text-xs leading-relaxed"
-        style={{ color: '#4a5878', maxWidth: '200px' }}
+        style={{ color: '#0a0e1a', maxWidth: '200px' }}
       >
         {body}
       </p>
@@ -407,7 +407,7 @@ function RightCallout({ title, body, index, inView }: { title: string; body: str
       </div>
       <p
         className="text-xs leading-relaxed pl-4"
-        style={{ color: '#4a5878', maxWidth: '200px' }}
+        style={{ color: '#0a0e1a', maxWidth: '200px' }}
       >
         {body}
       </p>
@@ -463,7 +463,7 @@ export default function AppFeature() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
             className="text-base leading-relaxed mt-4 mx-auto"
-            style={{ color: '#4a5878', maxWidth: '480px' }}
+            style={{ color: '#0a0e1a', maxWidth: '480px' }}
           >
             Biomarkers, protocols, and clinical progress — in one place. Built for continuity, not just your next appointment.
           </motion.p>
@@ -508,7 +508,7 @@ export default function AppFeature() {
                 </div>
                 <p
                   className="text-[11px] leading-relaxed pl-3"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   {c.body}
                 </p>
@@ -529,7 +529,7 @@ export default function AppFeature() {
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <p className="text-xs" style={{ color: '#7a90a8' }}>
+          <p className="text-xs" style={{ color: '#4890f7' }}>
             App included with all active memberships at launch
           </p>
         </motion.div>

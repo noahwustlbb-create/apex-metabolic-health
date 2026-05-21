@@ -85,9 +85,9 @@ export default function FloatingContact() {
               <button
                 onClick={() => setOpen(false)}
                 className="w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ color: '#4a5878' }}
+                style={{ color: '#0a0e1a' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#f2efe9' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#4a5a6a' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#0a0e1a' }}
                 aria-label="Close"
               >
                 <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -110,7 +110,7 @@ export default function FloatingContact() {
                         className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-shrink-0"
                         style={{
                           backgroundColor: isOpen ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.04)',
-                          color: isOpen ? '#4890f7' : '#4a5a6a',
+                          color: isOpen ? '#4890f7' : '#0a0e1a',
                           border: isOpen ? '1px solid rgba(72,144,247,0.28)' : '1px solid rgba(255,255,255,0.07)',
                         }}
                       >
@@ -127,7 +127,7 @@ export default function FloatingContact() {
                         fill="none"
                         className="w-3 h-3 flex-shrink-0 transition-transform duration-200"
                         style={{
-                          color: '#4a5878',
+                          color: '#0a0e1a',
                           transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                         }}
                         aria-hidden="true"
@@ -148,7 +148,7 @@ export default function FloatingContact() {
                           <div className="px-5 pb-5 pt-1 pl-16">
                             <p
                               className="text-sm leading-relaxed mb-4"
-                              style={{ color: '#4a5878' }}
+                              style={{ color: '#0a0e1a' }}
                             >
                               {step.description}
                             </p>

@@ -93,7 +93,7 @@ export default function Testimonials() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18 }}
             className="text-base leading-relaxed max-w-xl mx-auto"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Real experiences from real patients. Names withheld for privacy.
           </motion.p>
@@ -110,7 +110,7 @@ export default function Testimonials() {
             >
               <StarRating />
 
-              <p className="text-sm leading-relaxed flex-1" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed flex-1" style={{ color: '#0a0e1a' }}>
                 &ldquo;{t.quote}&rdquo;
               </p>
 
@@ -129,7 +129,7 @@ export default function Testimonials() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>{t.initials}</p>
-                    <p className="text-[11px]" style={{ color: '#4a5878' }}>{t.location}</p>
+                    <p className="text-[11px]" style={{ color: '#0a0e1a' }}>{t.location}</p>
                   </div>
                 </div>
                 <span
@@ -152,7 +152,7 @@ export default function Testimonials() {
           animate={gridInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center text-xs mt-8"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           Patient names withheld for privacy. Experiences reflect individual clinical journeys and do not constitute medical claims or guaranteed outcomes.
         </motion.p>

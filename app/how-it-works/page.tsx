@@ -65,7 +65,7 @@ function HowItWorksHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl mb-8"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           No vague timelines. No hidden steps. Every stage of care, explained.
         </motion.p>
@@ -91,7 +91,7 @@ function HowItWorksHero() {
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
           {['No GP referral required', 'AHPRA-registered doctors', 'Australia-wide telehealth'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
               <span className="w-1 h-1 rounded-full" style={{ background: 'rgba(200,169,110,0.5)' }} />
               {t}
             </span>
@@ -239,7 +239,7 @@ function FullProcess() {
                   </div>
                   <div className="space-y-3">
                     {step.body.split('\n\n').map((para, j) => (
-                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#4a5878' }}>
+                      <p key={j} className="text-base leading-relaxed max-w-2xl" style={{ color: '#0a0e1a' }}>
                         {para}
                       </p>
                     ))}
@@ -288,7 +288,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
           {answer}
         </p>
       )}

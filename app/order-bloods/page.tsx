@@ -101,7 +101,7 @@ function PanelCard({
         </div>
         <div className="text-right flex-shrink-0">
           <p className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{price}</p>
-          <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: '#4a5878' }}>{priceNote}</p>
+          <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>{priceNote}</p>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ function PanelCard({
           {pricingContext.map((note) => (
             <div key={note} className="flex items-start gap-2">
               <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: '#4890f7', opacity: 0.6 }} />
-              <p className="text-[11px] leading-relaxed" style={{ color: '#4a5878' }}>{note}</p>
+              <p className="text-[11px] leading-relaxed" style={{ color: '#0a0e1a' }}>{note}</p>
             </div>
           ))}
         </div>
@@ -125,7 +125,7 @@ function PanelCard({
           <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.2"/>
           <path d="M10 5v5l3 3" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-        <p className="text-[11px] leading-relaxed" style={{ color: '#4a5878' }}>
+        <p className="text-[11px] leading-relaxed" style={{ color: '#0a0e1a' }}>
           <span className="font-semibold" style={{ color: '#4890f7' }}>Best collected 7–9am, fasted.</span>{' '}
           Morning collection ensures accurate hormone and metabolic readings.
         </p>
@@ -139,7 +139,7 @@ function PanelCard({
               <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.06)" />
               <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item}</span>
+            <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item}</span>
           </li>
         ))}
       </ul>
@@ -203,7 +203,7 @@ export default function OrderBloodsPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '520px', marginBottom: '2rem' }}
+              style={{ color: '#0a0e1a', maxWidth: '520px', marginBottom: '2rem' }}
             >
               Doctor-ordered panels. No GP referral required. Collect at any accredited centre near you — your results go directly to your Apex doctor.
             </motion.p>
@@ -214,7 +214,7 @@ export default function OrderBloodsPage() {
               className="flex flex-wrap gap-x-6 gap-y-2"
             >
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide', 'Results reviewed by your doctor'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -284,14 +284,14 @@ export default function OrderBloodsPage() {
                 <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.2"/>
                 <path d="M10 5v5l3 3" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <p className="text-xs leading-relaxed text-left" style={{ color: '#4a5878' }}>
+              <p className="text-xs leading-relaxed text-left" style={{ color: '#0a0e1a' }}>
                 <span className="font-semibold" style={{ color: '#4890f7' }}>Collection tip — </span>
                 Bloods are best collected in the morning, ideally between <strong style={{ color: '#B0B8C5' }}>7am and 9am</strong> and before 10am. Hormone levels (particularly testosterone and cortisol) peak in the morning and decline throughout the day. For metabolic markers, aim to fast for 8–10 hours prior to collection.
               </p>
             </motion.div>
             <div className="mt-8 px-5 py-4 rounded-xl text-center max-w-2xl mx-auto"
               style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>
+              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
                 The appropriate panel depends on your clinical pathway and the biomarkers being assessed.
                 Some programs require a comprehensive baseline panel, while others may require limited monitoring or no blood testing initially.
                 Exact pricing is confirmed after your clinical assessment and program match.
@@ -351,7 +351,7 @@ export default function OrderBloodsPage() {
                     >
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
                       {step.description}
                     </p>
                   </div>
@@ -380,10 +380,10 @@ export default function OrderBloodsPage() {
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
               </Link>
-              <p className="text-xs" style={{ color: '#7a90a8' }}>Takes 60 seconds. No commitment.</p>
+              <p className="text-xs" style={{ color: '#4890f7' }}>Takes 60 seconds. No commitment.</p>
             </motion.div>
             <motion.p initial={{ opacity: 0 }} animate={ctaInView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-sm mt-10" style={{ color: '#7a90a8' }}>
+              className="text-sm mt-10" style={{ color: '#4890f7' }}>
               Next: <Link href="/services" style={{ color: '#4890f7' }} className="hover:underline">explore our clinical programs →</Link>
             </motion.p>
           </div>

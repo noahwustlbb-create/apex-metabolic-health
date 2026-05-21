@@ -65,7 +65,7 @@ export default function OurApproachPage() {
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '520px', marginBottom: '2rem' }}>
+              style={{ color: '#0a0e1a', maxWidth: '520px', marginBottom: '2rem' }}>
               Every clinical decision is guided by data, context, and a doctor who takes the time to understand the full picture — not the fastest path to a script.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
@@ -80,7 +80,7 @@ export default function OurApproachPage() {
             <motion.div initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }}
               className="flex flex-wrap gap-x-6 gap-y-2">
               {['AHPRA-registered doctors', 'No GP referral required', 'Data-led, not assumption-led'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -100,12 +100,12 @@ export default function OurApproachPage() {
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}>
                   Most healthcare is{' '}
-                  <span style={{ color: '#4a5878' }}>reactive.</span>
+                  <span style={{ color: '#0a0e1a' }}>reactive.</span>
                 </h2>
-                <p className="text-lg leading-relaxed mb-5" style={{ color: '#4a5878' }}>
+                <p className="text-lg leading-relaxed mb-5" style={{ color: '#0a0e1a' }}>
                   Short consults. Surface-level assessments. One-size-fits-all recommendations.
                 </p>
-                <p className="text-base leading-relaxed" style={{ color: '#4a5878' }}>
+                <p className="text-base leading-relaxed" style={{ color: '#0a0e1a' }}>
                   That&apos;s not how high-performing individuals operate — and it&apos;s not how we practise.
                 </p>
               </FadeIn>
@@ -125,10 +125,10 @@ export default function OurApproachPage() {
                         border: `1px solid ${row.negative ? 'rgba(255,255,255,0.05)' : 'rgba(72,144,247,0.15)'}`,
                       }}>
                       <span className="text-[10px] font-semibold tracking-[0.15em] uppercase flex-shrink-0"
-                        style={{ color: row.negative ? '#4a5a6a' : '#4890f7' }}>
+                        style={{ color: row.negative ? '#0a0e1a' : '#4890f7' }}>
                         {row.label}
                       </span>
-                      <span className="text-sm font-medium text-right" style={{ color: row.negative ? '#4a5a6a' : '#F5F5F5' }}>
+                      <span className="text-sm font-medium text-right" style={{ color: row.negative ? '#0a0e1a' : '#F5F5F5' }}>
                         {row.negative ? <s>{row.value}</s> : row.value}
                       </span>
                     </div>
@@ -156,7 +156,7 @@ export default function OurApproachPage() {
                     Time, context,
                     <br />and clarity.
                   </h2>
-                  <p className="text-base leading-relaxed mb-8" style={{ color: '#4a5878', maxWidth: '400px' }}>
+                  <p className="text-base leading-relaxed mb-8" style={{ color: '#0a0e1a', maxWidth: '400px' }}>
                     Your health is complex. Understanding it properly requires time, full context, and clinical precision. We don&apos;t rush the picture.
                   </p>
                 </FadeIn>
@@ -175,7 +175,7 @@ export default function OurApproachPage() {
                         </div>
                         <div>
                           <h4 className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{item.heading}</h4>
-                          <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.body}</p>
+                          <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.body}</p>
                         </div>
                       </div>
                     ))}
@@ -232,8 +232,8 @@ export default function OurApproachPage() {
                         style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.15)', color: '#4890f7' }}>
                         {item.icon}
                       </div>
-                      <h3 className="text-xs font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#c5cdd6' }}>{item.title}</h3>
-                      <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{item.desc}</p>
+                      <h3 className="text-xs font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.title}</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -255,7 +255,7 @@ export default function OurApproachPage() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}>
                   We assess how key systems interact.
                 </h2>
-                <p className="text-lg leading-relaxed mb-10" style={{ color: '#4a5878', maxWidth: '540px' }}>
+                <p className="text-lg leading-relaxed mb-10" style={{ color: '#0a0e1a', maxWidth: '540px' }}>
                   Symptoms are downstream of systems. Sleep, hormones, metabolic health, and stress don&apos;t operate in isolation — and we don&apos;t assess them that way.
                 </p>
               </FadeIn>
@@ -275,7 +275,7 @@ export default function OurApproachPage() {
                     <div className="flex items-center gap-2.5 px-4 py-3 rounded-lg"
                       style={{ background: '#ffffff', border: '1px solid rgba(255,255,255,0.06)' }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#4890f7' }} aria-hidden="true" />
-                      <span className="text-xs font-medium" style={{ color: '#4a5878' }}>{system}</span>
+                      <span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>{system}</span>
                     </div>
                   </FadeIn>
                 ))}
@@ -299,7 +299,7 @@ export default function OurApproachPage() {
                   <div key={item.label} className="px-7 py-6"
                     style={{ background: i === 1 ? '#111111' : '#111111', borderRight: i < 2 ? '1px solid #1E1E1E' : 'none' }}>
                     <p className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.label}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#4a5878' }}>{item.desc}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -323,7 +323,7 @@ export default function OurApproachPage() {
                     <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>
                       {item.headline}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>{item.body}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.body}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -352,9 +352,9 @@ export default function OurApproachPage() {
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>
                 </Link>
-                <p className="text-xs" style={{ color: '#7a90a8' }}>Takes 60 seconds. No commitment.</p>
+                <p className="text-xs" style={{ color: '#4890f7' }}>Takes 60 seconds. No commitment.</p>
               </div>
-              <p className="text-sm mt-10" style={{ color: '#7a90a8' }}>
+              <p className="text-sm mt-10" style={{ color: '#4890f7' }}>
                 Next: <Link href="/services" style={{ color: '#4890f7' }} className="hover:underline">explore our clinical programs →</Link>
               </p>
             </FadeIn>

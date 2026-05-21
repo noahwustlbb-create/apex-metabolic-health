@@ -147,7 +147,7 @@ export default function ProgramsGrid() {
               >
                 {program.name}
               </h3>
-              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#0a0e1a' }}>
                 {program.description}
               </p>
 
@@ -170,7 +170,7 @@ export default function ProgramsGrid() {
                   style={{
                     background: '#ffffff',
                     border: '1px solid rgba(72,144,247,0.1)',
-                    color: '#4a5878',
+                    color: '#0a0e1a',
                   }}
                 >
                   Book Consultation
@@ -186,7 +186,7 @@ export default function ProgramsGrid() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs text-center mt-10"
-          style={{ color: '#7a90a8' }}
+          style={{ color: '#4890f7' }}
         >
           Not sure which program fits? <a href="/intake/discovery" style={{ color: '#4890f7' }} className="hover:underline">Book a free discovery call →</a>
         </motion.p>

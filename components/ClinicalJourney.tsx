@@ -93,7 +93,7 @@ function StepBlock({ step, index, isInView }: {
         >
           {step.title}
         </h3>
-        <p className="text-sm md:text-base leading-relaxed" style={{ color: '#4a5878', maxWidth: 560 }}>
+        <p className="text-sm md:text-base leading-relaxed" style={{ color: '#0a0e1a', maxWidth: 560 }}>
           {step.description}
         </p>
       </div>
@@ -150,7 +150,7 @@ export default function ClinicalJourney() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-base md:text-lg leading-relaxed"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             Five steps from not knowing your numbers to having a doctor-built protocol working in your favour.
           </motion.p>
@@ -177,9 +177,9 @@ export default function ClinicalJourney() {
           <a
             href="/intake/discovery"
             className="text-sm font-medium flex items-center gap-2 transition-colors duration-150"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
             onMouseEnter={e => (e.currentTarget.style.color = '#7a8a9a')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#4a5a6a')}
+            onMouseLeave={e => (e.currentTarget.style.color = '#0a0e1a')}
           >
             Not sure where to start?{' '}
             <span style={{ color: '#4890f7' }}>Book a free discovery call →</span>

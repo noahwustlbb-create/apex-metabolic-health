@@ -198,24 +198,24 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
           {area.title}
         </h3>
 
-        <p className="text-xs leading-relaxed mb-2" style={{ color: '#c5cdd6' }}>
+        <p className="text-xs leading-relaxed mb-2" style={{ color: '#4890f7' }}>
           {area.recognition}
         </p>
-        <p className="text-xs leading-relaxed flex-1 mb-4" style={{ color: '#4a5878' }}>
+        <p className="text-xs leading-relaxed flex-1 mb-4" style={{ color: '#0a0e1a' }}>
           {area.clinical}
         </p>
 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {area.tags.map((tag) => (
             <span key={tag} className="text-[9px] font-semibold tracking-[0.1em] uppercase px-2 py-1 rounded-sm"
-              style={{ color: '#7a90a8', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              style={{ color: '#4890f7', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               {tag}
             </span>
           ))}
         </div>
 
         <div className="flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase transition-colors duration-200"
-          style={{ color: '#7a90a8' }}>
+          style={{ color: '#4890f7' }}>
           <span className="group-hover:text-[#4890f7] transition-colors duration-200">Start assessment</span>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -239,7 +239,7 @@ function SectionHead({ label, title, sub, inView }: { label: string; title: stri
         {title}
       </motion.h2>
       <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: 0.15, ease }}
-        className="text-sm leading-relaxed max-w-lg" style={{ color: '#4a5878' }}>
+        className="text-sm leading-relaxed max-w-lg" style={{ color: '#0a0e1a' }}>
         {sub}
       </motion.p>
     </div>
@@ -285,7 +285,7 @@ export default function WhatWeTreatPage() {
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#4a5878', maxWidth: '520px', marginBottom: '2rem' }}>
+              style={{ color: '#0a0e1a', maxWidth: '520px', marginBottom: '2rem' }}>
               You&apos;ve been told your bloods are &ldquo;normal.&rdquo; Normal is not optimal. We investigate what&apos;s actually behind your low energy, poor recovery, weight gain, and lost drive.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
@@ -300,7 +300,7 @@ export default function WhatWeTreatPage() {
             <motion.div initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }}
               className="flex flex-wrap gap-x-6 gap-y-2">
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#7a90a8' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -362,7 +362,7 @@ export default function WhatWeTreatPage() {
                   in the right direction.
                 </span>
               </h2>
-              <p className="text-sm leading-relaxed mb-8 mx-auto" style={{ color: '#4a5878', maxWidth: '400px' }}>
+              <p className="text-sm leading-relaxed mb-8 mx-auto" style={{ color: '#0a0e1a', maxWidth: '400px' }}>
                 Our clinical pre-screen identifies the most relevant pathway for your situation — no commitment, no GP referral required.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -376,7 +376,7 @@ export default function WhatWeTreatPage() {
                   General Appointment
                 </Link>
               </div>
-              <p className="text-xs mt-8" style={{ color: '#7a90a8' }}>
+              <p className="text-xs mt-8" style={{ color: '#4890f7' }}>
                 All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
               </p>
             </div>

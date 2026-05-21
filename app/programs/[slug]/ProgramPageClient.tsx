@@ -97,7 +97,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
               className="text-xl font-medium mb-6 max-w-2xl"
-              style={{ color: '#4a5878' }}
+              style={{ color: '#0a0e1a' }}
             >
               {program.tagline}
             </motion.p>
@@ -151,7 +151,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
               className="mt-6 px-4 py-3 rounded-sm text-xs leading-relaxed"
-              style={{ backgroundColor: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)', color: '#4a5878' }}
+              style={{ backgroundColor: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)', color: '#0a0e1a' }}
             >
               <strong style={{ color: '#0a0e1a' }}>Therapeutic goods disclosure: </strong>
               Some treatment options available through this program involve therapeutic goods not registered on the Australian Register of Therapeutic Goods (ARTG). Your doctor will advise you if this applies to your protocol and will obtain your informed consent before proceeding.
@@ -238,7 +238,7 @@ function WhatItAddresses({ program }: { program: Program }) {
                 <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.5" fill="rgba(72,144,247,0.06)" />
                 <path d="M6 10l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+              <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
                 {item}
               </span>
             </motion.div>
@@ -309,7 +309,7 @@ function WhatsIncluded({ program }: { program: Program }) {
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <p className="text-sm leading-relaxed" style={{ color: '#4a5878' }}>
+              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
                 {item}
               </p>
             </motion.div>
@@ -406,7 +406,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed max-w-xl" style={{ color: '#4a5878' }}>
+                  <p className="text-sm leading-relaxed max-w-xl" style={{ color: '#0a0e1a' }}>
                     {step.description}
                   </p>
                 </div>
@@ -471,7 +471,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.38 }}
           className="text-xs leading-relaxed max-w-2xl mx-auto"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           Clinical suitability is assessed by a doctor. All treatments are prescribed by
           AHPRA-registered medical practitioners. We do not name specific medications in compliance

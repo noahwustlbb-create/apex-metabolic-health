@@ -84,7 +84,7 @@ export default function Affiliations() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase mb-8"
-          style={{ color: '#4a5878' }}
+          style={{ color: '#0a0e1a' }}
         >
           CREDENTIALS & COMPLIANCE
         </motion.p>
@@ -115,7 +115,7 @@ export default function Affiliations() {
                 <p className="text-xs font-semibold leading-snug mb-0.5" style={{ color: '#0a0e1a' }}>
                   {badge.label}
                 </p>
-                <p className="text-[10px]" style={{ color: '#4a5878' }}>
+                <p className="text-[10px]" style={{ color: '#0a0e1a' }}>
                   {badge.sublabel}
                 </p>
               </div>

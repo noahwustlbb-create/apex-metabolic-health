@@ -318,7 +318,7 @@ function AllPathways() {
               Every way to{' '}
               <span className="text-teal-gradient">get started.</span>
             </h2>
-            <p className="text-base md:text-lg" style={{ color: '#4a5878' }}>
+            <p className="text-base md:text-lg" style={{ color: '#0a0e1a' }}>
               Choose what fits where you&apos;re at right now.
             </p>
           </motion.div>
@@ -361,7 +361,7 @@ function AllPathways() {
                 >
                   <p
                     className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-4"
-                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                    style={{ color: path.featured ? '#4890f7' : '#0a0e1a' }}
                   >
                     {path.tag}
                   </p>
@@ -370,7 +370,7 @@ function AllPathways() {
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
                       background: path.featured ? 'rgba(44,116,232,0.15)' : 'rgba(255,255,255,0.05)',
-                      color: path.featured ? '#4890f7' : '#8899aa',
+                      color: path.featured ? '#4890f7' : '#4890f7',
                     }}
                   >
                     {path.icon}
@@ -383,13 +383,13 @@ function AllPathways() {
                     {path.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#4a5878' }}>
+                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#0a0e1a' }}>
                     {path.desc}
                   </p>
 
                   <div
                     className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-200"
-                    style={{ color: path.featured ? '#4890f7' : '#4a5a6a' }}
+                    style={{ color: path.featured ? '#4890f7' : '#0a0e1a' }}
                   >
                     <span className="group-hover:text-[#4890f7] transition-colors duration-200">
                       {path.cta}
@@ -408,7 +408,7 @@ function AllPathways() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center text-[11px] tracking-[0.16em] uppercase mt-10"
-            style={{ color: '#4a5878' }}
+            style={{ color: '#0a0e1a' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </motion.p>
@@ -467,7 +467,7 @@ function EnquiryForm() {
             >
               Send a Direct Enquiry
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#4a5878' }}>
+            <p className="text-base leading-relaxed" style={{ color: '#0a0e1a' }}>
               Fill out the form below and we&apos;ll get back to you within 1 business day.
             </p>
           </motion.div>
@@ -484,7 +484,7 @@ function EnquiryForm() {
                 <path d="M7.5 12l3 3 5-5" stroke="#2C74E8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <h3 className="text-xl font-bold mb-2" style={{ color: '#0a0e1a', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
-              <p className="text-sm" style={{ color: '#4a5878' }}>We&apos;ll be in touch within 1 business day.</p>
+              <p className="text-sm" style={{ color: '#0a0e1a' }}>We&apos;ll be in touch within 1 business day.</p>
             </motion.div>
           ) : (
           <motion.form
@@ -500,7 +500,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   Full Name
                 </label>
@@ -516,7 +516,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   Email
                 </label>
@@ -536,7 +536,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   Phone
                 </label>
@@ -552,7 +552,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#4a5878' }}
+                  style={{ color: '#0a0e1a' }}
                 >
                   Program of Interest
                 </label>
@@ -583,7 +583,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#4a5878' }}
+                style={{ color: '#0a0e1a' }}
               >
                 How did you hear about us?
               </label>
@@ -627,7 +627,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#4a5878' }}
+                style={{ color: '#0a0e1a' }}
               >
                 Message
               </label>
