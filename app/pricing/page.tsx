@@ -300,62 +300,77 @@ function MembershipComparison() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
 
-          {/* Left — Apex Clinical Program (Recommended) */}
+          {/* Left — Apex Membership (Recommended) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.25, ease }}
             className="rounded-2xl overflow-hidden flex flex-col"
-            style={{ border: `1.5px solid ${accent}`, boxShadow: '0 8px 40px rgba(72,144,247,0.12)' }}
+            style={{ border: `1.5px solid ${accent}`, boxShadow: '0 12px 48px rgba(72,144,247,0.14)' }}
           >
-            <div className="h-1 w-full" style={{ background: accent }} />
+            <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, #2563eb, ${accent}, #6ba8ff)` }} />
             <div className="p-7 flex flex-col flex-1">
 
               {/* Badge */}
-              <div className="mb-5">
-                <span className="text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full"
+              <div className="mb-6">
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full"
                   style={{ background: accent, color: '#ffffff' }}>
                   RECOMMENDED
                 </span>
               </div>
 
               {/* Title + price */}
-              <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
-                Apex Clinical Program
+              <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+                Apex Membership
               </h3>
-              <div className="flex items-baseline gap-2 mb-7">
-                <span className="font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '52px', lineHeight: 1, color: '#0a0e1a' }}>$99</span>
-                <span className="text-base" style={{ color: 'rgba(10,14,26,0.45)' }}>per month</span>
+              <div className="flex items-baseline gap-2.5 mb-1">
+                <span className="font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '56px', lineHeight: 1, color: '#0a0e1a' }}>$99</span>
+                <span className="text-base" style={{ color: 'rgba(10,14,26,0.4)' }}>/month</span>
               </div>
+              <p className="text-[13px] font-medium mb-5" style={{ color: accent }}>
+                Doctor-led care, tracked and refined over time
+              </p>
+
+              {/* Description */}
+              <p className="text-sm leading-relaxed mb-7 pb-6" style={{ color: 'rgba(10,14,26,0.6)', borderBottom: '1px solid rgba(72,144,247,0.1)', fontStyle: 'italic' }}>
+                Your protocol isn&apos;t static. It evolves with your biology, guided by a clinical team that monitors your data, adjusts your treatment, and stays ahead of the curve — every step of the way.
+              </p>
+
+              {/* What's included label */}
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: 'rgba(10,14,26,0.35)' }}>
+                What&apos;s included
+              </p>
 
               {/* Bullets */}
-              <ul className="flex flex-col gap-3.5 mb-8 flex-1">
+              <ul className="flex flex-col gap-3 mb-8 flex-1">
                 {[
-                  { bold: 'No clinic or admin fees after enrolment.' },
-                  { bold: 'Zero Medication Mark-ups:', rest: ' We pass our exact cost-price directly to you through our partnering pharmacies. No margins, no hidden costs.' },
-                  {
-                    bold: 'Heavily Discounted Doctors Consults:',
-                    sub: ['$275 Hormone and Performance Health.', '$125 Longevity, Weight loss & Recovery.'],
-                  },
-                  { rest: 'Free referrals, medical certificates, health summaries or travel letters.' },
-                  { bold: 'VIP Admin support 9am–4pm weekdays.' },
-                  { rest: 'Ongoing access to quality care through our nursing team with follow ups and treatment protocols delivered post consult and every 6–8 weeks following.' },
-                  { rest: 'Escripts — choose your own pharmacy (not recommended) and your prescription is issued and sent to you free of charge.' },
-                  { rest: 'Medication dispensed around Australia discretely, fast and safely by approved cGMP partnering pharmacies.' },
+                  { text: 'Zero medication mark-ups — medications dispensed at cost price through our partner pharmacy' },
+                  { text: 'Doctor oversight and protocol refinement across every review cycle' },
+                  { text: 'Blood work heavily discounted every cycle with biomarker trends tracked over time' },
+                  { text: 'Prescribing fee waived — scripts issued and sent to you at no extra cost' },
+                  { text: 'Discounted doctor review consultations' },
+                  { text: 'Nursing team support with follow-ups every 6–8 weeks' },
+                  { text: 'Priority clinical support between reviews' },
+                  { text: 'Free referrals, medical certificates, and health summaries' },
+                  { text: 'Nutrition and lifestyle clinically calibrated to your protocol' },
+                  { text: 'VIP admin support 9am–4pm weekdays' },
+                  { text: 'Apex App — full protocol visibility and tracking', soon: true },
+                  { text: 'Medication dispensed discreetly and safely via TGA-compliant partner pharmacies' },
                 ].map((item, j) => (
                   <li key={j} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: accent, marginTop: '6px' }} />
-                    <div className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
-                      {item.bold && <strong>{item.bold}</strong>}
-                      {item.rest}
-                      {item.sub && (
-                        <ul className="mt-1.5 flex flex-col gap-0.5">
-                          {item.sub.map(s => (
-                            <li key={s} className="text-sm" style={{ color: '#0a0e1a' }}>• {s}</li>
-                          ))}
-                        </ul>
+                    <svg viewBox="0 0 16 16" fill="none" className="flex-shrink-0" style={{ width: 16, height: 16, marginTop: '2px' }} aria-hidden="true">
+                      <circle cx="8" cy="8" r="7" fill={`rgba(72,144,247,0.1)`} stroke={accent} strokeWidth="1" />
+                      <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+                      {item.text}
+                      {item.soon && (
+                        <span className="ml-2 text-[9px] font-bold tracking-[0.12em] uppercase px-1.5 py-0.5 rounded"
+                          style={{ background: 'rgba(72,144,247,0.08)', color: accent, border: '1px solid rgba(72,144,247,0.2)', verticalAlign: 'middle' }}>
+                          Soon
+                        </span>
                       )}
-                    </div>
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -363,21 +378,19 @@ function MembershipComparison() {
               {/* CTA */}
               <Link
                 href="/intake/pre-screen"
-                className="block w-full py-4 rounded-xl text-center text-sm font-bold tracking-[0.08em] uppercase transition-all duration-200"
+                className="flex items-center justify-center gap-2.5 w-full py-4 rounded-xl text-center text-[13px] font-bold tracking-[0.06em] uppercase transition-all duration-200"
                 style={{ background: accent, color: '#ffffff' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#2563eb' }}
-                onMouseLeave={e => { e.currentTarget.style.background = accent }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#2563eb'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(72,144,247,0.4)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = accent; e.currentTarget.style.boxShadow = 'none' }}
               >
-                Join Apex Now
+                Start Your Clinical Assessment
+                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
-              <p className="text-xs text-center mt-3" style={{ color: 'rgba(10,14,26,0.4)' }}>
-                Join Australia&apos;s leading men&apos;s telehealth clinic
+              <p className="text-[11px] text-center mt-3 leading-relaxed" style={{ color: 'rgba(10,14,26,0.38)' }}>
+                No lock-in contracts. Activates after your initial consultation,<br />where treatment is clinically appropriate.
               </p>
-              <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}>
-                <p className="text-[11px] text-center" style={{ color: 'rgba(10,14,26,0.35)' }}>
-                  (Note: Script release excludes NSW patients due to state regulations.)
-                </p>
-              </div>
             </div>
           </motion.div>
 

@@ -319,11 +319,15 @@ function Chk({ checked, onChange, children }: { checked: boolean; onChange: (v: 
 
 function PathwayCards({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const memberFeatures = [
-    'No clinic or admin fees after enrolment',
-    'Medications at cost price through our partner pharmacy — zero mark-up',
-    'Nursing team support and review cycles every 6–8 weeks',
+    'Zero medication mark-ups — dispensed at cost price through our partner pharmacy',
+    'Doctor oversight and protocol refinement across every review cycle',
+    'Blood work heavily discounted every cycle, biomarker trends tracked over time',
+    'Prescribing fee waived — scripts issued and sent to you at no extra cost',
+    'Discounted doctor review consultations',
+    'Nursing team support with follow-ups every 6–8 weeks',
+    'Priority clinical support between reviews',
+    'Free referrals, medical certificates, and health summaries',
     'VIP admin support 9am–4pm weekdays',
-    'Treatment protocols updated at every review',
   ]
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
