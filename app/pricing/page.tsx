@@ -39,7 +39,7 @@ function PricingHero() {
           style={{ fontSize: 'clamp(32px, 4.5vw, 64px)', maxWidth: '780px' }}
         >
           Simple. Transparent.{' '}
-          <span style={{ color: 'rgba(10,14,26,0.2)' }}>Nothing forced.</span>
+          <span style={{ color: '#4890f7' }}>Nothing forced.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -240,7 +240,7 @@ function PricingSteps() {
             style={{ fontSize: 'clamp(26px, 3.5vw, 48px)' }}
           >
             Three components.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.2)' }}>That&apos;s it.</span>
+            <span style={{ color: '#4890f7' }}>That&apos;s it.</span>
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
             className="text-base leading-relaxed max-w-lg" style={{ color: '#0a0e1a' }}>
@@ -285,7 +285,7 @@ function MembershipComparison() {
             style={{ fontSize: 'clamp(28px, 4vw, 56px)' }}
           >
             Ongoing system vs.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.28)' }}>script only.</span>
+            <span style={{ color: '#4890f7' }}>script only.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
