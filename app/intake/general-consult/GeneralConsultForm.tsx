@@ -309,9 +309,12 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)', color: '#4890f7' }}>
           Recommended
         </span>
-        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+        <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Apex Clinical Program
         </h3>
+        <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>
+          $99<span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>/month</span>
+        </p>
         <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>

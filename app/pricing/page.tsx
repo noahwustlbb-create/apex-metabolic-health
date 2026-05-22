@@ -74,7 +74,7 @@ const STEPS = [
     number: '01',
     label: 'Foundation',
     title: 'Blood Panels',
-    price: 'From $73.66',
+    price: 'From $99',
     priceNote: 'program-specific pathology',
     body: 'Panel selection depends on your clinical pathway. Some programs require a comprehensive baseline — others require minimal or no testing.',
     includes: [
@@ -265,196 +265,210 @@ function MembershipComparison() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   const accent = '#4890f7'
-  const accentBg = 'rgba(72,144,247,0.06)'
-  const accentBorder = 'rgba(72,144,247,0.18)'
-
-  const memberBullets = [
-    'Continuous doctor-led optimisation',
-    'Discounted review consultations',
-    'Blood work included in ongoing care',
-    'Biomarker tracking over time',
-    'Protocol adjustments based on results',
-    'Priority clinical support between reviews',
-  ]
-
-  const adminFeeDetails = [
-    'Ongoing file and protocol management',
-    'Treatment guidance and clinical support',
-    'Medication safety checks and dispensing oversight',
-  ]
-
-  const pathway2Bullets = [
-    'Script and treatment plan released directly to you',
-    'Fill at any pharmacy of your choice',
-    'Ongoing support from your Apex care team',
-    'Access to our nursing team for dosing advice and guidance',
-  ]
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Ongoing pathway options">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Choose your path">
       <div className="warm-rule" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
-      />
 
       <div ref={ref} className="container-tight relative z-10">
-        <div className="mb-12">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            After your consultation
+
+        {/* Section heading */}
+        <div className="mb-12 text-center max-w-3xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-5">
+            Choose Your Path
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
             className="display-serif mb-4"
-            style={{ fontSize: 'clamp(24px, 3vw, 42px)' }}
+            style={{ fontSize: 'clamp(28px, 4vw, 56px)' }}
           >
-            Two pathways.{' '}
-            <span style={{ color: 'rgba(72,144,247,0.4)' }}>Your choice.</span>
+            Ongoing system vs.{' '}
+            <span style={{ color: 'rgba(10,14,26,0.28)' }}>script only.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-sm leading-relaxed"
-            style={{ color: '#0a0e1a', maxWidth: '560px' }}
+            className="text-sm leading-relaxed mx-auto"
+            style={{ color: '#0a0e1a', maxWidth: '520px' }}
           >
-            A patient reading this page should know exactly what they're paying for. Three possible costs: your consultation fee, your pharmacy pathway fee, and medication. Nothing else.
+            After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
 
-          {/* Apex Clinical Program */}
+          {/* Left — Apex Clinical Program (Recommended) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.25, ease }}
-            className="rounded-2xl overflow-hidden"
-            style={{
-              background: '#ffffff',
-              border: '1px solid rgba(72,144,247,0.25)',
-              boxShadow: '0 8px 40px rgba(72,144,247,0.08)',
-            }}
+            className="rounded-2xl overflow-hidden flex flex-col"
+            style={{ border: `1.5px solid ${accent}`, boxShadow: '0 8px 40px rgba(72,144,247,0.12)' }}
           >
-            <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #4890f7, #6ba8ff 60%, transparent)' }} />
-            <div className="p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-[8px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded-sm"
-                  style={{ color: accent, background: accentBg, border: `1px solid ${accentBorder}` }}>
-                  Recommended
+            <div className="h-1 w-full" style={{ background: accent }} />
+            <div className="p-7 flex flex-col flex-1">
+
+              {/* Badge */}
+              <div className="mb-5">
+                <span className="text-[10px] font-bold tracking-[0.18em] uppercase px-4 py-1.5 rounded-full"
+                  style={{ background: accent, color: '#ffffff' }}>
+                  RECOMMENDED
                 </span>
               </div>
-              <p className="text-base font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+
+              {/* Title + price */}
+              <h3 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                 Apex Clinical Program
-              </p>
-              <p className="text-2xl font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>
-                $99<span className="text-sm font-medium" style={{ color: '#0a0e1a' }}>/month</span>
-              </p>
-              <p className="text-xs mb-5" style={{ color: accent }}>
-                Medications at cost price — zero mark-up
-              </p>
-              <ul className="flex flex-col gap-2.5">
-                {memberBullets.map((b, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
-                    <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true">
-                      <circle cx="8" cy="8" r="6.5" stroke={accent} strokeWidth="1" fill={accentBg} />
-                      <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {b}
+              </h3>
+              <div className="flex items-baseline gap-2 mb-7">
+                <span className="font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '52px', lineHeight: 1, color: '#0a0e1a' }}>$99</span>
+                <span className="text-base" style={{ color: 'rgba(10,14,26,0.45)' }}>per month</span>
+              </div>
+
+              {/* Bullets */}
+              <ul className="flex flex-col gap-3.5 mb-8 flex-1">
+                {[
+                  { bold: 'No clinic or admin fees after enrolment.' },
+                  { bold: 'Zero Medication Mark-ups:', rest: ' We pass our exact cost-price directly to you through our partnering pharmacies. No margins, no hidden costs.' },
+                  {
+                    bold: 'Heavily Discounted Doctors Consults:',
+                    sub: ['$275 Hormone and Performance Health.', '$125 Longevity, Weight loss & Recovery.'],
+                  },
+                  { rest: 'Free referrals, medical certificates, health summaries or travel letters.' },
+                  { bold: 'VIP Admin support 9am–4pm weekdays.' },
+                  { rest: 'Ongoing access to quality care through our nursing team with follow ups and treatment protocols delivered post consult and every 6–8 weeks following.' },
+                  { rest: 'Escripts — choose your own pharmacy (not recommended) and your prescription is issued and sent to you free of charge.' },
+                  { rest: 'Medication dispensed around Australia discretely, fast and safely by approved cGMP partnering pharmacies.' },
+                ].map((item, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: accent, marginTop: '6px' }} />
+                    <div className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+                      {item.bold && <strong>{item.bold}</strong>}
+                      {item.rest}
+                      {item.sub && (
+                        <ul className="mt-1.5 flex flex-col gap-0.5">
+                          {item.sub.map(s => (
+                            <li key={s} className="text-sm" style={{ color: '#0a0e1a' }}>• {s}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
                   </li>
                 ))}
               </ul>
+
+              {/* CTA */}
+              <Link
+                href="/intake/pre-screen"
+                className="block w-full py-4 rounded-xl text-center text-sm font-bold tracking-[0.08em] uppercase transition-all duration-200"
+                style={{ background: accent, color: '#ffffff' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#2563eb' }}
+                onMouseLeave={e => { e.currentTarget.style.background = accent }}
+              >
+                Join Apex Now
+              </Link>
+              <p className="text-xs text-center mt-3" style={{ color: 'rgba(10,14,26,0.4)' }}>
+                Join Australia&apos;s leading men&apos;s telehealth clinic
+              </p>
+              <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}>
+                <p className="text-[11px] text-center" style={{ color: 'rgba(10,14,26,0.35)' }}>
+                  (Note: Script release excludes NSW patients due to state regulations.)
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Single Consultation */}
+          {/* Right — Single Consultation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.35, ease }}
-            className="rounded-2xl"
-            style={{
-              background: '#ffffff',
-              border: '1px solid rgba(72,144,247,0.12)',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
-            }}
+            className="rounded-2xl overflow-hidden"
+            style={{ border: '1px solid rgba(10,14,26,0.1)', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
           >
-            <div className="p-6" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
-              <p className="text-base font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+            <div className="p-7">
+
+              {/* Title */}
+              <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
                 Single Consultation
-              </p>
-              <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
-                One-time consultation. Script issued where clinically appropriate.
+              </h3>
+
+              {/* Consultation prices */}
+              <p className="text-sm mb-1" style={{ color: 'rgba(10,14,26,0.5)' }}>$275 Hormone and Performance Health Consultation</p>
+              <p className="text-sm mb-4" style={{ color: 'rgba(10,14,26,0.5)' }}>$125 Longevity, Weight loss, Recovery Consultation</p>
+
+              {/* Description */}
+              <p className="text-sm leading-relaxed mb-7" style={{ color: 'rgba(10,14,26,0.5)' }}>
+                Non-members enjoy the same quality medical consultation and treatment options, but without full membership benefits.
               </p>
 
-              {/* Consultation fee block */}
-              <div className="rounded-lg px-4 py-3" style={{ background: accentBg, border: `1px solid ${accentBorder}` }}>
-                <p className="text-[10px] font-bold tracking-[0.14em] uppercase mb-2" style={{ color: accent }}>
-                  Consultation Fee
+              {/* Pathway 1 */}
+              <div className="mb-7">
+                <h4 className="text-sm font-bold mb-3" style={{ color: '#0a0e1a' }}>
+                  Pathway Option 1: Order Through Our Partner Pharmacies
+                </h4>
+                <ul className="flex flex-col gap-3">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(10,14,26,0.25)', marginTop: '7px' }} />
+                    <span className="text-sm" style={{ color: '#0a0e1a' }}>You pay the PHARMACY price for all medications.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(10,14,26,0.25)', marginTop: '7px' }} />
+                    <div>
+                      <span className="text-sm" style={{ color: '#0a0e1a' }}>
+                        Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
+                      </span>
+                      <ul className="mt-2 flex flex-col gap-1">
+                        <li className="text-sm" style={{ color: 'rgba(10,14,26,0.55)' }}>— Ongoing file management.</li>
+                        <li className="text-sm" style={{ color: 'rgba(10,14,26,0.55)' }}>— Treatment guidance.</li>
+                        <li className="text-sm" style={{ color: 'rgba(10,14,26,0.55)' }}>— Medication safety checks.</li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Pathway 2 */}
+              <div className="mb-7">
+                <h4 className="text-sm font-bold mb-3" style={{ color: '#0a0e1a' }}>
+                  Pathway Option 2: Choose Your Own Pharmacy
+                </h4>
+                <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(10,14,26,0.5)' }}>
+                  If a prescription is issued, our team will send this out to you including your treatment plan, dosing guides and scripts.
                 </p>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>$275</span>
-                    <span className="text-xs" style={{ color: '#0a0e1a' }}>Hormone Optimisation & TRT</span>
-                  </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>$125</span>
-                    <span className="text-xs" style={{ color: '#0a0e1a' }}>Weight Loss, Longevity & General Programs</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Pathway 1 */}
-            <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
-              <p className="text-[10px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: accent }}>
-                Pathway 1 — Partner Pharmacy
-              </p>
-              <p className="text-xs mb-2.5" style={{ color: '#0a0e1a' }}>
-                Medication fulfilled through our TGA-compliant compounding pharmacy partner. An administration fee applies — this covers:
-              </p>
-              <ul className="flex flex-col gap-1.5">
-                {adminFeeDetails.map((d, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: accent }} />
-                    {d}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-[11px] mt-2.5" style={{ color: accent }}>
-                Administration fee confirmed by our team before dispensing.
-              </p>
-            </div>
-
-            {/* Pathway 2 */}
-            <div className="px-6 py-5">
-              <p className="text-[10px] font-bold tracking-[0.14em] uppercase mb-3" style={{ color: accent }}>
-                Pathway 2 — Own Pharmacy
-              </p>
-
-              {/* Prescribing Fee — visually prominent */}
-              <div className="flex items-center justify-between mb-3 rounded-lg px-3 py-2.5"
-                style={{ background: '#f8f9ff', border: `1.5px solid ${accent}` }}>
-                <span className="text-xs font-bold" style={{ color: '#0a0e1a' }}>Prescribing Fee</span>
-                <span className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>$125</span>
+                <ul className="flex flex-col gap-2.5">
+                  {[
+                    'Prescribing Fee: $125.',
+                    'On-going Support.',
+                    'Access to our nursing team for dosing advice and support.',
+                  ].map(item => (
+                    <li key={item} className="flex items-start gap-2.5">
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(10,14,26,0.25)', marginTop: '7px' }} />
+                      <span className="text-sm font-semibold" style={{ color: '#0a0e1a' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <ul className="flex flex-col gap-1.5">
-                {pathway2Bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: 'rgba(72,144,247,0.35)' }} />
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              {/* CTA */}
+              <Link
+                href="/intake/pre-screen"
+                className="block w-full py-3.5 rounded-xl text-center text-sm font-bold tracking-[0.08em] uppercase transition-all duration-200"
+                style={{ background: '#f1f5fb', color: '#0a0e1a', border: '1px solid rgba(10,14,26,0.1)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#e5e9f0' }}
+                onMouseLeave={e => { e.currentTarget.style.background = '#f1f5fb' }}
+              >
+                Order Now
+              </Link>
 
-              <p className="text-[10px] leading-relaxed mt-4 px-3 py-2 rounded-sm"
-                style={{ color: '#b45309', background: 'rgba(240,168,74,0.08)', border: '1px solid rgba(240,168,74,0.2)' }}>
-                ⚠ NSW patients: Script release (Pathway 2) is not available under NSW Poisons and Therapeutic Goods Regulation 2008 for certain Schedule 4 medications prescribed via telehealth. Pathway 1 remains available.
-              </p>
+              <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(10,14,26,0.07)' }}>
+                <p className="text-[11px] text-center" style={{ color: 'rgba(10,14,26,0.35)' }}>
+                  (Note: Script release excludes NSW patients due to state regulations.)
+                </p>
+              </div>
             </div>
           </motion.div>
 
