@@ -325,15 +325,6 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
     'VIP admin support 9am–4pm weekdays',
     'Treatment protocols updated at every review',
   ]
-  const casualPath1 = [
-    'Fulfilled through our TGA-compliant partner pharmacy',
-    'Medication fees apply — our team will confirm before dispensing',
-  ]
-  const casualPath2 = [
-    'Script and treatment plan sent directly to you',
-    'Fill at any pharmacy of your choice',
-    'Dosing guides included',
-  ]
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {/* Membership */}
@@ -387,25 +378,47 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
-        <p className="text-xs font-semibold mb-1.5" style={{ color: '#0a0e1a' }}>Pathway 1 — Partner Pharmacy</p>
-        <ul className="flex flex-col gap-1.5 mb-4">
-          {casualPath1.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
-              <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
-            </li>
-          ))}
+
+        {/* Pathway 1 */}
+        <p className="text-[10px] font-bold tracking-[0.12em] uppercase mb-2" style={{ color: ACCENT }}>
+          Pathway Option 1: Order Through Our Partner Pharmacies
+        </p>
+        <ul className="flex flex-col gap-1.5 mb-2">
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+            <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
+            You pay the PHARMACY price for all medications.
+          </li>
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+            <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
+            <div>
+              Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
+              <ul className="mt-1 flex flex-col gap-0.5">
+                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Ongoing file management.</li>
+                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Treatment guidance.</li>
+                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Medication safety checks.</li>
+              </ul>
+            </div>
+          </li>
         </ul>
-        <div className="flex items-center justify-between mb-1.5">
-          <p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>Pathway 2 — Own Pharmacy</p>
-          <span className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125 <span className="text-[10px] font-normal" style={{ color: '#0a0e1a' }}>one-off</span></span>
+
+        {/* Pathway 2 */}
+        <p className="text-[10px] font-bold tracking-[0.12em] uppercase mt-3 mb-2" style={{ color: ACCENT }}>
+          Pathway Option 2: Choose Your Own Pharmacy
+        </p>
+        {/* Prescribing fee — prominent box */}
+        <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-2"
+          style={{ background: '#ffffff', border: `1.5px solid ${ACCENT}` }}>
+          <span className="text-xs font-bold" style={{ color: '#0a0e1a' }}>Prescribing Fee</span>
+          <span className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125</span>
         </div>
-        <ul className="flex flex-col gap-1.5 mb-4">
-          {casualPath2.map(f => (
+        <ul className="flex flex-col gap-1 mb-3">
+          {['Script and treatment plan sent directly to you', 'Fill at any pharmacy of your choice', 'Dosing guides included'].map(f => (
             <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
-              <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
+              <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
         </ul>
+
         <p className="text-[11px] mb-4 px-3 py-2 rounded-sm" style={{ color: '#f0a84a', background: 'rgba(240,168,74,0.08)', border: '1px solid rgba(240,168,74,0.2)' }}>
           ⚠ NSW patients: Script release (Pathway 2) is not available under NSW Poisons and Therapeutic Goods Regulation 2008 for certain Schedule 4 medications prescribed via telehealth. Partner Pharmacy (Pathway 1) remains available.
         </p>
