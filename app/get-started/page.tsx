@@ -12,9 +12,9 @@ import { programs } from '@/lib/programs'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 const inputBase: React.CSSProperties = {
-  background: '#f0f5ff',
+  background: 'var(--elevated-high)',
   border: '1px solid rgba(255,255,255,0.08)',
-  color: '#0a0e1a',
+  color: 'var(--text-primary)',
   padding: '12px 16px',
   borderRadius: '4px',
   width: '100%',
@@ -29,7 +29,7 @@ function GetStartedHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#ffffff', paddingTop: '120px' }}
+      style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="Get started hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -289,7 +289,7 @@ function AllPathways() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="All pathways"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -313,12 +313,12 @@ function AllPathways() {
             <p className="label mb-4">YOUR OPTIONS</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}
             >
               Every way to{' '}
               <span className="text-teal-gradient">get started.</span>
             </h2>
-            <p className="text-base md:text-lg" style={{ color: '#0a0e1a' }}>
+            <p className="text-base md:text-lg" style={{ color: 'var(--text-primary)' }}>
               Choose what fits where you&apos;re at right now.
             </p>
           </motion.div>
@@ -338,7 +338,7 @@ function AllPathways() {
                     background: path.featured ? 'rgba(44,116,232,0.1)' : '#111111',
                     border: path.featured
                       ? '1px solid rgba(44,116,232,0.4)'
-                      : '1px solid rgba(255,255,255,0.07)',
+                      : '1px solid rgba(72,144,247,0.12)',
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget
@@ -355,7 +355,7 @@ function AllPathways() {
                     el.style.transform = 'translateY(0)'
                     el.style.borderColor = path.featured
                       ? 'rgba(44,116,232,0.4)'
-                      : 'rgba(255,255,255,0.07)'
+                      : 'var(--border)'
                     el.style.boxShadow = 'none'
                   }}
                 >
@@ -369,7 +369,7 @@ function AllPathways() {
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
-                      background: path.featured ? 'rgba(44,116,232,0.15)' : 'rgba(255,255,255,0.05)',
+                      background: path.featured ? 'rgba(44,116,232,0.15)' : 'var(--elevated)',
                       color: path.featured ? '#4890f7' : '#4890f7',
                     }}
                   >
@@ -378,12 +378,12 @@ function AllPathways() {
 
                   <h3
                     className="text-base font-bold mb-2"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                   >
                     {path.title}
                   </h3>
 
-                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: '#0a0e1a' }}>
+                  <p className="text-sm leading-relaxed flex-1 mb-5" style={{ color: 'var(--text-primary)' }}>
                     {path.desc}
                   </p>
 
@@ -408,7 +408,7 @@ function AllPathways() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-center text-[11px] tracking-[0.16em] uppercase mt-10"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </motion.p>
@@ -447,7 +447,7 @@ function EnquiryForm() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Enquiry form"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -463,11 +463,11 @@ function EnquiryForm() {
             <p className="label mb-4">SEND AN ENQUIRY</p>
             <h2
               className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
             >
               Send a Direct Enquiry
             </h2>
-            <p className="text-base leading-relaxed" style={{ color: '#0a0e1a' }}>
+            <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)' }}>
               Fill out the form below and we&apos;ll get back to you within 1 business day.
             </p>
           </motion.div>
@@ -483,8 +483,8 @@ function EnquiryForm() {
                 <circle cx="12" cy="12" r="10" stroke="#2C74E8" strokeWidth="1.5"/>
                 <path d="M7.5 12l3 3 5-5" stroke="#2C74E8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <h3 className="text-xl font-bold mb-2" style={{ color: '#0a0e1a', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
-              <p className="text-sm" style={{ color: '#0a0e1a' }}>We&apos;ll be in touch within 1 business day.</p>
+              <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>Enquiry Received</h3>
+              <p className="text-sm" style={{ color: 'var(--text-primary)' }}>We&apos;ll be in touch within 1 business day.</p>
             </motion.div>
           ) : (
           <motion.form
@@ -500,7 +500,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Full Name
                 </label>
@@ -510,13 +510,13 @@ function EnquiryForm() {
                   placeholder="Your full name"
                   style={inputBase}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
                 />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Email
                 </label>
@@ -526,7 +526,7 @@ function EnquiryForm() {
                   placeholder="your@email.com"
                   style={inputBase}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
                 />
               </div>
             </div>
@@ -536,7 +536,7 @@ function EnquiryForm() {
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Phone
                 </label>
@@ -546,13 +546,13 @@ function EnquiryForm() {
                   placeholder="+61 4xx xxx xxx"
                   style={inputBase}
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
                 />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label
                   className="text-xs font-semibold tracking-wide uppercase"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   Program of Interest
                 </label>
@@ -561,7 +561,7 @@ function EnquiryForm() {
                   style={{ ...inputBase, cursor: 'pointer' }}
                   defaultValue=""
                   onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
                 >
                   <option value="" disabled style={{ color: '#8299b0' }}>
                     Select a program
@@ -570,7 +570,7 @@ function EnquiryForm() {
                     <option
                       key={p.slug}
                       value={p.slug}
-                      style={{ background: '#ffffff', color: '#0a0e1a' }}
+                      style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
                     >
                       {p.name}
                     </option>
@@ -583,7 +583,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)' }}
               >
                 How did you hear about us?
               </label>
@@ -592,7 +592,7 @@ function EnquiryForm() {
                 style={{ ...inputBase, cursor: 'pointer' }}
                 defaultValue=""
                 onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               >
                 <option value="" disabled style={{ color: '#8299b0' }}>
                   Select an option
@@ -607,7 +607,7 @@ function EnquiryForm() {
                   <option
                     key={option}
                     value={option}
-                    style={{ background: '#ffffff', color: '#0a0e1a' }}
+                    style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}
                   >
                     {option}
                   </option>
@@ -619,7 +619,7 @@ function EnquiryForm() {
                 placeholder="Please specify (optional)"
                 style={{ ...inputBase, marginTop: '8px' }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = '#3575C6')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
             </div>
 
@@ -627,7 +627,7 @@ function EnquiryForm() {
             <div className="flex flex-col gap-1.5">
               <label
                 className="text-xs font-semibold tracking-wide uppercase"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)' }}
               >
                 Message
               </label>
@@ -637,7 +637,7 @@ function EnquiryForm() {
                 placeholder="Tell us what you're experiencing or what you'd like to achieve..."
                 style={{ ...inputBase, resize: 'vertical' }}
                 onFocus={(e) => (e.currentTarget.style.borderColor = '#2C74E8')}
-                onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
             </div>
 
@@ -693,7 +693,7 @@ function TrustStrip() {
                 <circle cx="8" cy="8" r="7" stroke="#2C74E8" strokeWidth="1.2" fill="rgba(44,116,232,0.07)" />
                 <path d="M5 8l2.5 2.5 4-4" stroke="#2C74E8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm font-semibold tracking-wide" style={{ color: '#0a0e1a' }}>
+              <span className="text-sm font-semibold tracking-wide" style={{ color: 'var(--text-primary)' }}>
                 {item}
               </span>
             </div>

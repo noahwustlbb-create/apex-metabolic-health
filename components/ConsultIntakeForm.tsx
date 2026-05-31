@@ -45,14 +45,14 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
         {label}{required && <span style={{ color: '#4890f7' }}> *</span>}
       </label>
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
         onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
+        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }} />
     </div>
   )
 }
@@ -62,12 +62,12 @@ function TextArea({ label, value, onChange, placeholder, rows = 3 }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>{label}</label>
       <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
         onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }} />
+        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }} />
     </div>
   )
 }
@@ -77,14 +77,14 @@ function RadioGroup({ label, options, value, onChange }: {
 }) {
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>{label}</label>
+      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>{label}</label>
       <div className="flex flex-wrap gap-2">
         {options.map(opt => (
           <button key={opt} type="button" onClick={() => onChange(opt)}
             className="px-4 py-2 rounded-sm text-xs font-semibold transition-all duration-150"
             style={{
               background: value === opt ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${value === opt ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
+              border: `1px solid ${value === opt ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
               color: value === opt ? '#4890f7' : '#4890f7',
             }}>{opt}</button>
         ))}
@@ -98,8 +98,8 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 1 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Your details</h2>
-      <p className="text-sm mb-8" style={{ color: '#0a0e1a' }}>Basic information to set up your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>Your details</h2>
+      <p className="text-sm mb-8" style={{ color: 'var(--text-primary)' }}>Basic information to set up your consultation.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" required />
         <Field label="Last name" value={data.lastName} onChange={v => set('lastName', v)} placeholder="Smith" required />
@@ -107,12 +107,12 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
         <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" required />
         <Field label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} required />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: '#0a0e1a' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
           <select value={data.state} onChange={e => set('state', e.target.value)}
             className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
             style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#F5F5F5' : '#0a0e1a' }}>
             <option value="" disabled>Select state</option>
-            {AU_STATES.map(s => <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>)}
+            {AU_STATES.map(s => <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>)}
           </select>
         </div>
         <Field label="GP name (optional)" value={data.gpName} onChange={v => set('gpName', v)} placeholder="Dr. surname" />
@@ -128,20 +128,20 @@ function Step2({ data, set, toggleCondition, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 2 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Medical info</h2>
-      <p className="text-sm mb-8" style={{ color: '#0a0e1a' }}>Your doctor reviews this before your consultation.</p>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>Medical info</h2>
+      <p className="text-sm mb-8" style={{ color: 'var(--text-primary)' }}>Your doctor reviews this before your consultation.</p>
       <div className="flex flex-col gap-6">
         <TextArea label="What's your main concern?" value={data.mainConcern} onChange={v => set('mainConcern', v)}
           placeholder={config.concern} rows={3} />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: '#0a0e1a' }}>Medical conditions (select all that apply)</label>
+          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>Medical conditions (select all that apply)</label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {CONDITIONS.map(c => (
               <button key={c} type="button" onClick={() => toggleCondition(c)}
                 className="px-3 py-2 rounded-sm text-xs font-medium transition-all duration-150 text-left"
                 style={{
                   background: data.conditions.includes(c) ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${data.conditions.includes(c) ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+                  border: `1px solid ${data.conditions.includes(c) ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
                   color: data.conditions.includes(c) ? '#4890f7' : '#4890f7',
                 }}>{c}</button>
             ))}
@@ -164,15 +164,15 @@ function Step3({ data, set, config }: {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
       <p className="label mb-3">STEP 3 OF 3</p>
-      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>Confirm & submit</h2>
-      <p className="text-sm mb-8" style={{ color: '#0a0e1a' }}>Review your details and confirm consent.</p>
-      <div className="p-5 rounded-sm mb-6" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.1)' }}>
+      <h2 className="text-3xl font-bold tracking-tight mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>Confirm & submit</h2>
+      <p className="text-sm mb-8" style={{ color: 'var(--text-primary)' }}>Review your details and confirm consent.</p>
+      <div className="p-5 rounded-sm mb-6" style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.1)' }}>
         <p className="text-xs font-bold tracking-[0.16em] uppercase mb-4" style={{ color: '#4890f7' }}>YOUR BOOKING SUMMARY</p>
         <div className="flex flex-col gap-2">
           {[['Name', `${data.firstName} ${data.lastName}`], ['Email', data.email], ['Phone', data.phone], ['State', data.state], ['Program', config.programName]].map(([k, v]) => v ? (
             <div key={k} className="flex justify-between text-sm">
-              <span style={{ color: '#0a0e1a' }}>{k}</span>
-              <span style={{ color: '#0a0e1a' }}>{v}</span>
+              <span style={{ color: 'var(--text-primary)' }}>{k}</span>
+              <span style={{ color: 'var(--text-primary)' }}>{v}</span>
             </div>
           ) : null)}
         </div>
@@ -187,11 +187,11 @@ function Step3({ data, set, config }: {
               className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-sm flex items-center justify-center transition-all duration-150"
               style={{
                 background: data[key] ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data[key] ? 'rgba(200,169,110,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                border: `1px solid ${data[key] ? 'rgba(200,169,110,0.5)' : 'var(--border)'}`,
               }}>
               {data[key] && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
             </div>
-            <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{label}</span>
+            <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{label}</span>
           </label>
         ))}
       </div>
@@ -246,7 +246,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           fontFamily: 'var(--font-space-grotesk)',
           fontSize: 'clamp(28px, 3vw, 42px)',
           lineHeight: 1.1,
-          color: '#0a0e1a',
+          color: 'var(--text-primary)',
           letterSpacing: '-0.02em',
         }}
       >
@@ -268,7 +268,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.58, ease: [0.22, 1, 0.36, 1] }}
         className="text-base leading-relaxed mb-10"
-        style={{ color: '#0a0e1a', maxWidth: 440 }}
+        style={{ color: 'var(--text-primary)', maxWidth: 440 }}
       >
         Your {config.programName} intake has been received by our clinical team.
         We will review your details and be in touch within one business day with everything you need for your next step.
@@ -302,7 +302,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
           <div key={i} className="flex gap-4 items-start">
             <div style={{
               minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2,
-              background: '#ffffff',
+              background: 'var(--bg)',
               border: '1px solid rgba(72,144,247,0.1)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: 9, fontWeight: 700, color: '#4890f7',
@@ -311,8 +311,8 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
               {i + 1}
             </div>
             <div>
-              <p className="text-sm font-semibold mb-0.5" style={{ color: '#0a0e1a' }}>{item.step}</p>
-              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.detail}</p>
+              <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{item.step}</p>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.detail}</p>
             </div>
           </div>
         ))}
@@ -324,7 +324,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
         className="text-[11px] leading-relaxed"
-        style={{ color: '#0a0e1a' }}
+        style={{ color: 'var(--text-primary)' }}
       >
         Apex Metabolic Health &nbsp;·&nbsp; AHPRA-registered practitioners &nbsp;·&nbsp; Private &amp; confidential
       </motion.p>
@@ -388,7 +388,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
     <>
       <Nav />
       <main>
-        <section className="relative overflow-hidden" style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 right-0 w-[500px] h-[400px] pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }} />
@@ -401,7 +401,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   </span>
                   <span className="text-xs" style={{ color: '#4890f7' }}>{progress}%</span>
                 </div>
-                <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div style={{ height: 2, background: 'var(--elevated)', borderRadius: 2 }}>
                   <motion.div style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
                     initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} />
                 </div>
@@ -423,7 +423,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
                   {step > 1 && (
                     <button type="button" onClick={() => { setStep(s => s - 1); scrollTop() }}
                       className="px-5 py-3 rounded-sm text-sm font-semibold transition-all duration-150"
-                      style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)', color: '#0a0e1a' }}>← Back</button>
+                      style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)', color: 'var(--text-primary)' }}>← Back</button>
                   )}
                   {step < 3 ? (
                     <button type="button" onClick={() => { setStep(s => s + 1); scrollTop() }}

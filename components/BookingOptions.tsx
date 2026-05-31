@@ -82,7 +82,7 @@ export default function BookingOptions({
     <section
       ref={ref}
       className={`relative section-pad overflow-hidden ${className}`}
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Booking options"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -106,11 +106,11 @@ export default function BookingOptions({
           <p className="label mb-4">{eyebrow}</p>
           <h2
             className="text-3xl md:text-4xl font-bold tracking-tight mb-3"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}
           >
             {heading}
           </h2>
-          <p className="text-base md:text-lg" style={{ color: '#0a0e1a' }}>
+          <p className="text-base md:text-lg" style={{ color: 'var(--text-primary)' }}>
             {subheading}
           </p>
         </motion.div>
@@ -131,7 +131,7 @@ export default function BookingOptions({
                   background: opt.featured ? 'rgba(53,117,198,0.1)' : '#121c30',
                   border: opt.featured
                     ? '1px solid rgba(53,117,198,0.4)'
-                    : '1px solid rgba(255,255,255,0.07)',
+                    : '1px solid rgba(72,144,247,0.12)',
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget
@@ -148,7 +148,7 @@ export default function BookingOptions({
                   el.style.transform = 'translateY(0)'
                   el.style.borderColor = opt.featured
                     ? 'rgba(53,117,198,0.4)'
-                    : 'rgba(255,255,255,0.07)'
+                    : 'var(--border)'
                   el.style.boxShadow = 'none'
                 }}
               >
@@ -164,7 +164,7 @@ export default function BookingOptions({
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                   style={{
-                    background: opt.featured ? 'rgba(53,117,198,0.2)' : 'rgba(255,255,255,0.05)',
+                    background: opt.featured ? 'rgba(53,117,198,0.2)' : 'var(--elevated)',
                     color: opt.featured ? '#6AAEE8' : '#B0B8C5',
                   }}
                 >
@@ -176,7 +176,7 @@ export default function BookingOptions({
                   className="text-base font-bold mb-2"
                   style={{
                     fontFamily: 'var(--font-space-grotesk)',
-                    color: '#0a0e1a',
+                    color: 'var(--text-primary)',
                   }}
                 >
                   {opt.title}
@@ -185,7 +185,7 @@ export default function BookingOptions({
                 {/* Desc */}
                 <p
                   className="text-sm leading-relaxed flex-1 mb-5"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   {opt.desc}
                 </p>
@@ -230,7 +230,7 @@ export default function BookingOptions({
           )}
           <p
             className="text-center text-[11px] tracking-[0.18em] uppercase"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             All consultations conducted by AHPRA-registered medical practitioners · 100% online · Australia-wide
           </p>

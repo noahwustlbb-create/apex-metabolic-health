@@ -30,7 +30,7 @@ function Input({ value, onChange, placeholder, type = 'text', inputMode }: {
       placeholder={placeholder} inputMode={inputMode}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: '#f0f5ff', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: '#0a0e1a' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
@@ -43,14 +43,14 @@ function TextArea({ value, onChange, placeholder }: { value: string; onChange: (
       placeholder={placeholder} rows={4}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: '#f0f5ff', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: '#0a0e1a' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
 
 function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
   return (
-    <label className="block text-sm font-medium mb-1.5" style={{ color: '#0a0e1a' }}>
+    <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
       {children}{required && <span style={{ color: '#4890f7' }}> *</span>}
     </label>
   )
@@ -100,7 +100,7 @@ export default function DiscoveryCallPage() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
@@ -110,10 +110,10 @@ export default function DiscoveryCallPage() {
                 </svg>
               </div>
               <p className="label mb-4">Request Received</p>
-              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+              <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                 We&apos;ll be in touch, {form.firstName}.
               </h1>
-              <p className="text-base leading-relaxed mb-10" style={{ color: '#0a0e1a' }}>
+              <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-primary)' }}>
                 Our team will contact you within one business day to schedule your free discovery call.
               </p>
               <Link href="/" className="btn-teal">Back to Home</Link>
@@ -128,16 +128,16 @@ export default function DiscoveryCallPage() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
         <div className="container-tight max-w-2xl pt-6">
 
           {/* Header */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-10">
             <p className="label mb-3">Free · No commitment</p>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Book a Discovery Call
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
               Not sure where to start? A 15-minute call with our team to understand your goals and find the right program. No cost, no commitment.
             </p>
           </motion.div>
@@ -149,14 +149,14 @@ export default function DiscoveryCallPage() {
               style={{ backgroundColor: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.3)' }}>
               <p className="text-sm font-semibold mb-2" style={{ color: '#dc3545' }}>Please fix the following:</p>
               <ul className="space-y-1">
-                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: '#0a0e1a' }}>— {e}</li>)}
+                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: 'var(--text-primary)' }}>— {e}</li>)}
               </ul>
             </motion.div>
           )}
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="apex-card p-8 space-y-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(72,144,247,0.14)" }}>
+            className="apex-card p-8 space-y-6" style={{ backgroundColor: "var(--bg)", border: "1px solid rgba(72,144,247,0.14)" }}>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -192,7 +192,7 @@ export default function DiscoveryCallPage() {
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
                       style={{ border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.3)'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
-                      {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#f0f5ff' }} />}
+                      {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--elevated-high)' }} />}
                     </span>
                     {p}
                   </button>
@@ -210,7 +210,7 @@ export default function DiscoveryCallPage() {
               {submitting ? 'Submitting…' : 'Request My Discovery Call'}
             </button>
 
-            <p className="text-xs text-center leading-relaxed" style={{ color: '#0a0e1a' }}>
+            <p className="text-xs text-center leading-relaxed" style={{ color: 'var(--text-primary)' }}>
               Our team will contact you within one business day. All consultations are conducted by AHPRA-registered medical practitioners.
             </p>
           </motion.div>

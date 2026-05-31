@@ -7,22 +7,26 @@ const STEPS = [
   {
     number: '01',
     title: 'Complete your assessment',
-    description: 'Answer a few quick questions. We match you to the right program and blood panel for your goals.',
+    description: 'Answer a short clinical questionnaire online. Takes 3–5 minutes. We match you to the right program and the correct blood panel.',
+    time: '3–5 min',
   },
   {
     number: '02',
     title: 'Order your blood panel',
-    description: 'Doctor-issued referral sent within 24 hours. Collect at any accredited pathology centre near you — fasted before 9am.',
+    description: 'Doctor-issued pathology referral sent within 24 hours. Collect at any of 4,000+ accredited centres near you — morning, fasted. No GP required.',
+    time: '24h',
   },
   {
     number: '03',
     title: 'Telehealth consultation',
-    description: 'Your AHPRA-registered doctor reviews your results and builds a personalised clinical protocol — typically 30–60 minutes.',
+    description: 'Your AHPRA-registered doctor reviews your full results and builds a personalised clinical protocol — typically 45–60 minutes. Not a prescription call.',
+    time: '45–60 min',
   },
   {
     number: '04',
     title: 'Ongoing optimisation',
-    description: 'Doctor-prescribed treatment, scheduled reviews every 4 months, and clinical support throughout your programme.',
+    description: 'Doctor-prescribed treatment delivered to your door. Scheduled clinical reviews every 4 months, protocol adjustments based on your data, and support between appointments.',
+    time: 'Every 4 months',
   },
 ]
 
@@ -36,7 +40,7 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="How it works"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -64,9 +68,9 @@ export default function HowItWorks() {
             className="display-serif"
             style={{ fontSize: 'clamp(36px, 4vw, 62px)' }}
           >
-            Clinical medicine.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
-              No waiting rooms.
+            From assessment{' '}
+            <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
+              to protocol.
             </span>
           </motion.h2>
         </div>
@@ -80,7 +84,7 @@ export default function HowItWorks() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="relative p-6 rounded-2xl flex flex-col"
               style={{
-                background: '#ffffff',
+                background: 'var(--bg)',
                 border: '1px solid rgba(72,144,247,0.12)',
               }}
             >
@@ -103,13 +107,20 @@ export default function HowItWorks() {
               </span>
               <h3
                 className="text-base font-semibold mb-2"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
               >
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+              <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
                 {step.description}
               </p>
+              {'time' in step && step.time && (
+                <div className="mt-4 pt-3" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
+                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase" style={{ color: '#4890f7', opacity: 0.7 }}>
+                    {step.time}
+                  </span>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -129,9 +140,9 @@ export default function HowItWorks() {
           <a
             href="/how-it-works"
             className="text-sm font-medium transition-colors duration-200"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#7a8a9a' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
           >
             Learn more about our process →
           </a>

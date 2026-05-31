@@ -131,10 +131,10 @@ function F({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>
+      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
         {label}{required && <span style={{ color: ACCENT }}> *</span>}
       </label>
-      {hint && <p className="text-[11px]" style={{ color: '#0a0e1a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: 'var(--text-primary)' }}>{hint}</p>}
       <input
         type={type}
         name={name}
@@ -143,9 +143,9 @@ function F({
         placeholder={placeholder}
         className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-all duration-150"
         style={{
-          background: '#ffffff',
+          background: 'var(--bg)',
           border: '1px solid rgba(72,144,247,0.14)',
-          color: '#0a0e1a',
+          color: 'var(--text-primary)',
         }}
         onFocus={e => { e.currentTarget.style.borderColor = ACCENT_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px ${ACCENT_BG}` }}
         onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.12)'; e.currentTarget.style.boxShadow = 'none' }}
@@ -162,10 +162,10 @@ function TA({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>
+      <label className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
         {label}
       </label>
-      {hint && <p className="text-[11px]" style={{ color: '#0a0e1a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: 'var(--text-primary)' }}>{hint}</p>}
       <textarea
         name={name}
         value={value}
@@ -174,9 +174,9 @@ function TA({
         rows={rows}
         className="w-full rounded-lg px-4 py-3 text-sm outline-none resize-none transition-all duration-150"
         style={{
-          background: '#ffffff',
+          background: 'var(--bg)',
           border: '1px solid rgba(72,144,247,0.14)',
-          color: '#0a0e1a',
+          color: 'var(--text-primary)',
         }}
         onFocus={e => { e.currentTarget.style.borderColor = ACCENT_BORDER; e.currentTarget.style.boxShadow = `0 0 0 3px ${ACCENT_BG}` }}
         onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.12)'; e.currentTarget.style.boxShadow = 'none' }}
@@ -202,7 +202,7 @@ function Cards({
   }
   return (
     <div className="flex flex-col gap-2">
-      <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>{label}</p>
+      <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>{label}</p>
       <div className="flex flex-wrap gap-2">
         {options.map(opt => {
           const active = selected.includes(opt)
@@ -235,12 +235,12 @@ function Score({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-baseline justify-between">
-        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>{label}</p>
+        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>{label}</p>
         {value !== '' && (
           <span className="text-sm font-bold" style={{ color: ACCENT }}>{value} / 10</span>
         )}
       </div>
-      {hint && <p className="text-[11px]" style={{ color: '#0a0e1a' }}>{hint}</p>}
+      {hint && <p className="text-[11px]" style={{ color: 'var(--text-primary)' }}>{hint}</p>}
       <div className="flex gap-1.5">
         {Array.from({ length: 11 }, (_, i) => (
           <button
@@ -282,10 +282,10 @@ function Head({ step, title, sub }: { step: number; title: string; sub?: string 
       <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-2" style={{ color: ACCENT }}>
         Step {step} of {TOTAL} — {STEP_LABELS[step - 1]}
       </p>
-      <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.2 }}>
+      <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.2 }}>
         {title}
       </h2>
-      {sub && <p className="mt-2 text-sm leading-relaxed" style={{ color: '#0a0e1a', maxWidth: '500px' }}>{sub}</p>}
+      {sub && <p className="mt-2 text-sm leading-relaxed" style={{ color: 'var(--text-primary)', maxWidth: '500px' }}>{sub}</p>}
     </div>
   )
 }
@@ -310,7 +310,7 @@ function Chk({ checked, onChange, children }: { checked: boolean; onChange: (v: 
           </svg>
         )}
       </button>
-      <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{children}</span>
+      <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{children}</span>
     </label>
   )
 }
@@ -342,18 +342,18 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}`, color: ACCENT }}>
           Recommended
         </span>
-        <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+        <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
           Apex Clinical Program
         </h3>
         <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>
-          $99<span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>/month</span>
+          $99<span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>/month</span>
         </p>
-        <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
+        <p className="text-xs mb-4" style={{ color: 'var(--text-primary)' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
               <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -376,10 +376,10 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           border: `1px solid ${value === 'casual' ? ACCENT : 'rgba(72,144,247,0.25)'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
-        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
           Single Consultation
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>
+        <p className="text-xs mb-4" style={{ color: 'var(--text-primary)' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
 
@@ -388,18 +388,18 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           Pathway Option 1: Order Through Our Partner Pharmacies
         </p>
         <ul className="flex flex-col gap-1.5 mb-2">
-          <li className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
             <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
             You pay the PHARMACY price for all medications.
           </li>
-          <li className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
             <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
             <div>
               Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
               <ul className="mt-1 flex flex-col gap-0.5">
-                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Ongoing file management.</li>
-                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Treatment guidance.</li>
-                <li className="text-[11px]" style={{ color: 'rgba(10,14,26,0.6)' }}>· Medication safety checks.</li>
+                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Ongoing file management.</li>
+                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Treatment guidance.</li>
+                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Medication safety checks.</li>
               </ul>
             </div>
           </li>
@@ -411,13 +411,13 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         {/* Prescribing fee — prominent box */}
         <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-2"
-          style={{ background: '#ffffff', border: `1.5px solid ${ACCENT}` }}>
-          <span className="text-xs font-bold" style={{ color: '#0a0e1a' }}>Prescribing Fee</span>
+          style={{ background: 'var(--bg)', border: `1.5px solid ${ACCENT}` }}>
+          <span className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>Prescribing Fee</span>
           <span className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125</span>
         </div>
         <ul className="flex flex-col gap-1 mb-3">
           {['Script and treatment plan sent directly to you', 'Fill at any pharmacy of your choice', 'Dosing guides included'].map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#0a0e1a' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
               <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -515,7 +515,7 @@ export default function HormoneConsultForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -528,16 +528,16 @@ export default function HormoneConsultForm() {
                   <path d="M5 12l5 5L20 7" stroke={ACCENT} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 700, color: '#0a0e1a', marginBottom: '1rem' }}>
+              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1rem' }}>
                 Form submitted.
               </h1>
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#0a0e1a' }}>
+              <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text-primary)' }}>
                 Thank you, {d.firstName}. Your hormone consult intake has been received by our clinical team. You&apos;ll hear from us within 1 business day to confirm next steps.
               </p>
 
               <div className="rounded-xl p-5 text-left mb-8"
-                style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.14)' }}>
-                <p className="text-xs font-semibold tracking-[0.14em] uppercase mb-4" style={{ color: '#0a0e1a' }}>What happens next</p>
+                style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.14)' }}>
+                <p className="text-xs font-semibold tracking-[0.14em] uppercase mb-4" style={{ color: 'var(--text-primary)' }}>What happens next</p>
                 <div className="flex flex-col gap-3">
                   {[
                     ['Review', 'Your intake is reviewed by our clinical team.'],
@@ -551,8 +551,8 @@ export default function HormoneConsultForm() {
                         <span className="text-[10px] font-bold" style={{ color: ACCENT }}>{i + 1}</span>
                       </div>
                       <div>
-                        <p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>{title}</p>
-                        <p className="text-xs mt-0.5" style={{ color: '#0a0e1a' }}>{desc}</p>
+                        <p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{title}</p>
+                        <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)' }}>{desc}</p>
                       </div>
                     </div>
                   ))}
@@ -572,7 +572,7 @@ export default function HormoneConsultForm() {
     return (
       <>
         <Nav />
-        <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
+        <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '100px', paddingBottom: '80px' }}>
           <div className="container-tight max-w-xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -590,19 +590,19 @@ export default function HormoneConsultForm() {
                 Hormone Consult Intake
               </p>
 
-              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 700, letterSpacing: '-0.025em', color: '#0a0e1a', lineHeight: 1.15, marginBottom: '1.25rem' }}>
+              <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 4vw, 38px)', fontWeight: 700, letterSpacing: '-0.025em', color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '1.25rem' }}>
                 Your hormone health,<br />
                 <span style={{ background: `linear-gradient(135deg, ${ACCENT}, #7bb3ff)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                   assessed properly.
                 </span>
               </h1>
 
-              <p className="text-sm leading-relaxed mb-8" style={{ color: '#0a0e1a', maxWidth: '440px' }}>
+              <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text-primary)', maxWidth: '440px' }}>
                 This intake form takes approximately 8–10 minutes to complete. Your responses are reviewed by an AHPRA-registered doctor before your consultation.
               </p>
 
               <div className="rounded-xl p-5 mb-8"
-                style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.14)' }}>
+                style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.14)' }}>
                 <div className="grid grid-cols-3 gap-4">
                   {[
                     ['6 sections', 'Thorough clinical picture'],
@@ -610,8 +610,8 @@ export default function HormoneConsultForm() {
                     ['Saved progress', 'Resume where you left off'],
                   ].map(([stat, label]) => (
                     <div key={stat}>
-                      <p className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{stat}</p>
-                      <p className="text-[11px] mt-0.5" style={{ color: '#0a0e1a' }}>{label}</p>
+                      <p className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{stat}</p>
+                      <p className="text-[11px] mt-0.5" style={{ color: 'var(--text-primary)' }}>{label}</p>
                     </div>
                   ))}
                 </div>
@@ -628,7 +628,7 @@ export default function HormoneConsultForm() {
                       style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}` }}>
                       <div className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
                     </div>
-                    <p className="text-xs" style={{ color: '#0a0e1a' }}>{note}</p>
+                    <p className="text-xs" style={{ color: 'var(--text-primary)' }}>{note}</p>
                   </div>
                 ))}
               </div>
@@ -658,12 +658,12 @@ export default function HormoneConsultForm() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '80px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '80px', paddingBottom: '80px' }}>
         {/* Progress */}
-        <div className="sticky top-16 z-30" style={{ backgroundColor: '#ffffff', borderBottom: '1px solid rgba(72,144,247,0.1)' }}>
+        <div className="sticky top-16 z-30" style={{ backgroundColor: 'var(--bg)', borderBottom: '1px solid rgba(72,144,247,0.1)' }}>
           <div className="container-tight max-w-2xl mx-auto py-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>
+              <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
                 {STEP_LABELS[step - 1]}
               </p>
               <p className="text-[11px] font-semibold" style={{ color: ACCENT }}>{pct}%</p>
@@ -746,7 +746,7 @@ export default function HormoneConsultForm() {
                   <Head step={3} title="Medical History" sub="Accurate medical history allows us to design a safe, appropriate protocol." />
 
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#0a0e1a' }}>
+                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: 'var(--text-primary)' }}>
                       Existing conditions — select all that apply
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -850,8 +850,8 @@ export default function HormoneConsultForm() {
 
                   <TA label="Current supplements" name="supplementsCurrent" value={d.supplementsCurrent} onChange={v => set('supplementsCurrent', v)} placeholder="e.g. Zinc, Vitamin D, Magnesium, Ashwagandha, Creatine..." rows={2} />
 
-                  <div className="rounded-xl p-4" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}>
-                    <p className="text-xs font-semibold mb-1" style={{ color: '#0a0e1a' }}>Don&apos;t have recent bloods?</p>
+                  <div className="rounded-xl p-4" style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}>
+                    <p className="text-xs font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>Don&apos;t have recent bloods?</p>
                     <p className="text-xs leading-relaxed" style={{ color: '#4890f7' }}>
                       No problem — we&apos;ll issue a referral for your hormone panel after reviewing this intake. Testing is available at thousands of collection centres nationally.
                     </p>
@@ -866,8 +866,8 @@ export default function HormoneConsultForm() {
 
                   {/* Pathway selection */}
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: '#0a0e1a' }}>Choose Your Path</p>
-                    <p className="text-xs mb-4" style={{ color: '#0a0e1a' }}>After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.</p>
+                    <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-1" style={{ color: 'var(--text-primary)' }}>Choose Your Path</p>
+                    <p className="text-xs mb-4" style={{ color: 'var(--text-primary)' }}>After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.</p>
                     <PathwayCards value={d.pathway} onChange={v => set('pathway', v)} />
                     <p className="text-xs mt-3" style={{ color: '#4890f7' }}>
                       Our team will confirm consultation fees based on your selected pathway. You can change your selection before your consultation.
@@ -877,8 +877,8 @@ export default function HormoneConsultForm() {
                   <div className="h-px" style={{ background: 'rgba(72,144,247,0.12)' }} />
 
                   {/* Summary card */}
-                  <div className="rounded-xl p-5" style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.14)' }}>
-                    <p className="text-xs font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#0a0e1a' }}>Summary</p>
+                  <div className="rounded-xl p-5" style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.14)' }}>
+                    <p className="text-xs font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: 'var(--text-primary)' }}>Summary</p>
                     <div className="grid grid-cols-2 gap-x-6 gap-y-2">
                       {[
                         ['Name', `${d.firstName} ${d.lastName}`],
@@ -890,13 +890,13 @@ export default function HormoneConsultForm() {
                       ].map(([label, val]) => (
                         <div key={label}>
                           <p className="text-[10px] uppercase tracking-wider" style={{ color: '#4890f7' }}>{label}</p>
-                          <p className="text-sm mt-0.5 truncate" style={{ color: '#0a0e1a' }}>{val || '—'}</p>
+                          <p className="text-sm mt-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{val || '—'}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4 p-5 rounded-xl" style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}>
+                  <div className="flex flex-col gap-4 p-5 rounded-xl" style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}>
                     <Chk checked={d.ageConfirm} onChange={v => set('ageConfirm', v)}>
                       I confirm I am 18 years of age or older.
                     </Chk>
@@ -931,7 +931,7 @@ export default function HormoneConsultForm() {
             <button
               onClick={() => go(-1)}
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all duration-150"
-              style={{ color: '#0a0e1a', background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}
+              style={{ color: 'var(--text-primary)', background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}
             >
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
                 <path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

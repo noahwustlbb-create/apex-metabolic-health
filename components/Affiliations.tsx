@@ -73,7 +73,7 @@ export default function Affiliations() {
     <section
       ref={ref}
       className="relative py-14 overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Credentials and affiliations"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -84,7 +84,7 @@ export default function Affiliations() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
           className="text-center text-[10px] font-semibold tracking-[0.2em] uppercase mb-8"
-          style={{ color: '#0a0e1a' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           CREDENTIALS & COMPLIANCE
         </motion.p>
@@ -112,10 +112,10 @@ export default function Affiliations() {
                 {badge.icon}
               </div>
               <div>
-                <p className="text-xs font-semibold leading-snug mb-0.5" style={{ color: '#0a0e1a' }}>
+                <p className="text-xs font-semibold leading-snug mb-0.5" style={{ color: 'var(--text-primary)' }}>
                   {badge.label}
                 </p>
-                <p className="text-[10px]" style={{ color: '#0a0e1a' }}>
+                <p className="text-[10px]" style={{ color: 'var(--text-primary)' }}>
                   {badge.sublabel}
                 </p>
               </div>

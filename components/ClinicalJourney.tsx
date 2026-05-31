@@ -89,11 +89,11 @@ function StepBlock({ step, index, isInView }: {
       <div className={`flex-1 ${isLast ? 'pb-0' : 'pb-10 md:pb-12'}`}>
         <h3
           className="text-xl md:text-2xl font-semibold mb-2 leading-snug"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', marginTop: 8 }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', marginTop: 8 }}
         >
           {step.title}
         </h3>
-        <p className="text-sm md:text-base leading-relaxed" style={{ color: '#0a0e1a', maxWidth: 560 }}>
+        <p className="text-sm md:text-base leading-relaxed" style={{ color: 'var(--text-primary)', maxWidth: 560 }}>
           {step.description}
         </p>
       </div>
@@ -109,7 +109,7 @@ export default function ClinicalJourney() {
     <section
       id="clinical-journey"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical journey"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -140,7 +140,7 @@ export default function ClinicalJourney() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Simple from{' '}
-              <span style={{ color: 'rgba(10,14,26,0.2)' }}>
+              <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
                 start to finish.
               </span>
             </motion.h2>
@@ -150,7 +150,7 @@ export default function ClinicalJourney() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16 }}
             className="text-base md:text-lg leading-relaxed"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             Five steps from not knowing your numbers to having a doctor-built protocol working in your favour.
           </motion.p>
@@ -177,9 +177,9 @@ export default function ClinicalJourney() {
           <a
             href="/intake/discovery"
             className="text-sm font-medium flex items-center gap-2 transition-colors duration-150"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
             onMouseEnter={e => (e.currentTarget.style.color = '#7a8a9a')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#0a0e1a')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
             Not sure where to start?{' '}
             <span style={{ color: '#4890f7' }}>Book a free discovery call →</span>

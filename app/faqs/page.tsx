@@ -21,7 +21,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
           style={{
             fontFamily: 'var(--font-space-grotesk)',
             fontWeight: 600,
-            color: '#0a0e1a',
+            color: 'var(--text-primary)',
             fontSize: '15px',
           }}
         >
@@ -40,7 +40,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
       </button>
       {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+        <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
           {answer}
         </p>
       )}
@@ -199,7 +199,7 @@ function FAQHero() {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#ffffff', paddingTop: '120px' }}
+      style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="FAQs hero"
     >
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -227,7 +227,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.06' }}
         >
           Straight Answers.
         </motion.h1>
@@ -237,7 +237,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22 }}
           className="text-lg leading-relaxed max-w-xl"
-          style={{ color: '#0a0e1a' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           Not on this list? Contact us through the Get Started page.
         </motion.p>
@@ -276,7 +276,7 @@ function FAQCategory({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
         >
           {category}
         </motion.h2>
@@ -306,7 +306,7 @@ function FAQBottomCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -325,7 +325,7 @@ function FAQBottomCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
         >
           Still have questions?
         </motion.h2>

@@ -48,7 +48,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
         style={{
           width: 240,
           borderRadius: 32,
-          background: '#f8fbff',
+          background: 'var(--elevated-high)',
           border: '1.5px solid rgba(72,144,247,0.15)',
           boxShadow:
             '0 48px 80px rgba(0,0,0,0.7), 0 0 80px rgba(72,144,247,0.07), 0 0 160px rgba(72,144,247,0.03)',
@@ -62,7 +62,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               width: 72,
               height: 6,
               borderRadius: 3,
-              background: '#f8f9ff',
+              background: 'var(--surface)',
               border: '1px solid rgba(72,144,247,0.08)',
             }}
           />
@@ -77,7 +77,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             marginBottom: 10,
           }}
         >
-          <span style={{ fontSize: 7, color: '#0a0e1a', fontWeight: 700 }}>9:41</span>
+          <span style={{ fontSize: 7, color: 'var(--text-primary)', fontWeight: 700 }}>9:41</span>
           <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
             {[3, 4, 5, 6].map((h) => (
               <div
@@ -126,7 +126,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <p
             style={{
               fontSize: 6.5,
-              color: '#0a0e1a',
+              color: 'var(--text-primary)',
               letterSpacing: '0.18em',
               fontWeight: 700,
               textTransform: 'uppercase',
@@ -139,7 +139,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             style={{
               fontSize: 12,
               fontWeight: 800,
-              color: '#0a0e1a',
+              color: 'var(--text-primary)',
               fontFamily: 'var(--font-space-grotesk)',
               letterSpacing: '-0.02em',
             }}
@@ -182,7 +182,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 style={{
                   fontSize: 30,
                   fontWeight: 800,
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   fontFamily: 'var(--font-space-grotesk)',
                   lineHeight: 1,
                   letterSpacing: '-0.04em',
@@ -190,7 +190,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               >
                 31
               </span>
-              <span style={{ fontSize: 7.5, color: '#0a0e1a', display: 'block', marginTop: 1 }}>
+              <span style={{ fontSize: 7.5, color: 'var(--text-primary)', display: 'block', marginTop: 1 }}>
                 biological
               </span>
             </div>
@@ -199,7 +199,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 style={{
                   fontSize: 18,
                   fontWeight: 700,
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   fontFamily: 'var(--font-space-grotesk)',
                   lineHeight: 1,
                 }}
@@ -232,7 +232,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             margin: '0 6px 8px',
             padding: '8px 10px',
             borderRadius: 8,
-            background: '#ffffff',
+            background: 'var(--bg)',
             border: '1px solid rgba(255,255,255,0.04)',
           }}
         >
@@ -244,7 +244,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               marginBottom: 6,
             }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#0a0e1a' }}>Testosterone</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: 'var(--text-primary)' }}>Testosterone</p>
             <span style={{ fontSize: 8, color: '#4890f7', fontWeight: 700 }}>22.4 nmol/L</span>
           </div>
           <svg
@@ -272,8 +272,8 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             />
           </svg>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
-            <span style={{ fontSize: 6.5, color: '#0a0e1a' }}>Jan</span>
-            <span style={{ fontSize: 6.5, color: '#0a0e1a' }}>Apr</span>
+            <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Jan</span>
+            <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Apr</span>
             <span style={{ fontSize: 6.5, color: '#4890f7', fontWeight: 600 }}>Now</span>
           </div>
         </div>
@@ -283,14 +283,14 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             margin: '0 6px',
             padding: '8px 10px',
             borderRadius: 8,
-            background: '#ffffff',
+            background: 'var(--bg)',
             border: '1px solid rgba(255,255,255,0.04)',
           }}
         >
           <div
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <p style={{ fontSize: 7.5, fontWeight: 700, color: '#0a0e1a' }}>Active Protocol</p>
+            <p style={{ fontSize: 7.5, fontWeight: 700, color: 'var(--text-primary)' }}>Active Protocol</p>
             <div
               style={{ width: 5, height: 5, borderRadius: '50%', background: '#4890f7', opacity: 0.7 }}
             />
@@ -366,7 +366,7 @@ function LeftCallout({ title, body, index, inView }: { title: string; body: stri
       <div className="flex items-center gap-2.5">
         <p
           className="text-sm font-semibold"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
         >
           {title}
         </p>
@@ -377,7 +377,7 @@ function LeftCallout({ title, body, index, inView }: { title: string; body: stri
       </div>
       <p
         className="text-xs leading-relaxed"
-        style={{ color: '#0a0e1a', maxWidth: '200px' }}
+        style={{ color: 'var(--text-primary)', maxWidth: '200px' }}
       >
         {body}
       </p>
@@ -400,14 +400,14 @@ function RightCallout({ title, body, index, inView }: { title: string; body: str
         />
         <p
           className="text-sm font-semibold"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
         >
           {title}
         </p>
       </div>
       <p
         className="text-xs leading-relaxed pl-4"
-        style={{ color: '#0a0e1a', maxWidth: '200px' }}
+        style={{ color: 'var(--text-primary)', maxWidth: '200px' }}
       >
         {body}
       </p>
@@ -423,7 +423,7 @@ export default function AppFeature() {
     <section
       id="app-feature"
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Apex app"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -454,7 +454,7 @@ export default function AppFeature() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)', maxWidth: '600px' }}
           >
             Your care,{' '}
-            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
+            <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
               visible over time.
             </span>
           </motion.h2>
@@ -463,7 +463,7 @@ export default function AppFeature() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
             className="text-base leading-relaxed mt-4 mx-auto"
-            style={{ color: '#0a0e1a', maxWidth: '480px' }}
+            style={{ color: 'var(--text-primary)', maxWidth: '480px' }}
           >
             Biomarkers, protocols, and clinical progress — in one place. Built for continuity, not just your next appointment.
           </motion.p>
@@ -501,14 +501,14 @@ export default function AppFeature() {
                   />
                   <p
                     className="text-xs font-semibold"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                   >
                     {c.title}
                   </p>
                 </div>
                 <p
                   className="text-[11px] leading-relaxed pl-3"
-                  style={{ color: '#0a0e1a' }}
+                  style={{ color: 'var(--text-primary)' }}
                 >
                   {c.body}
                 </p>

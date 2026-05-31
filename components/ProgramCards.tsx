@@ -91,7 +91,7 @@ function ProgramCard({ program, index, inView }: {
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, delay: index * 0.08, ease }}
       className="flex flex-col rounded-2xl overflow-hidden"
-      style={{ background: '#f8fbff', border: '1px solid rgba(72,144,247,0.1)' }}
+      style={{ background: 'var(--elevated-high)', border: '1px solid rgba(72,144,247,0.1)' }}
     >
       {/* Visual area */}
       <div
@@ -135,7 +135,7 @@ function ProgramCard({ program, index, inView }: {
 
       {/* Content area */}
       <div className="flex flex-col flex-1 p-5">
-        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: '#0a0e1a' }}>
+        <p className="text-sm leading-relaxed mb-5 flex-1" style={{ color: 'var(--text-primary)' }}>
           {program.description}
         </p>
 
@@ -143,7 +143,7 @@ function ProgramCard({ program, index, inView }: {
         {program.comingSoon ? (
           <div
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold mb-3"
-            style={{ background: 'rgba(255,255,255,0.05)', color: '#0a0e1a', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
+            style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-primary)', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
           >
             Joining waitlist soon
           </div>
@@ -175,7 +175,7 @@ export default function ProgramCards() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -206,7 +206,7 @@ export default function ProgramCards() {
                 fontFamily: 'var(--font-space-grotesk)',
                 fontSize: 'clamp(32px, 3.5vw, 54px)',
                 lineHeight: 1.06,
-                color: '#0a0e1a',
+                color: 'var(--text-primary)',
                 letterSpacing: '-0.02em',
               }}
             >
@@ -227,7 +227,7 @@ export default function ProgramCards() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-sm md:text-right"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             Doctor-led, evidence-based protocols for each of the six biological systems that most affect how men look, feel, and perform.
           </motion.p>
@@ -248,7 +248,7 @@ export default function ProgramCards() {
           className="flex flex-wrap items-center justify-between gap-4 mt-10 pt-8"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
         >
-          <p className="text-sm" style={{ color: '#0a0e1a' }}>
+          <p className="text-sm" style={{ color: 'var(--text-primary)' }}>
             Not sure which program is right for you?
           </p>
           <a

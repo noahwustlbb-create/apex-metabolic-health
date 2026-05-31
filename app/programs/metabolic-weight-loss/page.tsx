@@ -67,7 +67,7 @@ function Hero() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
+      style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Metabolic & Weight Loss program"
     >
       <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
@@ -90,7 +90,7 @@ function Hero() {
           >
             Clinical Programs
           </Link>
-          <span style={{ color: '#0a0e1a' }}>›</span>
+          <span style={{ color: 'var(--text-primary)' }}>›</span>
           <span className="text-[11px] tracking-[0.14em] uppercase font-semibold" style={{ color: ACCENT }}>
             Metabolic & Weight Loss
           </span>
@@ -115,7 +115,7 @@ function Hero() {
             fontWeight: 700,
             lineHeight: 1.06,
             letterSpacing: '-0.025em',
-            color: '#0a0e1a',
+            color: 'var(--text-primary)',
             maxWidth: '720px',
             marginBottom: '1.25rem',
           }}
@@ -131,7 +131,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease }}
-          style={{ color: '#0a0e1a', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+          style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
           Weight that doesn&apos;t move despite genuine effort is rarely a willpower problem. We assess the metabolic and hormonal variables behind the plateau — and build a protocol around what we find.
         </motion.p>
@@ -178,7 +178,7 @@ function SymptomsSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="Symptoms">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Symptoms">
       <div className="glow-rule" aria-hidden="true" />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -191,7 +191,7 @@ function SymptomsSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '1rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1rem' }}
             >
               Doing everything right.{' '}
               <span style={{ color: ACCENT }}>Nothing working.</span>
@@ -201,7 +201,7 @@ function SymptomsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed"
-              style={{ color: '#0a0e1a', maxWidth: '420px' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
               When diet and exercise aren&apos;t moving the needle, there&apos;s usually a metabolic or hormonal explanation. Insulin resistance, thyroid dysfunction, and low testosterone all directly drive body composition — and are frequently missed on standard bloods.
             </motion.p>
@@ -215,10 +215,10 @@ function SymptomsSection() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.07, ease }}
                 className="rounded-xl p-4"
-                style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)', borderLeft: `2px solid ${ACCENT}` }}
+                style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)', borderLeft: `2px solid ${ACCENT}` }}
               >
                 <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{s.title}</p>
-                <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{s.body}</p>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{s.body}</p>
               </motion.div>
             ))}
           </div>
@@ -233,7 +233,7 @@ function PathwaySection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Clinical pathway">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Clinical pathway">
       <div className="glow-rule" aria-hidden="true" />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -245,7 +245,7 @@ function PathwaySection() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '0.75rem' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '0.75rem' }}
           >
             How it works.
           </motion.h2>
@@ -254,7 +254,7 @@ function PathwaySection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-sm leading-relaxed max-w-lg"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             A clinical pathway that identifies the root drivers — not a meal plan and a weigh-in schedule.
           </motion.p>
@@ -268,7 +268,7 @@ function PathwaySection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.1 + i * 0.1, ease }}
               className="rounded-xl p-6"
-              style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}
+              style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}
             >
               <div
                 className="w-8 h-8 rounded-full flex items-center justify-center mb-4"
@@ -277,7 +277,7 @@ function PathwaySection() {
                 <span className="text-[11px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{p.step}</span>
               </div>
               <h3 className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#e8f0f8' }}>{p.title}</h3>
-              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{p.body}</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{p.body}</p>
             </motion.div>
           ))}
         </div>
@@ -291,7 +291,7 @@ function PanelSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="Blood panel">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Blood panel">
       <div className="glow-rule" aria-hidden="true" />
 
       <div ref={ref} className="container-tight relative z-10">
@@ -304,7 +304,7 @@ function PanelSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '1rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '1rem' }}
             >
               What we actually test.
             </motion.h2>
@@ -313,7 +313,7 @@ function PanelSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed mb-6"
-              style={{ color: '#0a0e1a', maxWidth: '400px' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
               Our metabolic panel covers insulin sensitivity, glucose regulation, hormonal drivers of body composition, and systemic markers. It&apos;s built to identify what a standard panel misses.
             </motion.p>
@@ -325,7 +325,7 @@ function PanelSection() {
               style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}` }}
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
-              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                 Have recent bloods? Submit them during the pre-screen — we&apos;ll review suitability. If recent and comprehensive enough, you may be able to proceed directly to consultation.
               </p>
             </motion.div>
@@ -336,14 +336,14 @@ function PanelSection() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2, ease }}
             className="rounded-2xl overflow-hidden"
-            style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}
+            style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}
           >
             <div className="px-5 py-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.1)' }}>
               <p className="text-xs font-bold tracking-[0.16em] uppercase" style={{ color: ACCENT }}>Metabolic & Weight Loss Panel</p>
             </div>
             <ul className="p-5 flex flex-col gap-2">
               {PANEL_MARKERS.map((m, i) => (
-                <li key={i} className="flex items-center gap-3 text-xs" style={{ color: '#0a0e1a' }}>
+                <li key={i} className="flex items-center gap-3 text-xs" style={{ color: 'var(--text-primary)' }}>
                   <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: ACCENT, opacity: 0.5 }} />
                   {m}
                 </li>
@@ -351,7 +351,7 @@ function PanelSection() {
             </ul>
             <div className="px-5 pb-5">
               <p className="text-[11px]" style={{ color: '#4890f7' }}>
-                Final panel confirmed after pre-screen assessment. Pricing from $73.66 at accredited collection centres.
+                Final panel confirmed after pre-screen assessment. Blood panels from $99 at accredited collection centres.
               </p>
             </div>
           </motion.div>
@@ -366,7 +366,7 @@ function CTASection() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Get started">
+    <section ref={ref} className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Get started">
       <div className="glow-rule" aria-hidden="true" />
       <div
         aria-hidden="true"
@@ -379,7 +379,7 @@ function CTASection() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease }}
-          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 50px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#0a0e1a', marginBottom: '1rem' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 50px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: 'var(--text-primary)', marginBottom: '1rem' }}
         >
           Find out what&apos;s actually driving it.
         </motion.h2>
@@ -388,7 +388,7 @@ function CTASection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1, ease }}
-          style={{ color: '#0a0e1a', maxWidth: '420px', margin: '0 auto 2rem', fontSize: '14px', lineHeight: 1.7 }}
+          style={{ color: 'var(--text-primary)', maxWidth: '420px', margin: '0 auto 2rem', fontSize: '14px', lineHeight: 1.7 }}
         >
           Complete the pre-screen. We&apos;ll assess your suitability and outline the clinical pathway for your specific case.
         </motion.p>

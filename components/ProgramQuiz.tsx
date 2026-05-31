@@ -22,7 +22,7 @@ export default function ProgramQuiz() {
     <section
       id="quiz"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Health assessment quiz"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -50,11 +50,11 @@ export default function ProgramQuiz() {
             <p className="label mb-4">HEALTH ASSESSMENT</p>
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
             >
               Not Sure Where to Start?
             </h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: '#0a0e1a' }}>
+            <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)' }}>
               Answer a few quick questions and we&apos;ll recommend the right program for your goals.
               Takes 2 minutes.
             </p>

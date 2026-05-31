@@ -154,7 +154,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
       transition={{ duration: 0.55, delay: i * 0.08, ease }}
       className="group flex flex-col rounded-2xl overflow-hidden relative"
       style={{
-        background: '#ffffff',
+        background: 'var(--bg)',
         border: '1px solid rgba(72,144,247,0.12)',
         borderLeft: `2px solid ${prog.accent}`,
         transition: 'box-shadow 0.25s ease',
@@ -195,11 +195,11 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
 
         <h3
           className="text-[15px] font-semibold leading-snug mb-2"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', letterSpacing: '-0.01em' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}
         >
           {prog.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
           {prog.tagline}
         </p>
       </div>
@@ -213,7 +213,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
                 className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
                 style={{ background: prog.accent, opacity: 0.55 }}
               />
-              <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item}</span>
+              <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item}</span>
             </li>
           ))}
         </ul>
@@ -222,9 +222,9 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           href={prog.href}
           className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
           style={{
-            background: '#ffffff',
+            background: 'var(--bg)',
             border: '1px solid rgba(72,144,247,0.1)',
-            color: '#0a0e1a',
+            color: 'var(--text-primary)',
           }}
           onMouseEnter={e => {
             const el = e.currentTarget as HTMLElement
@@ -234,9 +234,9 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           }}
           onMouseLeave={e => {
             const el = e.currentTarget as HTMLElement
-            el.style.background = 'rgba(255,255,255,0.02)'
-            el.style.borderColor = 'rgba(255,255,255,0.07)'
-            el.style.color = '#4890f7'
+            el.style.background = 'var(--bg)'
+            el.style.borderColor = 'rgba(72,144,247,0.1)'
+            el.style.color = 'var(--text-primary)'
           }}
         >
           Check eligibility
@@ -261,7 +261,7 @@ export default function ProgramsSection() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical programs"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -292,7 +292,7 @@ export default function ProgramsSection() {
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Six programs.{' '}
-              <span style={{ color: 'rgba(10,14,26,0.2)' }}>
+              <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
                 One clinic.
               </span>
             </motion.h2>
@@ -302,7 +302,7 @@ export default function ProgramsSection() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
           </motion.p>
@@ -326,7 +326,7 @@ export default function ProgramsSection() {
           style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}
         >
           <div>
-            <p className="text-sm font-medium mb-0.5" style={{ color: '#0a0e1a' }}>
+            <p className="text-sm font-medium mb-0.5" style={{ color: 'var(--text-primary)' }}>
               Not sure which program fits?
             </p>
             <p className="text-xs" style={{ color: '#4890f7' }}>

@@ -3,20 +3,50 @@
 @tailwind utilities;
 
 :root {
-  --bg:             #ffffff;
-  --surface:        #f8f9ff;
-  --elevated:       #ffffff;
-  --elevated-high:  #f0f5ff;
-  --blue:           #4890f7;
-  --blue-dark:      #2563eb;
-  --blue-light:     #6ba8ff;
-  --border:         rgba(72,144,247,0.14);
-  --text-primary:   #0a0e1a;
-  --text-secondary: #0a0e1a;
-  --text-muted:     #4890f7;
-  --teal:           #4890f7;
-  --gold:           #4890f7;
-  --apex-blue:      #4890f7;
+  --bg:               #ffffff;
+  --surface:          #f8f9ff;
+  --elevated:         #ffffff;
+  --elevated-high:    #f0f5ff;
+  --surface-muted:    #f1f5fb;
+  --card-bg:          #ffffff;
+  --input-bg:         #ffffff;
+  --blue:             #4890f7;
+  --blue-dark:        #2563eb;
+  --blue-light:       #6ba8ff;
+  --border:           rgba(72,144,247,0.14);
+  --border-strong:    rgba(72,144,247,0.25);
+  --text-primary:     #0a0e1a;
+  --text-secondary:   #0a0e1a;
+  --text-muted:       #4890f7;
+  --text-primary-rgb: 10, 14, 26;
+  --teal:             #4890f7;
+  --gold:             #4890f7;
+  --apex-blue:        #4890f7;
+  --shadow-card:      rgba(72,144,247,0.08);
+  --nav-bg:           rgba(255,255,255,0.92);
+  --nav-bg-scrolled:  rgba(255,255,255,0.97);
+  --nav-border:       rgba(72,144,247,0.06);
+  --nav-border-scrolled: rgba(72,144,247,0.12);
+}
+
+[data-theme="dark"] {
+  --bg:               #070a0d;
+  --surface:          #0d1117;
+  --elevated:         #111820;
+  --elevated-high:    #1a2234;
+  --surface-muted:    #111820;
+  --card-bg:          #111820;
+  --input-bg:         #0d1117;
+  --border:           rgba(72,144,247,0.18);
+  --border-strong:    rgba(72,144,247,0.32);
+  --text-primary:     #e8edf5;
+  --text-secondary:   #c5cdd6;
+  --text-primary-rgb: 232, 237, 245;
+  --shadow-card:      rgba(0,0,0,0.35);
+  --nav-bg:           rgba(7,10,13,0.92);
+  --nav-bg-scrolled:  rgba(7,10,13,0.97);
+  --nav-border:       rgba(72,144,247,0.1);
+  --nav-border-scrolled: rgba(72,144,247,0.18);
 }
 
 @layer base {
@@ -27,12 +57,13 @@
   }
 
   body {
-    background-color: #ffffff;
-    color: #0a0e1a;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::-webkit-scrollbar { width: 3px; }
-  ::-webkit-scrollbar-track { background: #f0f5ff; }
+  ::-webkit-scrollbar-track { background: var(--elevated-high); }
   ::-webkit-scrollbar-thumb { background: #c0d4f8; border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: #4890f7; }
 
@@ -44,6 +75,9 @@
   .dot-grid {
     background-image: radial-gradient(circle, rgba(72,144,247,0.07) 1px, transparent 1px);
     background-size: 32px 32px;
+  }
+  [data-theme="dark"] .dot-grid {
+    background-image: radial-gradient(circle, rgba(72,144,247,0.13) 1px, transparent 1px);
   }
 
   .line-grid {
@@ -88,19 +122,19 @@
     font-weight: 700;
     letter-spacing: -0.028em;
     line-height: 1.04;
-    color: #0a0e1a;
+    color: var(--text-primary);
   }
 
   .apex-card {
-    background: #ffffff;
+    background: var(--card-bg);
     border-radius: 12px;
-    border: 1px solid rgba(72,144,247,0.14);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease, background 0.3s ease;
   }
 
   .apex-card:hover {
     border-color: rgba(72,144,247,0.3);
-    box-shadow: 0 8px 32px rgba(72,144,247,0.1);
+    box-shadow: 0 8px 32px var(--shadow-card);
     transform: translateY(-2px);
   }
 
@@ -172,6 +206,29 @@
     background: #f0f5ff;
     box-shadow: 0 4px 24px rgba(0,0,0,0.12);
     transform: translateY(-1px);
+  }
+
+  /* Ghost — outline style on any background */
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: transparent;
+    border: 1.5px solid var(--border-strong);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .btn-ghost:hover {
+    border-color: #4890f7;
+    color: #4890f7;
+    background: rgba(72,144,247,0.05);
   }
 
   /* Legacy */

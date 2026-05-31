@@ -88,7 +88,7 @@ export default function ProgramsGrid() {
     <section
       id="programs"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f8f9ff' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical programs"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -111,7 +111,7 @@ export default function ProgramsGrid() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="text-3xl md:text-4xl font-bold tracking-tight max-w-xl"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: 1.1 }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: 1.1 }}
           >
             Pick your program.{' '}
             <span className="text-teal-gradient">Start with bloods.</span>
@@ -143,11 +143,11 @@ export default function ProgramsGrid() {
               {/* Name + description */}
               <h3
                 className="text-base font-bold mb-2"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
               >
                 {program.name}
               </h3>
-              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: '#0a0e1a' }}>
+              <p className="text-sm leading-relaxed flex-1 mb-6" style={{ color: 'var(--text-primary)' }}>
                 {program.description}
               </p>
 
@@ -168,9 +168,9 @@ export default function ProgramsGrid() {
                   href={program.consultHref}
                   className="w-full text-center inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-sm text-xs font-semibold tracking-wide transition-all duration-150"
                   style={{
-                    background: '#ffffff',
+                    background: 'var(--bg)',
                     border: '1px solid rgba(72,144,247,0.1)',
-                    color: '#0a0e1a',
+                    color: 'var(--text-primary)',
                   }}
                 >
                   Book Consultation

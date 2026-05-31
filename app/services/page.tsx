@@ -189,7 +189,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
       transition={{ duration: 0.55, delay: i * 0.07, ease }}
       className="group flex flex-col rounded-xl overflow-hidden"
       style={{
-        background: '#ffffff',
+        background: 'var(--bg)',
         border: '1px solid rgba(72,144,247,0.14)',
         borderLeft: `2px solid ${p.accent}`,
         opacity: isComingSoon ? 0.75 : 1,
@@ -234,7 +234,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         >
           {p.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
           {p.tagline}
         </p>
       </div>
@@ -245,7 +245,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           {p.bullets.map((b, j) => (
             <li key={j} className="flex items-start gap-2">
               <div className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: p.accent, opacity: 0.6 }} />
-              <span className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{b}</span>
+              <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{b}</span>
             </li>
           ))}
         </ul>
@@ -254,7 +254,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         {isComingSoon ? (
           <div
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase"
-            style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(72,144,247,0.14)', color: '#4890f7', cursor: 'default' }}
+            style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.14)', color: '#4890f7', cursor: 'default' }}
           >
             Joining soon
             <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -266,7 +266,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           <Link
             href={p.intakeHref}
             className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
-            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.14)', color: '#0a0e1a' }}
+            style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.14)', color: 'var(--text-primary)' }}
             onMouseEnter={e => {
               const el = e.currentTarget as HTMLElement
               el.style.background = p.accentBg
@@ -309,7 +309,7 @@ export default function ServicesPage() {
         {/* ── Hero ──────────────────────────────────────────────── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
+          style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="Clinical programs"
         >
           <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
@@ -339,7 +339,7 @@ export default function ServicesPage() {
                 fontWeight: 700,
                 lineHeight: 1.06,
                 letterSpacing: '-0.025em',
-                color: '#0a0e1a',
+                color: 'var(--text-primary)',
                 maxWidth: '720px',
                 marginBottom: '1.25rem',
               }}
@@ -360,7 +360,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2, ease }}
-              style={{ color: '#0a0e1a', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
             >
               Six doctor-led protocols — each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
             </motion.p>
@@ -385,7 +385,7 @@ export default function ServicesPage() {
         {/* ── Program Cards ─────────────────────────────────────── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#f8f9ff', paddingTop: '64px', paddingBottom: '48px' }}
+          style={{ backgroundColor: 'var(--surface)', paddingTop: '64px', paddingBottom: '48px' }}
           aria-label="Programs"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -407,7 +407,7 @@ export default function ServicesPage() {
               style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
               <div>
-                <p className="text-sm font-medium mb-0.5" style={{ color: '#0a0e1a' }}>
+                <p className="text-sm font-medium mb-0.5" style={{ color: 'var(--text-primary)' }}>
                   Not sure which program fits?
                 </p>
                 <p className="text-xs" style={{ color: '#4890f7' }}>
@@ -449,7 +449,7 @@ export default function ServicesPage() {
         <section
           ref={ctaRef}
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', paddingTop: '80px', paddingBottom: '100px' }}
+          style={{ backgroundColor: 'var(--bg)', paddingTop: '80px', paddingBottom: '100px' }}
           aria-label="Get started"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -479,7 +479,7 @@ export default function ServicesPage() {
                 fontWeight: 700,
                 lineHeight: 1.08,
                 letterSpacing: '-0.02em',
-                color: '#0a0e1a',
+                color: 'var(--text-primary)',
                 marginBottom: '1.5rem',
               }}
             >
@@ -498,7 +498,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 16 }}
               animate={ctaInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
-              style={{ color: '#0a0e1a', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
+              style={{ color: 'var(--text-primary)', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
             >
               Doctor-led assessment. Advanced diagnostics. A protocol built around your biology — not a generic plan.
             </motion.p>
@@ -520,9 +520,9 @@ export default function ServicesPage() {
               <Link
                 href="/intake/discovery"
                 className="text-sm font-medium transition-colors duration-150"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)' }}
                 onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#0a0e1a' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
               >
                 Book a free discovery call
               </Link>

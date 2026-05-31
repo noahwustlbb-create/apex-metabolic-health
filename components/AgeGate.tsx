@@ -54,7 +54,7 @@ export default function AgeGate() {
             className="relative z-10 flex flex-col items-center text-center px-8 py-12 mx-4"
             style={{
               maxWidth: '480px',
-              background: '#f0f5ff',
+              background: 'var(--elevated-high)',
               border: '1px solid #1A3F7A',
               borderRadius: '12px',
               boxShadow: '0 32px 80px rgba(0,0,0,0.6)',
@@ -78,14 +78,14 @@ export default function AgeGate() {
 
             <h2
               className="text-2xl md:text-3xl font-bold tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.1' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.1' }}
             >
               This website contains medical health information
             </h2>
 
-            <p className="text-sm leading-relaxed mb-8" style={{ color: '#0a0e1a' }}>
+            <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text-primary)' }}>
               Apex Metabolic Health provides clinical health services for adults. By entering this
-              site you confirm that you are <strong style={{ color: '#0a0e1a' }}>18 years of age or older</strong> and
+              site you confirm that you are <strong style={{ color: 'var(--text-primary)' }}>18 years of age or older</strong> and
               consent to viewing medical health information.
             </p>
 
@@ -105,7 +105,7 @@ export default function AgeGate() {
               </button>
             </div>
 
-            <p className="text-xs mt-6 leading-relaxed" style={{ color: '#0a0e1a' }}>
+            <p className="text-xs mt-6 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
               This site is intended for Australian adults seeking medical health information only.
               It does not constitute medical advice.
             </p>

@@ -44,7 +44,7 @@ export default function OurApproachPage() {
         {/* ── 1. Hero ── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', paddingTop: '150px', paddingBottom: '100px' }}
+          style={{ backgroundColor: 'var(--bg)', paddingTop: '150px', paddingBottom: '100px' }}
           aria-label="Our approach hero"
         >
           <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
@@ -56,7 +56,7 @@ export default function OurApproachPage() {
               The Apex Method
             </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 28 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.75, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: '#0a0e1a', maxWidth: '780px', marginBottom: '1.25rem' }}>
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: 'var(--text-primary)', maxWidth: '780px', marginBottom: '1.25rem' }}>
               We work by system.
               <br />
               <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
@@ -65,7 +65,7 @@ export default function OurApproachPage() {
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#0a0e1a', maxWidth: '520px', marginBottom: '2rem' }}>
+              style={{ color: 'var(--text-primary)', maxWidth: '520px', marginBottom: '2rem' }}>
               Every clinical decision is guided by data, context, and a doctor who takes the time to understand the full picture — not the fastest path to a script.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
@@ -90,7 +90,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 2. The Problem ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="The problem with standard healthcare">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="The problem with standard healthcare">
           <div className="glow-rule" aria-hidden="true" />
           <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden="true" />
           <div className="container-tight relative z-10">
@@ -98,14 +98,14 @@ export default function OurApproachPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <FadeIn>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}>
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}>
                   Most healthcare is{' '}
-                  <span style={{ color: '#0a0e1a' }}>reactive.</span>
+                  <span style={{ color: 'var(--text-primary)' }}>reactive.</span>
                 </h2>
-                <p className="text-lg leading-relaxed mb-5" style={{ color: '#0a0e1a' }}>
+                <p className="text-lg leading-relaxed mb-5" style={{ color: 'var(--text-primary)' }}>
                   Short consults. Surface-level assessments. One-size-fits-all recommendations.
                 </p>
-                <p className="text-base leading-relaxed" style={{ color: '#0a0e1a' }}>
+                <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                   That&apos;s not how high-performing individuals operate — and it&apos;s not how we practise.
                 </p>
               </FadeIn>
@@ -121,8 +121,8 @@ export default function OurApproachPage() {
                   ].map((row, i) => (
                     <div key={i} className="flex items-center justify-between gap-4 px-5 py-3.5 rounded-lg"
                       style={{
-                        background: row.negative ? 'rgba(255,255,255,0.02)' : 'rgba(72,144,247,0.05)',
-                        border: `1px solid ${row.negative ? 'rgba(255,255,255,0.05)' : 'rgba(72,144,247,0.15)'}`,
+                        background: row.negative ? 'var(--surface)' : 'rgba(72,144,247,0.05)',
+                        border: `1px solid ${row.negative ? 'var(--elevated)' : 'rgba(72,144,247,0.15)'}`,
                       }}>
                       <span className="text-[10px] font-semibold tracking-[0.15em] uppercase flex-shrink-0"
                         style={{ color: row.negative ? '#0a0e1a' : '#4890f7' }}>
@@ -140,7 +140,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 3. How We Assess (merged: approach + consultation) ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="How we assess">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="How we assess">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(72,144,247,0.04) 0%, transparent 60%)' }} />
@@ -152,11 +152,11 @@ export default function OurApproachPage() {
                 <FadeIn>
                   <p className="label mb-5">How We Consult</p>
                   <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}>
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}>
                     Time, context,
                     <br />and clarity.
                   </h2>
-                  <p className="text-base leading-relaxed mb-8" style={{ color: '#0a0e1a', maxWidth: '400px' }}>
+                  <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', maxWidth: '400px' }}>
                     Your health is complex. Understanding it properly requires time, full context, and clinical precision. We don&apos;t rush the picture.
                   </p>
                 </FadeIn>
@@ -168,14 +168,14 @@ export default function OurApproachPage() {
                       { heading: 'Nothing assumed, nothing missed', body: 'Sleep, stress, lifestyle, and recovery are part of the clinical picture. We ask the questions others skip.' },
                     ].map((item, i) => (
                       <div key={item.heading} className="flex gap-4 p-5 rounded-xl"
-                        style={{ background: '#ffffff', border: '1px solid rgba(255,255,255,0.07)' }}>
+                        style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.12)' }}>
                         <div className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 text-[11px] font-bold"
                           style={{ background: 'rgba(72,144,247,0.08)', color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>
                           {String(i + 1).padStart(2, '0')}
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{item.heading}</h4>
-                          <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.body}</p>
+                          <h4 className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{item.heading}</h4>
+                          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.body}</p>
                         </div>
                       </div>
                     ))}
@@ -227,13 +227,13 @@ export default function OurApproachPage() {
                     },
                   ].map((item) => (
                     <div key={item.title} className="flex flex-col gap-3 p-5 rounded-xl"
-                      style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}>
+                      style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}>
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                         style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.15)', color: '#4890f7' }}>
                         {item.icon}
                       </div>
                       <h3 className="text-xs font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.title}</h3>
-                      <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item.desc}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -243,7 +243,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 4. Systems interaction ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="Systems-level assessment">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Systems-level assessment">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.04) 0%, transparent 60%)' }} />
@@ -252,10 +252,10 @@ export default function OurApproachPage() {
               <FadeIn>
                 <p className="label mb-5">The Full Picture</p>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}>
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}>
                   We assess how key systems interact.
                 </h2>
-                <p className="text-lg leading-relaxed mb-10" style={{ color: '#0a0e1a', maxWidth: '540px' }}>
+                <p className="text-lg leading-relaxed mb-10" style={{ color: 'var(--text-primary)', maxWidth: '540px' }}>
                   Symptoms are downstream of systems. Sleep, hormones, metabolic health, and stress don&apos;t operate in isolation — and we don&apos;t assess them that way.
                 </p>
               </FadeIn>
@@ -273,9 +273,9 @@ export default function OurApproachPage() {
                 ].map((system, i) => (
                   <FadeIn key={system} delay={i * 0.04}>
                     <div className="flex items-center gap-2.5 px-4 py-3 rounded-lg"
-                      style={{ background: '#ffffff', border: '1px solid rgba(255,255,255,0.06)' }}>
+                      style={{ background: 'var(--bg)', border: '1px solid rgba(255,255,255,0.06)' }}>
                       <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#4890f7' }} aria-hidden="true" />
-                      <span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>{system}</span>
+                      <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{system}</span>
                     </div>
                   </FadeIn>
                 ))}
@@ -285,7 +285,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 5. Ongoing review — compact strip ── */}
-        <section className="relative overflow-hidden" style={{ backgroundColor: '#ffffff', paddingTop: '60px', paddingBottom: '60px' }}
+        <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', paddingTop: '60px', paddingBottom: '60px' }}
           aria-label="Ongoing review">
           <div className="glow-rule" aria-hidden="true" />
           <div className="container-tight relative z-10">
@@ -299,7 +299,7 @@ export default function OurApproachPage() {
                   <div key={item.label} className="px-7 py-6"
                     style={{ background: i === 1 ? '#111111' : '#111111', borderRight: i < 2 ? '1px solid #1E1E1E' : 'none' }}>
                     <p className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.label}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{item.desc}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.desc}</p>
                   </div>
                 ))}
               </div>
@@ -308,7 +308,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 6. Trust close ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#f8f9ff' }} aria-label="Authority close">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Authority close">
           <div className="glow-rule" aria-hidden="true" />
           <div className="absolute inset-0 dot-grid opacity-[0.1]" aria-hidden="true" />
           <div className="container-tight relative z-10">
@@ -319,11 +319,11 @@ export default function OurApproachPage() {
                 { headline: 'Built Around You.', body: 'As your results change, so does your care. We don\'t set and forget — we track, refine, and stay ahead.' },
               ].map((item, i) => (
                 <FadeIn key={item.headline} delay={i * 0.1}>
-                  <div className="p-8 md:p-10 h-full flex flex-col" style={{ background: '#f8f9ff' }}>
+                  <div className="p-8 md:p-10 h-full flex flex-col" style={{ background: 'var(--surface)' }}>
                     <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>
                       {item.headline}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item.body}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.body}</p>
                   </div>
                 </FadeIn>
               ))}
@@ -332,13 +332,13 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 7. CTA ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Start assessment">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Start assessment">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
           <div className="container-tight relative z-10 text-center">
             <FadeIn>
-              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: '#0a0e1a', marginBottom: '1rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '1rem' }}>
                 The standard you expected.
                 <br />
                 <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>

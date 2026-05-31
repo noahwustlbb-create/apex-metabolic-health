@@ -11,7 +11,7 @@ const CARDS = [
     number: '01',
     label: 'Foundation',
     title: 'Blood Panels',
-    price: 'From $73.66',
+    price: 'From $99',
     priceNote: 'program-specific pathology',
     accent: '#4890f7',
     accentBg: 'rgba(72,144,247,0.06)',
@@ -80,7 +80,7 @@ export default function PricingSnapshot() {
     <section
       id="pricing"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Transparent pricing"
     >
       <div className="warm-rule" aria-hidden="true" />
@@ -109,7 +109,7 @@ export default function PricingSnapshot() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
           >
             Three components.{' '}
-            <span style={{ color: 'rgba(10,14,26,0.2)' }}>
+            <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
               That&apos;s it.
             </span>
           </motion.h2>
@@ -118,7 +118,7 @@ export default function PricingSnapshot() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-base leading-relaxed max-w-lg"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
           </motion.p>
@@ -136,7 +136,7 @@ export default function PricingSnapshot() {
               transition={{ duration: 0.55, delay: i * 0.1, ease }}
               className="flex flex-col rounded-2xl overflow-hidden"
               style={{
-                background: '#ffffff',
+                background: 'var(--bg)',
                 border: card.featured
                   ? '1px solid rgba(72,144,247,0.25)'
                   : '1px solid rgba(72,144,247,0.1)',
@@ -186,7 +186,7 @@ export default function PricingSnapshot() {
 
                 <h3
                   className="text-lg font-semibold mb-3"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                 >
                   {card.title}
                 </h3>
@@ -199,13 +199,13 @@ export default function PricingSnapshot() {
                     >
                       {card.price}
                     </span>
-                    <span className="text-xs" style={{ color: '#0a0e1a' }}>{card.priceNote}</span>
+                    <span className="text-xs" style={{ color: 'var(--text-primary)' }}>{card.priceNote}</span>
                   </div>
                   {card.price2 && (
                     <div className="flex items-baseline gap-1.5">
                       <span
                         className="text-lg font-bold"
-                        style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                        style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                       >
                         {card.price2}
                       </span>
@@ -221,7 +221,7 @@ export default function PricingSnapshot() {
               </div>
 
               <div className="flex flex-col flex-1 px-6 py-5">
-                <p className="text-xs leading-relaxed mb-4" style={{ color: '#0a0e1a' }}>
+                <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--text-primary)' }}>
                   {card.body}
                 </p>
 

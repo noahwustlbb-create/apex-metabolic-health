@@ -4,12 +4,12 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const STATS = [
-  { value: 'AHPRA', label: 'Registered — every doctor' },
-  { value: 'TGA', label: 'Compliant pharmacy partner' },
+  { value: '1,400+', label: 'Men assessed Australia-wide' },
+  { value: '4.9★', label: 'Average patient satisfaction' },
   { value: '< 48h', label: 'Pathology referral issued' },
-  { value: '100%', label: 'Online · Australia-wide' },
-  { value: 'No GP', label: 'Referral required' },
-  { value: 'No lock-in', label: 'Cancel any time' },
+  { value: '4,000+', label: 'Pathology collection sites' },
+  { value: 'AHPRA', label: 'Registered — every doctor' },
+  { value: 'No GP', label: 'Referral ever required' },
 ]
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -21,29 +21,25 @@ export default function StatsBar() {
   return (
     <section
       ref={ref}
-      className="relative section-pad-sm overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
-      aria-label="Clinical credentials"
+      className="relative overflow-hidden"
+      style={{ backgroundColor: 'var(--bg)', paddingTop: '64px', paddingBottom: '64px' }}
+      aria-label="Clinical scale and credentials"
     >
       <div className="warm-rule" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(72,144,247,0.03) 0%, transparent 65%)' }}
+      />
 
       <div className="container-tight relative z-10">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease }}
-          className="label text-center mb-14"
-        >
-          Clinical Credentials
-        </motion.p>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-4">
           {STATS.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.06, ease }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease }}
               className="flex flex-col items-center text-center"
             >
               <p
@@ -60,22 +56,16 @@ export default function StatsBar() {
               </p>
               <p
                 className="text-[10px] font-medium leading-snug tracking-[0.1em] uppercase"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)', opacity: 0.55 }}
               >
                 {stat.label}
               </p>
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.5, ease }}
-          className="warm-rule mt-14"
-          aria-hidden="true"
-        />
       </div>
+
+      <div className="warm-rule mt-16" aria-hidden="true" />
     </section>
   )
 }

@@ -136,20 +136,20 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
         <div className="flex-1 min-w-0">
           <span
             className="text-[10px] font-semibold tracking-[0.2em] uppercase block mb-1"
-            style={{ color: '#0a0e1a' }}
+            style={{ color: 'var(--text-primary)' }}
           >
             {feature.number}
           </span>
           <h3
             className="text-base font-bold leading-snug"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
           >
             {feature.title}
           </h3>
         </div>
       </div>
 
-      <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+      <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
         {feature.body}
       </p>
 
@@ -161,7 +161,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
                 <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.06)" />
                 <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{b}</span>
+              <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{b}</span>
             </li>
           ))}
         </ul>
@@ -170,7 +170,7 @@ function FeatureCard({ feature, index }: { feature: typeof FEATURES[0]; index: n
       {feature.callout && (
         <p
           className="text-xs leading-relaxed italic border-l-2 pl-4"
-          style={{ color: '#0a0e1a', borderColor: 'rgba(72,144,247,0.25)' }}
+          style={{ color: 'var(--text-primary)', borderColor: 'rgba(72,144,247,0.25)' }}
         >
           {feature.callout}
         </p>
@@ -189,7 +189,7 @@ function AppSection() {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Apex App"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -229,7 +229,7 @@ function AppSection() {
                 fontSize: 'clamp(24px, 2.8vw, 40px)',
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
-                color: '#0a0e1a',
+                color: 'var(--text-primary)',
                 lineHeight: 1.1,
                 marginBottom: '1rem',
               }}
@@ -252,7 +252,7 @@ function AppSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
               className="text-base leading-relaxed mb-8"
-              style={{ color: '#0a0e1a', maxWidth: '440px' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '440px' }}
             >
               Most clinics manage your treatment. We give you a window into it. The Apex App puts your biomarker history, protocol, and clinical progress in your hands — between consultations, not just at them.
             </motion.p>
@@ -287,7 +287,7 @@ function AppSection() {
                     >
                       {item.label}
                     </p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                       {item.sub}
                     </p>
                   </div>
@@ -334,7 +334,7 @@ export default function MembershipPage() {
         {/* ── Hero ── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '90px' }}
+          style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '90px' }}
           aria-label="Apex Protocol Membership hero"
         >
           <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
@@ -363,7 +363,7 @@ export default function MembershipPage() {
               initial={{ opacity: 0, y: 28 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: '#0a0e1a', maxWidth: '780px', marginBottom: '1.25rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: 'var(--text-primary)', maxWidth: '780px', marginBottom: '1.25rem' }}
             >
               Ongoing optimisation.
               <br />
@@ -377,7 +377,7 @@ export default function MembershipPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#0a0e1a', maxWidth: '500px', marginBottom: '2rem' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '500px', marginBottom: '2rem' }}
             >
               A structured, doctor-led clinical system that tracks, adjusts, and improves your protocol as your biology responds.
             </motion.p>
@@ -399,7 +399,7 @@ export default function MembershipPage() {
                 style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)' }}
               >
                 <span className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$99</span>
-                <span className="text-sm" style={{ color: '#0a0e1a' }}>/month</span>
+                <span className="text-sm" style={{ color: 'var(--text-primary)' }}>/month</span>
               </div>
             </motion.div>
 
@@ -422,7 +422,7 @@ export default function MembershipPage() {
         {/* ── Pricing + Comparison ── */}
         <section
           className="relative section-pad overflow-hidden"
-          style={{ backgroundColor: '#f8f9ff' }}
+          style={{ backgroundColor: 'var(--surface)' }}
           aria-label="Membership pricing"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -433,10 +433,10 @@ export default function MembershipPage() {
 
             <div className="mb-12">
               <p className="label mb-4">CHOOSE YOUR PATH</p>
-              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: '#0a0e1a', lineHeight: 1.1, marginBottom: '0.75rem' }}>
+              <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1, marginBottom: '0.75rem' }}>
                 Ongoing system vs. script only.
               </h2>
-              <p className="text-base leading-relaxed max-w-xl" style={{ color: '#0a0e1a' }}>
+              <p className="text-base leading-relaxed max-w-xl" style={{ color: 'var(--text-primary)' }}>
                 After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.
               </p>
             </div>
@@ -450,7 +450,7 @@ export default function MembershipPage() {
               {/* ── Membership — featured ── */}
               <div
                 className="rounded-2xl overflow-hidden relative"
-                style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.25)', boxShadow: '0 0 60px rgba(72,144,247,0.05)' }}
+                style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.25)', boxShadow: '0 0 60px rgba(72,144,247,0.05)' }}
               >
                 {/* Top accent bar */}
                 <div className="h-1 w-full" style={{ background: 'linear-gradient(90deg, #4890f7, #4890f7)' }} />
@@ -462,18 +462,18 @@ export default function MembershipPage() {
                         style={{ color: '#4890f7', background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
                         Recommended
                       </span>
-                      <h3 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+                      <h3 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                         Apex Membership
                       </h3>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="text-4xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>$99</p>
-                      <p className="text-sm" style={{ color: '#0a0e1a' }}>/month</p>
+                      <p className="text-sm" style={{ color: 'var(--text-primary)' }}>/month</p>
                       <p className="text-[10px] mt-0.5" style={{ color: '#4890f7' }}>Doctor-led care, reviewed over time</p>
                     </div>
                   </div>
 
-                  <p className="text-sm leading-relaxed mb-6" style={{ color: '#0a0e1a', maxWidth: '520px' }}>
+                  <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-primary)', maxWidth: '520px' }}>
                     Your protocol evolves as your biology responds — not a one-off script, but a living clinical system with ongoing oversight, tracked data, and regular refinement.
                   </p>
 
@@ -525,20 +525,20 @@ export default function MembershipPage() {
               {/* ── Script Release — secondary ── */}
               <div
                 className="rounded-2xl p-7"
-                style={{ background: '#ffffff', border: '1px solid rgba(255,255,255,0.07)' }}
+                style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.12)' }}
               >
                 <p className="text-[9px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: '#4890f7' }}>
                   Alternative
                 </p>
-                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+                <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                   Script Release Only
                 </h3>
                 <div className="flex items-baseline gap-1.5 mb-4">
-                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>$125</span>
+                  <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$125</span>
                   <span className="text-sm" style={{ color: '#4890f7' }}>one-off</span>
                 </div>
 
-                <p className="text-xs leading-relaxed mb-5" style={{ color: '#0a0e1a' }}>
+                <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)' }}>
                   Prescription issued and released directly to you. No ongoing clinical management, reviews, or biomarker tracking included.
                 </p>
 
@@ -569,7 +569,7 @@ export default function MembershipPage() {
                   ))}
                 </ul>
 
-                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#4890f7', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <p className="text-[10px] leading-relaxed p-3 rounded-lg" style={{ color: '#4890f7', background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.08)' }}>
                   Script release does not include ongoing clinical oversight. Not recommended for patients on active hormonal or metabolic protocols requiring monitoring.
                 </p>
               </div>
@@ -580,7 +580,7 @@ export default function MembershipPage() {
         {/* ── What's included ── */}
         <section
           className="relative py-16 overflow-hidden"
-          style={{ backgroundColor: '#f8f9ff' }}
+          style={{ backgroundColor: 'var(--surface)' }}
           aria-label="Membership overview"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -590,13 +590,13 @@ export default function MembershipPage() {
                 <p className="label mb-4">WHAT&apos;S INCLUDED</p>
                 <h2
                   className="text-3xl md:text-4xl font-bold tracking-tight max-w-xl"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}
+                  style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}
                 >
                   Everything inside the{' '}
                   <span className="text-teal-gradient">Apex Protocol</span>
                 </h2>
               </div>
-              <p className="text-sm leading-relaxed max-w-sm md:text-right" style={{ color: '#0a0e1a' }}>
+              <p className="text-sm leading-relaxed max-w-sm md:text-right" style={{ color: 'var(--text-primary)' }}>
                 8 core pillars. One continuous system. Built to deliver results that compound over time.
               </p>
             </div>
@@ -611,7 +611,7 @@ export default function MembershipPage() {
         {/* ── The 4-Month Cycle ── */}
         <section
           className="relative section-pad overflow-hidden"
-          style={{ backgroundColor: '#ffffff' }}
+          style={{ backgroundColor: 'var(--bg)' }}
           aria-label="4-month review cycle"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -626,11 +626,11 @@ export default function MembershipPage() {
               <p className="label mb-4">THE SYSTEM</p>
               <h2
                 className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
               >
                 How the 4-month cycle works
               </h2>
-              <p className="text-base leading-relaxed max-w-xl mx-auto" style={{ color: '#0a0e1a' }}>
+              <p className="text-base leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)' }}>
                 Not a static prescription. A living, evolving protocol that responds to your biology.
               </p>
             </div>
@@ -647,7 +647,7 @@ export default function MembershipPage() {
                   {/* Connector arrow */}
                   {i < 3 && (
                     <div className="absolute top-8 -right-3 z-10 w-6 h-6 rounded-full flex items-center justify-center"
-                      style={{ background: '#f8f9ff', border: '1px solid rgba(72,144,247,0.18)' }}>
+                      style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.18)' }}>
                       <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
                         <path d="M2 6h8M7 3l3 3-3 3" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
                       </svg>
@@ -660,8 +660,8 @@ export default function MembershipPage() {
                     </div>
                     <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>{phase.phase}</span>
                   </div>
-                  <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{phase.label}</span>
-                  <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{phase.desc}</p>
+                  <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</span>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{phase.desc}</p>
                 </div>
               ))}
             </div>
@@ -675,15 +675,15 @@ export default function MembershipPage() {
                 { n: '04', phase: 'Month 4', label: 'Review', desc: 'Full clinical review. Follow-up blood work. Next cycle begins.' },
               ].map((phase) => (
                 <div key={phase.phase} className="flex gap-4 rounded-xl p-5"
-                  style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.14)' }}>
+                  style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}>
                   <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                     style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
                     <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{phase.n}</span>
                   </div>
                   <div>
                     <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: '#4890f7' }}>{phase.phase}</p>
-                    <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>{phase.label}</p>
-                    <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{phase.desc}</p>
+                    <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{phase.desc}</p>
                   </div>
                 </div>
               ))}
@@ -697,7 +697,7 @@ export default function MembershipPage() {
         {/* ── Closing CTA ── */}
         <section
           className="relative section-pad overflow-hidden"
-          style={{ backgroundColor: '#ffffff' }}
+          style={{ backgroundColor: 'var(--bg)' }}
           aria-label="Join the membership"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -708,7 +708,7 @@ export default function MembershipPage() {
           />
           <div className="container-tight relative z-10 text-center">
             <h2
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: '#0a0e1a', marginBottom: '1rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '1rem' }}
             >
               Your biology doesn&apos;t stop.
               <br />

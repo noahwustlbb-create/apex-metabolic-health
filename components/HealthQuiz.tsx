@@ -17,7 +17,7 @@ const PROGRAMS: Record<PK, { name: string; desc: string; href: string; cta: stri
   skin:       { name: 'Skin Regeneration',           color: '#c9a84c', href: '/intake/general-consult',  cta: 'Begin Skin Assessment',        desc: 'Clinical skin protocols combining advanced diagnostics with evidence-based regenerative treatments for lasting skin quality improvement.' },
   injury:     { name: 'Injury Repair & Recovery',    color: '#1a9e8f', href: '/intake/general-consult',  cta: 'Begin Injury Assessment',      desc: 'Targeted repair protocols for chronic injuries, joint issues, and musculoskeletal conditions that have not responded to standard treatment.' },
   bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/order-bloods',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
-  general:    { name: 'General Telehealth',          color: '#0a0e1a', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
+  general:    { name: 'General Telehealth',          color: 'var(--text-primary)', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
 }
 
 // ─── Scoring ──────────────────────────────────────────────────────────────────
@@ -135,8 +135,8 @@ function Card({ children, selected, onClick }: { children: React.ReactNode; sele
       onClick={onClick}
       className="w-full text-left rounded-2xl px-6 py-5 transition-all duration-200"
       style={{
-        background: selected ? 'rgba(72,144,247,0.06)' : 'rgba(255,255,255,0.025)',
-        border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
+        background: selected ? 'rgba(72,144,247,0.06)' : 'var(--surface)',
+        border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
         boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.1), inset 0 0 20px rgba(72,144,247,0.04)' : 'none',
         transform: selected ? 'translateY(-1px)' : 'none',
       }}
@@ -293,8 +293,8 @@ function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; o
             <button key={g.id} onClick={() => toggle(g.id)}
               className="text-left rounded-2xl px-6 py-5 transition-all duration-200 flex items-start gap-4"
               style={{
-                background: selected ? 'rgba(72,144,247,0.06)' : 'rgba(255,255,255,0.025)',
-                border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                background: selected ? 'rgba(72,144,247,0.06)' : 'var(--surface)',
+                border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
                 boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.1)' : 'none',
               }}
             >
@@ -412,9 +412,9 @@ function AgeStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; o
         {AGES.map(a => (
           <button key={a.id} onClick={() => onSelect(a.id, a.w)}
             className="rounded-2xl py-6 text-center font-bold text-xl transition-all duration-200"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', background: '#ffffff', border: '1px solid rgba(72,144,247,0.1)' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.1)' }}
             onMouseEnter={e => { e.currentTarget.style.border = '1px solid rgba(72,144,247,0.3)'; e.currentTarget.style.background = 'rgba(72,144,247,0.05)'; e.currentTarget.style.color = 'var(--teal)' }}
-            onMouseLeave={e => { e.currentTarget.style.border = '1px solid rgba(255,255,255,0.07)'; e.currentTarget.style.background = 'rgba(255,255,255,0.025)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+            onMouseLeave={e => { e.currentTarget.style.border = '1px solid rgba(72,144,247,0.12)'; e.currentTarget.style.background = 'var(--surface)'; e.currentTarget.style.color = 'var(--text-primary)' }}
           >
             {a.label}
           </button>
@@ -569,7 +569,7 @@ function Capture({ onSubmit, submitting, onBack }: {
   const valid = first.trim().length > 1 && email.includes('@') && email.includes('.') && mobile.trim().length >= 8
 
   const inputStyle = {
-    background: '#ffffff',
+    background: 'var(--bg)',
     border: '1px solid rgba(72,144,247,0.1)',
     color: 'var(--text-primary)',
     fontFamily: 'var(--font-inter)',
@@ -620,9 +620,9 @@ function Capture({ onSubmit, submitting, onBack }: {
           onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
           onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
         >
-          <option value="" style={{ background: '#f8f9ff', color: '#0a0e1a' }}>How did you hear about us? (optional)</option>
+          <option value="" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>How did you hear about us? (optional)</option>
           {REFERRAL_SOURCES.map(s => (
-            <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>
+            <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>
           ))}
         </select>
         <input type="text" placeholder="Referral or access code (optional)" value={referralCode}
@@ -731,7 +731,7 @@ function Results({ matches, firstName }: { matches: PK[]; firstName: string }) {
       )}
 
       <div className="mt-8 rounded-xl p-4 text-xs leading-relaxed"
-        style={{ background: '#ffffff', border: '1px solid rgba(72,144,247,0.08)', color: 'var(--text-muted)' }}>
+        style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.08)', color: 'var(--text-muted)' }}>
         <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Clinical note: </span>
         These recommendations are based on self-reported responses and are a guide only. Diagnosis and treatment require assessment by one of our AHPRA-registered practitioners.
       </div>

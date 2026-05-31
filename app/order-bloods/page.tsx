@@ -92,7 +92,7 @@ function PanelCard({
           {icon}
         </div>
         <div className="flex-1 min-w-0">
-          <h2 className="text-lg font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+          <h2 className="text-lg font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
             {title}
           </h2>
           <span className="text-[10px] font-semibold tracking-[0.18em] uppercase" style={{ color: '#4890f7' }}>
@@ -101,7 +101,7 @@ function PanelCard({
         </div>
         <div className="text-right flex-shrink-0">
           <p className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{price}</p>
-          <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: '#0a0e1a' }}>{priceNote}</p>
+          <p className="text-[10px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>{priceNote}</p>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ function PanelCard({
           {pricingContext.map((note) => (
             <div key={note} className="flex items-start gap-2">
               <span className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: '#4890f7', opacity: 0.6 }} />
-              <p className="text-[11px] leading-relaxed" style={{ color: '#0a0e1a' }}>{note}</p>
+              <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-primary)' }}>{note}</p>
             </div>
           ))}
         </div>
@@ -125,7 +125,7 @@ function PanelCard({
           <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.2"/>
           <path d="M10 5v5l3 3" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
-        <p className="text-[11px] leading-relaxed" style={{ color: '#0a0e1a' }}>
+        <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-primary)' }}>
           <span className="font-semibold" style={{ color: '#4890f7' }}>Best collected 7–9am, fasted.</span>{' '}
           Morning collection ensures accurate hormone and metabolic readings.
         </p>
@@ -139,7 +139,7 @@ function PanelCard({
               <circle cx="8" cy="8" r="7" stroke="#4890f7" strokeWidth="1.2" fill="rgba(72,144,247,0.06)" />
               <path d="M5 8l2.5 2.5 4-4" stroke="#4890f7" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>{item}</span>
+            <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item}</span>
           </li>
         ))}
       </ul>
@@ -165,7 +165,7 @@ export default function OrderBloodsPage() {
         {/* Hero */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', paddingTop: '140px', paddingBottom: '80px' }}
+          style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="Order bloods hero"
         >
           <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
@@ -190,7 +190,7 @@ export default function OrderBloodsPage() {
               initial={{ opacity: 0, y: 28 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: '#0a0e1a', maxWidth: '780px', marginBottom: '1.25rem' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: 'var(--text-primary)', maxWidth: '780px', marginBottom: '1.25rem' }}
             >
               Start with data.
               <br />
@@ -203,7 +203,7 @@ export default function OrderBloodsPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
-              style={{ color: '#0a0e1a', maxWidth: '520px', marginBottom: '2rem' }}
+              style={{ color: 'var(--text-primary)', maxWidth: '520px', marginBottom: '2rem' }}
             >
               Doctor-ordered panels. No GP referral required. Collect at any accredited centre near you — your results go directly to your Apex doctor.
             </motion.p>
@@ -226,7 +226,7 @@ export default function OrderBloodsPage() {
         {/* Panels */}
         <section
           className="relative section-pad overflow-hidden"
-          style={{ backgroundColor: '#f8f9ff' }}
+          style={{ backgroundColor: 'var(--surface)' }}
           aria-label="Blood test panels"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -262,7 +262,7 @@ export default function OrderBloodsPage() {
                 ctaLabel="Get Started — Metabolic Panel"
                 ctaHref="/intake/general-consult"
                 delay={0.08}
-                price="From $73.66"
+                price="From \$99"
                 priceNote="program-specific"
                 icon={
                   <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="#4890f7" strokeWidth="1.5" aria-hidden="true">
@@ -284,14 +284,14 @@ export default function OrderBloodsPage() {
                 <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.2"/>
                 <path d="M10 5v5l3 3" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-              <p className="text-xs leading-relaxed text-left" style={{ color: '#0a0e1a' }}>
+              <p className="text-xs leading-relaxed text-left" style={{ color: 'var(--text-primary)' }}>
                 <span className="font-semibold" style={{ color: '#4890f7' }}>Collection tip — </span>
                 Bloods are best collected in the morning, ideally between <strong style={{ color: '#B0B8C5' }}>7am and 9am</strong> and before 10am. Hormone levels (particularly testosterone and cortisol) peak in the morning and decline throughout the day. For metabolic markers, aim to fast for 8–10 hours prior to collection.
               </p>
             </motion.div>
             <div className="mt-8 px-5 py-4 rounded-xl text-center max-w-2xl mx-auto"
-              style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+              style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.08)' }}>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                 The appropriate panel depends on your clinical pathway and the biomarkers being assessed.
                 Some programs require a comprehensive baseline panel, while others may require limited monitoring or no blood testing initially.
                 Exact pricing is confirmed after your clinical assessment and program match.
@@ -303,7 +303,7 @@ export default function OrderBloodsPage() {
         {/* How it works strip */}
         <section
           className="relative py-16 overflow-hidden"
-          style={{ backgroundColor: '#f8f9ff' }}
+          style={{ backgroundColor: 'var(--surface)' }}
           aria-label="How blood testing works"
         >
           <div className="glow-rule" aria-hidden="true" />
@@ -347,11 +347,11 @@ export default function OrderBloodsPage() {
                   <div>
                     <h3
                       className="text-base font-semibold mb-2"
-                      style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                      style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                     >
                       {step.title}
                     </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                       {step.description}
                     </p>
                   </div>
@@ -362,13 +362,13 @@ export default function OrderBloodsPage() {
         </section>
 
         {/* CTA Block */}
-        <section ref={ctaRef} className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }} aria-label="Get started">
+        <section ref={ctaRef} className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Get started">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
           <div className="container-tight relative z-10 text-center">
             <motion.h2 initial={{ opacity: 0, y: 24 }} animate={ctaInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: '#0a0e1a', marginBottom: '1rem' }}>
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '1rem' }}>
               Know your numbers.
               <br />
               <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Act on them.</span>

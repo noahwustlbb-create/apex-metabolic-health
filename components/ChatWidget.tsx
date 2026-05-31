@@ -114,7 +114,7 @@ export default function ChatWidget() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="w-full mb-3 rounded-2xl overflow-hidden flex flex-col"
             style={{
-              background: '#ffffff',
+              background: 'var(--bg)',
               border: '1px solid rgba(53,117,198,0.18)',
               boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(53,117,198,0.08)',
               height: '480px',
@@ -135,21 +135,21 @@ export default function ChatWidget() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold" style={{ color: '#0a0e1a', fontFamily: 'var(--font-space-grotesk)' }}>
+                  <p className="text-[13px] font-semibold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
                     Apex Clinical Advisor
                   </p>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[10px]" style={{ color: '#0a0e1a' }}>Online now</span>
+                    <span className="text-[10px]" style={{ color: 'var(--text-primary)' }}>Online now</span>
                   </div>
                 </div>
               </div>
               <button
                 onClick={() => setOpen(false)}
                 className="w-7 h-7 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)' }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = '#F4F4F6' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = '#0a0e1a' }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-primary)' }}
                 aria-label="Close chat"
               >
                 <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -169,7 +169,7 @@ export default function ChatWidget() {
                 >
                   <div
                     className="rounded-xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm leading-relaxed"
-                    style={{ backgroundColor: '#f0f5ff', color: '#0a0e1a' }}
+                    style={{ backgroundColor: 'var(--elevated-high)', color: 'var(--text-primary)' }}
                   >
                     Hi — I&apos;m the Apex clinical advisor. I can help you find the right program, explain how our process works, or answer any questions before you book.
                   </div>
@@ -208,7 +208,7 @@ export default function ChatWidget() {
                     style={
                       msg.role === 'user'
                         ? { backgroundColor: '#3575C6', color: '#ffffff', borderRadius: '12px 12px 2px 12px' }
-                        : { backgroundColor: '#f0f5ff', color: '#0a0e1a', borderRadius: '12px 12px 12px 2px' }
+                        : { backgroundColor: 'var(--elevated-high)', color: 'var(--text-primary)', borderRadius: '12px 12px 12px 2px' }
                     }
                   >
                     {msg.content || (msg.role === 'assistant' && loading && i === messages.length - 1
@@ -223,7 +223,7 @@ export default function ChatWidget() {
                 <div className="flex justify-start">
                   <div
                     className="rounded-xl px-2 py-1"
-                    style={{ backgroundColor: '#f0f5ff', borderRadius: '12px 12px 12px 2px' }}
+                    style={{ backgroundColor: 'var(--elevated-high)', borderRadius: '12px 12px 12px 2px' }}
                   >
                     <TypingIndicator />
                   </div>
@@ -246,7 +246,7 @@ export default function ChatWidget() {
                 placeholder="Ask a question..."
                 disabled={loading}
                 className="flex-1 bg-transparent text-sm outline-none"
-                style={{ color: '#0a0e1a' }}
+                style={{ color: 'var(--text-primary)' }}
               />
               <button
                 type="submit"
@@ -272,7 +272,7 @@ export default function ChatWidget() {
         whileTap={{ scale: 0.97 }}
         className="flex items-center gap-3 px-6 py-3.5 transition-all duration-200"
         style={{
-          background: '#ffffff',
+          background: 'var(--bg)',
           border: '1px solid rgba(53,117,198,0.28)',
           borderRadius: '999px',
           boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)',

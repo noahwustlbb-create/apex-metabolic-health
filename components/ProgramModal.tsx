@@ -66,7 +66,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               maxWidth: '560px',
               width: 'calc(100% - 48px)',
               margin: 'auto',
-              background: '#f0f5ff',
+              background: 'var(--elevated-high)',
               border: '1px solid rgba(72,144,247,0.1)',
               borderRadius: '16px',
               maxHeight: '85vh',
@@ -86,7 +86,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 height: '32px',
                 borderRadius: '50%',
                 background: '#2e3542',
-                color: '#0a0e1a',
+                color: 'var(--text-primary)',
                 fontSize: '20px',
                 lineHeight: '32px',
                 textAlign: 'center',
@@ -111,7 +111,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
             {/* Panel header */}
             <div
               style={{
-                background: '#ffffff',
+                background: 'var(--bg)',
                 padding: '32px 28px 24px',
                 borderRadius: '16px 16px 0 0',
                 textAlign: 'center',
@@ -164,7 +164,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                   fontFamily: 'var(--font-space-grotesk)',
                   fontSize: '22px',
                   fontWeight: 700,
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   margin: 0,
                   position: 'relative',
                 }}
@@ -219,7 +219,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               <p
                 style={{
                   fontSize: '14px',
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   marginBottom: '20px',
                   marginTop: 0,
                   lineHeight: 1.5,
@@ -236,7 +236,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 style={{
                   fontSize: '15px',
                   lineHeight: 1.75,
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   marginBottom: '24px',
                   marginTop: 0,
                 }}
@@ -251,7 +251,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     fontSize: '10px',
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: '#0a0e1a',
+                    color: 'var(--text-primary)',
                     marginBottom: '10px',
                     fontFamily: 'var(--font-space-grotesk)',
                     marginTop: 0,
@@ -272,7 +272,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           marginTop: '5px',
                         }}
                       />
-                      <span style={{ fontSize: '13px', color: '#0a0e1a', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>
@@ -287,7 +287,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     fontSize: '10px',
                     letterSpacing: '0.2em',
                     textTransform: 'uppercase',
-                    color: '#0a0e1a',
+                    color: 'var(--text-primary)',
                     marginBottom: '10px',
                     fontFamily: 'var(--font-space-grotesk)',
                     marginTop: 0,
@@ -314,7 +314,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      <span style={{ fontSize: '13px', color: '#0a0e1a', lineHeight: 1.5 }}>
+                      <span style={{ fontSize: '13px', color: 'var(--text-primary)', lineHeight: 1.5 }}>
                         {item}
                       </span>
                     </div>
@@ -343,7 +343,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                 style={{
                   textAlign: 'center',
                   fontSize: '11px',
-                  color: '#0a0e1a',
+                  color: 'var(--text-primary)',
                   letterSpacing: '0.12em',
                   marginTop: '16px',
                   marginBottom: 0,

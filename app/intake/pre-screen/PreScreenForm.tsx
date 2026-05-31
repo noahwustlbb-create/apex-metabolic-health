@@ -249,7 +249,7 @@ function MultiPill({ label, selected, onClick, accent = '#4890f7' }: {
       className="px-3 py-2.5 rounded-lg text-xs font-medium transition-all duration-150 text-left"
       style={{
         background: selected ? `color-mix(in srgb, ${accent} 12%, transparent)` : 'rgba(255,255,255,0.03)',
-        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 50%, transparent)` : 'rgba(255,255,255,0.07)'}`,
+        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 50%, transparent)` : 'var(--border)'}`,
         color: selected ? accent : '#4890f7',
       }}
     >
@@ -267,8 +267,8 @@ function RadioCard({ label, selected, onClick, accent = '#4890f7' }: {
       onClick={onClick}
       className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-150 text-left"
       style={{
-        background: selected ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.02)',
-        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 45%, transparent)` : 'rgba(255,255,255,0.06)'}`,
+        background: selected ? 'var(--elevated)' : 'var(--surface)',
+        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 45%, transparent)` : 'var(--elevated)'}`,
         color: selected ? '#F5F5F5' : '#4890f7',
         fontWeight: selected ? 500 : 400,
       }}
@@ -293,23 +293,23 @@ function Field({ label, value, onChange, type = 'text', placeholder }: {
 }) {
   return (
     <div>
-      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>{label}</label>
+      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7' }}
+        style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
         onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
       />
     </div>
   )
 }
 
 function QLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: '#0a0e1a' }}>{children}</p>
+  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: 'var(--text-primary)' }}>{children}</p>
 }
 
 // ─── Step 1: Symptoms & goals ─────────────────────────────────────────────────
@@ -324,11 +324,11 @@ function StepOne({ data, set, toggle }: {
       <p className="label mb-4">STEP 1 OF 2</p>
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#0a0e1a', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
       >
         What&apos;s been going on?
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#0a0e1a' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
         Tell us what you&apos;re dealing with. We&apos;ll use this to identify your likely clinical pathway.
       </p>
 
@@ -344,7 +344,7 @@ function StepOne({ data, set, toggle }: {
               className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150"
               style={{
                 background: data.ageRange === a ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.ageRange === a ? 'rgba(72,144,247,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                border: `1px solid ${data.ageRange === a ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
                 color: data.ageRange === a ? '#4890f7' : '#4890f7',
                 fontFamily: 'var(--font-space-grotesk)',
               }}
@@ -391,7 +391,7 @@ function StepOne({ data, set, toggle }: {
               className="flex-1 px-4 py-2.5 rounded-lg text-xs font-medium transition-all duration-150 text-left sm:text-center"
               style={{
                 background: data.recentBloods === val ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.recentBloods === val ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+                border: `1px solid ${data.recentBloods === val ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
                 color: data.recentBloods === val ? '#4890f7' : '#4890f7',
               }}
             >
@@ -415,7 +415,7 @@ function StepTwo({ data, set }: {
       <p className="label mb-4" style={{ color: '#4890f7' }}>STEP 2 OF 2</p>
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#0a0e1a', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
       >
         A bit more context.
         <br />
@@ -423,7 +423,7 @@ function StepTwo({ data, set }: {
           This helps us be specific.
         </span>
       </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: '#0a0e1a' }}>
+      <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
         These questions go beyond a generic match — and help us identify what&apos;s likely driving this for you specifically.
       </p>
 
@@ -481,7 +481,7 @@ function StepTwo({ data, set }: {
                 className="flex-1 px-4 py-3 rounded-lg text-xs font-medium transition-all duration-150 text-center"
                 style={{
                   background: data.urgency === u ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${data.urgency === u ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}`,
+                  border: `1px solid ${data.urgency === u ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
                   color: data.urgency === u ? '#4890f7' : '#4890f7',
                 }}
               >
@@ -527,11 +527,11 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
       <h2
         className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: '#0a0e1a', lineHeight: 1.1 }}
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
       >
         Your result is ready.
       </h2>
-      <p className="text-sm mb-7 leading-relaxed" style={{ color: '#0a0e1a' }}>
+      <p className="text-sm mb-7 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
         We&apos;ve identified your likely clinical pathway. Enter your details to unlock your result and speak with an Apex doctor.
       </p>
 
@@ -546,7 +546,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
           <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.5)' }}>{info.description}</p>
           <div className="flex gap-1.5 flex-wrap">
             {info.tags.map(t => (
-              <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.55)' }}>{t}</span>
+              <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'var(--border)', color: 'rgba(255,255,255,0.55)' }}>{t}</span>
             ))}
           </div>
         </div>
@@ -569,27 +569,27 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
 
         {/* Referral source */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>
             How did you hear about us? <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <select
             value={data.referralSource}
             onChange={e => set('referralSource', e.target.value)}
             className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#0a0e1a', caretColor: '#4890f7', cursor: 'pointer' }}
+            style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#0a0e1a', caretColor: '#4890f7', cursor: 'pointer' }}
             onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
+            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
           >
-            <option value="" style={{ background: '#f8f9ff', color: '#0a0e1a' }}>Select…</option>
+            <option value="" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Select…</option>
             {REFERRAL_SOURCES.map(s => (
-              <option key={s} value={s} style={{ background: '#f8f9ff', color: '#0a0e1a' }}>{s}</option>
+              <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>
             ))}
           </select>
         </div>
 
         {/* Referral / access code */}
         <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: '#0a0e1a' }}>
+          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>
             Referral or access code <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
           </label>
           <input
@@ -598,9 +598,9 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
             onChange={e => set('referralCode', e.target.value.toUpperCase())}
             placeholder="e.g. APEX25"
             className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: '#0a0e1a', caretColor: '#4890f7', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
+            style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
             onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'rgba(255,255,255,0.04)' }}
+            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
           />
         </div>
       </div>
@@ -609,7 +609,7 @@ function Gate({ data, set, submitting, onSubmit, onBack, error }: {
       <div className="flex items-center gap-3">
         <button type="button" onClick={onBack}
           className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150 flex-shrink-0"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#0a0e1a' }}>
+          style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-primary)' }}>
           ← Back
         </button>
         <button
@@ -685,10 +685,10 @@ function Success({ data }: { data: FormData }) {
       </div>
 
       <h2 className="font-bold tracking-tight mb-3"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: '#0a0e1a', lineHeight: 1.15 }}>
+        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: 'var(--text-primary)', lineHeight: 1.15 }}>
         {data.firstName ? `Here's your next step, ${data.firstName}.` : "Here's your next step."}
       </h2>
-      <p className="text-sm leading-relaxed mb-6" style={{ color: '#0a0e1a' }}>
+      <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
         {hasBloods
           ? `You have recent blood results — our team will review your submission and an Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} to arrange your consultation.`
           : `Based on your full profile, we've matched you to the ${label} program. An Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} with your blood panel referral and next steps.`}
@@ -719,17 +719,17 @@ function Success({ data }: { data: FormData }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.12 }}
           className="rounded-xl p-5 mb-7"
-          style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}
+          style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.12)' }}
         >
           <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#4890f7' }}>
             PATHOLOGY
           </p>
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
+              <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                 {PATHWAY_INFO[pathway].bloodLabel}
               </p>
-              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                 {PATHWAY_INFO[pathway].bloodNote}
               </p>
             </div>
@@ -742,7 +742,7 @@ function Success({ data }: { data: FormData }) {
               )}
             </div>
           </div>
-          <div className="mt-3 pt-3 flex items-center gap-2" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="mt-3 pt-3 flex items-center gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
             <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
             <p className="text-[10px]" style={{ color: '#4890f7' }}>
               Ongoing monitoring bloods are included as part of your Apex Membership review cycle — not charged separately.
@@ -767,8 +767,8 @@ function Success({ data }: { data: FormData }) {
           </svg>
         </div>
         <div>
-          <p className="text-sm font-semibold mb-1" style={{ color: '#0a0e1a' }}>An Apex doctor will contact you today</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>An Apex doctor will contact you today</p>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
             Our clinical team reviews your submission and a doctor reaches out directly — no portal, no waiting room, no queue. We handle your referral and next steps.
           </p>
         </div>
@@ -787,8 +787,8 @@ function Success({ data }: { data: FormData }) {
               className="p-4 rounded-xl"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
             >
-              <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: '#0a0e1a' }}>{f.title}</p></div>
-              <p className="text-xs leading-relaxed" style={{ color: '#0a0e1a' }}>{f.body}</p>
+              <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{f.title}</p></div>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{f.body}</p>
             </motion.div>
           ))}
         </div>
@@ -814,8 +814,8 @@ function Success({ data }: { data: FormData }) {
             { label: 'hsCRP', value: '0.4 mg/L', status: 'optimal', pct: 88 },
           ].map(row => (
             <div key={row.label} className="flex items-center gap-3">
-              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: '#0a0e1a' }}>{row.label}</p></div>
-              <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.06)' }}>
+              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: 'var(--text-primary)' }}>{row.label}</p></div>
+              <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'var(--elevated)' }}>
                 <div className="h-full rounded-full" style={{ width: `${row.pct}%`, background: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }} />
               </div>
               <p className="text-[10px] font-mono w-20 text-right" style={{ color: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }}>{row.value}</p>
@@ -826,7 +826,7 @@ function Success({ data }: { data: FormData }) {
       </motion.div>
 
       {/* Pathway steps */}
-      <div className="p-5 rounded-xl mb-7" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="p-5 rounded-xl mb-7" style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.06)' }}>
         <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#4890f7' }}>YOUR NEXT STEPS</p>
         <div className="flex flex-col gap-0">
           {(hasBloods
@@ -848,7 +848,7 @@ function Success({ data }: { data: FormData }) {
                 <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{step.n}</div>
                 {i < arr.length - 1 && <div style={{ width: 1, flex: 1, minHeight: 12, background: 'rgba(72,144,247,0.08)', marginTop: 2, marginBottom: 2 }} />}
               </div>
-              <p className="text-sm leading-relaxed pb-3" style={{ color: '#0a0e1a' }}>{step.label}</p>
+              <p className="text-sm leading-relaxed pb-3" style={{ color: 'var(--text-primary)' }}>{step.label}</p>
             </div>
           ))}
         </div>
@@ -959,7 +959,7 @@ export default function PreScreenForm() {
       <main>
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}
+          style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}
         >
           <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
           <div aria-hidden="true" className="absolute top-0 left-0 w-[600px] h-[500px] pointer-events-none"
@@ -976,7 +976,7 @@ export default function PreScreenForm() {
                   </span>
                   <span className="text-xs" style={{ color: '#4890f7' }}>{progressPct}</span>
                 </div>
-                <div style={{ height: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 2 }}>
+                <div style={{ height: 2, background: 'var(--elevated)', borderRadius: 2 }}>
                   <motion.div
                     style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
                     initial={false}
@@ -1020,7 +1020,7 @@ export default function PreScreenForm() {
                     {step === 2 && (
                       <button type="button" onClick={() => { setStep(1); scrollTop() }}
                         className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150"
-                        style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#0a0e1a' }}>
+                        style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-primary)' }}>
                         ← Back
                       </button>
                     )}

@@ -101,7 +101,7 @@ function DonutChart({ percentage, color, yesCount }: { percentage: number; color
   return (
     <div className="relative flex items-center justify-center" style={{ width: SVG_SIZE, height: SVG_SIZE }}>
       <svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`} style={{ transform: 'rotate(-90deg)' }} aria-hidden="true">
-        <circle cx={SVG_SIZE / 2} cy={SVG_SIZE / 2} r={RADIUS} fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={STROKE_WIDTH} />
+        <circle cx={SVG_SIZE / 2} cy={SVG_SIZE / 2} r={RADIUS} fill="none" stroke="var(--elevated)" strokeWidth={STROKE_WIDTH} />
         <circle
           cx={SVG_SIZE / 2} cy={SVG_SIZE / 2} r={RADIUS} fill="none"
           stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round"
@@ -142,7 +142,7 @@ function QuestionCard({
       className="rounded-xl p-5 md:p-6"
       style={{
         background: '#121c30',
-        border: `1px solid ${answer ? 'rgba(53,117,198,0.3)' : 'rgba(255,255,255,0.06)'}`,
+        border: `1px solid ${answer ? 'rgba(53,117,198,0.3)' : 'var(--elevated)'}`,
         transition: 'border-color 0.25s',
       }}
     >
@@ -152,8 +152,8 @@ function QuestionCard({
             className="flex-shrink-0 flex items-center justify-center rounded-full text-xs font-bold"
             style={{
               width: 26, height: 26, marginTop: 1,
-              background: answer ? 'rgba(53,117,198,0.2)' : 'rgba(255,255,255,0.04)',
-              border: `1px solid ${answer ? 'rgba(53,117,198,0.4)' : 'rgba(255,255,255,0.08)'}`,
+              background: answer ? 'rgba(53,117,198,0.2)' : 'var(--surface)',
+              border: `1px solid ${answer ? 'rgba(53,117,198,0.4)' : 'var(--border)'}`,
               color: answer ? '#6AAEE8' : '#0a0e1a',
               fontFamily: 'var(--font-space-grotesk)',
               transition: 'all 0.25s',
@@ -237,7 +237,7 @@ export default function MetabolicCheckPage() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" style={{ backgroundColor: '#ffffff' }}>
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
         <div
           aria-hidden="true"
@@ -294,7 +294,7 @@ export default function MetabolicCheckPage() {
       </section>
 
       {/* QUIZ */}
-      <section className="relative section-pad" style={{ backgroundColor: '#ffffff' }}>
+      <section className="relative section-pad" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="glow-rule mb-0" />
 
         <div className="container-tight pt-10 md:pt-14">
@@ -320,14 +320,14 @@ export default function MetabolicCheckPage() {
                 className="font-bold text-2xl leading-none"
                 style={{ fontFamily: 'var(--font-space-grotesk)', color: answeredCount === 10 ? '#3575C6' : '#F4F4F6', transition: 'color 0.3s' }}
               >
-                {answeredCount}<span style={{ color: '#0a0e1a', fontSize: 16 }}>/10</span>
+                {answeredCount}<span style={{ color: 'var(--text-primary)', fontSize: 16 }}>/10</span>
               </span>
-              <span style={{ fontSize: 10, color: '#0a0e1a', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
+              <span style={{ fontSize: 10, color: 'var(--text-primary)', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
             </div>
           </motion.div>
 
           {/* Progress bar */}
-          <div className="mb-8 md:mb-10 rounded-full overflow-hidden" style={{ height: 3, background: 'rgba(255,255,255,0.05)' }}>
+          <div className="mb-8 md:mb-10 rounded-full overflow-hidden" style={{ height: 3, background: 'var(--elevated)' }}>
             <motion.div
               className="h-full rounded-full"
               style={{ background: 'linear-gradient(90deg, #3575C6, #6AAEE8)' }}
@@ -372,7 +372,7 @@ export default function MetabolicCheckPage() {
           <section
             ref={resultRef}
             className="relative section-pad overflow-hidden scroll-mt-20"
-            style={{ backgroundColor: '#ffffff' }}
+            style={{ backgroundColor: 'var(--bg)' }}
           >
             <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
             <div
@@ -401,7 +401,7 @@ export default function MetabolicCheckPage() {
                 <div
                   className="rounded-2xl overflow-hidden"
                   style={{
-                    background: '#ffffff',
+                    background: 'var(--bg)',
                     border: `1px solid ${tier.color}33`,
                     boxShadow: `0 0 60px ${tier.glowColor}, 0 0 0 1px ${tier.color}22`,
                   }}
@@ -445,14 +445,14 @@ export default function MetabolicCheckPage() {
                           >
                             METABOLIC SCORE — {SCORE_LABEL[result.tier]}
                           </span>
-                          <span style={{ color: '#0a0e1a', fontSize: 11 }}>
+                          <span style={{ color: 'var(--text-primary)', fontSize: 11 }}>
                             · {result.yesCount} of 10 symptoms present
                           </span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mb-6" style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
+                    <div className="mb-6" style={{ height: 1, background: 'var(--elevated)' }} />
 
                     <p className="text-sm md:text-base leading-relaxed mb-8" style={{ color: '#B0B8C5' }}>
                       {tier.body}
@@ -479,7 +479,7 @@ export default function MetabolicCheckPage() {
 
                     <div
                       className="rounded-lg p-4 text-xs leading-relaxed"
-                      style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', color: '#0a0e1a' }}
+                      style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.08)', color: 'var(--text-primary)' }}
                     >
                       <span style={{ color: '#B0B8C5', fontWeight: 600 }}>Disclaimer: </span>
                       This tool is a screening aid only and does not constitute medical advice. Clinical assessment by an AHPRA-registered practitioner is required for diagnosis and treatment.
@@ -491,9 +491,9 @@ export default function MetabolicCheckPage() {
                   <button
                     onClick={handleRetake}
                     className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: '#0a0e1a', letterSpacing: '0.04em' }}
+                    style={{ color: 'var(--text-primary)', letterSpacing: '0.04em' }}
                     onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#B0B8C5')}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#0a0e1a')}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--text-primary)')}
                   >
                     ↺ Retake Quiz
                   </button>
@@ -517,7 +517,7 @@ function BottomCTA() {
   const isInView = useInView(ref, { once: true, margin: '-60px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: '#ffffff' }}>
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(53,117,198,0.07) 0%, transparent 65%)' }} />
       <div className="glow-rule mb-0" />
       <div className="container-tight pt-10 md:pt-14">

@@ -14,7 +14,7 @@ function ProgramHero({ program }: { program: Program }) {
   return (
     <section
       className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: '#ffffff', paddingTop: '120px' }}
+      style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="Program hero"
     >
       {/* Dot grid */}
@@ -87,7 +87,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.06' }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.06' }}
             >
               {program.name}
             </motion.h1>
@@ -97,7 +97,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
               className="text-xl font-medium mb-6 max-w-2xl"
-              style={{ color: '#0a0e1a' }}
+              style={{ color: 'var(--text-primary)' }}
             >
               {program.tagline}
             </motion.p>
@@ -151,9 +151,9 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
               className="mt-6 px-4 py-3 rounded-sm text-xs leading-relaxed"
-              style={{ backgroundColor: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)', color: '#0a0e1a' }}
+              style={{ backgroundColor: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
             >
-              <strong style={{ color: '#0a0e1a' }}>Therapeutic goods disclosure: </strong>
+              <strong style={{ color: 'var(--text-primary)' }}>Therapeutic goods disclosure: </strong>
               Some treatment options available through this program involve therapeutic goods not registered on the Australian Register of Therapeutic Goods (ARTG). Your doctor will advise you if this applies to your protocol and will obtain your informed consent before proceeding.
             </motion.div>
           )}
@@ -165,7 +165,7 @@ function ProgramHero({ program }: { program: Program }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="relative aspect-[4/3] rounded-sm overflow-hidden hidden lg:block"
-              style={{ border: '1px solid rgba(72,144,247,0.14)', background: '#ffffff' }}
+              style={{ border: '1px solid rgba(72,144,247,0.14)', background: 'var(--bg)' }}
             >
               <Image
                 src={program.image}
@@ -198,7 +198,7 @@ function WhatItAddresses({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f0f5ff' }}
+      style={{ backgroundColor: 'var(--elevated-high)' }}
       aria-label="What this program addresses"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -218,7 +218,7 @@ function WhatItAddresses({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
           >
             What This Program Addresses
           </motion.h2>
@@ -238,7 +238,7 @@ function WhatItAddresses({ program }: { program: Program }) {
                 <circle cx="10" cy="10" r="9" stroke="#4890f7" strokeWidth="1.5" fill="rgba(72,144,247,0.06)" />
                 <path d="M6 10l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+              <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                 {item}
               </span>
             </motion.div>
@@ -260,7 +260,7 @@ function WhatsIncluded({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="What's included"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -288,7 +288,7 @@ function WhatsIncluded({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
           >
             What&apos;s Included
           </motion.h2>
@@ -309,7 +309,7 @@ function WhatsIncluded({ program }: { program: Program }) {
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <p className="text-sm leading-relaxed" style={{ color: '#0a0e1a' }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                 {item}
               </p>
             </motion.div>
@@ -331,7 +331,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#f0f5ff' }}
+      style={{ backgroundColor: 'var(--elevated-high)' }}
       aria-label="How this program works"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -351,7 +351,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
           >
             How This Program Works
           </motion.h2>
@@ -380,7 +380,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 relative z-10"
                     style={{
-                      backgroundColor: '#f0f5ff',
+                      backgroundColor: 'var(--elevated-high)',
                       border: '1px solid rgba(72,144,247,0.25)',
                     }}
                   >
@@ -402,11 +402,11 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                 <div className="flex-1 pt-3">
                   <h3
                     className="text-lg font-semibold mb-3"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
                   >
                     {step.title}
                   </h3>
-                  <p className="text-sm leading-relaxed max-w-xl" style={{ color: '#0a0e1a' }}>
+                  <p className="text-sm leading-relaxed max-w-xl" style={{ color: 'var(--text-primary)' }}>
                     {step.description}
                   </p>
                 </div>
@@ -429,7 +429,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Get started"
     >
       <div className="glow-rule" aria-hidden="true" />
@@ -450,7 +450,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5 max-w-2xl mx-auto"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a', lineHeight: '1.08' }}
+          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}
         >
           Ready to Get Started?
         </motion.h2>
@@ -471,7 +471,7 @@ function ProgramBottomCTA({ program }: { program: Program }) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.38 }}
           className="text-xs leading-relaxed max-w-2xl mx-auto"
-          style={{ color: '#0a0e1a' }}
+          style={{ color: 'var(--text-primary)' }}
         >
           Clinical suitability is assessed by a doctor. All treatments are prescribed by
           AHPRA-registered medical practitioners. We do not name specific medications in compliance

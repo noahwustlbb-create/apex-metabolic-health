@@ -4,6 +4,7 @@ import Script from 'next/script'
 import './globals.css'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
@@ -55,11 +56,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body
-        className="antialiased overflow-x-hidden"
-        style={{ backgroundColor: '#ffffff', color: '#0a0e1a' }}
-      >
+    <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('apex-theme');var d=t||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="antialiased overflow-x-hidden">
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
@@ -73,9 +78,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', '${AW_ID}');
           `}
         </Script>
-        <AgeGate />
-        <ReferralCapture />
-        {children}
+        <ThemeProvider>
+          <AgeGate />
+          <ReferralCapture />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

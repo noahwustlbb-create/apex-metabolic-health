@@ -54,16 +54,68 @@ export default function Footer() {
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed max-w-xs mb-6" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              Doctor-led hormonal health. Evidence-based. Australia-wide.
+            <p className="text-sm leading-relaxed max-w-xs mb-5" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              Doctor-led hormonal health, evidence-based and delivered online to men across Australia.
             </p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-6">
               {['AHPRA Registered', 'TGA Compliant', '100% Online'].map((badge) => (
                 <span key={badge} className="text-[10px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5"
                   style={{ color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(72,144,247,0.2)', borderRadius: '2px' }}>
                   {badge}
                 </span>
+              ))}
+            </div>
+
+            {/* Contact */}
+            <div className="flex flex-col gap-2 mb-5">
+              <a href="mailto:hello@apexmetabolichealth.com.au"
+                className="text-xs transition-colors duration-200"
+                style={{ color: 'rgba(255,255,255,0.3)' }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}>
+                hello@apexmetabolichealth.com.au
+              </a>
+              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>Mon – Fri · 9am – 5pm AEST</p>
+            </div>
+
+            {/* Social links */}
+            <div className="flex items-center gap-3">
+              {[
+                {
+                  label: 'Instagram',
+                  href: 'https://instagram.com/apexmetabolichealth',
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                      <rect x="2" y="2" width="20" height="20" rx="5" />
+                      <circle cx="12" cy="12" r="4" />
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Facebook',
+                  href: 'https://facebook.com/apexmetabolichealth',
+                  icon: (
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
+                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" />
+                    </svg>
+                  ),
+                },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
+                  style={{ color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(72,144,247,0.15)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; e.currentTarget.style.background = 'rgba(72,144,247,0.12)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
+                >
+                  {s.icon}
+                </a>
               ))}
             </div>
           </div>

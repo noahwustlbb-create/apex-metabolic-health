@@ -7,7 +7,7 @@ export default function TermsPage() {
   return (
     <>
       <Nav />
-      <main style={{ backgroundColor: '#ffffff', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}>
         <div className="container-tight max-w-3xl">
           <div className="mb-10">
             <p className="label mb-3">Legal</p>
