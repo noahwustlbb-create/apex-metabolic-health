@@ -49,7 +49,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(26,158,143,0.22)',
     heading: 'Your metabolic markers appear within a healthy range.',
     body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually — advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
-    primaryCTA: { label: 'Order a Metabolic Panel', href: '/order-bloods' },
+    primaryCTA: { label: 'Order a Metabolic Panel', href: '/intake/pre-screen' },
     secondaryCTA: { label: 'Explore Programs', href: '/services' },
   },
   moderate: {
@@ -59,7 +59,7 @@ const TIER_CONFIG = {
     heading: 'Your results suggest signs of metabolic dysregulation.',
     body: 'Several of your responses align with early-stage metabolic dysfunction — including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
     primaryCTA: { label: 'Book a Metabolic Consult', href: '/intake/general-consult' },
-    secondaryCTA: { label: 'Order Blood Panel', href: '/order-bloods' },
+    secondaryCTA: { label: 'Order Blood Panel', href: '/intake/pre-screen' },
   },
   high: {
     label: 'HIGH RISK',
@@ -543,7 +543,7 @@ function BottomCTA() {
                 </svg>
               </span>
             </a>
-            <a href="/order-bloods" className="btn-ghost">
+            <a href="/intake/pre-screen" className="btn-ghost">
               Order Blood Panel
               <span className="btn-circle">
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">

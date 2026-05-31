@@ -21,10 +21,10 @@ const STEPS = [
   },
   {
     number: '3',
-    title: 'Start With Bloods',
+    title: 'Get Your Blood Panel',
     description: 'Advanced biomarker analysis. No GP referral required. Doctor-ordered panels through Apex.',
-    cta: 'Order bloods',
-    href: '/order-bloods',
+    cta: 'Start assessment',
+    href: '/intake/pre-screen',
   },
   {
     number: '4',

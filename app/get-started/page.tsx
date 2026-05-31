@@ -89,7 +89,7 @@ function GetStartedHero() {
             { label: 'Skin Regeneration', href: '/intake/general-consult' },
             { label: 'Injury Repair', href: '/intake/general-consult' },
             { label: 'General Check Up', href: '/intake/general-consult' },
-            { label: 'Order Blood Panel', href: '/order-bloods' },
+            { label: 'Order Blood Panel', href: '/intake/pre-screen' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
           ].map(({ label, href, primary }) => (
@@ -188,7 +188,7 @@ const ALL_PATHWAYS = [
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
     desc: 'Doctor-ordered blood panels issued directly through Apex — collect at any accredited centre near you.',
-    href: '/order-bloods',
+    href: '/intake/pre-screen',
     cta: 'Order Blood Panel',
     featured: false,
     icon: (

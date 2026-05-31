@@ -19,7 +19,8 @@ const navLinks = [
   { label: 'Membership',    href: '/membership'    },
   { label: 'What We Treat', href: '/what-we-treat' },
   { label: 'Our Approach',  href: '/our-approach'  },
-  { label: 'Pricing',       href: '/pricing'       },
+  { label: 'About',         href: '/about'         },
+  { label: 'Learn',         href: '/learn'         },
   { label: 'FAQs',          href: '/faqs'          },
 ]
 
@@ -172,12 +173,6 @@ export default function Nav() {
                 </svg>
               )}
             </button>
-            <Link href="/order-bloods"
-              className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-              style={{ color: '#4890f7' }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#2563eb' }}
-              onMouseLeave={e => { e.currentTarget.style.color = '#4890f7' }}
-            >Order Bloods</Link>
             <Link href="/intake/pre-screen"
               className="inline-flex items-center gap-2 text-[12.5px] font-semibold transition-all duration-200 whitespace-nowrap"
               style={{ background: '#4890f7', color: '#ffffff', padding: '9px 20px', borderRadius: '999px' }}
@@ -234,7 +229,8 @@ export default function Nav() {
                   { label: 'Membership',        href: '/membership'    },
                   { label: 'Our Approach',      href: '/our-approach'  },
                   { label: 'What We Treat',     href: '/what-we-treat' },
-                  { label: 'Pricing',           href: '/pricing'       },
+                  { label: 'About',             href: '/about'         },
+                  { label: 'Learn',             href: '/learn'         },
                   { label: 'FAQs',              href: '/faqs'          },
                 ].map((link, i) => (
                   <motion.div key={link.href} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.26, delay: i * 0.055 + 0.04 }}>
@@ -250,9 +246,6 @@ export default function Nav() {
                   </motion.div>
                 ))}
               </nav>
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, delay: 0.3 }} className="px-6 pt-5">
-                <Link href="/order-bloods" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>Order Bloods →</Link>
-              </motion.div>
             </div>
 
             <motion.div

@@ -44,7 +44,7 @@ BOOKING LINKS (direct patients to these):
 - General / Metabolic Consult: /intake/general-consult
 - Full Assessment Quiz: /assessment
 - Hormone Symptom Check: /hormone-check
-- Start With Bloods: /order-bloods
+- Start Assessment: /intake/pre-screen
 - Get Started: /get-started
 
 COMPLIANCE RULES — NEVER:

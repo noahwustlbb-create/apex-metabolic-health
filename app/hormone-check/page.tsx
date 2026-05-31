@@ -51,7 +51,7 @@ const TIER_CONFIG = {
     glowColor: 'rgba(26,158,143,0.25)',
     heading: 'Your hormone levels appear within normal range.',
     body: 'While your current score suggests low androgen deficiency risk, hormonal health exists on a spectrum. Advanced biomarker analysis provides objective data that symptom screening alone cannot capture.',
-    primaryCTA: { label: 'Get a Baseline Panel', href: '/order-bloods' },
+    primaryCTA: { label: 'Get a Baseline Panel', href: '/intake/pre-screen' },
     secondaryCTA: { label: 'Start Assessment', href: '/assessment' },
   },
   moderate: {
