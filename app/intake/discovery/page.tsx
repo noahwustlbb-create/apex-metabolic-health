@@ -156,7 +156,7 @@ export default function DiscoveryCallPage() {
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="apex-card p-8 space-y-6" style={{ backgroundColor: "#091230", border: "1px solid rgba(72,144,247,0.18)" }}>
+            className="apex-card p-8 space-y-6" style={{ backgroundColor: "#ffffff", border: "1px solid rgba(72,144,247,0.14)" }}>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -186,12 +186,12 @@ export default function DiscoveryCallPage() {
                   <button key={p} type="button" onClick={() => set('program', p)}
                     className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                     style={{
-                      backgroundColor: form.program === p ? 'rgba(72,144,247,0.07)' : '#f0f5ff',
-                      border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.18)'}`,
-                      color: form.program === p ? '#F5F5F5' : '#4890f7',
+                      backgroundColor: form.program === p ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
+                      border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.2)'}`,
+                      color: form.program === p ? '#4890f7' : '#0a0e1a',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : '#0a0e1a'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
+                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.3)'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
                       {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: '#f0f5ff' }} />}
                     </span>
                     {p}
@@ -206,7 +206,7 @@ export default function DiscoveryCallPage() {
             </div>
 
             <button type="button" onClick={submit} disabled={submitting}
-              className="btn-teal w-full" style={{ opacity: submitting ? 0.7 : 1 }}>
+              className="btn-primary w-full" style={{ opacity: submitting ? 0.7 : 1 }}>
               {submitting ? 'Submitting…' : 'Request My Discovery Call'}
             </button>
 
