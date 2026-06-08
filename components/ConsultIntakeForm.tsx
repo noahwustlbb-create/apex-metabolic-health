@@ -376,8 +376,13 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
         }),
       })
       const json = await res.json()
-      if (json.success) { setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop() }
-      else setError('Something went wrong. Please try again.')
+      if (json.success) {
+        fetch('/api/send-confirmation', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'consult-intake' }),
+        }).catch(() => {})
+        setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop()
+      } else setError('Something went wrong. Please try again.')
     } catch { setError('Network error. Please try again.') }
     finally { setSubmitting(false) }
   }

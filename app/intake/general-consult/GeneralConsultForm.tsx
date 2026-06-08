@@ -534,6 +534,10 @@ export default function GeneralConsultForm() {
       })
       const json = await res.json()
       if (json.success) {
+        fetch('/api/send-confirmation', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'general-consult' }),
+        }).catch(() => {})
         setSubmitted(true)
         localStorage.removeItem(STORAGE_KEY)
         setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)

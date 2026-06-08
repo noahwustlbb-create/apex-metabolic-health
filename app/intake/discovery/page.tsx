@@ -92,6 +92,10 @@ export default function DiscoveryCallPage() {
         }),
       })
     } catch {}
+    fetch('/api/send-confirmation', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: form.email, firstName: form.firstName, formType: 'discovery' }),
+    }).catch(() => {})
     setSubmitting(false)
     setSubmitted(true)
   }

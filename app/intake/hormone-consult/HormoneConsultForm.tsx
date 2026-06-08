@@ -496,6 +496,10 @@ export default function HormoneConsultForm() {
       const json = await res.json()
       if (!json.success) throw new Error('Submission failed')
       try { localStorage.removeItem(STORAGE_KEY) } catch {}
+      fetch('/api/send-confirmation', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: d.email, firstName: d.firstName, formType: 'hormone-consult' }),
+      }).catch(() => {})
       setDone(true)
     } catch {
       setError('Something went wrong. Please try again or email us directly.')

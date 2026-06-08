@@ -300,8 +300,13 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
         }),
       })
       const json = await res.json()
-      if (json.success) { setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop() }
-      else setError('Something went wrong. Please try again.')
+      if (json.success) {
+        fetch('/api/send-confirmation', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'bloods' }),
+        }).catch(() => {})
+        setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop()
+      } else setError('Something went wrong. Please try again.')
     } catch {
       setError('Network error. Please try again.')
     } finally {
