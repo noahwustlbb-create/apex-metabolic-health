@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import BookingChoice from '@/components/BookingChoice'
 
 const STORAGE_KEY = 'apex-general-consult-v2'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -441,9 +442,10 @@ function Success({ name }: { name: string }) {
           </div>
         ))}
       </motion.div>
-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 1.0, ease }} className="text-[11px]" style={{ color: 'var(--text-primary)' }}>
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 1.0, ease }} className="text-[11px] mb-2" style={{ color: 'var(--text-primary)' }}>
         Apex Metabolic Health &nbsp;·&nbsp; AHPRA-registered practitioners &nbsp;·&nbsp; Private &amp; confidential
       </motion.p>
+      <BookingChoice type="general" delay={1.1} />
     </motion.div>
   )
 }

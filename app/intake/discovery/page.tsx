@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import BookingChoice from '@/components/BookingChoice'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
@@ -117,10 +118,15 @@ export default function DiscoveryCallPage() {
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                 We&apos;ll be in touch, {form.firstName}.
               </h1>
-              <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-primary)' }}>
+              <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
                 Our team will contact you within one business day to schedule your free discovery call.
               </p>
-              <Link href="/" className="btn-teal">Back to Home</Link>
+              <div className="flex justify-center w-full">
+                <BookingChoice type="general" delay={0.8} />
+              </div>
+              <div className="mt-6">
+                <Link href="/" className="btn-teal">Back to Home</Link>
+              </div>
             </motion.div>
           </div>
         </main>

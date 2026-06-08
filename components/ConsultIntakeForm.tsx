@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import AppFeature from '@/components/AppFeature'
+import BookingChoice from '@/components/BookingChoice'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const STEPS = ['Your Details', 'Medical Info', 'Confirm & Submit']
@@ -323,11 +324,13 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
-        className="text-[11px] leading-relaxed"
+        className="text-[11px] leading-relaxed mb-2"
         style={{ color: 'var(--text-primary)' }}
       >
         Apex Metabolic Health &nbsp;·&nbsp; AHPRA-registered practitioners &nbsp;·&nbsp; Private &amp; confidential
       </motion.p>
+
+      <BookingChoice type="general" delay={1.1} />
     </motion.div>
   )
 }

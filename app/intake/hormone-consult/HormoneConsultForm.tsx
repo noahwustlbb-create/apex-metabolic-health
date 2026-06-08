@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import BookingChoice from '@/components/BookingChoice'
 
 const STORAGE_KEY = 'apex-hormone-consult-v1'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -563,7 +564,10 @@ export default function HormoneConsultForm() {
                 </div>
               </div>
 
-              <Link href="/" className="btn-ghost">Back to home</Link>
+              <BookingChoice type="hormone" delay={0.7} />
+              <div className="mt-4">
+                <Link href="/" className="btn-ghost">Back to home</Link>
+              </div>
             </motion.div>
           </div>
         </main>

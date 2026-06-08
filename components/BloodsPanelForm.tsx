@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import AppFeature from '@/components/AppFeature'
+import BookingChoice from '@/components/BookingChoice'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
@@ -248,7 +249,7 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
           ))}
         </div>
       </div>
-      <a href="/intake/hormone-consult" className="btn-teal inline-flex">Book your consultation →</a>
+      <BookingChoice type="hormone" />
     </motion.div>
   )
 }
