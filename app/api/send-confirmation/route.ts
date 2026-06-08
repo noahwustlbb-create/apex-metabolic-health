@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import { NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake'
 
 const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
@@ -223,6 +221,7 @@ export async function POST(req: Request) {
   if (!FORM_CONFIG[formType]) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
 
   const config = FORM_CONFIG[formType]
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   const { error } = await resend.emails.send({
     from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
