@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 import { getProduct, getPriceId, type EnquiryType } from '@/lib/intake-routing'
 
 export async function POST(req: Request) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2025-05-28.basil' })
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-05-27.dahlia' })
 
   const body = await req.json()
   const { firstName, lastName, dob, email, phone, state, sex, enquiry, medications, hasBloods } = body
