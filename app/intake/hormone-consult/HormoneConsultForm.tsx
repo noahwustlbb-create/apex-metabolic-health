@@ -343,18 +343,18 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}`, color: ACCENT }}>
           Recommended
         </span>
-        <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
+        <h3 className="text-base font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Apex Clinical Program
         </h3>
         <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>
-          $99<span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>/month</span>
+          $99<span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>/month</span>
         </p>
-        <p className="text-xs mb-4" style={{ color: 'var(--text-primary)' }}>
+        <p className="text-xs mb-4" style={{ color: '#374151' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
               <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -377,10 +377,10 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           border: `1px solid ${value === 'casual' ? ACCENT : 'rgba(72,144,247,0.25)'}`,
         }}>
         <div className="mb-4" style={{ height: 28 }} />
-        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
+        <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Single Consultation
         </h3>
-        <p className="text-xs mb-4" style={{ color: 'var(--text-primary)' }}>
+        <p className="text-xs mb-4" style={{ color: '#374151' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
 
@@ -389,18 +389,18 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           Pathway Option 1: Order Through Our Partner Pharmacies
         </p>
         <ul className="flex flex-col gap-1.5 mb-2">
-          <li className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
             <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
             You pay the PHARMACY price for all medications.
           </li>
-          <li className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
             <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>
             <div>
               Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
               <ul className="mt-1 flex flex-col gap-0.5">
-                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Ongoing file management.</li>
-                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Treatment guidance.</li>
-                <li className="text-[11px]" style={{ color: 'rgba(var(--text-primary-rgb),0.6)' }}>· Medication safety checks.</li>
+                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Ongoing file management.</li>
+                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Treatment guidance.</li>
+                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Medication safety checks.</li>
               </ul>
             </div>
           </li>
@@ -412,13 +412,13 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         {/* Prescribing fee — prominent box */}
         <div className="flex items-center justify-between px-3 py-2 rounded-lg mb-2"
-          style={{ background: 'var(--bg)', border: `1.5px solid ${ACCENT}` }}>
-          <span className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>Prescribing Fee</span>
+          style={{ background: '#eef2ff', border: `1.5px solid ${ACCENT}` }}>
+          <span className="text-xs font-bold" style={{ color: '#0a0e1a' }}>Prescribing Fee</span>
           <span className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$125</span>
         </div>
         <ul className="flex flex-col gap-1 mb-3">
           {['Script and treatment plan sent directly to you', 'Fill at any pharmacy of your choice', 'Dosing guides included'].map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: 'var(--text-primary)' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
               <span style={{ color: ACCENT, flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
