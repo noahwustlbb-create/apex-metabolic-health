@@ -144,9 +144,9 @@ const ALL_PATHWAYS = [
     ),
   },
   {
-    tag: 'Hormone & TRT Programs',
+    tag: 'Hormone Optimisation',
     title: 'Get Started Hormone Consult',
-    desc: 'Hormone optimisation, TRT, and performance-focused treatment. Advanced blood work first, then your dedicated consultation.',
+    desc: 'Hormone optimisation and performance-focused treatment. Advanced blood work first, then your dedicated consultation.',
     href: '/intake/hormone-consult',
     cta: 'Get Started Hormone Consult',
     featured: false,
@@ -160,7 +160,7 @@ const ALL_PATHWAYS = [
   {
     tag: 'Weight, Peptides & More',
     title: 'General Check Up',
-    desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and general consultation programs.',
+    desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and peptide consultation programs.',
     href: '/intake/general-consult',
     cta: 'Book General Check Up',
     featured: false,

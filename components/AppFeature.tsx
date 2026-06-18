@@ -222,7 +222,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               />
             </svg>
             <span style={{ fontSize: 7.5, color: '#4890f7', fontWeight: 700 }}>
-              7 years younger than calendar age
+              Biological age tracked over time
             </span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -47,7 +47,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Three components. Published upfront. No discovery calls to unlock a price.
+          Every number published upfront. Member or single consult — compare and decide before you start.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -67,204 +67,24 @@ function PricingHero() {
   )
 }
 
-// ─── Three Components ─────────────────────────────────────────────────────────
-
-const STEPS = [
-  {
-    number: '01',
-    label: 'Foundation',
-    title: 'Blood Panels',
-    price: 'From $99',
-    priceNote: 'program-specific pathology',
-    body: 'Panel selection depends on your clinical pathway. Some programs require a comprehensive baseline — others require minimal or no testing.',
-    includes: [
-      'Doctor-issued referral — no GP required',
-      'Collected at any accredited pathology centre',
-      'Results reviewed by your Apex doctor',
-      'Ongoing monitoring included in membership',
-    ],
-    note: 'Panel pricing confirmed after assessment. Have recent bloods? Submit them — we\'ll review suitability.',
-    featured: false,
-  },
-  {
-    number: '02',
-    label: 'Clinical Review',
-    title: 'Doctor Consultation',
-    priceBlock: [
-      { price: '$275', note: 'Hormone program consultation' },
-      { price: '$125', note: 'General and non-hormonal programs' },
-    ],
-    body: 'A full telehealth consultation — not a quick prescription call. Your doctor reviews your results, takes a clinical history, and builds your personalised protocol.',
-    includes: [
-      'Full pathology review and interpretation',
-      'Personalised clinical protocol',
-      'Prescribing where clinically appropriate',
-      'Clear next steps before you hang up',
-    ],
-    note: null,
-    featured: false,
-  },
-  {
-    number: '03',
-    label: 'Ongoing Protocol',
-    title: 'Apex Membership',
-    price: '$99',
-    priceNote: '/month',
-    body: 'Built for ongoing oversight, better data, and a more complete standard of care over time.',
-    includes: [
-      'Continuous doctor-led optimisation',
-      'Discounted review consultations',
-      'Follow-up blood work included in care',
-      'Protocol adjustments based on results',
-      'Priority clinical support between reviews',
-    ],
-    note: 'Script release available at $125 one-off — prescription released to you, fill at any pharmacy, no ongoing membership.',
-    featured: true,
-  },
-]
-
-function StepCard({ step, i, inView }: { step: typeof STEPS[0]; i: number; inView: boolean }) {
-  const accent = '#4890f7'
-  const accentBg = 'rgba(72,144,247,0.06)'
-  const accentBorder = 'rgba(72,144,247,0.18)'
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: i * 0.1, ease }}
-      className="flex flex-col rounded-2xl overflow-hidden"
-      style={{
-        background: 'var(--bg)',
-        border: step.featured ? '1px solid rgba(72,144,247,0.25)' : '1px solid rgba(72,144,247,0.1)',
-        boxShadow: step.featured ? '0 8px 40px rgba(72,144,247,0.08)' : '0 2px 12px rgba(0,0,0,0.04)',
-      }}
-    >
-      {step.featured && (
-        <div className="h-0.5 w-full" style={{ background: 'linear-gradient(90deg, #4890f7, #6ba8ff 60%, transparent)' }} />
-      )}
-
-      {/* Header */}
-      <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.07)' }}>
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div
-            className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-            style={{ background: accentBg, border: `1px solid ${accentBorder}` }}
-          >
-            <span className="text-[11px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>{step.number}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            {step.featured && (
-              <span className="text-[8px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded-sm"
-                style={{ color: accent, background: accentBg, border: `1px solid ${accentBorder}` }}>
-                Recommended
-              </span>
-            )}
-            <span className="text-[8px] font-bold tracking-[0.16em] uppercase px-2 py-0.5 rounded-sm"
-              style={{ color: accent, background: accentBg, border: `1px solid ${accentBorder}` }}>
-              {step.label}
-            </span>
-          </div>
-        </div>
-
-        <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-          {step.title}
-        </h3>
-
-        {/* Price block */}
-        {'priceBlock' in step && step.priceBlock ? (
-          <div className="flex flex-col gap-1.5">
-            {step.priceBlock.map((p, j) => (
-              <div key={j} className="flex items-baseline gap-2">
-                <span
-                  className="font-bold"
-                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: j === 0 ? '26px' : '20px', color: j === 0 ? accent : '#0a0e1a', lineHeight: 1 }}
-                >
-                  {p.price}
-                </span>
-                <span className="text-xs" style={{ color: j === 0 ? '#4890f7' : '#9ab0c8' }}>{p.note}</span>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-3xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: accent }}>{step.price}</span>
-            <span className="text-sm" style={{ color: 'var(--text-primary)' }}>{step.priceNote}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Body */}
-      <div className="flex flex-col flex-1 px-6 py-5">
-        <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--text-primary)' }}>{step.body}</p>
-        <ul className="flex flex-col gap-2 flex-1">
-          {step.includes.map((item, j) => (
-            <li key={j} className="flex items-start gap-2 text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" aria-hidden="true">
-                <circle cx="8" cy="8" r="6.5" stroke={accent} strokeWidth="1" fill={accentBg} />
-                <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              {item}
-            </li>
-          ))}
-        </ul>
-        {step.note && (
-          <p className="text-[11px] leading-relaxed mt-4 pt-4" style={{ color: 'var(--text-primary)', borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-            {step.note}
-          </p>
-        )}
-      </div>
-    </motion.div>
-  )
-}
-
-function PricingSteps() {
-  const headingRef = useRef(null)
-  const headingInView = useInView(headingRef, { once: true, margin: '-80px' })
-  const cardsRef = useRef(null)
-  const cardsInView = useInView(cardsRef, { once: true, margin: '-60px' })
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Pricing steps">
-      <div className="warm-rule" aria-hidden="true" />
-      <div className="container-tight relative z-10">
-        <div ref={headingRef} className="mb-12">
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="label mb-4">
-            What you pay
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="display-serif mb-3"
-            style={{ fontSize: 'clamp(26px, 3.5vw, 48px)' }}
-          >
-            Three components.{' '}
-            <span style={{ color: '#4890f7' }}>That&apos;s it.</span>
-          </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={headingInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-base leading-relaxed max-w-lg" style={{ color: 'var(--text-primary)' }}>
-            Blood panel. Consultation. Ongoing membership if you want it. Nothing bundled to obscure what you&apos;re paying for.
-          </motion.p>
-        </div>
-
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-          {STEPS.map((step, i) => (
-            <StepCard key={step.title} step={step} i={i} inView={cardsInView} />
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Membership vs Single Consultation ───────────────────────────────────────
+
+const COMPARISON_ROWS = [
+  { label: 'Initial Blood Panel',   member: 'From $99',   single: 'From $99'    },
+  { label: 'Hormone Consultation',  member: '$275',        single: '$275'        },
+  { label: 'Peptide Consultation',  member: '$125',        single: '$125'        },
+  { label: 'Monthly Membership',    member: '$99 /mo',     single: '—'           },
+  { label: 'Medication',            member: 'Cost price',  single: 'Cost + fee'  },
+  { label: 'Prescribing Fee',       member: 'Waived',      single: '$125'        },
+  { label: 'Follow-up Bloods',      member: 'Discounted',  single: 'Standard'    },
+  { label: 'Referrals & Certs',     member: 'Free',        single: 'Standard'    },
+]
 
 function MembershipComparison() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-
   const accent = '#4890f7'
+  const memberHighlight = new Set(['Cost price', 'Waived', 'Free', 'Discounted', '$99 /mo'])
 
   return (
     <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Choose your path">
@@ -272,220 +92,742 @@ function MembershipComparison() {
 
       <div ref={ref} className="container-tight relative z-10">
 
-        {/* Section heading */}
-        <div className="mb-12 text-center max-w-3xl mx-auto">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-5">
+        <div className="mb-12 text-center max-w-2xl mx-auto">
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
             Choose Your Path
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="display-serif mb-4"
-            style={{ fontSize: 'clamp(28px, 4vw, 56px)' }}
+            className="display-serif"
+            style={{ fontSize: 'clamp(26px, 3.5vw, 46px)' }}
           >
-            Ongoing system vs.{' '}
-            <span style={{ color: '#4890f7' }}>script only.</span>
+            Ongoing program vs.{' '}
+            <span style={{ color: accent }}>script only.</span>
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-sm leading-relaxed mx-auto"
-            style={{ color: 'var(--text-primary)', maxWidth: '520px' }}
-          >
-            After your consultation, two paths are available. One is a complete clinical program. The other is a prescription only.
-          </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.16, ease }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto"
+        >
 
-          {/* Left — Apex Membership (Recommended) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.25, ease }}
-            className="rounded-2xl overflow-hidden flex flex-col"
-            style={{ border: `1.5px solid ${accent}`, boxShadow: '0 12px 48px rgba(72,144,247,0.14)' }}
+          {/* ── Single Consult Card ── */}
+          <div
+            className="flex flex-col rounded-2xl overflow-hidden"
+            style={{ border: '1px solid rgba(72,144,247,0.1)', background: 'var(--surface)' }}
           >
-            <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, #2563eb, ${accent}, #6ba8ff)` }} />
-            <div className="p-7 flex flex-col flex-1">
+            <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+              <p style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
+                letterSpacing: '0.1em', textTransform: 'uppercase' as const,
+                color: 'var(--text-primary)', opacity: 0.45, marginBottom: '4px',
+              }}>Single Consult</p>
+              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.28 }}>
+                Once-off · No subscription
+              </p>
+            </div>
 
-              {/* Badge */}
-              <div className="mb-6">
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full"
-                  style={{ background: accent, color: '#ffffff' }}>
-                  RECOMMENDED
-                </span>
+            <div className="flex flex-col flex-1">
+              {COMPARISON_ROWS.map((row, i) => (
+                <div
+                  key={row.label}
+                  className="flex items-center justify-between px-6 py-3.5"
+                  style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
+                >
+                  <span style={{
+                    fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
+                    textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.35,
+                  }}>{row.label}</span>
+                  <span style={{
+                    fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
+                    color: row.single === '—' ? 'rgba(255,255,255,0.1)' : 'var(--text-primary)',
+                    opacity: row.single === '—' ? 1 : 0.48,
+                  }}>{row.single}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
+              <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
+                <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>Average initial investment</p>
+                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$350 – $650</p>
+                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>Consultation + pathology + AHI prescribing fee</p>
               </div>
-
-              {/* Title + price */}
-              <h3 className="text-xl font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                Apex Membership
-              </h3>
-              <div className="flex items-baseline gap-2.5 mb-1">
-                <span className="font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '56px', lineHeight: 1, color: 'var(--text-primary)' }}>$99</span>
-                <span className="text-base" style={{ color: 'rgba(var(--text-primary-rgb),0.4)' }}>/month</span>
-              </div>
-              <p className="text-[13px] font-medium mb-5" style={{ color: accent }}>
-                Doctor-led care, tracked and refined over time
-              </p>
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed mb-7 pb-6" style={{ color: 'rgba(var(--text-primary-rgb),0.6)', borderBottom: '1px solid rgba(72,144,247,0.1)', fontStyle: 'italic' }}>
-                Your protocol isn&apos;t static. It evolves with your biology, guided by a clinical team that monitors your data, adjusts your treatment, and stays ahead of the curve — every step of the way.
-              </p>
-
-              {/* What's included label */}
-              <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: 'rgba(var(--text-primary-rgb),0.35)' }}>
-                What&apos;s included
-              </p>
-
-              {/* Bullets */}
-              <ul className="flex flex-col gap-3 mb-8 flex-1">
-                {[
-                  { text: 'Zero medication mark-ups — medications dispensed at cost price through our partner pharmacy' },
-                  { text: 'Doctor oversight and protocol refinement across every review cycle' },
-                  { text: 'Blood work heavily discounted every cycle with biomarker trends tracked over time' },
-                  { text: 'Prescribing fee waived — scripts issued and sent to you at no extra cost' },
-                  { text: 'Discounted doctor review consultations' },
-                  { text: 'Nursing team support with follow-ups every 6–8 weeks' },
-                  { text: 'Priority clinical support between reviews' },
-                  { text: 'Free referrals, medical certificates, and health summaries' },
-                  { text: 'Nutrition and lifestyle clinically calibrated to your protocol' },
-                  { text: 'VIP admin support 9am–4pm weekdays' },
-                  { text: 'Apex App — full protocol visibility and tracking', soon: true },
-                  { text: 'Medication dispensed discreetly and safely via TGA-compliant partner pharmacies' },
-                ].map((item, j) => (
-                  <li key={j} className="flex items-start gap-3">
-                    <svg viewBox="0 0 16 16" fill="none" className="flex-shrink-0" style={{ width: 16, height: 16, marginTop: '2px' }} aria-hidden="true">
-                      <circle cx="8" cy="8" r="7" fill={`rgba(72,144,247,0.1)`} stroke={accent} strokeWidth="1" />
-                      <path d="M5 8l2 2 4-4" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                      {item.text}
-                      {item.soon && (
-                        <span className="ml-2 text-[9px] font-bold tracking-[0.12em] uppercase px-1.5 py-0.5 rounded"
-                          style={{ background: 'rgba(72,144,247,0.08)', color: accent, border: '1px solid rgba(72,144,247,0.2)', verticalAlign: 'middle' }}>
-                          Soon
-                        </span>
-                      )}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
               <Link
                 href="/intake/pre-screen"
-                className="flex items-center justify-center gap-2.5 w-full py-4 rounded-xl text-center text-[13px] font-bold tracking-[0.06em] uppercase transition-all duration-200"
-                style={{ background: accent, color: '#ffffff' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#2563eb'; e.currentTarget.style.boxShadow = '0 6px 24px rgba(72,144,247,0.4)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = accent; e.currentTarget.style.boxShadow = 'none' }}
+                className="flex items-center justify-center w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
+                style={{ border: '1px solid rgba(72,144,247,0.18)', color: 'var(--text-primary)', opacity: 0.55 }}
+                onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.4)' }}
+                onMouseLeave={e => { e.currentTarget.style.opacity = '0.55'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.18)' }}
               >
-                Start Your Clinical Assessment
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                Single Consult
+              </Link>
+            </div>
+          </div>
+
+          {/* ── Member Card (featured) ── */}
+          <div
+            className="flex flex-col rounded-2xl overflow-hidden relative"
+            style={{
+              border: `1px solid ${accent}`,
+              background: 'var(--surface)',
+              boxShadow: '0 0 80px rgba(72,144,247,0.14)',
+            }}
+          >
+            {/* Recommended badge */}
+            <div style={{
+              position: 'absolute', top: 0, right: 20,
+              background: accent, borderRadius: '0 0 6px 6px',
+              padding: '4px 12px',
+              fontFamily: 'var(--font-space-grotesk)', fontSize: '9px',
+              fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff',
+            }}>
+              Recommended
+            </div>
+
+            <div className="px-6 py-5" style={{ borderBottom: `1px solid rgba(72,144,247,0.18)` }}>
+              <p style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
+                letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: accent, marginBottom: '4px',
+              }}>Apex Member</p>
+              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.4 }}>
+                Ongoing program · Cancel anytime
+              </p>
+            </div>
+
+            <div className="flex flex-col flex-1">
+              {COMPARISON_ROWS.map((row, i) => {
+                const isAdvantage = memberHighlight.has(row.member)
+                return (
+                  <div
+                    key={row.label}
+                    className="flex items-center justify-between px-6 py-3.5"
+                    style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? `1px solid rgba(72,144,247,0.08)` : 'none' }}
+                  >
+                    <span style={{
+                      fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
+                      textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.4,
+                    }}>{row.label}</span>
+                    <span
+                      className="flex items-center gap-1.5"
+                      style={{
+                        fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
+                        color: isAdvantage ? accent : 'var(--text-primary)',
+                      }}
+                    >
+                      {isAdvantage && (
+                        <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
+                          <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.15)" stroke={accent} strokeWidth="0.8" />
+                          <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                      {row.member}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className="px-6 py-5" style={{ borderTop: `1px solid rgba(72,144,247,0.18)` }}>
+              <Link
+                href="/intake/hormone-consult"
+                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
+                style={{ background: accent, color: '#ffffff', boxShadow: '0 4px 20px rgba(72,144,247,0.35)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = '#5fa0ff'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(72,144,247,0.5)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = accent; e.currentTarget.style.boxShadow = '0 4px 20px rgba(72,144,247,0.35)' }}
+              >
+                Get Started
+                <svg viewBox="0 0 14 14" fill="none" width="12" height="12" aria-hidden="true">
+                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-              <p className="text-[11px] text-center mt-3 leading-relaxed" style={{ color: 'rgba(var(--text-primary-rgb),0.38)' }}>
-                No lock-in contracts. Activates after your initial consultation,<br />where treatment is clinically appropriate.
+            </div>
+          </div>
+
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-center text-[11px] leading-relaxed"
+          style={{ color: 'var(--text-primary)', opacity: 0.28, maxWidth: 520, margin: '20px auto 0' }}
+        >
+          Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
+        </motion.p>
+      </div>
+    </section>
+  )
+}
+
+// ─── Member Savings Guide ────────────────────────────────────────────────────
+
+const SAVINGS_ROWS = [
+  { label: 'Prescribing fees',       saving: 'Up to $500',  period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
+  { label: 'Medication mark-ups',    saving: '$600–$1,200', period: '/yr', detail: 'Zero AHI fees — you pay pharmacy cost price direct' },
+  { label: 'Follow-up blood panels', saving: '~$120',       period: '/yr', detail: 'Discounted member rate on all repeat blood panels' },
+]
+
+function MemberSavings() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const accent = '#4890f7'
+
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{ backgroundColor: 'var(--surface)', paddingTop: '80px', paddingBottom: '80px' }}
+      aria-label="Membership savings guide"
+    >
+      <div className="warm-rule" aria-hidden="true" />
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.06) 0%, transparent 70%)' }}
+      />
+
+      <div ref={ref} className="container-tight relative z-10">
+
+        <div className="max-w-2xl mx-auto text-center mb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
+            className="label mb-4"
+          >
+            Is Membership Worth It?
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
+            className="display-serif"
+            style={{ fontSize: 'clamp(22px, 3vw, 40px)' }}
+          >
+            The average Apex patient on protocol has:
+          </motion.h2>
+        </div>
+
+        {/* Typical usage stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.15, ease }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto mb-10"
+        >
+          {[
+            { value: '2–4', label: 'Doctor consultations per year' },
+            { value: '2–3', label: 'Blood panels per year' },
+            { value: '12+', label: 'Months of ongoing treatment' },
+          ].map(({ value, label }) => (
+            <div
+              key={label}
+              className="flex flex-col items-center justify-center py-6 px-4 rounded-xl text-center"
+              style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}
+            >
+              <span style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '38px', fontWeight: 800,
+                color: accent, lineHeight: 1,
+              }}>
+                {value}
+              </span>
+              <span style={{
+                fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
+                color: 'var(--text-primary)', opacity: 0.4, marginTop: '8px',
+              }}>
+                {label}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center text-sm mb-8"
+          style={{ color: 'var(--text-primary)', opacity: 0.45 }}
+        >
+          If that&apos;s you, here&apos;s what membership saves you annually vs. the single consult path:
+        </motion.p>
+
+        {/* Savings breakdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.35, ease }}
+          className="max-w-2xl mx-auto overflow-hidden"
+          style={{ border: '1px solid rgba(72,144,247,0.12)', borderRadius: '16px', background: 'var(--bg)' }}
+        >
+          {SAVINGS_ROWS.map((row) => (
+            <div
+              key={row.label}
+              className="flex items-center justify-between px-6 py-5"
+              style={{ borderBottom: '1px solid rgba(72,144,247,0.06)' }}
+            >
+              <div className="min-w-0 pr-4">
+                <p style={{
+                  fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
+                  color: 'var(--text-primary)', opacity: 0.5, marginBottom: '3px',
+                }}>
+                  {row.label}
+                </p>
+                <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28 }}>
+                  {row.detail}
+                </p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <span style={{
+                  fontFamily: 'var(--font-space-grotesk)', fontSize: '20px', fontWeight: 800, color: accent,
+                }}>
+                  {row.saving}
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 600, color: accent, opacity: 0.65,
+                }}>
+                  {row.period}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          {/* Total row */}
+          <div
+            className="flex items-center justify-between px-6 py-6"
+            style={{ background: 'rgba(72,144,247,0.05)', borderTop: '1px solid rgba(72,144,247,0.16)' }}
+          >
+            <div>
+              <p style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 700,
+                letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.55,
+              }}>
+                Typical annual saving
+              </p>
+              <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28, marginTop: '3px' }}>
+                vs. single consult path · individual results vary
               </p>
             </div>
-          </motion.div>
+            <div className="text-right flex-shrink-0 ml-6">
+              <p style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '30px', fontWeight: 800,
+                color: accent, lineHeight: 1,
+              }}>
+                $1,000–$1,800
+              </p>
+              <p style={{
+                fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 600,
+                color: accent, opacity: 0.6, marginTop: '3px',
+              }}>
+                per year
+              </p>
+            </div>
+          </div>
+        </motion.div>
 
-          {/* Right — Single Consultation */}
+        <motion.p
+          initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-center text-[11px] mt-5"
+          style={{ color: 'var(--text-primary)', opacity: 0.28 }}
+        >
+          Membership: $99/mo ($1,188/yr). At 3+ medication invoices, the saving pays for itself.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.6, ease }}
+          className="flex justify-center mt-8"
+        >
+          <Link
+            href="/intake/hormone-consult"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-200"
+            style={{ background: accent, color: '#ffffff', boxShadow: '0 4px 20px rgba(72,144,247,0.3)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#5fa0ff'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(72,144,247,0.45)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = accent; e.currentTarget.style.boxShadow = '0 4px 20px rgba(72,144,247,0.3)' }}
+          >
+            Become a Member
+            <svg viewBox="0 0 14 14" fill="none" width="12" height="12" aria-hidden="true">
+              <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </motion.div>
+
+      </div>
+    </section>
+  )
+}
+
+// ─── Program Pathways (accordion) ────────────────────────────────────────────
+
+type PathwayStep = {
+  label: string
+  body: string
+  price?: string
+  priceNote?: string
+  includes?: string[]
+  options?: { label: string; detail: string }[]
+}
+
+type Pathway = {
+  id: string
+  title: string
+  tag: 'Apex Member' | 'Single Consult'
+  steps: PathwayStep[]
+}
+
+const PATHWAYS: Pathway[] = [
+  {
+    id: 'hormone-member',
+    title: 'Hormone Optimisation',
+    tag: 'Apex Member',
+    steps: [
+      {
+        label: 'Intake',
+        body: 'Complete the hormone consult intake form online — takes 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
+      },
+      {
+        label: 'Blood Panel',
+        body: 'Doctor-issued referral — no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
+        price: 'From $99',
+        priceNote: 'Discounted for members',
+      },
+      {
+        label: 'Hormone Consultation',
+        body: 'Full telehealth review of your pathology, clinical history, and goals. Your doctor builds a personalised protocol and prescribes where clinically appropriate.',
+        price: '$275',
+        priceNote: 'Initial consultation',
+      },
+      {
+        label: 'Ongoing Protocol',
+        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results — reviewed every cycle.',
+        price: '$99 /mo',
+        priceNote: 'No lock-in contracts',
+        includes: [
+          'Zero medication mark-ups — pharmacy cost price direct',
+          'Prescribing fee waived — scripts issued at no charge',
+          'Discounted follow-up consultations and review blood panels',
+          'Nursing team check-ins every 6–8 weeks',
+          'Free referrals, medical certificates, and health summaries',
+          'Priority clinical support between reviews',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'hormone-single',
+    title: 'Hormone Optimisation',
+    tag: 'Single Consult',
+    steps: [
+      {
+        label: 'Intake',
+        body: 'Complete the hormone consult intake form. Our clinical team reviews your submission before your consultation is scheduled.',
+      },
+      {
+        label: 'Blood Panel',
+        body: 'Doctor-issued referral. Collected fasted before 9am at any accredited pathology centre. Results reviewed by your Apex doctor.',
+        price: 'From $99',
+        priceNote: 'Standard pricing',
+      },
+      {
+        label: 'Hormone Consultation',
+        body: 'Full telehealth review of your results and clinical history. Personalised treatment plan issued where clinically appropriate.',
+        price: '$275',
+        priceNote: 'Initial consultation',
+      },
+      {
+        label: 'Treatment Options',
+        body: 'At the conclusion of your consultation, choose how to proceed with your prescription.',
+        options: [
+          {
+            label: 'Partner Pharmacy',
+            detail: 'You pay the pharmacy cost price for medication. An Administration, Handling & Infrastructure (AHI) fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
+          },
+          {
+            label: 'Own Pharmacy — Script Release',
+            detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you. Ongoing nursing support included. Note: excludes NSW patients.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'weight-member',
+    title: 'Weight Loss & Metabolic',
+    tag: 'Apex Member',
+    steps: [
+      {
+        label: 'Intake',
+        body: 'Complete the metabolic health intake form online. Our clinical team reviews your submission before your consultation.',
+      },
+      {
+        label: 'Blood Panel',
+        body: 'Doctor-issued referral matched to your metabolic pathway. No GP required. Collected at any accredited pathology centre.',
+        price: 'From $99',
+        priceNote: 'Discounted for members',
+      },
+      {
+        label: 'Peptide Consultation',
+        body: 'Telehealth review of your metabolic health profile, results, and goals. Treatment plan built where clinically appropriate.',
+        price: '$125',
+        priceNote: 'Initial consultation',
+      },
+      {
+        label: 'Ongoing Protocol',
+        body: 'Apex Membership activates post-consultation where clinically appropriate.',
+        price: '$99 /mo',
+        priceNote: 'No lock-in contracts',
+        includes: [
+          'Zero medication mark-ups — pharmacy cost price direct',
+          'Prescribing fee waived',
+          'Discounted follow-up consultations and review bloods',
+          'Nursing team support throughout your protocol',
+          'Free referrals, medical certificates, and health summaries',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'weight-single',
+    title: 'Weight Loss & Metabolic',
+    tag: 'Single Consult',
+    steps: [
+      {
+        label: 'Intake',
+        body: 'Complete the metabolic health intake form. Our clinical team reviews before your consultation.',
+      },
+      {
+        label: 'Blood Panel',
+        body: 'Doctor-issued referral. Collected at any accredited pathology centre. Results reviewed by your Apex doctor.',
+        price: 'From $99',
+        priceNote: 'Standard pricing',
+      },
+      {
+        label: 'Peptide Consultation',
+        body: 'Telehealth review of your metabolic health and goals. Treatment plan issued where clinically appropriate.',
+        price: '$125',
+        priceNote: 'Initial consultation',
+      },
+      {
+        label: 'Treatment Options',
+        body: 'Choose how to proceed with your prescription after consultation.',
+        options: [
+          {
+            label: 'Partner Pharmacy',
+            detail: 'Pharmacy cost price for medication. AHI fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
+          },
+          {
+            label: 'Own Pharmacy — Script Release',
+            detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you.',
+          },
+        ],
+      },
+    ],
+  },
+]
+
+function AccordionItem({ pathway }: { pathway: Pathway }) {
+  const [open, setOpen] = useState(false)
+  const accent = '#4890f7'
+  const isMember = pathway.tag === 'Apex Member'
+
+  return (
+    <div
+      className="rounded-xl overflow-hidden mb-2"
+      style={{
+        border: open
+          ? `1px solid ${isMember ? 'rgba(72,144,247,0.3)' : 'rgba(72,144,247,0.12)'}`
+          : `1px solid ${isMember ? 'rgba(72,144,247,0.18)' : 'rgba(72,144,247,0.08)'}`,
+        background: open
+          ? (isMember ? 'rgba(72,144,247,0.04)' : 'var(--bg)')
+          : 'var(--bg)',
+        transition: 'border-color 0.2s, background 0.2s',
+      }}
+    >
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-full flex items-center justify-between px-5 py-4 text-left"
+        aria-expanded={open}
+      >
+        <div className="flex items-center gap-4 min-w-0">
+          <span
+            className="flex-shrink-0 px-3 py-1.5 rounded text-[11px] font-bold tracking-[0.1em] uppercase"
+            style={{
+              background: isMember ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.05)',
+              color: isMember ? accent : 'var(--text-primary)',
+              border: `1px solid ${isMember ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.14)'}`,
+              opacity: isMember ? 1 : 0.8,
+              minWidth: '120px',
+              textAlign: 'center',
+            }}
+          >
+            {pathway.tag}
+          </span>
+          <span style={{ fontSize: '13px', color: 'var(--text-primary)', opacity: 0.5 }}>
+            {isMember ? 'Ongoing program · $99/mo membership' : 'Once-off · Script release available'}
+          </span>
+        </div>
+        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="flex-shrink-0 ml-4">
+          <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
+            <path d="M4 6l4 4 4-4" stroke={open ? accent : 'currentColor'} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: open ? 1 : 0.35 }} />
+          </svg>
+        </motion.div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
           <motion.div
+            key="body"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            style={{ overflow: 'hidden' }}
+          >
+            <div className="pb-8" style={{ borderTop: '1px solid rgba(72,144,247,0.06)' }}>
+              {pathway.steps.map((step, i) => (
+                <div
+                  key={step.label}
+                  className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8 py-5"
+                  style={{ borderBottom: i < pathway.steps.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
+                >
+                  {/* Left — step number + content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
+                        <span style={{ fontSize: '9px', fontWeight: 700, color: accent, fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</span>
+                      </div>
+                      <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                        {step.label}
+                      </p>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55, paddingLeft: '29px' }}>
+                      {step.body}
+                    </p>
+
+                    {step.options && (
+                      <div className="mt-4 flex flex-col gap-2.5" style={{ paddingLeft: '29px' }}>
+                        {step.options.map(opt => (
+                          <div key={opt.label} className="p-4 rounded-xl" style={{ background: 'rgba(72,144,247,0.03)', border: '1px solid rgba(72,144,247,0.1)' }}>
+                            <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '6px' }}>
+                              {opt.label}
+                            </p>
+                            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                              {opt.detail}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {step.includes && (
+                      <ul className="mt-4 flex flex-col gap-2" style={{ paddingLeft: '29px' }}>
+                        {step.includes.map(item => (
+                          <li key={item} className="flex items-start gap-2.5">
+                            <svg viewBox="0 0 12 12" fill="none" className="flex-shrink-0" style={{ width: 12, height: 12, marginTop: '3px' }} aria-hidden="true">
+                              <circle cx="6" cy="6" r="5.5" stroke={accent} strokeWidth="0.8" fill="rgba(72,144,247,0.06)" />
+                              <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Right — price */}
+                  {step.price && (
+                    <div className="flex-shrink-0 sm:text-right" style={{ minWidth: '100px' }}>
+                      <p style={{
+                        fontFamily: 'var(--font-space-grotesk)',
+                        fontSize: '20px',
+                        fontWeight: 700,
+                        lineHeight: 1,
+                        color: (isMember && step.price.includes('/mo')) ? accent : 'var(--text-primary)',
+                      }}>
+                        {step.price}
+                      </p>
+                      {step.priceNote && (
+                        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.3, marginTop: '4px' }}>
+                          {step.priceNote}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+function ProgramPathways() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const accent = '#4890f7'
+
+  const programGroups = PATHWAYS.reduce<Record<string, Pathway[]>>((acc, p) => {
+    if (!acc[p.title]) acc[p.title] = []
+    acc[p.title].push(p)
+    return acc
+  }, {})
+
+  return (
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Program pathways">
+      <div className="warm-rule" aria-hidden="true" />
+      <div ref={ref} className="container-tight relative z-10">
+
+        <div className="mb-10">
+          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
+            Program Pathways
+          </motion.p>
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.35, ease }}
-            className="rounded-2xl overflow-hidden"
-            style={{ border: '1px solid rgba(var(--text-primary-rgb),0.1)', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
+            transition={{ duration: 0.65, delay: 0.08, ease }}
+            className="display-serif"
+            style={{ fontSize: 'clamp(24px, 3vw, 40px)' }}
           >
-            <div className="p-7">
+            Step-by-step,{' '}
+            <span style={{ color: accent }}>by program.</span>
+          </motion.h2>
+        </div>
 
-              {/* Title */}
-              <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                Single Consultation
-              </h3>
-
-              {/* Consultation prices */}
-              <p className="text-sm mb-1" style={{ color: 'rgba(var(--text-primary-rgb),0.5)' }}>$275 Hormone and Performance Health Consultation</p>
-              <p className="text-sm mb-4" style={{ color: 'rgba(var(--text-primary-rgb),0.5)' }}>$125 Longevity, Weight loss, Recovery Consultation</p>
-
-              {/* Description */}
-              <p className="text-sm leading-relaxed mb-7" style={{ color: 'rgba(var(--text-primary-rgb),0.5)' }}>
-                Non-members enjoy the same quality medical consultation and treatment options, but without full membership benefits.
-              </p>
-
-              {/* Pathway 1 */}
-              <div className="mb-7">
-                <h4 className="text-sm font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
-                  Pathway Option 1: Order Through Our Partner Pharmacies
-                </h4>
-                <ul className="flex flex-col gap-3">
-                  <li className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(var(--text-primary-rgb),0.25)', marginTop: '7px' }} />
-                    <span className="text-sm" style={{ color: 'var(--text-primary)' }}>You pay the PHARMACY price for all medications.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(var(--text-primary-rgb),0.25)', marginTop: '7px' }} />
-                    <div>
-                      <span className="text-sm" style={{ color: 'var(--text-primary)' }}>
-                        Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
-                      </span>
-                      <ul className="mt-2 flex flex-col gap-1">
-                        <li className="text-sm" style={{ color: 'rgba(var(--text-primary-rgb),0.55)' }}>— Ongoing file management.</li>
-                        <li className="text-sm" style={{ color: 'rgba(var(--text-primary-rgb),0.55)' }}>— Treatment guidance.</li>
-                        <li className="text-sm" style={{ color: 'rgba(var(--text-primary-rgb),0.55)' }}>— Medication safety checks.</li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Pathway 2 */}
-              <div className="mb-7">
-                <h4 className="text-sm font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
-                  Pathway Option 2: Choose Your Own Pharmacy
-                </h4>
-                <p className="text-sm leading-relaxed mb-3" style={{ color: 'rgba(var(--text-primary-rgb),0.5)' }}>
-                  If a prescription is issued, our team will send this out to you including your treatment plan, dosing guides and scripts.
-                </p>
-                <ul className="flex flex-col gap-2.5">
-                  {[
-                    'Prescribing Fee: $125.',
-                    'On-going Support.',
-                    'Access to our nursing team for dosing advice and support.',
-                  ].map(item => (
-                    <li key={item} className="flex items-start gap-2.5">
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: 'rgba(var(--text-primary-rgb),0.25)', marginTop: '7px' }} />
-                      <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* CTA */}
-              <Link
-                href="/intake/pre-screen"
-                className="block w-full py-3.5 rounded-xl text-center text-sm font-bold tracking-[0.08em] uppercase transition-all duration-200"
-                style={{ background: 'var(--surface-muted)', color: 'var(--text-primary)', border: '1px solid rgba(var(--text-primary-rgb),0.1)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#e5e9f0' }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#f1f5fb' }}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2, ease }}
+          className="flex flex-col gap-10"
+        >
+          {Object.entries(programGroups).map(([title, pathways], groupIndex) => (
+            <div key={title}>
+              <div
+                className="flex items-center gap-4 mb-4"
+                style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(72,144,247,0.14)' }}
               >
-                Order Now
-              </Link>
-
-              <div className="mt-5 pt-4" style={{ borderTop: '1px solid rgba(var(--text-primary-rgb),0.07)' }}>
-                <p className="text-[11px] text-center" style={{ color: 'rgba(var(--text-primary-rgb),0.35)' }}>
-                  (Note: Script release excludes NSW patients due to state regulations.)
-                </p>
+                <h3 style={{
+                  fontFamily: 'var(--font-space-grotesk)',
+                  fontSize: '18px',
+                  fontWeight: 700,
+                  color: 'var(--text-primary)',
+                  letterSpacing: '-0.01em',
+                }}>
+                  {title}
+                </h3>
+                <span style={{
+                  fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const,
+                  color: 'var(--text-primary)', opacity: 0.3,
+                }}>
+                  {pathways.length} pathways
+                </span>
+              </div>
+              <div className="flex flex-col gap-2">
+                {pathways.map(pathway => (
+                  <AccordionItem key={pathway.id} pathway={pathway} />
+                ))}
               </div>
             </div>
-          </motion.div>
+          ))}
+        </motion.div>
 
-        </div>
+        <p className="text-[10px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+          Script release excludes NSW patients. All treatment subject to clinical appropriateness.
+        </p>
       </div>
     </section>
   )
@@ -626,8 +968,9 @@ export default function PricingPage() {
       <Nav />
       <main>
         <PricingHero />
-        <PricingSteps />
         <MembershipComparison />
+        <MemberSavings />
+        <ProgramPathways />
         <NotIncluded />
         <PricingCTA />
       </main>

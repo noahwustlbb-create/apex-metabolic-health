@@ -12,7 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const AU_STATES = ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'ACT', 'NT']
 
 const HEALTH_CONDITIONS = [
-  'Hormone Optimisation & TRT',
+  'Hormone Optimisation',
   'Weight Management & Metabolic Health',
   'Performance & Recovery',
   'Hair Restoration',
@@ -22,7 +22,7 @@ const HEALTH_CONDITIONS = [
   'Longevity & Anti-Ageing',
   'Sleep Disorders',
   'Blood Panel & Health Assessment',
-  'General Consultation',
+  'Peptide Consultation',
   'Other',
 ]
 
@@ -137,8 +137,8 @@ function F({ label, value, onChange, type = 'text', placeholder, req, hint }: {
       </label>
       {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#4890f7' }}>{hint}</p>}
       <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-        style={inputBase} onFocus={onFocus} onBlur={onBlur} />
+        className="w-full px-4 py-3 rounded-sm outline-none transition-all duration-150"
+        style={{ ...inputBase, fontSize: '16px' }} onFocus={onFocus} onBlur={onBlur} />
     </div>
   )
 }
@@ -154,8 +154,8 @@ function TA({ label, value, onChange, placeholder, rows = 3, hint, req }: {
       </label>
       {hint && <p className="text-[11px] mb-1.5 leading-relaxed" style={{ color: '#4890f7' }}>{hint}</p>}
       <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
-        className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
-        style={inputBase} onFocus={onFocus} onBlur={onBlur} />
+        className="w-full px-4 py-3 rounded-sm outline-none resize-none transition-all duration-150"
+        style={{ ...inputBase, fontSize: '16px' }} onFocus={onFocus} onBlur={onBlur} />
     </div>
   )
 }
@@ -192,11 +192,13 @@ function Score({ label, value, onChange, hint }: {
     <div>
       <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>{label}</label>
       {hint && <p className="text-[11px] mb-2" style={{ color: '#4890f7' }}>{hint}</p>}
-      <div className="flex gap-1.5 flex-wrap">
+      <div className="flex gap-1 flex-wrap">
         {Array.from({ length: 11 }, (_, i) => String(i)).map(s => (
           <button key={s} type="button" onClick={() => onChange(s)}
-            className="w-9 h-9 rounded-sm text-xs font-bold transition-all duration-150"
+            className="flex-1 rounded-sm text-xs font-bold transition-all duration-150"
             style={{
+              minHeight: '44px',
+              minWidth: '28px',
               background: value === s ? '#4890f7' : '#f1f5fb',
               border: `1px solid ${value === s ? '#4890f7' : 'rgba(72,144,247,0.25)'}`,
               color: value === s ? '#ffffff' : '#4890f7',
@@ -311,12 +313,12 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>
           $99<span className="text-xs font-medium" style={{ color: '#0a0e1a' }}>/month</span>
         </p>
-        <p className="text-xs mb-4" style={{ color: '#374151' }}>
+        <p className="text-xs mb-4" style={{ color: '#1c2840' }}>
           Complete care pathway from consultation through to ongoing treatment.
         </p>
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#1c2840' }}>
               <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -342,7 +344,7 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <h3 className="text-base font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#0a0e1a' }}>
           Single Consultation
         </h3>
-        <p className="text-xs mb-4" style={{ color: '#374151' }}>
+        <p className="text-xs mb-4" style={{ color: '#1c2840' }}>
           One-time consultation. Script issued if clinically appropriate.
         </p>
 
@@ -351,18 +353,18 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
           Pathway Option 1: Order Through Our Partner Pharmacies
         </p>
         <ul className="flex flex-col gap-1.5 mb-2">
-          <li className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#1c2840' }}>
             <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>
             You pay the PHARMACY price for all medications.
           </li>
-          <li className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
+          <li className="flex items-start gap-2 text-xs" style={{ color: '#1c2840' }}>
             <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>
             <div>
               Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong>$50</strong>, which covers:
               <ul className="mt-1 flex flex-col gap-0.5">
-                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Ongoing file management.</li>
-                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Treatment guidance.</li>
-                <li className="text-[11px]" style={{ color: '#6b7280' }}>· Medication safety checks.</li>
+                <li className="text-[11px]" style={{ color: '#2a3f65' }}>· Ongoing file management.</li>
+                <li className="text-[11px]" style={{ color: '#2a3f65' }}>· Treatment guidance.</li>
+                <li className="text-[11px]" style={{ color: '#2a3f65' }}>· Medication safety checks.</li>
               </ul>
             </div>
           </li>
@@ -380,7 +382,7 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </div>
         <ul className="flex flex-col gap-1 mb-3">
           {['Script and treatment plan sent directly to you', 'Fill at any pharmacy of your choice', 'Dosing guides included'].map(f => (
-            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#374151' }}>
+            <li key={f} className="flex items-start gap-2 text-xs" style={{ color: '#1c2840' }}>
               <span style={{ color: '#4890f7', flexShrink: 0 }}>—</span>{f}
             </li>
           ))}
@@ -627,8 +629,8 @@ export default function GeneralConsultForm() {
                       <div>
                         <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>State</label>
                         <select value={data.state} onChange={e => set('state', e.target.value)}
-                          className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-                          style={{ ...inputBase, color: data.state ? '#0a0e1a' : '#4890f7' }}
+                          className="w-full px-4 py-3 rounded-sm outline-none transition-all duration-150 appearance-none"
+                          style={{ ...inputBase, fontSize: '16px', color: data.state ? '#0a0e1a' : '#4890f7' }}
                           onFocus={onFocus} onBlur={onBlur}>
                           <option value="" disabled style={{ background: 'var(--surface)' }}>State</option>
                           {AU_STATES.map(s => <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>)}
@@ -653,7 +655,7 @@ export default function GeneralConsultForm() {
                       <p className="text-xs font-semibold mb-1.5" style={{ color: 'var(--text-primary)' }}>Driver&apos;s licence — identity verification</p>
                       <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                         Please email a photo of your driver&apos;s licence (name and date of birth only — no licence number required) to{' '}
-                        <strong style={{ color: 'var(--text-primary)' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line.
+                        <strong style={{ color: 'var(--text-primary)' }}>admin@apexmetabolichealth.com.au</strong> with your full name in the subject line.
                         This is collected for identity verification only and destroyed once confirmed.
                       </p>
                     </div>
@@ -713,7 +715,7 @@ export default function GeneralConsultForm() {
                       <p className="text-xs font-semibold mb-1" style={{ color: '#4890f7' }}>Forward previous test results</p>
                       <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                         Email previous blood tests, DEXA scans, or other relevant results to{' '}
-                        <strong style={{ color: 'var(--text-primary)' }}>care@apexmetabolichealth.com.au</strong> with your full name in the subject line. Your doctor will review them before your consultation.
+                        <strong style={{ color: 'var(--text-primary)' }}>admin@apexmetabolichealth.com.au</strong> with your full name in the subject line. Your doctor will review them before your consultation.
                       </p>
                     </div>
                   </div>

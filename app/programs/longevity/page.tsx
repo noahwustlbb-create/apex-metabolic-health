@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import Image from 'next/image'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -42,6 +43,13 @@ function Hero() {
       aria-label="Longevity Protocol program"
     >
       <div className="absolute inset-0 dot-grid opacity-[0.14]" aria-hidden="true" />
+      {/* Program hero image */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+        <Image src="/img-longevity.png" alt="" fill className="object-cover object-center" style={{ opacity: 0.18, mixBlendMode: 'luminosity' }} />
+        <div className="absolute inset-0 lg:hidden" style={{ background: 'rgba(4,6,13,0.6)' }} />
+        <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(90deg, var(--bg) 0%, rgba(4,6,13,0.35) 50%, transparent 75%)' }} />
+        <div className="absolute inset-x-0 bottom-0 h-32" style={{ background: 'linear-gradient(180deg, transparent, var(--bg))' }} />
+      </div>
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
@@ -110,7 +118,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '520px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          The Apex Longevity Protocol is our most comprehensive program — a multi-system biological assessment, ongoing tracking, and a doctor-led protocol built for men who are thinking proactively about the next decade, not just the next checkup.
+          The Apex Longevity Protocol is our most comprehensive program — a multi-system biological assessment, ongoing tracking, and a doctor-led protocol built for those thinking proactively about the next decade, not just the next checkup.
         </motion.p>
 
         <motion.div

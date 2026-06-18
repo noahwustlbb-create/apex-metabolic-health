@@ -7,21 +7,22 @@ import { useTheme } from '@/components/ThemeProvider'
 
 const NAV_PROGRAMS = [
   { name: 'Hormone Optimisation',     slug: 'hormone-optimisation',  comingSoon: false },
+  { name: 'Sexual Health',            slug: 'sexual-health',         comingSoon: false },
   { name: 'Performance & Recovery',   slug: 'performance-plus',      comingSoon: false },
   { name: 'Metabolic & Weight',       slug: 'metabolic-weight-loss', comingSoon: false },
+  { name: 'Anti-Ageing & Longevity',  slug: 'longevity',             comingSoon: false },
   { name: 'Hair Restoration',         slug: 'hair-restoration',      comingSoon: false },
   { name: 'Skin Regeneration',        slug: 'skin-regeneration',     comingSoon: false },
   { name: 'Injury Repair & Recovery', slug: 'injury-repair',         comingSoon: false },
-  { name: 'Longevity Protocol',       slug: 'longevity',             comingSoon: true  },
+  { name: 'Pathology',                slug: 'pathology',             comingSoon: false },
 ]
 
 const navLinks = [
-  { label: 'Membership',    href: '/membership'    },
-  { label: 'What We Treat', href: '/what-we-treat' },
-  { label: 'Our Approach',  href: '/our-approach'  },
-  { label: 'About',         href: '/about'         },
-  { label: 'Learn',         href: '/learn'         },
-  { label: 'FAQs',          href: '/faqs'          },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Pricing',      href: '/pricing'      },
+  { label: 'Membership',   href: '/membership'   },
+  { label: 'About',        href: '/about'        },
+  { label: 'FAQs',         href: '/faqs'         },
 ]
 
 export default function Nav() {
@@ -225,12 +226,11 @@ export default function Nav() {
             <div className="flex flex-col flex-1 overflow-y-auto" style={{ paddingTop: '76px' }}>
               <nav className="flex flex-col px-6 pt-6" aria-label="Primary navigation">
                 {[
-                  { label: 'Clinical Programs', href: '/services'       },
+                  { label: 'Clinical Programs', href: '/services'      },
+                  { label: 'How It Works',      href: '/how-it-works'  },
+                  { label: 'Pricing',           href: '/pricing'       },
                   { label: 'Membership',        href: '/membership'    },
-                  { label: 'Our Approach',      href: '/our-approach'  },
-                  { label: 'What We Treat',     href: '/what-we-treat' },
                   { label: 'About',             href: '/about'         },
-                  { label: 'Learn',             href: '/learn'         },
                   { label: 'FAQs',              href: '/faqs'          },
                 ].map((link, i) => (
                   <motion.div key={link.href} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.26, delay: i * 0.055 + 0.04 }}>

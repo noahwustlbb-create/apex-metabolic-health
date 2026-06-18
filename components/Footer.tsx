@@ -9,7 +9,7 @@ const COMPANY_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
-  { label: 'Get Started', href: '/assessment' },
+  { label: 'Get Started', href: '/intake/pre-screen' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms' },
 ]
@@ -55,7 +55,7 @@ export default function Footer() {
             </div>
 
             <p className="text-sm leading-relaxed max-w-xs mb-5" style={{ color: 'rgba(255,255,255,0.3)' }}>
-              Doctor-led hormonal health, evidence-based and delivered online to men across Australia.
+              Doctor-led hormonal health, evidence-based and delivered online across Australia.
             </p>
 
             <div className="flex flex-wrap gap-2 mb-6">
@@ -69,12 +69,12 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="flex flex-col gap-2 mb-5">
-              <a href="mailto:hello@apexmetabolichealth.com.au"
+              <a href="mailto:admin@apexmetabolichealth.com.au"
                 className="text-xs transition-colors duration-200"
                 style={{ color: 'rgba(255,255,255,0.3)' }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}>
-                hello@apexmetabolichealth.com.au
+                admin@apexmetabolichealth.com.au
               </a>
               <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>Mon – Fri · 9am – 5pm AEST</p>
             </div>
@@ -84,7 +84,7 @@ export default function Footer() {
               {[
                 {
                   label: 'Instagram',
-                  href: 'https://instagram.com/apexmetabolichealth',
+                  href: 'https://instagram.com/apex_metabolichealth',
                   icon: (
                     <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                       <rect x="2" y="2" width="20" height="20" rx="5" />
@@ -157,8 +157,8 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8">
-              <Link href="/assessment" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
-                Book a Consultation
+              <Link href="/intake/pre-screen" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
+                Start Assessment
               </Link>
             </div>
           </div>

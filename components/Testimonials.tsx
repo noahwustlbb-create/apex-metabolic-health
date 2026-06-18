@@ -78,7 +78,7 @@ export default function Testimonials() {
             className="display-serif"
             style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
           >
-            What men say{' '}
+            What our patients say{' '}
             <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
               after their first consult.
             </span>

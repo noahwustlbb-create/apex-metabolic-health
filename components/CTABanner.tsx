@@ -65,7 +65,7 @@ export default function CTABanner() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {/* Primary CTA */}
             <a
-              href="https://calendly.com/apex-metabolic-health"   /* ← swap for real booking URL */
+              href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 bg-white text-[#005F8E] font-black

@@ -336,7 +336,7 @@ function FAQBottomCTA() {
           transition={{ duration: 0.6, delay: 0.22 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/assessment" className="btn-teal">
+          <Link href="/intake/pre-screen" className="btn-teal">
             Get Started
           </Link>
           <Link href="/how-it-works" className="btn-ghost">

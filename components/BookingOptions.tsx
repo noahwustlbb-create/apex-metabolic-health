@@ -11,7 +11,7 @@ const OPTIONS = [
     tag: 'Not Sure Where to Start',
     title: 'Find My Program',
     desc: 'Answer 5 questions. Get matched to the right program in under 2 minutes.',
-    href: '/assessment',
+    href: '/intake/pre-screen',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
@@ -33,7 +33,7 @@ const OPTIONS = [
     ),
   },
   {
-    tag: 'Hormone & TRT Programs',
+    tag: 'Hormone Optimisation',
     title: 'Hormone Consultation',
     desc: 'Advanced blood testing first, then your dedicated consultation with our doctor.',
     href: '/intake/hormone-consult',
@@ -48,7 +48,7 @@ const OPTIONS = [
   {
     tag: 'Weight, Peptides & More',
     title: 'General Consultation',
-    desc: 'Weight management, peptide protocols, medical certificates, or a general health review.',
+    desc: 'Weight management, therapeutic peptide protocols, medical certificates, or a general health review.',
     href: '/intake/general-consult',
     featured: false,
     icon: (
@@ -216,7 +216,7 @@ export default function BookingOptions({
         >
           {showViewAll && (
             <Link
-              href="/assessment"
+              href="/intake/pre-screen"
               className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200"
               style={{ color: '#3575C6' }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#6AAEE8' }}

@@ -5,6 +5,7 @@ import './globals.css'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import FloatingContact from '@/components/FloatingContact'
 
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AgeGate />
           <ReferralCapture />
           {children}
+          <FloatingContact />
         </ThemeProvider>
       </body>
     </html>

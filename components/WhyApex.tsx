@@ -36,7 +36,7 @@ const DIFFERENTIATORS = [
         <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    title: 'TGA-compliant pharmacy',
+    title: 'Accredited compounding pharmacy',
     description: 'Prescriptions fulfilled through our accredited compounding pharmacy partner. No grey-market suppliers. No unregulated imports. Every compound produced under Australian standards.',
     accent: '#4890f7',
   },
@@ -59,7 +59,7 @@ const COMPARISON_ROWS = [
   { label: 'Same-week appointments', apex: true, gp: false },
   { label: 'Optimisation-focused protocols', apex: true, gp: false },
   { label: 'Ongoing protocol refinement', apex: true, gp: false },
-  { label: 'TGA-compliant compounding', apex: true, gp: false },
+  { label: 'Accredited compounding pharmacy', apex: true, gp: false },
 ]
 
 export default function WhyApex() {
@@ -171,12 +171,12 @@ export default function WhyApex() {
         >
           {/* Table header */}
           <div
-            className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-4"
-            style={{ background: 'rgba(72,144,247,0.04)', borderBottom: '1px solid rgba(72,144,247,0.1)' }}
+            className="grid px-4 sm:px-6 py-4"
+            style={{ gridTemplateColumns: '1fr 64px 64px', background: 'rgba(72,144,247,0.04)', borderBottom: '1px solid rgba(72,144,247,0.1)', gap: '8px' }}
           >
             <span className="text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>Feature</span>
-            <span className="text-[10px] font-bold tracking-[0.18em] uppercase w-20 text-center" style={{ color: '#4890f7' }}>Apex</span>
-            <span className="text-[10px] font-bold tracking-[0.18em] uppercase w-20 text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>Your GP</span>
+            <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-center" style={{ color: '#4890f7' }}>Apex</span>
+            <span className="text-[10px] font-bold tracking-[0.18em] uppercase text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>GP</span>
           </div>
           {COMPARISON_ROWS.map((row, i) => (
             <motion.div
@@ -184,14 +184,16 @@ export default function WhyApex() {
               initial={{ opacity: 0, x: -12 }}
               animate={tableInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 + i * 0.06, ease }}
-              className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 py-3.5 items-center"
+              className="grid px-4 sm:px-6 py-3.5 items-center"
               style={{
+                gridTemplateColumns: '1fr 64px 64px',
+                gap: '8px',
                 borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(72,144,247,0.06)' : 'none',
                 background: 'var(--bg)',
               }}
             >
               <span className="text-sm" style={{ color: 'var(--text-primary)' }}>{row.label}</span>
-              <div className="w-20 flex justify-center">
+              <div className="flex justify-center">
                 {row.apex ? (
                   <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.3)' }}>
                     <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3" aria-label="Yes">
@@ -206,7 +208,7 @@ export default function WhyApex() {
                   </div>
                 )}
               </div>
-              <div className="w-20 flex justify-center">
+              <div className="flex justify-center">
                 {row.gp ? (
                   <div className="w-5 h-5 rounded-full flex items-center justify-center" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.3)' }}>
                     <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3" aria-label="Yes">

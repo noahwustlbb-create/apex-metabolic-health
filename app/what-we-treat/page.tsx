@@ -53,7 +53,7 @@ const SYMPTOMS = [
   {
     title: 'Mood, Motivation & Drive',
     recognition: 'Flat affect, low motivation, irritability, or just not feeling like yourself — these are textbook presentations of hormonal dysfunction.',
-    clinical: 'Low testosterone and thyroid imbalance are the most common drivers in men. We assess and treat both.',
+    clinical: 'Low testosterone and thyroid imbalance are among the most common hormonal drivers. We assess and treat both.',
     tags: ['Testosterone', 'Thyroid', 'Cortisol', 'Hormones'],
     href: '/intake/hormone-consult',
     icon: (
@@ -97,7 +97,7 @@ const CLINICAL = [
     title: 'Hormonal Health & Testosterone',
     recognition: 'Testosterone, oestradiol, SHBG, DHEA, prolactin — when these are off, everything downstream suffers.',
     clinical: 'Full hormonal panel, clinical interpretation, and a doctor-led protocol where treatment is appropriate.',
-    tags: ['Testosterone', 'TRT', 'Hormones', 'DHEA'],
+    tags: ['Testosterone', 'Hormone Optimisation', 'Hormones', 'DHEA'],
     href: '/intake/hormone-consult',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -316,7 +316,7 @@ export default function WhatWeTreatPage() {
             <SectionHead
               label="Symptoms"
               title="What our patients commonly experience"
-              sub="These are the patterns that bring men to Apex. If something on this list sounds familiar, there's likely a clinical reason — and a clinical answer."
+              sub="These are the patterns that bring patients to Apex. If something on this list sounds familiar, there's likely a clinical reason — and a clinical answer."
               inView={symptomsInView}
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

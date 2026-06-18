@@ -2,7 +2,7 @@
 
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import PaymentCard from '@/components/PaymentCard'
+import BookingCard from '@/components/BookingCard'
 import { motion } from 'framer-motion'
 
 export default function CheckoutPage() {
@@ -18,17 +18,17 @@ export default function CheckoutPage() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="mb-8"
           >
-            <p className="label mb-3">Step 2 of 2</p>
+            <p className="label mb-3">Almost there</p>
             <h1 className="text-3xl font-bold tracking-tight mb-2"
               style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-              Your recommended pathway
+              Your next step
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
-              Based on your intake, here&apos;s what we recommend. Payment is processed securely via Stripe.
+              Based on your intake, here&apos;s what happens next.
             </p>
           </motion.div>
 
-          <PaymentCard />
+          <BookingCard />
         </div>
       </main>
       <Footer />

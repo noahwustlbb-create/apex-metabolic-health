@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ENQUIRY_LABELS, type EnquiryType } from '@/lib/intake-routing'
@@ -65,6 +65,14 @@ export default function IntakeForm() {
   const [disqualified, setDisqualified] = useState(false)
   const [error, setError] = useState('')
 
+  useEffect(() => {
+    const pre = sessionStorage.getItem('apex_pre_enquiry')
+    if (pre) {
+      setData(p => ({ ...p, enquiry: pre as EnquiryType }))
+      sessionStorage.removeItem('apex_pre_enquiry')
+    }
+  }, [])
+
   const set = <K extends keyof FormData>(k: K, v: FormData[K]) =>
     setData(p => ({ ...p, [k]: v }))
 
@@ -89,6 +97,8 @@ export default function IntakeForm() {
     return null
   }
 
+  const HORMONE_ENQUIRIES = new Set(['trt', 'sexual-health', 'anti-aging', 'sleep', 'performance'])
+
   const submit = async () => {
     if (data.contraindications.length > 0) {
       setDisqualified(true)
@@ -100,10 +110,16 @@ export default function IntakeForm() {
     setSubmitting(true)
 
     try {
-      // Store intake data for the checkout page (no sensitive clinical data in URL)
-      sessionStorage.setItem('apex_intake', JSON.stringify(data))
+      const isHormone = HORMONE_ENQUIRIES.has(data.enquiry)
 
-      // Fire-and-forget to Web3Forms for admin visibility pre-payment
+      // Store intake data for the checkout/booking page
+      sessionStorage.setItem('apex_intake', JSON.stringify(
+        isHormone
+          ? { enquiry: data.enquiry, hasBloods: data.hasBloods }
+          : data
+      ))
+
+      // Fire-and-forget lead capture
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -119,7 +135,7 @@ export default function IntakeForm() {
         }),
       }).catch(() => {})
 
-      router.push('/checkout')
+      router.push(isHormone ? '/intake/hormone-consult' : '/checkout')
     } catch {
       setError('Something went wrong. Please try again.')
       setSubmitting(false)
@@ -152,8 +168,8 @@ export default function IntakeForm() {
         </p>
         <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
           If you believe this is an error or have questions, contact us at{' '}
-          <a href="mailto:care@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
-            care@apexmetabolichealth.com.au
+          <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
+            admin@apexmetabolichealth.com.au
           </a>
         </p>
       </motion.div>
@@ -254,8 +270,8 @@ export default function IntakeForm() {
           {data.hasBloods === true && (
             <p className="text-xs mt-2" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
               Email your results to{' '}
-              <a href="mailto:care@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
-                care@apexmetabolichealth.com.au
+              <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
+                admin@apexmetabolichealth.com.au
               </a>{' '}
               with your full name — your doctor reviews them before your consultation.
             </p>
@@ -327,7 +343,7 @@ export default function IntakeForm() {
           className="w-full py-4 rounded-sm text-sm font-semibold tracking-wide transition-all duration-200"
           style={{ background: ACCENT, color: '#fff', opacity: submitting ? 0.7 : 1 }}
         >
-          {submitting ? 'One moment…' : 'Continue to payment →'}
+          {submitting ? 'One moment…' : 'Continue →'}
         </button>
 
         <p className="text-[11px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>

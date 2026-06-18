@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const STATS = [
-  { value: '1,400+', label: 'Men assessed Australia-wide' },
+  { value: '1,400+', label: 'Patients assessed Australia-wide' },
   { value: '4.9★', label: 'Average patient satisfaction' },
   { value: '< 48h', label: 'Pathology referral issued' },
   { value: '4,000+', label: 'Pathology collection sites' },
@@ -56,7 +56,7 @@ export default function StatsBar() {
               </p>
               <p
                 className="text-[10px] font-medium leading-snug tracking-[0.1em] uppercase"
-                style={{ color: 'var(--text-primary)', opacity: 0.55 }}
+                style={{ color: 'var(--text-secondary)' }}
               >
                 {stat.label}
               </p>

@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import AppFeature from '@/components/AppFeature'
 import BookingChoice from '@/components/BookingChoice'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -330,7 +329,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         Apex Metabolic Health &nbsp;·&nbsp; AHPRA-registered practitioners &nbsp;·&nbsp; Private &amp; confidential
       </motion.p>
 
-      <BookingChoice type="general" delay={1.1} />
+      <BookingChoice type="discovery" delay={1.1} />
     </motion.div>
   )
 }
@@ -449,7 +448,6 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
             )}
           </div>
         </section>
-        <AppFeature />
       </main>
       <Footer />
     </>

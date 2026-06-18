@@ -1,1052 +1,812 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import AppFeature from '@/components/AppFeature'
 
-const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const ease = [0.22, 1, 0.36, 1] as const
+const ACCENT = '#4890f7'
+const WEB3_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
-// ─── Types ────────────────────────────────────────────────────────────────────
+type Pathway = 'hormone' | 'performance' | 'metabolic' | 'hair_skin' | 'injury' | 'peptide'
 
 interface FormData {
-  // Gate (lead capture)
+  concern: string
+  age: string
+  symptoms: string[]
+  history: string
   firstName: string
+  lastName: string
   email: string
   phone: string
-  referralSource: string
-  referralCode: string
-  // Step 1
-  ageRange: string
-  goals: string[]
-  symptoms: string[]
-  recentBloods: string
-  // Step 2
-  duration: string
-  impact: string
-  tried: string
-  lookingFor: string
-  urgency: string
 }
 
 const INITIAL: FormData = {
-  firstName: '', email: '', phone: '', referralSource: '', referralCode: '',
-  ageRange: '', goals: [], symptoms: [], recentBloods: '',
-  duration: '', impact: '', tried: '', lookingFor: '', urgency: '',
+  concern: '', age: '', symptoms: [], history: '',
+  firstName: '', lastName: '', email: '', phone: '',
 }
 
-const REFERRAL_SOURCES = [
-  'Google / Search',
-  'Instagram',
-  'Facebook',
-  'TikTok',
-  'YouTube',
-  'Podcast',
-  'Referred by a friend',
-  'Referred by a doctor or health professional',
-  'Other',
-]
+// ─── Program Data ────────────────────────────────────────────────────────────
 
-// ─── Question data ────────────────────────────────────────────────────────────
-
-const AGE_RANGES = ['18–25', '26–35', '36–45', '46–55', '55+']
-
-const GOALS = [
-  'Hormone balance',
-  'More energy',
-  'Weight management',
-  'Athletic performance',
-  'Hair & skin',
-  'Better sleep',
-  'Sexual health',
-  'General health check',
-]
-
-const SYMPTOMS = [
-  'Low energy / fatigue',
-  'Brain fog',
-  'Weight gain',
-  'Poor sleep',
-  'Low libido or drive',
-  'Hair loss',
-  'Slow recovery',
-  'Mood changes',
-  'Reduced strength',
-  'Skin changes',
-]
-
-const DURATIONS = [
-  'Less than 3 months',
-  '3–12 months',
-  '1–3 years',
-  'More than 3 years',
-  "Hard to say — it's been gradual",
-]
-
-const IMPACTS = [
-  'Energy and work performance',
-  'Training and physical output',
-  'Sexual health and relationships',
-  'Weight and body composition',
-  'Mood and mental clarity',
-  'Hair, skin, or appearance',
-  'Injury recovery',
-]
-
-const TRIED = [
-  "Nothing yet — looking for a starting point",
-  'Diet and exercise changes',
-  'Supplements or over-the-counter products',
-  "Saw a GP — was told my results are normal",
-  "Previous treatment that didn't fully work",
-]
-
-const LOOKING_FOR = [
-  "Clinical answers — I want to know what's actually wrong",
-  'An ongoing protocol, not just a one-off check',
-  'A doctor who actually specialises in this',
-  'Fast access to bloodwork and a real consultation',
-]
-
-const URGENCY = [
-  "I'm ready to start now",
-  'Within the next few weeks',
-  'Still exploring — no rush',
-]
-
-// ─── Pathway scoring ──────────────────────────────────────────────────────────
-
-type Pathway = 'hormone' | 'performance' | 'metabolic' | 'hair_skin' | 'injury'
-
-const PATHWAY_LABELS: Record<Pathway, string> = {
-  hormone: 'Hormone Optimisation',
-  performance: 'Performance & Recovery',
-  metabolic: 'Metabolic & Weight',
-  hair_skin: 'Hair & Skin Restoration',
-  injury: 'Injury Repair & Recovery',
+interface ProgramData {
+  label: string
+  tagline: string
+  clinicalSummary: string
+  intakeHref: string
+  enquiry: string
+  biomarkers: string[]
+  urgency: string
 }
 
-interface PathwayInfo {
-  description: string
-  tags: string[]
-  bloods: string
-  bloodLabel: string
-  bloodPrice: string
-  bloodNote: string
-  bloodConditional: boolean
-}
-
-const PATHWAY_INFO: Record<Pathway, PathwayInfo> = {
+const PROGRAMS: Record<Pathway, ProgramData> = {
   hormone: {
-    description: 'Your profile points to hormonal drivers. Our doctors recommend a panel covering testosterone, cortisol, thyroid function, SHBG, and metabolic markers.',
-    tags: ['Testosterone', 'Cortisol', 'Thyroid', 'SHBG'],
-    bloods: '/intake/bloods-hormone',
-    bloodLabel: 'Comprehensive hormonal blood panel',
-    bloodPrice: 'From $99',
-    bloodNote: 'Required before your initial consultation.',
-    bloodConditional: false,
+    label: 'Hormone Optimisation Protocol',
+    tagline: 'Your GP tested 3 things. We test 32.',
+    clinicalSummary: 'Your profile is consistent with hypothalamic-pituitary-gonadal axis disruption — the hormonal cascade controlling testosterone, energy, libido, and mood. This is among the most underdiagnosed patterns in men under 55, precisely because standard GP panels measure only total testosterone and miss the 11 markers that actually explain how you feel.',
+    intakeHref: '/intake/hormone-consult',
+    enquiry: 'trt',
+    biomarkers: ['Free & Total Testosterone', 'SHBG', 'LH + FSH', 'Oestradiol', 'Prolactin', 'Cortisol', 'DHEA-S', 'TSH / T3 / T4', 'IGF-1', 'Vitamin D', 'hsCRP', 'Full Metabolic Panel'],
+    urgency: 'Hormonal decline is progressive. The earlier intervention begins, the better the clinical response.',
   },
   performance: {
-    description: 'Your profile suggests performance and recovery drivers. We assess IGF-1, cortisol, testosterone, CK, and inflammation markers.',
-    tags: ['IGF-1', 'Testosterone', 'CK', 'Cortisol'],
-    bloods: '/intake/bloods-performance',
-    bloodLabel: 'Performance and metabolic baseline panel',
-    bloodPrice: 'From $99',
-    bloodNote: 'Initial pathology is required before consultation. Ongoing monitoring is managed as part of membership.',
-    bloodConditional: false,
+    label: 'Performance & Recovery Protocol',
+    tagline: 'Your biology has a ceiling. Find it — then raise it.',
+    clinicalSummary: 'Your profile suggests your training has hit a biological ceiling — not a motivational one. The markers we look for include suppressed IGF-1, elevated cortisol-to-testosterone ratio, and micronutrient depletion that systematically undermines recovery, adaptation, and output. This is addressable with precision. Your effort isn\'t the problem.',
+    intakeHref: '/intake/hormone-consult',
+    enquiry: 'performance',
+    biomarkers: ['IGF-1', 'Free & Total Testosterone', 'Cortisol', 'DHEA-S', 'Thyroid Panel', 'Ferritin + Iron Studies', 'B12 + Folate', 'Zinc + Magnesium', 'hsCRP', 'Creatine Kinase', 'Vitamin D', 'Full Blood Count'],
+    urgency: 'Most athletes operate 20–30% below their biological potential. The gap is measurable and closable.',
   },
   metabolic: {
-    description: 'Your profile points to metabolic drivers. Our panel covers HbA1c, insulin resistance markers, thyroid function, cortisol, and lipids.',
-    tags: ['HbA1c', 'Insulin', 'Thyroid', 'Lipids'],
-    bloods: '/intake/bloods-metabolic',
-    bloodLabel: 'Metabolic baseline panel',
-    bloodPrice: 'From $99',
-    bloodNote: 'Initial pathology is required before consultation. Ongoing monitoring is managed as part of membership.',
-    bloodConditional: false,
+    label: 'Metabolic & Weight Loss Protocol',
+    tagline: 'Resistance to diet and exercise is almost always hormonal.',
+    clinicalSummary: 'Your responses indicate a metabolic presentation where the limiting factor is biology, not behaviour. Insulin resistance, thyroid dysfunction, and cortisol-driven visceral fat accumulation are the three most common drivers — and they\'re virtually never investigated by GPs until you\'re diabetic. The correct intervention starts with identifying your specific driver.',
+    intakeHref: '/intake/hormone-consult',
+    enquiry: 'weight-loss',
+    biomarkers: ['HbA1c', 'Fasting Insulin + HOMA-IR', 'TSH / T3 / T4', 'Cortisol', 'Testosterone + SHBG', 'hsCRP', 'Full Lipid Panel', 'Liver Function', 'Vitamin D', 'Leptin', 'Adiponectin', 'Full Metabolic Panel'],
+    urgency: 'Metabolic dysfunction compounds over time. Earlier diagnosis changes the trajectory significantly.',
   },
   hair_skin: {
-    description: 'Your profile suggests hormonal and nutritional drivers. We assess DHT, DHEA-S, thyroid, zinc, ferritin, and inflammation markers.',
-    tags: ['DHT', 'DHEA-S', 'Ferritin', 'Thyroid'],
-    bloods: '/intake/bloods-hair',
-    bloodLabel: 'Pre-treatment blood panel',
-    bloodPrice: 'From $99',
-    bloodNote: 'A pre-treatment blood panel may be required depending on your clinical pathway. Your doctor will confirm at consultation.',
-    bloodConditional: true,
+    label: 'Hair Restoration & Skin Protocol',
+    tagline: 'Hair loss has a cause. Most people are treating the wrong one.',
+    clinicalSummary: 'Your profile is most consistent with a hormonally-driven presentation — either DHT-mediated follicle miniaturisation, nutritional depletion, or thyroid dysfunction. These three mechanisms look identical from the outside but require entirely different interventions. Treating the wrong cause is the most common reason people spend years on products that don\'t work.',
+    intakeHref: '/intake/general-consult',
+    enquiry: 'hair',
+    biomarkers: ['DHT', 'Free & Total Testosterone', 'DHEA-S', 'TSH / T3 / T4', 'Ferritin', 'Zinc', 'Prolactin', 'hsCRP', 'Vitamin D', 'SHBG', 'Oestradiol', 'Full Blood Count'],
+    urgency: 'Hair follicle miniaturisation is progressive. Earlier intervention preserves significantly more density.',
   },
   injury: {
-    description: 'Your profile points to recovery and repair drivers. We assess IGF-1, Vitamin D, CK, CRP, ESR, and hormonal impact on healing.',
-    tags: ['IGF-1', 'Vitamin D', 'CRP', 'ESR'],
-    bloods: '/intake/bloods-injury',
-    bloodLabel: 'Baseline metabolic and recovery panel',
-    bloodPrice: 'From $99',
-    bloodNote: 'Some pathways require baseline metabolic testing, while others may not require bloods initially. Your doctor will confirm.',
-    bloodConditional: true,
+    label: 'Injury Repair & Recovery Protocol',
+    tagline: 'Slow healing always has a systemic cause.',
+    clinicalSummary: 'Your presentation suggests what\'s limiting your recovery isn\'t local — it\'s systemic. Chronically elevated cortisol, suppressed IGF-1, Vitamin D deficiency, and inflammatory burden are the four most common biological barriers to tissue repair and don\'t appear on any standard sports medicine workup. We identify the specific driver so your rehabilitation has the hormonal substrate it needs.',
+    intakeHref: '/intake/general-consult',
+    enquiry: 'injury-repair',
+    biomarkers: ['IGF-1', 'Cortisol', 'Vitamin D', 'CK + CRP + ESR', 'Testosterone', 'Ferritin', 'B12 + Folate', 'Zinc', 'Growth Hormone Panel', 'Full Blood Count', 'Thyroid Panel', 'Full Metabolic Panel'],
+    urgency: 'Tissue repair capacity declines with each failed recovery cycle. Systemic intervention changes the outcome.',
+  },
+  peptide: {
+    label: 'Peptide & Longevity Protocol',
+    tagline: 'Optimisation isn\'t a symptom. It\'s a decision.',
+    clinicalSummary: 'Your profile indicates a patient functioning adequately but aware that biological output doesn\'t match ambition. This is the category where targeted peptide protocols and longevity medicine deliver the most clinically meaningful outcomes. The goal isn\'t to fix a dysfunction — it\'s to systematically close the gap between where you are and where your biology is capable of taking you.',
+    intakeHref: '/intake/general-consult',
+    enquiry: 'peptide',
+    biomarkers: ['IGF-1', 'Growth Hormone', 'Testosterone', 'Cortisol', 'DHEA-S', 'Thyroid Panel', 'Biological Age Markers', 'hsCRP', 'Telomere Length (optional)', 'Vitamin D', 'Full Metabolic Panel', 'Oxidative Stress Panel'],
+    urgency: 'Biological ageing is measurable. So is the rate of change.',
   },
 }
 
-function computePathway(data: FormData): Pathway {
-  const scores: Record<Pathway, number> = { hormone: 0, performance: 0, metabolic: 0, hair_skin: 0, injury: 0 }
+// ─── Matching ────────────────────────────────────────────────────────────────
 
-  // Goals
-  const goalW: Record<string, Partial<Record<Pathway, number>>> = {
-    'Hormone balance':    { hormone: 3 },
-    'More energy':        { hormone: 2, metabolic: 1 },
-    'Weight management':  { metabolic: 3 },
-    'Athletic performance': { performance: 3 },
-    'Hair & skin':        { hair_skin: 3 },
-    'Better sleep':       { hormone: 2 },
-    'Sexual health':      { hormone: 3 },
-    'General health check': { hormone: 1, metabolic: 1 },
+function matchPathway(data: FormData): Pathway {
+  const { concern, age, symptoms } = data
+
+  if (concern === 'hair_skin') return 'hair_skin'
+  if (concern === 'injury')    return 'injury'
+  if (concern === 'weight')    return 'metabolic'
+  if (concern === 'libido')    return 'hormone'
+
+  if (concern === 'optimise') {
+    return (age === '50+' || age === '40-49') ? 'hormone' : 'peptide'
   }
-  data.goals.forEach(g => Object.entries(goalW[g] || {}).forEach(([p, v]) => { scores[p as Pathway] += v }))
 
-  // Symptoms
-  const symptomW: Record<string, Partial<Record<Pathway, number>>> = {
-    'Low energy / fatigue':   { hormone: 2, metabolic: 1 },
-    'Brain fog':              { hormone: 2, metabolic: 1 },
-    'Weight gain':            { metabolic: 2 },
-    'Poor sleep':             { hormone: 2 },
-    'Low libido or drive':    { hormone: 3 },
-    'Hair loss':              { hair_skin: 3 },
-    'Slow recovery':          { performance: 2, injury: 1 },
-    'Mood changes':           { hormone: 2 },
-    'Reduced strength':       { performance: 2, hormone: 1 },
-    'Skin changes':           { hair_skin: 2 },
+  if (concern === 'energy') {
+    const hormoneFlags = ['low_libido', 'mood', 'muscle_loss', 'brain_fog']
+    if (symptoms.some(s => hormoneFlags.includes(s)) || age === '40-49' || age === '50+') return 'hormone'
+    return 'performance'
   }
-  data.symptoms.forEach(s => Object.entries(symptomW[s] || {}).forEach(([p, v]) => { scores[p as Pathway] += v }))
 
-  // Impact (step 2)
-  const impactW: Record<string, Partial<Record<Pathway, number>>> = {
-    'Energy and work performance':      { hormone: 2, metabolic: 1 },
-    'Training and physical output':     { performance: 3 },
-    'Sexual health and relationships':  { hormone: 3 },
-    'Weight and body composition':      { metabolic: 3 },
-    'Mood and mental clarity':          { hormone: 2 },
-    'Hair, skin, or appearance':        { hair_skin: 3 },
-    'Injury recovery':                  { injury: 3 },
-  }
-  if (data.impact) Object.entries(impactW[data.impact] || {}).forEach(([p, v]) => { scores[p as Pathway] += v })
-
-  // Bonus signals
-  if (data.recentBloods === 'Yes') scores.hormone += 1
-  if (data.tried === "Saw a GP — was told my results are normal") { scores.hormone += 1; scores.metabolic += 1 }
-  if (data.urgency === "I'm ready to start now") scores.hormone += 1
-
-  return Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0] as Pathway
+  return 'hormone'
 }
 
-// ─── Reusable UI ──────────────────────────────────────────────────────────────
+function getClinicalObservations(data: FormData, pathway: Pathway): string[] {
+  const obs: string[] = []
 
-function MultiPill({ label, selected, onClick, accent = '#4890f7' }: {
-  label: string; selected: boolean; onClick: () => void; accent?: string
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="px-3 py-2.5 rounded-lg text-xs font-medium transition-all duration-150 text-left"
-      style={{
-        background: selected ? `color-mix(in srgb, ${accent} 12%, transparent)` : 'rgba(255,255,255,0.03)',
-        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 50%, transparent)` : 'var(--border)'}`,
-        color: selected ? accent : '#4890f7',
-      }}
-    >
-      {label}
-    </button>
-  )
+  if (data.history === 'gp_normal') {
+    obs.push('Prior GP testing returned "normal" — standard panels miss free testosterone, LH/FSH, oestradiol, and cortisol, which are the markers that actually explain your symptoms.')
+  } else if (data.history === 'never') {
+    obs.push('No comprehensive testing on record — your symptom profile has never been mapped to objective biomarker data. This is the critical first step.')
+  } else if (data.history === 'treated') {
+    obs.push('Prior treatment history detected — previous intervention provides a clinical baseline. Protocol refinement is typically more targeted in these cases.')
+  }
+
+  if (data.symptoms.includes('brain_fog') && data.symptoms.includes('fatigue')) {
+    obs.push('Co-presenting cognitive and energy symptoms — this combination is a hallmark of insufficient free testosterone and/or thyroid disruption. Both are routinely missed by standard panels.')
+  }
+
+  if (pathway === 'hormone' && (data.age === '40-49' || data.age === '50+')) {
+    obs.push('Age-related hormonal shift — testosterone typically declines 1–2% annually from age 30. At your age bracket, the cumulative deficit is often clinically significant even when labelled "within range."')
+  }
+
+  if (data.symptoms.includes('mood') && data.symptoms.includes('low_libido')) {
+    obs.push('Concurrent mood and libido changes — this pattern is characteristic of HPG axis disruption, not psychological stress. It has a distinct biomarker signature.')
+  }
+
+  if (data.symptoms.includes('muscle_loss') && pathway === 'hormone') {
+    obs.push('Muscle loss is a reliable indicator of anabolic insufficiency — typically driven by low free testosterone. It won\'t respond to training adjustments alone.')
+  }
+
+  if (pathway === 'metabolic') {
+    obs.push('Resistance to conventional diet and exercise is the clinical hallmark of a hormonal metabolic driver. The underlying mechanism is testable and directly addressable.')
+  }
+
+  if (pathway === 'performance' && (data.age === '18-29' || data.age === '30-39')) {
+    obs.push('Performance ceiling in a physiologically active individual often reflects systemic underperformance — elevated cortisol-to-testosterone ratio and micronutrient depletion are the most common culprits.')
+  }
+
+  return obs.slice(0, 3)
 }
 
-function RadioCard({ label, selected, onClick, accent = '#4890f7' }: {
-  label: string; selected: boolean; onClick: () => void; accent?: string
-}) {
+// ─── Question Data ───────────────────────────────────────────────────────────
+
+const CONCERN_OPTIONS = [
+  { val: 'energy',    label: 'Low energy, brain fog, or fatigue',          sub: 'Difficulty getting through the day, mental sluggishness' },
+  { val: 'libido',    label: 'Low libido or sexual health',                sub: 'Reduced drive, erectile difficulties, performance concerns' },
+  { val: 'weight',    label: 'Weight gain or body composition',            sub: 'Fat accumulation, inability to lose weight, muscle loss' },
+  { val: 'hair_skin', label: 'Hair loss or declining skin quality',        sub: 'Thinning, shedding, texture changes, skin quality decline' },
+  { val: 'injury',    label: 'Injury recovery or chronic pain',            sub: 'Slow healing, recurring injuries, persistent inflammation' },
+  { val: 'optimise',  label: 'I feel okay — but I want to be exceptional', sub: 'Performance, longevity, peptides, full optimisation' },
+]
+
+const AGE_OPTIONS = [
+  { val: '18-29', label: '18 – 29' },
+  { val: '30-39', label: '30 – 39' },
+  { val: '40-49', label: '40 – 49' },
+  { val: '50+',   label: '50 +' },
+]
+
+const SYMPTOM_MAP: Record<string, { val: string; label: string }[]> = {
+  energy: [
+    { val: 'fatigue',     label: 'Persistent fatigue — not fixed by sleep' },
+    { val: 'brain_fog',   label: 'Brain fog or poor concentration' },
+    { val: 'mood',        label: 'Mood changes, irritability, or low motivation' },
+    { val: 'low_libido',  label: 'Reduced sex drive' },
+    { val: 'muscle_loss', label: 'Muscle loss or difficulty building' },
+  ],
+  libido: [
+    { val: 'low_libido',   label: 'Reduced sexual drive or interest' },
+    { val: 'erectile',     label: 'Erectile dysfunction or reduced firmness' },
+    { val: 'morning_wood', label: 'Loss of morning erections' },
+    { val: 'mood',         label: 'Low mood or confidence' },
+    { val: 'fatigue',      label: 'Low energy or motivation' },
+  ],
+  weight: [
+    { val: 'belly_fat',    label: 'Stubborn belly fat that won\'t shift' },
+    { val: 'plateau',      label: 'Diet and exercise aren\'t producing results' },
+    { val: 'cravings',     label: 'Strong sugar or carbohydrate cravings' },
+    { val: 'energy_crash', label: 'Energy crashes after eating' },
+    { val: 'slow_meta',    label: 'Feeling like metabolism has slowed significantly' },
+  ],
+  hair_skin: [
+    { val: 'thinning',     label: 'Visible thinning across the crown or temples' },
+    { val: 'shedding',     label: 'Excessive daily shedding' },
+    { val: 'hairline',     label: 'Hairline recession' },
+    { val: 'skin_texture', label: 'Declining skin texture or firmness' },
+    { val: 'scalp',        label: 'Scalp sensitivity, itching, or oiliness' },
+  ],
+  injury: [
+    { val: 'slow_heal',    label: 'Injuries take significantly longer to heal' },
+    { val: 'recurring',    label: 'Recurring injury at the same site' },
+    { val: 'chronic_pain', label: 'Chronic joint or tendon pain' },
+    { val: 'inflammation', label: 'Persistent swelling or inflammation' },
+    { val: 'stiffness',    label: 'Morning stiffness that takes hours to resolve' },
+  ],
+  optimise: [
+    { val: 'sub_energy',   label: 'Energy that\'s good — but not optimal' },
+    { val: 'sub_recovery', label: 'Recovery that could be faster' },
+    { val: 'sub_focus',    label: 'Focus and mental clarity that could be sharper' },
+    { val: 'sub_body',     label: 'Body composition that could be leaner' },
+    { val: 'sub_libido',   label: 'Sex drive that has dipped from your baseline' },
+  ],
+}
+
+const HISTORY_OPTIONS = [
+  { val: 'never',     label: 'No — I\'ve never had comprehensive blood work',  sub: 'Standard GP panels only, if at all' },
+  { val: 'gp_normal', label: 'Yes — GP told me everything was "normal"',       sub: 'Results came back fine, but I still feel like this' },
+  { val: 'recent',    label: 'Yes — I have results from the last 6 months',    sub: 'I can share these with my doctor' },
+  { val: 'treated',   label: 'Yes — I\'ve been treated for this before',       sub: 'Previous hormone therapy or clinical treatment' },
+]
+
+// ─── Sub-components ──────────────────────────────────────────────────────────
+
+function Progress({ step, total }: { step: number; total: number }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm transition-all duration-150 text-left"
-      style={{
-        background: selected ? 'var(--elevated)' : 'var(--surface)',
-        border: `1px solid ${selected ? `color-mix(in srgb, ${accent} 45%, transparent)` : 'var(--elevated)'}`,
-        color: selected ? '#F5F5F5' : '#4890f7',
-        fontWeight: selected ? 500 : 400,
-      }}
-    >
-      <span
-        className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center"
-        style={{
-          border: `1.5px solid ${selected ? accent : 'rgba(255,255,255,0.18)'}`,
-          background: selected ? `color-mix(in srgb, ${accent} 15%, transparent)` : 'transparent',
-          transition: 'all 0.15s',
-        }}
-      >
-        {selected && <span className="w-1.5 h-1.5 rounded-full" style={{ background: accent }} />}
+    <div className="flex items-center gap-3 mb-4">
+      <div className="flex-1 h-px rounded-full overflow-hidden" style={{ background: 'rgba(72,144,247,0.1)' }}>
+        <motion.div className="h-full rounded-full" style={{ background: ACCENT }}
+          initial={false} animate={{ width: `${(step / total) * 100}%` }}
+          transition={{ duration: 0.5, ease }} />
+      </div>
+      <span className="text-[10px] font-bold tracking-[0.15em] uppercase flex-shrink-0" style={{ color: ACCENT, opacity: 0.6 }}>
+        {step} / {total}
       </span>
-      {label}
-    </button>
-  )
-}
-
-function Field({ label, value, onChange, type = 'text', placeholder }: {
-  label: string; value: string; onChange: (v: string) => void; type?: string; placeholder?: string
-}) {
-  return (
-    <div>
-      <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>{label}</label>
-      <input
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-        style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
-      />
     </div>
   )
 }
 
-function QLabel({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: 'var(--text-primary)' }}>{children}</p>
-}
-
-// ─── Step 1: Symptoms & goals ─────────────────────────────────────────────────
-
-function StepOne({ data, set, toggle }: {
-  data: FormData
-  set: (k: keyof FormData, v: string) => void
-  toggle: (k: 'goals' | 'symptoms', v: string) => void
-}) {
-  return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-      <p className="label mb-4">STEP 1 OF 2</p>
-      <h2
-        className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
-      >
-        What&apos;s been going on?
-      </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-        Tell us what you&apos;re dealing with. We&apos;ll use this to identify your likely clinical pathway.
-      </p>
-
-      {/* Age */}
-      <div className="mb-8">
-        <QLabel>Your age range</QLabel>
-        <div className="flex flex-wrap gap-2">
-          {AGE_RANGES.map(a => (
-            <button
-              key={a}
-              type="button"
-              onClick={() => set('ageRange', a)}
-              className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150"
-              style={{
-                background: data.ageRange === a ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.ageRange === a ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
-                color: data.ageRange === a ? '#4890f7' : '#4890f7',
-                fontFamily: 'var(--font-space-grotesk)',
-              }}
-            >
-              {a}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Goals */}
-      <div className="mb-8">
-        <QLabel>Primary concern — select all that apply</QLabel>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {GOALS.map(g => (
-            <MultiPill key={g} label={g} selected={data.goals.includes(g)} onClick={() => toggle('goals', g)} accent="#4890f7" />
-          ))}
-        </div>
-      </div>
-
-      {/* Symptoms */}
-      <div className="mb-8">
-        <QLabel>Symptoms you&apos;ve noticed</QLabel>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {SYMPTOMS.map(s => (
-            <MultiPill key={s} label={s} selected={data.symptoms.includes(s)} onClick={() => toggle('symptoms', s)} accent="#4890f7" />
-          ))}
-        </div>
-      </div>
-
-      {/* Recent bloods */}
-      <div>
-        <QLabel>Blood test results in the last 3 months?</QLabel>
-        <div className="flex flex-col sm:flex-row gap-2">
-          {[
-            { label: 'Yes — I have recent results', val: 'Yes' },
-            { label: "No — I haven't tested recently", val: 'No' },
-            { label: 'Not sure', val: 'Not sure' },
-          ].map(({ label, val }) => (
-            <button
-              key={val}
-              type="button"
-              onClick={() => set('recentBloods', val)}
-              className="flex-1 px-4 py-2.5 rounded-lg text-xs font-medium transition-all duration-150 text-left sm:text-center"
-              style={{
-                background: data.recentBloods === val ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                border: `1px solid ${data.recentBloods === val ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
-                color: data.recentBloods === val ? '#4890f7' : '#4890f7',
-              }}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Step 2: Context & urgency ────────────────────────────────────────────────
-
-function StepTwo({ data, set }: {
-  data: FormData
-  set: (k: keyof FormData, v: string) => void
-}) {
-  return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-      <p className="label mb-4" style={{ color: '#4890f7' }}>STEP 2 OF 2</p>
-      <h2
-        className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
-      >
-        A bit more context.
-        <br />
-        <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-          This helps us be specific.
-        </span>
-      </h2>
-      <p className="text-sm mb-8 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-        These questions go beyond a generic match — and help us identify what&apos;s likely driving this for you specifically.
-      </p>
-
-      <div className="flex flex-col gap-8">
-
-        {/* Duration */}
-        <div>
-          <QLabel>How long has this been going on?</QLabel>
-          <div className="flex flex-col gap-2">
-            {DURATIONS.map(d => (
-              <RadioCard key={d} label={d} selected={data.duration === d} onClick={() => set('duration', d)} accent="#4890f7" />
-            ))}
-          </div>
-        </div>
-
-        {/* Impact */}
-        <div>
-          <QLabel>What&apos;s it affecting most right now?</QLabel>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {IMPACTS.map(i => (
-              <RadioCard key={i} label={i} selected={data.impact === i} onClick={() => set('impact', i)} accent="#4890f7" />
-            ))}
-          </div>
-        </div>
-
-        {/* Tried */}
-        <div>
-          <QLabel>Have you tried to address this already?</QLabel>
-          <div className="flex flex-col gap-2">
-            {TRIED.map(t => (
-              <RadioCard key={t} label={t} selected={data.tried === t} onClick={() => set('tried', t)} accent="#4890f7" />
-            ))}
-          </div>
-        </div>
-
-        {/* Looking for */}
-        <div>
-          <QLabel>What are you looking for from a clinic?</QLabel>
-          <div className="flex flex-col gap-2">
-            {LOOKING_FOR.map(l => (
-              <RadioCard key={l} label={l} selected={data.lookingFor === l} onClick={() => set('lookingFor', l)} accent="#4890f7" />
-            ))}
-          </div>
-        </div>
-
-        {/* Urgency */}
-        <div>
-          <QLabel>How soon are you looking to act on this?</QLabel>
-          <div className="flex flex-col sm:flex-row gap-2">
-            {URGENCY.map(u => (
-              <button
-                key={u}
-                type="button"
-                onClick={() => set('urgency', u)}
-                className="flex-1 px-4 py-3 rounded-lg text-xs font-medium transition-all duration-150 text-center"
-                style={{
-                  background: data.urgency === u ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${data.urgency === u ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
-                  color: data.urgency === u ? '#4890f7' : '#4890f7',
-                }}
-              >
-                {u}
-              </button>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Gate: result unlock ──────────────────────────────────────────────────────
-
-function Gate({ data, set, submitting, onSubmit, onBack, error }: {
-  data: FormData
-  set: (k: keyof FormData, v: string) => void
-  submitting: boolean
-  onSubmit: () => void
-  onBack: () => void
-  error: string
-}) {
-  const pathway = computePathway(data)
-  const label = PATHWAY_LABELS[pathway]
-  const info = PATHWAY_INFO[pathway]
-  const valid = data.firstName.trim() && data.email.trim() && data.phone.trim()
-
-  return (
-    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-
-      {/* Badge */}
-      <div className="flex items-center gap-2.5 mb-6">
-        <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
-          <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-            <path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <p className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>Assessment complete</p>
-      </div>
-
-      <h2
-        className="font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 34px)', color: 'var(--text-primary)', lineHeight: 1.1 }}
-      >
-        Your result is ready.
-      </h2>
-      <p className="text-sm mb-7 leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-        We&apos;ve identified your likely clinical pathway. Enter your details to unlock your result and speak with an Apex doctor.
-      </p>
-
-      {/* Blurred pathway card */}
-      <div className="relative rounded-xl overflow-hidden mb-7" style={{ border: '1px solid rgba(72,144,247,0.2)' }}>
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(10,28,80,0.9) 0%, rgba(20,60,180,0.6) 100%)' }} />
-
-        {/* Blurred content */}
-        <div className="relative px-5 pt-5 pb-4" style={{ filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' }}>
-          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-2" style={{ color: 'rgba(255,255,255,0.4)' }}>RECOMMENDED PATHWAY</p>
-          <p className="text-lg font-bold mb-1.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#ffffff' }}>{label}</p>
-          <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.5)' }}>{info.description}</p>
-          <div className="flex gap-1.5 flex-wrap">
-            {info.tags.map(t => (
-              <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'var(--border)', color: 'rgba(255,255,255,0.55)' }}>{t}</span>
-            ))}
-          </div>
-        </div>
-
-        {/* Lock bar */}
-        <div className="relative px-5 py-3 flex items-center gap-2.5" style={{ background: 'rgba(5,8,14,0.7)', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true">
-            <rect x="3" y="7" width="10" height="8" rx="1.5" stroke="#4890f7" strokeWidth="1.3" />
-            <path d="M5 7V5.5a3 3 0 016 0V7" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" />
-          </svg>
-          <p className="text-[11px] font-medium" style={{ color: '#6b8fd4' }}>Enter your details below to unlock your result</p>
-        </div>
-      </div>
-
-      {/* Form fields */}
-      <div className="flex flex-col gap-4 mb-5">
-        <Field label="First name" value={data.firstName} onChange={v => set('firstName', v)} placeholder="James" />
-        <Field label="Email" type="email" value={data.email} onChange={v => set('email', v)} placeholder="you@email.com" />
-        <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" />
-
-        {/* Referral source */}
-        <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>
-            How did you hear about us? <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
-          </label>
-          <select
-            value={data.referralSource}
-            onChange={e => set('referralSource', e.target.value)}
-            className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: data.referralSource ? '#F5F5F5' : '#0a0e1a', caretColor: '#4890f7', cursor: 'pointer' }}
-            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
-          >
-            <option value="" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>Select…</option>
-            {REFERRAL_SOURCES.map(s => (
-              <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Referral / access code */}
-        <div>
-          <label className="block text-[11px] font-semibold mb-2 tracking-[0.14em] uppercase" style={{ color: 'var(--text-primary)' }}>
-            Referral or access code <span style={{ color: '#4890f7', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>(optional)</span>
-          </label>
-          <input
-            type="text"
-            value={data.referralCode}
-            onChange={e => set('referralCode', e.target.value.toUpperCase())}
-            placeholder="e.g. APEX25"
-            className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-all duration-150"
-            style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.06em' }}
-            onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.4)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-            onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }}
-          />
-        </div>
-      </div>
-
-      {/* CTAs */}
-      <div className="flex items-center gap-3">
-        <button type="button" onClick={onBack}
-          className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150 flex-shrink-0"
-          style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-primary)' }}>
-          ← Back
-        </button>
-        <button
-          type="button"
-          onClick={onSubmit}
-          disabled={submitting || !valid}
-          className="btn-teal flex-1 justify-center"
-          style={{ opacity: submitting || !valid ? 0.5 : 1, cursor: submitting || !valid ? 'not-allowed' : 'pointer' }}
-        >
-          {submitting ? 'Submitting…' : 'Unlock my result →'}
-        </button>
-      </div>
-
-      {error && <p className="text-sm mt-3" style={{ color: '#e05c5c' }}>{error}</p>}
-
-      <p className="text-[11px] mt-4" style={{ color: '#4890f7' }}>
-        100% private. No spam. An Apex doctor contacts you the same day.
-      </p>
-    </motion.div>
-  )
-}
-
-// ─── Success ──────────────────────────────────────────────────────────────────
-
-function Success({ data }: { data: FormData }) {
-  const pathway = computePathway(data)
-  const label = PATHWAY_LABELS[pathway]
-  const hasBloods = data.recentBloods === 'Yes'
-  const highUrgency = data.urgency === "I'm ready to start now"
-
-  const FEATURES = [
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><circle cx="10" cy="10" r="8" stroke="#4890f7" strokeWidth="1.4" /><path d="M6 10a4 4 0 014-4" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="1.5" fill="#4890f7" /></svg>,
-      title: 'Biological Age Tracking',
-      body: 'See your biological age vs chronological age, updated with every panel.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><rect x="3" y="5" width="14" height="11" rx="1.5" stroke="#4890f7" strokeWidth="1.4" /><path d="M6 9h2m0 0l1.5 2L11 8l1.5 3H14" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" /></svg>,
-      title: '54+ Biomarker Dashboard',
-      body: 'Every marker displayed clearly — with context, trends, and what it means for you.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" /><circle cx="10" cy="10" r="7" stroke="#4890f7" strokeWidth="1.4" /></svg>,
-      title: 'Doctor-Built Protocol',
-      body: 'An AHPRA-registered doctor reviews your results and builds a personalised programme.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true"><path d="M10 2l2.5 5 5.5.8-4 3.9.9 5.5L10 14.5 5.1 17.2l.9-5.5L2 7.8l5.5-.8L10 2z" stroke="#4890f7" strokeWidth="1.4" strokeLinejoin="round" /></svg>,
-      title: 'Ongoing Optimisation',
-      body: 'Scheduled reviews, protocol adjustments, and real clinical support — not a one-off.',
-    },
-  ]
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.65, ease }}
-      className="max-w-2xl"
-    >
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-7">
-        <div className="w-10 h-10 flex items-center justify-center rounded-xl flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-            <path d="M5 12l5 5L19 7" stroke="#4890f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-        <div>
-          <p className="label">Assessment complete</p>
-          <p className="text-[11px]" style={{ color: '#4890f7' }}>Matched to your recommended pathway</p>
-        </div>
-      </div>
-
-      <h2 className="font-bold tracking-tight mb-3"
-        style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.5vw, 30px)', color: 'var(--text-primary)', lineHeight: 1.15 }}>
-        {data.firstName ? `Here's your next step, ${data.firstName}.` : "Here's your next step."}
-      </h2>
-      <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
-        {hasBloods
-          ? `You have recent blood results — our team will review your submission and an Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} to arrange your consultation.`
-          : `Based on your full profile, we've matched you to the ${label} program. An Apex doctor will contact you ${highUrgency ? 'today' : 'shortly'} with your blood panel referral and next steps.`}
-      </p>
-
-      {/* Matched pathway revealed */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="rounded-xl p-5 mb-7"
-        style={{ background: 'linear-gradient(135deg, rgba(10,28,80,0.6) 0%, rgba(20,60,180,0.35) 100%)', border: '1px solid rgba(72,144,247,0.2)' }}
-      >
-        <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-2" style={{ color: 'rgba(255,255,255,0.4)' }}>YOUR MATCHED PATHWAY</p>
-        <p className="text-base font-bold mb-1.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#ffffff' }}>{label}</p>
-        <p className="text-xs leading-relaxed mb-3" style={{ color: 'rgba(255,255,255,0.55)' }}>{PATHWAY_INFO[pathway].description}</p>
-        <div className="flex gap-1.5 flex-wrap">
-          {PATHWAY_INFO[pathway].tags.map(t => (
-            <span key={t} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'rgba(72,144,247,0.12)', color: 'rgba(160,190,255,0.8)', border: '1px solid rgba(72,144,247,0.18)' }}>{t}</span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Pathology pricing card — shown only after match, not publicly */}
-      {!hasBloods && (
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.12 }}
-          className="rounded-xl p-5 mb-7"
-          style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.12)' }}
-        >
-          <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-3" style={{ color: '#4890f7' }}>
-            PATHOLOGY
-          </p>
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex-1">
-              <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                {PATHWAY_INFO[pathway].bloodLabel}
-              </p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                {PATHWAY_INFO[pathway].bloodNote}
-              </p>
-            </div>
-            <div className="flex-shrink-0 text-right">
-              <p className="text-base font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: PATHWAY_INFO[pathway].bloodConditional ? '#4890f7' : '#4890f7' }}>
-                {PATHWAY_INFO[pathway].bloodPrice}
-              </p>
-              {PATHWAY_INFO[pathway].bloodConditional && (
-                <p className="text-[9px] tracking-[0.1em] uppercase mt-0.5" style={{ color: '#4890f7' }}>if required</p>
-              )}
-            </div>
-          </div>
-          <div className="mt-3 pt-3 flex items-center gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
-            <p className="text-[10px]" style={{ color: '#4890f7' }}>
-              Ongoing monitoring bloods are included as part of your Apex Membership review cycle — not charged separately.
-            </p>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Doctor contact card */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.15 }}
-        className="flex items-start gap-4 p-5 rounded-xl mb-7"
-        style={{ background: 'linear-gradient(135deg, rgba(72,144,247,0.06) 0%, rgba(72,144,247,0.06) 100%)', border: '1px solid rgba(72,144,247,0.15)' }}
-      >
-        <div className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center mt-0.5"
-          style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-          <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-            <path d="M10 2a6 6 0 016 6c0 2.5-1 4.5-3 5.5V15a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5C5 12.5 4 10.5 4 8a6 6 0 016-6z" stroke="#4890f7" strokeWidth="1.3" />
-            <path d="M8 18h4" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round" />
-          </svg>
-        </div>
-        <div>
-          <p className="text-sm font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>An Apex doctor will contact you today</p>
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-            Our clinical team reviews your submission and a doctor reaches out directly — no portal, no waiting room, no queue. We handle your referral and next steps.
-          </p>
-        </div>
-      </motion.div>
-
-      {/* What's included */}
-      <div className="mb-7">
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>WHAT YOU GET WITH APEX</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {FEATURES.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.07 }}
-              className="p-4 rounded-xl"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
-            >
-              <div className="flex items-center gap-2 mb-2">{f.icon}<p className="text-xs font-semibold" style={{ color: 'var(--text-primary)' }}>{f.title}</p></div>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{f.body}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Sample dashboard */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.45 }}
-        className="p-5 rounded-xl mb-7 overflow-hidden relative"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}
-      >
-        <div className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.07) 0%, transparent 70%)' }} />
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>SAMPLE — YOUR RESULTS DASHBOARD</p>
-        <div className="flex flex-col gap-2.5">
-          {[
-            { label: 'Total Testosterone', value: '22.4 nmol/L', status: 'optimal', pct: 78 },
-            { label: 'Free Testosterone', value: '420 pmol/L', status: 'optimal', pct: 82 },
-            { label: 'Cortisol (AM)', value: '540 nmol/L', status: 'watch', pct: 55 },
-            { label: 'Vitamin D', value: '62 nmol/L', status: 'low', pct: 32 },
-            { label: 'hsCRP', value: '0.4 mg/L', status: 'optimal', pct: 88 },
-          ].map(row => (
-            <div key={row.label} className="flex items-center gap-3">
-              <div className="w-28 flex-shrink-0"><p className="text-[10px] font-medium" style={{ color: 'var(--text-primary)' }}>{row.label}</p></div>
-              <div className="flex-1 h-1 rounded-full overflow-hidden" style={{ background: 'var(--elevated)' }}>
-                <div className="h-full rounded-full" style={{ width: `${row.pct}%`, background: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }} />
-              </div>
-              <p className="text-[10px] font-mono w-20 text-right" style={{ color: row.status === 'optimal' ? '#4890f7' : row.status === 'watch' ? '#e8a838' : '#e05c5c' }}>{row.value}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-[10px] mt-3" style={{ color: '#4890f7' }}>54 biomarkers tracked · Updated with every panel · Doctor-reviewed</p>
-      </motion.div>
-
-      {/* Pathway steps */}
-      <div className="p-5 rounded-xl mb-7" style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.06)' }}>
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-5" style={{ color: '#4890f7' }}>YOUR NEXT STEPS</p>
-        <div className="flex flex-col gap-0">
-          {(hasBloods
-            ? [
-                { n: '01', label: 'Complete your consultation intake (3 min)' },
-                { n: '02', label: 'Doctor reviews your results before the call' },
-                { n: '03', label: 'Telehealth consultation — your personalised protocol is built' },
-                { n: '04', label: 'Begin your protocol — coordinated fulfilment and ongoing support' },
-              ]
-            : [
-                { n: '01', label: `Doctor-issued referral for your ${label} panel sent within 24 hours` },
-                { n: '02', label: 'Collect at any accredited centre near you — fasted before 9am' },
-                { n: '03', label: 'Consultation booked once results are back' },
-                { n: '04', label: 'Your personalised protocol is built, monitored, and refined over time' },
-              ]
-          ).map((step, i, arr) => (
-            <div key={step.n} className="flex gap-4">
-              <div className="flex flex-col items-center">
-                <div style={{ width: 24, height: 24, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{step.n}</div>
-                {i < arr.length - 1 && <div style={{ width: 1, flex: 1, minHeight: 12, background: 'rgba(72,144,247,0.08)', marginTop: 2, marginBottom: 2 }} />}
-              </div>
-              <p className="text-sm leading-relaxed pb-3" style={{ color: 'var(--text-primary)' }}>{step.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Trust signals */}
-      <div className="flex flex-wrap gap-x-6 gap-y-2">
-        {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential', 'No lock-in contracts'].map(t => (
-          <span key={t} className="flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
-            <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
-            {t}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  )
-}
-
-// ─── Main ─────────────────────────────────────────────────────────────────────
-
-export default function PreScreenForm() {
-  const [step, setStep] = useState<1 | 2 | 3>(1) // 1=symptoms, 2=context, 3=gate
-  const [data, setData] = useState<FormData>(INITIAL)
-  const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState('')
-  const topRef = useRef<HTMLDivElement>(null)
-
-  const set = (k: keyof FormData, v: string) => setData(p => ({ ...p, [k]: v }))
-  const toggle = (k: 'goals' | 'symptoms', v: string) =>
-    setData(p => ({
-      ...p,
-      [k]: (p[k] as string[]).includes(v)
-        ? (p[k] as string[]).filter(x => x !== v)
-        : [...(p[k] as string[]), v],
-    }))
-
-  const scrollTop = () => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-
-  const step1Valid = data.ageRange && data.goals.length > 0
-  const step2Valid = data.duration && data.impact && data.urgency
-
-  const submit = async () => {
-    setSubmitting(true)
-    setError('')
-    try {
-      const pathway = computePathway(data)
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `New Lead — ${data.firstName} → ${PATHWAY_LABELS[pathway]}`,
-          from_name: 'Apex Metabolic Health',
-          name: data.firstName,
-          email: data.email,
-          phone: data.phone,
-          age_range: data.ageRange,
-          goals: data.goals.join(', '),
-          symptoms: data.symptoms.join(', '),
-          recent_bloods: data.recentBloods,
-          duration: data.duration,
-          impact: data.impact,
-          tried: data.tried,
-          looking_for: data.lookingFor,
-          urgency: data.urgency,
-          referral_source: data.referralSource || 'Not specified',
-          referral_code: data.referralCode || '',
-          matched_pathway: PATHWAY_LABELS[pathway],
-          formType: 'Clinical Assessment',
-        }),
-      })
-      const json = await res.json()
-      if (json.success) {
-        // Send confirmation email to customer
-        const pathwayProgramMap: Record<Pathway, string> = {
-          hormone:     'Hormone Optimisation',
-          performance: 'Hormone & Performance',
-          metabolic:   'Metabolic Weight Loss',
-          hair_skin:   'Hair Restoration',
-          injury:      'Injury Repair & Recovery',
-        }
-        fetch('/api/quiz-confirmation', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            firstName: data.firstName,
-            email: data.email,
-            programs: [pathwayProgramMap[pathway]],
-          }),
-        }).catch(() => {/* non-blocking */})
-        setSubmitted(true)
-        scrollTop()
-      }
-      else setError(json.message || 'Something went wrong. Please try again.')
-    } catch {
-      setError('Network error — please check your connection and try again.')
-    } finally {
-      setSubmitting(false)
+function ProfileStrip({ data }: { data: FormData }) {
+  const parts: string[] = []
+  if (data.concern) {
+    const c = CONCERN_OPTIONS.find(o => o.val === data.concern)
+    if (c) {
+      const short = c.label.length > 28 ? c.label.substring(0, 28) + '…' : c.label
+      parts.push(short)
     }
   }
+  if (data.age) {
+    const a = AGE_OPTIONS.find(o => o.val === data.age)
+    if (a) parts.push(a.label)
+  }
+  if (data.symptoms.length > 0) {
+    parts.push(`${data.symptoms.length} symptom${data.symptoms.length !== 1 ? 's' : ''} flagged`)
+  }
+  if (parts.length === 0) return null
+  return (
+    <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }} className="mb-5 px-4 py-2.5 rounded-xl flex items-center gap-2.5 overflow-hidden"
+      style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
+      <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
+      <p className="text-[10px] font-semibold tracking-[0.06em] truncate" style={{ color: ACCENT, opacity: 0.85 }}>
+        {parts.join('  ·  ')}
+      </p>
+    </motion.div>
+  )
+}
 
-  const progressPct = step === 1 ? '33%' : step === 2 ? '66%' : '100%'
+function BackBtn({ onClick }: { onClick: () => void }) {
+  return (
+    <button onClick={onClick} className="flex items-center gap-1.5 mb-6"
+      style={{ color: 'var(--text-primary)', opacity: 0.35, fontSize: '12px', fontWeight: 500 }}
+      onMouseEnter={e => { e.currentTarget.style.opacity = '0.7' }}
+      onMouseLeave={e => { e.currentTarget.style.opacity = '0.35' }}>
+      <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3" aria-hidden="true">
+        <path d="M11 7H3M7 3L3 7l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      Back
+    </button>
+  )
+}
+
+// ─── Main ────────────────────────────────────────────────────────────────────
+
+const TOTAL_Q = 4
+
+export default function PreScreenForm() {
+  const [screen, setScreen]         = useState(0)
+  const [dir, setDir]               = useState(1)
+  const [data, setData]             = useState<FormData>(INITIAL)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted]   = useState(false)
+  const [errors, setErrors]         = useState<string[]>([])
+  const [flash, setFlash]           = useState('')
+
+  const concern  = data.concern as keyof typeof SYMPTOM_MAP
+  const symptoms = SYMPTOM_MAP[concern] || SYMPTOM_MAP['energy']
+  const pathway  = matchPathway(data)
+  const prog     = PROGRAMS[pathway]
+  const observations = getClinicalObservations(data, pathway)
+
+  const advance = (delta = 1) => {
+    setDir(delta)
+    setScreen(s => s + delta)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const pick = (k: keyof FormData, v: string) => {
+    setData(p => ({ ...p, [k]: v }))
+    setFlash(v)
+    setTimeout(() => { setFlash(''); advance(1) }, 280)
+  }
+
+  const toggleSymptom = (s: string) =>
+    setData(p => ({ ...p, symptoms: p.symptoms.includes(s) ? p.symptoms.filter(x => x !== s) : [...p.symptoms, s] }))
+
+  const set = (k: keyof FormData, v: string) => setData(p => ({ ...p, [k]: v }))
+
+  const validateLead = () => {
+    const e: string[] = []
+    if (!data.firstName.trim()) e.push('First name required')
+    if (!data.email.trim() || !data.email.includes('@')) e.push('Valid email required')
+    if (!data.phone.trim()) e.push('Phone number required')
+    return e
+  }
+
+  const submitLead = async () => {
+    const errs = validateLead()
+    if (errs.length) { setErrors(errs); return }
+    setSubmitting(true)
+    setErrors([])
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3_KEY,
+          subject: `Health Assessment — ${data.firstName} ${data.lastName} → ${prog.label}`,
+          from_name: 'Apex Metabolic Health',
+          firstName: data.firstName, lastName: data.lastName,
+          email: data.email, phone: data.phone,
+          matchedProgram: prog.label, pathway,
+          concern: data.concern, age: data.age,
+          symptoms: data.symptoms.join(', '), history: data.history,
+          formType: 'Health Assessment',
+          submittedAt: new Date().toISOString(),
+        }),
+      })
+      fetch('/api/send-confirmation', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'assessment' }),
+      }).catch(() => {})
+    } catch {}
+    setSubmitting(false)
+    setSubmitted(true)
+    advance(1)
+  }
+
+  const variants = {
+    enter:  (d: number) => ({ opacity: 0, x: d > 0 ? 36 : -36 }),
+    center: { opacity: 1, x: 0 },
+    exit:   (d: number) => ({ opacity: 0, x: d > 0 ? -36 : 36 }),
+  }
+  const sp = {
+    key: screen, custom: dir, variants,
+    initial: 'enter' as const, animate: 'center' as const, exit: 'exit' as const,
+    transition: { duration: 0.28, ease },
+  }
+
+  const cardBase: React.CSSProperties = { background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }
+  const cardHover = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.3)'
+    e.currentTarget.style.background  = 'rgba(72,144,247,0.04)'
+  }
+  const cardLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.1)'
+    e.currentTarget.style.background  = 'var(--surface)'
+  }
 
   return (
     <>
       <Nav />
-      <main>
-        <section
-          className="relative overflow-hidden"
-          style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '120px', paddingBottom: '80px' }}
-        >
-          <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
-          <div aria-hidden="true" className="absolute top-0 left-0 w-[600px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }} />
+      <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
+        <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" aria-hidden="true" />
+        <div aria-hidden="true" className="absolute top-0 right-0 w-[500px] h-[400px] pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }} />
 
-          <div ref={topRef} className="container-tight relative z-10" style={{ maxWidth: 680 }}>
+        <div className="container-tight relative z-10 max-w-lg">
+          <AnimatePresence mode="wait" custom={dir}>
 
-            {/* Progress bar */}
-            {!submitted && (
-              <div className="mb-10">
-                <div className="flex justify-between mb-2">
-                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: step === 3 ? '#4890f7' : '#4890f7' }}>
-                    {step === 1 ? 'STEP 1 OF 2' : step === 2 ? 'STEP 2 OF 2' : 'RESULT READY'}
-                  </span>
-                  <span className="text-xs" style={{ color: '#4890f7' }}>{progressPct}</span>
+            {/* ── Screen 0 — Concern ── */}
+            {screen === 0 && (
+              <motion.div {...sp}>
+                <div className="mb-8">
+                  <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-4" style={{ color: ACCENT, opacity: 0.65 }}>
+                    Clinical Assessment · Confidential
+                  </p>
+                  <h1 className="font-bold tracking-tight mb-3"
+                    style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                    What&apos;s the primary issue?
+                  </h1>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                    Your answer determines the clinical pathway we map for you. Be direct — the more accurate the input, the more relevant your result.
+                  </p>
                 </div>
-                <div style={{ height: 2, background: 'var(--elevated)', borderRadius: 2 }}>
-                  <motion.div
-                    style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
-                    initial={false}
-                    animate={{ width: progressPct }}
-                    transition={{ duration: 0.5, ease }}
-                  />
+
+                <div className="flex flex-col gap-2">
+                  {CONCERN_OPTIONS.map(opt => {
+                    const isFlash = flash === opt.val
+                    return (
+                      <button key={opt.val} type="button" onClick={() => pick('concern', opt.val)}
+                        className="w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left transition-all duration-150"
+                        style={{
+                          background: isFlash ? 'rgba(72,144,247,0.08)' : 'var(--surface)',
+                          border: `1px solid ${isFlash ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.1)'}`,
+                        }}
+                        onMouseEnter={cardHover} onMouseLeave={cardLeave}>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{opt.label}</p>
+                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>{opt.sub}</p>
+                        </div>
+                        <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5 flex-shrink-0"
+                          style={{ color: isFlash ? ACCENT : 'rgba(72,144,247,0.3)', transition: 'color 0.15s' }} aria-hidden="true">
+                          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    )
+                  })}
                 </div>
-              </div>
+
+                <p className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.22 }}>
+                  Takes 90 seconds · Confidential · AHPRA-registered doctors
+                </p>
+              </motion.div>
             )}
 
-            {submitted ? (
-              <Success data={data} />
-            ) : (
-              <>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={step}
-                    initial={{ opacity: 0, x: 24 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -24 }}
-                    transition={{ duration: 0.3, ease }}
-                  >
-                    {step === 1 && <StepOne data={data} set={set} toggle={toggle} />}
-                    {step === 2 && <StepTwo data={data} set={set} />}
-                    {step === 3 && (
-                      <Gate
-                        data={data}
-                        set={set}
-                        submitting={submitting}
-                        onSubmit={submit}
-                        onBack={() => { setStep(2); scrollTop() }}
-                        error={error}
-                      />
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Step 1 & 2 navigation */}
-                {step < 3 && (
-                  <div className="flex items-center gap-4 mt-8">
-                    {step === 2 && (
-                      <button type="button" onClick={() => { setStep(1); scrollTop() }}
-                        className="px-5 py-3 rounded-lg text-sm font-semibold transition-all duration-150"
-                        style={{ background: 'var(--surface)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-primary)' }}>
-                        ← Back
+            {/* ── Screen 1 — Age ── */}
+            {screen === 1 && (
+              <motion.div {...sp}>
+                <BackBtn onClick={() => advance(-1)} />
+                <Progress step={1} total={TOTAL_Q} />
+                <ProfileStrip data={data} />
+                <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-4" style={{ color: ACCENT, opacity: 0.65 }}>
+                  Clinical Intake · Step 1 of {TOTAL_Q}
+                </p>
+                <h2 className="font-bold tracking-tight mb-2"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                  How old are you?
+                </h2>
+                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                  Hormonal profiles shift significantly by decade. Age determines which markers we prioritise.
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {AGE_OPTIONS.map(opt => {
+                    const isFlash = flash === opt.val
+                    return (
+                      <button key={opt.val} type="button" onClick={() => pick('age', opt.val)}
+                        className="flex items-center justify-center py-5 rounded-xl font-bold transition-all duration-150"
+                        style={{
+                          background: isFlash ? 'rgba(72,144,247,0.08)' : 'var(--surface)',
+                          border: `1px solid ${isFlash ? ACCENT : 'rgba(72,144,247,0.1)'}`,
+                          fontFamily: 'var(--font-space-grotesk)', fontSize: '20px',
+                          color: isFlash ? ACCENT : 'var(--text-primary)',
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.borderColor = ACCENT; e.currentTarget.style.color = ACCENT; e.currentTarget.style.background = 'rgba(72,144,247,0.05)' }}
+                        onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.1)'; e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--surface)' }}>
+                        {opt.label}
                       </button>
-                    )}
-                    <button
-                      type="button"
-                      onClick={() => { setStep(step === 1 ? 2 : 3); scrollTop() }}
-                      disabled={step === 1 ? !step1Valid : !step2Valid}
-                      className="btn-teal"
-                      style={{ opacity: (step === 1 ? !step1Valid : !step2Valid) ? 0.45 : 1 }}
-                    >
-                      {step === 1 ? 'Continue →' : 'Reveal my result →'}
-                    </button>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            )}
+
+            {/* ── Screen 2 — Symptoms ── */}
+            {screen === 2 && (
+              <motion.div {...sp}>
+                <BackBtn onClick={() => advance(-1)} />
+                <Progress step={2} total={TOTAL_Q} />
+                <ProfileStrip data={data} />
+                <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-4" style={{ color: ACCENT, opacity: 0.65 }}>
+                  Clinical Intake · Step 2 of {TOTAL_Q}
+                </p>
+                <h2 className="font-bold tracking-tight mb-2"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                  Which of these apply?
+                </h2>
+                <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                  Select everything that sounds familiar. Co-presenting symptoms are diagnostically significant.
+                </p>
+                <div className="grid grid-cols-1 gap-2 mb-6">
+                  {symptoms.map(s => {
+                    const sel = data.symptoms.includes(s.val)
+                    return (
+                      <button key={s.val} type="button" onClick={() => toggleSymptom(s.val)}
+                        className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm text-left transition-all duration-150"
+                        style={{
+                          background: sel ? 'rgba(72,144,247,0.07)' : 'var(--surface)',
+                          border: `1px solid ${sel ? 'rgba(72,144,247,0.35)' : 'rgba(72,144,247,0.08)'}`,
+                        }}>
+                        <div className="w-4 h-4 rounded flex items-center justify-center flex-shrink-0"
+                          style={{ background: sel ? ACCENT : 'transparent', border: `1.5px solid ${sel ? ACCENT : 'rgba(255,255,255,0.15)'}`, transition: 'all 0.15s' }}>
+                          {sel && (
+                            <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
+                              <path d="M1.5 5l3 3 4-4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          )}
+                        </div>
+                        <span className="text-sm font-medium" style={{ color: sel ? ACCENT : 'var(--text-primary)' }}>{s.label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+                <button type="button" onClick={() => advance(1)} className="btn-teal w-full justify-center">
+                  {data.symptoms.length === 0 ? 'None of these — continue' : `Continue (${data.symptoms.length} selected)`}
+                  <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </motion.div>
+            )}
+
+            {/* ── Screen 3 — Blood work history ── */}
+            {screen === 3 && (
+              <motion.div {...sp}>
+                <BackBtn onClick={() => advance(-1)} />
+                <Progress step={3} total={TOTAL_Q} />
+                <ProfileStrip data={data} />
+                <p className="text-[9px] font-bold tracking-[0.25em] uppercase mb-4" style={{ color: ACCENT, opacity: 0.65 }}>
+                  Clinical Intake · Step 3 of {TOTAL_Q}
+                </p>
+                <h2 className="font-bold tracking-tight mb-2"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                  Have you had blood work done?
+                </h2>
+                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                  Prior testing changes what your first appointment looks like and how we interpret your symptom profile.
+                </p>
+                <div className="flex flex-col gap-2.5">
+                  {HISTORY_OPTIONS.map(opt => {
+                    const isFlash = flash === opt.val
+                    return (
+                      <button key={opt.val} type="button" onClick={() => pick('history', opt.val)}
+                        className="w-full flex items-center justify-between gap-4 px-5 py-4 rounded-xl text-left transition-all duration-150"
+                        style={{
+                          background: isFlash ? 'rgba(72,144,247,0.06)' : 'var(--surface)',
+                          border: `1px solid ${isFlash ? 'rgba(72,144,247,0.4)' : 'rgba(72,144,247,0.1)'}`,
+                        }}
+                        onMouseEnter={cardHover} onMouseLeave={cardLeave}>
+                        <div>
+                          <p className="text-sm font-semibold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{opt.label}</p>
+                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>{opt.sub}</p>
+                        </div>
+                        <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5 flex-shrink-0"
+                          style={{ color: isFlash ? ACCENT : 'rgba(72,144,247,0.3)', transition: 'color 0.15s' }} aria-hidden="true">
+                          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            )}
+
+            {/* ── Screen 4 — Unlock (lead form) ── */}
+            {screen === 4 && !submitted && (
+              <motion.div {...sp}>
+                <BackBtn onClick={() => advance(-1)} />
+                <Progress step={4} total={TOTAL_Q} />
+
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-5 h-5 rounded-full flex items-center justify-center"
+                    style={{ background: 'rgba(72,144,247,0.12)', border: '1px solid rgba(72,144,247,0.3)' }}>
+                    <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
+                      <path d="M1.5 5l2.5 2.5 4.5-5" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span className="text-[9px] font-bold tracking-[0.2em] uppercase" style={{ color: ACCENT }}>
+                    Clinical profile compiled · Protocol match ready
+                  </span>
+                </div>
+
+                <h2 className="font-bold tracking-tight mb-3"
+                  style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                  Your results are ready.
+                </h2>
+                <p className="text-sm leading-relaxed mb-7" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                  We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment — a doctor will review your profile within 24 hours.
+                </p>
+
+                {/* Blurred result preview */}
+                <div className="relative mb-8 rounded-2xl overflow-hidden"
+                  style={{ border: '1px solid rgba(72,144,247,0.2)', background: 'var(--surface)' }}>
+                  <div className="p-5" style={{ filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' }}>
+                    <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: ACCENT }}>Matched protocol</p>
+                    <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{prog.label}</p>
+                    <p className="text-xs mb-4" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{prog.tagline}</p>
+                    <div className="flex flex-col gap-1.5">
+                      {prog.biomarkers.slice(0, 4).map(b => (
+                        <div key={b} className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
+                          <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{b}</span>
+                        </div>
+                      ))}
+                      <div className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
+                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>+ {prog.biomarkers.length - 4} more markers</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center"
+                    style={{ background: 'rgba(7,10,13,0.65)', backdropFilter: 'blur(2px)' }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center mb-3"
+                      style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
+                      <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5" style={{ color: ACCENT }}>
+                        <rect x="4" y="9" width="12" height="9" rx="2" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                    <p className="text-sm font-bold text-center mb-1" style={{ color: 'var(--text-primary)' }}>Results locked</p>
+                    <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>Enter your details below to unlock</p>
+                  </div>
+                </div>
+
+                {errors.length > 0 && (
+                  <div className="rounded-lg px-4 py-3 mb-4" style={{ background: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.25)' }}>
+                    {errors.map(e => <p key={e} className="text-xs" style={{ color: '#dc3545' }}>— {e}</p>)}
                   </div>
                 )}
 
-                {step === 1 && (
-                  <p className="text-xs mt-5 flex items-center gap-2" style={{ color: '#4890f7' }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.35)' }} />
-                    Trusted by 2,000+ Australian men
-                  </p>
-                )}
-              </>
+                <div className="flex flex-col gap-3 mb-5">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                        First name <span style={{ color: ACCENT }}>*</span>
+                      </label>
+                      <input type="text" value={data.firstName} onChange={e => set('firstName', e.target.value)}
+                        placeholder="John" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
+                        style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
+                        onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
+                        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                        Last name
+                      </label>
+                      <input type="text" value={data.lastName} onChange={e => set('lastName', e.target.value)}
+                        placeholder="Smith" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
+                        style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
+                        onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
+                        onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      Email address <span style={{ color: ACCENT }}>*</span>
+                    </label>
+                    <input type="email" value={data.email} onChange={e => set('email', e.target.value)}
+                      placeholder="john@email.com" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
+                      style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
+                      onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
+                      onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      Mobile number <span style={{ color: ACCENT }}>*</span>
+                    </label>
+                    <input type="tel" value={data.phone} onChange={e => set('phone', e.target.value)}
+                      placeholder="04XX XXX XXX" inputMode="tel" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
+                      style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
+                      onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
+                      onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
+                  </div>
+                </div>
+
+                <button type="button" onClick={submitLead} disabled={submitting}
+                  className="btn-teal w-full justify-center mb-4" style={{ opacity: submitting ? 0.7 : 1 }}>
+                  {submitting ? 'Processing…' : 'Unlock my clinical assessment'}
+                  {!submitting && (
+                    <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                </button>
+
+                <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+                  Your information is private and confidential. A doctor will review your profile within 24 hours.
+                  <br />Not shared with third parties. AHPRA-registered practitioners only.
+                </p>
+              </motion.div>
             )}
-          </div>
-        </section>
-        <AppFeature />
+
+            {/* ── Screen 5 — Result ── */}
+            {screen === 5 && (
+              <motion.div {...sp}>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center"
+                      style={{ background: 'rgba(72,144,247,0.12)', border: '1px solid rgba(72,144,247,0.3)' }}>
+                      <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
+                        <path d="M1.5 5l2.5 2.5 4.5-5" stroke={ACCENT} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                    <span className="text-[9px] font-bold tracking-[0.2em] uppercase" style={{ color: ACCENT }}>
+                      Clinical profile unlocked{data.firstName ? ` · ${data.firstName}` : ''} · reviewed by Apex Medical Team
+                    </span>
+                  </div>
+
+                  <h1 className="font-bold tracking-tight mb-2"
+                    style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 4.5vw, 40px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
+                    {prog.label}
+                  </h1>
+                  <p className="text-base font-semibold mb-6"
+                    style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                    {prog.tagline}
+                  </p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease }}
+                  className="rounded-2xl p-6 mb-6"
+                  style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.15)' }}>
+                  <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-3" style={{ color: ACCENT }}>Clinical assessment</p>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.8 }}>
+                    {prog.clinicalSummary}
+                  </p>
+                </motion.div>
+
+                {observations.length > 0 && (
+                  <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.18, ease }}
+                    className="rounded-2xl p-6 mb-6"
+                    style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }}>
+                    <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: ACCENT }}>Observations from your profile</p>
+                    <div className="flex flex-col gap-3">
+                      {observations.map((obs, i) => (
+                        <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.2 + i * 0.07, ease }}
+                          className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: ACCENT }} />
+                          <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>{obs}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
+                  className="rounded-xl px-5 py-3.5 mb-6"
+                  style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.12)' }}>
+                  <p className="text-xs leading-relaxed italic" style={{ color: ACCENT }}>{prog.urgency}</p>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.28, ease }}
+                  className="rounded-2xl p-6 mb-6"
+                  style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }}>
+                  <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: ACCENT }}>
+                    Recommended blood panel — {prog.biomarkers.length} markers
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                    {prog.biomarkers.map(b => (
+                      <div key={b} className="flex items-center gap-2">
+                        <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: ACCENT, opacity: 0.6 }} />
+                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>{b}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.38, ease }}
+                  className="flex flex-col gap-3">
+                  <Link href={prog.intakeHref} className="btn-teal w-full justify-center" style={{ fontSize: '14px', padding: '16px' }}>
+                    Book my consultation →
+                  </Link>
+                  <a href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call" target="_blank" rel="noopener noreferrer"
+                    className="btn-ghost w-full justify-center" style={{ fontSize: '13px' }}>
+                    Speak with our team first
+                  </a>
+                </motion.div>
+
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.55 }}
+                  className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.22 }}>
+                  This assessment is not a medical diagnosis. A clinical assessment with an AHPRA-registered doctor is required before any treatment is prescribed.
+                </motion.p>
+              </motion.div>
+            )}
+
+          </AnimatePresence>
+        </div>
+
+        {/* Selection flash toast */}
+        <AnimatePresence>
+          {flash && (
+            <motion.div key="toast"
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.18 }}
+              className="fixed bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2.5 px-5 py-2.5 rounded-full pointer-events-none z-50"
+              style={{ background: 'rgba(7,10,13,0.9)', border: '1px solid rgba(72,144,247,0.3)', backdropFilter: 'blur(16px)' }}>
+              <div className="w-1.5 h-1.5 rounded-full" style={{ background: ACCENT }} />
+              <span className="text-xs font-semibold tracking-[0.1em]" style={{ color: ACCENT }}>Updating your profile</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
       <Footer />
     </>

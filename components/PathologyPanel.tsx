@@ -200,7 +200,7 @@ export default function PathologyPanel() {
               href="/intake/general-consult"
               className="btn-teal w-full text-center text-xs"
             >
-              Get Started — General Consult
+              Get Started — Peptide Consult
             </a>
           </motion.div>
         </div>

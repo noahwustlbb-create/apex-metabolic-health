@@ -14,7 +14,7 @@ const ARTICLES = [
     category: 'Hormones',
     readTime: '6 min read',
     title: 'Low Testosterone: What GPs Don\'t Test For',
-    summary: 'A standard testosterone test tells you almost nothing. Total testosterone, reference ranges, and why the gap between "normal" and "optimal" is larger than most men realise.',
+    summary: 'A standard testosterone test tells you almost nothing. Total testosterone, reference ranges, and why the gap between "normal" and "optimal" is larger than most people realise.',
     slug: 'low-testosterone-what-gps-dont-test-for',
     featured: true,
     tags: ['Testosterone', 'Blood panels', 'GPs'],

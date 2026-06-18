@@ -1,6 +1,6 @@
 export type EnquiryType =
   | 'trt'
-  | 'peptides'
+  | 'performance'
   | 'weight-loss'
   | 'injury-repair'
   | 'hair'
@@ -10,8 +10,8 @@ export type EnquiryType =
   | 'sleep'
 
 export const ENQUIRY_LABELS: Record<EnquiryType, string> = {
-  'trt': 'TRT / Hormone Optimisation',
-  'peptides': 'Peptides',
+  'trt': 'Hormone Optimisation',
+  'performance': 'Performance & Recovery',
   'weight-loss': 'Weight Loss',
   'injury-repair': 'Injury Repair & Recovery',
   'hair': 'Hair Restoration',
@@ -21,8 +21,22 @@ export const ENQUIRY_LABELS: Record<EnquiryType, string> = {
   'sleep': 'Sleep Optimisation',
 }
 
+// bloodygoodtests.com.au panel URLs — shown when patient has no existing bloods
+export const PANEL_URLS: Record<EnquiryType, string> = {
+  'trt':          'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
+  'sexual-health':'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
+  'anti-aging':   'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
+  'sleep':        'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
+  'performance':  'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
+  'injury-repair':'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
+  'weight-loss':  'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
+  'hair':         'https://app.bloodygoodtests.com.au/buy/a09b6127-f307-4446-81a6-ab7789440754',
+  'skin':         'https://app.bloodygoodtests.com.au/buy/a09b6127-f307-4446-81a6-ab7789440754',
+}
+
 export type ProductType =
   | 'panel-hormone'
+  | 'panel-performance'
   | 'panel-weight-loss'
   | 'panel-injury'
   | 'panel-hair'
@@ -41,32 +55,38 @@ export interface Product {
 
 const PRODUCTS: Record<ProductType, Omit<Product, 'type'>> = {
   'panel-hormone': {
-    name: 'Hormone Health Panel',
-    description: 'Comprehensive hormone and metabolic blood panel. Doctor-issued referral sent within 24 hours. Collect at any accredited pathology centre nationwide — no appointment required.',
+    name: 'Hormone Panel',
+    description: 'Comprehensive hormone and metabolic blood panel. Collect at any accredited pathology centre nationwide — no appointment required.',
     price: 199,
     priceEnvKey: 'STRIPE_PRICE_PANEL_HORMONE',
   },
+  'panel-performance': {
+    name: 'Performance & Recovery Panel',
+    description: 'Markers covering hormonal output, recovery capacity, inflammation, and tissue repair. Collect at any accredited pathology centre.',
+    price: 150,
+    priceEnvKey: 'STRIPE_PRICE_PANEL_INJURY',
+  },
   'panel-weight-loss': {
     name: 'Metabolic Weight Loss Panel',
-    description: 'Targeted metabolic and hormonal markers to guide your weight loss protocol. Doctor-issued referral sent within 24 hours.',
+    description: 'Targeted metabolic and hormonal markers to guide your weight loss protocol. Collect at any accredited pathology centre.',
     price: 150,
     priceEnvKey: 'STRIPE_PRICE_PANEL_WEIGHT_LOSS',
   },
   'panel-injury': {
     name: 'Injury Recovery Panel',
-    description: 'Markers to assess recovery capacity, inflammation, and tissue repair. Doctor-issued referral sent within 24 hours.',
+    description: 'Markers to assess recovery capacity, inflammation, and tissue repair. Collect at any accredited pathology centre.',
     price: 150,
     priceEnvKey: 'STRIPE_PRICE_PANEL_INJURY',
   },
   'panel-hair': {
     name: 'Hair Restoration Panel',
-    description: 'Hormonal and nutritional markers linked to hair loss and scalp health. Doctor-issued referral sent within 24 hours.',
+    description: 'Hormonal and nutritional markers linked to hair loss and scalp health. Collect at any accredited pathology centre.',
     price: 150,
     priceEnvKey: 'STRIPE_PRICE_PANEL_HAIR',
   },
   'panel-skin': {
     name: 'Skin Regeneration Panel',
-    description: 'Hormonal and inflammatory markers that influence skin health and regeneration. Doctor-issued referral sent within 24 hours.',
+    description: 'Hormonal and inflammatory markers that influence skin health and regeneration. Collect at any accredited pathology centre.',
     price: 150,
     priceEnvKey: 'STRIPE_PRICE_PANEL_SKIN',
   },
@@ -94,12 +114,13 @@ export function getProduct(enquiry: EnquiryType, hasBloods: boolean): Product {
   let type: ProductType
 
   if (hasBloods) {
-    if (enquiry === 'peptides') type = 'consult-hormone-recovery'
-    else if (['weight-loss', 'injury-repair', 'hair', 'skin'].includes(enquiry)) type = 'consult-general'
+    if (['weight-loss', 'injury-repair', 'hair', 'skin'].includes(enquiry)) type = 'consult-general'
+    else if (enquiry === 'performance') type = 'consult-hormone-recovery'
     else type = 'consult-hormone'
   } else {
     if (enquiry === 'weight-loss') type = 'panel-weight-loss'
     else if (enquiry === 'injury-repair') type = 'panel-injury'
+    else if (enquiry === 'performance') type = 'panel-performance'
     else if (enquiry === 'hair') type = 'panel-hair'
     else if (enquiry === 'skin') type = 'panel-skin'
     else type = 'panel-hormone'

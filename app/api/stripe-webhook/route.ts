@@ -116,7 +116,7 @@ export async function POST(req: Request) {
               : 'Our team will contact you within 1 business day to confirm your telehealth consultation time.'}
           </p>
           <p style="color:#4a5a6a;font-size:11px;margin:32px 0 0;">
-            Questions? Reply to this email or contact us at care@apexmetabolichealth.com.au<br>
+            Questions? Reply to this email or contact us at admin@apexmetabolichealth.com.au<br>
             Apex Metabolic Health · AHPRA-registered practitioners · This email does not constitute medical advice.
           </p>
         </div>

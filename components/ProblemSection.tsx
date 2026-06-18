@@ -129,7 +129,7 @@ export default function ProblemSection() {
               className="text-xs mt-5 leading-relaxed"
               style={{ color: '#4890f7' }}
             >
-              These are clinical indicators — not lifestyle problems. Most men are never tested for them. We test all of them.
+              These are clinical indicators — not lifestyle problems. Most patients are never tested for them. We test all of them.
             </motion.p>
           </div>
         </div>

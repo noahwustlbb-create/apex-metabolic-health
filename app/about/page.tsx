@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -54,12 +55,12 @@ const WHY = [
   {
     label: 'The gap we fill',
     title: 'GPs are not built for optimisation.',
-    body: 'The standard of care in Australian general practice is designed to identify disease, not investigate function. A man with testosterone at the bottom of the reference range will be told he is "fine." His GP is not wrong — he does not have a diagnosable disease. But he is nowhere near optimal, and nobody is investigating why.\n\nApex exists to close that gap. We run deeper panels, interpreted by doctors who specialise in exactly this, and we build protocols around where your biology should be — not just where it technically clears the threshold.',
+    body: 'The standard of care in Australian general practice is designed to identify disease, not investigate function. A patient with testosterone at the bottom of the reference range will be told they are "fine." Their GP is not wrong — they do not have a diagnosable disease. But they are nowhere near optimal, and nobody is investigating why.\n\nApex exists to close that gap. We run deeper panels, interpreted by doctors who specialise in exactly this, and we build protocols around where your biology should be — not just where it technically clears the threshold.',
   },
   {
     label: 'What we are not',
     title: 'Not a wellness brand. Not a supplement store.',
-    body: 'The men\'s health space is full of brands selling confidence and identity alongside protein powder. We are a medical clinic. Our doctors are qualified. Our pathology is accredited. Our pharmacy is TGA-compliant.\n\nIf that sounds clinical, good. You should be sceptical of anyone in this space who isn\'t. The men who come to us have usually spent years being told everything is fine. They want real answers, not a lifestyle subscription.',
+    body: 'The health optimisation space is full of brands selling confidence and identity alongside protein powder. We are a medical clinic. Our doctors are qualified. Our pathology is accredited. Our pharmacy is TGA-compliant.\n\nIf that sounds clinical, good. You should be sceptical of anyone in this space who isn\'t. The patients who come to us have usually spent years being told everything is fine. They want real answers, not a lifestyle subscription.',
   },
 ]
 
@@ -146,8 +147,60 @@ export default function AboutPage() {
               className="text-lg leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '560px', opacity: 0.75 }}
             >
-              Apex Metabolic Health is an Australian doctor-led telehealth clinic built for men who want more than a normal result — they want an optimal one.
+              Apex Metabolic Health is an Australian doctor-led telehealth clinic built for those who want more than a normal result — they want an optimal one.
             </motion.p>
+          </div>
+        </section>
+
+        {/* Clinical imagery strip */}
+        <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
+          <div className="container-tight">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pb-0">
+              {[
+                {
+                  src: 'https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=700&q=80',
+                  alt: 'Accredited pathology blood panel',
+                  label: 'NATA-accredited pathology',
+                },
+                {
+                  src: 'https://images.unsplash.com/photo-1758691462743-f9fc9e430d39?auto=format&fit=crop&w=700&q=80',
+                  alt: 'Telehealth consultation with AHPRA doctor',
+                  label: 'AHPRA-registered doctors',
+                },
+                {
+                  src: 'https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=700&q=80',
+                  alt: 'Patient outcomes and performance',
+                  label: 'Real clinical outcomes',
+                },
+              ].map((img, i) => {
+                const ref = useRef(null)
+                const inView = useInView(ref, { once: true, margin: '-40px' })
+                return (
+                  <motion.div
+                    key={img.label}
+                    ref={ref}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.55, delay: i * 0.1, ease }}
+                    className="relative rounded-2xl overflow-hidden"
+                    style={{ aspectRatio: '4/3', border: '1px solid rgba(72,144,247,0.12)' }}
+                  >
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover"
+                      style={{ opacity: 0.8 }}
+                      unoptimized
+                    />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(4,6,13,0.9) 100%)' }} />
+                    <div className="absolute bottom-0 left-0 p-4">
+                      <p className="text-xs font-semibold tracking-[0.12em] uppercase" style={{ color: 'rgba(72,144,247,0.9)' }}>{img.label}</p>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
         </section>
 
@@ -251,7 +304,7 @@ export default function AboutPage() {
                       </span>
                     </div>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Dr Chen leads Apex&apos;s clinical operations, protocol development, and medical governance. His focus is on evidence-based hormone and metabolic medicine — moving men from functional decline toward measurable biological optimisation.
+                      Dr Chen leads Apex&apos;s clinical operations, protocol development, and medical governance. His focus is on evidence-based hormone and metabolic medicine — moving patients from functional decline toward measurable biological optimisation.
                     </p>
                   </div>
                   <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>

@@ -4,183 +4,195 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
-const STEPS = [
+const ACCENT = '#4890f7'
+const ease = [0.22, 1, 0.36, 1] as const
+
+const ACTIONS = [
   {
-    number: '1',
-    title: 'Start Your Assessment',
-    description: 'Answer a short health questionnaire. We\'ll match you to the right program and doctor.',
-    cta: 'Begin assessment',
-    href: '/assessment',
-  },
-  {
-    number: '2',
-    title: 'Book a Consultation',
-    description: 'Speak with an AHPRA-registered doctor via telehealth — hormone, metabolic, or general.',
-    cta: 'Book now',
-    href: '/intake/hormone-consult',
-  },
-  {
-    number: '3',
-    title: 'Get Your Blood Panel',
-    description: 'Advanced biomarker analysis. No GP referral required. Doctor-ordered panels through Apex.',
-    cta: 'Start assessment',
+    id: 'assessment',
+    icon: (
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4" aria-hidden="true">
+        <path d="M9 1v4M9 13v4M1 9h4M13 9h4" strokeLinecap="round" />
+        <circle cx="9" cy="9" r="4" />
+      </svg>
+    ),
+    label: '60-second assessment',
+    sub: 'Tell us your goals — we match you to the right doctor and program.',
     href: '/intake/pre-screen',
+    external: false,
+    highlight: true,
   },
   {
-    number: '4',
-    title: 'Speak to a Clinician',
-    description: 'Still unsure? Our clinical team is on standby to guide you through your options.',
-    cta: 'Book a free call',
-    href: '/intake/discovery',
+    id: 'hormone',
+    icon: (
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4" aria-hidden="true">
+        <path d="M9 2a7 7 0 100 14A7 7 0 009 2z" />
+        <path d="M9 6v3l2 2" strokeLinecap="round" />
+      </svg>
+    ),
+    label: 'Hormone consultation',
+    sub: 'Hormone optimisation and performance. Speak with a doctor.',
+    href: '/intake/hormone-consult',
+    external: false,
+    highlight: false,
+  },
+  {
+    id: 'peptide',
+    icon: (
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4" aria-hidden="true">
+        <path d="M5 3l3 3-3 3M10 9l3 3-3 3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M3 9h4M11 9h4" strokeLinecap="round" />
+      </svg>
+    ),
+    label: 'Peptide consultation',
+    sub: 'Hair, skin, injury repair, anti-ageing, and weight protocols.',
+    href: '/intake/general-consult',
+    external: false,
+    highlight: false,
+  },
+  {
+    id: 'discovery',
+    icon: (
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4" aria-hidden="true">
+        <path d="M3 5h12M3 9h8M3 13h5" strokeLinecap="round" />
+      </svg>
+    ),
+    label: 'Free discovery call',
+    sub: '15 minutes with our clinical team. No cost, no commitment.',
+    href: 'https://calendly.com/admin-apexmetabolichealth/free-discovery-call',
+    external: true,
+    highlight: false,
   },
 ]
 
 export default function FloatingContact() {
   const [open, setOpen] = useState(false)
-  const [expanded, setExpanded] = useState<string | null>('1')
-  const [heroVisible, setHeroVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const hero = document.getElementById('hero')
-    if (!hero) { setHeroVisible(false); return }
-    const observer = new IntersectionObserver(
-      ([entry]) => setHeroVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    )
-    observer.observe(hero)
-    return () => observer.disconnect()
+    const handle = () => setVisible(window.scrollY > 120)
+    handle()
+    window.addEventListener('scroll', handle, { passive: true })
+    return () => window.removeEventListener('scroll', handle)
+  }, [])
+
+  // Close on escape
+  useEffect(() => {
+    const handle = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
+    window.addEventListener('keydown', handle)
+    return () => window.removeEventListener('keydown', handle)
   }, [])
 
   return (
     <motion.div
-      animate={{ opacity: heroVisible ? 0 : 1, pointerEvents: heroVisible ? 'none' : 'auto' }}
-      transition={{ duration: 0.4, ease: 'easeInOut' }}
+      animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12, pointerEvents: visible ? 'auto' : 'none' }}
+      transition={{ duration: 0.35, ease }}
       className="fixed bottom-6 right-5 sm:right-8 z-50 flex flex-col items-end gap-3"
-      style={{ width: 'min(420px, calc(100vw - 32px))' }}
+      style={{ width: 'min(400px, calc(100vw - 32px))' }}
     >
+      {/* Expanded panel */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.97 }}
+            key="panel"
+            initial={{ opacity: 0, y: 10, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            transition={{ duration: 0.2, ease }}
             className="w-full rounded-2xl overflow-hidden"
             style={{
               background: 'var(--surface)',
-              border: '1px solid rgba(72,144,247,0.16)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(72,144,247,0.05)',
+              border: '1px solid rgba(72,144,247,0.18)',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(72,144,247,0.06)',
             }}
           >
-            <div
-              className="px-5 py-4 flex items-center justify-between"
-              style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
-            >
-              <span
-                className="text-[11px] font-semibold tracking-[0.18em] uppercase"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                Start Health Assessment
+            {/* Panel header */}
+            <div className="flex items-center justify-between px-5 py-3.5"
+              style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: ACCENT }}>
+                Get Started
               </span>
               <button
                 onClick={() => setOpen(false)}
                 className="w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ color: 'var(--text-primary)' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = '#f2efe9' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-primary)' }}
-                aria-label="Close"
+                style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-primary)' }}
+                aria-label="Close menu"
               >
-                <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-                  <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
+                  <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </button>
             </div>
 
-            <div className="divide-y" style={{ borderColor: 'var(--elevated)' }}>
-              {STEPS.map((step) => {
-                const isOpen = expanded === step.number
-                return (
-                  <div key={step.number}>
-                    <button
-                      className="w-full flex items-center gap-4 px-5 py-4 text-left transition-colors duration-150"
-                      onClick={() => setExpanded(isOpen ? null : step.number)}
-                      style={{ background: isOpen ? 'rgba(72,144,247,0.04)' : 'transparent' }}
-                    >
-                      <span
-                        className="w-7 h-7 rounded-full flex items-center justify-center text-[12px] font-bold flex-shrink-0"
-                        style={{
-                          backgroundColor: isOpen ? 'rgba(72,144,247,0.12)' : 'var(--surface)',
-                          color: isOpen ? '#4890f7' : 'var(--text-primary)',
-                          border: isOpen ? '1px solid rgba(72,144,247,0.28)' : '1px solid rgba(72,144,247,0.12)',
-                        }}
-                      >
-                        {step.number}
-                      </span>
-                      <span
-                        className="text-sm font-semibold flex-1 text-left"
-                        style={{ color: isOpen ? 'var(--text-primary)' : '#7a8a9a', fontFamily: 'var(--font-space-grotesk)' }}
-                      >
-                        {step.title}
-                      </span>
-                      <svg
-                        viewBox="0 0 12 12"
-                        fill="none"
-                        className="w-3 h-3 flex-shrink-0 transition-transform duration-200"
-                        style={{
-                          color: 'var(--text-primary)',
-                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        }}
-                        aria-hidden="true"
-                      >
-                        <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </button>
+            {/* Action list */}
+            <div className="flex flex-col">
+              {ACTIONS.map((action, i) => {
+                const Tag = action.external ? 'a' : Link
+                const extraProps = action.external
+                  ? { href: action.href, target: '_blank', rel: 'noopener noreferrer' }
+                  : { href: action.href }
 
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 pb-5 pt-1 pl-16">
-                            <p
-                              className="text-sm leading-relaxed mb-4"
-                              style={{ color: 'var(--text-primary)' }}
-                            >
-                              {step.description}
-                            </p>
-                            <Link
-                              href={step.href}
-                              onClick={() => setOpen(false)}
-                              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-200"
-                              style={{
-                                background: '#4890f7',
-                                color: '#ffffff',
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = '#2563eb'
-                                e.currentTarget.style.boxShadow = '0 4px 16px rgba(72,144,247,0.35)'
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = '#4890f7'
-                                e.currentTarget.style.boxShadow = 'none'
-                              }}
-                            >
-                              {step.cta}
-                              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                              </svg>
-                            </Link>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+                return (
+                  <motion.div
+                    key={action.id}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.18, delay: i * 0.04, ease }}
+                  >
+                    <Tag
+                      {...extraProps}
+                      onClick={() => setOpen(false)}
+                      className="group flex items-center gap-4 px-5 py-4 transition-all duration-150"
+                      style={{
+                        borderBottom: i < ACTIONS.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                        background: action.highlight ? 'rgba(72,144,247,0.04)' : 'transparent',
+                        textDecoration: 'none',
+                        display: 'flex',
+                      }}
+                      onMouseEnter={(e: React.MouseEvent<HTMLElement>) => {
+                        e.currentTarget.style.background = 'rgba(72,144,247,0.07)'
+                      }}
+                      onMouseLeave={(e: React.MouseEvent<HTMLElement>) => {
+                        e.currentTarget.style.background = action.highlight ? 'rgba(72,144,247,0.04)' : 'transparent'
+                      }}
+                    >
+                      {/* Icon */}
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{
+                          background: action.highlight ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.04)',
+                          border: `1px solid ${action.highlight ? 'rgba(72,144,247,0.25)' : 'rgba(255,255,255,0.07)'}`,
+                          color: action.highlight ? ACCENT : 'var(--text-primary)',
+                        }}>
+                        {action.icon}
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold leading-tight mb-0.5"
+                          style={{ fontFamily: 'var(--font-space-grotesk)', color: action.highlight ? ACCENT : 'var(--text-primary)' }}>
+                          {action.label}
+                        </p>
+                        <p className="text-[10px] leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>
+                          {action.sub}
+                        </p>
+                      </div>
+
+                      {/* Arrow */}
+                      <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3 flex-shrink-0 transition-transform duration-150 group-hover:translate-x-0.5"
+                        style={{ color: action.highlight ? ACCENT : 'rgba(255,255,255,0.2)' }} aria-hidden="true">
+                        <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </Tag>
+                  </motion.div>
                 )
               })}
+            </div>
+
+            {/* Footer */}
+            <div className="px-5 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+              <p className="text-[9px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+                AHPRA-registered doctors · 100% online · Australia-wide
+              </p>
             </div>
           </motion.div>
         )}
@@ -188,32 +200,38 @@ export default function FloatingContact() {
 
       {/* Pill trigger */}
       <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center gap-3 px-7 py-4 transition-all duration-200"
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center gap-3 px-6 py-3.5 transition-all duration-200"
         style={{
           background: 'var(--surface)',
-          border: '1px solid rgba(255,255,255,0.1)',
+          border: `1px solid ${open ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.1)'}`,
           borderRadius: '999px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+          boxShadow: open
+            ? '0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(72,144,247,0.12)'
+            : '0 8px 32px rgba(0,0,0,0.5)',
           color: 'var(--text-primary)',
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(72,144,247,0.08)'
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = 'rgba(72,144,247,0.3)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 24px rgba(72,144,247,0.1)'
         }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'var(--border)'
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = open ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.1)'
           e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5)'
         }}
-        aria-label="Start Health Assessment"
+        aria-label="Get started"
         aria-expanded={open}
+        aria-haspopup="true"
       >
-        <span className="text-[12px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
+        <span className="text-[11px] font-bold tracking-[0.18em] uppercase whitespace-nowrap"
+          style={{ fontFamily: 'var(--font-space-grotesk)' }}>
           Start Health Assessment
         </span>
-        <span
-          className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
-          style={{ backgroundColor: '#4890f7' }}
+        <motion.span
+          className="w-2 h-2 rounded-full flex-shrink-0"
+          style={{ backgroundColor: ACCENT }}
+          animate={{ opacity: open ? 0.5 : [1, 0.4, 1] }}
+          transition={{ duration: 2, repeat: open ? 0 : Infinity, ease: 'easeInOut' }}
         />
       </button>
     </motion.div>

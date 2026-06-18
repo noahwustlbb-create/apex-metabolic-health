@@ -7,11 +7,8 @@ import WhyApex from '@/components/WhyApex'
 import HowItWorks from '@/components/HowItWorks'
 import Testimonials from '@/components/Testimonials'
 import PricingSnapshot from '@/components/PricingSnapshot'
-import AppFeature from '@/components/AppFeature'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
-import FloatingContact from '@/components/FloatingContact'
-
 export default function Home() {
   return (
     <>
@@ -25,11 +22,9 @@ export default function Home() {
         <HowItWorks />
         <Testimonials />
         <PricingSnapshot />
-        <AppFeature />
         <CTASection />
       </main>
       <Footer />
-      <FloatingContact />
     </>
   )
 }

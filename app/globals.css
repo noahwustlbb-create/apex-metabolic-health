@@ -4,49 +4,49 @@
 
 :root {
   --bg:               #ffffff;
-  --surface:          #f8f9ff;
+  --surface:          #f3f7ff;
   --elevated:         #ffffff;
-  --elevated-high:    #f0f5ff;
-  --surface-muted:    #f1f5fb;
+  --elevated-high:    #e8f0ff;
+  --surface-muted:    #eef3ff;
   --card-bg:          #ffffff;
   --input-bg:         #ffffff;
   --blue:             #4890f7;
   --blue-dark:        #2563eb;
   --blue-light:       #6ba8ff;
-  --border:           rgba(72,144,247,0.14);
-  --border-strong:    rgba(72,144,247,0.25);
-  --text-primary:     #0a0e1a;
-  --text-secondary:   #0a0e1a;
+  --border:           rgba(72,144,247,0.16);
+  --border-strong:    rgba(72,144,247,0.28);
+  --text-primary:     #07090f;
+  --text-secondary:   #1c2840;
   --text-muted:       #4890f7;
-  --text-primary-rgb: 10, 14, 26;
+  --text-primary-rgb: 7, 9, 15;
   --teal:             #4890f7;
   --gold:             #4890f7;
   --apex-blue:        #4890f7;
-  --shadow-card:      rgba(72,144,247,0.08);
-  --nav-bg:           rgba(255,255,255,0.92);
-  --nav-bg-scrolled:  rgba(255,255,255,0.97);
-  --nav-border:       rgba(72,144,247,0.06);
-  --nav-border-scrolled: rgba(72,144,247,0.12);
+  --shadow-card:      rgba(72,144,247,0.1);
+  --nav-bg:           rgba(255,255,255,0.94);
+  --nav-bg-scrolled:  rgba(255,255,255,0.98);
+  --nav-border:       rgba(72,144,247,0.08);
+  --nav-border-scrolled: rgba(72,144,247,0.14);
 }
 
 [data-theme="dark"] {
-  --bg:               #070a0d;
-  --surface:          #0d1117;
-  --elevated:         #111820;
-  --elevated-high:    #1a2234;
-  --surface-muted:    #111820;
-  --card-bg:          #111820;
-  --input-bg:         #0d1117;
-  --border:           rgba(72,144,247,0.18);
-  --border-strong:    rgba(72,144,247,0.32);
-  --text-primary:     #e8edf5;
-  --text-secondary:   #c5cdd6;
-  --text-primary-rgb: 232, 237, 245;
-  --shadow-card:      rgba(0,0,0,0.35);
-  --nav-bg:           rgba(7,10,13,0.92);
-  --nav-bg-scrolled:  rgba(7,10,13,0.97);
-  --nav-border:       rgba(72,144,247,0.1);
-  --nav-border-scrolled: rgba(72,144,247,0.18);
+  --bg:               #04060d;
+  --surface:          #080c18;
+  --elevated:         #0d1525;
+  --elevated-high:    #162033;
+  --surface-muted:    #0d1525;
+  --card-bg:          #0d1525;
+  --input-bg:         #080c18;
+  --border:           rgba(72,144,247,0.2);
+  --border-strong:    rgba(72,144,247,0.35);
+  --text-primary:     #f0f5ff;
+  --text-secondary:   #7fa8d8;
+  --text-primary-rgb: 240, 245, 255;
+  --shadow-card:      rgba(0,0,0,0.4);
+  --nav-bg:           rgba(4,6,13,0.94);
+  --nav-bg-scrolled:  rgba(4,6,13,0.98);
+  --nav-border:       rgba(72,144,247,0.12);
+  --nav-border-scrolled: rgba(72,144,247,0.2);
 }
 
 @layer base {

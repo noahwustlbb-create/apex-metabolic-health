@@ -16,7 +16,7 @@ const PROBLEMS = [
   {
     number: '03',
     heading: 'Your edge is fading — and you feel it.',
-    body: "Drive. Focus. Libido. Competitive fire. The qualities that define a high-performing man don't disappear overnight — they erode quietly. And then one day you notice the gap between who you were and who you are.",
+    body: "Drive. Focus. Libido. Competitive fire. The qualities that define a high-performing person don't disappear overnight — they erode quietly. And then one day you notice the gap between who you were and who you are.",
   },
 ]
 

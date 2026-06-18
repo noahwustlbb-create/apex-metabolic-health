@@ -5,8 +5,6 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import AppFeature from '@/components/AppFeature'
-
 const ease = [0.22, 1, 0.36, 1] as const
 
 const PROGRAMS = [
@@ -156,7 +154,7 @@ const PROGRAMS = [
   {
     category: 'Longevity',
     name: 'Longevity Protocol',
-    tagline: 'Comprehensive health optimisation for men thinking about the long game — proactive, not reactive.',
+    tagline: 'Comprehensive health optimisation for those thinking about the long game — proactive, not reactive.',
     bullets: [
       'Full multi-system biomarker baseline',
       'Hormonal, metabolic, cardiovascular, and cellular markers',
@@ -441,9 +439,6 @@ export default function ServicesPage() {
             </motion.div>
           </div>
         </section>
-
-        {/* ── App Section ───────────────────────────────────────── */}
-        <AppFeature />
 
         {/* ── CTA ───────────────────────────────────────────────── */}
         <section

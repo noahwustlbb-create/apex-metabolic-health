@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const STEPS = [
   {
@@ -111,12 +112,12 @@ export default function HowItWorks() {
               >
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
+              <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-secondary)' }}>
                 {step.description}
               </p>
               {'time' in step && step.time && (
                 <div className="mt-4 pt-3" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase" style={{ color: '#4890f7', opacity: 0.7 }}>
+                  <span className="text-[10px] font-bold tracking-[0.14em] uppercase" style={{ color: '#4890f7' }}>
                     {step.time}
                   </span>
                 </div>
@@ -124,6 +125,62 @@ export default function HowItWorks() {
             </motion.div>
           ))}
         </div>
+
+        {/* Clinical imagery strip — all 4 steps */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.4, ease }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-14"
+        >
+          {[
+            {
+              step: '01',
+              src: 'https://images.unsplash.com/photo-1499914485622-a88fac536970?auto=format&fit=crop&w=600&q=80',
+              alt: 'Complete your health assessment online',
+              title: 'Online assessment',
+              sub: 'Takes 3–5 minutes',
+            },
+            {
+              step: '02',
+              src: 'https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=600&q=80',
+              alt: 'Pathology blood panel collection',
+              title: 'Accredited pathology',
+              sub: '4,000+ collection centres',
+            },
+            {
+              step: '03',
+              src: 'https://images.unsplash.com/photo-1758691462743-f9fc9e430d39?auto=format&fit=crop&w=600&q=80',
+              alt: 'Doctor-led telehealth consultation',
+              title: 'Telehealth consultation',
+              sub: 'AHPRA-registered · 45–60 min',
+            },
+            {
+              step: '04',
+              src: 'https://images.unsplash.com/flagged/photo-1556746834-1cb5b8fabd54?auto=format&fit=crop&w=600&q=80',
+              alt: 'Ongoing optimisation and protocol',
+              title: 'Ongoing optimisation',
+              sub: 'Reviews every 4 months',
+            },
+          ].map((item) => (
+            <div key={item.step} className="relative rounded-xl overflow-hidden" style={{ aspectRatio: '3/4', border: '1px solid rgba(72,144,247,0.12)' }}>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                className="object-cover"
+                style={{ opacity: 0.8 }}
+                unoptimized
+              />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(4,6,13,0.2) 0%, transparent 35%, rgba(4,6,13,0.88) 100%)' }} />
+              <div className="absolute bottom-0 left-0 p-4">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1" style={{ color: 'rgba(72,144,247,0.9)' }}>Step {item.step}</p>
+                <p className="text-sm font-semibold leading-tight" style={{ color: '#ffffff' }}>{item.title}</p>
+                <p className="text-[11px] mt-1" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.sub}</p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}

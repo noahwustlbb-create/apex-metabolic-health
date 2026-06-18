@@ -122,7 +122,7 @@ export default function DiscoveryCallPage() {
                 Our team will contact you within one business day to schedule your free discovery call.
               </p>
               <div className="flex justify-center w-full">
-                <BookingChoice type="general" delay={0.8} />
+                <BookingChoice type="discovery" delay={0.8} />
               </div>
               <div className="mt-6">
                 <Link href="/" className="btn-teal">Back to Home</Link>

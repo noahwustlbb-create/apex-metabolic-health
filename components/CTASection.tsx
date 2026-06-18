@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const PROOF = [
-  { value: '1,400+', label: 'men assessed' },
+  { value: '1,400+', label: 'patients assessed' },
   { value: '< 48h', label: 'referral issued' },
   { value: 'No GP', label: 'referral needed' },
 ]
@@ -84,7 +84,9 @@ export default function CTASection() {
               </svg>
             </a>
             <a
-              href="/intake/discovery"
+              href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-[13px] font-medium transition-all duration-200"
               style={{ background: 'rgba(255,255,255,0.1)', color: '#ffffff', border: '1.5px solid rgba(255,255,255,0.25)' }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.18)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)' }}

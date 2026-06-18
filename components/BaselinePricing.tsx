@@ -76,7 +76,7 @@ const CARDS = [
       'Lifestyle and nutrition guidance',
       'Referrals and further testing if needed',
     ],
-    cta: 'Book general consult',
+    cta: 'Book peptide consult',
     href: '/intake/general-consult',
     featured: false,
   },

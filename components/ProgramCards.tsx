@@ -2,13 +2,15 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 const PROGRAMS = [
   {
     name: 'Hormone Optimisation',
-    slug: 'Hormone & TRT',
+    img: '/img-hormone-optimisation.png',
+    slug: 'Hormone Optimisation',
     description: 'Testosterone, SHBG, LH, FSH, cortisol and 20+ hormone markers. Identify and correct the root cause of low drive, fatigue, and poor recovery.',
     href: '/intake/hormone-consult',
     bloodsHref: '/intake/bloods-hormone',
@@ -20,6 +22,7 @@ const PROGRAMS = [
   },
   {
     name: 'Performance & Recovery',
+    img: '/img-hormone-performance.png',
     slug: 'Athletic Optimisation',
     description: 'IGF-1, CK, cortisol, testosterone and inflammation markers. Optimise strength output, recovery speed, and endurance.',
     href: '/intake/hormone-consult',
@@ -32,6 +35,7 @@ const PROGRAMS = [
   },
   {
     name: 'Metabolic & Weight',
+    img: '/img-weight-loss.png',
     slug: 'Weight Management',
     description: 'Insulin resistance, HbA1c, thyroid, cortisol, lipids and metabolic markers. Understand exactly what is driving weight gain and stubborn fat.',
     href: '/intake/general-consult',
@@ -44,6 +48,7 @@ const PROGRAMS = [
   },
   {
     name: 'Hair & Skin',
+    img: '/img-hair-restoration.png',
     slug: 'Restoration Protocol',
     description: 'DHT, DHEA-S, thyroid, cortisol, zinc, ferritin and inflammation markers. Address hair loss and skin quality from the same hormonal and nutritional root causes.',
     href: '/intake/hormone-consult',
@@ -56,6 +61,7 @@ const PROGRAMS = [
   },
   {
     name: 'Injury Repair',
+    img: '/img-injury-repair.png',
     slug: 'Recovery Protocol',
     description: 'IGF-1, CK, Vit D, ESR, CRP and repair markers. Understand the biological factors slowing your recovery and how to accelerate them.',
     href: '/intake/general-consult',
@@ -68,6 +74,7 @@ const PROGRAMS = [
   },
   {
     name: 'Longevity Protocol',
+    img: '/img-longevity.png',
     slug: 'Coming Soon',
     description: 'Comprehensive multi-system panel covering hormonal, metabolic, cardiovascular, and cellular health markers. Built for the long game.',
     href: '/programs/longevity',
@@ -98,6 +105,17 @@ function ProgramCard({ program, index, inView }: {
         className="relative flex flex-col justify-between p-6 overflow-hidden"
         style={{ background: program.bg, minHeight: 200, aspectRatio: '4/3' }}
       >
+        {/* Program image */}
+        {program.img && (
+          <Image
+            src={program.img}
+            alt=""
+            fill
+            className="object-cover object-center"
+            style={{ opacity: 0.18, mixBlendMode: 'luminosity' }}
+            aria-hidden="true"
+          />
+        )}
         {/* Noise texture */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -229,7 +247,7 @@ export default function ProgramCards() {
             className="text-base leading-relaxed max-w-sm md:text-right"
             style={{ color: 'var(--text-primary)' }}
           >
-            Doctor-led, evidence-based protocols for each of the six biological systems that most affect how men look, feel, and perform.
+            Doctor-led, evidence-based protocols for each of the biological systems that most affect how you look, feel, and perform.
           </motion.p>
         </div>
 

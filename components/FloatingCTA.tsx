@@ -18,7 +18,7 @@ export default function FloatingCTA() {
   return (
     <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6">
       <Link
-        href="/assessment"
+        href="/intake/pre-screen"
         aria-label="Get Started"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}

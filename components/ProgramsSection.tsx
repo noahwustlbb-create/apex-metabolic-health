@@ -147,39 +147,64 @@ const PROGRAMS = [
 ]
 
 function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number; inView: boolean }) {
+  const stepNum = String(i + 1).padStart(2, '0')
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.55, delay: i * 0.08, ease }}
-      className="group flex flex-col rounded-2xl overflow-hidden relative"
+      transition={{ duration: 0.55, delay: i * 0.07, ease }}
+      className="group flex flex-col relative overflow-hidden rounded-2xl"
       style={{
-        background: 'var(--bg)',
-        border: '1px solid rgba(72,144,247,0.12)',
-        borderLeft: `2px solid ${prog.accent}`,
-        transition: 'box-shadow 0.25s ease',
+        background: 'var(--surface)',
+        border: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+        transition: 'box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.boxShadow = `0 0 40px ${prog.glowColor}, 0 8px 32px rgba(0,0,0,0.35)`
+        e.currentTarget.style.boxShadow = `0 0 0 1.5px ${prog.accent}, 0 20px 60px ${prog.glowColor}, 0 8px 24px rgba(0,0,0,0.12)`
+        e.currentTarget.style.transform = 'translateY(-3px)'
+        e.currentTarget.style.borderColor = 'transparent'
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.boxShadow = 'none'
+        e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.04)'
+        e.currentTarget.style.transform = 'translateY(0)'
+        e.currentTarget.style.borderColor = 'rgba(0,0,0,0.06)'
       }}
     >
-      {/* Header */}
-      <div className="px-5 pt-5 pb-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.07)' }}>
-        <div className="flex items-center justify-between gap-3 mb-3.5">
-          <div className="flex items-center gap-2">
+      {/* Top accent bar */}
+      <div className="h-[3px] w-full flex-shrink-0" style={{ background: `linear-gradient(90deg, ${prog.accent}, ${prog.accent}66)` }} />
+
+      {/* Hover glow */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: `radial-gradient(ellipse at 0% 0%, ${prog.accentBg.replace(/[\d.]+\)$/, '0.18)')} 0%, transparent 55%)` }}
+      />
+
+      {/* Backdrop number */}
+      <span
+        className="absolute pointer-events-none select-none leading-none"
+        style={{
+          top: '-8px', right: '12px',
+          fontSize: '130px', fontWeight: 900,
+          color: prog.accent, opacity: 0.04,
+          fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.05em',
+        }}
+        aria-hidden="true"
+      >
+        {stepNum}
+      </span>
+
+      <div className="relative z-10 p-6 flex flex-col flex-1">
+        {/* Icon + category */}
+        <div className="flex items-center justify-between gap-2 mb-5">
+          <div className="flex items-center gap-2.5">
             <div
-              className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
+              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
               style={{ background: prog.accentBg, border: `1px solid ${prog.accentBorder}`, color: prog.accent }}
             >
               {prog.icon}
             </div>
-            <span
-              className="text-[9px] font-bold tracking-[0.2em] uppercase"
-              style={{ color: prog.accent, opacity: 0.85 }}
-            >
+            <span className="text-[9px] font-bold tracking-[0.22em] uppercase" style={{ color: prog.accent }}>
               {prog.category}
             </span>
           </div>
@@ -193,56 +218,54 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
           )}
         </div>
 
+        {/* Program name */}
         <h3
-          className="text-[15px] font-semibold leading-snug mb-2"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', letterSpacing: '-0.01em' }}
+          className="font-bold leading-tight mb-2.5"
+          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '19px', color: 'var(--text-primary)', letterSpacing: '-0.02em' }}
         >
           {prog.name}
         </h3>
-        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+
+        {/* Tagline */}
+        <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
           {prog.tagline}
         </p>
-      </div>
 
-      {/* Focus list */}
-      <div className="flex flex-col flex-1 px-5 py-4">
-        <ul className="flex flex-col gap-2 flex-1">
-          {prog.focus.map((item, j) => (
-            <li key={j} className="flex items-start gap-2">
-              <div
-                className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5"
-                style={{ background: prog.accent, opacity: 0.55 }}
-              />
-              <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item}</span>
-            </li>
+        {/* Focus chips */}
+        <div className="flex flex-wrap gap-1.5 mb-6">
+          {prog.focus.slice(0, 4).map((item, j) => (
+            <span
+              key={j}
+              className="text-[10px] font-medium px-2.5 py-1 rounded-full leading-none"
+              style={{ color: prog.accent, background: prog.accentBg, border: `1px solid ${prog.accentBorder}` }}
+            >
+              {item}
+            </span>
           ))}
-        </ul>
+        </div>
 
+        {/* CTA */}
         <Link
           href={prog.href}
-          className="mt-5 flex items-center justify-between gap-2 px-4 py-2.5 rounded-lg text-[11px] font-semibold tracking-[0.06em] uppercase transition-all duration-150"
-          style={{
-            background: 'var(--bg)',
-            border: '1px solid rgba(72,144,247,0.1)',
-            color: 'var(--text-primary)',
-          }}
-          onMouseEnter={e => {
-            const el = e.currentTarget as HTMLElement
-            el.style.background = prog.accentBg
-            el.style.borderColor = prog.accentBorder
-            el.style.color = prog.accent
-          }}
-          onMouseLeave={e => {
-            const el = e.currentTarget as HTMLElement
-            el.style.background = 'var(--bg)'
-            el.style.borderColor = 'rgba(72,144,247,0.1)'
-            el.style.color = 'var(--text-primary)'
-          }}
+          className="mt-auto flex items-center justify-between pt-4 transition-colors duration-200"
+          style={{ borderTop: `1px solid ${prog.accentBorder}` }}
+          onMouseEnter={e => { (e.currentTarget.querySelector('span') as HTMLElement).style.letterSpacing = '0.14em' }}
+          onMouseLeave={e => { (e.currentTarget.querySelector('span') as HTMLElement).style.letterSpacing = '0.12em' }}
         >
-          Check eligibility
-          <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <span
+            className="text-[11px] font-bold uppercase transition-all duration-200"
+            style={{ color: prog.accent, letterSpacing: '0.12em' }}
+          >
+            Check eligibility
+          </span>
+          <div
+            className="w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5"
+            style={{ background: prog.accentBg, border: `1px solid ${prog.accentBorder}`, color: prog.accent }}
+          >
+            <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
         </Link>
       </div>
     </motion.div>
