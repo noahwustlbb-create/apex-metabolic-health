@@ -146,7 +146,7 @@ export default function Hero() {
                 primary: false,
               },
               {
-                label: 'Performance & Recovery',
+                label: 'Performance, Recovery & Injury',
                 href: '/intake/performance',
                 primary: false,
               },
@@ -160,11 +160,6 @@ export default function Hero() {
                 href: '/intake/general-consult',
                 primary: false,
               },
-              {
-                label: 'Injury Repair',
-                href: '/intake/injury',
-                primary: false,
-              },
             ].map(({ label, href, primary }, i) => (
               <motion.a
                 key={href}
@@ -174,7 +169,7 @@ export default function Hero() {
                 transition={{ duration: 0.45, delay: 0.34 + i * 0.07, ease }}
                 className="w-full flex items-center justify-between px-5 transition-all duration-200"
                 style={{
-                  marginBottom: i < 6 ? '8px' : 0,
+                  marginBottom: i < 5 ? '8px' : 0,
                   height: '54px',
                   borderRadius: '6px',
                   fontFamily: 'var(--font-space-grotesk)',
