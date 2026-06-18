@@ -137,7 +137,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What programs does Apex Metabolic Health offer?',
         answer:
-          'We currently offer seven clinical programs: Hormone Optimisation, Performance & Recovery, Metabolic Weight Loss, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, and the Longevity Protocol (coming soon). Visit our programs pages for full details.',
+          'We currently offer eight clinical programs: Hormone Optimisation, Performance & Recovery, Metabolic Weight Loss, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, General Telehealth, and the Longevity Protocol. Visit our programs pages for full details.',
       },
       {
         question: 'Are your services suitable for both men and women?',

@@ -27,7 +27,7 @@ const STEPS = [
   {
     number: '05',
     title: 'Ongoing care or one-off pathway',
-    description: 'Continue with Apex Membership for quarterly bloods, protocol adjustments, and biological age tracking. Or take your protocol and go. Your choice.',
+    description: 'Continue with Apex Membership for quarterly bloods, protocol adjustments, and ongoing biomarker tracking. Or take your protocol and go. Your choice.',
   },
 ]
 

@@ -593,7 +593,7 @@ export default function PreScreenForm() {
                   Your results are ready.
                 </h2>
                 <p className="text-sm leading-relaxed mb-7" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
-                  We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment — a doctor will review your profile within 24 hours.
+                  We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment — our clinical team will be in touch to arrange your next step.
                 </p>
 
                 {/* Blurred result preview */}
@@ -692,8 +692,7 @@ export default function PreScreenForm() {
                 </button>
 
                 <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
-                  Your information is private and confidential. A doctor will review your profile within 24 hours.
-                  <br />Not shared with third parties. AHPRA-registered practitioners only.
+                  Your information is private and confidential. Not shared with third parties. AHPRA-registered practitioners only.
                 </p>
               </motion.div>
             )}

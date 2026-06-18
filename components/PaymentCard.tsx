@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = '#4890f7'
 
 const PANEL_STEPS = [
-  'Doctor-issued pathology referral sent to your email within 24 hours',
+  'Doctor-issued pathology referral sent to your email — typically same business day',
   'Collect at any accredited pathology centre — fasted before 9am, no appointment needed',
   'Results reviewed by your Apex doctor with a full clinical interpretation',
   'Book your consultation once results are back to start your protocol',

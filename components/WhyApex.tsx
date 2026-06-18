@@ -56,7 +56,7 @@ const DIFFERENTIATORS = [
 const COMPARISON_ROWS = [
   { label: 'GP referral required', apex: false, gp: true },
   { label: 'Specialist hormone testing', apex: true, gp: false },
-  { label: 'Same-week appointments', apex: true, gp: false },
+  { label: 'Priority appointment access', apex: true, gp: false },
   { label: 'Optimisation-focused protocols', apex: true, gp: false },
   { label: 'Ongoing protocol refinement', apex: true, gp: false },
   { label: 'Accredited compounding pharmacy', apex: true, gp: false },

@@ -14,8 +14,8 @@ const STEPS = [
   {
     number: '02',
     title: 'Order your blood panel',
-    description: 'Doctor-issued pathology referral sent within 24 hours. Collect at any of 4,000+ accredited centres near you — morning, fasted. No GP required.',
-    time: '24h',
+    description: 'Doctor-issued pathology referral sent to your email — typically same business day. Collect at any of 4,000+ accredited centres near you — morning, fasted. No GP required.',
+    time: '< 48h',
   },
   {
     number: '03',

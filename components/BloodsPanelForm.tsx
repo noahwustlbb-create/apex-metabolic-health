@@ -237,7 +237,7 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
         <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>WHAT HAPPENS NEXT</p>
         <div className="flex flex-col gap-3">
           {[
-            'Doctor-issued pathology referral sent to your email within 24 hours',
+            'Doctor-issued pathology referral sent to your email — typically same business day',
             `Collect your ${config.panelName.toLowerCase()} at any accredited centre — fasted before 9am`,
             'Book your consultation once results are back to build your protocol',
           ].map((s, i) => (
