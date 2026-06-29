@@ -12,13 +12,13 @@ const ACTIONS = [
     id: 'assessment',
     icon: (
       <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4" aria-hidden="true">
-        <path d="M9 1v4M9 13v4M1 9h4M13 9h4" strokeLinecap="round" />
-        <circle cx="9" cy="9" r="4" />
+        <circle cx="9" cy="9" r="7" />
+        <path d="M6 9l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     label: '60-second assessment',
     sub: 'Tell us your goals — we match you to the right doctor and program.',
-    href: '/intake/pre-screen',
+    href: '/start',
     external: false,
     highlight: true,
   },
@@ -31,9 +31,9 @@ const ACTIONS = [
       </svg>
     ),
     label: 'Hormone consultation',
-    sub: 'Hormone optimisation and performance. Speak with a doctor.',
-    href: '/intake/hormone-consult',
-    external: false,
+    sub: 'Testosterone, energy & hormone optimisation. Speak with a doctor.',
+    href: 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation',
+    external: true,
     highlight: false,
   },
   {
@@ -45,9 +45,9 @@ const ACTIONS = [
       </svg>
     ),
     label: 'Peptide consultation',
-    sub: 'Hair, skin, injury repair, anti-ageing, and weight protocols.',
-    href: '/intake/general-consult',
-    external: false,
+    sub: 'Weight loss, recovery, skin, hair & anti-ageing protocols.',
+    href: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
+    external: true,
     highlight: false,
   },
   {
