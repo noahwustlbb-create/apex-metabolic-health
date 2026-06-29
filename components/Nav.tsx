@@ -3,36 +3,44 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { useTheme } from '@/components/ThemeProvider'
 
 const NAV_PROGRAMS = [
-  { name: 'Hormone Optimisation',     slug: 'hormone-optimisation',  comingSoon: false },
-  { name: 'Sexual Health',            slug: 'sexual-health',         comingSoon: false },
-  { name: 'Performance & Recovery',   slug: 'performance-plus',      comingSoon: false },
-  { name: 'Metabolic & Weight',       slug: 'metabolic-weight-loss', comingSoon: false },
-  { name: 'Anti-Ageing & Longevity',  slug: 'longevity',             comingSoon: false },
-  { name: 'Hair Restoration',         slug: 'hair-restoration',      comingSoon: false },
-  { name: 'Skin Regeneration',        slug: 'skin-regeneration',     comingSoon: false },
-  { name: 'Injury Repair & Recovery', slug: 'injury-repair',         comingSoon: false },
-  { name: 'Pathology',                slug: 'pathology',             comingSoon: false },
+  { name: 'Hormone Optimisation',      type: 'hormone'   },
+  { name: 'Weight Loss',               type: 'weight'    },
+  { name: 'Sexual Health',             type: 'sexual'    },
+  { name: 'Recovery & Performance',    type: 'recovery'  },
+  { name: 'Anti-Ageing & Longevity',   type: 'longevity' },
+  { name: 'Skin & Hair',               type: 'skinhair'  },
+  { name: 'Repeat Order',              type: 'repeat',   href: '/intake/repeat-order' },
 ]
 
-const navLinks = [
+// Desktop: 4 items only. Complexity stays hidden.
+const DESKTOP_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Pricing',      href: '/pricing'      },
   { label: 'Membership',   href: '/membership'   },
+  { label: 'About',        href: '/about'        },
+]
+
+// Mobile drawer: everything
+const MOBILE_LINKS = [
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Programs',     href: '/services'     },
+  { label: 'Membership',   href: '/membership'   },
+  { label: 'Pricing',      href: '/pricing'      },
   { label: 'About',        href: '/about'        },
   { label: 'FAQs',         href: '/faqs'         },
 ]
+
+const TEXT = 'var(--text-primary)'
+const BLUE = '#4890f7'
 
 export default function Nav() {
   const [scrolled, setScrolled]         = useState(false)
   const [menuOpen, setMenuOpen]         = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
-  const { theme, toggle } = useTheme()
 
   useEffect(() => {
-    const handle = () => setScrolled(window.scrollY > 32)
+    const handle = () => setScrolled(window.scrollY > 24)
     window.addEventListener('scroll', handle, { passive: true })
     return () => window.removeEventListener('scroll', handle)
   }, [])
@@ -42,30 +50,49 @@ export default function Nav() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  const linkStyle = {
+    color: TEXT,
+    fontFamily: 'var(--font-inter)',
+    fontSize: '13px',
+    fontWeight: 500,
+    letterSpacing: '0.01em',
+    transition: 'color 0.2s',
+    whiteSpace: 'nowrap' as const,
+    textDecoration: 'none',
+  }
+
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -16 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
-          backgroundColor: scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          borderBottom: scrolled ? '1px solid var(--nav-border-scrolled)' : '1px solid var(--nav-border)',
+          backgroundColor: scrolled ? 'rgba(4,6,13,0.97)' : 'rgba(4,6,13,0.85)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: `1px solid ${scrolled ? 'rgba(72,144,247,0.14)' : 'rgba(72,144,247,0.06)'}`,
         }}
       >
-        <div className="mx-auto w-full max-w-[1440px] px-6 md:px-8 flex items-center justify-between h-[68px] md:h-[76px]">
+        <div
+          className="mx-auto w-full max-w-[1440px] flex items-center justify-between"
+          style={{ padding: '0 40px', height: '88px' }}
+        >
 
-          {/* Logo — pure wordmark */}
-          <Link href="/" className="flex flex-col flex-shrink-0 select-none" aria-label="Apex Metabolic Health" style={{ textDecoration: 'none' }}>
+          {/* ── Logo ── */}
+          <Link
+            href="/"
+            className="flex flex-col flex-shrink-0 select-none"
+            aria-label="Apex Metabolic Health — Home"
+            style={{ textDecoration: 'none', gap: '5px' }}
+          >
             <span style={{
               fontFamily: 'var(--font-inter)',
-              fontWeight: 300,
-              fontSize: '17px',
-              letterSpacing: '0.15em',
-              color: 'var(--text-primary)',
+              fontWeight: 600,
+              fontSize: '20px',
+              letterSpacing: '0.22em',
+              color: '#f0f5ff',
               lineHeight: 1,
               textTransform: 'uppercase',
             }}>
@@ -73,69 +100,83 @@ export default function Nav() {
             </span>
             <span style={{
               fontFamily: 'var(--font-inter)',
-              fontWeight: 300,
-              fontSize: '10px',
-              letterSpacing: '0.15em',
-              color: '#4890f7',
+              fontWeight: 400,
+              fontSize: '9.5px',
+              letterSpacing: '0.2em',
+              color: BLUE,
               lineHeight: 1,
-              marginTop: '3px',
               textTransform: 'uppercase',
+              opacity: 0.85,
             }}>
               Metabolic Health
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6" aria-label="Primary navigation">
-            <div className="relative" onMouseEnter={() => setProgramsOpen(true)} onMouseLeave={() => setProgramsOpen(false)}>
-              <div className="flex items-center gap-0.5">
-                <Link
-                  href="/services"
-                  className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-                  style={{ color: 'var(--text-primary)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
-                >
-                  Clinical Programs
-                </Link>
-                <button className="flex items-center p-1" style={{ color: 'var(--text-primary)' }} aria-expanded={programsOpen} aria-haspopup="true" aria-label="Open programs menu">
-                  <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5 transition-transform duration-200" style={{ transform: programsOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} aria-hidden="true">
-                    <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
+          {/* ── Desktop centre nav ── */}
+          <nav className="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+
+            {/* Programs dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setProgramsOpen(true)}
+              onMouseLeave={() => setProgramsOpen(false)}
+            >
+              <button
+                style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '4px', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                aria-expanded={programsOpen}
+                aria-haspopup="true"
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = TEXT }}
+              >
+                Explore Programs
+                <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" style={{ transition: 'transform 0.2s', transform: programsOpen ? 'rotate(180deg)' : 'rotate(0)' }} aria-hidden="true">
+                  <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
 
               <AnimatePresence>
                 {programsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.16, ease: 'easeOut' }}
-                    className="absolute top-full left-0 mt-4 z-50"
-                    style={{ width: 300, background: 'var(--elevated)', border: '1px solid var(--border)', borderRadius: 12, boxShadow: '0 16px 48px rgba(72,144,247,0.1), 0 2px 12px rgba(0,0,0,0.06)', padding: '8px' }}
+                    initial={{ opacity: 0, y: 6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                    transition={{ duration: 0.14, ease: 'easeOut' }}
+                    className="absolute top-full mt-5 z-50"
+                    style={{
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: 264,
+                      background: '#0d1525',
+                      border: '1px solid rgba(72,144,247,0.18)',
+                      borderRadius: 10,
+                      boxShadow: '0 20px 60px rgba(0,0,0,0.5), 0 4px 16px rgba(72,144,247,0.08)',
+                      padding: '8px',
+                    }}
                   >
-                    {NAV_PROGRAMS.map((program) =>
-                      program.comingSoon ? (
-                        <div key={program.slug} className="flex items-center justify-between px-3.5 py-2.5 text-[13px]" style={{ color: 'rgba(72,144,247,0.4)', cursor: 'default' }}>
-                          <span>{program.name}</span>
-                          <span className="text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-sm" style={{ color: '#4890f7', background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.18)' }}>Soon</span>
-                        </div>
-                      ) : (
-                        <Link key={program.slug} href={`/programs/${program.slug}`}
-                          className="block px-3.5 py-2.5 rounded-lg text-[13px] transition-all duration-150"
-                          style={{ color: 'var(--text-primary)' }}
-                          onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--elevated-high)' }}
-                          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'transparent' }}
-                        >{program.name}</Link>
-                      )
-                    )}
-                    <div style={{ borderTop: '1px solid rgba(72,144,247,0.1)', marginTop: 4, paddingTop: 4 }}>
-                      <Link href="/services"
-                        className="flex items-center justify-between px-3.5 py-2.5 rounded-lg text-[12px] font-semibold transition-all duration-150"
-                        style={{ color: '#4890f7' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--elevated-high)' }}
+                    {NAV_PROGRAMS.map((p) => (
+                      <Link
+                        key={p.type}
+                        href={p.href ?? `/start?t=${p.type}`}
+                        onClick={() => setProgramsOpen(false)}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '13px', color: '#c8d8f0', textDecoration: 'none', transition: 'background 0.12s, color 0.12s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)'; e.currentTarget.style.color = '#f0f5ff' }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#c8d8f0' }}
+                      >
+                        {p.name}
+                        <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3 flex-shrink-0 opacity-30" aria-hidden="true">
+                          <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </Link>
+                    ))}
+                    <div style={{ borderTop: '1px solid rgba(72,144,247,0.1)', marginTop: '6px', paddingTop: '6px' }}>
+                      <Link
+                        href="/start"
+                        onClick={() => setProgramsOpen(false)}
+                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '12px', fontWeight: 600, color: BLUE, textDecoration: 'none', transition: 'background 0.12s' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                       >
-                        View all programs
+                        Not sure? Take the assessment
                         <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -146,100 +187,140 @@ export default function Nav() {
               </AnimatePresence>
             </div>
 
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}
-                className="text-[12.5px] font-medium tracking-wide transition-colors duration-200 whitespace-nowrap"
-                style={{ color: 'var(--text-primary)' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
-              >{link.label}</Link>
+            {DESKTOP_LINKS.map(link => (
+              <Link
+                key={link.href}
+                href={link.href}
+                style={linkStyle}
+                onMouseEnter={e => { e.currentTarget.style.color = BLUE }}
+                onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
 
-          {/* Desktop right */}
+          {/* ── Desktop right CTAs ── */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={toggle}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="flex items-center justify-center w-8 h-8 rounded-full transition-colors duration-200"
-              style={{ color: 'var(--text-primary)', background: 'var(--surface)' }}
+            <a
+              href="https://app.apexmetabolichealth.com.au/login"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontFamily: 'var(--font-inter)',
+                fontSize: '12.5px',
+                fontWeight: 500,
+                color: '#a8c4e8',
+                textDecoration: 'none',
+                letterSpacing: '0.01em',
+                transition: 'color 0.2s',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#a8c4e8' }}
             >
-              {theme === 'dark' ? (
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              )}
-            </button>
-            <Link href="/intake/pre-screen"
-              className="inline-flex items-center gap-2 text-[12.5px] font-semibold transition-all duration-200 whitespace-nowrap"
-              style={{ background: '#4890f7', color: '#ffffff', padding: '9px 20px', borderRadius: '999px' }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#2563eb'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(72,144,247,0.4)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#4890f7'; e.currentTarget.style.boxShadow = 'none' }}
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
+                <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
+                <path d="M2.5 13.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              Log in
+            </a>
+            <Link
+              href="/start"
+              style={{
+                fontFamily: 'var(--font-inter)',
+                fontSize: '12.5px',
+                fontWeight: 500,
+                color: '#a8c4e8',
+                textDecoration: 'none',
+                letterSpacing: '0.01em',
+                transition: 'color 0.2s',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
+              onMouseLeave={e => { e.currentTarget.style.color = '#a8c4e8' }}
             >
-              Start Assessment
-              <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3" aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              Health Assessment
+            </Link>
+            <Link
+              href="/start"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                background: BLUE,
+                color: '#ffffff',
+                padding: '10px 22px',
+                borderRadius: '999px',
+                fontSize: '12.5px',
+                fontWeight: 600,
+                letterSpacing: '0.01em',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'background 0.2s, box-shadow 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#2563eb'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(72,144,247,0.45)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = BLUE; e.currentTarget.style.boxShadow = 'none' }}
+            >
+              Get Started
+              <svg viewBox="0 0 16 16" fill="none" width="12" height="12" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <div className="md:hidden flex items-center gap-2">
-            <button
-              onClick={toggle}
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              className="flex items-center justify-center w-8 h-8 rounded-full"
-              style={{ color: 'var(--text-primary)', background: 'var(--surface)' }}
-            >
-              {theme === 'dark' ? (
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
-              )}
-            </button>
-            <button className="flex flex-col gap-[5px] p-2" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation menu" aria-expanded={menuOpen}>
-              <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.25 }} className="block w-5 h-px" style={{ background: 'var(--text-primary)' }} />
-              <motion.span animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }} transition={{ duration: 0.2 }} className="block w-5 h-px" style={{ background: 'var(--text-primary)' }} />
-              <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.25 }} className="block w-5 h-px" style={{ background: 'var(--text-primary)' }} />
-            </button>
-          </div>
+          {/* ── Mobile hamburger ── */}
+          <button
+            className="md:hidden flex flex-col justify-center gap-[5px] p-2"
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+          >
+            <motion.span animate={menuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.22 }} className="block w-[22px] h-px" style={{ background: '#f0f5ff' }} />
+            <motion.span animate={menuOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }} transition={{ duration: 0.18 }} className="block w-[22px] h-px" style={{ background: '#f0f5ff' }} />
+            <motion.span animate={menuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }} transition={{ duration: 0.22 }} className="block w-[22px] h-px" style={{ background: '#f0f5ff' }} />
+          </button>
         </div>
       </motion.header>
 
-      {/* Mobile drawer */}
+      {/* ── Mobile drawer ── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 md:hidden flex flex-col"
-            style={{ backgroundColor: 'var(--bg)' }}
+            style={{ backgroundColor: '#04060d' }}
           >
-            <div className="flex flex-col flex-1 overflow-y-auto" style={{ paddingTop: '76px' }}>
-              <nav className="flex flex-col px-6 pt-6" aria-label="Primary navigation">
-                {[
-                  { label: 'Clinical Programs', href: '/services'      },
-                  { label: 'How It Works',      href: '/how-it-works'  },
-                  { label: 'Pricing',           href: '/pricing'       },
-                  { label: 'Membership',        href: '/membership'    },
-                  { label: 'About',             href: '/about'         },
-                  { label: 'FAQs',              href: '/faqs'          },
-                ].map((link, i) => (
-                  <motion.div key={link.href} initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.26, delay: i * 0.055 + 0.04 }}>
-                    <Link href={link.href} onClick={() => setMenuOpen(false)}
-                      className="flex items-center justify-between py-4 text-[22px] font-semibold border-b"
-                      style={{ color: 'var(--text-primary)', borderColor: 'var(--border)', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.01em' }}
+            <div className="flex flex-col flex-1 overflow-y-auto" style={{ paddingTop: '88px' }}>
+              <nav className="flex flex-col px-6 pt-4" aria-label="Primary navigation">
+                {MOBILE_LINKS.map((link, i) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.24, delay: i * 0.05 + 0.03 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center justify-between py-5 border-b"
+                      style={{
+                        color: '#f0f5ff',
+                        borderColor: 'rgba(72,144,247,0.1)',
+                        fontFamily: 'var(--font-inter)',
+                        fontSize: '22px',
+                        fontWeight: 600,
+                        letterSpacing: '-0.02em',
+                        textDecoration: 'none',
+                      }}
                     >
                       {link.label}
-                      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" style={{ opacity: 0.25 }} aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0" style={{ opacity: 0.2 }} aria-hidden="true">
                         <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Link>
@@ -249,22 +330,43 @@ export default function Nav() {
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
-              transition={{ duration: 0.32, delay: 0.22 }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.28, delay: 0.18 }}
               className="px-6 pb-10 pt-5 flex flex-col gap-3"
               style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
-              <Link href="/intake/pre-screen" onClick={() => setMenuOpen(false)} className="btn-primary justify-center w-full text-[14px]" style={{ padding: '15px 24px' }}>
-                Start My Assessment
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <Link
+                href="/start"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center gap-2 w-full"
+                style={{ background: BLUE, color: '#ffffff', padding: '16px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em' }}
+              >
+                Get Started
+                <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-              <div className="flex items-center justify-center gap-6">
-                <Link href="/intake/hormone-consult" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>Hormone Consult →</Link>
-                <span style={{ color: 'rgba(72,144,247,0.2)' }}>|</span>
-                <Link href="/intake/general-consult" onClick={() => setMenuOpen(false)} className="text-sm font-medium" style={{ color: '#4890f7' }}>General Consult →</Link>
-              </div>
+              <Link
+                href="/start"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center w-full"
+                style={{ border: '1px solid rgba(72,144,247,0.3)', color: '#a8c4e8', padding: '15px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
+              >
+                Health Assessment
+              </Link>
+              <a
+                href="https://app.apexmetabolichealth.com.au/login"
+                className="flex items-center justify-center gap-2 w-full"
+                style={{ color: 'rgba(168,196,232,0.6)', fontSize: '14px', fontWeight: 500, textDecoration: 'none', paddingTop: '4px' }}
+              >
+                <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+                  <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M2.5 13.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+                Log in to your account
+              </a>
             </motion.div>
           </motion.div>
         )}
