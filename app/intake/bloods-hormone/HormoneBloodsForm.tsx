@@ -1,13 +1,14 @@
-import BloodsPanelForm from '@/components/BloodsPanelForm'
+'use client'
+
+import BgtEmbed from '@/components/BgtEmbed'
 
 export default function HormoneBloodsForm() {
   return (
-    <BloodsPanelForm config={{
-      storageKey: 'apex-bloods-hormone-v3',
-      panelName: 'HORMONE HEALTH PANEL',
-      panelPrice: '$99',
-      programLabel: 'Hormone Optimisation',
-      biomarkers: ['Total Testosterone', 'Free Testosterone', 'SHBG', 'LH', 'FSH', 'Oestradiol', 'DHEA-S', 'Prolactin', 'TSH', 'FT3', 'FT4', 'Cortisol', 'FBC', 'Iron Studies', 'Vit D', 'B12', 'Lipids', 'Glucose', 'HbA1c', 'LFT', 'UEC', 'hsCRP', 'PSA'],
-    }} />
+    <BgtEmbed
+      title="Hormone Health Panel"
+      subtitle="Comprehensive pre-TRT hormone assessment ordered by our doctors"
+      url="https://my.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2"
+      biomarkers={['Total Testosterone', 'Free Testosterone', 'SHBG', 'LH', 'FSH', 'Oestradiol (E2)', 'DHEA-S', 'Prolactin', 'PSA', 'FBC', 'Thyroid (TSH)', 'Cortisol', 'Lipids', 'Glucose', 'LFT', 'UEC']}
+    />
   )
 }

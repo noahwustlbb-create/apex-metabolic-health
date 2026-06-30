@@ -1,14 +1,14 @@
-import BloodsPanelForm from '@/components/BloodsPanelForm'
+'use client'
+
+import BgtEmbed from '@/components/BgtEmbed'
 
 export default function TrtBloodsForm() {
   return (
-    <BloodsPanelForm config={{
-      storageKey: 'apex-bloods-trt-v1',
-      panelName: 'TRT MONITORING PANEL',
-      panelPrice: '$79',
-      programLabel: 'Hormone Optimisation (TRT)',
-      biomarkers: ['Total Testosterone', 'Free Testosterone', 'SHBG', 'Oestradiol (E2)', 'PSA', 'FBC', 'Haematocrit', 'Haemoglobin', 'LFT', 'UEC', 'Glucose', 'Lipids'],
-      accent: 'teal',
-    }} />
+    <BgtEmbed
+      title="TRT Monitoring Panel"
+      subtitle="Ongoing monitoring panel for patients on testosterone replacement therapy"
+      url="https://my.bloodygoodtests.com.au/buy/a069c9d0-3f6f-4627-b998-67afb76993ad"
+      biomarkers={['Total Testosterone', 'Free Testosterone', 'SHBG', 'Oestradiol (E2)', 'PSA', 'FBC', 'Haematocrit', 'Haemoglobin', 'LFT', 'UEC', 'Glucose', 'Lipids']}
+    />
   )
 }
