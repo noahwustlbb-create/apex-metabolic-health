@@ -713,19 +713,62 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
         </div>
 
         {/* What you get */}
-        <div className="rounded-xl p-4 mb-5 flex flex-col gap-3" style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.12)' }}>
-          <p className="text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: TEAL }}>What you get</p>
-          {[
-            { icon: '🩺', text: 'Personalised treatment protocol from an AHPRA-registered doctor' },
-            { icon: '📋', text: 'Doctor-ordered pathology — collect at 2,000+ centres Australia-wide' },
-            { icon: '💊', text: 'Medication fulfilled through our TGA-compliant compounding pharmacy' },
-            { icon: '📱', text: 'Ongoing telehealth reviews and clinical support, 100% online' },
-          ].map(({ icon, text }) => (
-            <div key={text} className="flex items-start gap-3">
-              <span className="text-sm flex-shrink-0 mt-0.5">{icon}</span>
-              <span className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.6)' }}>{text}</span>
-            </div>
-          ))}
+        <div className="rounded-xl mb-5 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="px-4 py-3" style={{ background: 'rgba(72,144,247,0.08)', borderBottom: '1px solid rgba(72,144,247,0.12)' }}>
+            <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: TEAL }}>What you get</p>
+          </div>
+          <div className="flex flex-col divide-y" style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.05)' }}>
+            {[
+              {
+                title: 'Doctor-prescribed protocol',
+                body: 'Built from your blood results by an AHPRA-registered practitioner — not a template.',
+                icon: (
+                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                    <circle cx="10" cy="6" r="3.5" stroke={TEAL} strokeWidth="1.4" />
+                    <path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                ),
+              },
+              {
+                title: 'Pathology at 2,000+ centres',
+                body: 'Doctor-ordered blood tests — referral issued instantly. Collect anywhere in Australia.',
+                icon: (
+                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                    <path d="M7 2h6v5l2 8H5L7 7V2z" stroke={TEAL} strokeWidth="1.4" strokeLinejoin="round" />
+                    <path d="M7 8h6" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                ),
+              },
+              {
+                title: 'TGA-compliant pharmacy delivery',
+                body: 'Medication compounded and shipped directly to your door. No chemist visits.',
+                icon: (
+                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                    <rect x="2" y="6" width="16" height="11" rx="2" stroke={TEAL} strokeWidth="1.4" />
+                    <path d="M6 6V4a4 4 0 018 0v2" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                ),
+              },
+              {
+                title: 'Unlimited telehealth reviews',
+                body: 'Ongoing clinical support and scheduled check-ins with your doctor, 100% online.',
+                icon: (
+                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
+                    <rect x="2" y="4" width="16" height="11" rx="2" stroke={TEAL} strokeWidth="1.4" />
+                    <path d="M7 18h6M10 15v3" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
+                  </svg>
+                ),
+              },
+            ].map(({ title, body, icon }) => (
+              <div key={title} className="flex items-start gap-3 px-4 py-3.5" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+                <div className="mt-0.5 flex-shrink-0">{icon}</div>
+                <div>
+                  <p className="text-xs font-semibold mb-0.5" style={{ color: '#f0f4f8' }}>{title}</p>
+                  <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,244,248,0.45)' }}>{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="rounded-xl p-6 flex flex-col gap-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
