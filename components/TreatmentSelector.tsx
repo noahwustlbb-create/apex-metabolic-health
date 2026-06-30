@@ -20,7 +20,7 @@ const TREATMENTS = [
   },
   {
     id: 'weight',
-    href: '/intake/fast-track?program=weightloss',
+    href: '/intake/quiz/weightloss',
     label: 'Medical Weight Loss',
     sub: 'Doctor-led metabolic management',
     image: 'https://images.unsplash.com/photo-1579758682665-53a1a614eea6?auto=format&fit=crop&w=600&q=90',
@@ -31,7 +31,7 @@ const TREATMENTS = [
   },
   {
     id: 'sexual',
-    href: '/intake/fast-track?program=sexual',
+    href: '/intake/quiz/sexual',
     label: 'Sexual Health',
     sub: 'Private & confidential treatment',
     image: 'https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&w=600&q=90',
@@ -42,7 +42,7 @@ const TREATMENTS = [
   },
   {
     id: 'recovery',
-    href: '/intake/fast-track?program=recovery',
+    href: '/intake/quiz/injury',
     label: 'Recovery & Injury Repair',
     sub: 'Performance · Rehab · Mobility',
     image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=90',
@@ -53,7 +53,7 @@ const TREATMENTS = [
   },
   {
     id: 'longevity',
-    href: '/intake/fast-track?program=antiageing',
+    href: '/intake/quiz/antiageing',
     label: 'Anti-Ageing & Longevity',
     sub: 'Healthspan · Vitality · Prevention',
     image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=600&q=90',
@@ -64,7 +64,7 @@ const TREATMENTS = [
   },
   {
     id: 'skinhair',
-    href: '/intake/fast-track?program=skinhair',
+    href: '/intake/quiz/skin',
     label: 'Skin & Hair',
     sub: 'Restoration · Regeneration',
     image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=90',
