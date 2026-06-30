@@ -35,7 +35,7 @@ export async function POST(req: Request) {
     .join('')
 
   const { error } = await resend.emails.send({
-    from: 'Apex Metabolic Health <onboarding@resend.dev>',
+    from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
     to: email,
     subject: 'Your Apex Health Assessment — Personalised Clinical Pathway',
     html: `
