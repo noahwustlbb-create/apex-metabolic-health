@@ -32,7 +32,7 @@ export default function HormoneIntakeForm() {
       <div className="flex items-center justify-between px-6 sm:px-10 py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <a href="/" className="flex flex-col leading-none">
           <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
-          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: '#00c2b8' }}>Metabolic Health</span>
+          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: '#4890f7' }}>Metabolic Health</span>
         </a>
         <button
           onClick={() => router.back()}
@@ -55,7 +55,7 @@ export default function HormoneIntakeForm() {
           transition={{ duration: 0.5, ease }}
         >
           {/* Eyebrow */}
-          <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: '#00c2b8' }}>
+          <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: '#4890f7' }}>
             Hormone Optimisation · Step 1 of 2
           </p>
 
@@ -94,8 +94,8 @@ export default function HormoneIntakeForm() {
                     <div
                       className="w-4 h-4 rounded-full flex-shrink-0 mt-0.5 flex items-center justify-center"
                       style={{
-                        border: `1.5px solid ${isSelected ? '#00c2b8' : 'rgba(255,255,255,0.2)'}`,
-                        background: isSelected ? '#00c2b8' : 'transparent',
+                        border: `1.5px solid ${isSelected ? '#4890f7' : 'rgba(255,255,255,0.2)'}`,
+                        background: isSelected ? '#4890f7' : 'transparent',
                         transition: 'all 0.2s',
                       }}
                     >
@@ -144,7 +144,7 @@ export default function HormoneIntakeForm() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2, ease }}
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-sm text-sm font-semibold transition-all duration-150"
-                  style={{ background: '#00c2b8', color: '#070a0d', textDecoration: 'none' }}
+                  style={{ background: '#4890f7', color: '#070a0d', textDecoration: 'none' }}
                 >
                   Continue
                   <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
