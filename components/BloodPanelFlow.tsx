@@ -12,6 +12,8 @@ const PANELS = {
     tag: 'Pre-TRT Assessment',
     heading: "Let's check your baseline hormone levels",
     description: 'A comprehensive hormone assessment to understand your current hormonal profile — including testosterone, oestrogen, thyroid, and metabolic markers.',
+    price: 'A$199',
+    priceNote: 'inc. GST',
     biomarkers: [
       'Total Testosterone', 'Free Testosterone', 'SHBG', 'LH', 'FSH',
       'Oestradiol (E2)', 'DHEA-S', 'Prolactin', 'PSA',
@@ -26,6 +28,8 @@ const PANELS = {
     tag: 'On-Treatment Monitoring',
     heading: "Let's monitor your testosterone levels",
     description: 'Essential safety and efficacy monitoring for patients currently on testosterone replacement therapy. Keeps your levels dialled and your health protected.',
+    price: 'A$149',
+    priceNote: 'inc. GST',
     biomarkers: [
       'Total Testosterone', 'Free Testosterone', 'SHBG', 'Oestradiol (E2)',
       'PSA', 'Full Blood Count (FBC)', 'Haematocrit', 'Haemoglobin',
@@ -44,8 +48,21 @@ interface Props {
 }
 
 const RADIO_OPTIONS = [
-  { value: 'no',  label: 'No, I am not currently on TRT' },
-  { value: 'yes', label: 'Yes, I am currently on testosterone replacement therapy' },
+  {
+    value: 'no',
+    label: 'No, I have not been on hormone therapy',
+    sub: 'I want to understand my hormone levels and explore whether treatment is right for me.',
+  },
+  {
+    value: 'yes',
+    label: 'Yes, I\'m currently on TRT or have been previously',
+    sub: 'I\'m with another clinic or doctor and want to continue or transfer my care.',
+  },
+  {
+    value: 'apex',
+    label: 'Yes, I\'m an existing Apex patient',
+    sub: 'I\'m already on a program with Apex and need my regular monitoring bloods.',
+  },
 ]
 
 function QuestionStep({ onAnswer }: { onAnswer: (panel: PanelKey) => void }) {
@@ -55,6 +72,7 @@ function QuestionStep({ onAnswer }: { onAnswer: (panel: PanelKey) => void }) {
   function handleContinue() {
     if (!selected) return
     onAnswer(selected === 'no' ? 'hormone' : 'trt')
+    // 'yes' and 'apex' both route to TRT monitoring
   }
 
   return (
@@ -79,14 +97,14 @@ function QuestionStep({ onAnswer }: { onAnswer: (panel: PanelKey) => void }) {
               <button
                 key={opt.value}
                 onClick={() => setSelected(opt.value)}
-                className="w-full flex items-center gap-4 px-5 py-4 rounded-xl text-left transition-all duration-150"
+                className="w-full flex items-start gap-4 px-5 py-4 rounded-xl text-left transition-all duration-150"
                 style={{
                   background: active ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.03)',
                   border: `1px solid ${active ? 'rgba(72,144,247,0.45)' : 'rgba(255,255,255,0.08)'}`,
                 }}
               >
                 <span
-                  className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all"
+                  className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center transition-all mt-0.5"
                   style={{
                     border: `2px solid ${active ? BLUE : 'rgba(255,255,255,0.2)'}`,
                     background: active ? BLUE : 'transparent',
@@ -94,7 +112,10 @@ function QuestionStep({ onAnswer }: { onAnswer: (panel: PanelKey) => void }) {
                 >
                   {active && <span className="w-2 h-2 rounded-full bg-white block" />}
                 </span>
-                <span className="text-sm" style={{ color: active ? '#f0f4f8' : 'rgba(240,244,248,0.65)' }}>{opt.label}</span>
+                <span className="flex flex-col gap-1">
+                  <span className="text-sm font-medium" style={{ color: active ? '#f0f4f8' : 'rgba(240,244,248,0.75)' }}>{opt.label}</span>
+                  <span className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.38)' }}>{opt.sub}</span>
+                </span>
               </button>
             )
           })}
@@ -159,11 +180,9 @@ function PanelStep({ panelKey, showBack }: { panelKey: PanelKey; showBack?: () =
             <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-1.5" style={{ color: BLUE }}>{panel.tag}</p>
             <h2 className="font-bold text-lg leading-snug" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{panel.name}</h2>
           </div>
-          <div className="flex-shrink-0">
-            <svg viewBox="0 0 44 44" fill="none" className="w-10 h-10 opacity-20" aria-hidden="true">
-              <rect x="8" y="6" width="28" height="34" rx="3" stroke="#4890f7" strokeWidth="1.5" />
-              <path d="M14 16h16M14 22h16M14 28h10" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+          <div className="flex-shrink-0 text-right">
+            <p className="font-bold text-2xl leading-none" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{panel.price}</p>
+            <p className="text-[10px] mt-1" style={{ color: 'rgba(240,244,248,0.35)' }}>{panel.priceNote}</p>
           </div>
         </div>
         <div className="px-6 py-5">
