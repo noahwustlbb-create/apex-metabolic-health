@@ -602,6 +602,13 @@ function IneligiblePhase({ config, overrideMsg }: { config: QuizConfig; override
 
 // ─── Account gate ─────────────────────────────────────────────────────────────
 
+const TRUST_PANELS = [
+  { label: 'Personalised', heading: 'Prescription protocols', body: 'Treatments matched to your pathology, not a one-size-fits-all template.' },
+  { label: 'Pharmacy delivery', heading: 'Australia-wide', body: 'TGA-compliant compounding pharmacy, delivered direct to your door.' },
+  { label: 'Unlimited', heading: 'Doctor consultations', body: 'AHPRA-registered practitioners managing your ongoing care.' },
+  { label: '100%', heading: 'Telehealth based', body: 'Consult from anywhere in Australia. No waiting rooms.' },
+]
+
 function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers: Answers; onDone: () => void }) {
   const [form, setForm] = useState({ name: '', email: '', emailConfirm: '', password: '', passwordConfirm: '' })
   const [error, setError] = useState('')
@@ -643,113 +650,178 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
   }
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-5 py-12">
-      <motion.div className="w-full max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-        <div className="w-12 h-12 rounded-full flex items-center justify-center mb-5 mx-auto" style={{ background: 'rgba(72,144,247,0.12)', border: `2px solid ${TEAL}` }}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
-            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill={TEAL} />
-          </svg>
+    <div className="flex-1 flex min-h-0" style={{ background: '#070a0d' }}>
+
+      {/* Left — form */}
+      <div className="flex flex-col w-full lg:w-[520px] flex-shrink-0 overflow-y-auto px-8 sm:px-12 py-10">
+        {/* Mini brand */}
+        <div className="mb-8">
+          <span className="font-black text-sm tracking-[0.2em] uppercase block" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
+          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: TEAL }}>Metabolic Health</span>
         </div>
 
-        <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-2 text-center" style={{ color: TEAL }}>One last step</p>
-        <h1 className="font-bold text-center mb-2 leading-tight" style={{ fontSize: 'clamp(20px,3.5vw,26px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
-          Create your account to unlock your results
+        {/* Step indicator */}
+        <div className="flex items-center gap-2 mb-7">
+          {[1, 2, 3].map(n => (
+            <div key={n} className="flex items-center gap-2">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                style={{
+                  background: n === 1 ? TEAL : 'rgba(255,255,255,0.06)',
+                  color: n === 1 ? '#fff' : 'rgba(255,255,255,0.25)',
+                  border: `1px solid ${n === 1 ? TEAL : 'rgba(255,255,255,0.08)'}`,
+                }}
+              >{n}</div>
+              {n < 3 && <div className="w-8 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />}
+            </div>
+          ))}
+          <span className="text-xs ml-1" style={{ color: 'rgba(240,244,248,0.35)' }}>Step 1 of 3</span>
+        </div>
+
+        <h1 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(22px,3vw,30px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
+          Take the first step<br />to a <span style={{ color: TEAL }}>better you.</span>
         </h1>
-        <p className="text-sm text-center mb-7 leading-relaxed" style={{ color: 'rgba(240,244,248,0.45)' }}>
-          Your personalised {config.programName.toLowerCase()} plan is ready. Create an account to access it and book your consultation.
-        </p>
+        <div className="flex items-center gap-5 mb-7 mt-2">
+          {['Treatment in days, not months', 'Doctor prescribed, tailored to you'].map(t => (
+            <div key={t} className="flex items-center gap-1.5">
+              <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3 flex-shrink-0" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="text-[11px]" style={{ color: 'rgba(240,244,248,0.5)' }}>{t}</span>
+            </div>
+          ))}
+        </div>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Full name</label>
-            <input
-              type="text"
-              placeholder="Your full name"
-              value={form.name}
-              onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-              className="px-4 py-3 rounded-sm text-sm outline-none"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
-              required
-            />
-          </div>
+        <div className="rounded-xl p-6 flex flex-col gap-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+          <h2 className="font-semibold text-sm" style={{ color: '#f0f4f8' }}>Create your account</h2>
 
-          <div className="grid grid-cols-2 gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Email</label>
+              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Email</label>
               <input
                 type="email"
                 placeholder="example@gmail.com"
                 value={form.email}
                 onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none"
+                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
                 required
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Confirm email</label>
+              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Confirm email</label>
               <input
                 type="email"
-                placeholder="Enter email again"
+                placeholder="Confirm email address"
                 value={form.emailConfirm}
                 onChange={e => setForm(f => ({ ...f, emailConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none"
+                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
                 style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.emailConfirm && form.emailConfirm !== form.email ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
                 required
               />
             </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Password</label>
+              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Full name</label>
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                value={form.name}
+                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Password</label>
               <input
                 type="password"
-                placeholder="Min 8 characters"
+                placeholder="Enter password"
                 value={form.password}
                 onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none"
+                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
                 style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.password && form.password.length < 8 ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
                 required
                 minLength={8}
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Confirm password</label>
+              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Confirm password</label>
               <input
                 type="password"
-                placeholder="Re-enter password"
+                placeholder="Confirm password"
                 value={form.passwordConfirm}
                 onChange={e => setForm(f => ({ ...f, passwordConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none"
+                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
                 style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.passwordConfirm && form.passwordConfirm !== form.password ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
                 required
               />
             </div>
+
+            {error && <p className="text-xs" style={{ color: '#ef4444' }}>{error}</p>}
+
+            <button
+              type="submit"
+              disabled={!valid || loading}
+              className="w-full py-3.5 rounded-lg text-sm font-bold tracking-wide transition-all duration-150 mt-1"
+              style={{
+                background: valid && !loading ? TEAL : 'rgba(255,255,255,0.06)',
+                color: valid && !loading ? '#fff' : 'rgba(255,255,255,0.25)',
+                cursor: valid && !loading ? 'pointer' : 'not-allowed',
+                fontFamily: 'var(--font-space-grotesk)',
+              }}
+            >
+              {loading ? 'Creating account...' : 'Create account'}
+            </button>
+          </form>
+
+          <p className="text-center text-[11px]" style={{ color: 'rgba(240,244,248,0.25)' }}>
+            Already have an account?{' '}
+            <a href="/login" style={{ color: TEAL }}>Sign in</a>
+          </p>
+        </div>
+
+        {/* LegitScript badge */}
+        <div className="mt-5 rounded-xl p-4 flex items-center gap-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.2)' }}>
+            <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
+              <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" stroke={TEAL} strokeWidth="1.5" strokeLinejoin="round" />
+              <path d="M9 12l2 2 4-4" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
+          <div>
+            <p className="text-xs font-semibold" style={{ color: '#f0f4f8' }}>LegitScript Certified</p>
+            <p className="text-[10px]" style={{ color: 'rgba(240,244,248,0.35)' }}>Verified online healthcare provider · TGA compliant</p>
+          </div>
+          <div className="ml-auto flex items-center gap-1">
+            <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
+              <path d="M2 6l3 3 5-5" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-[10px] font-semibold" style={{ color: '#22c55e' }}>Verified</span>
+          </div>
+        </div>
+      </div>
 
-          {error && <p className="text-sm" style={{ color: '#ef4444' }}>{error}</p>}
-
-          <button
-            type="submit"
-            disabled={!valid || loading}
-            className="w-full py-4 rounded-sm text-sm font-bold tracking-wide transition-all duration-150 mt-2"
-            style={{
-              background: valid && !loading ? TEAL : 'rgba(255,255,255,0.06)',
-              color: valid && !loading ? '#fff' : 'rgba(255,255,255,0.3)',
-              cursor: valid && !loading ? 'pointer' : 'not-allowed',
-              fontFamily: 'var(--font-space-grotesk)',
-            }}
+      {/* Right — trust grid (desktop only) */}
+      <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(255,255,255,0.04)' }}>
+        {TRUST_PANELS.map((p, i) => (
+          <div
+            key={i}
+            className="flex flex-col justify-end p-7 relative overflow-hidden"
+            style={{ background: '#070a0d' }}
           >
-            {loading ? 'Creating account...' : 'Create account & unlock results'}
-          </button>
-        </form>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: `radial-gradient(ellipse at ${i % 2 === 0 ? '0% 100%' : '100% 0%'}, rgba(72,144,247,0.05) 0%, transparent 70%)` }}
+            />
+            <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1 relative z-10" style={{ color: TEAL }}>{p.label}</p>
+            <h3 className="font-bold text-base mb-2 relative z-10" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{p.heading}</h3>
+            <p className="text-xs leading-relaxed relative z-10" style={{ color: 'rgba(240,244,248,0.4)' }}>{p.body}</p>
+          </div>
+        ))}
+      </div>
 
-        <p className="text-center text-xs mt-4" style={{ color: 'rgba(240,244,248,0.25)' }}>
-          Already have an account?{' '}
-          <a href="/login" style={{ color: TEAL }}>Log in</a>
-        </p>
-      </motion.div>
     </div>
   )
 }
