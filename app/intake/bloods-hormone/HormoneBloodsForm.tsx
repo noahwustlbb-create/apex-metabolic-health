@@ -3,5 +3,5 @@
 import BloodPanelFlow from '@/components/BloodPanelFlow'
 
 export default function HormoneBloodsForm() {
-  return <BloodPanelFlow />
+  return <BloodPanelFlow startPanel="hormone" />
 }
