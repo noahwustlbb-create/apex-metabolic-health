@@ -17,15 +17,15 @@ const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 // ── Intake form routing ────────────────────────────────────────────────────────
 const INTAKE_ROUTES: Record<string, string> = {
-  hormone:   '/intake/hormone-consult',
-  weight:    '/intake/general-consult?program=weight-loss',
-  sexual:    '/intake/general-consult?program=sexual-health',
-  recovery:  '/intake/general-consult?program=recovery',
-  longevity: '/intake/general-consult?program=longevity',
-  skinhair:  '/intake/general-consult?program=skin-hair',
-  bloods:    '/intake/hormone-consult',
-  general:   '/intake/general-consult',
-  repeat:    '/intake/repeat-order',
+  hormone:   '/intake/quiz/hormone',
+  weight:    '/intake/quiz/weightloss',
+  sexual:    '/intake/quiz/sexual',
+  recovery:  '/intake/quiz/injury',
+  longevity: '/intake/quiz/antiageing',
+  skinhair:  '/intake/quiz/skin',
+  bloods:    '/intake/bloods-hormone',
+  general:   '/intake/quiz/hormone',
+  repeat:    '/intake/quiz/hormone',
 }
 
 // ── Treatment picker (inside assessment) ──────────────────────────────────────
@@ -478,7 +478,7 @@ export default function ShortAssessment() {
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#5a9ef8'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 48px rgba(72,144,247,0.5)' }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = BLUE; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 40px rgba(72,144,247,0.35)' }}
                   >
-                    Complete intake form
+                    Start your health assessment
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </a>
                   <p className="text-[11px] mt-4" style={{ color: 'rgba(200,220,248,0.3)' }}>
