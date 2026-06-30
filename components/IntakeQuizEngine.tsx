@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const DISCOVERY_URL = 'https://calendly.com/admin-apexmetabolichealth/free-discovery-call'
-const TEAL = '#00c2b8'
+const TEAL = '#4890f7'
 const BG = '#070a0d'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
