@@ -2,56 +2,28 @@ import { NextResponse } from 'next/server'
 
 const BGT_API = 'https://api.bloodygoodtests.com.au'
 
-// Cache the token in memory for its lifetime
-let cachedToken: { value: string; expiresAt: number } | null = null
-
-async function getBgtToken(): Promise<string> {
-  if (cachedToken && Date.now() < cachedToken.expiresAt) {
-    return cachedToken.value
-  }
-
-  const clientId     = process.env.BGT_CLIENT_ID
-  const clientSecret = process.env.BGT_CLIENT_SECRET
-
-  if (!clientId || !clientSecret) {
-    throw new Error('BGT credentials not configured')
-  }
-
-  // Standard OAuth2 client credentials — Basic auth header
-  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
-
-  const res = await fetch(`${BGT_API}/oauth/token`, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Basic ${basic}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: 'grant_type=client_credentials',
-    cache: 'no-store',
+async function bgtFetch(url: string, clientId: string, clientSecret: string): Promise<Response> {
+  // Try 1: client_secret as Bearer token directly (simplest API key pattern)
+  const r1 = await fetch(url, {
+    headers: { Authorization: `Bearer ${clientSecret}` },
+    next: { revalidate: 300 },
   })
+  if (r1.ok) return r1
 
-  if (!res.ok) {
-    // Fallback: try JSON body approach
-    const res2 = await fetch(`${BGT_API}/v1/auth/token`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ client_id: clientId, client_secret: clientSecret, grant_type: 'client_credentials' }),
-      cache: 'no-store',
-    })
-    if (!res2.ok) {
-      const text = await res2.text()
-      throw new Error(`BGT auth failed: ${text}`)
-    }
-    const data = await res2.json()
-    const token = data.access_token ?? data.token
-    cachedToken = { value: token, expiresAt: Date.now() + (data.expires_in ?? 3600) * 1000 - 60_000 }
-    return token
-  }
+  // Try 2: Basic auth (client_id:client_secret)
+  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+  const r2 = await fetch(url, {
+    headers: { Authorization: `Basic ${basic}` },
+    next: { revalidate: 300 },
+  })
+  if (r2.ok) return r2
 
-  const data = await res.json()
-  const token = data.access_token ?? data.token
-  cachedToken = { value: token, expiresAt: Date.now() + (data.expires_in ?? 3600) * 1000 - 60_000 }
-  return token
+  // Try 3: client_id as Bearer
+  const r3 = await fetch(url, {
+    headers: { Authorization: `Bearer ${clientId}` },
+    next: { revalidate: 300 },
+  })
+  return r3
 }
 
 // GET /api/bgt?resource=bundles|tests
@@ -60,21 +32,24 @@ export async function GET(req: Request) {
   const resource = searchParams.get('resource') ?? 'bundles'
   const count    = searchParams.get('count') ?? '50'
 
-  try {
-    const token = await getBgtToken()
+  const clientId     = process.env.BGT_CLIENT_ID
+  const clientSecret = process.env.BGT_CLIENT_SECRET
 
+  if (!clientId || !clientSecret) {
+    return NextResponse.json({ error: 'BGT credentials not configured' }, { status: 500 })
+  }
+
+  try {
     const endpoint = resource === 'tests'
       ? `${BGT_API}/v1/tests`
       : `${BGT_API}/v1/bundles?count=${count}`
 
-    const res = await fetch(endpoint, {
-      headers: { Authorization: `Bearer ${token}` },
-      next: { revalidate: 300 }, // cache 5 min
-    })
+    const res = await bgtFetch(endpoint, clientId, clientSecret)
 
     if (!res.ok) {
       const text = await res.text()
-      return NextResponse.json({ error: text }, { status: res.status })
+      console.error('[BGT API] all auth methods failed:', text)
+      return NextResponse.json({ error: text, authHint: 'Check BGT API docs for correct auth format' }, { status: res.status })
     }
 
     const data = await res.json()
