@@ -246,16 +246,17 @@ function PanelStep({ panelKey, showBack }: { panelKey: PanelKey; showBack?: () =
 }
 
 export default function BloodPanelFlow({ startPanel }: Props) {
+  const router = useRouter()
   const [phase, setPhase] = useState<Phase>(startPanel ?? 'question')
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: BG }}>
       {/* Header */}
       <div className="flex items-center justify-between px-6 sm:px-10 py-5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <a href="/" className="flex flex-col leading-none">
+        <button onClick={() => router.back()} className="flex flex-col leading-none" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
           <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
           <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: BLUE }}>Metabolic Health</span>
-        </a>
+        </button>
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.15)' }}>
           <div className="w-1.5 h-1.5 rounded-full" style={{ background: BLUE }} />
           <span className="text-[10px] font-semibold" style={{ color: 'rgba(200,220,248,0.6)' }}>Secure · AHPRA-registered doctors</span>

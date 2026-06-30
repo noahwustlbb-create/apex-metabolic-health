@@ -630,6 +630,7 @@ const TRUST_PANELS = [
 ]
 
 function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers: Answers; onDone: () => void }) {
+  const router = useRouter()
   const [form, setForm] = useState({ name: '', email: '', emailConfirm: '', password: '', passwordConfirm: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -675,10 +676,10 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
       {/* Left — form */}
       <div className="flex flex-col w-full lg:w-[520px] flex-shrink-0 overflow-y-auto px-8 sm:px-12 py-10">
         {/* Mini brand */}
-        <div className="mb-8">
+        <button onClick={() => router.back()} className="mb-8 text-left" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
           <span className="font-black text-sm tracking-[0.2em] uppercase block" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
           <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: TEAL }}>Metabolic Health</span>
-        </div>
+        </button>
 
         {/* Step indicator */}
         <div className="flex items-center gap-2 mb-7">

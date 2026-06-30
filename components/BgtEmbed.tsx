@@ -21,10 +21,10 @@ export default function BgtEmbed({ title, subtitle, url, biomarkers }: BgtEmbedP
     <div className="min-h-screen flex flex-col" style={{ background: BG }}>
       {/* Minimal header */}
       <div className="flex items-center justify-between px-6 sm:px-10 py-5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <a href="/" className="flex flex-col leading-none">
+        <button onClick={() => router.back()} className="flex flex-col leading-none" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
           <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
           <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: BLUE }}>Metabolic Health</span>
-        </a>
+        </button>
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full" style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.15)' }}>
             <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
