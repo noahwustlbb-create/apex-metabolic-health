@@ -603,10 +603,30 @@ function IneligiblePhase({ config, overrideMsg }: { config: QuizConfig; override
 // ─── Account gate ─────────────────────────────────────────────────────────────
 
 const TRUST_PANELS = [
-  { label: 'Personalised', heading: 'Prescription protocols', body: 'Treatments matched to your pathology, not a one-size-fits-all template.' },
-  { label: 'Pharmacy delivery', heading: 'Australia-wide', body: 'TGA-compliant compounding pharmacy, delivered direct to your door.' },
-  { label: 'Unlimited', heading: 'Doctor consultations', body: 'AHPRA-registered practitioners managing your ongoing care.' },
-  { label: '100%', heading: 'Telehealth based', body: 'Consult from anywhere in Australia. No waiting rooms.' },
+  {
+    label: 'Personalised',
+    heading: 'Prescription protocols',
+    body: 'Treatments matched to your pathology, not a one-size-fits-all template.',
+    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=700&h=500&fit=crop&auto=format&q=80',
+  },
+  {
+    label: 'Pharmacy delivery',
+    heading: 'Australia-wide',
+    body: 'TGA-compliant compounding pharmacy, delivered direct to your door.',
+    img: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=700&h=500&fit=crop&auto=format&q=80',
+  },
+  {
+    label: 'Unlimited',
+    heading: 'Doctor consultations',
+    body: 'AHPRA-registered practitioners managing your ongoing care.',
+    img: 'https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=700&h=500&fit=crop&auto=format&q=80',
+  },
+  {
+    label: '100%',
+    heading: 'Telehealth based',
+    body: 'Consult from anywhere in Australia. No waiting rooms.',
+    img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop&auto=format&q=80',
+  },
 ]
 
 function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers: Answers; onDone: () => void }) {
@@ -681,13 +701,29 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
         <h1 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(22px,3vw,30px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
           Take the first step<br />to a <span style={{ color: TEAL }}>better you.</span>
         </h1>
-        <div className="flex items-center gap-5 mb-7 mt-2">
+        <div className="flex items-center gap-5 mb-5 mt-2">
           {['Treatment in days, not months', 'Doctor prescribed, tailored to you'].map(t => (
             <div key={t} className="flex items-center gap-1.5">
               <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3 flex-shrink-0" aria-hidden="true">
                 <path d="M2 6l3 3 5-5" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span className="text-[11px]" style={{ color: 'rgba(240,244,248,0.5)' }}>{t}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* What you get */}
+        <div className="rounded-xl p-4 mb-5 flex flex-col gap-3" style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.12)' }}>
+          <p className="text-[10px] font-bold tracking-[0.18em] uppercase" style={{ color: TEAL }}>What you get</p>
+          {[
+            { icon: '🩺', text: 'Personalised treatment protocol from an AHPRA-registered doctor' },
+            { icon: '📋', text: 'Doctor-ordered pathology — collect at 2,000+ centres Australia-wide' },
+            { icon: '💊', text: 'Medication fulfilled through our TGA-compliant compounding pharmacy' },
+            { icon: '📱', text: 'Ongoing telehealth reviews and clinical support, 100% online' },
+          ].map(({ icon, text }) => (
+            <div key={text} className="flex items-start gap-3">
+              <span className="text-sm flex-shrink-0 mt-0.5">{icon}</span>
+              <span className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.6)' }}>{text}</span>
             </div>
           ))}
         </div>
@@ -803,21 +839,30 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
       </div>
 
       {/* Right — trust grid (desktop only) */}
-      <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(255,255,255,0.04)' }}>
+      <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(255,255,255,0.06)' }}>
         {TRUST_PANELS.map((p, i) => (
           <div
             key={i}
-            className="flex flex-col justify-end p-7 relative overflow-hidden"
-            style={{ background: '#070a0d' }}
+            className="flex flex-col justify-end relative overflow-hidden"
+            style={{ minHeight: '50%' }}
           >
+            {/* Photo background */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: `radial-gradient(ellipse at ${i % 2 === 0 ? '0% 100%' : '100% 0%'}, rgba(72,144,247,0.05) 0%, transparent 70%)` }}
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${p.img})` }}
             />
-            <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1 relative z-10" style={{ color: TEAL }}>{p.label}</p>
-            <h3 className="font-bold text-base mb-2 relative z-10" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{p.heading}</h3>
-            <p className="text-xs leading-relaxed relative z-10" style={{ color: 'rgba(240,244,248,0.4)' }}>{p.body}</p>
+            {/* Dark gradient overlay for text legibility */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top, rgba(7,10,13,0.92) 0%, rgba(7,10,13,0.4) 50%, rgba(7,10,13,0.1) 100%)' }}
+            />
+            <div className="relative z-10 p-7">
+              <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1" style={{ color: TEAL }}>{p.label}</p>
+              <h3 className="font-bold text-base mb-1.5" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{p.heading}</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.55)' }}>{p.body}</p>
+            </div>
           </div>
         ))}
       </div>
