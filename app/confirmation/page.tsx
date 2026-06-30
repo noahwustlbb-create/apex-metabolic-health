@@ -89,12 +89,30 @@ export default function ConfirmationPage() {
               </p>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.05, ease }}>
+            {/* Optional account creation prompt */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.05, ease }}
+              className="p-5 rounded-xl mb-6"
+              style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.14)' }}
+            >
+              <p className="text-sm font-semibold mb-1" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>Want to track your results and consultations?</p>
+              <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.5)' }}>Create a free account to manage your health records, view upcoming appointments, and communicate with your doctor — all in one place.</p>
+              <Link
+                href="/signup"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm text-xs font-bold tracking-wide transition-all duration-150"
+                style={{ background: '#4890f7', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+              >
+                Create account — it&apos;s free
+              </Link>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 1.12, ease }}>
               <Link href="/" className="btn-ghost">Back to home</Link>
             </motion.div>
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.1, ease }}
+              transition={{ duration: 0.5, delay: 1.18, ease }}
               className="text-[11px] mt-6" style={{ color: 'var(--text-primary)', opacity: 0.3 }}
             >
               Apex Metabolic Health · AHPRA-registered practitioners · Private & confidential

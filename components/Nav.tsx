@@ -170,7 +170,7 @@ export default function Nav() {
                     ))}
                     <div style={{ borderTop: '1px solid rgba(72,144,247,0.1)', marginTop: '6px', paddingTop: '6px' }}>
                       <Link
-                        href="/start"
+                        href="/signup"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '12px', fontWeight: 600, color: BLUE, textDecoration: 'none', transition: 'background 0.12s' }}
                         onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
@@ -227,7 +227,7 @@ export default function Nav() {
               Log in
             </a>
             <Link
-              href="/start"
+              href="/signup"
               style={{
                 fontFamily: 'var(--font-inter)',
                 fontSize: '12.5px',
@@ -244,7 +244,7 @@ export default function Nav() {
               Health Assessment
             </Link>
             <Link
-              href="/start"
+              href="/signup"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -338,7 +338,7 @@ export default function Nav() {
               style={{ borderTop: '1px solid rgba(72,144,247,0.1)' }}
             >
               <Link
-                href="/start"
+                href="/signup"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{ background: BLUE, color: '#ffffff', padding: '16px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 600, textDecoration: 'none', letterSpacing: '0.01em' }}
@@ -349,7 +349,7 @@ export default function Nav() {
                 </svg>
               </Link>
               <Link
-                href="/start"
+                href="/signup"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center w-full"
                 style={{ border: '1px solid rgba(72,144,247,0.3)', color: '#a8c4e8', padding: '15px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}

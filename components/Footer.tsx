@@ -9,10 +9,14 @@ const COMPANY_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
-  { label: 'Get Started', href: '/intake/pre-screen' },
+  { label: 'Get Started', href: '/book' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms' },
 ]
+
+const BLUE  = '#4890f7'
+const TEXT  = '#c8dcf8'
+const DIM   = 'rgba(200,220,248,0.55)'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -30,10 +34,10 @@ export default function Footer() {
               <span style={{
                 display: 'block',
                 fontFamily: 'var(--font-inter)',
-                fontWeight: 300,
+                fontWeight: 600,
                 fontSize: '18px',
-                letterSpacing: '0.15em',
-                color: '#ffffff',
+                letterSpacing: '0.22em',
+                color: '#f0f5ff',
                 lineHeight: 1,
                 textTransform: 'uppercase',
               }}>
@@ -42,26 +46,27 @@ export default function Footer() {
               <span style={{
                 display: 'block',
                 fontFamily: 'var(--font-inter)',
-                fontWeight: 300,
-                fontSize: '11px',
-                letterSpacing: '0.15em',
-                color: 'rgba(255,255,255,0.35)',
+                fontWeight: 400,
+                fontSize: '9.5px',
+                letterSpacing: '0.2em',
+                color: BLUE,
                 lineHeight: 1,
-                marginTop: '4px',
+                marginTop: '5px',
                 textTransform: 'uppercase',
+                opacity: 0.85,
               }}>
                 Metabolic Health
               </span>
             </div>
 
-            <p className="text-sm leading-relaxed max-w-xs mb-5" style={{ color: 'rgba(255,255,255,0.3)' }}>
+            <p className="text-sm leading-relaxed max-w-xs mb-5" style={{ color: TEXT }}>
               Doctor-led hormonal health, evidence-based and delivered online across Australia.
             </p>
 
             <div className="flex flex-wrap gap-2 mb-6">
               {['AHPRA Registered', 'TGA Compliant', '100% Online'].map((badge) => (
                 <span key={badge} className="text-[10px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5"
-                  style={{ color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(72,144,247,0.2)', borderRadius: '2px' }}>
+                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: '2px' }}>
                   {badge}
                 </span>
               ))}
@@ -71,12 +76,12 @@ export default function Footer() {
             <div className="flex flex-col gap-2 mb-5">
               <a href="mailto:admin@apexmetabolichealth.com.au"
                 className="text-xs transition-colors duration-200"
-                style={{ color: 'rgba(255,255,255,0.3)' }}
-                onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
-                onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}>
+                style={{ color: TEXT }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
+                onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
                 admin@apexmetabolichealth.com.au
               </a>
-              <p className="text-xs" style={{ color: 'rgba(255,255,255,0.2)' }}>Mon – Fri · 9am – 5pm AEST</p>
+              <p className="text-xs" style={{ color: DIM }}>Mon – Fri · 9am – 5pm AEST</p>
             </div>
 
             {/* Social links */}
@@ -110,9 +115,9 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
-                  style={{ color: 'rgba(255,255,255,0.3)', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(72,144,247,0.15)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)'; e.currentTarget.style.background = 'rgba(72,144,247,0.12)' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)' }}
+                  style={{ color: TEXT, background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff'; e.currentTarget.style.background = 'rgba(72,144,247,0.18)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = TEXT; e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
                 >
                   {s.icon}
                 </a>
@@ -122,7 +127,7 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
+            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
               Programs
             </h4>
             <ul className="space-y-2.5">
@@ -130,9 +135,9 @@ export default function Footer() {
                 <li key={program.slug}>
                   <Link href={`/programs/${program.slug}`}
                     className="text-sm transition-colors duration-200"
-                    style={{ color: 'rgba(255,255,255,0.3)' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}
+                    style={{ color: TEXT }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
+                    onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
                   >{program.name}</Link>
                 </li>
               ))}
@@ -141,7 +146,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: 'rgba(255,255,255,0.25)' }}>
+            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
               Company
             </h4>
             <ul className="space-y-2.5">
@@ -149,41 +154,68 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link href={link.href}
                     className="text-sm transition-colors duration-200"
-                    style={{ color: 'rgba(255,255,255,0.3)' }}
-                    onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.7)' }}
-                    onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)' }}
+                    style={{ color: TEXT }}
+                    onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
+                    onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
                   >{link.label}</Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
-              <Link href="/intake/pre-screen" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
-                Start Assessment
+            <div className="mt-8 flex flex-col gap-3">
+              <Link href="/signup" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
+                Get Started
               </Link>
+              {/* LegitScript certified badge */}
+              <a
+                href="https://www.legitscript.com/websites/?checker_keywords=apexmetabolichealth.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LegitScript certified — verify our certification"
+                className="flex items-center gap-2.5 mt-1 w-fit"
+              >
+                <div className="relative flex-shrink-0" style={{ width: 52, height: 60 }}>
+                  <svg viewBox="0 0 52 60" fill="none" xmlns="http://www.w3.org/2000/svg" width={52} height={60}>
+                    <path d="M26 1L4 11v17c0 13.2 9.4 25.6 22 29 12.6-3.4 22-15.8 22-29V11L26 1z" fill="#0a1628" stroke="rgba(72,144,247,0.4)" strokeWidth="1.5" />
+                    <path d="M26 1L4 11v17c0 13.2 9.4 25.6 22 29 12.6-3.4 22-15.8 22-29V11L26 1z" fill="url(#ls-grad)" />
+                    <defs>
+                      <linearGradient id="ls-grad" x1="4" y1="1" x2="48" y2="60" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stopColor="rgba(72,144,247,0.15)" />
+                        <stop offset="100%" stopColor="rgba(72,144,247,0.03)" />
+                      </linearGradient>
+                    </defs>
+                    <circle cx="26" cy="30" r="11" fill="rgba(72,144,247,0.15)" stroke={BLUE} strokeWidth="1.2" />
+                    <path d="M20.5 30l3.5 3.5 7-7" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold tracking-[0.12em] uppercase leading-tight" style={{ color: BLUE }}>LegitScript</p>
+                  <p className="text-[9px] tracking-[0.08em] leading-tight" style={{ color: 'rgba(200,220,248,0.5)' }}>Certified</p>
+                </div>
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="h-px w-full mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.1)' }} aria-hidden="true" />
+        <div className="h-px w-full mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.12)' }} aria-hidden="true" />
 
         {/* Compliance */}
-        <div className="p-5 rounded-sm mb-8" style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(72,144,247,0.1)' }}>
-          <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(255,255,255,0.25)' }}>
+        <div className="p-5 rounded-sm mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
+          <p className="text-xs leading-relaxed mb-2" style={{ color: DIM }}>
             All consultations conducted by AHPRA-registered medical practitioners. This website does not constitute medical advice. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
           </p>
-          <p className="text-xs leading-relaxed mb-2" style={{ color: 'rgba(255,255,255,0.25)' }}>
+          <p className="text-xs leading-relaxed mb-2" style={{ color: DIM }}>
             Clinical suitability is assessed by a doctor during consultation. All medical services are provided by Australian AHPRA-registered medical practitioners.
           </p>
-          <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.25)' }}>
-            <strong style={{ color: 'rgba(255,255,255,0.45)' }}>After-hours &amp; emergencies:</strong> Apex Metabolic Health does not provide emergency medical care. If you are experiencing a medical emergency, call <strong style={{ color: '#ffffff' }}>000</strong> immediately. For after-hours GP care, contact the <strong style={{ color: 'rgba(255,255,255,0.45)' }}>National Home Doctor Service on 13 7425</strong>.
+          <p className="text-xs leading-relaxed" style={{ color: DIM }}>
+            <strong style={{ color: TEXT }}>After-hours &amp; emergencies:</strong> Apex Metabolic Health does not provide emergency medical care. If you are experiencing a medical emergency, call <strong style={{ color: '#ffffff' }}>000</strong> immediately. For after-hours GP care, contact the <strong style={{ color: TEXT }}>National Home Doctor Service on 13 7425</strong>.
           </p>
         </div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.18)' }}>
+          <p className="text-xs" style={{ color: DIM }}>
             © {year} Apex Metabolic Health. All rights reserved.
           </p>
-          <p className="text-xs tracking-wide" style={{ color: 'rgba(72,144,247,0.4)' }}>
+          <p className="text-xs tracking-wide" style={{ color: BLUE, opacity: 0.7 }}>
             Doctor-led hormonal health. Evidence-based. Australia-wide.
           </p>
         </div>

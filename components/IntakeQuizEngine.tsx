@@ -31,7 +31,7 @@ export interface QuizConfig {
   ineligibleAlt?: { label: string; href: string }
 }
 
-type Phase = 'intro' | 'quiz' | 'processing' | 'eligible' | 'ineligible'
+type Phase = 'intro' | 'quiz' | 'processing' | 'account' | 'eligible' | 'ineligible'
 type Answers = Record<string, string | string[]>
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -600,6 +600,160 @@ function IneligiblePhase({ config, overrideMsg }: { config: QuizConfig; override
   )
 }
 
+// ─── Account gate ─────────────────────────────────────────────────────────────
+
+function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers: Answers; onDone: () => void }) {
+  const [form, setForm] = useState({ name: '', email: '', emailConfirm: '', password: '', passwordConfirm: '' })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const valid =
+    form.name.trim().length > 1 &&
+    form.email.includes('@') &&
+    form.email === form.emailConfirm &&
+    form.password.length >= 8 &&
+    form.password === form.passwordConfirm
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!valid) return
+    setError('')
+    setLoading(true)
+    try {
+      const answerSummary = Object.entries(answers)
+        .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
+        .join('\n')
+
+      await fetch('/api/notify-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          source: 'quiz',
+          program: config.programName,
+          message: answerSummary,
+        }),
+      })
+      onDone()
+    } catch {
+      setError('Something went wrong. Please try again.')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="flex-1 flex flex-col items-center justify-center px-5 py-12">
+      <motion.div className="w-full max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
+        <div className="w-12 h-12 rounded-full flex items-center justify-center mb-5 mx-auto" style={{ background: 'rgba(72,144,247,0.12)', border: `2px solid ${TEAL}` }}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" aria-hidden="true">
+            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" fill={TEAL} />
+          </svg>
+        </div>
+
+        <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-2 text-center" style={{ color: TEAL }}>One last step</p>
+        <h1 className="font-bold text-center mb-2 leading-tight" style={{ fontSize: 'clamp(20px,3.5vw,26px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
+          Create your account to unlock your results
+        </h1>
+        <p className="text-sm text-center mb-7 leading-relaxed" style={{ color: 'rgba(240,244,248,0.45)' }}>
+          Your personalised {config.programName.toLowerCase()} plan is ready. Create an account to access it and book your consultation.
+        </p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Full name</label>
+            <input
+              type="text"
+              placeholder="Your full name"
+              value={form.name}
+              onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+              className="px-4 py-3 rounded-sm text-sm outline-none"
+              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Email</label>
+              <input
+                type="email"
+                placeholder="example@gmail.com"
+                value={form.email}
+                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                className="px-4 py-3 rounded-sm text-sm outline-none"
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Confirm email</label>
+              <input
+                type="email"
+                placeholder="Enter email again"
+                value={form.emailConfirm}
+                onChange={e => setForm(f => ({ ...f, emailConfirm: e.target.value }))}
+                className="px-4 py-3 rounded-sm text-sm outline-none"
+                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.emailConfirm && form.emailConfirm !== form.email ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Password</label>
+              <input
+                type="password"
+                placeholder="Min 8 characters"
+                value={form.password}
+                onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+                className="px-4 py-3 rounded-sm text-sm outline-none"
+                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.password && form.password.length < 8 ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
+                required
+                minLength={8}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.55)' }}>Confirm password</label>
+              <input
+                type="password"
+                placeholder="Re-enter password"
+                value={form.passwordConfirm}
+                onChange={e => setForm(f => ({ ...f, passwordConfirm: e.target.value }))}
+                className="px-4 py-3 rounded-sm text-sm outline-none"
+                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.passwordConfirm && form.passwordConfirm !== form.password ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
+                required
+              />
+            </div>
+          </div>
+
+          {error && <p className="text-sm" style={{ color: '#ef4444' }}>{error}</p>}
+
+          <button
+            type="submit"
+            disabled={!valid || loading}
+            className="w-full py-4 rounded-sm text-sm font-bold tracking-wide transition-all duration-150 mt-2"
+            style={{
+              background: valid && !loading ? TEAL : 'rgba(255,255,255,0.06)',
+              color: valid && !loading ? '#fff' : 'rgba(255,255,255,0.3)',
+              cursor: valid && !loading ? 'pointer' : 'not-allowed',
+              fontFamily: 'var(--font-space-grotesk)',
+            }}
+          >
+            {loading ? 'Creating account...' : 'Create account & unlock results'}
+          </button>
+        </form>
+
+        <p className="text-center text-xs mt-4" style={{ color: 'rgba(240,244,248,0.25)' }}>
+          Already have an account?{' '}
+          <a href="/login" style={{ color: TEAL }}>Log in</a>
+        </p>
+      </motion.div>
+    </div>
+  )
+}
+
 // ─── Main engine ──────────────────────────────────────────────────────────────
 
 export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
@@ -612,6 +766,8 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
   const [bmiWeight, setBmiWeight] = useState('')
   const [isEligible, setIsEligible] = useState(true)
   const [bmiIneligibleMsg, setBmiIneligibleMsg] = useState<string | undefined>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_accountDone, setAccountDone] = useState(false)
 
   const checkEligibility = useCallback(() => {
     for (const step of config.steps) {
@@ -684,7 +840,7 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
   const handleProcessingDone = useCallback((_eligible: boolean) => {
     const eligible = checkEligibility()
     setIsEligible(eligible)
-    setPhase(eligible ? 'eligible' : 'ineligible')
+    setPhase(eligible ? 'account' : 'ineligible')
   }, [checkEligibility])
 
   return (
@@ -709,6 +865,13 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
         />
       )}
       {phase === 'processing' && <ProcessingPhase eligible={isEligible} onDone={handleProcessingDone} />}
+      {phase === 'account' && (
+        <AccountPhase
+          config={config}
+          answers={answers}
+          onDone={() => { setAccountDone(true); setPhase('eligible') }}
+        />
+      )}
       {phase === 'eligible' && <EligiblePhase config={config} />}
       {phase === 'ineligible' && <IneligiblePhase config={config} overrideMsg={bmiIneligibleMsg} />}
     </Shell>
