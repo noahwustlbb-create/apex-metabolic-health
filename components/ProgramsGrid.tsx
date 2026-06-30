@@ -14,7 +14,8 @@ const PROGRAMS = [
     ),
     name: 'Hormone Optimisation',
     description: 'Restore and optimise testosterone, DHEA, thyroid, and other key hormonal pathways driving energy, body composition, and drive.',
-    bloodsHref: '/intake/bloods-hormone',
+    bloodsHref: '/intake/hormone',
+    bloodsLabel: 'Get Started →',
     consultHref: '/intake/hormone-consult',
   },
   {
@@ -162,7 +163,7 @@ export default function ProgramsGrid() {
                     color: '#4890f7',
                   }}
                 >
-                  Order Bloods — $99
+                  {(program as { bloodsLabel?: string }).bloodsLabel ?? 'Order Bloods — $99'}
                 </a>
                 <a
                   href={program.consultHref}
