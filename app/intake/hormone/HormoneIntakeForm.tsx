@@ -17,6 +17,12 @@ const OPTIONS = [
     sub: 'I\'m with another clinic or doctor and want to continue or transfer my care.',
     href: '/intake/bloods-trt',
   },
+  {
+    id: 'apex',
+    heading: 'Yes, I\'m an existing Apex patient',
+    sub: 'I\'m already on a program with Apex and need my regular monitoring bloods.',
+    href: '/intake/bloods-trt',
+  },
 ]
 
 const ease = [0.22, 1, 0.36, 1] as const
