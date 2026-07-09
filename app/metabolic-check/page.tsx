@@ -1,14 +1,11 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 
-// ---------------------------------------------------------------------------
-// Metabolic Health Questionnaire
-// 10 clinically-relevant metabolic symptom indicators
-// ---------------------------------------------------------------------------
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
 const QUESTIONS = [
   { id: 1,  text: 'Do you struggle to lose weight even when dieting or exercising consistently?' },
   { id: 2,  text: 'Have you noticed increasing fat around your midsection in the past 12 months?' },
@@ -22,538 +19,309 @@ const QUESTIONS = [
   { id: 10, text: 'Do you feel physically slower or less capable than you were 3–5 years ago?' },
 ]
 
-type Answer = 'yes' | 'no' | null
+type Answer = 'yes' | 'no'
 
-// ---------------------------------------------------------------------------
-// Scoring logic
-// ---------------------------------------------------------------------------
 function computeResult(answers: Answer[]) {
-  const yesCount = answers.filter((a) => a === 'yes').length
-
+  const yesCount = answers.filter(a => a === 'yes').length
   let tier: 'low' | 'moderate' | 'high'
-  if (yesCount <= 2) {
-    tier = 'low'
-  } else if (yesCount <= 5) {
-    tier = 'moderate'
-  } else {
-    tier = 'high'
-  }
-
+  if (yesCount <= 2) tier = 'low'
+  else if (yesCount <= 5) tier = 'moderate'
+  else tier = 'high'
   return { yesCount, tier }
 }
 
-const TIER_CONFIG = {
+const TIER = {
   low: {
     label: 'LOW RISK',
-    color: '#1a9e8f',
-    glowColor: 'rgba(26,158,143,0.22)',
+    color: '#16a34a',
+    bg: '#f0fdf4',
+    border: '#bbf7d0',
     heading: 'Your metabolic markers appear within a healthy range.',
     body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually — advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
-    primaryCTA: { label: 'Order a Metabolic Panel', href: '/intake/pre-screen' },
-    secondaryCTA: { label: 'Explore Programs', href: '/services' },
+    cta: 'Get a Metabolic Baseline',
+    href: 'https://app.apexmetabolichealth.com.au/signup',
   },
   moderate: {
     label: 'MODERATE RISK',
-    color: '#c9a84c',
-    glowColor: 'rgba(201,168,76,0.22)',
+    color: '#d97706',
+    bg: '#fffbeb',
+    border: '#fde68a',
     heading: 'Your results suggest signs of metabolic dysregulation.',
     body: 'Several of your responses align with early-stage metabolic dysfunction — including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
-    primaryCTA: { label: 'Book a Metabolic Consult', href: '/intake/general-consult' },
-    secondaryCTA: { label: 'Order Blood Panel', href: '/intake/pre-screen' },
+    cta: 'Book a Metabolic Consultation',
+    href: 'https://app.apexmetabolichealth.com.au/signup',
   },
   high: {
     label: 'HIGH RISK',
-    color: '#e05c5c',
-    glowColor: 'rgba(224,92,92,0.22)',
+    color: '#dc2626',
+    bg: '#fef2f2',
+    border: '#fecaca',
     heading: 'Your results indicate significant metabolic dysfunction.',
-    body: 'Your symptom profile is strongly consistent with metabolic syndrome indicators — including insulin resistance, visceral fat accumulation, hormonal dysregulation, and systemic inflammation. We strongly recommend a comprehensive metabolic panel and clinical consultation.',
-    primaryCTA: { label: 'Book Metabolic Consult Now', href: '/intake/general-consult' },
-    secondaryCTA: { label: 'Speak to a Clinician', href: '/intake/discovery' },
+    body: 'Your symptom profile strongly suggests metabolic dysregulation that warrants clinical assessment. A comprehensive metabolic blood panel and consultation with an AHPRA-registered doctor is strongly recommended.',
+    cta: 'Start Your Metabolic Assessment',
+    href: 'https://app.apexmetabolichealth.com.au/signup',
   },
 }
 
-// ---------------------------------------------------------------------------
-// Score label mapping
-// ---------------------------------------------------------------------------
-const SCORE_LABEL: Record<string, string> = {
-  low: 'Optimal',
-  moderate: 'At Risk',
-  high: 'Dysfunction',
-}
+// ─── Logo ─────────────────────────────────────────────────────────────────────
 
-// ---------------------------------------------------------------------------
-// Animated donut chart
-// ---------------------------------------------------------------------------
-const RADIUS = 70
-const STROKE_WIDTH = 10
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS
-const SVG_SIZE = (RADIUS + STROKE_WIDTH) * 2 + 8
-
-function DonutChart({ percentage, color, yesCount }: { percentage: number; color: string; yesCount: number }) {
-  const [animatedPct, setAnimatedPct] = useState(0)
-  const dashOffset = CIRCUMFERENCE * (1 - animatedPct / 100)
-
-  useEffect(() => {
-    const t = setTimeout(() => setAnimatedPct(percentage), 300)
-    return () => clearTimeout(t)
-  }, [percentage])
-
+function ApexLogo() {
   return (
-    <div className="relative flex items-center justify-center" style={{ width: SVG_SIZE, height: SVG_SIZE }}>
-      <svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`} style={{ transform: 'rotate(-90deg)' }} aria-hidden="true">
-        <circle cx={SVG_SIZE / 2} cy={SVG_SIZE / 2} r={RADIUS} fill="none" stroke="var(--elevated)" strokeWidth={STROKE_WIDTH} />
-        <circle
-          cx={SVG_SIZE / 2} cy={SVG_SIZE / 2} r={RADIUS} fill="none"
-          stroke={color} strokeWidth={STROKE_WIDTH} strokeLinecap="round"
-          strokeDasharray={CIRCUMFERENCE} strokeDashoffset={dashOffset}
-          style={{ transition: 'stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1)', filter: `drop-shadow(0 0 8px ${color})` }}
-        />
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-        <span className="font-bold leading-none" style={{ fontSize: 36, color: '#F4F4F6' }}>
-          {yesCount}<span style={{ fontSize: 18, color: '#B0B8C5' }}>/10</span>
-        </span>
-        <span style={{ fontSize: 11, color: '#B0B8C5', letterSpacing: '0.12em', marginTop: 4 }}>SYMPTOMS</span>
-      </div>
-    </div>
+    <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', flexDirection: 'column', alignItems: 'center' }}>
+      <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 17, fontWeight: 800, letterSpacing: '0.2em', color: '#0f172a', lineHeight: 1 }}>
+        APEX
+      </span>
+      <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 8, fontWeight: 600, letterSpacing: '0.24em', color: '#94a3b8', marginTop: 2, textTransform: 'uppercase' as const }}>
+        Metabolic Health
+      </span>
+    </Link>
   )
 }
 
-// ---------------------------------------------------------------------------
-// Question card
-// ---------------------------------------------------------------------------
-function QuestionCard({
-  question, index, answer, onAnswer,
-}: {
-  question: { id: number; text: string }
-  index: number
-  answer: Answer
-  onAnswer: (id: number, value: 'yes' | 'no') => void
-}) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-40px' })
+// ─── Answer Card ──────────────────────────────────────────────────────────────
 
+function AnswerCard({ label, onClick }: { label: string; onClick: () => void }) {
+  const [hover, setHover] = useState(false)
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-xl p-5 md:p-6"
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
-        background: '#121c30',
-        border: `1px solid ${answer ? 'rgba(53,117,198,0.3)' : 'var(--elevated)'}`,
-        transition: 'border-color 0.25s',
+        display: 'flex', alignItems: 'center', gap: 16,
+        padding: '18px 20px', borderRadius: 12,
+        border: `1.5px solid ${hover ? 'var(--blue)' : '#e2e8f0'}`,
+        background: hover ? '#f8faff' : '#ffffff',
+        cursor: 'pointer', textAlign: 'left' as const, width: '100%',
+        transition: 'border-color 0.15s, background 0.15s',
       }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="flex items-start gap-3 flex-1">
-          <span
-            className="flex-shrink-0 flex items-center justify-center rounded-full text-xs font-bold"
-            style={{
-              width: 26, height: 26, marginTop: 1,
-              background: answer ? 'rgba(53,117,198,0.2)' : 'var(--surface)',
-              border: `1px solid ${answer ? 'rgba(53,117,198,0.4)' : 'var(--border)'}`,
-              color: answer ? '#6AAEE8' : '#0a0e1a',
-              fontFamily: 'var(--font-space-grotesk)',
-              transition: 'all 0.25s',
-            }}
-          >
-            {question.id}
-          </span>
-          <p className="text-sm md:text-base leading-relaxed" style={{ color: '#F4F4F6' }}>
-            {question.text}
-          </p>
-        </div>
-
-        <div className="flex gap-2 sm:flex-shrink-0">
-          {(['yes', 'no'] as const).map((val) => {
-            const selected = answer === val
-            const isYes = val === 'yes'
-            return (
-              <button
-                key={val}
-                onClick={() => onAnswer(question.id, val)}
-                className="relative rounded-full text-sm font-semibold transition-all duration-200"
-                style={{
-                  padding: '8px 24px',
-                  fontFamily: 'var(--font-space-grotesk)',
-                  letterSpacing: '0.04em',
-                  background: selected ? (isYes ? '#3575C6' : 'transparent') : '#121c30',
-                  border: selected ? '1px solid #3575C6' : '1px solid rgba(255,255,255,0.08)',
-                  color: selected ? (isYes ? '#ffffff' : '#6AAEE8') : '#B0B8C5',
-                  boxShadow: selected && isYes ? '0 0 16px rgba(53,117,198,0.4)' : 'none',
-                  transform: selected ? 'scale(1.03)' : 'scale(1)',
-                }}
-              >
-                {val === 'yes' ? 'Yes' : 'No'}
-              </button>
-            )
-          })}
-        </div>
+      <div style={{
+        width: 20, height: 20, borderRadius: '50%',
+        border: `1.5px solid ${hover ? 'var(--blue)' : '#cbd5e1'}`,
+        flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        transition: 'border-color 0.15s',
+      }}>
+        {hover && <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: 'var(--blue)' }} />}
       </div>
-    </motion.div>
+      <span style={{
+        fontSize: 17, fontWeight: 600, color: hover ? '#0f172a' : '#1e293b', lineHeight: 1.5,
+        fontFamily: 'var(--font-space-grotesk)', transition: 'color 0.15s',
+      }}>
+        {label}
+      </span>
+    </button>
   )
 }
 
-// ---------------------------------------------------------------------------
-// Main page
-// ---------------------------------------------------------------------------
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function MetabolicCheckPage() {
-  const [answers, setAnswers] = useState<Answer[]>(Array(10).fill(null))
+  const [currentQ, setCurrentQ] = useState(0)
+  const [answers, setAnswers] = useState<Answer[]>([])
   const [showResult, setShowResult] = useState(false)
-  const resultRef = useRef<HTMLDivElement>(null)
-  const heroRef = useRef(null)
-  const heroInView = useInView(heroRef, { once: true })
+  const [dir, setDir] = useState(1)
+  const [animating, setAnimating] = useState(false)
 
-  const answeredCount = answers.filter((a) => a !== null).length
-  const allAnswered = answeredCount === 10
+  const total = QUESTIONS.length
+  const progressPct = showResult ? 100 : (currentQ / total) * 100
 
-  function handleAnswer(id: number, value: 'yes' | 'no') {
-    setAnswers((prev) => {
-      const next = [...prev]
-      next[id - 1] = value
-      return next
-    })
+  function handleAnswer(val: Answer) {
+    if (animating) return
+    setAnimating(true)
+    setAnswers(a => [...a, val])
+    setDir(1)
+    setTimeout(() => {
+      if (currentQ < total - 1) {
+        setCurrentQ(q => q + 1)
+      } else {
+        setShowResult(true)
+      }
+      setAnimating(false)
+    }, 180)
   }
 
-  function handleCalculate() {
-    setShowResult(true)
-    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+  function handleBack() {
+    if (currentQ === 0 || animating) return
+    setDir(-1)
+    setAnimating(true)
+    setTimeout(() => {
+      setCurrentQ(q => q - 1)
+      setAnswers(a => a.slice(0, -1))
+      setAnimating(false)
+    }, 160)
   }
 
   function handleRetake() {
-    setAnswers(Array(10).fill(null))
+    setAnswers([])
+    setCurrentQ(0)
     setShowResult(false)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setDir(1)
   }
 
-  const result = computeResult(answers)
-  const tier = TIER_CONFIG[result.tier]
-  const percentage = Math.round((result.yesCount / 10) * 100)
+  const result = showResult ? computeResult(answers) : null
+  const tier = result ? TIER[result.tier] : null
 
   return (
-    <div style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
-      <Nav />
+    <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', display: 'flex', flexDirection: 'column' }}>
 
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28" style={{ backgroundColor: 'var(--bg)' }}>
-        <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
-        <div
-          aria-hidden="true"
-          className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(53,117,198,0.08) 0%, transparent 60%)' }}
+      {/* Header */}
+      <header style={{
+        padding: '22px 24px', display: 'flex', alignItems: 'center',
+        justifyContent: 'center', borderBottom: '1px solid #f1f5f9', position: 'relative',
+      }}>
+        <ApexLogo />
+        <Link href="/" style={{
+          position: 'absolute', left: 24, fontSize: 12, color: '#94a3b8',
+          textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4,
+          fontFamily: 'var(--font-space-grotesk)', fontWeight: 500,
+        }}>
+          ← Exit
+        </Link>
+      </header>
+
+      {/* Progress bar */}
+      <div style={{ height: 3, backgroundColor: '#f1f5f9' }}>
+        <motion.div
+          style={{ height: '100%', backgroundColor: 'var(--blue)' }}
+          animate={{ width: `${progressPct}%` }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
         />
-        <div
-          aria-hidden="true"
-          className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
-          style={{ background: 'linear-gradient(to bottom, transparent, #0A0A0A)' }}
-        />
+      </div>
 
-        <div className="container-tight relative">
-          <motion.div
-            ref={heroRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <span className="label">Metabolic Health Check</span>
-            </div>
-
-            <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6', lineHeight: 1.1 }}
-            >
-              Is Your Metabolism{' '}
-              <span className="text-teal-gradient">Working For You?</span>
-            </h1>
-
-            <p className="text-base md:text-lg leading-relaxed mb-8 mx-auto max-w-xl" style={{ color: '#B0B8C5' }}>
-              10 clinically-relevant questions to screen for metabolic dysfunction — including insulin resistance, poor body composition, and systemic fatigue. Takes under 2 minutes.
-            </p>
-
-            <div className="flex justify-center">
-              <span
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold"
-                style={{
-                  fontFamily: 'var(--font-space-grotesk)',
-                  letterSpacing: '0.06em',
-                  background: 'rgba(53,117,198,0.08)',
-                  border: '1px solid rgba(53,117,198,0.2)',
-                  color: '#6AAEE8',
-                }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#3575C6', boxShadow: '0 0 6px #3575C6' }} />
-                Clinically-informed · Metabolic Symptom Screening
-              </span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* QUIZ */}
-      <section className="relative section-pad" style={{ backgroundColor: 'var(--bg)' }}>
-        <div className="glow-rule mb-0" />
-
-        <div className="container-tight pt-10 md:pt-14">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center justify-between mb-8 md:mb-10"
-          >
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: '#3575C6', fontFamily: 'var(--font-space-grotesk)' }}>
-                Metabolic Screening
-              </p>
-              <h2 className="text-xl md:text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}>
-                Answer all 10 questions
-              </h2>
-            </div>
-            <div
-              className="flex flex-col items-center justify-center rounded-xl px-5 py-3"
-              style={{ background: '#121c30', border: '1px solid rgba(255,255,255,0.06)', minWidth: 80 }}
-            >
-              <span
-                className="font-bold text-2xl leading-none"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: answeredCount === 10 ? '#3575C6' : '#F4F4F6', transition: 'color 0.3s' }}
-              >
-                {answeredCount}<span style={{ color: 'var(--text-primary)', fontSize: 16 }}>/10</span>
-              </span>
-              <span style={{ fontSize: 10, color: 'var(--text-primary)', letterSpacing: '0.1em', marginTop: 2 }}>ANSWERED</span>
-            </div>
-          </motion.div>
-
-          {/* Progress bar */}
-          <div className="mb-8 md:mb-10 rounded-full overflow-hidden" style={{ height: 3, background: 'var(--elevated)' }}>
-            <motion.div
-              className="h-full rounded-full"
-              style={{ background: 'linear-gradient(90deg, #3575C6, #6AAEE8)' }}
-              initial={{ width: '0%' }}
-              animate={{ width: `${(answeredCount / 10) * 100}%` }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            />
-          </div>
-
-          <div className="flex flex-col gap-3 md:gap-4">
-            {QUESTIONS.map((q, i) => (
-              <QuestionCard key={q.id} question={q} index={i} answer={answers[q.id - 1]} onAnswer={handleAnswer} />
-            ))}
-          </div>
-
-          <AnimatePresence>
-            {allAnswered && !showResult && (
+      {/* Main */}
+      <main style={{ flex: 1, display: 'flex', justifyContent: 'center', padding: '52px 24px 40px' }}>
+        <div style={{ width: '100%', maxWidth: 580 }}>
+          <AnimatePresence mode="wait" custom={dir}>
+            {!showResult ? (
               <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-10 flex justify-center"
+                key={`q-${currentQ}`}
+                custom={dir}
+                initial={{ opacity: 0, x: dir * 48 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: dir * -48 }}
+                transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               >
-                <button onClick={handleCalculate} className="btn-teal">
-                  Calculate My Metabolic Score
-                  <span className="btn-circle">
-                    <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--blue)', marginBottom: 20, fontFamily: 'var(--font-space-grotesk)' }}>
+                  Question {currentQ + 1} of {total}
+                </p>
+
+                <h1 style={{
+                  fontSize: 'clamp(24px, 4.5vw, 36px)', fontWeight: 700, color: '#0f172a',
+                  lineHeight: 1.22, marginBottom: 32, fontFamily: 'var(--font-space-grotesk)',
+                  letterSpacing: '-0.02em',
+                }}>
+                  {QUESTIONS[currentQ].text}
+                </h1>
+
+                {/* Doctor */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 36 }}>
+                  <div style={{ position: 'relative', flexShrink: 0 }}>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: '50%',
+                      background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      border: '2px solid #e2e8f0',
+                    }}>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-space-grotesk)' }}>CC</span>
+                    </div>
+                    <span style={{
+                      position: 'absolute', bottom: 1, right: 1, width: 9, height: 9,
+                      borderRadius: '50%', backgroundColor: '#22c55e', border: '1.5px solid #fff',
+                    }} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
+                      Dr Cameron Chen
+                    </p>
+                    <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 1 }}>Medical Director</p>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {(['yes', 'no'] as const).map(val => (
+                    <AnswerCard key={val} label={val === 'yes' ? 'Yes' : 'No'} onClick={() => handleAnswer(val)} />
+                  ))}
+                </div>
+
+                {currentQ > 0 && (
+                  <button onClick={handleBack} style={{
+                    marginTop: 28, fontSize: 13, color: '#94a3b8', background: 'none',
+                    border: 'none', cursor: 'pointer', padding: 0,
+                    fontFamily: 'var(--font-space-grotesk)', display: 'flex', alignItems: 'center', gap: 4,
+                  }}>
+                    ← Back
+                  </button>
+                )}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="result"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 14px',
+                  borderRadius: 99, backgroundColor: tier!.bg, border: `1px solid ${tier!.border}`, marginBottom: 24,
+                }}>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', backgroundColor: tier!.color, display: 'block', flexShrink: 0 }} />
+                  <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: tier!.color, fontFamily: 'var(--font-space-grotesk)' }}>
+                    {tier!.label}
                   </span>
+                </div>
+
+                <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--blue)', marginBottom: 14, fontFamily: 'var(--font-space-grotesk)' }}>
+                  Metabolic Screening — {result!.yesCount}/{total} symptoms reported
+                </p>
+
+                <h2 style={{
+                  fontSize: 'clamp(22px, 4vw, 32px)', fontWeight: 700, color: '#0f172a',
+                  lineHeight: 1.22, marginBottom: 18, fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em',
+                }}>
+                  {tier!.heading}
+                </h2>
+
+                <p style={{ fontSize: 15, color: '#475569', lineHeight: 1.72, marginBottom: 36 }}>
+                  {tier!.body}
+                </p>
+
+                <a href={tier!.href} style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  width: '100%', padding: '18px 24px', borderRadius: 12,
+                  background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
+                  color: '#ffffff', fontSize: 15, fontWeight: 600, textDecoration: 'none',
+                  fontFamily: 'var(--font-space-grotesk)', boxShadow: '0 8px 32px rgba(72,144,247,0.28)',
+                  marginBottom: 12, letterSpacing: '-0.01em',
+                }}>
+                  {tier!.cta}
+                  <svg viewBox="0 0 16 16" fill="none" width={14} height={14} aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+
+                <button onClick={handleRetake} style={{
+                  width: '100%', padding: '16px 24px', borderRadius: 12,
+                  border: '1.5px solid #e2e8f0', background: '#ffffff', color: '#64748b',
+                  fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)',
+                }}>
+                  Retake questionnaire
                 </button>
+
+                <p style={{ marginTop: 28, fontSize: 11, color: '#94a3b8', lineHeight: 1.65, textAlign: 'center' as const }}>
+                  This questionnaire is a screening tool only and does not constitute medical advice. Clinical decisions are made by AHPRA-registered medical practitioners.
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-      </section>
+      </main>
 
-      {/* RESULT */}
-      <AnimatePresence>
-        {showResult && (
-          <section
-            ref={resultRef}
-            className="relative section-pad overflow-hidden scroll-mt-20"
-            style={{ backgroundColor: 'var(--bg)' }}
-          >
-            <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
-            <div
-              aria-hidden="true"
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-              style={{ width: 600, height: 600, background: `radial-gradient(ellipse at center, ${tier.glowColor} 0%, transparent 65%)` }}
-            />
-            <div className="glow-rule mb-0" />
-
-            <div className="container-tight pt-10 md:pt-14">
-              <motion.div
-                initial={{ opacity: 0, y: 32 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-2xl mx-auto"
-              >
-                <div className="text-center mb-10">
-                  <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: '#3575C6', fontFamily: 'var(--font-space-grotesk)' }}>
-                    Your Results
-                  </p>
-                  <h2 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}>
-                    Metabolic Score
-                  </h2>
-                </div>
-
-                <div
-                  className="rounded-2xl overflow-hidden"
-                  style={{
-                    background: 'var(--bg)',
-                    border: `1px solid ${tier.color}33`,
-                    boxShadow: `0 0 60px ${tier.glowColor}, 0 0 0 1px ${tier.color}22`,
-                  }}
-                >
-                  <div className="h-1 w-full" style={{ background: tier.color }} />
-
-                  <div className="p-7 md:p-10">
-                    <div className="flex flex-col sm:flex-row items-center gap-8 mb-8">
-                      <DonutChart percentage={percentage} color={tier.color} yesCount={result.yesCount} />
-
-                      <div className="flex-1 text-center sm:text-left">
-                        <motion.span
-                          initial={{ opacity: 0, scale: 0.85 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: 0.4, duration: 0.4 }}
-                          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold mb-4"
-                          style={{
-                            fontFamily: 'var(--font-space-grotesk)',
-                            letterSpacing: '0.12em',
-                            background: `${tier.color}18`,
-                            border: `1px solid ${tier.color}55`,
-                            color: tier.color,
-                          }}
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full" style={{ background: tier.color, boxShadow: `0 0 6px ${tier.color}` }} />
-                          {tier.label}
-                        </motion.span>
-
-                        <h3 className="text-lg md:text-xl font-bold mb-3 leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}>
-                          {tier.heading}
-                        </h3>
-
-                        <div className="flex items-center gap-2 justify-center sm:justify-start">
-                          <span
-                            className="w-2 h-2 rounded-full flex-shrink-0"
-                            style={{ background: tier.color, boxShadow: `0 0 6px ${tier.color}` }}
-                          />
-                          <span
-                            className="text-xs font-semibold"
-                            style={{ fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.08em', color: tier.color }}
-                          >
-                            METABOLIC SCORE — {SCORE_LABEL[result.tier]}
-                          </span>
-                          <span style={{ color: 'var(--text-primary)', fontSize: 11 }}>
-                            · {result.yesCount} of 10 symptoms present
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mb-6" style={{ height: 1, background: 'var(--elevated)' }} />
-
-                    <p className="text-sm md:text-base leading-relaxed mb-8" style={{ color: '#B0B8C5' }}>
-                      {tier.body}
-                    </p>
-
-                    <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                      <a href={tier.primaryCTA.href} className="btn-teal flex-1 justify-center">
-                        {tier.primaryCTA.label}
-                        <span className="btn-circle">
-                          <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                      </a>
-                      <a href={tier.secondaryCTA.href} className="btn-ghost flex-1 justify-center">
-                        {tier.secondaryCTA.label}
-                        <span className="btn-circle">
-                          <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                      </a>
-                    </div>
-
-                    <div
-                      className="rounded-lg p-4 text-xs leading-relaxed"
-                      style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.08)', color: 'var(--text-primary)' }}
-                    >
-                      <span style={{ color: '#B0B8C5', fontWeight: 600 }}>Disclaimer: </span>
-                      This tool is a screening aid only and does not constitute medical advice. Clinical assessment by an AHPRA-registered practitioner is required for diagnosis and treatment.
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 text-center">
-                  <button
-                    onClick={handleRetake}
-                    className="text-sm font-semibold transition-colors duration-200"
-                    style={{ color: 'var(--text-primary)', letterSpacing: '0.04em' }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#B0B8C5')}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = 'var(--text-primary)')}
-                  >
-                    ↺ Retake Quiz
-                  </button>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-        )}
-      </AnimatePresence>
-
-      {/* BOTTOM CTA */}
-      <BottomCTA />
-
-      <Footer />
+      <footer style={{ padding: '18px 24px', textAlign: 'center' as const, borderTop: '1px solid #f1f5f9' }}>
+        <p style={{ fontSize: 11, color: '#94a3b8', fontFamily: 'var(--font-space-grotesk)' }}>
+          All consultations conducted by AHPRA-registered medical practitioners. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
+        </p>
+      </footer>
     </div>
-  )
-}
-
-function BottomCTA() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(53,117,198,0.07) 0%, transparent 65%)' }} />
-      <div className="glow-rule mb-0" />
-      <div className="container-tight pt-10 md:pt-14">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 28 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-2xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6' }}>
-            Ready for Real <span className="text-teal-gradient">Answers?</span>
-          </h2>
-          <p className="text-base md:text-lg leading-relaxed mb-8" style={{ color: '#B0B8C5' }}>
-            Advanced metabolic panel. Personalised clinical protocol. 100% online.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a href="/intake/general-consult" className="btn-teal">
-              Book Metabolic Consult
-              <span className="btn-circle">
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </a>
-            <a href="/intake/pre-screen" className="btn-ghost">
-              Order Blood Panel
-              <span className="btn-circle">
-                <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
-            </a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
   )
 }

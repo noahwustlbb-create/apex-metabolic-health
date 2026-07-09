@@ -52,14 +52,11 @@ export default function OurApproachPage() {
             style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
 
           <div ref={heroRef} className="container-tight relative z-10">
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }} className="label mb-5">
-              The Apex Method
-            </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 28 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.75, delay: 0.08, ease }}
               style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: 'var(--text-primary)', maxWidth: '780px', marginBottom: '1.25rem' }}>
               We work by system.
               <br />
-              <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ color: 'var(--blue)' }}>
                 Not by symptom.
               </span>
             </motion.h1>
@@ -70,8 +67,8 @@ export default function OurApproachPage() {
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
               className="flex flex-wrap items-center gap-4 mb-8">
-              <Link href="/intake/pre-screen" className="btn-teal">
-                Start your clinical assessment
+              <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
+                Take the health assessment
                 <span className="btn-circle" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
@@ -80,7 +77,7 @@ export default function OurApproachPage() {
             <motion.div initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }}
               className="flex flex-wrap gap-x-6 gap-y-2">
               {['AHPRA-registered doctors', 'No GP referral required', 'Data-led, not assumption-led'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--blue)' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -94,7 +91,6 @@ export default function OurApproachPage() {
           <div className="glow-rule" aria-hidden="true" />
           <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden="true" />
           <div className="container-tight relative z-10">
-            <FadeIn><p className="label mb-6">The Problem</p></FadeIn>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <FadeIn>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
@@ -125,7 +121,7 @@ export default function OurApproachPage() {
                         border: `1px solid ${row.negative ? 'var(--elevated)' : 'rgba(72,144,247,0.15)'}`,
                       }}>
                       <span className="text-[10px] font-semibold tracking-[0.15em] uppercase flex-shrink-0"
-                        style={{ color: row.negative ? '#0a0e1a' : '#4890f7' }}>
+                        style={{ color: row.negative ? '#0a0e1a' : 'var(--blue)' }}>
                         {row.label}
                       </span>
                       <span className="text-sm font-medium text-right" style={{ color: row.negative ? '#0a0e1a' : '#F5F5F5' }}>
@@ -150,7 +146,6 @@ export default function OurApproachPage() {
               {/* Left — heading + numbered rows */}
               <div>
                 <FadeIn>
-                  <p className="label mb-5">How We Consult</p>
                   <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
                     style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}>
                     Time, context,
@@ -170,7 +165,7 @@ export default function OurApproachPage() {
                       <div key={item.heading} className="flex gap-4 p-5 rounded-xl"
                         style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.12)' }}>
                         <div className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5 text-[11px] font-bold"
-                          style={{ background: 'rgba(72,144,247,0.08)', color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>
+                          style={{ background: 'rgba(72,144,247,0.08)', color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>
                           {String(i + 1).padStart(2, '0')}
                         </div>
                         <div>
@@ -229,10 +224,10 @@ export default function OurApproachPage() {
                     <div key={item.title} className="flex flex-col gap-3 p-5 rounded-xl"
                       style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.14)' }}>
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.15)', color: '#4890f7' }}>
+                        style={{ background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--blue)' }}>
                         {item.icon}
                       </div>
-                      <h3 className="text-xs font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.title}</h3>
+                      <h3 className="text-xs font-bold leading-snug" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}>{item.title}</h3>
                       <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.desc}</p>
                     </div>
                   ))}
@@ -250,7 +245,6 @@ export default function OurApproachPage() {
           <div className="container-tight relative z-10">
             <div className="max-w-3xl">
               <FadeIn>
-                <p className="label mb-5">The Full Picture</p>
                 <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5"
                   style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}>
                   We assess how key systems interact.
@@ -274,7 +268,7 @@ export default function OurApproachPage() {
                   <FadeIn key={system} delay={i * 0.04}>
                     <div className="flex items-center gap-2.5 px-4 py-3 rounded-lg"
                       style={{ background: 'var(--bg)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: '#4890f7' }} aria-hidden="true" />
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--blue)' }} aria-hidden="true" />
                       <span className="text-xs font-medium" style={{ color: 'var(--text-primary)' }}>{system}</span>
                     </div>
                   </FadeIn>
@@ -292,13 +286,13 @@ export default function OurApproachPage() {
             <FadeIn>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(72,144,247,0.14)' }}>
                 {[
-                  { label: 'Reviewed every 4 months', desc: 'Structured clinical review cycles — not ad hoc when something feels wrong.' },
-                  { label: 'Protocol adjusts as you respond', desc: 'A protocol written today should look different in 4 months. Yours will.' },
+                  { label: 'Reviewed every 3 months', desc: 'Structured clinical review cycles — not ad hoc when something feels wrong.' },
+                  { label: 'Protocol adjusts as you respond', desc: 'A protocol written today should look different in 3 months. Yours will.' },
                   { label: 'Blood work included in care', desc: 'Follow-up testing is built into the cycle. No gaps. No blind adjustments.' },
                 ].map((item, i) => (
                   <div key={item.label} className="px-7 py-6"
                     style={{ background: i === 1 ? '#111111' : '#111111', borderRight: i < 2 ? '1px solid #1E1E1E' : 'none' }}>
-                    <p className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>{item.label}</p>
+                    <p className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}>{item.label}</p>
                     <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.desc}</p>
                   </div>
                 ))}
@@ -320,7 +314,7 @@ export default function OurApproachPage() {
               ].map((item, i) => (
                 <FadeIn key={item.headline} delay={i * 0.1}>
                   <div className="p-8 md:p-10 h-full flex flex-col" style={{ background: 'var(--surface)' }}>
-                    <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}>
+                    <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}>
                       {item.headline}
                     </h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.body}</p>
@@ -332,7 +326,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 7. CTA ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Start assessment">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Take the health assessment">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
@@ -341,21 +335,21 @@ export default function OurApproachPage() {
               <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '1rem' }}>
                 The standard you expected.
                 <br />
-                <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span style={{ color: 'var(--blue)' }}>
                   Finally available.
                 </span>
               </h2>
               <div className="flex flex-col items-center gap-3 mt-6">
-                <Link href="/intake/pre-screen" className="btn-teal">
-                  Start your clinical assessment
+                <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
+                  Take the health assessment
                   <span className="btn-circle" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>
                 </Link>
-                <p className="text-xs" style={{ color: '#4890f7' }}>Takes 60 seconds. No commitment.</p>
+                <p className="text-xs" style={{ color: 'var(--blue)' }}>Takes 60 seconds. No commitment.</p>
               </div>
-              <p className="text-sm mt-10" style={{ color: '#4890f7' }}>
-                Next: <Link href="/services" style={{ color: '#4890f7' }} className="hover:underline">explore our clinical programs →</Link>
+              <p className="text-sm mt-10" style={{ color: 'var(--blue)' }}>
+                Next: <Link href="/services" style={{ color: 'var(--blue)' }} className="hover:underline">explore our clinical programs →</Link>
               </p>
             </FadeIn>
           </div>

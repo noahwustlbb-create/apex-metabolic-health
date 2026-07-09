@@ -2,17 +2,18 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useSignupGate } from '@/context/SignupGateContext'
 
 const STEPS = [
   {
     number: '01',
-    title: 'Choose your program',
-    description: 'Six clinical programs — each targeting a distinct biological system. The pre-screen assessment will confirm the right match for your goals.',
+    title: 'Choose your treatment',
+    description: 'Six clinical treatments — each targeting a distinct biological system. Your doctor will confirm the right match for your goals during your consultation.',
   },
   {
     number: '02',
     title: 'Complete your intake & blood draw',
-    description: 'Fill in a short pre-screen form online. Your doctor issues a pathology referral — collect at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
+    description: 'Complete your intake form online. Your doctor issues a pathology referral — collect at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
   },
   {
     number: '03',
@@ -104,6 +105,7 @@ function StepBlock({ step, index, isInView }: {
 export default function ClinicalJourney() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const { open } = useSignupGate()
 
   return (
     <section
@@ -112,8 +114,8 @@ export default function ClinicalJourney() {
       style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical journey"
     >
-      <div className="warm-rule" aria-hidden="true" />
-      <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden="true" />
+      
+      
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[500px] h-[400px] pointer-events-none"
@@ -136,11 +138,11 @@ export default function ClinicalJourney() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="display-serif"
+              className="display-heading"
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
               Simple from{' '}
-              <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
+              <span style={{ color: 'var(--blue)' }}>
                 start to finish.
               </span>
             </motion.h2>
@@ -168,22 +170,23 @@ export default function ClinicalJourney() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="mt-14 flex flex-col sm:flex-row items-start sm:items-center gap-4"
         >
-          <a href="/intake/pre-screen" className="btn-primary">
-            Start your assessment
+          <button type="button" onClick={() => open()} className="btn-primary" style={{ cursor: 'pointer' }}>
+            Book a Consultation
             <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </a>
-          <a
-            href="/intake/discovery"
+          </button>
+          <button
+            type="button"
+            onClick={() => open()}
             className="text-sm font-medium flex items-center gap-2 transition-colors duration-150"
-            style={{ color: 'var(--text-primary)' }}
+            style={{ color: 'var(--text-primary)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
             onMouseEnter={e => (e.currentTarget.style.color = '#7a8a9a')}
             onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-primary)')}
           >
             Not sure where to start?{' '}
-            <span style={{ color: '#4890f7' }}>Book a free discovery call →</span>
-          </a>
+            <span style={{ color: 'var(--blue)' }}>Book a free discovery call →</span>
+          </button>
         </motion.div>
 
       </div>

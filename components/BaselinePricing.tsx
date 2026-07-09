@@ -5,10 +5,10 @@ import { motion, useInView } from 'framer-motion'
 
 const CARDS = [
   {
-    tag: 'BLOOD PANEL',
-    tagColor: '#4890f7',
-    title: 'Baseline Blood Panel',
-    price: '$99',
+    tag: 'BLOOD REFERRAL',
+    tagColor: 'var(--blue)',
+    title: 'Initial Blood Referral',
+    price: '$199',
     priceLabel: 'one-off',
     priceColor: '#F5F5F5',
     description: 'Doctor-ordered pathology referral. Collect at any accredited centre near you — no GP required.',
@@ -19,17 +19,17 @@ const CARDS = [
       'Access to the Apex app & dashboard',
     ],
     note: 'To have results reviewed and a protocol built, book a consultation separately.',
-    cta: 'Get my baseline — $99',
+    cta: 'Order blood referral — $199',
     href: '/intake/bloods-hormone',
     featured: false,
   },
   {
     tag: 'ONGOING',
-    tagColor: '#4890f7',
+    tagColor: 'var(--blue)',
     title: 'Apex Membership',
     price: '$99',
     priceLabel: '/month',
-    priceColor: '#4890f7',
+    priceColor: 'var(--blue)',
     description: 'Ongoing clinical oversight with regular bloods, protocol refinement, and Biological Age tracked over time.',
     includes: [
       'Blood draws every 7–8 weeks',
@@ -46,7 +46,7 @@ const CARDS = [
   },
   {
     tag: 'CONSULTATION',
-    tagColor: '#4890f7',
+    tagColor: 'var(--blue)',
     title: 'Hormone Consultation',
     price: null,
     priceLabel: null,
@@ -64,7 +64,7 @@ const CARDS = [
   },
   {
     tag: 'CONSULTATION',
-    tagColor: '#4890f7',
+    tagColor: 'var(--blue)',
     title: 'General Health Consult',
     price: null,
     priceLabel: null,
@@ -150,7 +150,7 @@ export default function BaselinePricing() {
             style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: 1.08 }}
           >
             Start with your baseline —{' '}
-            <span className="text-teal-gradient">$99</span>
+            <span className="text-accent">$199</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -190,7 +190,7 @@ export default function BaselinePricing() {
                     background: 'rgba(72,144,247,0.12)',
                     borderLeft: '1px solid rgba(72,144,247,0.25)',
                     borderBottom: '1px solid rgba(72,144,247,0.25)',
-                    color: '#4890f7',
+                    color: 'var(--blue)',
                     borderBottomLeftRadius: 6,
                   }}
                 >
@@ -222,8 +222,8 @@ export default function BaselinePricing() {
                 {card.includes.map((item) => (
                   <li key={item} className="flex items-start gap-2.5">
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true">
-                      <circle cx="8" cy="8" r="7" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.2" fill={card.featured ? 'rgba(72,144,247,0.07)' : 'rgba(72,144,247,0.06)'} />
-                      <path d="M5 8l2 2 4-4" stroke={card.featured ? '#4890f7' : '#4890f7'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="8" cy="8" r="7" stroke={card.featured ? 'var(--blue)' : 'var(--blue)'} strokeWidth="1.2" fill={card.featured ? 'rgba(72,144,247,0.07)' : 'rgba(72,144,247,0.06)'} />
+                      <path d="M5 8l2 2 4-4" stroke={card.featured ? 'var(--blue)' : 'var(--blue)'} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item}</span>
                   </li>
@@ -241,8 +241,8 @@ export default function BaselinePricing() {
                 href={card.href}
                 className="w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-sm text-sm font-semibold tracking-wide transition-all duration-200"
                 style={card.featured
-                  ? { background: '#4890f7', color: '#0A0A0A', border: '1px solid #4890f7' }
-                  : { background: 'rgba(72,144,247,0.07)', color: '#4890f7', border: '1px solid rgba(72,144,247,0.2)' }
+                  ? { background: 'var(--blue)', color: '#0A0A0A', border: '1px solid #4890f7' }
+                  : { background: 'rgba(72,144,247,0.07)', color: 'var(--blue)', border: '1px solid rgba(72,144,247,0.2)' }
                 }
               >
                 {card.cta}

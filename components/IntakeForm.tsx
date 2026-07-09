@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ENQUIRY_LABELS, type EnquiryType } from '@/lib/intake-routing'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 const CONTRAINDICATIONS = [
   { id: 'prostate_cancer', label: 'Personal history of prostate or breast cancer' },
@@ -35,13 +35,14 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
   type?: string; placeholder?: string; required?: boolean
 }) {
   const [focused, setFocused] = useState(false)
+  const id = useId()
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
+      <label htmlFor={id} className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
         {label}{required && <span style={{ color: ACCENT }}> *</span>}
       </label>
       <input
-        type={type} value={value} onChange={e => onChange(e.target.value)}
+        id={id} type={type} value={value} onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
@@ -151,13 +152,13 @@ export default function IntakeForm() {
         className="max-w-lg"
       >
         <div className="w-10 h-10 rounded-full flex items-center justify-center mb-6"
-          style={{ background: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.25)' }}>
+          style={{ background: 'var(--color-danger-muted)', border: '1px solid var(--color-danger-border)' }}>
           <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
-            <path d="M10 6v4M10 14h.01" stroke="#dc3545" strokeWidth="1.8" strokeLinecap="round" />
-            <circle cx="10" cy="10" r="8" stroke="#dc3545" strokeWidth="1.5" />
+            <path d="M10 6v4M10 14h.01" stroke="var(--color-danger-fg)" strokeWidth="1.8" strokeLinecap="round" />
+            <circle cx="10" cy="10" r="8" stroke="var(--color-danger-fg)" strokeWidth="1.5" />
           </svg>
         </div>
-        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-3" style={{ color: '#dc3545' }}>
+        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-3" style={{ color: 'var(--color-danger-fg)' }}>
           Unable to proceed online
         </p>
         <h2 className="text-2xl font-bold tracking-tight mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
@@ -203,23 +204,23 @@ export default function IntakeForm() {
         {/* State + Sex */}
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
+            <label htmlFor="if-state" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
               State <span style={{ color: ACCENT }}>*</span>
             </label>
             <select
-              value={data.state} onChange={e => set('state', e.target.value)}
+              id="if-state" value={data.state} onChange={e => set('state', e.target.value)}
               className="w-full px-4 py-3 rounded-sm text-sm outline-none appearance-none transition-all duration-150"
-              style={{ background: 'rgba(72,144,247,0.04)', border: `1px solid rgba(72,144,247,0.18)`, color: data.state ? 'var(--text-primary)' : 'rgba(255,255,255,0.3)' }}
+              style={{ background: 'rgba(72,144,247,0.04)', border: `1px solid rgba(72,144,247,0.18)`, color: 'var(--text-primary)' }}
             >
               <option value="" disabled>Select</option>
               {AU_STATES.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
           </div>
           <div>
-            <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
+            <span id="if-sex" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
               Biological sex <span style={{ color: ACCENT }}>*</span>
-            </label>
-            <div className="flex gap-2">
+            </span>
+            <div role="group" aria-labelledby="if-sex" className="flex gap-2">
               {['Male', 'Female'].map(s => (
                 <button key={s} type="button" onClick={() => set('sex', s)}
                   className="flex-1 py-3 rounded-sm text-xs font-semibold transition-all duration-150"
@@ -235,10 +236,10 @@ export default function IntakeForm() {
 
         {/* Enquiry */}
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>
+          <span id="if-enquiry" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>
             Reason for enquiry <span style={{ color: ACCENT }}>*</span>
-          </label>
-          <div className="flex flex-wrap gap-2">
+          </span>
+          <div role="group" aria-labelledby="if-enquiry" className="flex flex-wrap gap-2">
             {(Object.entries(ENQUIRY_LABELS) as [EnquiryType, string][]).map(([key, label]) => (
               <button key={key} type="button" onClick={() => set('enquiry', key)}
                 className="px-3.5 py-2 rounded-sm text-xs font-medium transition-all duration-150"
@@ -253,10 +254,10 @@ export default function IntakeForm() {
 
         {/* Existing bloods */}
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>
+          <span id="if-bloods" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>
             Do you have blood results from the last 3 months? <span style={{ color: ACCENT }}>*</span>
-          </label>
-          <div className="flex gap-3">
+          </span>
+          <div role="group" aria-labelledby="if-bloods" className="flex gap-3">
             {[{ label: 'Yes — I have results', val: true }, { label: 'No — I need testing', val: false }].map(opt => (
               <button key={String(opt.val)} type="button" onClick={() => set('hasBloods', opt.val)}
                 className="flex-1 py-3 px-4 rounded-sm text-xs font-semibold text-left transition-all duration-150"
@@ -280,12 +281,12 @@ export default function IntakeForm() {
 
         {/* Medications */}
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
+          <label htmlFor="if-medications" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
             Current medications or supplements
             <span className="ml-1 normal-case font-normal tracking-normal opacity-50">(optional)</span>
           </label>
           <textarea
-            value={data.medications} onChange={e => set('medications', e.target.value)}
+            id="if-medications" value={data.medications} onChange={e => set('medications', e.target.value)}
             placeholder="List any current medications, vitamins, or supplements. Write 'none' if not applicable."
             rows={3}
             className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
@@ -295,9 +296,9 @@ export default function IntakeForm() {
 
         {/* Contraindications */}
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1" style={{ color: 'var(--text-primary)' }}>
+          <span className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1" style={{ color: 'var(--text-primary)' }}>
             Safety check — select any that apply
-          </label>
+          </span>
           <p className="text-[11px] mb-3" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
             If any of the following apply, we may be unable to proceed with online treatment.
           </p>
@@ -330,7 +331,7 @@ export default function IntakeForm() {
             <motion.p
               initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
               className="text-sm px-4 py-3 rounded-sm"
-              style={{ color: '#dc3545', background: 'rgba(220,53,69,0.06)', border: '1px solid rgba(220,53,69,0.2)' }}
+              style={{ color: 'var(--color-danger-fg)', background: 'var(--color-danger-muted)', border: '1px solid var(--color-danger-border)' }}
             >
               {error}
             </motion.p>

@@ -20,39 +20,39 @@ const PROGRAMS = [
   'Not sure yet',
 ]
 
-function Input({ value, onChange, placeholder, type = 'text', inputMode }: {
-  value: string; onChange: (v: string) => void; placeholder?: string
+function Input({ id, value, onChange, placeholder, type = 'text', inputMode }: {
+  id?: string; value: string; onChange: (v: string) => void; placeholder?: string
   type?: string; inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']
 }) {
   const [focused, setFocused] = useState(false)
   return (
     <input
-      type={type} value={value} onChange={(e) => onChange(e.target.value)}
+      id={id} type={type} value={value} onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder} inputMode={inputMode}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
 
-function TextArea({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
+function TextArea({ id, value, onChange, placeholder }: { id?: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
   const [focused, setFocused] = useState(false)
   return (
     <textarea
-      value={value} onChange={(e) => onChange(e.target.value)}
+      id={id} value={value} onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder} rows={4}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? '#4890f7' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
 
-function Label({ children, required }: { children: React.ReactNode; required?: boolean }) {
+function Label({ children, required, htmlFor }: { children: React.ReactNode; required?: boolean; htmlFor?: string }) {
   return (
-    <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
-      {children}{required && <span style={{ color: '#4890f7' }}> *</span>}
+    <label htmlFor={htmlFor} className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>
+      {children}{required && <span style={{ color: 'var(--blue)' }}> *</span>}
     </label>
   )
 }
@@ -110,7 +110,7 @@ export default function DiscoveryCallPage() {
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
                 style={{ backgroundColor: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.25)' }}>
-                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: '#4890f7' }}>
+                <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: 'var(--blue)' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
@@ -125,7 +125,7 @@ export default function DiscoveryCallPage() {
                 <BookingChoice type="discovery" delay={0.8} />
               </div>
               <div className="mt-6">
-                <Link href="/" className="btn-teal">Back to Home</Link>
+                <Link href="/" className="btn-pill">Back to Home</Link>
               </div>
             </motion.div>
           </div>
@@ -156,8 +156,8 @@ export default function DiscoveryCallPage() {
           {errors.length > 0 && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               className="px-5 py-4 rounded-sm mb-6"
-              style={{ backgroundColor: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.3)' }}>
-              <p className="text-sm font-semibold mb-2" style={{ color: '#dc3545' }}>Please fix the following:</p>
+              style={{ backgroundColor: 'var(--color-danger-muted)', border: '1px solid var(--color-danger-border)' }}>
+              <p className="text-sm font-semibold mb-2" style={{ color: 'var(--color-danger-fg)' }}>Please fix the following:</p>
               <ul className="space-y-1">
                 {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: 'var(--text-primary)' }}>— {e}</li>)}
               </ul>
@@ -170,38 +170,38 @@ export default function DiscoveryCallPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <Label required>First Name</Label>
-                <Input value={form.firstName} onChange={(v) => set('firstName', v)} placeholder="John" />
+                <Label required htmlFor="dq-first-name">First Name</Label>
+                <Input id="dq-first-name" value={form.firstName} onChange={(v) => set('firstName', v)} placeholder="John" />
               </div>
               <div>
-                <Label required>Last Name</Label>
-                <Input value={form.lastName} onChange={(v) => set('lastName', v)} placeholder="Smith" />
+                <Label required htmlFor="dq-last-name">Last Name</Label>
+                <Input id="dq-last-name" value={form.lastName} onChange={(v) => set('lastName', v)} placeholder="Smith" />
               </div>
             </div>
 
             <div>
-              <Label required>Email Address</Label>
-              <Input type="email" value={form.email} onChange={(v) => set('email', v)} placeholder="john@example.com" />
+              <Label required htmlFor="dq-email">Email Address</Label>
+              <Input id="dq-email" type="email" value={form.email} onChange={(v) => set('email', v)} placeholder="john@example.com" />
             </div>
 
             <div>
-              <Label required>Phone Number</Label>
-              <Input type="tel" value={form.phone} onChange={(v) => set('phone', v)} placeholder="04XX XXX XXX" inputMode="tel" />
+              <Label required htmlFor="dq-phone">Phone Number</Label>
+              <Input id="dq-phone" type="tel" value={form.phone} onChange={(v) => set('phone', v)} placeholder="04XX XXX XXX" inputMode="tel" />
             </div>
 
-            <div>
-              <Label required>Program of Interest</Label>
+            <div role="group" aria-labelledby="dq-program-label">
+              <span id="dq-program-label" className="block text-sm font-medium mb-1.5" style={{ color: 'var(--text-primary)' }}>Program of Interest<span style={{ color: 'var(--blue)' }}> *</span></span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
                 {PROGRAMS.map((p) => (
                   <button key={p} type="button" onClick={() => set('program', p)}
                     className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                     style={{
                       backgroundColor: form.program === p ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
-                      border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.2)'}`,
-                      color: form.program === p ? '#4890f7' : '#0a0e1a',
+                      border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(72,144,247,0.2)'}`,
+                      color: form.program === p ? 'var(--blue)' : '#0a0e1a',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? '#4890f7' : 'rgba(72,144,247,0.3)'}`, backgroundColor: form.program === p ? '#4890f7' : 'transparent' }}>
+                      style={{ border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(72,144,247,0.3)'}`, backgroundColor: form.program === p ? 'var(--blue)' : 'transparent' }}>
                       {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--elevated-high)' }} />}
                     </span>
                     {p}
@@ -211,8 +211,8 @@ export default function DiscoveryCallPage() {
             </div>
 
             <div>
-              <Label>Anything else you&apos;d like us to know? (optional)</Label>
-              <TextArea value={form.message} onChange={(v) => set('message', v)} placeholder="Brief description of your goals or concerns..." />
+              <Label htmlFor="dq-message">Anything else you&apos;d like us to know? (optional)</Label>
+              <TextArea id="dq-message" value={form.message} onChange={(v) => set('message', v)} placeholder="Brief description of your goals or concerns..." />
             </div>
 
             <button type="button" onClick={submit} disabled={submitting}

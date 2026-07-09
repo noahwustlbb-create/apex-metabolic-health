@@ -5,9 +5,10 @@ import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { useSignupGate } from '@/context/SignupGateContext'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 const ACCENT_BG = 'rgba(72,144,247,0.06)'
 const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
 
@@ -198,7 +199,7 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
           {area.title}
         </h3>
 
-        <p className="text-xs leading-relaxed mb-2" style={{ color: '#4890f7' }}>
+        <p className="text-xs leading-relaxed mb-2" style={{ color: 'var(--blue)' }}>
           {area.recognition}
         </p>
         <p className="text-xs leading-relaxed flex-1 mb-4" style={{ color: 'var(--text-primary)' }}>
@@ -208,15 +209,15 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {area.tags.map((tag) => (
             <span key={tag} className="text-[9px] font-semibold tracking-[0.1em] uppercase px-2 py-1 rounded-sm"
-              style={{ color: '#4890f7', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              style={{ color: 'var(--blue)', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
               {tag}
             </span>
           ))}
         </div>
 
         <div className="flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase transition-colors duration-200"
-          style={{ color: '#4890f7' }}>
-          <span className="group-hover:text-[#4890f7] transition-colors duration-200">Start assessment</span>
+          style={{ color: 'var(--blue)' }}>
+          <span className="group-hover:text-blue transition-colors duration-200">Take the health assessment</span>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -255,6 +256,7 @@ export default function WhatWeTreatPage() {
   const symptomsInView = useInView(symptomsRef, { once: true, margin: '-80px' })
   const clinicalRef = useRef(null)
   const clinicalInView = useInView(clinicalRef, { once: true, margin: '-80px' })
+  const { open } = useSignupGate()
 
   return (
     <>
@@ -272,14 +274,11 @@ export default function WhatWeTreatPage() {
             style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }} />
 
           <div ref={heroRef} className="container-tight relative z-10">
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }} className="label mb-5">
-              Focus Areas
-            </motion.p>
             <motion.h1 initial={{ opacity: 0, y: 28 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.75, delay: 0.08, ease }}
               style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(32px, 4.5vw, 64px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.02em', color: 'var(--text-primary)', maxWidth: '780px', marginBottom: '1.25rem' }}>
               Your symptoms are signals.
               <br />
-              <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ color: 'var(--blue)' }}>
                 We read them clinically.
               </span>
             </motion.h1>
@@ -290,17 +289,17 @@ export default function WhatWeTreatPage() {
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
               className="flex flex-wrap items-center gap-4 mb-8">
-              <Link href="/intake/pre-screen" className="btn-teal">
-                Start your clinical assessment
+              <button type="button" onClick={() => open()} className="btn-pill" style={{ cursor: 'pointer' }}>
+                Take the health assessment
                 <span className="btn-circle" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
-              </Link>
+              </button>
             </motion.div>
             <motion.div initial={{ opacity: 0 }} animate={heroInView ? { opacity: 1 } : {}} transition={{ duration: 0.6, delay: 0.5, ease }}
               className="flex flex-wrap gap-x-6 gap-y-2">
               {['AHPRA-registered doctors', 'No GP referral required', 'Australia-wide telehealth'].map(t => (
-                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: '#4890f7' }}>
+                <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--blue)' }}>
                   <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(200,169,110,0.5)' }} />
                   {t}
                 </span>
@@ -358,7 +357,7 @@ export default function WhatWeTreatPage() {
               <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 48px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: 'var(--text-primary)', marginBottom: '1rem' }}>
                 60 seconds will point you
                 <br />
-                <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span style={{ color: 'var(--blue)' }}>
                   in the right direction.
                 </span>
               </h2>
@@ -366,17 +365,17 @@ export default function WhatWeTreatPage() {
                 Our clinical pre-screen identifies the most relevant pathway for your situation — no commitment, no GP referral required.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Link href="/intake/pre-screen" className="btn-teal">
-                  Start your assessment
+                <button type="button" onClick={() => open()} className="btn-pill" style={{ cursor: 'pointer' }}>
+                  Take the health assessment
                   <span className="btn-circle" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>
-                </Link>
-                <Link href="/intake/general-consult" className="btn-ghost">
-                  General Appointment
-                </Link>
+                </button>
+                <button type="button" onClick={() => open()} className="btn-ghost" style={{ cursor: 'pointer' }}>
+                  Get Started
+                </button>
               </div>
-              <p className="text-xs mt-8" style={{ color: '#4890f7' }}>
+              <p className="text-xs mt-8" style={{ color: 'var(--blue)' }}>
                 All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate.
               </p>
             </div>

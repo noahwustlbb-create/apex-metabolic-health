@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import HormoneConsultForm from './HormoneConsultForm'
 
 export const metadata: Metadata = {
-  title: 'Hormone Consult Intake — Apex Metabolic Health',
-  description: 'Complete your hormone consultation intake form.',
+  title: 'New Patient | Hormone Consult — Apex Metabolic Health',
+  description: 'Request an appointment and complete your consent form for a Hormone Consultation.',
   robots: { index: false, follow: false },
 }
 

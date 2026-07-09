@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
@@ -9,17 +9,50 @@ const HIDDEN_PATHS = ['/intake', '/get-started']
 
 export default function FloatingCTA() {
   const [hovered, setHovered] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
 
   const isHidden = HIDDEN_PATHS.some((p) => pathname.startsWith(p))
 
-  if (isHidden) return null
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setMenuOpen(document.body.style.overflow === 'hidden')
+    })
+    observer.observe(document.body, { attributes: true, attributeFilter: ['style'] })
+    return () => observer.disconnect()
+  }, [])
+
+  if (isHidden || menuOpen) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6">
+    <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6 flex items-center gap-2">
+      <a
+        href="https://app.apexmetabolichealth.com.au/login"
+        style={{
+          fontSize: '12px',
+          fontWeight: 500,
+          color: '#6b7280',
+          textDecoration: 'none',
+          padding: '9px 14px',
+          borderRadius: '40px',
+          background: 'rgba(255,255,255,0.9)',
+          border: '1px solid rgba(0,0,0,0.09)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+          transition: 'color 0.18s',
+          whiteSpace: 'nowrap',
+          fontFamily: 'var(--font-inter)',
+        }}
+        onMouseEnter={e => { e.currentTarget.style.color = '#111827' }}
+        onMouseLeave={e => { e.currentTarget.style.color = '#6b7280' }}
+      >
+        Log in
+      </a>
+
       <Link
-        href="/intake/pre-screen"
-        aria-label="Get Started"
+        href="/start"
+        aria-label="Health Assessment"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{ display: 'block', position: 'relative' }}
@@ -48,13 +81,13 @@ export default function FloatingCTA() {
             padding: '12px 20px 12px 16px',
             borderRadius: '40px',
             background: hovered
-              ? 'linear-gradient(135deg, #2b7be0 0%, #1a5fb4 100%)'
-              : 'linear-gradient(135deg, #121c30 0%, #111111 100%)',
-            border: `1px solid ${hovered ? 'rgba(43,123,224,0.8)' : '#1A3F7A'}`,
+              ? 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)'
+              : '#ffffff',
+            border: `1.5px solid ${hovered ? 'rgba(72,144,247,0.6)' : 'rgba(0,0,0,0.12)'}`,
             boxShadow: hovered
-              ? '0 0 28px rgba(43,123,224,0.45), 0 8px 32px rgba(0,0,0,0.6)'
-              : '0 4px 24px rgba(0,0,0,0.5)',
-            transition: 'background 0.25s, border-color 0.25s, box-shadow 0.25s',
+              ? '0 8px 32px rgba(72,144,247,0.4), 0 2px 8px rgba(0,0,0,0.1)'
+              : '0 4px 20px rgba(0,0,0,0.12)',
+            transition: 'background 0.22s, border-color 0.22s, box-shadow 0.22s',
             cursor: 'pointer',
             whiteSpace: 'nowrap',
           }}
@@ -62,37 +95,24 @@ export default function FloatingCTA() {
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            style={{ width: '20px', height: '20px', flexShrink: 0 }}
+            style={{ width: '18px', height: '18px', flexShrink: 0 }}
             aria-hidden="true"
           >
-            <polygon
-              points="12,3 21,19 3,19"
-              stroke={hovered ? '#ffffff' : '#2b7be0'}
-              strokeWidth="1.5"
-              strokeLinejoin="round"
-              fill="none"
-              style={{ transition: 'stroke 0.25s' }}
-            />
-            <polygon
-              points="12,9 17,17 7,17"
-              stroke={hovered ? 'rgba(255,255,255,0.55)' : 'rgba(43,123,224,0.5)'}
-              strokeWidth="1"
-              strokeLinejoin="round"
-              fill="none"
-              style={{ transition: 'stroke 0.25s' }}
-            />
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke={hovered ? '#fff' : 'var(--blue)'} strokeWidth="1.6" strokeLinecap="round" style={{ transition: 'stroke 0.22s' }} />
+            <rect x="9" y="3" width="6" height="4" rx="1" stroke={hovered ? '#fff' : 'var(--blue)'} strokeWidth="1.6" style={{ transition: 'stroke 0.22s' }} />
+            <path d="M9 12h6M9 16h4" stroke={hovered ? 'rgba(255,255,255,0.7)' : 'rgba(72,144,247,0.6)'} strokeWidth="1.4" strokeLinecap="round" style={{ transition: 'stroke 0.22s' }} />
           </svg>
           <span
             style={{
-              fontSize: '11px',
-              fontWeight: 700,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              color: hovered ? '#ffffff' : '#F4F4F6',
-              transition: 'color 0.25s',
+              fontSize: '12px',
+              fontWeight: 600,
+              letterSpacing: '0.01em',
+              color: hovered ? '#ffffff' : '#111827',
+              transition: 'color 0.22s',
+              fontFamily: 'var(--font-inter)',
             }}
           >
-            Get Started
+            Health Assessment
           </span>
         </motion.div>
       </Link>

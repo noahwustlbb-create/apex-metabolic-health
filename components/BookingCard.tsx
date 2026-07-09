@@ -42,7 +42,7 @@ export default function BookingCard() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease }}
     >
-      <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>
+      <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-4" style={{ color: 'var(--blue)' }}>
         {enquiryLabel}
       </p>
 
@@ -51,7 +51,7 @@ export default function BookingCard() {
         <>
           <div className="rounded-2xl p-5 mb-6"
             style={{ border: '1px solid rgba(72,144,247,0.18)', background: 'var(--surface)' }}>
-            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: '#4890f7' }}>
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--blue)' }}>
               Telehealth Consultation
             </p>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>
@@ -61,7 +61,7 @@ export default function BookingCard() {
               style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
               {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential'].map(t => (
                 <div key={t} className="flex items-center gap-1.5">
-                  <div className="w-1 h-1 rounded-full" style={{ background: '#4890f7' }} />
+                  <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />
                   <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{t}</span>
                 </div>
               ))}
@@ -79,7 +79,7 @@ export default function BookingCard() {
           style={{ border: '1px solid rgba(72,144,247,0.18)', background: 'var(--surface)' }}
         >
           <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
-            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: '#4890f7' }}>
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--blue)' }}>
               Blood Panel Required
             </p>
             <h2 className="text-lg font-bold tracking-tight mb-2"
@@ -101,7 +101,7 @@ export default function BookingCard() {
                 <div key={s.n} className="flex gap-3 items-start">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
                     style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                    <span className="text-[9px] font-bold" style={{ color: '#4890f7' }}>{s.n}</span>
+                    <span className="text-[9px] font-bold" style={{ color: 'var(--blue)' }}>{s.n}</span>
                   </div>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>{s.text}</p>
                 </div>
@@ -112,7 +112,7 @@ export default function BookingCard() {
               href={panelUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-teal w-full justify-center"
+              className="btn-pill w-full justify-center"
             >
               Order your blood panel →
             </a>
@@ -126,7 +126,7 @@ export default function BookingCard() {
             style={{ borderTop: '1px solid rgba(72,144,247,0.08)', background: 'rgba(72,144,247,0.03)' }}>
             {['AHPRA-registered doctors', '4,000+ collection centres', 'Private & confidential'].map(t => (
               <div key={t} className="flex items-center gap-1.5">
-                <div className="w-1 h-1 rounded-full" style={{ background: '#4890f7' }} />
+                <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />
                 <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{t}</span>
               </div>
             ))}

@@ -3,15 +3,18 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSignupGate } from '@/context/SignupGateContext'
 
-const DISCOVERY_URL = 'https://calendly.com/admin-apexmetabolichealth/free-discovery-call'
-const TEAL = '#4890f7'
-const BG = '#070a0d'
+const DISCOVERY_URL = '/discovery-call'
+const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
+const TEAL = 'var(--blue)'
+const BG = '#ffffff'
+const PORTAL_LOGIN = 'https://app.apexmetabolichealth.com.au'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type SingleStep = { type: 'single'; id: string; question: string; sub?: string; options: Array<{ label: string; value: string; disqualify?: boolean }> }
-type MultiStep  = { type: 'multi';  id: string; question: string; sub?: string; options: Array<{ label: string; value: string; disqualify?: boolean }> }
+type SingleStep = { type: 'single'; id: string; question: string; sub?: string; options: Array<{ label: string; value: string; disqualify?: boolean; score?: number }> }
+type MultiStep  = { type: 'multi';  id: string; question: string; sub?: string; options: Array<{ label: string; value: string; disqualify?: boolean; score?: number }> }
 type TextStep   = { type: 'text';   id: string; question: string; sub?: string; placeholder?: string; whyWeAsk?: string; optional?: boolean }
 type BmiStep    = { type: 'bmi';    id: string; question: string; minBmi: number; bmiIneligibleMsg?: string }
 type InfoStep   = { type: 'info';   id: string; heading: string; body: string; stat?: string }
@@ -26,9 +29,45 @@ export interface QuizConfig {
   benefits: string[]
   steps: QuizStep[]
   consultUrl: string
+  signupUrl?: string
+  scoreLabel?: string
+  requiresBloodTest?: boolean
+  bloodTestUrl?: string
   ineligibleHeading?: string
   ineligibleBody?: string
   ineligibleAlt?: { label: string; href: string }
+}
+
+// ─── Score helpers ─────────────────────────────────────────────────────────────
+
+function calcScore(steps: QuizStep[], answers: Answers): { earned: number; max: number; pct: number } {
+  let earned = 0, max = 0
+  for (const step of steps) {
+    if (step.type === 'single') {
+      const maxVal = Math.max(0, ...step.options.map(o => o.score ?? 0))
+      if (maxVal > 0) {
+        max += maxVal
+        const ans = answers[step.id] as string
+        earned += step.options.find(o => o.value === ans)?.score ?? 0
+      }
+    }
+    if (step.type === 'multi') {
+      for (const opt of step.options) {
+        if ((opt.score ?? 0) > 0) {
+          max += opt.score!
+          if (((answers[step.id] as string[]) ?? []).includes(opt.value)) earned += opt.score!
+        }
+      }
+    }
+  }
+  const pct = max > 0 ? Math.round((earned / max) * 100) : 0
+  return { earned, max, pct }
+}
+
+function scoreTier(pct: number): { label: string; color: string; bg: string; border: string } {
+  if (pct >= 70) return { label: 'High — significant indicators detected', color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.2)' }
+  if (pct >= 45) return { label: 'Moderate — notable indicators present', color: '#f59e0b', bg: 'rgba(245,158,11,0.07)', border: 'rgba(245,158,11,0.2)' }
+  return { label: 'Mild — some early indicators', color: '#22c55e', bg: 'rgba(34,197,94,0.07)', border: 'rgba(34,197,94,0.2)' }
 }
 
 type Phase = 'intro' | 'quiz' | 'processing' | 'account' | 'eligible' | 'ineligible'
@@ -36,30 +75,59 @@ type Answers = Record<string, string | string[]>
 
 const ease = [0.22, 1, 0.36, 1] as const
 
+// Auto-injected as step 0 in every quiz — captures blood work recency for portal task creation
+const BLOOD_TIMING_STEP: QuizStep = {
+  type: 'single',
+  id: '__bloodwork_timing',
+  question: 'When did you last have a blood test done?',
+  options: [
+    { label: 'Within the last 3 months', value: 'lt3m' },
+    { label: '3 to 6 months ago', value: '3to6m' },
+    { label: 'More than 6 months ago', value: 'gt6m' },
+    { label: "I haven't had one / not sure", value: 'never' },
+  ],
+}
+
 // ─── Shell ────────────────────────────────────────────────────────────────────
 
 function Shell({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
   return (
     <div className="min-h-screen flex flex-col" style={{ background: BG }}>
-      <div className="flex items-center justify-between px-6 sm:px-10 py-5 flex-shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-        <a href="/" className="flex flex-col leading-none">
-          <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
-          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: TEAL }}>Metabolic Health</span>
-        </a>
+      {/* Header */}
+      <div
+        className="flex items-center justify-center px-6 py-5 flex-shrink-0 relative"
+        style={{ borderBottom: '1px solid #f1f5f9' }}
+      >
+        {/* Exit link */}
         <button
           onClick={onClose}
-          className="w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' }}
-          aria-label="Close"
+          className="absolute left-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-150"
+          style={{ color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}
+          aria-label="Exit"
+          onMouseEnter={e => { e.currentTarget.style.color = TEAL }}
+          onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8' }}
         >
-          <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-            <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          ← Exit
         </button>
+        {/* Centered logo */}
+        <a href="/" className="flex flex-col items-center leading-none" style={{ textDecoration: 'none' }}>
+          <span className="font-black text-[17px] tracking-[0.2em] uppercase" style={{ color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1 }}>APEX</span>
+          <span className="text-[8px] tracking-[0.24em] font-semibold uppercase mt-0.5" style={{ color: '#94a3b8' }}>Metabolic Health</span>
+        </a>
+        {/* Sign in link */}
+        <a
+          href={PORTAL_LOGIN}
+          className="absolute right-6 text-xs font-medium transition-colors duration-150"
+          style={{ color: '#94a3b8', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = TEAL }}
+          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#94a3b8' }}
+        >
+          Sign in
+        </a>
       </div>
       <div className="flex-1 flex flex-col">{children}</div>
-      <div className="px-6 py-4 text-center flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <p className="text-[9px] tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.18)' }}>
+      <div className="px-6 py-4 text-center flex-shrink-0" style={{ borderTop: '1px solid #f1f5f9' }}>
+        <p className="text-[9px] tracking-widest uppercase" style={{ color: '#6b7280', fontFamily: 'var(--font-space-grotesk)' }}>
           AHPRA-registered doctors · TGA compliant · 100% online
         </p>
       </div>
@@ -72,12 +140,15 @@ function BtnContinue({ onClick, disabled, label = 'Continue' }: { onClick: () =>
     <button
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-sm text-sm font-semibold transition-all duration-150"
+      className="flex-1 flex items-center justify-center gap-2 py-4 text-sm font-semibold transition-all duration-150"
       style={{
-        background: disabled ? 'rgba(255,255,255,0.05)' : TEAL,
-        color: disabled ? 'rgba(255,255,255,0.2)' : BG,
+        borderRadius: 12,
+        background: disabled ? '#f1f5f9' : `linear-gradient(135deg, ${TEAL} 0%, #1d4fd8 100%)`,
+        color: disabled ? '#94a3b8' : '#ffffff',
         cursor: disabled ? 'not-allowed' : 'pointer',
         fontFamily: 'var(--font-space-grotesk)',
+        boxShadow: disabled ? 'none' : '0 4px 16px rgba(72,144,247,0.3)',
+        border: 'none',
       }}
     >
       {label}
@@ -95,7 +166,7 @@ function BtnBack({ onClick }: { onClick: () => void }) {
     <button
       onClick={onClick}
       className="flex items-center gap-1.5 px-4 py-3.5 text-sm font-medium transition-colors duration-150"
-      style={{ color: 'rgba(255,255,255,0.3)', fontFamily: 'var(--font-space-grotesk)' }}
+      style={{ color: '#6b7280', fontFamily: 'var(--font-space-grotesk)' }}
     >
       <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
         <path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -119,29 +190,29 @@ function IntroPhase({ config, onStart }: { config: QuizConfig; onStart: () => vo
         <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-4" style={{ color: TEAL }}>
           {config.programName}
         </p>
-        <h1 className="font-bold mb-3 leading-tight" style={{ fontSize: 'clamp(24px,4vw,34px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
+        <h1 className="font-bold mb-3 leading-tight" style={{ fontSize: 'clamp(24px,4vw,34px)', color: '#111827', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
           Let&apos;s get you one step closer to feeling better
         </h1>
-        <p className="text-sm mb-6 leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>
+        <p className="text-sm mb-6 leading-relaxed" style={{ color: '#4b5563' }}>
           Answer a few quick questions so our doctors can tailor a safe and effective plan just for you.
         </p>
 
         <div className="flex items-center gap-2 mb-8">
-          <span className="text-sm" style={{ color: 'rgba(240,244,248,0.45)' }}>Estimated time:</span>
-          <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: 'rgba(0,194,184,0.1)', color: TEAL, border: `1px solid rgba(0,194,184,0.2)` }}>{config.estimatedTime}</span>
+          <span className="text-sm" style={{ color: '#6b7280' }}>Estimated time:</span>
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full" style={{ background: 'rgba(72,144,247,0.08)', color: TEAL, border: `1px solid rgba(72,144,247,0.18)` }}>{config.estimatedTime}</span>
         </div>
 
-        <div className="rounded-xl p-5 mb-8" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <p className="text-xs font-semibold mb-3" style={{ color: 'rgba(240,244,248,0.5)' }}>Based on your answers, you&apos;ll receive:</p>
+        <div className="rounded-xl p-5 mb-8" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
+          <p className="text-xs font-semibold mb-3" style={{ color: '#4b5563' }}>Based on your answers, you&apos;ll receive:</p>
           <ul className="flex flex-col gap-2.5">
             {config.benefits.map(b => (
               <li key={b} className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(0,194,184,0.15)', border: `1px solid rgba(0,194,184,0.3)` }}>
+                <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(72,144,247,0.12)', border: `1px solid rgba(72,144,247,0.25)` }}>
                   <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
                     <path d="M2 5l2 2 4-4" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <span className="text-sm" style={{ color: 'rgba(240,244,248,0.7)' }}>{b}</span>
+                <span className="text-sm" style={{ color: '#4b5563' }}>{b}</span>
               </li>
             ))}
           </ul>
@@ -162,25 +233,39 @@ function IntroPhase({ config, onStart }: { config: QuizConfig; onStart: () => vo
 // ─── Step renderers ───────────────────────────────────────────────────────────
 
 function SingleStep({ step, answer, onSelect }: { step: SingleStep; answer: string; onSelect: (v: string) => void }) {
+  const [hovered, setHovered] = useState<string | null>(null)
   return (
     <div className="flex flex-col gap-2.5">
       {step.options.map(opt => {
         const selected = answer === opt.value
+        const hot = hovered === opt.value || selected
         return (
           <button
             key={opt.value}
             onClick={() => onSelect(opt.value)}
-            className="text-left flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-150"
+            onMouseEnter={() => setHovered(opt.value)}
+            onMouseLeave={() => setHovered(null)}
+            className="text-left flex items-center gap-4 transition-all duration-150"
             style={{
-              background: selected ? 'rgba(0,194,184,0.06)' : 'rgba(255,255,255,0.02)',
-              border: `1.5px solid ${selected ? 'rgba(0,194,184,0.45)' : 'rgba(255,255,255,0.08)'}`,
-              boxShadow: selected ? '0 0 20px rgba(0,194,184,0.07)' : 'none',
+              padding: '17px 20px',
+              borderRadius: 12,
+              background: hot ? '#f8faff' : '#ffffff',
+              border: `1.5px solid ${hot ? TEAL : '#e2e8f0'}`,
+              cursor: 'pointer',
+              width: '100%',
             }}
           >
-            <div className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center" style={{ border: `1.5px solid ${selected ? TEAL : 'rgba(255,255,255,0.2)'}`, background: selected ? TEAL : 'transparent', transition: 'all 0.15s' }}>
-              {selected && <div className="w-1.5 h-1.5 rounded-full" style={{ background: BG }} />}
+            <div style={{
+              width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+              border: `1.5px solid ${hot ? TEAL : '#cbd5e1'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'border-color 0.15s',
+            }}>
+              {hot && <div style={{ width: 8, height: 8, borderRadius: '50%', backgroundColor: TEAL }} />}
             </div>
-            <span className="text-sm font-medium leading-snug" style={{ color: selected ? '#f0f4f8' : 'rgba(240,244,248,0.7)', fontFamily: 'var(--font-space-grotesk)' }}>{opt.label}</span>
+            <span style={{ fontSize: 16, fontWeight: 600, color: hot ? '#0f172a' : '#1e293b', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.5 }}>
+              {opt.label}
+            </span>
           </button>
         )
       })}
@@ -189,28 +274,42 @@ function SingleStep({ step, answer, onSelect }: { step: SingleStep; answer: stri
 }
 
 function MultiStep({ step, answer, onToggle }: { step: MultiStep; answer: string[]; onToggle: (v: string) => void }) {
+  const [hovered, setHovered] = useState<string | null>(null)
   return (
     <div className="flex flex-col gap-2.5">
       {step.options.map(opt => {
         const selected = answer.includes(opt.value)
+        const hot = hovered === opt.value || selected
         return (
           <button
             key={opt.value}
+            onMouseEnter={() => setHovered(opt.value)}
+            onMouseLeave={() => setHovered(null)}
             onClick={() => onToggle(opt.value)}
-            className="text-left flex items-center gap-3 px-5 py-4 rounded-xl transition-all duration-150"
+            className="text-left flex items-center gap-4 transition-all duration-150"
             style={{
-              background: selected ? 'rgba(0,194,184,0.06)' : 'rgba(255,255,255,0.02)',
-              border: `1.5px solid ${selected ? 'rgba(0,194,184,0.45)' : 'rgba(255,255,255,0.08)'}`,
+              padding: '17px 20px', borderRadius: 12,
+              background: hot ? '#f8faff' : '#ffffff',
+              border: `1.5px solid ${hot ? TEAL : '#e2e8f0'}`,
+              cursor: 'pointer', width: '100%',
             }}
           >
-            <div className="w-4 h-4 rounded-sm flex-shrink-0 flex items-center justify-center" style={{ border: `1.5px solid ${selected ? TEAL : 'rgba(255,255,255,0.2)'}`, background: selected ? TEAL : 'transparent', transition: 'all 0.15s' }}>
+            <div style={{
+              width: 18, height: 18, borderRadius: 4, flexShrink: 0,
+              border: `1.5px solid ${hot ? TEAL : '#cbd5e1'}`,
+              background: selected ? TEAL : 'transparent',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              transition: 'all 0.15s',
+            }}>
               {selected && (
-                <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
-                  <path d="M1.5 5l2.5 2.5 4.5-5" stroke={BG} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <svg viewBox="0 0 10 10" fill="none" width="10" height="10" aria-hidden="true">
+                  <path d="M1.5 5l2.5 2.5 4.5-5" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
             </div>
-            <span className="text-sm font-medium leading-snug" style={{ color: selected ? '#f0f4f8' : 'rgba(240,244,248,0.7)', fontFamily: 'var(--font-space-grotesk)' }}>{opt.label}</span>
+            <span style={{ fontSize: 16, fontWeight: 600, color: hot ? '#0f172a' : '#1e293b', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.5 }}>
+              {opt.label}
+            </span>
           </button>
         )
       })}
@@ -227,19 +326,19 @@ function TextStepRender({ step, answer, onChange }: { step: TextStep; answer: st
         placeholder={step.placeholder ?? 'Type your answer here...'}
         rows={4}
         className="w-full px-4 py-3 rounded-xl text-sm outline-none resize-none transition-all duration-150"
-        style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.09)', color: '#f0f4f8', caretColor: TEAL }}
-        onFocus={e => { e.target.style.borderColor = `rgba(0,194,184,0.4)` }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)' }}
+        style={{ background: '#ffffff', border: '1.5px solid rgba(0,0,0,0.12)', color: '#111827', caretColor: TEAL }}
+        onFocus={e => { e.target.style.borderColor = `rgba(72,144,247,0.35)` }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(0,0,0,0.08)' }}
       />
       {step.whyWeAsk && (
-        <div className="mt-4 flex gap-3 p-4 rounded-xl" style={{ background: 'rgba(0,194,184,0.04)', border: '1px solid rgba(0,194,184,0.12)' }}>
+        <div className="mt-4 flex gap-3 p-4 rounded-xl" style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.12)' }}>
           <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" aria-hidden="true">
             <circle cx="10" cy="10" r="8" stroke={TEAL} strokeWidth="1.5" />
             <path d="M10 7v4M10 13h.01" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" />
           </svg>
           <div>
             <p className="text-xs font-semibold mb-1" style={{ color: TEAL }}>Why we ask?</p>
-            <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>{step.whyWeAsk}</p>
+            <p className="text-xs leading-relaxed" style={{ color: '#4b5563' }}>{step.whyWeAsk}</p>
           </div>
         </div>
       )}
@@ -256,9 +355,10 @@ function BmiStepRender({ step, heightCm, weightKg, onHeight, onWeight }: {
     <div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-xs font-semibold tracking-[0.1em] uppercase mb-2" style={{ color: 'rgba(240,244,248,0.45)' }}>Height</label>
+          <label htmlFor="iqe-height" className="block text-xs font-semibold tracking-[0.1em] uppercase mb-2" style={{ color: '#6b7280' }}>Height</label>
           <div className="relative">
             <input
+              id="iqe-height"
               type="number"
               value={heightCm}
               onChange={e => onHeight(e.target.value)}
@@ -266,17 +366,18 @@ function BmiStepRender({ step, heightCm, weightKg, onHeight, onWeight }: {
               min={100}
               max={250}
               className="w-full px-4 py-3.5 pr-12 rounded-xl text-sm outline-none transition-all duration-150"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.09)', color: '#f0f4f8' }}
-              onFocus={e => { e.target.style.borderColor = `rgba(0,194,184,0.4)` }}
-              onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)' }}
+              style={{ background: '#ffffff', border: '1.5px solid rgba(0,0,0,0.12)', color: '#111827' }}
+              onFocus={e => { e.target.style.borderColor = `rgba(72,144,247,0.35)` }}
+              onBlur={e => { e.target.style.borderColor = 'rgba(0,0,0,0.08)' }}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium" style={{ color: 'rgba(255,255,255,0.35)' }}>cm</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium" style={{ color: '#6b7280' }}>cm</span>
           </div>
         </div>
         <div>
-          <label className="block text-xs font-semibold tracking-[0.1em] uppercase mb-2" style={{ color: 'rgba(240,244,248,0.45)' }}>Weight</label>
+          <label htmlFor="iqe-weight" className="block text-xs font-semibold tracking-[0.1em] uppercase mb-2" style={{ color: '#6b7280' }}>Weight</label>
           <div className="relative">
             <input
+              id="iqe-weight"
               type="number"
               value={weightKg}
               onChange={e => onWeight(e.target.value)}
@@ -284,16 +385,16 @@ function BmiStepRender({ step, heightCm, weightKg, onHeight, onWeight }: {
               min={30}
               max={300}
               className="w-full px-4 py-3.5 pr-12 rounded-xl text-sm outline-none transition-all duration-150"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.09)', color: '#f0f4f8' }}
-              onFocus={e => { e.target.style.borderColor = `rgba(0,194,184,0.4)` }}
-              onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)' }}
+              style={{ background: '#ffffff', border: '1.5px solid rgba(0,0,0,0.12)', color: '#111827' }}
+              onFocus={e => { e.target.style.borderColor = `rgba(72,144,247,0.35)` }}
+              onBlur={e => { e.target.style.borderColor = 'rgba(0,0,0,0.08)' }}
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium" style={{ color: 'rgba(255,255,255,0.35)' }}>kg</span>
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-medium" style={{ color: '#6b7280' }}>kg</span>
           </div>
         </div>
       </div>
       {bmi !== null && !isNaN(bmi) && (
-        <p className="text-xs" style={{ color: 'rgba(240,244,248,0.35)' }}>
+        <p className="text-xs" style={{ color: '#6b7280' }}>
           Your BMI: <span style={{ color: bmi >= (step.minBmi) ? TEAL : '#f59e0b' }}>{bmi.toFixed(1)}</span>
         </p>
       )}
@@ -303,9 +404,9 @@ function BmiStepRender({ step, heightCm, weightKg, onHeight, onWeight }: {
 
 function InfoStepRender({ step }: { step: InfoStep }) {
   return (
-    <div className="rounded-xl p-6" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.07)' }}>
-      <h3 className="font-bold text-lg mb-3 leading-snug" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{step.heading}</h3>
-      <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.55)' }}>{step.body}</p>
+    <div className="rounded-xl p-6" style={{ background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.06)' }}>
+      <h3 className="font-bold text-lg mb-3 leading-snug" style={{ color: '#111827', fontFamily: 'var(--font-space-grotesk)' }}>{step.heading}</h3>
+      <p className="text-sm leading-relaxed mb-4" style={{ color: '#4b5563' }}>{step.body}</p>
       {step.stat && (
         <p className="text-[10px] font-semibold tracking-[0.14em] uppercase" style={{ color: TEAL }}>{step.stat}</p>
       )}
@@ -315,14 +416,14 @@ function InfoStepRender({ step }: { step: InfoStep }) {
 
 function TrustStepRender({ step }: { step: TrustStep }) {
   return (
-    <div className="rounded-xl p-6" style={{ background: 'rgba(0,194,184,0.03)', border: '1px solid rgba(0,194,184,0.12)' }}>
+    <div className="rounded-xl p-6" style={{ background: 'rgba(0,194,184,0.03)', border: '1px solid rgba(72,144,247,0.12)' }}>
       <div className="flex items-start gap-3 mb-4">
         <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7 flex-shrink-0 mt-0.5" aria-hidden="true">
           <path d="M3 21l1.5-5.5L12 3l7.5 12.5L21 21H3z" stroke={TEAL} strokeWidth="1.5" strokeLinejoin="round" />
         </svg>
-        <h3 className="font-bold text-lg leading-snug" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{step.heading}</h3>
+        <h3 className="font-bold text-lg leading-snug" style={{ color: '#111827', fontFamily: 'var(--font-space-grotesk)' }}>{step.heading}</h3>
       </div>
-      <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,244,248,0.55)' }}>{step.body}</p>
+      <p className="text-sm leading-relaxed" style={{ color: '#4b5563' }}>{step.body}</p>
     </div>
   )
 }
@@ -351,6 +452,8 @@ function QuizPhase({
   onBmiIneligible: (msg?: string) => void
 }) {
   const step = config.steps[stepIndex]
+  const questionSteps = config.steps.filter(s => s.type === 'single' || s.type === 'multi' || s.type === 'text' || s.type === 'bmi')
+  const questionIndex = questionSteps.findIndex((_, i) => config.steps.indexOf(questionSteps[i]) === stepIndex)
   const progress = Math.round(((stepIndex) / config.steps.length) * 100)
 
   const canContinue = (() => {
@@ -382,36 +485,63 @@ function QuizPhase({
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Progress bar */}
-      <div className="px-6 sm:px-10 pt-5 pb-0">
-        <div className="flex items-center justify-between mb-1.5">
-          <div className="flex-1 h-1 rounded-full mr-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
-            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${progress}%`, background: TEAL }} />
-          </div>
-          <span className="text-xs font-semibold" style={{ color: 'rgba(255,255,255,0.35)', minWidth: 32, textAlign: 'right' }}>{progress}%</span>
-        </div>
+      {/* Progress bar — full-width, no padding */}
+      <div style={{ height: 3, backgroundColor: '#f1f5f9' }}>
+        <motion.div
+          style={{ height: '100%', backgroundColor: TEAL }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+        />
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-5 py-8">
+      <div className="flex-1 flex flex-col items-center justify-start px-5 pt-12 pb-8">
         <div className="w-full max-w-lg">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={stepIndex}
-              initial={{ opacity: 0, x: direction > 0 ? 30 : -30 }}
+              initial={{ opacity: 0, x: direction > 0 ? 40 : -40 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction > 0 ? -30 : 30 }}
-              transition={{ duration: 0.28, ease }}
+              exit={{ opacity: 0, x: direction > 0 ? -40 : 40 }}
+              transition={{ duration: 0.25, ease }}
             >
               {/* Question heading */}
               {(step.type === 'single' || step.type === 'multi' || step.type === 'text' || step.type === 'bmi') && (
-                <div className="mb-6">
-                  <h2 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(18px,3.5vw,26px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.015em' }}>
+                <div className="mb-8">
+                  {/* "Question X of Y" counter */}
+                  <p style={{ fontSize: 14, fontWeight: 600, color: TEAL, marginBottom: 18, fontFamily: 'var(--font-space-grotesk)' }}>
+                    Question {questionIndex + 1} of {questionSteps.length}
+                  </p>
+                  <h2 className="font-bold" style={{ fontSize: 'clamp(24px, 4.5vw, 36px)', lineHeight: 1.22, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em', marginBottom: 8 }}>
                     {'question' in step ? step.question : ''}
                   </h2>
                   {('sub' in step && step.sub) && (
-                    <p className="text-sm" style={{ color: 'rgba(240,244,248,0.4)' }}>{step.sub}</p>
+                    <p style={{ fontSize: 15, lineHeight: 1.6, color: '#64748b', marginTop: 8 }}>{step.sub}</p>
                   )}
+                  {/* Doctor avatar */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 22, marginBottom: 4 }}>
+                    <div style={{ position: 'relative', flexShrink: 0 }}>
+                      <div style={{
+                        width: 38, height: 38, borderRadius: '50%',
+                        background: `linear-gradient(135deg, ${TEAL} 0%, #1d4fd8 100%)`,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        border: '2px solid #e2e8f0',
+                      }}>
+                        <span style={{ fontSize: 12, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-space-grotesk)' }}>CC</span>
+                      </div>
+                      <span style={{
+                        position: 'absolute', bottom: 1, right: 1, width: 9, height: 9,
+                        borderRadius: '50%', backgroundColor: '#22c55e', border: '1.5px solid #fff',
+                        display: 'block',
+                      }} />
+                    </div>
+                    <div>
+                      <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
+                        Dr Cameron Chen
+                      </p>
+                      <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 1 }}>Medical Director</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -461,16 +591,18 @@ function ProcessingPhase({ onDone }: { onDone: (eligible: boolean) => void; elig
   const [step2Done, setStep2Done] = useState(false)
 
   useEffect(() => {
-    const t1 = setTimeout(() => setStep1Done(true), 2000)
-    const t2 = setTimeout(() => setStep2Done(true), 4000)
-    const t3 = setTimeout(() => onDone(true), 4400)
+    // Brief transition only — answers are already saved and eligibility is
+    // checked instantly in onDone. Don't fake long-running work.
+    const t1 = setTimeout(() => setStep1Done(true), 600)
+    const t2 = setTimeout(() => setStep2Done(true), 1200)
+    const t3 = setTimeout(() => onDone(true), 1600)
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
   }, [onDone])
 
   const ProcessStep = ({ done, label, sub }: { done: boolean; label: string; sub?: string }) => (
     <div className="flex items-start gap-4">
       <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500"
-        style={{ background: done ? 'rgba(0,194,184,0.15)' : 'rgba(255,255,255,0.05)', border: `1.5px solid ${done ? TEAL : 'rgba(255,255,255,0.1)'}` }}>
+        style={{ background: done ? 'rgba(72,144,247,0.12)' : 'rgba(0,0,0,0.06)', border: `1.5px solid ${done ? TEAL : 'rgba(0,0,0,0.09)'}` }}>
         {done ? (
           <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
             <path d="M2.5 7l3 3 6-6" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -481,8 +613,8 @@ function ProcessingPhase({ onDone }: { onDone: (eligible: boolean) => void; elig
         )}
       </div>
       <div>
-        <p className="text-sm font-semibold" style={{ color: done ? '#f0f4f8' : 'rgba(240,244,248,0.45)', fontFamily: 'var(--font-space-grotesk)' }}>{label}</p>
-        {sub && <p className="text-xs mt-0.5" style={{ color: 'rgba(240,244,248,0.3)' }}>{sub}</p>}
+        <p className="text-sm font-semibold" style={{ color: done ? '#111827' : '#6b7280', fontFamily: 'var(--font-space-grotesk)' }}>{label}</p>
+        {sub && <p className="text-xs mt-0.5" style={{ color: '#6b7280' }}>{sub}</p>}
       </div>
     </div>
   )
@@ -490,9 +622,9 @@ function ProcessingPhase({ onDone }: { onDone: (eligible: boolean) => void; elig
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-5 py-16">
       <motion.div className="w-full max-w-sm flex flex-col gap-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, ease }}>
-        <ProcessStep done={step1Done} label="Reviewing your answers" sub="Checking clinical eligibility criteria" />
-        <div className="w-px h-8 ml-4" style={{ background: 'rgba(255,255,255,0.06)' }} />
-        <ProcessStep done={step2Done} label="Creating your consultation plan" sub="This can take up to 20 seconds" />
+        <ProcessStep done={step1Done} label="Saving your answers" sub="Your responses are recorded for your consultation" />
+        <div className="w-px h-8 ml-4" style={{ background: 'rgba(0,0,0,0.06)' }} />
+        <ProcessStep done={step2Done} label="Checking eligibility" sub="Against our clinical screening criteria" />
       </motion.div>
     </div>
   )
@@ -501,56 +633,87 @@ function ProcessingPhase({ onDone }: { onDone: (eligible: boolean) => void; elig
 // ─── Eligible phase ───────────────────────────────────────────────────────────
 
 function EligiblePhase({ config }: { config: QuizConfig }) {
+  const portalUrl = config.signupUrl ?? PORTAL_SIGNUP
+  const bloodTestUrl = config.bloodTestUrl ?? '/order-bloods'
+
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-5 py-12">
       <motion.div className="w-full max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto" style={{ background: 'rgba(0,194,184,0.12)', border: `2px solid ${TEAL}` }}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" aria-hidden="true">
-            <path d="M5 13l4 4L19 7" stroke={TEAL} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto" style={{ background: 'rgba(72,144,247,0.1)' }}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
+            <path d="M5 13l4 4L19 7" stroke={TEAL} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
 
-        <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3 text-center" style={{ color: TEAL }}>Eligibility check complete</p>
-        <h1 className="font-bold text-center mb-3 leading-tight" style={{ fontSize: 'clamp(22px,4vw,30px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
-          You appear to be a good candidate for {config.programName}.
+        <h1 className="font-bold text-center mb-3 leading-tight" style={{ fontSize: 'clamp(22px,4vw,30px)', color: '#111827', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
+          Account created.<br />You&apos;re all set.
         </h1>
-        <p className="text-sm text-center mb-10 leading-relaxed" style={{ color: 'rgba(240,244,248,0.45)' }}>
-          Your profile has been reviewed. Book your consultation and let our AHPRA-registered doctors design your personalised protocol.
+        <p className="text-sm text-center mb-8 leading-relaxed" style={{ color: '#6b7280' }}>
+          Our clinical team has your assessment. Here&apos;s what happens next.
         </p>
 
+        {/* Blood test card for programs that require it */}
+        {config.requiresBloodTest && (
+          <div className="rounded-xl p-5 mb-5" style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)' }}>
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: TEAL }}>Step 1 — Pathology</p>
+            <p className="text-sm font-semibold mb-1" style={{ color: '#111827' }}>Complete your hormone panel</p>
+            <p className="text-xs leading-relaxed mb-4" style={{ color: '#6b7280' }}>
+              Walk into any of 4,000+ accredited collection centres across Australia. Your referral is issued by your doctor after your consultation.
+            </p>
+            <p className="text-[10px] leading-relaxed" style={{ color: '#6b7280' }}>
+              Prescription treatments require a valid prescription from an AHPRA-registered doctor. A pathology assessment is required before any treatment is initiated.
+            </p>
+          </div>
+        )}
+
         {/* Next steps */}
-        <div className="flex flex-col gap-3 mb-8">
-          {[
-            { n: 1, label: 'Book your consultation', sub: 'Telehealth — 30 mins with an AHPRA-registered doctor' },
-            { n: 2, label: 'Doctor reviews your profile', sub: 'Your answers inform a tailored clinical assessment' },
-            { n: 3, label: 'Personalised protocol issued', sub: 'Doctor-prescribed treatment coordinated through our pharmacy' },
-          ].map(s => (
-            <div key={s.n} className="flex items-start gap-4 px-4 py-3 rounded-xl" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold" style={{ background: 'rgba(0,194,184,0.1)', color: TEAL }}>{s.n}</div>
+        <div className="flex flex-col gap-0 mb-7 rounded-xl overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.07)' }}>
+          {(config.requiresBloodTest
+            ? [
+                { n: 1, label: 'Sign in to your patient portal', sub: 'Access your assessment results and clinical profile' },
+                { n: 2, label: 'Complete your pathology', sub: 'Doctor issues your referral — collect at 4,000+ centres Australia-wide' },
+                { n: 3, label: 'Telehealth consultation', sub: 'AHPRA-registered doctor builds your personalised protocol' },
+              ]
+            : [
+                { n: 1, label: 'Sign in to your patient portal', sub: 'Access your assessment and clinical profile' },
+                { n: 2, label: 'Doctor reviews your assessment', sub: 'Your answers inform a tailored clinical plan' },
+                { n: 3, label: 'Personalised protocol issued', sub: 'Doctor-prescribed, coordinated through our TGA-compliant pharmacy' },
+              ]
+          ).map((s, i, arr) => (
+            <div key={s.n} className="flex items-start gap-4 px-4 py-4" style={{ background: i % 2 === 0 ? '#fafafa' : '#fff', borderBottom: i < arr.length - 1 ? '1px solid rgba(0,0,0,0.05)' : 'none' }}>
+              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-[11px] font-bold mt-0.5" style={{ background: 'rgba(72,144,247,0.1)', color: TEAL }}>{s.n}</div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{s.label}</p>
-                <p className="text-xs mt-0.5 leading-relaxed" style={{ color: 'rgba(240,244,248,0.4)' }}>{s.sub}</p>
+                <p className="text-sm font-semibold" style={{ color: '#111827', fontFamily: 'var(--font-space-grotesk)' }}>{s.label}</p>
+                <p className="text-xs mt-0.5 leading-relaxed" style={{ color: '#6b7280' }}>{s.sub}</p>
               </div>
             </div>
           ))}
         </div>
 
         <a
-          href={config.consultUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-2 py-4 rounded-sm text-sm font-bold tracking-wide mb-4"
-          style={{ background: TEAL, color: BG, textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+          href={portalUrl}
+          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl text-sm font-bold tracking-wide mb-3 transition-all duration-150"
+          style={{ background: `linear-gradient(135deg, ${TEAL} 0%, #1d4fd8 100%)`, color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)', boxShadow: '0 4px 20px rgba(72,144,247,0.3)' }}
         >
-          Book my {config.programName.toLowerCase()} consultation
+          Go to my patient portal
           <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </a>
 
-        <p className="text-center text-xs" style={{ color: 'rgba(240,244,248,0.35)' }}>
-          Prefer to chat first?{' '}
-          <a href={DISCOVERY_URL} target="_blank" rel="noopener noreferrer" style={{ color: TEAL }}>Book a free discovery call</a>
+        {config.requiresBloodTest && (
+          <a
+            href={bloodTestUrl}
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-sm font-semibold mb-4 transition-all duration-150"
+            style={{ background: 'rgba(72,144,247,0.07)', color: TEAL, textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+          >
+            Order my blood panel now
+          </a>
+        )}
+
+        <p className="text-center text-xs" style={{ color: '#6b7280' }}>
+          Questions?{' '}
+          <a href={DISCOVERY_URL} style={{ color: TEAL }}>Book a free discovery call</a>
         </p>
       </motion.div>
     </div>
@@ -563,36 +726,34 @@ function IneligiblePhase({ config, overrideMsg }: { config: QuizConfig; override
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-5 py-12">
       <motion.div className="w-full max-w-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease }}>
-        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto" style={{ background: 'rgba(245,158,11,0.1)', border: '2px solid rgba(245,158,11,0.4)' }}>
-          <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8" aria-hidden="true">
+        <div className="w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto" style={{ background: 'rgba(245,158,11,0.08)' }}>
+          <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" aria-hidden="true">
             <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
 
-        <h1 className="font-bold text-center mb-4 leading-tight" style={{ fontSize: 'clamp(20px,3.5vw,26px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.015em' }}>
+        <h1 className="font-bold text-center mb-4 leading-tight" style={{ fontSize: 'clamp(20px,3.5vw,26px)', color: '#111827', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.015em' }}>
           {overrideMsg ? 'This program may not be the right fit right now.' : (config.ineligibleHeading ?? 'This program may not be right for you at this time.')}
         </h1>
-        <p className="text-sm text-center mb-8 leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>
+        <p className="text-sm text-center mb-8 leading-relaxed" style={{ color: '#4b5563' }}>
           {overrideMsg ?? config.ineligibleBody ?? 'Based on your answers, our doctors need to review your situation more carefully before recommending a protocol.'}
         </p>
 
         <a
           href={DISCOVERY_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full flex items-center justify-center gap-2 py-4 rounded-sm text-sm font-bold tracking-wide mb-4"
-          style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)', border: '1px solid rgba(245,158,11,0.25)' }}
+          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl text-sm font-bold tracking-wide mb-4"
+          style={{ background: 'rgba(245,158,11,0.08)', color: '#d97706', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
         >
           Book a free discovery call
         </a>
 
         {config.ineligibleAlt && (
-          <p className="text-center text-xs" style={{ color: 'rgba(240,244,248,0.35)' }}>
+          <p className="text-center text-xs" style={{ color: '#6b7280' }}>
             <a href={config.ineligibleAlt.href} style={{ color: TEAL }}>{config.ineligibleAlt.label}</a>
           </p>
         )}
 
-        <p className="text-center text-xs mt-3" style={{ color: 'rgba(240,244,248,0.25)' }}>
+        <p className="text-center text-xs mt-3" style={{ color: '#d1d5db' }}>
           Our clinical team can help determine the right pathway for you.
         </p>
       </motion.div>
@@ -630,260 +791,170 @@ const TRUST_PANELS = [
 ]
 
 function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers: Answers; onDone: () => void }) {
-  const router = useRouter()
-  const [form, setForm] = useState({ name: '', email: '', emailConfirm: '', password: '', passwordConfirm: '' })
-  const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const { open: openSignupGate } = useSignupGate()
+  const { earned, max, pct } = calcScore(config.steps, answers)
+  const hasScore = !!(config.scoreLabel && max > 0)
+  const tier = hasScore ? scoreTier(pct) : null
+  const circumference = 2 * Math.PI * 44
 
-  const valid =
-    form.name.trim().length > 1 &&
-    form.email.includes('@') &&
-    form.email === form.emailConfirm &&
-    form.password.length >= 8 &&
-    form.password === form.passwordConfirm
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!valid) return
-    setError('')
+  async function handleContinue() {
     setLoading(true)
     try {
+      if (typeof window !== 'undefined') {
+        const bloodTiming = answers['__bloodwork_timing'] as string | undefined
+        const hasRecentBloods = bloodTiming === 'lt3m' || bloodTiming === '3to6m'
+        localStorage.setItem('apex-quiz-result', JSON.stringify({
+          program: config.programName,
+          answers,
+          score: hasScore ? { earned, max, pct } : null,
+          hasRecentBloods,
+          lastBloods: bloodTiming ?? null,
+          completedAt: new Date().toISOString(),
+        }))
+      }
       const answerSummary = Object.entries(answers)
         .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
         .join('\n')
-
       await fetch('/api/notify-admin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: form.name,
-          email: form.email,
           source: 'quiz',
           program: config.programName,
+          score: hasScore ? `${pct}% (${earned}/${max})` : 'n/a',
           message: answerSummary,
         }),
-      })
+      }).catch(() => {})
+    } finally {
       onDone()
-    } catch {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
     }
   }
 
   return (
-    <div className="flex-1 flex min-h-0" style={{ background: '#070a0d' }}>
+    <div className="flex-1 flex min-h-0" style={{ background: '#f9fafb' }}>
 
-      {/* Left — form */}
-      <div className="flex flex-col w-full lg:w-[520px] flex-shrink-0 overflow-y-auto px-8 sm:px-12 py-10">
-        {/* Mini brand */}
-        <button onClick={() => router.back()} className="mb-8 text-left" style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
-          <span className="font-black text-sm tracking-[0.2em] uppercase block" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
-          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: TEAL }}>Metabolic Health</span>
-        </button>
+      {/* Left — score reveal + CTA */}
+      <div className="flex flex-col w-full lg:w-[520px] flex-shrink-0 overflow-y-auto px-8 sm:px-12 py-10" style={{ background: '#ffffff' }}>
 
-        {/* Step indicator */}
-        <div className="flex items-center gap-2 mb-7">
-          {[1, 2, 3].map(n => (
-            <div key={n} className="flex items-center gap-2">
-              <div
-                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
-                style={{
-                  background: n === 1 ? TEAL : 'rgba(255,255,255,0.06)',
-                  color: n === 1 ? '#fff' : 'rgba(255,255,255,0.25)',
-                  border: `1px solid ${n === 1 ? TEAL : 'rgba(255,255,255,0.08)'}`,
-                }}
-              >{n}</div>
-              {n < 3 && <div className="w-8 h-px" style={{ background: 'rgba(255,255,255,0.08)' }} />}
-            </div>
-          ))}
-          <span className="text-xs ml-1" style={{ color: 'rgba(240,244,248,0.35)' }}>Step 1 of 3</span>
-        </div>
-
-        <h1 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(22px,3vw,30px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
-          Take the first step<br />to a <span style={{ color: TEAL }}>better you.</span>
-        </h1>
-        <div className="flex items-center gap-5 mb-5 mt-2">
-          {['Treatment in days, not months', 'Doctor prescribed, tailored to you'].map(t => (
-            <div key={t} className="flex items-center gap-1.5">
-              <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3 flex-shrink-0" aria-hidden="true">
-                <path d="M2 6l3 3 5-5" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Score ring */}
+        {hasScore && tier && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease }}
+            className="flex flex-col items-center mb-8 pt-2"
+          >
+            <div className="relative mb-4">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="44" fill="none" stroke="rgba(0,0,0,0.06)" strokeWidth="8" />
+                <motion.circle
+                  cx="60" cy="60" r="44" fill="none"
+                  stroke={tier.color} strokeWidth="8" strokeLinecap="round"
+                  strokeDasharray={circumference}
+                  initial={{ strokeDashoffset: circumference }}
+                  animate={{ strokeDashoffset: circumference - (pct / 100) * circumference }}
+                  transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                  style={{ transformOrigin: '60px 60px', rotate: '-90deg' } as React.CSSProperties}
+                />
+                <text x="60" y="55" textAnchor="middle" style={{ fontSize: 26, fontWeight: 700, fill: '#111827', fontFamily: 'Space Grotesk, sans-serif' }}>{pct}%</text>
+                <text x="60" y="72" textAnchor="middle" style={{ fontSize: 9, fill: '#6b7280', fontFamily: 'Space Grotesk, sans-serif', letterSpacing: 1 }}>SCORE</text>
               </svg>
-              <span className="text-[11px]" style={{ color: 'rgba(240,244,248,0.5)' }}>{t}</span>
             </div>
-          ))}
-        </div>
+            <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-center mb-1" style={{ color: TEAL }}>{config.scoreLabel}</p>
+            <div className="px-3 py-1 rounded-full text-xs font-semibold" style={{ background: tier.bg, color: tier.color }}>
+              {tier.label}
+            </div>
+          </motion.div>
+        )}
 
-        {/* What you get */}
-        <div className="rounded-xl mb-5 overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
-          <div className="px-4 py-3" style={{ background: 'rgba(72,144,247,0.08)', borderBottom: '1px solid rgba(72,144,247,0.12)' }}>
-            <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: TEAL }}>What you get</p>
+        {/* Heading */}
+        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease, delay: hasScore ? 0.2 : 0 }}>
+          <h1 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(20px,3vw,28px)', color: '#111827', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
+            {hasScore
+              ? <>Your results are ready.<br /><span style={{ color: TEAL }}>Create an account to start.</span></>
+              : <>Assessment complete.<br /><span style={{ color: TEAL }}>One step to get started.</span></>
+            }
+          </h1>
+          <p className="text-sm mb-6 leading-relaxed" style={{ color: '#4b5563' }}>
+            {hasScore
+              ? 'Our doctors have the context they need. Create your patient account and we\'ll build your personalised clinical protocol.'
+              : 'You\'re eligible for a consultation. Create your patient account to book with an AHPRA-registered doctor.'}
+          </p>
+        </motion.div>
+
+        {/* What happens next */}
+        <div className="rounded-xl mb-5 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.07)' }}>
+          <div className="px-4 py-3" style={{ background: 'rgba(72,144,247,0.06)', borderBottom: '1px solid rgba(72,144,247,0.1)' }}>
+            <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: TEAL }}>What happens next</p>
           </div>
-          <div className="flex flex-col divide-y" style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'rgba(255,255,255,0.05)' }}>
+          <div className="flex flex-col" style={{ background: '#fafafa' }}>
             {[
-              {
-                title: 'Doctor-prescribed protocol',
-                body: 'Built from your blood results by an AHPRA-registered practitioner — not a template.',
-                icon: (
-                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                    <circle cx="10" cy="6" r="3.5" stroke={TEAL} strokeWidth="1.4" />
-                    <path d="M3 17c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
-                  </svg>
-                ),
-              },
-              {
-                title: 'Pathology at 2,000+ centres',
-                body: 'Doctor-ordered blood tests — referral issued instantly. Collect anywhere in Australia.',
-                icon: (
-                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                    <path d="M7 2h6v5l2 8H5L7 7V2z" stroke={TEAL} strokeWidth="1.4" strokeLinejoin="round" />
-                    <path d="M7 8h6" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
-                  </svg>
-                ),
-              },
-              {
-                title: 'TGA-compliant pharmacy delivery',
-                body: 'Medication compounded and shipped directly to your door. No chemist visits.',
-                icon: (
-                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                    <rect x="2" y="6" width="16" height="11" rx="2" stroke={TEAL} strokeWidth="1.4" />
-                    <path d="M6 6V4a4 4 0 018 0v2" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
-                  </svg>
-                ),
-              },
-              {
-                title: 'Unlimited telehealth reviews',
-                body: 'Ongoing clinical support and scheduled check-ins with your doctor, 100% online.',
-                icon: (
-                  <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-                    <rect x="2" y="4" width="16" height="11" rx="2" stroke={TEAL} strokeWidth="1.4" />
-                    <path d="M7 18h6M10 15v3" stroke={TEAL} strokeWidth="1.4" strokeLinecap="round" />
-                  </svg>
-                ),
-              },
-            ].map(({ title, body, icon }) => (
-              <div key={title} className="flex items-start gap-3 px-4 py-3.5" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-                <div className="mt-0.5 flex-shrink-0">{icon}</div>
+              { n: 1, title: 'Create your account', body: 'Register in under 2 minutes — no GP referral required.' },
+              { n: 2, title: 'Complete pathology testing', body: 'We issue your referral. Walk into any of 4,000+ accredited collection centres.' },
+              { n: 3, title: 'Doctor consultation', body: 'Your AHPRA-registered doctor builds your personalised protocol.' },
+            ].map(s => (
+              <div key={s.n} className="flex items-start gap-3 px-4 py-3.5" style={{ borderBottom: s.n < 3 ? '1px solid rgba(0,0,0,0.05)' : 'none' }}>
+                <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-[11px] font-bold mt-0.5" style={{ background: 'rgba(72,144,247,0.1)', color: TEAL }}>{s.n}</div>
                 <div>
-                  <p className="text-xs font-semibold mb-0.5" style={{ color: '#f0f4f8' }}>{title}</p>
-                  <p className="text-[11px] leading-relaxed" style={{ color: 'rgba(240,244,248,0.45)' }}>{body}</p>
+                  <p className="text-xs font-semibold mb-0.5" style={{ color: '#111827' }}>{s.title}</p>
+                  <p className="text-[11px] leading-relaxed" style={{ color: '#6b7280' }}>{s.body}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-xl p-6 flex flex-col gap-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <h2 className="font-semibold text-sm" style={{ color: '#f0f4f8' }}>Create your account</h2>
-
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Email</label>
-              <input
-                type="email"
-                placeholder="example@gmail.com"
-                value={form.email}
-                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Confirm email</label>
-              <input
-                type="email"
-                placeholder="Confirm email address"
-                value={form.emailConfirm}
-                onChange={e => setForm(f => ({ ...f, emailConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.emailConfirm && form.emailConfirm !== form.email ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Full name</label>
-              <input
-                type="text"
-                placeholder="Enter your full name"
-                value={form.name}
-                onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', color: '#f0f4f8' }}
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Password</label>
-              <input
-                type="password"
-                placeholder="Enter password"
-                value={form.password}
-                onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
-                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.password && form.password.length < 8 ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-                minLength={8}
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-semibold" style={{ color: 'rgba(240,244,248,0.45)' }}>Confirm password</label>
-              <input
-                type="password"
-                placeholder="Confirm password"
-                value={form.passwordConfirm}
-                onChange={e => setForm(f => ({ ...f, passwordConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-lg text-sm outline-none w-full"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.passwordConfirm && form.passwordConfirm !== form.password ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-              />
-            </div>
-
-            {error && <p className="text-xs" style={{ color: '#ef4444' }}>{error}</p>}
-
-            <button
-              type="submit"
-              disabled={!valid || loading}
-              className="w-full py-3.5 rounded-lg text-sm font-bold tracking-wide transition-all duration-150 mt-1"
-              style={{
-                background: valid && !loading ? TEAL : 'rgba(255,255,255,0.06)',
-                color: valid && !loading ? '#fff' : 'rgba(255,255,255,0.25)',
-                cursor: valid && !loading ? 'pointer' : 'not-allowed',
-                fontFamily: 'var(--font-space-grotesk)',
-              }}
-            >
-              {loading ? 'Creating account...' : 'Create account'}
-            </button>
-          </form>
-
-          <p className="text-center text-[11px]" style={{ color: 'rgba(240,244,248,0.25)' }}>
-            Already have an account?{' '}
-            <a href="/login" style={{ color: TEAL }}>Sign in</a>
-          </p>
-        </div>
-
-        {/* LegitScript badge */}
-        <div className="mt-5 rounded-xl p-4 flex items-center gap-3" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)' }}>
-          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.2)' }}>
-            <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-              <path d="M12 2L4 6v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V6l-8-4z" stroke={TEAL} strokeWidth="1.5" strokeLinejoin="round" />
-              <path d="M9 12l2 2 4-4" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        {/* CTA */}
+        <a
+          href={config.signupUrl ?? PORTAL_SIGNUP}
+          onClick={e => { e.preventDefault(); openSignupGate(() => { handleContinue().then(() => { window.location.href = config.signupUrl ?? PORTAL_SIGNUP }) }) }}
+          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl text-sm font-bold tracking-wide mb-3 transition-all duration-150"
+          style={{
+            background: loading ? 'rgba(0,0,0,0.08)' : `linear-gradient(135deg, ${TEAL} 0%, #1d4fd8 100%)`,
+            color: loading ? '#6b7280' : '#fff',
+            textDecoration: 'none',
+            fontFamily: 'var(--font-space-grotesk)',
+            boxShadow: loading ? 'none' : '0 4px 20px rgba(72,144,247,0.3)',
+          }}
+        >
+          {loading ? 'Saving your results…' : 'Create account & start treatment'}
+          {!loading && (
+            <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
+          )}
+        </a>
+
+        <p className="text-center text-[11px] mb-6" style={{ color: '#6b7280' }}>
+          Already have an account?{' '}
+          <a href="https://app.apexmetabolichealth.com.au" style={{ color: TEAL }}>Sign in to portal</a>
+        </p>
+
+        {/* Compliance note for blood-requiring programs */}
+        {config.requiresBloodTest && (
+          <div className="rounded-xl p-4 mb-4" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}>
+            <p className="text-[11px] leading-relaxed" style={{ color: '#6b7280' }}>
+              Prescription treatments require a valid prescription from an AHPRA-registered doctor. A pathology assessment is required before any treatment is initiated.
+            </p>
           </div>
-          <div>
-            <p className="text-xs font-semibold" style={{ color: '#f0f4f8' }}>LegitScript Certified</p>
-            <p className="text-[10px]" style={{ color: 'rgba(240,244,248,0.35)' }}>Verified online healthcare provider · TGA compliant</p>
-          </div>
-          <div className="ml-auto flex items-center gap-1">
-            <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-              <path d="M2 6l3 3 5-5" stroke="#22c55e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-[10px] font-semibold" style={{ color: '#22c55e' }}>Verified</span>
-          </div>
+        )}
+
+        {/* Trust row */}
+        <div className="flex items-center justify-center gap-5 mt-1">
+          {['AHPRA registered', 'TGA compliant', '100% online'].map(t => (
+            <div key={t} className="flex items-center gap-1.5">
+              <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5 flex-shrink-0" aria-hidden="true">
+                <path d="M1.5 5l2 2 4.5-4" stroke={TEAL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span className="text-[10px]" style={{ color: '#6b7280' }}>{t}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Right — trust grid (desktop only) */}
-      <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(255,255,255,0.06)' }}>
+      <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(0,0,0,0.06)' }}>
         {TRUST_PANELS.map((p, i) => (
           <div
             key={i}
@@ -904,8 +975,8 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
             />
             <div className="relative z-10 p-7">
               <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1" style={{ color: TEAL }}>{p.label}</p>
-              <h3 className="font-bold text-base mb-1.5" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{p.heading}</h3>
-              <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.55)' }}>{p.body}</p>
+              <h3 className="font-bold text-base mb-1.5" style={{ color: '#111827', fontFamily: 'var(--font-space-grotesk)' }}>{p.heading}</h3>
+              <p className="text-xs leading-relaxed" style={{ color: '#4b5563' }}>{p.body}</p>
             </div>
           </div>
         ))}
@@ -919,7 +990,7 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
 
 export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
   const router = useRouter()
-  const [phase, setPhase] = useState<Phase>('intro')
+  const [phase, setPhase] = useState<Phase>('quiz')
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
   const [direction, setDirection] = useState(1)
@@ -930,8 +1001,11 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_accountDone, setAccountDone] = useState(false)
 
+  // Inject blood timing question as the very first step in every quiz
+  const augmentedConfig = { ...config, steps: [BLOOD_TIMING_STEP, ...config.steps] }
+
   const checkEligibility = useCallback(() => {
-    for (const step of config.steps) {
+    for (const step of augmentedConfig.steps) {
       if (step.type === 'single') {
         const ans = answers[step.id] as string
         const opt = step.options.find(o => o.value === ans)
@@ -944,10 +1018,11 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
       }
     }
     return true
-  }, [answers, config.steps])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answers, augmentedConfig.steps])
 
   const handleContinue = useCallback(() => {
-    if (stepIndex < config.steps.length - 1) {
+    if (stepIndex < augmentedConfig.steps.length - 1) {
       setDirection(1)
       setStepIndex(i => i + 1)
     } else {
@@ -1006,10 +1081,10 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
 
   return (
     <Shell onClose={() => router.back()}>
-      {phase === 'intro' && <IntroPhase config={config} onStart={() => { setPhase('quiz'); setStepIndex(0) }} />}
+      {phase === 'intro' && <IntroPhase config={augmentedConfig} onStart={() => { setPhase('quiz'); setStepIndex(0) }} />}
       {phase === 'quiz' && (
         <QuizPhase
-          config={config}
+          config={augmentedConfig}
           stepIndex={stepIndex}
           answers={answers}
           direction={direction}
@@ -1028,13 +1103,13 @@ export default function IntakeQuizEngine({ config }: { config: QuizConfig }) {
       {phase === 'processing' && <ProcessingPhase eligible={isEligible} onDone={handleProcessingDone} />}
       {phase === 'account' && (
         <AccountPhase
-          config={config}
+          config={augmentedConfig}
           answers={answers}
           onDone={() => { setAccountDone(true); setPhase('eligible') }}
         />
       )}
-      {phase === 'eligible' && <EligiblePhase config={config} />}
-      {phase === 'ineligible' && <IneligiblePhase config={config} overrideMsg={bmiIneligibleMsg} />}
+      {phase === 'eligible' && <EligiblePhase config={augmentedConfig} />}
+      {phase === 'ineligible' && <IneligiblePhase config={augmentedConfig} overrideMsg={bmiIneligibleMsg} />}
     </Shell>
   )
 }

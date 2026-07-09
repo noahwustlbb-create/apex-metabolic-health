@@ -16,7 +16,7 @@ const PROGRAMS = [
     bloodsHref: '/intake/bloods-hormone',
     color: '#1a4fd6',
     bg: 'linear-gradient(145deg, #0f2a6e 0%, #1a4fd6 60%, #3b82f6 100%)',
-    accent: '#4890f7',
+    accent: 'var(--blue)',
     tag: 'Most Popular',
     comingSoon: false,
   },
@@ -81,7 +81,7 @@ const PROGRAMS = [
     bloodsHref: '/programs/longevity',
     color: '#0f766e',
     bg: 'linear-gradient(145deg, #042f2e 0%, #0f766e 60%, #14b8a6 100%)',
-    accent: '#4890f7',
+    accent: 'var(--blue)',
     tag: 'Coming Soon',
     comingSoon: true,
   },
@@ -145,7 +145,7 @@ function ProgramCard({ program, index, inView }: {
           <h3 className="text-xl font-bold leading-tight" style={{ fontFamily: 'var(--font-space-grotesk)', color: '#ffffff' }}>
             {program.name}
           </h3>
-          <p className="text-[10px] mt-3 tracking-[0.1em] uppercase" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          <p className="text-[10px] mt-3 tracking-[0.1em] uppercase" style={{ color: 'var(--blue)' }}>
             YOUR JOURNEY TO OPTIMAL HEALTH ↗
           </p>
         </div>
@@ -161,7 +161,7 @@ function ProgramCard({ program, index, inView }: {
         {program.comingSoon ? (
           <div
             className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold mb-3"
-            style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-primary)', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
+            style={{ background: 'rgba(0,0,0,0.04)', color: 'var(--text-primary)', border: '1px solid rgba(72,144,247,0.1)', cursor: 'default' }}
           >
             Joining waitlist soon
           </div>
@@ -173,7 +173,7 @@ function ProgramCard({ program, index, inView }: {
             onMouseEnter={e => { e.currentTarget.style.opacity = '0.9' }}
             onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
           >
-            Start program
+            Start treatment
             <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -230,12 +230,7 @@ export default function ProgramCards() {
             >
               Six programs.
               <br />
-              <span style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ color: 'var(--blue)' }}>
                 One clinic.
               </span>
             </motion.h2>
@@ -264,19 +259,19 @@ export default function ProgramCards() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6, ease }}
           className="flex flex-wrap items-center justify-between gap-4 mt-10 pt-8"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+          style={{ borderTop: '1px solid rgba(0,0,0,0.04)' }}
         >
           <p className="text-sm" style={{ color: 'var(--text-primary)' }}>
             Not sure which program is right for you?
           </p>
           <a
-            href="/intake/pre-screen"
+            href="https://app.apexmetabolichealth.com.au/signup"
             className="inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-150"
-            style={{ color: '#4890f7' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#4890f7' }}
+            style={{ color: 'var(--blue)' }}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--blue)' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--blue)' }}
           >
-            Take the 60-second assessment →
+            Get started →
           </a>
         </motion.div>
       </div>

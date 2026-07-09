@@ -60,7 +60,7 @@ function GetStartedHero() {
           style={{ fontFamily: 'var(--font-space-grotesk)', color: '#F4F4F6', lineHeight: '1.06' }}
         >
           Every Way to Begin.{' '}
-          <span className="text-teal-gradient">Choose Yours.</span>
+          <span className="text-accent">Choose Yours.</span>
         </motion.h1>
 
         <motion.p
@@ -81,7 +81,7 @@ function GetStartedHero() {
           className="flex flex-wrap gap-3"
         >
           {[
-            { label: 'Start Assessment', href: '/intake/pre-screen', primary: true },
+            { label: 'Take the health assessment', href: '/quiz', primary: true },
             { label: 'Hormone Consultation', href: '/intake/hormone-consult' },
             { label: 'Performance Consultation', href: '/intake/hormone-consult' },
             { label: 'Metabolic Consultation', href: '/intake/general-consult' },
@@ -89,14 +89,14 @@ function GetStartedHero() {
             { label: 'Skin Regeneration', href: '/intake/general-consult' },
             { label: 'Injury Repair', href: '/intake/general-consult' },
             { label: 'General Check Up', href: '/intake/general-consult' },
-            { label: 'Order Blood Panel', href: '/intake/pre-screen' },
+            { label: 'Order Blood Panel', href: '/quiz' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
           ].map(({ label, href, primary }) => (
             <Link
               key={href}
               href={href}
-              className={primary ? 'btn-teal' : 'btn-ghost'}
+              className={primary ? 'btn-pill' : 'btn-ghost'}
             >
               {label}
               <span className="btn-circle">
@@ -117,10 +117,10 @@ function GetStartedHero() {
 const ALL_PATHWAYS = [
   {
     tag: 'Not Sure Where to Start',
-    title: 'Start Assessment',
+    title: 'Take the health assessment',
     desc: 'Answer a few questions. Get matched to the right clinical pathway in under 2 minutes.',
     href: '/assessment',
-    cta: 'Start Assessment',
+    cta: 'Take the health assessment',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
@@ -188,7 +188,7 @@ const ALL_PATHWAYS = [
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
     desc: 'Doctor-ordered blood panels issued directly through Apex — collect at any accredited centre near you.',
-    href: '/intake/pre-screen',
+    href: '/quiz',
     cta: 'Order Blood Panel',
     featured: false,
     icon: (
@@ -316,7 +316,7 @@ function AllPathways() {
               style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.08' }}
             >
               Every way to{' '}
-              <span className="text-teal-gradient">get started.</span>
+              <span className="text-accent">get started.</span>
             </h2>
             <p className="text-base md:text-lg" style={{ color: 'var(--text-primary)' }}>
               Choose what fits where you&apos;re at right now.
@@ -361,7 +361,7 @@ function AllPathways() {
                 >
                   <p
                     className="text-[10px] font-semibold tracking-[0.18em] uppercase mb-4"
-                    style={{ color: path.featured ? '#4890f7' : '#0a0e1a' }}
+                    style={{ color: path.featured ? 'var(--blue)' : '#0a0e1a' }}
                   >
                     {path.tag}
                   </p>
@@ -370,7 +370,7 @@ function AllPathways() {
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
                       background: path.featured ? 'rgba(44,116,232,0.15)' : 'var(--elevated)',
-                      color: path.featured ? '#4890f7' : '#4890f7',
+                      color: path.featured ? 'var(--blue)' : 'var(--blue)',
                     }}
                   >
                     {path.icon}
@@ -389,9 +389,9 @@ function AllPathways() {
 
                   <div
                     className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase transition-colors duration-200"
-                    style={{ color: path.featured ? '#4890f7' : '#0a0e1a' }}
+                    style={{ color: path.featured ? 'var(--blue)' : '#0a0e1a' }}
                   >
-                    <span className="group-hover:text-[#4890f7] transition-colors duration-200">
+                    <span className="group-hover:text-blue transition-colors duration-200">
                       {path.cta}
                     </span>
                     <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
@@ -641,7 +641,7 @@ function EnquiryForm() {
               />
             </div>
 
-            <button type="submit" className="btn-teal w-full md:w-auto px-12" disabled={submitting} style={{ opacity: submitting ? 0.7 : 1 }}>
+            <button type="submit" className="btn-pill w-full md:w-auto px-12" disabled={submitting} style={{ opacity: submitting ? 0.7 : 1 }}>
               {submitting ? 'Sending…' : 'Send Enquiry'}
             </button>
 

@@ -40,7 +40,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
       >
         {/* Header */}
         <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
-          <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: '#4890f7' }}>
+          <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: 'var(--blue)' }}>
             Next step
           </p>
           <p className="text-sm font-semibold mt-0.5" style={{ color: 'var(--text-primary)' }}>
@@ -83,7 +83,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
                     {consultSub}
                   </p>
-                  <p className="text-xs font-semibold mt-1.5" style={{ color: '#4890f7' }}>Choose a time →</p>
+                  <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Choose a time →</p>
                 </div>
               </a>
 
@@ -113,7 +113,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                     <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
                       Not sure where to start? A quick call to discuss your goals — no obligation.
                     </p>
-                    <p className="text-xs font-semibold mt-1.5" style={{ color: '#4890f7' }}>Book free call →</p>
+                    <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Book free call →</p>
                   </div>
                 </a>
               )}
@@ -138,7 +138,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
                     We'll contact you within 1 business day to confirm your next step.
                   </p>
-                  <p className="text-xs font-semibold mt-1.5" style={{ color: '#4890f7' }}>I'm happy to wait →</p>
+                  <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>I'm happy to wait →</p>
                 </div>
               </button>
             </motion.div>
@@ -161,7 +161,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Got it — we'll be in touch within 1 business day.</p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                   Changed your mind?{' '}
-                  <a href={primaryLink} target="_blank" rel="noopener noreferrer" style={{ color: '#4890f7' }}>Book a time here.</a>
+                  <a href={primaryLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>Book a time here.</a>
                 </p>
               </div>
             </motion.div>
@@ -183,7 +183,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Calendly is opening in a new tab.</p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                   Can't see it?{' '}
-                  <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: '#4890f7' }}>
+                  <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
                     Click here to book.
                   </a>
                 </p>

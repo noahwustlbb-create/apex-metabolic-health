@@ -13,7 +13,7 @@ const config: QuizConfig = {
     'Consultation with an AHPRA-registered doctor',
     'Doctor-coordinated pharmacy delivery',
   ],
-  consultUrl: HORMONE_URL,
+  consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our longevity program needs further assessment for your situation.',
   ineligibleBody: 'Based on your health history, our doctors need to conduct a more specialised review before recommending a longevity protocol. Please book a free discovery call — we can help you find the right pathway.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },

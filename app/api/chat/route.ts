@@ -36,7 +36,7 @@ PROCESS:
 3. Telehealth consultation with an AHPRA-registered doctor (30–60 minutes)
 4. Personalised clinical protocol designed
 5. Doctor-prescribed treatment through our TGA-compliant partner pharmacy
-6. Mandatory biological reviews every 4 months
+6. Mandatory biological reviews every 3 months
 
 BOOKING LINKS (direct patients to these):
 - Free Discovery Call: /intake/discovery

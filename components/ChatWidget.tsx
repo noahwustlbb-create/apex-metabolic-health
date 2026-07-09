@@ -22,7 +22,7 @@ function TypingIndicator() {
         <motion.span
           key={i}
           className="w-1.5 h-1.5 rounded-full"
-          style={{ backgroundColor: '#0a0e1a' }}
+          style={{ backgroundColor: '#9ca3af' }}
           animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
           transition={{ duration: 1, repeat: Infinity, delay: i * 0.18 }}
         />

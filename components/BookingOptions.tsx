@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
+import { useSignupGate } from '@/context/SignupGateContext'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -11,7 +12,7 @@ const OPTIONS = [
     tag: 'Not Sure Where to Start',
     title: 'Find My Program',
     desc: 'Answer 5 questions. Get matched to the right program in under 2 minutes.',
-    href: '/intake/pre-screen',
+    href: '/quiz',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
@@ -77,6 +78,7 @@ export default function BookingOptions({
 }: BookingOptionsProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
+  const { open } = useSignupGate()
 
   return (
     <section
@@ -215,10 +217,11 @@ export default function BookingOptions({
           className="flex flex-col items-center gap-4 mt-10"
         >
           {showViewAll && (
-            <Link
-              href="/intake/pre-screen"
+            <button
+              type="button"
+              onClick={() => open()}
               className="inline-flex items-center gap-2 text-[12px] font-semibold tracking-[0.14em] uppercase transition-colors duration-200"
-              style={{ color: '#3575C6' }}
+              style={{ color: '#3575C6', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
               onMouseEnter={(e) => { e.currentTarget.style.color = '#6AAEE8' }}
               onMouseLeave={(e) => { e.currentTarget.style.color = '#3575C6' }}
             >
@@ -226,7 +229,7 @@ export default function BookingOptions({
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </Link>
+            </button>
           )}
           <p
             className="text-center text-[11px] tracking-[0.18em] uppercase"

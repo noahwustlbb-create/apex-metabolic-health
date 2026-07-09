@@ -11,7 +11,7 @@ const PROGRAMS = [
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
     tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
-    accent: '#4890f7',
+    accent: 'var(--blue)',
     accentBg: 'rgba(72,144,247,0.05)',
     accentBorder: 'rgba(72,144,247,0.15)',
     glowColor: 'rgba(72,144,247,0.04)',
@@ -22,11 +22,33 @@ const PROGRAMS = [
       'Body composition changes — fat gain, muscle loss',
       'Brain fog and reduced motivation',
     ],
-    href: '/intake/hormone-consult',
+    href: '/programs/hormone-optimisation',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 2v4M10 14v4M2 10h4M14 10h4" strokeLinecap="round" />
         <circle cx="10" cy="10" r="4" />
+      </svg>
+    ),
+  },
+  {
+    category: 'Sexual Health',
+    name: 'Sexual Health',
+    tagline: 'Reduced libido, erectile dysfunction, and hormonal factors affecting sexual health — assessed and treated clinically.',
+    accent: '#f43f5e',
+    accentBg: 'rgba(244,63,94,0.06)',
+    accentBorder: 'rgba(244,63,94,0.18)',
+    glowColor: 'rgba(244,63,94,0.04)',
+    tag: null,
+    focus: [
+      'Reduced libido and sexual drive',
+      'Erectile dysfunction — clinically assessed',
+      'Low testosterone with sexual symptoms',
+      'Hormonal contributors to sexual health',
+    ],
+    href: '/programs/sexual-health',
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+        <path d="M10 16.5S2.5 12 2.5 7A4.5 4.5 0 0110 4a4.5 4.5 0 017.5 3c0 5-7.5 9.5-7.5 9.5z" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -45,7 +67,7 @@ const PROGRAMS = [
       'Declining strength or endurance output',
       'Suboptimal body composition despite diet and training',
     ],
-    href: '/intake/hormone-consult',
+    href: '/programs/performance-plus',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M2 10h3l2-5 3 10 2-7 2 4 2-2h2" strokeLinecap="round" strokeLinejoin="round" />
@@ -67,7 +89,7 @@ const PROGRAMS = [
       'Low energy despite adequate sleep',
       'Weight that doesn\'t respond to diet or exercise',
     ],
-    href: '/intake/general-consult',
+    href: '/programs/metabolic-weight-loss',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M3 17l4-8 4 4 3-6 3 4" strokeLinecap="round" strokeLinejoin="round" />
@@ -90,7 +112,7 @@ const PROGRAMS = [
       'Hairline recession',
       'Hormonally driven scalp changes',
     ],
-    href: '/intake/general-consult',
+    href: '/programs/hair-restoration',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M10 3c0 0-5 4-5 8a5 5 0 0010 0c0-4-5-8-5-8z" strokeLinejoin="round" />
@@ -113,7 +135,7 @@ const PROGRAMS = [
       'Acne or persistent skin conditions',
       'Post-injury or post-procedural skin repair',
     ],
-    href: '/intake/general-consult',
+    href: '/programs/skin-regeneration',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="10" cy="10" r="7" />
@@ -136,11 +158,58 @@ const PROGRAMS = [
       'Recurring injury at the same sites',
       'Return-to-training clinical support',
     ],
-    href: '/intake/general-consult',
+    href: '/programs/injury-repair',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M6 10h8M10 6v8" strokeLinecap="round" />
         <rect x="3" y="3" width="14" height="14" rx="3" />
+      </svg>
+    ),
+  },
+  {
+    category: 'Longevity',
+    name: 'Anti-Ageing & Longevity',
+    tagline: 'Comprehensive health optimisation for the long game — tracking what matters before problems emerge.',
+    accent: '#f59e0b',
+    accentBg: 'rgba(245,158,11,0.06)',
+    accentBorder: 'rgba(245,158,11,0.18)',
+    glowColor: 'rgba(245,158,11,0.04)',
+    tag: 'New',
+    focus: [
+      'Preventive cardiovascular and metabolic profiling',
+      'Hormonal baseline tracking over time',
+      'Performance and cognitive longevity',
+      'Proactive long-horizon health management',
+    ],
+    href: '/programs/longevity',
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+        <circle cx="10" cy="10" r="7" />
+        <path d="M10 6.5v3.5l2.5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M14.5 5.5l1-1M5.5 5.5l-1-1" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    category: 'Diagnostics',
+    name: 'Comprehensive Blood Panels',
+    tagline: 'Doctor-issued pathology covering the markers your GP doesn\'t order — interpreted in clinical context, not just a normal range.',
+    accent: '#06b6d4',
+    accentBg: 'rgba(6,182,212,0.06)',
+    accentBorder: 'rgba(6,182,212,0.18)',
+    glowColor: 'rgba(6,182,212,0.04)',
+    tag: null,
+    focus: [
+      'Multi-system hormone and metabolic panels',
+      'Doctor-issued referral — no GP required',
+      '4,000+ accredited collection centres',
+      'Results interpreted by your Apex doctor',
+    ],
+    href: '/programs/pathology',
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+        <path d="M7.5 3h5M8.5 3v6L5 16.5a.75.75 0 00.7 1h8.6a.75.75 0 00.7-1L11.5 9V3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M7 13.5h6" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -287,8 +356,8 @@ export default function ProgramsSection() {
       style={{ backgroundColor: 'var(--surface)' }}
       aria-label="Clinical programs"
     >
-      <div className="warm-rule" aria-hidden="true" />
-      <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden="true" />
+      
+      
       <div
         aria-hidden="true"
         className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
@@ -305,17 +374,17 @@ export default function ProgramsSection() {
               transition={{ duration: 0.5, ease }}
               className="label mb-5"
             >
-              Clinical Programs
+              Clinical Treatments
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 24 }}
               animate={headingInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              className="display-serif"
+              className="display-heading"
               style={{ fontSize: 'clamp(32px, 3.5vw, 56px)' }}
             >
-              Six programs.{' '}
-              <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
+              Nine treatments.{' '}
+              <span style={{ color: 'var(--blue)' }}>
                 One clinic.
               </span>
             </motion.h2>
@@ -327,7 +396,7 @@ export default function ProgramsSection() {
             className="text-base leading-relaxed"
             style={{ color: 'var(--text-primary)' }}
           >
-            Each program targets a distinct biological system with its own clinical pathway and doctor-led protocol. The pre-screen assessment confirms the right fit for your profile.
+            Each treatment targets a distinct biological system with its own clinical pathway and doctor-led protocol. Speak with one of our doctors to confirm the right fit for your profile.
           </motion.p>
         </div>
 
@@ -350,36 +419,42 @@ export default function ProgramsSection() {
         >
           <div>
             <p className="text-sm font-medium mb-0.5" style={{ color: 'var(--text-primary)' }}>
-              Not sure which program fits?
+              Not sure which treatment fits?
             </p>
-            <p className="text-xs" style={{ color: '#4890f7' }}>
-              Complete the pre-screen and we&apos;ll identify the right clinical pathway for you.
+            <p className="text-xs" style={{ color: 'var(--blue)' }}>
+              Take the 2-min assessment or book a consultation — your doctor confirms the right pathway.
             </p>
           </div>
-          <Link
-            href="/intake/pre-screen"
-            className="inline-flex items-center gap-2 text-sm font-semibold flex-shrink-0 px-5 py-2.5 rounded-full transition-all duration-150"
-            style={{
-              background: 'rgba(72,144,247,0.07)',
-              border: '1px solid rgba(72,144,247,0.18)',
-              color: '#4890f7',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLElement
-              el.style.background = 'rgba(72,144,247,0.12)'
-              el.style.borderColor = 'rgba(72,144,247,0.38)'
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLElement
-              el.style.background = 'rgba(72,144,247,0.07)'
-              el.style.borderColor = 'rgba(72,144,247,0.18)'
-            }}
-          >
-            Start pre-screen assessment
-            <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <Link
+              href="https://app.apexmetabolichealth.com.au/signup"
+              className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-150"
+              style={{
+                background: 'rgba(72,144,247,0.07)',
+                border: '1px solid rgba(72,144,247,0.18)',
+                color: 'var(--blue)',
+              }}
+              onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(72,144,247,0.12)'; el.style.borderColor = 'rgba(72,144,247,0.38)' }}
+              onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(72,144,247,0.07)'; el.style.borderColor = 'rgba(72,144,247,0.18)' }}
+            >
+              Take Assessment
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+            <Link
+              href="https://app.apexmetabolichealth.com.au/signup"
+              className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-150"
+              style={{ background: 'var(--blue)', color: '#fff' }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--blue-dark)' }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'var(--blue)' }}
+            >
+              Get Started
+              <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
         </motion.div>
 
       </div>

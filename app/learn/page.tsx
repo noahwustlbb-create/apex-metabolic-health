@@ -7,7 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 const ARTICLES = [
   {
@@ -49,9 +49,9 @@ const ARTICLES = [
   {
     category: 'Clinical Care',
     readTime: '4 min read',
-    title: 'The 4-Month Review Cycle: Why Oversight Isn\'t Optional',
+    title: 'The 3-Month Review Cycle: Why Oversight Isn\'t Optional',
     summary: 'Protocol optimisation is not a one-time event. Why ongoing clinical reviews — and the data they generate — are what separates real outcomes from guesswork.',
-    slug: 'the-4-month-review-cycle',
+    slug: 'the-3-month-review-cycle',
     featured: false,
     tags: ['Reviews', 'Protocol', 'Ongoing care'],
   },
@@ -101,14 +101,6 @@ export default function LearnPage() {
             style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
           />
           <div className="container-tight relative z-10">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, ease }}
-              className="label mb-5"
-            >
-              Clinical Education
-            </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
@@ -123,12 +115,7 @@ export default function LearnPage() {
               }}
             >
               Understand your{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ color: 'var(--blue)' }}>
                 biology.
               </span>
             </motion.h1>
@@ -325,10 +312,10 @@ export default function LearnPage() {
                     </p>
                   </div>
                   <Link
-                    href="/intake/pre-screen"
+                    href="https://app.apexmetabolichealth.com.au/signup"
                     className="btn-primary whitespace-nowrap flex-shrink-0"
                   >
-                    Start assessment
+                    Create Your Account
                     <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>

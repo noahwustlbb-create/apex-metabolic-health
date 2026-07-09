@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function StartPage() {
   return (
-    <Suspense fallback={<div style={{ background: '#04060d', minHeight: '100vh' }} />}>
+    <Suspense fallback={<div style={{ background: '#f9fafb', minHeight: '100vh' }} />}>
       <ShortAssessment />
     </Suspense>
   )

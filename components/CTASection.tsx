@@ -1,26 +1,28 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const PROOF = [
-  { value: '1,400+', label: 'Patients assessed' },
-  { value: '< 48h',  label: 'Referral issued'   },
-  { value: 'No GP',  label: 'Referral needed'   },
-]
-
 export default function CTASection() {
+  const prefersReduced = useReducedMotion()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+
+  const anim = (delay = 0, y = 20) => ({
+    initial: prefersReduced ? false : { opacity: 0, y },
+    animate: inView ? { opacity: 1, y: 0 } : {},
+    transition: prefersReduced ? { duration: 0 } : { duration: 0.7, delay, ease },
+  })
 
   return (
     <section
       id="cta"
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ background: '#04060d' }}
+      style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)' }}
       aria-label="Get started"
     >
       {/* Top rule */}
@@ -30,125 +32,132 @@ export default function CTASection() {
         aria-hidden="true"
       />
 
-      {/* Central atmospheric glow */}
+      {/* Subtle top glow */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 55% at 50% 100%, rgba(72,144,247,0.13) 0%, transparent 70%)' }}
-      />
-      {/* Top secondary glow */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 50% 30% at 50% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
-      />
-
-      <div
-        className="absolute inset-0 dot-grid pointer-events-none"
-        style={{ opacity: 0.28 }}
-        aria-hidden="true"
+        style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 0%, rgba(72,144,247,0.06) 0%, transparent 70%)' }}
       />
 
       <div className="container-tight relative z-10">
         <div className="max-w-3xl mx-auto text-center">
 
-          {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, ease }}
-            className="text-[10px] font-bold tracking-[0.24em] uppercase mb-8"
-            style={{ color: 'rgba(72,144,247,0.55)' }}
-          >
-            Take the first step
-          </motion.p>
-
           {/* Headline */}
           <motion.h2
-            initial={{ opacity: 0, y: 32 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.08, ease }}
-            className="display-serif mb-6"
-            style={{ fontSize: 'clamp(46px, 7vw, 96px)', color: '#f0f5ff' }}
+            {...anim(0, 32)}
+            className="display-heading mb-6"
+            style={{ fontSize: 'clamp(30px, 5.5vw, 72px)', color: 'var(--text-primary)' }}
           >
             Your biology.{' '}
-            <span style={{ color: '#4890f7' }}>
+            <span style={{ color: 'var(--blue)' }}>
               Optimised.
             </span>
           </motion.h2>
 
           {/* Body */}
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease }}
+            {...anim(0.14, 18)}
             className="text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-12"
-            style={{ color: 'rgba(240,245,255,0.78)' }}
+            style={{ color: 'var(--text-secondary)' }}
           >
-            Get started with an AHPRA-registered doctor. Know your numbers within days.
-            Have a personalised clinical protocol in your hands within two weeks.
+            You&apos;ve done the reading. You know something is off. Here&apos;s where you find out
+            exactly what it is — and what to do about it.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.32, ease }}
-            className="flex flex-col items-center gap-4 mb-16"
+            {...anim(0.26, 14)}
+            className="flex flex-col items-center gap-5 mb-16"
           >
+            {/* Primary CTA */}
             <a
-              href="/book"
-              className="btn-white"
-              style={{ fontSize: '14px', padding: '16px 40px' }}
+              href="/start"
+              className="group inline-flex items-center gap-3 font-semibold transition-all duration-200"
+              style={{
+                background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
+                color: '#fff',
+                fontSize: 15,
+                padding: '17px 44px',
+                borderRadius: 12,
+                letterSpacing: '-0.01em',
+                boxShadow: '0 8px 32px rgba(72,144,247,0.35), 0 2px 8px rgba(72,144,247,0.2)',
+                textDecoration: 'none',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translateY(-2px)'
+                e.currentTarget.style.boxShadow = '0 16px 48px rgba(72,144,247,0.45), 0 4px 12px rgba(72,144,247,0.25)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(72,144,247,0.35), 0 2px 8px rgba(72,144,247,0.2)'
+              }}
             >
-              Get Started
-              <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
+              Start your assessment
+              <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
+
+            {/* Program shortcuts */}
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {CANONICAL_PROGRAMS.map(p => ({ label: p.name, href: p.websiteHref })).map(p => (
+                <a
+                  key={p.label}
+                  href={p.href}
+                  className="transition-all duration-150"
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: 'var(--text-secondary)',
+                    background: 'rgba(72,144,247,0.06)',
+                    border: '1px solid rgba(72,144,247,0.12)',
+                    borderRadius: 99,
+                    padding: '0 16px',
+                    minHeight: 44,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.color = 'var(--blue)'
+                    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)'
+                    e.currentTarget.style.background = 'rgba(72,144,247,0.1)'
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.color = 'var(--text-secondary)'
+                    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.12)'
+                    e.currentTarget.style.background = 'rgba(72,144,247,0.06)'
+                  }}
+                >
+                  {p.label} →
+                </a>
+              ))}
+            </div>
+
             <a
               href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium transition-opacity duration-200"
-              style={{ color: 'rgba(240,245,255,0.65)' }}
-              onMouseEnter={e => { e.currentTarget.style.opacity = '0.75' }}
-              onMouseLeave={e => { e.currentTarget.style.opacity = '1' }}
+              className="text-sm transition-colors duration-200"
+              style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'var(--blue)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)' }}
             >
-              or book a free discovery call →
+              Prefer to talk first? Book a free call →
             </a>
           </motion.div>
 
-          {/* Mini stats */}
-          <motion.div
-            initial={{ opacity: 0 }}
+          {/* Empathetic close */}
+          <motion.p
+            initial={prefersReduced ? false : { opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.5, ease }}
-            className="flex items-center justify-center gap-0 pt-10"
-            style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}
+            transition={prefersReduced ? { duration: 0 } : { duration: 0.8, delay: 0.5, ease }}
+            className="text-sm leading-relaxed"
+            style={{ color: 'var(--text-secondary)', borderTop: '1px solid rgba(72,144,247,0.08)', paddingTop: 40 }}
           >
-            {PROOF.map((p, i) => (
-              <div key={p.label} className="flex items-center">
-                <div className="text-center px-8">
-                  <p
-                    className="text-xl font-bold"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: '#f0f5ff', letterSpacing: '-0.02em' }}
-                  >
-                    {p.value}
-                  </p>
-                  <p
-                    className="text-[10px] tracking-[0.14em] uppercase mt-1"
-                    style={{ color: 'rgba(240,245,255,0.55)' }}
-                  >
-                    {p.label}
-                  </p>
-                </div>
-                {i < PROOF.length - 1 && (
-                  <div className="w-px h-8 flex-shrink-0" style={{ background: 'rgba(72,144,247,0.12)' }} aria-hidden="true" />
-                )}
-              </div>
-            ))}
-          </motion.div>
+            Most men who book with us have been told by at least one doctor that their results
+            look fine. We look further.
+          </motion.p>
 
         </div>
       </div>

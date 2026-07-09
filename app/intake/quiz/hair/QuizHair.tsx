@@ -2,18 +2,20 @@
 
 import IntakeQuizEngine, { type QuizConfig } from '@/components/IntakeQuizEngine'
 
-const HORMONE_URL = 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation'
-
 const config: QuizConfig = {
   programName: 'Hair Restoration',
   programSub: 'Doctor-led hair loss treatment',
   estimatedTime: '2 min',
+  scoreLabel: 'Hair Loss Score',
+  requiresBloodTest: true,
+  bloodTestUrl: '/order-bloods',
+  signupUrl: 'https://app.apexmetabolichealth.com.au/signup',
   benefits: [
     'Personalised hair restoration plan',
     'Consultation with an AHPRA-registered doctor',
     'Doctor-coordinated pharmacy delivery',
   ],
-  consultUrl: HORMONE_URL,
+  consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Hair restoration may not be appropriate for you right now.',
   ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call — our clinical team can help determine the safest pathway for you.",
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
@@ -36,21 +38,10 @@ const config: QuizConfig = {
       id: 'duration',
       question: 'How long have you been noticing hair loss?',
       options: [
-        { label: 'Less than 6 months', value: 'lt6m' },
-        { label: '6 months to 1 year', value: '6to12m' },
-        { label: '1 to 3 years', value: '1to3y' },
-        { label: 'More than 3 years', value: 'gt3y' },
-      ],
-    },
-    {
-      type: 'single',
-      id: 'family',
-      question: 'Do you have a family history of hair loss?',
-      options: [
-        { label: "Yes, on my father's side", value: 'fathers' },
-        { label: "Yes, on my mother's side", value: 'mothers' },
-        { label: 'Yes, on both sides', value: 'both' },
-        { label: "No family history I'm aware of", value: 'none' },
+        { label: 'Less than 6 months', value: 'lt6m', score: 1 },
+        { label: '6 months to 1 year', value: '6to12m', score: 2 },
+        { label: '1 to 3 years', value: '1to3y', score: 3 },
+        { label: 'More than 3 years', value: 'gt3y', score: 3 },
       ],
     },
     {
@@ -58,16 +49,34 @@ const config: QuizConfig = {
       id: 'severity',
       question: 'How would you describe the current severity?',
       options: [
-        { label: 'Early stage — noticeable thinning only', value: 'early' },
-        { label: 'Moderate — visible thinning or a receding hairline', value: 'moderate' },
-        { label: 'Advanced — significant loss or large bald areas', value: 'advanced' },
+        { label: 'Early stage — noticeable thinning only', value: 'early', score: 1 },
+        { label: 'Moderate — visible thinning or a receding hairline', value: 'moderate', score: 2 },
+        { label: 'Advanced — significant loss or large bald areas', value: 'advanced', score: 3 },
       ],
+    },
+    {
+      type: 'single',
+      id: 'family',
+      question: 'Do you have a family history of hair loss?',
+      options: [
+        { label: "Yes, on my father's side", value: 'fathers', score: 2 },
+        { label: "Yes, on my mother's side", value: 'mothers', score: 1 },
+        { label: 'Yes, on both sides', value: 'both', score: 3 },
+        { label: "No family history I'm aware of", value: 'none', score: 0 },
+      ],
+    },
+    {
+      type: 'info',
+      id: 'info',
+      heading: 'Why DHT and hormones matter for hair',
+      body: "Androgenetic alopecia — the most common form of male hair loss — is driven by DHT (dihydrotestosterone) binding to follicle receptors. It's a medical condition with evidence-based treatment options, assessed properly through a hormonal blood panel.",
+      stat: 'AHPRA-registered doctors · Hormonal & DHT panel · TGA-compliant protocols',
     },
     {
       type: 'trust',
       id: 'trust',
       heading: 'Hair loss is more treatable than most people think',
-      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually — not with a generic protocol.',
+      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually — a hormonal blood panel is required before any protocol is prescribed.',
     },
     {
       type: 'multi',

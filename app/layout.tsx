@@ -4,8 +4,10 @@ import Script from 'next/script'
 import './globals.css'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
-import { ThemeProvider } from '@/components/ThemeProvider'
 import FloatingContact from '@/components/FloatingContact'
+import { SignupGateProvider } from '@/context/SignupGateContext'
+import { ThemeProvider } from '@/components/ThemeProvider'
+import MotionProvider from '@/components/MotionProvider'
 
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
@@ -14,7 +16,7 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
 const spaceGrotesk = Space_Grotesk({
@@ -35,10 +37,10 @@ export const metadata: Metadata = {
     'hormone optimisation',
     'Australia',
     'metabolic health',
-    'TRT',
-    'low testosterone',
     'weight loss',
     'performance',
+    'AHPRA',
+    'doctor-led',
   ],
   openGraph: {
     title: "Apex Metabolic Health | Doctor-Led Telehealth",
@@ -57,15 +59,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('apex-theme');var d=t||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d);}catch(e){}})();`,
-          }}
-        />
-      </head>
+    <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased overflow-x-hidden">
+        {/* Runs before hydration — prevents light-mode flash when user has saved a preference */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('apex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
@@ -79,11 +76,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', '${AW_ID}');
           `}
         </Script>
+        <a className="skip-link" href="#main-content">Skip to main content</a>
+        <AgeGate />
+        <ReferralCapture />
         <ThemeProvider>
-          <AgeGate />
-          <ReferralCapture />
-          {children}
-          <FloatingContact />
+          <MotionProvider>
+            <SignupGateProvider>
+              {children}
+              <FloatingContact />
+            </SignupGateProvider>
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,8 @@
+{
+  "files": ["public/**/*.html", ".next/**/*.html"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
+  "framework": "nextjs",
+  "devServer": "http://localhost:3000",
+  "cspChecked": true
+}

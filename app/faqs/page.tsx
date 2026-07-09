@@ -29,7 +29,7 @@ function AccordionItem({ question, answer }: { question: string; answer: string 
         </span>
         <span
           style={{
-            color: '#4890f7',
+            color: 'var(--blue)',
             fontSize: '22px',
             lineHeight: 1,
             flexShrink: 0,
@@ -132,17 +132,17 @@ const FAQ_CATEGORIES = [
     ],
   },
   {
-    category: 'Services & Programs',
+    category: 'Services & Treatments',
     faqs: [
       {
-        question: 'What programs does Apex Metabolic Health offer?',
+        question: 'What treatments does Apex Metabolic Health offer?',
         answer:
-          'We currently offer eight clinical programs: Hormone Optimisation, Performance & Recovery, Metabolic Weight Loss, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, General Telehealth, and the Longevity Protocol. Visit our programs pages for full details.',
+          'We currently offer eight clinical treatments: Hormone Optimisation, Performance & Recovery, Metabolic Weight Loss, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, General Telehealth, and the Longevity Protocol. Visit our treatments pages for full details.',
       },
       {
         question: 'Are your services suitable for both men and women?',
         answer:
-          'Yes. Apex Metabolic Health provides clinical services for all adults. Our hormone and metabolic programs are designed to assess and address imbalances in both men and women. Women\'s-specific programs are available including tailored pathology panels.',
+          'Yes. Apex Metabolic Health provides clinical services for all adults. Our hormone and metabolic treatments are designed to assess and address imbalances in both men and women. Women\'s-specific treatments are available including tailored pathology panels.',
       },
       {
         question: 'What is telehealth and how does it work at Apex?',
@@ -160,9 +160,9 @@ const FAQ_CATEGORIES = [
           'Integrative hormone care combines evidence-based pathology testing with personalised clinical protocols that address the full picture of a patient\'s health — not just a single symptom. Our approach considers hormonal, metabolic, and lifestyle factors together rather than in isolation.',
       },
       {
-        question: 'How does the weight management program work?',
+        question: 'How does the weight management treatment work?',
         answer:
-          'Our Metabolic Optimisation program begins with a doctor consultation (no upfront biomarker analysis required) to assess your metabolic profile and design a personalised protocol. Where clinically appropriate, doctor-prescribed treatment is coordinated through our pharmacy partner. Ongoing biological monitoring and review consultations are built into the program.',
+          'Our Metabolic Optimisation treatment begins with a doctor consultation (no upfront biomarker analysis required) to assess your metabolic profile and design a personalised protocol. Where clinically appropriate, doctor-prescribed treatment is coordinated through our pharmacy partner. Ongoing biological monitoring and review consultations are built into the treatment.',
       },
     ],
   },
@@ -213,14 +213,6 @@ function FAQHero() {
       />
 
       <div className="container-tight relative z-10">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="label mb-5"
-        >
-          FAQS
-        </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
@@ -336,7 +328,7 @@ function FAQBottomCTA() {
           transition={{ duration: 0.6, delay: 0.22 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/intake/pre-screen" className="btn-teal">
+          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
             Get Started
           </Link>
           <Link href="/how-it-works" className="btn-ghost">

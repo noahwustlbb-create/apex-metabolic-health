@@ -52,7 +52,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>7. Ongoing Reviews</h2>
-              <p>Patients on active treatment protocols are required to attend a review consultation and repeat pathology testing every 4 months. This is a clinical safety requirement, not optional. Failure to attend a scheduled review may result in your treating doctor declining to continue prescribing until a review is completed.</p>
+              <p>Patients on active treatment protocols are required to attend a review consultation and repeat pathology testing every 3 months. This is a clinical safety requirement, not optional. Failure to attend a scheduled review may result in your treating doctor declining to continue prescribing until a review is completed.</p>
             </section>
 
             <section>

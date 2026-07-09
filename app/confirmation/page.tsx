@@ -37,7 +37,7 @@ export default function ConfirmationPage() {
               style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 38px)', lineHeight: 1.1, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}
             >
               You&apos;re all set.{' '}
-              <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <span style={{ color: 'var(--blue)' }}>
                 We take it from here.
               </span>
             </motion.h1>
@@ -65,7 +65,7 @@ export default function ConfirmationPage() {
                 { step: 'Your protocol', detail: 'Following your consultation, a personalised clinical protocol is prepared where clinically appropriate.' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start">
-                  <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
+                  <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
                   <div>
                     <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{item.step}</p>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{item.detail}</p>
@@ -79,10 +79,10 @@ export default function ConfirmationPage() {
               className="p-4 rounded-sm mb-8"
               style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}
             >
-              <p className="text-xs font-semibold mb-1" style={{ color: '#4890f7' }}>Questions? We&apos;re here.</p>
+              <p className="text-xs font-semibold mb-1" style={{ color: 'var(--blue)' }}>Questions? We&apos;re here.</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
                 Email us at{' '}
-                <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: '#4890f7' }}>
+                <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: 'var(--blue)' }}>
                   admin@apexmetabolichealth.com.au
                 </a>{' '}
                 — we respond within 1 business day.
@@ -101,7 +101,7 @@ export default function ConfirmationPage() {
               <Link
                 href="/signup"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm text-xs font-bold tracking-wide transition-all duration-150"
-                style={{ background: '#4890f7', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+                style={{ background: 'var(--blue)', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
               >
                 Create account — it&apos;s free
               </Link>

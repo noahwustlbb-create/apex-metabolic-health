@@ -8,7 +8,7 @@ export default function CTABanner() {
     <section
       id="book-consultation"
       className="relative py-24 md:py-32 overflow-hidden"
-      aria-label="Book a consultation"
+      aria-label="Get started"
     >
       {/* Gradient background */}
       <div
@@ -51,7 +51,7 @@ export default function CTABanner() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <FadeUp>
-          <p className="text-xs font-semibold tracking-[0.3em] uppercase mb-6 text-white/55">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase mb-6 text-white/75">
             Take the First Step
           </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
@@ -98,7 +98,7 @@ export default function CTABanner() {
               'Results within weeks',
               '100% online',
             ].map(item => (
-              <span key={item} className="text-xs text-white/50 font-medium tracking-wide">
+              <span key={item} className="text-xs text-white/70 font-medium tracking-wide">
                 ✓ {item}
               </span>
             ))}

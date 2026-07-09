@@ -257,7 +257,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     marginTop: 0,
                   }}
                 >
-                  Included in this Program
+                  Included in this Treatment
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {program.includes.slice(0, 4).map((item, i) => (
@@ -293,7 +293,7 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
                     marginTop: 0,
                   }}
                 >
-                  This Program Addresses
+                  This Treatment Addresses
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {program.symptoms.slice(0, 4).map((item, i) => (
@@ -325,17 +325,17 @@ export default function ProgramModal({ program, onClose }: ProgramModalProps) {
               {/* CTA buttons */}
               <a
                 href={program.track === 'hormone' ? '/intake/hormone-consult' : '/intake/general-consult'}
-                className="btn-teal w-full block text-center"
+                className="btn-pill w-full block text-center"
                 style={{ marginBottom: '12px' }}
               >
-                Book a Consultation
+                Get Started
               </a>
               <Link
                 href={`/programs/${program.slug}`}
                 className="btn-ghost w-full block text-center"
                 onClick={onClose}
               >
-                View Full Program Details
+                View Full Treatment Details
               </Link>
 
               {/* Trust line */}

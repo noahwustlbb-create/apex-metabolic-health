@@ -6,20 +6,20 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const ADVANTAGE_STATS = [
   { value: '$0',           label: 'Prescribing fees',   sub: 'vs $125 per script' },
-  { value: 'Cost price',   label: 'All medication',     sub: 'No AHI mark-up' },
-  { value: '$1,000–$1,800', label: 'Annual saving',     sub: 'vs single consult path' },
+  { value: 'Cost price',   label: 'All medication',     sub: 'No medication mark-up' },
+  { value: '$1,000–$1,800', label: 'Est. annual saving', sub: 'Based on 3+ scripts/yr' },
   { value: '$99',          label: 'Per month',           sub: 'No lock-in contracts' },
 ]
 
 const SAVINGS_ROWS = [
   { label: 'Prescribing fees',        saving: 'Up to $500',   period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
-  { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'Zero AHI fees — pharmacy cost price passed direct' },
+  { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up — pharmacy cost price passed direct' },
   { label: 'Follow-up blood panels',  saving: '~$120',        period: '/yr', detail: 'Discounted member rate on all repeat pathology' },
 ]
 
@@ -39,8 +39,8 @@ const INCLUDED = [
         <circle cx="11" cy="11" r="9" /><path d="M11 7v4l3 2" strokeLinecap="round" />
       </svg>
     ),
-    title: 'Structured 4-month review cycles',
-    body: 'Every 4 months: blood work, full biomarker analysis, and protocol reassessment. Not guesswork between appointments — a systematic clinical review.',
+    title: 'Structured 3-month review cycles',
+    body: 'Every 3 months: blood work, full biomarker analysis, and protocol reassessment. Not guesswork between appointments — a systematic clinical review.',
   },
   {
     icon: (
@@ -79,6 +79,17 @@ const INCLUDED = [
     title: 'Free referrals, certs & letters',
     body: 'Medical certificates, health summaries, referrals, and travel letters included as part of your membership. No bolt-on fees.',
   },
+  {
+    icon: (
+      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
+        <rect x="5" y="2" width="12" height="18" rx="2" />
+        <path d="M9 6h4M11 16h.01" strokeLinecap="round" />
+        <path d="M8 10h6M8 13h4" strokeLinecap="round" />
+      </svg>
+    ),
+    title: 'Full patient portal access',
+    body: 'View your bloodwork results, track biomarker trends over time, message your care team, access prescriptions and medical documents — all in one place.',
+  },
 ]
 
 // ─── Sections ─────────────────────────────────────────────────────────────────
@@ -114,7 +125,7 @@ function Hero() {
             <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="text-[11px] font-semibold" style={{ color: ACCENT }}>
-            Members save $1,000–$1,800/yr vs. the single consult path
+            Members may save $1,000–$1,800/yr — based on 3+ scripts annually
           </span>
         </motion.div>
 
@@ -143,7 +154,7 @@ function Hero() {
           }}
         >
           Ongoing care that{' '}
-          <span style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+          <span style={{ color: 'var(--blue)' }}>
             pays for itself.
           </span>
         </motion.h1>
@@ -164,8 +175,8 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.32, ease }}
           className="flex flex-wrap items-center gap-4 mb-8"
         >
-          <Link href="/intake/pre-screen" className="btn-teal">
-            Start your clinical assessment
+          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
+            Take the health assessment
             <span className="btn-circle" aria-hidden="true">
               <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -185,7 +196,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.48, ease }}
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
-          {['AHPRA-registered doctors', 'Reviewed every 4 months', 'Australia-wide telehealth', 'Cancel anytime'].map(t => (
+          {['AHPRA-registered doctors', 'Reviewed every 3 months', 'Australia-wide telehealth', 'Cancel anytime'].map(t => (
             <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: ACCENT }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
               {t}
@@ -406,6 +417,7 @@ function WhatsIncluded() {
             'Nursing team check-ins every 6–8 weeks',
             'Medical certificates included',
             'Health summaries on request',
+            'Full patient portal access',
           ].map(item => (
             <div key={item} className="flex items-center gap-2 px-4 py-2.5 rounded-lg"
               style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
@@ -417,6 +429,113 @@ function WhatsIncluded() {
             </div>
           ))}
         </motion.div>
+      </div>
+    </section>
+  )
+}
+
+function PortalAccess() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  const features = [
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M3 3v14h14" strokeLinecap="round"/><path d="M7 13l3-5 3 3 3-5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+      label: 'Biomarker dashboard', body: 'Every blood result in one place — plotted over time so you can see exactly how your markers are moving.',
+    },
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M17 12a2 2 0 01-2 2H5l-3 3V5a2 2 0 012-2h11a2 2 0 012 2z" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+      label: 'Message your care team', body: 'Direct access to your clinical team between consultations. Questions answered, not queued.',
+    },
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h0a2 2 0 002-2M9 5a2 2 0 012-2h0a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+      label: 'Prescription history', body: 'Full visibility of your treatment history, current protocol, and upcoming renewals.',
+    },
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M4 4h12v12H4zM8 4V2M12 4V2M4 8h12" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+      label: 'Medical documents', body: 'Certificates, referrals, and clinical summaries available to download any time.',
+    },
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M7 2v4M13 2v4M3 9h14" strokeLinecap="round"/></svg>,
+      label: 'Consultation booking', body: 'Book, reschedule, or cancel telehealth appointments directly from the portal.',
+    },
+    {
+      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M10 2a6 6 0 016 6c0 3-1 5-2 6H6c-1-1-2-3-2-6a6 6 0 016-6zM8 17a2 2 0 004 0" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+      label: 'Review reminders', body: 'Automated reminders when your next blood draw or clinical review is due.',
+    },
+  ]
+
+  return (
+    <section className="relative section-pad-sm overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Patient portal">
+      <div className="glow-rule" aria-hidden="true" />
+      <div ref={ref} className="container-tight relative z-10">
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Left */}
+          <div>
+            <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
+              Patient Portal
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
+              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 44px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.08, marginBottom: '1rem' }}
+            >
+              Members unlock the{' '}
+              <span style={{ color: ACCENT }}>full platform.</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
+              className="text-sm leading-relaxed mb-8"
+              style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '440px' }}
+            >
+              The Apex patient portal puts your entire clinical picture in one place — results, messaging, documents, and bookings — accessible from any device.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.28, ease }}
+            >
+              <Link
+                href="https://app.apexmetabolichealth.com.au/signup"
+                className="btn-primary"
+                style={{ display: 'inline-flex', fontSize: '13px' }}
+              >
+                Create your account
+                <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right — feature grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+          >
+            {features.map((f, i) => (
+              <motion.div
+                key={f.label}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: 0.3 + i * 0.06, ease }}
+                className="rounded-xl p-4"
+                style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }}
+              >
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
+                  style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.15)', color: ACCENT }}
+                  aria-hidden="true">
+                  {f.icon}
+                </div>
+                <p className="text-xs font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
+                  {f.label}
+                </p>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                  {f.body}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -434,7 +553,7 @@ function FourMonthCycle() {
   ]
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="4-month review cycle">
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="3-month review cycle">
       <div className="glow-rule" aria-hidden="true" />
       <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
       <div aria-hidden="true" className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none"
@@ -449,7 +568,7 @@ function FourMonthCycle() {
             initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
             style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '0.75rem' }}
           >
-            How the 4-month cycle works.
+            How the 3-month review cycle works.
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
@@ -552,7 +671,7 @@ function ClosingCTA() {
           {[
             { value: '$0', label: 'Prescribing fees' },
             { value: 'Cost price', label: 'Medication' },
-            { value: '$1,000–$1,800', label: 'Avg annual saving' },
+            { value: '$1,000–$1,800', label: 'Est. annual saving' },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '22px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>{stat.value}</p>
@@ -565,8 +684,8 @@ function ClosingCTA() {
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3, ease }}
           className="flex flex-col items-center gap-3"
         >
-          <Link href="/intake/pre-screen" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
-            Start your clinical assessment
+          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
+            Take the health assessment
             <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -594,6 +713,7 @@ export default function MembershipPage() {
         <AdvantageStrip />
         <SavingsBreakdown />
         <WhatsIncluded />
+        <PortalAccess />
         <FourMonthCycle />
         <ClosingCTA />
       </main>

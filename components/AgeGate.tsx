@@ -28,7 +28,7 @@ export default function AgeGate() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[999] flex items-center justify-center"
+          className="fixed inset-0 z-modal flex items-center justify-center"
           style={{ backgroundColor: 'rgba(7,10,13,0.97)', backdropFilter: 'blur(12px)' }}
           aria-modal="true"
           role="dialog"
@@ -92,7 +92,7 @@ export default function AgeGate() {
             <div className="flex flex-col sm:flex-row gap-3 w-full">
               <button
                 onClick={confirm}
-                className="btn-teal flex-1"
+                className="btn-pill flex-1"
                 autoFocus
               >
                 I am 18 or older — Enter

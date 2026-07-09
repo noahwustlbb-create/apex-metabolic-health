@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -53,16 +53,17 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
   label: string; value: string; onChange: (v: string) => void
   type?: string; placeholder?: string; required?: boolean
 }) {
+  const id = useId()
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
-        {label}{required && <span style={{ color: '#4890f7' }}> *</span>}
+      <label htmlFor={id} className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>
+        {label}{required && <span style={{ color: 'var(--blue)' }}> *</span>}
       </label>
-      <input type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+      <input id={id} type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }} />
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(0,0,0,0.10)', color: 'var(--text-primary)', caretColor: 'var(--blue)' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(0,0,0,0.10)'; e.target.style.background = 'var(--surface)' }} />
     </div>
   )
 }
@@ -70,14 +71,15 @@ function Field({ label, value, onChange, type = 'text', placeholder, required }:
 function TextArea({ label, value, onChange, placeholder, rows = 3 }: {
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; rows?: number
 }) {
+  const id = useId()
   return (
     <div>
-      <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>{label}</label>
-      <textarea value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
+      <label htmlFor={id} className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>{label}</label>
+      <textarea id={id} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         className="w-full px-4 py-3 rounded-sm text-sm outline-none resize-none transition-all duration-150"
-        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: 'var(--text-primary)', caretColor: '#4890f7' }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(200,169,110,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.09)'; e.target.style.background = 'var(--surface)' }} />
+        style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(0,0,0,0.10)', color: 'var(--text-primary)', caretColor: 'var(--blue)' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(72,144,247,0.5)'; e.target.style.background = 'rgba(72,144,247,0.04)' }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(0,0,0,0.10)'; e.target.style.background = 'var(--surface)' }} />
     </div>
   )
 }
@@ -96,8 +98,8 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
           <circle cx="12" cy="12" r="10" stroke="#4890f7" strokeWidth="1.5" />
           <path d="M12 8v4m0 4h.01" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
-        <p className="text-xs leading-relaxed" style={{ color: '#7ab8b5' }}>
-          <strong style={{ color: '#4890f7' }}>Morning collection required.</strong> For accurate hormone and metabolic markers, attend your collection centre fasted (10–12 hrs) before 9am. Drink water only.
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--color-accent-fg)' }}>
+          <strong style={{ color: 'var(--blue)' }}>Morning collection required.</strong> For accurate hormone and metabolic markers, attend your collection centre fasted (10–12 hrs) before 9am. Drink water only.
         </p>
       </div>
 
@@ -108,10 +110,10 @@ function Step1({ data, set }: { data: FormData; set: (k: keyof FormData, v: stri
         <Field label="Mobile" type="tel" value={data.phone} onChange={v => set('phone', v)} placeholder="04XX XXX XXX" required />
         <Field label="Date of birth" type="date" value={data.dob} onChange={v => set('dob', v)} required />
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>State <span style={{ color: '#4890f7' }}>*</span></label>
-          <select value={data.state} onChange={e => set('state', e.target.value)}
+          <label htmlFor="bpf-state" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)' }}>State <span style={{ color: 'var(--blue)' }}>*</span></label>
+          <select id="bpf-state" value={data.state} onChange={e => set('state', e.target.value)}
             className="w-full px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150 appearance-none"
-            style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(255,255,255,0.09)', color: data.state ? '#F5F5F5' : '#0a0e1a' }}>
+            style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(0,0,0,0.10)', color: '#111827' }}>
             <option value="" disabled>Select state</option>
             {AU_STATES.map(s => <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>)}
           </select>
@@ -133,15 +135,15 @@ function Step2({ data, set, toggleCondition }: {
       <p className="text-sm mb-8" style={{ color: 'var(--text-primary)' }}>Reviewed by your doctor before issuing your referral.</p>
       <div className="flex flex-col gap-6">
         <div>
-          <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>Medical conditions (select all that apply)</label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <span id="bpf-conditions" className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: 'var(--text-primary)' }}>Medical conditions (select all that apply)</span>
+          <div role="group" aria-labelledby="bpf-conditions" className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {CONDITIONS.map(c => (
               <button key={c} type="button" onClick={() => toggleCondition(c)}
                 className="px-3 py-2 rounded-sm text-xs font-medium transition-all duration-150 text-left"
                 style={{
-                  background: data.conditions.includes(c) ? 'rgba(72,144,247,0.07)' : 'rgba(255,255,255,0.03)',
+                  background: data.conditions.includes(c) ? 'rgba(72,144,247,0.07)' : 'rgba(0,0,0,0.02)',
                   border: `1px solid ${data.conditions.includes(c) ? 'rgba(72,144,247,0.3)' : 'var(--border)'}`,
-                  color: data.conditions.includes(c) ? '#4890f7' : '#4890f7',
+                  color: data.conditions.includes(c) ? 'var(--blue)' : 'var(--blue)',
                 }}>{c}</button>
             ))}
           </div>
@@ -172,14 +174,14 @@ function Step3({ data, set, config }: {
       <div className="p-5 rounded-sm mb-5" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}>
         <div className="flex justify-between items-start mb-4">
           <div>
-            <p className="text-xs font-bold tracking-[0.16em] uppercase mb-1" style={{ color: '#4890f7' }}>{config.panelName}</p>
+            <p className="text-xs font-bold tracking-[0.16em] uppercase mb-1" style={{ color: 'var(--blue)' }}>{config.panelName}</p>
             <p className="text-xs" style={{ color: 'var(--text-primary)' }}>{config.programLabel} Program</p>
           </div>
           <span className="text-lg font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{config.panelPrice}</span>
         </div>
         <div className="flex flex-wrap gap-1.5">
           {config.biomarkers.map(b => (
-            <span key={b} className="px-2 py-0.5 rounded-sm text-[10px] font-medium" style={{ background: 'rgba(72,144,247,0.07)', color: '#5ab8b5', border: '1px solid rgba(72,144,247,0.12)' }}>{b}</span>
+            <span key={b} className="px-2 py-0.5 rounded-sm text-[10px] font-medium" style={{ background: 'rgba(72,144,247,0.07)', color: 'var(--color-accent-fg)', border: '1px solid rgba(72,144,247,0.12)' }}>{b}</span>
           ))}
         </div>
       </div>
@@ -206,7 +208,7 @@ function Step3({ data, set, config }: {
             <div onClick={() => set(key, !(data[key] as boolean))}
               className="mt-0.5 w-5 h-5 flex-shrink-0 rounded-sm flex items-center justify-center transition-all duration-150"
               style={{
-                background: data[key] ? 'rgba(72,144,247,0.1)' : 'rgba(255,255,255,0.03)',
+                background: data[key] ? 'rgba(72,144,247,0.1)' : 'rgba(0,0,0,0.02)',
                 border: `1px solid ${data[key] ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
               }}>
               {data[key] && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke="#4890f7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>}
@@ -234,7 +236,7 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
         Your doctor will review your details and issue a pathology referral within one business day. Collect at any accredited centre near you — no appointment needed.
       </p>
       <div className="p-5 rounded-sm mb-6" style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.1)' }}>
-        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: '#4890f7' }}>WHAT HAPPENS NEXT</p>
+        <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: 'var(--blue)' }}>WHAT HAPPENS NEXT</p>
         <div className="flex flex-col gap-3">
           {[
             'Doctor-issued pathology referral sent to your email — typically same business day',
@@ -242,7 +244,7 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
             'Book your consultation once results are back to build your protocol',
           ].map((s, i) => (
             <div key={i} className="flex items-start gap-3">
-              <div style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: '#4890f7', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
+              <div style={{ width: 18, height: 18, borderRadius: '50%', flexShrink: 0, background: 'rgba(72,144,247,0.07)', border: '1px solid rgba(72,144,247,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 800, color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{s}</p>
             </div>
           ))}
@@ -330,17 +332,17 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
             {!submitted && (
               <div className="mb-10">
                 <div className="flex justify-between mb-2">
-                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: '#4890f7' }}>
+                  <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: 'var(--blue)' }}>
                     {config.panelName} — {config.panelPrice}
                   </span>
-                  <span className="text-xs" style={{ color: '#4890f7' }}>{progress}%</span>
+                  <span className="text-xs" style={{ color: 'var(--blue)' }}>{progress}%</span>
                 </div>
                 <div style={{ height: 2, background: 'var(--elevated)', borderRadius: 2 }}>
                   <motion.div style={{ height: '100%', borderRadius: 2, background: 'linear-gradient(90deg, #4890f7, #4890f7)' }}
                     initial={false} animate={{ width: `${progress}%` }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }} />
                 </div>
                 <div className="flex gap-2 mt-3">
-                  {STEPS.map((s, i) => <span key={s} className="text-[10px] tracking-wide" style={{ color: i + 1 <= step ? '#4890f7' : '#0a0e1a' }}>{s}</span>)}
+                  {STEPS.map((s, i) => <span key={s} className="text-[10px] tracking-wide" style={{ color: i + 1 <= step ? 'var(--blue)' : '#0a0e1a' }}>{s}</span>)}
                 </div>
               </div>
             )}
@@ -363,16 +365,16 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
                   {step < 3 ? (
                     <button type="button" onClick={() => { setStep(s => s + 1); scrollTop() }}
                       disabled={step === 1 && !step1Valid}
-                      className="btn-teal"
+                      className="btn-pill"
                       style={{ opacity: step === 1 && !step1Valid ? 0.4 : 1, cursor: step === 1 && !step1Valid ? 'not-allowed' : 'pointer' }}>Continue →</button>
                   ) : (
-                    <button type="button" onClick={submit} disabled={submitting || !step3Valid} className="btn-teal"
+                    <button type="button" onClick={submit} disabled={submitting || !step3Valid} className="btn-pill"
                       style={{ opacity: submitting || !step3Valid ? 0.5 : 1, cursor: submitting || !step3Valid ? 'not-allowed' : 'pointer' }}>
                       {submitting ? 'Submitting…' : `Order ${config.panelName} →`}</button>
                   )}
                 </div>
-                {error && <p className="text-sm mt-4" style={{ color: '#e05c5c' }}>{error}</p>}
-                <p className="text-xs mt-5" style={{ color: '#4890f7' }}>Your information is private and confidential. Doctor-issued referral only — no walk-ins required.</p>
+                {error && <p className="text-sm mt-4" style={{ color: 'var(--color-danger-fg)' }}>{error}</p>}
+                <p className="text-xs mt-5" style={{ color: 'var(--blue)' }}>Your information is private and confidential. Doctor-issued referral only — no walk-ins required.</p>
               </>
             )}
           </div>

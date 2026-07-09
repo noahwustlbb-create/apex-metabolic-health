@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-const BLUE = '#4890f7'
+const BLUE = 'var(--blue)'
 
 interface BgtBundle {
   id: string
@@ -18,7 +18,105 @@ interface BgtBundle {
   checkout_url?: string
 }
 
-function PanelCard({ bundle }: { bundle: BgtBundle }) {
+// ─── Checkout modal (keeps users on-site) ─────────────────────────────────────
+
+function CheckoutModal({ url, onClose }: { url: string; onClose: () => void }) {
+  const [iframeLoaded, setIframeLoaded] = useState(false)
+
+  const handleKey = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') onClose()
+  }, [onClose])
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [handleKey])
+
+  return (
+    <div
+      className="fixed inset-0 flex flex-col"
+      style={{ zIndex: 1000, background: 'rgba(4,6,10,0.96)' }}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Blood test checkout"
+    >
+      {/* Top bar */}
+      <div className="flex items-center justify-between px-4 py-3 flex-shrink-0" style={{ background: '#070a0d', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex items-center gap-3">
+          <div className="flex flex-col leading-none">
+            <span className="text-[11px] font-black tracking-[0.22em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
+            <span className="text-[7px] tracking-[0.2em] font-semibold uppercase" style={{ color: 'var(--blue)' }}>Metabolic Health</span>
+          </div>
+          <div className="w-px h-4 mx-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
+          <span className="text-xs" style={{ color: 'rgba(240,244,248,0.4)' }}>Blood test checkout</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium flex items-center gap-1 transition-colors duration-150"
+            style={{ color: 'rgba(240,244,248,0.35)', textDecoration: 'none' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(240,244,248,0.7)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(240,244,248,0.35)' }}
+          >
+            Open in new tab
+            <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
+              <path d="M5 3H3a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V7M7 2h3v3M10 2L6 6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+          <button
+            onClick={onClose}
+            className="w-11 h-11 rounded-full flex items-center justify-center transition-colors duration-150"
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(240,244,248,0.5)', cursor: 'pointer' }}
+            aria-label="Close checkout"
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)' }}
+          >
+            <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
+              <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* iframe */}
+      <div className="flex-1 relative">
+        {!iframeLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-3">
+              <div className="w-8 h-8 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: `rgba(72,144,247,0.3)`, borderTopColor: BLUE }} />
+              <p className="text-xs" style={{ color: 'rgba(240,244,248,0.35)' }}>Loading checkout…</p>
+            </div>
+          </div>
+        )}
+        <iframe
+          src={url}
+          title="Blood test checkout"
+          className="w-full h-full"
+          style={{ border: 'none', opacity: iframeLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }}
+          onLoad={() => setIframeLoaded(true)}
+          sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation-by-user-activation"
+        />
+      </div>
+
+      {/* Bottom trust bar */}
+      <div className="flex items-center justify-center gap-4 px-4 py-2.5 flex-shrink-0" style={{ background: '#070a0d', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+        <p className="text-[10px]" style={{ color: 'rgba(240,244,248,0.25)' }}>
+          Blood test collection by Bloody Good Tests — TGA accredited partner · SSL secured
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ─── Panel card ───────────────────────────────────────────────────────────────
+
+function PanelCard({ bundle, onOrder }: { bundle: BgtBundle; onOrder: (url: string) => void }) {
   const price = bundle.price_cents
     ? `$${(bundle.price_cents / 100).toFixed(0)}`
     : bundle.price
@@ -58,53 +156,59 @@ function PanelCard({ bundle }: { bundle: BgtBundle }) {
         {price && (
           <p className="text-lg font-bold" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{price}</p>
         )}
-        <a
-          href={orderUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => onOrder(orderUrl)}
           className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-sm text-xs font-bold tracking-wide transition-all duration-150"
-          style={{ background: BLUE, color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+          style={{ background: BLUE, color: '#fff', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}
         >
           Order now
           <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3" aria-hidden="true">
             <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
   )
 }
 
-function SkeletonCard() {
-  return (
-    <div className="rounded-xl p-6 animate-pulse" style={{ background: '#0d1117', border: '1px solid rgba(255,255,255,0.06)' }}>
-      <div className="h-3 w-20 rounded mb-3" style={{ background: 'rgba(255,255,255,0.06)' }} />
-      <div className="h-5 w-3/4 rounded mb-2" style={{ background: 'rgba(255,255,255,0.06)' }} />
-      <div className="h-3 w-full rounded mb-1" style={{ background: 'rgba(255,255,255,0.04)' }} />
-      <div className="h-3 w-2/3 rounded mb-6" style={{ background: 'rgba(255,255,255,0.04)' }} />
-      <div className="h-9 w-full rounded" style={{ background: 'rgba(72,144,247,0.08)' }} />
-    </div>
-  )
-}
+
+const APEX_PANELS: BgtBundle[] = [
+  {
+    id: 'pre-trt',
+    name: 'Pre-TRT Hormone Panel',
+    description: 'Baseline hormonal assessment required before starting a testosterone optimisation program. Includes complete endocrine and metabolic markers.',
+    biomarkers: ['Total Testosterone', 'Free Testosterone', 'SHBG', 'LH', 'FSH', 'Oestradiol', 'Prolactin', 'Cortisol', 'DHEA-S', 'PSA', 'Full Blood Count', 'Lipids'],
+    checkout_url: 'https://my.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
+  },
+  {
+    id: 'trt-monitoring',
+    name: 'TRT Monitoring Panel',
+    description: 'Ongoing monitoring for patients on testosterone replacement therapy. Tracks key safety and efficacy markers to keep you in your optimal range.',
+    biomarkers: ['Total Testosterone', 'Free Testosterone', 'SHBG', 'Oestradiol', 'LH', 'Haematocrit', 'Haemoglobin', 'PSA', 'Liver Function'],
+    checkout_url: 'https://my.bloodygoodtests.com.au/buy/a069c9d0-3f6f-4627-b998-67afb76993ad',
+  },
+  {
+    id: 'weight-loss',
+    name: 'Weight Loss Blood Panel',
+    description: 'Comprehensive metabolic and hormonal assessment for weight management programs. Identifies drivers of weight gain and resistance to loss.',
+    biomarkers: ['Fasting Glucose', 'HbA1c', 'Fasting Insulin', 'TSH', 'Free T3', 'Free T4', 'Total Testosterone', 'Cortisol', 'Lipid Panel', 'CRP', 'Liver Function'],
+    checkout_url: 'https://my.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
+  },
+  {
+    id: 'skin-pre-treatment',
+    name: 'Skin Regeneration Pre-Treatment Panel',
+    description: 'Baseline bloodwork required before commencing a skin regeneration program. Covers inflammatory, nutritional, and metabolic markers.',
+    biomarkers: ['Full Blood Count', 'Liver Function', 'Kidney Function', 'Zinc', 'Copper', 'Vitamin D', 'CRP', 'Ferritin', 'Thyroid Panel'],
+    checkout_url: 'https://my.bloodygoodtests.com.au/buy/a09b6127-f307-4446-81a6-ab7789440754',
+  },
+]
 
 export default function BgtOrderPage() {
-  const [bundles, setBundles] = useState<BgtBundle[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    fetch('/api/bgt?resource=bundles&count=50')
-      .then(r => r.json())
-      .then(data => {
-        const list: BgtBundle[] = Array.isArray(data) ? data : (data.bundles ?? data.data ?? [])
-        setBundles(list)
-      })
-      .catch(() => setError('Unable to load panels. Please try again.'))
-      .finally(() => setLoading(false))
-  }, [])
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null)
 
   return (
     <>
+      {checkoutUrl && <CheckoutModal url={checkoutUrl} onClose={() => setCheckoutUrl(null)} />}
       <Nav />
       <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: 80 }}>
         <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" aria-hidden="true" />
@@ -135,38 +239,9 @@ export default function BgtOrderPage() {
 
         {/* Panels grid */}
         <div className="relative z-10 px-6 pb-20 max-w-6xl mx-auto">
-          {error && (
-            <div className="text-center py-16">
-              <p className="text-sm" style={{ color: 'rgba(240,244,248,0.4)' }}>{error}</p>
-            </div>
-          )}
-
-          {loading && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
-            </div>
-          )}
-
-          {!loading && !error && bundles.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-sm mb-4" style={{ color: 'rgba(240,244,248,0.4)' }}>No panels available at the moment.</p>
-              <a
-                href="https://bloodygoodtests.com.au"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold"
-                style={{ color: BLUE }}
-              >
-                Browse all panels →
-              </a>
-            </div>
-          )}
-
-          {!loading && bundles.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {bundles.map(b => <PanelCard key={b.id} bundle={b} />)}
-            </div>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {APEX_PANELS.map(b => <PanelCard key={b.id} bundle={b} onOrder={setCheckoutUrl} />)}
+          </div>
         </div>
       </main>
       <Footer />

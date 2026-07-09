@@ -13,10 +13,10 @@ const config: QuizConfig = {
     'Consultation with an AHPRA-registered doctor',
     'Doctor-coordinated pharmacy delivery',
   ],
-  consultUrl: PEPTIDE_URL,
-  ineligibleHeading: "Our skin program isn't the right fit right now.",
+  consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
+  ineligibleHeading: "Our skin treatment isn't the right fit right now.",
   ineligibleBody: "Based on your answers, there are factors that need to be assessed before we can prescribe a skin regeneration protocol. Book a free discovery call and our clinical team will help determine the safest pathway for you.",
-  ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
+  ineligibleAlt: { label: 'Explore other treatments', href: '/#programs' },
   steps: [
     {
       type: 'multi',

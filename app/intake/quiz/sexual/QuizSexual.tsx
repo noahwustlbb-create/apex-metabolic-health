@@ -2,18 +2,20 @@
 
 import IntakeQuizEngine, { type QuizConfig } from '@/components/IntakeQuizEngine'
 
-const HORMONE_URL = 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation'
-
 const config: QuizConfig = {
   programName: 'Sexual Health',
   programSub: 'Private, judgment-free care',
   estimatedTime: '2 min',
+  scoreLabel: 'Sexual Health Score',
+  requiresBloodTest: true,
+  bloodTestUrl: '/order-bloods',
+  signupUrl: 'https://app.apexmetabolichealth.com.au/signup',
   benefits: [
     'Personalised treatment plan',
     'Confidential consultation with an AHPRA-registered doctor',
     'Doctor-coordinated pharmacy delivery',
   ],
-  consultUrl: HORMONE_URL,
+  consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Based on your health history, we need to refer you first.',
   ineligibleBody: 'Some of your answers indicate a need for more specialised cardiac or medical assessment before a sexual health protocol can be safely prescribed. We recommend speaking with your GP, or booking a free discovery call so our clinical team can guide your next steps.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
@@ -23,10 +25,10 @@ const config: QuizConfig = {
       id: 'concern',
       question: "What best describes what you're experiencing?",
       options: [
-        { label: 'Difficulty achieving or maintaining an erection', value: 'ed' },
-        { label: 'Reduced sexual desire or libido', value: 'libido' },
-        { label: 'Performance anxiety affecting sexual function', value: 'anxiety' },
-        { label: 'Other sexual health concerns', value: 'other' },
+        { label: 'Difficulty achieving or maintaining an erection', value: 'ed', score: 3 },
+        { label: 'Reduced sexual desire or libido', value: 'libido', score: 2 },
+        { label: 'Performance anxiety affecting sexual function', value: 'anxiety', score: 2 },
+        { label: 'Other sexual health concerns', value: 'other', score: 1 },
       ],
     },
     {
@@ -34,10 +36,10 @@ const config: QuizConfig = {
       id: 'duration',
       question: 'How long have you been experiencing this?',
       options: [
-        { label: 'Less than 3 months', value: 'lt3m' },
-        { label: '3 to 6 months', value: '3to6m' },
-        { label: '6 months to 2 years', value: '6mto2y' },
-        { label: 'More than 2 years', value: 'gt2y' },
+        { label: 'Less than 3 months', value: 'lt3m', score: 1 },
+        { label: '3 to 6 months', value: '3to6m', score: 2 },
+        { label: '6 months to 2 years', value: '6mto2y', score: 3 },
+        { label: 'More than 2 years', value: 'gt2y', score: 3 },
       ],
     },
     {
@@ -45,9 +47,9 @@ const config: QuizConfig = {
       id: 'impact',
       question: 'How much is this affecting your quality of life?',
       options: [
-        { label: 'Mildly — it bothers me occasionally', value: 'mild' },
-        { label: 'Moderately — it affects my confidence and relationships', value: 'moderate' },
-        { label: 'Significantly — it is a major concern for me', value: 'significant' },
+        { label: 'Mildly — it bothers me occasionally', value: 'mild', score: 1 },
+        { label: 'Moderately — it affects my confidence and relationships', value: 'moderate', score: 2 },
+        { label: 'Significantly — it is a major concern for me', value: 'significant', score: 3 },
       ],
     },
     {

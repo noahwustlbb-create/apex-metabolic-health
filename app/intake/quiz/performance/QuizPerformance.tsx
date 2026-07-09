@@ -2,18 +2,18 @@
 
 import IntakeQuizEngine, { type QuizConfig } from '@/components/IntakeQuizEngine'
 
-const PEPTIDE_URL = 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult'
-
 const config: QuizConfig = {
   programName: 'Performance & Recovery',
   programSub: 'Doctor-led performance optimisation',
   estimatedTime: '2 min',
+  scoreLabel: 'Performance Score',
+  signupUrl: 'https://app.apexmetabolichealth.com.au/signup',
   benefits: [
     'Personalised performance protocol',
     'Consultation with an AHPRA-registered doctor',
     'Doctor-coordinated pharmacy delivery',
   ],
-  consultUrl: PEPTIDE_URL,
+  consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'A performance protocol may not be appropriate right now.',
   ineligibleBody: 'Based on your answers, there are health factors that need to be reviewed before we can safely recommend a performance optimisation protocol. Please book a free discovery call so our doctors can guide you.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
@@ -48,9 +48,9 @@ const config: QuizConfig = {
       id: 'plateau',
       question: 'Have you hit a plateau with your current approach?',
       options: [
-        { label: 'Yes — my results have stalled despite consistent effort', value: 'yes' },
-        { label: 'Somewhat — progress has slowed significantly', value: 'somewhat' },
-        { label: "No — I'm looking to optimise further from a solid base", value: 'no' },
+        { label: 'Yes — my results have stalled despite consistent effort', value: 'yes', score: 3 },
+        { label: 'Somewhat — progress has slowed significantly', value: 'somewhat', score: 2 },
+        { label: "No — I'm looking to optimise further from a solid base", value: 'no', score: 1 },
       ],
     },
     {

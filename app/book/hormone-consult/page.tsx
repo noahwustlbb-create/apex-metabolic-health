@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 const WHO = [
   { label: 'Low energy or fatigue', sub: "Sleep doesn't fix it. Energy crashes mid-afternoon. Hard to push through the day." },
@@ -97,7 +97,7 @@ export default function HormoneConsultBookPage() {
               <h1 className="font-bold tracking-tight mb-5"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: 1.05, color: 'var(--text-primary)' }}>
                 Your GP said normal.{' '}
-                <span style={{ background: 'linear-gradient(135deg, #4890f7, #7bb3ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span style={{ color: 'var(--blue)' }}>
                   We go deeper.
                 </span>
               </h1>

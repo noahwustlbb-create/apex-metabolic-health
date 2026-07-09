@@ -35,7 +35,7 @@ const PROGRAMS: Program[] = [
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
     tagline: "Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.",
-    accent: '#4890f7',
+    accent: 'var(--blue)',
     accentBg: 'rgba(72,144,247,0.05)',
     accentBorder: 'rgba(72,144,247,0.15)',
     glowColor: 'rgba(72,144,247,0.06)',
@@ -425,7 +425,7 @@ export default function ProgramsSelectPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease }}
                     className="text-[10px] font-bold tracking-[0.22em] uppercase mb-4"
-                    style={{ color: '#4890f7' }}
+                    style={{ color: 'var(--blue)' }}
                   >
                     Clinical Programs · Doctor-led · Australia-wide
                   </motion.p>
@@ -465,7 +465,7 @@ export default function ProgramsSelectPage() {
                   className="text-xs mt-8 text-center"
                   style={{ color: 'var(--text-primary)', opacity: 0.3 }}
                 >
-                  Not sure? <a href="/intake/pre-screen" style={{ color: '#4890f7', opacity: 1 }}>Take the full pre-screen assessment</a> and we&apos;ll recommend the right fit.
+                  Not sure? <a href="https://app.apexmetabolichealth.com.au/signup" style={{ color: 'var(--blue)', opacity: 1 }}>Create your account</a> and we&apos;ll guide you to the right program.
                 </motion.p>
               </div>
             </motion.div>
@@ -677,7 +677,7 @@ export default function ProgramsSelectPage() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(26px, 3.5vw, 38px)', lineHeight: 1.1, color: 'var(--text-primary)' }}
                 >
                   You&apos;re a strong fit.{' '}
-                  <span style={{ background: `linear-gradient(135deg, ${prog.accent}, ${prog.accent}99)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                  <span style={{ color: prog.accent }}>
                     Let&apos;s get started.
                   </span>
                 </motion.h1>

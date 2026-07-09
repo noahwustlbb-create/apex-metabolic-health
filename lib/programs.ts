@@ -21,54 +21,66 @@ export interface Program {
 const defaultHormoneHowItWorks = [
   {
     number: '01',
-    title: 'Complete the Form',
+    title: 'Create your account',
     description:
-      'Fill out our Get Started form. Takes 3–5 minutes. Our team will contact you to confirm your pathway.',
+      'Sign up at app.apexmetabolichealth.com.au. Takes two minutes. No GP referral required.',
   },
   {
     number: '02',
-    title: 'Get Your Blood Work',
+    title: 'Complete your intake',
     description:
-      'We refer you to a local accredited pathology centre. No appointment needed at most locations.',
+      'Answer a short set of clinical questions about your health history and goals directly in the patient portal.',
   },
   {
     number: '03',
-    title: 'Consult With Your Doctor',
+    title: 'Get your blood work done',
     description:
-      'A telehealth consultation with an AHPRA-registered doctor reviews your results and builds your personalised protocol.',
+      'We arrange your pathology referral. Attend any of 4,000+ accredited collection centres near you — no appointment needed at most locations. Results back within 48 hours.',
   },
   {
     number: '04',
-    title: 'Begin Your Protocol',
+    title: 'Telehealth consultation',
     description:
-      'Treatment is coordinated through our partner pharmacy or your own — whatever suits you. Ongoing reviews are built in.',
+      'Your AHPRA-registered doctor reviews your results and builds your personalised protocol. Video or phone — your choice.',
+  },
+  {
+    number: '05',
+    title: 'Protocol begins',
+    description:
+      'Your prescription is coordinated through our TGA-compliant compounding pharmacy partner and dispatched directly to you. 3-monthly reviews and script renewals are built in.',
   },
 ]
 
 const defaultGeneralHowItWorks = [
   {
     number: '01',
-    title: 'Complete the Form',
+    title: 'Create your account',
     description:
-      'Fill out our Get Started form and describe your injury or recovery needs. Our team will be in touch.',
+      'Sign up at app.apexmetabolichealth.com.au. No GP referral required.',
   },
   {
     number: '02',
-    title: 'Doctor Consultation',
+    title: 'Complete your intake',
     description:
-      'A telehealth consultation with an AHPRA-registered doctor to assess your needs and build a protocol.',
+      'Answer a short set of clinical questions about your health history and goals in the patient portal.',
   },
   {
     number: '03',
-    title: 'Begin Your Protocol',
+    title: 'Telehealth consultation',
     description:
-      'Treatment is arranged through our pharmacy partner or your own. Your doctor will guide you through each phase.',
+      'An AHPRA-registered doctor reviews your intake, issues pathology referrals where indicated, and builds your personalised protocol.',
   },
   {
     number: '04',
-    title: 'Monitor & Adjust',
+    title: 'Protocol begins',
     description:
-      'Follow-up consultations track your progress and adjust the protocol as you recover.',
+      'Treatment is arranged through our TGA-compliant pharmacy partner and dispatched directly to you. Your doctor manages your protocol ongoing.',
+  },
+  {
+    number: '05',
+    title: 'Review and adjust',
+    description:
+      'Follow-up consultations every 3 months track your progress and adjust your protocol based on results.',
   },
 ]
 
@@ -97,7 +109,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   },
   {
     slug: 'performance-plus',
@@ -123,7 +135,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
     sasDisclosure: true,
   },
   {
@@ -151,7 +163,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultGeneralHowItWorks,
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   sasDisclosure: true,
   },
   {
@@ -178,7 +190,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultGeneralHowItWorks,
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   sasDisclosure: true,
   },
   {
@@ -205,7 +217,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultGeneralHowItWorks,
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   },
   {
     slug: 'metabolic-weight-loss',
@@ -233,31 +245,37 @@ export const programs: Program[] = [
     howItWorks: [
       {
         number: '01',
-        title: 'Complete the Form',
+        title: 'Create your account',
         description:
-          'Fill out our Get Started form. No blood work required upfront for this program.',
+          'Sign up at app.apexmetabolichealth.com.au. No blood work required before your first consultation.',
       },
       {
         number: '02',
-        title: 'Doctor Consultation ($125)',
+        title: 'Complete your intake',
         description:
-          'A telehealth consultation to review your full health profile and create your personalised treatment plan.',
+          'Tell us about your weight history, previous attempts, energy patterns, and goals in the patient portal.',
       },
       {
         number: '03',
-        title: 'Begin Your Protocol',
+        title: 'Doctor consultation',
         description:
-          'Treatment is coordinated through our partner pharmacy or your own. Your doctor manages your protocol ongoing.',
+          'A telehealth consultation to review your full health profile, identify metabolic drivers, and create your personalised treatment plan.',
       },
       {
         number: '04',
-        title: 'Monitor & Review',
+        title: 'Protocol begins',
         description:
-          'Regular follow-up consultations track your progress and refine your protocol as needed.',
+          'Treatment is coordinated through our TGA-compliant pharmacy partner. Your doctor manages your protocol ongoing.',
+      },
+      {
+        number: '05',
+        title: 'Monitor and review',
+        description:
+          'Regular follow-up consultations every 3 months track your progress and refine your protocol as needed.',
       },
     ],
     ctaLabel: 'Get Started',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   },
   {
     slug: 'longevity',
@@ -284,7 +302,7 @@ export const programs: Program[] = [
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Join the Waitlist',
-    ctaHref: '/get-started',
+    ctaHref: 'https://app.apexmetabolichealth.com.au/signup',
   },
 ]
 

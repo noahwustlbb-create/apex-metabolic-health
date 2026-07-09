@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const ACTIONS = [
@@ -115,7 +115,7 @@ export default function FloatingContact() {
               <button
                 onClick={() => setOpen(false)}
                 className="w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-150"
-                style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-primary)' }}
+                style={{ background: 'rgba(0,0,0,0.04)', color: 'var(--text-primary)' }}
                 aria-label="Close menu"
               >
                 <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
@@ -144,7 +144,7 @@ export default function FloatingContact() {
                       onClick={() => setOpen(false)}
                       className="group flex items-center gap-4 px-5 py-4 transition-all duration-150"
                       style={{
-                        borderBottom: i < ACTIONS.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none',
+                        borderBottom: i < ACTIONS.length - 1 ? '1px solid rgba(0,0,0,0.03)' : 'none',
                         background: action.highlight ? 'rgba(72,144,247,0.04)' : 'transparent',
                         textDecoration: 'none',
                         display: 'flex',
@@ -159,8 +159,8 @@ export default function FloatingContact() {
                       {/* Icon */}
                       <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                         style={{
-                          background: action.highlight ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.04)',
-                          border: `1px solid ${action.highlight ? 'rgba(72,144,247,0.25)' : 'rgba(255,255,255,0.07)'}`,
+                          background: action.highlight ? 'rgba(72,144,247,0.12)' : 'rgba(0,0,0,0.03)',
+                          border: `1px solid ${action.highlight ? 'rgba(72,144,247,0.25)' : 'rgba(0,0,0,0.06)'}`,
                           color: action.highlight ? ACCENT : 'var(--text-primary)',
                         }}>
                         {action.icon}
@@ -179,7 +179,7 @@ export default function FloatingContact() {
 
                       {/* Arrow */}
                       <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3 flex-shrink-0 transition-transform duration-150 group-hover:translate-x-0.5"
-                        style={{ color: action.highlight ? ACCENT : 'rgba(255,255,255,0.2)' }} aria-hidden="true">
+                        style={{ color: action.highlight ? ACCENT : '#9ca3af' }} aria-hidden="true">
                         <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Tag>
@@ -189,7 +189,7 @@ export default function FloatingContact() {
             </div>
 
             {/* Footer */}
-            <div className="px-5 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+            <div className="px-5 py-3" style={{ borderTop: '1px solid rgba(0,0,0,0.03)' }}>
               <p className="text-[9px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
                 AHPRA-registered doctors · 100% online · Australia-wide
               </p>

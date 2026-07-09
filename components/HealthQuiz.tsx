@@ -1,876 +1,838 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
+import { useState } from 'react'
+import { useSignupGate } from '@/context/SignupGateContext'
 
-// ─── Program definitions ──────────────────────────────────────────────────────
-
-type PK = 'hormone' | 'metabolic' | 'performance' | 'hair' | 'skin' | 'injury' | 'bloodpanel' | 'general'
-
-const PROGRAMS: Record<PK, { name: string; desc: string; href: string; cta: string; color: string }> = {
-  hormone:    { name: 'Hormone Optimisation',        color: '#3575C6', href: '/intake/hormone-consult',  cta: 'Begin Hormone Assessment',     desc: 'Clinically-guided hormone optimisation and restoration. Your doctor will review your full hormonal panel before designing a personalised protocol targeting energy, drive, body composition, and performance.' },
-  metabolic:  { name: 'Metabolic Weight Management', color: '#7c52e8', href: '/intake/general-consult',  cta: 'Begin Metabolic Assessment',   desc: 'Evidence-based protocols targeting insulin resistance, visceral fat, and the root drivers of stubborn weight gain. Doctor-led and data-driven.' },
-  performance:{ name: 'Performance & Recovery',      color: '#e8872c', href: '/intake/general-consult',  cta: 'Begin Performance Assessment', desc: 'Advanced clinical protocols for men who train hard. Optimise recovery markers, output, and endurance through targeted biomarker analysis.' },
-  hair:       { name: 'Hair Restoration',            color: '#2e9e52', href: '/intake/general-consult',  cta: 'Begin Hair Assessment',        desc: 'Doctor-prescribed treatment addressing the hormonal and genetic drivers of male pattern hair loss. Protocol tailored to your blood panel and clinical history.' },
-  skin:       { name: 'Skin Regeneration',           color: '#c9a84c', href: '/intake/general-consult',  cta: 'Begin Skin Assessment',        desc: 'Clinical skin protocols combining advanced diagnostics with evidence-based regenerative treatments for lasting skin quality improvement.' },
-  injury:     { name: 'Injury Repair & Recovery',    color: '#1a9e8f', href: '/intake/general-consult',  cta: 'Begin Injury Assessment',      desc: 'Targeted repair protocols for chronic injuries, joint issues, and musculoskeletal conditions that have not responded to standard treatment.' },
-  bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/intake/pre-screen',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
-  general:    { name: 'General Telehealth',          color: 'var(--text-primary)', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
+declare const gtag: undefined | ((...args: unknown[]) => void)
+function track(event: string, params?: Record<string, string | number>) {
+  if (typeof window !== 'undefined' && typeof gtag !== 'undefined') {
+    gtag('event', event, params ?? {})
+  }
 }
 
-// ─── Scoring ──────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-type W = Partial<Record<PK, number>>
-type Scores = Record<PK, number>
-
-const zero = (): Scores => ({ hormone:0, metabolic:0, performance:0, hair:0, skin:0, injury:0, bloodpanel:0, general:0 })
-
-function merge(s: Scores, w: W): Scores {
-  const n = { ...s }
-  for (const k in w) n[k as PK] += w[k as PK]!
-  return n
+interface Answers {
+  q1?: string; q2?: string; q3?: string
+  reasons?: string[]
+  sex?: string
+  age?: string
+  illness?: string
+  state?: string
+  concerns?: string[]
+  condQ?: string
+  familyHistory?: string[]
+  firstName?: string
+  email?: string
+  phone?: string
 }
 
-function top(s: Scores): PK[] {
-  return (Object.entries(s) as [PK, number][])
-    .filter(([, v]) => v > 0)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, 3)
-    .map(([k]) => k)
+// ─── Static data ──────────────────────────────────────────────────────────────
+
+const REASONS = [
+  'Low energy or persistent fatigue',
+  'Weight gain or difficulty changing my body',
+  'Poor sleep or slow recovery',
+  'Reduced drive, focus or performance',
+  'I just want to understand my health better',
+]
+
+const CONCERNS = [
+  'A recent health warning or wake-up call',
+  "I'm not performing at the level I expect of myself",
+  'I feel older than I should for my age',
+  'I want to get ahead of potential issues',
+  "A family member's diagnosis made me think",
+  "I've tried other approaches that haven't worked",
+]
+
+const FAMILY_HX = [
+  'Heart disease or stroke',
+  'Type 2 diabetes',
+  'Thyroid conditions',
+  'Hormone-related cancers',
+  'Obesity',
+  'None of the above',
+]
+
+const STATES = ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'TAS', 'NT', 'ACT']
+
+const PERSONAS = [
+  {
+    name: 'Marcus T.', age: 38, loc: 'Sydney',
+    quote: "I'd been brushing off the same symptoms for two years. This gave me data I could actually act on.",
+    goals: ['Energy restoration', 'Body composition', 'Sleep quality'],
+  },
+  {
+    name: 'Liam K.', age: 44, loc: 'Melbourne',
+    quote: "I wanted answers, not reassurance. For the first time I understand what's been happening.",
+    goals: ['Hormone optimisation', 'Longevity planning', 'Mental clarity'],
+  },
+  {
+    name: 'James P.', age: 51, loc: 'Brisbane',
+    quote: "I thought this was only for elite athletes. Turns out it's exactly what I needed.",
+    goals: ['Weight management', 'Cardiovascular health', 'Metabolic function'],
+  },
+]
+
+const GOAL_MAP: Record<string, string> = {
+  'Low energy or persistent fatigue': 'Restore sustained energy',
+  'Weight gain or difficulty changing my body': 'Optimise body composition',
+  'Poor sleep or slow recovery': 'Improve sleep & recovery',
+  'Reduced drive, focus or performance': 'Enhance drive & cognitive performance',
+  'I just want to understand my health better': 'Build a comprehensive health baseline',
 }
 
-// ─── Question data ────────────────────────────────────────────────────────────
-
-const GOALS = [
-  { id: 'energy',      label: 'Energy & vitality',         sub: 'Fatigue, motivation, drive',          w: { hormone:3, metabolic:2, performance:1 } as W },
-  { id: 'weight',      label: 'Weight management',         sub: 'Fat loss, body composition',          w: { metabolic:3, hormone:2 } as W },
-  { id: 'performance', label: 'Athletic performance',      sub: 'Strength, endurance, output',         w: { performance:3, hormone:2 } as W },
-  { id: 'recovery',    label: 'Recovery & repair',         sub: 'Post-training, sleep, healing',       w: { performance:3, injury:2, hormone:1 } as W },
-  { id: 'hair',        label: 'Hair restoration',          sub: 'Thinning, loss, regrowth',            w: { hair:4, hormone:1 } as W },
-  { id: 'skin',        label: 'Skin & appearance',         sub: 'Ageing, texture, regeneration',       w: { skin:4 } as W },
-  { id: 'injury',      label: 'Injury & joint pain',       sub: 'Chronic pain, mobility',              w: { injury:4, performance:1 } as W },
-  { id: 'health',      label: 'General health check',      sub: 'Baseline, prevention, clarity',       w: { bloodpanel:3, general:2 } as W },
-]
-
-const SYMPTOMS = [
-  { id: 'low_energy',    label: 'Persistent fatigue or low energy',          w: { hormone:3, metabolic:2, performance:1 } as W },
-  { id: 'brain_fog',     label: 'Brain fog or poor concentration',           w: { hormone:2, metabolic:2 } as W },
-  { id: 'weight_gain',   label: 'Unexplained weight gain or belly fat',      w: { metabolic:3, hormone:2 } as W },
-  { id: 'poor_recovery', label: 'Slow recovery after training or exertion',  w: { performance:3, hormone:2 } as W },
-  { id: 'low_libido',    label: 'Low libido or reduced sex drive',           w: { hormone:4 } as W },
-  { id: 'mood',          label: 'Mood changes or persistent low mood',       w: { hormone:2, metabolic:1 } as W },
-  { id: 'sleep',         label: 'Poor sleep or waking unrefreshed',          w: { hormone:2, performance:1, metabolic:1 } as W },
-  { id: 'hair_loss',     label: 'Hair thinning or visible hair loss',        w: { hair:4, hormone:1 } as W },
-  { id: 'skin_issues',   label: 'Skin concerns or accelerated ageing',       w: { skin:4 } as W },
-  { id: 'joint_pain',    label: 'Joint, muscle, or chronic pain',            w: { injury:4, performance:1 } as W },
-  { id: 'strength',      label: 'Declining strength or physical capability', w: { performance:3, hormone:2 } as W },
-  { id: 'none',          label: 'None of the above',                         w: { bloodpanel:2, general:2 } as W },
-]
-
-const DURATIONS = [
-  { id: 'recent',   label: 'Less than 3 months',  w: { general:1, bloodpanel:1 } as W },
-  { id: 'months',   label: '3 – 12 months',        w: { hormone:1, metabolic:1 } as W },
-  { id: 'years',    label: '1 – 3 years',           w: { hormone:2, metabolic:1 } as W },
-  { id: 'longterm', label: 'More than 3 years',    w: { hormone:3, metabolic:2 } as W },
-]
-
-const TRAINING = [
-  { id: 'none',     label: 'Not currently training',  sub: 'Sedentary or light activity',   w: { metabolic:1, general:1 } as W },
-  { id: 'light',    label: '1 – 2x per week',          sub: 'Light, inconsistent',           w: { hormone:1, performance:1 } as W },
-  { id: 'moderate', label: '3 – 4x per week',          sub: 'Regular training',              w: { performance:2, hormone:1 } as W },
-  { id: 'heavy',    label: '5+ per week',              sub: 'High volume athlete',           w: { performance:3, injury:1 } as W },
-]
-
-const AGES = [
-  { id: '18-25', label: '18 – 25', w: { performance:1, general:1 } as W },
-  { id: '26-35', label: '26 – 35', w: { hormone:2, metabolic:1, performance:1 } as W },
-  { id: '36-45', label: '36 – 45', w: { hormone:3, metabolic:2 } as W },
-  { id: '46-55', label: '46 – 55', w: { hormone:3, metabolic:2, bloodpanel:1 } as W },
-  { id: '56+',   label: '56+',     w: { hormone:2, metabolic:2, bloodpanel:2 } as W },
-]
-
-const GENDERS = [
-  { id: 'male',   label: 'Male',   w: {} as W },
-  { id: 'female', label: 'Female', w: {} as W },
-]
-
-const CONDITIONS = [
-  { id: 'diabetes',   label: 'Diabetes or pre-diabetes',           w: { metabolic:3 } as W },
-  { id: 'thyroid',    label: 'Thyroid condition',                  w: { hormone:2, metabolic:1 } as W },
-  { id: 'heart',      label: 'Heart or cardiovascular condition',  w: { bloodpanel:2, general:2 } as W },
-  { id: 'autoimmune', label: 'Autoimmune condition',               w: { general:2, bloodpanel:1 } as W },
-  { id: 'cancer',     label: 'Cancer or history of cancer',        w: { general:3, bloodpanel:2 } as W },
-  { id: 'none',       label: 'None of the above',                  w: {} as W },
-]
-
-const READINESS = [
-  { id: 'now',       label: 'Ready to start now',           sub: 'Looking to book within the week',  w: { hormone:1, metabolic:1, performance:1 } as W },
-  { id: 'soon',      label: 'Within the next 2 – 4 weeks',  sub: 'Researching, nearly decided',      w: {} as W },
-  { id: 'exploring', label: 'Still exploring options',      sub: 'Early stage, not yet committed',   w: { bloodpanel:1, general:1 } as W },
-]
-
-// ─── Step types ───────────────────────────────────────────────────────────────
-
-type Step = 'intro' | 'goal' | 'symptoms' | 'duration' | 'training' | 'age' | 'gender' | 'conditions' | 'readiness' | 'analysing' | 'capture' | 'results'
-
-const STEPS: Step[] = ['intro','goal','symptoms','duration','training','age','gender','conditions','readiness','analysing','capture','results']
-const Q_STEPS: Step[] = ['goal','symptoms','duration','training','age','gender','conditions','readiness']
-
-// ─── Motion variants ──────────────────────────────────────────────────────────
-
-const ease = [0.22, 1, 0.36, 1] as const
-const variants = {
-  enter: (d: number) => ({ opacity: 0, x: d > 0 ? 48 : -48 }),
-  center: { opacity: 1, x: 0 },
-  exit:  (d: number) => ({ opacity: 0, x: d > 0 ? -48 : 48 }),
+const RISK_MAP: Record<string, string[]> = {
+  '35–39': ['Early hormonal decline markers'],
+  '40–44': ['Testosterone & metabolic panel', 'Cardiovascular risk markers'],
+  '45–54': ['Full hormonal panel', 'Metabolic syndrome screening'],
+  '55+': ['Comprehensive age-related panel', 'Bone density markers'],
+  'Heart disease or stroke': ['Cardiovascular & lipid profile'],
+  'Type 2 diabetes': ['Metabolic & glucose regulation panel'],
+  'Thyroid conditions': ['Full thyroid panel (TSH, fT3, fT4)'],
+  'Hormone-related cancers': ['Hormonal panel with PSA'],
+  'Obesity': ['Metabolic & insulin resistance markers'],
 }
 
-// ─── Shared primitives ────────────────────────────────────────────────────────
+const TOTAL = 17
 
-function Card({ children, selected, onClick }: { children: React.ReactNode; selected?: boolean; onClick: () => void }) {
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+const getGoals = (answers: Answers) =>
+  (answers.reasons || []).map(r => GOAL_MAP[r]).filter(Boolean)
+
+const getRisks = (answers: Answers): string[] => {
+  const out: string[] = []
+  if (RISK_MAP[answers.age || '']) out.push(...RISK_MAP[answers.age || ''])
+  ;(answers.familyHistory || []).forEach(h => {
+    if (RISK_MAP[h]) out.push(...RISK_MAP[h])
+  })
+  return [...new Set(out)].slice(0, 4)
+}
+
+// ─── Design tokens ────────────────────────────────────────────────────────────
+
+const BG      = '#f9fafb'
+const SURFACE = '#ffffff'
+const BLUE    = 'var(--blue)'
+const TEXT    = '#111827'
+const DIM     = '#4b5563'
+const MUTED   = '#6b7280'
+const BORDER  = 'rgba(0,0,0,0.10)'
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function ProgressBar({ step }: { step: number }) {
+  if (step === 0 || step > TOTAL) return null
+  const pct = Math.min(Math.round((step / TOTAL) * 100), 100)
   return (
-    <button
-      onClick={onClick}
-      className="w-full text-left rounded-2xl px-6 py-5 transition-all duration-200"
-      style={{
-        background: selected ? 'rgba(72,144,247,0.06)' : 'var(--surface)',
-        border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
-        boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.1), inset 0 0 20px rgba(72,144,247,0.04)' : 'none',
-        transform: selected ? 'translateY(-1px)' : 'none',
-      }}
-    >
-      {children}
-    </button>
+    <div className="fixed top-0 inset-x-0 z-50 border-b" style={{ backgroundColor: 'rgba(249,250,251,0.97)', backdropFilter: 'blur(16px)', borderColor: BORDER }}>
+      <div className="max-w-[480px] mx-auto px-5 py-3 flex items-center gap-4">
+        <span className="text-[10px] font-bold tracking-[0.22em] uppercase whitespace-nowrap" style={{ color: MUTED }}>
+          Apex Health
+        </span>
+        <div className="flex items-center gap-2.5 flex-1 ml-auto max-w-[160px] ml-auto">
+          <div className="flex-1 h-[3px] rounded-full overflow-hidden" style={{ background: 'rgba(72,144,247,0.12)' }}>
+            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: BLUE }} />
+          </div>
+          <span className="text-[11px] font-bold tabular-nums w-8 text-right" style={{ color: DIM }}>{pct}%</span>
+        </div>
+      </div>
+    </div>
   )
 }
 
-function Dot({ selected }: { selected: boolean }) {
+function BackBtn({ step, onBack }: { step: number; onBack: () => void }) {
+  if (step <= 1) return null
   return (
-    <span className="flex-shrink-0 flex items-center justify-center rounded-full transition-all duration-150"
-      style={{
-        width: 22, height: 22,
-        background: selected ? 'var(--teal)' : 'transparent',
-        border: `1.5px solid ${selected ? 'var(--teal)' : 'rgba(255,255,255,0.18)'}`,
-      }}
-    >
-      {selected && (
-        <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
-          <path d="M1.5 5.5L4 8l4.5-5.5" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )}
-    </span>
-  )
-}
-
-function ContinueBtn({ onClick, disabled, label = 'Continue' }: { onClick: () => void; disabled?: boolean; label?: string }) {
-  return (
-    <motion.button
-      onClick={onClick}
-      disabled={disabled}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: disabled ? 0.35 : 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="btn-teal w-full justify-center mt-6 text-sm"
-      style={{ cursor: disabled ? 'not-allowed' : 'pointer', pointerEvents: disabled ? 'none' : 'auto' }}
-    >
-      {label}
-      <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </motion.button>
-  )
-}
-
-function BackBtn({ onClick }: { onClick: () => void }) {
-  return (
-    <button onClick={onClick} className="flex items-center gap-1.5 text-xs font-medium transition-colors"
-      style={{ color: 'var(--text-muted)' }}
-      onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
-      onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}
-    >
-      <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
-        <path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+    <button onClick={onBack} className="flex items-center gap-1.5 text-xs transition-colors mt-1" style={{ color: MUTED }}
+      onMouseEnter={e => { e.currentTarget.style.color = DIM }}
+      onMouseLeave={e => { e.currentTarget.style.color = MUTED }}>
+      <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5"><path d="M10 4L6 8l4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
       Back
     </button>
   )
 }
 
-function StepLabel({ n, total }: { n: number; total: number }) {
+function InfoBox({ text }: { text: string }) {
   return (
-    <span className="text-xs font-bold tracking-widest" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space-grotesk)' }}>
-      {n} / {total}
-    </span>
-  )
-}
-
-function QHead({ eyebrow, heading, sub }: { eyebrow: string; heading: string; sub?: string }) {
-  return (
-    <div className="mb-8">
-      <p className="label mb-3">{eyebrow}</p>
-      <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: 1.2 }}>
-        {heading}
-      </h2>
-      {sub && <p className="text-sm" style={{ color: 'var(--text-muted)' }}>{sub}</p>}
+    <div className="mt-5 rounded-xl px-4 py-3 flex gap-2.5" style={{ background: 'rgba(72,144,247,0.07)', border: `1px solid rgba(72,144,247,0.18)` }}>
+      <svg viewBox="0 0 18 18" fill="none" className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: BLUE }}>
+        <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.3" />
+        <path d="M9 8v5M9 6v.01" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+      <p className="text-xs leading-relaxed" style={{ color: 'rgba(168,196,232,0.85)' }}>{text}</p>
     </div>
   )
 }
 
-// ─── Screens ──────────────────────────────────────────────────────────────────
-
-function Intro({ onStart }: { onStart: () => void }) {
+function BlueCheck() {
   return (
-    <div className="text-center max-w-lg mx-auto px-4">
-      <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-bold tracking-widest"
-        style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
-        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--teal)' }} />
-        PERFORMANCE HEALTH ASSESSMENT
-      </div>
-
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5"
-        style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: 1.05 }}>
-        Find Your<br /><span className="text-teal-gradient">Clinical Program</span>
-      </h1>
-
-      <p className="text-base md:text-lg leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
-        7 questions. 2 minutes. Matched to up to 3 programs based on your goals, symptoms, and health profile.
-      </p>
-      <p className="text-sm mb-10" style={{ color: 'var(--text-muted)' }}>
-        Checking your eligibility for Apex clinical programs.
-      </p>
-
-      <div className="flex items-center justify-center gap-10 mb-10">
-        {[['7', 'Questions'], ['< 2 min', 'To complete'], ['8', 'Programs mapped']].map(([v, l]) => (
-          <div key={l} className="text-center">
-            <p className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--teal)' }}>{v}</p>
-            <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>{l}</p>
-          </div>
-        ))}
-      </div>
-
-      <button onClick={onStart} className="btn-teal px-10 py-4 text-sm">
-        Begin Assessment
-        <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-
-      <p className="mt-4 text-xs" style={{ color: 'var(--text-muted)' }}>Doctor-curated · No cost · No commitment</p>
-    </div>
+    <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4 flex-shrink-0">
+      <circle cx="8" cy="8" r="7" fill="rgba(72,144,247,0.15)" />
+      <circle cx="8" cy="8" r="7" stroke={BLUE} strokeWidth="0.8" />
+      <path d="M5 8l2 2 4-4" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
-function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; onBack?: () => void }) {
-  const [sel, setSel] = useState<string[]>([])
-
-  function toggle(id: string) {
-    setSel(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])
-  }
-
-  function handleNext() {
-    const w = zero()
-    for (const id of sel) {
-      const g = GOALS.find(x => x.id === id)!
-      for (const k in g.w) w[k as PK] += g.w[k as PK]!
-    }
-    onNext(sel, w)
-  }
-
+function PrimaryBtn({ children, onClick, disabled = false }: { children: React.ReactNode; onClick: () => void; disabled?: boolean }) {
   return (
-    <div className="w-full max-w-2xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        {onBack ? <BackBtn onClick={onBack} /> : <span />}
-        <StepLabel n={1} total={8} />
-      </div>
-      <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select all that apply — we'll build your profile from there." />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {GOALS.map(g => {
-          const selected = sel.includes(g.id)
-          return (
-            <button key={g.id} onClick={() => toggle(g.id)}
-              className="text-left rounded-2xl px-6 py-5 transition-all duration-200 flex items-start gap-4"
-              style={{
-                background: selected ? 'rgba(72,144,247,0.06)' : 'var(--surface)',
-                border: `1px solid ${selected ? 'rgba(72,144,247,0.4)' : 'var(--border)'}`,
-                boxShadow: selected ? '0 0 0 1px rgba(72,144,247,0.1)' : 'none',
-              }}
-            >
-              <span className="flex-shrink-0 flex items-center justify-center rounded-md mt-0.5 transition-all duration-150"
-                style={{ width: 20, height: 20, background: selected ? 'var(--teal)' : 'transparent', border: `1.5px solid ${selected ? 'var(--teal)' : 'rgba(255,255,255,0.18)'}` }}>
-                {selected && (
-                  <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5">
-                    <path d="M1.5 5.5L4 8l4.5-5.5" stroke="#000" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                )}
-              </span>
-              <span>
-                <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{g.label}</p>
-                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{g.sub}</p>
-              </span>
-            </button>
-          )
-        })}
-      </div>
-      <ContinueBtn onClick={handleNext} disabled={sel.length === 0} />
-    </div>
+    <button onClick={onClick} disabled={disabled}
+      className="w-full rounded-full py-4 text-sm font-semibold flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+      style={{ background: BLUE, color: '#fff' }}
+      onMouseEnter={e => { if (!disabled) (e.currentTarget as HTMLElement).style.background = 'var(--blue-dark)' }}
+      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = BLUE }}>
+      {children}
+    </button>
   )
 }
 
-function SymptomsStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; onBack: () => void }) {
-  const [sel, setSel] = useState<string[]>([])
-
-  function toggle(id: string) {
-    if (id === 'none') { setSel(s => s.includes('none') ? [] : ['none']); return }
-    setSel(prev => {
-      const without = prev.filter(x => x !== 'none')
-      return without.includes(id) ? without.filter(x => x !== id) : [...without, id]
-    })
-  }
-
-  function handleNext() {
-    const w = zero()
-    for (const id of sel) {
-      const s = SYMPTOMS.find(x => x.id === id)!
-      for (const k in s.w) w[k as PK] += s.w[k as PK]!
-    }
-    onNext(sel, w)
-  }
-
+function Arrow() {
   return (
-    <div className="w-full max-w-xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={2} total={8} />
-      </div>
-      <QHead eyebrow="Symptoms" heading="Which of these do you experience?" sub="Select all that apply — this shapes your program match." />
-      <div className="flex flex-col gap-2.5">
-        {SYMPTOMS.map(s => (
-          <Card key={s.id} selected={sel.includes(s.id)} onClick={() => toggle(s.id)}>
-            <div className="flex items-center gap-4">
-              <Dot selected={sel.includes(s.id)} />
-              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{s.label}</span>
-            </div>
-          </Card>
-        ))}
-      </div>
-      <ContinueBtn onClick={handleNext} disabled={sel.length === 0} />
-    </div>
+    <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
-function DurationStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
+function ChoiceBtn({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
-    <div className="w-full max-w-xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={3} total={8} />
-      </div>
-      <QHead eyebrow="Timeline" heading="How long have you felt this way?" sub="Duration helps determine the likely cause and appropriate intervention." />
-      <div className="flex flex-col gap-2.5">
-        {DURATIONS.map(d => (
-          <Card key={d.id} onClick={() => onSelect(d.id, d.w)}>
-            <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>{d.label}</span>
-          </Card>
-        ))}
-      </div>
-    </div>
+    <button onClick={onClick}
+      className="w-full py-4 px-5 rounded-2xl text-sm font-semibold text-left transition-all duration-150"
+      style={{ background: SURFACE, color: TEXT, border: `1.5px solid ${BORDER}` }}
+      onMouseEnter={e => {
+        e.currentTarget.style.background = 'rgba(72,144,247,0.1)'
+        e.currentTarget.style.borderColor = `rgba(72,144,247,0.4)`
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.background = SURFACE
+        e.currentTarget.style.borderColor = BORDER
+      }}>
+      {children}
+    </button>
   )
 }
 
-function TrainingStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
-  return (
-    <div className="w-full max-w-xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={4} total={8} />
-      </div>
-      <QHead eyebrow="Lifestyle" heading="How often do you currently train?" sub="Physical activity levels directly influence hormone and recovery protocols." />
-      <div className="flex flex-col gap-2.5">
-        {TRAINING.map(t => (
-          <Card key={t.id} onClick={() => onSelect(t.id, t.w)}>
-            <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>{t.label}</p>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{t.sub}</p>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function AgeStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
-  return (
-    <div className="w-full max-w-lg mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={5} total={8} />
-      </div>
-      <QHead eyebrow="Profile" heading="What is your age range?" sub="Hormonal and metabolic baselines shift significantly across decades." />
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {AGES.map(a => (
-          <button key={a.id} onClick={() => onSelect(a.id, a.w)}
-            className="rounded-2xl py-6 text-center font-bold text-xl transition-all duration-200"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.1)' }}
-            onMouseEnter={e => { e.currentTarget.style.border = '1px solid rgba(72,144,247,0.3)'; e.currentTarget.style.background = 'rgba(72,144,247,0.05)'; e.currentTarget.style.color = 'var(--teal)' }}
-            onMouseLeave={e => { e.currentTarget.style.border = '1px solid rgba(72,144,247,0.12)'; e.currentTarget.style.background = 'var(--surface)'; e.currentTarget.style.color = 'var(--text-primary)' }}
-          >
-            {a.label}
-          </button>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function GenderStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
-  return (
-    <div className="w-full max-w-lg mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={6} total={8} />
-      </div>
-      <QHead eyebrow="Profile" heading="What is your gender assigned at birth?" />
-      <div className="flex flex-col gap-2.5">
-        {GENDERS.map(g => (
-          <Card key={g.id} onClick={() => onSelect(g.id, g.w)}>
-            <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>{g.label}</span>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function ConditionsStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; onBack: () => void }) {
-  const [sel, setSel] = useState<string[]>([])
-
-  function toggle(id: string) {
-    if (id === 'none') { setSel(s => s.includes('none') ? [] : ['none']); return }
-    setSel(prev => {
-      const without = prev.filter(x => x !== 'none')
-      return without.includes(id) ? without.filter(x => x !== id) : [...without, id]
-    })
-  }
-
-  function handleNext() {
-    const w = zero()
-    for (const id of sel) {
-      const c = CONDITIONS.find(x => x.id === id)!
-      for (const k in c.w) w[k as PK] += c.w[k as PK]!
-    }
-    onNext(sel, w)
-  }
-
-  return (
-    <div className="w-full max-w-xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={7} total={8} />
-      </div>
-      <QHead eyebrow="Medical Context" heading="Any existing medical conditions?" sub="This ensures we route you to the correct clinical pathway safely." />
-      <div className="flex flex-col gap-2.5">
-        {CONDITIONS.map(c => (
-          <Card key={c.id} selected={sel.includes(c.id)} onClick={() => toggle(c.id)}>
-            <div className="flex items-center gap-4">
-              <Dot selected={sel.includes(c.id)} />
-              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>{c.label}</span>
-            </div>
-          </Card>
-        ))}
-      </div>
-      <ContinueBtn onClick={handleNext} disabled={sel.length === 0} />
-    </div>
-  )
-}
-
-function ReadinessStep({ onSelect, onBack }: { onSelect: (id: string, w: W) => void; onBack: () => void }) {
-  return (
-    <div className="w-full max-w-xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-8">
-        <BackBtn onClick={onBack} />
-        <StepLabel n={8} total={8} />
-      </div>
-      <QHead eyebrow="Commitment" heading="How ready are you to take action?" sub="We personalise your next steps based on where you're at right now." />
-      <div className="flex flex-col gap-2.5">
-        {READINESS.map(r => (
-          <Card key={r.id} onClick={() => onSelect(r.id, r.w)}>
-            <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>{r.label}</p>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{r.sub}</p>
-          </Card>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function Analysing({ onDone }: { onDone: () => void }) {
-  const [line, setLine] = useState(0)
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setLine(1), 700)
-    const t2 = setTimeout(() => setLine(2), 1600)
-    const t3 = setTimeout(onDone, 2800)
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3) }
-  }, [onDone])
-
-  const lines = ['Analysing your health profile…', 'Matching you to clinical programs…']
-
-  return (
-    <div className="text-center max-w-sm mx-auto px-4">
-      <div className="flex items-center justify-center gap-2 mb-10">
-        {[0, 1, 2].map(i => (
-          <motion.span key={i} className="rounded-full"
-            style={{ width: 10, height: 10, background: 'var(--teal)', display: 'block' }}
-            animate={{ scale: [1, 1.5, 1], opacity: [0.4, 1, 0.4] }}
-            transition={{ duration: 1.2, delay: i * 0.2, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        ))}
-      </div>
-      <div className="space-y-3">
-        {lines.map((l, i) => (
-          <AnimatePresence key={l}>
-            {line > i && (
-              <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-                className="text-base font-medium" style={{ color: i === 0 ? 'var(--text-secondary)' : 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
-                {l}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-const REFERRAL_SOURCES = [
-  'Google / Search',
-  'Instagram',
-  'Facebook',
-  'TikTok',
-  'YouTube',
-  'Podcast',
-  'Referred by a friend',
-  'Referred by a doctor or health professional',
-  'Other',
-]
-
-function Capture({ onSubmit, submitting, onBack }: {
-  onSubmit: (first: string, email: string, mobile: string, referralSource: string, referralCode: string) => void
-  submitting: boolean
-  onBack: () => void
+function MultiSelect({ options, selected, onToggle, exclusive }: {
+  options: string[]; selected: string[]; onToggle: (v: string) => void; exclusive?: string
 }) {
-  const [first, setFirst] = useState('')
-  const [email, setEmail] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [referralSource, setReferralSource] = useState('')
-  const [referralCode, setReferralCode] = useState('')
-  const valid = first.trim().length > 1 && email.includes('@') && email.includes('.') && mobile.trim().length >= 8
-
-  const inputStyle = {
-    background: 'var(--bg)',
-    border: '1px solid rgba(72,144,247,0.1)',
-    color: 'var(--text-primary)',
-    fontFamily: 'var(--font-inter)',
-    borderRadius: 6,
-    width: '100%',
-    padding: '14px 18px',
-    fontSize: 14,
-    outline: 'none',
+  const toggle = (v: string) => {
+    if (exclusive && v === exclusive) { onToggle(exclusive); return }
+    onToggle(v)
   }
-
   return (
-    <div className="w-full max-w-md mx-auto px-4 text-center">
-      <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-bold tracking-widest"
-        style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.2)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
-        <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
-          <path d="M13 4L6 11l-3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        ELIGIBILITY CONFIRMED
-      </div>
-
-      <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-        Your personalised<br />protocol is ready
-      </h2>
-      <p className="text-sm mb-8" style={{ color: 'var(--text-muted)' }}>
-        Enter your details to unlock your clinical program matches and recommended pathway.
-      </p>
-
-      <div className="flex flex-col gap-3 mb-4 text-left">
-        <input type="text" placeholder="First name" value={first} onChange={e => setFirst(e.target.value)}
-          style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
-          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
-        />
-        <input type="email" placeholder="Email address" value={email} onChange={e => setEmail(e.target.value)}
-          style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
-          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
-        />
-        <input type="tel" placeholder="Mobile number" value={mobile} onChange={e => setMobile(e.target.value)}
-          style={inputStyle}
-          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
-          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
-        />
-        <select
-          value={referralSource}
-          onChange={e => setReferralSource(e.target.value)}
-          style={{ ...inputStyle, color: referralSource ? 'var(--text-primary)' : 'var(--text-muted)', cursor: 'pointer' }}
-          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
-          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
-        >
-          <option value="" style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>How did you hear about us? (optional)</option>
-          {REFERRAL_SOURCES.map(s => (
-            <option key={s} value={s} style={{ background: 'var(--surface)', color: 'var(--text-primary)' }}>{s}</option>
-          ))}
-        </select>
-        <input type="text" placeholder="Referral or access code (optional)" value={referralCode}
-          onChange={e => setReferralCode(e.target.value.toUpperCase())}
-          style={{ ...inputStyle, letterSpacing: '0.06em', fontFamily: 'var(--font-space-grotesk)' }}
-          onFocus={e => (e.target.style.border = '1px solid rgba(72,144,247,0.35)')}
-          onBlur={e => (e.target.style.border = '1px solid rgba(255,255,255,0.08)')}
-        />
-      </div>
-
-      <button onClick={() => onSubmit(first.trim(), email.trim(), mobile.trim(), referralSource, referralCode)} disabled={!valid || submitting}
-        className="btn-teal w-full justify-center"
-        style={{ opacity: !valid || submitting ? 0.4 : 1, cursor: !valid || submitting ? 'not-allowed' : 'pointer' }}>
-        {submitting ? 'Loading…' : 'Unlock My Results'}
-        {!submitting && (
-          <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        )}
-      </button>
-
-      <button onClick={onBack} className="block mx-auto mt-4 text-xs transition-colors"
-        style={{ color: 'var(--text-muted)' }}
-        onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
-        onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
-        ← Back
-      </button>
-
-      <p className="mt-5 text-xs" style={{ color: 'var(--text-muted)' }}>
-        No spam. Reviewed by our clinical team. No commitment required.
-      </p>
+    <div className="flex flex-col gap-2.5 mt-5">
+      {options.map(opt => {
+        const active = selected.includes(opt)
+        return (
+          <button key={opt} onClick={() => toggle(opt)}
+            className="flex items-center gap-3 p-4 rounded-2xl text-sm font-medium transition-all duration-100 text-left"
+            style={{
+              background: active ? 'rgba(72,144,247,0.12)' : SURFACE,
+              color: active ? TEXT : DIM,
+              border: `1.5px solid ${active ? 'rgba(72,144,247,0.4)' : BORDER}`,
+            }}>
+            <span className="w-5 h-5 rounded-md flex-shrink-0 flex items-center justify-center border transition-all"
+              style={{ borderColor: active ? BLUE : 'rgba(72,144,247,0.2)', background: active ? 'rgba(72,144,247,0.2)' : 'rgba(72,144,247,0.04)' }}>
+              {active && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke={BLUE} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>}
+            </span>
+            {opt}
+          </button>
+        )
+      })}
     </div>
   )
 }
 
-function Results({ matches, firstName }: { matches: PK[]; firstName: string }) {
-  const primary = matches[0]
-  const secondary = matches.slice(1)
-  if (!primary) return null
-  const p = PROGRAMS[primary]
-
-  return (
-    <div className="w-full max-w-2xl mx-auto px-4">
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6 text-xs font-bold tracking-widest"
-          style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.2)', color: 'var(--teal)', fontFamily: 'var(--font-space-grotesk)' }}>
-          <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
-            <path d="M13 4L6 11l-3-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          CLINICAL MATCH CONFIRMED
-        </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-          {firstName ? `${firstName}, here are` : 'Here are'} your program matches
-        </h2>
-        <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
-          Based on your goals and symptom profile. Your primary recommendation is below.
-        </p>
-      </div>
-
-      {/* Primary */}
-      <div className="rounded-2xl overflow-hidden mb-4"
-        style={{ background: 'var(--surface)', border: `1px solid ${p.color}44`, boxShadow: `0 0 50px ${p.color}1a` }}>
-        <div className="h-1" style={{ background: p.color }} />
-        <div className="p-7 md:p-8">
-          <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold mb-4"
-            style={{ background: `${p.color}18`, border: `1px solid ${p.color}40`, color: p.color, fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.1em' }}>
-            PRIMARY MATCH
-          </span>
-          <h3 className="text-xl md:text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-            {p.name}
-          </h3>
-          <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>{p.desc}</p>
-          <a href={p.href} className="btn-teal inline-flex">
-            {p.cta}
-            <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-          <p className="mt-3 text-xs" style={{ color: 'var(--text-muted)' }}>Limited consultation availability</p>
-        </div>
-      </div>
-
-      {/* Secondary */}
-      {secondary.length > 0 && (
-        <>
-          <p className="text-xs font-bold tracking-widest mb-3" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-space-grotesk)' }}>
-            ALSO RELEVANT
-          </p>
-          <div className="flex flex-col gap-3">
-            {secondary.map(key => {
-              const s = PROGRAMS[key]
-              return (
-                <div key={key} className="rounded-xl p-5 flex items-center gap-4"
-                  style={{ background: 'var(--surface)', border: `1px solid ${s.color}22` }}>
-                  <div className="w-1 self-stretch rounded-full flex-shrink-0" style={{ background: s.color }} />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{s.name}</p>
-                    <p className="text-xs leading-relaxed line-clamp-2" style={{ color: 'var(--text-muted)' }}>{s.desc}</p>
-                  </div>
-                  <a href={s.href} className="btn-ghost text-xs px-4 py-2 flex-shrink-0">View</a>
-                </div>
-              )
-            })}
-          </div>
-        </>
-      )}
-
-      <div className="mt-8 rounded-xl p-4 text-xs leading-relaxed"
-        style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.08)', color: 'var(--text-muted)' }}>
-        <span style={{ color: 'var(--text-secondary)', fontWeight: 600 }}>Clinical note: </span>
-        These recommendations are based on self-reported responses and are a guide only. Diagnosis and treatment require assessment by one of our AHPRA-registered practitioners.
-      </div>
-    </div>
-  )
-}
-
-// ─── Root ──────────────────────────────────────────────────────────────────────
-
-interface Answers {
-  goals?: string[]
-  symptoms?: string[]
-  duration?: string
-  training?: string
-  age?: string
-  gender?: string
-  conditions?: string[]
-  readiness?: string
-}
-
-function labels(ids: string[] | undefined, source: { id: string; label: string }[]): string {
-  if (!ids?.length) return '—'
-  return ids.map(id => source.find(x => x.id === id)?.label ?? id).join(', ')
-}
-
-function label1(id: string | undefined, source: { id: string; label: string }[]): string {
-  if (!id) return '—'
-  return source.find(x => x.id === id)?.label ?? id
-}
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function HealthQuiz() {
-  const [step, setStep]       = useState<Step>('intro')
-  const [dir, setDir]         = useState(1)
-  const [scores, setScores]   = useState<Scores>(zero())
+  const [step, setStep] = useState(1)
   const [answers, setAnswers] = useState<Answers>({})
-  const [matches, setMatches] = useState<PK[]>([])
+  const [personaIdx, setPersonaIdx] = useState(0)
+  const [sel, setSel] = useState<string[]>([])
   const [firstName, setFirstName] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const { open } = useSignupGate()
 
-  function go(next: Step, d = 1) { setDir(d); setStep(next) }
-
-  function applyAndGo(w: W, next: Step) {
-    setScores(prev => merge(prev, w))
-    go(next)
+  const STEP_NAMES: Record<number, string> = {
+    1: 'energy_q', 2: 'gp_q', 3: 'data_q', 4: 'reasons',
+    5: 'personas', 6: 'sex', 7: 'age', 8: 'illness', 9: 'state',
+    10: 'educational', 11: 'map', 12: 'testimonial', 13: 'concerns',
+    14: 'cond_q', 15: 'family_hx', 16: 'reveal', 17: 'teaser',
+    18: 'capture', 19: 'outcome',
   }
 
-  function progressPct() {
-    if (step === 'intro') return 0
-    if (step === 'results') return 100
-    if (step === 'analysing' || step === 'capture') return 95
-    const i = Q_STEPS.indexOf(step)
-    return Math.round(((i + 1) / Q_STEPS.length) * 90)
+  const go = (next: number, extra?: Partial<Answers>) => {
+    if (extra) setAnswers(a => ({ ...a, ...extra }))
+    setSel([])
+    setStep(next)
+    track('quiz_step_viewed', { step_number: next, step_name: STEP_NAMES[next] ?? `step_${next}` })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  async function handleCapture(first: string, email: string, mobile: string, referralSource: string, referralCode: string) {
-    setSubmitting(true)
-    setFirstName(first)
-    const m = top(scores)
-    setMatches(m)
-    try {
-      const body = [
-        `CONTACT`,
-        `Name:    ${first}`,
-        `Email:   ${email}`,
-        `Mobile:  ${mobile}`,
-        ``,
-        `PROGRAM MATCHES`,
-        `Primary:    ${m[0] ? PROGRAMS[m[0]].name : '—'}`,
-        `Secondary:  ${m.slice(1).map(k => PROGRAMS[k].name).join(', ') || '—'}`,
-        ``,
-        `QUIZ ANSWERS`,
-        `1. Goals:       ${labels(answers.goals, GOALS)}`,
-        `2. Symptoms:    ${labels(answers.symptoms, SYMPTOMS)}`,
-        `3. Duration:    ${label1(answers.duration, DURATIONS)}`,
-        `4. Training:    ${label1(answers.training, TRAINING)}`,
-        `5. Age:         ${label1(answers.age, AGES)}`,
-        `6. Gender:      ${label1(answers.gender, GENDERS)}`,
-        `7. Conditions:  ${labels(answers.conditions, CONDITIONS)}`,
-        `8. Readiness:   ${label1(answers.readiness, READINESS)}`,
-        ``,
-        `REFERRAL`,
-        `Source:  ${referralSource || 'Not specified'}`,
-        `Code:    ${referralCode || '—'}`,
-      ].join('\n')
+  const back = () => go(Math.max(0, step - 1))
 
-      await fetch('https://api.web3forms.com/submit', {
+  const toggleSel = (v: string, excl?: string) => {
+    if (excl && v === excl) { setSel([v]); return }
+    setSel(s => s.includes(v) ? s.filter(x => x !== (excl ? excl : v) && x !== v) : [...s.filter(x => x !== (excl || '')), v])
+  }
+
+  const condQ = (() => {
+    const c = answers.concerns || []
+    if (c.includes("I'm not performing at the level I expect of myself"))
+      return { q: 'Which area of performance matters most?', opts: ['Mental sharpness & focus', 'Physical strength & endurance', 'Drive and motivation', 'All of the above'] }
+    if (c.includes('I feel older than I should for my age') || c.includes('A recent health warning or wake-up call'))
+      return { q: 'How would you describe your energy across the day?', opts: ['Strong in the morning, crashes by afternoon', 'Low from the moment I wake up', 'Inconsistent — varies day to day', 'Gradually declining over time'] }
+    return { q: 'Which would most improve your quality of life right now?', opts: ['More sustained energy', 'Sharper mental performance', 'Better body composition', 'Improved sleep and recovery'] }
+  })()
+
+  const goals = getGoals(answers)
+  const risks = getRisks(answers)
+  const planName = answers.firstName || firstName || 'Your'
+
+  const inputCls = "w-full rounded-xl px-4 py-3.5 text-sm focus:outline-none transition-colors"
+  const inputStyle = { background: SURFACE, color: TEXT, border: `1px solid rgba(72,144,247,0.2)` }
+  const wrap = "flex flex-col min-h-screen pt-20 pb-10 px-5"
+  const inner = "flex-1 flex flex-col max-w-[480px] mx-auto w-full"
+  const heading = "text-[26px] font-bold leading-tight"
+
+  // ── STEPS 1–3: Yes / No micro-quiz ───────────────────────────────────────────
+  const YN_STEPS: [number, keyof Answers, string, string][] = [
+    [1, 'q1', 'In the past 12 months, have you noticed changes in your energy, body, or mood?',
+      'Many men experience meaningful hormonal and metabolic shifts between 35 and 55. Few ever investigate the underlying cause.'],
+    [2, 'q2', "Have you ever felt something was off, even when a doctor said everything looks normal?",
+      'Standard GP blood panels check fewer than 12 markers. Comprehensive testing assesses 40+ biomarkers and can reveal patterns routine checks miss.'],
+    [3, 'q3', 'Are you open to using real data, not guesswork, to understand your health?',
+      'Evidence-based clinical treatments use your own biomarker data to inform treatment decisions. That is a fundamentally different approach to your health.'],
+  ]
+  const ynMatch = YN_STEPS.find(([s]) => s === step)
+  if (ynMatch) {
+    const [, key, question, callout] = ynMatch
+    return (
+      <div className={wrap} style={{ background: BG }}>
+        <ProgressBar step={step} />
+        <div className={inner}>
+          <BackBtn step={step} onBack={back} />
+          <div className="mt-6">
+            <h2 className={`${heading} mb-8`} style={{ color: TEXT }}>{question}</h2>
+            <div className="flex flex-col gap-3">
+              {['Yes', 'No'].map(opt => <ChoiceBtn key={opt} onClick={() => go(step + 1, { [key]: opt })}>{opt}</ChoiceBtn>)}
+            </div>
+            <InfoBox text={`Did you know? ${callout}`} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── STEP 4: What brought you here ────────────────────────────────────────────
+  if (step === 4) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={inner}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6">
+          <h2 className={`${heading} mb-1`} style={{ color: TEXT }}>What's brought you here today?</h2>
+          <p className="text-sm mb-0.5" style={{ color: DIM }}>Select all that apply.</p>
+          <MultiSelect options={REASONS} selected={sel} onToggle={v => setSel(s => s.includes(v) ? s.filter(x => x !== v) : [...s, v])} />
+          <div className="mt-6"><PrimaryBtn onClick={() => go(5, { reasons: sel })} disabled={sel.length === 0}>Continue <Arrow /></PrimaryBtn></div>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 5: Why clinical data matters ────────────────────────────────────────
+  if (step === 5) {
+    const goalLabels = sel.length ? sel.map(r => GOAL_MAP[r]).filter(Boolean) : ['Comprehensive health baseline']
+    return (
+      <div className={wrap} style={{ background: BG }}>
+        <ProgressBar step={step} />
+        <div className={inner}>
+          <BackBtn step={step} onBack={back} />
+          <div className="mt-6">
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: MUTED }}>What we'll work on</p>
+            <h2 className={`${heading} mb-6`} style={{ color: TEXT }}>Here's what your answers point to</h2>
+            <div className="rounded-2xl p-5 mb-6" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+              {(goalLabels.length ? goalLabels : ['Comprehensive health baseline']).map(g => (
+                <div key={g} className="flex items-center gap-3 text-sm font-medium mb-3 last:mb-0" style={{ color: TEXT }}>
+                  <BlueCheck />{g}
+                </div>
+              ))}
+            </div>
+            <PrimaryBtn onClick={() => go(6)}>Continue <Arrow /></PrimaryBtn>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── STEP 6: Biological sex ────────────────────────────────────────────────────
+  if (step === 6) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <h2 className={`${heading} mt-6 mb-2`} style={{ color: TEXT }}>What is your biological sex?</h2>
+        <p className="text-sm mb-8" style={{ color: DIM }}>Helps us apply the right reference ranges to your results.</p>
+        <div className="flex flex-col gap-3">
+          {['Male', 'Female', 'Prefer not to say'].map(opt => <ChoiceBtn key={opt} onClick={() => go(7, { sex: opt })}>{opt}</ChoiceBtn>)}
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 7: Age bracket ───────────────────────────────────────────────────────
+  if (step === 7) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <h2 className={`${heading} mt-6 mb-8`} style={{ color: TEXT }}>What is your age?</h2>
+        <div className="grid grid-cols-2 gap-3">
+          {['Under 30', '30–34', '35–39', '40–44', '45–54', '55+'].map(opt => <ChoiceBtn key={opt} onClick={() => go(8, { age: opt })}>{opt}</ChoiceBtn>)}
+        </div>
+        <InfoBox text="Hormonal and metabolic function shifts meaningfully across different age brackets. Your panel recommendations are tailored accordingly." />
+      </div>
+    </div>
+  )
+
+  // ── STEP 8: Serious illness ───────────────────────────────────────────────────
+  if (step === 8) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <h2 className={`${heading} mt-6 mb-2`} style={{ color: TEXT }}>Are you currently undergoing treatment for a serious medical condition?</h2>
+        <p className="text-sm mb-8" style={{ color: DIM }}>Cancer, organ disease, or an active treatment regimen.</p>
+        <div className="flex flex-col gap-3">
+          {['Yes', 'No'].map(opt => <ChoiceBtn key={opt} onClick={() => go(9, { illness: opt })}>{opt}</ChoiceBtn>)}
+        </div>
+        {answers.illness === 'Yes' && (
+          <div className="mt-4 rounded-xl p-4" style={{ background: 'rgba(234,179,8,0.08)', border: '1px solid rgba(234,179,8,0.2)' }}>
+            <p className="text-xs leading-relaxed" style={{ color: 'rgba(253,224,71,0.75)' }}>Please consult your treating physician before starting any new health treatment. Our clinical team can still discuss what might be appropriate for your situation.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+
+  // ── STEP 9: State picker ──────────────────────────────────────────────────────
+  if (step === 9) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <h2 className={`${heading} mt-6 mb-8`} style={{ color: TEXT }}>Which state or territory are you in?</h2>
+        <div className="grid grid-cols-2 gap-3">
+          {STATES.map(s => <ChoiceBtn key={s} onClick={() => go(10, { state: s })}>{s}</ChoiceBtn>)}
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 10: Educational interstitial ────────────────────────────────────────
+  if (step === 10) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6 rounded-3xl p-7" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style={{ background: 'rgba(72,144,247,0.15)', border: `1px solid rgba(72,144,247,0.25)` }}>
+            <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" style={{ color: BLUE }}>
+              <path d="M9 11l3 3L22 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: MUTED }}>Why this matters</p>
+          <h2 className="text-2xl font-bold leading-tight mb-4" style={{ color: TEXT }}>
+            Most standard blood tests check fewer than 12 markers.
+          </h2>
+          <p className="text-sm leading-relaxed mb-6" style={{ color: DIM }}>
+            A comprehensive health intelligence panel assesses 40+ biomarkers, giving you a far more detailed picture of how your hormonal, metabolic, and cardiovascular systems are functioning.
+          </p>
+          <div className="grid grid-cols-2 gap-3 mb-6">
+            {['40+ biomarkers', 'Hormonal panel', 'Metabolic markers', 'Cardiovascular risk'].map(tag => (
+              <div key={tag} className="flex items-center gap-2 text-xs" style={{ color: DIM }}><BlueCheck />{tag}</div>
+            ))}
+          </div>
+          <PrimaryBtn onClick={() => go(11)}>Continue <Arrow /></PrimaryBtn>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 11: Map screen ───────────────────────────────────────────────────────
+  if (step === 11) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={inner}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6">
+          <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: BLUE }}>Collection network</p>
+          <h2 className={`${heading} mb-6`} style={{ color: TEXT }}>
+            4,200+ collection points{answers.state ? ` in and around ${answers.state}` : ' across Australia'}
+          </h2>
+          <div className="rounded-2xl overflow-hidden mb-6 relative" style={{ background: SURFACE, border: `1px solid ${BORDER}`, aspectRatio: '4/3' }}>
+            <svg viewBox="0 0 400 300" className="w-full h-full opacity-60">
+              <path d="M60,90 L80,60 L120,45 L180,40 L240,38 L290,42 L330,55 L350,75 L355,100 L340,130 L330,155 L310,175 L290,210 L270,240 L245,255 L220,260 L195,255 L175,240 L160,220 L140,230 L120,240 L100,235 L85,220 L75,200 L65,175 L55,150 L50,120 Z"
+                fill="none" stroke="rgba(72,144,247,0.35)" strokeWidth="1.5" />
+              {[[310,220],[175,215],[255,100],[130,165],[85,155],[220,180],[290,175],[185,100],[330,130],[150,210],[270,140],[110,200],[340,100],[200,240],[245,120],[160,170],[300,90],[200,140]].map(([x,y],i) => (
+                <circle key={i} cx={x} cy={y} r="3.5" fill={BLUE} opacity="0.85" />
+              ))}
+            </svg>
+            <div className="absolute inset-0 flex items-end p-5">
+              <div className="rounded-xl px-4 py-2.5" style={{ background: 'rgba(4,6,13,0.8)', backdropFilter: 'blur(8px)', border: `1px solid ${BORDER}` }}>
+                <p className="text-xs font-semibold" style={{ color: TEXT }}>4,200+ accredited collection centres nationwide</p>
+                <p className="text-[10px] mt-0.5" style={{ color: MUTED }}>Morning appointments · No GP referral needed</p>
+              </div>
+            </div>
+          </div>
+          <PrimaryBtn onClick={() => go(12)}>Continue <Arrow /></PrimaryBtn>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 12: Clinical process overview ───────────────────────────────────────
+  if (step === 12) return (
+    <div className="flex flex-col min-h-screen pt-20 pb-10 px-5" style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6">
+          <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: MUTED }}>How it works</p>
+          <h2 className={`${heading} mb-6`} style={{ color: TEXT }}>From assessment to clinical care in three steps</h2>
+          <div className="flex flex-col gap-3 mb-8">
+            {[
+              { num: '01', title: 'Complete pathology', body: 'Visit any accredited collection centre. No GP referral required.' },
+              { num: '02', title: 'Telehealth consultation', body: 'Review your results with an AHPRA-registered doctor.' },
+              { num: '03', title: 'Personalised protocol', body: 'Receive an ongoing care plan tailored to your biomarker data.' },
+            ].map(({ num, title, body }) => (
+              <div key={num} className="flex gap-4 rounded-2xl p-4" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+                <span className="text-[11px] font-bold tabular-nums pt-0.5 flex-shrink-0" style={{ color: BLUE }}>{num}</span>
+                <div>
+                  <p className="text-sm font-semibold mb-0.5" style={{ color: TEXT }}>{title}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: DIM }}>{body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <PrimaryBtn onClick={() => go(13)}>Continue <Arrow /></PrimaryBtn>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 13: What's making you look now ──────────────────────────────────────
+  if (step === 13) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={inner}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6">
+          <h2 className={`${heading} mb-1`} style={{ color: TEXT }}>What's making you look at this now?</h2>
+          <p className="text-sm mb-0.5" style={{ color: DIM }}>Select all that apply.</p>
+          <MultiSelect options={CONCERNS} selected={sel} onToggle={v => setSel(s => s.includes(v) ? s.filter(x => x !== v) : [...s, v])} />
+          <div className="mt-6"><PrimaryBtn onClick={() => go(14, { concerns: sel })} disabled={sel.length === 0}>Continue <Arrow /></PrimaryBtn></div>
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 14: Conditional question ────────────────────────────────────────────
+  if (step === 14) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={`${inner} justify-center`}>
+        <BackBtn step={step} onBack={back} />
+        <h2 className={`${heading} mt-6 mb-8`} style={{ color: TEXT }}>{condQ.q}</h2>
+        <div className="flex flex-col gap-3">
+          {condQ.opts.map(opt => <ChoiceBtn key={opt} onClick={() => go(15, { condQ: opt })}>{opt}</ChoiceBtn>)}
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 15: Family history ───────────────────────────────────────────────────
+  if (step === 15) return (
+    <div className={wrap} style={{ background: BG }}>
+      <ProgressBar step={step} />
+      <div className={inner}>
+        <BackBtn step={step} onBack={back} />
+        <div className="mt-6">
+          <h2 className={`${heading} mb-1`} style={{ color: TEXT }}>Does your family history include any of the following?</h2>
+          <p className="text-sm mb-0.5" style={{ color: DIM }}>Select all that apply.</p>
+          <MultiSelect options={FAMILY_HX} selected={sel} onToggle={v => toggleSel(v, 'None of the above')} exclusive="None of the above" />
+          <div className="mt-6"><PrimaryBtn onClick={() => go(16, { familyHistory: sel })} disabled={sel.length === 0}>Continue <Arrow /></PrimaryBtn></div>
+          <InfoBox text="Family history helps identify which panels are most relevant for your risk profile. This is used only to personalise your plan." />
+        </div>
+      </div>
+    </div>
+  )
+
+  // ── STEP 16: Recommendation reveal ───────────────────────────────────────────
+  if (step === 16) {
+    const g = goals.length ? goals : ['Comprehensive health baseline']
+    const r = risks.length ? risks : ['Hormonal health markers', 'Metabolic function panel']
+    return (
+      <div className={wrap} style={{ background: BG }}>
+        <ProgressBar step={step} />
+        <div className={inner}>
+          <div className="mt-6">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-6" style={{ background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.2)' }}>
+              <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#22c55e' }} />
+              <span className="text-[11px] font-semibold" style={{ color: '#4ade80' }}>Analysis complete</span>
+            </div>
+            <h2 className={`${heading} mb-6`} style={{ color: TEXT }}>Based on your answers, here's what we've identified</h2>
+            <div className="rounded-2xl p-5 mb-4" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+              <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: MUTED }}>What you want to address</p>
+              {g.map(goal => <div key={goal} className="flex items-center gap-3 text-sm font-medium mb-2" style={{ color: TEXT }}><BlueCheck />{goal}</div>)}
+            </div>
+            <div className="rounded-2xl p-5 mb-6" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+              <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: MUTED }}>Panels worth discussing with your doctor</p>
+              {r.map(risk => <div key={risk} className="flex items-center gap-3 text-sm font-medium mb-2" style={{ color: TEXT }}><BlueCheck />{risk}</div>)}
+            </div>
+            <PrimaryBtn onClick={() => go(17)}>See my personalised plan <Arrow /></PrimaryBtn>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── STEP 17: Teaser / locked plan card ───────────────────────────────────────
+  if (step === 17) {
+    const g = goals.length ? goals : ['Comprehensive health baseline']
+    return (
+      <div className={wrap} style={{ background: BG }}>
+        <ProgressBar step={step} />
+        <div className={inner}>
+          <div className="mt-6">
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: BLUE }}>Your plan is ready</p>
+            <div className="relative rounded-2xl overflow-hidden mb-6" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+              <div className="p-5 pb-0">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="font-bold text-lg" style={{ color: TEXT }}>{planName}'s Health Intelligence Plan</h3>
+                    <p className="text-xs mt-0.5" style={{ color: MUTED }}>Personalised · {new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                  </div>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style={{ background: 'rgba(72,144,247,0.15)', color: BLUE }}>
+                    {planName[0].toUpperCase()}
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {g.slice(0, 3).map(tag => <span key={tag} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ background: 'rgba(72,144,247,0.1)', color: 'rgba(168,196,232,0.8)' }}>{tag}</span>)}
+                  {answers.state && <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ background: 'rgba(72,144,247,0.1)', color: 'rgba(168,196,232,0.8)' }}>{answers.state}</span>}
+                </div>
+              </div>
+              {/* Blurred lock overlay */}
+              <div className="relative">
+                <div className="px-5 pb-5 blur-sm select-none pointer-events-none">
+                  <div className="border-t pt-4" style={{ borderColor: BORDER }}>
+                    <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: MUTED }}>Recommended panels</p>
+                    {['Panel A — ████████ ██████', 'Panel B — ████ ██████', 'Panel C — ██████████'].map(item => (
+                      <div key={item} className="flex items-center gap-2 mb-2"><BlueCheck /><span className="text-xs" style={{ color: DIM }}>{item}</span></div>
+                    ))}
+                  </div>
+                  <div className="border-t pt-4 mt-4" style={{ borderColor: BORDER }}>
+                    <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: MUTED }}>Clinical pathway</p>
+                    <div className="rounded-xl h-12" style={{ background: 'rgba(72,144,247,0.06)' }} />
+                  </div>
+                </div>
+                <div className="absolute inset-0 flex flex-col items-center justify-center" style={{ background: 'rgba(13,21,37,0.75)', backdropFilter: 'blur(2px)' }}>
+                  <div className="flex items-center gap-2 text-sm font-semibold mb-1" style={{ color: TEXT }}>
+                    <svg viewBox="0 0 18 18" fill="none" className="w-4 h-4"><rect x="3" y="8" width="12" height="9" rx="2" stroke="currentColor" strokeWidth="1.4" /><path d="M6 8V5.5a3 3 0 016 0V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /></svg>
+                    Full plan locked
+                  </div>
+                  <p className="text-xs" style={{ color: MUTED }}>Enter your details to unlock</p>
+                </div>
+              </div>
+            </div>
+            <PrimaryBtn onClick={() => go(18)}>Unlock my full plan <Arrow /></PrimaryBtn>
+            <p className="text-xs text-center mt-3" style={{ color: MUTED }}>Free · Your details stay private</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── STEP 18: Capture gate ─────────────────────────────────────────────────────
+  if (step === 18) {
+    const valid = firstName.trim().length > 0 && email.includes('@') && email.includes('.')
+    const handleSubmit = async () => {
+      if (!valid) return
+      const fn = firstName.trim()
+      const em = email.trim()
+      const ph = phone.trim()
+      const payload = { ...answers, firstName: fn, email: em, phone: ph }
+      setAnswers(payload)
+      track('quiz_lead_captured', {
+        step_number: 18,
+        has_phone: ph.length > 0 ? 1 : 0,
+        goals_count: (answers.reasons || []).length,
+      })
+      // Dual send — Web3Forms (browser→admin@) + Resend (server→gmail) for redundancy
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `Quiz Lead — ${first} — ${m.map(k => PROGRAMS[k].name).join(', ')}`,
-          from_name: first || 'Quiz Lead',
-          email,
-          message: body,
+          subject: `Apex — Health Assessment Lead: ${fn}`,
+          name: fn,
+          email: em,
+          phone: ph || 'Not provided',
+          source: 'health-assessment',
+          goals: (answers.reasons || []).join(', ') || 'Not specified',
+          concerns: (answers.concerns || []).join(', ') || 'Not specified',
+          age_bracket: answers.age || 'Not specified',
+          state: answers.state || 'Not specified',
+          sex: answers.sex || 'Not specified',
+          family_history: (answers.familyHistory || []).join(', ') || 'Not specified',
         }),
-      })
-    } catch {}
-    setSubmitting(false)
-    go('results')
+      }).catch(() => {})
+      fetch('/api/notify-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: fn, email: em, phone: ph || '',
+          source: 'quiz',
+          goals: (answers.reasons || []).join(', ') || '',
+          concerns: (answers.concerns || []).join(', ') || '',
+          age: answers.age || '', state: answers.state || '',
+          sex: answers.sex || '',
+          familyHistory: (answers.familyHistory || []).join(', ') || '',
+        }),
+      }).catch(() => {})
+      go(19, { firstName: fn, email: em, phone: ph })
+    }
+    return (
+      <div className={wrap} style={{ background: BG }}>
+        <ProgressBar step={step} />
+        <div className={`${inner} justify-center`}>
+          <div className="mt-6">
+            <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style={{ background: 'rgba(72,144,247,0.12)', border: `1px solid rgba(72,144,247,0.25)` }}>
+              <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" style={{ color: BLUE }}>
+                <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" strokeWidth="1.8" />
+                <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              </svg>
+            </div>
+            <h2 className={`${heading} mb-2`} style={{ color: TEXT }}>Where should we send your plan?</h2>
+            <p className="text-sm mb-8" style={{ color: DIM }}>We'll email you a summary and a link to book your consultation. No spam, ever.</p>
+            <div className="flex flex-col gap-3 mb-6">
+              <input
+                className={inputCls} style={inputStyle} aria-label="First name"
+                placeholder="First name *" value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+                onFocus={e => { e.target.style.borderColor = BLUE }}
+                onBlur={e => { e.target.style.borderColor = 'rgba(72,144,247,0.2)' }}
+                autoComplete="given-name" />
+              <input
+                className={inputCls} style={inputStyle} aria-label="Email address"
+                placeholder="Email address *" type="email" value={email}
+                onChange={e => setEmail(e.target.value)}
+                onFocus={e => { e.target.style.borderColor = BLUE }}
+                onBlur={e => { e.target.style.borderColor = 'rgba(72,144,247,0.2)' }}
+                autoComplete="email" />
+              <input
+                className={inputCls} style={inputStyle} aria-label="Mobile number (optional)"
+                placeholder="Mobile number (optional)" type="tel" value={phone}
+                onChange={e => setPhone(e.target.value)}
+                onFocus={e => { e.target.style.borderColor = BLUE }}
+                onBlur={e => { e.target.style.borderColor = 'rgba(72,144,247,0.2)' }}
+                autoComplete="tel" />
+            </div>
+            <PrimaryBtn onClick={handleSubmit} disabled={!valid}>Unlock my plan <Arrow /></PrimaryBtn>
+            <p className="text-[10px] text-center mt-4 leading-relaxed" style={{ color: MUTED }}>
+              By continuing you agree to our privacy policy. Your information will not be shared with third parties.
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
-  return (
-    <div style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
-      <Nav />
+  // ── STEP 19: Final outcome ────────────────────────────────────────────────────
+  if (step >= 19) {
+    const g = goals.length ? goals : ['Comprehensive health baseline']
+    const displayName = answers.firstName || firstName || ''
+    return (
+      <div className="flex flex-col min-h-screen pt-12 pb-12 px-5" style={{ background: BG }}>
+        {/* Top glow */}
+        <div className="fixed top-0 right-0 w-[400px] h-[300px] pointer-events-none" aria-hidden="true"
+          style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 65%)' }} />
+        <div className="max-w-[480px] mx-auto w-full relative">
+          <div className="flex items-center gap-2 mb-8 mt-4">
+            <svg viewBox="0 0 20 20" fill="none" className="w-5 h-5">
+              <circle cx="10" cy="10" r="9" fill="rgba(34,197,94,0.15)" stroke="#22c55e" strokeWidth="0.8" />
+              <path d="M6 10l3 3 5-5" stroke="#22c55e" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="text-sm font-semibold" style={{ color: '#4ade80' }}>Your plan is ready</span>
+          </div>
+          <h2 className="text-2xl font-bold leading-tight mb-1" style={{ color: TEXT }}>
+            {displayName ? `${displayName}'s` : 'Your'} Health Intelligence Plan
+          </h2>
+          <p className="text-sm mb-6" style={{ color: DIM }}>Personalised from your answers · {new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+          <div className="flex flex-wrap gap-1.5 mb-8">
+            {g.map(tag => <span key={tag} className="text-[10px] font-semibold px-2.5 py-1 rounded-full" style={{ background: BLUE, color: '#fff' }}>{tag}</span>)}
+          </div>
 
-      {/* Progress bar */}
-      {step !== 'intro' && (
-        <div className="fixed left-0 right-0 z-40" style={{ top: 80, height: 2, background: 'rgba(72,144,247,0.04)' }}>
-          <motion.div className="h-full" style={{ background: 'var(--teal)' }}
-            animate={{ width: `${progressPct()}%` }} transition={{ duration: 0.4, ease: 'easeOut' }} />
+          {/* Tier cards */}
+          <div className="rounded-2xl p-5 mb-3" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
+            <div className="flex items-start justify-between mb-3">
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.14em] uppercase mb-1" style={{ color: MUTED }}>Tier 1</p>
+                <h3 className="font-bold text-lg" style={{ color: TEXT }}>Diagnostic</h3>
+                <p className="text-xs mt-0.5" style={{ color: DIM }}>Understand your baseline</p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 mb-4">
+              {['Comprehensive 40+ marker blood panel', 'Doctor-led telehealth consultation', 'Written clinical summary and next steps'].map(f => (
+                <div key={f} className="flex items-center gap-2.5 text-xs" style={{ color: DIM }}><BlueCheck />{f}</div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl p-5 mb-6 relative" style={{ background: 'rgba(72,144,247,0.08)', border: `2px solid ${BLUE}` }}>
+            <span className="absolute top-3 right-3 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full" style={{ background: BLUE, color: '#fff' }}>Recommended</span>
+            <div className="pr-24 mb-3">
+              <p className="text-[10px] font-bold tracking-[0.14em] uppercase mb-1" style={{ color: 'rgba(72,144,247,0.5)' }}>Tier 2</p>
+              <h3 className="font-bold text-lg" style={{ color: TEXT }}>Optimisation</h3>
+              <p className="text-xs mt-0.5" style={{ color: DIM }}>Act on what you find</p>
+            </div>
+            <div className="flex flex-col gap-2 mb-4">
+              {['Everything in Diagnostic', 'Ongoing personalised protocol', 'Clinical reviews every 3 months', 'Priority support between appointments'].map(f => (
+                <div key={f} className="flex items-center gap-2.5 text-xs" style={{ color: DIM }}>
+                  <BlueCheck />{f}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button type="button" onClick={() => open()}
+            className="w-full rounded-full py-4 text-sm font-semibold flex items-center justify-center gap-2 mb-3 transition-all"
+            style={{ background: BLUE, color: '#fff', cursor: 'pointer', border: 'none' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'var(--blue-dark)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = BLUE }}>
+            Get started <Arrow />
+          </button>
+          <button type="button" onClick={() => open()}
+            className="w-full rounded-full py-3.5 text-sm font-medium flex items-center justify-center mb-6 transition-colors"
+            style={{ border: `1px solid ${BORDER}`, color: DIM, cursor: 'pointer', background: 'transparent' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = TEXT; (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(72,144,247,0.3)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = DIM; (e.currentTarget as HTMLButtonElement).style.borderColor = BORDER }}>
+            Create your account →
+          </button>
+          <p className="text-[10px] text-center leading-relaxed" style={{ color: MUTED }}>
+            AHPRA-registered doctors · All consultations conducted by Australian licensed practitioners<br />
+            This assessment does not constitute medical advice. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
+          </p>
         </div>
-      )}
+      </div>
+    )
+  }
 
-      <main className="min-h-screen flex items-center justify-center py-24 pt-32">
-        <div className="w-full">
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div key={step} custom={dir} variants={variants}
-              initial="enter" animate="center" exit="exit"
-              transition={{ duration: 0.28, ease }}>
-
-              {step === 'intro'      && <Intro onStart={() => go('goal')} />}
-              {step === 'goal'       && <GoalStep onNext={(ids, w) => { setAnswers(a => ({ ...a, goals: ids })); applyAndGo(w, 'symptoms') }} />}
-              {step === 'symptoms'   && <SymptomsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, symptoms: ids })); applyAndGo(w, 'duration') }} onBack={() => go('goal', -1)} />}
-              {step === 'duration'   && <DurationStep onSelect={(id, w) => { setAnswers(a => ({ ...a, duration: id })); applyAndGo(w, 'training') }} onBack={() => go('symptoms', -1)} />}
-              {step === 'training'   && <TrainingStep onSelect={(id, w) => { setAnswers(a => ({ ...a, training: id })); applyAndGo(w, 'age') }} onBack={() => go('duration', -1)} />}
-              {step === 'age'        && <AgeStep onSelect={(id, w) => { setAnswers(a => ({ ...a, age: id })); applyAndGo(w, 'gender') }} onBack={() => go('training', -1)} />}
-              {step === 'gender'     && <GenderStep onSelect={(id, w) => { setAnswers(a => ({ ...a, gender: id })); applyAndGo(w, 'conditions') }} onBack={() => go('age', -1)} />}
-              {step === 'conditions' && <ConditionsStep onNext={(ids, w) => { setAnswers(a => ({ ...a, conditions: ids })); applyAndGo(w, 'readiness') }} onBack={() => go('gender', -1)} />}
-              {step === 'readiness'  && <ReadinessStep onSelect={(id, w) => { setAnswers(a => ({ ...a, readiness: id })); applyAndGo(w, 'analysing') }} onBack={() => go('conditions', -1)} />}
-              {step === 'analysing'  && <Analysing onDone={() => go('capture')} />}
-              {step === 'capture'    && <Capture onSubmit={handleCapture} submitting={submitting} onBack={() => go('readiness', -1)} />}
-              {step === 'results'    && <Results matches={matches} firstName={firstName} />}
-
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </main>
-
-      {step === 'results' && <Footer />}
-    </div>
-  )
+  return null
 }

@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import DoctorCard from '@/components/DoctorCard'
+import FAQSection from '@/components/FAQSection'
 import type { Program } from '@/lib/programs'
 
 // ─── Program Hero ─────────────────────────────────────────────────────────────
@@ -17,28 +19,6 @@ function ProgramHero({ program }: { program: Program }) {
       style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="Program hero"
     >
-      {/* Dot grid */}
-      <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
-
-      {/* Glow — top left */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)',
-        }}
-      />
-
-      {/* Glow — bottom right */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 100% 100%, rgba(72,144,247,0.04) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="glow-rule" aria-hidden="true" />
 
       <div className="container-tight relative z-10 mt-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -57,7 +37,7 @@ function ProgramHero({ program }: { program: Program }) {
                   style={
                     program.badge === 'Flagship'
                       ? {
-                          color: '#4890f7',
+                          color: 'var(--blue)',
                           backgroundColor: 'rgba(72,144,247,0.08)',
                           border: '1px solid rgba(72,144,247,0.2)',
                         }
@@ -111,7 +91,7 @@ function ProgramHero({ program }: { program: Program }) {
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-1.5 text-sm font-medium"
-                style={{ color: '#4890f7' }}
+                style={{ color: 'var(--blue)' }}
               >
                 View transparent pricing
                 <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
@@ -133,11 +113,11 @@ function ProgramHero({ program }: { program: Program }) {
               className="flex flex-wrap gap-4"
             >
               {program.status === 'coming-soon' ? (
-                <a href="/intake/hormone-consult" className="btn-ghost">
-                  Join the Waitlist
+                <a href="https://app.apexmetabolichealth.com.au/signup" className="btn-ghost">
+                  Get Started
                 </a>
               ) : (
-                <Link href={program.track === 'hormone' ? '/intake/hormone-consult' : '/intake/general-consult'} className="btn-teal">
+                <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
                   {program.ctaLabel}
                 </Link>
               )}
@@ -198,21 +178,12 @@ function WhatItAddresses({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--elevated-high)' }}
+      style={{ backgroundColor: 'var(--surface)' }}
       aria-label="What this program addresses"
     >
-      <div className="glow-rule" aria-hidden="true" />
 
       <div className="container-tight relative z-10">
         <div ref={headingRef} className="mb-10">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="label mb-4"
-          >
-            WHAT WE TREAT
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
@@ -263,26 +234,9 @@ function WhatsIncluded({ program }: { program: Program }) {
       style={{ backgroundColor: 'var(--bg)' }}
       aria-label="What's included"
     >
-      <div className="glow-rule" aria-hidden="true" />
-
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)',
-        }}
-      />
 
       <div className="container-tight relative z-10">
         <div ref={headingRef} className="mb-10">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="label mb-4"
-          >
-            PROGRAM INCLUDES
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
@@ -305,7 +259,7 @@ function WhatsIncluded({ program }: { program: Program }) {
             >
               <span
                 className="text-sm font-bold flex-shrink-0"
-                style={{ fontFamily: 'var(--font-space-grotesk)', color: '#4890f7' }}
+                style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -331,21 +285,12 @@ function HowThisProgramWorks({ program }: { program: Program }) {
   return (
     <section
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--elevated-high)' }}
+      style={{ backgroundColor: 'var(--elevated)' }}
       aria-label="How this program works"
     >
-      <div className="glow-rule" aria-hidden="true" />
 
       <div className="container-tight relative z-10">
         <div ref={headingRef} className="mb-16 md:mb-20">
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={headingInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="label mb-4"
-          >
-            THE PROCESS
-          </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }}
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
@@ -389,7 +334,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                       style={{
                         fontFamily: 'var(--font-space-grotesk)',
                         fontSize: '20px',
-                        color: '#4890f7',
+                        color: 'var(--blue)',
                         letterSpacing: '-0.02em',
                       }}
                     >
@@ -432,17 +377,6 @@ function ProgramBottomCTA({ program }: { program: Program }) {
       style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Get started"
     >
-      <div className="glow-rule" aria-hidden="true" />
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.07) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="absolute inset-0 dot-grid opacity-50" aria-hidden="true" />
 
       <div className="container-tight relative z-10 text-center">
         <motion.h2
@@ -461,8 +395,8 @@ function ProgramBottomCTA({ program }: { program: Program }) {
           transition={{ duration: 0.6, delay: 0.22 }}
           className="mb-10"
         >
-          <Link href={program.track === 'hormone' ? '/intake/hormone-consult' : '/intake/general-consult'} className="btn-teal">
-            Book a Consultation
+          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
+            Get Started
           </Link>
         </motion.div>
 
@@ -484,6 +418,33 @@ function ProgramBottomCTA({ program }: { program: Program }) {
 
 // ─── Page Client ──────────────────────────────────────────────────────────────
 
+const PROGRAM_FAQS = [
+  {
+    q: 'Do I need a GP referral to start?',
+    a: 'No. You register directly through Apex and we issue a pathology referral within the same business day. No existing GP referral needed.',
+  },
+  {
+    q: 'Are your doctors AHPRA-registered?',
+    a: 'Yes, unconditionally. Every consultation is conducted by an AHPRA-registered medical practitioner. You can verify any of our doctors directly on the AHPRA national register.',
+  },
+  {
+    q: 'What blood tests are included?',
+    a: 'Our panels go well beyond standard GP orders — full hormone profiles, metabolic markers, thyroid function, inflammatory markers, and nutritional status. The full picture needed to build a protocol, not just check for disease.',
+  },
+  {
+    q: 'Where do I get my blood test done?',
+    a: 'At any of 4,000+ accredited pathology collection centres across Australia. We send your referral electronically and most results come back within 24–48 hours.',
+  },
+  {
+    q: 'How does ongoing care work?',
+    a: "After your initial consultation, you'll have structured clinical reviews every 3 months — a blood panel followed by a telehealth consultation where your doctor reviews results and adjusts your protocol. Script renewal requires a review. It's not a set-and-forget service.",
+  },
+  {
+    q: 'Is this legal in Australia?',
+    a: 'Yes. We operate under Australian law with TGA-compliant prescribing and a registered compounding pharmacy partner operating under TGA GMP standards.',
+  },
+]
+
 export default function ProgramPageClient({ program }: { program: Program }) {
   return (
     <>
@@ -493,6 +454,8 @@ export default function ProgramPageClient({ program }: { program: Program }) {
         <WhatItAddresses program={program} />
         <WhatsIncluded program={program} />
         <HowThisProgramWorks program={program} />
+        <DoctorCard />
+        <FAQSection faqs={PROGRAM_FAQS} />
         <ProgramBottomCTA program={program} />
       </main>
       <Footer />

@@ -77,11 +77,11 @@ export default function AppComingSoon() {
             >
               <span
                 className="w-1.5 h-1.5 rounded-full"
-                style={{ background: '#4890f7', boxShadow: '0 0 6px rgba(72,144,247,0.8)' }}
+                style={{ background: 'var(--blue)', boxShadow: '0 0 6px rgba(72,144,247,0.8)' }}
               />
               <span
                 className="text-[11px] font-semibold tracking-[0.2em] uppercase"
-                style={{ color: '#4890f7' }}
+                style={{ color: 'var(--blue)' }}
               >
                 In Development
               </span>
@@ -92,7 +92,7 @@ export default function AppComingSoon() {
               initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.08, ease }}
-              className="display-serif mb-5 mx-auto"
+              className="display-heading mb-5 mx-auto"
               style={{
                 fontSize: 'clamp(36px, 5vw, 72px)',
                 maxWidth: '720px',
@@ -134,8 +134,8 @@ export default function AppComingSoon() {
               transition={{ duration: 0.5, delay: 0.65, ease }}
               className="flex flex-col sm:flex-row items-center gap-4"
             >
-              <Link href="/intake/pre-screen" className="btn-primary">
-                Start Your Assessment
+              <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary">
+                Create Your Account
                 <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -163,7 +163,7 @@ export default function AppComingSoon() {
             >
               <p className="label mb-4">What's inside</p>
               <h2
-                className="display-serif"
+                className="display-heading"
                 style={{ fontSize: 'clamp(28px, 3vw, 44px)' }}
               >
                 Built for the long game
@@ -216,7 +216,7 @@ export default function AppComingSoon() {
             >
               <p className="label mb-5">Don't wait for the app</p>
               <h2
-                className="display-serif mb-5 mx-auto"
+                className="display-heading mb-5 mx-auto"
                 style={{ fontSize: 'clamp(28px, 3vw, 44px)', maxWidth: '520px' }}
               >
                 Your clinical journey starts with a consultation
@@ -228,8 +228,8 @@ export default function AppComingSoon() {
                 The app will be available to all Apex patients. Get started today and have full
                 access from day one of launch.
               </p>
-              <Link href="/intake/pre-screen" className="btn-primary">
-                Book a Consultation
+              <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary">
+                Get Started
                 <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

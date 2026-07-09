@@ -1,92 +1,103 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
+const ACCENT = 'var(--blue)'
+const GLOW   = 'rgba(72,144,247,0.35)'
+
 const TREATMENTS = [
   {
     id: 'hormone',
-    href: '/intake/hormone',
+    href: '/programs/hormone-optimisation',
     label: 'Hormone Optimisation',
-    sub: 'Testosterone · Energy · Drive',
-    image: 'https://images.unsplash.com/photo-1601113329251-0aebe217bdbe?auto=format&fit=crop&w=600&q=90',
-    imgPos: 'center top',
-    bg: '#030d1f',
-    glowColor: 'rgba(72,144,247,0.35)',
+    sub: 'Energy · Drive · Recovery',
+    image: 'https://images.unsplash.com/photo-1734443544776-7161343f09d2?auto=format&fit=crop&w=800&q=85',
+    imgPos: 'center 30%',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: 'Most popular',
   },
   {
     id: 'weight',
-    href: '/intake/quiz/weightloss',
+    href: '/programs/metabolic-weight-loss',
     label: 'Medical Weight Loss',
-    sub: 'Doctor-led metabolic management',
-    image: 'https://images.unsplash.com/photo-1579758682665-53a1a614eea6?auto=format&fit=crop&w=600&q=90',
-    imgPos: 'center top',
-    bg: '#02150a',
-    glowColor: 'rgba(5,150,105,0.35)',
+    sub: 'Doctor-led metabolic reset',
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85',
+    imgPos: 'center center',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: null,
   },
   {
     id: 'sexual',
-    href: '/intake/quiz/sexual',
+    href: '/programs/sexual-health',
     label: 'Sexual Health',
-    sub: 'Private & confidential treatment',
-    image: 'https://images.unsplash.com/photo-1628595351029-c2bf17511435?auto=format&fit=crop&w=600&q=90',
+    sub: 'Private · Confidential · Discreet',
+    image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
-    bg: '#08081e',
-    glowColor: 'rgba(99,102,241,0.35)',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: null,
   },
   {
     id: 'recovery',
-    href: '/intake/quiz/injury',
-    label: 'Recovery & Injury Repair',
+    href: '/programs/injury-repair',
+    label: 'Recovery and Injury Repair',
     sub: 'Performance · Rehab · Mobility',
-    image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=90',
-    imgPos: 'center top',
-    bg: '#060f20',
-    glowColor: 'rgba(37,99,235,0.35)',
+    image: 'https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=800&q=85',
+    imgPos: 'center center',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: null,
   },
   {
     id: 'longevity',
-    href: '/intake/quiz/antiageing',
-    label: 'Anti-Ageing & Longevity',
+    href: '/programs/longevity',
+    label: 'Anti-Ageing and Longevity',
     sub: 'Healthspan · Vitality · Prevention',
-    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=600&q=90',
+    image: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
-    bg: '#0a0618',
-    glowColor: 'rgba(139,92,246,0.35)',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: 'New',
   },
   {
     id: 'skinhair',
-    href: '/intake/quiz/skin',
-    label: 'Skin & Hair',
+    href: '/programs/skin-regeneration',
+    label: 'Skin and Hair',
     sub: 'Restoration · Regeneration',
-    image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=90',
+    image: 'https://images.unsplash.com/photo-1781178339148-d6ac1edb7b8f?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
-    bg: '#140818',
-    glowColor: 'rgba(168,85,247,0.35)',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: null,
   },
   {
     id: 'bloods',
-    href: '/intake/fast-track?program=bloods',
+    href: '/programs/pathology',
     label: 'Comprehensive Blood Tests',
     sub: 'Full-panel diagnostics · Doctor reviewed',
-    image: 'https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=90',
+    image: 'https://images.unsplash.com/photo-1570917013020-a6966d3ee863?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
-    bg: '#041510',
-    glowColor: 'rgba(16,185,129,0.35)',
+    bg: '#0e1117',
+    accent: ACCENT,
+    glowColor: GLOW,
     tag: null,
   },
 ]
 
 export default function TreatmentSelector() {
+  const prefersReduced = useReducedMotion()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -102,50 +113,53 @@ export default function TreatmentSelector() {
       }}
       aria-label="Treatment pathways"
     >
-      {/* Subtle radial at top */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }}
-      />
 
       {/* ── Section header ── */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={prefersReduced ? false : { opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, ease }}
+        transition={prefersReduced ? { duration: 0 } : { duration: 0.6, ease }}
         style={{
           paddingLeft: 'clamp(24px, 5.5vw, 80px)',
           paddingRight: 'clamp(24px, 5.5vw, 80px)',
           marginBottom: 40,
         }}
       >
-        <p className="label mb-4">Treatment Pathways</p>
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h2
             className="font-bold tracking-tight"
             style={{
-              fontFamily: 'var(--font-space-grotesk)',
+              fontFamily: 'var(--font-inter)',
               fontSize: 'clamp(26px, 3.5vw, 48px)',
               lineHeight: 1.08,
               letterSpacing: '-0.025em',
               color: 'var(--text-primary)',
             }}
           >
-            Find your program.
+            Find your treatment.
           </h2>
           <a
             href="/start"
             className="hidden md:inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-            style={{ color: 'rgba(200,220,248,0.4)', textDecoration: 'none' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#4890f7' }}
-            onMouseLeave={e => { e.currentTarget.style.color = 'rgba(200,220,248,0.4)' }}
+            style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
+            onMouseEnter={e => { e.currentTarget.style.color = 'var(--blue)' }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)' }}
           >
-            Not sure? Take the assessment
+            Not sure? Start your assessment
             <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>
+        </div>
+        <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4">
+          {['Under 2 minutes', 'Completely confidential', 'Reviewed by Australian doctors'].map(item => (
+            <span key={item} className="flex items-center gap-2 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
+              <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3 flex-shrink-0" aria-hidden="true">
+                <path d="M2 6l3 3 5-5" stroke="var(--blue)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {item}
+            </span>
+          ))}
         </div>
       </motion.div>
 
@@ -167,9 +181,9 @@ export default function TreatmentSelector() {
             <motion.a
               key={t.id}
               href={t.href}
-              initial={{ opacity: 0, y: 36 }}
+              initial={prefersReduced ? false : { opacity: 0, y: 36 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.065, ease }}
+              transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: i * 0.065, ease }}
               className="relative flex-shrink-0 overflow-hidden no-underline group"
               style={{
                 width: 'clamp(210px, 26vw, 290px)',
@@ -187,9 +201,8 @@ export default function TreatmentSelector() {
                   src={t.image}
                   alt=""
                   fill
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  className="object-cover motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:group-hover:scale-[1.04]"
                   style={{ objectPosition: t.imgPos, opacity: 0.72 }}
-                  unoptimized
                 />
               </div>
 
@@ -219,64 +232,55 @@ export default function TreatmentSelector() {
               {/* ── Card content ── */}
               <div className="absolute inset-0 flex flex-col justify-between" style={{ padding: 'clamp(16px, 2.5vw, 22px)' }}>
 
-                {/* Top section: badge + title + sub */}
+                {/* Top section: badge + sub + title */}
                 <div>
                   {t.tag && (
                     <div
                       className="inline-flex items-center mb-2.5"
                       style={{
-                        background: 'rgba(255,255,255,0.08)',
-                        border: '1px solid rgba(255,255,255,0.12)',
-                        backdropFilter: 'blur(6px)',
+                        background: `${t.accent}22`,
+                        border: `1px solid ${t.accent}55`,
                         borderRadius: 99,
                         padding: '4px 10px',
                       }}
                     >
-                      <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)' }}>
+                      <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.accent }}>
                         {t.tag}
                       </span>
                     </div>
                   )}
+                  <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.accent, marginBottom: 6 }}>
+                    {t.sub}
+                  </p>
                   <h3
                     className="font-bold leading-tight"
                     style={{
-                      fontFamily: 'var(--font-space-grotesk)',
+                      fontFamily: 'var(--font-inter)',
                       fontSize: 'clamp(16px, 2vw, 21px)',
                       color: '#ffffff',
                       letterSpacing: '-0.015em',
-                      marginBottom: 6,
                     }}
                   >
                     {t.label}
                   </h3>
-                  <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.025em' }}>
-                    {t.sub}
-                  </p>
                 </div>
 
                 {/* Bottom section: arrow CTA */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-[11px] font-semibold tracking-wide uppercase transition-opacity duration-200 opacity-0 group-hover:opacity-100"
-                    style={{ color: 'rgba(255,255,255,0.7)' }}
-                  >
-                    Get started
-                  </span>
+                <div className="flex items-center justify-end">
                   <div
-                    className="flex items-center justify-center transition-all duration-200 group-hover:scale-110 group-hover:bg-white/20"
+                    className="flex items-center justify-center transition-all duration-200"
                     style={{
                       width: 44,
                       height: 44,
                       borderRadius: '50%',
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.18)',
-                      backdropFilter: 'blur(8px)',
+                      background: `${t.accent}20`,
+                      border: `1px solid ${t.accent}55`,
                       flexShrink: 0,
-                      marginLeft: 'auto',
+                      color: t.accent,
                     }}
                   >
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
-                      <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>
@@ -288,18 +292,18 @@ export default function TreatmentSelector() {
 
       {/* Mobile: assessment link */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={prefersReduced ? false : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.6 }}
+        transition={prefersReduced ? { duration: 0 } : { duration: 0.5, delay: 0.6 }}
         className="md:hidden text-center mt-8"
         style={{ paddingLeft: 24, paddingRight: 24 }}
       >
         <a
           href="/start"
           className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
-          style={{ color: 'rgba(200,220,248,0.4)', textDecoration: 'none' }}
+          style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
         >
-          Not sure? Take the Health Assessment
+          Not sure? Start your assessment
           <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
             <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

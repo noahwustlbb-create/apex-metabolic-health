@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useSignupGate } from '@/context/SignupGateContext'
 
 const SYMPTOMS = [
   'Chronic fatigue that rest doesn\'t fix',
@@ -19,20 +20,15 @@ const ease = [0.22, 1, 0.36, 1] as const
 export default function ProblemSection() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { open } = useSignupGate()
 
   return (
     <section
       id="problem"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--surface)' }}
+      style={{ backgroundColor: 'var(--bg)' }}
       aria-label="Symptoms section"
     >
-      <div className="warm-rule" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.04) 0%, transparent 65%)' }}
-      />
 
       <div ref={ref} className="container-tight">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
@@ -52,12 +48,12 @@ export default function ProblemSection() {
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.75, delay: 0.08, ease }}
-              className="display-serif mb-6"
+              className="display-heading mb-6"
               style={{ fontSize: 'clamp(36px, 4vw, 60px)' }}
             >
               Your GP said normal.
               <br />
-              <span style={{ color: 'rgba(var(--text-primary-rgb),0.2)' }}>
+              <span style={{ color: 'var(--blue)' }}>
                 Your body disagrees.
               </span>
             </motion.h2>
@@ -77,12 +73,12 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.28, ease }}
             >
-              <a href="/intake/pre-screen" className="btn-primary" style={{ display: 'inline-flex' }}>
+              <button type="button" onClick={() => open()} className="btn-primary" style={{ display: 'inline-flex', cursor: 'pointer' }}>
                 Find out what is actually wrong
                 <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </button>
             </motion.div>
           </div>
 
@@ -93,7 +89,7 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.2, ease }}
               className="text-[10px] font-semibold tracking-[0.22em] uppercase mb-5"
-              style={{ color: '#4890f7' }}
+              style={{ color: 'var(--blue)' }}
             >
               Sound familiar?
             </motion.p>
@@ -113,7 +109,7 @@ export default function ProblemSection() {
                 >
                   <div
                     className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ background: '#4890f7', opacity: 0.6 }}
+                    style={{ background: 'var(--blue)', opacity: 0.6 }}
                   />
                   <p className="text-sm" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-inter)' }}>
                     {symptom}
@@ -127,7 +123,7 @@ export default function ProblemSection() {
               animate={inView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.7, ease }}
               className="text-xs mt-5 leading-relaxed"
-              style={{ color: '#4890f7' }}
+              style={{ color: 'var(--blue)' }}
             >
               These are clinical indicators — not lifestyle problems. Most patients are never tested for them. We test all of them.
             </motion.p>

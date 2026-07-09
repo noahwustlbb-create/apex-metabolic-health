@@ -6,9 +6,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import DoctorCard from '@/components/DoctorCard'
+import FAQSection from '@/components/FAQSection'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
 
 const STANDARDS = [
@@ -102,20 +104,7 @@ export default function AboutPage() {
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '160px', paddingBottom: '100px' }}
         >
-          <div
-            aria-hidden="true"
-            className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-            style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.06) 0%, transparent 60%)' }}
-          />
           <div className="container-tight relative z-10">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, ease }}
-              className="label mb-5"
-            >
-              About Apex
-            </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
@@ -131,12 +120,7 @@ export default function AboutPage() {
               }}
             >
               Behind every protocol,{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #4890f7, #6ba8ff)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
+              <span style={{ color: 'var(--blue)' }}>
                 a clinical team.
               </span>
             </motion.h1>
@@ -165,12 +149,12 @@ export default function AboutPage() {
                 {
                   src: 'https://images.unsplash.com/photo-1758691462743-f9fc9e430d39?auto=format&fit=crop&w=700&q=80',
                   alt: 'Telehealth consultation with AHPRA doctor',
-                  label: 'AHPRA-registered doctors',
+                  label: 'AHPRA-registered practitioner',
                 },
                 {
                   src: 'https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=700&q=80',
-                  alt: 'Patient outcomes and performance',
-                  label: 'Real clinical outcomes',
+                  alt: 'Patient engaged in performance training',
+                  label: 'Performance-focused care',
                 },
               ].map((img, i) => {
                 const ref = useRef(null)
@@ -206,7 +190,6 @@ export default function AboutPage() {
 
         {/* Why Apex exists */}
         <Section bg="var(--surface)">
-          <div className="glow-rule" aria-hidden="true" />
           {WHY.map((block, i) => {
             const ref = useRef(null)
             const inView = useInView(ref, { once: true, margin: '-60px' })
@@ -253,9 +236,7 @@ export default function AboutPage() {
 
         {/* Clinical team */}
         <Section bg="var(--bg)">
-          <div className="warm-rule" aria-hidden="true" />
           <AnimBlock>
-            <p className="label mb-4">Clinical Team</p>
             <h2
               className="font-bold tracking-tight mb-12"
               style={{
@@ -291,7 +272,7 @@ export default function AboutPage() {
                   <div>
                     <div className="flex items-start justify-between mb-5">
                       <div>
-                        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Chief Medical Officer</p>
+                        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Medical Director</p>
                         <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                           Dr Cameron Chen
                         </h3>
@@ -339,14 +320,14 @@ export default function AboutPage() {
                     <div className="mb-5">
                       <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Clinical Network</p>
                       <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                        Our Consulting Doctors
+                        Clinical Standards
                       </h3>
                     </div>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      All consultations at Apex are conducted by AHPRA-registered medical practitioners with experience in hormonal and metabolic medicine. Patients are matched to a doctor based on their program and clinical needs.
+                      Every consultation at Apex is conducted by an AHPRA-registered medical practitioner with experience in hormonal and metabolic medicine. Each patient receives individualised clinical attention — not a template protocol.
                     </p>
                     <p className="text-sm leading-relaxed mt-4" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      All Apex doctors operate under the same clinical governance framework and evidence-based protocols established by the medical team.
+                      All clinical work at Apex operates under a consistent governance framework and the same evidence-based protocols.
                     </p>
                   </div>
                   <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
@@ -361,10 +342,8 @@ export default function AboutPage() {
         </Section>
 
         {/* Clinical standards */}
-        <Section bg="var(--surface)">
-          <div className="glow-rule" aria-hidden="true" />
+        <Section bg="var(--elevated)">
           <AnimBlock>
-            <p className="label mb-4">Our Standards</p>
             <h2
               className="font-bold tracking-tight mb-12"
               style={{
@@ -413,7 +392,6 @@ export default function AboutPage() {
 
         {/* CTA */}
         <Section bg="var(--bg)">
-          <div className="warm-rule" aria-hidden="true" />
           <AnimBlock>
             <div
               className="rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
@@ -423,7 +401,6 @@ export default function AboutPage() {
               }}
             >
               <div>
-                <p className="label mb-3">Ready to start?</p>
                 <h2
                   className="font-bold tracking-tight"
                   style={{
@@ -434,27 +411,30 @@ export default function AboutPage() {
                     color: 'var(--text-primary)',
                   }}
                 >
-                  The assessment takes<br />less than 5 minutes.
+                  Get started today.<br />Your account only takes a minute to create.
                 </h2>
               </div>
               <div className="flex flex-col gap-3 flex-shrink-0">
-                <Link href="/intake/pre-screen" className="btn-primary whitespace-nowrap">
-                  Start your assessment
+                <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary whitespace-nowrap">
+                  Take the health assessment
                   <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
                 <Link
-                  href="/intake/discovery"
+                  href="https://app.apexmetabolichealth.com.au/signup"
                   className="text-sm text-center font-medium transition-colors duration-200"
                   style={{ color: ACCENT }}
                 >
-                  Or book a free discovery call →
+                  Or create your account →
                 </Link>
               </div>
             </div>
           </AnimBlock>
         </Section>
+
+        <DoctorCard />
+        <FAQSection />
 
       </main>
       <Footer />

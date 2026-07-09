@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 
-const BLUE = '#4890f7'
+const BLUE = 'var(--blue)'
 const BG   = '#070a0d'
 
 function SignupFormInner() {
@@ -83,8 +83,9 @@ function SignupFormInner() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Email</label>
+              <label htmlFor="su-email" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Email</label>
               <input
+                id="su-email"
                 type="email"
                 placeholder="example@gmail.com"
                 value={form.email}
@@ -95,8 +96,9 @@ function SignupFormInner() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm email</label>
+              <label htmlFor="su-email-confirm" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm email</label>
               <input
+                id="su-email-confirm"
                 type="email"
                 placeholder="Enter email again"
                 value={form.emailConfirm}
@@ -110,8 +112,9 @@ function SignupFormInner() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Password</label>
+              <label htmlFor="su-password" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Password</label>
               <input
+                id="su-password"
                 type="password"
                 placeholder="Enter password"
                 value={form.password}
@@ -126,8 +129,9 @@ function SignupFormInner() {
               )}
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm password</label>
+              <label htmlFor="su-password-confirm" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm password</label>
               <input
+                id="su-password-confirm"
                 type="password"
                 placeholder="Enter confirm password"
                 value={form.passwordConfirm}

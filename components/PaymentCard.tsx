@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { getProduct, ENQUIRY_LABELS, type EnquiryType } from '@/lib/intake-routing'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 const PANEL_STEPS = [
   'Doctor-issued pathology referral sent to your email — typically same business day',

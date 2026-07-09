@@ -8,7 +8,7 @@ import Image from 'next/image'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 
 const PROGRAMS = [
   {
@@ -122,7 +122,7 @@ export default function GeneralConsultBookPage() {
               <h1 className="font-bold tracking-tight mb-5"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: 1.05, color: 'var(--text-primary)' }}>
                 Real diagnostics.{' '}
-                <span style={{ background: 'linear-gradient(135deg, #4890f7, #7bb3ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                <span style={{ color: 'var(--blue)' }}>
                   Real answers.
                 </span>
               </h1>
@@ -161,7 +161,7 @@ export default function GeneralConsultBookPage() {
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', background: 'rgba(72,144,247,0.02)' }}>
           <div className="container-tight max-w-2xl" style={{ paddingTop: 64, paddingBottom: 64 }}>
             <Section>
-              <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>Programs covered</p>
+              <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>Treatments covered</p>
               <h2 className="font-bold tracking-tight mb-8"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.8vw, 30px)', color: 'var(--text-primary)', lineHeight: 1.15 }}>
                 Choose your pathway — we&apos;ll match the diagnostics to it.

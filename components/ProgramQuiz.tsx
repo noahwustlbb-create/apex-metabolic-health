@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import Link from 'next/link'
+import { useSignupGate } from '@/context/SignupGateContext'
 
 const FOCUS_AREAS = [
   'Hormones & Energy',
@@ -17,6 +17,7 @@ const FOCUS_AREAS = [
 export default function ProgramQuiz() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const { open } = useSignupGate()
 
   return (
     <section
@@ -55,7 +56,7 @@ export default function ProgramQuiz() {
               Not Sure Where to Start?
             </h2>
             <p className="text-base md:text-lg leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)' }}>
-              Answer a few quick questions and we&apos;ll recommend the right program for your goals.
+              Answer a few quick questions and we&apos;ll recommend the right treatment for your goals.
               Takes 2 minutes.
             </p>
           </div>
@@ -103,7 +104,7 @@ export default function ProgramQuiz() {
                 <div key={label} className="text-center">
                   <p
                     className="text-2xl font-bold mb-0.5"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--teal)' }}
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}
                   >
                     {value}
                   </p>
@@ -112,12 +113,12 @@ export default function ProgramQuiz() {
               ))}
             </div>
 
-            <Link href="/quiz" className="btn-teal inline-flex mb-4">
-              Take the Health Assessment
+            <button type="button" onClick={() => open()} className="btn-pill inline-flex mb-4" style={{ cursor: 'pointer' }}>
+              Get Started
               <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
+            </button>
 
             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
               Doctor-curated result · No cost · No commitment

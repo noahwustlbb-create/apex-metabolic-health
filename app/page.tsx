@@ -1,27 +1,24 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import ProblemSection from '@/components/ProblemSection'
-import StatsBar from '@/components/StatsBar'
-import ProgramsSection from '@/components/ProgramsSection'
+import TreatmentSelector from '@/components/TreatmentSelector'
 import WhyApex from '@/components/WhyApex'
 import HowItWorks from '@/components/HowItWorks'
-import Testimonials from '@/components/Testimonials'
-import PricingSnapshot from '@/components/PricingSnapshot'
+import DoctorCard from '@/components/DoctorCard'
+import FAQSection from '@/components/FAQSection'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
+
 export default function Home() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content">
         <Hero />
-        <ProblemSection />
-        <StatsBar />
-        <ProgramsSection />
         <WhyApex />
+        <TreatmentSelector />
         <HowItWorks />
-        <Testimonials />
-        <PricingSnapshot />
+        <DoctorCard />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />

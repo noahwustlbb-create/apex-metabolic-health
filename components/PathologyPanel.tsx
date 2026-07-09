@@ -139,10 +139,10 @@ export default function PathologyPanel() {
               ))}
             </ul>
             <a
-              href="/intake/hormone-consult"
-              className="btn-teal w-full text-center text-xs"
+              href="https://app.apexmetabolichealth.com.au/signup"
+              className="btn-pill w-full text-center text-xs"
             >
-              Get Started — Hormone Consult
+              Get Started
             </a>
           </motion.div>
 
@@ -197,10 +197,10 @@ export default function PathologyPanel() {
               ))}
             </ul>
             <a
-              href="/intake/general-consult"
-              className="btn-teal w-full text-center text-xs"
+              href="https://app.apexmetabolichealth.com.au/signup"
+              className="btn-pill w-full text-center text-xs"
             >
-              Get Started — Peptide Consult
+              Get Started
             </a>
           </motion.div>
         </div>

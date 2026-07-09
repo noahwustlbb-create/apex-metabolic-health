@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import FAQSection from '@/components/FAQSection'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -20,26 +21,17 @@ function PricingHero() {
       style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Pricing hero"
     >
-      <div className="absolute inset-0 dot-grid opacity-60" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.08) 0%, transparent 60%)' }}
-      />
 
       <div ref={ref} className="container-tight relative z-10">
-        <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, ease }} className="label mb-5">
-          Pricing
-        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.75, delay: 0.08, ease }}
-          className="display-serif mb-5"
+          className="display-heading mb-5"
           style={{ fontSize: 'clamp(32px, 4.5vw, 64px)', maxWidth: '780px' }}
         >
           Simple. Transparent.{' '}
-          <span style={{ color: '#4890f7' }}>Nothing forced.</span>
+          <span style={{ color: 'var(--blue)' }}>Nothing forced.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -57,7 +49,7 @@ function PricingHero() {
         >
           {['No hidden fees', 'No lock-in contracts', 'AHPRA-registered doctors'].map(t => (
             <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: '#4890f7' }} />
+              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
               {t}
             </span>
           ))}
@@ -70,25 +62,24 @@ function PricingHero() {
 // ─── Membership vs Single Consultation ───────────────────────────────────────
 
 const COMPARISON_ROWS = [
-  { label: 'Initial Blood Panel',   member: 'From $99',   single: 'From $99'    },
-  { label: 'Hormone Consultation',  member: '$275',        single: '$275'        },
-  { label: 'Peptide Consultation',  member: '$125',        single: '$125'        },
-  { label: 'Monthly Membership',    member: '$99 /mo',     single: '—'           },
-  { label: 'Medication',            member: 'Cost price',  single: 'Cost + fee'  },
-  { label: 'Prescribing Fee',       member: 'Waived',      single: '$125'        },
-  { label: 'Follow-up Bloods',      member: 'Discounted',  single: 'Standard'    },
-  { label: 'Referrals & Certs',     member: 'Free',        single: 'Standard'    },
+  { label: 'Initial Blood Referral',   member: '$199',       single: '$199',        highlight: false },
+  { label: 'Follow Up Blood Referral', member: '$139',       single: '$180',        highlight: true  },
+  { label: 'Hormone Consultation',     member: '$199',       single: '$275',        highlight: true  },
+  { label: 'Peptide Consultation',     member: '$99',        single: '$125',        highlight: true  },
+  { label: 'Monthly Membership',       member: '$99 /mo',    single: '—',           highlight: true  },
+  { label: 'Medication',               member: 'Cost price', single: 'Cost + fee',  highlight: true  },
+  { label: 'Escript Release Fee',      member: 'Free',       single: '$125',        highlight: true  },
+  { label: 'Referrals & Certs',        member: 'Free',       single: '$25 each',    highlight: true  },
 ]
 
 function MembershipComparison() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
-  const accent = '#4890f7'
-  const memberHighlight = new Set(['Cost price', 'Waived', 'Free', 'Discounted', '$99 /mo'])
+  const accent = 'var(--blue)'
 
   return (
     <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Choose your path">
-      <div className="warm-rule" aria-hidden="true" />
+
 
       <div ref={ref} className="container-tight relative z-10">
 
@@ -100,10 +91,10 @@ function MembershipComparison() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="display-serif"
+            className="display-heading"
             style={{ fontSize: 'clamp(26px, 3.5vw, 46px)' }}
           >
-            Ongoing program vs.{' '}
+            Ongoing treatment vs.{' '}
             <span style={{ color: accent }}>script only.</span>
           </motion.h2>
         </div>
@@ -154,11 +145,11 @@ function MembershipComparison() {
             <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
               <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
                 <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>Average initial investment</p>
-                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$350 – $650</p>
-                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>Consultation + pathology + AHI prescribing fee</p>
+                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$474 – $599</p>
+                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>Blood referral + consultation + Escript fee</p>
               </div>
               <Link
-                href="/intake/pre-screen"
+                href="https://app.apexmetabolichealth.com.au/signup"
                 className="flex items-center justify-center w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
                 style={{ border: '1px solid rgba(72,144,247,0.18)', color: 'var(--text-primary)', opacity: 0.55 }}
                 onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.4)' }}
@@ -195,13 +186,13 @@ function MembershipComparison() {
                 letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: accent, marginBottom: '4px',
               }}>Apex Member</p>
               <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.4 }}>
-                Ongoing program · Cancel anytime
+                Ongoing treatment · Cancel anytime
               </p>
             </div>
 
             <div className="flex flex-col flex-1">
               {COMPARISON_ROWS.map((row, i) => {
-                const isAdvantage = memberHighlight.has(row.member)
+                const isAdvantage = row.highlight
                 return (
                   <div
                     key={row.label}
@@ -234,7 +225,7 @@ function MembershipComparison() {
 
             <div className="px-6 py-5" style={{ borderTop: `1px solid rgba(72,144,247,0.18)` }}>
               <Link
-                href="/intake/hormone-consult"
+                href="https://app.apexmetabolichealth.com.au/signup"
                 className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
                 style={{ background: accent, color: '#ffffff', boxShadow: '0 4px 20px rgba(72,144,247,0.35)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = '#5fa0ff'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(72,144,247,0.5)' }}
@@ -267,15 +258,15 @@ function MembershipComparison() {
 // ─── Member Savings Guide ────────────────────────────────────────────────────
 
 const SAVINGS_ROWS = [
-  { label: 'Prescribing fees',       saving: 'Up to $500',  period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
-  { label: 'Medication mark-ups',    saving: '$600–$1,200', period: '/yr', detail: 'Zero AHI fees — you pay pharmacy cost price direct' },
-  { label: 'Follow-up blood panels', saving: '~$120',       period: '/yr', detail: 'Discounted member rate on all repeat blood panels' },
+  { label: 'Consultation savings',      saving: 'Up to $304', period: '/yr', detail: 'Hormone consults at $199 vs $275 — saving $76 per consult' },
+  { label: 'Escript release fees',      saving: 'Up to $375', period: '/yr', detail: '3 scripts × $125, waived entirely as a member' },
+  { label: 'Follow-up blood referrals', saving: '~$82',       period: '/yr', detail: 'Member rate $139 vs standard $180 — saving $41 per panel' },
 ]
 
 function MemberSavings() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
-  const accent = '#4890f7'
+  const accent = 'var(--blue)'
 
   return (
     <section
@@ -283,12 +274,6 @@ function MemberSavings() {
       style={{ backgroundColor: 'var(--surface)', paddingTop: '80px', paddingBottom: '80px' }}
       aria-label="Membership savings guide"
     >
-      <div className="warm-rule" aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.06) 0%, transparent 70%)' }}
-      />
 
       <div ref={ref} className="container-tight relative z-10">
 
@@ -301,7 +286,7 @@ function MemberSavings() {
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="display-serif"
+            className="display-heading"
             style={{ fontSize: 'clamp(22px, 3vw, 40px)' }}
           >
             The average Apex patient on protocol has:
@@ -406,7 +391,7 @@ function MemberSavings() {
                 fontFamily: 'var(--font-space-grotesk)', fontSize: '30px', fontWeight: 800,
                 color: accent, lineHeight: 1,
               }}>
-                $1,000–$1,800
+                $600–$760
               </p>
               <p style={{
                 fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 600,
@@ -431,7 +416,7 @@ function MemberSavings() {
           className="flex justify-center mt-8"
         >
           <Link
-            href="/intake/hormone-consult"
+            href="https://app.apexmetabolichealth.com.au/signup"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-[12px] font-bold tracking-[0.08em] uppercase transition-all duration-200"
             style={{ background: accent, color: '#ffffff', boxShadow: '0 4px 20px rgba(72,144,247,0.3)' }}
             onMouseEnter={e => { e.currentTarget.style.background = '#5fa0ff'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(72,144,247,0.45)' }}
@@ -478,16 +463,16 @@ const PATHWAYS: Pathway[] = [
         body: 'Complete the hormone consult intake form online — takes 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
       },
       {
-        label: 'Blood Panel',
+        label: 'Blood Referral',
         body: 'Doctor-issued referral — no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
-        price: 'From $99',
-        priceNote: 'Discounted for members',
+        price: '$199',
+        priceNote: 'Initial · follow-ups $139',
       },
       {
         label: 'Hormone Consultation',
         body: 'Full telehealth review of your pathology, clinical history, and goals. Your doctor builds a personalised protocol and prescribes where clinically appropriate.',
-        price: '$275',
-        priceNote: 'Initial consultation',
+        price: '$199',
+        priceNote: 'Member rate',
       },
       {
         label: 'Ongoing Protocol',
@@ -515,10 +500,10 @@ const PATHWAYS: Pathway[] = [
         body: 'Complete the hormone consult intake form. Our clinical team reviews your submission before your consultation is scheduled.',
       },
       {
-        label: 'Blood Panel',
+        label: 'Blood Referral',
         body: 'Doctor-issued referral. Collected fasted before 9am at any accredited pathology centre. Results reviewed by your Apex doctor.',
-        price: 'From $99',
-        priceNote: 'Standard pricing',
+        price: '$199',
+        priceNote: 'Initial · follow-ups $180',
       },
       {
         label: 'Hormone Consultation',
@@ -532,7 +517,7 @@ const PATHWAYS: Pathway[] = [
         options: [
           {
             label: 'Partner Pharmacy',
-            detail: 'You pay the pharmacy cost price for medication. An Administration, Handling & Infrastructure (AHI) fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
+            detail: 'You pay the pharmacy cost price for medication. An administration fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
           },
           {
             label: 'Own Pharmacy — Script Release',
@@ -552,15 +537,15 @@ const PATHWAYS: Pathway[] = [
         body: 'Complete the metabolic health intake form online. Our clinical team reviews your submission before your consultation.',
       },
       {
-        label: 'Blood Panel',
+        label: 'Blood Referral',
         body: 'Doctor-issued referral matched to your metabolic pathway. No GP required. Collected at any accredited pathology centre.',
-        price: 'From $99',
-        priceNote: 'Discounted for members',
+        price: '$199',
+        priceNote: 'Initial · follow-ups $139',
       },
       {
         label: 'Peptide Consultation',
         body: 'Telehealth review of your metabolic health profile, results, and goals. Treatment plan built where clinically appropriate.',
-        price: '$125',
+        price: '$99',
         priceNote: 'Initial consultation',
       },
       {
@@ -588,10 +573,10 @@ const PATHWAYS: Pathway[] = [
         body: 'Complete the metabolic health intake form. Our clinical team reviews before your consultation.',
       },
       {
-        label: 'Blood Panel',
+        label: 'Blood Referral',
         body: 'Doctor-issued referral. Collected at any accredited pathology centre. Results reviewed by your Apex doctor.',
-        price: 'From $99',
-        priceNote: 'Standard pricing',
+        price: '$199',
+        priceNote: 'Initial · follow-ups $180',
       },
       {
         label: 'Peptide Consultation',
@@ -605,7 +590,7 @@ const PATHWAYS: Pathway[] = [
         options: [
           {
             label: 'Partner Pharmacy',
-            detail: 'Pharmacy cost price for medication. AHI fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
+            detail: 'Pharmacy cost price for medication. Administration fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
           },
           {
             label: 'Own Pharmacy — Script Release',
@@ -619,7 +604,7 @@ const PATHWAYS: Pathway[] = [
 
 function AccordionItem({ pathway }: { pathway: Pathway }) {
   const [open, setOpen] = useState(false)
-  const accent = '#4890f7'
+  const accent = 'var(--blue)'
   const isMember = pathway.tag === 'Apex Member'
 
   return (
@@ -655,7 +640,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
             {pathway.tag}
           </span>
           <span style={{ fontSize: '13px', color: 'var(--text-primary)', opacity: 0.5 }}>
-            {isMember ? 'Ongoing program · $99/mo membership' : 'Once-off · Script release available'}
+            {isMember ? 'Ongoing treatment · $99/mo membership' : 'Once-off · Script release available'}
           </span>
         </div>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="flex-shrink-0 ml-4">
@@ -759,7 +744,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
 function ProgramPathways() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
-  const accent = '#4890f7'
+  const accent = 'var(--blue)'
 
   const programGroups = PATHWAYS.reduce<Record<string, Pathway[]>>((acc, p) => {
     if (!acc[p.title]) acc[p.title] = []
@@ -769,22 +754,22 @@ function ProgramPathways() {
 
   return (
     <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Program pathways">
-      <div className="warm-rule" aria-hidden="true" />
+
       <div ref={ref} className="container-tight relative z-10">
 
         <div className="mb-10">
           <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            Program Pathways
+            Treatment Pathways
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.65, delay: 0.08, ease }}
-            className="display-serif"
+            className="display-heading"
             style={{ fontSize: 'clamp(24px, 3vw, 40px)' }}
           >
             Step-by-step,{' '}
-            <span style={{ color: accent }}>by program.</span>
+            <span style={{ color: accent }}>by treatment.</span>
           </motion.h2>
         </div>
 
@@ -846,7 +831,7 @@ const NOT_INCLUDED = [
   },
   {
     label: 'Lock-in contracts',
-    detail: 'No lock-in. 4-monthly reviews are clinical, not commercial.',
+    detail: 'No lock-in. 3-monthly reviews are clinical, not commercial.',
   },
   {
     label: 'Bundled packages',
@@ -863,8 +848,8 @@ function NotIncluded() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="What's not included">
-      <div className="warm-rule" aria-hidden="true" />
+    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="What's not included">
+
 
       <div ref={ref} className="container-tight relative z-10">
         <div className="max-w-2xl">
@@ -875,7 +860,7 @@ function NotIncluded() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="display-serif mb-3"
+            className="display-heading mb-3"
             style={{ fontSize: 'clamp(24px, 3vw, 42px)' }}
           >
             What&apos;s NOT included.
@@ -924,15 +909,9 @@ function PricingCTA() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #2563eb 0%, #4890f7 55%, #6ba8ff 100%)' }}
+      style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 55%, #4890f7 100%)' }}
       aria-label="Get started"
     >
-      <div className="absolute inset-0 dot-grid opacity-30" style={{ filter: 'invert(1)' }} aria-hidden="true" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,255,255,0.08) 0%, transparent 70%)' }}
-      />
 
       <div className="container-tight relative z-10 text-center">
         <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease }}
@@ -942,8 +921,8 @@ function PricingCTA() {
         </motion.h2>
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }} className="flex flex-col items-center gap-3">
-          <Link href="/intake/pre-screen" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
-            Start your clinical assessment
+          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
+            Take the health assessment
             <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -962,6 +941,33 @@ function PricingCTA() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
+const PRICING_FAQS = [
+  {
+    q: 'Is there a lock-in contract?',
+    a: "No. Membership can be cancelled at any time. Clinical reviews happen every 3 months — that's a clinical schedule, not a commercial one.",
+  },
+  {
+    q: 'Do I need a GP referral?',
+    a: 'No GP referral needed. You register directly through Apex and we issue a pathology referral within the same business day.',
+  },
+  {
+    q: 'What does the membership fee cover?',
+    a: 'The $99/month membership covers: zero medication mark-ups (pharmacy cost price), prescribing fees waived, discounted follow-up blood panels, nursing team check-ins, and priority clinical support between reviews.',
+  },
+  {
+    q: 'When does membership activate?',
+    a: 'Membership activates after your initial consultation, where clinically appropriate. You only pay for what your protocol requires.',
+  },
+  {
+    q: 'Are there any hidden fees?',
+    a: 'No. Every cost is published upfront. No discovery call fees, no bundled packages, no surprise admin charges.',
+  },
+  {
+    q: 'Are your doctors AHPRA-registered?',
+    a: 'Yes, unconditionally. Every consultation is conducted by an AHPRA-registered medical practitioner. You can verify any of our doctors on the AHPRA national register.',
+  },
+]
+
 export default function PricingPage() {
   return (
     <>
@@ -972,6 +978,7 @@ export default function PricingPage() {
         <MemberSavings />
         <ProgramPathways />
         <NotIncluded />
+        <FAQSection faqs={PRICING_FAQS} />
         <PricingCTA />
       </main>
       <Footer />

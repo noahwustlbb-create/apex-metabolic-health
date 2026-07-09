@@ -7,7 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = '#4890f7'
+const ACCENT = 'var(--blue)'
 const WEB3_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 type Pathway = 'hormone' | 'performance' | 'metabolic' | 'hair_skin' | 'injury' | 'peptide'
@@ -519,7 +519,7 @@ export default function PreScreenForm() {
                     )
                   })}
                 </div>
-                <button type="button" onClick={() => advance(1)} className="btn-teal w-full justify-center">
+                <button type="button" onClick={() => advance(1)} className="btn-pill w-full justify-center">
                   {data.symptoms.length === 0 ? 'None of these — continue' : `Continue (${data.symptoms.length} selected)`}
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -631,28 +631,28 @@ export default function PreScreenForm() {
                 </div>
 
                 {errors.length > 0 && (
-                  <div className="rounded-lg px-4 py-3 mb-4" style={{ background: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.25)' }}>
-                    {errors.map(e => <p key={e} className="text-xs" style={{ color: '#dc3545' }}>— {e}</p>)}
+                  <div className="rounded-lg px-4 py-3 mb-4" style={{ background: 'var(--color-danger-muted)', border: '1px solid var(--color-danger-border)' }}>
+                    {errors.map(e => <p key={e} className="text-xs" style={{ color: 'var(--color-danger-fg)' }}>— {e}</p>)}
                   </div>
                 )}
 
                 <div className="flex flex-col gap-3 mb-5">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <label htmlFor="ps-first-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                         First name <span style={{ color: ACCENT }}>*</span>
                       </label>
-                      <input type="text" value={data.firstName} onChange={e => set('firstName', e.target.value)}
+                      <input id="ps-first-name" type="text" value={data.firstName} onChange={e => set('firstName', e.target.value)}
                         placeholder="John" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
                         style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
                         onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
                         onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <label htmlFor="ps-last-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                         Last name
                       </label>
-                      <input type="text" value={data.lastName} onChange={e => set('lastName', e.target.value)}
+                      <input id="ps-last-name" type="text" value={data.lastName} onChange={e => set('lastName', e.target.value)}
                         placeholder="Smith" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
                         style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
                         onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
@@ -660,20 +660,20 @@ export default function PreScreenForm() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                    <label htmlFor="ps-email" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                       Email address <span style={{ color: ACCENT }}>*</span>
                     </label>
-                    <input type="email" value={data.email} onChange={e => set('email', e.target.value)}
+                    <input id="ps-email" type="email" value={data.email} onChange={e => set('email', e.target.value)}
                       placeholder="john@email.com" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
                       style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
                       onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
                       onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                    <label htmlFor="ps-phone" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                       Mobile number <span style={{ color: ACCENT }}>*</span>
                     </label>
-                    <input type="tel" value={data.phone} onChange={e => set('phone', e.target.value)}
+                    <input id="ps-phone" type="tel" value={data.phone} onChange={e => set('phone', e.target.value)}
                       placeholder="04XX XXX XXX" inputMode="tel" className="w-full px-4 py-3 rounded-xl text-sm outline-none"
                       style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
                       onFocus={e => { e.currentTarget.style.borderColor = ACCENT }}
@@ -682,7 +682,7 @@ export default function PreScreenForm() {
                 </div>
 
                 <button type="button" onClick={submitLead} disabled={submitting}
-                  className="btn-teal w-full justify-center mb-4" style={{ opacity: submitting ? 0.7 : 1 }}>
+                  className="btn-pill w-full justify-center mb-4" style={{ opacity: submitting ? 0.7 : 1 }}>
                   {submitting ? 'Processing…' : 'Unlock my clinical assessment'}
                   {!submitting && (
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
@@ -718,7 +718,7 @@ export default function PreScreenForm() {
                     {prog.label}
                   </h1>
                   <p className="text-base font-semibold mb-6"
-                    style={{ background: 'linear-gradient(135deg, #4890f7, #6ba8ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+                    style={{ color: 'var(--blue)' }}>
                     {prog.tagline}
                   </p>
                 </motion.div>
@@ -774,7 +774,7 @@ export default function PreScreenForm() {
 
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.38, ease }}
                   className="flex flex-col gap-3">
-                  <Link href={prog.intakeHref} className="btn-teal w-full justify-center" style={{ fontSize: '14px', padding: '16px' }}>
+                  <Link href={prog.intakeHref} className="btn-pill w-full justify-center" style={{ fontSize: '14px', padding: '16px' }}>
                     Book my consultation →
                   </Link>
                   <a href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call" target="_blank" rel="noopener noreferrer"
