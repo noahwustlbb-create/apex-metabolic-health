@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 
@@ -101,6 +101,15 @@ export default function TreatmentSelector() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
+  // Scroll progress for the card strip — the affordance that says
+  // "there are more cards" and "here's where you are".
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    const el = e.currentTarget
+    const max = el.scrollWidth - el.clientWidth
+    setScrollProgress(max > 0 ? el.scrollLeft / max : 0)
+  }, [])
+
   return (
     <section
       id="treatments"
@@ -127,14 +136,8 @@ export default function TreatmentSelector() {
       >
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h2
-            className="font-bold tracking-tight"
-            style={{
-              fontFamily: 'var(--font-inter)',
-              fontSize: 'clamp(26px, 3.5vw, 48px)',
-              lineHeight: 1.08,
-              letterSpacing: '-0.025em',
-              color: 'var(--text-primary)',
-            }}
+            className="display-heading"
+            style={{ fontSize: 'clamp(26px, 3.5vw, 48px)' }}
           >
             Find your treatment.
           </h2>
@@ -166,11 +169,12 @@ export default function TreatmentSelector() {
       {/* ── Horizontal scroll ── */}
       <div
         className="[&::-webkit-scrollbar]:hidden overflow-x-auto"
+        onScroll={handleScroll}
         style={{
           paddingLeft: 'clamp(24px, 5.5vw, 80px)',
           paddingRight: 'clamp(24px, 5.5vw, 80px)',
           paddingBottom: 8,
-          scrollSnapType: 'x mandatory',
+          scrollSnapType: 'x proximity',
           WebkitOverflowScrolling: 'touch',
           msOverflowStyle: 'none',
           scrollbarWidth: 'none',
@@ -287,6 +291,35 @@ export default function TreatmentSelector() {
               </div>
             </motion.a>
           ))}
+        </div>
+      </div>
+
+      {/* ── Scroll progress — where you are in the 7 pathways ── */}
+      <div
+        style={{
+          paddingLeft: 'clamp(24px, 5.5vw, 80px)',
+          paddingRight: 'clamp(24px, 5.5vw, 80px)',
+          marginTop: 20,
+        }}
+        aria-hidden="true"
+      >
+        <div
+          className="relative overflow-hidden"
+          style={{ maxWidth: 200, height: 2, borderRadius: 1, background: 'rgba(72,144,247,0.15)' }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              width: '25%',
+              borderRadius: 1,
+              background: 'var(--blue)',
+              transform: `translateX(${scrollProgress * 300}%)`,
+              transition: 'transform 80ms linear',
+            }}
+          />
         </div>
       </div>
 

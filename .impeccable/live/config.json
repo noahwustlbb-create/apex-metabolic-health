@@ -1,7 +1,7 @@
 {
-  "files": ["public/**/*.html", ".next/**/*.html"],
+  "files": ["app/layout.tsx"],
   "insertBefore": "</body>",
-  "commentSyntax": "html",
+  "commentSyntax": "jsx",
   "framework": "nextjs",
   "devServer": "http://localhost:3000",
   "cspChecked": true
