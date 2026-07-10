@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
-import { useSignupGate } from '@/context/SignupGateContext'
 import ThemeToggle from '@/components/ThemeToggle'
 
 const NAV_PROGRAMS = [
@@ -38,7 +37,6 @@ export default function Nav() {
   const [menuOpen, setMenuOpen]         = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
   const programsButtonRef               = useRef<HTMLButtonElement>(null)
-  const { open } = useSignupGate()
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 24)
@@ -245,9 +243,8 @@ export default function Nav() {
             >
               Log in
             </a>
-            <button
-              type="button"
-              onClick={() => open()}
+            <Link
+              href="/start"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -262,8 +259,7 @@ export default function Nav() {
                 whiteSpace: 'nowrap',
                 boxShadow: '0 4px 14px rgba(72,144,247,0.35), inset 0 1px 0 rgba(255,255,255,0.15)',
                 transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-                cursor: 'pointer',
-                border: 'none',
+                textDecoration: 'none',
               }}
               onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-1px)'
@@ -274,21 +270,22 @@ export default function Nav() {
                 e.currentTarget.style.boxShadow = '0 4px 14px rgba(72,144,247,0.35), inset 0 1px 0 rgba(255,255,255,0.15)'
               }}
             >
-              Get Started
+              Start your assessment
               <svg viewBox="0 0 16 16" fill="none" width="12" height="12" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </button>
+            </Link>
           </div>
 
           {/* ── Mobile right: Get Started + hamburger ── */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             {!menuOpen && (
-              <button
-                type="button"
-                onClick={() => open()}
+              <Link
+                href="/start"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
                   background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
                   color: '#fff',
                   padding: '13px 16px',
@@ -299,12 +296,11 @@ export default function Nav() {
                   letterSpacing: '0.01em',
                   whiteSpace: 'nowrap',
                   boxShadow: '0 2px 8px rgba(72,144,247,0.32)',
-                  cursor: 'pointer',
-                  border: 'none',
+                  textDecoration: 'none',
                 }}
               >
-                Get Started
-              </button>
+                Start assessment
+              </Link>
             )}
             <button
               className="flex flex-col justify-center gap-[5px] p-2 min-h-[44px] min-w-[44px]"
@@ -366,9 +362,9 @@ export default function Nav() {
               className="px-6 pb-10 pt-5 flex flex-col gap-3"
               style={{ borderTop: '1px solid var(--border)' }}
             >
-              <button
-                type="button"
-                onClick={() => { setMenuOpen(false); open() }}
+              <Link
+                href="/start"
+                onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
                   background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
@@ -379,15 +375,14 @@ export default function Nav() {
                   fontWeight: 600,
                   letterSpacing: '0.01em',
                   boxShadow: '0 6px 20px rgba(72,144,247,0.38), inset 0 1px 0 rgba(255,255,255,0.15)',
-                  cursor: 'pointer',
-                  border: 'none',
+                  textDecoration: 'none',
                 }}
               >
-                Get Started
+                Start your assessment
                 <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Link>
               <a
                 href="https://app.apexmetabolichealth.com.au/login"
                 onClick={() => setMenuOpen(false)}

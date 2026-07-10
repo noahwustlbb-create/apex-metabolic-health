@@ -144,7 +144,7 @@ export default function FAQSection({ faqs: customFaqs }: { faqs?: typeof FAQS })
             </motion.p>
 
             <motion.a
-              href="/contact"
+              href="mailto:admin@apexmetabolichealth.com.au"
               initial={prefersReduced ? false : { opacity: 0 }}
               animate={inView ? { opacity: 1 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.5, delay: 0.24, ease }}

@@ -2,7 +2,6 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -97,42 +96,6 @@ export default function CTASection() {
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
-
-            {/* Program shortcuts */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {CANONICAL_PROGRAMS.map(p => ({ label: p.name, href: p.websiteHref })).map(p => (
-                <a
-                  key={p.label}
-                  href={p.href}
-                  className="transition-all duration-150"
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 500,
-                    color: 'var(--text-secondary)',
-                    background: 'rgba(72,144,247,0.06)',
-                    border: '1px solid rgba(72,144,247,0.12)',
-                    borderRadius: 99,
-                    padding: '0 16px',
-                    minHeight: 44,
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    textDecoration: 'none',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.color = 'var(--blue)'
-                    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)'
-                    e.currentTarget.style.background = 'rgba(72,144,247,0.1)'
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.color = 'var(--text-secondary)'
-                    e.currentTarget.style.borderColor = 'rgba(72,144,247,0.12)'
-                    e.currentTarget.style.background = 'rgba(72,144,247,0.06)'
-                  }}
-                >
-                  {p.label} →
-                </a>
-              ))}
-            </div>
 
             <a
               href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"

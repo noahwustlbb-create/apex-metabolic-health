@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
-import { useSignupGate } from '@/context/SignupGateContext'
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
@@ -21,7 +20,6 @@ const DIM   = 'var(--text-muted)'
 
 export default function Footer() {
   const year = new Date().getFullYear()
-  const { open } = useSignupGate()
 
   return (
     <footer className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
@@ -164,9 +162,9 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3">
-              <button type="button" onClick={() => open()} className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5" style={{ cursor: 'pointer' }}>
+              <Link href="/start" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
                 Start your assessment
-              </button>
+              </Link>
               {/* LegitScript certified badge — real verifiable seal */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <a
