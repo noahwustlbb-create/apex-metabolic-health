@@ -5,11 +5,51 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const CREDENTIALS = [
-  { label: 'AHPRA Registered', sub: 'Every consultation, no exceptions' },
-  { label: 'TGA Compliant', sub: 'All prescriptions & compounds' },
-  { label: 'Evidence-Based', sub: 'Protocols backed by clinical research' },
-  { label: 'Ongoing Review', sub: 'Not a one-off script service' },
+const AHPRA_NUMBER = 'MED0001201298'
+const AHPRA_URL = `https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx?q=${AHPRA_NUMBER}`
+const LEGITSCRIPT_URL = 'https://www.legitscript.com/websites/?checker_keywords=apexmetabolichealth.com.au'
+
+/**
+ * The verification ledger. Every row is an auditable claim paired with the
+ * third party that can confirm it. Rows only exist when the proof is real:
+ * the reviews row stays dormant until the Google Business Profile holds
+ * 10+ reviews (see REVIEWS_LIVE below) — no fake proof, ever.
+ */
+const REVIEWS_LIVE = false // flip when Google Business Profile has ≥10 reviews
+const GOOGLE_REVIEWS_URL = '' // set alongside REVIEWS_LIVE
+
+interface LedgerRow {
+  claim: string
+  detail: string
+  verifyLabel: string
+  destination: string
+  href: string
+}
+
+const LEDGER: LedgerRow[] = [
+  {
+    claim: 'AHPRA-registered practitioners',
+    detail: AHPRA_NUMBER,
+    verifyLabel: 'Check the public register',
+    destination: 'opens ahpra.gov.au',
+    href: AHPRA_URL,
+  },
+  {
+    claim: 'LegitScript-certified healthcare merchant',
+    detail: 'apexmetabolichealth.com.au',
+    verifyLabel: 'Verify certification',
+    destination: 'opens legitscript.com',
+    href: LEGITSCRIPT_URL,
+  },
+  ...(REVIEWS_LIVE
+    ? [{
+        claim: 'Patient reviews, published unedited',
+        detail: 'Google Business Profile',
+        verifyLabel: 'Read patient reviews',
+        destination: 'opens google.com',
+        href: GOOGLE_REVIEWS_URL,
+      }]
+    : []),
 ]
 
 export default function DoctorCard() {
@@ -23,13 +63,12 @@ export default function DoctorCard() {
       id="our-doctors"
       className="relative section-pad overflow-hidden"
       style={{ backgroundColor: 'var(--elevated)' }}
-      aria-label="Our medical team"
+      aria-label="Verify our credentials"
     >
-
       <div className="container-tight relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr_8fr] gap-12 lg:gap-16 items-start">
 
-          {/* Left: Content */}
+          {/* ── Left: the person ── */}
           <div>
             <motion.h2
               initial={prefersReduced ? false : { opacity: 0, y: 24 }}
@@ -38,75 +77,34 @@ export default function DoctorCard() {
               className="display-heading mb-6"
               style={{ fontSize: 'clamp(32px, 3.5vw, 54px)' }}
             >
-              Doctors who specialise in this.
+              Don&apos;t take our word for it.
             </motion.h2>
             <motion.p
               initial={prefersReduced ? false : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.16, ease }}
+              transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.14, ease }}
               className="text-base leading-relaxed mb-10"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Every consultation at Apex is conducted by an AHPRA-registered medical practitioner
-              who specialises in hormonal health and metabolic optimisation — not a GP generalist,
-              not a nurse practitioner. Doctors who have chosen this as their practice.
+              Every consultation at Apex is conducted by an AHPRA-registered doctor who
+              specialises in hormonal and metabolic medicine. You don&apos;t have to trust
+              the claim — every credential on this page links to the body that regulates it.
             </motion.p>
 
-            {/* Credential list */}
-            <div className="flex flex-col gap-3">
-              {CREDENTIALS.map((c, i) => (
-                <motion.div
-                  key={c.label}
-                  initial={prefersReduced ? false : { opacity: 0, x: -16 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={prefersReduced ? { duration: 0 } : { duration: 0.5, delay: 0.24 + i * 0.08, ease }}
-                  className="flex items-center gap-3"
-                >
-                  <div
-                    className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}
-                  >
-                    <svg viewBox="0 0 10 10" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
-                      <path d="M2 5l2.5 2.5L8 3" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
-                      {c.label}
-                    </span>
-                    <span className="text-sm ml-2" style={{ color: 'var(--text-secondary)' }}>— {c.sub}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Card */}
-          <motion.div
-            initial={prefersReduced ? false : { opacity: 0, y: 32, scale: 0.97 }}
-            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-            transition={prefersReduced ? { duration: 0 } : { duration: 0.9, delay: 0.2, ease }}
-          >
-            <div
-              className="relative rounded-2xl overflow-hidden p-8"
-              style={{
-                background: 'var(--bg)',
-                border: '1px solid rgba(72,144,247,0.15)',
-                boxShadow: '0 32px 80px rgba(0,0,0,0.16), 0 4px 16px rgba(72,144,247,0.06)',
-              }}
+            {/* Doctor identity — monogram is a temporary state; the 64px slot
+                is sized for clinician photography (shoot scheduled). */}
+            <motion.div
+              initial={prefersReduced ? false : { opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.24, ease }}
             >
-              {/* Top glow */}
-              <div
-                aria-hidden="true"
-                className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: 'linear-gradient(90deg, transparent, rgba(72,144,247,0.4), transparent)' }}
-              />
-
-              {/* Doctor profile */}
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-6">
                 <div
-                  className="w-16 h-16 rounded-2xl flex-shrink-0 flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, rgba(72,144,247,0.18) 0%, rgba(29,79,216,0.22) 100%)', border: '1px solid rgba(72,144,247,0.25)' }}
+                  className="w-16 h-16 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(72,144,247,0.18) 0%, rgba(29,79,216,0.22) 100%)',
+                    border: '1px solid rgba(72,144,247,0.25)',
+                  }}
                   aria-hidden="true"
                 >
                   <span style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>CC</span>
@@ -121,35 +119,85 @@ export default function DoctorCard() {
                   <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
                     Medical Director
                   </p>
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {['AHPRA MED0001201298', 'HPI-I 8003613336579826'].map(badge => (
-                      <span
-                        key={badge}
-                        className="text-[9px] font-bold tracking-[0.08em] uppercase px-2 py-0.5 rounded-sm"
-                        style={{ color: 'var(--blue)', background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.18)' }}
-                      >
-                        {badge}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </div>
 
-              {/* Quote */}
               <blockquote
-                className="text-sm leading-relaxed mb-8 p-4"
+                className="text-sm leading-relaxed"
                 style={{
-                  background: 'rgba(72,144,247,0.04)',
-                  borderRadius: 6,
                   color: 'var(--text-primary)',
                   opacity: 0.75,
+                  borderTop: '1px solid var(--border)',
+                  paddingTop: 20,
                 }}
               >
-                "We test what other doctors don&apos;t order and interpret results in the context of optimisation — not just whether you fall inside the 'normal' reference range."
+                &ldquo;We test what other doctors don&apos;t order and interpret results in the
+                context of optimisation — not just whether you fall inside the &lsquo;normal&rsquo;
+                reference range.&rdquo;
               </blockquote>
+            </motion.div>
+          </div>
 
-            </div>
-          </motion.div>
+          {/* ── Right: the verification ledger ── */}
+          <div className="lg:pt-3">
+            {LEDGER.map((row, i) => (
+              <motion.a
+                key={row.claim}
+                href={row.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={prefersReduced ? false : { opacity: 0, y: 14 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={prefersReduced ? { duration: 0 } : { duration: 0.55, delay: 0.2 + i * 0.1, ease }}
+                className="group grid grid-cols-1 sm:grid-cols-[8fr_5fr] gap-2 sm:gap-8 py-7 no-underline transition-colors duration-200"
+                style={{ borderTop: '1px solid var(--border)', minHeight: 44 }}
+              >
+                <div>
+                  <p className="text-base font-semibold leading-snug" style={{ color: 'var(--text-primary)' }}>
+                    {row.claim}
+                  </p>
+                  <p
+                    className="text-sm mt-1"
+                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-secondary)', letterSpacing: '0.02em' }}
+                  >
+                    {row.detail}
+                  </p>
+                </div>
+                <div className="flex sm:flex-col sm:items-end items-baseline gap-2 sm:gap-1 sm:text-right">
+                  <span
+                    className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200"
+                    style={{ color: 'var(--blue)' }}
+                  >
+                    {row.verifyLabel}
+                    <svg
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    >
+                      {/* external-link arrow: leaving-site affordance */}
+                      <path d="M4 10L10 4M5.5 4H10v4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                    {row.destination}
+                  </span>
+                </div>
+              </motion.a>
+            ))}
+            <div style={{ borderTop: '1px solid var(--border)' }} aria-hidden="true" />
+
+            <motion.p
+              initial={prefersReduced ? false : { opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={prefersReduced ? { duration: 0 } : { duration: 0.7, delay: 0.5, ease }}
+              className="text-sm leading-relaxed mt-8"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Every claim on this page is checkable. That&apos;s the point.
+            </motion.p>
+          </div>
+
         </div>
       </div>
     </section>
