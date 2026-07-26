@@ -228,21 +228,24 @@ export default function Nav() {
                 gap: '6px',
                 fontFamily: 'var(--font-inter)',
                 fontSize: '12.5px',
-                fontWeight: 500,
-                color: '#a8c4e8',
+                fontWeight: 600,
+                color: TEXT,
                 textDecoration: 'none',
                 letterSpacing: '0.01em',
-                transition: 'color 0.2s',
                 whiteSpace: 'nowrap',
+                border: `1.5px solid rgba(72,144,247,0.35)`,
+                borderRadius: '999px',
+                padding: '9px 16px',
+                transition: 'border-color 0.2s, background 0.2s, color 0.2s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#f0f5ff' }}
-              onMouseLeave={e => { e.currentTarget.style.color = '#a8c4e8' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = BLUE; e.currentTarget.style.background = 'rgba(72,144,247,0.08)'; e.currentTarget.style.color = BLUE }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)'; e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = TEXT }}
             >
               <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
                 <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
                 <path d="M2.5 13.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
               </svg>
-              Log in
+              Patient Portal
             </a>
             <Link
               href="/start"
@@ -377,13 +380,13 @@ export default function Nav() {
               <a
                 href="https://app.apexmetabolichealth.com.au/login"
                 className="flex items-center justify-center gap-2 w-full"
-                style={{ color: 'rgba(168,196,232,0.6)', fontSize: '14px', fontWeight: 500, textDecoration: 'none', paddingTop: '4px' }}
+                style={{ border: '1px solid rgba(72,144,247,0.3)', color: '#a8c4e8', padding: '15px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
               >
                 <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                   <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.4" />
                   <path d="M2.5 13.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
-                Log in to your account
+                Patient Portal Log In
               </a>
             </motion.div>
           </motion.div>
