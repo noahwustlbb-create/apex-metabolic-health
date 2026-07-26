@@ -7,7 +7,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 const TESTIMONIALS = [
   {
-    quote: 'Finally felt heard. The doctor spent nearly an hour going through my results and explaining exactly what was driving everything. I\'d been dismissed by my GP three times with "your bloods are fine." They weren\'t fine — they just weren\'t looking at the right things.',
+    quote: 'Finally felt heard. The doctor spent nearly an hour going through my results and explaining exactly what was driving everything. I\'d been dismissed by my GP three times with "your bloods are fine." They weren\'t fine: they just weren\'t looking at the right things.',
     name: 'M.K.',
     age: 42,
     city: 'Brisbane',
@@ -21,7 +21,7 @@ const TESTIMONIALS = [
     program: 'Performance & Recovery',
   },
   {
-    quote: 'Worth it for the pathology alone. The panel they ordered flagged things my regular GP had never tested for. It gave me actual clinical context — not just a number and "that\'s normal." The protocol I was given made sense once I understood the data behind it.',
+    quote: 'Worth it for the pathology alone. The panel they ordered flagged things my regular GP had never tested for. It gave me actual clinical context, not just a number and "that\'s normal." The protocol I was given made sense once I understood the data behind it.',
     name: 'D.R.',
     age: 51,
     city: 'Sydney',

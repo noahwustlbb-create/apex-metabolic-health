@@ -41,7 +41,7 @@ const defaultHormoneHowItWorks = [
     number: '04',
     title: 'Begin Your Protocol',
     description:
-      'Treatment is coordinated through our partner pharmacy or your own — whatever suits you. Ongoing reviews are built in.',
+      'Treatment is coordinated through our partner pharmacy or your own: whatever suits you. Ongoing reviews are built in.',
   },
 ]
 
@@ -78,12 +78,12 @@ export const programs: Program[] = [
     name: 'Hormone Optimisation',
     image: '/img-hormone-optimisation.svg',
     tagline: 'Understand your hormones. Optimise your baseline.',
-    bio: "Hormonal imbalances don't always announce themselves loudly. Fatigue, poor recovery, changes in body composition and mood are often the first signs something is off. Our Hormone Optimisation program starts with comprehensive pathology to establish your clinical baseline, followed by a doctor consultation to interpret your results and build a treatment plan around your actual biology — not a generic protocol.",
+    bio: "Hormonal imbalances don't always announce themselves loudly. Fatigue, poor recovery, changes in body composition and mood are often the first signs something is off. Our Hormone Optimisation program starts with comprehensive pathology to establish your clinical baseline, followed by a doctor consultation to interpret your results and build a treatment plan around your actual biology, not a generic protocol.",
     track: 'hormone',
     status: 'active',
     symptoms: [
       'Persistent fatigue that doesn\'t resolve with adequate sleep',
-      'Changes in body composition — gaining weight or losing muscle',
+      'Changes in body composition: gaining weight or losing muscle',
       'Brain fog, poor concentration, or declining cognitive sharpness',
       'Low drive, reduced motivation, or emotional flatness',
       'Disrupted sleep patterns and poor recovery',
@@ -104,7 +104,7 @@ export const programs: Program[] = [
     name: 'Performance & Recovery',
     image: '/img-performance-plus.svg',
     tagline: 'Optimise output, recovery speed, and physical resilience with data-driven clinical protocols.',
-    bio: "Training harder doesn't always mean recovering better. This program combines hormonal and performance-specific markers to identify the clinical drivers limiting your output — whether that's recovery, energy systems, or hormonal interference. Your doctor reviews the full picture and builds a protocol targeted to your biology and your goals.",
+    bio: "Training harder doesn't always mean recovering better. This program combines hormonal and performance-specific markers to identify the clinical drivers limiting your output: whether that's recovery, energy systems, or hormonal interference. Your doctor reviews the full picture and builds a protocol targeted to your biology and your goals.",
     track: 'hormone',
     status: 'active',
     symptoms: [
@@ -117,7 +117,7 @@ export const programs: Program[] = [
     includes: [
       'IGF-1, cortisol, CK and inflammatory marker assessment',
       'Telehealth consultation with an AHPRA-registered doctor',
-      'Biomarker-driven protocol — strength, recovery and endurance focus',
+      'Biomarker-driven protocol: strength, recovery and endurance focus',
       'Treatment coordination through our TGA-compliant pharmacy partner',
       'Scheduled review cycles with clinical progress tracking',
     ],
@@ -132,11 +132,11 @@ export const programs: Program[] = [
     image: '/img-injury-repair.svg',
     tagline:
       'Clinically supported protocols to accelerate tissue repair and get you back performing.',
-    bio: "The body has a remarkable capacity to heal — but the right clinical environment makes the difference between slow recovery and real progress. Our Injury Repair program takes a doctor-led approach to tissue repair and recovery, using evidence-based protocols tailored to your injury history and health markers. No guesswork. Just a clear, medically supervised pathway back to full function.",
+    bio: "The body has a remarkable capacity to heal, but the right clinical environment makes the difference between slow recovery and real progress. Our Injury Repair program takes a doctor-led approach to tissue repair and recovery, using evidence-based protocols tailored to your injury history and health markers. No guesswork. Just a clear, medically supervised pathway back to full function.",
     track: 'general',
     status: 'active',
     symptoms: [
-      'Soft tissue injuries — tendons, ligaments, and muscle',
+      'Soft tissue injuries: tendons, ligaments, and muscle',
       'Slow or incomplete healing following injury or surgery',
       'Chronic musculoskeletal conditions limiting activity',
       'Recurring injuries in the same sites',
@@ -159,7 +159,7 @@ export const programs: Program[] = [
     name: 'Skin Regeneration',
     image: '/img-skin-regeneration.svg',
     tagline: 'Doctor-prescribed anti-ageing. Built on what your bloodwork actually shows.',
-    bio: "Skin quality is a direct reflection of what's happening internally — hormones, inflammation markers, nutrient status. Our Skin Regeneration program goes beyond surface treatments by identifying the underlying clinical drivers of skin changes and addressing them through doctor-prescribed protocols. The outcome is healthier skin built from the inside out, not just managed from the outside.",
+    bio: "Skin quality is a direct reflection of what's happening internally: hormones, inflammation markers, nutrient status. Our Skin Regeneration program goes beyond surface treatments by identifying the underlying clinical drivers of skin changes and addressing them through doctor-prescribed protocols. The outcome is healthier skin built from the inside out, not just managed from the outside.",
     track: 'general',
     status: 'active',
     symptoms: [
@@ -185,8 +185,8 @@ export const programs: Program[] = [
     slug: 'hair-restoration',
     name: 'Hair Restoration',
     image: '/img-hair-restoration.svg',
-    tagline: 'Evidence-based treatment for hair loss — not guesswork, not off-the-shelf.',
-    bio: "Hair loss has real clinical causes — hormonal, nutritional, and metabolic — and real clinical solutions. This program uses pathology to identify the specific drivers of hair loss in your case, and your doctor builds a treatment plan targeted to those causes. Evidence-based, doctor-prescribed, and monitored over time to ensure it's working.",
+    tagline: 'Evidence-based treatment for hair loss, not guesswork, not off-the-shelf.',
+    bio: "Hair loss has real clinical causes (hormonal, nutritional, and metabolic) and real clinical solutions. This program uses pathology to identify the specific drivers of hair loss in your case, and your doctor builds a treatment plan targeted to those causes. Evidence-based, doctor-prescribed, and monitored over time to ensure it's working.",
     track: 'general',
     status: 'active',
     symptoms: [
@@ -212,8 +212,8 @@ export const programs: Program[] = [
     name: 'Metabolic Weight Loss',
     image: '/img-weight-loss.svg',
     tagline:
-      'Address the real drivers of weight resistance — hormonal, metabolic, and clinical.',
-    bio: "Resistance to weight loss is rarely about willpower. Hormonal dysfunction, metabolic disruption, and underlying clinical factors are the most common culprits — and the most overlooked. Our Metabolic Weight Loss program uses pathology and a doctor consultation to understand your body's specific barriers, then builds a medically supervised protocol to address them directly.",
+      'Address the real drivers of weight resistance: hormonal, metabolic, and clinical.',
+    bio: "Resistance to weight loss is rarely about willpower. Hormonal dysfunction, metabolic disruption, and underlying clinical factors are the most common culprits, and the most overlooked. Our Metabolic Weight Loss program uses pathology and a doctor consultation to understand your body's specific barriers, then builds a medically supervised protocol to address them directly.",
     track: 'general',
     status: 'active',
     symptoms: [
@@ -273,7 +273,7 @@ export const programs: Program[] = [
       'Preventive assessment of cardiovascular and metabolic risk',
       'Hormonal and metabolic baseline tracking over time',
       'Performance and cognitive longevity',
-      'Proactive health management — not just reactive care',
+      'Proactive health management, not just reactive care',
     ],
     includes: [
       'Comprehensive multi-system blood panel referral',

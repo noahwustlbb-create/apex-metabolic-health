@@ -87,7 +87,7 @@ export default function BookingCard() {
               Order your panel first
             </h2>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>
-              Your doctor needs current blood results before your consultation. Order your matched panel below — collect at any accredited pathology centre, fasted before 9am, no appointment needed.
+              Your doctor needs current blood results before your consultation. Order your matched panel below: collect at any accredited pathology centre, fasted before 9am, no appointment needed.
             </p>
           </div>
 
@@ -95,7 +95,7 @@ export default function BookingCard() {
             <div className="flex flex-col gap-3 mb-5">
               {[
                 { n: 1, text: 'Order your panel via the button below' },
-                { n: 2, text: 'Collect at any accredited centre near you — fasted before 9am' },
+                { n: 2, text: 'Collect at any accredited centre near you: fasted before 9am' },
                 { n: 3, text: 'Email your results to admin@apexmetabolichealth.com.au to book your consultation' },
               ].map(s => (
                 <div key={s.n} className="flex gap-3 items-start">

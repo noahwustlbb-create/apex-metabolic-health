@@ -86,7 +86,7 @@ export default function Nav() {
           <Link
             href="/"
             className="flex flex-col flex-shrink-0 select-none"
-            aria-label="Apex Metabolic Health — Home"
+            aria-label="Apex Metabolic Health: Home"
             style={{ textDecoration: 'none', gap: '5px' }}
           >
             <span style={{

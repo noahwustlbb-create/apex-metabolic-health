@@ -63,7 +63,7 @@ const DURATION_OPTIONS = [
 ]
 
 interface D {
-  // Step 1 — About You
+  // Step 1: About You
   firstName: string
   lastName: string
   dob: string
@@ -72,13 +72,13 @@ interface D {
   state: string
   weightKg: string
   heightCm: string
-  // Step 2 — Symptoms
+  // Step 2: Symptoms
   mainConcern: string
   symptoms: string[]
   symptomDuration: string
   energyScore: string
   healthScore: string
-  // Step 3 — Health Background
+  // Step 3: Health Background
   conditions: string[]
   medications: string
   allergies: string
@@ -90,7 +90,7 @@ interface D {
   familyHistory: string
   dietScore: string
   supplementsCurrent: string
-  // Step 4 — Final Details
+  // Step 4: Final Details
   pathway: string
   recentBloods: string
   currentHormoneRx: string
@@ -231,7 +231,7 @@ function Head({ step, title, sub }: { step: number; title: string; sub?: string 
   return (
     <div className="mb-8">
       <p className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-2" style={{ color: ACCENT }}>
-        Step {step} of {TOTAL} — {STEP_LABELS[step - 1]}
+        Step {step} of {TOTAL}: {STEP_LABELS[step - 1]}
       </p>
       <h2 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 3vw, 30px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.2 }}>
         {title}
@@ -334,7 +334,7 @@ export default function HormoneConsultForm() {
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
           formType: 'Hormone Consult Intake',
-          subject: `Apex Hormone Consult — ${d.firstName} ${d.lastName}`,
+          subject: `Apex Hormone Consult: ${d.firstName} ${d.lastName}`,
           name: `${d.firstName} ${d.lastName}`,
           dob: d.dob,
           email: d.email,
@@ -405,7 +405,7 @@ export default function HormoneConsultForm() {
                 Let&apos;s get you started.
               </h1>
               <p className="text-sm leading-relaxed mb-8" style={{ color: 'var(--text-secondary)', maxWidth: '460px' }}>
-                Four short steps — takes around 5 minutes. Your doctor reviews everything before your consultation.
+                Four short steps: takes around 5 minutes. Your doctor reviews everything before your consultation.
               </p>
 
               <div className="flex flex-col gap-2.5 mb-8">
@@ -510,7 +510,7 @@ export default function HormoneConsultForm() {
                   <TA label="Main concern" name="mainConcern" value={d.mainConcern} onChange={v => set('mainConcern', v)}
                     placeholder="Describe your main symptoms and how they've been affecting you..." rows={4} />
                   <Cards label="How long have you been experiencing this?" options={DURATION_OPTIONS} value={d.symptomDuration} onChange={v => set('symptomDuration', v as string)} />
-                  <Div label="Symptom checklist — select all that apply" />
+                  <Div label="Symptom checklist: select all that apply" />
                   <Cards label="" options={SYMPTOMS} value={d.symptoms} onChange={v => set('symptoms', v)} multi />
                   <Div label="How are you feeling right now?" />
                   <Score label="Energy level" value={d.energyScore} onChange={v => set('energyScore', v)} hint="0 = exhausted, 10 = high energy" />
@@ -524,7 +524,7 @@ export default function HormoneConsultForm() {
                   <Head step={3} title="Health Background" sub="Accurate history allows us to design a safe, appropriate protocol." />
                   <div>
                     <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: 'var(--text-primary)' }}>
-                      Existing conditions — select all that apply
+                      Existing conditions: select all that apply
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {CONDITIONS.map(cond => (
@@ -618,7 +618,7 @@ export default function HormoneConsultForm() {
                   <div className="rounded-xl p-4" style={{ background: ACCENT_BG, border: `1px solid ${ACCENT_BORDER}` }}>
                     <p className="text-xs font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>Don&apos;t have recent bloods?</p>
                     <p className="text-xs leading-relaxed" style={{ color: ACCENT }}>
-                      No problem — we&apos;ll guide you to the right panel after this form. Testing is available at thousands of collection centres nationally.
+                      No problem: we&apos;ll guide you to the right panel after this form. Testing is available at thousands of collection centres nationally.
                     </p>
                   </div>
 
@@ -636,7 +636,7 @@ export default function HormoneConsultForm() {
                       ].map(([label, val]) => (
                         <div key={label}>
                           <p className="text-[10px] uppercase tracking-wider" style={{ color: ACCENT }}>{label}</p>
-                          <p className="text-sm mt-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{val || '—'}</p>
+                          <p className="text-sm mt-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{val || '-'}</p>
                         </div>
                       ))}
                     </div>

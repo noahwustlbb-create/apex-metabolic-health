@@ -16,7 +16,7 @@ const PROGRAMS: Record<PK, { name: string; desc: string; href: string; cta: stri
   hair:       { name: 'Hair Restoration',            color: '#2e9e52', href: '/intake/general-consult',  cta: 'Begin Hair Assessment',        desc: 'Doctor-prescribed treatment addressing the hormonal and genetic drivers of male pattern hair loss. Protocol tailored to your blood panel and clinical history.' },
   skin:       { name: 'Skin Regeneration',           color: '#c9a84c', href: '/intake/general-consult',  cta: 'Begin Skin Assessment',        desc: 'Clinical skin protocols combining advanced diagnostics with evidence-based regenerative treatments for lasting skin quality improvement.' },
   injury:     { name: 'Injury Repair & Recovery',    color: '#1a9e8f', href: '/intake/general-consult',  cta: 'Begin Injury Assessment',      desc: 'Targeted repair protocols for chronic injuries, joint issues, and musculoskeletal conditions that have not responded to standard treatment.' },
-  bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/intake/pre-screen',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers — the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
+  bloodpanel: { name: 'Comprehensive Blood Panel',   color: '#4890f7', href: '/intake/pre-screen',    cta: 'Order Blood Panel',            desc: 'Advanced pathology covering 50+ biomarkers: the most complete picture of your hormonal, metabolic, and cardiovascular health available.' },
   general:    { name: 'General Telehealth',          color: 'var(--text-primary)', href: '/intake/general-consult',  cta: 'Book a Consultation',          desc: 'A doctor-led consultation to assess your concerns, review your health history, and map the right clinical pathway forward.' },
 }
 
@@ -285,7 +285,7 @@ function GoalStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => void; o
         {onBack ? <BackBtn onClick={onBack} /> : <span />}
         <StepLabel n={1} total={8} />
       </div>
-      <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select all that apply — we'll build your profile from there." />
+      <QHead eyebrow="Primary Goal" heading="What are you looking to improve?" sub="Select all that apply: we'll build your profile from there." />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {GOALS.map(g => {
           const selected = sel.includes(g.id)
@@ -345,7 +345,7 @@ function SymptomsStep({ onNext, onBack }: { onNext: (ids: string[], w: W) => voi
         <BackBtn onClick={onBack} />
         <StepLabel n={2} total={8} />
       </div>
-      <QHead eyebrow="Symptoms" heading="Which of these do you experience?" sub="Select all that apply — this shapes your program match." />
+      <QHead eyebrow="Symptoms" heading="Which of these do you experience?" sub="Select all that apply: this shapes your program match." />
       <div className="flex flex-col gap-2.5">
         {SYMPTOMS.map(s => (
           <Card key={s.id} selected={sel.includes(s.id)} onClick={() => toggle(s.id)}>
@@ -753,12 +753,12 @@ interface Answers {
 }
 
 function labels(ids: string[] | undefined, source: { id: string; label: string }[]): string {
-  if (!ids?.length) return '—'
+  if (!ids?.length) return '-'
   return ids.map(id => source.find(x => x.id === id)?.label ?? id).join(', ')
 }
 
 function label1(id: string | undefined, source: { id: string; label: string }[]): string {
-  if (!id) return '—'
+  if (!id) return '-'
   return source.find(x => x.id === id)?.label ?? id
 }
 
@@ -799,8 +799,8 @@ export default function HealthQuiz() {
         `Mobile:  ${mobile}`,
         ``,
         `PROGRAM MATCHES`,
-        `Primary:    ${m[0] ? PROGRAMS[m[0]].name : '—'}`,
-        `Secondary:  ${m.slice(1).map(k => PROGRAMS[k].name).join(', ') || '—'}`,
+        `Primary:    ${m[0] ? PROGRAMS[m[0]].name : '-'}`,
+        `Secondary:  ${m.slice(1).map(k => PROGRAMS[k].name).join(', ') || '-'}`,
         ``,
         `QUIZ ANSWERS`,
         `1. Goals:       ${labels(answers.goals, GOALS)}`,
@@ -814,7 +814,7 @@ export default function HealthQuiz() {
         ``,
         `REFERRAL`,
         `Source:  ${referralSource || 'Not specified'}`,
-        `Code:    ${referralCode || '—'}`,
+        `Code:    ${referralCode || '-'}`,
       ].join('\n')
 
       await fetch('https://api.web3forms.com/submit', {
@@ -822,7 +822,7 @@ export default function HealthQuiz() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `Quiz Lead — ${first} — ${m.map(k => PROGRAMS[k].name).join(', ')}`,
+          subject: `Quiz Lead | ${first} | ${m.map(k => PROGRAMS[k].name).join(', ')}`,
           from_name: first || 'Quiz Lead',
           email,
           message: body,

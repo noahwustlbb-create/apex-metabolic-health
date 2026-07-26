@@ -434,7 +434,7 @@ function QuizPhase({
         </div>
       </div>
 
-      {/* Nav — only show if not single (single auto-advances) */}
+      {/* Nav: only show if not single (single auto-advances) */}
       {step.type !== 'single' && (
         <div className="px-5 pb-8 flex items-center gap-3 justify-center">
           <div className="w-full max-w-lg flex items-center gap-3">
@@ -521,7 +521,7 @@ function EligiblePhase({ config }: { config: QuizConfig }) {
         {/* Next steps */}
         <div className="flex flex-col gap-3 mb-8">
           {[
-            { n: 1, label: 'Book your consultation', sub: 'Telehealth — 30 mins with an AHPRA-registered doctor' },
+            { n: 1, label: 'Book your consultation', sub: 'Telehealth: 30 mins with an AHPRA-registered doctor' },
             { n: 2, label: 'Doctor reviews your profile', sub: 'Your answers inform a tailored clinical assessment' },
             { n: 3, label: 'Personalised protocol issued', sub: 'Doctor-prescribed treatment coordinated through our pharmacy' },
           ].map(s => (

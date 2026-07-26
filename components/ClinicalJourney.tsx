@@ -7,17 +7,17 @@ const STEPS = [
   {
     number: '01',
     title: 'Choose your program',
-    description: 'Six clinical programs — each targeting a distinct biological system. The pre-screen assessment will confirm the right match for your goals.',
+    description: 'Six clinical programs: each targeting a distinct biological system. The pre-screen assessment will confirm the right match for your goals.',
   },
   {
     number: '02',
     title: 'Complete your intake & blood draw',
-    description: 'Fill in a short pre-screen form online. Your doctor issues a pathology referral — collect at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
+    description: 'Fill in a short pre-screen form online. Your doctor issues a pathology referral: collect at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
   },
   {
     number: '03',
     title: 'Telehealth consultation',
-    description: 'Your Apex doctor reviews your results and meets with you via telehealth. This is where your clinical picture is built — not a 10-minute GP visit.',
+    description: 'Your Apex doctor reviews your results and meets with you via telehealth. This is where your clinical picture is built, not a 10-minute GP visit.',
   },
   {
     number: '04',

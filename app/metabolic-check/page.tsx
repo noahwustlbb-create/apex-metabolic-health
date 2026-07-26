@@ -15,7 +15,7 @@ const QUESTIONS = [
   { id: 3,  text: 'Do you experience persistent fatigue or low energy throughout the day?' },
   { id: 4,  text: 'Do you have strong sugar or carbohydrate cravings, particularly in the afternoon?' },
   { id: 5,  text: 'Do you feel mentally foggy, slow, or have difficulty concentrating?' },
-  { id: 6,  text: 'Do you experience energy crashes — especially after meals?' },
+  { id: 6,  text: 'Do you experience energy crashes: especially after meals?' },
   { id: 7,  text: 'Has a doctor mentioned elevated blood sugar, cholesterol, or blood pressure?' },
   { id: 8,  text: 'Do you have difficulty sleeping or wake feeling unrefreshed?' },
   { id: 9,  text: 'Has your motivation, drive, or general mood noticeably declined?' },
@@ -48,7 +48,7 @@ const TIER_CONFIG = {
     color: '#1a9e8f',
     glowColor: 'rgba(26,158,143,0.22)',
     heading: 'Your metabolic markers appear within a healthy range.',
-    body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually — advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
+    body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually: advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
     primaryCTA: { label: 'Order a Metabolic Panel', href: '/intake/pre-screen' },
     secondaryCTA: { label: 'Explore Programs', href: '/services' },
   },
@@ -57,7 +57,7 @@ const TIER_CONFIG = {
     color: '#c9a84c',
     glowColor: 'rgba(201,168,76,0.22)',
     heading: 'Your results suggest signs of metabolic dysregulation.',
-    body: 'Several of your responses align with early-stage metabolic dysfunction — including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
+    body: 'Several of your responses align with early-stage metabolic dysfunction: including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
     primaryCTA: { label: 'Book a Metabolic Consult', href: '/intake/general-consult' },
     secondaryCTA: { label: 'Order Blood Panel', href: '/intake/pre-screen' },
   },
@@ -66,7 +66,7 @@ const TIER_CONFIG = {
     color: '#e05c5c',
     glowColor: 'rgba(224,92,92,0.22)',
     heading: 'Your results indicate significant metabolic dysfunction.',
-    body: 'Your symptom profile is strongly consistent with metabolic syndrome indicators — including insulin resistance, visceral fat accumulation, hormonal dysregulation, and systemic inflammation. We strongly recommend a comprehensive metabolic panel and clinical consultation.',
+    body: 'Your symptom profile is strongly consistent with metabolic syndrome indicators: including insulin resistance, visceral fat accumulation, hormonal dysregulation, and systemic inflammation. We strongly recommend a comprehensive metabolic panel and clinical consultation.',
     primaryCTA: { label: 'Book Metabolic Consult Now', href: '/intake/general-consult' },
     secondaryCTA: { label: 'Speak to a Clinician', href: '/intake/discovery' },
   },
@@ -271,7 +271,7 @@ export default function MetabolicCheckPage() {
             </h1>
 
             <p className="text-base md:text-lg leading-relaxed mb-8 mx-auto max-w-xl" style={{ color: '#B0B8C5' }}>
-              10 clinically-relevant questions to screen for metabolic dysfunction — including insulin resistance, poor body composition, and systemic fatigue. Takes under 2 minutes.
+              10 clinically-relevant questions to screen for metabolic dysfunction: including insulin resistance, poor body composition, and systemic fatigue. Takes under 2 minutes.
             </p>
 
             <div className="flex justify-center">
@@ -443,7 +443,7 @@ export default function MetabolicCheckPage() {
                             className="text-xs font-semibold"
                             style={{ fontFamily: 'var(--font-space-grotesk)', letterSpacing: '0.08em', color: tier.color }}
                           >
-                            METABOLIC SCORE — {SCORE_LABEL[result.tier]}
+                            METABOLIC SCORE: {SCORE_LABEL[result.tier]}
                           </span>
                           <span style={{ color: 'var(--text-primary)', fontSize: 11 }}>
                             · {result.yesCount} of 10 symptoms present

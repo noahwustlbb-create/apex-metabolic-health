@@ -89,7 +89,7 @@ const HOW_IT_WORKS = [
   {
     step: '04',
     title: 'Clinical interpretation',
-    body: 'Your results are interpreted in the context of your program — not just against a generic reference range. Your consultation follows within days.',
+    body: 'Your results are interpreted in the context of your program, not just against a generic reference range. Your consultation follows within days.',
   },
 ]
 
@@ -163,7 +163,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Every Apex program begins with a doctor-issued blood panel specific to your clinical pathway. No GP referral required. Results interpreted by a specialist — not checked against a generic lab range.
+          Every Apex program begins with a doctor-issued blood panel specific to your clinical pathway. No GP referral required. Results interpreted by a specialist, not checked against a generic lab range.
         </motion.p>
 
         <motion.div
@@ -278,7 +278,7 @@ function PanelsSection() {
             className="text-sm leading-relaxed mt-3 max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            Each panel is matched to your program. Final markers confirmed after intake assessment — panels may be adjusted based on your clinical history.
+            Each panel is matched to your program. Final markers confirmed after intake assessment: panels may be adjusted based on your clinical history.
           </motion.p>
         </div>
 
@@ -315,7 +315,7 @@ function PanelsSection() {
           className="text-[11px] mt-8"
           style={{ color: 'var(--text-primary)', opacity: 0.3 }}
         >
-          Blood panels from $99 at accredited collection centres across Australia. Doctor-issued referral — no GP required.
+          Blood panels from $99 at accredited collection centres across Australia. Doctor-issued referral: no GP required.
         </motion.p>
       </div>
     </section>

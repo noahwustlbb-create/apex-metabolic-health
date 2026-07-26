@@ -14,11 +14,11 @@ const ACCENT_BORDER = 'rgba(249,115,22,0.18)'
 const GLOW = 'rgba(249,115,22,0.06)'
 
 const SYMPTOMS = [
-  { title: 'Training plateau', body: 'Output has stalled despite consistent training. Volume is there — the results aren\'t. Often a sign of a clinical bottleneck, not a programming issue.' },
+  { title: 'Training plateau', body: 'Output has stalled despite consistent training. Volume is there: the results aren\'t. Often a sign of a clinical bottleneck, not a programming issue.' },
   { title: 'Poor recovery between sessions', body: 'Persistent soreness, slow return to baseline, and accumulating fatigue across training blocks. Your recovery rate is a clinical variable.' },
   { title: 'Declining strength or endurance', body: 'Metrics trending down without explanation. Strength, power output, or aerobic capacity slipping despite training load.' },
   { title: 'Body composition plateau', body: 'Stubborn fat accumulation or difficulty adding lean tissue despite well-structured training and diet. Usually has a hormonal driver.' },
-  { title: 'Sleep and recovery quality', body: 'Not achieving deep, restorative sleep. Waking unrefreshed and carrying that into training — compounding performance limitations.' },
+  { title: 'Sleep and recovery quality', body: 'Not achieving deep, restorative sleep. Waking unrefreshed and carrying that into training: compounding performance limitations.' },
   { title: 'Reduced drive and motivation', body: 'The competitive edge and training motivation that was once automatic now requires effort. Hormonal context is often a factor.' },
 ]
 
@@ -210,7 +210,7 @@ function SymptomsSection() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              When training load is consistent but results aren&apos;t — and recovery is taking longer than it should — there&apos;s usually a clinical variable limiting the output. Standard blood tests won&apos;t catch it.
+              When training load is consistent but results aren&apos;t, and recovery is taking longer than it should, there&apos;s usually a clinical variable limiting the output. Standard blood tests won&apos;t catch it.
             </motion.p>
           </div>
 
@@ -268,7 +268,7 @@ function PathwaySection() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            A clinical process built around your training context — not a generic wellness checklist.
+            A clinical process built around your training context, not a generic wellness checklist.
           </motion.p>
         </div>
 
@@ -327,7 +327,7 @@ function PanelSection() {
               className="text-sm leading-relaxed mb-6"
               style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
-              The performance panel assesses the hormonal, metabolic, and recovery-relevant biomarkers that determine your ceiling — not just whether you&apos;re in a disease range.
+              The performance panel assesses the hormonal, metabolic, and recovery-relevant biomarkers that determine your ceiling, not just whether you&apos;re in a disease range.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -338,7 +338,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods? Submit them during the pre-screen — we&apos;ll review whether they meet the panel requirements. You may be able to move directly to consultation.
+                Have recent bloods? Submit them during the pre-screen: we&apos;ll review whether they meet the panel requirements. You may be able to move directly to consultation.
               </p>
             </motion.div>
           </div>

@@ -11,11 +11,11 @@ const PROGRAMS = [
   {
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
-    tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
+    tagline: 'Low drive, poor recovery, body composition changes: often rooted in hormonal dysfunction that standard testing misses.',
     bullets: [
       'Low testosterone, libido, and drive',
       'Persistent fatigue and poor sleep quality',
-      'Body composition changes — fat gain, muscle loss',
+      'Body composition changes: fat gain, muscle loss',
       'Brain fog and reduced motivation',
     ],
     tag: 'Most common',
@@ -35,7 +35,7 @@ const PROGRAMS = [
   {
     category: 'Athletic Optimisation',
     name: 'Performance & Recovery',
-    tagline: 'Output has stalled, recovery is slow — something clinical is likely limiting what your training can produce.',
+    tagline: 'Output has stalled, recovery is slow: something clinical is likely limiting what your training can produce.',
     bullets: [
       'Training plateau despite consistent effort',
       'Poor recovery between sessions',
@@ -58,7 +58,7 @@ const PROGRAMS = [
   {
     category: 'Metabolic Health',
     name: 'Metabolic & Weight Loss',
-    tagline: 'Stubborn weight gain and body fat that doesn\'t respond to diet or exercise — there\'s usually a clinical driver.',
+    tagline: 'Stubborn weight gain and body fat that doesn\'t respond to diet or exercise: there\'s usually a clinical driver.',
     bullets: [
       'Stubborn weight and body fat accumulation',
       'Insulin resistance or metabolic dysfunction',
@@ -82,7 +82,7 @@ const PROGRAMS = [
   {
     category: 'Hair & Scalp Health',
     name: 'Hair Restoration',
-    tagline: 'Shedding, thinning density, hairline recession — address the biology driving hair loss, not just the surface.',
+    tagline: 'Shedding, thinning density, hairline recession: address the biology driving hair loss, not just the surface.',
     bullets: [
       'Pattern hair loss or diffuse thinning',
       'Shedding and reduced density',
@@ -106,7 +106,7 @@ const PROGRAMS = [
   {
     category: 'Skin & Dermal Health',
     name: 'Skin Regeneration',
-    tagline: 'Declining texture, firmness, and skin quality — driven by internal biology that topical products can\'t reach.',
+    tagline: 'Declining texture, firmness, and skin quality: driven by internal biology that topical products can\'t reach.',
     bullets: [
       'Declining skin texture, firmness, or quality',
       'Hormonally driven skin changes',
@@ -130,9 +130,9 @@ const PROGRAMS = [
   {
     category: 'Musculoskeletal Health',
     name: 'Injury Repair & Recovery',
-    tagline: 'Slow healing, recurring injury, post-surgical recovery — clinical protocols that support what the body can\'t do alone.',
+    tagline: 'Slow healing, recurring injury, post-surgical recovery: clinical protocols that support what the body can\'t do alone.',
     bullets: [
-      'Soft tissue injury — tendons, ligaments, muscle',
+      'Soft tissue injury: tendons, ligaments, muscle',
       'Slow or incomplete healing after injury or surgery',
       'Recurring injury at the same sites',
       'Return-to-training clinical support',
@@ -154,7 +154,7 @@ const PROGRAMS = [
   {
     category: 'Longevity',
     name: 'Longevity Protocol',
-    tagline: 'Comprehensive health optimisation for those thinking about the long game — proactive, not reactive.',
+    tagline: 'Comprehensive health optimisation for those thinking about the long game: proactive, not reactive.',
     bullets: [
       'Full multi-system biomarker baseline',
       'Hormonal, metabolic, cardiovascular, and cellular markers',
@@ -360,7 +360,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.2, ease }}
               style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
             >
-              Six doctor-led protocols — each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
+              Six doctor-led protocols: each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
             </motion.p>
 
             {/* Trust strip */}
@@ -409,7 +409,7 @@ export default function ServicesPage() {
                   Not sure which program fits?
                 </p>
                 <p className="text-xs" style={{ color: '#4890f7' }}>
-                  Complete the 60-second pre-screen — we&apos;ll identify the right clinical pathway for you.
+                  Complete the 60-second pre-screen: we&apos;ll identify the right clinical pathway for you.
                 </p>
               </div>
               <Link
@@ -495,7 +495,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.16, ease }}
               style={{ color: 'var(--text-primary)', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
             >
-              Doctor-led assessment. Advanced diagnostics. A protocol built around your biology — not a generic plan.
+              Doctor-led assessment. Advanced diagnostics. A protocol built around your biology, not a generic plan.
             </motion.p>
 
             <motion.div

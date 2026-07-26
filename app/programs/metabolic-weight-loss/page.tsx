@@ -14,7 +14,7 @@ const ACCENT_BORDER = 'rgba(0,168,158,0.18)'
 const GLOW = 'rgba(0,168,158,0.06)'
 
 const SYMPTOMS = [
-  { title: 'Stubborn weight gain', body: 'Fat accumulation — particularly around the abdomen — that doesn\'t respond to reduced calories or increased exercise. Often a metabolic or hormonal driver.' },
+  { title: 'Stubborn weight gain', body: 'Fat accumulation (particularly around the abdomen) that doesn\'t respond to reduced calories or increased exercise. Often a metabolic or hormonal driver.' },
   { title: 'Insulin resistance', body: 'Energy crashes after meals, difficulty managing blood sugar, and increasing fasting glucose. Metabolic dysfunction that standard panels frequently miss early.' },
   { title: 'Low energy despite sleep', body: 'Persistent fatigue that isn\'t explained by sleep deficit. Often tied to metabolic inefficiency, thyroid function, or hormonal dysregulation.' },
   { title: 'Diet and exercise not working', body: 'Weight that doesn\'t move despite structured effort. Plateaus that have persisted for months or years. A clinical driver is usually present.' },
@@ -31,7 +31,7 @@ const PATHWAY = [
   {
     step: '02',
     title: 'Metabolic blood panel',
-    body: 'Your doctor issues a referral for a comprehensive metabolic and hormonal panel. Collected at any accredited pathology centre — no GP required.',
+    body: 'Your doctor issues a referral for a comprehensive metabolic and hormonal panel. Collected at any accredited pathology centre: no GP required.',
   },
   {
     step: '03',
@@ -141,7 +141,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Weight that doesn&apos;t move despite genuine effort is rarely a willpower problem. We assess the metabolic and hormonal variables behind the plateau — and build a protocol around what we find.
+          Weight that doesn&apos;t move despite genuine effort is rarely a willpower problem. We assess the metabolic and hormonal variables behind the plateau, and build a protocol around what we find.
         </motion.p>
 
         <motion.div
@@ -211,7 +211,7 @@ function SymptomsSection() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              When diet and exercise aren&apos;t moving the needle, there&apos;s usually a metabolic or hormonal explanation. Insulin resistance, thyroid dysfunction, and low testosterone all directly drive body composition — and are frequently missed on standard bloods.
+              When diet and exercise aren&apos;t moving the needle, there&apos;s usually a metabolic or hormonal explanation. Insulin resistance, thyroid dysfunction, and low testosterone all directly drive body composition, and are frequently missed on standard bloods.
             </motion.p>
           </div>
 
@@ -264,7 +264,7 @@ function PathwaySection() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            A clinical pathway that identifies the root drivers — not a meal plan and a weigh-in schedule.
+            A clinical pathway that identifies the root drivers, not a meal plan and a weigh-in schedule.
           </motion.p>
         </div>
 
@@ -334,7 +334,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods? Submit them during the pre-screen — we&apos;ll review suitability. If recent and comprehensive enough, you may be able to proceed directly to consultation.
+                Have recent bloods? Submit them during the pre-screen: we&apos;ll review suitability. If recent and comprehensive enough, you may be able to proceed directly to consultation.
               </p>
             </motion.div>
           </div>

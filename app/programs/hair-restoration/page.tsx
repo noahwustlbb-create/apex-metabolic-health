@@ -14,12 +14,12 @@ const ACCENT_BORDER = 'rgba(167,139,250,0.18)'
 const GLOW = 'rgba(167,139,250,0.05)'
 
 const SYMPTOMS = [
-  { title: 'Pattern hair loss', body: 'Recession at the temples, crown thinning, or a widening part line — typically androgenetic in origin, driven by DHT sensitivity.' },
+  { title: 'Pattern hair loss', body: 'Recession at the temples, crown thinning, or a widening part line: typically androgenetic in origin, driven by DHT sensitivity.' },
   { title: 'Diffuse thinning', body: 'Density reduction across the scalp rather than a defined pattern. Often tied to nutritional deficiency, hormonal imbalance, or systemic stress.' },
   { title: 'Increased shedding', body: 'Visible hair in the shower, on pillows, or throughout the day at rates that weren\'t previously normal. Can signal acute or chronic drivers.' },
   { title: 'Hairline recession', body: 'Frontal hairline moving back with increased forehead prominence. Often the earliest visible sign of androgenetic alopecia.' },
-  { title: 'Reduced scalp density', body: 'Scalp becoming increasingly visible through hair — particularly under lighting. A sign of active miniaturisation in affected follicles.' },
-  { title: 'Hormonal scalp changes', body: 'Excess scalp oiliness, inflammation, or sensitivity — often a sign of androgenic activity at the follicle level.' },
+  { title: 'Reduced scalp density', body: 'Scalp becoming increasingly visible through hair: particularly under lighting. A sign of active miniaturisation in affected follicles.' },
+  { title: 'Hormonal scalp changes', body: 'Excess scalp oiliness, inflammation, or sensitivity: often a sign of androgenic activity at the follicle level.' },
 ]
 
 const PATHWAY = [
@@ -140,7 +140,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Hair loss is a symptom. The drivers are hormonal, nutritional, and systemic — and they require clinical assessment, not just topical treatment. We find the drivers and address them directly.
+          Hair loss is a symptom. The drivers are hormonal, nutritional, and systemic, and they require clinical assessment, not just topical treatment. We find the drivers and address them directly.
         </motion.p>
 
         <motion.div
@@ -263,7 +263,7 @@ function PathwaySection() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            A clinical process that identifies the biological drivers — not just a product recommendation.
+            A clinical process that identifies the biological drivers, not just a product recommendation.
           </motion.p>
         </div>
 
@@ -322,7 +322,7 @@ function PanelSection() {
               className="text-sm leading-relaxed mb-6"
               style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
-              The hair restoration panel assesses androgens, thyroid function, nutritional sufficiency, and inflammatory markers — the key drivers of hair loss that standard testing doesn&apos;t cover.
+              The hair restoration panel assesses androgens, thyroid function, nutritional sufficiency, and inflammatory markers: the key drivers of hair loss that standard testing doesn&apos;t cover.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -333,7 +333,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods? Submit them in the pre-screen — we&apos;ll review whether they meet our panel requirements before ordering new tests.
+                Have recent bloods? Submit them in the pre-screen: we&apos;ll review whether they meet our panel requirements before ordering new tests.
               </p>
             </motion.div>
           </div>

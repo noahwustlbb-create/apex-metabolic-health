@@ -85,7 +85,7 @@ export default function DiscoveryCallPage() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Discovery Call Request — ${form.firstName} ${form.lastName}`,
+          subject: `Discovery Call Request: ${form.firstName} ${form.lastName}`,
           from_name: 'Apex Metabolic Health',
           ...form,
           formType: 'Discovery Call Request',
@@ -159,7 +159,7 @@ export default function DiscoveryCallPage() {
               style={{ backgroundColor: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.3)' }}>
               <p className="text-sm font-semibold mb-2" style={{ color: '#dc3545' }}>Please fix the following:</p>
               <ul className="space-y-1">
-                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: 'var(--text-primary)' }}>— {e}</li>)}
+                {errors.map((e, i) => <li key={i} className="text-sm" style={{ color: 'var(--text-primary)' }}>- {e}</li>)}
               </ul>
             </motion.div>
           )}

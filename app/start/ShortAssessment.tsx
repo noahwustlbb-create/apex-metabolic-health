@@ -37,7 +37,7 @@ const TREATMENT_PICKS = [
   { id: 'longevity', label: 'Anti-Ageing & Longevity',     sub: 'Healthspan, vitality, long-term optimisation' },
   { id: 'skinhair',  label: 'Skin & Hair',                 sub: 'Hair restoration, skin health, anti-ageing' },
   { id: 'bloods',    label: 'Comprehensive Blood Tests',   sub: 'Full-panel diagnostics with doctor review' },
-  { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet — I'd like to speak to a doctor" },
+  { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet: I'd like to speak to a doctor" },
 ]
 
 // ── Per-treatment configs ──────────────────────────────────────────────────────
@@ -59,7 +59,7 @@ const CONFIGS: Record<string, Config> = {
       'Difficulty building muscle',
       'Mood changes or low motivation',
       'Weight gain despite diet and exercise',
-      "I'm not sure — I'd like a health check",
+      "I'm not sure: I'd like a health check",
     ],
     q2: 'How long have you been experiencing this?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -72,10 +72,10 @@ const CONFIGS: Record<string, Config> = {
       'Improve metabolic health',
       'Address insulin resistance',
       'Manage a related condition',
-      "I'm not sure — I'd like guidance",
+      "I'm not sure: I'd like guidance",
     ],
     q2: 'Have you tried medically supervised weight loss before?',
-    opts2: ["No — this is my first time", "Yes — but it didn't stick", "Currently on a program that isn't working"],
+    opts2: ["No, this is my first time", "Yes, but it didn't stick", "Currently on a program that isn't working"],
   },
   sexual: {
     title: 'Sexual Health',
@@ -85,7 +85,7 @@ const CONFIGS: Record<string, Config> = {
       'Erectile dysfunction',
       'Performance and confidence',
       'Hormonal contributors to sexual health',
-      "I'm not sure — general assessment",
+      "I'm not sure: general assessment",
     ],
     q2: 'How long has this been a concern?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -98,7 +98,7 @@ const CONFIGS: Record<string, Config> = {
       'Improve recovery between training sessions',
       'Improve athletic output and performance',
       'Healthy ageing and mobility',
-      "I'm not sure — general assessment",
+      "I'm not sure: general assessment",
     ],
     q2: 'Which best describes your activity level?',
     opts2: [
@@ -117,7 +117,7 @@ const CONFIGS: Record<string, Config> = {
       'Extending my healthspan long-term',
       'Physical and cognitive optimisation',
       'Proactive health monitoring and prevention',
-      "I'm not sure — I'd like a full review",
+      "I'm not sure: I'd like a full review",
     ],
     q2: 'How long have these concerns been on your mind?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -130,7 +130,7 @@ const CONFIGS: Record<string, Config> = {
       'Skin ageing & fine lines',
       'Acne or breakouts',
       'Skin health & complexion',
-      "I'm not sure — I'd like guidance",
+      "I'm not sure: I'd like guidance",
     ],
     q2: "What's your main goal?",
     opts2: [
@@ -148,7 +148,7 @@ const CONFIGS: Record<string, Config> = {
       'Metabolic health (glucose, insulin, cholesterol)',
       'Full comprehensive panel',
       'Cardiovascular markers',
-      "I'm not sure — recommend a panel for me",
+      "I'm not sure: recommend a panel for me",
     ],
     q2: 'When did you last have a blood test?',
     opts2: ['Never', 'More than 2 years ago', 'Within the last 2 years', 'Within the last 6 months'],
@@ -169,7 +169,7 @@ const CONFIGS: Record<string, Config> = {
       'First time seeking specialist help',
       'Follow-up or ongoing care',
       'Second opinion',
-      "Not sure — I just need to speak to a doctor",
+      "Not sure: I just need to speak to a doctor",
     ],
   },
 }
@@ -387,7 +387,7 @@ export default function ShortAssessment() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Apex Lead — ${config.title}: ${firstName} ${lastName}`,
+          subject: `Apex Lead: ${config.title}: ${firstName} ${lastName}`,
           from_name: 'Apex Metabolic Health',
           name: `${firstName} ${lastName}`, email, mobile,
           treatment_type: config.title,
@@ -422,7 +422,7 @@ export default function ShortAssessment() {
           {phase === 'intro' && <IntroScreen key="intro" onStart={handleIntroStart} />}
         </AnimatePresence>
 
-        {/* Eligibility result — full-screen centered */}
+        {/* Eligibility result: full-screen centered */}
         <AnimatePresence mode="wait">
           {phase === 'eligible' && (
             <motion.div
@@ -455,7 +455,7 @@ export default function ShortAssessment() {
                   className="font-bold tracking-tight mb-4"
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 4vw, 44px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: TEXT }}
                 >
-                  Good news{firstName ? `, ${firstName}` : ''} —<br />
+                  Good news{firstName ? `, ${firstName}` : ''}:<br />
                   <span style={{ background: 'linear-gradient(135deg, #4890f7, #7bb3ff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                     you qualify.
                   </span>
@@ -571,7 +571,7 @@ export default function ShortAssessment() {
                           {consent && <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3"><path d="M2 6l3 3 5-5" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>}
                         </div>
                         <span className="text-xs leading-relaxed" style={{ color: 'rgba(200,220,248,0.5)' }}>
-                          I consent to Apex Metabolic Health contacting me about my treatment pathway. I understand this is not a diagnosis — treatment is subject to clinical assessment by an AHPRA-registered doctor.
+                          I consent to Apex Metabolic Health contacting me about my treatment pathway. I understand this is not a diagnosis: treatment is subject to clinical assessment by an AHPRA-registered doctor.
                         </span>
                       </label>
 

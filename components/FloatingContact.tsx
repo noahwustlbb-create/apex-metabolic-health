@@ -17,7 +17,7 @@ const ACTIONS = [
       </svg>
     ),
     label: '60-second assessment',
-    sub: 'Tell us your goals — we match you to the right doctor and program.',
+    sub: 'Tell us your goals: we match you to the right doctor and program.',
     href: '/start',
     external: false,
     highlight: true,

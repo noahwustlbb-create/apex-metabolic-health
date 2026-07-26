@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
                 <li>Medicare number and card details (collected for QScript monitored medicines verification only)</li>
                 <li>Medical and health history, current medications, and lifestyle information provided via intake forms</li>
                 <li>Pathology results shared with or ordered through our clinic</li>
-                <li>Payment information (processed by third-party payment processors — we do not store card details)</li>
+                <li>Payment information (processed by third-party payment processors: we do not store card details)</li>
                 <li>Website usage data collected via cookies and analytics tools</li>
               </ul>
             </section>

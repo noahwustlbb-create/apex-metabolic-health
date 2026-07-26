@@ -16,10 +16,10 @@ const GLOW = 'rgba(56,189,248,0.05)'
 const SYMPTOMS = [
   { title: 'Declining skin quality', body: 'Loss of firmness, elasticity, and overall skin texture that isn\'t explained by age alone. Often a sign of hormonal and collagen-related decline.' },
   { title: 'Hormonally driven changes', body: 'Testosterone, growth hormone, and other endocrine signals directly regulate skin thickness, sebum production, and cellular turnover.' },
-  { title: 'Persistent acne', body: 'Adult acne driven by androgen activity or gut-skin axis dysfunction — not responding to standard topical approaches.' },
+  { title: 'Persistent acne', body: 'Adult acne driven by androgen activity or gut-skin axis dysfunction, not responding to standard topical approaches.' },
   { title: 'Skin conditions resistant to treatment', body: 'Rosacea, seborrheic dermatitis, or chronic inflammatory conditions that haven\'t responded to conventional dermatology.' },
   { title: 'Post-procedural skin repair', body: 'Supporting recovery after laser, microneedling, chemical peel, or other cosmetic procedures. Clinical protocols can accelerate healing.' },
-  { title: 'Premature ageing signs', body: 'Fine lines, loss of volume, and dullness appearing earlier than expected — often reflecting nutritional gaps, oxidative stress, or hormonal decline.' },
+  { title: 'Premature ageing signs', body: 'Fine lines, loss of volume, and dullness appearing earlier than expected: often reflecting nutritional gaps, oxidative stress, or hormonal decline.' },
 ]
 
 const PATHWAY = [
@@ -31,7 +31,7 @@ const PATHWAY = [
   {
     step: '02',
     title: 'Dermal health blood panel',
-    body: 'Your doctor issues a referral for a panel targeting the internal drivers of skin quality — hormonal, nutritional, and inflammatory. Collected at any accredited pathology centre.',
+    body: 'Your doctor issues a referral for a panel targeting the internal drivers of skin quality: hormonal, nutritional, and inflammatory. Collected at any accredited pathology centre.',
   },
   {
     step: '03',
@@ -140,7 +140,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Topical products can only do so much. Skin quality is largely determined by hormonal signalling, nutritional sufficiency, and inflammation — biological variables that require internal assessment and protocol.
+          Topical products can only do so much. Skin quality is largely determined by hormonal signalling, nutritional sufficiency, and inflammation: biological variables that require internal assessment and protocol.
         </motion.p>
 
         <motion.div
@@ -322,7 +322,7 @@ function PanelSection() {
               className="text-sm leading-relaxed mb-6"
               style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
-              The skin regeneration panel assesses the hormonal, nutritional, and inflammatory contributors to skin quality — building a picture that topical treatments can&apos;t.
+              The skin regeneration panel assesses the hormonal, nutritional, and inflammatory contributors to skin quality: building a picture that topical treatments can&apos;t.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -333,7 +333,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods? Submit them during the pre-screen — we&apos;ll assess whether they meet our panel requirements.
+                Have recent bloods? Submit them during the pre-screen: we&apos;ll assess whether they meet our panel requirements.
               </p>
             </motion.div>
           </div>

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import ShortAssessment from './ShortAssessment'
 
 export const metadata: Metadata = {
-  title: 'Find My Treatment — Apex Metabolic Health',
+  title: 'Find My Treatment | Apex Metabolic Health',
   description: 'Answer a few quick questions and our clinical team will guide you to the right doctor-led treatment pathway.',
   robots: { index: false, follow: false },
 }

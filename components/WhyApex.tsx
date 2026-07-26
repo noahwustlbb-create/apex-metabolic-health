@@ -26,7 +26,7 @@ const DIFFERENTIATORS = [
       </svg>
     ),
     title: 'Advanced diagnostics',
-    description: 'Standard panels rule out disease. Ours identify how you function. We test the markers GPs don\'t order — and interpret them in the context of optimisation, not just "normal range."',
+    description: 'Standard panels rule out disease. Ours identify how you function. We test the markers GPs don\'t order, and interpret them in the context of optimisation, not just "normal range."',
     accent: '#4890f7',
   },
   {
@@ -48,7 +48,7 @@ const DIFFERENTIATORS = [
       </svg>
     ),
     title: 'Ongoing biological oversight',
-    description: 'The first consult is the start, not the end. Structured reviews every four months, protocol adjustments based on your data, and clinical support between — not just at — appointments.',
+    description: 'The first consult is the start, not the end. Structured reviews every four months, protocol adjustments based on your data, and clinical support between (not just at) appointments.',
     accent: '#4890f7',
   },
 ]
@@ -118,7 +118,7 @@ export default function WhyApex() {
             className="text-base leading-relaxed"
             style={{ color: 'var(--text-primary)' }}
           >
-            A GP manages disease. A wellness brand sells supplements. We build clinical protocols around your biology — with real doctors, real diagnostics, and ongoing oversight.
+            A GP manages disease. A wellness brand sells supplements. We build clinical protocols around your biology, with real doctors, real diagnostics, and ongoing oversight.
           </motion.p>
         </div>
 

@@ -24,7 +24,7 @@ const STEPS = [
         <path d="M9 12h6M9 16h4" strokeLinecap="round"/>
       </svg>
     ),
-    body: 'Answer a short set of clinical questions about your symptoms, history, and goals. No commitment required. An Apex doctor reviews your submission and contacts you directly — typically the same day.',
+    body: 'Answer a short set of clinical questions about your symptoms, history, and goals. No commitment required. An Apex doctor reviews your submission and contacts you directly: typically the same day.',
     details: [
       { label: 'No GP referral required' },
       { label: 'Reviewed by a doctor, not a form system' },
@@ -41,7 +41,7 @@ const STEPS = [
         <path d="M12 2L8 8H4l4 4-1.5 5.5L12 15l5.5 2.5L16 12l4-4h-4L12 2z" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    body: 'Your doctor issues a pathology referral specific to your program. Attend any accredited collection centre near you — no appointment required at most locations. Fasted morning collection is standard for hormone panels.',
+    body: 'Your doctor issues a pathology referral specific to your program. Attend any accredited collection centre near you: no appointment required at most locations. Fasted morning collection is standard for hormone panels.',
     details: [
       { label: 'Any accredited collection centre Australia-wide' },
       { label: 'Fasted morning draw recommended for hormones' },
@@ -58,9 +58,9 @@ const STEPS = [
         <path d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.89L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    body: 'Your AHPRA-registered doctor reviews your blood results, takes a detailed medical history, and delivers a full clinical assessment. This is not a quick prescription call — expect a thorough conversation about your biology, your goals, and your options.',
+    body: 'Your AHPRA-registered doctor reviews your blood results, takes a detailed medical history, and delivers a full clinical assessment. This is not a quick prescription call: expect a thorough conversation about your biology, your goals, and your options.',
     details: [
-      { label: 'Video or phone — your choice' },
+      { label: 'Video or phone: your choice' },
       { label: 'Full biomarker review included' },
       { label: 'Leave with a clear written protocol' },
     ],
@@ -92,7 +92,7 @@ const STEPS = [
         <path d="M4 4v5h5M20 20v-5h-5M4 20l16-16" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
-    body: 'Active protocol patients complete a blood panel and a doctor review every 4 months. Not optional — it\'s how we keep treatment safe, evidence-based, and continuously refined. Protocol adjustments are made on results, not assumptions.',
+    body: 'Active protocol patients complete a blood panel and a doctor review every 4 months. Not optional: it\'s how we keep treatment safe, evidence-based, and continuously refined. Protocol adjustments are made on results, not assumptions.',
     details: [
       { label: 'Blood work required every 4 months' },
       { label: 'Protocol adjusted based on results' },
@@ -108,7 +108,7 @@ const FAQS = [
   },
   {
     q: 'Can I use existing blood test results?',
-    a: 'In some cases, yes — particularly if results are recent and comprehensive. Submit them via our assessment form and our team will assess their suitability before your consultation.',
+    a: 'In some cases, yes: particularly if results are recent and comprehensive. Submit them via our assessment form and our team will assess their suitability before your consultation.',
   },
   {
     q: 'How long before I see results?',
@@ -120,7 +120,7 @@ const FAQS = [
   },
   {
     q: 'How are consultations conducted?',
-    a: 'All consultations are via secure telehealth — video or phone. You need a device with a camera or microphone and a private space.',
+    a: 'All consultations are via secure telehealth: video or phone. You need a device with a camera or microphone and a private space.',
   },
   {
     q: 'Is there a lock-in contract?',
@@ -132,7 +132,7 @@ const FAQS = [
   },
   {
     q: 'Can I choose between membership and script release?',
-    a: 'Yes. Your doctor will explain both options during your initial consultation. Membership is strongly recommended for patients on ongoing protocols — the clinical oversight and cost savings are significant.',
+    a: 'Yes. Your doctor will explain both options during your initial consultation. Membership is strongly recommended for patients on ongoing protocols: the clinical oversight and cost savings are significant.',
   },
 ]
 
@@ -189,7 +189,7 @@ function Hero() {
           className="text-base md:text-lg leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.65, maxWidth: '500px', marginBottom: '2rem' }}
         >
-          No vague timelines. No hidden steps. Every stage of care, explained — from your first assessment to ongoing protocol management.
+          No vague timelines. No hidden steps. Every stage of care, explained: from your first assessment to ongoing protocol management.
         </motion.p>
 
         <motion.div
@@ -270,7 +270,7 @@ function ProcessSteps() {
         </div>
 
         <div className="relative">
-          {/* Vertical connector line — desktop */}
+          {/* Vertical connector line: desktop */}
           <div className="absolute left-[27px] top-10 bottom-10 w-px hidden md:block" style={{ background: 'linear-gradient(to bottom, transparent, rgba(72,144,247,0.15) 10%, rgba(72,144,247,0.15) 90%, transparent)' }} aria-hidden="true" />
 
           <div className="flex flex-col gap-0">
@@ -431,7 +431,7 @@ function TwoPathways() {
               <div className="flex flex-col gap-3 mb-8">
                 {[
                   'Prescribing fees waived ($125 per script otherwise)',
-                  'Medication at pharmacy cost price — no mark-up',
+                  'Medication at pharmacy cost price: no mark-up',
                   'Discounted follow-up blood panels',
                   '4-monthly consultation and protocol review',
                   'Nursing team check-ins every 6–8 weeks',
@@ -453,7 +453,7 @@ function TwoPathways() {
                   style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.12)' }}>
                   <p className="text-[11px] font-semibold mb-0.5" style={{ color: ACCENT }}>Members save $1,000–$1,800/yr on average</p>
                   <p className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>
-                    vs. the single consult path — at 3+ medication invoices it pays for itself
+                    vs. the single consult path: at 3+ medication invoices it pays for itself
                   </p>
                 </div>
                 <Link href="/membership" className="btn-teal w-full justify-center">

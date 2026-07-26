@@ -9,8 +9,8 @@ const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = '#4890f7'
 
 const PANEL_STEPS = [
-  'Doctor-issued pathology referral sent to your email — typically same business day',
-  'Collect at any accredited pathology centre — fasted before 9am, no appointment needed',
+  'Doctor-issued pathology referral sent to your email: typically same business day',
+  'Collect at any accredited pathology centre: fasted before 9am, no appointment needed',
   'Results reviewed by your Apex doctor with a full clinical interpretation',
   'Book your consultation once results are back to start your protocol',
 ]
@@ -18,7 +18,7 @@ const PANEL_STEPS = [
 const CONSULT_STEPS = [
   'Our team confirms your appointment time within 1 business day',
   'Your doctor reviews your blood results and health history before your consultation',
-  'Telehealth consultation — your personalised protocol is discussed where clinically appropriate',
+  'Telehealth consultation: your personalised protocol is discussed where clinically appropriate',
   'Coordinated treatment through our TGA-compliant compounding pharmacy partner',
 ]
 

@@ -44,7 +44,7 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   hormone: {
     label: 'Hormone Optimisation Protocol',
     tagline: 'Your GP tested 3 things. We test 32.',
-    clinicalSummary: 'Your profile is consistent with hypothalamic-pituitary-gonadal axis disruption — the hormonal cascade controlling testosterone, energy, libido, and mood. This is among the most underdiagnosed patterns in men under 55, precisely because standard GP panels measure only total testosterone and miss the 11 markers that actually explain how you feel.',
+    clinicalSummary: 'Your profile is consistent with hypothalamic-pituitary-gonadal axis disruption: the hormonal cascade controlling testosterone, energy, libido, and mood. This is among the most underdiagnosed patterns in men under 55, precisely because standard GP panels measure only total testosterone and miss the 11 markers that actually explain how you feel.',
     intakeHref: '/intake/hormone-consult',
     enquiry: 'trt',
     biomarkers: ['Free & Total Testosterone', 'SHBG', 'LH + FSH', 'Oestradiol', 'Prolactin', 'Cortisol', 'DHEA-S', 'TSH / T3 / T4', 'IGF-1', 'Vitamin D', 'hsCRP', 'Full Metabolic Panel'],
@@ -52,8 +52,8 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   },
   performance: {
     label: 'Performance & Recovery Protocol',
-    tagline: 'Your biology has a ceiling. Find it — then raise it.',
-    clinicalSummary: 'Your profile suggests your training has hit a biological ceiling — not a motivational one. The markers we look for include suppressed IGF-1, elevated cortisol-to-testosterone ratio, and micronutrient depletion that systematically undermines recovery, adaptation, and output. This is addressable with precision. Your effort isn\'t the problem.',
+    tagline: 'Your biology has a ceiling. Find it: then raise it.',
+    clinicalSummary: 'Your profile suggests your training has hit a biological ceiling, not a motivational one. The markers we look for include suppressed IGF-1, elevated cortisol-to-testosterone ratio, and micronutrient depletion that systematically undermines recovery, adaptation, and output. This is addressable with precision. Your effort isn\'t the problem.',
     intakeHref: '/intake/hormone-consult',
     enquiry: 'performance',
     biomarkers: ['IGF-1', 'Free & Total Testosterone', 'Cortisol', 'DHEA-S', 'Thyroid Panel', 'Ferritin + Iron Studies', 'B12 + Folate', 'Zinc + Magnesium', 'hsCRP', 'Creatine Kinase', 'Vitamin D', 'Full Blood Count'],
@@ -62,7 +62,7 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   metabolic: {
     label: 'Metabolic & Weight Loss Protocol',
     tagline: 'Resistance to diet and exercise is almost always hormonal.',
-    clinicalSummary: 'Your responses indicate a metabolic presentation where the limiting factor is biology, not behaviour. Insulin resistance, thyroid dysfunction, and cortisol-driven visceral fat accumulation are the three most common drivers — and they\'re virtually never investigated by GPs until you\'re diabetic. The correct intervention starts with identifying your specific driver.',
+    clinicalSummary: 'Your responses indicate a metabolic presentation where the limiting factor is biology, not behaviour. Insulin resistance, thyroid dysfunction, and cortisol-driven visceral fat accumulation are the three most common drivers, and they\'re virtually never investigated by GPs until you\'re diabetic. The correct intervention starts with identifying your specific driver.',
     intakeHref: '/intake/hormone-consult',
     enquiry: 'weight-loss',
     biomarkers: ['HbA1c', 'Fasting Insulin + HOMA-IR', 'TSH / T3 / T4', 'Cortisol', 'Testosterone + SHBG', 'hsCRP', 'Full Lipid Panel', 'Liver Function', 'Vitamin D', 'Leptin', 'Adiponectin', 'Full Metabolic Panel'],
@@ -71,7 +71,7 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   hair_skin: {
     label: 'Hair Restoration & Skin Protocol',
     tagline: 'Hair loss has a cause. Most people are treating the wrong one.',
-    clinicalSummary: 'Your profile is most consistent with a hormonally-driven presentation — either DHT-mediated follicle miniaturisation, nutritional depletion, or thyroid dysfunction. These three mechanisms look identical from the outside but require entirely different interventions. Treating the wrong cause is the most common reason people spend years on products that don\'t work.',
+    clinicalSummary: 'Your profile is most consistent with a hormonally-driven presentation: either DHT-mediated follicle miniaturisation, nutritional depletion, or thyroid dysfunction. These three mechanisms look identical from the outside but require entirely different interventions. Treating the wrong cause is the most common reason people spend years on products that don\'t work.',
     intakeHref: '/intake/general-consult',
     enquiry: 'hair',
     biomarkers: ['DHT', 'Free & Total Testosterone', 'DHEA-S', 'TSH / T3 / T4', 'Ferritin', 'Zinc', 'Prolactin', 'hsCRP', 'Vitamin D', 'SHBG', 'Oestradiol', 'Full Blood Count'],
@@ -80,7 +80,7 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   injury: {
     label: 'Injury Repair & Recovery Protocol',
     tagline: 'Slow healing always has a systemic cause.',
-    clinicalSummary: 'Your presentation suggests what\'s limiting your recovery isn\'t local — it\'s systemic. Chronically elevated cortisol, suppressed IGF-1, Vitamin D deficiency, and inflammatory burden are the four most common biological barriers to tissue repair and don\'t appear on any standard sports medicine workup. We identify the specific driver so your rehabilitation has the hormonal substrate it needs.',
+    clinicalSummary: 'Your presentation suggests what\'s limiting your recovery isn\'t local: it\'s systemic. Chronically elevated cortisol, suppressed IGF-1, Vitamin D deficiency, and inflammatory burden are the four most common biological barriers to tissue repair and don\'t appear on any standard sports medicine workup. We identify the specific driver so your rehabilitation has the hormonal substrate it needs.',
     intakeHref: '/intake/general-consult',
     enquiry: 'injury-repair',
     biomarkers: ['IGF-1', 'Cortisol', 'Vitamin D', 'CK + CRP + ESR', 'Testosterone', 'Ferritin', 'B12 + Folate', 'Zinc', 'Growth Hormone Panel', 'Full Blood Count', 'Thyroid Panel', 'Full Metabolic Panel'],
@@ -89,7 +89,7 @@ const PROGRAMS: Record<Pathway, ProgramData> = {
   peptide: {
     label: 'Peptide & Longevity Protocol',
     tagline: 'Optimisation isn\'t a symptom. It\'s a decision.',
-    clinicalSummary: 'Your profile indicates a patient functioning adequately but aware that biological output doesn\'t match ambition. This is the category where targeted peptide protocols and longevity medicine deliver the most clinically meaningful outcomes. The goal isn\'t to fix a dysfunction — it\'s to systematically close the gap between where you are and where your biology is capable of taking you.',
+    clinicalSummary: 'Your profile indicates a patient functioning adequately but aware that biological output doesn\'t match ambition. This is the category where targeted peptide protocols and longevity medicine deliver the most clinically meaningful outcomes. The goal isn\'t to fix a dysfunction: it\'s to systematically close the gap between where you are and where your biology is capable of taking you.',
     intakeHref: '/intake/general-consult',
     enquiry: 'peptide',
     biomarkers: ['IGF-1', 'Growth Hormone', 'Testosterone', 'Cortisol', 'DHEA-S', 'Thyroid Panel', 'Biological Age Markers', 'hsCRP', 'Telomere Length (optional)', 'Vitamin D', 'Full Metabolic Panel', 'Oxidative Stress Panel'],
@@ -124,27 +124,27 @@ function getClinicalObservations(data: FormData, pathway: Pathway): string[] {
   const obs: string[] = []
 
   if (data.history === 'gp_normal') {
-    obs.push('Prior GP testing returned "normal" — standard panels miss free testosterone, LH/FSH, oestradiol, and cortisol, which are the markers that actually explain your symptoms.')
+    obs.push('Prior GP testing returned "normal": standard panels miss free testosterone, LH/FSH, oestradiol, and cortisol, which are the markers that actually explain your symptoms.')
   } else if (data.history === 'never') {
-    obs.push('No comprehensive testing on record — your symptom profile has never been mapped to objective biomarker data. This is the critical first step.')
+    obs.push('No comprehensive testing on record: your symptom profile has never been mapped to objective biomarker data. This is the critical first step.')
   } else if (data.history === 'treated') {
-    obs.push('Prior treatment history detected — previous intervention provides a clinical baseline. Protocol refinement is typically more targeted in these cases.')
+    obs.push('Prior treatment history detected: previous intervention provides a clinical baseline. Protocol refinement is typically more targeted in these cases.')
   }
 
   if (data.symptoms.includes('brain_fog') && data.symptoms.includes('fatigue')) {
-    obs.push('Co-presenting cognitive and energy symptoms — this combination is a hallmark of insufficient free testosterone and/or thyroid disruption. Both are routinely missed by standard panels.')
+    obs.push('Co-presenting cognitive and energy symptoms: this combination is a hallmark of insufficient free testosterone and/or thyroid disruption. Both are routinely missed by standard panels.')
   }
 
   if (pathway === 'hormone' && (data.age === '40-49' || data.age === '50+')) {
-    obs.push('Age-related hormonal shift — testosterone typically declines 1–2% annually from age 30. At your age bracket, the cumulative deficit is often clinically significant even when labelled "within range."')
+    obs.push('Age-related hormonal shift: testosterone typically declines 1–2% annually from age 30. At your age bracket, the cumulative deficit is often clinically significant even when labelled "within range."')
   }
 
   if (data.symptoms.includes('mood') && data.symptoms.includes('low_libido')) {
-    obs.push('Concurrent mood and libido changes — this pattern is characteristic of HPG axis disruption, not psychological stress. It has a distinct biomarker signature.')
+    obs.push('Concurrent mood and libido changes: this pattern is characteristic of HPG axis disruption, not psychological stress. It has a distinct biomarker signature.')
   }
 
   if (data.symptoms.includes('muscle_loss') && pathway === 'hormone') {
-    obs.push('Muscle loss is a reliable indicator of anabolic insufficiency — typically driven by low free testosterone. It won\'t respond to training adjustments alone.')
+    obs.push('Muscle loss is a reliable indicator of anabolic insufficiency: typically driven by low free testosterone. It won\'t respond to training adjustments alone.')
   }
 
   if (pathway === 'metabolic') {
@@ -152,7 +152,7 @@ function getClinicalObservations(data: FormData, pathway: Pathway): string[] {
   }
 
   if (pathway === 'performance' && (data.age === '18-29' || data.age === '30-39')) {
-    obs.push('Performance ceiling in a physiologically active individual often reflects systemic underperformance — elevated cortisol-to-testosterone ratio and micronutrient depletion are the most common culprits.')
+    obs.push('Performance ceiling in a physiologically active individual often reflects systemic underperformance: elevated cortisol-to-testosterone ratio and micronutrient depletion are the most common culprits.')
   }
 
   return obs.slice(0, 3)
@@ -166,7 +166,7 @@ const CONCERN_OPTIONS = [
   { val: 'weight',    label: 'Weight gain or body composition',            sub: 'Fat accumulation, inability to lose weight, muscle loss' },
   { val: 'hair_skin', label: 'Hair loss or declining skin quality',        sub: 'Thinning, shedding, texture changes, skin quality decline' },
   { val: 'injury',    label: 'Injury recovery or chronic pain',            sub: 'Slow healing, recurring injuries, persistent inflammation' },
-  { val: 'optimise',  label: 'I feel okay — but I want to be exceptional', sub: 'Performance, longevity, peptides, full optimisation' },
+  { val: 'optimise',  label: 'I feel okay, but I want to be exceptional', sub: 'Performance, longevity, peptides, full optimisation' },
 ]
 
 const AGE_OPTIONS = [
@@ -178,7 +178,7 @@ const AGE_OPTIONS = [
 
 const SYMPTOM_MAP: Record<string, { val: string; label: string }[]> = {
   energy: [
-    { val: 'fatigue',     label: 'Persistent fatigue — not fixed by sleep' },
+    { val: 'fatigue',     label: 'Persistent fatigue, not fixed by sleep' },
     { val: 'brain_fog',   label: 'Brain fog or poor concentration' },
     { val: 'mood',        label: 'Mood changes, irritability, or low motivation' },
     { val: 'low_libido',  label: 'Reduced sex drive' },
@@ -213,7 +213,7 @@ const SYMPTOM_MAP: Record<string, { val: string; label: string }[]> = {
     { val: 'stiffness',    label: 'Morning stiffness that takes hours to resolve' },
   ],
   optimise: [
-    { val: 'sub_energy',   label: 'Energy that\'s good — but not optimal' },
+    { val: 'sub_energy',   label: 'Energy that\'s good, but not optimal' },
     { val: 'sub_recovery', label: 'Recovery that could be faster' },
     { val: 'sub_focus',    label: 'Focus and mental clarity that could be sharper' },
     { val: 'sub_body',     label: 'Body composition that could be leaner' },
@@ -222,10 +222,10 @@ const SYMPTOM_MAP: Record<string, { val: string; label: string }[]> = {
 }
 
 const HISTORY_OPTIONS = [
-  { val: 'never',     label: 'No — I\'ve never had comprehensive blood work',  sub: 'Standard GP panels only, if at all' },
-  { val: 'gp_normal', label: 'Yes — GP told me everything was "normal"',       sub: 'Results came back fine, but I still feel like this' },
-  { val: 'recent',    label: 'Yes — I have results from the last 6 months',    sub: 'I can share these with my doctor' },
-  { val: 'treated',   label: 'Yes — I\'ve been treated for this before',       sub: 'Previous hormone therapy or clinical treatment' },
+  { val: 'never',     label: 'No: I\'ve never had comprehensive blood work',  sub: 'Standard GP panels only, if at all' },
+  { val: 'gp_normal', label: 'Yes: GP told me everything was "normal"',       sub: 'Results came back fine, but I still feel like this' },
+  { val: 'recent',    label: 'Yes: I have results from the last 6 months',    sub: 'I can share these with my doctor' },
+  { val: 'treated',   label: 'Yes: I\'ve been treated for this before',       sub: 'Previous hormone therapy or clinical treatment' },
 ]
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -343,7 +343,7 @@ export default function PreScreenForm() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           access_key: WEB3_KEY,
-          subject: `Health Assessment — ${data.firstName} ${data.lastName} → ${prog.label}`,
+          subject: `Health Assessment: ${data.firstName} ${data.lastName} → ${prog.label}`,
           from_name: 'Apex Metabolic Health',
           firstName: data.firstName, lastName: data.lastName,
           email: data.email, phone: data.phone,
@@ -396,7 +396,7 @@ export default function PreScreenForm() {
         <div className="container-tight relative z-10 max-w-lg">
           <AnimatePresence mode="wait" custom={dir}>
 
-            {/* ── Screen 0 — Concern ── */}
+            {/* ── Screen 0: Concern ── */}
             {screen === 0 && (
               <motion.div {...sp}>
                 <div className="mb-8">
@@ -408,7 +408,7 @@ export default function PreScreenForm() {
                     What&apos;s the primary issue?
                   </h1>
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
-                    Your answer determines the clinical pathway we map for you. Be direct — the more accurate the input, the more relevant your result.
+                    Your answer determines the clinical pathway we map for you. Be direct: the more accurate the input, the more relevant your result.
                   </p>
                 </div>
 
@@ -442,7 +442,7 @@ export default function PreScreenForm() {
               </motion.div>
             )}
 
-            {/* ── Screen 1 — Age ── */}
+            {/* ── Screen 1: Age ── */}
             {screen === 1 && (
               <motion.div {...sp}>
                 <BackBtn onClick={() => advance(-1)} />
@@ -480,7 +480,7 @@ export default function PreScreenForm() {
               </motion.div>
             )}
 
-            {/* ── Screen 2 — Symptoms ── */}
+            {/* ── Screen 2: Symptoms ── */}
             {screen === 2 && (
               <motion.div {...sp}>
                 <BackBtn onClick={() => advance(-1)} />
@@ -520,7 +520,7 @@ export default function PreScreenForm() {
                   })}
                 </div>
                 <button type="button" onClick={() => advance(1)} className="btn-teal w-full justify-center">
-                  {data.symptoms.length === 0 ? 'None of these — continue' : `Continue (${data.symptoms.length} selected)`}
+                  {data.symptoms.length === 0 ? 'None of these: continue' : `Continue (${data.symptoms.length} selected)`}
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -528,7 +528,7 @@ export default function PreScreenForm() {
               </motion.div>
             )}
 
-            {/* ── Screen 3 — Blood work history ── */}
+            {/* ── Screen 3: Blood work history ── */}
             {screen === 3 && (
               <motion.div {...sp}>
                 <BackBtn onClick={() => advance(-1)} />
@@ -570,7 +570,7 @@ export default function PreScreenForm() {
               </motion.div>
             )}
 
-            {/* ── Screen 4 — Unlock (lead form) ── */}
+            {/* ── Screen 4: Unlock (lead form) ── */}
             {screen === 4 && !submitted && (
               <motion.div {...sp}>
                 <BackBtn onClick={() => advance(-1)} />
@@ -593,7 +593,7 @@ export default function PreScreenForm() {
                   Your results are ready.
                 </h2>
                 <p className="text-sm leading-relaxed mb-7" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
-                  We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment — our clinical team will be in touch to arrange your next step.
+                  We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment: our clinical team will be in touch to arrange your next step.
                 </p>
 
                 {/* Blurred result preview */}
@@ -632,7 +632,7 @@ export default function PreScreenForm() {
 
                 {errors.length > 0 && (
                   <div className="rounded-lg px-4 py-3 mb-4" style={{ background: 'rgba(220,53,69,0.08)', border: '1px solid rgba(220,53,69,0.25)' }}>
-                    {errors.map(e => <p key={e} className="text-xs" style={{ color: '#dc3545' }}>— {e}</p>)}
+                    {errors.map(e => <p key={e} className="text-xs" style={{ color: '#dc3545' }}>- {e}</p>)}
                   </div>
                 )}
 
@@ -697,7 +697,7 @@ export default function PreScreenForm() {
               </motion.div>
             )}
 
-            {/* ── Screen 5 — Result ── */}
+            {/* ── Screen 5: Result ── */}
             {screen === 5 && (
               <motion.div {...sp}>
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
@@ -760,7 +760,7 @@ export default function PreScreenForm() {
                   className="rounded-2xl p-6 mb-6"
                   style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }}>
                   <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-4" style={{ color: ACCENT }}>
-                    Recommended blood panel — {prog.biomarkers.length} markers
+                    Recommended blood panel: {prog.biomarkers.length} markers
                   </p>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-2">
                     {prog.biomarkers.map(b => (

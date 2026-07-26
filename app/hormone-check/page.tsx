@@ -304,7 +304,7 @@ export default function HormoneCheckPage() {
         {/* Dot grid */}
         <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
 
-        {/* Radial glow — top right */}
+        {/* Radial glow: top right */}
         <div
           aria-hidden="true"
           className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none"
@@ -507,7 +507,7 @@ export default function HormoneCheckPage() {
             {/* Dot grid */}
             <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
 
-            {/* Glow behind chart — tier colour */}
+            {/* Glow behind chart: tier colour */}
             <div
               aria-hidden="true"
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
@@ -721,7 +721,7 @@ export default function HormoneCheckPage() {
 }
 
 // ---------------------------------------------------------------------------
-// Bottom CTA — isolated for useInView
+// Bottom CTA: isolated for useInView
 // ---------------------------------------------------------------------------
 function BottomCTA() {
   const ref = useRef(null)

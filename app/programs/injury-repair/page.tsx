@@ -15,9 +15,9 @@ const GLOW = 'rgba(74,222,128,0.05)'
 
 const SYMPTOMS = [
   { title: 'Soft tissue injury', body: 'Tendon, ligament, or muscle injuries that haven\'t healed at the expected rate. Clinical protocols can support tissue repair where the body\'s capacity is limited.' },
-  { title: 'Slow post-surgical healing', body: 'Incomplete recovery following surgical repair. Healing velocity is a biological variable — one that can be supported clinically.' },
+  { title: 'Slow post-surgical healing', body: 'Incomplete recovery following surgical repair. Healing velocity is a biological variable: one that can be supported clinically.' },
   { title: 'Recurring injury at the same sites', body: 'Repeated reinjury at the same location suggests incomplete biological repair, not just mechanical overload. A clinical lens is often warranted.' },
-  { title: 'Persistent pain without structural cause', body: 'Ongoing pain in the absence of clear structural findings. Tissue-level biology — inflammation, growth factors, vascularity — may be the underlying driver.' },
+  { title: 'Persistent pain without structural cause', body: 'Ongoing pain in the absence of clear structural findings. Tissue-level biology (inflammation, growth factors, vascularity) may be the underlying driver.' },
   { title: 'Return-to-training support', body: 'Clinical oversight during return-to-sport or high-load training phases. Reduces reinjury risk and supports progressive loading capacity.' },
   { title: 'Post-procedural recovery', body: 'Supporting healing after orthopedic procedures, joint surgery, or interventional treatments. Clinical protocols can be coordinated alongside your treating specialist.' },
 ]
@@ -210,7 +210,7 @@ function SymptomsSection() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              Tissue repair is governed by hormones, growth factors, inflammation, and nutrition. When these are suboptimal, recovery slows — and recurring injury becomes the pattern. A clinical protocol can change the biological environment healing occurs in.
+              Tissue repair is governed by hormones, growth factors, inflammation, and nutrition. When these are suboptimal, recovery slows, and recurring injury becomes the pattern. A clinical protocol can change the biological environment healing occurs in.
             </motion.p>
           </div>
 
@@ -263,7 +263,7 @@ function PathwaySection() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            A clinical process that addresses the biology of recovery — not just the injury site.
+            A clinical process that addresses the biology of recovery, not just the injury site.
           </motion.p>
         </div>
 
@@ -333,7 +333,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods? Submit them during the pre-screen — we&apos;ll review whether they meet our panel requirements before ordering anything new.
+                Have recent bloods? Submit them during the pre-screen: we&apos;ll review whether they meet our panel requirements before ordering anything new.
               </p>
             </motion.div>
           </div>

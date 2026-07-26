@@ -22,13 +22,13 @@ const WHO = [
 const WHAT = [
   {
     n: '01',
-    title: 'Full hormone panel — 32+ markers',
+    title: 'Full hormone panel: 32+ markers',
     body: 'Total and free testosterone, SHBG, LH & FSH, oestradiol, cortisol, full thyroid, DHEA-S, prolactin, IGF-1, Vitamin D, hsCRP. Not a 3-marker GP panel.',
   },
   {
     n: '02',
     title: 'Doctor-reviewed results',
-    body: 'An AHPRA-registered doctor reviews every marker and provides a written clinical interpretation — not just a reference range flag.',
+    body: 'An AHPRA-registered doctor reviews every marker and provides a written clinical interpretation, not just a reference range flag.',
   },
   {
     n: '03',
@@ -38,13 +38,13 @@ const WHAT = [
   {
     n: '04',
     title: 'Ongoing clinical oversight',
-    body: 'Scheduled reviews, blood work monitoring, and clinical support. This is not a one-off script — it\'s a managed care pathway.',
+    body: 'Scheduled reviews, blood work monitoring, and clinical support. This is not a one-off script: it\'s a managed care pathway.',
   },
 ]
 
 const PROCESS = [
   { step: '01', title: 'Complete your intake', body: 'An 8–10 minute clinical intake covering your symptoms, history, lifestyle, and goals. Reviewed by your doctor before the consultation.' },
-  { step: '02', title: 'Doctor-issued blood panel', body: 'Your doctor issues a referral for your hormone panel. Collect fasted before 9am at any of 4,000+ accredited collection centres — no GP needed.' },
+  { step: '02', title: 'Doctor-issued blood panel', body: 'Your doctor issues a referral for your hormone panel. Collect fasted before 9am at any of 4,000+ accredited collection centres: no GP needed.' },
   { step: '03', title: 'Telehealth consultation', body: 'A full clinical consultation with your Apex doctor. Your results are reviewed in depth and your protocol is discussed.' },
   { step: '04', title: 'Protocol commenced', body: 'Where clinically appropriate, treatment is coordinated through our compounding pharmacy partner. Ongoing reviews scheduled.' },
 ]
@@ -102,7 +102,7 @@ export default function HormoneConsultBookPage() {
                 </span>
               </h1>
               <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', opacity: 0.65, maxWidth: 560 }}>
-                Standard GP panels miss the markers that matter. Our hormone consultation tests 32+ biomarkers interpreted by doctors who specialise in exactly this — and where treatment is warranted, it starts.
+                Standard GP panels miss the markers that matter. Our hormone consultation tests 32+ biomarkers interpreted by doctors who specialise in exactly this, and where treatment is warranted, it starts.
               </p>
 
               {/* Stats */}
@@ -139,7 +139,7 @@ export default function HormoneConsultBookPage() {
               <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>Who this is for</p>
               <h2 className="font-bold tracking-tight mb-8"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.8vw, 30px)', color: 'var(--text-primary)', lineHeight: 1.15 }}>
-                Patients who know something is wrong — but are told their results are "normal."
+                Patients who know something is wrong, but are told their results are "normal."
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {WHO.map((w, i) => (

@@ -10,7 +10,7 @@ const PROGRAMS = [
   {
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
-    tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
+    tagline: 'Low drive, poor recovery, body composition changes: often rooted in hormonal dysfunction that standard testing misses.',
     accent: '#4890f7',
     accentBg: 'rgba(72,144,247,0.05)',
     accentBorder: 'rgba(72,144,247,0.15)',
@@ -19,7 +19,7 @@ const PROGRAMS = [
     focus: [
       'Low testosterone, libido, and drive',
       'Fatigue and poor sleep quality',
-      'Body composition changes — fat gain, muscle loss',
+      'Body composition changes: fat gain, muscle loss',
       'Brain fog and reduced motivation',
     ],
     href: '/intake/hormone-consult',
@@ -33,7 +33,7 @@ const PROGRAMS = [
   {
     category: 'Athletic Optimisation',
     name: 'Performance & Recovery',
-    tagline: 'Output has stalled, recovery is slow — and something clinical is likely limiting what your training can produce.',
+    tagline: 'Output has stalled, recovery is slow, and something clinical is likely limiting what your training can produce.',
     accent: '#f97316',
     accentBg: 'rgba(249,115,22,0.06)',
     accentBorder: 'rgba(249,115,22,0.18)',
@@ -78,7 +78,7 @@ const PROGRAMS = [
   {
     category: 'Hair & Scalp Health',
     name: 'Hair Restoration',
-    tagline: 'Shedding, thinning density, or hairline recession — address the biology driving hair loss, not just the surface.',
+    tagline: 'Shedding, thinning density, or hairline recession: address the biology driving hair loss, not just the surface.',
     accent: '#a78bfa',
     accentBg: 'rgba(167,139,250,0.06)',
     accentBorder: 'rgba(167,139,250,0.18)',
@@ -101,7 +101,7 @@ const PROGRAMS = [
   {
     category: 'Skin & Dermal Health',
     name: 'Skin Regeneration',
-    tagline: 'Declining texture, firmness, and skin quality — driven by internal biology that topical products can\'t reach.',
+    tagline: 'Declining texture, firmness, and skin quality: driven by internal biology that topical products can\'t reach.',
     accent: '#38bdf8',
     accentBg: 'rgba(56,189,248,0.06)',
     accentBorder: 'rgba(56,189,248,0.18)',
@@ -124,14 +124,14 @@ const PROGRAMS = [
   {
     category: 'Musculoskeletal Health',
     name: 'Injury Repair & Recovery',
-    tagline: 'Slow healing, recurring injury, or post-surgical recovery — a clinical protocol supports what the body can\'t do alone.',
+    tagline: 'Slow healing, recurring injury, or post-surgical recovery: a clinical protocol supports what the body can\'t do alone.',
     accent: '#4ade80',
     accentBg: 'rgba(74,222,128,0.06)',
     accentBorder: 'rgba(74,222,128,0.18)',
     glowColor: 'rgba(74,222,128,0.04)',
     tag: null,
     focus: [
-      'Soft tissue injury — tendons, ligaments, muscle',
+      'Soft tissue injury: tendons, ligaments, muscle',
       'Slow or incomplete healing post-injury or surgery',
       'Recurring injury at the same sites',
       'Return-to-training clinical support',

@@ -26,22 +26,22 @@ const SYSTEMS = [
   {
     number: '02',
     title: 'Metabolic function',
-    body: 'Fasting insulin, HbA1c, full lipid fractions, liver enzymes, kidney function, and glucose regulation markers. Metabolic dysfunction rarely announces itself — it builds quietly for years.',
+    body: 'Fasting insulin, HbA1c, full lipid fractions, liver enzymes, kidney function, and glucose regulation markers. Metabolic dysfunction rarely announces itself: it builds quietly for years.',
   },
   {
     number: '03',
     title: 'Thyroid & adrenal',
-    body: 'TSH, free T3, free T4, and adrenal cortisol patterns. These two axes control energy regulation, recovery rate, and metabolic speed — and are the most frequently overlooked on routine panels.',
+    body: 'TSH, free T3, free T4, and adrenal cortisol patterns. These two axes control energy regulation, recovery rate, and metabolic speed, and are the most frequently overlooked on routine panels.',
   },
   {
     number: '04',
     title: 'Inflammatory load',
-    body: 'hsCRP, ferritin, ESR, and key nutrient status markers. Chronic low-grade inflammation is the common denominator in nearly every age-related disease — and it\'s entirely measurable years before symptoms.',
+    body: 'hsCRP, ferritin, ESR, and key nutrient status markers. Chronic low-grade inflammation is the common denominator in nearly every age-related disease, and it\'s entirely measurable years before symptoms.',
   },
   {
     number: '05',
     title: 'Growth & cellular repair',
-    body: 'IGF-1 and growth hormone markers that reflect your body\'s capacity to repair, adapt, and regenerate. These decline predictably with age — and the rate of decline is modifiable.',
+    body: 'IGF-1 and growth hormone markers that reflect your body\'s capacity to repair, adapt, and regenerate. These decline predictably with age, and the rate of decline is modifiable.',
   },
 ]
 
@@ -54,12 +54,12 @@ const STEPS = [
   {
     n: '02',
     title: 'Multi-system blood panel',
-    body: 'Attend any accredited collection centre in Australia — no GP referral required. Your panel covers 40+ markers across five biological systems. Fasted collection, typically 15–20 minutes.',
+    body: 'Attend any accredited collection centre in Australia: no GP referral required. Your panel covers 40+ markers across five biological systems. Fasted collection, typically 15–20 minutes.',
   },
   {
     n: '03',
     title: 'Clinical interpretation',
-    body: 'Your results are reviewed by your doctor against optimal ranges — not just population averages. A complete biological picture is built. Every marker is contextualised against your age, goals, and history.',
+    body: 'Your results are reviewed by your doctor against optimal ranges, not just population averages. A complete biological picture is built. Every marker is contextualised against your age, goals, and history.',
   },
   {
     n: '04',
@@ -73,7 +73,7 @@ const TRUTHS = [
     stat: '3',
     unit: 'markers',
     label: 'Standard GP panel',
-    body: 'A routine blood test screens for catastrophic failure — anaemia, organ dysfunction, obvious disease. It tells you almost nothing about how you\'re ageing.',
+    body: 'A routine blood test screens for catastrophic failure: anaemia, organ dysfunction, obvious disease. It tells you almost nothing about how you\'re ageing.',
   },
   {
     stat: '40+',
@@ -85,7 +85,7 @@ const TRUTHS = [
     stat: '10–20',
     unit: 'years',
     label: 'The intervention window',
-    body: 'The biological changes that determine how you feel at 60 are detectable — and addressable — a decade or more before they become symptomatic.',
+    body: 'The biological changes that determine how you feel at 60 are detectable, and addressable, a decade or more before they become symptomatic.',
   },
 ]
 
@@ -183,7 +183,7 @@ function HeroSection() {
           transition={{ duration: 0.7, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', opacity: 0.7, maxWidth: '540px', fontSize: '16px', lineHeight: 1.8, marginBottom: '2.5rem' }}
         >
-          The Apex Longevity Protocol maps your complete biological picture — before the first symptom — and builds a clinical strategy for the next decade of your health. Not a check-up. A biological audit.
+          The Apex Longevity Protocol maps your complete biological picture (before the first symptom) and builds a clinical strategy for the next decade of your health. Not a check-up. A biological audit.
         </motion.p>
 
         {/* CTAs */}
@@ -217,7 +217,7 @@ function HeroSection() {
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-wrap items-center gap-6">
-          {['AHPRA-registered doctors', 'No GP referral required', '100% telehealth — Australia-wide', '40+ biomarkers assessed'].map((t, i) => (
+          {['AHPRA-registered doctors', 'No GP referral required', '100% telehealth: Australia-wide', '40+ biomarkers assessed'].map((t, i) => (
             <div key={i} className="flex items-center gap-1.5">
               <div className="w-1 h-1 rounded-full" style={{ background: GOLD, opacity: 0.6 }} />
               <span className="text-[11px] font-semibold tracking-[0.08em]" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>{t}</span>
@@ -297,7 +297,7 @@ function SystemsSection() {
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.16, ease }}
             className="text-base leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
-            The Longevity Protocol assesses every biological system that determines how you age — not just the ones that fail first. This is what a complete picture of your health actually looks like.
+            The Longevity Protocol assesses every biological system that determines how you age, not just the ones that fail first. This is what a complete picture of your health actually looks like.
           </motion.p>
         </div>
 
@@ -395,7 +395,7 @@ function ForWhomSection() {
 
   const profiles = [
     'You\'re functional. You\'re not sick. But you\'re aware that the trajectory matters.',
-    'You\'ve been told everything\'s "normal" — and you know that\'s not the same as optimal.',
+    'You\'ve been told everything\'s "normal", and you know that\'s not the same as optimal.',
     'You\'re thinking 10 years ahead, not 10 weeks. You want a clinical strategy, not reassurance.',
     'You want data on your biology. Not a guess. Not a general recommendation. Your data.',
   ]
@@ -489,7 +489,7 @@ function CTASection() {
         <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.14, ease }}
           style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '480px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.75 }}>
-          The second best time is now. One telehealth consultation. One blood draw. A complete biological picture — and a doctor who knows how to act on it.
+          The second best time is now. One telehealth consultation. One blood draw. A complete biological picture, and a doctor who knows how to act on it.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}

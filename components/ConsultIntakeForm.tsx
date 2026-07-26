@@ -19,7 +19,7 @@ const AU_STATES = ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'ACT', 'NT']
 export interface ConsultConfig {
   storageKey: string
   programName: string      // e.g. "Hormone Optimisation"
-  formTitle: string        // e.g. "HORMONE OPTIMISATION — INTAKE FORM"
+  formTitle: string        // e.g. "HORMONE OPTIMISATION: INTAKE FORM"
   concern: string          // placeholder for main concern field
   goals?: string[]         // optional goal pills
   bloodsHref: string       // URL to order blood panel after submission
@@ -208,7 +208,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
       className="flex flex-col items-start"
       style={{ maxWidth: 540 }}
     >
-      {/* Icon — restrained, not celebratory */}
+      {/* Icon: restrained, not celebratory */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -236,7 +236,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         Intake Received
       </motion.p>
 
-      {/* Headline — personal, warm, final */}
+      {/* Headline: personal, warm, final */}
       <motion.h2
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -262,7 +262,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         </span>
       </motion.h2>
 
-      {/* Primary body — calm and reassuring */}
+      {/* Primary body: calm and reassuring */}
       <motion.p
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -286,7 +286,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         }}
       />
 
-      {/* What happens next — three lines, no list styling */}
+      {/* What happens next: three lines, no list styling */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -318,7 +318,7 @@ function Success({ firstName, config }: { firstName: string; config: ConsultConf
         ))}
       </motion.div>
 
-      {/* Trust footer — grounding, not sales */}
+      {/* Trust footer: grounding, not sales */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -367,7 +367,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `${config.programName} Intake — ${data.firstName} ${data.lastName}`,
+          subject: `${config.programName} Intake: ${data.firstName} ${data.lastName}`,
           from_name: 'Apex Metabolic Health',
           name: `${data.firstName} ${data.lastName}`, email: data.email,
           phone: data.phone, dob: data.dob, state: data.state, gp_name: data.gpName,

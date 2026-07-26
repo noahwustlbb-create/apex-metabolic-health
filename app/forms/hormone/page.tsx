@@ -69,7 +69,7 @@ export default function HormoneFormPDF() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <span style={{ color: 'white', fontWeight: 700, fontSize: '14px', fontFamily: 'Arial' }}>
-          Hormone Program — Request an Appointment & Pre-Screen Intake Form
+          Hormone Program: Request an Appointment & Pre-Screen Intake Form
         </span>
         <button
           onClick={handlePrint}
@@ -90,7 +90,7 @@ export default function HormoneFormPDF() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', paddingBottom: '16px', borderBottom: '2px solid #1a1a2e' }}>
           <div>
             <div style={{ fontSize: '18px', fontWeight: 800, color: '#1a1a2e', letterSpacing: '0.05em' }}>APEX METABOLIC HEALTH</div>
-            <div style={{ fontSize: '11px', color: '#555', marginTop: '3px' }}>Doctor-Led Telehealth — Australia-Wide</div>
+            <div style={{ fontSize: '11px', color: '#555', marginTop: '3px' }}>Doctor-Led Telehealth: Australia-Wide</div>
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '14px', fontWeight: 700, color: '#4890f7' }}>HORMONE PROGRAM</div>

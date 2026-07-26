@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: HORMONE_URL,
   ineligibleHeading: 'Hair restoration may not be appropriate for you right now.',
-  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call — our clinical team can help determine the safest pathway for you.",
+  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call: our clinical team can help determine the safest pathway for you.",
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {
@@ -58,16 +58,16 @@ const config: QuizConfig = {
       id: 'severity',
       question: 'How would you describe the current severity?',
       options: [
-        { label: 'Early stage — noticeable thinning only', value: 'early' },
-        { label: 'Moderate — visible thinning or a receding hairline', value: 'moderate' },
-        { label: 'Advanced — significant loss or large bald areas', value: 'advanced' },
+        { label: 'Early stage: noticeable thinning only', value: 'early' },
+        { label: 'Moderate: visible thinning or a receding hairline', value: 'moderate' },
+        { label: 'Advanced: significant loss or large bald areas', value: 'advanced' },
       ],
     },
     {
       type: 'trust',
       id: 'trust',
       heading: 'Hair loss is more treatable than most people think',
-      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually — not with a generic protocol.',
+      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually, not with a generic protocol.',
     },
     {
       type: 'multi',
@@ -101,8 +101,8 @@ const config: QuizConfig = {
       id: 'tried',
       question: 'Have you tried any hair loss treatment before?',
       options: [
-        { label: 'Yes — over-the-counter products (shampoos, topical treatments, etc.)', value: 'otc' },
-        { label: 'Yes — prescription medication from a doctor', value: 'rx' },
+        { label: 'Yes: over-the-counter products (shampoos, topical treatments, etc.)', value: 'otc' },
+        { label: 'Yes: prescription medication from a doctor', value: 'rx' },
         { label: "No, I haven't tried anything yet", value: 'none' },
       ],
     },

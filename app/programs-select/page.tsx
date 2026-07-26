@@ -34,7 +34,7 @@ const PROGRAMS: Program[] = [
     id: 'hormone',
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
-    tagline: "Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.",
+    tagline: "Low drive, poor recovery, body composition changes: often rooted in hormonal dysfunction that standard testing misses.",
     accent: '#4890f7',
     accentBg: 'rgba(72,144,247,0.05)',
     accentBorder: 'rgba(72,144,247,0.15)',
@@ -61,7 +61,7 @@ const PROGRAMS: Program[] = [
     id: 'performance',
     category: 'Athletic Optimisation',
     name: 'Performance & Recovery',
-    tagline: "Output has stalled, recovery is slow — and something clinical is likely limiting what your training can produce.",
+    tagline: "Output has stalled, recovery is slow, and something clinical is likely limiting what your training can produce.",
     accent: '#f97316',
     accentBg: 'rgba(249,115,22,0.06)',
     accentBorder: 'rgba(249,115,22,0.18)',
@@ -110,7 +110,7 @@ const PROGRAMS: Program[] = [
     id: 'hair',
     category: 'Hair & Scalp Health',
     name: 'Hair Restoration',
-    tagline: "Shedding, thinning density, or hairline recession — address the biology driving hair loss, not just the surface.",
+    tagline: "Shedding, thinning density, or hairline recession: address the biology driving hair loss, not just the surface.",
     accent: '#a78bfa',
     accentBg: 'rgba(167,139,250,0.06)',
     accentBorder: 'rgba(167,139,250,0.18)',
@@ -136,7 +136,7 @@ const PROGRAMS: Program[] = [
     id: 'skin',
     category: 'Skin & Dermal Health',
     name: 'Skin Regeneration',
-    tagline: "Declining texture, firmness, and skin quality — driven by internal biology that topical products can't reach.",
+    tagline: "Declining texture, firmness, and skin quality: driven by internal biology that topical products can't reach.",
     accent: '#38bdf8',
     accentBg: 'rgba(56,189,248,0.06)',
     accentBorder: 'rgba(56,189,248,0.18)',
@@ -162,14 +162,14 @@ const PROGRAMS: Program[] = [
     id: 'injury',
     category: 'Musculoskeletal Health',
     name: 'Injury Repair & Recovery',
-    tagline: "Slow healing, recurring injury, or post-surgical recovery — a clinical protocol supports what the body can't do alone.",
+    tagline: "Slow healing, recurring injury, or post-surgical recovery: a clinical protocol supports what the body can't do alone.",
     accent: '#4ade80',
     accentBg: 'rgba(74,222,128,0.06)',
     accentBorder: 'rgba(74,222,128,0.18)',
     glowColor: 'rgba(74,222,128,0.05)',
     tag: null,
     symptoms: [
-      'Soft tissue injury — tendons, ligaments, muscle',
+      'Soft tissue injury: tendons, ligaments, muscle',
       'Slow or incomplete healing post-injury',
       'Recurring injury at the same sites',
       'Return-to-training clinical support',
@@ -187,12 +187,12 @@ const PROGRAMS: Program[] = [
 ]
 
 const BLOODS_OPTIONS_STANDARD = [
-  { label: 'Yes — within 6 months', value: true },
-  { label: 'No — I need a blood panel', value: false },
+  { label: 'Yes: within 6 months', value: true },
+  { label: 'No: I need a blood panel', value: false },
 ]
 
 const BLOODS_OPTIONS_PEPTIDE = [
-  { label: 'Yes — I have recent blood work', value: true },
+  { label: 'Yes: I have recent blood work', value: true },
   { label: 'No / not recently', value: false },
 ]
 
@@ -529,7 +529,7 @@ export default function ProgramsSelectPage() {
                         Which of these sounds like you?
                       </h2>
                       <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
-                        Select all that apply — or skip if none match.
+                        Select all that apply: or skip if none match.
                       </p>
 
                       <div className="flex flex-col gap-2 mb-8">
@@ -571,7 +571,7 @@ export default function ProgramsSelectPage() {
                           className="btn-primary"
                           style={{ fontSize: '13px', padding: '13px 32px' }}
                         >
-                          {selectedSymptoms.length > 0 ? 'Continue' : 'Skip — none apply'}
+                          {selectedSymptoms.length > 0 ? 'Continue' : 'Skip: none apply'}
                           <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
                             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
@@ -603,8 +603,8 @@ export default function ProgramsSelectPage() {
                       </h2>
                       <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                         {prog.isPeptide
-                          ? 'Not required for this program — but useful context for your doctor.'
-                          : 'Within the last 6 months — a GP or private blood panel.'}
+                          ? 'Not required for this program, but useful context for your doctor.'
+                          : 'Within the last 6 months: a GP or private blood panel.'}
                       </p>
 
                       <div className="flex flex-col gap-2">
@@ -690,8 +690,8 @@ export default function ProgramsSelectPage() {
                   style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: 420 }}
                 >
                   {hasBloods
-                    ? "Your intake form will take under 10 minutes. Bring your recent blood results — your doctor will review them before your consultation."
-                    : "Your intake form will take under 10 minutes. We'll issue a referral for your blood panel — collected at any of 4,000+ accredited centres Australia-wide."}
+                    ? "Your intake form will take under 10 minutes. Bring your recent blood results: your doctor will review them before your consultation."
+                    : "Your intake form will take under 10 minutes. We'll issue a referral for your blood panel: collected at any of 4,000+ accredited centres Australia-wide."}
                 </motion.p>
 
                 {selectedSymptoms.length > 0 && (

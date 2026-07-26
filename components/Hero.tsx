@@ -10,7 +10,7 @@ const TRUST = [
   'AHPRA-registered doctors',
   'Accredited compounding pharmacy',
   'No GP referral required',
-  '100% online — Australia-wide',
+  '100% online: Australia-wide',
 ]
 
 const MORE_PROGRAMS = [
@@ -118,7 +118,7 @@ export default function Hero() {
             style={{ color: 'var(--text-secondary)' }}
           >
             Your GP said everything looks normal. You know something is wrong.
-            We run the diagnostics GPs don&apos;t order — interpreted by doctors who specialise in exactly this.
+            We run the diagnostics GPs don&apos;t order: interpreted by doctors who specialise in exactly this.
           </motion.p>
 
           <motion.div
@@ -136,7 +136,7 @@ export default function Hero() {
                 primary: true,
               },
               {
-                label: 'Get Started — Hormone Consult',
+                label: 'Get Started: Hormone Consult',
                 href: '/intake/hormone-consult',
                 primary: false,
               },

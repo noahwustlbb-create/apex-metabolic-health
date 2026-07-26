@@ -45,9 +45,9 @@ const config: QuizConfig = {
       id: 'impact',
       question: 'How much is this affecting your quality of life?',
       options: [
-        { label: 'Mildly — it bothers me occasionally', value: 'mild' },
-        { label: 'Moderately — it affects my confidence and relationships', value: 'moderate' },
-        { label: 'Significantly — it is a major concern for me', value: 'significant' },
+        { label: 'Mildly: it bothers me occasionally', value: 'mild' },
+        { label: 'Moderately: it affects my confidence and relationships', value: 'moderate' },
+        { label: 'Significantly: it is a major concern for me', value: 'significant' },
       ],
     },
     {
@@ -74,7 +74,7 @@ const config: QuizConfig = {
       type: 'multi',
       id: 'contraindications',
       question: 'Do any of the following apply to you?',
-      sub: 'Select all that apply — this is important for your safety',
+      sub: 'Select all that apply: this is important for your safety',
       options: [
         { label: 'I currently take nitrate medications (GTN spray, isosorbide, amyl nitrate)', value: 'nitrates', disqualify: true },
         { label: 'I have had a heart attack or stroke in the last 3 months', value: 'recent_cardiac', disqualify: true },

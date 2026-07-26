@@ -29,7 +29,7 @@ const PROGRAMS: Program[] = [
     icon: Target,
     name: 'Weight Loss Program',
     description:
-      'Clinically supervised metabolic intervention. Evidence-based, personalised to your biomarkers, and built for sustainable results — not crash diets.',
+      'Clinically supervised metabolic intervention. Evidence-based, personalised to your biomarkers, and built for sustainable results, not crash diets.',
   },
   {
     icon: Sparkles,

@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const LEFT_CALLOUTS = [
   {
     title: 'Biomarker Trends',
-    body: 'Every draw plots a point. Patterns emerge across months — not single moments.',
+    body: 'Every draw plots a point. Patterns emerge across months, not single moments.',
   },
   {
     title: 'Biological Age',
@@ -17,7 +17,7 @@ const LEFT_CALLOUTS = [
   },
   {
     title: 'Review Timeline',
-    body: 'Know exactly when your next review is — and what will be assessed.',
+    body: 'Know exactly when your next review is, and what will be assessed.',
   },
 ]
 
@@ -465,7 +465,7 @@ export default function AppFeature() {
             className="text-base leading-relaxed mt-4 mx-auto"
             style={{ color: 'var(--text-primary)', maxWidth: '480px' }}
           >
-            Biomarkers, protocols, and clinical progress — in one place. Built for continuity, not just your next appointment.
+            Biomarkers, protocols, and clinical progress: in one place. Built for continuity, not just your next appointment.
           </motion.p>
         </div>
 

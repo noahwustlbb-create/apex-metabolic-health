@@ -8,7 +8,7 @@ const STATS = [
   { value: '4.9★', label: 'Average patient satisfaction' },
   { value: '< 48h', label: 'Pathology referral issued' },
   { value: '4,000+', label: 'Pathology collection sites' },
-  { value: 'AHPRA', label: 'Registered — every doctor' },
+  { value: 'AHPRA', label: 'Registered: every doctor' },
   { value: 'No GP', label: 'Referral ever required' },
 ]
 

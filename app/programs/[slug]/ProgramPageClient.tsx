@@ -20,7 +20,7 @@ function ProgramHero({ program }: { program: Program }) {
       {/* Dot grid */}
       <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
 
-      {/* Glow — top left */}
+      {/* Glow: top left */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 w-[700px] h-[500px] pointer-events-none"
@@ -29,7 +29,7 @@ function ProgramHero({ program }: { program: Program }) {
         }}
       />
 
-      {/* Glow — bottom right */}
+      {/* Glow: bottom right */}
       <div
         aria-hidden="true"
         className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"

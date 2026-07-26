@@ -5,8 +5,8 @@ export default function GeneralIntakeForm() {
     <ConsultIntakeForm config={{
       storageKey: 'apex-general-intake-v3',
       programName: 'General Telehealth',
-      formTitle: 'GENERAL TELEHEALTH — CONSULTATION INTAKE',
-      concern: 'Describe what you\'d like to discuss — symptoms, concerns, anything you want reviewed or checked...',
+      formTitle: 'GENERAL TELEHEALTH: CONSULTATION INTAKE',
+      concern: 'Describe what you\'d like to discuss: symptoms, concerns, anything you want reviewed or checked...',
       bloodsHref: '/intake/bloods-hormone',
     }} />
   )

@@ -47,7 +47,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Every number published upfront. Member or single consult — compare and decide before you start.
+          Every number published upfront. Member or single consult: compare and decide before you start.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -73,7 +73,7 @@ const COMPARISON_ROWS = [
   { label: 'Initial Blood Panel',   member: 'From $99',   single: 'From $99'    },
   { label: 'Hormone Consultation',  member: '$275',        single: '$275'        },
   { label: 'Peptide Consultation',  member: '$125',        single: '$125'        },
-  { label: 'Monthly Membership',    member: '$99 /mo',     single: '—'           },
+  { label: 'Monthly Membership',    member: '$99 /mo',     single: '-'           },
   { label: 'Medication',            member: 'Cost price',  single: 'Cost + fee'  },
   { label: 'Prescribing Fee',       member: 'Waived',      single: '$125'        },
   { label: 'Follow-up Bloods',      member: 'Discounted',  single: 'Standard'    },
@@ -144,8 +144,8 @@ function MembershipComparison() {
                   }}>{row.label}</span>
                   <span style={{
                     fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
-                    color: row.single === '—' ? 'rgba(255,255,255,0.1)' : 'var(--text-primary)',
-                    opacity: row.single === '—' ? 1 : 0.48,
+                    color: row.single === '-' ? 'rgba(255,255,255,0.1)' : 'var(--text-primary)',
+                    opacity: row.single === '-' ? 1 : 0.48,
                   }}>{row.single}</span>
                 </div>
               ))}
@@ -268,7 +268,7 @@ function MembershipComparison() {
 
 const SAVINGS_ROWS = [
   { label: 'Prescribing fees',       saving: 'Up to $500',  period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
-  { label: 'Medication mark-ups',    saving: '$600–$1,200', period: '/yr', detail: 'Zero AHI fees — you pay pharmacy cost price direct' },
+  { label: 'Medication mark-ups',    saving: '$600–$1,200', period: '/yr', detail: 'Zero AHI fees: you pay pharmacy cost price direct' },
   { label: 'Follow-up blood panels', saving: '~$120',       period: '/yr', detail: 'Discounted member rate on all repeat blood panels' },
 ]
 
@@ -475,11 +475,11 @@ const PATHWAYS: Pathway[] = [
     steps: [
       {
         label: 'Intake',
-        body: 'Complete the hormone consult intake form online — takes 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
+        body: 'Complete the hormone consult intake form online: takes 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
       },
       {
         label: 'Blood Panel',
-        body: 'Doctor-issued referral — no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
+        body: 'Doctor-issued referral: no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
         price: 'From $99',
         priceNote: 'Discounted for members',
       },
@@ -491,12 +491,12 @@ const PATHWAYS: Pathway[] = [
       },
       {
         label: 'Ongoing Protocol',
-        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results — reviewed every cycle.',
+        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results: reviewed every cycle.',
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
-          'Zero medication mark-ups — pharmacy cost price direct',
-          'Prescribing fee waived — scripts issued at no charge',
+          'Zero medication mark-ups: pharmacy cost price direct',
+          'Prescribing fee waived: scripts issued at no charge',
           'Discounted follow-up consultations and review blood panels',
           'Nursing team check-ins every 6–8 weeks',
           'Free referrals, medical certificates, and health summaries',
@@ -535,7 +535,7 @@ const PATHWAYS: Pathway[] = [
             detail: 'You pay the pharmacy cost price for medication. An Administration, Handling & Infrastructure (AHI) fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
           },
           {
-            label: 'Own Pharmacy — Script Release',
+            label: 'Own Pharmacy: Script Release',
             detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you. Ongoing nursing support included. Note: excludes NSW patients.',
           },
         ],
@@ -569,7 +569,7 @@ const PATHWAYS: Pathway[] = [
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
-          'Zero medication mark-ups — pharmacy cost price direct',
+          'Zero medication mark-ups: pharmacy cost price direct',
           'Prescribing fee waived',
           'Discounted follow-up consultations and review bloods',
           'Nursing team support throughout your protocol',
@@ -608,7 +608,7 @@ const PATHWAYS: Pathway[] = [
             detail: 'Pharmacy cost price for medication. AHI fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
           },
           {
-            label: 'Own Pharmacy — Script Release',
+            label: 'Own Pharmacy: Script Release',
             detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you.',
           },
         ],
@@ -682,7 +682,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                   className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8 py-5"
                   style={{ borderBottom: i < pathway.steps.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
                 >
-                  {/* Left — step number + content */}
+                  {/* Left: step number + content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2.5 mb-2">
                       <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
@@ -727,7 +727,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                     )}
                   </div>
 
-                  {/* Right — price */}
+                  {/* Right: price */}
                   {step.price && (
                     <div className="flex-shrink-0 sm:text-right" style={{ minWidth: '100px' }}>
                       <p style={{
@@ -838,7 +838,7 @@ function ProgramPathways() {
 const NOT_INCLUDED = [
   {
     label: 'Discovery call fees',
-    detail: 'No discovery call. Complete the assessment — your doctor contacts you directly.',
+    detail: 'No discovery call. Complete the assessment: your doctor contacts you directly.',
   },
   {
     label: 'Surprise admin charges',
@@ -850,7 +850,7 @@ const NOT_INCLUDED = [
   },
   {
     label: 'Bundled packages',
-    detail: 'No bundles. You pay for what your protocol requires — nothing else.',
+    detail: 'No bundles. You pay for what your protocol requires: nothing else.',
   },
   {
     label: 'Outcome guarantees',
@@ -953,7 +953,7 @@ function PricingCTA() {
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}
           className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.4)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate. Pricing subject to change — confirm at time of booking.
+          All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate. Pricing subject to change: confirm at time of booking.
         </motion.p>
       </div>
     </section>

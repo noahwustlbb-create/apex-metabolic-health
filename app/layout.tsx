@@ -26,7 +26,7 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "Apex Metabolic Health | Doctor-Led Telehealth — Australia",
+  title: "Apex Metabolic Health | Doctor-Led Telehealth: Australia",
   description:
     "Doctor-led telehealth clinic. Hormone optimisation, metabolic medicine, performance protocols, and more. Evidence-based. AHPRA-registered practitioners. 100% online, Australia-wide.",
   keywords: [

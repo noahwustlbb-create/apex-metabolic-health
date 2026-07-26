@@ -14,13 +14,13 @@ const STEPS = [
   {
     number: '02',
     title: 'Order your blood panel',
-    description: 'Doctor-issued pathology referral sent to your email — typically same business day. Collect at any of 4,000+ accredited centres near you — morning, fasted. No GP required.',
+    description: 'Doctor-issued pathology referral sent to your email, typically same business day. Collect at any of 4,000+ accredited centres near you, morning, fasted. No GP required.',
     time: '< 48h',
   },
   {
     number: '03',
     title: 'Telehealth consultation',
-    description: 'Your AHPRA-registered doctor reviews your full results and builds a personalised clinical protocol — typically 45–60 minutes. Not a prescription call.',
+    description: 'Your AHPRA-registered doctor reviews your full results and builds a personalised clinical protocol: typically 45–60 minutes. Not a prescription call.',
     time: '45–60 min',
   },
   {
@@ -126,7 +126,7 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* Clinical imagery strip — all 4 steps */}
+        {/* Clinical imagery strip: all 4 steps */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

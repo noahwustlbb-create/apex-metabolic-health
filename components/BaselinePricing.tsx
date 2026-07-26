@@ -11,7 +11,7 @@ const CARDS = [
     price: '$99',
     priceLabel: 'one-off',
     priceColor: '#F5F5F5',
-    description: 'Doctor-ordered pathology referral. Collect at any accredited centre near you — no GP required.',
+    description: 'Doctor-ordered pathology referral. Collect at any accredited centre near you: no GP required.',
     includes: [
       '60+ biomarkers including Biological Age',
       'Doctor-issued referral, no GP needed',
@@ -19,7 +19,7 @@ const CARDS = [
       'Access to the Apex app & dashboard',
     ],
     note: 'To have results reviewed and a protocol built, book a consultation separately.',
-    cta: 'Get my baseline — $99',
+    cta: 'Get my baseline: $99',
     href: '/intake/bloods-hormone',
     featured: false,
   },
@@ -149,7 +149,7 @@ export default function BaselinePricing() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-5"
             style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: 1.08 }}
           >
-            Start with your baseline —{' '}
+            Start with your baseline:{' '}
             <span className="text-teal-gradient">$99</span>
           </motion.h2>
           <motion.p
@@ -163,7 +163,7 @@ export default function BaselinePricing() {
           </motion.p>
         </div>
 
-        {/* Cards — 2×2 grid */}
+        {/* Cards: 2×2 grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {CARDS.map((card, i) => (
             <motion.div

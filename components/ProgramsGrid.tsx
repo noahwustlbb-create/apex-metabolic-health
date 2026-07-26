@@ -38,7 +38,7 @@ const PROGRAMS = [
       </svg>
     ),
     name: 'Metabolic Weight Management',
-    description: 'Address the hormonal and metabolic drivers of weight resistance — not just calories. A clinical approach to lasting body composition change.',
+    description: 'Address the hormonal and metabolic drivers of weight resistance, not just calories. A clinical approach to lasting body composition change.',
     bloodsHref: '/intake/quiz/weightloss',
     bloodsLabel: 'Get Started →',
     consultHref: '/intake/general-consult',
@@ -52,7 +52,7 @@ const PROGRAMS = [
       </svg>
     ),
     name: 'Hair Restoration',
-    description: 'Medical management of androgenic alopecia targeting the hormonal and follicular causes of hair loss — not just the symptoms.',
+    description: 'Medical management of androgenic alopecia targeting the hormonal and follicular causes of hair loss, not just the symptoms.',
     bloodsHref: '/intake/quiz/hair',
     bloodsLabel: 'Get Started →',
     consultHref: '/intake/hormone-consult',
@@ -168,7 +168,7 @@ export default function ProgramsGrid() {
                     color: '#4890f7',
                   }}
                 >
-                  {(program as { bloodsLabel?: string }).bloodsLabel ?? 'Order Bloods — $99'}
+                  {(program as { bloodsLabel?: string }).bloodsLabel ?? 'Order Bloods: $99'}
                 </a>
                 <a
                   href={program.consultHref}

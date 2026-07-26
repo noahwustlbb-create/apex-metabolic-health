@@ -14,11 +14,11 @@ const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
 const GLOW = 'rgba(72,144,247,0.06)'
 
 const SYMPTOMS = [
-  { title: 'Low testosterone & drive', body: 'Reduced libido, motivation, and competitive edge — often the first signs of suboptimal hormone levels.' },
+  { title: 'Low testosterone & drive', body: 'Reduced libido, motivation, and competitive edge: often the first signs of suboptimal hormone levels.' },
   { title: 'Persistent fatigue', body: 'Low energy that sleep doesn\'t fix. Waking unrefreshed. Afternoon crashes that disrupt work and training.' },
-  { title: 'Body composition changes', body: 'Unexpected fat accumulation — particularly around the abdomen — combined with difficulty building or retaining muscle.' },
+  { title: 'Body composition changes', body: 'Unexpected fat accumulation (particularly around the abdomen) combined with difficulty building or retaining muscle.' },
   { title: 'Brain fog', body: 'Reduced mental clarity, poor concentration, and memory lapses that weren\'t there a few years ago.' },
-  { title: 'Poor sleep quality', body: 'Difficulty falling asleep, staying asleep, or achieving restorative rest — often a downstream effect of hormonal imbalance.' },
+  { title: 'Poor sleep quality', body: 'Difficulty falling asleep, staying asleep, or achieving restorative rest: often a downstream effect of hormonal imbalance.' },
   { title: 'Mood and emotional changes', body: 'Increased irritability, reduced confidence, or a general flatness that doesn\'t have a clear external cause.' },
 ]
 
@@ -31,7 +31,7 @@ const PATHWAY = [
   {
     step: '02',
     title: 'Doctor-issued blood panel',
-    body: 'Your Apex doctor issues a referral for a comprehensive hormonal and metabolic panel. Collected at any accredited pathology centre — no GP required.',
+    body: 'Your Apex doctor issues a referral for a comprehensive hormonal and metabolic panel. Collected at any accredited pathology centre: no GP required.',
   },
   {
     step: '03',
@@ -140,7 +140,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Most GPs check one or two markers. We run a comprehensive hormonal and metabolic panel — then build a personalised, doctor-prescribed protocol around what your biology actually needs.
+          Most GPs check one or two markers. We run a comprehensive hormonal and metabolic panel: then build a personalised, doctor-prescribed protocol around what your biology actually needs.
         </motion.p>
 
         <motion.div
@@ -210,7 +210,7 @@ function SymptomsSection() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              Standard GP blood panels check if you&apos;re in a disease range — not an optimal one. Testosterone can sit in the bottom third of reference range and your results will show "normal." We look harder.
+              Standard GP blood panels check if you&apos;re in a disease range, not an optimal one. Testosterone can sit in the bottom third of reference range and your results will show "normal." We look harder.
             </motion.p>
           </div>
 
@@ -268,7 +268,7 @@ function PathwaySection() {
             className="text-sm leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            A structured, clinical process — not a quick online quiz and a script. Every step has a purpose.
+            A structured, clinical process, not a quick online quiz and a script. Every step has a purpose.
           </motion.p>
         </div>
 
@@ -328,7 +328,7 @@ function PanelSection() {
               className="text-sm leading-relaxed mb-6"
               style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
-              Our hormone panel goes beyond a standard testosterone check. We assess the full endocrine picture — including upstream signals, metabolic context, and conversion pathways.
+              Our hormone panel goes beyond a standard testosterone check. We assess the full endocrine picture: including upstream signals, metabolic context, and conversion pathways.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -339,7 +339,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Good news</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Have recent bloods from your GP? Submit them during the pre-screen — we&apos;ll review whether they meet our clinical requirements. If they do, you may not need to retest.
+                Have recent bloods from your GP? Submit them during the pre-screen: we&apos;ll review whether they meet our clinical requirements. If they do, you may not need to retest.
               </p>
             </motion.div>
           </div>

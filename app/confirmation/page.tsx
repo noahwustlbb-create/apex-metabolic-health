@@ -85,7 +85,7 @@ export default function ConfirmationPage() {
                 <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: '#4890f7' }}>
                   admin@apexmetabolichealth.com.au
                 </a>{' '}
-                — we respond within 1 business day.
+               : we respond within 1 business day.
               </p>
             </motion.div>
 

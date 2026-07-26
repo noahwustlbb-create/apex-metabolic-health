@@ -12,12 +12,12 @@ const ACCENT_BG = 'rgba(72,144,247,0.06)'
 const ACCENT_BORDER = 'rgba(72,144,247,0.18)'
 
 const SYMPTOMS = [
-  { title: 'Reduced libido', body: 'Declining interest in sex that isn\'t explained by stress or relationship factors — often a direct indicator of hormonal imbalance, particularly low testosterone.' },
-  { title: 'Erectile dysfunction', body: 'Difficulty achieving or maintaining erections. Can be vascular, neurological, hormonal, or psychological in origin — full assessment determines the driver.' },
+  { title: 'Reduced libido', body: 'Declining interest in sex that isn\'t explained by stress or relationship factors: often a direct indicator of hormonal imbalance, particularly low testosterone.' },
+  { title: 'Erectile dysfunction', body: 'Difficulty achieving or maintaining erections. Can be vascular, neurological, hormonal, or psychological in origin: full assessment determines the driver.' },
   { title: 'Premature or delayed ejaculation', body: 'Changes in ejaculatory control that aren\'t situational. Often responsive to treatment once the underlying physiology is identified.' },
-  { title: 'Low testosterone symptoms', body: 'Fatigue, reduced drive, mood changes, and body composition shifts alongside sexual changes — often occurring together when testosterone is suboptimal.' },
+  { title: 'Low testosterone symptoms', body: 'Fatigue, reduced drive, mood changes, and body composition shifts alongside sexual changes: often occurring together when testosterone is suboptimal.' },
   { title: 'Performance anxiety', body: 'Anticipatory anxiety around sexual performance that creates a feedback loop, independent of or compounding physical drivers.' },
-  { title: 'Hormonal imbalance signs', body: 'Elevated oestrogen, low free testosterone, or thyroid dysfunction — all measurable on pathology and all with direct sexual health implications.' },
+  { title: 'Hormonal imbalance signs', body: 'Elevated oestrogen, low free testosterone, or thyroid dysfunction: all measurable on pathology and all with direct sexual health implications.' },
 ]
 
 const PATHWAY = [
@@ -128,7 +128,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '500px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Sexual health changes are almost always driven by measurable biology — hormonal imbalance, vascular function, or metabolic factors. We run the tests most GPs don&apos;t order, and build a protocol around what we find.
+          Sexual health changes are almost always driven by measurable biology: hormonal imbalance, vascular function, or metabolic factors. We run the tests most GPs don&apos;t order, and build a protocol around what we find.
         </motion.p>
 
         <motion.div
@@ -198,7 +198,7 @@ function SymptomsSection() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              Most GPs offer little beyond a referral to a psychologist. We run the full hormonal and metabolic workup that identifies the physical drivers — because most of the time, they&apos;re there.
+              Most GPs offer little beyond a referral to a psychologist. We run the full hormonal and metabolic workup that identifies the physical drivers, because most of the time, they&apos;re there.
             </motion.p>
           </div>
 
@@ -298,7 +298,7 @@ function PanelSection() {
               className="text-sm leading-relaxed mb-6"
               style={{ color: 'var(--text-primary)', maxWidth: '400px' }}
             >
-              The sexual health panel covers the full hormonal, metabolic, and vascular picture — not just testosterone. Results reviewed directly by your Apex doctor.
+              The sexual health panel covers the full hormonal, metabolic, and vascular picture, not just testosterone. Results reviewed directly by your Apex doctor.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -309,7 +309,7 @@ function PanelSection() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: ACCENT }}>Have recent bloods?</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                Submit them in the intake — your doctor will review whether they meet the panel requirements before ordering new tests.
+                Submit them in the intake: your doctor will review whether they meet the panel requirements before ordering new tests.
               </p>
             </motion.div>
           </div>

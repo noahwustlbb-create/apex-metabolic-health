@@ -66,7 +66,7 @@ export default function OurApproachPage() {
             <motion.p initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.22, ease }}
               className="text-base md:text-lg leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '520px', marginBottom: '2rem' }}>
-              Every clinical decision is guided by data, context, and a doctor who takes the time to understand the full picture — not the fastest path to a script.
+              Every clinical decision is guided by data, context, and a doctor who takes the time to understand the full picture, not the fastest path to a script.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
               className="flex flex-wrap items-center gap-4 mb-8">
@@ -106,7 +106,7 @@ export default function OurApproachPage() {
                   Short consults. Surface-level assessments. One-size-fits-all recommendations.
                 </p>
                 <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                  That&apos;s not how high-performing individuals operate — and it&apos;s not how we practise.
+                  That&apos;s not how high-performing individuals operate, and it&apos;s not how we practise.
                 </p>
               </FadeIn>
               <FadeIn delay={0.1}>
@@ -147,7 +147,7 @@ export default function OurApproachPage() {
           <div className="container-tight relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
-              {/* Left — heading + numbered rows */}
+              {/* Left: heading + numbered rows */}
               <div>
                 <FadeIn>
                   <p className="label mb-5">How We Consult</p>
@@ -163,7 +163,7 @@ export default function OurApproachPage() {
                 <FadeIn delay={0.1}>
                   <div className="space-y-4">
                     {[
-                      { heading: 'Full history review', body: 'Your doctor has context — your history, your results, your goals — before the consult begins.' },
+                      { heading: 'Full history review', body: 'Your doctor has context (your history, your results, your goals) before the consult begins.' },
                       { heading: 'Test before we recommend', body: 'Nothing is assumed. Clinical decisions are made on objective data, not guesswork.' },
                       { heading: 'Nothing assumed, nothing missed', body: 'Sleep, stress, lifestyle, and recovery are part of the clinical picture. We ask the questions others skip.' },
                     ].map((item, i) => (
@@ -183,7 +183,7 @@ export default function OurApproachPage() {
                 </FadeIn>
               </div>
 
-              {/* Right — 4 assessment pillars */}
+              {/* Right: 4 assessment pillars */}
               <FadeIn delay={0.15}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:pt-[88px]">
                   {[
@@ -198,7 +198,7 @@ export default function OurApproachPage() {
                     },
                     {
                       title: 'Comprehensive biomarker analysis',
-                      desc: 'We test what\'s clinically relevant — not just what\'s standard. Every marker reviewed in context.',
+                      desc: 'We test what\'s clinically relevant, not just what\'s standard. Every marker reviewed in context.',
                       icon: (
                         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                           <path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round" />
@@ -208,7 +208,7 @@ export default function OurApproachPage() {
                     },
                     {
                       title: 'Lifestyle, nutrition & recovery',
-                      desc: 'Sleep, stress, and nutrition assessed alongside clinical data — because they all interact.',
+                      desc: 'Sleep, stress, and nutrition assessed alongside clinical data, because they all interact.',
                       icon: (
                         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" strokeLinejoin="round" />
@@ -217,7 +217,7 @@ export default function OurApproachPage() {
                     },
                     {
                       title: 'Ongoing monitoring & adjustment',
-                      desc: 'Your protocol is never set and forgotten — reviewed, refined, and updated as your biology responds.',
+                      desc: 'Your protocol is never set and forgotten: reviewed, refined, and updated as your biology responds.',
                       icon: (
                         <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
                           <path d="M23 4v6h-6M1 20v-6h6" strokeLinecap="round" strokeLinejoin="round" />
@@ -256,7 +256,7 @@ export default function OurApproachPage() {
                   We assess how key systems interact.
                 </h2>
                 <p className="text-lg leading-relaxed mb-10" style={{ color: 'var(--text-primary)', maxWidth: '540px' }}>
-                  Symptoms are downstream of systems. Sleep, hormones, metabolic health, and stress don&apos;t operate in isolation — and we don&apos;t assess them that way.
+                  Symptoms are downstream of systems. Sleep, hormones, metabolic health, and stress don&apos;t operate in isolation, and we don&apos;t assess them that way.
                 </p>
               </FadeIn>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -284,7 +284,7 @@ export default function OurApproachPage() {
           </div>
         </section>
 
-        {/* ── 5. Ongoing review — compact strip ── */}
+        {/* ── 5. Ongoing review: compact strip ── */}
         <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', paddingTop: '60px', paddingBottom: '60px' }}
           aria-label="Ongoing review">
           <div className="glow-rule" aria-hidden="true" />
@@ -292,7 +292,7 @@ export default function OurApproachPage() {
             <FadeIn>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(72,144,247,0.14)' }}>
                 {[
-                  { label: 'Reviewed every 4 months', desc: 'Structured clinical review cycles — not ad hoc when something feels wrong.' },
+                  { label: 'Reviewed every 4 months', desc: 'Structured clinical review cycles, not ad hoc when something feels wrong.' },
                   { label: 'Protocol adjusts as you respond', desc: 'A protocol written today should look different in 4 months. Yours will.' },
                   { label: 'Blood work included in care', desc: 'Follow-up testing is built into the cycle. No gaps. No blind adjustments.' },
                 ].map((item, i) => (
@@ -314,9 +314,9 @@ export default function OurApproachPage() {
           <div className="container-tight relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-px overflow-hidden rounded-2xl" style={{ border: '1px solid rgba(72,144,247,0.14)' }}>
               {[
-                { headline: 'Doctor-Led.', body: 'Every clinical decision is made by an AHPRA-registered medical practitioner — not an algorithm, not a template.' },
+                { headline: 'Doctor-Led.', body: 'Every clinical decision is made by an AHPRA-registered medical practitioner, not an algorithm, not a template.' },
                 { headline: 'Data-First.', body: 'Nothing recommended without objective data to support it. We test before we treat, and we track after.' },
-                { headline: 'Built Around You.', body: 'As your results change, so does your care. We don\'t set and forget — we track, refine, and stay ahead.' },
+                { headline: 'Built Around You.', body: 'As your results change, so does your care. We don\'t set and forget: we track, refine, and stay ahead.' },
               ].map((item, i) => (
                 <FadeIn key={item.headline} delay={i * 0.1}>
                   <div className="p-8 md:p-10 h-full flex flex-col" style={{ background: 'var(--surface)' }}>
