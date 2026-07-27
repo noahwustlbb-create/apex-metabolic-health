@@ -37,7 +37,8 @@ export async function POST(req: Request) {
   const sourceLabel = source === 'quiz' ? 'Health Assessment' : source === 'book' ? 'Book page' : source ?? 'Website'
 
   const { error } = await resend.emails.send({
-    from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
+    // STOPGAP: resend.dev until domain verified in Resend, then revert to admin@apexmetabolichealth.com.au
+    from: 'Apex Metabolic Health <onboarding@resend.dev>',
     to: ADMIN_EMAIL,
     replyTo: email,
     subject: `New lead: ${name || email} (${sourceLabel})`,
