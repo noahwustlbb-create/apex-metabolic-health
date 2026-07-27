@@ -94,7 +94,7 @@ const config: QuizConfig = {
     {
       type: 'info', id: 'info',
       heading: 'Why these symptoms matter',
-      body: 'The symptoms above align with validated clinical screening criteria for hormonal imbalance. They are assessed alongside pathology results by our AHPRA-registered doctors, not to diagnose you, but to identify men who would benefit most from a full clinical assessment.',
+      body: 'The symptoms above align with validated clinical screening criteria for hormonal imbalance. They are assessed alongside pathology results by our AHPRA-registered doctors, not to diagnose you, but to identify those who would benefit most from a full clinical assessment.',
       stat: 'AHPRA-registered doctors · Comprehensive pathology · TGA-compliant protocols',
     },
     {

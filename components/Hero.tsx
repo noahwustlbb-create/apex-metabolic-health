@@ -99,7 +99,7 @@ export default function Hero() {
               textWrap: 'pretty' as React.CSSProperties['textWrap'],
             }}
           >
-            Doctor-led hormone and metabolic care, designed for men who already know something&apos;s off.
+            Doctor-led hormone and metabolic care, designed for anyone who already knows something&apos;s off.
           </motion.p>
 
           {/* CTAs */}

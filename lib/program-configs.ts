@@ -121,7 +121,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
   heroBentoLifestyle: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80',
 
   empathyHeadline: "It's not a willpower problem. It's a physiology problem.",
-  empathyBody: "Carrying extra weight isn't a character failure. Metabolism, hormones, appetite signalling, insulin sensitivity: these are biological systems that can be assessed, identified, and treated. Most men who struggle with weight have at least one clinical driver that's never been investigated.",
+  empathyBody: "Carrying extra weight isn't a character failure. Metabolism, hormones, appetite signalling, insulin sensitivity: these are biological systems that can be assessed, identified, and treated. Most people who struggle with weight have at least one clinical driver that's never been investigated.",
   empathyChips: ['Stubborn belly fat', 'Appetite dysregulation', 'Energy crashes', 'Diet not working', 'Slow metabolism', 'Poor sleep'],
   empathyImage: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=80',
 
@@ -153,7 +153,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
 
   faqs: [
     { q: 'Will you just prescribe weight loss injections?', a: 'No. Treatment is only prescribed where clinically appropriate based on your blood results, medical history, and clinical assessment. We don\'t name or discuss specific medications on this website in compliance with TGA guidelines.' },
-    { q: 'What if I\'ve tried everything before?', a: 'That\'s exactly who this program is designed for. Most men who haven\'t responded to lifestyle changes have at least one unidentified metabolic or hormonal driver. We investigate those properly.' },
+    { q: 'What if I\'ve tried everything before?', a: 'That\'s exactly who this program is designed for. Most people who haven\'t responded to lifestyle changes have at least one unidentified metabolic or hormonal driver. We investigate those properly.' },
     ...SHARED_FAQS,
   ],
 
@@ -214,7 +214,7 @@ export const performancePlusConfig: ProgramPageConfig = {
   ],
 
   faqs: [
-    { q: 'Is this program for elite athletes only?', a: 'No. The program is designed for any man who trains consistently and feels his performance or recovery isn\'t matching his effort. You don\'t need to be competitive to benefit from understanding your biology.' },
+    { q: 'Is this program for elite athletes only?', a: 'No. The program is designed for anyone who trains consistently and feels their performance or recovery isn\'t matching their effort. You don\'t need to be competitive to benefit from understanding your biology.' },
     { q: 'What makes this different from a GP sports medicine consult?', a: 'We run a far more comprehensive panel, our doctors review results against optimal ranges rather than disease ranges, and our protocols are built around your individual markers, not general athletic guidelines.' },
     ...SHARED_FAQS,
   ],
@@ -373,7 +373,7 @@ export const longevityConfig: ProgramPageConfig = {
   heroBentoStat: { value: '20+', label: 'years between healthspan and lifespan in most men' },
   heroBentoLifestyle: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=600&q=80',
 
-  empathyHeadline: "Most men reach their 50s having never optimised their baseline.",
+  empathyHeadline: "Most people reach their 50s having never optimised their baseline.",
   empathyBody: "The gap between how long you live and how well you live is not inevitable. It\'s the product of biological processes that begin decades earlier, and that are measurable, addressable, and modifiable with the right clinical approach.",
   empathyChips: ['Declining energy', 'Slower recovery', 'Cognitive decline', 'Metabolic drift', 'Hormonal change', 'Inflammatory load'],
   empathyImage: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=1400&q=80',
@@ -501,7 +501,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
   heroBentoStat: { value: '1 in 5', label: 'men experience significant sexual health concerns' },
   heroBentoLifestyle: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=90',
 
-  empathyHeadline: "Most men wait years before seeking help. You don\'t need to.",
+  empathyHeadline: "Many people wait years before seeking help. You don\'t need to.",
   empathyBody: "Sexual health concerns are among the most under-reported medical issues in men. They are also among the most treatable once the clinical driver is properly identified. A complete assessment, completely online, completely private.",
   empathyChips: ['Erectile dysfunction', 'Low libido', 'Performance anxiety', 'Hormonal cause', 'Vascular factor', 'Premature ejaculation'],
   empathyImage: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=1400&q=80',

@@ -118,7 +118,7 @@ export default function CTASection() {
             className="text-sm leading-relaxed"
             style={{ color: 'var(--text-secondary)', borderTop: '1px solid rgba(72,144,247,0.08)', paddingTop: 40 }}
           >
-            Most men who book with us have been told by at least one doctor that their results
+            Most people who book with us have been told by at least one doctor that their results
             look fine. We look further.
           </motion.p>
 
