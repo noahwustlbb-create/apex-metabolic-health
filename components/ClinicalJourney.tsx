@@ -8,17 +8,17 @@ const STEPS = [
   {
     number: '01',
     title: 'Choose your treatment',
-    description: 'Six clinical treatments — each targeting a distinct biological system. Your doctor will confirm the right match for your goals during your consultation.',
+    description: 'Six clinical treatments, each targeting a distinct biological system. Your doctor will confirm the right match for your goals during your consultation.',
   },
   {
     number: '02',
     title: 'Complete your intake & blood draw',
-    description: 'Complete your intake form online. Your doctor issues a pathology referral — collect at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
+    description: 'Complete your intake form online. Your doctor issues a pathology referral, collected at any of 4,000+ accredited centres near you. No GP required. Morning, fasted.',
   },
   {
     number: '03',
     title: 'Telehealth consultation',
-    description: 'Your Apex doctor reviews your results and meets with you via telehealth. This is where your clinical picture is built — not a 10-minute GP visit.',
+    description: 'Your Apex doctor reviews your results and meets with you via telehealth. This is where your clinical picture is built, not a 10-minute GP visit.',
   },
   {
     number: '04',

@@ -165,7 +165,7 @@ export default function Footer() {
               <Link href="/start" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
                 Start your assessment
               </Link>
-              {/* LegitScript certified badge — real verifiable seal */}
+              {/* LegitScript certified badge - real verifiable seal */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <a
                 href="https://www.legitscript.com/websites/?checker_keywords=apexmetabolichealth.com.au"

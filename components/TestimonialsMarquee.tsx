@@ -6,15 +6,15 @@ import { motion, useInView } from 'framer-motion'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const REVIEWS = [
-  { quote: 'Finally felt heard. The doctor spent nearly an hour going through my results. I\'d been dismissed by my GP three times — "your bloods are fine." They weren\'t fine.', name: 'M.K.', age: 42, city: 'Brisbane', program: 'Hormone Optimisation' },
+  { quote: 'Finally felt heard. The doctor spent nearly an hour going through my results. I\'d been dismissed by my GP three times with "your bloods are fine." They weren\'t fine.', name: 'M.K.', age: 42, city: 'Brisbane', program: 'Hormone Optimisation' },
   { quote: 'Had my pathology referral within 24 hours and a consultation booked that same week. Very different to what I expected from a telehealth clinic.', name: 'S.T.', age: 36, city: 'Melbourne', program: 'Performance & Recovery' },
   { quote: 'The panel they ordered flagged things my regular GP had never tested for. The protocol I was given made sense once I understood the data behind it.', name: 'D.R.', age: 51, city: 'Sydney', program: 'Metabolic Weight Loss' },
-  { quote: 'Three months in and the difference is significant. Energy levels, mental clarity, sleep quality — all measurably better. This is what I wished my GP had offered years ago.', name: 'J.M.', age: 44, city: 'Perth', program: 'Hormone Optimisation' },
+  { quote: 'Three months in and the difference is significant. Energy levels, mental clarity, sleep quality: all measurably better. This is what I wished my GP had offered years ago.', name: 'J.M.', age: 44, city: 'Perth', program: 'Hormone Optimisation' },
   { quote: 'The intake process was thorough and the doctor actually read my full history before the call. No rushing. No vague answers. Just real clinical reasoning.', name: 'A.W.', age: 38, city: 'Adelaide', program: 'Performance & Recovery' },
-  { quote: 'I\'d tried two other telehealth services and felt like I was talking to a call centre. Apex was completely different — proper clinical depth from the first conversation.', name: 'B.C.', age: 47, city: 'Brisbane', program: 'Metabolic Weight Loss' },
+  { quote: 'I\'d tried two other telehealth services and felt like I was talking to a call centre. Apex was completely different, with proper clinical depth from the first conversation.', name: 'B.C.', age: 47, city: 'Brisbane', program: 'Metabolic Weight Loss' },
   { quote: 'Worth every cent just for the pathology alone. I now actually understand what my numbers mean and what to do about them.', name: 'T.N.', age: 33, city: 'Sydney', program: 'Hormone Optimisation' },
   { quote: 'Got results back within 72 hours and had a follow-up booked before I even had time to stress about them. That kind of responsiveness is rare.', name: 'C.P.', age: 55, city: 'Melbourne', program: 'Performance & Recovery' },
-  { quote: 'The ongoing review structure is what sets Apex apart. Not just a one-off consult — actual follow-through with protocol adjustments based on new data.', name: 'R.H.', age: 40, city: 'Gold Coast', program: 'Hormone Optimisation' },
+  { quote: 'The ongoing review structure is what sets Apex apart. Not just a one-off consult, but actual follow-through with protocol adjustments based on new data.', name: 'R.H.', age: 40, city: 'Gold Coast', program: 'Hormone Optimisation' },
   { quote: 'I was sceptical about telehealth but the quality of the consultation changed my mind. Detailed, evidence-based, no fluff. My kind of medicine.', name: 'L.F.', age: 49, city: 'Canberra', program: 'Metabolic Weight Loss' },
 ]
 

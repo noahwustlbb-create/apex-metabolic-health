@@ -24,7 +24,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
   const activeLink = chose === 'discovery' ? discoveryLink : primaryLink
 
   const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Telehealth consultation' : 'Book now'
-  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor.' : type === 'general' ? 'General telehealth consultation with your Apex doctor.' : 'Pick a time that suits you — speak to us today.'
+  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor.' : type === 'general' ? 'General telehealth consultation with your Apex doctor.' : 'Pick a time that suits you and speak to us today.'
 
   return (
     <motion.div
@@ -87,7 +87,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 </div>
               </a>
 
-              {/* Free discovery call — only shown when showDiscovery=true */}
+              {/* Free discovery call - only shown when showDiscovery=true */}
               {showDiscovery && (
                 <a
                   href={discoveryLink}
@@ -111,7 +111,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                       Free discovery call
                     </p>
                     <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
-                      Not sure where to start? A quick call to discuss your goals — no obligation.
+                      Not sure where to start? A quick call to discuss your goals, no obligation.
                     </p>
                     <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Book free call →</p>
                   </div>
@@ -158,7 +158,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Got it — we'll be in touch within 1 business day.</p>
+                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Got it, we'll be in touch within 1 business day.</p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
                   Changed your mind?{' '}
                   <a href={primaryLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>Book a time here.</a>

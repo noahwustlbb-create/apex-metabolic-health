@@ -13,7 +13,7 @@ const LEGITSCRIPT_URL = 'https://www.legitscript.com/websites/?checker_keywords=
  * The verification ledger. Every row is an auditable claim paired with the
  * third party that can confirm it. Rows only exist when the proof is real:
  * the reviews row stays dormant until the Google Business Profile holds
- * 10+ reviews (see REVIEWS_LIVE below) — no fake proof, ever.
+ * 10+ reviews (see REVIEWS_LIVE below) - no fake proof, ever.
  */
 const REVIEWS_LIVE = false // flip when Google Business Profile has ≥10 reviews
 const GOOGLE_REVIEWS_URL = '' // set alongside REVIEWS_LIVE
@@ -88,10 +88,10 @@ export default function DoctorCard() {
             >
               Every consultation at Apex is conducted by an AHPRA-registered doctor who
               specialises in hormonal and metabolic medicine. You don&apos;t have to trust
-              the claim — every credential on this page links to the body that regulates it.
+              the claim: every credential on this page links to the body that regulates it.
             </motion.p>
 
-            {/* Doctor identity — monogram is a temporary state; the 64px slot
+            {/* Doctor identity - monogram is a temporary state; the 64px slot
                 is sized for clinician photography (shoot scheduled). */}
             <motion.div
               initial={prefersReduced ? false : { opacity: 0, y: 16 }}
@@ -132,7 +132,7 @@ export default function DoctorCard() {
                 }}
               >
                 &ldquo;We test what other doctors don&apos;t order and interpret results in the
-                context of optimisation — not just whether you fall inside the &lsquo;normal&rsquo;
+                context of optimisation, not just whether you fall inside the &lsquo;normal&rsquo;
                 reference range.&rdquo;
               </blockquote>
             </motion.div>

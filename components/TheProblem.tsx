@@ -5,7 +5,7 @@ import FadeUp from './FadeUp'
 const PROBLEMS = [
   {
     number: '01',
-    heading: "You're doing everything right — and still exhausted.",
+    heading: "You're doing everything right, and still exhausted.",
     body: "Quality sleep. Clean diet. Regular training. But you wake up depleted. Brain fog by mid-morning. Energy crashes by 3pm. You've optimised your habits and you're still running on empty. Something isn't adding up.",
   },
   {
@@ -15,8 +15,8 @@ const PROBLEMS = [
   },
   {
     number: '03',
-    heading: 'Your edge is fading — and you feel it.',
-    body: "Drive. Focus. Libido. Competitive fire. The qualities that define a high-performing person don't disappear overnight — they erode quietly. And then one day you notice the gap between who you were and who you are.",
+    heading: 'Your edge is fading, and you feel it.',
+    body: "Drive. Focus. Libido. Competitive fire. The qualities that define a high-performing person don't disappear overnight; they erode quietly. And then one day you notice the gap between who you were and who you are.",
   },
 ]
 

@@ -19,7 +19,7 @@ const ADVANTAGE_STATS = [
 
 const SAVINGS_ROWS = [
   { label: 'Prescribing fees',        saving: 'Up to $500',   period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
-  { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up — pharmacy cost price passed direct' },
+  { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up: pharmacy cost price passed direct' },
   { label: 'Follow-up blood panels',  saving: '~$120',        period: '/yr', detail: 'Discounted member rate on all repeat pathology' },
 ]
 
@@ -31,7 +31,7 @@ const INCLUDED = [
       </svg>
     ),
     title: 'Doctor-led protocol management',
-    body: 'Your treatment isn\'t a static prescription. It evolves with your bloods, your feedback, and your response to treatment — adjusted by a doctor every cycle.',
+    body: 'Your treatment isn\'t a static prescription. It evolves with your bloods, your feedback, and your response to treatment, adjusted by a doctor every cycle.',
   },
   {
     icon: (
@@ -40,7 +40,7 @@ const INCLUDED = [
       </svg>
     ),
     title: 'Structured 3-month review cycles',
-    body: 'Every 3 months: blood work, full biomarker analysis, and protocol reassessment. Not guesswork between appointments — a systematic clinical review.',
+    body: 'Every 3 months: blood work, full biomarker analysis, and protocol reassessment. Not guesswork between appointments, but a systematic clinical review.',
   },
   {
     icon: (
@@ -58,7 +58,7 @@ const INCLUDED = [
       </svg>
     ),
     title: 'Discounted follow-up blood panels',
-    body: 'Repeat pathology at member rates. No guessing at dose changes without data — every adjustment is grounded in objective measurement.',
+    body: 'Repeat pathology at member rates. No guessing at dose changes without data: every adjustment is grounded in objective measurement.',
   },
   {
     icon: (
@@ -67,7 +67,7 @@ const INCLUDED = [
       </svg>
     ),
     title: 'Priority clinical support',
-    body: 'Your care team between consultations — not just at them. Questions answered, concerns escalated, and care coordinated by a dedicated clinical team.',
+    body: 'Your care team between consultations, not just at them. Questions answered, concerns escalated, and care coordinated by a dedicated clinical team.',
   },
   {
     icon: (
@@ -88,7 +88,7 @@ const INCLUDED = [
       </svg>
     ),
     title: 'Full patient portal access',
-    body: 'View your bloodwork results, track biomarker trends over time, message your care team, access prescriptions and medical documents — all in one place.',
+    body: 'View your bloodwork results, track biomarker trends over time, message your care team, access prescriptions and medical documents, all in one place.',
   },
 ]
 
@@ -125,7 +125,7 @@ function Hero() {
             <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="text-[11px] font-semibold" style={{ color: ACCENT }}>
-            Members may save $1,000–$1,800/yr — based on 3+ scripts annually
+            Members may save $1,000–$1,800/yr based on 3+ scripts annually
           </span>
         </motion.div>
 
@@ -166,7 +166,7 @@ function Hero() {
           className="text-base md:text-lg leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.7, maxWidth: '520px', marginBottom: '2.25rem' }}
         >
-          A full doctor-led clinical system for $99/mo — protocol management, biomarker tracking, medication at cost price, and prescribing fees waived. Structured to save you more than it costs.
+          A full doctor-led clinical system for $99/mo: protocol management, biomarker tracking, medication at cost price, and prescribing fees waived. Structured to save you more than it costs.
         </motion.p>
 
         <motion.div
@@ -273,7 +273,7 @@ function SavingsBreakdown() {
       <div ref={ref} className="container-tight relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left — context */}
+          {/* Left - context */}
           <div>
             <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
               Is it worth it?
@@ -307,11 +307,11 @@ function SavingsBreakdown() {
               className="text-sm leading-relaxed"
               style={{ color: 'var(--text-primary)', opacity: 0.55 }}
             >
-              If that sounds like you, here&apos;s what membership saves you annually — before you factor in the clinical value of having a doctor actually managing your protocol.
+              If that sounds like you, here&apos;s what membership saves you annually, before you factor in the clinical value of having a doctor actually managing your protocol.
             </motion.p>
           </div>
 
-          {/* Right — savings table */}
+          {/* Right - savings table */}
           <motion.div
             initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
           >
@@ -441,7 +441,7 @@ function PortalAccess() {
   const features = [
     {
       icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M3 3v14h14" strokeLinecap="round"/><path d="M7 13l3-5 3 3 3-5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Biomarker dashboard', body: 'Every blood result in one place — plotted over time so you can see exactly how your markers are moving.',
+      label: 'Biomarker dashboard', body: 'Every blood result in one place, plotted over time so you can see exactly how your markers are moving.',
     },
     {
       icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M17 12a2 2 0 01-2 2H5l-3 3V5a2 2 0 012-2h11a2 2 0 012 2z" strokeLinecap="round" strokeLinejoin="round"/></svg>,
@@ -489,7 +489,7 @@ function PortalAccess() {
               className="text-sm leading-relaxed mb-8"
               style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '440px' }}
             >
-              The Apex patient portal puts your entire clinical picture in one place — results, messaging, documents, and bookings — accessible from any device.
+              The Apex patient portal puts your entire clinical picture in one place (results, messaging, documents, and bookings) accessible from any device.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.28, ease }}
@@ -507,7 +507,7 @@ function PortalAccess() {
             </motion.div>
           </div>
 
-          {/* Right — feature grid */}
+          {/* Right - feature grid */}
           <motion.div
             initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-3"
@@ -572,7 +572,7 @@ function FourMonthCycle() {
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
             className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
-            Not a static prescription — a living, evolving protocol that responds to your biology.
+            Not a static prescription, but a living, evolving protocol that responds to your biology.
           </motion.p>
         </div>
 
@@ -645,7 +645,7 @@ function ClosingCTA() {
 
       <div className="container-tight relative z-10 text-center">
         <motion.p initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
-          className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: 'rgba(255,255,255,0.55)' }}>
+          className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
           Apex Protocol Membership
         </motion.p>
         <motion.h2
@@ -654,11 +654,11 @@ function ClosingCTA() {
         >
           Your biology doesn&apos;t stop.
           <br />
-          <span style={{ color: 'rgba(255,255,255,0.5)' }}>Neither should your care.</span>
+          <span style={{ color: 'rgba(255,255,255,0.8)' }}>Neither should your care.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.12, ease }}
-          className="text-sm leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.6)' }}
+          className="text-sm leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.88)' }}
         >
           $99/mo. No lock-in. Activates after your initial consultation where clinically appropriate. Saves most members more than it costs.
         </motion.p>
@@ -695,7 +695,7 @@ function ClosingCTA() {
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.35)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Membership activates post-consultation where clinically appropriate. Pricing subject to change — confirm at time of booking.
+          All consultations conducted by AHPRA-registered practitioners. Membership activates post-consultation where clinically appropriate. Pricing subject to change; confirm at time of booking.
         </motion.p>
       </div>
     </section>

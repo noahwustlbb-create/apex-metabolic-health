@@ -174,7 +174,7 @@ const ALL_PATHWAYS = [
   {
     tag: 'Speak to Our Team',
     title: 'Free Discovery Call',
-    desc: '15 minutes with our clinical team. Understand your options and whether Apex is the right fit — no cost.',
+    desc: '15 minutes with our clinical team. Understand your options and whether Apex is the right fit, at no cost.',
     href: '/intake/discovery',
     cta: 'Book Discovery Call',
     featured: false,
@@ -187,7 +187,7 @@ const ALL_PATHWAYS = [
   {
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
-    desc: 'Doctor-ordered blood panels issued directly through Apex — collect at any accredited centre near you.',
+    desc: 'Doctor-ordered blood panels issued directly through Apex, collected at any accredited centre near you.',
     href: '/quiz',
     cta: 'Order Blood Panel',
     featured: false,
@@ -267,7 +267,7 @@ const ALL_PATHWAYS = [
   {
     tag: 'Explore All Services',
     title: 'View All Programs',
-    desc: 'Browse our full range of clinical programs — hormone optimisation, metabolic health, hair, skin, injury and more.',
+    desc: 'Browse our full range of clinical programs: hormone optimisation, metabolic health, hair, skin, injury and more.',
     href: '/services',
     cta: 'View Programs',
     featured: false,
@@ -433,7 +433,7 @@ function EnquiryForm() {
     setError('')
     const data = new FormData(e.currentTarget)
     data.append('access_key', WEB3FORMS_KEY)
-    data.append('subject', 'New Enquiry — Apex Metabolic Health')
+    data.append('subject', 'New Enquiry | Apex Metabolic Health')
     try {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
       const json = await res.json()

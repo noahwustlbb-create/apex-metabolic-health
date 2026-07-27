@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our weight management program may not be right for you at this time.',
-  ineligibleBody: 'Based on your answers, your health history includes factors that our doctors need to assess more carefully before recommending a weight management protocol. We encourage you to book a free discovery call — our clinical team can help determine the safest next step for you.',
+  ineligibleBody: 'Based on your answers, your health history includes factors that our doctors need to assess more carefully before recommending a weight management protocol. We encourage you to book a free discovery call, and our clinical team can help determine the safest next step for you.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {
@@ -23,7 +23,7 @@ const config: QuizConfig = {
       id: 'bmi',
       question: 'What is your current height and weight?',
       minBmi: 25,
-      bmiIneligibleMsg: 'Our weight management program is designed for patients with a clinical need for metabolic support. Based on your measurements, your weight appears to be within a healthy range — another Apex program may be a better fit for your goals.',
+      bmiIneligibleMsg: 'Our weight management program is designed for patients with a clinical need for metabolic support. Based on your measurements, your weight appears to be within a healthy range, so another Apex program may be a better fit for your goals.',
     },
     {
       type: 'single',
@@ -103,7 +103,7 @@ const config: QuizConfig = {
       type: 'multi',
       id: 'conditions',
       question: 'Do you have any of the following health conditions?',
-      sub: 'Select all that apply — these may actually support your eligibility',
+      sub: 'Select all that apply; these may actually support your eligibility',
       options: [
         { label: 'Type 2 diabetes', value: 't2dm' },
         { label: 'High blood pressure', value: 'hbp' },
@@ -183,10 +183,10 @@ const config: QuizConfig = {
       question: 'How much alcohol do you drink?',
       options: [
         { label: "I don't drink alcohol", value: 'none' },
-        { label: 'Rarely — less than 1 drink per week', value: 'rarely' },
-        { label: 'Sometimes — 1 to 5 drinks per week', value: 'sometimes' },
-        { label: 'Often — 6 to 10 drinks per week', value: 'often' },
-        { label: 'Very often — more than 10 drinks per week', value: 'heavy' },
+        { label: 'Rarely, less than 1 drink per week', value: 'rarely' },
+        { label: 'Sometimes, 1 to 5 drinks per week', value: 'sometimes' },
+        { label: 'Often, 6 to 10 drinks per week', value: 'often' },
+        { label: 'Very often: more than 10 drinks per week', value: 'heavy' },
       ],
     },
     {

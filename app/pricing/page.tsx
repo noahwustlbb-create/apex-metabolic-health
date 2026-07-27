@@ -39,7 +39,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Every number published upfront. Member or single consult — compare and decide before you start.
+          Every number published upfront. Member or single consult: compare and decide before you start.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -66,7 +66,7 @@ const COMPARISON_ROWS = [
   { label: 'Follow Up Blood Referral', member: '$139',       single: '$180',        highlight: true  },
   { label: 'Hormone Consultation',     member: '$199',       single: '$275',        highlight: true  },
   { label: 'Peptide Consultation',     member: '$99',        single: '$125',        highlight: true  },
-  { label: 'Monthly Membership',       member: '$99 /mo',    single: '—',           highlight: true  },
+  { label: 'Monthly Membership',       member: '$99 /mo',    single: '·',           highlight: true  },
   { label: 'Medication',               member: 'Cost price', single: 'Cost + fee',  highlight: true  },
   { label: 'Escript Release Fee',      member: 'Free',       single: '$125',        highlight: true  },
   { label: 'Referrals & Certs',        member: 'Free',       single: '$25 each',    highlight: true  },
@@ -135,8 +135,8 @@ function MembershipComparison() {
                   }}>{row.label}</span>
                   <span style={{
                     fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
-                    color: row.single === '—' ? 'rgba(255,255,255,0.1)' : 'var(--text-primary)',
-                    opacity: row.single === '—' ? 1 : 0.48,
+                    color: row.single === '·' ? 'var(--text-muted)' : 'var(--text-primary)',
+                    opacity: row.single === '·' ? 0.5 : 0.48,
                   }}>{row.single}</span>
                 </div>
               ))}
@@ -258,9 +258,9 @@ function MembershipComparison() {
 // ─── Member Savings Guide ────────────────────────────────────────────────────
 
 const SAVINGS_ROWS = [
-  { label: 'Consultation savings',      saving: 'Up to $304', period: '/yr', detail: 'Hormone consults at $199 vs $275 — saving $76 per consult' },
+  { label: 'Consultation savings',      saving: 'Up to $304', period: '/yr', detail: 'Hormone consults at $199 vs $275, saving $76 per consult' },
   { label: 'Escript release fees',      saving: 'Up to $375', period: '/yr', detail: '3 scripts × $125, waived entirely as a member' },
-  { label: 'Follow-up blood referrals', saving: '~$82',       period: '/yr', detail: 'Member rate $139 vs standard $180 — saving $41 per panel' },
+  { label: 'Follow-up blood referrals', saving: '~$82',       period: '/yr', detail: 'Member rate $139 vs standard $180, saving $41 per panel' },
 ]
 
 function MemberSavings() {
@@ -460,11 +460,11 @@ const PATHWAYS: Pathway[] = [
     steps: [
       {
         label: 'Intake',
-        body: 'Complete the hormone consult intake form online — takes 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
+        body: 'Complete the hormone consult intake form online in 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
       },
       {
         label: 'Blood Referral',
-        body: 'Doctor-issued referral — no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
+        body: 'Doctor-issued referral, no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
         price: '$199',
         priceNote: 'Initial · follow-ups $139',
       },
@@ -476,12 +476,12 @@ const PATHWAYS: Pathway[] = [
       },
       {
         label: 'Ongoing Protocol',
-        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results — reviewed every cycle.',
+        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results, reviewed every cycle.',
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
-          'Zero medication mark-ups — pharmacy cost price direct',
-          'Prescribing fee waived — scripts issued at no charge',
+          'Zero medication mark-ups: pharmacy cost price direct',
+          'Prescribing fee waived: scripts issued at no charge',
           'Discounted follow-up consultations and review blood panels',
           'Nursing team check-ins every 6–8 weeks',
           'Free referrals, medical certificates, and health summaries',
@@ -520,7 +520,7 @@ const PATHWAYS: Pathway[] = [
             detail: 'You pay the pharmacy cost price for medication. An administration fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
           },
           {
-            label: 'Own Pharmacy — Script Release',
+            label: 'Own Pharmacy: Script Release',
             detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you. Ongoing nursing support included. Note: excludes NSW patients.',
           },
         ],
@@ -554,7 +554,7 @@ const PATHWAYS: Pathway[] = [
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
-          'Zero medication mark-ups — pharmacy cost price direct',
+          'Zero medication mark-ups: pharmacy cost price direct',
           'Prescribing fee waived',
           'Discounted follow-up consultations and review bloods',
           'Nursing team support throughout your protocol',
@@ -593,7 +593,7 @@ const PATHWAYS: Pathway[] = [
             detail: 'Pharmacy cost price for medication. Administration fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
           },
           {
-            label: 'Own Pharmacy — Script Release',
+            label: 'Own Pharmacy: Script Release',
             detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you.',
           },
         ],
@@ -667,7 +667,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                   className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8 py-5"
                   style={{ borderBottom: i < pathway.steps.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
                 >
-                  {/* Left — step number + content */}
+                  {/* Left - step number + content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2.5 mb-2">
                       <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
@@ -712,7 +712,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                     )}
                   </div>
 
-                  {/* Right — price */}
+                  {/* Right - price */}
                   {step.price && (
                     <div className="flex-shrink-0 sm:text-right" style={{ minWidth: '100px' }}>
                       <p style={{
@@ -823,7 +823,7 @@ function ProgramPathways() {
 const NOT_INCLUDED = [
   {
     label: 'Discovery call fees',
-    detail: 'No discovery call. Complete the assessment — your doctor contacts you directly.',
+    detail: 'No discovery call. Complete the assessment and your doctor contacts you directly.',
   },
   {
     label: 'Surprise admin charges',
@@ -835,7 +835,7 @@ const NOT_INCLUDED = [
   },
   {
     label: 'Bundled packages',
-    detail: 'No bundles. You pay for what your protocol requires — nothing else.',
+    detail: 'No bundles. You pay for what your protocol requires, nothing else.',
   },
   {
     label: 'Outcome guarantees',
@@ -917,7 +917,7 @@ function PricingCTA() {
         <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease }}
           style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#ffffff', marginBottom: '1rem' }}>
           Know the cost.{' '}
-          <span style={{ color: 'rgba(255,255,255,0.45)' }}>Start when you&apos;re ready.</span>
+          <span style={{ color: 'rgba(255,255,255,0.8)' }}>Start when you&apos;re ready.</span>
         </motion.h2>
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }} className="flex flex-col items-center gap-3">
@@ -927,12 +927,12 @@ function PricingCTA() {
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>Takes 60 seconds. No commitment.</p>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.85)' }}>Takes 60 seconds. No commitment.</p>
         </motion.div>
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.4)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate. Pricing subject to change — confirm at time of booking.
+          className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.78)' }}>
+          All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate. Pricing subject to change; confirm at time of booking.
         </motion.p>
       </div>
     </section>
@@ -944,7 +944,7 @@ function PricingCTA() {
 const PRICING_FAQS = [
   {
     q: 'Is there a lock-in contract?',
-    a: "No. Membership can be cancelled at any time. Clinical reviews happen every 3 months — that's a clinical schedule, not a commercial one.",
+    a: "No. Membership can be cancelled at any time. Clinical reviews happen every 3 months. That's a clinical schedule, not a commercial one.",
   },
   {
     q: 'Do I need a GP referral?',

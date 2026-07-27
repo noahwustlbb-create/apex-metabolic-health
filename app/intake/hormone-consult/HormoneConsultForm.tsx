@@ -177,7 +177,7 @@ function EnergyScore({ value, onChange }: { value: string; onChange: (v: string)
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-baseline justify-between">
-        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#374151' }}>Energy & drive — rate yourself right now</p>
+        <p className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: '#374151' }}>Energy & drive: rate yourself right now</p>
         {value !== '' && <span className="text-sm font-bold" style={{ color: BLUE }}>{value} / 10</span>}
       </div>
       <p className="text-xs" style={{ color: MUTED }}>0 = completely depleted · 10 = optimal</p>
@@ -356,7 +356,7 @@ export default function HormoneConsultForm() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Apex Hormone Consult — ${d.firstName} ${d.lastName}`,
+          subject: `Apex Hormone Consult - ${d.firstName} ${d.lastName}`,
           formType: 'Hormone Consult Intake',
           name: `${d.firstName} ${d.lastName}`, dob: d.dob, email: d.email,
           mobile: d.mobile, state: d.state, weight_kg: d.weightKg, height_cm: d.heightCm,
@@ -536,10 +536,10 @@ export default function HormoneConsultForm() {
               {/* ── Step 3: Health Background ── */}
               {step === 3 && (
                 <div className="flex flex-col gap-6">
-                  <Head title="Health background." sub="Helps us prescribe safely. Be accurate — your doctor reviews this before writing any protocol." />
+                  <Head title="Health background." sub="Helps us prescribe safely. Be accurate: your doctor reviews this before writing any protocol." />
 
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#374151' }}>Existing conditions — select all that apply</p>
+                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-3" style={{ color: '#374151' }}>Existing conditions: select all that apply</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {CONDITIONS.map(c => (
                         <CheckCard key={c} label={c} checked={d.conditions.includes(c)}
@@ -550,7 +550,7 @@ export default function HormoneConsultForm() {
 
                   <TA label="Current medications" name="medications" value={d.medications} onChange={v => set('medications', v)}
                     hint="Include all prescription medications, supplements you take daily, and any hormone therapies."
-                    placeholder="e.g. Metformin 500mg, Vitamin D 5000IU — or write 'None'" rows={3} />
+                    placeholder="e.g. Metformin 500mg, Vitamin D 5000IU, or write 'None'" rows={3} />
 
                   <TA label="Known allergies or adverse reactions" name="allergies" value={d.allergies} onChange={v => set('allergies', v)}
                     placeholder="Write 'None' if not applicable." rows={2} />
@@ -581,7 +581,7 @@ export default function HormoneConsultForm() {
                   </div>
 
                   <TA label="Current supplements (optional)" name="supplementsCurrent" value={d.supplementsCurrent} onChange={v => set('supplementsCurrent', v)}
-                    placeholder="e.g. Creatine 5g, Magnesium 400mg — or leave blank" rows={2} />
+                    placeholder="e.g. Creatine 5g, Magnesium 400mg, or leave blank" rows={2} />
                 </div>
               )}
 
@@ -639,12 +639,12 @@ export default function HormoneConsultForm() {
 
                   {/* Summary */}
                   <div className="rounded-2xl p-5" style={{ background: SURF, border: `1.5px solid ${BORDER}` }}>
-                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-4" style={{ color: MUTED }}>Your details — please review</p>
+                    <p className="text-[11px] font-semibold tracking-[0.12em] uppercase mb-4" style={{ color: MUTED }}>Your details: please review</p>
                     <div className="grid grid-cols-2 gap-x-6 gap-y-3">
                       {([['Name', `${d.firstName} ${d.lastName}`], ['DOB', d.dob], ['State', d.state], ['Mobile', d.mobile], ['Email', d.email]] as [string, string][]).map(([label, val]) => (
                         <div key={label}>
                           <p className="text-[10px] uppercase tracking-wider mb-0.5" style={{ color: BLUE }}>{label}</p>
-                          <p className="text-sm truncate" style={{ color: INK }}>{val || '—'}</p>
+                          <p className="text-sm truncate" style={{ color: INK }}>{val || '·'}</p>
                         </div>
                       ))}
                     </div>

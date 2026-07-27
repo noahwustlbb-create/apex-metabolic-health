@@ -126,7 +126,7 @@ export default function IntakeForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `New Intake — ${data.firstName} ${data.lastName} — ${data.enquiry}`,
+          subject: `New Intake: ${data.firstName} ${data.lastName} (${data.enquiry})`,
           from_name: 'Apex Metabolic Health',
           ...data,
           contraindications: data.contraindications.join(', ') || 'None',
@@ -258,7 +258,7 @@ export default function IntakeForm() {
             Do you have blood results from the last 3 months? <span style={{ color: ACCENT }}>*</span>
           </span>
           <div role="group" aria-labelledby="if-bloods" className="flex gap-3">
-            {[{ label: 'Yes — I have results', val: true }, { label: 'No — I need testing', val: false }].map(opt => (
+            {[{ label: 'Yes, I have results', val: true }, { label: 'No, I need testing', val: false }].map(opt => (
               <button key={String(opt.val)} type="button" onClick={() => set('hasBloods', opt.val)}
                 className="flex-1 py-3 px-4 rounded-sm text-xs font-semibold text-left transition-all duration-150"
                 style={{
@@ -274,7 +274,7 @@ export default function IntakeForm() {
               <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
                 admin@apexmetabolichealth.com.au
               </a>{' '}
-              with your full name — your doctor reviews them before your consultation.
+              with your full name, and your doctor reviews them before your consultation.
             </p>
           )}
         </div>
@@ -297,7 +297,7 @@ export default function IntakeForm() {
         {/* Contraindications */}
         <div>
           <span className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1" style={{ color: 'var(--text-primary)' }}>
-            Safety check — select any that apply
+            Safety check: select any that apply
           </span>
           <p className="text-[11px] mb-3" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
             If any of the following apply, we may be unable to proceed with online treatment.

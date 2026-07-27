@@ -60,7 +60,7 @@ export default function CTASection() {
             style={{ color: 'var(--text-secondary)' }}
           >
             You&apos;ve done the reading. You know something is off. Here&apos;s where you find out
-            exactly what it is — and what to do about it.
+            exactly what it is, and what to do about it.
           </motion.p>
 
           {/* CTAs */}

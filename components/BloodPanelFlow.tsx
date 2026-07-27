@@ -11,7 +11,7 @@ const PANELS = {
     name: 'Hormone Health Panel',
     tag: 'Pre-TRT Assessment',
     heading: "Let's check your baseline hormone levels",
-    description: 'A comprehensive hormone assessment to understand your current hormonal profile — including testosterone, oestrogen, thyroid, and metabolic markers.',
+    description: 'A comprehensive hormone assessment to understand your current hormonal profile, including testosterone, oestrogen, thyroid, and metabolic markers.',
     price: 'A$199',
     priceNote: 'inc. GST',
     biomarkers: [
@@ -121,7 +121,7 @@ function QuestionStep({ onAnswer }: { onAnswer: (panel: PanelKey) => void }) {
           })}
         </div>
         <p className="text-[11px] mt-4" style={{ color: '#6b7280' }}>
-          This helps us recommend the correct panel — be sure to answer truthfully.
+          This helps us recommend the correct panel, so be sure to answer truthfully.
         </p>
       </div>
 

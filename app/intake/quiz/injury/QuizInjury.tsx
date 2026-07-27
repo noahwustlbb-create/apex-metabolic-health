@@ -47,9 +47,9 @@ const config: QuizConfig = {
       id: 'treatment',
       question: 'Have you received any treatment for this so far?',
       options: [
-        { label: 'Yes — physiotherapy or sports medicine', value: 'physio' },
-        { label: 'Yes — surgery', value: 'surgery' },
-        { label: 'Yes — other treatment', value: 'other' },
+        { label: 'Yes, physiotherapy or sports medicine', value: 'physio' },
+        { label: 'Yes, surgery', value: 'surgery' },
+        { label: 'Yes, other treatment', value: 'other' },
         { label: "No, I haven't sought treatment yet", value: 'none' },
       ],
     },

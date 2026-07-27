@@ -44,7 +44,7 @@ export async function POST(req: Request) {
   const hasBloods = m.hasBloods === 'true'
   const amountPaid = session.amount_total ? `$${(session.amount_total / 100).toFixed(2)}` : 'N/A'
 
-  // 1 — Create Cliniko patient
+  // 1 - Create Cliniko patient
   try {
     await createClinikoPatient({
       firstName,
@@ -56,16 +56,16 @@ export async function POST(req: Request) {
     })
   } catch (err) {
     console.error('Cliniko patient creation failed:', err)
-    // Non-fatal — log and continue
+    // Non-fatal - log and continue
   }
 
-  // 2 — Send internal admin notification
+  // 2 - Send internal admin notification
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
       from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
       to: 'admin@apexmetabolichealth.com.au',
-      subject: `New Patient Payment — ${firstName} ${lastName} — ${productName}`,
+      subject: `New Patient Payment: ${firstName} ${lastName} (${productName})`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;padding:32px;">
           <h2 style="margin:0 0 16px;font-size:18px;">New patient payment confirmed</h2>
@@ -95,14 +95,14 @@ export async function POST(req: Request) {
     console.error('Admin email failed:', err)
   }
 
-  // 3 — Send patient confirmation email
+  // 3 - Send patient confirmation email
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const isPanel = productType.startsWith('panel')
     await resend.emails.send({
       from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
       to: email,
-      subject: `Payment confirmed — ${productName}`,
+      subject: `Payment confirmed: ${productName}`,
       html: `
         <div style="font-family:sans-serif;max-width:600px;background:#07090f;padding:40px;border-radius:12px;">
           <p style="color:#4890f7;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;margin:0 0 16px;">Apex Metabolic Health</p>
@@ -112,7 +112,7 @@ export async function POST(req: Request) {
           </p>
           <p style="color:#8899aa;font-size:14px;line-height:1.7;margin:0 0 24px;">
             ${isPanel
-              ? 'Your doctor-issued pathology referral will be sent to this email within 24 hours. Collect at any accredited collection centre — fasted before 9am, no appointment needed.'
+              ? 'Your doctor-issued pathology referral will be sent to this email within 24 hours. Collect at any accredited collection centre, fasted before 9am, no appointment needed.'
               : 'Our team will contact you within 1 business day to confirm your telehealth consultation time.'}
           </p>
           <p style="color:#4a5a6a;font-size:11px;margin:32px 0 0;">

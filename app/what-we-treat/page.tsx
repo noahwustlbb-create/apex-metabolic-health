@@ -17,7 +17,7 @@ const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
 const SYMPTOMS = [
   {
     title: 'Low Energy & Fatigue',
-    recognition: 'If you wake up exhausted, crash by midday, or rely on caffeine to function — that\'s worth investigating properly.',
+    recognition: 'If you wake up exhausted, crash by midday, or rely on caffeine to function, that\'s worth investigating properly.',
     clinical: 'We assess hormonal, thyroid, iron, cortisol, and metabolic drivers rather than dismissing it as ageing or stress.',
     tags: ['Hormones', 'Thyroid', 'Cortisol', 'Iron'],
     href: '/intake/hormone-consult',
@@ -29,7 +29,7 @@ const SYMPTOMS = [
   },
   {
     title: 'Brain Fog & Cognitive Performance',
-    recognition: 'Can\'t focus, forgetting things, or feeling mentally slower than you should — this has a clinical explanation.',
+    recognition: 'Can\'t focus, forgetting things, or feeling mentally slower than you should? This has a clinical explanation.',
     clinical: 'Brain fog is a downstream effect of hormonal, thyroid, or metabolic dysfunction. We find the cause.',
     tags: ['Hormones', 'Thyroid', 'Metabolic', 'Cortisol'],
     href: '/intake/hormone-consult',
@@ -41,7 +41,7 @@ const SYMPTOMS = [
   },
   {
     title: 'Sleep Disruption & Stress',
-    recognition: 'Waking at 3am, never feeling rested, or running on chronic stress — these aren\'t lifestyle issues, they\'re hormonal ones.',
+    recognition: 'Waking at 3am, never feeling rested, or running on chronic stress: these aren\'t lifestyle issues, they\'re hormonal ones.',
     clinical: 'Cortisol dysregulation, low testosterone, and thyroid dysfunction are the most common drivers. We measure and manage them.',
     tags: ['Cortisol', 'HPA Axis', 'Sleep', 'Hormones'],
     href: '/intake/hormone-consult',
@@ -53,7 +53,7 @@ const SYMPTOMS = [
   },
   {
     title: 'Mood, Motivation & Drive',
-    recognition: 'Flat affect, low motivation, irritability, or just not feeling like yourself — these are textbook presentations of hormonal dysfunction.',
+    recognition: 'Flat affect, low motivation, irritability, or just not feeling like yourself: these are textbook presentations of hormonal dysfunction.',
     clinical: 'Low testosterone and thyroid imbalance are among the most common hormonal drivers. We assess and treat both.',
     tags: ['Testosterone', 'Thyroid', 'Cortisol', 'Hormones'],
     href: '/intake/hormone-consult',
@@ -66,7 +66,7 @@ const SYMPTOMS = [
   },
   {
     title: 'Weight Gain & Body Composition',
-    recognition: 'If you\'re eating well and training but the weight won\'t shift, the problem isn\'t effort — it\'s underlying physiology.',
+    recognition: 'If you\'re eating well and training but the weight won\'t shift, the problem isn\'t effort. It\'s underlying physiology.',
     clinical: 'Hormonal resistance, poor insulin sensitivity, and metabolic adaptation block progress. We address the root cause.',
     tags: ['Metabolic', 'Insulin', 'Hormones', 'Body Composition'],
     href: '/intake/general-consult',
@@ -79,7 +79,7 @@ const SYMPTOMS = [
   },
   {
     title: 'Performance & Recovery Decline',
-    recognition: 'Strength that\'s harder to build, recovery that takes longer, and drive that simply isn\'t there — these are signals, not age.',
+    recognition: 'Strength that\'s harder to build, recovery that takes longer, and drive that simply isn\'t there: these are signals, not age.',
     clinical: 'We optimise the hormonal and metabolic physiology that physical performance depends on.',
     tags: ['Performance', 'Hormones', 'Recovery', 'Muscle'],
     href: '/intake/hormone-consult',
@@ -96,7 +96,7 @@ const SYMPTOMS = [
 const CLINICAL = [
   {
     title: 'Hormonal Health & Testosterone',
-    recognition: 'Testosterone, oestradiol, SHBG, DHEA, prolactin — when these are off, everything downstream suffers.',
+    recognition: 'Testosterone, oestradiol, SHBG, DHEA, prolactin: when these are off, everything downstream suffers.',
     clinical: 'Full hormonal panel, clinical interpretation, and a doctor-led protocol where treatment is appropriate.',
     tags: ['Testosterone', 'Hormone Optimisation', 'Hormones', 'DHEA'],
     href: '/intake/hormone-consult',
@@ -109,7 +109,7 @@ const CLINICAL = [
   },
   {
     title: 'Erectile Dysfunction',
-    recognition: 'ED has clinical causes — vascular, hormonal, neurological — and deserves a clinical solution, not a generic script.',
+    recognition: 'ED has clinical causes (vascular, hormonal, neurological) and deserves a clinical solution, not a generic script.',
     clinical: 'We assess the root cause and build a treatment approach that addresses it directly, not just symptomatically.',
     tags: ['Sexual Health', 'Vascular', 'Hormones', 'ED'],
     href: '/intake/hormone-consult',
@@ -123,7 +123,7 @@ const CLINICAL = [
   {
     title: 'Cardiovascular & Metabolic Risk',
     recognition: 'Most people don\'t know their metabolic risk numbers until something goes wrong. We give you the full picture.',
-    clinical: 'Lipids, glucose, HbA1c, inflammation, and cardiovascular markers — assessed, interpreted, and explained.',
+    clinical: 'Lipids, glucose, HbA1c, inflammation, and cardiovascular markers, assessed, interpreted, and explained.',
     tags: ['Lipids', 'HbA1c', 'CRP', 'Metabolic'],
     href: '/intake/general-consult',
     icon: (
@@ -134,7 +134,7 @@ const CLINICAL = [
   },
   {
     title: 'Hair Loss & Skin Regeneration',
-    recognition: 'Hair loss and declining skin quality both have identifiable clinical drivers — DHT, nutrient deficiencies, hormones, collagen.',
+    recognition: 'Hair loss and declining skin quality both have identifiable clinical drivers: DHT, nutrient deficiencies, hormones, collagen.',
     clinical: 'We run the blood work, identify the cause, and build a protocol tailored to your pattern.',
     tags: ['DHT', 'Hormones', 'Peptides', 'Nutrition'],
     href: '/programs/hair-restoration',
@@ -147,7 +147,7 @@ const CLINICAL = [
   },
   {
     title: 'Injury Repair & Recovery',
-    recognition: 'Chronic injuries that won\'t resolve, or recovery that stalls after training — these have clinical solutions.',
+    recognition: 'Chronic injuries that won\'t resolve, or recovery that stalls after training: these have clinical solutions.',
     clinical: 'Peptide protocols accelerate tissue repair and reduce the inflammation that blocks recovery.',
     tags: ['Peptides', 'Inflammation', 'Tissue Repair', 'Recovery'],
     href: '/programs/injury-repair',
@@ -209,7 +209,7 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
         <div className="flex flex-wrap gap-1.5 mb-4">
           {area.tags.map((tag) => (
             <span key={tag} className="text-[9px] font-semibold tracking-[0.1em] uppercase px-2 py-1 rounded-sm"
-              style={{ color: 'var(--blue)', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              style={{ color: 'var(--blue)', background: 'var(--state-hover-bg)', border: '1px solid var(--color-border-muted)' }}>
               {tag}
             </span>
           ))}
@@ -315,7 +315,7 @@ export default function WhatWeTreatPage() {
             <SectionHead
               label="Symptoms"
               title="What our patients commonly experience"
-              sub="These are the patterns that bring patients to Apex. If something on this list sounds familiar, there's likely a clinical reason — and a clinical answer."
+              sub="These are the patterns that bring patients to Apex. If something on this list sounds familiar, there's likely a clinical reason, and a clinical answer."
               inView={symptomsInView}
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -335,7 +335,7 @@ export default function WhatWeTreatPage() {
             <SectionHead
               label="Clinical Areas"
               title="What we actually investigate"
-              sub="Behind most symptoms is a measurable clinical driver. These are the areas we focus on — not broad wellness categories, but specific, testable physiological problems."
+              sub="Behind most symptoms is a measurable clinical driver. These are the areas we focus on: not broad wellness categories, but specific, testable physiological problems."
               inView={clinicalInView}
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -362,7 +362,7 @@ export default function WhatWeTreatPage() {
                 </span>
               </h2>
               <p className="text-sm leading-relaxed mb-8 mx-auto" style={{ color: 'var(--text-primary)', maxWidth: '400px' }}>
-                Our clinical pre-screen identifies the most relevant pathway for your situation — no commitment, no GP referral required.
+                Our clinical pre-screen identifies the most relevant pathway for your situation. No commitment, no GP referral required.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button type="button" onClick={() => open()} className="btn-pill" style={{ cursor: 'pointer' }}>

@@ -17,15 +17,15 @@ const ease = [0.22, 1, 0.36, 1] as const
 const QUESTIONS = [
   'Are you male?',
   'Has your energy noticeably declined in the past 6–12 months?',
-  'Do you experience mood changes — irritability, low motivation, or mental fog?',
+  'Do you experience mood changes such as irritability, low motivation, or mental fog?',
   'Has your sex drive dropped compared to a few years ago?',
   'Have you noticed changes in sexual function or performance?',
   'Do you feel less driven or engaged with life than you used to?',
-  'Has your physical performance — strength, recovery, or stamina — declined?',
+  'Has your physical performance (strength, recovery, or stamina) declined?',
   'Do you struggle with sleep quality or feel fatigued even after a full night\'s rest?',
   'Has weight become harder to manage despite no major changes to diet or activity?',
   'Do you experience reduced mental sharpness, concentration, or drive at work?',
-  'Have you noticed changes in body composition — less muscle, more fat — without obvious cause?',
+  'Have you noticed changes in body composition (less muscle, more fat) without obvious cause?',
   'Are you currently prescribed testosterone by a doctor or clinic?',
   'Briefly describe your medical history',
 ]
@@ -394,7 +394,7 @@ export default function HormoneIntakeForm() {
               Based on {TOTAL - 3} clinical indicators.
             </p>
 
-            {/* Score card — blurred behind gate */}
+            {/* Score card - blurred behind gate */}
             <div
               className="rounded-2xl overflow-hidden mb-6"
               style={{
@@ -462,7 +462,7 @@ export default function HormoneIntakeForm() {
               </div>
             </div>
 
-            {/* CTA block — locked behind gate */}
+            {/* CTA block - locked behind gate */}
             <div
               className="rounded-2xl p-6 mb-6"
               style={{
@@ -489,7 +489,7 @@ export default function HormoneIntakeForm() {
                 <div>
                   <p className="font-semibold text-sm mb-1" style={{ color: TEXT }}>Pathology comes first</p>
                   <p className="text-sm leading-relaxed" style={{ color: DIM }}>
-                    Your doctor needs recent bloodwork to build an evidence-based protocol. We issue a referral — no GP needed.
+                    Your doctor needs recent bloodwork to build an evidence-based protocol. We issue a referral, no GP needed.
                   </p>
                 </div>
               </div>

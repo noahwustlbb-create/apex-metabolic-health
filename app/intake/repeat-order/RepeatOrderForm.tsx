@@ -91,7 +91,7 @@ export default function RepeatOrderForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Apex — Repeat Order / Renewal: ${d.firstName} ${d.lastName}`,
+          subject: `Apex Repeat Order / Renewal: ${d.firstName} ${d.lastName}`,
           from_name: 'Apex Metabolic Health',
           formType: 'Repeat Order | Consult Form',
           title: d.title,
@@ -198,7 +198,7 @@ export default function RepeatOrderForm() {
                 </div>
               </div>
 
-              {/* Not existing patient — redirect */}
+              {/* Not existing patient - redirect */}
               {isExisting === false && (
                 <div
                   style={{ background: 'rgba(72,144,247,0.06)', border: `1px solid ${BORDER}`, borderRadius: 14, padding: 24, textAlign: 'center' }}
@@ -220,7 +220,7 @@ export default function RepeatOrderForm() {
                 </div>
               )}
 
-              {/* Existing patient — full form */}
+              {/* Existing patient - full form */}
               {isExisting === true && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
 
@@ -233,7 +233,7 @@ export default function RepeatOrderForm() {
                         onFocus={() => onFocus('title')} onBlur={() => onBlur('title')}
                         style={{ ...inputStyle(focus['title']), appearance: 'none', cursor: 'pointer' }}
                       >
-                        <option value="">—</option>
+                        <option value="">Select…</option>
                         {TITLES.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </Field>
@@ -310,7 +310,7 @@ export default function RepeatOrderForm() {
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                       {[
-                        'New Consult Appointment — Renewal',
+                        'New Consult Appointment: Renewal',
                         'Order Medication / Blood Work',
                       ].map(opt => (
                         <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>

@@ -18,7 +18,7 @@ const CARDS = [
     accentBorder: 'rgba(72,144,247,0.15)',
     body: 'The panel depends on your clinical pathway. Some programs require a comprehensive baseline. Others need limited monitoring, or none at all.',
     bullets: [
-      'Doctor-issued referral — no GP required',
+      'Doctor-issued referral, no GP required',
       'Collected at any accredited pathology centre',
       'Results reviewed directly by your Apex doctor',
       'Hormone programs: two separate morning tests required to confirm low testosterone (TGA/AHPRA)',
@@ -40,7 +40,7 @@ const CARDS = [
     body: 'Not a quick prescription call. Your AHPRA-registered doctor reviews your full results, takes a detailed history, and builds a personalised clinical protocol.',
     bullets: [
       'Full pathology review and interpretation',
-      'Personalised protocol — not a template',
+      'Personalised protocol, not a template',
       'Prescribing where clinically appropriate',
     ],
     note: null,
@@ -66,7 +66,7 @@ const CARDS = [
       'Protocol adjustments based on results',
       'Priority clinical support between reviews',
     ],
-    note: 'Script release available: $125 one-off. Prescription released to you — fill at any pharmacy. No ongoing membership.',
+    note: 'Script release available: $125 one-off. Prescription released to you to fill at any pharmacy. No ongoing membership.',
     featured: true,
   },
 ]
@@ -121,7 +121,7 @@ export default function PricingSnapshot() {
             className="text-base leading-relaxed max-w-lg"
             style={{ color: 'var(--text-primary)' }}
           >
-            Bloods. Consultation. Ongoing membership if you want it. Clear pricing — no hidden layers, no bloated packages.
+            Bloods. Consultation. Ongoing membership if you want it. Clear pricing, no hidden layers, no bloated packages.
           </motion.p>
         </div>
 

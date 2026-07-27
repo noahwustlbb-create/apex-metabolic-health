@@ -26,7 +26,7 @@ export default function TermsPage() {
 
             <section>
               <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>2. Nature of Services</h2>
-              <p>Apex Metabolic Health facilitates access to telehealth consultations with independent AHPRA-registered medical practitioners. All clinical decisions — including assessment, diagnosis, and prescribing — are made by those practitioners in accordance with their professional obligations.</p>
+              <p>Apex Metabolic Health facilitates access to telehealth consultations with independent AHPRA-registered medical practitioners. All clinical decisions, including assessment, diagnosis, and prescribing, are made by those practitioners in accordance with their professional obligations.</p>
               <p className="mt-3">This website does not constitute medical advice. Nothing published here should be relied upon to self-diagnose or self-treat any condition. If you are experiencing a medical emergency, call <strong style={{ color: 'var(--text-primary)' }}>000</strong> immediately.</p>
             </section>
 
@@ -36,7 +36,7 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>4. Fully Private Clinic — No Medicare Rebates</h2>
+              <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>4. Fully Private Clinic: No Medicare Rebates</h2>
               <p>Apex Metabolic Health is a fully private medical service. No Medicare rebates are available for consultations or services provided through our platform. All fees are payable in full by the patient. A full fee schedule is available on our Pricing page.</p>
             </section>
 

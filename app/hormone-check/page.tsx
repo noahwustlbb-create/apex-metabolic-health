@@ -299,7 +299,7 @@ export default function HormoneCheckPage() {
 
                 {/* Counter */}
                 <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--blue)', marginBottom: 14, fontFamily: 'var(--font-space-grotesk)' }}>
-                  ADAM Questionnaire — {result!.yesCount}/{total} symptoms reported
+                  ADAM Questionnaire: {result!.yesCount}/{total} symptoms reported
                 </p>
 
                 {/* Heading */}

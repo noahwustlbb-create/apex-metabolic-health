@@ -48,7 +48,7 @@ function SignupFormInner() {
 
   return (
     <div className="min-h-screen flex" style={{ background: BG }}>
-      {/* Left — form */}
+      {/* Left - form */}
       <div className="flex-1 flex flex-col justify-center px-8 py-16 max-w-xl">
         <Link href="/" className="flex flex-col leading-none mb-12">
           <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
@@ -166,7 +166,7 @@ function SignupFormInner() {
         </p>
       </div>
 
-      {/* Right — trust panel */}
+      {/* Right - trust panel */}
       <div className="hidden lg:flex flex-col justify-center gap-6 px-12 flex-1" style={{ background: 'rgba(255,255,255,0.015)', borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
         {[
           {
@@ -186,7 +186,7 @@ function SignupFormInner() {
           },
           {
             title: '100% telehealth based',
-            body: 'No more drives, queues, or waiting rooms — enjoy quality care from your home.',
+            body: 'No more drives, queues, or waiting rooms. Enjoy quality care from your home.',
             accent: '#7bb3ff',
           },
         ].map((item) => (

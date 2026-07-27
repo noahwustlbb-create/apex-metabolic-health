@@ -83,7 +83,7 @@ export default function Nav() {
           <Link
             href="/"
             className="flex flex-col flex-shrink-0 select-none"
-            aria-label="Apex Metabolic Health — Home"
+            aria-label="Apex Metabolic Health, Home"
             style={{ textDecoration: 'none', gap: '5px' }}
           >
             <span style={{
@@ -392,7 +392,7 @@ export default function Nav() {
                 className="flex items-center justify-center w-full"
                 style={{ border: '1px solid rgba(72,144,247,0.35)', color: 'var(--blue)', padding: '15px 24px', borderRadius: '12px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
               >
-                Patient Portal — log in
+                Patient Portal: log in
               </a>
               <div className="flex items-center justify-between pt-1">
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Appearance</span>

@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our longevity program needs further assessment for your situation.',
-  ineligibleBody: 'Based on your health history, our doctors need to conduct a more specialised review before recommending a longevity protocol. Please book a free discovery call — we can help you find the right pathway.',
+  ineligibleBody: 'Based on your health history, our doctors need to conduct a more specialised review before recommending a longevity protocol. Please book a free discovery call, and we can help you find the right pathway.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {
@@ -51,20 +51,20 @@ const config: QuizConfig = {
         { label: 'I have several ongoing health conditions', value: 'multiple' },
         { label: 'I have one or two health concerns', value: 'some' },
         { label: 'Generally healthy with minor issues', value: 'mostly_healthy' },
-        { label: "Excellent health — I'm here to optimise", value: 'excellent' },
+        { label: "Excellent health: I'm here to optimise", value: 'excellent' },
       ],
     },
     {
       type: 'info',
       id: 'info',
       heading: 'Longevity medicine is proactive, not reactive',
-      body: 'Our anti-ageing protocols go beyond symptom management. Using comprehensive biomarker assessment, our doctors design personalised protocols targeting the biological drivers of accelerated ageing — from cellular energy decline to hormonal imbalance.',
+      body: 'Our anti-ageing protocols go beyond symptom management. Using comprehensive biomarker assessment, our doctors design personalised protocols targeting the biological drivers of accelerated ageing, from cellular energy decline to hormonal imbalance.',
       stat: 'Evidence-based · Doctor-designed · Clinically monitored',
     },
     {
       type: 'trust',
       id: 'trust',
-      heading: 'Ageing is a biological process — and it can be optimised',
+      heading: 'Ageing is a biological process, and it can be optimised',
       body: 'Our AHPRA-registered doctors take a data-driven approach to longevity. Every protocol is informed by your pathology results, not guesswork. Your health and safety are always the first consideration.',
     },
     {

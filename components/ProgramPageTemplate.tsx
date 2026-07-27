@@ -164,7 +164,7 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
             </motion.p>
           </div>
 
-          {/* Right: bento photo grid — 2-col on mobile, 2-col 2-row on desktop */}
+          {/* Right: bento photo grid - 2-col on mobile, 2-col 2-row on desktop */}
           <motion.div
             initial={prefersReduced ? false : { opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -172,7 +172,7 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
             className="grid grid-cols-2 grid-rows-[200px] lg:grid-rows-[220px_160px] w-full lg:w-[clamp(280px,38vw,460px)]"
             style={{ gap: 8, flexShrink: 0 }}
           >
-            {/* Portrait — 200px on mobile, spans 2 rows on desktop */}
+            {/* Portrait - 200px on mobile, spans 2 rows on desktop */}
             <div className="row-span-1 lg:row-span-2" style={{ borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
               <Image
                 src={config.heroBentoPortrait}
@@ -204,7 +204,7 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
               <div style={{ width: 24, height: 2, background: BLUE, borderRadius: 1, marginTop: 10 }} />
             </div>
 
-            {/* Lifestyle photo — hidden on mobile, second row on desktop */}
+            {/* Lifestyle photo - hidden on mobile, second row on desktop */}
             <div className="hidden lg:block" style={{ borderRadius: 16, overflow: 'hidden', position: 'relative' }}>
               <Image
                 src={config.heroBentoLifestyle}
@@ -412,7 +412,7 @@ function ProcessSection({ config, onGetStarted }: { config: ProgramPageConfig; o
             transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.1, ease }}
             style={{ fontSize: 15, color: BODY_COLOR, maxWidth: '52ch', lineHeight: 1.65 }}
           >
-            A structured clinical process — not a quick quiz. Every step has a purpose.
+            A structured clinical process, not a quick quiz. Every step has a purpose.
           </motion.p>
         </div>
 

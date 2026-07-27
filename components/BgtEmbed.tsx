@@ -46,7 +46,7 @@ export default function BgtEmbed({ title, subtitle, url, biomarkers }: BgtEmbedP
       </div>
 
       <div className="flex flex-1 overflow-hidden">
-        {/* Left sidebar — panel info */}
+        {/* Left sidebar - panel info */}
         <div className="hidden lg:flex flex-col w-80 flex-shrink-0 px-8 py-8 overflow-y-auto" style={{ borderRight: '1px solid rgba(0,0,0,0.04)' }}>
           <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: BLUE }}>Blood Panel</p>
           <h2 className="font-bold mb-1 leading-tight" style={{ fontSize: 22, color: '#111827', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>{title}</h2>
@@ -72,7 +72,7 @@ export default function BgtEmbed({ title, subtitle, url, biomarkers }: BgtEmbedP
           </div>
         </div>
 
-        {/* Right — BGT iframe */}
+        {/* Right - BGT iframe */}
         <div className="flex-1 relative">
           {!loaded && (
             <div className="absolute inset-0 flex items-center justify-center" style={{ background: BG }}>

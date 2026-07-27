@@ -286,7 +286,7 @@ export default function HealthQuiz() {
     if (c.includes("I'm not performing at the level I expect of myself"))
       return { q: 'Which area of performance matters most?', opts: ['Mental sharpness & focus', 'Physical strength & endurance', 'Drive and motivation', 'All of the above'] }
     if (c.includes('I feel older than I should for my age') || c.includes('A recent health warning or wake-up call'))
-      return { q: 'How would you describe your energy across the day?', opts: ['Strong in the morning, crashes by afternoon', 'Low from the moment I wake up', 'Inconsistent — varies day to day', 'Gradually declining over time'] }
+      return { q: 'How would you describe your energy across the day?', opts: ['Strong in the morning, crashes by afternoon', 'Low from the moment I wake up', 'Inconsistent, varies day to day', 'Gradually declining over time'] }
     return { q: 'Which would most improve your quality of life right now?', opts: ['More sustained energy', 'Sharper mental performance', 'Better body composition', 'Improved sleep and recovery'] }
   })()
 
@@ -633,7 +633,7 @@ export default function HealthQuiz() {
                 <div className="px-5 pb-5 blur-sm select-none pointer-events-none">
                   <div className="border-t pt-4" style={{ borderColor: BORDER }}>
                     <p className="text-[10px] uppercase tracking-wider mb-3" style={{ color: MUTED }}>Recommended panels</p>
-                    {['Panel A — ████████ ██████', 'Panel B — ████ ██████', 'Panel C — ██████████'].map(item => (
+                    {['Panel A ████████ ██████', 'Panel B ████ ██████', 'Panel C ██████████'].map(item => (
                       <div key={item} className="flex items-center gap-2 mb-2"><BlueCheck /><span className="text-xs" style={{ color: DIM }}>{item}</span></div>
                     ))}
                   </div>
@@ -674,13 +674,13 @@ export default function HealthQuiz() {
         has_phone: ph.length > 0 ? 1 : 0,
         goals_count: (answers.reasons || []).length,
       })
-      // Dual send — Web3Forms (browser→admin@) + Resend (server→gmail) for redundancy
+      // Dual send - Web3Forms (browser→admin@) + Resend (server→gmail) for redundancy
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `Apex — Health Assessment Lead: ${fn}`,
+          subject: `Apex Health Assessment Lead: ${fn}`,
           name: fn,
           email: em,
           phone: ph || 'Not provided',

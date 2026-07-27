@@ -233,14 +233,14 @@ function Success({ firstName, config }: { firstName: string; config: PanelConfig
         {firstName ? `You're locked in, ${firstName}.` : "You're all set."}
       </h2>
       <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)' }}>
-        Your doctor will review your details and issue a pathology referral within one business day. Collect at any accredited centre near you — no appointment needed.
+        Your doctor will review your details and issue a pathology referral within one business day. Collect at any accredited centre near you, no appointment needed.
       </p>
       <div className="p-5 rounded-sm mb-6" style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.1)' }}>
         <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-4" style={{ color: 'var(--blue)' }}>WHAT HAPPENS NEXT</p>
         <div className="flex flex-col gap-3">
           {[
-            'Doctor-issued pathology referral sent to your email — typically same business day',
-            `Collect your ${config.panelName.toLowerCase()} at any accredited centre — fasted before 9am`,
+            'Doctor-issued pathology referral sent to your email, typically same business day',
+            `Collect your ${config.panelName.toLowerCase()} at any accredited centre, fasted before 9am`,
             'Book your consultation once results are back to build your protocol',
           ].map((s, i) => (
             <div key={i} className="flex items-start gap-3">
@@ -291,7 +291,7 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `${config.panelName} Order — ${data.firstName} ${data.lastName}`,
+          subject: `${config.panelName} Order: ${data.firstName} ${data.lastName}`,
           from_name: 'Apex Metabolic Health',
           name: `${data.firstName} ${data.lastName}`,
           email: data.email, phone: data.phone, dob: data.dob, state: data.state,
@@ -333,7 +333,7 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
               <div className="mb-10">
                 <div className="flex justify-between mb-2">
                   <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: 'var(--blue)' }}>
-                    {config.panelName} — {config.panelPrice}
+                    {config.panelName} · {config.panelPrice}
                   </span>
                   <span className="text-xs" style={{ color: 'var(--blue)' }}>{progress}%</span>
                 </div>
@@ -374,7 +374,7 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
                   )}
                 </div>
                 {error && <p className="text-sm mt-4" style={{ color: 'var(--color-danger-fg)' }}>{error}</p>}
-                <p className="text-xs mt-5" style={{ color: 'var(--blue)' }}>Your information is private and confidential. Doctor-issued referral only — no walk-ins required.</p>
+                <p className="text-xs mt-5" style={{ color: 'var(--blue)' }}>Your information is private and confidential. Doctor-issued referral only, no walk-ins required.</p>
               </>
             )}
           </div>

@@ -20,9 +20,9 @@ const QUIZ = [
     id: 'duration',
     question: 'How long have you been dealing with this?',
     options: [
-      { label: 'Just starting to notice — under 6 months', value: 'recent' },
-      { label: "It's been building — 6 months to 2 years", value: 'moderate' },
-      { label: "It's been years — I'm ready to do something about it", value: 'long' },
+      { label: 'Just starting to notice, under 6 months', value: 'recent' },
+      { label: "It's been building, 6 months to 2 years", value: 'moderate' },
+      { label: "It's been years, and I'm ready to do something about it", value: 'long' },
     ],
   },
   {

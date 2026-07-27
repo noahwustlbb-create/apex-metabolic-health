@@ -13,7 +13,7 @@ const ACCENT = 'var(--blue)'
 const PROGRAMS = [
   {
     label: 'Metabolic & Weight Loss',
-    sub: 'Insulin resistance, thyroid dysfunction, cortisol-driven fat — the metabolic drivers most GPs never investigate.',
+    sub: 'Insulin resistance, thyroid dysfunction, cortisol-driven fat: the metabolic drivers most GPs never investigate.',
     icon: (
       <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4">
         <path d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 3a2 2 0 110 4 2 2 0 010-4zm0 9.5c-2.33 0-4.29-1.19-5.5-3 .03-1.82 3.67-2.83 5.5-2.83 1.83 0 5.47 1.01 5.5 2.83-1.21 1.81-3.17 3-5.5 3z" fill={ACCENT} opacity="0.7"/>
@@ -59,7 +59,7 @@ const WHAT = [
   {
     n: '02',
     title: 'Clinical interpretation',
-    body: 'An AHPRA-registered doctor reviews every marker in the context of your symptoms and health history — not just reference ranges.',
+    body: 'An AHPRA-registered doctor reviews every marker in the context of your symptoms and health history, not just reference ranges.',
   },
   {
     n: '03',
@@ -75,7 +75,7 @@ const WHAT = [
 
 const PROCESS = [
   { step: '01', title: 'Complete your intake', body: 'A 5-minute clinical intake covering your primary concern, symptoms, and health history. Takes under 5 minutes. Reviewed by your doctor before the consultation.' },
-  { step: '02', title: 'Doctor-issued blood panel', body: 'Your doctor issues a referral matched to your program. Collect at any of 4,000+ accredited collection centres nationally — no GP, no appointment.' },
+  { step: '02', title: 'Doctor-issued blood panel', body: 'Your doctor issues a referral matched to your program. Collect at any of 4,000+ accredited collection centres nationally, with no GP and no appointment.' },
   { step: '03', title: 'Telehealth consultation', body: 'A full clinical review with your Apex doctor. Results are interpreted in context and your clinical pathway is confirmed.' },
   { step: '04', title: 'Protocol commenced', body: 'Where clinically appropriate, treatment is coordinated through our compounding pharmacy partner with ongoing review scheduled.' },
 ]
@@ -127,7 +127,7 @@ export default function GeneralConsultBookPage() {
                 </span>
               </h1>
               <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', opacity: 0.65, maxWidth: 560 }}>
-                For weight loss, performance, hair, skin, and injury recovery. We run the diagnostics GPs don't order — interpreted by doctors who specialise in exactly this.
+                For weight loss, performance, hair, skin, and injury recovery. We run the diagnostics GPs don't order, interpreted by doctors who specialise in exactly this.
               </p>
 
               {/* Stats */}
@@ -164,7 +164,7 @@ export default function GeneralConsultBookPage() {
               <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3" style={{ color: ACCENT }}>Treatments covered</p>
               <h2 className="font-bold tracking-tight mb-8"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 2.8vw, 30px)', color: 'var(--text-primary)', lineHeight: 1.15 }}>
-                Choose your pathway — we&apos;ll match the diagnostics to it.
+                Choose your pathway and we&apos;ll match the diagnostics to it.
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {PROGRAMS.map((p, i) => (
@@ -290,7 +290,7 @@ export default function GeneralConsultBookPage() {
                 Free discovery call
               </a>
             </div>
-            <p className="text-[10px] mt-6" style={{ color: 'rgba(255,255,255,0.25)' }}>
+            <p className="text-[10px] mt-6" style={{ color: 'rgba(255,255,255,0.6)' }}>
               AHPRA-registered practitioners · Private & confidential · No lock-in contracts
             </p>
           </motion.div>

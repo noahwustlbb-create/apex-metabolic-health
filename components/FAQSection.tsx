@@ -12,7 +12,7 @@ const FAQS = [
   },
   {
     q: 'What\'s included in the blood panel?',
-    a: 'Our panels go significantly beyond what a standard GP orders. For hormone programs, we test full hormone profiles, metabolic markers, thyroid function, inflammatory markers, and nutritional status — the full picture needed to build a precise protocol, not just check for disease.',
+    a: 'Our panels go significantly beyond what a standard GP orders. For hormone programs, we test full hormone profiles, metabolic markers, thyroid function, inflammatory markers, and nutritional status: the full picture needed to build a precise protocol, not just check for disease.',
   },
   {
     q: 'Are your doctors actually AHPRA-registered?',

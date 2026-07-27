@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   const { error } = await resend.emails.send({
     from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
     to: email,
-    subject: 'Your Apex Health Assessment — Personalised Clinical Pathway',
+    subject: 'Your Apex Health Assessment: Personalised Clinical Pathway',
     html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -192,7 +192,7 @@ export async function POST(req: Request) {
                     <tr>
                       <td>
                         <p style="margin:0 0 2px;font-size:14px;font-weight:700;color:#f0f4f8;">Script Release Only</p>
-                        <p style="margin:0;font-size:12px;color:#4a5a6a;">One-off prescribing — no ongoing support</p>
+                        <p style="margin:0;font-size:12px;color:#4a5a6a;">One-off prescribing, no ongoing support</p>
                       </td>
                       <td align="right">
                         <p style="margin:0;font-size:16px;font-weight:700;color:#f0f4f8;">$125<span style="font-size:12px;font-weight:400;color:#4a5a6a;"> one-off</span></p>
@@ -230,7 +230,7 @@ export async function POST(req: Request) {
 
             <p style="margin:0;font-size:13px;line-height:1.7;color:#4a5a6a;">
               This isn't a one-off treatment.<br>
-              This is an ongoing optimisation system — built around you.
+              This is an ongoing optimisation system, built around you.
             </p>
 
           </td>

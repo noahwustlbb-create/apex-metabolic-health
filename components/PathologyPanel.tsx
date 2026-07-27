@@ -9,11 +9,11 @@ const HORMONE_PANEL = [
   'SHBG',
   'FSH / LH',
   'Prolactin',
-  'Thyroid Function — TSH / FT3 / FT4',
-  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
-  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
+  'Thyroid Function: TSH / FT3 / FT4',
+  'Liver Function (LFT): ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Kidney Function (UEC): Creatinine, eGFR, Electrolytes',
   'Full Blood Count (FBC)',
-  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Lipid Studies: Cholesterol, HDL, LDL, Triglycerides',
   'Glucose + HbA1c',
   'High Sensitivity CRP',
   'Magnesium, Calcium, Phosphate, Uric Acid',
@@ -21,12 +21,12 @@ const HORMONE_PANEL = [
 
 const METABOLIC_PANEL = [
   'Full Blood Count (FBC)',
-  'Kidney Function (UEC) — Creatinine, eGFR, Electrolytes',
-  'Liver Function (LFT) — ALT, AST, GGT, ALP, Bilirubin, Albumin',
-  'Lipid Studies — Cholesterol, HDL, LDL, Triglycerides',
+  'Kidney Function (UEC): Creatinine, eGFR, Electrolytes',
+  'Liver Function (LFT): ALT, AST, GGT, ALP, Bilirubin, Albumin',
+  'Lipid Studies: Cholesterol, HDL, LDL, Triglycerides',
   'Glucose + HbA1c + Insulin',
   'Iron Studies',
-  'Thyroid Function — TSH / FT3 / FT4',
+  'Thyroid Function: TSH / FT3 / FT4',
   'High Sensitivity CRP',
   'Vitamin D',
   'Vitamin B12',
@@ -83,7 +83,7 @@ export default function PathologyPanel() {
             className="text-base md:text-lg leading-relaxed max-w-2xl mx-auto"
             style={{ color: 'var(--text-primary)' }}
           >
-            Every clinical decision is built on objective pathology data — not guesswork, not
+            Every clinical decision is built on objective pathology data, not guesswork, not
             GP-standard screens. We test what&apos;s actually relevant.
           </motion.p>
         </div>

@@ -10,7 +10,7 @@ const PANEL = {
   name: 'Metabolic Health Panel',
   tag: 'Weight Loss Assessment',
   heading: "Let's check your metabolic baseline",
-  description: 'A comprehensive metabolic assessment covering blood sugar, insulin resistance, thyroid, hormone levels, and inflammatory markers — everything needed to build your weight loss protocol.',
+  description: 'A comprehensive metabolic assessment covering blood sugar, insulin resistance, thyroid, hormone levels, and inflammatory markers: everything needed to build your weight loss protocol.',
   price: 'A$99',
   priceNote: 'inc. GST',
   biomarkers: [
@@ -103,7 +103,7 @@ function QuestionStep({ onAnswer }: { onAnswer: (v: string) => void }) {
           })}
         </div>
         <p className="text-[11px] mt-4" style={{ color: '#6b7280' }}>
-          This helps us recommend the right next step — answer honestly for the best outcome.
+          This helps us recommend the right next step, so answer honestly for the best outcome.
         </p>
       </div>
 

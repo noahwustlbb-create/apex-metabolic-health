@@ -12,7 +12,7 @@ const PROGRAMS = [
   {
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
-    tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
+    tagline: 'Low drive, poor recovery, body composition changes, often rooted in hormonal dysfunction that standard testing misses.',
     tag: 'Most common',
     accent: 'var(--blue)',
     accentBg: 'rgba(72,144,247,0.12)',
@@ -33,7 +33,7 @@ const PROGRAMS = [
   {
     category: 'Metabolic Health',
     name: 'Medical Weight Loss',
-    tagline: "Stubborn weight that doesn't respond to diet or exercise — there's usually a clinical driver that hasn't been investigated.",
+    tagline: "Stubborn weight that doesn't respond to diet or exercise? There's usually a clinical driver that hasn't been investigated.",
     tag: null,
     accent: '#00a89e',
     accentBg: 'rgba(0,168,158,0.12)',
@@ -54,7 +54,7 @@ const PROGRAMS = [
   {
     category: "Men's Sexual Health",
     name: 'Sexual Health',
-    tagline: 'Sexual health concerns are medical issues. We identify the clinical drivers — hormonal, vascular, and beyond — and treat them properly.',
+    tagline: 'Sexual health concerns are medical issues. We identify the clinical drivers (hormonal, vascular, and beyond) and treat them properly.',
     tag: null,
     accent: '#a78bfa',
     accentBg: 'rgba(167,139,250,0.12)',
@@ -75,7 +75,7 @@ const PROGRAMS = [
   {
     category: 'Recovery & Rehabilitation',
     name: 'Injury Repair & Recovery',
-    tagline: "Slow healing, recurring injury, post-surgical recovery — clinical protocols that support what the body can't do alone.",
+    tagline: "Slow healing, recurring injury, post-surgical recovery: clinical protocols that support what the body can't do alone.",
     tag: null,
     accent: '#4ade80',
     accentBg: 'rgba(74,222,128,0.12)',
@@ -96,7 +96,7 @@ const PROGRAMS = [
   {
     category: 'Longevity & Healthspan',
     name: 'Anti-Ageing & Longevity',
-    tagline: 'Proactive protocols to extend healthspan — not just lifespan. Biological markers assessed and optimised before problems develop.',
+    tagline: 'Proactive protocols to extend healthspan, not just lifespan. Biological markers assessed and optimised before problems develop.',
     tag: null,
     accent: '#c9a84c',
     accentBg: 'rgba(201,168,76,0.12)',
@@ -117,7 +117,7 @@ const PROGRAMS = [
   {
     category: 'Skin & Hair',
     name: 'Skin and Hair',
-    tagline: "Skin quality, hair loss, texture, and ageing — driven by internal biology that topical products can't reach. We address the root cause.",
+    tagline: "Skin quality, hair loss, texture, and ageing, driven by internal biology that topical products can't reach. We address the root cause.",
     tag: null,
     accent: '#38bdf8',
     accentBg: 'rgba(56,189,248,0.12)',
@@ -138,7 +138,7 @@ const PROGRAMS = [
   {
     category: 'Diagnostic Pathology',
     name: 'Comprehensive Blood Tests',
-    tagline: '30+ markers — hormones, metabolism, inflammation, nutrition. Doctor-issued, doctor-reviewed, doctor-explained.',
+    tagline: '30+ markers: hormones, metabolism, inflammation, nutrition. Doctor-issued, doctor-reviewed, doctor-explained.',
     tag: null,
     accent: '#f97316',
     accentBg: 'rgba(249,115,22,0.12)',
@@ -181,7 +181,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
         style={{ background: `linear-gradient(to top, ${p.bg} 0%, ${p.bg}f0 38%, ${p.bg}80 60%, transparent 80%)` }}
       />
 
-      {/* Accent glow — revealed on hover */}
+      {/* Accent glow - revealed on hover */}
       <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
         style={{ background: `radial-gradient(ellipse 90% 50% at 50% 100%, ${p.glowColor.replace(/[\d.]+\)$/, '0.3)')} 0%, transparent 65%)` }}
@@ -221,7 +221,7 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           {p.name}
         </h3>
 
-        <p className="text-xs leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.48)', maxWidth: 260 }}>
+        <p className="text-xs leading-relaxed mb-5" style={{ color: 'rgba(255,255,255,0.68)', maxWidth: 260 }}>
           {p.tagline}
         </p>
 
@@ -239,9 +239,9 @@ function ProgramCard({ p, i, inView }: { p: typeof PROGRAMS[0]; i: number; inVie
           <Link
             href={p.href}
             className="text-[11px] font-medium transition-colors duration-150"
-            style={{ color: 'rgba(255,255,255,0.35)' }}
+            style={{ color: 'rgba(255,255,255,0.6)' }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.7)' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.35)' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)' }}
           >
             Learn more →
           </Link>
@@ -322,7 +322,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.2, ease }}
               style={{ color: 'var(--text-secondary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
             >
-              Seven doctor-led programs — each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
+              Seven doctor-led programs, each targeting a distinct biological system with its own clinical pathway, blood panel, and personalised protocol.
             </motion.p>
 
             <motion.div
@@ -341,7 +341,7 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* ── Program Cards — dark cinematic section ────────────── */}
+        {/* ── Program Cards - dark cinematic section ────────────── */}
         <section
           className="relative overflow-hidden"
           style={{ backgroundColor: '#080d18', paddingTop: '72px', paddingBottom: '72px' }}
@@ -380,7 +380,7 @@ export default function ServicesPage() {
                   Not sure which treatment fits?
                 </p>
                 <p className="text-xs" style={{ color: 'rgba(72,144,247,0.8)' }}>
-                  Complete the 60-second pre-screen — we&apos;ll identify the right clinical pathway for you.
+                  Complete the 60-second pre-screen and we&apos;ll identify the right clinical pathway for you.
                 </p>
               </div>
               <Link
@@ -468,7 +468,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0.16, ease }}
               style={{ color: 'var(--text-secondary)', maxWidth: '440px', margin: '0 auto 2.5rem', fontSize: '15px', lineHeight: 1.7 }}
             >
-              Doctor-led assessment. Advanced diagnostics. A protocol built around your biology — not a generic plan.
+              Doctor-led assessment. Advanced diagnostics. A protocol built around your biology, not a generic plan.
             </motion.p>
 
             <motion.div

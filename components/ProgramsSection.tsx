@@ -10,7 +10,7 @@ const PROGRAMS = [
   {
     category: 'Hormonal Health',
     name: 'Hormone Optimisation',
-    tagline: 'Low drive, poor recovery, body composition changes — often rooted in hormonal dysfunction that standard testing misses.',
+    tagline: 'Low drive, poor recovery, body composition changes, often rooted in hormonal dysfunction that standard testing misses.',
     accent: 'var(--blue)',
     accentBg: 'rgba(72,144,247,0.05)',
     accentBorder: 'rgba(72,144,247,0.15)',
@@ -19,7 +19,7 @@ const PROGRAMS = [
     focus: [
       'Low testosterone, libido, and drive',
       'Fatigue and poor sleep quality',
-      'Body composition changes — fat gain, muscle loss',
+      'Body composition changes: fat gain, muscle loss',
       'Brain fog and reduced motivation',
     ],
     href: '/programs/hormone-optimisation',
@@ -33,7 +33,7 @@ const PROGRAMS = [
   {
     category: 'Sexual Health',
     name: 'Sexual Health',
-    tagline: 'Reduced libido, erectile dysfunction, and hormonal factors affecting sexual health — assessed and treated clinically.',
+    tagline: 'Reduced libido, erectile dysfunction, and hormonal factors affecting sexual health, assessed and treated clinically.',
     accent: '#f43f5e',
     accentBg: 'rgba(244,63,94,0.06)',
     accentBorder: 'rgba(244,63,94,0.18)',
@@ -41,7 +41,7 @@ const PROGRAMS = [
     tag: null,
     focus: [
       'Reduced libido and sexual drive',
-      'Erectile dysfunction — clinically assessed',
+      'Erectile dysfunction, clinically assessed',
       'Low testosterone with sexual symptoms',
       'Hormonal contributors to sexual health',
     ],
@@ -55,7 +55,7 @@ const PROGRAMS = [
   {
     category: 'Athletic Optimisation',
     name: 'Performance & Recovery',
-    tagline: 'Output has stalled, recovery is slow — and something clinical is likely limiting what your training can produce.',
+    tagline: 'Output has stalled, recovery is slow, and something clinical is likely limiting what your training can produce.',
     accent: '#f97316',
     accentBg: 'rgba(249,115,22,0.06)',
     accentBorder: 'rgba(249,115,22,0.18)',
@@ -100,7 +100,7 @@ const PROGRAMS = [
   {
     category: 'Hair & Scalp Health',
     name: 'Hair Restoration',
-    tagline: 'Shedding, thinning density, or hairline recession — address the biology driving hair loss, not just the surface.',
+    tagline: 'Shedding, thinning density, or hairline recession. Address the biology driving hair loss, not just the surface.',
     accent: '#a78bfa',
     accentBg: 'rgba(167,139,250,0.06)',
     accentBorder: 'rgba(167,139,250,0.18)',
@@ -123,7 +123,7 @@ const PROGRAMS = [
   {
     category: 'Skin & Dermal Health',
     name: 'Skin Regeneration',
-    tagline: 'Declining texture, firmness, and skin quality — driven by internal biology that topical products can\'t reach.',
+    tagline: 'Declining texture, firmness, and skin quality, driven by internal biology that topical products can\'t reach.',
     accent: '#38bdf8',
     accentBg: 'rgba(56,189,248,0.06)',
     accentBorder: 'rgba(56,189,248,0.18)',
@@ -146,14 +146,14 @@ const PROGRAMS = [
   {
     category: 'Musculoskeletal Health',
     name: 'Injury Repair & Recovery',
-    tagline: 'Slow healing, recurring injury, or post-surgical recovery — a clinical protocol supports what the body can\'t do alone.',
+    tagline: 'Slow healing, recurring injury, or post-surgical recovery. A clinical protocol supports what the body can\'t do alone.',
     accent: '#4ade80',
     accentBg: 'rgba(74,222,128,0.06)',
     accentBorder: 'rgba(74,222,128,0.18)',
     glowColor: 'rgba(74,222,128,0.04)',
     tag: null,
     focus: [
-      'Soft tissue injury — tendons, ligaments, muscle',
+      'Soft tissue injury: tendons, ligaments, muscle',
       'Slow or incomplete healing post-injury or surgery',
       'Recurring injury at the same sites',
       'Return-to-training clinical support',
@@ -169,7 +169,7 @@ const PROGRAMS = [
   {
     category: 'Longevity',
     name: 'Anti-Ageing & Longevity',
-    tagline: 'Comprehensive health optimisation for the long game — tracking what matters before problems emerge.',
+    tagline: 'Comprehensive health optimisation for the long game, tracking what matters before problems emerge.',
     accent: '#f59e0b',
     accentBg: 'rgba(245,158,11,0.06)',
     accentBorder: 'rgba(245,158,11,0.18)',
@@ -193,7 +193,7 @@ const PROGRAMS = [
   {
     category: 'Diagnostics',
     name: 'Comprehensive Blood Panels',
-    tagline: 'Doctor-issued pathology covering the markers your GP doesn\'t order — interpreted in clinical context, not just a normal range.',
+    tagline: 'Doctor-issued pathology covering the markers your GP doesn\'t order, interpreted in clinical context, not just a normal range.',
     accent: '#06b6d4',
     accentBg: 'rgba(6,182,212,0.06)',
     accentBorder: 'rgba(6,182,212,0.18)',
@@ -201,7 +201,7 @@ const PROGRAMS = [
     tag: null,
     focus: [
       'Multi-system hormone and metabolic panels',
-      'Doctor-issued referral — no GP required',
+      'Doctor-issued referral, no GP required',
       '4,000+ accredited collection centres',
       'Results interpreted by your Apex doctor',
     ],
@@ -422,7 +422,7 @@ export default function ProgramsSection() {
               Not sure which treatment fits?
             </p>
             <p className="text-xs" style={{ color: 'var(--blue)' }}>
-              Take the 2-min assessment or book a consultation — your doctor confirms the right pathway.
+              Take the 2-min assessment or book a consultation, and your doctor confirms the right pathway.
             </p>
           </div>
           <div className="flex items-center gap-3 flex-shrink-0">

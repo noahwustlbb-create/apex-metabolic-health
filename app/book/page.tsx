@@ -42,7 +42,7 @@ const DURATIONS = [
 ]
 
 const READINESS = [
-  { id: 'now',       label: "I'm ready — let's get started",       detail: 'Skip straight to booking' },
+  { id: 'now',       label: "I'm ready, let's get started",       detail: 'Skip straight to booking' },
   { id: 'talk',      label: 'I want to speak with someone first',   detail: 'Send a message, we respond within 1 business day' },
   { id: 'exploring', label: "I'm still exploring my options",       detail: 'Take the health assessment first' },
 ]
@@ -82,7 +82,7 @@ function BookingFlow() {
   const [capEmail, setCapEmail] = useState('')
   const [capPhone, setCapPhone] = useState('')
 
-  // Inline contact form (step 5 — message path)
+  // Inline contact form (step 5 - message path)
   const [message, setMessage] = useState('')
   const [contactSending, setContactSending] = useState(false)
   const [contactSent, setContactSent] = useState(false)
@@ -113,7 +113,7 @@ function BookingFlow() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-            subject: `Apex — Enquiry from ${capName || 'Website visitor'}`,
+            subject: `Apex Enquiry from ${capName || 'Website visitor'}`,
             name: capName, email: capEmail,
             phone: capPhone || 'Not provided',
             program: selectedProgram?.name || program || 'Not specified',
@@ -135,7 +135,7 @@ function BookingFlow() {
       ])
       const data = res.status === 'fulfilled' ? res.value : null
       if (data?.success) { setContactSent(true) }
-      else { setContactSent(true) } // treat as sent regardless — server backup captured it
+      else { setContactSent(true) } // treat as sent regardless - server backup captured it
     } catch {
       setContactError('Could not send. Please email admin@apexmetabolichealth.com.au')
     } finally {
@@ -276,7 +276,7 @@ function BookingFlow() {
                     Let's stay in touch
                   </h2>
                   <p className="text-sm max-w-sm mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    Enter your details and we'll send you the next steps. No spam — we reach out once, professionally.
+                    Enter your details and we'll send you the next steps. No spam. We reach out once, professionally.
                   </p>
                 </div>
 
@@ -297,7 +297,7 @@ function BookingFlow() {
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
                         access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-                        subject: `Apex — Book page lead: ${capName.trim() || capEmail.trim()}`,
+                        subject: `Apex Book page lead: ${capName.trim() || capEmail.trim()}`,
                         name: capName.trim(), email: capEmail.trim(),
                         phone: capPhone.trim() || 'Not provided', source: 'book',
                         program: selectedProgram?.name || program || 'Not specified',
@@ -334,7 +334,7 @@ function BookingFlow() {
               </motion.div>
             )}
 
-            {/* ── STEP 5: Outcome — 3 paths ── */}
+            {/* ── STEP 5: Outcome - 3 paths ── */}
             {step === 5 && (
               <motion.div key="s5" custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.38, ease }}>
                 {outcomeView === 'default' ? (
@@ -349,13 +349,13 @@ function BookingFlow() {
                         {durationLine(duration)}
                       </h2>
                       <p className="text-sm max-w-md mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                        Choose the path that feels right. All roads lead to the same place — a doctor who actually has time to understand your situation.
+                        Choose the path that feels right. All roads lead to the same place: a doctor who actually has time to understand your situation.
                       </p>
                     </div>
 
                     <div className="flex flex-col gap-4">
 
-                      {/* Path 1 — Book now */}
+                      {/* Path 1 - Book now */}
                       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0, ease }}
                         className="rounded-2xl p-6 relative overflow-hidden"
                         style={{ background: readiness === 'now' ? 'rgba(72,144,247,0.08)' : 'var(--surface)', border: `1px solid ${readiness === 'now' ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}` }}>
@@ -400,7 +400,7 @@ function BookingFlow() {
                         </a>
                       </motion.div>
 
-                      {/* Path 2 — Health assessment */}
+                      {/* Path 2 - Health assessment */}
                       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.08, ease }}
                         className="rounded-2xl p-6"
                         style={{ background: readiness === 'exploring' ? 'rgba(72,144,247,0.06)' : 'var(--surface)', border: `1px solid ${readiness === 'exploring' ? 'rgba(72,144,247,0.25)' : 'rgba(255,255,255,0.07)'}` }}>
@@ -422,7 +422,7 @@ function BookingFlow() {
                           </div>
                         </div>
                         <a href="https://app.apexmetabolichealth.com.au/signup" className="inline-flex items-center justify-center gap-2 w-full rounded-full py-3.5 text-sm font-semibold transition-all duration-150"
-                          style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'var(--text-primary)', background: 'transparent' }}
+                          style={{ border: '1px solid var(--border-strong)', color: 'var(--text-primary)', background: 'transparent' }}
                           onMouseEnter={e => { e.currentTarget.style.borderColor = ACCENT; e.currentTarget.style.color = ACCENT }}
                           onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'var(--text-primary)' }}>
                           Create Your Account
@@ -432,7 +432,7 @@ function BookingFlow() {
                         </a>
                       </motion.div>
 
-                      {/* Path 3 — Message us (replaces Calendly) */}
+                      {/* Path 3 - Message us (replaces Calendly) */}
                       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: 0.16, ease }}
                         className="rounded-2xl p-6"
                         style={{ background: readiness === 'talk' ? 'rgba(72,144,247,0.06)' : 'var(--surface)', border: `1px solid ${readiness === 'talk' ? 'rgba(72,144,247,0.25)' : 'rgba(255,255,255,0.07)'}` }}>
@@ -455,7 +455,7 @@ function BookingFlow() {
                         </div>
                         <button onClick={() => setOutcomeView('contact')}
                           className="inline-flex items-center justify-center gap-2 w-full rounded-full py-3.5 text-sm font-semibold transition-all duration-150"
-                          style={{ border: '1px solid rgba(255,255,255,0.12)', color: 'var(--text-primary)', background: 'transparent' }}
+                          style={{ border: '1px solid var(--border-strong)', color: 'var(--text-primary)', background: 'transparent' }}
                           onMouseEnter={e => { e.currentTarget.style.borderColor = ACCENT; e.currentTarget.style.color = ACCENT }}
                           onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'var(--text-primary)' }}>
                           Write to us

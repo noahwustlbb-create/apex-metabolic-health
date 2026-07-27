@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
     to: ADMIN_EMAIL,
     replyTo: email,
-    subject: `New lead — ${name || email} (${sourceLabel})`,
+    subject: `New lead: ${name || email} (${sourceLabel})`,
     html: `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"></head>
@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       <tr>
         <td style="padding-bottom:20px;">
           <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#4890f7;">Apex Metabolic Health</p>
-          <h1 style="margin:6px 0 0;font-size:20px;font-weight:700;color:#f0f4f8;">New lead — ${sourceLabel}</h1>
+          <h1 style="margin:6px 0 0;font-size:20px;font-weight:700;color:#f0f4f8;">New lead: ${sourceLabel}</h1>
         </td>
       </tr>
 

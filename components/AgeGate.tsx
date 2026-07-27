@@ -95,7 +95,7 @@ export default function AgeGate() {
                 className="btn-pill flex-1"
                 autoFocus
               >
-                I am 18 or older — Enter
+                I am 18 or older. Enter
               </button>
               <button
                 onClick={decline}

@@ -24,7 +24,7 @@ const TREATMENT_PICKS = [
   { id: 'longevity', label: 'Anti-Ageing & Longevity',     sub: 'Healthspan, vitality, long-term optimisation' },
   { id: 'skinhair',  label: 'Skin & Hair',                 sub: 'Hair restoration, skin health, anti-ageing' },
   { id: 'bloods',    label: 'Comprehensive Blood Tests',   sub: 'Full-panel diagnostics with doctor review' },
-  { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet — I'd like to speak to a doctor" },
+  { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet, but I'd like to speak to a doctor" },
 ]
 
 // ── Per-treatment configs ──────────────────────────────────────────────────────
@@ -46,7 +46,7 @@ const CONFIGS: Record<string, Config> = {
       'Difficulty building muscle',
       'Mood changes or low motivation',
       'Weight gain despite diet and exercise',
-      "I'm not sure — I'd like a health check",
+      "I'm not sure, I'd like a health check",
     ],
     q2: 'How long have they been experiencing this?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -59,10 +59,10 @@ const CONFIGS: Record<string, Config> = {
       'Improve metabolic health',
       'Address insulin resistance',
       'Manage a related condition',
-      "I'm not sure — guidance needed",
+      "I'm not sure, guidance needed",
     ],
     q2: 'Have they tried medically supervised weight loss before?',
-    opts2: ["No — this is the first time", "Yes — but it didn't stick", "Currently on a treatment that isn't working"],
+    opts2: ["No, this is the first time", "Yes, but it didn't stick", "Currently on a treatment that isn't working"],
   },
   sexual: {
     title: 'Sexual Health',
@@ -72,7 +72,7 @@ const CONFIGS: Record<string, Config> = {
       'Erectile dysfunction',
       'Performance and confidence',
       'Hormonal contributors to sexual health',
-      "I'm not sure — general assessment",
+      "I'm not sure, general assessment",
     ],
     q2: 'How long has this been a concern?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -85,7 +85,7 @@ const CONFIGS: Record<string, Config> = {
       'Improve recovery between training sessions',
       'Improve athletic output and performance',
       'Healthy ageing and mobility',
-      "I'm not sure — general assessment",
+      "I'm not sure, general assessment",
     ],
     q2: 'Which best describes their activity level?',
     opts2: [
@@ -104,7 +104,7 @@ const CONFIGS: Record<string, Config> = {
       'Extending healthspan long-term',
       'Physical and cognitive optimisation',
       'Proactive health monitoring and prevention',
-      "I'm not sure — a full review is needed",
+      "I'm not sure, a full review is needed",
     ],
     q2: 'How long have these concerns been present?',
     opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
@@ -117,7 +117,7 @@ const CONFIGS: Record<string, Config> = {
       'Skin ageing & fine lines',
       'Acne or breakouts',
       'Skin health & complexion',
-      "I'm not sure — guidance needed",
+      "I'm not sure, guidance needed",
     ],
     q2: "What's the main goal?",
     opts2: [
@@ -135,7 +135,7 @@ const CONFIGS: Record<string, Config> = {
       'Metabolic health (glucose, insulin, cholesterol)',
       'Full comprehensive panel',
       'Cardiovascular markers',
-      "I'm not sure — recommend a panel",
+      "I'm not sure, recommend a panel",
     ],
     q2: 'When did they last have a blood test?',
     opts2: ['Never', 'More than 2 years ago', 'Within the last 2 years', 'Within the last 6 months'],
@@ -156,7 +156,7 @@ const CONFIGS: Record<string, Config> = {
       'First time seeking specialist help',
       'Follow-up or ongoing care',
       'Second opinion',
-      "Not sure — just need to speak to a doctor",
+      "Not sure, I just need to speak to a doctor",
     ],
   },
 }
@@ -191,21 +191,21 @@ const Q3_SELF = {
     "I didn't know where to start",
     "Previous options felt generic or dismissive",
     "I'm just starting to explore my options",
-    "Nothing — I'm ready to move forward",
+    "Nothing, I'm ready to move forward",
   ],
 }
 
 const Q3_CAREGIVER = {
   question: "Does the person you're helping know you're looking into this for them?",
   options: [
-    "Yes — they've asked me to help manage this",
-    "Yes — and they're willing to consent to treatment",
+    "Yes, they've asked me to help manage this",
+    "Yes, and they're willing to consent to treatment",
     "I'm researching options before speaking to them",
     "They have difficulty managing healthcare themselves",
   ],
 }
 
-// ── Q0 — who is this for? ──────────────────────────────────────────────────────
+// ── Q0 - who is this for? ──────────────────────────────────────────────────────
 const Q0_OPTIONS = [
   {
     id: 'self',
@@ -299,7 +299,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
             textWrap: 'pretty' as React.CSSProperties['textWrap'],
           }}
         >
-          Answer 4 quick questions. We&apos;ll match you to the right clinical program — then you can create an account to get started.
+          Answer 4 quick questions. We&apos;ll match you to the right clinical program, then you can create an account to get started.
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.42, ease }}>
@@ -497,7 +497,7 @@ export default function ShortAssessment() {
                   className="font-bold tracking-tight mb-4"
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 4vw, 44px)', lineHeight: 1.1, letterSpacing: '-0.03em', color: TEXT }}
                 >
-                  {isCaregiver ? 'A strong match — for your family member.' : "You're a strong match."}
+                  {isCaregiver ? 'A strong match for your family member.' : "You're a strong match."}
                 </motion.h2>
 
                 <motion.p
@@ -519,7 +519,7 @@ export default function ShortAssessment() {
                       {[
                         'Create an account using your own name and contact details',
                         "During intake, enter the patient's full name and date of birth",
-                        "Upload their blood test results — even if the patient's name is on the report",
+                        "Upload their blood test results, even if the patient's name is on the report",
                         'Our clinical team will confirm consent with the patient before any treatment begins',
                       ].map((item, i) => (
                         <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: '#4b5563' }}>
@@ -536,7 +536,7 @@ export default function ShortAssessment() {
                     initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4, ease }}
                     className="text-sm mb-10" style={{ color: '#6b7280' }}
                   >
-                    Create a free account to get your personalised plan — or log in if you already have one.
+                    Create a free account to get your personalised plan, or log in if you already have one.
                   </motion.p>
                 )}
 
@@ -676,7 +676,7 @@ export default function ShortAssessment() {
                       <StepHeading
                         eyebrow={hasPredefinedType ? 'Question 3 of 3' : 'Question 4 of 4'}
                         title={q3Data.question}
-                        sub={isCaregiver ? "We take this seriously — clinical consent is required before any treatment begins." : "One last question, then we'll show your results."}
+                        sub={isCaregiver ? "We take this seriously: clinical consent is required before any treatment begins." : "One last question, then we'll show your results."}
                       />
                       <div className="flex flex-col gap-3">
                         {q3Data.options.map(opt => (

@@ -85,7 +85,7 @@ export default function ConfirmationPage() {
                 <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: 'var(--blue)' }}>
                   admin@apexmetabolichealth.com.au
                 </a>{' '}
-                — we respond within 1 business day.
+                and we respond within 1 business day.
               </p>
             </motion.div>
 
@@ -97,13 +97,13 @@ export default function ConfirmationPage() {
               style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.14)' }}
             >
               <p className="text-sm font-semibold mb-1" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>Want to track your results and consultations?</p>
-              <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.5)' }}>Create a free account to manage your health records, view upcoming appointments, and communicate with your doctor — all in one place.</p>
+              <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.5)' }}>Create a free account to manage your health records, view upcoming appointments, and communicate with your doctor, all in one place.</p>
               <Link
                 href="/signup"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-sm text-xs font-bold tracking-wide transition-all duration-150"
                 style={{ background: 'var(--blue)', color: '#fff', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
               >
-                Create account — it&apos;s free
+                Create account, it&apos;s free
               </Link>
             </motion.div>
 

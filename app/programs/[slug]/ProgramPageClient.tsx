@@ -429,7 +429,7 @@ const PROGRAM_FAQS = [
   },
   {
     q: 'What blood tests are included?',
-    a: 'Our panels go well beyond standard GP orders — full hormone profiles, metabolic markers, thyroid function, inflammatory markers, and nutritional status. The full picture needed to build a protocol, not just check for disease.',
+    a: 'Our panels go well beyond standard GP orders: full hormone profiles, metabolic markers, thyroid function, inflammatory markers, and nutritional status. The full picture needed to build a protocol, not just check for disease.',
   },
   {
     q: 'Where do I get my blood test done?',
@@ -437,7 +437,7 @@ const PROGRAM_FAQS = [
   },
   {
     q: 'How does ongoing care work?',
-    a: "After your initial consultation, you'll have structured clinical reviews every 3 months — a blood panel followed by a telehealth consultation where your doctor reviews results and adjusts your protocol. Script renewal requires a review. It's not a set-and-forget service.",
+    a: "After your initial consultation, you'll have structured clinical reviews every 3 months: a blood panel followed by a telehealth consultation where your doctor reviews results and adjusts your protocol. Script renewal requires a review. It's not a set-and-forget service.",
   },
   {
     q: 'Is this legal in Australia?',

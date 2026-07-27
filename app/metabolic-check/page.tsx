@@ -12,7 +12,7 @@ const QUESTIONS = [
   { id: 3,  text: 'Do you experience persistent fatigue or low energy throughout the day?' },
   { id: 4,  text: 'Do you have strong sugar or carbohydrate cravings, particularly in the afternoon?' },
   { id: 5,  text: 'Do you feel mentally foggy, slow, or have difficulty concentrating?' },
-  { id: 6,  text: 'Do you experience energy crashes — especially after meals?' },
+  { id: 6,  text: 'Do you experience energy crashes, especially after meals?' },
   { id: 7,  text: 'Has a doctor mentioned elevated blood sugar, cholesterol, or blood pressure?' },
   { id: 8,  text: 'Do you have difficulty sleeping or wake feeling unrefreshed?' },
   { id: 9,  text: 'Has your motivation, drive, or general mood noticeably declined?' },
@@ -37,7 +37,7 @@ const TIER = {
     bg: '#f0fdf4',
     border: '#bbf7d0',
     heading: 'Your metabolic markers appear within a healthy range.',
-    body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually — advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
+    body: 'Your current symptom profile suggests low risk of metabolic dysregulation. That said, metabolic health shifts gradually. Advanced biomarker analysis gives you a precise baseline and catches changes before they become problems.',
     cta: 'Get a Metabolic Baseline',
     href: 'https://app.apexmetabolichealth.com.au/signup',
   },
@@ -47,7 +47,7 @@ const TIER = {
     bg: '#fffbeb',
     border: '#fde68a',
     heading: 'Your results suggest signs of metabolic dysregulation.',
-    body: 'Several of your responses align with early-stage metabolic dysfunction — including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
+    body: 'Several of your responses align with early-stage metabolic dysfunction, including insulin resistance, poor body composition, and energy dysregulation. A clinical consultation and targeted blood panel will identify the root cause and a treatment pathway.',
     cta: 'Book a Metabolic Consultation',
     href: 'https://app.apexmetabolichealth.com.au/signup',
   },
@@ -272,7 +272,7 @@ export default function MetabolicCheckPage() {
                 </div>
 
                 <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--blue)', marginBottom: 14, fontFamily: 'var(--font-space-grotesk)' }}>
-                  Metabolic Screening — {result!.yesCount}/{total} symptoms reported
+                  Metabolic Screening: {result!.yesCount}/{total} symptoms reported
                 </p>
 
                 <h2 style={{

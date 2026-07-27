@@ -72,7 +72,7 @@ function CheckoutModal({ url, onClose }: { url: string; onClose: () => void }) {
           <button
             onClick={onClose}
             className="w-11 h-11 rounded-full flex items-center justify-center transition-colors duration-150"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(240,244,248,0.5)', cursor: 'pointer' }}
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(240,244,248,0.7)', cursor: 'pointer' }}
             aria-label="Close checkout"
             onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.1)' }}
             onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)' }}
@@ -107,7 +107,7 @@ function CheckoutModal({ url, onClose }: { url: string; onClose: () => void }) {
       {/* Bottom trust bar */}
       <div className="flex items-center justify-center gap-4 px-4 py-2.5 flex-shrink-0" style={{ background: '#070a0d', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <p className="text-[10px]" style={{ color: 'rgba(240,244,248,0.25)' }}>
-          Blood test collection by Bloody Good Tests — TGA accredited partner · SSL secured
+          Blood test collection by Bloody Good Tests, a TGA accredited partner · SSL secured
         </p>
       </div>
     </div>
@@ -137,7 +137,7 @@ function PanelCard({ bundle, onOrder }: { bundle: BgtBundle; onOrder: (url: stri
         <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: BLUE }}>Blood Panel</p>
         <h3 className="font-bold text-base mb-2 leading-snug" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>{bundle.name}</h3>
         {bundle.description && (
-          <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.5)' }}>{bundle.description}</p>
+          <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.7)' }}>{bundle.description}</p>
         )}
 
         {biomarkers.length > 0 && (
@@ -219,7 +219,7 @@ export default function BgtOrderPage() {
           <h1 className="font-bold mb-4 leading-tight" style={{ fontSize: 'clamp(28px,4vw,44px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
             Doctor-reviewed blood panels
           </h1>
-          <p className="text-sm leading-relaxed mx-auto max-w-xl" style={{ color: 'rgba(240,244,248,0.5)' }}>
+          <p className="text-sm leading-relaxed mx-auto max-w-xl" style={{ color: 'rgba(240,244,248,0.7)' }}>
             Order online, collect at an accredited pathology centre near you, and get results reviewed by our clinical team. No GP referral required.
           </p>
 
@@ -231,7 +231,7 @@ export default function BgtOrderPage() {
             ].map(t => (
               <div key={t} className="flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full" style={{ background: BLUE }} />
-                <span className="text-xs" style={{ color: 'rgba(240,244,248,0.5)' }}>{t}</span>
+                <span className="text-xs" style={{ color: 'rgba(240,244,248,0.7)' }}>{t}</span>
               </div>
             ))}
           </div>

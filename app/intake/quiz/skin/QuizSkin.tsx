@@ -52,7 +52,7 @@ const config: QuizConfig = {
         { label: 'Over-the-counter skincare products', value: 'otc' },
         { label: 'Prescription topical treatments', value: 'rx_topical' },
         { label: 'Professional treatments (peels, laser, etc.)', value: 'professional' },
-        { label: "Nothing yet — this is my first step", value: 'nothing' },
+        { label: "Nothing yet: this is my first step", value: 'nothing' },
       ],
     },
     {
@@ -60,11 +60,11 @@ const config: QuizConfig = {
       id: 'skin_type',
       question: 'How would you describe your skin?',
       options: [
-        { label: 'Normal — balanced, no major issues', value: 'normal' },
-        { label: 'Dry — often tight or flaky', value: 'dry' },
-        { label: 'Oily — prone to shine or breakouts', value: 'oily' },
-        { label: 'Combination — oily in some areas, dry in others', value: 'combo' },
-        { label: 'Sensitive — reactive to products or sun', value: 'sensitive' },
+        { label: 'Normal: balanced, no major issues', value: 'normal' },
+        { label: 'Dry: often tight or flaky', value: 'dry' },
+        { label: 'Oily: prone to shine or breakouts', value: 'oily' },
+        { label: 'Combination: oily in some areas, dry in others', value: 'combo' },
+        { label: 'Sensitive: reactive to products or sun', value: 'sensitive' },
       ],
     },
     {

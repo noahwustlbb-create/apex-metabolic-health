@@ -21,8 +21,8 @@ const STEPS = [
     title: 'Create your account',
     duration: '2 minutes',
     phase: 'Day 1',
-    body: 'Go to app.apexmetabolichealth.com.au and sign up. No GP referral. No pre-screening. Your patient portal is live immediately — this is where your entire care journey lives.',
-    details: ['No GP referral required', 'Secure patient portal created instantly', 'Australia-wide — 100% online'],
+    body: 'Go to app.apexmetabolichealth.com.au and sign up. No GP referral. No pre-screening. Your patient portal is live immediately. This is where your entire care journey lives.',
+    details: ['No GP referral required', 'Secure patient portal created instantly', 'Australia-wide, 100% online'],
   },
   {
     n: '02',
@@ -31,7 +31,7 @@ const STEPS = [
     title: 'Complete your clinical intake',
     duration: '5–10 minutes',
     phase: 'Day 1',
-    body: 'Inside your portal, complete a short intake covering your health history, current symptoms, medications, and goals. This is reviewed by your doctor — not processed by an algorithm — before anything else happens.',
+    body: 'Inside your portal, complete a short intake covering your health history, current symptoms, medications, and goals. This is reviewed by your doctor, not processed by an algorithm, before anything else happens.',
     details: ['Completed inside your patient portal', 'Reviewed by a doctor, not an algorithm', 'Determines your blood panel and consultation approach'],
   },
   {
@@ -41,7 +41,7 @@ const STEPS = [
     title: 'Get your blood work done',
     duration: '< 48 hours for results',
     phase: 'Day 1–2',
-    body: 'We arrange your pathology referral through the portal. Attend any of 4,000+ accredited collection centres across Australia — no appointment required at most locations. Hormone panels require a fasted morning draw. Results are returned directly to your portal within 48 hours.',
+    body: 'We arrange your pathology referral through the portal. Attend any of 4,000+ accredited collection centres across Australia, with no appointment required at most locations. Hormone panels require a fasted morning draw. Results are returned directly to your portal within 48 hours.',
     details: ['4,000+ accredited collection centres nationwide', 'Fasted morning draw required for hormone treatments', 'Results uploaded to your portal within 48 hours'],
   },
   {
@@ -51,8 +51,8 @@ const STEPS = [
     title: 'Telehealth consultation',
     duration: '30–60 minutes',
     phase: 'Day 3–5',
-    body: 'Your AHPRA-registered doctor reviews your blood results and intake, takes a full clinical history, and builds your personalised protocol. This is a thorough medical consultation — not a prescription call. Video or phone, booked through your portal.',
-    details: ['Video or phone — your choice', 'Full biomarker review and clinical history', 'Leave with a written protocol and clear next steps'],
+    body: 'Your AHPRA-registered doctor reviews your blood results and intake, takes a full clinical history, and builds your personalised protocol. This is a thorough medical consultation, not a prescription call. Video or phone, booked through your portal.',
+    details: ['Video or phone, your choice', 'Full biomarker review and clinical history', 'Leave with a written protocol and clear next steps'],
   },
   {
     n: '05',
@@ -61,7 +61,7 @@ const STEPS = [
     title: 'Protocol begins. Care continues.',
     duration: '10–14 days to delivery',
     phase: 'From week 1',
-    body: 'Your prescription is issued via our ePrescribing system and coordinated through our TGA-compliant pharmacy partner. Medication is compounded and dispatched directly to your door. 3-monthly reviews — blood panel, consultation, script renewal — are built into your portal and required by AHPRA and TGA guidelines.',
+    body: 'Your prescription is issued via our ePrescribing system and coordinated through our TGA-compliant pharmacy partner. Medication is compounded and dispatched directly to your door. 3-monthly reviews (blood panel, consultation, script renewal) are built into your portal and required by AHPRA and TGA guidelines.',
     details: ['Medication dispatched in 10–14 days', '3-monthly review required for all active protocols', 'Portal manages your review schedule automatically'],
   },
 ]
@@ -102,7 +102,7 @@ const PORTAL_FEATURES = [
       </svg>
     ),
     title: 'Your treatment protocol',
-    body: 'Your written protocol lives in your portal — accessible any time. Updated after every consultation.',
+    body: 'Your written protocol lives in your portal, accessible any time. Updated after every consultation.',
   },
   {
     icon: (
@@ -127,7 +127,7 @@ const PORTAL_FEATURES = [
 const FAQS = [
   {
     q: 'Do I need a GP referral to get started?',
-    a: 'No. You sign up directly at app.apexmetabolichealth.com.au — no referral, no prior medical records required. Clinical suitability is assessed by our AHPRA-registered doctors during your consultation.',
+    a: 'No. You sign up directly at app.apexmetabolichealth.com.au with no referral and no prior medical records required. Clinical suitability is assessed by our AHPRA-registered doctors during your consultation.',
   },
   {
     q: 'What happens inside the patient portal?',
@@ -135,7 +135,7 @@ const FAQS = [
   },
   {
     q: 'Can I use existing blood test results?',
-    a: 'In some cases, yes — particularly if results are recent and comprehensive. Upload them via your portal and our team will assess whether they\'re sufficient before scheduling your consultation.',
+    a: 'In some cases, yes, particularly if results are recent and comprehensive. Upload them via your portal and our team will assess whether they\'re sufficient before scheduling your consultation.',
   },
   {
     q: 'How long before I receive my medication?',
@@ -147,7 +147,7 @@ const FAQS = [
   },
   {
     q: 'How are consultations conducted?',
-    a: 'All consultations are via secure telehealth — video or phone. You book through your patient portal and a link is sent automatically. You need a private space and a device with camera or microphone.',
+    a: 'All consultations are via secure telehealth, video or phone. You book through your patient portal and a link is sent automatically. You need a private space and a device with camera or microphone.',
   },
   {
     q: 'What does the 3-month review involve?',
@@ -155,7 +155,7 @@ const FAQS = [
   },
   {
     q: 'Is there a lock-in contract?',
-    a: 'No. Review consultations are required for patients on active protocols — that\'s a regulatory requirement, not a commercial one. You can step back from treatment at any point by speaking with your doctor.',
+    a: 'No. Review consultations are required for patients on active protocols. That\'s a regulatory requirement, not a commercial one. You can step back from treatment at any point by speaking with your doctor.',
   },
 ]
 
@@ -216,7 +216,7 @@ function Hero() {
           className="text-base md:text-lg leading-relaxed mb-8"
           style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '520px' }}
         >
-          Everything happens through your patient portal — from intake to blood results to consultation booking to ongoing care.
+          Everything happens through your patient portal, from intake to blood results to consultation booking to ongoing care.
           No paperwork, no GP run-around, no guesswork.
         </motion.p>
 
@@ -227,7 +227,7 @@ function Hero() {
           className="flex flex-wrap items-center gap-3 mb-12"
         >
           <a href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary">
-            Create Your Account — Free
+            Create Your Account (Free)
             <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -282,7 +282,7 @@ function PortalIntro() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid var(--color-border-muted)' }}
       aria-label="Your patient portal"
     >
       <div className="container-tight relative z-10">
@@ -304,7 +304,7 @@ function PortalIntro() {
               className="text-sm leading-relaxed mb-8"
               style={{ color: 'var(--text-primary)', opacity: 0.55, maxWidth: '440px' }}
             >
-              Your intake, blood results, consultation bookings, treatment protocol, and 3-monthly reviews are all managed through your secure patient portal. You don't need to chase anything — the portal prompts you at every step.
+              Your intake, blood results, consultation bookings, treatment protocol, and 3-monthly reviews are all managed through your secure patient portal. You don't need to chase anything. The portal prompts you at every step.
             </motion.p>
 
             <motion.div
@@ -348,13 +348,13 @@ function PortalIntro() {
                 style={{ background: 'rgba(72,144,247,0.05)', borderBottom: '1px solid rgba(72,144,247,0.1)' }}
               >
                 <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255,255,255,0.12)' }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255,255,255,0.12)' }} />
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(255,255,255,0.12)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'var(--color-border-emphasis)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'var(--color-border-emphasis)' }} />
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'var(--color-border-emphasis)' }} />
                 </div>
                 <div
                   className="flex-1 mx-3 px-3 py-1 rounded-md text-[11px] font-mono"
-                  style={{ background: 'rgba(255,255,255,0.04)', color: 'var(--text-primary)', opacity: 0.45 }}
+                  style={{ background: 'var(--state-hover-bg)', color: 'var(--text-primary)', opacity: 0.6 }}
                 >
                   app.apexmetabolichealth.com.au
                 </div>
@@ -427,7 +427,7 @@ function PortalIntro() {
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-[12px] font-semibold transition-all duration-150"
                   style={{ background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', color: '#fff', boxShadow: '0 4px 16px rgba(72,144,247,0.32)', textDecoration: 'none' }}
                 >
-                  Create your account — it&apos;s free
+                  Create your account, it&apos;s free
                   <svg viewBox="0 0 16 16" fill="none" width="12" height="12" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -483,7 +483,7 @@ function ProcessSteps() {
         </div>
 
         <div className="relative">
-          {/* Vertical connector — desktop */}
+          {/* Vertical connector - desktop */}
           <div
             className="absolute left-[26px] top-8 bottom-8 w-px hidden md:block"
             style={{ background: 'linear-gradient(to bottom, transparent, rgba(72,144,247,0.12) 8%, rgba(72,144,247,0.12) 92%, transparent)' }}
@@ -534,7 +534,7 @@ function ProcessSteps() {
                         </span>
                         <span
                           className="text-[9px] font-medium px-2 py-1 rounded-full"
-                          style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', color: 'var(--text-primary)', opacity: 0.45 }}
+                          style={{ background: 'var(--state-hover-bg)', border: '1px solid var(--color-border-muted)', color: 'var(--text-primary)', opacity: 0.6 }}
                         >
                           {step.duration}
                         </span>
@@ -608,7 +608,7 @@ function AfterConsultation() {
     <section
       ref={ref}
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid rgba(255,255,255,0.04)' }}
+      style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid var(--color-border-muted)' }}
       aria-label="After your consultation"
     >
       <div className="container-tight relative z-10">
@@ -646,14 +646,14 @@ function AfterConsultation() {
                   Protocol Membership
                 </p>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
-                  Full ongoing clinical management. The 3-monthly review cycle, prescribing fees waived, medication at cost price, and nursing support — all coordinated through your portal.
+                  Full ongoing clinical management. The 3-monthly review cycle, prescribing fees waived, medication at cost price, and nursing support, all coordinated through your portal.
                 </p>
               </div>
 
               <div className="flex flex-col gap-2.5 mb-8">
                 {[
                   'Prescribing fees waived ($125 per script otherwise)',
-                  'Medication at pharmacy cost — no mark-up',
+                  'Medication at pharmacy cost, no mark-up',
                   'Discounted follow-up blood panels',
                   '3-monthly review and protocol adjustment',
                   'Nursing check-ins every 6–8 weeks',

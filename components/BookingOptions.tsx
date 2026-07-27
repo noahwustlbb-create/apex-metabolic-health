@@ -117,7 +117,7 @@ export default function BookingOptions({
           </p>
         </motion.div>
 
-        {/* Cards grid — featured card full width on mobile, top-left on desktop */}
+        {/* Cards grid - featured card full width on mobile, top-left on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {OPTIONS.map((opt, i) => (
             <motion.div
@@ -225,7 +225,7 @@ export default function BookingOptions({
               onMouseEnter={(e) => { e.currentTarget.style.color = '#6AAEE8' }}
               onMouseLeave={(e) => { e.currentTarget.style.color = '#3575C6' }}
             >
-              Three Ways to Book — See All Options
+              Three Ways to Book: See All Options
               <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

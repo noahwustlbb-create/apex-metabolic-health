@@ -101,7 +101,7 @@ export default function TreatmentSelector() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
-  // Scroll progress for the card strip — the affordance that says
+  // Scroll progress for the card strip - the affordance that says
   // "there are more cards" and "here's where you are".
   const [scrollProgress, setScrollProgress] = useState(0)
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
@@ -294,7 +294,7 @@ export default function TreatmentSelector() {
         </div>
       </div>
 
-      {/* ── Scroll progress — where you are in the 7 pathways ── */}
+      {/* ── Scroll progress - where you are in the 7 pathways ── */}
       <div
         style={{
           paddingLeft: 'clamp(24px, 5.5vw, 80px)',

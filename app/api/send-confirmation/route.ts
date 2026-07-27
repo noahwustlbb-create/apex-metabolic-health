@@ -5,53 +5,53 @@ type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' |
 
 const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
   'hormone-consult': {
-    subject: 'Your Hormone Consultation — Apex Metabolic Health',
+    subject: 'Your Hormone Consultation | Apex Metabolic Health',
     heading: 'Your hormone consult intake has been received.',
     subheading: 'Our clinical team will review your case and confirm your consultation within 1 business day.',
     nextSteps: [
       'Our team reviews your intake and confirms your appointment time',
-      'Your doctor issues a pathology referral for your hormone panel — collected at 4,000+ accredited centres',
+      'Your doctor issues a pathology referral for your hormone panel, collected at 4,000+ accredited centres',
       'Your AHPRA-registered doctor reviews your results and builds your personalised protocol',
     ],
   },
   'general-consult': {
-    subject: 'Your Consultation Request — Apex Metabolic Health',
+    subject: 'Your Consultation Request | Apex Metabolic Health',
     heading: 'Your clinical intake has been received.',
     subheading: 'Our team will be in touch within 1 business day to confirm your consultation.',
     nextSteps: [
       'Our team reviews your intake and confirms your appointment',
       'Your doctor reviews your health history before your consultation',
-      'Telehealth consultation — your doctor builds your personalised protocol',
+      'Telehealth consultation where your doctor builds your personalised protocol',
     ],
   },
   'discovery': {
-    subject: 'Your Discovery Call — Apex Metabolic Health',
+    subject: 'Your Discovery Call | Apex Metabolic Health',
     heading: "We've received your discovery call request.",
     subheading: "One of our team will be in touch within 1 business day to lock in a time.",
     nextSteps: [
       "We'll call or message you to confirm your 10-minute slot",
       'Our team walks you through the right program for your goals',
-      'You decide if Apex is the right fit — zero pressure',
+      'You decide if Apex is the right fit, zero pressure',
     ],
   },
   'bloods': {
-    subject: 'Your Blood Panel Request — Apex Metabolic Health',
+    subject: 'Your Blood Panel Request | Apex Metabolic Health',
     heading: 'Your blood panel request has been received.',
     subheading: 'Your doctor-issued pathology referral will be sent to this email within 24 hours.',
     nextSteps: [
       'Doctor-issued referral arrives in your inbox within 24 hours',
-      'Collect at any of 4,000+ accredited pathology centres — no GP required',
+      'Collect at any of 4,000+ accredited pathology centres, no GP required',
       'Results reviewed by your Apex doctor with a full clinical interpretation',
     ],
   },
   'consult-intake': {
-    subject: 'Your Intake Confirmed — Apex Metabolic Health',
+    subject: 'Your Intake Confirmed | Apex Metabolic Health',
     heading: "Your intake has been received.",
     subheading: "Our clinical team will review your case and reach out within 1 business day.",
     nextSteps: [
       'Our team reviews your intake before your consultation',
       'Your doctor is briefed on your history and goals',
-      'Telehealth consultation — your personalised protocol is built',
+      'Telehealth consultation where your personalised protocol is built',
     ],
   },
 }
@@ -101,7 +101,7 @@ function buildEmail(firstName: string, formType: FormType): string {
         <td style="background:#0d1117;border:1px solid rgba(72,144,247,0.15);border-radius:16px 16px 0 0;padding:40px 40px 32px;">
           <p style="margin:0 0 10px;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#4890f7;">Apex Metabolic Health</p>
           <h1 style="margin:0 0 14px;font-size:22px;font-weight:700;color:#f0f4f8;line-height:1.25;">
-            ${firstName ? `Hi ${firstName} — ` : ''}${config.heading}
+            ${firstName ? `Hi ${firstName}, ` : ''}${config.heading}
           </h1>
           <p style="margin:0;font-size:14px;line-height:1.7;color:#8899aa;">${config.subheading}</p>
         </td>

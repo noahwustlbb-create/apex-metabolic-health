@@ -78,7 +78,7 @@ export default function CTABanner() {
               <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-200" />
             </a>
 
-            {/* Secondary — phone */}
+            {/* Secondary - phone */}
             <a
               href="tel:+611300000000"
               className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium

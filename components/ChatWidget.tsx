@@ -171,7 +171,7 @@ export default function ChatWidget() {
                     className="rounded-xl rounded-tl-sm px-4 py-3 max-w-[85%] text-sm leading-relaxed"
                     style={{ backgroundColor: 'var(--elevated-high)', color: 'var(--text-primary)' }}
                   >
-                    Hi — I&apos;m the Apex clinical advisor. I can help you find the right program, explain how our process works, or answer any questions before you book.
+                    Hi, I&apos;m the Apex clinical advisor. I can help you find the right program, explain how our process works, or answer any questions before you book.
                   </div>
                   <div className="mt-3 flex flex-col gap-2">
                     {SUGGESTED_QUESTIONS.map((q) => (

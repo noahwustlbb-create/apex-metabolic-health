@@ -7,7 +7,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 const TESTIMONIALS = [
   {
-    quote: 'Finally felt heard. The doctor spent nearly an hour going through my results and explaining exactly what was driving everything. I\'d been dismissed by my GP three times with "your bloods are fine." They weren\'t fine — they just weren\'t looking at the right things.',
+    quote: 'Finally felt heard. The doctor spent nearly an hour going through my results and explaining exactly what was driving everything. I\'d been dismissed by my GP three times with "your bloods are fine." They weren\'t fine; they just weren\'t looking at the right things.',
     name: 'M.K.',
     age: 42,
     city: 'Brisbane',
@@ -23,7 +23,7 @@ const TESTIMONIALS = [
     featured: false,
   },
   {
-    quote: 'Worth it for the pathology alone. The panel they ordered flagged things my regular GP had never tested for. It gave me actual clinical context — not just a number and "that\'s normal." The protocol I was given made sense once I understood the data behind it.',
+    quote: 'Worth it for the pathology alone. The panel they ordered flagged things my regular GP had never tested for. It gave me actual clinical context, not just a number and "that\'s normal." The protocol I was given made sense once I understood the data behind it.',
     name: 'D.R.',
     age: 51,
     city: 'Sydney',
@@ -95,7 +95,7 @@ export default function Testimonials() {
         {/* Card grid */}
         <div ref={cardsRef} className="grid grid-cols-1 lg:grid-cols-5 gap-4 items-start">
 
-          {/* Featured testimonial — spans 3 of 5 cols */}
+          {/* Featured testimonial - spans 3 of 5 cols */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={cardsInView ? { opacity: 1, y: 0 } : {}}
@@ -151,7 +151,7 @@ export default function Testimonials() {
             </div>
           </motion.div>
 
-          {/* Secondary testimonials — stack in 2 cols */}
+          {/* Secondary testimonials - stack in 2 cols */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             {secondary.map((t, i) => (
               <motion.div

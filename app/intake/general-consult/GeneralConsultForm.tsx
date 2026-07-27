@@ -306,10 +306,10 @@ function CheckGrid({ items, selected, toggle }: { items: string[]; selected: str
 
 function PathwayCards({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const memberFeatures = [
-    'Zero medication mark-ups — dispensed at cost price through our partner pharmacy',
+    'Zero medication mark-ups: dispensed at cost price through our partner pharmacy',
     'Doctor oversight and protocol refinement across every review cycle',
     'Blood work heavily discounted every cycle, biomarker trends tracked over time',
-    'Prescribing fee waived — scripts issued and sent to you at no extra cost',
+    'Prescribing fee waived: scripts issued and sent to you at no extra cost',
     'Discounted doctor review consultations',
     'Nursing team support with follow-ups every 6–8 weeks',
     'Priority clinical support between reviews',
@@ -341,7 +341,7 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <ul className="flex flex-col gap-2 mb-6">
           {memberFeatures.map(f => (
             <li key={f} className="flex items-start gap-2 text-xs" style={{ color: DIM }}>
-              <span style={{ color: BLUE, flexShrink: 0 }}>—</span>{f}
+              <span style={{ color: BLUE, flexShrink: 0 }}>•</span>{f}
             </li>
           ))}
         </ul>
@@ -375,11 +375,11 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         </p>
         <ul className="flex flex-col gap-1.5 mb-2">
           <li className="flex items-start gap-2 text-xs" style={{ color: DIM }}>
-            <span style={{ color: BLUE, flexShrink: 0 }}>—</span>
+            <span style={{ color: BLUE, flexShrink: 0 }}>•</span>
             You pay the PHARMACY price for all medications.
           </li>
           <li className="flex items-start gap-2 text-xs" style={{ color: DIM }}>
-            <span style={{ color: BLUE, flexShrink: 0 }}>—</span>
+            <span style={{ color: BLUE, flexShrink: 0 }}>•</span>
             <div>
               Medication invoices include a clinic Administration, Handling and Infrastructure fee starting from <strong style={{ color: TEXT }}>$50</strong>, which covers:
               <ul className="mt-1 flex flex-col gap-0.5">
@@ -402,7 +402,7 @@ function PathwayCards({ value, onChange }: { value: string; onChange: (v: string
         <ul className="flex flex-col gap-1 mb-3">
           {['Script and treatment plan sent directly to you', 'Fill at any pharmacy of your choice', 'Dosing guides included'].map(f => (
             <li key={f} className="flex items-start gap-2 text-xs" style={{ color: DIM }}>
-              <span style={{ color: BLUE, flexShrink: 0 }}>—</span>{f}
+              <span style={{ color: BLUE, flexShrink: 0 }}>•</span>{f}
             </li>
           ))}
         </ul>
@@ -536,7 +536,7 @@ export default function GeneralConsultForm() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `General Consult Intake — ${data.firstName} ${data.lastName}`,
+          subject: `General Consult Intake - ${data.firstName} ${data.lastName}`,
           from_name: 'Apex Metabolic Health',
           formType: 'General Consult Intake',
           name: `${data.firstName} ${data.lastName}`,
@@ -571,8 +571,8 @@ export default function GeneralConsultForm() {
           typical_diet: data.typicalDiet,
           alcohol_per_week: data.alcoholPerWeek,
           recreational_drugs: data.recreationalDrugs,
-          smoking: data.smokingStatus === 'Yes' ? `Yes — ${data.smokingPerDay}/day` : data.smokingStatus,
-          past_smoker: data.pastSmoker === 'Yes' ? `Yes — quit ${data.quitYear}` : data.pastSmoker,
+          smoking: data.smokingStatus === 'Yes' ? `Yes, ${data.smokingPerDay}/day` : data.smokingStatus,
+          past_smoker: data.pastSmoker === 'Yes' ? `Yes, quit ${data.quitYear}` : data.pastSmoker,
           weight_change: `Loss: ${data.weightLoss || '0'}kg  Gain: ${data.weightGain || '0'}kg`,
           stress_score: data.stressScore, stress_events: data.stressEvents,
           hobbies: data.hobbies,
@@ -624,7 +624,7 @@ export default function GeneralConsultForm() {
                     </span>
                   </h1>
                   <p className="text-sm leading-relaxed mb-5" style={{ color: DIM, maxWidth: 520 }}>
-                    Complete this intake before your consultation. Your doctor reviews all information prior to your appointment — the more detail you provide, the better prepared they will be.
+                    Complete this intake before your consultation. Your doctor reviews all information prior to your appointment. The more detail you provide, the better prepared they will be.
                   </p>
                   <div className="flex flex-wrap gap-5">
                     {[['⏱', '10–15 min'], ['🔒', 'Private & confidential'], ['💾', 'Auto-saved'], ['🩺', 'Doctor reviewed']].map(([icon, text]) => (
@@ -640,7 +640,7 @@ export default function GeneralConsultForm() {
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.2 }}
                   className="flex flex-col gap-12">
 
-                  {/* 01 — Personal Information */}
+                  {/* 01 - Personal Information */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="01" title="Personal Information" sub="Your basic registration details for our clinical records." />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -655,7 +655,7 @@ export default function GeneralConsultForm() {
                     <F label="Occupation / job title" value={data.occupation} onChange={v => set('occupation', v)} placeholder="e.g. Construction manager" />
                   </div>
 
-                  {/* 02 — Contact & Address */}
+                  {/* 02 - Contact & Address */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="02" title="Contact & Address" sub="How we reach you and your registered address." />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -687,7 +687,7 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 03 — Medicare & Identification */}
+                  {/* 03 - Medicare & Identification */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="03" title="Medicare & Identification" sub="Required for safe prescribing and monitored medicine compliance." />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -699,9 +699,9 @@ export default function GeneralConsultForm() {
                     </div>
                     <F label="Medicare reference number" value={data.medicareRef} onChange={v => set('medicareRef', v)} placeholder="e.g. 1" />
                     <div className="p-4 rounded-xl" style={{ background: SURFACE, border: `1px solid ${BORDER}` }}>
-                      <p className="text-xs font-semibold mb-1.5" style={{ color: TEXT }}>Driver&apos;s licence — identity verification</p>
+                      <p className="text-xs font-semibold mb-1.5" style={{ color: TEXT }}>Driver&apos;s licence for identity verification</p>
                       <p className="text-xs leading-relaxed" style={{ color: DIM }}>
-                        Please email a photo of your driver&apos;s licence (name and date of birth only — no licence number required) to{' '}
+                        Please email a photo of your driver&apos;s licence (name and date of birth only, no licence number required) to{' '}
                         <strong style={{ color: TEXT }}>admin@apexmetabolichealth.com.au</strong> with your full name in the subject line.
                         This is collected for identity verification only and destroyed once confirmed.
                       </p>
@@ -728,7 +728,7 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 04 — Reason for Consultation */}
+                  {/* 04 - Reason for Consultation */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="04" title="Reason for Consultation" sub="Tell us what you'd like help with. The more detail you provide, the more prepared your doctor will be." />
                     <div>
@@ -752,7 +752,7 @@ export default function GeneralConsultForm() {
                     </div>
                     <TA label="Reason for appointment" value={data.mainCondition} onChange={v => set('mainCondition', v)}
                       placeholder="Describe your main concern, symptoms, and problems as clearly as you can. Include as much detail as possible."
-                      rows={5} hint="Your doctor reads this before your consultation — more detail means a more prepared doctor." />
+                      rows={5} hint="Your doctor reads this before your consultation. More detail means a more prepared doctor." />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <TA label="When did you first notice this?" value={data.firstNoticed} onChange={v => set('firstNoticed', v)}
                         placeholder="When symptoms began and how they have progressed…" rows={3} />
@@ -770,7 +770,7 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 05 — Physical Health */}
+                  {/* 05 - Physical Health */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="05" title="Physical Health" sub="Baseline physical measurements and your regular GP details." />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -789,7 +789,7 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 06 — Allergies & Current Symptoms */}
+                  {/* 06 - Allergies & Current Symptoms */}
                   <div className="flex flex-col gap-5">
                     <SectionHead num="06" title="Allergies & Current Symptoms" sub="Please indicate if you currently suffer from any of the following." />
                     <TA label="Do you have any allergies?" value={data.allergies} onChange={v => set('allergies', v)}
@@ -797,7 +797,7 @@ export default function GeneralConsultForm() {
                       rows={3} hint="Medications, vitamins, minerals, food, latex, etc." />
                     <div>
                       <label className="block text-xs font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: TEXT }}>
-                        Please tick relating to your current health — select all that apply
+                        Please tick relating to your current health. Select all that apply
                       </label>
                       <CheckGrid items={CURRENT_SYMPTOMS} selected={data.currentSymptoms} toggle={toggleSymptom} />
                     </div>
@@ -809,15 +809,15 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 07 — Medical Conditions */}
+                  {/* 07 - Medical Conditions */}
                   <div className="flex flex-col gap-4">
-                    <SectionHead num="07" title="Medical Conditions" sub="Do you suffer from any of the following? Select all that apply — past or present." />
+                    <SectionHead num="07" title="Medical Conditions" sub="Do you suffer from any of the following? Select all that apply, past or present." />
                     <CheckGrid items={CONDITIONS} selected={data.conditions} toggle={toggleCond} />
                     <TA label="Other medical conditions not listed above" value={data.otherConditions} onChange={v => set('otherConditions', v)}
                       placeholder="Any other conditions not covered above…" rows={2} />
                   </div>
 
-                  {/* 08 — Medical History */}
+                  {/* 08 - Medical History */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="08" title="Medical History" sub="Include anything relevant, even if it seems minor. Your doctor reviews all of this before your consultation." />
                     <TA label="Current health status including any medical issues" value={data.currentHealthStatus} onChange={v => set('currentHealthStatus', v)}
@@ -828,22 +828,22 @@ export default function GeneralConsultForm() {
                       placeholder="List all surgeries with approximate year (e.g. Appendectomy 2015). Write 'None' if not applicable."
                       rows={3} hint="Mark any work-related injuries with an asterisk (*) and note if a workers compensation claim is involved." />
                     <TA label="List any medications, vitamins or supplements you take" value={data.medications} onChange={v => set('medications', v)}
-                      placeholder="Include all prescription medications, vitamins, minerals, herbal remedies — dose and frequency. Write 'None' if not applicable."
+                      placeholder="Include all prescription medications, vitamins, minerals, herbal remedies, with dose and frequency. Write 'None' if not applicable."
                       rows={4} hint="Include everything. Over-the-counter items and supplements all count." />
                     <TA label="Family medical history" value={data.familyHistory} onChange={v => set('familyHistory', v)}
-                      placeholder="Note the condition and which family member — e.g. Father: type 2 diabetes, Mother: breast cancer…" rows={3} />
+                      placeholder="Note the condition and which family member, e.g. Father: type 2 diabetes, Mother: breast cancer…" rows={3} />
                   </div>
 
-                  {/* 09 — Lifestyle */}
+                  {/* 09 - Lifestyle */}
                   <div className="flex flex-col gap-5">
                     <SectionHead num="09" title="Lifestyle" sub="Your daily habits, exercise, nutrition, and relevant lifestyle factors." />
                     <Cards label="How often do you exercise?"
                       opts={['Never', 'Once or twice a week', 'Every other day', 'Daily']}
                       value={data.exerciseFrequency} onChange={v => set('exerciseFrequency', v)} />
                     <TA label="Describe your current lifestyle" value={data.exerciseRoutine} onChange={v => set('exerciseRoutine', v)}
-                      placeholder="Exercise routine, physical activity, sport — describe what you typically do. Write 'None' if you don't currently exercise." rows={3} />
+                      placeholder="Exercise routine, physical activity, sport: describe what you typically do. Write 'None' if you don't currently exercise." rows={3} />
                     <TA label="Describe your current diet" value={data.typicalDiet} onChange={v => set('typicalDiet', v)}
-                      placeholder="What do you typically eat? Keto, Mediterranean, high carb, intermittent fasting — describe your eating pattern." rows={3} />
+                      placeholder="What do you typically eat? Keto, Mediterranean, high carb, intermittent fasting: describe your eating pattern." rows={3} />
                     <F label="How many standard drinks of alcohol do you consume per week?" value={data.alcoholPerWeek} onChange={v => set('alcoholPerWeek', v)} placeholder="e.g. 5–6 standard drinks" />
                     <Cards label="Do you engage in the use of recreational drugs?" opts={['No', 'Occasionally', 'Yes']} value={data.recreationalDrugs} onChange={v => set('recreationalDrugs', v)} />
                     <Divider label="Smoking" />
@@ -867,7 +867,7 @@ export default function GeneralConsultForm() {
                     <F label="Hobbies and sport" value={data.hobbies} onChange={v => set('hobbies', v)} placeholder="What do you do for fun or fitness?" />
                   </div>
 
-                  {/* 10 — Goals & Pharmacy */}
+                  {/* 10 - Goals & Pharmacy */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="10" title="Goals & Pharmacy" sub="Your health objectives and preferred pharmacy for any prescribed protocols." />
                     <TA label="What are your health goals?" value={data.majorGoal} onChange={v => set('majorGoal', v)}
@@ -894,7 +894,7 @@ export default function GeneralConsultForm() {
                     </div>
                   </div>
 
-                  {/* 11 — Choose Your Path */}
+                  {/* 11 - Choose Your Path */}
                   <div className="flex flex-col gap-4">
                     <SectionHead num="11" title="Choose Your Path" sub="After your consultation, two pathways are available. One is a complete clinical program. The other is a prescription only." />
                     <PathwayCards value={data.pathway} onChange={v => set('pathway', v)} />
@@ -903,7 +903,7 @@ export default function GeneralConsultForm() {
                     </p>
                   </div>
 
-                  {/* 12 — Declaration & Consents */}
+                  {/* 12 - Declaration & Consents */}
                   <div className="flex flex-col gap-5">
                     <SectionHead num="12" title="Declaration & Consents" sub="Please read each statement carefully before submitting." />
 

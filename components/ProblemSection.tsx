@@ -65,7 +65,7 @@ export default function ProblemSection() {
               className="text-base leading-relaxed mb-8"
               style={{ color: 'var(--text-primary)', maxWidth: '420px' }}
             >
-              Standard blood panels are designed to rule out disease — not optimise how you function. We run advanced diagnostics interpreted by doctors who specialise in exactly this.
+              Standard blood panels are designed to rule out disease, not optimise how you function. We run advanced diagnostics interpreted by doctors who specialise in exactly this.
             </motion.p>
 
             <motion.div
@@ -82,7 +82,7 @@ export default function ProblemSection() {
             </motion.div>
           </div>
 
-          {/* Right — symptom list */}
+          {/* Right - symptom list */}
           <div>
             <motion.p
               initial={{ opacity: 0 }}
@@ -125,7 +125,7 @@ export default function ProblemSection() {
               className="text-xs mt-5 leading-relaxed"
               style={{ color: 'var(--blue)' }}
             >
-              These are clinical indicators — not lifestyle problems. Most patients are never tested for them. We test all of them.
+              These are clinical indicators, not lifestyle problems. Most patients are never tested for them. We test all of them.
             </motion.p>
           </div>
         </div>

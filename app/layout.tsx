@@ -28,7 +28,7 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
-  title: "Apex Metabolic Health | Doctor-Led Telehealth — Australia",
+  title: "Apex Metabolic Health | Doctor-Led Telehealth | Australia",
   description:
     "Doctor-led telehealth clinic. Hormone optimisation, metabolic medicine, performance protocols, and more. Evidence-based. AHPRA-registered practitioners. 100% online, Australia-wide.",
   keywords: [
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased overflow-x-hidden">
-        {/* Runs before hydration — prevents light-mode flash when user has saved a preference */}
+        {/* Runs before hydration - prevents light-mode flash when user has saved a preference */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('apex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

@@ -117,7 +117,7 @@ export default function DiscoveryCallForm() {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Apex Discovery Call — ${d.firstName} ${d.lastName}`,
+          subject: `Apex Discovery Call - ${d.firstName} ${d.lastName}`,
           formType: 'Discovery Call Request',
           name: `${d.firstName} ${d.lastName}`,
           email: d.email, phone: d.phone,

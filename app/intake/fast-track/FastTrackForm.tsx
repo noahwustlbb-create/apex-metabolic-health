@@ -82,7 +82,7 @@ const PROGRAMS: Record<string, Program> = {
     title: 'Anti-Ageing & Longevity',
     eyebrow: 'FAST TRACK ENQUIRY',
     heading: ['Optimise for the', 'next decade.'],
-    sub: "Longevity isn't one thing — it's energy, recovery, cognition and biomarkers working together. Tell us what matters most to you.",
+    sub: "Longevity isn't one thing. It's energy, recovery, cognition and biomarkers working together. Tell us what matters most to you.",
     fields: ['name', 'email', 'phone'],
     extra: [
       { key: 'priority', label: 'WHAT MATTERS MOST TO YOU RIGHT NOW?', type: 'multiselect', options: ['Energy & vitality', 'Skin, hair & recovery', 'Cognitive performance', 'Full longevity biomarker panel'], helper: 'Select all that apply.' },
@@ -139,7 +139,7 @@ const PROGRAMS: Record<string, Program> = {
     isOrderForm: true,
     extra: [
       { key: 'dob', label: 'DATE OF BIRTH', type: 'date', helper: 'Used to confirm your patient record.' },
-      { key: 'product', label: 'WHAT ARE YOU REORDERING?', type: 'select', options: ['Compounded testosterone', 'Peptide therapy', 'Weight loss / metabolic medication', 'Not sure — check my last order'] },
+      { key: 'product', label: 'WHAT ARE YOU REORDERING?', type: 'select', options: ['Compounded testosterone', 'Peptide therapy', 'Weight loss / metabolic medication', 'Not sure: check my last order'] },
       { key: 'notes', label: 'ANYTHING ELSE WE SHOULD KNOW?', type: 'textarea', optional: true },
     ],
     cta: 'Submit Reorder',
@@ -244,7 +244,7 @@ function FormInner() {
     try {
       const body: Record<string, string> = {
         access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-        subject: `Fast Track Enquiry — ${p.title}`,
+        subject: `Fast Track Enquiry - ${p.title}`,
         from_name: 'Apex Fast Track',
         Program: p.title,
         Name: (values.name as string) || '',
@@ -266,7 +266,7 @@ function FormInner() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          subject: `Fast Track Enquiry — ${p.title}`,
+          subject: `Fast Track Enquiry - ${p.title}`,
           name: values.name || 'Not provided',
           email: values.email || '',
           program: p.title,
@@ -332,7 +332,7 @@ function FormInner() {
             <FieldInput label="EMAIL ADDRESS" placeholder="your@email.com" type="email" value={(values.email as string) || ''} onChange={v => set('email', v)} />
           )}
           {p.fields.includes('phone') && (
-            <FieldInput label="PHONE — optional" placeholder="04xx xxx xxx" type="tel" value={(values.phone as string) || ''} onChange={v => set('phone', v)} />
+            <FieldInput label="PHONE (optional)" placeholder="04xx xxx xxx" type="tel" value={(values.phone as string) || ''} onChange={v => set('phone', v)} />
           )}
 
           {p.extra.map(f => {

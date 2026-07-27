@@ -21,7 +21,7 @@ export const ENQUIRY_LABELS: Record<EnquiryType, string> = {
   'sleep': 'Sleep Optimisation',
 }
 
-// bloodygoodtests.com.au panel URLs — shown when patient has no existing bloods
+// bloodygoodtests.com.au panel URLs - shown when patient has no existing bloods
 export const PANEL_URLS: Record<EnquiryType, string> = {
   'trt':          'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
   'sexual-health':'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
@@ -56,7 +56,7 @@ export interface Product {
 const PRODUCTS: Record<ProductType, Omit<Product, 'type'>> = {
   'panel-hormone': {
     name: 'Hormone Panel',
-    description: 'Comprehensive hormone and metabolic blood panel. Collect at any accredited pathology centre nationwide — no appointment required.',
+    description: 'Comprehensive hormone and metabolic blood panel. Collect at any accredited pathology centre nationwide, no appointment required.',
     price: 199,
     priceEnvKey: 'STRIPE_PRICE_PANEL_HORMONE',
   },

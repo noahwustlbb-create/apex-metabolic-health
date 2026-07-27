@@ -82,12 +82,12 @@ const FAQ_CATEGORIES = [
       {
         question: 'Why do I need blood tests before a consultation?',
         answer:
-          'Advanced biomarker analysis is the foundation of every clinical decision. Without objective biological data, a doctor cannot responsibly design a hormonal protocol. We don\'t guess — we measure.',
+          'Advanced biomarker analysis is the foundation of every clinical decision. Without objective biological data, a doctor cannot responsibly design a hormonal protocol. We don\'t guess. We measure.',
       },
       {
         question: 'Where do I get my blood tests done?',
         answer:
-          'We refer you to an accredited pathology collection centre. There are centres across all major cities and most regional areas in Australia — you can attend whichever one is most convenient. No appointment is required at most locations.',
+          'We refer you to an accredited pathology collection centre. There are centres across all major cities and most regional areas in Australia, and you can attend whichever one is most convenient. No appointment is required at most locations.',
       },
       {
         question: 'Can I use existing blood test results?',
@@ -107,7 +107,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'How are consultations conducted?',
         answer:
-          'All consultations are conducted via secure telehealth — video or phone call. You need a private space, a device with a camera or microphone, and a stable internet connection. Our doctors are available across all Australian time zones.',
+          'All consultations are conducted via secure telehealth, by video or phone call. You need a private space, a device with a camera or microphone, and a stable internet connection. Our doctors are available across all Australian time zones.',
       },
       {
         question: 'Am I guaranteed to receive a prescription?',
@@ -117,7 +117,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What happens if treatment isn\'t clinically appropriate for me?',
         answer:
-          'Your doctor will explain their assessment, discuss alternative options, and ensure you leave the consultation with clear guidance — even if that guidance is to explore other options. You will not be charged for a consultation that doesn\'t result in a treatment plan without prior discussion.',
+          'Your doctor will explain their assessment, discuss alternative options, and ensure you leave the consultation with clear guidance, even if that guidance is to explore other options. You will not be charged for a consultation that doesn\'t result in a treatment plan without prior discussion.',
       },
       {
         question: 'Can I share my medication with someone else?',
@@ -147,7 +147,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What is telehealth and how does it work at Apex?',
         answer:
-          'Telehealth is a secure, online medical consultation — the same clinical standard as an in-person visit, conducted via video or phone. All Apex consultations are telehealth-based, meaning you can access our services from anywhere in Australia without travelling to a clinic.',
+          'Telehealth is a secure, online medical consultation, held to the same clinical standard as an in-person visit, conducted via video or phone. All Apex consultations are telehealth-based, meaning you can access our services from anywhere in Australia without travelling to a clinic.',
       },
       {
         question: 'Can I get a medical certificate during my consultation?',
@@ -157,7 +157,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'What is integrative hormone care?',
         answer:
-          'Integrative hormone care combines evidence-based pathology testing with personalised clinical protocols that address the full picture of a patient\'s health — not just a single symptom. Our approach considers hormonal, metabolic, and lifestyle factors together rather than in isolation.',
+          'Integrative hormone care combines evidence-based pathology testing with personalised clinical protocols that address the full picture of a patient\'s health, not just a single symptom. Our approach considers hormonal, metabolic, and lifestyle factors together rather than in isolation.',
       },
       {
         question: 'How does the weight management treatment work?',

@@ -57,7 +57,7 @@ const WHY = [
   {
     label: 'The gap we fill',
     title: 'GPs are not built for optimisation.',
-    body: 'The standard of care in Australian general practice is designed to identify disease, not investigate function. A patient with testosterone at the bottom of the reference range will be told they are "fine." Their GP is not wrong — they do not have a diagnosable disease. But they are nowhere near optimal, and nobody is investigating why.\n\nApex exists to close that gap. We run deeper panels, interpreted by doctors who specialise in exactly this, and we build protocols around where your biology should be — not just where it technically clears the threshold.',
+    body: 'The standard of care in Australian general practice is designed to identify disease, not investigate function. A patient with testosterone at the bottom of the reference range will be told they are "fine." Their GP is not wrong; they do not have a diagnosable disease. But they are nowhere near optimal, and nobody is investigating why.\n\nApex exists to close that gap. We run deeper panels, interpreted by doctors who specialise in exactly this, and we build protocols around where your biology should be, not just where it technically clears the threshold.',
   },
   {
     label: 'What we are not',
@@ -131,7 +131,7 @@ export default function AboutPage() {
               className="text-lg leading-relaxed"
               style={{ color: 'var(--text-primary)', maxWidth: '560px', opacity: 0.75 }}
             >
-              Apex Metabolic Health is an Australian doctor-led telehealth clinic built for those who want more than a normal result — they want an optimal one.
+              Apex Metabolic Health is an Australian doctor-led telehealth clinic built for those who want more than a normal result. They want an optimal one.
             </motion.p>
           </div>
         </section>
@@ -285,7 +285,7 @@ export default function AboutPage() {
                       </span>
                     </div>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Dr Chen leads Apex&apos;s clinical operations, protocol development, and medical governance. His focus is on evidence-based hormone and metabolic medicine — moving patients from functional decline toward measurable biological optimisation.
+                      Dr Chen leads Apex&apos;s clinical operations, protocol development, and medical governance. His focus is on evidence-based hormone and metabolic medicine, moving patients from functional decline toward measurable biological optimisation.
                     </p>
                   </div>
                   <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
@@ -324,7 +324,7 @@ export default function AboutPage() {
                       </h3>
                     </div>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Every consultation at Apex is conducted by an AHPRA-registered medical practitioner with experience in hormonal and metabolic medicine. Each patient receives individualised clinical attention — not a template protocol.
+                      Every consultation at Apex is conducted by an AHPRA-registered medical practitioner with experience in hormonal and metabolic medicine. Each patient receives individualised clinical attention, not a template protocol.
                     </p>
                     <p className="text-sm leading-relaxed mt-4" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
                       All clinical work at Apex operates under a consistent governance framework and the same evidence-based protocols.

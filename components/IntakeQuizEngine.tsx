@@ -65,9 +65,9 @@ function calcScore(steps: QuizStep[], answers: Answers): { earned: number; max: 
 }
 
 function scoreTier(pct: number): { label: string; color: string; bg: string; border: string } {
-  if (pct >= 70) return { label: 'High — significant indicators detected', color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.2)' }
-  if (pct >= 45) return { label: 'Moderate — notable indicators present', color: '#f59e0b', bg: 'rgba(245,158,11,0.07)', border: 'rgba(245,158,11,0.2)' }
-  return { label: 'Mild — some early indicators', color: '#22c55e', bg: 'rgba(34,197,94,0.07)', border: 'rgba(34,197,94,0.2)' }
+  if (pct >= 70) return { label: 'High: significant indicators detected', color: '#ef4444', bg: 'rgba(239,68,68,0.07)', border: 'rgba(239,68,68,0.2)' }
+  if (pct >= 45) return { label: 'Moderate: notable indicators present', color: '#f59e0b', bg: 'rgba(245,158,11,0.07)', border: 'rgba(245,158,11,0.2)' }
+  return { label: 'Mild: some early indicators', color: '#22c55e', bg: 'rgba(34,197,94,0.07)', border: 'rgba(34,197,94,0.2)' }
 }
 
 type Phase = 'intro' | 'quiz' | 'processing' | 'account' | 'eligible' | 'ineligible'
@@ -75,7 +75,7 @@ type Answers = Record<string, string | string[]>
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-// Auto-injected as step 0 in every quiz — captures blood work recency for portal task creation
+// Auto-injected as step 0 in every quiz - captures blood work recency for portal task creation
 const BLOOD_TIMING_STEP: QuizStep = {
   type: 'single',
   id: '__bloodwork_timing',
@@ -485,7 +485,7 @@ function QuizPhase({
 
   return (
     <div className="flex-1 flex flex-col">
-      {/* Progress bar — full-width, no padding */}
+      {/* Progress bar - full-width, no padding */}
       <div style={{ height: 3, backgroundColor: '#f1f5f9' }}>
         <motion.div
           style={{ height: '100%', backgroundColor: TEAL }}
@@ -564,7 +564,7 @@ function QuizPhase({
         </div>
       </div>
 
-      {/* Nav — only show if not single (single auto-advances) */}
+      {/* Nav - only show if not single (single auto-advances) */}
       {step.type !== 'single' && (
         <div className="px-5 pb-8 flex items-center gap-3 justify-center">
           <div className="w-full max-w-lg flex items-center gap-3">
@@ -591,7 +591,7 @@ function ProcessingPhase({ onDone }: { onDone: (eligible: boolean) => void; elig
   const [step2Done, setStep2Done] = useState(false)
 
   useEffect(() => {
-    // Brief transition only — answers are already saved and eligibility is
+    // Brief transition only - answers are already saved and eligibility is
     // checked instantly in onDone. Don't fake long-running work.
     const t1 = setTimeout(() => setStep1Done(true), 600)
     const t2 = setTimeout(() => setStep2Done(true), 1200)
@@ -655,7 +655,7 @@ function EligiblePhase({ config }: { config: QuizConfig }) {
         {/* Blood test card for programs that require it */}
         {config.requiresBloodTest && (
           <div className="rounded-xl p-5 mb-5" style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)' }}>
-            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: TEAL }}>Step 1 — Pathology</p>
+            <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: TEAL }}>Step 1: Pathology</p>
             <p className="text-sm font-semibold mb-1" style={{ color: '#111827' }}>Complete your hormone panel</p>
             <p className="text-xs leading-relaxed mb-4" style={{ color: '#6b7280' }}>
               Walk into any of 4,000+ accredited collection centres across Australia. Your referral is issued by your doctor after your consultation.
@@ -671,7 +671,7 @@ function EligiblePhase({ config }: { config: QuizConfig }) {
           {(config.requiresBloodTest
             ? [
                 { n: 1, label: 'Sign in to your patient portal', sub: 'Access your assessment results and clinical profile' },
-                { n: 2, label: 'Complete your pathology', sub: 'Doctor issues your referral — collect at 4,000+ centres Australia-wide' },
+                { n: 2, label: 'Complete your pathology', sub: 'Doctor issues your referral, collect at 4,000+ centres Australia-wide' },
                 { n: 3, label: 'Telehealth consultation', sub: 'AHPRA-registered doctor builds your personalised protocol' },
               ]
             : [
@@ -834,7 +834,7 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
   return (
     <div className="flex-1 flex min-h-0" style={{ background: '#f9fafb' }}>
 
-      {/* Left — score reveal + CTA */}
+      {/* Left - score reveal + CTA */}
       <div className="flex flex-col w-full lg:w-[520px] flex-shrink-0 overflow-y-auto px-8 sm:px-12 py-10" style={{ background: '#ffffff' }}>
 
         {/* Score ring */}
@@ -890,7 +890,7 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
           </div>
           <div className="flex flex-col" style={{ background: '#fafafa' }}>
             {[
-              { n: 1, title: 'Create your account', body: 'Register in under 2 minutes — no GP referral required.' },
+              { n: 1, title: 'Create your account', body: 'Register in under 2 minutes, no GP referral required.' },
               { n: 2, title: 'Complete pathology testing', body: 'We issue your referral. Walk into any of 4,000+ accredited collection centres.' },
               { n: 3, title: 'Doctor consultation', body: 'Your AHPRA-registered doctor builds your personalised protocol.' },
             ].map(s => (
@@ -953,7 +953,7 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
         </div>
       </div>
 
-      {/* Right — trust grid (desktop only) */}
+      {/* Right - trust grid (desktop only) */}
       <div className="hidden lg:grid flex-1 grid-cols-2 gap-px" style={{ background: 'rgba(0,0,0,0.06)' }}>
         {TRUST_PANELS.map((p, i) => (
           <div

@@ -17,7 +17,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Hair restoration may not be appropriate for you right now.',
-  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call — our clinical team can help determine the safest pathway for you.",
+  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call, and our clinical team can help determine the safest pathway for you.",
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {
@@ -49,9 +49,9 @@ const config: QuizConfig = {
       id: 'severity',
       question: 'How would you describe the current severity?',
       options: [
-        { label: 'Early stage — noticeable thinning only', value: 'early', score: 1 },
-        { label: 'Moderate — visible thinning or a receding hairline', value: 'moderate', score: 2 },
-        { label: 'Advanced — significant loss or large bald areas', value: 'advanced', score: 3 },
+        { label: 'Early stage: noticeable thinning only', value: 'early', score: 1 },
+        { label: 'Moderate: visible thinning or a receding hairline', value: 'moderate', score: 2 },
+        { label: 'Advanced: significant loss or large bald areas', value: 'advanced', score: 3 },
       ],
     },
     {
@@ -69,14 +69,14 @@ const config: QuizConfig = {
       type: 'info',
       id: 'info',
       heading: 'Why DHT and hormones matter for hair',
-      body: "Androgenetic alopecia — the most common form of male hair loss — is driven by DHT (dihydrotestosterone) binding to follicle receptors. It's a medical condition with evidence-based treatment options, assessed properly through a hormonal blood panel.",
+      body: "Androgenetic alopecia, the most common form of male hair loss, is driven by DHT (dihydrotestosterone) binding to follicle receptors. It's a medical condition with evidence-based treatment options, assessed properly through a hormonal blood panel.",
       stat: 'AHPRA-registered doctors · Hormonal & DHT panel · TGA-compliant protocols',
     },
     {
       type: 'trust',
       id: 'trust',
       heading: 'Hair loss is more treatable than most people think',
-      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually — a hormonal blood panel is required before any protocol is prescribed.',
+      body: 'Our AHPRA-registered doctors take a clinical approach to hair restoration, addressing underlying hormonal and nutritional factors alongside targeted treatments. Your case is assessed individually, and a hormonal blood panel is required before any protocol is prescribed.',
     },
     {
       type: 'multi',
@@ -110,8 +110,8 @@ const config: QuizConfig = {
       id: 'tried',
       question: 'Have you tried any hair loss treatment before?',
       options: [
-        { label: 'Yes — over-the-counter products (shampoos, topical treatments, etc.)', value: 'otc' },
-        { label: 'Yes — prescription medication from a doctor', value: 'rx' },
+        { label: 'Yes, over-the-counter products (shampoos, topical treatments, etc.)', value: 'otc' },
+        { label: 'Yes, prescription medication from a doctor', value: 'rx' },
         { label: "No, I haven't tried anything yet", value: 'none' },
       ],
     },

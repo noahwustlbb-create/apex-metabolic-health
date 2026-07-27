@@ -12,7 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const FEATURES = [
   {
     title: 'Biomarker Trends',
-    body: 'Every draw plots a point. Watch patterns emerge across months — not single snapshots.',
+    body: 'Every draw plots a point. Watch patterns emerge across months, not single snapshots.',
   },
   {
     title: 'Biological Age',
@@ -24,7 +24,7 @@ const FEATURES = [
   },
   {
     title: 'Review Timeline',
-    body: 'Know exactly when your next review is — and what will be assessed.',
+    body: 'Know exactly when your next review is, and what will be assessed.',
   },
   {
     title: 'Clinical Progress',
@@ -114,7 +114,7 @@ export default function AppComingSoon() {
               style={{ color: 'var(--text-secondary)', maxWidth: '520px' }}
             >
               The Apex app is coming. Track biomarkers, view your protocol, and message your
-              clinical team — all in one place, built for continuity of care.
+              clinical team, all in one place, built for continuity of care.
             </motion.p>
 
             {/* Phone mockup */}
