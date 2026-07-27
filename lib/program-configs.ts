@@ -501,7 +501,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
   heroBentoStat: { value: '1 in 5', label: 'men experience significant sexual health concerns' },
   heroBentoLifestyle: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=90',
 
-  empathyHeadline: "Many people wait years before seeking help. You don\'t need to.",
+  empathyHeadline: "Most men wait years before seeking help. You don\'t need to.",
   empathyBody: "Sexual health concerns are among the most under-reported medical issues in men. They are also among the most treatable once the clinical driver is properly identified. A complete assessment, completely online, completely private.",
   empathyChips: ['Erectile dysfunction', 'Low libido', 'Performance anxiety', 'Hormonal cause', 'Vascular factor', 'Premature ejaculation'],
   empathyImage: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=1400&q=80',
