@@ -280,30 +280,35 @@ export default function Nav() {
             </Link>
           </div>
 
-          {/* ── Mobile right: Get Started + hamburger ── */}
+          {/* ── Mobile right: Portal + Get Started + hamburger ── */}
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
             {!menuOpen && (
-              <Link
-                href="/start"
+              <a
+                href="https://app.apexmetabolichealth.com.au/login"
+                aria-label="Patient Portal login"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
-                  color: '#fff',
-                  padding: '13px 16px',
+                  gap: '5px',
                   minHeight: '44px',
+                  padding: '0 12px',
                   borderRadius: '12px',
+                  border: '1px solid rgba(72,144,247,0.35)',
+                  color: 'var(--blue)',
+                  fontFamily: 'var(--font-inter)',
                   fontSize: '12px',
                   fontWeight: 600,
-                  letterSpacing: '0.01em',
                   whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 8px rgba(72,144,247,0.32)',
                   textDecoration: 'none',
                 }}
               >
-                Start assessment
-              </Link>
+                <svg viewBox="0 0 20 20" fill="none" width="14" height="14" aria-hidden="true">
+                  <circle cx="10" cy="6.5" r="3.2" stroke="currentColor" strokeWidth="1.6" />
+                  <path d="M4 17c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+                Patient Portal
+              </a>
             )}
             <button
               className="flex flex-col justify-center gap-[5px] p-2 min-h-[44px] min-w-[44px]"
