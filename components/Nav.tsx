@@ -231,17 +231,20 @@ export default function Nav() {
               style={{
                 fontFamily: 'var(--font-inter)',
                 fontSize: '12.5px',
-                fontWeight: 500,
-                color: 'var(--text-muted)',
+                fontWeight: 600,
+                color: 'var(--blue)',
+                border: '1px solid rgba(72,144,247,0.35)',
+                padding: '9px 18px',
+                borderRadius: '12px',
                 textDecoration: 'none',
                 letterSpacing: '0.01em',
-                transition: 'color 0.2s',
+                transition: 'background 0.2s, border-color 0.2s',
                 whiteSpace: 'nowrap',
               }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.6)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)' }}
             >
-              Log in
+              Patient Portal
             </a>
             <Link
               href="/start"
@@ -389,7 +392,7 @@ export default function Nav() {
                 className="flex items-center justify-center w-full"
                 style={{ border: '1px solid rgba(72,144,247,0.35)', color: 'var(--blue)', padding: '15px 24px', borderRadius: '12px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
               >
-                Log in
+                Patient Portal — log in
               </a>
               <div className="flex items-center justify-between pt-1">
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Appearance</span>
