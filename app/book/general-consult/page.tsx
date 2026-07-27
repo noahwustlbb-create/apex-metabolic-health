@@ -126,7 +126,7 @@ export default function GeneralConsultBookPage() {
                   Real answers.
                 </span>
               </h1>
-              <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', opacity: 0.65, maxWidth: 560 }}>
+              <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 560 }}>
                 For weight loss, performance, hair, skin, and injury recovery. We run the diagnostics GPs don't order, interpreted by doctors who specialise in exactly this.
               </p>
 
@@ -136,7 +136,7 @@ export default function GeneralConsultBookPage() {
                   <div key={t.label} className="px-4 py-3 rounded-xl"
                     style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.14)' }}>
                     <p className="text-sm font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{t.stat}</p>
-                    <p className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>{t.label}</p>
+                    <p className="text-[10px] mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{t.label}</p>
                   </div>
                 ))}
               </div>
@@ -184,7 +184,7 @@ export default function GeneralConsultBookPage() {
                       </div>
                       <div>
                         <p className="text-xs font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{p.label}</p>
-                        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>{p.sub}</p>
+                        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{p.sub}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -218,7 +218,7 @@ export default function GeneralConsultBookPage() {
                     <span className="text-[10px] font-bold" style={{ color: ACCENT }}>{w.n}</span>
                   </div>
                   <p className="text-sm font-semibold mb-1.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{w.title}</p>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>{w.body}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{w.body}</p>
                 </motion.div>
               ))}
             </div>
@@ -250,7 +250,7 @@ export default function GeneralConsultBookPage() {
                     </div>
                     <div className="pt-1">
                       <p className="text-sm font-semibold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{p.title}</p>
-                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>{p.body}</p>
+                      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{p.body}</p>
                     </div>
                   </motion.div>
                 ))}

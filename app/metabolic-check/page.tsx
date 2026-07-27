@@ -71,7 +71,7 @@ function ApexLogo() {
       <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 17, fontWeight: 800, letterSpacing: '0.2em', color: '#0f172a', lineHeight: 1 }}>
         APEX
       </span>
-      <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 8, fontWeight: 600, letterSpacing: '0.24em', color: '#94a3b8', marginTop: 2, textTransform: 'uppercase' as const }}>
+      <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 8, fontWeight: 600, letterSpacing: '0.24em', color: '#4b5563', marginTop: 2, textTransform: 'uppercase' as const }}>
         Metabolic Health
       </span>
     </Link>
@@ -172,7 +172,7 @@ export default function MetabolicCheckPage() {
       }}>
         <ApexLogo />
         <Link href="/" style={{
-          position: 'absolute', left: 24, fontSize: 12, color: '#94a3b8',
+          position: 'absolute', left: 24, fontSize: 12, color: '#4b5563',
           textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 4,
           fontFamily: 'var(--font-space-grotesk)', fontWeight: 500,
         }}>
@@ -234,7 +234,7 @@ export default function MetabolicCheckPage() {
                     <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
                       Dr Cameron Chen
                     </p>
-                    <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 1 }}>Medical Director</p>
+                    <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>Medical Director</p>
                   </div>
                 </div>
 
@@ -246,7 +246,7 @@ export default function MetabolicCheckPage() {
 
                 {currentQ > 0 && (
                   <button onClick={handleBack} style={{
-                    marginTop: 28, fontSize: 13, color: '#94a3b8', background: 'none',
+                    marginTop: 28, fontSize: 13, color: '#4b5563', background: 'none',
                     border: 'none', cursor: 'pointer', padding: 0,
                     fontFamily: 'var(--font-space-grotesk)', display: 'flex', alignItems: 'center', gap: 4,
                   }}>
@@ -308,7 +308,7 @@ export default function MetabolicCheckPage() {
                   Retake questionnaire
                 </button>
 
-                <p style={{ marginTop: 28, fontSize: 11, color: '#94a3b8', lineHeight: 1.65, textAlign: 'center' as const }}>
+                <p style={{ marginTop: 28, fontSize: 11, color: '#4b5563', lineHeight: 1.65, textAlign: 'center' as const }}>
                   This questionnaire is a screening tool only and does not constitute medical advice. Clinical decisions are made by AHPRA-registered medical practitioners.
                 </p>
               </motion.div>
@@ -318,7 +318,7 @@ export default function MetabolicCheckPage() {
       </main>
 
       <footer style={{ padding: '18px 24px', textAlign: 'center' as const, borderTop: '1px solid #f1f5f9' }}>
-        <p style={{ fontSize: 11, color: '#94a3b8', fontFamily: 'var(--font-space-grotesk)' }}>
+        <p style={{ fontSize: 11, color: '#4b5563', fontFamily: 'var(--font-space-grotesk)' }}>
           All consultations conducted by AHPRA-registered medical practitioners. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
         </p>
       </footer>

@@ -59,14 +59,14 @@ export default function GetStartedModal({ onClose, onConfirm }: { onClose: () =>
           <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 17, fontWeight: 800, letterSpacing: '0.2em', color: '#0f172a', lineHeight: 1 }}>
             APEX
           </span>
-          <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 8, fontWeight: 600, letterSpacing: '0.24em', color: '#94a3b8', marginTop: 2, textTransform: 'uppercase' as const }}>
+          <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 8, fontWeight: 600, letterSpacing: '0.24em', color: '#4b5563', marginTop: 2, textTransform: 'uppercase' as const }}>
             Metabolic Health
           </span>
         </Link>
         <button
           onClick={onClose}
           style={{
-            position: 'absolute', left: 24, fontSize: 12, color: '#94a3b8',
+            position: 'absolute', left: 24, fontSize: 12, color: '#4b5563',
             background: 'none', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', gap: 4,
             fontFamily: 'var(--font-space-grotesk)', fontWeight: 500,
@@ -150,7 +150,7 @@ export default function GetStartedModal({ onClose, onConfirm }: { onClose: () =>
               Create your account
               <Arrow />
             </a>
-            <p style={{ textAlign: 'center' as const, fontSize: 11, color: '#94a3b8', marginTop: 12, fontFamily: 'var(--font-space-grotesk)' }}>
+            <p style={{ textAlign: 'center' as const, fontSize: 11, color: '#4b5563', marginTop: 12, fontFamily: 'var(--font-space-grotesk)' }}>
               No payment required to get started
             </p>
           </div>
@@ -158,7 +158,7 @@ export default function GetStartedModal({ onClose, onConfirm }: { onClose: () =>
       </main>
 
       <footer style={{ padding: '18px 24px', textAlign: 'center' as const, borderTop: '1px solid #f1f5f9' }}>
-        <p style={{ fontSize: 11, color: '#94a3b8', fontFamily: 'var(--font-space-grotesk)' }}>
+        <p style={{ fontSize: 11, color: '#4b5563', fontFamily: 'var(--font-space-grotesk)' }}>
           All consultations conducted by AHPRA-registered medical practitioners. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
         </p>
       </footer>

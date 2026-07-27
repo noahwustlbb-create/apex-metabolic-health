@@ -172,7 +172,7 @@ export default function FloatingContact() {
                           style={{ fontFamily: 'var(--font-space-grotesk)', color: action.highlight ? ACCENT : 'var(--text-primary)' }}>
                           {action.label}
                         </p>
-                        <p className="text-[10px] leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>
+                        <p className="text-[10px] leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                           {action.sub}
                         </p>
                       </div>
@@ -190,7 +190,7 @@ export default function FloatingContact() {
 
             {/* Footer */}
             <div className="px-5 py-3" style={{ borderTop: '1px solid rgba(0,0,0,0.03)' }}>
-              <p className="text-[9px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+              <p className="text-[9px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                 AHPRA-registered doctors · 100% online · Australia-wide
               </p>
             </div>

@@ -286,7 +286,7 @@ function ProgramCard({ prog, index, onSelect }: { prog: Program; index: number; 
         </h3>
 
         {/* Tagline */}
-        <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+        <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           {prog.tagline}
         </p>
 
@@ -444,7 +444,7 @@ export default function ProgramsSelectPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.14, ease }}
                     className="text-sm leading-relaxed"
-                    style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: 520 }}
+                    style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520 }}
                   >
                     Select a program to run a quick 2-question check. It takes under 30 seconds and routes you directly to the right intake form.
                   </motion.p>
@@ -463,7 +463,7 @@ export default function ProgramsSelectPage() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.6, ease }}
                   className="text-xs mt-8 text-center"
-                  style={{ color: 'var(--text-primary)', opacity: 0.3 }}
+                  style={{ color: 'var(--text-primary)', opacity: 0.72 }}
                 >
                   Not sure? <a href="https://app.apexmetabolichealth.com.au/signup" style={{ color: 'var(--blue)', opacity: 1 }}>Create your account</a> and we&apos;ll guide you to the right program.
                 </motion.p>
@@ -486,7 +486,7 @@ export default function ProgramsSelectPage() {
                 <button
                   onClick={handleBack}
                   className="flex items-center gap-1.5 mb-8 text-xs font-medium transition-opacity duration-150"
-                  style={{ color: 'var(--text-primary)', opacity: 0.45 }}
+                  style={{ color: 'var(--text-primary)', opacity: 0.72 }}
                   onMouseEnter={e => { e.currentTarget.style.opacity = '0.8' }}
                   onMouseLeave={e => { e.currentTarget.style.opacity = '0.45' }}
                 >
@@ -528,7 +528,7 @@ export default function ProgramsSelectPage() {
                       >
                         Which of these sounds like you?
                       </h2>
-                      <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                         Select all that apply, or skip if none match.
                       </p>
 
@@ -601,7 +601,7 @@ export default function ProgramsSelectPage() {
                       >
                         Any recent blood work?
                       </h2>
-                      <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                         {prog.isPeptide
                           ? 'Not required for this program, but useful context for your doctor.'
                           : 'Within the last 6 months, from a GP or private blood panel.'}
@@ -687,7 +687,7 @@ export default function ProgramsSelectPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.3, ease }}
                   className="text-sm leading-relaxed mb-8"
-                  style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: 420 }}
+                  style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 420 }}
                 >
                   {hasBloods
                     ? "Your intake form will take under 10 minutes. Bring your recent blood results, and your doctor will review them before your consultation."
@@ -702,7 +702,7 @@ export default function ProgramsSelectPage() {
                     className="mb-8 p-4 rounded-xl"
                     style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.08)' }}
                   >
-                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: 'var(--text-primary)', opacity: 0.35 }}>
+                    <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       Symptoms noted
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -738,7 +738,7 @@ export default function ProgramsSelectPage() {
                   <button
                     onClick={handleBack}
                     className="text-sm font-medium transition-opacity duration-150"
-                    style={{ color: 'var(--text-primary)', opacity: 0.4 }}
+                    style={{ color: 'var(--text-primary)', opacity: 0.72 }}
                     onMouseEnter={e => { e.currentTarget.style.opacity = '0.75' }}
                     onMouseLeave={e => { e.currentTarget.style.opacity = '0.4' }}
                   >
@@ -751,7 +751,7 @@ export default function ProgramsSelectPage() {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4, delay: 0.6, ease }}
                   className="text-[11px] mt-6"
-                  style={{ color: 'var(--text-primary)', opacity: 0.3 }}
+                  style={{ color: 'var(--text-primary)', opacity: 0.72 }}
                 >
                   AHPRA-registered practitioners · Private & confidential · No lock-in contracts
                 </motion.p>

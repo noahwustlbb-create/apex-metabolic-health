@@ -80,7 +80,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   <p className="text-sm font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
                     {consultLabel}
                   </p>
-                  <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                  <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                     {consultSub}
                   </p>
                   <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Choose a time →</p>
@@ -110,7 +110,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                     <p className="text-sm font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
                       Free discovery call
                     </p>
-                    <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                    <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       Not sure where to start? A quick call to discuss your goals, no obligation.
                     </p>
                     <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Book free call →</p>
@@ -135,7 +135,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   <p className="text-sm font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
                     Wait for our call
                   </p>
-                  <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                  <p className="text-xs leading-relaxed mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                     We'll contact you within 1 business day to confirm your next step.
                   </p>
                   <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>I'm happy to wait →</p>
@@ -159,7 +159,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               </div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Got it, we'll be in touch within 1 business day.</p>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Changed your mind?{' '}
                   <a href={primaryLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>Book a time here.</a>
                 </p>
@@ -181,7 +181,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               </div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Calendly is opening in a new tab.</p>
-                <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Can't see it?{' '}
                   <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
                     Click here to book.

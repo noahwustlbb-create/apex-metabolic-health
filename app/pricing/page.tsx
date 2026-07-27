@@ -115,9 +115,9 @@ function MembershipComparison() {
               <p style={{
                 fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-                color: 'var(--text-primary)', opacity: 0.45, marginBottom: '4px',
+                color: 'var(--text-primary)', opacity: 0.72, marginBottom: '4px',
               }}>Single Consult</p>
-              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.28 }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
                 Once-off · No subscription
               </p>
             </div>
@@ -131,7 +131,7 @@ function MembershipComparison() {
                 >
                   <span style={{
                     fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
-                    textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.35,
+                    textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72,
                   }}>{row.label}</span>
                   <span style={{
                     fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
@@ -144,14 +144,14 @@ function MembershipComparison() {
 
             <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
               <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>Average initial investment</p>
+                <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Average initial investment</p>
                 <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$474 – $599</p>
-                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>Blood referral + consultation + Escript fee</p>
+                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Blood referral + consultation + Escript fee</p>
               </div>
               <Link
                 href="https://app.apexmetabolichealth.com.au/signup"
                 className="flex items-center justify-center w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
-                style={{ border: '1px solid rgba(72,144,247,0.18)', color: 'var(--text-primary)', opacity: 0.55 }}
+                style={{ border: '1px solid rgba(72,144,247,0.18)', color: 'var(--text-primary)', opacity: 0.72 }}
                 onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.4)' }}
                 onMouseLeave={e => { e.currentTarget.style.opacity = '0.55'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.18)' }}
               >
@@ -185,7 +185,7 @@ function MembershipComparison() {
                 fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
                 letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: accent, marginBottom: '4px',
               }}>Apex Member</p>
-              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.4 }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
                 Ongoing treatment · Cancel anytime
               </p>
             </div>
@@ -201,7 +201,7 @@ function MembershipComparison() {
                   >
                     <span style={{
                       fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
-                      textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.4,
+                      textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72,
                     }}>{row.label}</span>
                     <span
                       className="flex items-center gap-1.5"
@@ -246,7 +246,7 @@ function MembershipComparison() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center text-[11px] leading-relaxed"
-          style={{ color: 'var(--text-primary)', opacity: 0.28, maxWidth: 520, margin: '20px auto 0' }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520, margin: '20px auto 0' }}
         >
           Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
         </motion.p>
@@ -316,7 +316,7 @@ function MemberSavings() {
               </span>
               <span style={{
                 fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-                color: 'var(--text-primary)', opacity: 0.4, marginTop: '8px',
+                color: 'var(--text-primary)', opacity: 0.72, marginTop: '8px',
               }}>
                 {label}
               </span>
@@ -327,7 +327,7 @@ function MemberSavings() {
         <motion.p
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.3 }}
           className="text-center text-sm mb-8"
-          style={{ color: 'var(--text-primary)', opacity: 0.45 }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72 }}
         >
           If that&apos;s you, here&apos;s what membership saves you annually vs. the single consult path:
         </motion.p>
@@ -347,11 +347,11 @@ function MemberSavings() {
               <div className="min-w-0 pr-4">
                 <p style={{
                   fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-                  color: 'var(--text-primary)', opacity: 0.5, marginBottom: '3px',
+                  color: 'var(--text-primary)', opacity: 0.72, marginBottom: '3px',
                 }}>
                   {row.label}
                 </p>
-                <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28 }}>
+                <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72 }}>
                   {row.detail}
                 </p>
               </div>
@@ -378,11 +378,11 @@ function MemberSavings() {
             <div>
               <p style={{
                 fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 700,
-                letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.55,
+                letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72,
               }}>
                 Typical annual saving
               </p>
-              <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28, marginTop: '3px' }}>
+              <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72, marginTop: '3px' }}>
                 vs. single consult path · individual results vary
               </p>
             </div>
@@ -406,7 +406,7 @@ function MemberSavings() {
         <motion.p
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }}
           className="text-center text-[11px] mt-5"
-          style={{ color: 'var(--text-primary)', opacity: 0.28 }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72 }}
         >
           Membership: $99/mo ($1,188/yr). At 3+ medication invoices, the saving pays for itself.
         </motion.p>
@@ -639,7 +639,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
           >
             {pathway.tag}
           </span>
-          <span style={{ fontSize: '13px', color: 'var(--text-primary)', opacity: 0.5 }}>
+          <span style={{ fontSize: '13px', color: 'var(--text-primary)', opacity: 0.72 }}>
             {isMember ? 'Ongoing treatment · $99/mo membership' : 'Once-off · Script release available'}
           </span>
         </div>
@@ -678,7 +678,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                         {step.label}
                       </p>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55, paddingLeft: '29px' }}>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72, paddingLeft: '29px' }}>
                       {step.body}
                     </p>
 
@@ -689,7 +689,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                             <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '6px' }}>
                               {opt.label}
                             </p>
-                            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                               {opt.detail}
                             </p>
                           </div>
@@ -705,7 +705,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                               <circle cx="6" cy="6" r="5.5" stroke={accent} strokeWidth="0.8" fill="rgba(72,144,247,0.06)" />
                               <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
-                            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{item}</span>
+                            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -725,7 +725,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                         {step.price}
                       </p>
                       {step.priceNote && (
-                        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.3, marginTop: '4px' }}>
+                        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '4px' }}>
                           {step.priceNote}
                         </p>
                       )}
@@ -796,7 +796,7 @@ function ProgramPathways() {
                 </h3>
                 <span style={{
                   fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const,
-                  color: 'var(--text-primary)', opacity: 0.3,
+                  color: 'var(--text-primary)', opacity: 0.72,
                 }}>
                   {pathways.length} pathways
                 </span>
@@ -810,7 +810,7 @@ function ProgramPathways() {
           ))}
         </motion.div>
 
-        <p className="text-[10px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+        <p className="text-[10px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           Script release excludes NSW patients. All treatment subject to clinical appropriateness.
         </p>
       </div>

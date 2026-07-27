@@ -84,7 +84,7 @@ export default function WhyApex() {
               </h3>
               <p
                 className="text-sm leading-relaxed"
-                style={{ color: 'var(--text-primary)', opacity: 0.7 }}
+                style={{ color: 'var(--text-primary)', opacity: 0.72 }}
               >
                 {item.description}
               </p>

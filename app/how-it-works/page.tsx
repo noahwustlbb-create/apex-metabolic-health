@@ -214,7 +214,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.18, ease }}
           className="text-base md:text-lg leading-relaxed mb-8"
-          style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '520px' }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '520px' }}
         >
           Everything happens through your patient portal, from intake to blood results to consultation booking to ongoing care.
           No paperwork, no GP run-around, no guesswork.
@@ -257,7 +257,7 @@ function Hero() {
                 style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.12)' }}
               >
                 <span className="text-[9px] font-bold tracking-[0.1em] uppercase" style={{ color: ACCENT, opacity: 0.7 }}>{phase}</span>
-                <span className="text-[10px] font-medium" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>{label}</span>
+                <span className="text-[10px] font-medium" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{label}</span>
               </div>
               {i < 4 && (
                 <svg viewBox="0 0 12 12" fill="none" width="18" height="18" className="mx-0.5 flex-shrink-0" aria-hidden="true">
@@ -302,7 +302,7 @@ function PortalIntro() {
               initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.16, ease }}
               className="text-sm leading-relaxed mb-8"
-              style={{ color: 'var(--text-primary)', opacity: 0.55, maxWidth: '440px' }}
+              style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '440px' }}
             >
               Your intake, blood results, consultation bookings, treatment protocol, and 3-monthly reviews are all managed through your secure patient portal. You don't need to chase anything. The portal prompts you at every step.
             </motion.p>
@@ -325,7 +325,7 @@ function PortalIntro() {
                   </div>
                   <div>
                     <p className="text-[12px] font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{f.title}</p>
-                    <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>{f.body}</p>
+                    <p className="text-[11px] leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{f.body}</p>
                   </div>
                 </motion.div>
               ))}
@@ -354,7 +354,7 @@ function PortalIntro() {
                 </div>
                 <div
                   className="flex-1 mx-3 px-3 py-1 rounded-md text-[11px] font-mono"
-                  style={{ background: 'var(--state-hover-bg)', color: 'var(--text-primary)', opacity: 0.6 }}
+                  style={{ background: 'var(--state-hover-bg)', color: 'var(--text-primary)', opacity: 0.72 }}
                 >
                   app.apexmetabolichealth.com.au
                 </div>
@@ -433,7 +433,7 @@ function PortalIntro() {
                   </svg>
                 </a>
 
-                <p className="text-center text-[10px] mt-3" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+                <p className="text-center text-[10px] mt-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   No GP referral · No upfront payment · 2 minutes
                 </p>
               </div>
@@ -534,14 +534,14 @@ function ProcessSteps() {
                         </span>
                         <span
                           className="text-[9px] font-medium px-2 py-1 rounded-full"
-                          style={{ background: 'var(--state-hover-bg)', border: '1px solid var(--color-border-muted)', color: 'var(--text-primary)', opacity: 0.6 }}
+                          style={{ background: 'var(--state-hover-bg)', border: '1px solid var(--color-border-muted)', color: 'var(--text-primary)', opacity: 0.72 }}
                         >
                           {step.duration}
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-sm leading-relaxed mb-4 max-w-2xl" style={{ color: 'var(--text-primary)', opacity: 0.58 }}>
+                    <p className="text-sm leading-relaxed mb-4 max-w-2xl" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       {step.body}
                     </p>
 
@@ -556,7 +556,7 @@ function ProcessSteps() {
                             <circle cx="5" cy="5" r="4.5" fill="rgba(72,144,247,0.1)" stroke={ACCENT} strokeWidth="0.7" />
                             <path d="M3 5l1.5 1.5 2.5-3" stroke={ACCENT} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
-                          <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{d}</span>
+                          <span className="text-[11px] font-medium" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{d}</span>
                         </div>
                       ))}
                     </div>
@@ -579,7 +579,7 @@ function ProcessSteps() {
             <p className="font-semibold text-sm mb-1" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
               Ready to get started?
             </p>
-            <p className="text-[12px]" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>
+            <p className="text-[12px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Sign up takes 2 minutes. No GP referral. No upfront payment.
             </p>
           </div>
@@ -621,7 +621,7 @@ function AfterConsultation() {
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.16, ease }}
-            className="text-sm max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.5 }}
+            className="text-sm max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.72 }}
           >
             Your doctor will explain both options at your consultation. Both options are managed through your patient portal.
           </motion.p>
@@ -645,7 +645,7 @@ function AfterConsultation() {
                 <p className="text-[10px] font-bold tracking-[0.16em] uppercase mb-2" style={{ color: ACCENT }}>
                   Protocol Membership
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Full ongoing clinical management. The 3-monthly review cycle, prescribing fees waived, medication at cost price, and nursing support, all coordinated through your portal.
                 </p>
               </div>
@@ -664,7 +664,7 @@ function AfterConsultation() {
                       <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.1)" stroke={ACCENT} strokeWidth="0.8" />
                       <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.62 }}>{item}</span>
+                    <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -688,10 +688,10 @@ function AfterConsultation() {
           >
             <div className="p-8 flex flex-col flex-1">
               <div className="mb-5">
-                <p className="text-[10px] font-bold tracking-[0.16em] uppercase mb-2" style={{ color: 'var(--text-primary)', opacity: 0.35 }}>
+                <p className="text-[10px] font-bold tracking-[0.16em] uppercase mb-2" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Script Release Only
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Clinical assessment, a prescription, then independence. Script is released to your preferred pharmacy. Follow-up consultations are available on request through your portal.
                 </p>
               </div>
@@ -709,7 +709,7 @@ function AfterConsultation() {
                       <circle cx="6" cy="6" r="5.5" stroke="rgba(255,255,255,0.12)" strokeWidth="0.8" />
                       <path d="M3.5 6l2 2 3-3.5" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.42 }}>{item}</span>
+                    <span className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -754,7 +754,7 @@ function CTA() {
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
-          className="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.5 }}
+          className="text-sm leading-relaxed mb-8 max-w-lg mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.72 }}
         >
           Create your account in two minutes. Complete your intake in the portal.
           Your doctor has your results and protocol ready within days.
@@ -775,7 +775,7 @@ function CTA() {
         </motion.div>
         <motion.p
           initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.45 }}
-          className="text-[11px] mt-6" style={{ color: 'var(--text-primary)', opacity: 0.22 }}
+          className="text-[11px] mt-6" style={{ color: 'var(--text-primary)', opacity: 0.72 }}
         >
           All consultations conducted by AHPRA-registered medical practitioners. This website does not constitute medical advice.
         </motion.p>

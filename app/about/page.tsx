@@ -331,7 +331,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-                    <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>
+                    <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       All consultations conducted by AHPRA-registered medical practitioners.
                     </p>
                   </div>
@@ -381,7 +381,7 @@ export default function AboutPage() {
                   <h3 className="text-base font-semibold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                     {standard.title}
                   </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                     {standard.body}
                   </p>
                 </motion.div>

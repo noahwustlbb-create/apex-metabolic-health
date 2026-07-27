@@ -28,7 +28,7 @@ export default function IntakePage() {
               style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Start your intake
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Tell us about your goals and health history. Your doctor reviews this before your consultation.
             </p>
           </motion.div>

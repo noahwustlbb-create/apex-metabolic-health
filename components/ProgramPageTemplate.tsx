@@ -159,7 +159,7 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
               </Link>
             </motion.div>
 
-            <motion.p {...anim(0.36, 0)} style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', color: '#9ca3af', textTransform: 'uppercase' }}>
+            <motion.p {...anim(0.36, 0)} style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
               AHPRA Registered&nbsp;&nbsp;·&nbsp;&nbsp;TGA Compliant&nbsp;&nbsp;·&nbsp;&nbsp;100% Online
             </motion.p>
           </div>
@@ -503,7 +503,7 @@ function ProcessSection({ config, onGetStarted }: { config: ProgramPageConfig; o
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-          <p style={{ fontSize: 11, color: '#9ca3af', marginTop: 10, fontFamily: 'var(--font-inter)' }}>
+          <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 10, fontFamily: 'var(--font-inter)' }}>
             No GP referral required. 100% online.
           </p>
         </motion.div>
@@ -619,7 +619,7 @@ function TestimonialsSection({ config }: { config: ProgramPageConfig }) {
           initial={prefersReduced ? false : { opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.08 }}
-          style={{ fontSize: 12, color: '#9ca3af', marginBottom: '2.5rem', maxWidth: '60ch', lineHeight: 1.6 }}
+          style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: '2.5rem', maxWidth: '60ch', lineHeight: 1.6 }}
         >
           Patient experiences reflect individual service interactions. Clinical outcomes vary and cannot be implied or guaranteed.
         </motion.p>

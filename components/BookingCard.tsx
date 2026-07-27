@@ -54,7 +54,7 @@ export default function BookingCard() {
             <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--blue)' }}>
               Telehealth Consultation
             </p>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Your doctor will review your existing results and build a personalised protocol during your consultation.
             </p>
             <div className="mt-4 pt-3 flex flex-wrap gap-x-4 gap-y-1"
@@ -62,7 +62,7 @@ export default function BookingCard() {
               {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential'].map(t => (
                 <div key={t} className="flex items-center gap-1.5">
                   <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />
-                  <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{t}</span>
+                  <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{t}</span>
                 </div>
               ))}
             </div>
@@ -86,7 +86,7 @@ export default function BookingCard() {
               style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Order your panel first
             </h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Your doctor needs current blood results before your consultation. Order your matched panel below, then collect at any accredited pathology centre, fasted before 9am, no appointment needed.
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function BookingCard() {
                     style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
                     <span className="text-[9px] font-bold" style={{ color: 'var(--blue)' }}>{s.n}</span>
                   </div>
-                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>{s.text}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{s.text}</p>
                 </div>
               ))}
             </div>
@@ -117,7 +117,7 @@ export default function BookingCard() {
               Order your blood panel →
             </a>
 
-            <p className="text-[11px] text-center mt-3" style={{ color: 'var(--text-primary)', opacity: 0.35 }}>
+            <p className="text-[11px] text-center mt-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Powered by Bloody Good Tests · Results delivered digitally
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function BookingCard() {
             {['AHPRA-registered doctors', '4,000+ collection centres', 'Private & confidential'].map(t => (
               <div key={t} className="flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />
-                <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{t}</span>
+                <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{t}</span>
               </div>
             ))}
           </div>

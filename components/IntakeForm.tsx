@@ -164,10 +164,10 @@ export default function IntakeForm() {
         <h2 className="text-2xl font-bold tracking-tight mb-4" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
           We recommend speaking with a doctor directly.
         </h2>
-        <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>
+        <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           Based on what you&apos;ve indicated, our online intake pathway is not appropriate. Please consult your regular GP or specialist for an in-person review before pursuing telehealth treatment.
         </p>
-        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+        <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           If you believe this is an error or have questions, contact us at{' '}
           <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
             admin@apexmetabolichealth.com.au
@@ -269,7 +269,7 @@ export default function IntakeForm() {
             ))}
           </div>
           {data.hasBloods === true && (
-            <p className="text-xs mt-2" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+            <p className="text-xs mt-2" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Email your results to{' '}
               <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: ACCENT }}>
                 admin@apexmetabolichealth.com.au
@@ -299,7 +299,7 @@ export default function IntakeForm() {
           <span className="block text-xs font-semibold tracking-[0.12em] uppercase mb-1" style={{ color: 'var(--text-primary)' }}>
             Safety check: select any that apply
           </span>
-          <p className="text-[11px] mb-3" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+          <p className="text-[11px] mb-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
             If any of the following apply, we may be unable to proceed with online treatment.
           </p>
           <div className="flex flex-col gap-2">
@@ -347,7 +347,7 @@ export default function IntakeForm() {
           {submitting ? 'One moment…' : 'Continue →'}
         </button>
 
-        <p className="text-[11px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>
+        <p className="text-[11px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           All consultations conducted by AHPRA-registered medical practitioners.
           This form does not constitute a diagnosis or guarantee of treatment.
         </p>

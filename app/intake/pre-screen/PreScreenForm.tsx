@@ -277,7 +277,7 @@ function ProfileStrip({ data }: { data: FormData }) {
 function BackBtn({ onClick }: { onClick: () => void }) {
   return (
     <button onClick={onClick} className="flex items-center gap-1.5 mb-6"
-      style={{ color: 'var(--text-primary)', opacity: 0.35, fontSize: '12px', fontWeight: 500 }}
+      style={{ color: 'var(--text-primary)', opacity: 0.72, fontSize: '12px', fontWeight: 500 }}
       onMouseEnter={e => { e.currentTarget.style.opacity = '0.7' }}
       onMouseLeave={e => { e.currentTarget.style.opacity = '0.35' }}>
       <svg viewBox="0 0 14 14" fill="none" className="w-3 h-3" aria-hidden="true">
@@ -407,7 +407,7 @@ export default function PreScreenForm() {
                     style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                     What&apos;s the primary issue?
                   </h1>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                     Your answer determines the clinical pathway we map for you. Be direct: the more accurate the input, the more relevant your result.
                   </p>
                 </div>
@@ -425,7 +425,7 @@ export default function PreScreenForm() {
                         onMouseEnter={cardHover} onMouseLeave={cardLeave}>
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-semibold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{opt.label}</p>
-                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>{opt.sub}</p>
+                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{opt.sub}</p>
                         </div>
                         <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5 flex-shrink-0"
                           style={{ color: isFlash ? ACCENT : 'rgba(72,144,247,0.3)', transition: 'color 0.15s' }} aria-hidden="true">
@@ -436,7 +436,7 @@ export default function PreScreenForm() {
                   })}
                 </div>
 
-                <p className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.22 }}>
+                <p className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Takes 90 seconds · Confidential · AHPRA-registered doctors
                 </p>
               </motion.div>
@@ -455,7 +455,7 @@ export default function PreScreenForm() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                   How old are you?
                 </h2>
-                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Hormonal profiles shift significantly by decade. Age determines which markers we prioritise.
                 </p>
                 <div className="grid grid-cols-2 gap-3">
@@ -493,7 +493,7 @@ export default function PreScreenForm() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                   Which of these apply?
                 </h2>
-                <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-sm mb-7" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Select everything that sounds familiar. Co-presenting symptoms are diagnostically significant.
                 </p>
                 <div className="grid grid-cols-1 gap-2 mb-6">
@@ -541,7 +541,7 @@ export default function PreScreenForm() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                   Have you had blood work done?
                 </h2>
-                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-sm mb-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Prior testing changes what your first appointment looks like and how we interpret your symptom profile.
                 </p>
                 <div className="flex flex-col gap-2.5">
@@ -557,7 +557,7 @@ export default function PreScreenForm() {
                         onMouseEnter={cardHover} onMouseLeave={cardLeave}>
                         <div>
                           <p className="text-sm font-semibold mb-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{opt.label}</p>
-                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.38 }}>{opt.sub}</p>
+                          <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{opt.sub}</p>
                         </div>
                         <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5 flex-shrink-0"
                           style={{ color: isFlash ? ACCENT : 'rgba(72,144,247,0.3)', transition: 'color 0.15s' }} aria-hidden="true">
@@ -592,7 +592,7 @@ export default function PreScreenForm() {
                   style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(22px, 4vw, 32px)', color: 'var(--text-primary)', lineHeight: 1.1 }}>
                   Your results are ready.
                 </h2>
-                <p className="text-sm leading-relaxed mb-7" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+                <p className="text-sm leading-relaxed mb-7" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   We&apos;ve identified a clinical pattern and matched you to a protocol. Enter your details to unlock your personalised assessment. Our clinical team will be in touch to arrange your next step.
                 </p>
 
@@ -602,17 +602,17 @@ export default function PreScreenForm() {
                   <div className="p-5" style={{ filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' }}>
                     <p className="text-[9px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: ACCENT }}>Matched protocol</p>
                     <p className="text-lg font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{prog.label}</p>
-                    <p className="text-xs mb-4" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{prog.tagline}</p>
+                    <p className="text-xs mb-4" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{prog.tagline}</p>
                     <div className="flex flex-col gap-1.5">
                       {prog.biomarkers.slice(0, 4).map(b => (
                         <div key={b} className="flex items-center gap-2">
                           <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
-                          <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{b}</span>
+                          <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{b}</span>
                         </div>
                       ))}
                       <div className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
-                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>+ {prog.biomarkers.length - 4} more markers</span>
+                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>+ {prog.biomarkers.length - 4} more markers</span>
                       </div>
                     </div>
                   </div>
@@ -626,7 +626,7 @@ export default function PreScreenForm() {
                       </svg>
                     </div>
                     <p className="text-sm font-bold text-center mb-1" style={{ color: 'var(--text-primary)' }}>Results locked</p>
-                    <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>Enter your details below to unlock</p>
+                    <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Enter your details below to unlock</p>
                   </div>
                 </div>
 
@@ -639,7 +639,7 @@ export default function PreScreenForm() {
                 <div className="flex flex-col gap-3 mb-5">
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label htmlFor="ps-first-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <label htmlFor="ps-first-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                         First name <span style={{ color: ACCENT }}>*</span>
                       </label>
                       <input id="ps-first-name" type="text" value={data.firstName} onChange={e => set('firstName', e.target.value)}
@@ -649,7 +649,7 @@ export default function PreScreenForm() {
                         onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
                     </div>
                     <div>
-                      <label htmlFor="ps-last-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                      <label htmlFor="ps-last-name" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                         Last name
                       </label>
                       <input id="ps-last-name" type="text" value={data.lastName} onChange={e => set('lastName', e.target.value)}
@@ -660,7 +660,7 @@ export default function PreScreenForm() {
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="ps-email" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                    <label htmlFor="ps-email" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       Email address <span style={{ color: ACCENT }}>*</span>
                     </label>
                     <input id="ps-email" type="email" value={data.email} onChange={e => set('email', e.target.value)}
@@ -670,7 +670,7 @@ export default function PreScreenForm() {
                       onBlur={e => { e.currentTarget.style.borderColor = 'rgba(72,144,247,0.15)' }} />
                   </div>
                   <div>
-                    <label htmlFor="ps-phone" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                    <label htmlFor="ps-phone" className="block text-[10px] font-semibold tracking-[0.12em] uppercase mb-1.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       Mobile number <span style={{ color: ACCENT }}>*</span>
                     </label>
                     <input id="ps-phone" type="tel" value={data.phone} onChange={e => set('phone', e.target.value)}
@@ -691,7 +691,7 @@ export default function PreScreenForm() {
                   )}
                 </button>
 
-                <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.25 }}>
+                <p className="text-[10px] text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Your information is private and confidential. Not shared with third parties. AHPRA-registered practitioners only.
                 </p>
               </motion.div>
@@ -743,7 +743,7 @@ export default function PreScreenForm() {
                           transition={{ duration: 0.4, delay: 0.2 + i * 0.07, ease }}
                           className="flex items-start gap-3">
                           <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5" style={{ background: ACCENT }} />
-                          <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>{obs}</p>
+                          <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{obs}</p>
                         </motion.div>
                       ))}
                     </div>
@@ -766,7 +766,7 @@ export default function PreScreenForm() {
                     {prog.biomarkers.map(b => (
                       <div key={b} className="flex items-center gap-2">
                         <div className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: ACCENT, opacity: 0.6 }} />
-                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>{b}</span>
+                        <span className="text-xs" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{b}</span>
                       </div>
                     ))}
                   </div>
@@ -784,7 +784,7 @@ export default function PreScreenForm() {
                 </motion.div>
 
                 <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.55 }}
-                  className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.22 }}>
+                  className="text-[10px] text-center mt-6" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   This assessment is not a medical diagnosis. A clinical assessment with an AHPRA-registered doctor is required before any treatment is prescribed.
                 </motion.p>
               </motion.div>

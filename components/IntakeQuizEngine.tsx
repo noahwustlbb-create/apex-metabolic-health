@@ -102,7 +102,7 @@ function Shell({ children, onClose }: { children: React.ReactNode; onClose: () =
         <button
           onClick={onClose}
           className="absolute left-6 flex items-center gap-1.5 text-xs font-medium transition-colors duration-150"
-          style={{ color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}
+          style={{ color: '#4b5563', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}
           aria-label="Exit"
           onMouseEnter={e => { e.currentTarget.style.color = TEAL }}
           onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8' }}
@@ -112,13 +112,13 @@ function Shell({ children, onClose }: { children: React.ReactNode; onClose: () =
         {/* Centered logo */}
         <a href="/" className="flex flex-col items-center leading-none" style={{ textDecoration: 'none' }}>
           <span className="font-black text-[17px] tracking-[0.2em] uppercase" style={{ color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1 }}>APEX</span>
-          <span className="text-[8px] tracking-[0.24em] font-semibold uppercase mt-0.5" style={{ color: '#94a3b8' }}>Metabolic Health</span>
+          <span className="text-[8px] tracking-[0.24em] font-semibold uppercase mt-0.5" style={{ color: '#4b5563' }}>Metabolic Health</span>
         </a>
         {/* Sign in link */}
         <a
           href={PORTAL_LOGIN}
           className="absolute right-6 text-xs font-medium transition-colors duration-150"
-          style={{ color: '#94a3b8', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
+          style={{ color: '#4b5563', textDecoration: 'none', fontFamily: 'var(--font-space-grotesk)' }}
           onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = TEAL }}
           onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#94a3b8' }}
         >
@@ -539,7 +539,7 @@ function QuizPhase({
                       <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
                         Dr Cameron Chen
                       </p>
-                      <p style={{ fontSize: 11, color: '#94a3b8', marginTop: 1 }}>Medical Director</p>
+                      <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>Medical Director</p>
                     </div>
                   </div>
                 </div>

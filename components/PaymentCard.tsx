@@ -102,17 +102,17 @@ export default function PaymentCard() {
               <p className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                 ${product.price}
               </p>
-              <p className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>AUD inc. GST</p>
+              <p className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>AUD inc. GST</p>
             </div>
           </div>
-          <p className="text-sm leading-relaxed mt-3" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>
+          <p className="text-sm leading-relaxed mt-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
             {product.description}
           </p>
         </div>
 
         {/* What happens next */}
         <div className="px-6 py-5">
-          <p className="text-[10px] font-bold tracking-[0.16em] uppercase mb-4" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>
+          <p className="text-[10px] font-bold tracking-[0.16em] uppercase mb-4" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
             What happens next
           </p>
           <div className="flex flex-col gap-3">
@@ -122,7 +122,7 @@ export default function PaymentCard() {
                   style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
                   <span className="text-[9px] font-bold" style={{ color: ACCENT }}>{i + 1}</span>
                 </div>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>{step}</p>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{step}</p>
               </div>
             ))}
           </div>
@@ -134,7 +134,7 @@ export default function PaymentCard() {
           {['AHPRA-registered doctors', 'Secure payment via Stripe', 'TGA-compliant protocols'].map(t => (
             <div key={t} className="flex items-center gap-1.5">
               <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
-              <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>{t}</span>
+              <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{t}</span>
             </div>
           ))}
         </div>
@@ -172,7 +172,7 @@ export default function PaymentCard() {
         )}
       </button>
 
-      <p className="text-[11px] text-center mt-3" style={{ color: 'var(--text-primary)', opacity: 0.35 }}>
+      <p className="text-[11px] text-center mt-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
         Powered by Stripe. Your card details are never stored by Apex.
       </p>
     </motion.div>

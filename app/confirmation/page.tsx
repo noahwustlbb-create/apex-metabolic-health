@@ -45,7 +45,7 @@ export default function ConfirmationPage() {
             <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.58, ease }}
               className="text-sm leading-relaxed mb-8"
-              style={{ color: 'var(--text-primary)', opacity: 0.65, maxWidth: 440 }}
+              style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 440 }}
             >
               Our team will contact you within 1 business day to confirm your next step. Your doctor will review your intake before your consultation.
             </motion.p>
@@ -68,7 +68,7 @@ export default function ConfirmationPage() {
                   <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
                   <div>
                     <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{item.step}</p>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>{item.detail}</p>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item.detail}</p>
                   </div>
                 </div>
               ))}
@@ -80,7 +80,7 @@ export default function ConfirmationPage() {
               style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}
             >
               <p className="text-xs font-semibold mb-1" style={{ color: 'var(--blue)' }}>Questions? We&apos;re here.</p>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                 Email us at{' '}
                 <a href="mailto:admin@apexmetabolichealth.com.au" style={{ color: 'var(--blue)' }}>
                   admin@apexmetabolichealth.com.au
@@ -113,7 +113,7 @@ export default function ConfirmationPage() {
 
             <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.18, ease }}
-              className="text-[11px] mt-6" style={{ color: 'var(--text-primary)', opacity: 0.3 }}
+              className="text-[11px] mt-6" style={{ color: 'var(--text-primary)', opacity: 0.72 }}
             >
               Apex Metabolic Health · AHPRA-registered practitioners · Private & confidential
             </motion.p>

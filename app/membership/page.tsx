@@ -164,7 +164,7 @@ function Hero() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2, ease }}
           className="text-base md:text-lg leading-relaxed"
-          style={{ color: 'var(--text-primary)', opacity: 0.7, maxWidth: '520px', marginBottom: '2.25rem' }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '520px', marginBottom: '2.25rem' }}
         >
           A full doctor-led clinical system for $99/mo: protocol management, biomarker tracking, medication at cost price, and prescribing fees waived. Structured to save you more than it costs.
         </motion.p>
@@ -186,7 +186,7 @@ function Hero() {
           <div className="flex items-baseline gap-1.5 px-5 py-3 rounded-full"
             style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)' }}>
             <span className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$99</span>
-            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>/month · no lock-in</span>
+            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>/month · no lock-in</span>
           </div>
         </motion.div>
 
@@ -245,7 +245,7 @@ function AdvantageStrip() {
               <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '3px' }}>
                 {stat.label}
               </span>
-              <span style={{ fontSize: '10px', color: 'var(--text-primary)', opacity: 0.38 }}>
+              <span style={{ fontSize: '10px', color: 'var(--text-primary)', opacity: 0.72 }}>
                 {stat.sub}
               </span>
             </motion.div>
@@ -297,7 +297,7 @@ function SavingsBreakdown() {
                 <div key={label} className="flex flex-col items-center justify-center py-5 rounded-xl text-center"
                   style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
                   <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '32px', fontWeight: 800, color: ACCENT, lineHeight: 1 }}>{value}</span>
-                  <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.4, marginTop: '6px' }}>{label}</span>
+                  <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '6px' }}>{label}</span>
                 </div>
               ))}
             </motion.div>
@@ -305,7 +305,7 @@ function SavingsBreakdown() {
             <motion.p
               initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.32 }}
               className="text-sm leading-relaxed"
-              style={{ color: 'var(--text-primary)', opacity: 0.55 }}
+              style={{ color: 'var(--text-primary)', opacity: 0.72 }}
             >
               If that sounds like you, here&apos;s what membership saves you annually, before you factor in the clinical value of having a doctor actually managing your protocol.
             </motion.p>
@@ -320,10 +320,10 @@ function SavingsBreakdown() {
                 <div key={row.label} className="flex items-center justify-between px-6 py-5"
                   style={{ borderBottom: '1px solid rgba(72,144,247,0.06)' }}>
                   <div className="min-w-0 pr-4">
-                    <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.5, marginBottom: '3px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginBottom: '3px' }}>
                       {row.label}
                     </p>
-                    <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28 }}>{row.detail}</p>
+                    <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72 }}>{row.detail}</p>
                   </div>
                   <div className="text-right flex-shrink-0">
                     <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '20px', fontWeight: 800, color: ACCENT }}>{row.saving}</span>
@@ -336,10 +336,10 @@ function SavingsBreakdown() {
               <div className="flex items-center justify-between px-6 py-6"
                 style={{ background: 'rgba(72,144,247,0.05)', borderTop: '1px solid rgba(72,144,247,0.16)' }}>
                 <div>
-                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.55 }}>
+                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72 }}>
                     Typical annual saving
                   </p>
-                  <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.28, marginTop: '3px' }}>
+                  <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72, marginTop: '3px' }}>
                     vs. single consult path · individual results vary
                   </p>
                 </div>
@@ -350,7 +350,7 @@ function SavingsBreakdown() {
               </div>
             </div>
 
-            <p className="text-[11px] mt-4 text-center" style={{ color: 'var(--text-primary)', opacity: 0.28 }}>
+            <p className="text-[11px] mt-4 text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Membership costs $99/mo ($1,188/yr). At 3+ medication invoices, the saving covers the cost of membership itself.
             </p>
           </motion.div>
@@ -399,7 +399,7 @@ function WhatsIncluded() {
               <h3 className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                 {item.title}
               </h3>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                 {item.body}
               </p>
             </motion.div>
@@ -425,7 +425,7 @@ function WhatsIncluded() {
                 <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.12)" stroke={ACCENT} strokeWidth="0.8" />
                 <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.7 }}>{item}</span>
+              <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
             </div>
           ))}
         </motion.div>
@@ -487,7 +487,7 @@ function PortalAccess() {
             <motion.p
               initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
               className="text-sm leading-relaxed mb-8"
-              style={{ color: 'var(--text-primary)', opacity: 0.6, maxWidth: '440px' }}
+              style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '440px' }}
             >
               The Apex patient portal puts your entire clinical picture in one place (results, messaging, documents, and bookings) accessible from any device.
             </motion.p>
@@ -529,7 +529,7 @@ function PortalAccess() {
                 <p className="text-xs font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
                   {f.label}
                 </p>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   {f.body}
                 </p>
               </motion.div>
@@ -571,7 +571,7 @@ function FourMonthCycle() {
             How the 3-month review cycle works.
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
-            className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>
+            className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
             Not a static prescription, but a living, evolving protocol that responds to your biology.
           </motion.p>
         </div>
@@ -601,7 +601,7 @@ function FourMonthCycle() {
                 <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: ACCENT }}>{phase.phase}</span>
               </div>
               <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</span>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>{phase.desc}</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
             </div>
           ))}
         </motion.div>
@@ -618,7 +618,7 @@ function FourMonthCycle() {
               <div>
                 <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: ACCENT }}>{phase.phase}</p>
                 <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</p>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.55 }}>{phase.desc}</p>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
               </div>
             </div>
           ))}

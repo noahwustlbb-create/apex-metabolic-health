@@ -23,7 +23,7 @@ export default function CheckoutPage() {
               style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Your next step
             </h1>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
               Based on your intake, here&apos;s what happens next.
             </p>
           </motion.div>

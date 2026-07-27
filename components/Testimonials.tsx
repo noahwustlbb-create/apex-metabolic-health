@@ -203,7 +203,7 @@ export default function Testimonials() {
           animate={cardsInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.5, ease }}
           className="text-xs text-center mt-8"
-          style={{ color: 'var(--text-primary)', opacity: 0.28 }}
+          style={{ color: 'var(--text-primary)', opacity: 0.72 }}
         >
           Names abbreviated and locations used with permission. Individual experiences vary.
         </motion.p>

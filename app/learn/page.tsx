@@ -164,7 +164,7 @@ export default function LearnPage() {
                           >
                             {featured.category}
                           </span>
-                          <span className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.45 }}>
+                          <span className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                             {featured.readTime}
                           </span>
                           <span
@@ -186,7 +186,7 @@ export default function LearnPage() {
                         >
                           {featured.title}
                         </h2>
-                        <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.7 }}>
+                        <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                           {featured.summary}
                         </p>
                       </div>
@@ -222,7 +222,7 @@ export default function LearnPage() {
                 animate={gridInView ? { opacity: 1 } : {}}
                 transition={{ duration: 0.5, ease }}
                 className="text-sm font-semibold"
-                style={{ color: 'var(--text-primary)', opacity: 0.5 }}
+                style={{ color: 'var(--text-primary)', opacity: 0.72 }}
               >
                 {rest.length} more articles
               </motion.p>
@@ -257,7 +257,7 @@ export default function LearnPage() {
                         >
                           {article.category}
                         </span>
-                        <span className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.4 }}>
+                        <span className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                           {article.readTime}
                         </span>
                       </div>
@@ -267,12 +267,12 @@ export default function LearnPage() {
                       >
                         {article.title}
                       </h3>
-                      <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.65 }}>
+                      <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                         {article.summary}
                       </p>
                       <div className="flex flex-wrap gap-1.5 mt-auto">
                         {article.tags.map(tag => (
-                          <span key={tag} className="text-[10px] font-medium tracking-wide px-2 py-0.5 rounded-full" style={{ background: 'var(--elevated-high)', color: 'var(--text-primary)', opacity: 0.6 }}>
+                          <span key={tag} className="text-[10px] font-medium tracking-wide px-2 py-0.5 rounded-full" style={{ background: 'var(--elevated-high)', color: 'var(--text-primary)', opacity: 0.72 }}>
                             {tag}
                           </span>
                         ))}
@@ -307,7 +307,7 @@ export default function LearnPage() {
                     <p className="text-base font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
                       Ready to get your own results?
                     </p>
-                    <p className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.6 }}>
+                    <p className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                       Start with a 5-minute assessment. We&apos;ll match you to the right program and panel.
                     </p>
                   </div>

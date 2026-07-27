@@ -296,7 +296,7 @@ function ProgramCard({ prog, i, inView }: { prog: typeof PROGRAMS[0]; i: number;
         </h3>
 
         {/* Tagline */}
-        <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.5 }}>
+        <p className="text-xs leading-relaxed mb-5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           {prog.tagline}
         </p>
 
