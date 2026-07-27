@@ -1,7 +1,7 @@
-import { Resend } from 'resend'
+import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
 
-const ADMIN_EMAIL = 'noahwustlbb@gmail.com'
+const ADMIN_EMAIL = 'admin@apexmetabolichealth.com.au'
 
 export async function POST(req: Request) {
   const body = await req.json() as Record<string, string>
@@ -9,7 +9,6 @@ export async function POST(req: Request) {
 
   if (!email) return NextResponse.json({ error: 'No email' }, { status: 400 })
 
-  const resend = new Resend(process.env.RESEND_API_KEY)
 
   const rows = [
     ['Name',           name            ],
@@ -36,9 +35,7 @@ export async function POST(req: Request) {
 
   const sourceLabel = source === 'quiz' ? 'Health Assessment' : source === 'book' ? 'Book page' : source ?? 'Website'
 
-  const { error } = await resend.emails.send({
-    // STOPGAP: resend.dev until domain verified in Resend, then revert to admin@apexmetabolichealth.com.au
-    from: 'Apex Metabolic Health <onboarding@resend.dev>',
+  const sendArgs = {
     to: ADMIN_EMAIL,
     replyTo: email,
     subject: `New lead: ${name || email} (${sourceLabel})`,
@@ -85,11 +82,13 @@ export async function POST(req: Request) {
 </table>
 </body>
 </html>`,
-  })
+  }
 
-  if (error) {
-    console.error('notify-admin Resend error:', error)
-    return NextResponse.json({ error }, { status: 500 })
+  try {
+    await sendEmail(sendArgs)
+  } catch (error) {
+    console.error('notify-admin mailer error:', error)
+    return NextResponse.json({ error: 'send failed' }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true })

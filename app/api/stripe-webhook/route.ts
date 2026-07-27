@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { Resend } from 'resend'
+import { sendEmail } from '@/lib/mailer'
 import { createClinikoPatient } from '@/lib/cliniko'
 
 export const runtime = 'nodejs'
@@ -61,9 +61,7 @@ export async function POST(req: Request) {
 
   // 2 - Send internal admin notification
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY)
-    await resend.emails.send({
-      from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
+    await sendEmail({
       to: 'admin@apexmetabolichealth.com.au',
       subject: `New Patient Payment: ${firstName} ${lastName} (${productName})`,
       html: `
@@ -97,10 +95,8 @@ export async function POST(req: Request) {
 
   // 3 - Send patient confirmation email
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY)
     const isPanel = productType.startsWith('panel')
-    await resend.emails.send({
-      from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
+    await sendEmail({
       to: email,
       subject: `Payment confirmed: ${productName}`,
       html: `

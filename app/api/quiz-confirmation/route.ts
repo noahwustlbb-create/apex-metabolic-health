@@ -1,9 +1,8 @@
-import { Resend } from 'resend'
+import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
 import { programs } from '@/lib/programs'
 
 export async function POST(req: Request) {
-  const resend = new Resend(process.env.RESEND_API_KEY)
   const { firstName, email, programs: programNames } = await req.json()
 
   if (!email) return NextResponse.json({ error: 'No email' }, { status: 400 })
@@ -34,8 +33,7 @@ export async function POST(req: Request) {
     )
     .join('')
 
-  const { error } = await resend.emails.send({
-    from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
+  const sendArgs = {
     to: email,
     subject: 'Your Apex Health Assessment: Personalised Clinical Pathway',
     html: `
@@ -252,11 +250,13 @@ export async function POST(req: Request) {
   </table>
 </body>
 </html>`,
-  })
+  }
 
-  if (error) {
-    console.error('Resend error:', error)
-    return NextResponse.json({ error }, { status: 500 })
+  try {
+    await sendEmail(sendArgs)
+  } catch (error) {
+    console.error('Mailer error:', error)
+    return NextResponse.json({ error: 'send failed' }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true })

@@ -1,4 +1,4 @@
-import { Resend } from 'resend'
+import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
 
 type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake'
@@ -221,18 +221,11 @@ export async function POST(req: Request) {
   if (!FORM_CONFIG[formType]) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
 
   const config = FORM_CONFIG[formType]
-  const resend = new Resend(process.env.RESEND_API_KEY)
-
-  const { error } = await resend.emails.send({
-    from: 'Apex Metabolic Health <admin@apexmetabolichealth.com.au>',
-    to: email,
-    subject: config.subject,
-    html: buildEmail(firstName ?? '', formType),
-  })
-
-  if (error) {
-    console.error('Resend error:', error)
-    return NextResponse.json({ error }, { status: 500 })
+  try {
+    await sendEmail({ to: email, subject: config.subject, html: buildEmail(firstName ?? '', formType) })
+  } catch (error) {
+    console.error('Mailer error:', error)
+    return NextResponse.json({ error: 'send failed' }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true })
