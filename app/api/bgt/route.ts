@@ -1,22 +1,52 @@
 import { NextResponse } from 'next/server'
 
 const BGT_API = 'https://api.bloodygoodtests.com.au'
+const BGT_TOKEN_URL = 'https://auth.bloodygoodtests.com.au/oauth/token'
+// BGT versions its API through the Accept header. Bundles require >= 1.1.0.
+const BGT_ACCEPT = 'application/vnd.bloodygoodtests.v1.1.0+json'
 
 const CORS = {
   'Access-Control-Allow-Origin': 'https://app.apexmetabolichealth.com.au',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
 }
 
+// Cache the OAuth access token across requests (tokens last ~24h). Refresh a
+// minute early to avoid using one that expires mid-flight.
+let cachedToken: { value: string; expiresAt: number } | null = null
+
+async function getAccessToken(clientId: string, clientSecret: string): Promise<string> {
+  if (cachedToken && Date.now() < cachedToken.expiresAt) return cachedToken.value
+
+  const res = await fetch(BGT_TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'client_credentials',
+      client_id: clientId,
+      client_secret: clientSecret,
+    }),
+  })
+  if (!res.ok) {
+    throw new Error(`BGT token exchange failed (${res.status}): ${await res.text()}`)
+  }
+  const data = (await res.json()) as { access_token: string; expires_in?: number }
+  const ttlMs = (data.expires_in ?? 86400) * 1000
+  cachedToken = { value: data.access_token, expiresAt: Date.now() + ttlMs - 60_000 }
+  return cachedToken.value
+}
+
 async function bgtFetch(url: string, clientId: string, clientSecret: string): Promise<Response> {
-  const r1 = await fetch(url, { headers: { Authorization: `Bearer ${clientSecret}` } })
-  if (r1.ok) return r1
-
-  const basic = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
-  const r2 = await fetch(url, { headers: { Authorization: `Basic ${basic}` } })
-  if (r2.ok) return r2
-
-  const r3 = await fetch(url, { headers: { Authorization: `Bearer ${clientId}` } })
-  return r3
+  const token = await getAccessToken(clientId, clientSecret)
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}`, Accept: BGT_ACCEPT },
+  })
+  // If the cached token was rejected, force one refresh and retry once.
+  if (res.status === 401) {
+    cachedToken = null
+    const fresh = await getAccessToken(clientId, clientSecret)
+    return fetch(url, { headers: { Authorization: `Bearer ${fresh}`, Accept: BGT_ACCEPT } })
+  }
+  return res
 }
 
 // GET /api/bgt?resource=bundles|results|orders|patients
