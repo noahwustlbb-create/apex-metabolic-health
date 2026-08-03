@@ -241,6 +241,10 @@ export default function Nav() {
                 letterSpacing: '0.01em',
                 transition: 'background 0.2s, border-color 0.2s',
                 whiteSpace: 'nowrap',
+                border: `1.5px solid rgba(72,144,247,0.35)`,
+                borderRadius: '999px',
+                padding: '9px 16px',
+                transition: 'border-color 0.2s, background 0.2s, color 0.2s',
               }}
               onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.6)' }}
               onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)' }}
