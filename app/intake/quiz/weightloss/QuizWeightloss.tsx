@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our weight management program may not be right for you at this time.',
-  ineligibleBody: 'Based on your answers, your health history includes factors that our doctors need to assess more carefully before recommending a weight management protocol. We encourage you to book a free discovery call, and our clinical team can help determine the safest next step for you.',
+  ineligibleBody: 'Based on your answers, your health history includes factors that our doctors need to assess more carefully before recommending a weight management protocol. We encourage you to request a free discovery call, and our clinical team can help determine the safest next step for you.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

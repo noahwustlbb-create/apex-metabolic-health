@@ -8,7 +8,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FAQSection from '@/components/FAQSection'
-import GetStartedModal from '@/components/GetStartedModal'
+import HeroStartModal from '@/components/HeroStartModal'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const BLUE = 'var(--blue)'
@@ -822,12 +822,16 @@ function StickyBar({ name, onGetStarted }: { name: string; onGetStarted: () => v
 
 // ─── Main Template ────────────────────────────────────────────────────────────
 
+// Only these programs use the multi-step clinical questionnaire.
+// Every other program gets the lighter intake-form / create-account choice.
+const QUESTIONNAIRE_SLUGS = new Set(['hormone-optimisation', 'sexual-health', 'hair-restoration'])
+
 export default function ProgramPageTemplate({ config }: { config: ProgramPageConfig }) {
   const [modalOpen, setModalOpen] = useState(false)
   const router = useRouter()
 
   const handleGetStarted = () => {
-    if (config.intakeUrl) {
+    if (QUESTIONNAIRE_SLUGS.has(config.slug) && config.intakeUrl) {
       router.push(config.intakeUrl)
     } else {
       setModalOpen(true)
@@ -851,7 +855,7 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
       <StickyBar name={config.name} onGetStarted={handleGetStarted} />
 
       <AnimatePresence>
-        {modalOpen && <GetStartedModal onClose={() => setModalOpen(false)} />}
+        {modalOpen && <HeroStartModal program={config.name} onClose={() => setModalOpen(false)} />}
       </AnimatePresence>
     </>
   )

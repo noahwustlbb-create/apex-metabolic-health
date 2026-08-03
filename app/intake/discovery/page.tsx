@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { captureLead } from '@/lib/captureLead'
 import BookingChoice from '@/components/BookingChoice'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -80,6 +81,11 @@ export default function DiscoveryCallPage() {
     if (errs.length > 0) { setErrors(errs); return }
     setSubmitting(true)
     try {
+      // First-party channel: survives ad blockers that block Web3Forms.
+      const firstParty = captureLead({
+        source: 'discovery-call-request', email: form.email,
+        name: `${form.firstName} ${form.lastName}`.trim(), phone: form.phone,
+      }).then(() => true).catch(() => false)
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -119,7 +125,7 @@ export default function DiscoveryCallPage() {
                 We&apos;ll be in touch, {form.firstName}.
               </h1>
               <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
-                Our team will contact you within one business day to schedule your free discovery call.
+                Our clinical team will call you within one business day to talk through your goals and the right next step.
               </p>
               <div className="flex justify-center w-full">
                 <BookingChoice type="discovery" delay={0.8} />
@@ -145,10 +151,10 @@ export default function DiscoveryCallPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-10">
             <p className="label mb-3">Free · No commitment</p>
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-              Book a Discovery Call
+              Request a Discovery Call
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-              Not sure where to start? A 15-minute call with our team to understand your goals and find the right program. No cost, no commitment.
+              Not sure where to start? Tell us a little about yourself and our clinical team will call you back to talk through your goals and the right program. Usually within 1 business day. No cost, no commitment.
             </p>
           </motion.div>
 

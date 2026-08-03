@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: "Our skin treatment isn't the right fit right now.",
-  ineligibleBody: "Based on your answers, there are factors that need to be assessed before we can prescribe a skin regeneration protocol. Book a free discovery call and our clinical team will help determine the safest pathway for you.",
+  ineligibleBody: "Based on your answers, there are factors that need to be assessed before we can prescribe a skin regeneration protocol. Request a free discovery call and our clinical team will help determine the safest pathway for you.",
   ineligibleAlt: { label: 'Explore other treatments', href: '/#programs' },
   steps: [
     {

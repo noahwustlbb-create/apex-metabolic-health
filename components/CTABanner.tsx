@@ -65,9 +65,7 @@ export default function CTABanner() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {/* Primary CTA */}
             <a
-              href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/intake/discovery"
               className="group inline-flex items-center gap-2.5 bg-white text-[#005F8E] font-black
                          px-8 py-4 rounded-md text-base
                          hover:bg-[#E8E8E8] transition-all duration-200

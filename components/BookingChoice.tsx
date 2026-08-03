@@ -8,7 +8,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const CALENDLY = {
   hormone: 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation',
   general: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
-  discovery: 'https://calendly.com/admin-apexmetabolichealth/free-discovery-call',
+  discovery: '/intake/discovery',
 } as const
 
 interface Props {
@@ -91,8 +91,6 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               {showDiscovery && (
                 <a
                   href={discoveryLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   onClick={() => setChose('discovery')}
                   className="flex gap-4 items-start p-5 transition-all duration-200"
                   style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
@@ -180,12 +178,18 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Calendly is opening in a new tab.</p>
+                <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                  {chose === 'discovery' ? 'Opening your request form.' : 'Calendly is opening in a new tab.'}
+                </p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                  Can't see it?{' '}
-                  <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
-                    Click here to book.
-                  </a>
+                  Can&apos;t see it?{' '}
+                  {chose === 'discovery' ? (
+                    <a href={activeLink} style={{ color: 'var(--blue)' }}>Click here to continue.</a>
+                  ) : (
+                    <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
+                      Click here to book.
+                    </a>
+                  )}
                 </p>
               </div>
             </motion.div>

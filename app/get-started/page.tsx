@@ -6,10 +6,10 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { programs } from '@/lib/programs'
+import { captureLead } from '@/lib/captureLead'
 
 // ─── Input styles ─────────────────────────────────────────────────────────────
 
-const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 const inputBase: React.CSSProperties = {
   background: 'var(--elevated-high)',
@@ -432,14 +432,19 @@ function EnquiryForm() {
     setSubmitting(true)
     setError('')
     const data = new FormData(e.currentTarget)
-    data.append('access_key', WEB3FORMS_KEY)
-    data.append('subject', 'New Enquiry | Apex Metabolic Health')
+    const fields = Object.fromEntries(data.entries()) as Record<string, string>
     try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
-      const json = await res.json()
-      if (json.success) { setSubmitted(true) } else { setError('Something went wrong. Please try again.') }
+      // Two independent channels — a blocked third-party request alone can no
+      // longer fail the submission or lose the enquiry.
+      await captureLead({
+        ...fields,
+        email: fields.email ?? '',
+        source: 'get-started-enquiry',
+        subject: 'New Enquiry | Apex Metabolic Health',
+      })
+      setSubmitted(true)
     } catch {
-      setError('Something went wrong. Please try again.')
+      setError('Something went wrong. Please try again, or email admin@apexmetabolichealth.com.au.')
     }
     setSubmitting(false)
   }

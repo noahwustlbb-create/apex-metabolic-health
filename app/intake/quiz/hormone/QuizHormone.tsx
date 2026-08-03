@@ -17,8 +17,8 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'We need more information before recommending a hormonal program.',
-  ineligibleBody: 'Based on your answers, our doctors need to review your situation carefully before recommending a hormonal protocol. Book a free discovery call to speak with our clinical team.',
-  ineligibleAlt: { label: 'Book a free discovery call', href: '/discovery-call' },
+  ineligibleBody: 'Based on your answers, our doctors need to review your situation carefully before recommending a hormonal protocol. Request a free discovery call to speak with our clinical team.',
+  ineligibleAlt: { label: 'Request a free discovery call', href: '/discovery-call' },
   steps: [
     {
       type: 'single', id: 'age',

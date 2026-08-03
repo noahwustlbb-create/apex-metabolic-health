@@ -4,6 +4,7 @@ import { useState, useId } from 'react'
 import { motion } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { captureLead } from '@/lib/captureLead'
 
 const BLUE = 'var(--blue)'
 const INK = '#111827'
@@ -113,6 +114,10 @@ export default function DiscoveryCallForm() {
     if (!valid) return
     setSubmitting(true); setError('')
     try {
+      const firstParty = captureLead({
+        source: 'discovery-call', email: d.email,
+        name: `${d.firstName} ${d.lastName}`.trim(), phone: d.phone,
+      }).then(() => true).catch(() => false)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -129,7 +134,8 @@ export default function DiscoveryCallForm() {
         }),
       })
       const json = await res.json()
-      if (!json.success) throw new Error()
+      // Only a genuine failure if BOTH channels failed.
+      if (!json.success && !(await firstParty)) throw new Error()
       setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch { setError('Something went wrong. Please try again or email us directly.') }
     finally { setSubmitting(false) }
@@ -168,7 +174,7 @@ export default function DiscoveryCallForm() {
                   <span className="text-[11px] font-semibold tracking-[0.12em] uppercase" style={{ color: BLUE }}>Free · No obligation</span>
                 </div>
                 <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 700, letterSpacing: '-0.025em', lineHeight: 1.12, color: INK, marginBottom: 14 }}>
-                  Book a free discovery call.
+                  Request a free discovery call.
                 </h1>
                 <p className="text-[15px] leading-relaxed" style={{ color: MUTED, maxWidth: '50ch' }}>
                   Speak with our clinical team about whether an Apex program is the right fit for you. No hard sell. No commitment.

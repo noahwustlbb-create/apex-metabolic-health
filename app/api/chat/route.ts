@@ -25,10 +25,7 @@ OUR PROGRAMS:
 8. General Telehealth: AHPRA-registered doctors for general health consultations, referrals, and medical management
 
 PRICING:
-- Hormone Consult (Initial): $275
-- General / Metabolic Consult (Initial): $125
-- Review Consultation: $125
-- Free Discovery Call: $0 (15 minutes)
+- Do NOT quote specific prices or dollar figures. If someone asks about cost or pricing, tell them a free 15-minute discovery call is available with no obligation, and that full pricing is shown on the pricing page and within the booking flow. Direct them to /pricing or to book a free discovery call.
 
 PROCESS:
 1. Patient selects a program
@@ -62,12 +59,29 @@ TONE:
 
 If you don't know something, say so honestly and suggest they book a free discovery call for a direct conversation with the team.`
 
+const FALLBACK_REPLY =
+  "Thanks for reaching out. Our live assistant is briefly offline, but our team is happy to help directly. Book a free 15-minute discovery call at /intake/discovery, or start your assessment at /start. If this is urgent medical help, please call 000."
+
 export async function POST(request: Request) {
   try {
     const { messages } = await request.json()
 
+    // Degrade gracefully if the API key isn't configured, rather than returning a 500.
+    if (!process.env.ANTHROPIC_API_KEY) {
+      const encoder = new TextEncoder()
+      return new Response(
+        new ReadableStream({
+          start(controller) {
+            controller.enqueue(encoder.encode(FALLBACK_REPLY))
+            controller.close()
+          },
+        }),
+        { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+      )
+    }
+
     const stream = await client.messages.stream({
-      model: 'claude-haiku-4-5-20251001',
+      model: 'claude-haiku-4-5',
       max_tokens: 512,
       system: SYSTEM_PROMPT,
       messages,
@@ -77,13 +91,25 @@ export async function POST(request: Request) {
 
     const readable = new ReadableStream({
       async start(controller) {
-        for await (const chunk of stream) {
-          if (
-            chunk.type === 'content_block_delta' &&
-            chunk.delta.type === 'text_delta'
-          ) {
-            controller.enqueue(encoder.encode(chunk.delta.text))
+        try {
+          let produced = false
+          for await (const chunk of stream) {
+            if (
+              chunk.type === 'content_block_delta' &&
+              chunk.delta.type === 'text_delta'
+            ) {
+              produced = true
+              controller.enqueue(encoder.encode(chunk.delta.text))
+            }
           }
+          // If the model produced nothing (e.g. immediate upstream error), still
+          // give the visitor a helpful reply.
+          if (!produced) controller.enqueue(encoder.encode(FALLBACK_REPLY))
+        } catch (streamErr) {
+          // Errors surfaced mid-stream (credit balance, rate limit, outage) land
+          // here, not in the outer catch. Degrade to the friendly fallback.
+          console.error('Chat stream error:', streamErr)
+          controller.enqueue(encoder.encode(FALLBACK_REPLY))
         }
         controller.close()
       },
@@ -97,9 +123,17 @@ export async function POST(request: Request) {
     })
   } catch (err) {
     console.error('Chat API error:', err)
-    return new Response(JSON.stringify({ error: 'Something went wrong' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    })
+    // Stream the friendly fallback on any failure (credit balance, rate limit,
+    // upstream outage) so the visitor always gets a helpful reply, never an error.
+    const encoder = new TextEncoder()
+    return new Response(
+      new ReadableStream({
+        start(controller) {
+          controller.enqueue(encoder.encode(FALLBACK_REPLY))
+          controller.close()
+        },
+      }),
+      { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+    )
   }
 }

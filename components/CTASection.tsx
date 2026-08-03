@@ -98,9 +98,7 @@ export default function CTASection() {
             </a>
 
             <a
-              href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/intake/discovery"
               className="text-sm transition-colors duration-200"
               style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
               onMouseEnter={e => { e.currentTarget.style.color = 'var(--blue)' }}

@@ -21,7 +21,7 @@ const DESKTOP_LINKS = [
 // Mobile drawer: everything
 const MOBILE_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Treatments',   href: '/services'     },
+  { label: 'Treatments',   href: '/treatments'   },
   { label: 'Membership',   href: '/membership'   },
   { label: 'Pricing',      href: '/pricing'      },
   { label: 'About',        href: '/about'        },
@@ -36,7 +36,7 @@ export default function Nav() {
   const [scrolled, setScrolled]         = useState(false)
   const [menuOpen, setMenuOpen]         = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
-  const programsButtonRef               = useRef<HTMLButtonElement>(null)
+  const programsButtonRef               = useRef<HTMLAnchorElement>(null)
 
   useEffect(() => {
     const handle = () => setScrolled(window.scrollY > 24)
@@ -126,9 +126,10 @@ export default function Nav() {
                 }
               }}
             >
-              <button
+              <Link
                 ref={programsButtonRef}
-                style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '4px', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                href="/treatments"
+                style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', padding: 0 }}
                 aria-expanded={programsOpen}
                 aria-haspopup="menu"
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE }}
@@ -144,7 +145,7 @@ export default function Nav() {
                 <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" style={{ transition: 'transform 0.2s', transform: programsOpen ? 'rotate(180deg)' : 'rotate(0)' }} aria-hidden="true">
                   <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </button>
+              </Link>
 
               <AnimatePresence>
                 {programsOpen && (

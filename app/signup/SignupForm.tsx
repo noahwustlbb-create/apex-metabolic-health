@@ -4,24 +4,26 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
+import { captureLead } from '@/lib/captureLead'
 
 const BLUE = 'var(--blue)'
 const BG   = '#070a0d'
+const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 
 function SignupFormInner() {
   const router = useRouter()
   const params = useSearchParams()
-  const redirect = params.get('redirect') || '/book'
+  // Accounts are created in the portal (Supabase auth) — this page only collects
+  // the email and hands off. It must never ask for a password it cannot use.
+  const redirect = params.get('redirect') || PORTAL_SIGNUP
 
-  const [form, setForm] = useState({ email: '', emailConfirm: '', password: '', passwordConfirm: '' })
+  const [form, setForm] = useState({ email: '', emailConfirm: '' })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
   const valid =
     form.email.includes('@') &&
-    form.email === form.emailConfirm &&
-    form.password.length >= 8 &&
-    form.password === form.passwordConfirm
+    form.email === form.emailConfirm
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -29,20 +31,23 @@ function SignupFormInner() {
     setError('')
     setLoading(true)
 
+    // Best-effort lead capture: this form's job is to get the visitor to the
+    // portal, so a delivery failure must never block the redirect.
     try {
-      await fetch('/api/notify-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: form.email,
-          source: 'signup',
-          program: 'New account registration',
-        }),
+      await captureLead({
+        email: form.email,
+        source: 'signup',
+        program: 'New account registration',
       })
-      router.push(redirect)
     } catch {
-      setError('Something went wrong. Please try again.')
-      setLoading(false)
+      /* captureLead already logs; both channels down shouldn't strand the user */
+    }
+    // The portal lives on a different origin, so next/router can't navigate there.
+    if (/^https?:\/\//i.test(redirect)) {
+      const sep = redirect.includes('?') ? '&' : '?'
+      window.location.href = `${redirect}${sep}email=${encodeURIComponent(form.email.trim())}`
+    } else {
+      router.push(redirect)
     }
   }
 
@@ -110,38 +115,9 @@ function SignupFormInner() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="su-password" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Password</label>
-              <input
-                id="su-password"
-                type="password"
-                placeholder="Enter password"
-                value={form.password}
-                onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.password && form.password.length < 8 ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-                minLength={8}
-              />
-              {form.password && form.password.length < 8 && (
-                <p className="text-[10px]" style={{ color: '#ef4444' }}>Min 8 characters</p>
-              )}
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="su-password-confirm" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm password</label>
-              <input
-                id="su-password-confirm"
-                type="password"
-                placeholder="Enter confirm password"
-                value={form.passwordConfirm}
-                onChange={e => setForm(f => ({ ...f, passwordConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.passwordConfirm && form.passwordConfirm !== form.password ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-              />
-            </div>
-          </div>
+          <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>
+            You&apos;ll choose your password on the next step, in the secure patient portal.
+          </p>
 
           {error && <p className="text-sm" style={{ color: '#ef4444' }}>{error}</p>}
 
@@ -156,7 +132,7 @@ function SignupFormInner() {
               fontFamily: 'var(--font-space-grotesk)',
             }}
           >
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? 'Continuing…' : 'Continue to create account'}
           </button>
         </form>
 

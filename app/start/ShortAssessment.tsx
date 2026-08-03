@@ -7,12 +7,12 @@ import Nav from '@/components/Nav'
 import { useSignupGate } from '@/context/SignupGateContext'
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
-const BG     = '#f9fafb'
-const SURF   = '#ffffff'
+const BG     = 'var(--bg)'
+const SURF   = 'var(--surface)'
 const BLUE   = 'var(--blue)'
-const TEXT   = '#111827'
-const DIM    = '#6b7280'
-const BORDER = 'rgba(0,0,0,0.08)'
+const TEXT   = 'var(--text-primary)'
+const DIM    = 'var(--text-secondary)'
+const BORDER = 'var(--border)'
 const ease   = [0.22, 1, 0.36, 1] as const
 
 // ── Treatment picker ───────────────────────────────────────────────────────────
@@ -257,7 +257,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease }}
           className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full mb-10"
-          style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.09)', boxShadow: '0 1px 6px rgba(0,0,0,0.07)' }}
+          style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 1px 6px rgba(0,0,0,0.07)' }}
         >
           <span className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
@@ -266,7 +266,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
               </svg>
             ))}
           </span>
-          <span className="text-[12px] font-semibold" style={{ color: '#374151' }}>Trusted by 2,400+ Australians</span>
+          <span className="text-[12px] font-semibold" style={{ color: 'var(--text-primary)' }}>Trusted by 2,400+ Australians</span>
         </motion.div>
 
         <motion.h1
@@ -292,7 +292,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           transition={{ duration: 0.6, delay: 0.3, ease }}
           className="mb-10 mx-auto"
           style={{
-            color: '#6b7280',
+            color: 'var(--text-secondary)',
             maxWidth: 420,
             fontSize: '17px',
             lineHeight: 1.65,
@@ -314,7 +314,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
             Check my eligibility
             <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
-          <p className="mt-4 text-[12px]" style={{ color: '#6b7280' }}>4 questions · Under 60 seconds · No payment required</p>
+          <p className="mt-4 text-[12px]" style={{ color: 'var(--text-secondary)' }}>4 questions · Under 60 seconds · No payment required</p>
         </motion.div>
       </div>
     </motion.div>
@@ -328,7 +328,7 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
     <div className="w-full mb-10">
       <div className="flex items-center justify-between mb-2.5">
         <span className="text-[11px] font-semibold tracking-[0.16em] uppercase" style={{ color: BLUE }}>Question {current} of {total}</span>
-        <span className="text-[11px] font-semibold" style={{ color: '#6b7280' }}>{pct}%</span>
+        <span className="text-[11px] font-semibold" style={{ color: 'var(--text-secondary)' }}>{pct}%</span>
       </div>
       <div className="w-full h-[3px] rounded-full" style={{ background: 'rgba(72,144,247,0.1)' }}>
         <motion.div
@@ -371,8 +371,8 @@ function OptionCard({ label, sub, selected, onClick, icon }: { label: string; su
           </span>
         )}
         <span>
-          <span className="block font-semibold" style={{ color: selected ? TEXT : '#374151', fontSize: '15px', lineHeight: 1.3 }}>{label}</span>
-          {sub && <span className="block text-xs mt-0.5" style={{ color: selected ? '#4b5563' : '#6b7280' }}>{sub}</span>}
+          <span className="block font-semibold" style={{ color: selected ? TEXT : 'var(--text-primary)', fontSize: '17px', lineHeight: 1.35 }}>{label}</span>
+          {sub && <span className="block mt-0.5" style={{ fontSize: '14px', color: selected ? 'var(--text-secondary)' : 'var(--text-secondary)' }}>{sub}</span>}
         </span>
       </span>
     </button>
@@ -387,7 +387,7 @@ function StepHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; 
       <h1 className="font-bold tracking-tight mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3.5vw, 36px)', lineHeight: 1.15, letterSpacing: '-0.025em', color: TEXT }}>
         {title}
       </h1>
-      {sub && <p className="text-sm" style={{ color: '#6b7280' }}>{sub}</p>}
+      {sub && <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>{sub}</p>}
     </div>
   )
 }
@@ -522,7 +522,7 @@ export default function ShortAssessment() {
                         "Upload their blood test results, even if the patient's name is on the report",
                         'Our clinical team will confirm consent with the patient before any treatment begins',
                       ].map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: '#4b5563' }}>
+                        <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
                           <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5">
                             <path d="M3 8l4 4 6-6" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
@@ -534,7 +534,7 @@ export default function ShortAssessment() {
                 ) : (
                   <motion.p
                     initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4, ease }}
-                    className="text-sm mb-10" style={{ color: '#6b7280' }}
+                    className="text-sm mb-10" style={{ color: 'var(--text-secondary)' }}
                   >
                     Create a free account to get your personalised plan, or log in if you already have one.
                   </motion.p>
@@ -547,7 +547,7 @@ export default function ShortAssessment() {
                 >
                   <button
                     type="button"
-                    onClick={() => open(() => { window.location.href = signupUrl })}
+                    onClick={() => open(undefined, { capture: true, program: config.title, signupUrl })}
                     className="w-full flex items-center justify-center gap-2.5 font-semibold"
                     style={{ background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', color: '#fff', fontSize: '16px', fontWeight: 600, padding: '17px 32px', borderRadius: '12px', boxShadow: '0 8px 32px rgba(29,79,216,0.38), inset 0 1px 0 rgba(255,255,255,0.18)', letterSpacing: '-0.01em', transition: 'transform 0.18s ease, box-shadow 0.18s ease', cursor: 'pointer', border: 'none' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 48px rgba(29,79,216,0.5), inset 0 1px 0 rgba(255,255,255,0.22)' }}
@@ -560,14 +560,14 @@ export default function ShortAssessment() {
                   <a
                     href="https://app.apexmetabolichealth.com.au/login"
                     className="w-full flex items-center justify-center font-medium transition-all duration-150"
-                    style={{ color: '#4b5563', fontSize: '14px', padding: '15px 32px', borderRadius: '12px', border: '1.5px solid rgba(0,0,0,0.1)', textDecoration: 'none', background: SURF }}
+                    style={{ color: 'var(--text-secondary)', fontSize: '14px', padding: '15px 32px', borderRadius: '12px', border: '1.5px solid var(--border)', textDecoration: 'none', background: SURF }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(72,144,247,0.4)'; (e.currentTarget as HTMLElement).style.color = BLUE }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(0,0,0,0.1)'; (e.currentTarget as HTMLElement).style.color = '#4b5563' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                   >
                     Already have an account? Log in
                   </a>
 
-                  <p className="text-[11px] mt-2" style={{ color: '#6b7280' }}>
+                  <p className="text-[11px] mt-2" style={{ color: 'var(--text-secondary)' }}>
                     Reviewed by an AHPRA-registered doctor · Completely confidential
                   </p>
                 </motion.div>
@@ -684,7 +684,7 @@ export default function ShortAssessment() {
                         ))}
                       </div>
                       {isCaregiver && (
-                        <p className="text-xs px-1" style={{ color: '#6b7280', lineHeight: 1.6 }}>
+                        <p className="text-xs px-1" style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                           Under Australian healthcare law, the patient must provide informed consent before treatment. Our clinical team will confirm this during the intake process.
                         </p>
                       )}
@@ -714,9 +714,9 @@ export default function ShortAssessment() {
                     type="button"
                     onClick={() => advance(phase === 'q1' ? 'q2' : phase === 'q2' ? 'q3' : 'eligible')}
                     className="text-sm font-medium transition-colors duration-150 ml-auto"
-                    style={{ color: '#6b7280' }}
+                    style={{ color: 'var(--text-secondary)' }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = DIM }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#6b7280' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                   >
                     Skip
                   </button>

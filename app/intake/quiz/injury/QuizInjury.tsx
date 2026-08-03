@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our injury repair program may not be right for you right now.',
-  ineligibleBody: 'Based on your answers, there are health factors that need specialist review before we can safely prescribe an injury recovery protocol. Book a free discovery call so our clinical team can help point you in the right direction.',
+  ineligibleBody: 'Based on your answers, there are health factors that need specialist review before we can safely prescribe an injury recovery protocol. Request a free discovery call so our clinical team can help point you in the right direction.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useCallback } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -101,6 +101,10 @@ export default function TreatmentSelector() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
+  // "Skin and Hair" is one card but two distinct pathways: Hair runs the
+  // clinical questionnaire, Skin uses the intake form. Ask which on select.
+  const [skinHairOpen, setSkinHairOpen] = useState(false)
+
   // Scroll progress for the card strip - the affordance that says
   // "there are more cards" and "here's where you are".
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -185,6 +189,7 @@ export default function TreatmentSelector() {
             <motion.a
               key={t.id}
               href={t.href}
+              onClick={t.id === 'skinhair' ? (e) => { e.preventDefault(); setSkinHairOpen(true) } : undefined}
               initial={prefersReduced ? false : { opacity: 0, y: 36 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: i * 0.065, ease }}
@@ -342,6 +347,75 @@ export default function TreatmentSelector() {
           </svg>
         </a>
       </motion.div>
+
+      {/* Skin vs Hair sub-choice */}
+      <AnimatePresence>
+        {skinHairOpen && (
+          <motion.div
+            role="dialog" aria-modal="true" aria-label="Choose skin or hair"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            onClick={() => setSkinHairOpen(false)}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 1000, display: 'flex',
+              alignItems: 'center', justifyContent: 'center', padding: 24,
+              background: 'rgba(4,6,13,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
+            }}
+          >
+            <motion.div
+              onClick={e => e.stopPropagation()}
+              initial={prefersReduced ? false : { opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={prefersReduced ? { opacity: 0 } : { opacity: 0, y: 8, scale: 0.98 }}
+              transition={prefersReduced ? { duration: 0 } : { duration: 0.24, ease }}
+              style={{
+                width: '100%', maxWidth: 460, background: 'var(--surface)',
+                border: '1px solid var(--border)', borderRadius: 20, padding: 'clamp(24px, 4vw, 32px)',
+                boxShadow: '0 40px 90px rgba(0,0,0,0.5)',
+              }}
+            >
+              <h3 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', marginBottom: 8 }}>
+                Skin or hair?
+              </h3>
+              <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 24 }}>
+                Two pathways, each with its own doctor-designed panel. Which are you here for?
+              </p>
+
+              {[
+                { href: '/programs/hair-restoration', label: 'Hair restoration', sub: 'DHT, SHBG, ferritin & thyroid markers' },
+                { href: '/programs/skin-regeneration', label: 'Skin regeneration', sub: 'Cortisol, DHEA-S & inflammatory markers' },
+              ].map(opt => (
+                <a
+                  key={opt.href}
+                  href={opt.href}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 14, padding: '18px 20px', borderRadius: 14,
+                    marginBottom: 12, textDecoration: 'none', background: 'var(--bg)',
+                    border: '1px solid var(--border)', transition: 'border-color 0.18s ease, transform 0.18s ease',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--blue)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)' }}
+                >
+                  <span style={{ flex: 1 }}>
+                    <span style={{ display: 'block', fontSize: 15.5, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-inter)', marginBottom: 3 }}>{opt.label}</span>
+                    <span style={{ display: 'block', fontSize: 12.5, color: 'var(--text-secondary)' }}>{opt.sub}</span>
+                  </span>
+                  <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true" style={{ color: 'var(--blue)', flexShrink: 0 }}>
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              ))}
+
+              <button
+                onClick={() => setSkinHairOpen(false)}
+                style={{ display: 'block', width: '100%', textAlign: 'center', marginTop: 8, padding: 10, background: 'none', border: 'none', color: 'var(--text-secondary)', fontSize: 13, cursor: 'pointer', fontFamily: 'var(--font-inter)' }}
+              >
+                Cancel
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

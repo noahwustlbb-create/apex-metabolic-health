@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import TreatmentSelector from '@/components/TreatmentSelector'
 import WhyApex from '@/components/WhyApex'
 import HowItWorks from '@/components/HowItWorks'
+import BrandBand from '@/components/BrandBand'
 import DoctorCard from '@/components/DoctorCard'
 import FAQSection from '@/components/FAQSection'
 import CTASection from '@/components/CTASection'
@@ -17,6 +18,7 @@ export default function Home() {
         <WhyApex />
         <TreatmentSelector />
         <HowItWorks />
+        <BrandBand />
         <DoctorCard />
         <FAQSection />
         <CTASection />

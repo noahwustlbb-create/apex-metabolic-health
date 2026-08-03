@@ -1,7 +1,7 @@
 import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
 
-type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake'
+type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
 
 const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
   'hormone-consult': {
@@ -52,6 +52,16 @@ const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheadi
       'Our team reviews your intake before your consultation',
       'Your doctor is briefed on your history and goals',
       'Telehealth consultation where your personalised protocol is built',
+    ],
+  },
+  'assessment': {
+    subject: 'Your Health Assessment | Apex Metabolic Health',
+    heading: 'Your clinical assessment is ready.',
+    subheading: 'We\'ve mapped your responses to a clinical pathway. Our team will be in touch within 1 business day to arrange your next step.',
+    nextSteps: [
+      'Our clinical team reviews your assessment and matched protocol',
+      'We contact you to arrange your consultation with an AHPRA-registered doctor',
+      'Your doctor confirms the right pathology panel and builds your protocol',
     ],
   },
 }

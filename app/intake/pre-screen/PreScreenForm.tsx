@@ -777,7 +777,7 @@ export default function PreScreenForm() {
                   <Link href={prog.intakeHref} className="btn-pill w-full justify-center" style={{ fontSize: '14px', padding: '16px' }}>
                     Book my consultation →
                   </Link>
-                  <a href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call" target="_blank" rel="noopener noreferrer"
+                  <a href="/intake/discovery"
                     className="btn-ghost w-full justify-center" style={{ fontSize: '13px' }}>
                     Speak with our team first
                   </a>

@@ -17,7 +17,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Based on your health history, we need to refer you first.',
-  ineligibleBody: 'Some of your answers indicate a need for more specialised cardiac or medical assessment before a sexual health protocol can be safely prescribed. We recommend speaking with your GP, or booking a free discovery call so our clinical team can guide your next steps.',
+  ineligibleBody: 'Some of your answers indicate a need for more specialised cardiac or medical assessment before a sexual health protocol can be safely prescribed. We recommend speaking with your GP, or requesting a free discovery call so our clinical team can guide your next steps.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

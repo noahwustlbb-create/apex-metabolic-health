@@ -4,6 +4,7 @@ import { useState, useEffect, useId } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ENQUIRY_LABELS, type EnquiryType } from '@/lib/intake-routing'
+import { captureLead } from '@/lib/captureLead'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
@@ -121,6 +122,10 @@ export default function IntakeForm() {
       ))
 
       // Fire-and-forget lead capture
+      captureLead({
+        source: 'streamlined-intake', email: data.email,
+        name: `${data.firstName} ${data.lastName}`.trim(), program: data.enquiry,
+      }).catch(() => {})
       fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

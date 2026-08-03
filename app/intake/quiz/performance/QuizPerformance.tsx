@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'A performance protocol may not be appropriate right now.',
-  ineligibleBody: 'Based on your answers, there are health factors that need to be reviewed before we can safely recommend a performance optimisation protocol. Please book a free discovery call so our doctors can guide you.',
+  ineligibleBody: 'Based on your answers, there are health factors that need to be reviewed before we can safely recommend a performance optimisation protocol. Please request a free discovery call so our doctors can guide you.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

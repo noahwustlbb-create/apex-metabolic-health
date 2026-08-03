@@ -15,7 +15,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Our longevity program needs further assessment for your situation.',
-  ineligibleBody: 'Based on your health history, our doctors need to conduct a more specialised review before recommending a longevity protocol. Please book a free discovery call, and we can help you find the right pathway.',
+  ineligibleBody: 'Based on your health history, our doctors need to conduct a more specialised review before recommending a longevity protocol. Please request a free discovery call, and we can help you find the right pathway.',
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

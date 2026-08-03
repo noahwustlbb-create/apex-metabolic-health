@@ -17,7 +17,7 @@ const config: QuizConfig = {
   ],
   consultUrl: 'https://app.apexmetabolichealth.com.au/signup',
   ineligibleHeading: 'Hair restoration may not be appropriate for you right now.',
-  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to book a free discovery call, and our clinical team can help determine the safest pathway for you.",
+  ineligibleBody: "Based on your health history, our doctors need to review certain factors before prescribing a hair restoration protocol. We encourage you to request a free discovery call, and our clinical team can help determine the safest pathway for you.",
   ineligibleAlt: { label: 'Explore other programs', href: '/#programs' },
   steps: [
     {

@@ -270,21 +270,21 @@ export default function ChatWidget() {
       <motion.button
         onClick={() => setOpen((v) => !v)}
         whileTap={{ scale: 0.97 }}
-        className="flex items-center gap-3 px-6 py-3.5 transition-all duration-200"
+        className="flex items-center gap-0 sm:gap-3 px-4 sm:px-6 py-4 sm:py-3.5 transition-all duration-200"
         style={{
-          background: 'var(--bg)',
+          background: 'var(--elevated)',
           border: '1px solid rgba(53,117,198,0.28)',
           borderRadius: '999px',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)',
-          color: '#ffffff',
+          boxShadow: '0 8px 28px rgba(0,0,0,0.18), 0 0 0 1px rgba(53,117,198,0.06)',
+          color: 'var(--text-primary)',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = 'rgba(53,117,198,0.55)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(53,117,198,0.15)'
+          e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.18), 0 0 20px rgba(53,117,198,0.15)'
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.borderColor = 'rgba(53,117,198,0.28)'
-          e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(53,117,198,0.06)'
+          e.currentTarget.style.boxShadow = '0 8px 28px rgba(0,0,0,0.18), 0 0 0 1px rgba(53,117,198,0.06)'
         }}
         aria-label={open ? 'Close chat' : 'Chat with us'}
         aria-expanded={open}
@@ -315,11 +315,11 @@ export default function ChatWidget() {
             </motion.svg>
           )}
         </AnimatePresence>
-        <span className="text-[12px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
+        <span className="hidden sm:inline text-[12px] font-semibold tracking-[0.18em] uppercase whitespace-nowrap">
           {open ? 'Close' : 'Ask Us Anything'}
         </span>
         {!open && (
-          <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: '#3575C6' }} />
+          <span className="hidden sm:block w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ backgroundColor: '#3575C6' }} />
         )}
       </motion.button>
     </div>

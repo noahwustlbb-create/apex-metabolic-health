@@ -142,19 +142,19 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pb-0">
               {[
                 {
-                  src: 'https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=700&q=80',
-                  alt: 'Accredited pathology blood panel',
-                  label: 'NATA-accredited pathology',
+                  src: '/team/team-standing.webp',
+                  alt: 'The Apex Metabolic Health team',
+                  label: 'Doctor-led, Australia-wide',
                 },
                 {
-                  src: 'https://images.unsplash.com/photo-1758691462743-f9fc9e430d39?auto=format&fit=crop&w=700&q=80',
-                  alt: 'Telehealth consultation with AHPRA doctor',
-                  label: 'AHPRA-registered practitioner',
+                  src: '/team/team-armchairs.webp',
+                  alt: 'A relaxed consultation setting',
+                  label: 'Care built around your data',
                 },
                 {
-                  src: 'https://images.unsplash.com/photo-1486218119243-13883505764c?auto=format&fit=crop&w=700&q=80',
-                  alt: 'Patient engaged in performance training',
-                  label: 'Performance-focused care',
+                  src: '/team/brand-boxes.webp',
+                  alt: 'Apex branded treatment packaging',
+                  label: 'Discreet, delivered to you',
                 },
               ].map((img, i) => {
                 const ref = useRef(null)
@@ -234,8 +234,69 @@ export default function AboutPage() {
           })}
         </Section>
 
-        {/* Clinical team */}
+        {/* Human by design */}
         <Section bg="var(--bg)">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <AnimBlock>
+              <p className="label mb-4">Human by design</p>
+              <h2
+                className="font-bold tracking-tight mb-5"
+                style={{
+                  fontFamily: 'var(--font-space-grotesk)',
+                  fontSize: 'clamp(26px, 3vw, 42px)',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                Clinical doesn&apos;t have to mean cold.
+              </h2>
+              <p className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
+                Apex was built by people who were tired of ten-minute appointments and being
+                told they were &ldquo;fine.&rdquo; Behind the science is a team that actually
+                has the conversation, reads the full picture, and stays with you between
+                appointments, not just at them.
+              </p>
+              <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
+                Modern, meticulous, and genuinely accessible. Everything runs online, on your
+                schedule, anywhere in Australia.
+              </p>
+            </AnimBlock>
+
+            <AnimBlock delay={0.12}>
+              <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                {[
+                  '/team/portrait-woman-blonde.webp',
+                  '/team/portrait-woman.webp',
+                  '/team/portrait-man.webp',
+                ].map((src, i) => (
+                  <div
+                    key={src}
+                    className="relative rounded-2xl overflow-hidden"
+                    style={{
+                      aspectRatio: '3 / 4',
+                      border: `1px solid ${ACCENT_BORDER}`,
+                      transform: i === 1 ? 'translateY(20px)' : 'none',
+                      boxShadow: '0 20px 50px rgba(0,0,0,0.22)',
+                    }}
+                  >
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1024px) 30vw, 15vw"
+                      className="object-cover"
+                      style={{ objectPosition: 'center 22%' }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </AnimBlock>
+          </div>
+        </Section>
+
+        {/* Clinical team */}
+        <Section bg="var(--surface)">
           <AnimBlock>
             <h2
               className="font-bold tracking-tight mb-12"

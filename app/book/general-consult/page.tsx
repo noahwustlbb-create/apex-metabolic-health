@@ -148,8 +148,8 @@ export default function GeneralConsultBookPage() {
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
-                <a href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
-                  target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '14px', padding: '15px 28px' }}>
+                <a href="/intake/discovery"
+                  className="btn-outline" style={{ fontSize: '14px', padding: '15px 28px' }}>
                   Free discovery call
                 </a>
               </div>
@@ -281,8 +281,7 @@ export default function GeneralConsultBookPage() {
               <Link href="/intake-v2" className="btn-white" style={{ fontSize: '14px', padding: '14px 36px' }}>
                 Start your intake →
               </Link>
-              <a href="https://calendly.com/admin-apexmetabolichealth/free-discovery-call"
-                target="_blank" rel="noopener noreferrer"
+              <a href="/intake/discovery"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full text-sm font-medium transition-all duration-200"
                 style={{ background: 'rgba(255,255,255,0.1)', color: '#ffffff', border: '1.5px solid rgba(255,255,255,0.25)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.18)' }}

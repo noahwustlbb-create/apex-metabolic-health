@@ -5,6 +5,7 @@ import './globals.css'
 import AgeGate from '@/components/AgeGate'
 import ReferralCapture from '@/components/ReferralCapture'
 import FloatingContact from '@/components/FloatingContact'
+import ChatWidget from '@/components/ChatWidget'
 import { SignupGateProvider } from '@/context/SignupGateContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import MotionProvider from '@/components/MotionProvider'
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SignupGateProvider>
               {children}
               <FloatingContact />
+              <ChatWidget />
             </SignupGateProvider>
           </MotionProvider>
         </ThemeProvider>

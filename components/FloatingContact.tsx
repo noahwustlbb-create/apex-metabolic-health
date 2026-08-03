@@ -57,10 +57,10 @@ const ACTIONS = [
         <path d="M3 5h12M3 9h8M3 13h5" strokeLinecap="round" />
       </svg>
     ),
-    label: 'Free discovery call',
-    sub: '15 minutes with our clinical team. No cost, no commitment.',
-    href: 'https://calendly.com/admin-apexmetabolichealth/free-discovery-call',
-    external: true,
+    label: 'Request a discovery call',
+    sub: 'Tell us your goals — our clinical team calls you back within 1 business day.',
+    href: '/intake/discovery',
+    external: false,
     highlight: false,
   },
 ]

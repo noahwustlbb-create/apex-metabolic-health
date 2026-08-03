@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import BookingChoice from '@/components/BookingChoice'
+import { captureLead } from '@/lib/captureLead'
 
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const STEPS = ['Your Details', 'Medical Info', 'Confirm & Submit']
@@ -361,6 +362,10 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
   const submit = async () => {
     setSubmitting(true); setError('')
     try {
+      const firstParty = captureLead({
+        source: 'consult-intake', email: data.email,
+        name: `${data.firstName} ${data.lastName}`.trim(), program: config.programName,
+      }).then(() => true).catch(() => false)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -376,7 +381,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
         }),
       })
       const json = await res.json()
-      if (json.success) {
+      if (json.success || await firstParty) {
         fetch('/api/send-confirmation', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'consult-intake' }),

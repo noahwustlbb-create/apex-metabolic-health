@@ -1,6 +1,8 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
+import HeroStartModal from './HeroStartModal'
 
 const ease = [0.16, 1, 0.3, 1] as const
 
@@ -15,6 +17,7 @@ function fade(delay: number, y = 24) {
 export default function Hero() {
   const prefersReduced = useReducedMotion()
   const mp = (delay: number, y?: number) => (prefersReduced ? {} : fade(delay, y))
+  const [startOpen, setStartOpen] = useState(false)
 
   return (
     <section
@@ -65,6 +68,7 @@ export default function Hero() {
           padding: 'clamp(100px, 14vw, 160px) clamp(24px, 5vw, 80px) clamp(64px, 10vw, 120px)',
         }}
       >
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,420px)] gap-12 lg:gap-20 items-center">
         <div style={{ maxWidth: 700 }}>
 
           {/* Headline */}
@@ -107,8 +111,10 @@ export default function Hero() {
             {...mp(300)}
             style={{ marginBottom: 28, display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}
           >
-            <a
-              href="#treatments"
+            {/* Primary: Get started → intake form or create account */}
+            <button
+              type="button"
+              onClick={() => setStartOpen(true)}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -120,7 +126,7 @@ export default function Hero() {
                 padding: '17px 40px',
                 borderRadius: 12,
                 border: 'none',
-                textDecoration: 'none',
+                cursor: 'pointer',
                 letterSpacing: '-0.01em',
                 boxShadow: '0 8px 28px rgba(72,144,247,0.38), inset 0 1px 0 rgba(255,255,255,0.18)',
                 fontFamily: 'var(--font-inter)',
@@ -137,12 +143,49 @@ export default function Hero() {
                 e.currentTarget.style.boxShadow = '0 8px 28px rgba(72,144,247,0.38), inset 0 1px 0 rgba(255,255,255,0.18)'
               }}
             >
-              Find your treatment
+              Get started
               <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
+            </button>
+
+            {/* Secondary: Find your treatment → treatment selector */}
+            <a
+              href="#treatments"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: 'transparent',
+                color: 'var(--text-primary)',
+                fontSize: 15,
+                fontWeight: 600,
+                padding: '16px 28px',
+                borderRadius: 12,
+                border: '1px solid var(--border)',
+                textDecoration: 'none',
+                letterSpacing: '-0.01em',
+                fontFamily: 'var(--font-inter)',
+                whiteSpace: 'nowrap',
+                WebkitTapHighlightColor: 'transparent',
+                transition: 'border-color 0.18s ease, background-color 0.18s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'var(--blue)'
+                e.currentTarget.style.backgroundColor = 'rgba(72,144,247,0.06)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.backgroundColor = 'transparent'
+              }}
+            >
+              Find my treatment
+              <svg viewBox="0 0 16 16" fill="none" width={14} height={14} aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
 
+            {/* Tertiary: How it works */}
             <a
               href="/how-it-works"
               style={{
@@ -185,7 +228,48 @@ export default function Hero() {
           </motion.p>
 
         </div>
+
+        {/* Brand visual - desktop only, decorative */}
+        <motion.div
+          {...mp(360, 28)}
+          className="hidden lg:block relative"
+          aria-hidden="true"
+        >
+          <div
+            style={{
+              position: 'relative',
+              borderRadius: 24,
+              overflow: 'hidden',
+              border: '1px solid var(--border)',
+              boxShadow: '0 40px 90px rgba(0,0,0,0.28)',
+            }}
+          >
+            <img
+              src="/team/team-sofa.webp"
+              alt=""
+              width={1100}
+              height={1650}
+              loading="eager"
+              style={{ display: 'block', width: '100%', height: 'auto' }}
+            />
+            {/* Subtle blue wash to marry the light interior into the dark hero */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background: 'linear-gradient(180deg, transparent 55%, color-mix(in srgb, var(--bg) 28%, transparent) 100%)',
+              }}
+            />
+          </div>
+        </motion.div>
+
+        </div>
       </div>
+
+      <AnimatePresence>
+        {startOpen && <HeroStartModal onClose={() => setStartOpen(false)} />}
+      </AnimatePresence>
     </section>
   )
 }

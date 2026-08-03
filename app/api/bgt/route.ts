@@ -49,8 +49,14 @@ async function bgtFetch(url: string, clientId: string, clientSecret: string): Pr
   return res
 }
 
+// Resources that expose patient PII / results. These are NOT public: they must
+// be called server-to-server with the internal secret. Anyone could otherwise
+// pull every patient's name, DOB, address and biomarkers from this endpoint.
+const PROTECTED = new Set(['results', 'orders', 'patients', 'reports'])
+
 // GET /api/bgt?resource=bundles|results|orders|patients
 // For patient results: ?resource=results&email=patient@email.com
+// Protected resources require header x-apex-internal: <BGT_INTERNAL_SECRET>.
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const resource = searchParams.get('resource') ?? 'bundles'
@@ -59,9 +65,27 @@ export async function GET(req: Request) {
 
   const clientId     = process.env.BGT_CLIENT_ID
   const clientSecret = process.env.BGT_CLIENT_SECRET
+  const internalSecret = process.env.BGT_INTERNAL_SECRET
 
   if (!clientId || !clientSecret) {
     return NextResponse.json({ error: 'BGT credentials not configured' }, { status: 500, headers: CORS })
+  }
+
+  // Guard patient data behind the internal secret + a required email to match on.
+  //
+  // `all=true` lifts the email requirement for the scheduled sync sweep, which
+  // has to see every recent result to match them against portal accounts. It is
+  // deliberately opt-in rather than "email is optional", so a caller can never
+  // pull the whole patient list by simply forgetting a parameter.
+  const wantsAll = searchParams.get('all') === 'true'
+  if (PROTECTED.has(resource)) {
+    const provided = req.headers.get('x-apex-internal')
+    if (!internalSecret || provided !== internalSecret) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403, headers: CORS })
+    }
+    if (!email && !wantsAll) {
+      return NextResponse.json({ error: 'email is required (or pass all=true)' }, { status: 400, headers: CORS })
+    }
   }
 
   try {
@@ -106,7 +130,18 @@ export async function GET(req: Request) {
       )
     }
 
-    const data = await res.json()
+    let data = await res.json()
+
+    // BGT ignores the ?email filter and returns every patient's results, so we
+    // MUST filter to the requested person here before returning anything.
+    if (PROTECTED.has(resource) && email && data && Array.isArray(data.results)) {
+      const wanted = email.trim().toLowerCase()
+      const filtered = data.results.filter(
+        (r: { person?: { email?: string } }) => r?.person?.email?.toLowerCase() === wanted
+      )
+      data = { ...data, results: filtered }
+    }
+
     return NextResponse.json(data, {
       headers: { ...CORS, 'Cache-Control': 'no-store' },
     })
