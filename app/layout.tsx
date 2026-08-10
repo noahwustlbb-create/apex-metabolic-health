@@ -62,6 +62,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased overflow-x-hidden">
+        {/* Google Tag Manager */}
+        <Script id="gtm-script" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-KTMMBP3M');`}
+        </Script>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KTMMBP3M"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager */}
         {/* Runs before hydration - prevents light-mode flash when user has saved a preference */}
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('apex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         <Script
