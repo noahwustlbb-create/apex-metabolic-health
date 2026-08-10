@@ -313,6 +313,7 @@ export default function BloodsPanelForm({ config }: { config: PanelConfig }) {
           body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'bloods' }),
         }).catch(() => {})
         setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop()
+        window.location.href = '/confirmation'
       } else setError('Something went wrong. Please try again.')
     } catch {
       setError('Network error. Please try again.')

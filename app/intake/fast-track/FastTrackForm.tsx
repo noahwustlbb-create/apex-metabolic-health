@@ -275,6 +275,7 @@ function FormInner() {
       })
 
       setSubmitted(true)
+      window.location.href = '/confirmation'
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {

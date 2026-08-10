@@ -590,6 +590,7 @@ export default function GeneralConsultForm() {
           body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'general-consult' }),
         }).catch(() => {})
         setSubmitted(true)
+        window.location.href = '/confirmation'
         localStorage.removeItem(STORAGE_KEY)
         setTimeout(() => topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
       } else setError('Something went wrong. Please try again.')

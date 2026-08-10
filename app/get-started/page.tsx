@@ -443,6 +443,7 @@ function EnquiryForm() {
         subject: 'New Enquiry | Apex Metabolic Health',
       })
       setSubmitted(true)
+      window.location.href = '/confirmation'
     } catch {
       setError('Something went wrong. Please try again, or email admin@apexmetabolichealth.com.au.')
     }

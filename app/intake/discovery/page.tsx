@@ -105,6 +105,7 @@ export default function DiscoveryCallPage() {
     }).catch(() => {})
     setSubmitting(false)
     setSubmitted(true)
+    window.location.href = '/confirmation'
   }
 
   if (submitted) {

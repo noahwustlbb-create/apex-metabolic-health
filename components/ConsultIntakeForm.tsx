@@ -387,6 +387,7 @@ export default function ConsultIntakeForm({ config }: { config: ConsultConfig })
           body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'consult-intake' }),
         }).catch(() => {})
         setSubmitted(true); localStorage.removeItem(config.storageKey); scrollTop()
+        window.location.href = '/confirmation'
       } else setError('Something went wrong. Please try again.')
     } catch { setError('Network error. Please try again.') }
     finally { setSubmitting(false) }

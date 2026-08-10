@@ -137,6 +137,7 @@ export default function DiscoveryCallForm() {
       // Only a genuine failure if BOTH channels failed.
       if (!json.success && !(await firstParty)) throw new Error()
       setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.location.href = '/confirmation'
     } catch { setError('Something went wrong. Please try again or email us directly.') }
     finally { setSubmitting(false) }
   }

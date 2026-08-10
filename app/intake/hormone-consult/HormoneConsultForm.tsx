@@ -379,6 +379,7 @@ export default function HormoneConsultForm() {
         body: JSON.stringify({ email: d.email, firstName: d.firstName, formType: 'hormone-consult' }),
       }).catch(() => {})
       setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.location.href = '/confirmation'
     } catch { setError('Something went wrong. Please try again.') }
     finally { setSubmitting(false) }
   }

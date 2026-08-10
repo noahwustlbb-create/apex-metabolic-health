@@ -112,6 +112,7 @@ export default function RepeatOrderForm() {
         body: JSON.stringify({ firstName: d.firstName, lastName: d.lastName, email: d.email, mobile: d.mobile, source: 'repeat-order' }),
       }).catch(() => {})
       setSubmitted(true)
+      window.location.href = '/confirmation'
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch {
       setError('Something went wrong. Please try again.')

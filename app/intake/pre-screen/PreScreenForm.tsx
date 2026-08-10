@@ -361,6 +361,7 @@ export default function PreScreenForm() {
     } catch {}
     setSubmitting(false)
     setSubmitted(true)
+    window.location.href = '/confirmation'
     advance(1)
   }
 
