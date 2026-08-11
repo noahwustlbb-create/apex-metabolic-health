@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Nav from '@/components/Nav'
 import BookingChoice from '@/components/BookingChoice'
+import { captureLead } from '@/lib/captureLead'
 
 const STORAGE_KEY = 'apex-hormone-consult-v5'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -352,6 +353,10 @@ export default function HormoneConsultForm() {
   const submit = async () => {
     setSubmitting(true); setError('')
     try {
+      const firstParty = captureLead({
+        source: 'hormone-consult-intake', email: d.email,
+        name: `${d.firstName} ${d.lastName}`.trim(), phone: d.mobile,
+      }).then(() => true).catch(() => false)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -372,7 +377,7 @@ export default function HormoneConsultForm() {
         }),
       })
       const json = await res.json()
-      if (!json.success) throw new Error()
+      if (!json.success && !(await firstParty)) throw new Error()
       try { localStorage.removeItem(STORAGE_KEY) } catch {}
       fetch('/api/send-confirmation', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import BookingChoice from '@/components/BookingChoice'
+import { captureLead } from '@/lib/captureLead'
 
 const STORAGE_KEY = 'apex-general-consult-v2'
 const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
@@ -532,6 +533,10 @@ export default function GeneralConsultForm() {
     }
     setSubmitting(true); setError('')
     try {
+      const firstParty = captureLead({
+        source: 'general-consult-intake', email: data.email,
+        name: `${data.firstName} ${data.lastName}`.trim(), phone: data.mobile,
+      }).then(() => true).catch(() => false)
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -584,7 +589,7 @@ export default function GeneralConsultForm() {
         }),
       })
       const json = await res.json()
-      if (json.success) {
+      if (json.success || await firstParty) {
         fetch('/api/send-confirmation', {
           method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'general-consult' }),

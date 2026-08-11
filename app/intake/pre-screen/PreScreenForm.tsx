@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { captureLead } from '@/lib/captureLead'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
@@ -338,6 +339,10 @@ export default function PreScreenForm() {
     setSubmitting(true)
     setErrors([])
     try {
+      const firstParty = captureLead({
+        source: 'health-assessment', email: data.email,
+        name: `${data.firstName} ${data.lastName}`.trim(), phone: data.phone, program: prog.label,
+      }).then(() => true).catch(() => false)
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
@@ -354,6 +359,7 @@ export default function PreScreenForm() {
           submittedAt: new Date().toISOString(),
         }),
       })
+      await firstParty
       fetch('/api/send-confirmation', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.email, firstName: data.firstName, formType: 'assessment' }),
