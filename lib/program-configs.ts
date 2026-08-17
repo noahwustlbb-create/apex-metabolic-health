@@ -4,9 +4,9 @@ import type { ProgramPageConfig } from '@/components/ProgramPageTemplate'
 
 const STEPS_IMAGES = {
   signup: '/team/team-standing.webp',
-  bloodTest: '/editorial/blood-vials.webp',
+  bloodTest: '/shoot/consult.jpg',
   consult: '/team/portrait-woman-blonde.webp',
-  protocol: '/team/brand-boxes.webp',
+  protocol: '/shoot/lounge.jpg',
 }
 
 const STANDARD_STEPS: ProgramPageConfig['processSteps'] = [
@@ -54,7 +54,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
     'AHPRA-registered doctors, Australia-wide',
     'Doctor-prescribed, TGA-compliant protocols',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
+  heroBentoPortrait: '/shoot/hormone.jpg',
   heroBentoStat: { value: '1 in 4', label: 'men over 35 have suboptimal testosterone' },
   heroBentoLifestyle: '/team/team-sofa.webp',
 
@@ -69,7 +69,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
     { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'No matter where you are in Australia, your blood work can be collected within a short drive. Results back within 48 hours.' },
     { value: '12+', label: 'Markers in our hormone panel', detail: 'We assess the full endocrine picture: upstream signals, metabolic context, conversion pathways, and nutritional status.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -81,7 +81,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
     { title: 'Cognitive sharpness', body: 'Brain fog, reduced concentration, and slower recall are recognised downstream effects of suboptimal testosterone and SHBG levels.' },
     { title: 'Mood and drive', body: 'Testosterone influences dopamine receptor sensitivity. Its deficiency is associated with reduced motivation, emotional flatness, and increased irritability.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Marcus T.', date: 'March 2025', highlight: 'Having a doctor actually investigate my free testosterone properly was completely different', full: 'Having a doctor actually investigate my free testosterone properly was completely different to anything I\'d experienced with a GP. The process was thorough and they actually explained every marker.' },
@@ -116,7 +116,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
     'AHPRA-registered doctors, Australia-wide',
     'Personalised protocol around your biomarkers',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
+  heroBentoPortrait: '/shoot/hormone.jpg',
   heroBentoStat: { value: '50%+', label: 'of Australian men are overweight or obese' },
   heroBentoLifestyle: '/team/team-armchairs.webp',
 
@@ -131,7 +131,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
     { value: '13+', label: 'Markers in our metabolic panel', detail: 'Fasting glucose, HbA1c, HOMA-IR, lipids, thyroid, testosterone, liver function: the full picture that determines what\'s actually driving your weight.' },
     { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'Your blood work collected near you, when it suits. Results reviewed by your doctor before your consultation.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -143,7 +143,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
     { title: 'Metabolic rate', body: 'Thyroid function, testosterone, and cortisol all influence your resting metabolic rate. Suboptimal levels slow fat oxidation even at a calorie deficit.' },
     { title: 'Body composition', body: 'True medical weight management prioritises fat loss while protecting muscle. We track composition markers, not just weight on a scale.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Tom B.', date: 'February 2025', highlight: 'First time a doctor approached this from a metabolic angle', full: 'First time a doctor approached this from a metabolic angle rather than just telling me to eat less and move more. The consultation was thorough and actually explained what was happening with my insulin.' },
@@ -178,14 +178,14 @@ export const performancePlusConfig: ProgramPageConfig = {
     'AHPRA-registered sports medicine approach',
     'Doctor-prescribed recovery and performance protocols',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
+  heroBentoPortrait: '/shoot/hormone.jpg',
   heroBentoStat: { value: '40%', label: 'performance drop from suboptimal testosterone in trained men' },
-  heroBentoLifestyle: '/editorial/recovery.webp',
+  heroBentoLifestyle: '/shoot/recovery.jpg',
 
   empathyHeadline: "Training consistently. Recovery not matching your effort.",
   empathyBody: "If your strength plateaus won't shift, recovery is slower than it used to be, and your training sessions feel harder than they should, the problem is rarely technique. Hormonal, metabolic, and nutritional markers often hold the answer.",
   empathyChips: ['Strength plateau', 'Slow recovery', 'Training fatigue', 'Poor sleep quality', 'Low drive', 'Muscle loss'],
-  empathyImage: '/editorial/recovery.webp',
+  empathyImage: '/shoot/recovery.jpg',
 
   evidenceHeadline: 'What your training data doesn\'t tell you.',
   evidencePoints: [
@@ -193,7 +193,7 @@ export const performancePlusConfig: ProgramPageConfig = {
     { value: '12+', label: 'Performance-specific markers tested', detail: 'Full hormonal panel, inflammatory markers, nutritional status, thyroid: everything that determines how your body responds to training stress.' },
     { value: '100%', label: 'Online, no clinic visits for consultations', detail: 'Your consultation with an AHPRA-registered doctor conducted entirely via telehealth. Blood tests at your nearest collection centre.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -205,7 +205,7 @@ export const performancePlusConfig: ProgramPageConfig = {
     { title: 'Energy system support', body: 'Mitochondrial efficiency, nutrient partitioning, and metabolic rate all influence sustainable training performance and output quality.' },
     { title: 'Nutritional biomarkers', body: 'Deficiencies in key micronutrients (B12, D, ferritin, zinc) significantly impair performance even when everything else is dialled in.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Luke M.', date: 'February 2025', highlight: 'First time my blood work was looked at through a performance lens', full: 'First time my blood work was looked at through a performance lens rather than just checking I wasn\'t sick. The doctor understood what I was trying to achieve and the protocol reflected that.' },
@@ -255,7 +255,7 @@ export const hairRestorationConfig: ProgramPageConfig = {
     { value: '6–12', label: 'Months for measurable follicle response', detail: 'Clinical hair loss treatment requires consistency. Early intervention typically produces better outcomes. The sooner the clinical driver is addressed, the more follicles remain viable.' },
     { value: '4,000+', label: 'Accredited collection centres for your blood work', detail: 'We assess your hormonal profile before any protocol is built. Testosterone, DHT, thyroid, and nutrient markers all inform the approach.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: [
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
@@ -272,7 +272,7 @@ export const hairRestorationConfig: ProgramPageConfig = {
     { title: 'Hormonal context', body: 'Testosterone, thyroid, iron, and other hormonal factors influence hair cycle length and follicle viability. All assessed in your blood panel.' },
     { title: 'Growth factor signalling', body: 'Clinical protocols can support the molecular signals that determine whether follicles remain in the growth phase of the hair cycle.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Ben A.', date: 'January 2025', highlight: 'Finally approached with a blood test rather than just product recommendations', full: 'Finally approached with a blood test rather than just product recommendations. The doctor actually looked at my DHT and hormonal profile before suggesting anything. That alone was different.' },
@@ -307,14 +307,14 @@ export const injuryRepairConfig: ProgramPageConfig = {
     'AHPRA-registered doctors',
     'Evidence-based recovery protocols',
   ],
-  heroBentoPortrait: '/editorial/recovery.webp',
+  heroBentoPortrait: '/shoot/recovery.jpg',
   heroBentoStat: { value: '60%', label: 'of soft tissue injuries are sub-optimally managed' },
   heroBentoLifestyle: '/team/team-armchairs.webp',
 
   empathyHeadline: "Still not right months after the injury.",
   empathyBody: "Slow healing, persistent inflammation, and incomplete recovery are frequently signs of underlying biological factors, not just the nature of the injury. Nutritional deficiencies, hormonal status, and inflammatory load all influence the speed and completeness of tissue repair.",
   empathyChips: ['Chronic tendon pain', 'Slow healing', 'Persistent inflammation', 'Joint stiffness', 'Post-surgical recovery', 'Recurring injury'],
-  empathyImage: '/editorial/athletic-male.webp',
+  empathyImage: '/shoot/hormone.jpg',
 
   evidenceHeadline: 'The biology of recovery most clinics don\'t assess.',
   evidencePoints: [
@@ -322,7 +322,7 @@ export const injuryRepairConfig: ProgramPageConfig = {
     { value: '12+', label: 'Recovery markers in our assessment panel', detail: 'Inflammatory markers, hormonal status, nutritional deficiencies, and metabolic factors that collectively determine your body\'s repair capacity.' },
     { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'Your blood panel collected near you, results reviewed by your doctor before your consultation.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -334,7 +334,7 @@ export const injuryRepairConfig: ProgramPageConfig = {
     { title: 'Nutritional support', body: 'Collagen synthesis requires specific nutrients: vitamin C, zinc, glycine, proline. Deficiencies directly slow healing timelines.' },
     { title: 'Hormonal environment', body: 'Testosterone and growth hormone are anabolic hormones that influence protein synthesis and tissue regeneration. Suboptimal levels impair recovery.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Dave N.', date: 'February 2025', highlight: 'First time someone looked at the biological side of why I wasn\'t healing properly', full: 'First time someone looked at the biological side of why I wasn\'t healing properly. The doctor was thorough, understood injury physiology, and the consultation was properly focused.' },
@@ -384,7 +384,7 @@ export const longevityConfig: ProgramPageConfig = {
     { value: '15+', label: 'Longevity markers in our comprehensive panel', detail: 'Biological age markers, metabolic function, hormonal status, inflammatory load, micronutrient deficiencies, and cardiovascular risk, all assessed together.' },
     { value: '100%', label: 'Online clinical care, Australia-wide', detail: 'Your longevity consultation conducted entirely via telehealth with an AHPRA-registered doctor who specialises in metabolic and preventive medicine.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -396,7 +396,7 @@ export const longevityConfig: ProgramPageConfig = {
     { title: 'Metabolic function', body: 'Insulin sensitivity, glucose metabolism, and lipid handling all deteriorate with age. Each is measurable and, where appropriate, clinically modifiable.' },
     { title: 'Cellular repair capacity', body: 'DNA repair, mitochondrial function, and autophagic processes decline with age. Clinical interventions can support these pathways.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Richard H.', date: 'January 2025', highlight: 'The most comprehensive clinical review I\'ve ever had', full: 'The most comprehensive clinical review I\'ve ever had. The doctor approached it as optimisation rather than disease detection, which is exactly what I was looking for.' },
@@ -431,9 +431,9 @@ export const pathologyConfig: ProgramPageConfig = {
     'AHPRA-registered doctor review',
     'Results explained in context, not just in range',
   ],
-  heroBentoPortrait: '/editorial/blood-vials.webp',
+  heroBentoPortrait: '/shoot/consult.jpg',
   heroBentoStat: { value: '30+', label: 'markers across hormones, metabolism, and health' },
-  heroBentoLifestyle: '/editorial/molecular.webp',
+  heroBentoLifestyle: '/shoot/lounge.jpg',
 
   empathyHeadline: "Your GP checks if you\'re sick. We check how well you\'re functioning.",
   empathyBody: "Standard GP blood panels are designed for disease detection. They tell you if something has gone wrong. Our comprehensive panel tells you how well your systems are actually performing, and identifies what\'s suboptimal before it becomes a problem.",
@@ -446,7 +446,7 @@ export const pathologyConfig: ProgramPageConfig = {
     { value: '48h', label: 'Results turnaround from pathology collection', detail: 'Results reviewed and explained by your AHPRA-registered doctor in a follow-up consultation. Not just a PDF of numbers.' },
     { value: '4,000+', label: 'Collection centres across Australia', detail: 'Your referral issued electronically. No appointment needed at most collection centres.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: [
     { title: 'Create your account', body: 'Register in under two minutes. Your doctor referral issued the same business day.', time: '2 MIN', image: STEPS_IMAGES.signup },
@@ -463,7 +463,7 @@ export const pathologyConfig: ProgramPageConfig = {
     { title: 'Inflammatory load', body: 'hsCRP and inflammatory markers detect chronic low-grade inflammation, a driver of disease that often goes unmeasured for years.' },
     { title: 'Nutritional status', body: 'Vitamin D, B12, iron studies, zinc: deficiencies that significantly affect how you feel, recover, and perform.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Michael T.', date: 'February 2025', highlight: 'First time my results were actually explained to me in full', full: 'First time my results were actually explained to me in full. Not just "looks fine", but a proper review of each marker in context. Worth it for that alone.' },
@@ -497,7 +497,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
     'AHPRA-registered doctors',
     'Clinical assessment before any treatment',
   ],
-  heroBentoPortrait: '/editorial/sexual-health.webp',
+  heroBentoPortrait: '/shoot/sexual.jpg',
   heroBentoStat: { value: '1 in 5', label: 'men experience significant sexual health concerns' },
   heroBentoLifestyle: '/team/team-armchairs.webp',
 
@@ -512,7 +512,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
     { value: '80%', label: 'Of ED cases have a physical component', detail: 'Vascular function, testosterone levels, and neurological factors account for the majority of erectile dysfunction, not psychological causes as commonly assumed.' },
     { value: '100%', label: 'Confidential, online consultation', detail: 'Your consultation conducted entirely via telehealth. No clinic waiting rooms. No awkward conversations in person.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: STANDARD_STEPS,
 
@@ -524,7 +524,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
     { title: 'Neurological factors', body: 'Nerve signalling governs arousal and sensation. Nutritional status and metabolic function both influence neurological health.' },
     { title: 'Psychological context', body: 'Performance anxiety and psychological factors can compound physical drivers. Your doctor assesses the full clinical picture before any treatment is recommended.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'S.B.', date: 'March 2025', highlight: 'Completely confidential and the doctor didn\'t make it awkward', full: 'Completely confidential and the doctor didn\'t make it awkward. They approached it like any other medical issue, which was exactly what I needed. Very professional.' },
@@ -540,7 +540,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
 
   ctaHeadline: 'A clinical assessment. Completely private.',
   ctaBody: 'Complete the pre-screen. Confidential from start to finish. Your doctor reviews your intake and confirms suitability and next steps.',
-  ctaImage: '/editorial/sexual-health.webp',
+  ctaImage: '/shoot/sexual.jpg',
   intakeUrl: '/intake/quiz/sexual',
 }
 
@@ -559,14 +559,14 @@ export const skinRegenerationConfig: ProgramPageConfig = {
     'AHPRA-registered doctors',
     'Clinically assessed, personalised protocols',
   ],
-  heroBentoPortrait: '/editorial/skin-closeup.webp',
+  heroBentoPortrait: '/shoot/skin.jpg',
   heroBentoStat: { value: '70%', label: 'of skin ageing is driven by controllable biological factors' },
   heroBentoLifestyle: '/team/portrait-woman.webp',
 
   empathyHeadline: "Skin ageing is not just about what you put on it.",
   empathyBody: "Collagen production, cellular turnover, hydration, and elasticity are regulated by hormones, nutrition, and systemic biology. Topical products can support, but they cannot compensate for deficiencies at the biological level.",
   empathyChips: ['Premature ageing', 'Skin laxity', 'Dullness', 'Acne in adults', 'Collagen loss', 'Uneven texture'],
-  empathyImage: '/editorial/skin-closeup.webp',
+  empathyImage: '/shoot/skin.jpg',
 
   evidenceHeadline: 'The biology behind skin quality.',
   evidencePoints: [
@@ -574,7 +574,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
     { value: '10+', label: 'Skin-relevant markers in our panel', detail: 'Hormonal status, vitamin D, zinc, collagen markers, and inflammatory load, all assessed before any protocol is built.' },
     { value: '100%', label: 'Doctor-led and clinically assessed', detail: 'No protocol is recommended without a proper clinical assessment and review of your blood markers. Treatment only where clinically appropriate.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
+  evidenceImage: '/shoot/consult.jpg',
 
   processSteps: [
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
@@ -591,7 +591,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
     { title: 'Inflammatory control', body: 'Chronic inflammation accelerates skin ageing and drives conditions like adult acne. Identifying and reducing inflammatory load improves skin quality from the inside out.' },
     { title: 'Hydration and barrier function', body: 'Hormonal influences on skin hydration and lipid production are significant, particularly testosterone and DHEA levels in both men and women.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
+  mechanismImage: '/shoot/focus.jpg',
 
   testimonials: [
     { name: 'Oliver K.', date: 'March 2025', highlight: 'First time skin health was approached as a medical question', full: 'First time skin health was approached as a medical question rather than a cosmetic one. The doctor identified nutritional deficiencies I wasn\'t aware of. Very different experience.' },

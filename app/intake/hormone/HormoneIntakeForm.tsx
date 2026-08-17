@@ -58,7 +58,7 @@ function ClinicBadge() {
             border: '1px solid rgba(72,144,247,0.25)',
             color: BLUE,
             letterSpacing: '0.04em',
-            fontFamily: '"Space Grotesk", sans-serif',
+            fontFamily: 'var(--font-satoshi), sans-serif',
           }}
         >
           AMH
@@ -162,7 +162,7 @@ function Shell({
         <div className="flex flex-col items-center leading-none select-none">
           <span
             className="font-black text-sm tracking-[0.2em] uppercase"
-            style={{ color: TEXT, fontFamily: '"Space Grotesk", sans-serif' }}
+            style={{ color: TEXT, fontFamily: 'var(--font-satoshi), sans-serif' }}
           >
             APEX
           </span>
@@ -242,7 +242,7 @@ function SignupGate({ onDismiss }: { onDismiss: () => void }) {
 
           <h3
             className="text-xl font-bold mb-2 leading-tight"
-            style={{ color: TEXT, fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '-0.02em' }}
+            style={{ color: TEXT, fontFamily: 'var(--font-satoshi), sans-serif', letterSpacing: '-0.02em' }}
           >
             Your results are ready
           </h3>
@@ -331,7 +331,7 @@ export default function HormoneIntakeForm() {
           </div>
           <h2
             className="text-2xl font-bold mb-3"
-            style={{ color: TEXT, letterSpacing: '-0.02em', fontFamily: '"Space Grotesk", sans-serif' }}
+            style={{ color: TEXT, letterSpacing: '-0.02em', fontFamily: 'var(--font-satoshi), sans-serif' }}
           >
             This program is for male patients
           </h2>
@@ -386,7 +386,7 @@ export default function HormoneIntakeForm() {
 
             <h1
               className="text-3xl font-bold leading-tight mb-1"
-              style={{ color: TEXT, letterSpacing: '-0.025em', fontFamily: '"Space Grotesk", sans-serif' }}
+              style={{ color: TEXT, letterSpacing: '-0.025em', fontFamily: 'var(--font-satoshi), sans-serif' }}
             >
               Your hormone profile
             </h1>
@@ -408,7 +408,7 @@ export default function HormoneIntakeForm() {
               {/* Hero image */}
               <div className="relative h-44 overflow-hidden" style={{ background: '#060d1a' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+                  src="/shoot/weight.jpg"
                   alt="Hormone Optimisation Program"
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: 'center 35%', opacity: 0.65 }}
@@ -424,7 +424,7 @@ export default function HormoneIntakeForm() {
                   >
                     {scoreLabel} indicator score
                   </span>
-                  <h2 className="text-2xl font-bold" style={{ color: '#111827', fontFamily: '"Space Grotesk", sans-serif' }}>
+                  <h2 className="text-2xl font-bold" style={{ color: '#111827', fontFamily: 'var(--font-satoshi), sans-serif' }}>
                     Hormone Optimisation
                   </h2>
                 </div>
@@ -543,7 +543,7 @@ export default function HormoneIntakeForm() {
             {/* Counter */}
             <p
               className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: BLUE, fontFamily: '"Space Grotesk", sans-serif', letterSpacing: '0.14em' }}
+              style={{ color: BLUE, fontFamily: 'var(--font-satoshi), sans-serif', letterSpacing: '0.14em' }}
             >
               Question {step + 1} of {TOTAL}
             </p>
@@ -555,7 +555,7 @@ export default function HormoneIntakeForm() {
                 fontSize: 'clamp(22px, 4.5vw, 34px)',
                 color: TEXT,
                 letterSpacing: '-0.02em',
-                fontFamily: '"Space Grotesk", sans-serif',
+                fontFamily: 'var(--font-satoshi), sans-serif',
               }}
             >
               {QUESTIONS[step]}
@@ -684,7 +684,7 @@ export default function HormoneIntakeForm() {
                   </div>
                   <h3
                     className="text-lg font-bold mb-2 leading-tight"
-                    style={{ color: TEXT, fontFamily: '"Space Grotesk", sans-serif' }}
+                    style={{ color: TEXT, fontFamily: 'var(--font-satoshi), sans-serif' }}
                   >
                     You&apos;re currently on testosterone
                   </h3>

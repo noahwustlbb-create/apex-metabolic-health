@@ -32,7 +32,7 @@ The emotional register is quiet authority — the confidence of a specialist who
 2. **Scroll earns trust.** Motion and reveals are scroll-driven, not time-driven. The user controls pacing. A man comparing options in five tabs needs to feel in control.
 3. **The process is the proof.** Motion and imagery describe the clinical process, never the outcome. AHPRA/TGA compliance is a constraint, but also a design principle — show the pathway, never imply a result.
 4. **Restraint over decoration.** No glassmorphism, no bento grids, no SaaS-dashboard-does-healthcare. Every visual element must earn its place by carrying information or reducing friction.
-5. **Inter is locked.** Typeface is Inter. Do not suggest alternatives.
+5. **Satoshi is locked.** Typeface is Satoshi (Fontshare; legal stand-in for ABC Repro). Do not suggest Inter, Space Grotesk, or a serif.
 
 ## Accessibility & Inclusion
 

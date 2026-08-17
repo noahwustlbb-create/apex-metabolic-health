@@ -25,8 +25,8 @@ const config: Config = {
         muted: '#7a90a8',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        grotesk: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-satoshi)', 'system-ui', 'sans-serif'],
+        grotesk: ['var(--font-satoshi)', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         'blue-sm': '0 0 20px rgba(72,144,247,0.12)',

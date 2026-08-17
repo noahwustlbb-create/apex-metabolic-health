@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import './globals.css'
 import AgeGate from '@/components/AgeGate'
@@ -13,18 +13,17 @@ import MotionProvider from '@/components/MotionProvider'
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+const satoshi = localFont({
+  src: [
+    { path: '../public/fonts/Satoshi-Light.woff2', weight: '300', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Medium.woff2', weight: '600', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../public/fonts/Satoshi-Bold.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-satoshi',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
-})
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
 })
 
 
@@ -60,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={satoshi.variable}>
       <body className="antialiased overflow-x-hidden">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="beforeInteractive">
