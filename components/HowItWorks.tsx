@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const STEPS = [
   {
     step: '01',
-    src: '/shoot/signup.jpg',
+    src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=90',
     alt: 'Create your account and complete intake online',
     title: 'Sign up and complete intake',
     sub: 'No GP referral required',
@@ -17,7 +17,7 @@ const STEPS = [
   },
   {
     step: '02',
-    src: '/shoot/consult.jpg',
+    src: 'https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=600&q=80',
     alt: 'Pathology blood panel collection',
     title: 'Accredited pathology',
     sub: '4,000+ collection centres',
@@ -25,7 +25,7 @@ const STEPS = [
   },
   {
     step: '03',
-    src: '/shoot/consult-2.jpg',
+    src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=90',
     alt: 'Doctor-led telehealth consultation',
     title: 'Telehealth consultation',
     sub: 'AHPRA-registered · personalised protocol',
@@ -33,7 +33,7 @@ const STEPS = [
   },
   {
     step: '04',
-    src: '/shoot/lounge.jpg',
+    src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=90',
     alt: 'Ongoing optimisation and protocol',
     title: 'Ongoing optimisation',
     sub: 'Adjustments based on your data',

@@ -8,9 +8,6 @@
   /* Primitive not covered by tokens.css */
   --blue-light:        #6ba8ff;
   --text-primary-rgb:  17, 24, 39;
-  /* Identity lock: Satoshi stands in for both former Inter and Space Grotesk */
-  --font-inter: var(--font-satoshi);
-  --font-space-grotesk: var(--font-satoshi);
 }
 
 @layer base {
@@ -26,7 +23,6 @@
   body {
     background-color: var(--bg);
     color: var(--text-primary);
-    font-family: var(--font-satoshi), system-ui, sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;

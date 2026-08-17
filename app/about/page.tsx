@@ -152,9 +152,9 @@ export default function AboutPage() {
                   label: 'Care built around your data',
                 },
                 {
-                  src: '/shoot/meeting.jpg',
-                  alt: 'Apex Metabolic Health clinical setting',
-                  label: 'A space built for the consult',
+                  src: '/team/brand-boxes.webp',
+                  alt: 'Apex branded treatment packaging',
+                  label: 'Discreet, delivered to you',
                 },
               ].map((img, i) => {
                 const ref = useRef(null)

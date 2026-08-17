@@ -768,25 +768,25 @@ const TRUST_PANELS = [
     label: 'Personalised',
     heading: 'Prescription protocols',
     body: 'Treatments matched to your pathology, not a one-size-fits-all template.',
-    img: '/shoot/consult.jpg',
+    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=700&h=500&fit=crop&auto=format&q=80',
   },
   {
     label: 'Pharmacy delivery',
     heading: 'Australia-wide',
     body: 'TGA-compliant compounding pharmacy, delivered direct to your door.',
-    img: '/shoot/meeting.jpg',
+    img: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=700&h=500&fit=crop&auto=format&q=80',
   },
   {
     label: 'Unlimited',
     heading: 'Doctor consultations',
     body: 'AHPRA-registered practitioners managing your ongoing care.',
-    img: '/shoot/consult-2.jpg',
+    img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&h=500&fit=crop&auto=format&q=80',
   },
   {
     label: '100%',
     heading: 'Telehealth based',
     body: 'Consult from anywhere in Australia. No waiting rooms.',
-    img: '/shoot/signup.jpg',
+    img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop&auto=format&q=80',
   },
 ]
 
@@ -857,8 +857,8 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
                   transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
                   style={{ transformOrigin: '60px 60px', rotate: '-90deg' } as React.CSSProperties}
                 />
-                <text x="60" y="55" textAnchor="middle" style={{ fontSize: 26, fontWeight: 700, fill: '#111827', fontFamily: 'var(--font-satoshi), sans-serif' }}>{pct}%</text>
-                <text x="60" y="72" textAnchor="middle" style={{ fontSize: 9, fill: '#6b7280', fontFamily: 'var(--font-satoshi), sans-serif', letterSpacing: 1 }}>SCORE</text>
+                <text x="60" y="55" textAnchor="middle" style={{ fontSize: 26, fontWeight: 700, fill: '#111827', fontFamily: 'Space Grotesk, sans-serif' }}>{pct}%</text>
+                <text x="60" y="72" textAnchor="middle" style={{ fontSize: 9, fill: '#6b7280', fontFamily: 'Space Grotesk, sans-serif', letterSpacing: 1 }}>SCORE</text>
               </svg>
             </div>
             <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-center mb-1" style={{ color: TEAL }}>{config.scoreLabel}</p>

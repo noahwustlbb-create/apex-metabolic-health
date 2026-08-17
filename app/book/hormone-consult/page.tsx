@@ -79,7 +79,7 @@ export default function HormoneConsultBookPage() {
       <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingBottom: '100px' }}>
         <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" aria-hidden="true" />
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden">
-          <Image src="/shoot/consult.jpg" alt="" fill className="object-cover object-center" style={{ opacity: 0.18 }} unoptimized />
+          <Image src="https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=1200&q=80" alt="" fill className="object-cover object-center" style={{ opacity: 0.18 }} unoptimized />
           <div className="absolute inset-0 lg:hidden" style={{ background: 'rgba(4,6,13,0.65)' }} />
           <div className="absolute inset-0 hidden lg:block" style={{ background: 'linear-gradient(90deg, var(--bg) 0%, rgba(4,6,13,0.35) 50%, transparent 75%)' }} />
           <div className="absolute inset-x-0 bottom-0 h-32" style={{ background: 'linear-gradient(180deg, transparent, var(--bg))' }} />

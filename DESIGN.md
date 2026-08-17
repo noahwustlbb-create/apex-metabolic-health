@@ -23,30 +23,30 @@ colors:
   danger-night: "#f87171"
 typography:
   display:
-    fontFamily: "Satoshi, system-ui, sans-serif"
+    fontFamily: "Space Grotesk, system-ui, sans-serif"
     fontSize: "clamp(2.5rem, 6vw, 6rem)"
     fontWeight: 700
     lineHeight: 1.05
     letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Satoshi, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "clamp(1.75rem, 4vw, 3rem)"
     fontWeight: 800
     lineHeight: 1.04
     letterSpacing: "-0.04em"
   title:
-    fontFamily: "Satoshi, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 600
     lineHeight: 1.4
     letterSpacing: "-0.01em"
   body:
-    fontFamily: "Satoshi, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
   label:
-    fontFamily: "Satoshi, system-ui, sans-serif"
+    fontFamily: "Inter, system-ui, sans-serif"
     fontSize: "0.625rem"
     fontWeight: 600
     letterSpacing: "0.22em"
@@ -123,17 +123,17 @@ A mono-accent system on a blue-black night canvas, with a mirrored light theme.
 
 ## 3. Typography
 
-**Display Font:** Satoshi Regular/Medium (with system-ui fallback) — display headings, stat numerals
-**Body Font:** Satoshi Light/Regular (with system-ui fallback) — everything else. Locked; do not suggest Inter, Space Grotesk, or a serif.
+**Display Font:** Space Grotesk (with system-ui fallback) — display headings, stat numerals, brand wordmark only
+**Body Font:** Inter (with system-ui fallback) — everything else. Locked; do not suggest alternatives.
 
-**Character:** One family. Large and calm, like Lightweight.info / ABC Repro. Headlines sit at Regular, not Bold-for-the-sake-of-it. The Peak-A lockup is the custom mark — not a second live typeface.
+**Character:** Inter carries the clinical calm; Space Grotesk supplies the technical edge in numerals and hero moments. The pairing is engineered, not decorative — a lab report, not a lifestyle magazine.
 
 ### Hierarchy
-- **Display** (Satoshi 400–700, clamp to 6rem ceiling, lh 1.05, -0.03em): hero headlines and brand numerals. Never exceeds 96px.
-- **Headline** (Satoshi 700, clamp, lh 1.04, -0.04em — the floor, no tighter): section headings via the `display-serif` utility.
-- **Title** (Satoshi 500, 18px, -0.01em): card and subsection headings.
-- **Body** (Satoshi 300–400, 16px, lh 1.6, max 65–75ch): prose. `text-wrap: balance` on h1–h3, `pretty` on prose.
-- **Label** (Satoshi 500, 10px, 0.22em tracking, uppercase, Apex Blue): the `.label` eyebrow — a scarce brand kicker, not section grammar.
+- **Display** (Space Grotesk 700, clamp to 6rem ceiling, lh 1.05, -0.03em): hero headlines and brand numerals. Never exceeds 96px.
+- **Headline** (Inter 800, clamp, lh 1.04, -0.04em — the floor, no tighter): section headings via the `display-serif` utility.
+- **Title** (Inter 600, 18px, -0.01em): card and subsection headings.
+- **Body** (Inter 400, 16px, lh 1.6, max 65–75ch): prose. `text-wrap: balance` on h1–h3, `pretty` on prose.
+- **Label** (Inter 600, 10px, 0.22em tracking, uppercase, Apex Blue): the `.label` eyebrow — a scarce brand kicker, not section grammar.
 
 ### Named Rules
 **The One-Kicker Rule.** At most one `.label` eyebrow per viewport of scroll. An eyebrow above every section heading is prohibited AI scaffolding.
@@ -153,7 +153,7 @@ A dual system keyed to theme. In light theme, depth is cast: a five-step shadow 
 ## 5. Components
 
 ### Buttons
-- **Shape:** softly squared (12px radius), 14×32px padding, 13px/600 Satoshi, subtle inset highlight.
+- **Shape:** softly squared (12px radius), 14×32px padding, 13px/600 Inter, subtle inset highlight.
 - **Primary:** blue gradient (135deg, #4890f7 → #1d4fd8), white text, blue-tinted shadow. Hover: −1px lift, deeper glow.
 - **Outline:** blue-tinted ghost (rgba(72,144,247,0.06) bg, 1.5px rgba(72,144,247,0.28) border, blue text). Hover: border solidifies to full blue.
 - **White:** solid white with deep-blue text — reserved for placement over photography or saturated panels.

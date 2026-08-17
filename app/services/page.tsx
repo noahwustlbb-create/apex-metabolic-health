@@ -20,7 +20,7 @@ const PROGRAMS = [
     glowColor: 'rgba(72,144,247,0.45)',
     href: '/programs/hormone-optimisation',
     intakeHref: 'https://app.apexmetabolichealth.com.au/intake/hormone',
-    image: '/shoot/hormone.jpg',
+    image: 'https://images.unsplash.com/photo-1734443544776-7161343f09d2?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center 30%',
     bg: '#06111f',
     icon: (
@@ -41,7 +41,7 @@ const PROGRAMS = [
     glowColor: 'rgba(0,168,158,0.4)',
     href: '/programs/metabolic-weight-loss',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/weight.jpg',
+    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
     bg: '#061509',
     icon: (
@@ -62,7 +62,7 @@ const PROGRAMS = [
     glowColor: 'rgba(167,139,250,0.4)',
     href: '/programs/sexual-health',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/sexual.jpg',
+    image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=800&q=90',
     imgPos: 'center 20%',
     bg: '#0d0818',
     icon: (
@@ -83,7 +83,7 @@ const PROGRAMS = [
     glowColor: 'rgba(74,222,128,0.4)',
     href: '/programs/injury-repair',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/recovery.jpg',
+    image: 'https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=800&q=90',
     imgPos: 'center center',
     bg: '#050f0d',
     icon: (
@@ -104,7 +104,7 @@ const PROGRAMS = [
     glowColor: 'rgba(201,168,76,0.4)',
     href: '/programs/longevity',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/longevity.jpg',
+    image: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
     bg: '#0d0818',
     icon: (
@@ -125,7 +125,7 @@ const PROGRAMS = [
     glowColor: 'rgba(56,189,248,0.4)',
     href: '/programs/skin-regeneration',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/skin.jpg',
+    image: 'https://images.unsplash.com/photo-1781178339148-d6ac1edb7b8f?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
     bg: '#071116',
     icon: (
@@ -146,7 +146,7 @@ const PROGRAMS = [
     glowColor: 'rgba(249,115,22,0.4)',
     href: '/programs/pathology',
     intakeHref: 'https://app.apexmetabolichealth.com.au/signup',
-    image: '/shoot/consult.jpg',
+    image: 'https://images.unsplash.com/photo-1570917013020-a6966d3ee863?auto=format&fit=crop&w=800&q=85',
     imgPos: 'center center',
     bg: '#0d0c08',
     icon: (

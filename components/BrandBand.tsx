@@ -114,7 +114,7 @@ export default function BrandBand() {
                 aria-hidden="true"
               >
                 <img
-                  src="/shoot/meeting.jpg"
+                  src="/team/brand-boxes.webp"
                   alt=""
                   width={1470}
                   height={1103}
