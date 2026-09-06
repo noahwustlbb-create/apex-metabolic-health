@@ -15,7 +15,7 @@ Your Claude Code numbers (2 Aug to 6 Sep) are not a flex and they are not a cost
 
 That is the same pattern as the business.
 
-You have unusually good taste. `PRODUCT.md` and `DESIGN.md` are better than most funded clinics. "Quiet authority." One idea per screen. Inter locked. Process is the proof. The email templates already have compliance rules a lawyer would recognise. You can specify quality.
+You have unusually good taste. `PRODUCT.md` and `DESIGN.md` are better than most funded clinics. "Quiet authority." One idea per screen. Inter locked. Process is the proof. The email templates already have compliance rules a lawyer would recognise. You can specify quality. One thing I got wrong on the first pass: the clinic is **men and women, 18–80**, not men 28–45. That number was sitting in `PRODUCT.md`. The age gate already said 18. The brief was stale. It is corrected.
 
 You cannot keep a single source of truth, and you do not finish the last 20%.
 
@@ -46,7 +46,7 @@ The tree still has `/intake/*` (hormone, general, hair, injury, metabolic, skin,
 
 **Brand you locked, then flipped**
 
-- Audience: men 28–45 (`PRODUCT.md`) → gender-neutral commit → hormone / sexual / hair put back to male-aimed.
+- Audience (locked, Noah corrected 6 Sep 2026): men and women, 18–80. `PRODUCT.md` used to say men 28–45. Some program pages still talk like the old brief. Do not treat those pages as the audience.
 - Type: Inter locked → Satoshi + new photos → revert.
 - Mail: Resend → "stopgap from resend.dev" → Google Workspace SMTP. Resend is still a dependency.
 - Bloods: BGT iframe → native flow. Old panel URLs still sit in `lib/intake-routing.ts`.

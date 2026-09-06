@@ -14,6 +14,7 @@ Locked
 - Dark is default. Light must still hit WCAG AA. Check both before shipping colour.
 - Motion is scroll-driven, expo-out, via `FadeUp` / `MotionProvider`. Honor `prefers-reduced-motion`.
 - One idea per screen. At most one `.label` eyebrow per viewport.
+- Audience is men and women, 18–80. Do not default copy, imagery captions, or stats to "men" unless the sentence is about a male-specific condition.
 
 Reject
 

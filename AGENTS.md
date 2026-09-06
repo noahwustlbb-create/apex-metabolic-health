@@ -47,6 +47,7 @@ If two files disagree, **do not silently pick one**. Say so, then follow the tab
 - No GP referral. AHPRA-registered doctors. TGA-compliant pharmacy partner.
 - Legal entity: Imperial Equity Investments Pty Ltd.
 - Admin email: `admin@apexmetabolichealth.com.au`.
+- Audience: **men and women, aged 18–80**, Australia-wide. Do not write the site as men-only. A program may discuss a sex-specific condition. The clinic does not.
 - Funnel: get people to the portal. Do not add new public intake forms on this site.
 - Other businesses (4th Qtr, Justflowz, Lab Built, PROTCL, 3D, Tools) are out of scope here.
 

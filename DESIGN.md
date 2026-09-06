@@ -1,6 +1,6 @@
 ---
 name: Apex Metabolic Health
-description: Doctor-led hormone and metabolic telehealth for skeptical Australian men — quiet clinical authority, dark by default.
+description: Doctor-led hormone and metabolic telehealth for Australian adults 18–80 — quiet clinical authority, dark by default.
 colors:
   accent-blue: "#4890f7"
   accent-blue-deep: "#1d4fd8"
@@ -88,7 +88,7 @@ components:
 
 **Creative North Star: "Quiet Authority"**
 
-The site is the waiting room of a specialist who doesn't need to convince you. Dark by default — a deep blue-black night canvas (#0e1117), not a trend but a register: premium, masculine, clinical, unhurried. A single blue accent carries every interactive signal. Nothing pulses for attention; the patient controls the pacing, and the scroll earns the trust. The visual system explicitly rejects supplement-brand energy (Biov8), startup gloss (Hormn), corporate safety (Everlab), and the default AI-designed healthcare template.
+The site is the waiting room of a specialist who doesn't need to convince you. Dark by default — a deep blue-black night canvas (#0e1117), not a trend but a register: premium, clinical, unhurried. Serves men and women, 18–80. A single blue accent carries every interactive signal. Nothing pulses for attention; the patient controls the pacing, and the scroll earns the trust. The visual system explicitly rejects supplement-brand energy (Biov8), startup gloss (Hormn), corporate safety (Everlab), and the default AI-designed healthcare template.
 
 The theme system is real, not cosmetic: a three-layer token architecture (`styles/tokens.css` — primitives → semantics → themes) drives both a dark default (`data-theme="dark"`, also the OS-preference fallback) and a full light theme behind the nav toggle. Every foreground token is contrast-verified ≥ 4.5:1 against its paired canvas in **both** themes; the ratios are documented inline in the token file, which is the single source of truth. Layout is mobile-first (`max-w-6xl` container, 24px gutters), with generous vertical sections (96–160px) that give each screen one idea.
 
