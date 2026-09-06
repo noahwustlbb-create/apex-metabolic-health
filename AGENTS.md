@@ -18,6 +18,8 @@ A prompt asks for output. A loop finishes a job.
 
 Do not load `.claude/skills/impeccable` unless the user asks for design critique, polish, or live edit.
 
+Harness files live in `.agent/`. Read `.agent/OPERATING.md` only for a multi-step job or a new chat continuing one. Do not load the rest of `.agent/` for a one-line copy fix.
+
 ## One chat, one job
 
 Noah's last five weeks of Claude Code usage were 94% cache reads from 1,600-turn sessions. That made the model worse and the work slower.

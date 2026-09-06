@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "passed": 20,
+  "failed": 0,
+  "okItems": [
+    "exists AGENTS.md",
+    "exists PRODUCT.md",
+    "exists .agent/OPERATING.md",
+    "exists .agent/IMPLEMENTATION.md",
+    "exists .agent/QUEUES.md",
+    "exists .agent/WORKFLOW.md",
+    "exists .agent/plan.md",
+    "exists .agent/tasks.md",
+    "exists .agent/knowledge.md",
+    "exists .agent/decisions.md",
+    "exists .agent/status.md",
+    "exists .agent/handoff.md",
+    "exists .agent/FAILURE.md",
+    "exists .agent/artifacts/cta-map.md",
+    "match audience lock",
+    "match age range",
+    "match compliance never-list",
+    "cta-map has /start",
+    "cta-map has signup",
+    "cta-map has /intake/"
+  ],
+  "failItems": [],
+  "at": "2026-09-06T13:51:06.901Z"
+}
