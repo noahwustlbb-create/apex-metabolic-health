@@ -1,0 +1,35 @@
+---
+description: Apex funnel, programs, and intake — do not grow the maze
+globs: app/**/*.{ts,tsx},lib/**/*.{ts,tsx},components/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+This site sells the consult. Care happens in the portal.
+
+Canonical path
+
+1. Land on the site.
+2. Assessment or program page.
+3. `https://app.apexmetabolichealth.com.au/signup` (or login).
+4. Intake, bloods, consult, protocol — all inside the portal.
+
+Do not add a new `/intake/*`, `/book/*`, `/forms/*`, `/get-started`, or `/quiz` route. The maze already exists. Prefer linking to the portal or to `/start`.
+
+If you touch an old public form, do not "improve" it into a parallel product. Either point it at the portal or leave it.
+
+Programs
+
+- Names and slugs: `lib/canonical-programs.ts` (what Nav uses).
+- Page copy: `lib/program-configs.ts`.
+- `lib/programs.ts` is leftover. Do not add to it. Do not invent a fourth catalogue.
+- `app/api/chat/route.ts` must not advertise a program list or a booking URL that the rest of the site no longer uses.
+
+Integrations (extend, do not replace)
+
+- Stripe checkout: `app/api/create-checkout/route.ts` + `lib/intake-routing.ts`.
+- Mail: Google Workspace SMTP via `lib/mailer.ts`. Resend is leftover.
+- Pathology partner: Bloody Good Tests (`lib` + `app/api/bgt`).
+- Practice: Cliniko.
+- Chat: Haiku in `app/api/chat/route.ts`. Keep replies short. No prices. No drug names.
+
+When two CTAs disagree (portal vs `/intake/hormone-consult` vs `/start`), prefer the portal signup unless the user is already mid-form.
