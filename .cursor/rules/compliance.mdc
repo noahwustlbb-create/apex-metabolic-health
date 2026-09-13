@@ -1,0 +1,23 @@
+---
+description: AHPRA / TGA / advertising locks for Apex
+alwaysApply: true
+---
+
+Apex is an Australian doctor-led telehealth clinic for men and women aged 18–80. Advertising law applies to every string.
+
+Never:
+
+- Name a medication, compound, peptide, hormone product, or dose. "Peptide consultation" is already on the site; do not add more of that language. Prefer "doctor-prescribed protocol" / "clinical protocol".
+- Imply a result. No before/after. No "you'll lose X". No guaranteed eligibility or approval.
+- Diagnose, prescribe, or give personal medical advice. The doctor does that after assessment.
+- Quote a price in the chatbot. Point to `/pricing` or the portal.
+- Treat AHPRA registration as a stat. It is a sentence.
+
+Always:
+
+- Suitability and prescribing stay with an AHPRA-registered doctor.
+- Pathology is arranged at accredited collection centres. Results inform the consult. They do not approve treatment.
+- Urgent symptoms → call 000.
+- Email copy follows the rules at the top of `lib/email/templates.ts` (service vs marketing, no approval language).
+
+If a requested line would not survive a TGA advertising review, do not write it. Say why in one sentence.

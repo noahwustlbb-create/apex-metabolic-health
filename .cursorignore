@@ -1,0 +1,6 @@
+# Token cost. Index the skill docs, not the detector runtime.
+.claude/skills/impeccable/scripts/
+.impeccable/critique/
+.impeccable/live/
+tsconfig.tsbuildinfo
+next-env.d.ts

@@ -6,11 +6,11 @@ brand
 
 ## Users
 
-Australian men aged 28–45. Health-aware and research-driven. They've already been dismissed by a GP ("your bloods are normal"), and they're comparing Apex against Biov8, Hormn, and Everlab in adjacent tabs before they decide. They are not early adopters — they're skeptics who want clinical credibility, not a sales pitch. They will leave the moment the site feels like a supplement brand or a generic wellness template.
+Australian men and women aged 18–80. Health-aware and research-driven. Many have already been dismissed by a GP ("your bloods are normal"), and they're comparing Apex against Biov8, Hormn, and Everlab in adjacent tabs before they decide. They are not early adopters — they're skeptics who want clinical credibility, not a sales pitch. They will leave the moment the site feels like a supplement brand or a generic wellness template.
 
 ## Product Purpose
 
-Doctor-led hormone and metabolic optimisation telehealth clinic. Not a wellness brand, not generic GP telehealth — sits above both. Patients select a program, complete pathology at an accredited collection centre, consult with an AHPRA-registered doctor, and receive an ongoing personalised protocol. 100% online, Australia-wide. The site exists to convert skeptical, research-driven men into booked consultations.
+Doctor-led hormone and metabolic optimisation telehealth clinic. Not a wellness brand, not generic GP telehealth — sits above both. Patients select a program, complete pathology at an accredited collection centre, consult with an AHPRA-registered doctor, and receive an ongoing personalised protocol. 100% online, Australia-wide. The site exists to convert skeptical, research-driven adults into booked consultations.
 
 ## Brand Personality
 
@@ -29,7 +29,7 @@ The emotional register is quiet authority — the confidence of a specialist who
 ## Design Principles
 
 1. **One idea per screen.** Apple product-page pattern: each scroll section holds a single thought. No section earns two ideas.
-2. **Scroll earns trust.** Motion and reveals are scroll-driven, not time-driven. The user controls pacing. A man comparing options in five tabs needs to feel in control.
+2. **Scroll earns trust.** Motion and reveals are scroll-driven, not time-driven. The user controls pacing. A patient comparing options in five tabs needs to feel in control.
 3. **The process is the proof.** Motion and imagery describe the clinical process, never the outcome. AHPRA/TGA compliance is a constraint, but also a design principle — show the pathway, never imply a result.
 4. **Restraint over decoration.** No glassmorphism, no bento grids, no SaaS-dashboard-does-healthcare. Every visual element must earn its place by carrying information or reducing friction.
 5. **Inter is locked.** Typeface is Inter. Do not suggest alternatives.
