@@ -22,7 +22,7 @@ const LEGACY_INTAKE_ROUTES = [
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/webp'] // AVIF disabled: Next.js AVIF image-optimizer RCE advisory,
     remotePatterns: [
       {
         protocol: 'https',
