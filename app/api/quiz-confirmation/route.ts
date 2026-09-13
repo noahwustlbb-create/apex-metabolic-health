@@ -218,7 +218,7 @@ export async function POST(req: Request) {
             <table cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
               <tr>
                 <td style="background:#00c2b8;border-radius:2px;">
-                  <a href="https://apexmetabolic.com.au/get-started"
+                  <a href="https://www.apexmetabolichealth.com.au/get-started"
                      style="display:inline-block;padding:14px 32px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#070a0d;text-decoration:none;">
                     Start Your Intake &rarr;
                   </a>

@@ -29,6 +29,7 @@ const spaceGrotesk = Space_Grotesk({
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.apexmetabolichealth.com.au'),
   title: "Apex Metabolic Health | Doctor-Led Telehealth | Australia",
   description:
     "Doctor-led telehealth clinic. Hormone optimisation, metabolic medicine, performance protocols, and more. Evidence-based. AHPRA-registered practitioners. 100% online, Australia-wide.",
@@ -49,7 +50,28 @@ export const metadata: Metadata = {
       "Real answers. Not reassurance. Doctor-led hormonal and metabolic medicine delivered online across Australia.",
     type: 'website',
     locale: 'en_AU',
+    url: '/',
+    images: [
+      {
+        url: '/logo-new.png',
+        width: 1024,
+        height: 1024,
+        alt: 'Apex Metabolic Health',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary',
+    title: 'Apex Metabolic Health | Doctor-Led Telehealth',
+    description:
+      'Real answers. Not reassurance. Doctor-led hormonal and metabolic medicine delivered online across Australia.',
+    images: ['/logo-new.png'],
+  },
+  icons: {
+    icon: '/logo-new.png',
+    apple: '/logo-new.png',
+  },
+  alternates: { canonical: '/' },
   robots: { index: true, follow: true },
 }
 
@@ -106,6 +128,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </SignupGateProvider>
           </MotionProvider>
         </ThemeProvider>
+        <Script
+          id="ghl-external-tracking"
+          src="https://links.apexmetabolichealth.com.au/js/external-tracking.js"
+          data-tracking-id="tk_f305a784711e4fb7ba579d4cc0264718"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )

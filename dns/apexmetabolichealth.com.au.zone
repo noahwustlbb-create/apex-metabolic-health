@@ -1,0 +1,35 @@
+; apexmetabolichealth.com.au — full zone, copied from Wix DNS on 2026-09-13
+; for import into Cloudflare. Adds the 2 Mailgun MX records GHL needs on mail.
+$ORIGIN apexmetabolichealth.com.au.
+$TTL 3600
+
+; --- Website (Vercel) ---
+@                       IN A      216.198.79.1
+www                     IN CNAME  39a238602c28a3d3.vercel-dns-017.com.
+app                     IN CNAME  b0c2f322fd274578.vercel-dns-017.com.
+
+; --- GoHighLevel white-label ---
+crm                     IN CNAME  whitelabel.ludicrous.cloud.
+links                   IN CNAME  brand.ludicrous.cloud.
+
+; --- Google Workspace (main inbox) ---
+@                       IN MX 10  aspmx.l.google.com.
+@                       IN MX 20  alt1.aspmx.l.google.com.
+@                       IN MX 30  alt2.aspmx.l.google.com.
+@                       IN MX 40  alt3.aspmx.l.google.com.
+@                       IN MX 50  alt4.aspmx.l.google.com.
+@                       IN TXT    "v=spf1 include:_spf.google.com ~all"
+@                       IN TXT    "google-site-verification=oBOs2Zz6ZF7-Mw6co1sqxcIkUu-Hxcu_0N_VI3lISdU"
+google._domainkey       IN TXT    "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwISve+UQDCF+TFg5fa9YSLfjx7ofTBvb6KgtSjsDe6JkyxFYM6Oguc0wxn7oS79Qu38RKRfuYRX+u6h06a0Xl+9f/aA/MdHsZYvNguAWAln2OWmCZkj5ZgSCcZtImOAZgga9Cxvz3YL83bt1YQYrCMbs4kUmH1XoJ1SPUzIoaH47GTeSAPQl8QcvMfrsyZnkl" "BQpTIgZDDPruYF1F+BvHalSrd0CI+IjYRfanbaHel+wM5f/G0lmsIf1iOumrfO/Tcrva8MrG3+zkD1U5+/L/xn8ClnICf9XWSXH9jELIzKZwjnUhq2+XKPabCK5X5UqIaetHP7BtLjlZ7XTIF3/6QIDAQAB"
+_dmarc                  IN TXT    "v=DMARC1; p=none; rua=mailto:admin@apexmetabolichealth.com.au; adkim=r; aspf=r; pct=100"
+
+; --- Resend ---
+resend._domainkey       IN TXT    "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYJd8QwlSFDp8XY/dwhTg9oKrYY9wgiK3OMwmhEXRlV1IaXjAo6GMhehDVLdJMUW6jKV/7XoI8CXtd0oACKMidn6s8F4T+k+1I5N0f3vK8OCXGcvyh1qPg+OgCoPzTalIVPfg6EJkESmJGhKMLjvGruFC+VlIUNkn8ur4Ckw6CIwIDAQAB"
+
+; --- GoHighLevel / Mailgun sending domain: mail. ---
+mail                    IN TXT    "v=spf1 include:spf.leadconnectorhq.com include:mailgun.org ~all"
+mx._domainkey.mail      IN TXT    "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVcvr6AiXsbRzys4BuSaG9+7s30k+teLNsrC1H4hk24kRJ8s6KXq9wSdA8XNvKvKbghWfnYRmtxxa9jQ0M43lTVdRM6/zlSxngGpWPUYH4dvUO/P6Pex4bHFG8gewQsrlsX687dEifR2c7Plb/EHpc4NHohejmPg+i88N6pstdIwIDAQAB"
+_dmarc.mail             IN TXT    "v=DMARC1;p=none;"
+email.mail              IN CNAME  mailgun.org.
+mail                    IN MX 10  mxa.mailgun.org.   ; NEW — Wix couldn't add these
+mail                    IN MX 10  mxb.mailgun.org.   ; NEW

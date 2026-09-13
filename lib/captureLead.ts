@@ -4,10 +4,10 @@
 // the Gmail app password was rejected, that route began returning 500 and every
 // one of those leads was lost outright — no inbox copy, no database row.
 //
-// captureLead fans the submission out to both the transactional mailer and
-// Web3Forms. They share no infrastructure, so a lead now survives the loss of
-// either one. It rejects only if BOTH channels fail, which keeps the caller's
-// error state meaningful rather than cosmetic.
+// captureLead fans the submission out to the transactional mailer, Web3Forms,
+// and HighLevel. They share no infrastructure, so a lead survives the loss of
+// any one channel. It rejects only if ALL channels fail, which keeps the
+// caller's error state meaningful rather than cosmetic.
 //
 // Web3Forms must be called from the browser: on the free plan it rejects
 // server-side requests, so this helper is client-only by design.
@@ -56,6 +56,18 @@ async function viaWeb3Forms(lead: LeadPayload): Promise<void> {
   if (!res.ok || !json?.success) throw new Error(`web3forms ${res.status}`)
 }
 
+async function viaHighLevel(lead: LeadPayload): Promise<void> {
+  // HighLevel is a marketing CRM, not the clinical patient record. Keep this
+  // allowlist explicit so questionnaire answers can never cross this boundary.
+  const { name, email, phone, source, program } = lead
+  const res = await fetch('/api/ghl-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, phone, source, program }),
+  })
+  if (!res.ok) throw new Error(`ghl-lead ${res.status}`)
+}
+
 /**
  * Submit an arbitrary form payload through both channels.
  *
@@ -77,7 +89,11 @@ export async function submitForm(
  * Resolves if at least one channel succeeded; rejects only if all of them failed.
  */
 export async function captureLead(lead: LeadPayload): Promise<void> {
-  const results = await Promise.allSettled([viaNotifyAdmin(lead), viaWeb3Forms(lead)])
+  const results = await Promise.allSettled([
+    viaNotifyAdmin(lead),
+    viaWeb3Forms(lead),
+    viaHighLevel(lead),
+  ])
 
   const delivered = results.some(r => r.status === 'fulfilled')
   const failures = results
