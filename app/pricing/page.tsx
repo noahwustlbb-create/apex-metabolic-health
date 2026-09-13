@@ -62,10 +62,10 @@ function PricingHero() {
 // ─── Membership vs Single Consultation ───────────────────────────────────────
 
 const COMPARISON_ROWS = [
-  { label: 'Initial Blood Referral',   member: '$199',       single: '$199',        highlight: false },
+  { label: 'Initial Blood Referral',   member: '$199',       single: '$280',        highlight: false },
   { label: 'Follow Up Blood Referral', member: '$139',       single: '$180',        highlight: true  },
   { label: 'Hormone Consultation',     member: '$199',       single: '$275',        highlight: true  },
-  { label: 'Peptide Consultation',     member: '$99',        single: '$125',        highlight: true  },
+  { label: 'Peptide Consultation',     member: '$99',        single: '$199',        highlight: true  },
   { label: 'Monthly Membership',       member: '$99 /mo',    single: '·',           highlight: true  },
   { label: 'Medication',               member: 'Cost price', single: 'Cost + fee',  highlight: true  },
   { label: 'Escript Release Fee',      member: 'Free',       single: '$125',        highlight: true  },
@@ -145,7 +145,7 @@ function MembershipComparison() {
             <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
               <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
                 <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Average initial investment</p>
-                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$474 – $599</p>
+                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$604 – $680</p>
                 <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Blood referral + consultation + Escript fee</p>
               </div>
               <Link
@@ -502,7 +502,7 @@ const PATHWAYS: Pathway[] = [
       {
         label: 'Blood Referral',
         body: 'Doctor-issued referral. Collected fasted before 9am at any accredited pathology centre. Results reviewed by your Apex doctor.',
-        price: '$199',
+        price: '$280',
         priceNote: 'Initial · follow-ups $180',
       },
       {
@@ -575,13 +575,13 @@ const PATHWAYS: Pathway[] = [
       {
         label: 'Blood Referral',
         body: 'Doctor-issued referral. Collected at any accredited pathology centre. Results reviewed by your Apex doctor.',
-        price: '$199',
+        price: '$280',
         priceNote: 'Initial · follow-ups $180',
       },
       {
         label: 'Peptide Consultation',
         body: 'Telehealth review of your metabolic health and goals. Treatment plan issued where clinically appropriate.',
-        price: '$125',
+        price: '$199',
         priceNote: 'Initial consultation',
       },
       {

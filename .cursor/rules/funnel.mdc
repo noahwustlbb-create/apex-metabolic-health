@@ -29,7 +29,7 @@ Integrations (extend, do not replace)
 - Stripe checkout: `app/api/create-checkout/route.ts` + `lib/intake-routing.ts`.
 - Mail: Google Workspace SMTP via `lib/mailer.ts`. Resend is leftover.
 - Pathology partner: Bloody Good Tests (`lib` + `app/api/bgt`).
-- Practice: Cliniko.
+- Practice: Apex portal (`app.apexmetabolichealth.com.au`). Cliniko is dead. Do not rebuild it. `lib/cliniko.ts` is leftover.
 - Chat: Haiku in `app/api/chat/route.ts`. Keep replies short. No prices. No drug names.
 
 When two CTAs disagree (portal vs `/intake/hormone-consult` vs `/start`), prefer the portal signup unless the user is already mid-form.
