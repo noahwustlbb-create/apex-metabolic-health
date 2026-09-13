@@ -22,13 +22,27 @@ const LEGACY_INTAKE_ROUTES = [
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    formats: ['image/webp'] // AVIF disabled: Next.js AVIF image-optimizer RCE advisory,
+    // AVIF disabled: Next.js AVIF image-optimizer RCE advisory
+    formats: ['image/webp'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
+        ],
+      },
+    ]
   },
   async redirects() {
     return LEGACY_INTAKE_ROUTES.map((source) => ({

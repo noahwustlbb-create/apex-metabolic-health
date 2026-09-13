@@ -6,8 +6,9 @@ export async function generateStaticParams() {
   return programs.map((p) => ({ slug: p.slug }))
 }
 
-export default function ProgramPage({ params }: { params: { slug: string } }) {
-  const program = getProgramBySlug(params.slug)
+export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const program = getProgramBySlug(slug)
 
   if (!program) {
     notFound()
