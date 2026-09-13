@@ -21,7 +21,9 @@ links                   IN CNAME  brand.ludicrous.cloud.
 @                       IN TXT    "v=spf1 include:_spf.google.com ~all"
 @                       IN TXT    "google-site-verification=oBOs2Zz6ZF7-Mw6co1sqxcIkUu-Hxcu_0N_VI3lISdU"
 google._domainkey       IN TXT    "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwISve+UQDCF+TFg5fa9YSLfjx7ofTBvb6KgtSjsDe6JkyxFYM6Oguc0wxn7oS79Qu38RKRfuYRX+u6h06a0Xl+9f/aA/MdHsZYvNguAWAln2OWmCZkj5ZgSCcZtImOAZgga9Cxvz3YL83bt1YQYrCMbs4kUmH1XoJ1SPUzIoaH47GTeSAPQl8QcvMfrsyZnkl" "BQpTIgZDDPruYF1F+BvHalSrd0CI+IjYRfanbaHel+wM5f/G0lmsIf1iOumrfO/Tcrva8MrG3+zkD1U5+/L/xn8ClnICf9XWSXH9jELIzKZwjnUhq2+XKPabCK5X5UqIaetHP7BtLjlZ7XTIF3/6QIDAQAB"
-_dmarc                  IN TXT    "v=DMARC1; p=none; rua=mailto:admin@apexmetabolichealth.com.au; adkim=r; aspf=r; pct=100"
+; DMARC ramp (security audit 2026-09-13): all known senders pass (Google Workspace SPF+DKIM, Resend DKIM,
+; GHL/Mailgun mail. SPF+DKIM). Step 1 quarantine 25% -> after 2 clean weeks of reports pct=100 -> then p=reject.
+_dmarc                  IN TXT    "v=DMARC1; p=quarantine; pct=25; rua=mailto:admin@apexmetabolichealth.com.au; adkim=r; aspf=r"
 
 ; --- Resend ---
 resend._domainkey       IN TXT    "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYJd8QwlSFDp8XY/dwhTg9oKrYY9wgiK3OMwmhEXRlV1IaXjAo6GMhehDVLdJMUW6jKV/7XoI8CXtd0oACKMidn6s8F4T+k+1I5N0f3vK8OCXGcvyh1qPg+OgCoPzTalIVPfg6EJkESmJGhKMLjvGruFC+VlIUNkn8ur4Ckw6CIwIDAQAB"
