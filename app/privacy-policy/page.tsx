@@ -84,7 +84,10 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>7. Cookies and Analytics</h2>
-              <p>Our website uses cookies and analytics tools (including web analytics) to understand how visitors interact with our site. This data is aggregated and does not identify individuals. You may disable cookies through your browser settings; however, some site functionality may be affected.</p>
+              <p>Our website and patient portal use cookies and analytics tools (Google Analytics and PostHog) to understand how people use our services and to improve them. PostHog stores this data on servers in the United States.</p>
+              <p className="mt-3">On our public website, visitors are not identified. We record pages viewed, clicks, device type and approximate location, and may record session replays in which all text and form entries are masked. Replays are never recorded on booking, assessment, checkout or signup pages.</p>
+              <p className="mt-3">In the patient portal, analytics is limited to page visits and key steps, such as creating an account or submitting a form, linked to a pseudonymous account ID. We never send your name, contact details, health information, form answers or pathology results to analytics providers, and we do not use session replay in the portal. IP addresses are not stored.</p>
+              <p className="mt-3">You can opt out by turning on Do Not Track in your browser or disabling cookies; some site functionality may be affected.</p>
             </section>
 
             <section>
