@@ -12,9 +12,8 @@ if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
     capture_pageleave: true,
     capture_exceptions: true,
     respect_dnt: true,
-    // Autocapture keeps element types and hrefs, never visible text or attributes.
+    // Autocapture keeps element types, classes and hrefs, never visible text.
     mask_all_text: true,
-    mask_all_element_attributes: true,
     session_recording: {
       maskAllInputs: true,
       maskTextSelector: '*',
