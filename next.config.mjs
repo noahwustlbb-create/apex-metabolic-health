@@ -16,7 +16,20 @@ const LEGACY_INTAKE_ROUTES = [
   '/intake-v2',
   '/forms/hormone',
   '/forms/general',
+  // Clinical intake belongs in the portal: these pages collected health data
+  // on the public site (privacy fix 2026-09-14).
+  '/intake/bloods-hair',
+  '/intake/bloods-hormone',
+  '/intake/bloods-injury',
+  '/intake/bloods-metabolic',
+  '/intake/bloods-performance',
+  '/intake/bloods-skin',
+  '/intake/bloods-trt',
+  '/intake/pre-screen',
+  '/intake/fast-track',
 ]
+
+const PORTAL_LOGIN = 'https://app.apexmetabolichealth.com.au/login'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -45,11 +58,15 @@ const nextConfig = {
     ]
   },
   async redirects() {
-    return LEGACY_INTAKE_ROUTES.map((source) => ({
-      source,
-      destination: PORTAL_SIGNUP,
-      permanent: false,
-    }))
+    return [
+      ...LEGACY_INTAKE_ROUTES.map((source) => ({
+        source,
+        destination: PORTAL_SIGNUP,
+        permanent: false,
+      })),
+      // Existing patients reorder inside the portal.
+      { source: '/intake/repeat-order', destination: PORTAL_LOGIN, permanent: false },
+    ]
   },
 }
 

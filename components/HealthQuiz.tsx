@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useSignupGate } from '@/context/SignupGateContext'
+import { captureLead } from '@/lib/captureLead'
 
 declare const gtag: undefined | ((...args: unknown[]) => void)
 function track(event: string, params?: Record<string, string | number>) {
@@ -674,37 +675,10 @@ export default function HealthQuiz() {
         has_phone: ph.length > 0 ? 1 : 0,
         goals_count: (answers.reasons || []).length,
       })
-      // Dual send - Web3Forms (browser→admin@) + Resend (server→gmail) for redundancy
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-          subject: `Apex Health Assessment Lead: ${fn}`,
-          name: fn,
-          email: em,
-          phone: ph || 'Not provided',
-          source: 'health-assessment',
-          goals: (answers.reasons || []).join(', ') || 'Not specified',
-          concerns: (answers.concerns || []).join(', ') || 'Not specified',
-          age_bracket: answers.age || 'Not specified',
-          state: answers.state || 'Not specified',
-          sex: answers.sex || 'Not specified',
-          family_history: (answers.familyHistory || []).join(', ') || 'Not specified',
-        }),
-      }).catch(() => {})
-      fetch('/api/notify-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: fn, email: em, phone: ph || '',
-          source: 'quiz',
-          goals: (answers.reasons || []).join(', ') || '',
-          concerns: (answers.concerns || []).join(', ') || '',
-          age: answers.age || '', state: answers.state || '',
-          sex: answers.sex || '',
-          familyHistory: (answers.familyHistory || []).join(', ') || '',
-        }),
+      // Identity and state only. Quiz answers are health information and stay in the browser.
+      captureLead({
+        source: 'health-assessment',
+        name: fn, email: em, phone: ph, state: answers.state || '',
       }).catch(() => {})
       go(19, { firstName: fn, email: em, phone: ph })
     }

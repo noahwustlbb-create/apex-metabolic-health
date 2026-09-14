@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useSearchParams } from 'next/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import { captureLead } from '@/lib/captureLead'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
@@ -107,35 +108,13 @@ function BookingFlow() {
     setContactSending(true)
     setContactError('')
     try {
-      const [res] = await Promise.allSettled([
-        fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-            subject: `Apex Enquiry from ${capName || 'Website visitor'}`,
-            name: capName, email: capEmail,
-            phone: capPhone || 'Not provided',
-            program: selectedProgram?.name || program || 'Not specified',
-            duration: duration || 'Not specified',
-            readiness: readiness || 'Not specified',
-            message,
-          }),
-        }).then(r => r.json()),
-        fetch('/api/notify-admin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: capName, email: capEmail, phone: capPhone,
-            source: 'book-enquiry', message,
-            program: selectedProgram?.name || program || '',
-            duration: duration || '', readiness: readiness || '',
-          }),
-        }),
-      ])
-      const data = res.status === 'fulfilled' ? res.value : null
-      if (data?.success) { setContactSent(true) }
-      else { setContactSent(true) } // treat as sent regardless - server backup captured it
+      await captureLead({
+        source: 'book-enquiry',
+        name: capName, email: capEmail, phone: capPhone,
+        program: selectedProgram?.name || program || '',
+        message,
+      })
+      setContactSent(true)
     } catch {
       setContactError('Could not send. Please email admin@apexmetabolichealth.com.au')
     } finally {
@@ -292,27 +271,10 @@ function BookingFlow() {
                 <button
                   onClick={() => {
                     if (!captureValid) return
-                    fetch('https://api.web3forms.com/submit', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        access_key: 'c874640f-184f-446d-8a27-5c614097d8a2',
-                        subject: `Apex Book page lead: ${capName.trim() || capEmail.trim()}`,
-                        name: capName.trim(), email: capEmail.trim(),
-                        phone: capPhone.trim() || 'Not provided', source: 'book',
-                        program: selectedProgram?.name || program || 'Not specified',
-                        duration: duration || 'Not specified', readiness: readiness || 'Not specified',
-                      }),
-                    }).catch(() => {})
-                    fetch('/api/notify-admin', {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        name: capName.trim(), email: capEmail.trim(),
-                        phone: capPhone.trim(), source: 'book',
-                        program: selectedProgram?.name || program || '',
-                        duration: duration || '', readiness: readiness || '',
-                      }),
+                    captureLead({
+                      source: 'book',
+                      name: capName.trim(), email: capEmail.trim(), phone: capPhone.trim(),
+                      program: selectedProgram?.name || program || '',
                     }).catch(() => {})
                     advance(5)
                   }}

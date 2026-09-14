@@ -813,19 +813,6 @@ function AccountPhase({ config, answers, onDone }: { config: QuizConfig; answers
           completedAt: new Date().toISOString(),
         }))
       }
-      const answerSummary = Object.entries(answers)
-        .map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`)
-        .join('\n')
-      await fetch('/api/notify-admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          source: 'quiz',
-          program: config.programName,
-          score: hasScore ? `${pct}% (${earned}/${max})` : 'n/a',
-          message: answerSummary,
-        }),
-      }).catch(() => {})
     } finally {
       onDone()
     }

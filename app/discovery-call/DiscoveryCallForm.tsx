@@ -12,7 +12,6 @@ const MUTED = '#6b7280'
 const SURF = '#ffffff'
 const BG = '#f9fafb'
 const BORDER = 'rgba(0,0,0,0.09)'
-const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const TREATMENTS = [
@@ -114,28 +113,11 @@ export default function DiscoveryCallForm() {
     if (!valid) return
     setSubmitting(true); setError('')
     try {
-      const firstParty = captureLead({
+      await captureLead({
         source: 'discovery-call', email: d.email,
         name: `${d.firstName} ${d.lastName}`.trim(), phone: d.phone,
-      }).then(() => true).catch(() => false)
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Apex Discovery Call - ${d.firstName} ${d.lastName}`,
-          formType: 'Discovery Call Request',
-          name: `${d.firstName} ${d.lastName}`,
-          email: d.email, phone: d.phone,
-          treatment_interest: d.treatment,
-          preferred_day: d.preferredDay,
-          preferred_time: d.preferredTime,
-          message: d.message,
-          submittedAt: new Date().toISOString(),
-        }),
+        program: d.treatment,
       })
-      const json = await res.json()
-      // Only a genuine failure if BOTH channels failed.
-      if (!json.success && !(await firstParty)) throw new Error()
       setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' })
       window.location.href = '/confirmation'
     } catch { setError('Something went wrong. Please try again or email us directly.') }

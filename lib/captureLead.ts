@@ -1,18 +1,10 @@
-// Lead capture with two independent delivery channels.
+// Lead capture with two independent first-party delivery channels:
+// the admin notification email (/api/notify-admin) and HighLevel (/api/ghl-lead).
+// A lead survives the loss of either channel.
 //
-// Several forms previously posted to /api/notify-admin and nowhere else. When
-// the Gmail app password was rejected, that route began returning 500 and every
-// one of those leads was lost outright — no inbox copy, no database row.
-//
-// captureLead fans the submission out to the transactional mailer, Web3Forms,
-// and HighLevel. They share no infrastructure, so a lead survives the loss of
-// any one channel. It rejects only if ALL channels fail, which keeps the
-// caller's error state meaningful rather than cosmetic.
-//
-// Web3Forms must be called from the browser: on the free plan it rejects
-// server-side requests, so this helper is client-only by design.
-
-const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
+// Privacy boundary: only identity and routing fields ever leave the browser.
+// Clinical questionnaire answers are collected in the patient portal, never
+// here, and third-party form services must not be used for any submission.
 
 export interface LeadPayload {
   /** Which form/entry point produced this lead, e.g. 'get-started-intake'. */
@@ -21,39 +13,24 @@ export interface LeadPayload {
   name?: string
   phone?: string
   program?: string
+  state?: string
   message?: string
   [key: string]: unknown
+}
+
+/** Strip everything except identity/routing fields. Never forward questionnaire answers. */
+function allowlisted(lead: LeadPayload) {
+  const { name, email, phone, source, program, state, message } = lead
+  return { name, email, phone, source, program, state, message }
 }
 
 async function viaNotifyAdmin(lead: LeadPayload): Promise<void> {
   const res = await fetch('/api/notify-admin', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(lead),
+    body: JSON.stringify(allowlisted(lead)),
   })
   if (!res.ok) throw new Error(`notify-admin ${res.status}`)
-}
-
-async function viaWeb3Forms(lead: LeadPayload): Promise<void> {
-  const { source, name, email, ...rest } = lead
-  const res = await fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      access_key: WEB3FORMS_KEY,
-      subject: `New lead: ${name || email} (${source})`,
-      from_name: 'Apex Metabolic Health',
-      source,
-      name,
-      email,
-      ...rest,
-      submittedAt: new Date().toISOString(),
-    }),
-  })
-  // Web3Forms answers 200 with {success:false} for rejected submissions, so the
-  // status code alone is not enough to call this delivered.
-  const json = await res.json().catch(() => null)
-  if (!res.ok || !json?.success) throw new Error(`web3forms ${res.status}`)
 }
 
 async function viaHighLevel(lead: LeadPayload): Promise<void> {
@@ -69,13 +46,8 @@ async function viaHighLevel(lead: LeadPayload): Promise<void> {
 }
 
 /**
- * Submit an arbitrary form payload through both channels.
- *
- * Use this instead of calling Web3Forms directly. Ad blockers and privacy
- * extensions routinely block requests to third-party form endpoints — a form
- * that posts only to Web3Forms shows those visitors "Something went wrong" and
- * loses the lead entirely. /api/notify-admin is first-party, so it survives.
- *
+ * Submit a form payload through both first-party channels.
+ * Only allowlisted identity/routing fields are forwarded.
  * Resolves if either channel delivered; rejects only if both failed.
  */
 export async function submitForm(
@@ -91,7 +63,6 @@ export async function submitForm(
 export async function captureLead(lead: LeadPayload): Promise<void> {
   const results = await Promise.allSettled([
     viaNotifyAdmin(lead),
-    viaWeb3Forms(lead),
     viaHighLevel(lead),
   ])
 

@@ -8,7 +8,6 @@ import Footer from '@/components/Footer'
 import { captureLead } from '@/lib/captureLead'
 import BookingChoice from '@/components/BookingChoice'
 
-const WEB3FORMS_KEY = 'c874640f-184f-446d-8a27-5c614097d8a2'
 
 const PROGRAMS = [
   'Hormone Optimisation',
@@ -81,22 +80,9 @@ export default function DiscoveryCallPage() {
     if (errs.length > 0) { setErrors(errs); return }
     setSubmitting(true)
     try {
-      // First-party channel: survives ad blockers that block Web3Forms.
-      const firstParty = captureLead({
+      await captureLead({
         source: 'discovery-call-request', email: form.email,
         name: `${form.firstName} ${form.lastName}`.trim(), phone: form.phone,
-      }).then(() => true).catch(() => false)
-      await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: WEB3FORMS_KEY,
-          subject: `Discovery Call Request - ${form.firstName} ${form.lastName}`,
-          from_name: 'Apex Metabolic Health',
-          ...form,
-          formType: 'Discovery Call Request',
-          submittedAt: new Date().toISOString(),
-        }),
       })
     } catch {}
     fetch('/api/send-confirmation', {
