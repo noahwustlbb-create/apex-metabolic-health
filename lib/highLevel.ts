@@ -127,8 +127,18 @@ async function highLevelRequest<T>(
   })
 
   if (!response.ok) {
-    // Do not include the response body: vendor errors can echo submitted PII.
-    throw new Error(`HighLevel API ${response.status} at ${path}`)
+    // Only validation messages, with anything email- or phone-like redacted:
+    // vendor errors can echo submitted PII.
+    let detail = ''
+    if (response.status === 400 || response.status === 422) {
+      const body = await response.json().catch(() => null) as { message?: unknown } | null
+      const msg = Array.isArray(body?.message) ? body.message.join('; ') : typeof body?.message === 'string' ? body.message : ''
+      detail = msg
+        .replace(/[^\s@]+@[^\s@]+/g, '[email]')
+        .replace(/\+?\d[\d\s-]{6,}/g, '[number]')
+        .slice(0, 300)
+    }
+    throw new Error(`HighLevel API ${response.status} at ${path.split('?')[0]}${detail ? `: ${detail}` : ''}`)
   }
 
   return response.json() as Promise<T>
@@ -267,16 +277,23 @@ export async function unsubscribeInHighLevel(emailInput: string): Promise<void> 
     body: JSON.stringify({
       locationId: config.locationId,
       email,
-      // Channel-level DND only: a global `dnd: true` would also block the
-      // care calls and messages the unsubscribe page promises will continue.
+      createNewIfDuplicateAllowed: false,
+    }),
+  })
+  const contactId = result.contact?.id
+  if (!contactId) throw new Error('HighLevel contact upsert returned no contact ID')
+
+  // Channel-level DND only: a global `dnd: true` would also block the care
+  // calls and messages the unsubscribe page promises will continue.
+  await highLevelRequest(config, `/contacts/${contactId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
       dndSettings: {
         Email: { status: 'active' },
         SMS: { status: 'active' },
       },
     }),
   })
-  const contactId = result.contact?.id
-  if (!contactId) throw new Error('HighLevel contact upsert returned no contact ID')
 
   await highLevelRequest(config, `/contacts/${contactId}/tags`, {
     method: 'POST',
