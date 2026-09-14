@@ -289,8 +289,8 @@ export async function unsubscribeInHighLevel(emailInput: string): Promise<void> 
     method: 'PUT',
     body: JSON.stringify({
       dndSettings: {
-        Email: { status: 'active' },
-        SMS: { status: 'active' },
+        email: { status: 'active' },
+        sms: { status: 'active' },
       },
     }),
   })
