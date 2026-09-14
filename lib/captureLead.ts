@@ -6,6 +6,8 @@
 // Clinical questionnaire answers are collected in the patient portal, never
 // here, and third-party form services must not be used for any submission.
 
+import { track } from '@/lib/analytics'
+
 export interface LeadPayload {
   /** Which form/entry point produced this lead, e.g. 'get-started-intake'. */
   source: string
@@ -74,5 +76,10 @@ export async function captureLead(lead: LeadPayload): Promise<void> {
   if (failures.length) {
     console.error(`captureLead: ${failures.length}/${results.length} channel(s) failed:`, failures)
   }
-  if (!delivered) throw new Error(`All lead channels failed: ${failures.join('; ')}`)
+  if (!delivered) {
+    track('lead_capture_failed', { source: lead.source })
+    throw new Error(`All lead channels failed: ${failures.join('; ')}`)
+  }
+  // Routing context only: never the lead's identity fields.
+  track('lead_captured', { source: lead.source })
 }
