@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { HORMONE_BOOKING_URL, GENERAL_BOOKING_URL } from '@/lib/booking'
 
 const ACCENT = 'var(--blue)'
 const ease = [0.22, 1, 0.36, 1] as const
@@ -32,7 +33,7 @@ const ACTIONS = [
     ),
     label: 'Hormone consultation',
     sub: 'Testosterone, energy & hormone optimisation. Speak with a doctor.',
-    href: 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation',
+    href: HORMONE_BOOKING_URL,
     external: true,
     highlight: false,
   },
@@ -46,7 +47,7 @@ const ACTIONS = [
     ),
     label: 'Peptide consultation',
     sub: 'Weight loss, recovery, skin, hair & anti-ageing protocols.',
-    href: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
+    href: GENERAL_BOOKING_URL,
     external: true,
     highlight: false,
   },

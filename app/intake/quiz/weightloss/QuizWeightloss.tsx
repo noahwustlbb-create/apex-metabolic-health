@@ -1,8 +1,9 @@
 'use client'
 
 import IntakeQuizEngine, { type QuizConfig } from '@/components/IntakeQuizEngine'
+import { HORMONE_BOOKING_URL } from '@/lib/booking'
 
-const HORMONE_URL = 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation'
+const HORMONE_URL = HORMONE_BOOKING_URL
 
 const config: QuizConfig = {
   programName: 'Medical Weight Management',

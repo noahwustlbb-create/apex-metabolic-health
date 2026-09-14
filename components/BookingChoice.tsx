@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { HORMONE_BOOKING_URL, GENERAL_BOOKING_URL } from '@/lib/booking'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 const CALENDLY = {
-  hormone: 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation',
-  general: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
+  hormone: HORMONE_BOOKING_URL,
+  general: GENERAL_BOOKING_URL,
   discovery: '/intake/discovery',
 } as const
 

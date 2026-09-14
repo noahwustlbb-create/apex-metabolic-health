@@ -1,8 +1,9 @@
 'use client'
 
 import IntakeQuizEngine, { type QuizConfig } from '@/components/IntakeQuizEngine'
+import { GENERAL_BOOKING_URL } from '@/lib/booking'
 
-const PEPTIDE_URL = 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult'
+const PEPTIDE_URL = GENERAL_BOOKING_URL
 
 const config: QuizConfig = {
   programName: 'Injury Repair & Recovery',
