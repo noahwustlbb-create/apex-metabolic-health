@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Privacy Policy
             </h1>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 26 March 2026</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 14 September 2026</p>
           </div>
 
           <div className="space-y-8 text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
