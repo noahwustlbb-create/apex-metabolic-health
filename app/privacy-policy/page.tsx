@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Privacy Policy
             </h1>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 26 March 2026</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 14 September 2026</p>
           </div>
 
           <div className="space-y-8 text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -84,7 +84,10 @@ export default function PrivacyPolicyPage() {
 
             <section>
               <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>7. Cookies and Analytics</h2>
-              <p>Our website uses cookies and analytics tools (including web analytics) to understand how visitors interact with our site. This data is aggregated and does not identify individuals. You may disable cookies through your browser settings; however, some site functionality may be affected.</p>
+              <p>Our website and patient portal use cookies and analytics tools (Google Analytics and PostHog) to understand how people use our services and to improve them. PostHog stores this data on servers in the United States.</p>
+              <p className="mt-3">On our public website, visitors are not identified. We record pages viewed, clicks, device type and approximate location, and may record session replays in which all text and form entries are masked. Replays are never recorded on booking, assessment, checkout or signup pages.</p>
+              <p className="mt-3">In the patient portal, analytics is limited to page visits and key steps, such as creating an account or submitting a form, linked to a pseudonymous account ID. We never send your name, contact details, health information, form answers or pathology results to analytics providers, and we do not use session replay in the portal. IP addresses are not stored.</p>
+              <p className="mt-3">You can opt out by turning on Do Not Track in your browser or disabling cookies; some site functionality may be affected.</p>
             </section>
 
             <section>

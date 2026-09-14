@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { getProduct, ENQUIRY_LABELS, type EnquiryType } from '@/lib/intake-routing'
+import { track } from '@/lib/analytics'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
@@ -57,6 +58,7 @@ export default function PaymentCard() {
 
       const json = await res.json()
       if (!json.url) throw new Error(json.error || 'Failed to create checkout')
+      track('checkout_started', { product_type: product?.type })
       window.location.href = json.url
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Something went wrong. Please try again.')
