@@ -6,7 +6,7 @@ import { HORMONE_BOOKING_URL, GENERAL_BOOKING_URL } from '@/lib/booking'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const CALENDLY = {
+const LINKS = {
   hormone: HORMONE_BOOKING_URL,
   general: GENERAL_BOOKING_URL,
   discovery: '/intake/discovery',
@@ -20,8 +20,8 @@ interface Props {
 
 export default function BookingChoice({ type = 'discovery', showDiscovery = false, delay = 0.6 }: Props) {
   const [chose, setChose] = useState<'book' | 'discovery' | 'call' | null>(null)
-  const primaryLink = CALENDLY[type]
-  const discoveryLink = CALENDLY.discovery
+  const primaryLink = LINKS[type]
+  const discoveryLink = LINKS.discovery
   const activeLink = chose === 'discovery' ? discoveryLink : primaryLink
 
   const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Telehealth consultation' : 'Book now'
@@ -180,7 +180,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               </div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  {chose === 'discovery' ? 'Opening your request form.' : 'Calendly is opening in a new tab.'}
+                  {chose === 'discovery' ? 'Opening your request form.' : 'Your booking page is opening in a new tab.'}
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Can&apos;t see it?{' '}
