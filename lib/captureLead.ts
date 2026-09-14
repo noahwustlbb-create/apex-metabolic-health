@@ -15,6 +15,8 @@ export interface LeadPayload {
   program?: string
   state?: string
   message?: string
+  /** Explicit, optional opt-in to marketing email/SMS. Absent means no consent. */
+  marketingConsent?: boolean
   [key: string]: unknown
 }
 
@@ -37,10 +39,11 @@ async function viaHighLevel(lead: LeadPayload): Promise<void> {
   // HighLevel is a marketing CRM, not the clinical patient record. Keep this
   // allowlist explicit so questionnaire answers can never cross this boundary.
   const { name, email, phone, source, program } = lead
+  const marketingConsent = lead.marketingConsent === true
   const res = await fetch('/api/ghl-lead', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, phone, source, program }),
+    body: JSON.stringify({ name, email, phone, source, program, marketingConsent }),
   })
   if (!res.ok) throw new Error(`ghl-lead ${res.status}`)
 }

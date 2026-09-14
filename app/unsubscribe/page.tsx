@@ -21,21 +21,25 @@ export default function UnsubscribePage() {
     e.preventDefault()
     if (!email.includes('@') || status === 'sending') return
     setStatus('sending')
-    try {
-      const res = await fetch('/api/notify-admin', {
+    // Two channels: HighLevel Do Not Disturb (automatic suppression) and an
+    // admin email (so any list outside HighLevel is also cleaned by hand).
+    const post = (url: string, body: Record<string, string>) =>
+      fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email.trim(),
-          source: 'unsubscribe',
-          program: 'Unsubscribe request',
-          message: 'Patient requested removal from Apex marketing emails.',
-        }),
-      })
-      setStatus(res.ok ? 'done' : 'error')
-    } catch {
-      setStatus('error')
-    }
+        body: JSON.stringify(body),
+      }).then(r => r.ok).catch(() => false)
+
+    const [crm, admin] = await Promise.all([
+      post('/api/unsubscribe', { email: email.trim() }),
+      post('/api/notify-admin', {
+        email: email.trim(),
+        source: 'unsubscribe',
+        program: 'Unsubscribe request',
+        message: 'Patient requested removal from Apex marketing emails and SMS.',
+      }),
+    ])
+    setStatus(crm || admin ? 'done' : 'error')
   }
 
   return (

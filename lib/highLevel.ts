@@ -10,6 +10,7 @@ export interface MarketingLead {
   phone?: string
   source: string
   program?: string
+  marketingConsent?: boolean
 }
 
 interface HighLevelConfig {
@@ -56,6 +57,7 @@ export function sanitizeMarketingLead(input: unknown): MarketingLead | null {
     phone: cleanText(candidate.phone, 40),
     source: cleanText(candidate.source, 75) ?? 'website',
     program: cleanText(candidate.program, 120),
+    marketingConsent: candidate.marketingConsent === true,
   }
 }
 
@@ -167,6 +169,7 @@ async function addRoutingTags(
   lead: MarketingLead,
 ): Promise<void> {
   const tags = ['source-website']
+  if (lead.marketingConsent) tags.push('marketing-consent')
   const serviceTag = programTag(lead.program)
   if (serviceTag) tags.push(serviceTag)
 
@@ -247,4 +250,40 @@ export async function submitMarketingLeadToHighLevel(lead: MarketingLead): Promi
     if (await findExistingOpportunity(config, contactId)) return
     throw error
   }
+}
+
+/**
+ * Honour an unsubscribe: mark the contact Do Not Disturb for email and SMS
+ * marketing, tag it, and remove the marketing-consent tag. Creates the contact
+ * if it doesn't exist so the suppression is on record before any future import.
+ */
+export async function unsubscribeInHighLevel(emailInput: string): Promise<void> {
+  const email = cleanText(emailInput, 254)?.toLowerCase()
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Invalid email')
+
+  const config = getConfig()
+  const result = await highLevelRequest<ContactUpsertResponse>(config, '/contacts/upsert', {
+    method: 'POST',
+    body: JSON.stringify({
+      locationId: config.locationId,
+      email,
+      dnd: true,
+      dndSettings: {
+        Email: { status: 'active', message: 'Unsubscribed via website' },
+        SMS: { status: 'active', message: 'Unsubscribed via website' },
+      },
+      createNewIfDuplicateAllowed: false,
+    }),
+  })
+  const contactId = result.contact?.id
+  if (!contactId) throw new Error('HighLevel contact upsert returned no contact ID')
+
+  await highLevelRequest(config, `/contacts/${contactId}/tags`, {
+    method: 'POST',
+    body: JSON.stringify({ tags: ['unsubscribed'] }),
+  })
+  await highLevelRequest(config, `/contacts/${contactId}/tags`, {
+    method: 'DELETE',
+    body: JSON.stringify({ tags: ['marketing-consent'] }),
+  })
 }

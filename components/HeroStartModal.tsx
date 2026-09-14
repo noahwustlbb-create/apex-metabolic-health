@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { programs } from '@/lib/programs'
 import { captureLead } from '@/lib/captureLead'
+import MarketingConsent from '@/components/MarketingConsent'
 
 const DEFAULT_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
@@ -25,6 +26,7 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
   const [program, setProgram] = useState(initialProgram)
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const [err, setErr] = useState('')
   const [sent, setSent] = useState(false)
   const closeRef = useRef<HTMLButtonElement>(null)
@@ -65,7 +67,7 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
       await captureLead({
         source: 'get-started-intake',
         name: name.trim(), email: cleanEmail, phone: phone.trim(),
-        program, message: message.trim(),
+        program, message: message.trim(), marketingConsent,
       })
       setSent(true)
     } catch {
@@ -235,6 +237,10 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                     <label htmlFor="hsm-msg" style={labelStyle}>Anything you&apos;d like us to know? (optional)</label>
                     <textarea id="hsm-msg" rows={3} maxLength={2000} value={message} onChange={e => setMessage(e.target.value)} placeholder="Symptoms, goals, or questions" style={{ ...inputStyle, resize: 'vertical', minHeight: 90 }} />
                   </div>
+                </div>
+
+                <div style={{ marginTop: 14 }}>
+                  <MarketingConsent id="hsm-consent" checked={marketingConsent} onChange={setMarketingConsent} />
                 </div>
 
                 {err && <p role="alert" style={{ fontSize: 12.5, color: '#dc2626', marginTop: 12, fontFamily: 'var(--font-space-grotesk)' }}>{err}</p>}

@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { captureLead } from '@/lib/captureLead'
+import MarketingConsent from '@/components/MarketingConsent'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
@@ -80,6 +81,7 @@ function BookingFlow() {
 
   // Lead capture (step 4)
   const [capName, setCapName] = useState('')
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const [capEmail, setCapEmail] = useState('')
   const [capPhone, setCapPhone] = useState('')
 
@@ -113,6 +115,7 @@ function BookingFlow() {
         name: capName, email: capEmail, phone: capPhone,
         program: selectedProgram?.name || program || '',
         message,
+        marketingConsent,
       })
       setContactSent(true)
     } catch {
@@ -268,6 +271,10 @@ function BookingFlow() {
                     type="tel" value={capPhone} onChange={e => setCapPhone(e.target.value)} autoComplete="tel" />
                 </div>
 
+                <div className="mb-4">
+                  <MarketingConsent id="book-consent" checked={marketingConsent} onChange={setMarketingConsent} />
+                </div>
+
                 <button
                   onClick={() => {
                     if (!captureValid) return
@@ -275,6 +282,7 @@ function BookingFlow() {
                       source: 'book',
                       name: capName.trim(), email: capEmail.trim(), phone: capPhone.trim(),
                       program: selectedProgram?.name || program || '',
+                      marketingConsent,
                     }).catch(() => {})
                     advance(5)
                   }}

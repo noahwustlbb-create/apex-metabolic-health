@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { captureLead } from '@/lib/captureLead'
+import MarketingConsent from '@/components/MarketingConsent'
 
 const BLUE = 'var(--blue)'
 const INK = '#111827'
@@ -101,6 +102,7 @@ function Select({ label, value, onChange, options, placeholder, required = false
 export default function DiscoveryCallForm() {
   const [d, setD] = useState<F>(EMPTY)
   const [submitting, setSubmitting] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
@@ -117,6 +119,7 @@ export default function DiscoveryCallForm() {
         source: 'discovery-call', email: d.email,
         name: `${d.firstName} ${d.lastName}`.trim(), phone: d.phone,
         program: d.treatment,
+        marketingConsent,
       })
       setSubmitted(true); window.scrollTo({ top: 0, behavior: 'smooth' })
       window.location.href = '/confirmation'
@@ -230,6 +233,8 @@ export default function DiscoveryCallForm() {
                     {error}
                   </p>
                 )}
+
+                <MarketingConsent id="dc-consent" checked={marketingConsent} onChange={setMarketingConsent} />
 
                 <button
                   type="submit" disabled={!valid || submitting}

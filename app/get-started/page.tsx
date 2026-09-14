@@ -439,6 +439,7 @@ function EnquiryForm() {
       await captureLead({
         ...fields,
         email: fields.email ?? '',
+        marketingConsent: fields.marketingConsent === 'on',
         source: 'get-started-enquiry',
         subject: 'New Enquiry | Apex Metabolic Health',
       })
@@ -646,6 +647,11 @@ function EnquiryForm() {
                 onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
               />
             </div>
+
+            <label htmlFor="gs-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', fontSize: 12, lineHeight: 1.55, color: 'var(--text-secondary)' }}>
+              <input id="gs-consent" name="marketingConsent" type="checkbox" style={{ marginTop: 3, width: 16, height: 16, flexShrink: 0, accentColor: 'var(--blue)' }} />
+              <span>Send me health tips, program updates and offers from Apex by email and SMS. Optional. You can unsubscribe any time.</span>
+            </label>
 
             <button type="submit" className="btn-pill w-full md:w-auto px-12" disabled={submitting} style={{ opacity: submitting ? 0.7 : 1 }}>
               {submitting ? 'Sending…' : 'Send Enquiry'}

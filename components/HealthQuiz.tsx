@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useSignupGate } from '@/context/SignupGateContext'
 import { captureLead } from '@/lib/captureLead'
+import MarketingConsent from '@/components/MarketingConsent'
 
 declare const gtag: undefined | ((...args: unknown[]) => void)
 function track(event: string, params?: Record<string, string | number>) {
@@ -256,6 +257,7 @@ export default function HealthQuiz() {
   const [sel, setSel] = useState<string[]>([])
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
+  const [marketingConsent, setMarketingConsent] = useState(false)
   const [phone, setPhone] = useState('')
   const { open } = useSignupGate()
 
@@ -679,6 +681,7 @@ export default function HealthQuiz() {
       captureLead({
         source: 'health-assessment',
         name: fn, email: em, phone: ph, state: answers.state || '',
+        marketingConsent,
       }).catch(() => {})
       go(19, { firstName: fn, email: em, phone: ph })
     }
@@ -717,6 +720,9 @@ export default function HealthQuiz() {
                 onFocus={e => { e.target.style.borderColor = BLUE }}
                 onBlur={e => { e.target.style.borderColor = 'rgba(72,144,247,0.2)' }}
                 autoComplete="tel" />
+            </div>
+            <div className="mb-4">
+              <MarketingConsent id="quiz-consent" checked={marketingConsent} onChange={setMarketingConsent} />
             </div>
             <PrimaryBtn onClick={handleSubmit} disabled={!valid}>Unlock my plan <Arrow /></PrimaryBtn>
             <p className="text-[10px] text-center mt-4 leading-relaxed" style={{ color: MUTED }}>

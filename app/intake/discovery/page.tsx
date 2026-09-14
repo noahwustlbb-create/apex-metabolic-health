@@ -7,6 +7,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { captureLead } from '@/lib/captureLead'
 import BookingChoice from '@/components/BookingChoice'
+import MarketingConsent from '@/components/MarketingConsent'
 
 
 const PROGRAMS = [
@@ -62,6 +63,7 @@ export default function DiscoveryCallPage() {
   const [errors, setErrors] = useState<string[]>([])
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
 
   const set = (key: keyof typeof form, val: string) => setForm((p) => ({ ...p, [key]: val }))
 
@@ -83,6 +85,7 @@ export default function DiscoveryCallPage() {
       await captureLead({
         source: 'discovery-call-request', email: form.email,
         name: `${form.firstName} ${form.lastName}`.trim(), phone: form.phone,
+        marketingConsent,
       })
     } catch {}
     fetch('/api/send-confirmation', {
@@ -207,6 +210,8 @@ export default function DiscoveryCallPage() {
               <Label htmlFor="dq-message">Anything else you&apos;d like us to know? (optional)</Label>
               <TextArea id="dq-message" value={form.message} onChange={(v) => set('message', v)} placeholder="Brief description of your goals or concerns..." />
             </div>
+
+            <MarketingConsent id="dq-consent" checked={marketingConsent} onChange={setMarketingConsent} />
 
             <button type="button" onClick={submit} disabled={submitting}
               className="btn-primary w-full" style={{ opacity: submitting ? 0.7 : 1 }}>
