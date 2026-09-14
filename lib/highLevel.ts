@@ -267,12 +267,12 @@ export async function unsubscribeInHighLevel(emailInput: string): Promise<void> 
     body: JSON.stringify({
       locationId: config.locationId,
       email,
-      dnd: true,
+      // Channel-level DND only: a global `dnd: true` would also block the
+      // care calls and messages the unsubscribe page promises will continue.
       dndSettings: {
-        Email: { status: 'active', message: 'Unsubscribed via website' },
-        SMS: { status: 'active', message: 'Unsubscribed via website' },
+        Email: { status: 'active' },
+        SMS: { status: 'active' },
       },
-      createNewIfDuplicateAllowed: false,
     }),
   })
   const contactId = result.contact?.id
