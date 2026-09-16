@@ -223,7 +223,7 @@ export default function HormoneCheckPage() {
                       justifyContent: 'center',
                       border: '2px solid #e2e8f0',
                     }}>
-                      <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-space-grotesk)' }}>CC</span>
+                      <span style={{ fontSize: 13, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-space-grotesk)' }}>AX</span>
                     </div>
                     <span style={{
                       position: 'absolute',
@@ -238,9 +238,9 @@ export default function HormoneCheckPage() {
                   </div>
                   <div>
                     <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
-                      Dr Cameron Chen
+                      Your Apex doctor
                     </p>
-                    <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>Medical Practitioner</p>
+                    <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>AHPRA-registered medical practitioner</p>
                   </div>
                 </div>
 
