@@ -26,17 +26,19 @@ export type Protocol = {
   href: string
   image: string
   swatch: string
+  /** Fixed column on the 3-column grid so featuring a card never moves another card under the cursor. */
+  col: 1 | 2 | 3
   tag?: string
 }
 
 export const PROTOCOLS: Protocol[] = [
-  { id: 'hormone',   code: 'APX-01', label: 'Hormone Optimisation',       sub: 'Energy · Drive · Recovery',          href: '/programs/hormone-optimisation',  image: '/protocols/hormone.jpg',   swatch: '#c9962a', tag: 'Most chosen' },
-  { id: 'weight',    code: 'APX-02', label: 'Medical Weight Loss',        sub: 'Doctor-led metabolic reset',         href: '/programs/metabolic-weight-loss', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/weight.jpg once generated */,    swatch: '#3b82f6' },
-  { id: 'sexual',    code: 'APX-03', label: 'Sexual Health',              sub: 'Private · Confidential · Discreet',  href: '/programs/sexual-health',         image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/sexual.jpg once generated */,    swatch: '#9f1239' },
-  { id: 'recovery',  code: 'APX-04', label: 'Recovery and Injury Repair', sub: 'Performance · Rehab · Mobility',     href: '/programs/injury-repair',         image: 'https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/recovery.jpg once generated */,  swatch: '#475569' },
-  { id: 'longevity', code: 'APX-05', label: 'Anti-Ageing and Longevity',  sub: 'Healthspan · Vitality · Prevention', href: '/programs/longevity',             image: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/longevity.jpg once generated */, swatch: '#8b5cf6', tag: 'New' },
-  { id: 'skinhair',  code: 'APX-06', label: 'Skin and Hair',              sub: 'Restoration · Regeneration',         href: '/programs/skin-regeneration',     image: 'https://images.unsplash.com/photo-1781178339148-d6ac1edb7b8f?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/skin.jpg once generated */,      swatch: '#d4a5a5' },
-  { id: 'bloods',    code: 'APX-07', label: 'Comprehensive Blood Tests',  sub: 'Full panel · Doctor reviewed',       href: '/programs/pathology',             image: 'https://images.unsplash.com/photo-1570917013020-a6966d3ee863?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/bloods.jpg once generated */,    swatch: '#b91c1c' },
+  { id: 'hormone', col: 1,   code: 'APX-01', label: 'Hormone Optimisation',       sub: 'Energy · Drive · Recovery',          href: '/programs/hormone-optimisation',  image: '/protocols/hormone.jpg',   swatch: '#c9962a', tag: 'Most chosen' },
+  { id: 'weight', col: 2,    code: 'APX-02', label: 'Medical Weight Loss',        sub: 'Doctor-led metabolic reset',         href: '/programs/metabolic-weight-loss', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/weight.jpg once generated */,    swatch: '#3b82f6' },
+  { id: 'sexual', col: 3,    code: 'APX-03', label: 'Sexual Health',              sub: 'Private · Confidential · Discreet',  href: '/programs/sexual-health',         image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/sexual.jpg once generated */,    swatch: '#9f1239' },
+  { id: 'recovery', col: 1,  code: 'APX-04', label: 'Recovery and Injury Repair', sub: 'Performance · Rehab · Mobility',     href: '/programs/injury-repair',         image: 'https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/recovery.jpg once generated */,  swatch: '#475569' },
+  { id: 'longevity', col: 2, code: 'APX-05', label: 'Anti-Ageing and Longevity',  sub: 'Healthspan · Vitality · Prevention', href: '/programs/longevity',             image: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/longevity.jpg once generated */, swatch: '#8b5cf6', tag: 'New' },
+  { id: 'skinhair', col: 3,  code: 'APX-06', label: 'Skin and Hair',              sub: 'Restoration · Regeneration',         href: '/programs/skin-regeneration',     image: 'https://images.unsplash.com/photo-1781178339148-d6ac1edb7b8f?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/skin.jpg once generated */,      swatch: '#d4a5a5' },
+  { id: 'bloods', col: 1,    code: 'APX-07', label: 'Comprehensive Blood Tests',  sub: 'Full panel · Doctor reviewed',       href: '/programs/pathology',             image: 'https://images.unsplash.com/photo-1570917013020-a6966d3ee863?auto=format&fit=crop&w=1200&q=85' /* TODO swap for /protocols/bloods.jpg once generated */,    swatch: '#b91c1c' },
 ]
 
 const REST_FEATURED = new Set(['hormone', 'longevity'])
@@ -121,7 +123,7 @@ export default function ProtocolGrid() {
                   initial={prefersReduced ? false : { opacity: 0, y: 24 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   className="min-w-0"
-                  style={{ gridRow: featured ? 'span 3' : 'span 1' }}
+                  style={{ gridRow: featured ? 'span 3' : 'span 1', gridColumn: canHover ? p.col : undefined }}
                 >
                   <ProtocolCard
                     p={p}
@@ -136,7 +138,7 @@ export default function ProtocolGrid() {
             })}
 
             {/* Not sure card: always compact, always last */}
-            <li className="min-w-0">
+            <li className="min-w-0" style={{ gridColumn: canHover ? 3 : undefined }}>
               <a
                 href="/start"
                 className="group no-underline flex items-center justify-between gap-4 h-full rounded-2xl px-5 py-4 transition-colors duration-200"
