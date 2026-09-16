@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const STEPS = [
   {
     step: '01',
-    src: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=90',
+    src: '/team/portrait-woman.webp',
     alt: 'Create your account and complete intake online',
     title: 'Sign up and complete intake',
     sub: 'No GP referral required',
@@ -17,7 +17,7 @@ const STEPS = [
   },
   {
     step: '02',
-    src: 'https://images.unsplash.com/photo-1639772823849-6efbd173043c?auto=format&fit=crop&w=600&q=80',
+    src: '/editorial/blood-vials.webp',
     alt: 'Pathology blood panel collection',
     title: 'Accredited pathology',
     sub: '4,000+ collection centres',
@@ -25,7 +25,7 @@ const STEPS = [
   },
   {
     step: '03',
-    src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=90',
+    src: '/team/portrait-man.webp',
     alt: 'Doctor-led telehealth consultation',
     title: 'Telehealth consultation',
     sub: 'AHPRA-registered · personalised protocol',
@@ -33,7 +33,7 @@ const STEPS = [
   },
   {
     step: '04',
-    src: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=90',
+    src: '/editorial/athletic-male.webp',
     alt: 'Ongoing optimisation and protocol',
     title: 'Ongoing optimisation',
     sub: 'Adjustments based on your data',
@@ -47,7 +47,7 @@ function StepCard({ item, delay }: { item: (typeof STEPS)[0]; delay: number }) {
   return (
     <motion.div
       className="relative rounded-xl overflow-hidden"
-      style={{ aspectRatio: '3/4', border: '1px solid rgba(72,144,247,0.12)' }}
+      style={{ aspectRatio: '3/4', border: '1px solid rgba(255,255,255,0.08)' }}
       initial={prefersReduced ? false : { opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -104,10 +104,20 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--bg)' }}
+      style={{ backgroundColor: '#0b0d12' }}
       aria-label="How it works"
     >
-      <div className="container-tight">
+      {/* Texture bleed: the protocol language carries through, low and cool. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/protocols/weight.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 60%', opacity: 0.18,
+          WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 40%, black 70%, transparent 100%)',
+          maskImage: 'linear-gradient(180deg, transparent 0%, black 40%, black 70%, transparent 100%)',
+        }}
+      />
+      <div className="container-tight relative z-10">
 
         <div ref={headingRef} className="max-w-2xl mb-16 md:mb-20">
           <motion.h2
@@ -115,10 +125,19 @@ export default function HowItWorks() {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease }}
             className="display-heading"
-            style={{ fontSize: 'clamp(36px, 4vw, 62px)' }}
+            style={{ fontSize: 'clamp(36px, 4vw, 62px)', color: '#ffffff' }}
           >
             From intake to protocol.
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={headingInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.12, ease }}
+            className="text-base leading-relaxed mt-5 max-w-xl"
+            style={{ color: 'rgba(255,255,255,0.62)' }}
+          >
+            Four steps, each with a stated clock. Intake in two minutes, bloods within 48 hours, a doctor on the phone, then a protocol that is reviewed every three months.
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">

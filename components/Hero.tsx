@@ -32,14 +32,29 @@ export default function Hero() {
       }}
       aria-label="Hero"
     >
-      {/* Top-right glow */}
+      {/* Signature texture: the same macro language as the protocol grid,
+          masked so it lives in the top-right and never fights the headline. */}
       <div
         aria-hidden="true"
         style={{
           position: 'absolute',
           inset: 0,
           pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.07) 0%, transparent 55%)',
+          backgroundImage: 'url(/protocols/hero.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: '70% 40%',
+          opacity: 0.55,
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 80% at 85% 30%, black 0%, transparent 70%)',
+          maskImage: 'radial-gradient(ellipse 70% 80% at 85% 30%, black 0%, transparent 70%)',
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.10) 0%, transparent 55%)',
         }}
       />
 
@@ -185,32 +200,6 @@ export default function Hero() {
               </svg>
             </a>
 
-            {/* Tertiary: How it works */}
-            <a
-              href="/how-it-works"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                color: 'var(--text-muted)',
-                fontSize: 15,
-                fontWeight: 500,
-                textDecoration: 'none',
-                letterSpacing: '-0.01em',
-                fontFamily: 'var(--font-inter)',
-                whiteSpace: 'nowrap',
-                WebkitTapHighlightColor: 'transparent',
-                transition: 'color 0.18s ease',
-                padding: '16px 4px',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)' }}
-            >
-              How it works
-              <svg viewBox="0 0 16 16" fill="none" width={13} height={13} aria-hidden="true">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
           </motion.div>
 
           {/* Credential bar */}
