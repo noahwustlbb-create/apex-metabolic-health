@@ -132,8 +132,8 @@
 
     /* ── Canvas ─────────────────────────────────────────── */
     /* Outermost page backgrounds. Progressively deeper. */
-    --color-canvas-default:    var(--primitive-neutral-50);   /* #f9fafb */
-    --color-canvas-subtle:     var(--primitive-neutral-100);  /* #f3f4f6 — alt sections */
+    --color-canvas-default:    var(--primitive-neutral-0);    /* #ffffff — white only */
+    --color-canvas-subtle:     #f5f7fa;                       /* porcelain — cards, panels */
     --color-canvas-inset:      var(--primitive-neutral-200);  /* #e5e7eb — code/recessed */
 
     /* ── Surface ────────────────────────────────────────── */
@@ -215,8 +215,8 @@
     --shadow-xl:  0 24px 64px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.06);
 
     /* ── Nav ─────────────────────────────────────────────── */
-    --color-nav-bg:            rgba(249,250,251,0.92);
-    --color-nav-bg-scrolled:   rgba(249,250,251,0.98);
+    --color-nav-bg:            rgba(255,255,255,0.86);
+    --color-nav-bg-scrolled:   rgba(255,255,255,0.96);
     --color-nav-border:        rgba(0,0,0,0.08);
     --color-nav-border-scrolled: rgba(0,0,0,0.12);
 
@@ -231,7 +231,7 @@
     --elevated:         var(--color-canvas-subtle);
     --elevated-high:    var(--color-canvas-inset);
     --surface-muted:    var(--color-canvas-subtle);
-    --card-bg:          var(--color-surface-default);
+    --card-bg:          var(--color-canvas-subtle);
     --input-bg:         var(--color-surface-default);
     --text-primary:     var(--color-fg-default);
     --text-secondary:   var(--color-fg-muted);

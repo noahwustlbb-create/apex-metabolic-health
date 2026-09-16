@@ -344,7 +344,7 @@ export default function ServicesPage() {
         {/* ── Program Cards - dark cinematic section ────────────── */}
         <section
           className="relative overflow-hidden"
-          style={{ backgroundColor: '#080d18', paddingTop: '72px', paddingBottom: '72px' }}
+          style={{ backgroundColor: 'var(--card-bg)', paddingTop: '72px', paddingBottom: '72px' }}
           aria-label="Treatments"
         >
           {/* Top edge rule */}

@@ -210,7 +210,7 @@ export default function BgtOrderPage() {
     <>
       {checkoutUrl && <CheckoutModal url={checkoutUrl} onClose={() => setCheckoutUrl(null)} />}
       <Nav />
-      <main style={{ backgroundColor: '#070a0d', minHeight: '100vh', paddingTop: 80 }}>
+      <main style={{ backgroundColor: 'var(--bg)', minHeight: '100vh', paddingTop: 80 }}>
         <div className="absolute inset-0 dot-grid opacity-20 pointer-events-none" aria-hidden="true" />
 
         {/* Header */}

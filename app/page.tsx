@@ -2,7 +2,8 @@ import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
 import Hero from '@/components/home/Hero'
 import Intro from '@/components/home/Intro'
-import ProtocolList from '@/components/home/ProtocolList'
+import Ticker from '@/components/home/Ticker'
+import ProtocolBento from '@/components/home/ProtocolBento'
 import Pathway from '@/components/home/Pathway'
 import VisualBreak from '@/components/home/VisualBreak'
 import DoctorCard from '@/components/DoctorCard'
@@ -15,7 +16,8 @@ import Footer from '@/components/Footer'
 
 // Story: HOOK (hero) → INTRODUCE (clinic) → OFFER (protocols) → EXPLAIN
 // (pathway) → rest (visual break) → PROVE (verification, pricing) → PAUSE
-// (who we are) → ANSWER (FAQ) → INVITE (cta). Bands alternate dark and light.
+// (who we are) → ANSWER (FAQ) → INVITE (cta). White page; depth comes from
+// framed photographs, floating panels and motion, not from dark bands.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -34,8 +36,9 @@ export default function Home() {
       <Nav />
       <main id="main-content">
         <Hero />
+        <Ticker />
         <Intro />
-        <ProtocolList />
+        <ProtocolBento />
         <Pathway />
         <VisualBreak />
         <DoctorCard />

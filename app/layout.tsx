@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Grotesk } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import AgeNotice from '@/components/AgeNotice'
+import SmoothScroll from '@/components/SmoothScroll'
 import ReferralCapture from '@/components/ReferralCapture'
 import FloatingContact from '@/components/FloatingContact'
 import GhlChatWidget from '@/components/GhlChatWidget'
@@ -115,7 +115,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased overflow-x-hidden">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
@@ -134,8 +134,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         {/* End Google Tag Manager */}
-        {/* Runs before hydration - prevents light-mode flash when user has saved a preference */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('apex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="lazyOnload"
@@ -151,7 +149,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
-        <AgeNotice />
+        <SmoothScroll />
         <ReferralCapture />
         <ThemeProvider>
           <MotionProvider>

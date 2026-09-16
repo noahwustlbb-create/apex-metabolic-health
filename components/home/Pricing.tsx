@@ -3,68 +3,71 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
+import RevealText from '@/components/motion/RevealText'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 // Numbers mirror app/pricing/page.tsx (COMPARISON_ROWS). Change them there first.
-const TILES = [
-  { label: 'Initial blood referral', member: '$199', single: '$280', note: 'Full panel, doctor reviewed' },
-  { label: 'Doctor consultation', member: 'from $99', single: 'from $199', note: 'Phone or video, 45 to 60 minutes' },
-  { label: 'Membership', member: '$99 / month', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees' },
+const CARDS = [
+  { label: 'Initial blood referral', member: '$199', single: '$280', note: 'Full panel, doctor reviewed. Results in about 48 hours.' },
+  { label: 'Doctor consultation', member: 'from $99', single: 'from $199', note: 'Phone or video, 45 to 60 minutes, with your results on screen.' },
+  { label: 'Membership', member: '$99 / mo', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees, free referrals.', highlight: true },
 ]
 
 /**
- * The visitor comparing tabs wants the number before the pitch. Three prices,
- * both ways to pay, and a link to the full table.
+ * The visitor comparing tabs wants the number before the pitch. Three
+ * cards, both ways to pay, and a link to the full table.
  */
 export default function Pricing() {
   const reduced = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
-  const reveal = (delay: number, y = 20) =>
-    reduced ? { initial: false as const } : { initial: { opacity: 0, y }, animate: inView ? { opacity: 1, y: 0 } : {}, transition: { duration: 0.65, delay, ease } }
+  const reveal = (delay: number, y = 22) =>
+    reduced ? { initial: false as const } : { initial: { opacity: 0, y }, animate: inView ? { opacity: 1, y: 0 } : {}, transition: { duration: 0.7, delay, ease } }
 
   return (
-    <section ref={ref} id="pricing" className="band-dark section-y" aria-label="Pricing">
+    <section ref={ref} id="pricing" className="section-y" style={{ background: 'var(--bg)' }} aria-label="Pricing">
       <div className="container-x">
-        <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-24 items-start">
-          <div>
-            <motion.p {...reveal(0, 10)} className="t-eyebrow" style={{ marginBottom: 20 }}>Straight pricing</motion.p>
-            <motion.h2 {...reveal(0.06)} className="t-h2" style={{ marginBottom: 22, maxWidth: '12ch' }}>Every number, before you start.</motion.h2>
-            <motion.p {...reveal(0.14, 14)} className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '44ch', marginBottom: 28 }}>
-              Pay per visit, or join as a member and pay less on every step. No packages, no upsell on the call.
-            </motion.p>
-            <motion.div {...reveal(0.2, 10)}>
-              <Link href="/pricing" className="link-draw text-[15px] font-medium" style={{ color: 'var(--color-accent-fg)' }}>
-                See the full price list
-              </Link>
-            </motion.div>
-          </div>
-
-          <div>
-            <div className="grid grid-cols-[1fr_auto_auto] gap-x-6 t-mono pb-3" style={{ color: 'var(--text-muted)', borderBottom: '1px solid var(--border)' }}>
-              <span>What</span><span className="text-right">Member</span><span className="text-right">Single visit</span>
-            </div>
-            {TILES.map((t, i) => (
-              <motion.div
-                key={t.label}
-                {...reveal(0.12 + i * 0.09, 16)}
-                className="grid grid-cols-[1fr_auto_auto] gap-x-6 items-baseline py-6"
-                style={{ borderBottom: '1px solid var(--border)' }}
-              >
-                <div className="min-w-0">
-                  <p className="text-[17px] font-semibold m-0" style={{ letterSpacing: '-0.01em' }}>{t.label}</p>
-                  <p className="text-[13px] mt-1 m-0" style={{ color: 'var(--text-secondary)' }}>{t.note}</p>
-                </div>
-                <p className="m-0 text-right" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(18px, 1.8vw, 24px)', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap' }}>{t.member}</p>
-                <p className="m-0 text-right" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(15px, 1.4vw, 18px)', fontWeight: 500, color: 'var(--text-secondary)', whiteSpace: 'nowrap' }}>{t.single}</p>
-              </motion.div>
-            ))}
-            <motion.p {...reveal(0.5)} className="text-[12.5px] leading-relaxed mt-5 m-0" style={{ color: 'var(--text-muted)' }}>
-              Prices in AUD. Clinical suitability is decided by your doctor after assessment; a consultation never guarantees a prescription.
-            </motion.p>
-          </div>
+        <div className="max-w-2xl mb-12 md:mb-16">
+          <motion.p {...reveal(0, 10)} className="t-eyebrow" style={{ marginBottom: 20 }}>Straight pricing</motion.p>
+          <RevealText as="h2" className="t-h2" style={{ marginBottom: 20 }} text="Every number, before you start." />
+          <motion.p {...reveal(0.3, 14)} className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '52ch' }}>
+            Pay per visit, or join as a member and pay less on every step. No packages, no upsell on the call.
+          </motion.p>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {CARDS.map((c, i) => (
+            <motion.div
+              key={c.label}
+              {...reveal(0.15 + i * 0.1, 26)}
+              whileHover={reduced ? undefined : { y: -6 }}
+              className={`relative rounded-[24px] p-7 md:p-8 ${!reduced ? `float-${['a', 'b', 'c'][i]}` : ''}`}
+              style={{
+                background: c.highlight ? 'linear-gradient(160deg, rgba(72,144,247,0.10) 0%, rgba(72,144,247,0.02) 60%, var(--card-bg) 100%)' : 'var(--card-bg)',
+                border: `1px solid ${c.highlight ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
+                boxShadow: c.highlight ? '0 30px 60px rgba(72,144,247,0.12)' : '0 1px 2px rgba(15,23,42,0.04)',
+                transition: 'box-shadow 0.4s ease',
+              }}
+            >
+              <p className="t-mono m-0" style={{ color: c.highlight ? 'var(--blue)' : 'var(--text-muted)' }}>{c.label}</p>
+              <p className="m-0 mt-5" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(34px, 3.4vw, 46px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text-primary)' }}>{c.member}</p>
+              <p className="m-0 mt-2 text-[13px]" style={{ color: 'var(--text-muted)' }}>
+                member · <span style={{ color: 'var(--text-secondary)' }}>{c.single}</span> single visit
+              </p>
+              <p className="t-body m-0 mt-6" style={{ color: 'var(--text-secondary)', fontSize: 15 }}>{c.note}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div {...reveal(0.5)} className="flex flex-wrap items-center justify-between gap-4 mt-8">
+          <p className="text-[12.5px] leading-relaxed m-0" style={{ color: 'var(--text-muted)', maxWidth: '62ch' }}>
+            Prices in AUD. Clinical suitability is decided by your doctor after assessment; a consultation never guarantees a prescription.
+          </p>
+          <Link href="/pricing" className="link-draw text-[15px] font-medium" style={{ color: 'var(--color-accent-fg)' }}>
+            See the full price list
+          </Link>
+        </motion.div>
       </div>
     </section>
   )

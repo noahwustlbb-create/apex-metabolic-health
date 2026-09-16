@@ -5,7 +5,6 @@ import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
-import ThemeToggle from '@/components/ThemeToggle'
 import Logo from '@/components/brand/Logo'
 
 const NAV_PROGRAMS = [
@@ -51,8 +50,8 @@ export default function Nav() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  // The home hero is a dark photograph in both themes: the bar disappears and
-  // the type goes light until the page scrolls.
+  // At the top of the home page the bar is invisible: the hero is white and
+  // the type is already the right colour.
   const overHero = pathname === '/' && !scrolled && !menuOpen
 
   const linkStyle = {
@@ -72,7 +71,7 @@ export default function Nav() {
         initial={prefersReduced ? false : { opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={prefersReduced ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${overHero ? 'nav-over-hero' : ''}`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
           backgroundColor: overHero ? 'transparent' : scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
           backdropFilter: overHero ? 'none' : 'blur(20px)',
@@ -205,7 +204,6 @@ export default function Nav() {
 
           {/* ── Desktop right CTAs ── */}
           <div className="hidden md:flex items-center gap-3">
-            <ThemeToggle />
             <a
               href="https://app.apexmetabolichealth.com.au/login"
               style={{
@@ -262,7 +260,6 @@ export default function Nav() {
 
           {/* ── Mobile right: Portal + Get Started + hamburger ── */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
             {!menuOpen && (
               <a
                 href="https://app.apexmetabolichealth.com.au/login"
@@ -381,8 +378,7 @@ export default function Nav() {
               </a>
               <div className="flex items-center justify-between pt-1">
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Appearance</span>
-                <ThemeToggle />
-              </div>
+                  </div>
             </motion.div>
           </motion.div>
         )}
