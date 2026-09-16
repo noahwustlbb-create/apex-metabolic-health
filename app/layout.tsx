@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     images: ['/logo-new.png'],
   },
   icons: {
-    icon: '/logo-new.png',
-    apple: '/logo-new.png',
+    icon: [{ url: '/favicon-32.png', sizes: '32x32', type: 'image/png' }, { url: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
+    apple: '/apple-icon-180.png',
   },
   alternates: { canonical: '/' },
   robots: { index: true, follow: true },
@@ -85,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-AU" data-theme="dark" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased overflow-x-hidden">
         {/* Google Tag Manager */}
-        <Script id="gtm-script" strategy="beforeInteractive">
+        <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
           j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -105,9 +105,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('apex-theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();` }} />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -132,7 +132,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           id="ghl-external-tracking"
           src="https://links.apexmetabolichealth.com.au/js/external-tracking.js"
           data-tracking-id="tk_f305a784711e4fb7ba579d4cc0264718"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
       </body>
     </html>

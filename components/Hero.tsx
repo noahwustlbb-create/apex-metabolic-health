@@ -1,22 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
-import HeroStartModal from './HeroStartModal'
+import { AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
 
-const ease = [0.16, 1, 0.3, 1] as const
+const HeroStartModal = dynamic(() => import('./HeroStartModal'), { ssr: false })
 
-function fade(delay: number, y = 24) {
-  return {
-    initial: { opacity: 0, y },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.65, delay: delay / 1000, ease },
-  }
-}
-
+// Entrance is CSS (.hero-in in globals.css), not Framer: the headline is the
+// page's LCP element and must be painted by the server-rendered HTML, then
+// animate. Gating it on hydration cost 10 seconds of LCP on a throttled phone.
 export default function Hero() {
-  const prefersReduced = useReducedMotion()
-  const mp = (delay: number, y?: number) => (prefersReduced ? {} : fade(delay, y))
   const [startOpen, setStartOpen] = useState(false)
 
   return (
@@ -40,7 +34,7 @@ export default function Hero() {
           position: 'absolute',
           inset: 0,
           pointerEvents: 'none',
-          backgroundImage: 'url(/protocols/hero.jpg)',
+          backgroundImage: 'url(/protocols/hero-bg.webp)',
           backgroundSize: 'cover',
           backgroundPosition: '70% 40%',
           opacity: 0.55,
@@ -87,9 +81,10 @@ export default function Hero() {
         <div style={{ maxWidth: 700 }}>
 
           {/* Headline */}
-          <motion.h1
-            {...mp(0, 36)}
+          <h1
+            className="hero-in"
             style={{
+              animationDelay: '0ms',
               fontSize: 'clamp(40px, 7vw, 80px)',
               fontWeight: 800,
               letterSpacing: '-0.04em',
@@ -104,12 +99,13 @@ export default function Hero() {
             <span style={{ color: 'var(--blue)' }}>
               It isn&apos;t being measured.
             </span>
-          </motion.h1>
+          </h1>
 
           {/* Body */}
-          <motion.p
-            {...mp(160)}
+          <p
+            className="hero-in"
             style={{
+              animationDelay: '160ms',
               fontSize: 18,
               lineHeight: 1.65,
               color: 'var(--text-secondary)',
@@ -119,12 +115,12 @@ export default function Hero() {
             }}
           >
             Doctor-led hormone and metabolic care, designed for anyone who already knows something&apos;s off.
-          </motion.p>
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            {...mp(300)}
-            style={{ marginBottom: 28, display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}
+          <div
+            className="hero-in"
+            style={{ animationDelay: '300ms', marginBottom: 28, display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}
           >
             {/* Primary: Get started → intake form or create account */}
             <button
@@ -200,12 +196,13 @@ export default function Hero() {
               </svg>
             </a>
 
-          </motion.div>
+          </div>
 
           {/* Credential bar */}
-          <motion.p
-            {...mp(420)}
+          <p
+            className="hero-in"
             style={{
+              animationDelay: '420ms',
               fontSize: 11,
               fontWeight: 500,
               letterSpacing: '0.06em',
@@ -214,14 +211,14 @@ export default function Hero() {
             }}
           >
             AHPRA-registered medical practitioners&nbsp;·&nbsp;No GP referral required&nbsp;·&nbsp;100% online across Australia
-          </motion.p>
+          </p>
 
         </div>
 
         {/* Brand visual - desktop only, decorative */}
-        <motion.div
-          {...mp(360, 28)}
-          className="hidden lg:block relative"
+        <div
+          className="hero-in hidden lg:block relative"
+          style={{ animationDelay: '360ms' }}
           aria-hidden="true"
         >
           <div
@@ -233,12 +230,13 @@ export default function Hero() {
               boxShadow: '0 40px 90px rgba(0,0,0,0.28)',
             }}
           >
-            <img
+            <Image
               src="/team/team-sofa.webp"
               alt=""
-              width={1100}
-              height={1650}
-              loading="eager"
+              width={1024}
+              height={1536}
+              priority
+              sizes="(min-width: 1024px) 420px, 0px"
               style={{ display: 'block', width: '100%', height: 'auto' }}
             />
             {/* Subtle blue wash to marry the light interior into the dark hero */}
@@ -251,7 +249,7 @@ export default function Hero() {
               }}
             />
           </div>
-        </motion.div>
+        </div>
 
         </div>
       </div>
