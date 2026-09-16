@@ -1,6 +1,6 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import TreatmentSelector from '@/components/TreatmentSelector'
+import ProtocolGrid from '@/components/ProtocolGrid'
 import WhyApex from '@/components/WhyApex'
 import HowItWorks from '@/components/HowItWorks'
 import BrandBand from '@/components/BrandBand'
@@ -16,7 +16,7 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <WhyApex />
-        <TreatmentSelector />
+        <ProtocolGrid />
         <HowItWorks />
         <BrandBand />
         <DoctorCard />
