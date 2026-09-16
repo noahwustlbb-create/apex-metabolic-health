@@ -539,7 +539,7 @@ function QuizPhase({
                       <p style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', lineHeight: 1.3 }}>
                         Dr Cameron Chen
                       </p>
-                      <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>Medical Director</p>
+                      <p style={{ fontSize: 11, color: '#4b5563', marginTop: 1 }}>Medical Practitioner</p>
                     </div>
                   </div>
                 </div>
