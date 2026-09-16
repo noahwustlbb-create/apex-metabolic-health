@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
+import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -103,12 +104,12 @@ export default function WhyApex() {
             transition={prefersReduced ? { duration: 0 } : { clipPath: { duration: 0.9, ease }, scale: { duration: 1.6, ease } }}
             style={{ borderRadius: 24, overflow: 'hidden', border: '1px solid var(--border)', boxShadow: '0 40px 90px rgba(0,0,0,0.28)' }}
           >
-            <img
+            <Image
               src="/team/team-standing.webp"
               alt="The Apex care team in the clinic"
-              width={1600}
-              height={2000}
-              loading="lazy"
+              width={1024}
+              height={1280}
+              sizes="(min-width: 1024px) 620px, 100vw"
               style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '4 / 5', objectFit: 'cover' }}
             />
             <div

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -94,12 +95,12 @@ export default function BrandBand() {
                   boxShadow: '0 40px 90px rgba(0,0,0,0.30)',
                 }}
               >
-                <img
+                <Image
                   src="/team/team-lounge.webp"
                   alt=""
                   width={1600}
                   height={1067}
-                  loading="lazy"
+                  sizes="(min-width: 1024px) 560px, 100vw"
                   style={{ display: 'block', width: '100%', height: 'auto' }}
                 />
               </motion.div>
@@ -119,12 +120,12 @@ export default function BrandBand() {
                 }}
                 aria-hidden="true"
               >
-                <img
+                <Image
                   src="/team/brand-boxes.webp"
                   alt=""
                   width={1470}
                   height={1103}
-                  loading="lazy"
+                  sizes="240px"
                   style={{ display: 'block', width: '100%', height: 'auto' }}
                 />
               </motion.div>

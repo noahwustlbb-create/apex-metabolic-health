@@ -112,7 +112,7 @@ export default function HowItWorks() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'url(/protocols/weight.jpg)', backgroundSize: 'cover', backgroundPosition: 'center 60%', opacity: 0.18,
+          backgroundImage: 'url(/protocols/weight-bg.webp)', backgroundSize: 'cover', backgroundPosition: 'center 60%', opacity: 0.18,
           WebkitMaskImage: 'linear-gradient(180deg, transparent 0%, black 40%, black 70%, transparent 100%)',
           maskImage: 'linear-gradient(180deg, transparent 0%, black 40%, black 70%, transparent 100%)',
         }}
