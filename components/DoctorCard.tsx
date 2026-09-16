@@ -117,7 +117,7 @@ export default function DoctorCard() {
                     Dr Cameron Chen
                   </p>
                   <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                    Medical Director
+                    Medical Practitioner
                   </p>
                 </div>
               </div>
