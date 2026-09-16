@@ -86,12 +86,16 @@
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 
+  /* Headline voice: Inter at 600, tight but not crushed, with the single-storey
+     a and rounded punctuation. Large and calm beats heavy and loud. */
   .display-heading {
     font-family: var(--font-inter), system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-weight: 600;
+    letter-spacing: -0.032em;
     line-height: 1.04;
     color: var(--text-primary);
+    font-feature-settings: "cv11", "ss03", "cv05";
+    text-wrap: balance;
   }
 
   .apex-card {
@@ -274,3 +278,167 @@
   }
 
 }
+
+/* ── Revamp 2026-09: type scale, bands, layout ───────────────────────────── */
+
+/* Three levels only: display, headline, body. Everything else is a label. */
+.t-display {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(38px, 5vw, 72px);
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  font-feature-settings: "cv11", "ss03", "cv05";
+  text-wrap: balance;
+}
+.t-h2 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(32px, 4vw, 58px);
+  letter-spacing: -0.032em;
+  line-height: 1.04;
+  font-feature-settings: "cv11", "ss03", "cv05";
+  text-wrap: balance;
+}
+.t-h3 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(20px, 1.8vw, 26px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-feature-settings: "cv11";
+}
+.t-lead {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+.t-body {
+  font-size: 16.5px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+.t-eyebrow {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+.t-mono {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Contrast bands. A band pins its own tokens so children keep using
+   var(--bg) / var(--text-primary) and the page alternates dark/light in both
+   themes: the chapters change, whichever theme the visitor chose. */
+.band-light {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --elevated: #e9ecf0;
+  --card-bg: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #374151;
+  --text-muted: #4b5563;
+  --border: rgba(0,0,0,0.10);
+  --border-strong: rgba(0,0,0,0.2);
+  --color-accent-fg: #1d4ed8;
+  background: var(--bg);
+  color: var(--text-primary);
+  color-scheme: light;
+}
+.band-dark {
+  --bg: #0b0d12;
+  --surface: #141821;
+  --elevated: #171c27;
+  --card-bg: #141821;
+  --text-primary: #f2f4f7;
+  --text-secondary: #a8b0ba;
+  --text-muted: #868b91;
+  --border: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.2);
+  --color-accent-fg: #60a5fa;
+  background: var(--bg);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+.section-y   { padding-block: clamp(88px, 9vw, 150px); }
+.section-y-sm{ padding-block: clamp(64px, 7vw, 110px); }
+.container-x {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 64px);
+}
+
+/* Hero media: paints first, then settles. */
+.hero-media { animation: hero-media 1.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes hero-media {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.hero-drift { animation: hero-drift 24s ease-in-out infinite alternate; }
+@keyframes hero-drift {
+  from { transform: scale(1) translate3d(0,0,0); }
+  to   { transform: scale(1.06) translate3d(-1%, -1%, 0); }
+}
+.scroll-cue::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 44px;
+  margin-top: 10px;
+  background: linear-gradient(180deg, currentColor, transparent);
+  animation: cue 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+@keyframes cue {
+  0%   { transform: scaleY(0); opacity: 0; }
+  30%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(12px); opacity: 0; }
+}
+
+/* Protocol index rows: identical anatomy at every width. */
+.protocol-row {
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+.protocol-row:hover, .protocol-row:focus-visible {
+  border-color: var(--blue) !important;
+  transform: translateY(-1px);
+}
+.protocol-row .protocol-thumb { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+.protocol-row:hover .protocol-thumb { transform: scale(1.08); }
+.protocol-row .protocol-arrow { opacity: 0; transform: translateX(-6px); transition: opacity 0.25s ease, transform 0.25s ease; }
+.protocol-row:hover .protocol-arrow, .protocol-row:focus-visible .protocol-arrow { opacity: 1; transform: translateX(0); }
+
+/* Text link with a drawn underline. */
+.link-draw {
+  position: relative;
+  text-decoration: none;
+  padding-bottom: 2px;
+}
+.link-draw::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.32);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-draw:hover::after { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media, .hero-drift, .scroll-cue::after { animation: none; }
+}
+
+/* Nav over the hero: no bar until the page moves. */
+.nav-over-hero { --text-primary: #f2f4f7; --text-secondary: #c9ced6; }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const ACCENT = 'var(--blue)'
 const ease = [0.22, 1, 0.36, 1] as const
@@ -66,6 +67,7 @@ const ACTIONS = [
 ]
 
 export default function FloatingContact() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [visible, setVisible] = useState(false)
 
@@ -82,6 +84,10 @@ export default function FloatingContact() {
     window.addEventListener('keydown', handle)
     return () => window.removeEventListener('keydown', handle)
   }, [])
+
+  // The home page carries its own single CTA in the hero, nav and close; a second
+  // floating pill beside the chat bubble was two competing asks on a phone.
+  if (pathname === '/') return null
 
   return (
     <motion.div

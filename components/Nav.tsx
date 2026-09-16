@@ -3,8 +3,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 import ThemeToggle from '@/components/ThemeToggle'
+import Logo from '@/components/brand/Logo'
 
 const NAV_PROGRAMS = [
   ...CANONICAL_PROGRAMS.map(p => ({ name: p.name, type: p.navType, href: p.websiteHref })),
@@ -12,9 +14,8 @@ const NAV_PROGRAMS = [
 
 // Desktop: 4 items only. Complexity stays hidden.
 const DESKTOP_LINKS = [
-  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'How it works', href: '/how-it-works' },
   { label: 'Pricing',      href: '/pricing'      },
-  { label: 'Membership',   href: '/membership'   },
   { label: 'About',        href: '/about'        },
 ]
 
@@ -33,6 +34,7 @@ const BLUE = 'var(--blue)'
 
 export default function Nav() {
   const prefersReduced = useReducedMotion()
+  const pathname = usePathname()
   const [scrolled, setScrolled]         = useState(false)
   const [menuOpen, setMenuOpen]         = useState(false)
   const [programsOpen, setProgramsOpen] = useState(false)
@@ -48,6 +50,10 @@ export default function Nav() {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
+
+  // The home hero is a dark photograph in both themes: the bar disappears and
+  // the type goes light until the page scrolls.
+  const overHero = pathname === '/' && !scrolled && !menuOpen
 
   const linkStyle = {
     color: TEXT,
@@ -66,12 +72,12 @@ export default function Nav() {
         initial={prefersReduced ? false : { opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={prefersReduced ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${overHero ? 'nav-over-hero' : ''}`}
         style={{
-          backgroundColor: scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: scrolled ? '1px solid var(--nav-border-scrolled)' : '1px solid var(--nav-border)',
+          backgroundColor: overHero ? 'transparent' : scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
+          backdropFilter: overHero ? 'none' : 'blur(20px)',
+          WebkitBackdropFilter: overHero ? 'none' : 'blur(20px)',
+          borderBottom: overHero ? '1px solid transparent' : scrolled ? '1px solid var(--nav-border-scrolled)' : '1px solid var(--nav-border)',
           boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.12)' : 'none',
         }}
       >
@@ -80,35 +86,8 @@ export default function Nav() {
         >
 
           {/* ── Logo ── */}
-          <Link
-            href="/"
-            className="flex flex-col flex-shrink-0 select-none"
-            aria-label="Apex Metabolic Health, Home"
-            style={{ textDecoration: 'none', gap: '5px' }}
-          >
-            <span style={{
-              fontFamily: 'var(--font-inter)',
-              fontWeight: 600,
-              fontSize: '20px',
-              letterSpacing: '0.22em',
-              color: 'var(--text-primary)',
-              lineHeight: 1,
-              textTransform: 'uppercase',
-            }}>
-              APEX
-            </span>
-            <span style={{
-              fontFamily: 'var(--font-inter)',
-              fontWeight: 400,
-              fontSize: '9.5px',
-              letterSpacing: '0.2em',
-              color: BLUE,
-              lineHeight: 1,
-              textTransform: 'uppercase',
-              opacity: 0.85,
-            }}>
-              Metabolic Health
-            </span>
+          <Link href="/" className="flex-shrink-0 select-none" aria-label="Apex Metabolic Health, Home" style={{ textDecoration: 'none' }}>
+            <Logo variant="nav" />
           </Link>
 
           {/* ── Desktop centre nav ── */}
@@ -255,8 +234,8 @@ export default function Nav() {
                 gap: '7px',
                 background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
                 color: '#ffffff',
-                padding: '10px 22px',
-                borderRadius: '12px',
+                padding: '11px 22px',
+                borderRadius: '999px',
                 fontSize: '12.5px',
                 fontWeight: 600,
                 letterSpacing: '0.01em',
