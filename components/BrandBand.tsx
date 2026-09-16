@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -9,6 +9,10 @@ export default function BrandBand() {
   const prefersReduced = useReducedMotion()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  // Parallax: the photo drifts slower than the page while the section is on screen.
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const photoY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [40, -40])
+  const accentY = useTransform(scrollYProgress, [0, 1], prefersReduced ? [0, 0] : [-16, 24])
 
   const reveal = (delay: number, y = 24) =>
     prefersReduced
@@ -80,8 +84,9 @@ export default function BrandBand() {
           <motion.div {...reveal(0.14, 30)} className="order-1 lg:order-2">
             <div className="relative" style={{ paddingBottom: 'clamp(40px, 8vw, 72px)' }}>
               {/* Main photo */}
-              <div
+              <motion.div
                 style={{
+                  y: photoY,
                   position: 'relative',
                   borderRadius: 24,
                   overflow: 'hidden',
@@ -97,12 +102,13 @@ export default function BrandBand() {
                   loading="lazy"
                   style={{ display: 'block', width: '100%', height: 'auto' }}
                 />
-              </div>
+              </motion.div>
 
               {/* Offset brand-packaging accent */}
-              <div
+              <motion.div
                 className="absolute"
                 style={{
+                  y: accentY,
                   right: 'clamp(-8px, 2vw, 20px)',
                   bottom: 0,
                   width: 'clamp(150px, 34%, 240px)',
@@ -121,7 +127,7 @@ export default function BrandBand() {
                   loading="lazy"
                   style={{ display: 'block', width: '100%', height: 'auto' }}
                 />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 

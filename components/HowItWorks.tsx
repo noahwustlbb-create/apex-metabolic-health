@@ -48,10 +48,10 @@ function StepCard({ item, delay }: { item: (typeof STEPS)[0]; delay: number }) {
     <motion.div
       className="relative rounded-xl overflow-hidden"
       style={{ aspectRatio: '3/4', border: '1px solid rgba(255,255,255,0.08)' }}
-      initial={prefersReduced ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={prefersReduced ? false : { opacity: 0, y: 40, scale: 0.96 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay, ease }}
+      transition={prefersReduced ? { duration: 0 } : { duration: 0.7, delay, ease }}
     >
       <Image
         src={item.src}

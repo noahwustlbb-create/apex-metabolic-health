@@ -408,7 +408,7 @@ export default function HormoneIntakeForm() {
               {/* Hero image */}
               <div className="relative h-44 overflow-hidden" style={{ background: '#060d1a' }}>
                 <img
-                  src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+                  src="/protocols/hormone.jpg"
                   alt="Hormone Optimisation Program"
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{ objectPosition: 'center 35%', opacity: 0.65 }}

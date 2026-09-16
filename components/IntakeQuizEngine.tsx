@@ -768,25 +768,25 @@ const TRUST_PANELS = [
     label: 'Personalised',
     heading: 'Prescription protocols',
     body: 'Treatments matched to your pathology, not a one-size-fits-all template.',
-    img: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=700&h=500&fit=crop&auto=format&q=80',
+    img: '/team/brand-boxes.webp',
   },
   {
     label: 'Pharmacy delivery',
     heading: 'Australia-wide',
     body: 'TGA-compliant compounding pharmacy, delivered direct to your door.',
-    img: 'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?w=700&h=500&fit=crop&auto=format&q=80',
+    img: '/protocols/weight.jpg',
   },
   {
     label: 'Unlimited',
     heading: 'Doctor consultations',
     body: 'AHPRA-registered practitioners managing your ongoing care.',
-    img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&h=500&fit=crop&auto=format&q=80',
+    img: '/team/portrait-man.webp',
   },
   {
     label: '100%',
     heading: 'Telehealth based',
     body: 'Consult from anywhere in Australia. No waiting rooms.',
-    img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop&auto=format&q=80',
+    img: '/team/team-armchairs.webp',
   },
 ]
 
