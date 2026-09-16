@@ -86,7 +86,7 @@ export default function ProtocolBento() {
             })}
 
             <li className="min-w-0 col-span-2 lg:col-span-1" style={{ gridColumn: hover ? 3 : undefined }}>
-              <a href="/start" className="group no-underline flex flex-col justify-between h-full rounded-2xl px-4 py-3.5 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: 'var(--text-primary)', color: '#fff', minHeight: ROW }}>
+              <a href="/start" className="group no-underline flex flex-col justify-between h-full rounded-2xl px-4 py-3.5 transition-transform duration-300 hover:-translate-y-0.5" style={{ background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', color: '#fff', minHeight: ROW, boxShadow: '0 16px 40px rgba(72,144,247,0.28)' }}>
                 <span className="flex items-start justify-between">
                   <span className="t-mono opacity-60">Not sure?</span>
                   <span className="w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ border: '1px solid currentColor', opacity: 0.7 }} aria-hidden="true">
