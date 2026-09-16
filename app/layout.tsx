@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     images: ['/logo-new.png'],
   },
   icons: {
-    icon: '/logo-new.png',
-    apple: '/logo-new.png',
+    icon: [{ url: '/favicon-32.png', sizes: '32x32', type: 'image/png' }, { url: '/icon-192.png', sizes: '192x192', type: 'image/png' }],
+    apple: '/apple-icon-180.png',
   },
   alternates: { canonical: '/' },
   robots: { index: true, follow: true },
