@@ -333,9 +333,9 @@ export default function AboutPage() {
                   <div>
                     <div className="flex items-start justify-between mb-5">
                       <div>
-                        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Medical Practitioner</p>
+                        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Medical team</p>
                         <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                          Dr Cameron Chen
+                          Apex doctors
                         </h3>
                       </div>
                       <span
@@ -346,7 +346,7 @@ export default function AboutPage() {
                       </span>
                     </div>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Dr Chen is an AHPRA-registered medical practitioner consulting with Apex patients. His focus is on evidence-based hormone and metabolic medicine, moving patients from functional decline toward measurable biological optimisation.
+                      Every Apex consultation is with an AHPRA-registered medical practitioner. Our doctors focus on evidence-based hormone and metabolic medicine, moving patients from functional decline toward measurable biological optimisation.
                     </p>
                   </div>
                   <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>

@@ -5,15 +5,21 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const AHPRA_NUMBER = 'MED0001201298'
-const AHPRA_URL = `https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx?q=${AHPRA_NUMBER}`
+const AHPRA_URL = 'https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx'
 const LEGITSCRIPT_URL = 'https://www.legitscript.com/websites/?checker_keywords=apexmetabolichealth.com.au'
+const ABN = '91 682 876 884'
+const ABN_URL = 'https://abr.business.gov.au/ABN/View?abn=91682876884'
+const NATA_URL = 'https://nata.com.au/'
 
 /**
  * The verification ledger. Every row is an auditable claim paired with the
  * third party that can confirm it. Rows only exist when the proof is real:
  * the reviews row stays dormant until the Google Business Profile holds
  * 10+ reviews (see REVIEWS_LIVE below) - no fake proof, ever.
+ *
+ * Deliberately no individual clinician here. Our doctors are contracted
+ * practitioners, not the brand; trust rests on the regulators, the company
+ * and the supply chain, all of which the reader can check without us.
  */
 const REVIEWS_LIVE = false // flip when Google Business Profile has ≥10 reviews
 const GOOGLE_REVIEWS_URL = '' // set alongside REVIEWS_LIVE
@@ -28,9 +34,9 @@ interface LedgerRow {
 
 const LEDGER: LedgerRow[] = [
   {
-    claim: 'AHPRA-registered practitioners',
-    detail: AHPRA_NUMBER,
-    verifyLabel: 'Check the public register',
+    claim: 'AHPRA-registered doctors',
+    detail: 'Every prescriber holds current Australian medical registration',
+    verifyLabel: 'Search the public register',
     destination: 'opens ahpra.gov.au',
     href: AHPRA_URL,
   },
@@ -40,6 +46,20 @@ const LEDGER: LedgerRow[] = [
     verifyLabel: 'Verify certification',
     destination: 'opens legitscript.com',
     href: LEGITSCRIPT_URL,
+  },
+  {
+    claim: 'Registered Australian company',
+    detail: `ABN ${ABN}`,
+    verifyLabel: 'Look up the ABN',
+    destination: 'opens abr.business.gov.au',
+    href: ABN_URL,
+  },
+  {
+    claim: 'NATA-accredited pathology',
+    detail: 'Bloods collected and analysed by accredited laboratories',
+    verifyLabel: 'About NATA accreditation',
+    destination: 'opens nata.com.au',
+    href: NATA_URL,
   },
   ...(REVIEWS_LIVE
     ? [{
@@ -86,56 +106,39 @@ export default function DoctorCard() {
               className="text-base leading-relaxed mb-10"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Every consultation at Apex is conducted by an AHPRA-registered doctor who
-              specialises in hormonal and metabolic medicine. You don&apos;t have to trust
-              the claim: every credential on this page links to the body that regulates it.
+              Every consultation at Apex is conducted by an AHPRA-registered doctor.
+              Every script is filled by an Australian pharmacy. Every blood test runs
+              through an accredited lab. You don&apos;t have to trust any of that: each
+              claim on the right links to the body that regulates it.
             </motion.p>
 
-            {/* Doctor identity - monogram is a temporary state; the 64px slot
-                is sized for clinician photography (shoot scheduled). */}
-            <motion.div
+            {/* No individual clinician on the brand. The trust device is the
+                absence list: the three things a legitimate clinic never does. */}
+            <motion.ul
               initial={prefersReduced ? false : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.24, ease }}
+              className="list-none p-0 m-0"
+              style={{ borderTop: '1px solid var(--border)' }}
+              aria-label="What Apex does not do"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className="w-16 h-16 rounded-2xl flex-shrink-0 flex items-center justify-center overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(72,144,247,0.18) 0%, rgba(29,79,216,0.22) 100%)',
-                    border: '1px solid rgba(72,144,247,0.25)',
-                  }}
-                  aria-hidden="true"
-                >
-                  <span style={{ fontSize: '20px', fontWeight: 700, letterSpacing: '-0.03em', color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>CC</span>
-                </div>
-                <div>
-                  <p
-                    className="text-base font-bold leading-tight"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
-                  >
-                    Dr Cameron Chen
+              {[
+                ['No overseas prescribers.', 'Every script is written by a doctor registered to practise in Australia.'],
+                ['No grey-market pharmacies.', 'Medication is compounded and dispensed by a TGA-compliant Australian pharmacy.'],
+                ['No unaccredited diagnostics.', 'Every blood panel runs through NATA-accredited pathology.'],
+              ].map(([lead, rest]) => (
+                <li key={lead} className="py-4 flex items-start gap-3" style={{ borderBottom: '1px solid var(--border)' }}>
+                  <span
+                    className="mt-[7px] w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ background: 'var(--blue)' }}
+                    aria-hidden="true"
+                  />
+                  <p className="text-sm leading-relaxed m-0" style={{ color: 'var(--text-secondary)' }}>
+                    <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{lead}</span> {rest}
                   </p>
-                  <p className="text-sm mt-0.5" style={{ color: 'var(--text-secondary)' }}>
-                    Medical Practitioner
-                  </p>
-                </div>
-              </div>
-
-              <blockquote
-                className="text-sm leading-relaxed"
-                style={{
-                  color: 'var(--text-primary)',
-                  opacity: 0.75,
-                  borderTop: '1px solid var(--border)',
-                  paddingTop: 20,
-                }}
-              >
-                &ldquo;We test what other doctors don&apos;t order and interpret results in the
-                context of optimisation, not just whether you fall inside the &lsquo;normal&rsquo;
-                reference range.&rdquo;
-              </blockquote>
-            </motion.div>
+                </li>
+              ))}
+            </motion.ul>
           </div>
 
           {/* ── Right: the verification ledger ── */}
