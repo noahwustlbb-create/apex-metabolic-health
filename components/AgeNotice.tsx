@@ -37,9 +37,11 @@ export default function AgeNotice() {
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           role="region"
           aria-label="Age notice"
-          className="fixed left-4 right-4 sm:left-6 sm:right-auto z-[390]"
+          // Under the nav on phones: the GHL chat widget owns the bottom of a
+          // phone screen and swallowed clicks on the button there. Bottom-left on
+          // wider screens, clear of the chat bubble on the right.
+          className="fixed left-4 right-4 top-[84px] sm:top-auto sm:bottom-6 sm:left-6 sm:right-auto z-[390]"
           style={{
-            bottom: 'calc(16px + env(safe-area-inset-bottom, 0px))',
             maxWidth: 380,
             background: 'var(--color-surface-overlay)',
             border: '1px solid var(--border)',
