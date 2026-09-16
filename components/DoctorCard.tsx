@@ -149,9 +149,9 @@ export default function DoctorCard() {
                 href={row.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={prefersReduced ? false : { opacity: 0, y: 14 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={prefersReduced ? { duration: 0 } : { duration: 0.55, delay: 0.2 + i * 0.1, ease }}
+                initial={prefersReduced ? false : { opacity: 0, x: -28 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.2 + i * 0.1, ease }}
                 className="group grid grid-cols-1 sm:grid-cols-[8fr_5fr] gap-2 sm:gap-8 py-7 no-underline transition-colors duration-200"
                 style={{ borderTop: '1px solid var(--border)', minHeight: 44 }}
               >

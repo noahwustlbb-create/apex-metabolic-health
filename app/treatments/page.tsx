@@ -9,13 +9,13 @@ import Footer from '@/components/Footer'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const TREATMENTS = [
-  { href: '/programs/hormone-optimisation', label: 'Hormone Optimisation', sub: 'Energy, drive and recovery, restored through precise hormonal balancing.', image: 'https://images.unsplash.com/photo-1734443544776-7161343f09d2?auto=format&fit=crop&w=900&q=85', imgPos: 'center 30%', tag: 'Most popular' },
-  { href: '/programs/metabolic-weight-loss', label: 'Medical Weight Loss', sub: 'A doctor-led metabolic reset that targets the real drivers of weight resistance.', image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: null },
-  { href: '/programs/sexual-health', label: 'Sexual Health', sub: 'Private, confidential care that treats the root cause, not just the symptom.', image: 'https://images.unsplash.com/photo-1633167606207-d840b5070fc2?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: null },
-  { href: '/programs/injury-repair', label: 'Recovery and Injury Repair', sub: 'Regenerative protocols for performance, rehabilitation and mobility.', image: 'https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: null },
-  { href: '/programs/longevity', label: 'Anti-Ageing and Longevity', sub: 'Healthspan, vitality and prevention, measured and managed over time.', image: 'https://images.unsplash.com/photo-1677212004257-103cfa6b59d0?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: 'New' },
-  { href: '/programs/skin-regeneration', label: 'Skin and Hair', sub: 'Evidence-based restoration and regeneration for skin and hair.', image: 'https://images.unsplash.com/photo-1781178339148-d6ac1edb7b8f?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: null },
-  { href: '/programs/pathology', label: 'Comprehensive Blood Tests', sub: 'Full-panel diagnostics that go well beyond the standard GP screen, doctor reviewed.', image: 'https://images.unsplash.com/photo-1570917013020-a6966d3ee863?auto=format&fit=crop&w=900&q=85', imgPos: 'center center', tag: null },
+  { href: '/programs/hormone-optimisation', label: 'Hormone Optimisation', sub: 'Energy, drive and recovery, restored through precise hormonal balancing.', image: '/protocols/hormone.jpg', imgPos: 'center 30%', tag: 'Most popular' },
+  { href: '/programs/metabolic-weight-loss', label: 'Medical Weight Loss', sub: 'A doctor-led metabolic reset that targets the real drivers of weight resistance.', image: '/protocols/weight.jpg', imgPos: 'center center', tag: null },
+  { href: '/programs/sexual-health', label: 'Sexual Health', sub: 'Private, confidential care that treats the root cause, not just the symptom.', image: '/protocols/sexual.jpg', imgPos: 'center center', tag: null },
+  { href: '/programs/injury-repair', label: 'Recovery and Injury Repair', sub: 'Regenerative protocols for performance, rehabilitation and mobility.', image: '/protocols/recovery.jpg', imgPos: 'center center', tag: null },
+  { href: '/programs/longevity', label: 'Anti-Ageing and Longevity', sub: 'Healthspan, vitality and prevention, measured and managed over time.', image: '/protocols/longevity.jpg', imgPos: 'center center', tag: 'New' },
+  { href: '/programs/skin-regeneration', label: 'Skin and Hair', sub: 'Evidence-based restoration and regeneration for skin and hair.', image: '/protocols/skin.jpg', imgPos: 'center center', tag: null },
+  { href: '/programs/pathology', label: 'Comprehensive Blood Tests', sub: 'Full-panel diagnostics that go well beyond the standard GP screen, doctor reviewed.', image: '/protocols/bloods.jpg', imgPos: 'center center', tag: null },
 ]
 
 function TreatmentCard({ t, i }: { t: (typeof TREATMENTS)[number]; i: number }) {
