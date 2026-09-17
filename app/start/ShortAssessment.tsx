@@ -509,7 +509,8 @@ export default function ShortAssessment() {
 
   const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy'] : ['q0', 'pick', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy']
   const countable = questionPhases.filter(p => p !== 'place' && p !== 'privacy')
-  const currentStep = Math.max(1, countable.indexOf(phase as (typeof countable)[number]) + 1)
+  // Interstitials (pathway, privacy) keep the number of the question before them instead of resetting to 01.
+  const currentStep = Math.max(1, countable.filter(p => questionPhases.indexOf(p) <= questionPhases.indexOf(phase)).length)
   const totalSteps = countable.length
   const showProgress = phase !== 'intro' && phase !== 'eligible' && phase !== 'loading'
 
