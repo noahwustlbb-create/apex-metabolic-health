@@ -687,7 +687,7 @@ function TrustStrip() {
     <section
       ref={ref}
       className="relative py-14 overflow-hidden"
-      style={{ backgroundColor: '#0d1840' }}
+      style={{ backgroundColor: 'var(--card-bg)' }}
       aria-label="Trust signals"
     >
       <div className="glow-rule" aria-hidden="true" />

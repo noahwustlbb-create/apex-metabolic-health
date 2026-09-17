@@ -26,7 +26,6 @@ const publicRoutes = [
   '/programs-select',
   '/quiz',
   '/services',
-  '/start',
   '/terms',
   '/treatments',
   '/what-we-treat',

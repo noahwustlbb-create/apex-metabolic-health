@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
+import Logo from '@/components/brand/Logo'
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
@@ -30,33 +31,8 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <div className="mb-5">
-              <span style={{
-                display: 'block',
-                fontFamily: 'var(--font-inter)',
-                fontWeight: 600,
-                fontSize: '18px',
-                letterSpacing: '0.22em',
-                color: 'var(--text-primary)',
-                lineHeight: 1,
-                textTransform: 'uppercase',
-              }}>
-                APEX
-              </span>
-              <span style={{
-                display: 'block',
-                fontFamily: 'var(--font-inter)',
-                fontWeight: 400,
-                fontSize: '9.5px',
-                letterSpacing: '0.2em',
-                color: BLUE,
-                lineHeight: 1,
-                marginTop: '5px',
-                textTransform: 'uppercase',
-                opacity: 0.85,
-              }}>
-                Metabolic Health
-              </span>
+            <div className="mb-6">
+              <Logo variant="footer" />
             </div>
 
             <p className="text-sm leading-relaxed max-w-xs mb-5" style={{ color: TEXT }}>
