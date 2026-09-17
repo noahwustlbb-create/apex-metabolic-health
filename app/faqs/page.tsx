@@ -11,7 +11,7 @@ import Footer from '@/components/Footer'
 function AccordionItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false)
   return (
-    <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+    <div style={{ borderBottom: '1px solid rgba(15,23,42,0.08)' }}>
       <button
         className="w-full flex items-center justify-between py-5 text-left gap-4"
         onClick={() => setOpen((o) => !o)}
@@ -219,7 +219,7 @@ function FAQHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.06' }}
+          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)', lineHeight: '1.06' }}
         >
           Straight Answers.
         </motion.h1>
@@ -251,7 +251,7 @@ function FAQCategory({
 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-60px' })
-  const bg = index % 2 === 0 ? '#111111' : '#0A0A0A'
+  const bg = index % 2 === 0 ? '#ffffff' : '#f6f8fa'
 
   return (
     <section
@@ -268,7 +268,7 @@ function FAQCategory({
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
         >
           {category}
         </motion.h2>
@@ -317,7 +317,7 @@ function FAQBottomCTA() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
         >
           Still have questions?
         </motion.h2>

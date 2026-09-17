@@ -59,7 +59,7 @@ function TreatmentCard({ t, i }: { t: (typeof TREATMENTS)[number]; i: number }) 
       <div className="relative z-10 p-6">
         <h2
           className="mb-2 font-bold"
-          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(19px, 2vw, 23px)', letterSpacing: '-0.01em', lineHeight: 1.15, color: '#fff' }}
+          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', fontSize: 'clamp(19px, 2vw, 23px)', letterSpacing: '-0.01em', lineHeight: 1.15, color: '#fff' }}
         >
           {t.label}
         </h2>
@@ -100,7 +100,7 @@ export default function TreatmentsPage() {
               animate={heroInView ? { opacity: 1, y: 0 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.75, delay: 0.06, ease }}
               className="font-bold tracking-tight"
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(38px, 5vw, 68px)', lineHeight: 1.05, letterSpacing: '-0.025em', color: 'var(--text-primary)', maxWidth: 820, marginBottom: 20 }}
+              style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', fontSize: 'clamp(38px, 5vw, 68px)', lineHeight: 1.05, letterSpacing: '-0.025em', color: 'var(--text-primary)', maxWidth: 820, marginBottom: 20 }}
             >
               Doctor-led programs, built around{' '}
               <span style={{ color: 'var(--blue)' }}>your biology.</span>
@@ -144,7 +144,7 @@ export default function TreatmentsPage() {
                 className="flex flex-col justify-center rounded-2xl p-7"
                 style={{ background: 'linear-gradient(150deg, rgba(72,144,247,0.14), rgba(29,79,216,0.1))', border: '1px solid rgba(72,144,247,0.28)', aspectRatio: '4 / 5' }}
               >
-                <h2 className="mb-3 font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(20px, 2vw, 24px)', letterSpacing: '-0.01em', lineHeight: 1.12, color: 'var(--text-primary)' }}>
+                <h2 className="mb-3 font-bold" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', fontSize: 'clamp(20px, 2vw, 24px)', letterSpacing: '-0.01em', lineHeight: 1.12, color: 'var(--text-primary)' }}>
                   Not sure which is right for you?
                 </h2>
                 <p className="mb-6 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>

@@ -111,7 +111,7 @@ export default function AboutPage() {
               transition={{ duration: 0.75, delay: 0.08, ease }}
               className="font-bold tracking-tight mb-6"
               style={{
-                fontFamily: 'var(--font-space-grotesk)',
+                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                 fontSize: 'clamp(38px, 5vw, 72px)',
                 lineHeight: 1.04,
                 letterSpacing: '-0.025em',
@@ -208,7 +208,7 @@ export default function AboutPage() {
                   <h2
                     className="font-bold tracking-tight"
                     style={{
-                      fontFamily: 'var(--font-space-grotesk)',
+                      fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                       fontSize: 'clamp(26px, 3vw, 42px)',
                       lineHeight: 1.1,
                       letterSpacing: '-0.02em',
@@ -242,7 +242,7 @@ export default function AboutPage() {
               <h2
                 className="font-bold tracking-tight mb-5"
                 style={{
-                  fontFamily: 'var(--font-space-grotesk)',
+                  fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                   fontSize: 'clamp(26px, 3vw, 42px)',
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
@@ -301,7 +301,7 @@ export default function AboutPage() {
             <h2
               className="font-bold tracking-tight mb-12"
               style={{
-                fontFamily: 'var(--font-space-grotesk)',
+                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                 fontSize: 'clamp(28px, 3.5vw, 48px)',
                 lineHeight: 1.08,
                 letterSpacing: '-0.02em',
@@ -325,7 +325,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.55, delay: 0, ease }}
                   className="rounded-2xl p-7 flex flex-col justify-between"
                   style={{
-                    background: 'var(--surface)',
+                    background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
                     border: `1px solid ${ACCENT_BORDER}`,
                     minHeight: 280,
                   }}
@@ -334,7 +334,7 @@ export default function AboutPage() {
                     <div className="flex items-start justify-between mb-5">
                       <div>
                         <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Medical team</p>
-                        <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
+                        <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>
                           Apex doctors
                         </h3>
                       </div>
@@ -372,7 +372,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.55, delay: 0.1, ease }}
                   className="rounded-2xl p-7 flex flex-col justify-between"
                   style={{
-                    background: 'var(--surface)',
+                    background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
                     border: '1px solid rgba(72,144,247,0.1)',
                     minHeight: 280,
                   }}
@@ -380,7 +380,7 @@ export default function AboutPage() {
                   <div>
                     <div className="mb-5">
                       <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Clinical Network</p>
-                      <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
+                      <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>
                         Clinical Standards
                       </h3>
                     </div>
@@ -408,7 +408,7 @@ export default function AboutPage() {
             <h2
               className="font-bold tracking-tight mb-12"
               style={{
-                fontFamily: 'var(--font-space-grotesk)',
+                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                 fontSize: 'clamp(28px, 3.5vw, 48px)',
                 lineHeight: 1.08,
                 letterSpacing: '-0.02em',
@@ -465,7 +465,7 @@ export default function AboutPage() {
                 <h2
                   className="font-bold tracking-tight"
                   style={{
-                    fontFamily: 'var(--font-space-grotesk)',
+                    fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
                     fontSize: 'clamp(24px, 3vw, 38px)',
                     lineHeight: 1.1,
                     letterSpacing: '-0.02em',

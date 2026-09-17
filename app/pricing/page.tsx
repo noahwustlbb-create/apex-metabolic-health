@@ -109,7 +109,7 @@ function MembershipComparison() {
           {/* ── Single Consult Card ── */}
           <div
             className="flex flex-col rounded-2xl overflow-hidden"
-            style={{ border: '1px solid rgba(72,144,247,0.1)', background: 'var(--surface)' }}
+            style={{ border: '1px solid rgba(72,144,247,0.1)', background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)' }}
           >
             <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
               <p style={{
@@ -145,7 +145,7 @@ function MembershipComparison() {
             <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
               <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
                 <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Average initial investment</p>
-                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>$604 – $680</p>
+                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>$604 – $680</p>
                 <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Blood referral + consultation + Escript fee</p>
               </div>
               <Link
@@ -165,8 +165,8 @@ function MembershipComparison() {
             className="flex flex-col rounded-2xl overflow-hidden relative"
             style={{
               border: `1px solid ${accent}`,
-              background: 'var(--surface)',
-              boxShadow: '0 0 80px rgba(72,144,247,0.14)',
+              background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
+              boxShadow: '0 0 80px rgba(72,144,247,0.14), 0 16px 40px rgba(15,23,42,0.08)',
             }}
           >
             {/* Recommended badge */}
@@ -270,8 +270,8 @@ function MemberSavings() {
 
   return (
     <section
-      className="relative overflow-hidden"
-      style={{ backgroundColor: 'var(--surface)', paddingTop: '80px', paddingBottom: '80px' }}
+      className="relative overflow-hidden mesh"
+      style={{ paddingTop: '80px', paddingBottom: '80px' }}
       aria-label="Membership savings guide"
     >
 
@@ -753,7 +753,7 @@ function ProgramPathways() {
   }, {})
 
   return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="Program pathways">
+    <section className="relative section-pad overflow-hidden mesh" aria-label="Program pathways">
 
       <div ref={ref} className="container-tight relative z-10">
 

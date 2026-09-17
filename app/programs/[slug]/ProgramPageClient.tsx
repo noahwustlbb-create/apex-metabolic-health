@@ -10,6 +10,20 @@ import DoctorCard from '@/components/DoctorCard'
 import FAQSection from '@/components/FAQSection'
 import type { Program } from '@/lib/programs'
 
+const TEXTURE: Record<string, string> = {
+  'hormone-optimisation': '/protocols/hormone.jpg', 'metabolic-weight-loss': '/protocols/weight.jpg', 'sexual-health': '/protocols/sexual.jpg',
+  'injury-repair': '/protocols/recovery.jpg', 'longevity': '/protocols/longevity.jpg', 'skin-regeneration': '/protocols/skin.jpg',
+  'hair-restoration': '/protocols/hair.jpg', 'performance-plus': '/protocols/performance.jpg', 'pathology': '/protocols/bloods.jpg',
+}
+const CODE: Record<string, string> = {
+  'hormone-optimisation': 'APX-01', 'metabolic-weight-loss': 'APX-02', 'sexual-health': 'APX-03', 'injury-repair': 'APX-04', 'longevity': 'APX-05',
+  'skin-regeneration': 'APX-06', 'hair-restoration': 'APX-07', 'performance-plus': 'APX-08', 'pathology': 'APX-09',
+}
+const START_TYPE: Record<string, string> = {
+  'hormone-optimisation': 'hormone', 'metabolic-weight-loss': 'weight', 'sexual-health': 'sexual', 'injury-repair': 'recovery', 'longevity': 'longevity',
+  'skin-regeneration': 'skinhair', 'hair-restoration': 'skinhair', 'performance-plus': 'recovery', 'pathology': 'bloods',
+}
+
 // ─── Program Hero ─────────────────────────────────────────────────────────────
 
 function ProgramHero({ program }: { program: Program }) {
@@ -57,17 +71,17 @@ function ProgramHero({ program }: { program: Program }) {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: program.badge ? 0.05 : 0 }}
-              className="label mb-5"
+              className="t-eyebrow mb-5"
             >
-              CLINICAL PROGRAM
+              Clinical protocol
             </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4"
-              style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)', lineHeight: '1.06' }}
+              className="t-display mb-4"
+              style={{ color: 'var(--text-primary)' }}
             >
               {program.name}
             </motion.h1>
@@ -76,8 +90,8 @@ function ProgramHero({ program }: { program: Program }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.18 }}
-              className="text-xl font-medium mb-6 max-w-2xl"
-              style={{ color: 'var(--text-primary)' }}
+              className="t-lead mb-6 max-w-2xl"
+              style={{ color: 'var(--text-secondary)' }}
             >
               {program.tagline}
             </motion.p>
@@ -117,8 +131,9 @@ function ProgramHero({ program }: { program: Program }) {
                   Get Started
                 </a>
               ) : (
-                <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
-                  {program.ctaLabel}
+                <Link href={`/start?t=${START_TYPE[program.slug] ?? 'general'}`} className="btn-primary" style={{ fontSize: 15, padding: '17px 34px', borderRadius: 999 }}>
+                  Start your assessment
+                  <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </Link>
               )}
             </motion.div>
@@ -138,29 +153,32 @@ function ProgramHero({ program }: { program: Program }) {
             </motion.div>
           )}
 
-          {/* Hero image */}
-          {program.image && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative aspect-[4/3] rounded-sm overflow-hidden hidden lg:block"
-              style={{ border: '1px solid rgba(72,144,247,0.14)', background: 'var(--bg)' }}
-            >
-              <Image
-                src={program.image}
-                alt={program.name}
-                fill
-                className="object-contain"
-                sizes="(max-width: 1024px) 0vw, 50vw"
-                priority
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(135deg, rgba(72,144,247,0.07) 0%, transparent 60%)' }}
-              />
-            </motion.div>
-          )}
+          {/* Protocol frame: texture, code and two readouts, on the mesh. */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative mesh rounded-[32px] overflow-hidden hidden lg:block"
+            style={{ aspectRatio: '4 / 3', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.9)' }}
+            aria-hidden="true"
+          >
+            <div className="absolute rounded-[24px] overflow-hidden" style={{ inset: '14%' , boxShadow: '0 30px 60px rgba(15,23,42,0.22)' }}>
+              <Image src={TEXTURE[program.slug] ?? '/protocols/hormone.jpg'} alt="" fill className="object-cover" sizes="40vw" priority />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(4,6,13,0.75) 0%, rgba(4,6,13,0.15) 50%, transparent 75%)' }} />
+              <div className="absolute left-5 bottom-5 right-5">
+                <span className="t-mono text-white/70 block" style={{ fontSize: 9.5 }}>{CODE[program.slug] ?? 'APX'}</span>
+                <span className="block text-white text-[20px] font-semibold leading-tight mt-1" style={{ letterSpacing: '-0.02em' }}>{program.name}</span>
+              </div>
+            </div>
+            <div className="absolute left-5 top-5 glass-card" style={{ padding: '12px 16px', borderRadius: 18 }}>
+              <span className="t-readout block" style={{ fontSize: 30, color: 'var(--text-primary)' }}>48h</span>
+              <span className="t-mono block mt-1" style={{ color: 'var(--text-muted)', fontSize: 9.5 }}>Results back</span>
+            </div>
+            <div className="absolute right-5 bottom-5 glass-card text-right" style={{ padding: '12px 16px', borderRadius: 18 }}>
+              <span className="t-readout block" style={{ fontSize: 30, color: 'var(--text-primary)' }}>01</span>
+              <span className="t-mono block mt-1" style={{ color: 'var(--text-muted)', fontSize: 9.5 }}>Doctor, start to finish</span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -177,8 +195,7 @@ function WhatItAddresses({ program }: { program: Program }) {
 
   return (
     <section
-      className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--surface)' }}
+      className="relative section-pad overflow-hidden mesh"
       aria-label="What this program addresses"
     >
 
@@ -189,7 +206,7 @@ function WhatItAddresses({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+            style={{ fontFamily: 'var(--font-inter)', fontWeight: 600, letterSpacing: '-0.03em', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
           >
             What This Program Addresses
           </motion.h2>
@@ -242,7 +259,7 @@ function WhatsIncluded({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+            style={{ fontFamily: 'var(--font-inter)', fontWeight: 600, letterSpacing: '-0.03em', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
           >
             What&apos;s Included
           </motion.h2>
@@ -296,7 +313,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
             animate={headingInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight"
-            style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+            style={{ fontFamily: 'var(--font-inter)', fontWeight: 600, letterSpacing: '-0.03em', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
           >
             How This Program Works
           </motion.h2>
@@ -347,7 +364,7 @@ function HowThisProgramWorks({ program }: { program: Program }) {
                 <div className="flex-1 pt-3">
                   <h3
                     className="text-lg font-semibold mb-3"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}
+                    style={{ fontFamily: 'var(--font-inter)', fontWeight: 600, letterSpacing: '-0.03em', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
                   >
                     {step.title}
                   </h3>

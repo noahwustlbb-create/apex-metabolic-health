@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import QuizHormone from './QuizHormone'
 
 export const metadata: Metadata = {
-  title: 'Hormone Optimisation | Eligibility Check | Apex Metabolic Health',
+  title: 'Hormone Optimisation | Eligibility Check',
   description: 'Check your suitability for our doctor-led hormone optimisation program. Takes 3 minutes.',
   robots: { index: false, follow: false },
 }
