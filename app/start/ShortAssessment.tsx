@@ -27,6 +27,13 @@ const TREATMENT_PICKS = [
   { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet, but I'd like to speak to a doctor" },
 ]
 
+// Portal program names, so the account opens with every protocol already set.
+const PORTAL_PROGRAM: Record<string, string> = {
+  hormone: 'Hormone Optimisation', weight: 'Weight Loss & Metabolic', sexual: 'Sexual Health', recovery: 'Recovery & Injury Repair',
+  longevity: 'Anti-Ageing & Longevity', skinhair: 'Skin & Hair', bloods: 'Comprehensive Blood Tests',
+}
+const PICK_LABEL = (id: string) => TREATMENT_PICKS.find(t => t.id === id)?.label ?? id
+
 // ── Per-treatment configs ──────────────────────────────────────────────────────
 interface Config {
   title: string
@@ -347,20 +354,20 @@ function StepHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; 
 }
 
 // ── Interstitial: you're in the right place ────────────────────────────────────
-function PlaceScreen({ programme, why, onContinue }: { programme: string; why?: string; onContinue: () => void }) {
+function PlaceScreen({ programme, count = 1, why, onContinue }: { programme: string; count?: number; why?: string; onContinue: () => void }) {
   const [revealed, setRevealed] = useState(false)
   useEffect(() => { const t = window.setTimeout(() => setRevealed(true), 1100); return () => window.clearTimeout(t) }, [])
   const steps = [
     { when: 'Today', title: 'Finish these questions', body: 'Two more, then we show your match.' },
-    { when: 'This week', title: 'Bloods near you', body: 'Referral sent electronically. 4,000+ centres. Results in about 48 hours.' },
-    { when: 'Day 5', title: 'Your doctor, on the call', body: `An AHPRA-registered doctor reads your panel with you and builds your ${programme.toLowerCase()} protocol.` },
+    { when: 'This week', title: count > 1 ? 'One blood panel for everything' : 'Bloods near you', body: count > 1 ? `One referral covers all ${count} protocols. 4,000+ centres. Results in about 48 hours.` : 'Referral sent electronically. 4,000+ centres. Results in about 48 hours.' },
+    { when: 'Day 5', title: 'Your doctor, on the call', body: count > 1 ? `One call. An AHPRA-registered doctor reads your panel with you and plans ${programme} together.` : `An AHPRA-registered doctor reads your panel with you and builds your ${programme.toLowerCase()} protocol.` },
   ]
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="flex flex-col gap-6">
       <div>
         <p className="t-eyebrow mb-3">Good news</p>
         <h1 className="t-h2" style={{ fontSize: 'clamp(28px, 3.6vw, 40px)', marginBottom: 10 }}>You’re in the right place. Here’s where you’re headed.</h1>
-        {why && <p className="text-[15px] m-0" style={{ color: DIM }}>You told us: <strong style={{ color: TEXT }}>{why}</strong>. That is exactly what the {programme} pathway is built for.</p>}
+        {why && <p className="text-[15px] m-0" style={{ color: DIM }}>You told us: <strong style={{ color: TEXT }}>{why}</strong>. That is exactly what {count > 1 ? 'these pathways are' : `the ${programme} pathway is`} built for.</p>}
       </div>
       <ol className="list-none p-0 m-0 relative flex flex-col gap-3">
         {steps.map((s, i) => {
@@ -432,6 +439,13 @@ export default function ShortAssessment() {
   const hasPredefinedType = !!CONFIGS[paramType]
 
   const [selectedType, setSelectedType] = useState(hasPredefinedType ? paramType : '')
+  // Every protocol the visitor wants. The first one drives the questions; all of them go to the portal.
+  const [picks, setPicks] = useState<string[]>(hasPredefinedType ? [paramType] : [])
+  const togglePick = (id: string) => {
+    const next = picks.includes(id) ? picks.filter(x => x !== id) : [...picks, id]
+    setPicks(next)
+    setSelectedType(next[0] ?? '')
+  }
   const [isCaregiver, setIsCaregiver] = useState(false)
   const [phase, setPhase] = useState<Phase>(hasPredefinedType ? 'q0' : 'intro')
   const [dir, setDir] = useState(1)
@@ -469,6 +483,10 @@ export default function ShortAssessment() {
   if (isCaregiver) signupQs.set('type', 'caregiver')
   if (bloods) signupQs.set('bloods', bloods)
   if (source) signupQs.set('src', source)
+  const portalPrograms = picks.map(id => PORTAL_PROGRAM[id]).filter(Boolean)
+  if (portalPrograms.length) signupQs.set('programs', portalPrograms.join('|'))
+  const pickTitles = picks.map(PICK_LABEL)
+  const programmeLine = pickTitles.length > 1 ? `${pickTitles.slice(0, -1).join(', ')} and ${pickTitles[pickTitles.length - 1]}` : config.title
   const whyId = params.get('why') || ''
   if (whyId) signupQs.set('why', whyId)
   const signupUrl = `https://app.apexmetabolichealth.com.au/signup${signupQs.toString() ? `?${signupQs}` : ''}`
@@ -508,8 +526,21 @@ export default function ShortAssessment() {
                   {isCaregiver ? 'A strong match for your family member.' : 'You’re a strong match.'}
                 </motion.h2>
                 <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35, ease }} className="mb-3 leading-relaxed" style={{ color: DIM, fontSize: 16 }}>
-                  Based on your answers, {isCaregiver ? 'the person you care for is' : 'you’re'} a good candidate for the <strong style={{ color: TEXT }}>{config.title}</strong> pathway.
+                  Based on your answers, {isCaregiver ? 'the person you care for is' : 'you’re'} a good candidate for {picks.length > 1 ? <>these pathways: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>the <strong style={{ color: TEXT }}>{config.title}</strong> pathway.</>}
                 </motion.p>
+                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.38, ease }} className="mb-6">
+                  <p className="t-mono mb-2" style={{ color: DIM, fontSize: 9.5 }}>{picks.length ? 'Your protocols · tap to add or remove' : 'Add a protocol'}</p>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {TREATMENT_PICKS.filter(t => t.id !== 'general').map(t => {
+                      const on = picks.includes(t.id)
+                      return (
+                        <button key={t.id} type="button" onClick={() => togglePick(t.id)} aria-pressed={on} className="rounded-full text-[13px] font-medium transition-colors" style={{ padding: '7px 12px', background: on ? BLUE : 'rgba(255,255,255,0.85)', color: on ? '#fff' : TEXT, border: `1px solid ${on ? BLUE : BORDER}`, cursor: 'pointer' }}>
+                          {on ? '✓ ' : '+ '}{t.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </motion.div>
 
                 {isCaregiver ? (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="text-left glass-card p-5 mb-8" style={{ borderRadius: 22 }}>
@@ -535,7 +566,7 @@ export default function ShortAssessment() {
                 )}
 
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, ease }} className="flex flex-col gap-3 w-full" style={{ maxWidth: 400, margin: '0 auto' }}>
-                  <button type="button" onClick={() => open(undefined, { capture: true, program: config.title, signupUrl })} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+                  <button type="button" onClick={() => open(undefined, { capture: true, program: pickTitles.length ? pickTitles.join(', ') : config.title, signupUrl })} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
                     {isCaregiver ? 'Create a caregiver account' : 'Create your free account'}
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </button>
@@ -569,11 +600,19 @@ export default function ShortAssessment() {
 
                 {phase === 'pick' && (
                   <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'What are you looking for help with?' : 'What are you looking for?'} sub="Pick the closest fit. Your doctor decides the final pathway." />
+                    <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'What are you looking for help with?' : 'What would you like help with?'} sub="Select all that apply. One blood panel and one doctor call cover everything you pick." />
                     <div className="flex flex-col gap-3">
-                      {TREATMENT_PICKS.map((t, i) => (
-                        <OptionCard key={t.id} index={i} label={t.label} sub={t.sub} selected={selectedType === t.id} onClick={() => { setSelectedType(t.id); setTimeout(advance, 240) }} />
+                      {TREATMENT_PICKS.filter(t => t.id !== 'general').map((t, i) => (
+                        <OptionCard key={t.id} index={i} label={t.label} sub={t.sub} selected={picks.includes(t.id)} onClick={() => togglePick(t.id)} />
                       ))}
+                    </div>
+                    <button type="button" onClick={() => { setPicks([]); setSelectedType('general'); advance() }} className="mx-auto text-[14px] font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer' }}>
+                      Not sure yet, I’d like to talk to a doctor
+                    </button>
+                    <div className="sticky bottom-4 z-10">
+                      <button type="button" disabled={!picks.length} onClick={advance} className="btn-primary w-full justify-center disabled:opacity-40" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+                        {picks.length > 1 ? `Continue with ${picks.length} protocols` : 'Continue'}
+                      </button>
                     </div>
                   </div>
                 )}
@@ -589,7 +628,7 @@ export default function ShortAssessment() {
                   </div>
                 )}
 
-                {phase === 'place' && <PlaceScreen programme={config.title} why={why} onContinue={advance} />}
+                {phase === 'place' && <PlaceScreen programme={programmeLine} count={Math.max(1, picks.length)} why={why} onContinue={advance} />}
 
                 {phase === 'q2' && (
                   <div className="flex flex-col gap-5">
