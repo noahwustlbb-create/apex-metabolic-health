@@ -240,7 +240,7 @@ const Q0_OPTIONS = [
   },
 ]
 
-type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'place' | 'q2' | 'q3' | 'bloods' | 'source' | 'loading' | 'eligible'
+type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'place' | 'exp' | 'q2' | 'q3' | 'bloods' | 'source' | 'privacy' | 'loading' | 'eligible'
 
 const BLOODS_OPTIONS = [
   { id: 'recent', label: 'Yes, from the last 12 months', sub: 'Upload them in your portal and your doctor reads them first' },
@@ -248,6 +248,14 @@ const BLOODS_OPTIONS = [
   { id: 'none', label: 'No', sub: 'We issue the referral; results are back in about 48 hours' },
   { id: 'unsure', label: 'Not sure', sub: 'Your doctor decides on the call' },
 ]
+// Where the patient is starting from, so the doctor opens the call at the right level.
+const EXPERIENCE_OPTIONS = [
+  { id: 'new', label: 'New to this', sub: 'Never had treatment for it' },
+  { id: 'tried', label: 'Tried it before', sub: 'Had treatment in the past, not on it now' },
+  { id: 'current', label: 'On treatment now', sub: 'With another doctor or clinic, looking to switch or review' },
+  { id: 'unsure', label: 'Not sure', sub: 'Your doctor works it out with you on the call' },
+]
+
 const SOURCE_OPTIONS = [
   { id: 'google', label: 'Google search' },
   { id: 'instagram', label: 'Instagram or Facebook' },
@@ -275,7 +283,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
           <span style={{ color: TEXT }}>Your protocol </span><span style={{ color: BLUE }}>starts here.</span>
         </motion.h1>
         <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3, ease }} className="t-lead mb-10 mx-auto" style={{ color: DIM, maxWidth: 420 }}>
-          Five quick questions. We match you to the right pathway, then you decide whether to create an account.
+          A few quick questions. We match you to the right pathway, then you decide whether to create an account.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.42, ease }}>
           <button type="button" onClick={onStart} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '18px 40px', borderRadius: 999, maxWidth: 420, margin: '0 auto' }}>
@@ -431,6 +439,44 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
   )
 }
 
+// ── Privacy (before the match and signup) ─────────────────────────────────────
+function PrivacyScreen({ refCode, setRefCode, onContinue }: { refCode: string; setRefCode: (v: string) => void; onContinue: () => void }) {
+  const points = [
+    { t: 'Only your care team sees it', b: 'Your answers go to Apex doctors and clinic staff. Nobody else.' },
+    { t: 'Never sold', b: 'We do not sell, rent or trade your information.' },
+    { t: 'Encrypted and private', b: 'Encrypted in transit and at rest, in a private medical record.' },
+    { t: 'A doctor decides', b: 'An AHPRA-registered doctor reviews you. Not an algorithm.' },
+  ]
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="flex flex-col gap-6">
+      <div className="flex flex-col items-center text-center">
+        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, ease }} className="w-20 h-20 rounded-[26px] flex items-center justify-center mb-5 glass-card" style={{ borderRadius: 26 }} aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" className="w-9 h-9"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z" stroke={BLUE} strokeWidth="1.8" strokeLinejoin="round" /><path d="M8.5 12l2.5 2.5 4.5-5" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        </motion.div>
+        <p className="t-eyebrow mb-2">Built for privacy</p>
+        <h1 className="t-h2" style={{ fontSize: 'clamp(28px, 3.6vw, 40px)', marginBottom: 8 }}>Your health stays yours.</h1>
+        <p className="text-[15px] m-0" style={{ color: DIM, maxWidth: 420 }}>Before we show your match, here is exactly what happens to what you told us.</p>
+      </div>
+      <ul className="list-none p-0 m-0 grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {points.map((p, i) => (
+          <motion.li key={p.t} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 + i * 0.08, ease }} className="glass-card" style={{ padding: '14px 16px', borderRadius: 20 }}>
+            <span className="block font-semibold text-[15px]" style={{ color: TEXT }}>{p.t}</span>
+            <span className="block mt-0.5 text-[13.5px]" style={{ color: DIM }}>{p.b}</span>
+          </motion.li>
+        ))}
+      </ul>
+      <div className="glass-card" style={{ padding: '14px 16px', borderRadius: 20 }}>
+        <label htmlFor="start-ref" className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>Got a referral code? <span className="font-normal" style={{ color: DIM }}>(optional)</span></label>
+        <input id="start-ref" value={refCode} onChange={e => setRefCode(e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))} placeholder="Enter referral code" autoComplete="off" className="w-full rounded-xl px-3.5 py-3 text-[15px] outline-none" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, letterSpacing: '0.08em' }} />
+      </div>
+      <button type="button" onClick={onContinue} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+        Show my match
+      </button>
+      <p className="text-center text-[12px] m-0" style={{ color: DIM }}>Full detail in our <a href="/privacy-policy" className="link-draw" style={{ color: TEXT }}>privacy policy</a>.</p>
+    </motion.div>
+  )
+}
+
 // ── Main ───────────────────────────────────────────────────────────────────────
 export default function ShortAssessment() {
   const params = useSearchParams()
@@ -455,12 +501,14 @@ export default function ShortAssessment() {
   const [s3, setS3] = useState('')
   const [bloods, setBloods] = useState('')
   const [source, setSource] = useState('')
+  const [experience, setExperience] = useState('')
+  const [refCode, setRefCode] = useState(() => (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))
   const { open } = useSignupGate()
 
   const config = CONFIGS[selectedType] ?? CONFIGS.hormone
 
-  const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'q2', 'q3', 'bloods', 'source'] : ['q0', 'pick', 'q1', 'place', 'q2', 'q3', 'bloods', 'source']
-  const countable = questionPhases.filter(p => p !== 'place')
+  const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy'] : ['q0', 'pick', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy']
+  const countable = questionPhases.filter(p => p !== 'place' && p !== 'privacy')
   const currentStep = Math.max(1, countable.indexOf(phase as (typeof countable)[number]) + 1)
   const totalSteps = countable.length
   const showProgress = phase !== 'intro' && phase !== 'eligible' && phase !== 'loading'
@@ -483,6 +531,8 @@ export default function ShortAssessment() {
   if (isCaregiver) signupQs.set('type', 'caregiver')
   if (bloods) signupQs.set('bloods', bloods)
   if (source) signupQs.set('src', source)
+  if (experience) signupQs.set('exp', experience)
+  if (refCode) signupQs.set('ref', refCode)
   const portalPrograms = picks.map(id => PORTAL_PROGRAM[id]).filter(Boolean)
   if (portalPrograms.length) signupQs.set('programs', portalPrograms.join('|'))
   const pickTitles = picks.map(PICK_LABEL)
@@ -630,6 +680,19 @@ export default function ShortAssessment() {
 
                 {phase === 'place' && <PlaceScreen programme={programmeLine} count={Math.max(1, picks.length)} why={why} onContinue={advance} />}
 
+                {phase === 'exp' && (
+                  <div className="flex flex-col gap-5">
+                    <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'Where are they at with it?' : 'Where are you at with it?'} sub="So your doctor starts the call at the right level." />
+                    <div className="flex flex-col gap-3">
+                      {EXPERIENCE_OPTIONS.map((opt, i) => (
+                        <OptionCard key={opt.id} index={i} label={opt.label} sub={opt.sub} selected={experience === opt.id} onClick={() => { setExperience(opt.id); setTimeout(advance, 240) }} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {phase === 'privacy' && <PrivacyScreen refCode={refCode} setRefCode={setRefCode} onContinue={advance} />}
+
                 {phase === 'q2' && (
                   <div className="flex flex-col gap-5">
                     <StepHeading eyebrow={eyebrow} title={q2Question} sub="This helps your doctor prepare before the call." />
@@ -669,7 +732,7 @@ export default function ShortAssessment() {
 
                 {phase === 'source' && (
                   <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title="Where did you hear about Apex?" sub="Last one. It helps us spend less on ads and more on doctors." />
+                    <StepHeading eyebrow={eyebrow} title="Where did you hear about Apex?" sub="Last question. It helps us spend less on ads and more on doctors." />
                     <div className="flex flex-col gap-3">
                       {SOURCE_OPTIONS.map((opt, i) => (
                         <OptionCard key={opt.id} index={i} label={opt.label} selected={source === opt.id} onClick={() => { setSource(opt.id); setTimeout(advance, 240) }} />
@@ -680,7 +743,7 @@ export default function ShortAssessment() {
               </motion.div>
             </AnimatePresence>
 
-            {(phase === 'q1' || phase === 'q2' || phase === 'q3' || phase === 'bloods' || phase === 'source') && (
+            {(phase === 'q1' || phase === 'exp' || phase === 'q2' || phase === 'q3' || phase === 'bloods' || phase === 'source') && (
               <div className="flex justify-end mt-6">
                 <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer' }}>Skip this question</button>
               </div>
