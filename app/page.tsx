@@ -7,6 +7,7 @@ import ProtocolBento from '@/components/home/ProtocolBento'
 import Pathway from '@/components/home/Pathway'
 import PortalPeek from '@/components/home/PortalPeek'
 import ReportPreview from '@/components/home/ReportPreview'
+import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
 import Pricing from '@/components/home/Pricing'
 import Values from '@/components/home/Values'
@@ -43,6 +44,7 @@ export default function Home() {
         <Pathway />
         <PortalPeek />
         <ReportPreview />
+        <PanelMarkers />
         <DoctorCard />
         <Pricing />
         <Values />
