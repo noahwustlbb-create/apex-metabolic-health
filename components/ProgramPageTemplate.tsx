@@ -87,10 +87,11 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
               {...anim(0.06, 32)}
               style={{
                 fontFamily: 'var(--font-inter)',
-                fontSize: 'clamp(34px, 5vw, 68px)',
-                fontWeight: 700,
-                lineHeight: 1.06,
-                letterSpacing: '-0.03em',
+                fontSize: 'clamp(38px, 5vw, 72px)',
+                fontWeight: 600,
+                lineHeight: 1.02,
+                letterSpacing: '-0.035em',
+                fontFeatureSettings: '"cv11", "ss03"',
                 color: INK,
                 marginBottom: '0.75rem',
               }}
@@ -126,9 +127,9 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   background: `linear-gradient(135deg, ${BLUE} 0%, #2563eb 100%)`,
-                  color: '#fff', fontSize: 14, fontWeight: 600, padding: '15px 32px',
-                  borderRadius: 12, border: 'none', cursor: 'pointer',
-                  boxShadow: '0 6px 24px rgba(72,144,247,0.35)',
+                  color: '#fff', fontSize: 15, fontWeight: 600, padding: '17px 34px',
+                  borderRadius: 999, border: 'none', cursor: 'pointer',
+                  boxShadow: '0 8px 24px rgba(29,79,216,0.3)',
                   fontFamily: 'var(--font-inter)', letterSpacing: '-0.01em',
                   transition: 'transform 0.18s ease, box-shadow 0.18s ease',
                   WebkitTapHighlightColor: 'transparent',
@@ -185,20 +186,18 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
             </div>
 
             {/* Stat card */}
-            <div style={{
+            <div className="glass-card" style={{
               borderRadius: 16, padding: '16px 14px',
-              background: DARK_INK,
               display: 'flex', flexDirection: 'column', justifyContent: 'center',
             }}>
-              <p style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: 'clamp(22px, 3.5vw, 42px)',
-                fontWeight: 700, color: '#ffffff', lineHeight: 1, letterSpacing: '-0.03em',
-                marginBottom: 4,
+              <p className="t-readout" style={{
+                fontSize: 'clamp(22px, 3.2vw, 38px)',
+                color: 'var(--text-primary)',
+                marginBottom: 6,
               }}>
                 {config.heroBentoStat.value}
               </p>
-              <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)', fontWeight: 500, lineHeight: 1.4 }}>
+              <p style={{ fontSize: 10.5, color: 'var(--text-secondary)', fontWeight: 500, lineHeight: 1.4 }}>
                 {config.heroBentoStat.label}
               </p>
               <div style={{ width: 24, height: 2, background: BLUE, borderRadius: 1, marginTop: 10 }} />
@@ -316,7 +315,7 @@ function EvidenceSection({ config }: { config: ProgramPageConfig }) {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid var(--border)', padding: 'clamp(64px, 8vw, 100px) 0' }} aria-label="Clinical foundation">
+    <section ref={ref} className="mesh" style={{ borderTop: '1px solid var(--border)', padding: 'clamp(64px, 8vw, 100px) 0' }} aria-label="Clinical foundation">
       <div className="container-tight">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -425,7 +424,7 @@ function ProcessSection({ config, onGetStarted }: { config: ProgramPageConfig; o
               transition={prefersReduced ? { duration: 0 } : { duration: 0.55, delay: i * 0.1, ease }}
               style={{
                 borderRadius: 16, overflow: 'hidden',
-                background: 'var(--surface)',
+                background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
                 border: '1px solid rgba(72,144,247,0.1)',
                 display: 'flex', flexDirection: 'column',
               }}
@@ -520,7 +519,7 @@ function MechanismSection({ config }: { config: ProgramPageConfig }) {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid var(--border)', padding: 'clamp(64px, 8vw, 100px) 0' }} aria-label="Why this approach works">
+    <section ref={ref} className="mesh" style={{ borderTop: '1px solid var(--border)', padding: 'clamp(64px, 8vw, 100px) 0' }} aria-label="Why this approach works">
       <div className="container-tight">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -788,9 +787,7 @@ function StickyBar({ name, onGetStarted }: { name: string; onGetStarted: () => v
           transition={prefersReduced ? { duration: 0 } : { duration: 0.3, ease }}
           style={{
             position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
-            background: 'var(--surface)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
+            background: 'rgba(255,255,255,0.86)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 -8px 30px rgba(15,23,42,0.08)',
             borderTop: '1px solid var(--border)',
             padding: '12px clamp(16px, 5vw, 48px)',
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,

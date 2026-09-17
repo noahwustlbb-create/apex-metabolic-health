@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import BgtOrderPage from './BgtOrderPage'
 
 export const metadata: Metadata = {
-  title: 'Order Blood Tests | Apex Metabolic Health',
+  title: 'Order Blood Tests',
   description: 'Order doctor-reviewed blood panels online. Results in 1–3 days at accredited collection centres across Australia.',
 }
 

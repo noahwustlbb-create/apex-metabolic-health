@@ -2,7 +2,7 @@ import HealthQuiz from '@/components/HealthQuiz'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Health Assessment | Apex Metabolic Health',
+  title: 'Health Assessment',
   description: 'Find your clinical program in 2 minutes. Doctor-curated matching across hormone, metabolic, performance, and recovery programs.',
 }
 

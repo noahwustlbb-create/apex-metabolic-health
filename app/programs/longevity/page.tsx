@@ -2,7 +2,7 @@ import ProgramPageTemplate from '@/components/ProgramPageTemplate'
 import { longevityConfig } from '@/lib/program-configs'
 
 export const metadata = {
-  title: 'Anti-Ageing & Longevity | Apex Metabolic Health',
+  title: 'Anti-Ageing & Longevity',
   description: 'Doctor-led longevity and healthspan program. Comprehensive biological panel, AHPRA-registered doctors, evidence-based protocols.',
 }
 
