@@ -34,7 +34,7 @@ export default function Invite() {
           </motion.div>
 
           <div className="relative max-w-3xl mx-auto text-center">
-            <RevealText as="h2" className="t-display" style={{ marginBottom: 24 }} segments={[{ text: 'Your biology.' }, { text: 'Measured properly.', accent: true }]} />
+            <RevealText as="h2" className="t-display" style={{ marginBottom: 24 }} segments={[{ text: 'Stop guessing.' }, { text: 'Start measuring.', accent: true }]} />
             <motion.p {...reveal(0.35, 18)} className="t-lead mx-auto" style={{ color: 'var(--text-secondary)', maxWidth: '40ch', marginBottom: 40 }}>
               Two minutes to start. A doctor within days. No GP referral.
             </motion.p>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, Doto } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -25,6 +25,15 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
+})
+
+// Dot-matrix readout face for numerals only (prices, hours, counts). Body copy stays Inter.
+const doto = Doto({
+  subsets: ['latin'],
+  variable: '--font-doto',
+  display: 'swap',
+  weight: 'variable',
+  axes: ['ROND'],
 })
 
 
@@ -115,7 +124,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable} ${doto.variable}`}>
       <body className="antialiased overflow-x-hidden">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">

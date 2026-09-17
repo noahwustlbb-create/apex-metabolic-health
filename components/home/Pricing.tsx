@@ -9,9 +9,9 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 // Numbers mirror app/pricing/page.tsx (COMPARISON_ROWS). Change them there first.
 const CARDS = [
-  { label: 'Initial blood referral', member: '$199', single: '$280', note: 'Full panel, doctor reviewed. Results in about 48 hours.' },
-  { label: 'Doctor consultation', member: 'from $99', single: 'from $199', note: 'Phone or video, 45 to 60 minutes, with your results on screen.' },
-  { label: 'Membership', member: '$99 / mo', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees, free referrals.', highlight: true },
+  { label: 'Initial blood referral', prefix: '', value: '$199', suffix: '', single: '$280', note: 'Full panel, doctor reviewed. Results in about 48 hours.' },
+  { label: 'Doctor consultation', prefix: 'from', value: '$99', suffix: '', single: 'from $199', note: 'Phone or video, 45 to 60 minutes, with your results on screen.' },
+  { label: 'Membership', prefix: '', value: '$99', suffix: '/ month', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees, free referrals.', highlight: true },
 ]
 
 /**
@@ -26,7 +26,7 @@ export default function Pricing() {
     reduced ? { initial: false as const } : { initial: { opacity: 0, y }, animate: inView ? { opacity: 1, y: 0 } : {}, transition: { duration: 0.7, delay, ease } }
 
   return (
-    <section ref={ref} id="pricing" className="section-y" style={{ background: 'var(--bg)' }} aria-label="Pricing">
+    <section ref={ref} id="pricing" className="section-y mesh" aria-label="Pricing">
       <div className="container-x">
         <div className="max-w-2xl mb-12 md:mb-16">
           <motion.p {...reveal(0, 10)} className="t-eyebrow" style={{ marginBottom: 20 }}>Straight pricing</motion.p>
@@ -42,16 +42,19 @@ export default function Pricing() {
               key={c.label}
               {...reveal(0.15 + i * 0.1, 26)}
               whileHover={reduced ? undefined : { y: -6 }}
-              className={`relative rounded-[24px] p-7 md:p-8 ${!reduced ? `float-${['a', 'b', 'c'][i]}` : ''}`}
+              className={`relative glass-card p-7 md:p-8 ${!reduced ? `float-${['a', 'b', 'c'][i]}` : ''}`}
               style={{
-                background: c.highlight ? 'linear-gradient(160deg, rgba(72,144,247,0.10) 0%, rgba(72,144,247,0.02) 60%, var(--card-bg) 100%)' : 'var(--card-bg)',
-                border: `1px solid ${c.highlight ? 'rgba(72,144,247,0.35)' : 'var(--border)'}`,
-                boxShadow: c.highlight ? '0 30px 60px rgba(72,144,247,0.12)' : '0 1px 2px rgba(15,23,42,0.04)',
-                transition: 'box-shadow 0.4s ease',
+                background: c.highlight ? 'linear-gradient(160deg, rgba(72,144,247,0.14) 0%, rgba(255,255,255,0.8) 70%)' : undefined,
+                border: c.highlight ? '1px solid rgba(72,144,247,0.35)' : undefined,
+                boxShadow: c.highlight ? '0 30px 60px rgba(72,144,247,0.16)' : undefined,
               }}
             >
               <p className="t-mono m-0" style={{ color: c.highlight ? 'var(--blue)' : 'var(--text-muted)' }}>{c.label}</p>
-              <p className="m-0 mt-5" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(34px, 3.4vw, 46px)', fontWeight: 600, letterSpacing: '-0.03em', lineHeight: 1, color: 'var(--text-primary)' }}>{c.member}</p>
+              <p className="m-0 mt-5 flex items-baseline gap-2 flex-wrap" style={{ color: 'var(--text-primary)' }}>
+                {c.prefix && <span className="text-[15px] font-medium" style={{ color: 'var(--text-secondary)' }}>{c.prefix}</span>}
+                <span className="t-readout" style={{ fontSize: 'clamp(36px, 3.6vw, 50px)' }}>{c.value}</span>
+                {c.suffix && <span className="text-[15px] font-medium" style={{ color: 'var(--text-secondary)' }}>{c.suffix}</span>}
+              </p>
               <p className="m-0 mt-2 text-[13px]" style={{ color: 'var(--text-muted)' }}>
                 member · <span style={{ color: 'var(--text-secondary)' }}>{c.single}</span> single visit
               </p>

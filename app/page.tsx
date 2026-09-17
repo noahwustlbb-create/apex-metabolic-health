@@ -5,7 +5,7 @@ import Intro from '@/components/home/Intro'
 import Ticker from '@/components/home/Ticker'
 import ProtocolBento from '@/components/home/ProtocolBento'
 import Pathway from '@/components/home/Pathway'
-import VisualBreak from '@/components/home/VisualBreak'
+import ReportPreview from '@/components/home/ReportPreview'
 import DoctorCard from '@/components/DoctorCard'
 import Pricing from '@/components/home/Pricing'
 import Values from '@/components/home/Values'
@@ -15,7 +15,7 @@ import Invite from '@/components/home/Invite'
 import Footer from '@/components/Footer'
 
 // Story: HOOK (hero) → INTRODUCE (clinic) → OFFER (protocols) → EXPLAIN
-// (pathway) → rest (visual break) → PROVE (verification, pricing) → PAUSE
+// (pathway) → PROVE (report preview, verification, pricing) → PAUSE
 // (who we are) → ANSWER (FAQ) → INVITE (cta). White page; depth comes from
 // framed photographs, floating panels and motion, not from dark bands.
 
@@ -40,7 +40,7 @@ export default function Home() {
         <Intro />
         <ProtocolBento />
         <Pathway />
-        <VisualBreak />
+        <ReportPreview />
         <DoctorCard />
         <Pricing />
         <Values />
