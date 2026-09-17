@@ -8,25 +8,22 @@ import RevealText from '@/components/motion/RevealText'
 const ease = [0.22, 1, 0.36, 1] as const
 
 /** What the doctor orders. Test names only, grouped the way the report groups them. */
+// Mirrors the iMedical panels exactly (checkout, 17 Sep 2026). Change both together.
 const MEN = [
-  ['Hormones', 'Total and free testosterone, SHBG, oestradiol, LH, FSH, prolactin, DHEA-S, cortisol'],
-  ['Growth', 'IGF-1'],
-  ['Thyroid', 'TSH, free T4, free T3'],
-  ['Metabolic', 'Fasting glucose, HbA1c, fasting insulin, magnesium'],
-  ['Lipids and heart', 'Total cholesterol, triglycerides, HDL, LDL, ApoB, hs-CRP'],
-  ['Liver and kidney', 'Liver function (LFT), kidney function (UEC)'],
-  ['Blood', 'Full blood count, haematocrit, ferritin and iron studies'],
+  ['Hormones', 'Total and free testosterone, SHBG, oestradiol, LH, FSH, prolactin, progesterone, DHEA-S, cortisol'],
+  ['Growth', 'IGF-1, growth hormone'],
+  ['Thyroid', 'TSH'],
   ['Prostate', 'PSA'],
-  ['Vitamins', 'Vitamin D, B12'],
+  ['Chemistry (MBA20)', 'Glucose, liver function, kidney function, electrolytes, calcium, uric acid, cholesterol, triglycerides'],
+  ['Blood and inflammation', 'Full blood count including haematocrit, hs-CRP'],
 ]
 const WOMEN = [
-  ['Hormones', 'Oestradiol, progesterone, free and total testosterone, SHBG, LH, FSH, prolactin, DHEA-S, cortisol'],
-  ['Thyroid', 'TSH, free T4, free T3, thyroid antibodies'],
-  ['Metabolic', 'Fasting glucose, HbA1c, fasting insulin, magnesium'],
-  ['Lipids and heart', 'Total cholesterol, triglycerides, HDL, LDL, ApoB, hs-CRP'],
-  ['Liver and kidney', 'Liver function (LFT), kidney function (UEC)'],
-  ['Blood', 'Full blood count, ferritin and iron studies'],
-  ['Vitamins', 'Vitamin D, B12, folate'],
+  ['Hormones', 'Oestradiol, progesterone, total and free testosterone, SHBG, LH, FSH, prolactin, DHEA-S, cortisol'],
+  ['Thyroid', 'TSH, free T4, free T3'],
+  ['Chemistry (MBA20)', 'Glucose, liver function, kidney function, electrolytes, calcium, uric acid, cholesterol, triglycerides'],
+  ['Metabolic', 'HbA1c, lipase'],
+  ['Iron and vitamins', 'Iron studies including ferritin, vitamin D'],
+  ['Blood and inflammation', 'Full blood count, hs-CRP'],
 ]
 
 /**

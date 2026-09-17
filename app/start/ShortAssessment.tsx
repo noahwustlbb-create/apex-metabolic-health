@@ -132,7 +132,7 @@ const CONFIGS: Record<string, Config> = {
     q1: 'What would they like to test for?',
     opts1: [
       'Hormones (testosterone, oestrogen, thyroid)',
-      'Metabolic health (glucose, insulin, cholesterol)',
+      'Metabolic health (glucose, cholesterol, liver, kidney)',
       'Full comprehensive panel',
       'Cardiovascular markers',
       "I'm not sure, recommend a panel",

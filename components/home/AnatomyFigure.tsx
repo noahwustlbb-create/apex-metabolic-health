@@ -14,6 +14,8 @@ type Hotspot = {
   label: string
   /** Tests on the Apex panel. Names of tests only, never medicines or outcomes. */
   markers: string
+  /** Women's panel differs for some systems (full thyroid, iron, vitamin D). */
+  femaleMarkers?: string
   /** One line on what the markers describe. */
   tells: string
   /** The pathway that reads these markers first. */
@@ -25,24 +27,24 @@ type Hotspot = {
 // One hotspot per protocol, placed where the body tells the story. Test
 // names only, never medicines or outcomes.
 const SHARED: Omit<Hotspot, 'x' | 'y'>[] = [
-  { id: 'brain',     label: 'Brain and pituitary', markers: 'LH · FSH · Prolactin · IGF-1',                  tells: 'The signals that drive the rest of the hormone system, and how you age.', protocol: { code: 'APX-05', name: 'Anti-Ageing and Longevity', href: '/programs/longevity' } },
-  { id: 'hair',      label: 'Scalp and hair',      markers: 'DHT · SHBG · Ferritin · Thyroid',              tells: 'The four markers behind thinning and shedding.',                        protocol: { code: 'APX-07', name: 'Hair Restoration', href: '/programs/hair-restoration' } },
-  { id: 'skin',      label: 'Skin',                markers: 'Cortisol · DHEA-S · hs-CRP · Zinc · Vitamin D', tells: 'Stress, inflammation and the nutrients skin repairs with.',             protocol: { code: 'APX-06', name: 'Skin Regeneration', href: '/programs/skin-regeneration' } },
-  { id: 'thyroid',   label: 'Thyroid',             markers: 'TSH · Free T4 · Free T3',                      tells: 'Energy, temperature, weight and mood set-point.',                       protocol: { code: 'APX-02', name: 'Medical Weight Loss', href: '/programs/metabolic-weight-loss' } },
-  { id: 'heart',     label: 'Heart and vessels',   markers: 'Lipids · ApoB · hs-CRP · Full blood count',    tells: 'Cardiovascular risk, oxygen carrying and background inflammation.',     protocol: { code: 'APX-09', name: 'Comprehensive Blood Tests', href: '/programs/pathology' } },
-  { id: 'muscle',    label: 'Muscle and recovery', markers: 'Testosterone · IGF-1 · Creatine kinase · Ferritin', tells: 'Output, recovery between sessions and body composition.',           protocol: { code: 'APX-08', name: 'Performance Plus', href: '/programs/performance-plus' } },
-  { id: 'liver',     label: 'Liver and kidneys',   markers: 'ALT · AST · GGT · eGFR · Electrolytes',        tells: 'How the body is coping with load, and what is safe to prescribe.',      protocol: { code: 'APX-09', name: 'Comprehensive Blood Tests', href: '/programs/pathology' } },
-  { id: 'metabolic', label: 'Metabolic',           markers: 'HbA1c · Fasting insulin · Glucose · Magnesium', tells: 'Blood sugar control, insulin resistance and where weight sits.',      protocol: { code: 'APX-02', name: 'Medical Weight Loss', href: '/programs/metabolic-weight-loss' } },
-  { id: 'joint',     label: 'Joints and tissue',   markers: 'hs-CRP · Vitamin D · Collagen markers · IGF-1', tells: 'Inflammation and the repair signals after injury.',                    protocol: { code: 'APX-04', name: 'Recovery and Injury Repair', href: '/programs/injury-repair' } },
+  { id: 'brain',     label: 'Brain and pituitary', markers: 'LH · FSH · Prolactin · IGF-1 · Cortisol', femaleMarkers: 'LH · FSH · Prolactin · Cortisol',                  tells: 'The signals that drive the rest of the hormone system, and how you age.', protocol: { code: 'APX-05', name: 'Anti-Ageing and Longevity', href: '/programs/longevity' } },
+  { id: 'hair',      label: 'Scalp and hair',      markers: 'Testosterone · SHBG · DHEA-S · TSH', femaleMarkers: 'Testosterone · SHBG · DHEA-S · Iron studies · Thyroid',              tells: 'The four markers behind thinning and shedding.',                        protocol: { code: 'APX-07', name: 'Hair Restoration', href: '/programs/hair-restoration' } },
+  { id: 'skin',      label: 'Skin',                markers: 'Cortisol · DHEA-S · hs-CRP', femaleMarkers: 'Cortisol · DHEA-S · hs-CRP · Vitamin D', tells: 'Stress, inflammation and the nutrients skin repairs with.',             protocol: { code: 'APX-06', name: 'Skin Regeneration', href: '/programs/skin-regeneration' } },
+  { id: 'thyroid',   label: 'Thyroid',             markers: 'TSH', femaleMarkers: 'TSH · Free T4 · Free T3',                      tells: 'Energy, temperature, weight and mood set-point.',                       protocol: { code: 'APX-02', name: 'Medical Weight Loss', href: '/programs/metabolic-weight-loss' } },
+  { id: 'heart',     label: 'Heart and vessels',   markers: 'Cholesterol · Triglycerides · hs-CRP · Full blood count', femaleMarkers: 'Cholesterol · Triglycerides · hs-CRP · Full blood count',    tells: 'Cardiovascular risk, oxygen carrying and background inflammation.',     protocol: { code: 'APX-09', name: 'Comprehensive Blood Tests', href: '/programs/pathology' } },
+  { id: 'muscle',    label: 'Muscle and recovery', markers: 'Testosterone · IGF-1 · Growth hormone · Cortisol', femaleMarkers: 'Testosterone · SHBG · Cortisol · Iron studies', tells: 'Output, recovery between sessions and body composition.',           protocol: { code: 'APX-08', name: 'Performance Plus', href: '/programs/performance-plus' } },
+  { id: 'liver',     label: 'Liver and kidneys',   markers: 'Liver function · Kidney function · Electrolytes', femaleMarkers: 'Liver function · Kidney function · Electrolytes · Lipase',        tells: 'How the body is coping with load, and what is safe to prescribe.',      protocol: { code: 'APX-09', name: 'Comprehensive Blood Tests', href: '/programs/pathology' } },
+  { id: 'metabolic', label: 'Metabolic',           markers: 'Glucose · Cholesterol · Triglycerides · Uric acid', femaleMarkers: 'Glucose · HbA1c · Cholesterol · Triglycerides', tells: 'Blood sugar control, insulin resistance and where weight sits.',      protocol: { code: 'APX-02', name: 'Medical Weight Loss', href: '/programs/metabolic-weight-loss' } },
+  { id: 'joint',     label: 'Joints and tissue',   markers: 'hs-CRP · Full blood count · Uric acid', femaleMarkers: 'hs-CRP · Vitamin D · Full blood count', tells: 'Inflammation and the repair signals after injury.',                    protocol: { code: 'APX-04', name: 'Recovery and Injury Repair', href: '/programs/injury-repair' } },
 ]
 
 const MALE_REPRO: Omit<Hotspot, 'x' | 'y'>[] = [
   { id: 'repro',  label: 'Reproductive',  markers: 'Total and free testosterone · SHBG · Oestradiol · PSA', tells: 'Drive, muscle, mood and recovery.',            protocol: { code: 'APX-01', name: 'Hormone Optimisation', href: '/programs/hormone-optimisation' } },
-  { id: 'sexual', label: 'Sexual health', markers: 'Testosterone · Prolactin · Lipids · HbA1c',            tells: 'The hormonal and vascular side of performance.', protocol: { code: 'APX-03', name: 'Sexual Health', href: '/programs/sexual-health' } },
+  { id: 'sexual', label: 'Sexual health', markers: 'Testosterone · Prolactin · Oestradiol · Cholesterol',            tells: 'The hormonal and vascular side of performance.', protocol: { code: 'APX-03', name: 'Sexual Health', href: '/programs/sexual-health' } },
 ]
 const FEMALE_REPRO: Omit<Hotspot, 'x' | 'y'>[] = [
   { id: 'repro',  label: 'Reproductive',  markers: 'Oestradiol · Progesterone · FSH · LH · Testosterone', tells: 'Cycle, energy, mood and body composition.',      protocol: { code: 'APX-01', name: 'Hormone Optimisation', href: '/programs/hormone-optimisation' } },
-  { id: 'sexual', label: 'Sexual health', markers: 'Oestradiol · Testosterone · Prolactin · Thyroid',     tells: 'Libido, comfort and the hormones behind both.',  protocol: { code: 'APX-03', name: 'Sexual Health', href: '/programs/sexual-health' } },
+  { id: 'sexual', label: 'Sexual health', markers: 'Oestradiol · Testosterone · Prolactin · TSH',     tells: 'Libido, comfort and the hormones behind both.',  protocol: { code: 'APX-03', name: 'Sexual Health', href: '/programs/sexual-health' } },
 ]
 
 /** Positions are percentages of the frame, tuned to each figure. */
@@ -52,7 +54,7 @@ const POS: Record<Sex, Record<string, [number, number]>> = {
 }
 
 export function hotspotsFor(sex: Sex): Hotspot[] {
-  const list = [...SHARED, ...(sex === 'male' ? MALE_REPRO : FEMALE_REPRO)]
+  const list = [...SHARED.map(h => sex === 'female' && h.femaleMarkers ? { ...h, markers: h.femaleMarkers } : h), ...(sex === 'male' ? MALE_REPRO : FEMALE_REPRO)]
   return list.map(h => ({ ...h, x: POS[sex][h.id][0], y: POS[sex][h.id][1] }))
 }
 

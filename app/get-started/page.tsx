@@ -213,7 +213,7 @@ const ALL_PATHWAYS = [
   {
     tag: 'Metabolic & Weight Management',
     title: 'Metabolic Consultation',
-    desc: 'Comprehensive metabolic panel covering insulin resistance, thyroid, inflammation and fat metabolism markers.',
+    desc: 'Blood panel covering glucose, cholesterol, thyroid, liver and kidney function, and inflammation.',
     href: '/intake/general-consult',
     cta: 'Start Metabolic Intake',
     featured: false,
