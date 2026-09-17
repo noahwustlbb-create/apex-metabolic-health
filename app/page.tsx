@@ -5,6 +5,7 @@ import Intro from '@/components/home/Intro'
 import Ticker from '@/components/home/Ticker'
 import ProtocolBento from '@/components/home/ProtocolBento'
 import Pathway from '@/components/home/Pathway'
+import PortalPeek from '@/components/home/PortalPeek'
 import ReportPreview from '@/components/home/ReportPreview'
 import DoctorCard from '@/components/DoctorCard'
 import Pricing from '@/components/home/Pricing'
@@ -40,6 +41,7 @@ export default function Home() {
         <Intro />
         <ProtocolBento />
         <Pathway />
+        <PortalPeek />
         <ReportPreview />
         <DoctorCard />
         <Pricing />

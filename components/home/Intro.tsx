@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import Image from 'next/image'
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 
@@ -52,8 +53,20 @@ export default function Intro() {
             </motion.ul>
           </div>
 
-          <div className="relative mesh rounded-[32px]" style={{ padding: 'clamp(20px, 3vw, 36px)' }}>
-            <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <div className="relative mesh rounded-[32px]" style={{ padding: 'clamp(16px, 2.4vw, 28px)' }}>
+            <div className="grid grid-cols-2 md:grid-cols-[0.9fr_1fr_1fr] gap-3 md:gap-4">
+              <motion.div
+                style={{ y: yA, minHeight: 220 }}
+                initial={reduced ? false : { opacity: 0, scale: 0.97 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 1, delay: 0.1, ease }}
+                className="relative col-span-2 md:col-span-1 md:row-span-2 rounded-[22px] overflow-hidden"
+              >
+                <Image src="/photos/man-kitchen-dawn.webp" alt="A man at his kitchen bench at dawn with a glass of water" fill sizes="(min-width: 768px) 240px, 100vw" className="object-cover" style={{ objectPosition: '55% 30%' }} />
+                <div aria-hidden="true" className="absolute inset-x-0 bottom-0 p-4" style={{ background: 'linear-gradient(180deg, transparent, rgba(15,23,42,0.45))' }}>
+                  <span className="t-mono text-white/90" style={{ fontSize: 9.5 }}>05:52 · Told his bloods were normal</span>
+                </div>
+              </motion.div>
               {READOUTS.map((r, i) => (
                 <motion.div
                   key={r.n}

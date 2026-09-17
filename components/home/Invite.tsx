@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 import Magnetic from '@/components/motion/Magnetic'
@@ -33,12 +34,13 @@ export default function Invite() {
             <div style={{ position: 'absolute', right: -200, bottom: -300, width: 720, height: 720, borderRadius: '50%', background: 'radial-gradient(circle, rgba(72,144,247,0.18) 0%, rgba(72,144,247,0.05) 45%, transparent 68%)', filter: 'blur(12px)' }} />
           </motion.div>
 
-          <div className="relative max-w-3xl mx-auto text-center">
+          <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-12 items-center">
+          <div className="relative max-w-3xl text-center lg:text-left">
             <RevealText as="h2" className="t-display" style={{ marginBottom: 24 }} segments={[{ text: 'Stop guessing.' }, { text: 'Start measuring.', accent: true }]} />
             <motion.p {...reveal(0.35, 18)} className="t-lead mx-auto" style={{ color: 'var(--text-secondary)', maxWidth: '40ch', marginBottom: 40 }}>
               Two minutes to start. A doctor within days. No GP referral.
             </motion.p>
-            <motion.div {...reveal(0.45, 14)} className="flex flex-col items-center gap-6">
+            <motion.div {...reveal(0.45, 14)} className="flex flex-col items-center lg:items-start gap-6">
               <Magnetic>
                 <Link href="/start" className="btn-primary" style={{ fontSize: 15, padding: '18px 40px', borderRadius: 999 }}>
                   Start your assessment
@@ -54,6 +56,10 @@ export default function Invite() {
             <motion.p {...reveal(0.7)} className="text-[13px] leading-relaxed mt-14 m-0" style={{ color: 'var(--text-muted)' }}>
               Most people who book with us have been told by at least one doctor that their results look fine. We look further.
             </motion.p>
+          </div>
+          <motion.div {...reveal(0.3, 30)} className="relative rounded-[24px] overflow-hidden hidden lg:block" style={{ aspectRatio: '4 / 5', boxShadow: '0 30px 60px rgba(15,23,42,0.16)' }} aria-hidden="true">
+            <Image src="/photos/hero-window-woman.webp" alt="" fill sizes="360px" className="object-cover" style={{ objectPosition: '50% 35%' }} />
+          </motion.div>
           </div>
         </div>
       </div>
