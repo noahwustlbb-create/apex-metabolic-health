@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 
@@ -62,6 +63,36 @@ export default function Pricing() {
             </motion.div>
           ))}
         </div>
+
+        {/* Most chosen: the three pathways people start with, priced to the first step. */}
+        <motion.div {...reveal(0.4, 18)} className="mt-10">
+          <div className="flex items-baseline justify-between gap-4 mb-4">
+            <p className="t-mono m-0" style={{ color: 'var(--text-muted)' }}>Most chosen</p>
+            <Link href="/treatments" className="link-draw text-[13px] font-medium" style={{ color: 'var(--text-primary)' }}>All nine protocols</Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {[
+              { code: 'APX-01', label: 'Hormone Optimisation', start: '$199', note: 'Full panel, then a $99 member consult', href: '/programs/hormone-optimisation', image: '/protocols/hormone.jpg' },
+              { code: 'APX-02', label: 'Medical Weight Loss', start: '$199', note: 'Metabolic panel, then a $99 member consult', href: '/programs/metabolic-weight-loss', image: '/protocols/weight.jpg' },
+              { code: 'APX-09', label: 'Comprehensive Blood Tests', start: '$199', note: 'Doctor-reviewed panel, no consult required', href: '/programs/pathology', image: '/protocols/bloods.jpg' },
+            ].map(c => (
+              <Link key={c.code} href={c.href} className="glass-card no-underline flex items-center gap-4 transition-transform duration-300 hover:-translate-y-0.5" style={{ padding: 14, borderRadius: 20 }}>
+                <span className="relative w-14 h-14 rounded-xl overflow-hidden flex-shrink-0" aria-hidden="true">
+                  <Image src={c.image} alt="" fill sizes="56px" className="object-cover" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="t-mono block" style={{ color: 'var(--text-muted)', fontSize: 9 }}>{c.code}</span>
+                  <span className="block text-[14.5px] font-semibold truncate" style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>{c.label}</span>
+                  <span className="block text-[12px] mt-0.5" style={{ color: 'var(--text-secondary)' }}>{c.note}</span>
+                </span>
+                <span className="text-right flex-shrink-0">
+                  <span className="t-mono block" style={{ color: 'var(--text-muted)', fontSize: 8.5 }}>From</span>
+                  <span className="t-readout block" style={{ fontSize: 22, color: 'var(--text-primary)' }}>{c.start}</span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </motion.div>
 
         <motion.div {...reveal(0.5)} className="flex flex-wrap items-center justify-between gap-4 mt-8">
           <p className="text-[12.5px] leading-relaxed m-0" style={{ color: 'var(--text-muted)', maxWidth: '62ch' }}>

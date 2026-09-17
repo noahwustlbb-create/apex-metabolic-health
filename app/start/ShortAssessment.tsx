@@ -233,7 +233,22 @@ const Q0_OPTIONS = [
   },
 ]
 
-type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'place' | 'q2' | 'q3' | 'loading' | 'eligible'
+type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'place' | 'q2' | 'q3' | 'bloods' | 'source' | 'loading' | 'eligible'
+
+const BLOODS_OPTIONS = [
+  { id: 'recent', label: 'Yes, from the last 12 months', sub: 'Upload them in your portal and your doctor reads them first' },
+  { id: 'older', label: 'Yes, but older than a year', sub: 'We will likely retest, so nothing to dig out' },
+  { id: 'none', label: 'No', sub: 'We issue the referral; results are back in about 48 hours' },
+  { id: 'unsure', label: 'Not sure', sub: 'Your doctor decides on the call' },
+]
+const SOURCE_OPTIONS = [
+  { id: 'google', label: 'Google search' },
+  { id: 'instagram', label: 'Instagram or Facebook' },
+  { id: 'tiktok', label: 'TikTok or YouTube' },
+  { id: 'friend', label: 'A friend or family member' },
+  { id: 'doctor', label: 'A doctor, pharmacist or trainer' },
+  { id: 'other', label: 'Somewhere else' },
+]
 
 const WHY_LABEL: Record<string, string> = {
   energy: 'Low energy', weight: 'Weight that won’t move', libido: 'Libido or performance', recovery: 'Slow recovery', ageing: 'Ageing well', unsure: 'Not sure yet',
@@ -424,11 +439,13 @@ export default function ShortAssessment() {
   const [s1, setS1] = useState('')
   const [s2, setS2] = useState('')
   const [s3, setS3] = useState('')
+  const [bloods, setBloods] = useState('')
+  const [source, setSource] = useState('')
   const { open } = useSignupGate()
 
   const config = CONFIGS[selectedType] ?? CONFIGS.hormone
 
-  const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'q2', 'q3'] : ['q0', 'pick', 'q1', 'place', 'q2', 'q3']
+  const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'q2', 'q3', 'bloods', 'source'] : ['q0', 'pick', 'q1', 'place', 'q2', 'q3', 'bloods', 'source']
   const countable = questionPhases.filter(p => p !== 'place')
   const currentStep = Math.max(1, countable.indexOf(phase as (typeof countable)[number]) + 1)
   const totalSteps = countable.length
@@ -448,7 +465,13 @@ export default function ShortAssessment() {
   const q3Data = isCaregiver ? Q3_CAREGIVER : Q3_SELF
   const q1Question = isCaregiver ? config.q1 : (SELF_Q1_OVERRIDES[selectedType] ?? config.q1)
   const q2Question = isCaregiver ? config.q2 : (SELF_Q2_OVERRIDES[selectedType] ?? config.q2)
-  const signupUrl = `https://app.apexmetabolichealth.com.au/signup${isCaregiver ? '?type=caregiver' : ''}`
+  const signupQs = new URLSearchParams()
+  if (isCaregiver) signupQs.set('type', 'caregiver')
+  if (bloods) signupQs.set('bloods', bloods)
+  if (source) signupQs.set('src', source)
+  const whyId = params.get('why') || ''
+  if (whyId) signupQs.set('why', whyId)
+  const signupUrl = `https://app.apexmetabolichealth.com.au/signup${signupQs.toString() ? `?${signupQs}` : ''}`
   const eyebrow = `Question ${currentStep} of ${totalSteps}`
 
   return (
@@ -581,7 +604,7 @@ export default function ShortAssessment() {
 
                 {phase === 'q3' && (
                   <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title={q3Data.question} sub={isCaregiver ? 'Clinical consent is required before any treatment begins.' : 'Last one, then we show your match.'} />
+                    <StepHeading eyebrow={eyebrow} title={q3Data.question} sub={isCaregiver ? 'Clinical consent is required before any treatment begins.' : 'Two quick ones after this, then your match.'} />
                     <div className="flex flex-col gap-3">
                       {q3Data.options.map((opt, i) => (
                         <OptionCard key={opt} index={i} label={opt} selected={s3 === opt} onClick={() => { setS3(opt); setTimeout(advance, 240) }} />
@@ -594,10 +617,31 @@ export default function ShortAssessment() {
                     )}
                   </div>
                 )}
+                {phase === 'bloods' && (
+                  <div className="flex flex-col gap-5">
+                    <StepHeading eyebrow={eyebrow} title="Do you have blood results already?" sub="Recent results save a step. Either way, nothing to find right now." />
+                    <div className="flex flex-col gap-3">
+                      {BLOODS_OPTIONS.map((opt, i) => (
+                        <OptionCard key={opt.id} index={i} label={opt.label} sub={opt.sub} selected={bloods === opt.id} onClick={() => { setBloods(opt.id); setTimeout(advance, 240) }} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {phase === 'source' && (
+                  <div className="flex flex-col gap-5">
+                    <StepHeading eyebrow={eyebrow} title="Where did you hear about Apex?" sub="Last one. It helps us spend less on ads and more on doctors." />
+                    <div className="flex flex-col gap-3">
+                      {SOURCE_OPTIONS.map((opt, i) => (
+                        <OptionCard key={opt.id} index={i} label={opt.label} selected={source === opt.id} onClick={() => { setSource(opt.id); setTimeout(advance, 240) }} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
 
-            {(phase === 'q1' || phase === 'q2' || phase === 'q3') && (
+            {(phase === 'q1' || phase === 'q2' || phase === 'q3' || phase === 'bloods' || phase === 'source') && (
               <div className="flex justify-end mt-6">
                 <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer' }}>Skip this question</button>
               </div>
