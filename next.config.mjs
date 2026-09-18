@@ -31,6 +31,23 @@ const LEGACY_INTAKE_ROUTES = [
 
 const PORTAL_LOGIN = 'https://app.apexmetabolichealth.com.au/login'
 
+// Live Google Ads final URLs that point at paths this site has never had.
+// Verified 2026-09-19 against www.apexmetabolichealth.com.au: /get/started,
+// /hormone/consult, /peptide/consult and /bloods all returned 404 while the
+// account was spending. Fixing the ads themselves needs a Google re-auth we
+// cannot complete from here, so the destination absorbs the mistake instead —
+// every paid click now lands on a real page. Temporary (307): the moment the
+// ad URLs are corrected these become dead weight and can be deleted.
+const AD_LANDING_ROUTES = [
+  ['/get/started', '/get-started'],
+  ['/hormone/consult', '/hormone-check'],
+  // No peptide page exists, and peptides are Schedule 4 — a dedicated landing
+  // page would be prescription-drug advertising. Conditions overview instead.
+  ['/peptide/consult', '/what-we-treat'],
+  ['/peptides', '/what-we-treat'],
+  ['/bloods', '/order-bloods'],
+]
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -74,6 +91,11 @@ const nextConfig = {
       })),
       // Existing patients reorder inside the portal.
       { source: '/intake/repeat-order', destination: PORTAL_LOGIN, permanent: false },
+      ...AD_LANDING_ROUTES.map(([source, destination]) => ({
+        source,
+        destination,
+        permanent: false,
+      })),
     ]
   },
 }

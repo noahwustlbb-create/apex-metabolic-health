@@ -35,7 +35,12 @@ export default function ProtocolBento() {
 
   const isFeatured = useCallback((id: string) => {
     if (active) return active === id
-    return hover ? id === 'hormone' || id === 'longevity' : id === 'hormone'
+    // Desktop rests with two cards open: there is room for them, and they show
+    // what an open card looks like. A phone has no such room — one open card
+    // filled the viewport, so the visitor met a protocol they had not chosen
+    // and had to scroll past it to see the other eight. Phones rest closed and
+    // wait for a tap, which is what the section header already tells them to do.
+    return hover ? id === 'hormone' || id === 'longevity' : false
   }, [active, hover])
 
   return (
@@ -173,20 +178,13 @@ function Card({ p, index, featured, hover, reduced, onEnter, onTap }: {
           <motion.div key="compact" initial={reduced ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.22 }} className="relative flex flex-col justify-between h-full px-4 py-3.5">
             <div className="flex items-start justify-between">
               <span className="t-mono" style={{ color: 'var(--text-muted)' }}>{num}</span>
-              <span
-                aria-hidden="true"
-                className="tap-hint t-mono"
-                style={{ position: 'absolute', left: 16, bottom: 10, fontSize: 9, color: 'var(--text-muted)' }}
-              >
-                Tap to preview
-              </span>
               <span className="relative w-[26px] h-[26px] rounded-md overflow-hidden flex-shrink-0" style={{ border: '1px solid var(--border)' }} aria-hidden="true">
                 <Image src={p.image} alt="" fill sizes="26px" className="object-cover" />
               </span>
             </div>
             <div className="min-w-0">
               <span className="block text-[14.5px] font-semibold leading-tight line-clamp-2 lg:truncate" style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>{p.label}</span>
-              <span className="t-mono block mt-1 truncate" style={{ color: 'var(--text-muted)' }}>{p.code} · {p.sub}</span>
+              <span className="t-mono block mt-1 truncate" style={{ color: 'var(--text-muted)' }}>{p.code}</span>
             </div>
           </motion.div>
         )}

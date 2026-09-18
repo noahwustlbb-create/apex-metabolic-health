@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { WORD, WORD_CUT, BOX } from './logoPaths'
 
 /**
@@ -13,6 +14,9 @@ const WORD_VIEWBOX = `${wx0} ${wy0} ${wx1 - wx0} ${wy1 - wy0}`
 const WORD_RATIO = (wx1 - wx0) / (wy1 - wy0)
 
 export function Wordmark({ height = 18, className }: { height?: number; className?: string }) {
+  // Unique per instance. A hardcoded id collided between the nav and footer
+  // lockups, and an unresolved mask renders the rect as a solid block.
+  const maskId = `apex-wm-${useId().replace(/:/g, '')}`
   return (
     <svg
       viewBox={WORD_VIEWBOX}
@@ -23,12 +27,12 @@ export function Wordmark({ height = 18, className }: { height?: number; classNam
       focusable="false"
     >
       <defs>
-        <mask id="apex-wm" maskUnits="userSpaceOnUse" x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0}>
+        <mask id={maskId} maskUnits="userSpaceOnUse" x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0}>
           {WORD.map((d, i) => <path key={i} d={d} fill="#fff" />)}
           {WORD_CUT.map((d, i) => <path key={`c${i}`} d={d} fill="#000" />)}
         </mask>
       </defs>
-      <rect x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0} fill="currentColor" mask="url(#apex-wm)" />
+      <rect x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0} fill="currentColor" mask={`url(#${maskId})`} />
     </svg>
   )
 }

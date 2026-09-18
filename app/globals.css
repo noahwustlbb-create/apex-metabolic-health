@@ -519,10 +519,3 @@ html.lenis, html.lenis body { height: auto; }
   .hotspot-ring, .breathe, .shimmer::after { animation: none; }
   .blur-in { filter: none; opacity: 1; transform: none; }
 }
-
-/* The bento's compact cards expand on first tap and open on the second. With no
-   hover there is nothing to signal that, so the hint shows on touch only. */
-.tap-hint { display: none; }
-@media (hover: none) {
-  .tap-hint { display: block; }
-}
