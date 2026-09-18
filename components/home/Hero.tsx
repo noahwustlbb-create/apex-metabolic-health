@@ -8,6 +8,7 @@ import RevealText from '@/components/motion/RevealText'
 import Magnetic from '@/components/motion/Magnetic'
 import AgeNotice from '@/components/AgeNotice'
 import AnatomyFigure from '@/components/home/AnatomyFigure'
+import { START_TOTAL_STEPS } from '@/lib/startFunnel'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -84,7 +85,7 @@ export default function Hero() {
             <div className="hero-in glass-card" style={{ animationDelay: '520ms', padding: '18px 18px 16px', borderRadius: 22, marginBottom: 26, maxWidth: 560 }}>
               <div className="flex items-baseline justify-between gap-4 mb-3">
                 <p className="m-0 text-[14.5px] font-semibold" style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>What brings you here?</p>
-                <span className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 9.5 }}>Step 1 of 5</span>
+                <span className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 9.5 }}>Step 1 of {START_TOTAL_STEPS}</span>
               </div>
               <div className="flex flex-wrap gap-2" role="group" aria-label="What brings you here">
                 {WHY.map(w => {

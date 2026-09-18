@@ -85,10 +85,10 @@ export default function PortalPeek() {
                   <div className="absolute inset-0 flex flex-col gap-2.5" style={{ padding: '48px 12px 12px' }}>
                     <div className="flex items-center justify-between px-1">
                       <span className="text-[11px] font-semibold" style={{ color: 'var(--text-primary)' }}>Good morning, James</span>
-                      <span className="t-mono" style={{ fontSize: 8, color: 'var(--text-muted)' }}>Member</span>
+                      <span className="t-mono" style={{ fontSize: 9.5, color: 'var(--text-muted)' }}>Member</span>
                     </div>
                     <div className="glass-card" style={{ padding: 12, borderRadius: 18 }}>
-                      <span className="t-mono block" style={{ fontSize: 8, color: 'var(--blue)' }}>Next step · Thu 24 Sep</span>
+                      <span className="t-mono block" style={{ fontSize: 9.5, color: 'var(--color-accent-fg)' }}>Next step · Thu 24 Sep</span>
                       <span className="block text-[13px] font-semibold mt-1 leading-tight" style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>Your doctor call, 9:30am</span>
                       <span className="block text-[10.5px] mt-1" style={{ color: 'var(--text-secondary)' }}>Results are in and reviewed. Nothing to prepare.</span>
                       <span className="inline-block mt-2.5 text-[10px] font-semibold rounded-full" style={{ background: 'var(--blue)', color: '#fff', padding: '6px 10px' }}>Join the call</span>
@@ -102,8 +102,8 @@ export default function PortalPeek() {
                         <span className="absolute inset-0 flex items-center justify-center t-readout" style={{ fontSize: 18, color: 'var(--text-primary)' }}>72</span>
                       </div>
                       <div>
-                        <span className="t-mono block" style={{ fontSize: 8, color: 'var(--text-muted)' }}>Apex score</span>
-                        <span className="block text-[11px] font-semibold mt-0.5" style={{ color: 'var(--text-primary)' }}>Up 6 since June</span>
+                        <span className="t-mono block" style={{ fontSize: 9.5, color: 'var(--text-muted)' }}>Apex score</span>
+                        <span className="block text-[11px] font-semibold mt-0.5" style={{ color: 'var(--text-primary)' }}>Trended per retest</span>
                         <span className="block text-[9.5px]" style={{ color: 'var(--text-secondary)' }}>From 38 markers</span>
                       </div>
                     </div>
@@ -112,13 +112,13 @@ export default function PortalPeek() {
                         <div key={r.title} className="flex items-center justify-between py-2" style={{ borderTop: i ? '1px solid rgba(15,23,42,0.06)' : 'none' }}>
                           <span>
                             <span className="block text-[10.5px] font-semibold" style={{ color: 'var(--text-primary)' }}>{r.title}</span>
-                            <span className="t-mono block" style={{ fontSize: 7.5, color: 'var(--text-muted)' }}>{r.when}</span>
+                            <span className="t-mono block" style={{ fontSize: 9.5, color: 'var(--text-muted)' }}>{r.when}</span>
                           </span>
-                          <span className="t-mono" style={{ fontSize: 7.5, color: 'var(--color-accent-fg)' }}>{r.state}</span>
+                          <span className="t-mono" style={{ fontSize: 9.5, color: 'var(--color-accent-fg)' }}>{r.state}</span>
                         </div>
                       ))}
                     </div>
-                    <p className="t-mono m-0 mt-auto text-center" style={{ fontSize: 7, color: 'var(--text-muted)' }}>Sample dashboard, invented values</p>
+                    <p className="t-mono m-0 mt-auto text-center" style={{ fontSize: 11, letterSpacing: '0.08em', color: 'var(--text-secondary)' }}>Sample dashboard, invented values</p>
                   </div>
                 </div>
               </div>

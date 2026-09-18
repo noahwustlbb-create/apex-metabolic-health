@@ -49,7 +49,7 @@ function CheckoutModal({ url, onClose }: { url: string; onClose: () => void }) {
         <div className="flex items-center gap-3">
           <div className="flex flex-col leading-none">
             <span className="text-[11px] font-black tracking-[0.22em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
-            <span className="text-[7px] tracking-[0.2em] font-semibold uppercase" style={{ color: 'var(--blue)' }}>Metabolic Health</span>
+            <span className="text-[11px] tracking-[0.16em] font-semibold uppercase" style={{ color: 'var(--color-accent-fg)' }}>Metabolic Health</span>
           </div>
           <div className="w-px h-4 mx-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
           <span className="text-xs" style={{ color: 'rgba(240,244,248,0.4)' }}>Blood test checkout</span>

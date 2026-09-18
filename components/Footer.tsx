@@ -103,9 +103,9 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
+            <h3 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
               Treatments
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {CANONICAL_PROGRAMS.map((program) => (
                 <li key={program.slug}>
@@ -122,9 +122,9 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
+            <h3 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
               Company
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {COMPANY_LINKS.map((link) => (
                 <li key={link.label}>

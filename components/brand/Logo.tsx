@@ -69,7 +69,7 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
             fontSize: footer ? 10 : 7.5,
             fontWeight: 600,
             letterSpacing: footer ? '0.32em' : '0.3em',
-            color: 'var(--blue)',
+            color: 'var(--color-accent-fg)',
             textTransform: 'uppercase',
             whiteSpace: 'nowrap',
           }}

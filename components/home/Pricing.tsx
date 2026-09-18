@@ -50,10 +50,10 @@ export default function Pricing() {
                 boxShadow: c.highlight ? '0 30px 60px rgba(72,144,247,0.16)' : undefined,
               }}
             >
-              <p className="t-mono m-0" style={{ color: c.highlight ? 'var(--blue)' : 'var(--text-muted)' }}>{c.label}</p>
+              <p className="t-mono m-0" style={{ color: c.highlight ? 'var(--color-accent-fg)' : 'var(--text-muted)' }}>{c.label}</p>
               <p className="m-0 mt-5 flex items-baseline gap-2 flex-wrap" style={{ color: 'var(--text-primary)' }}>
                 {c.prefix && <span className="text-[15px] font-medium" style={{ color: 'var(--text-secondary)' }}>{c.prefix}</span>}
-                <span className="t-readout" style={{ fontSize: 'clamp(36px, 3.6vw, 50px)' }}>{c.value}</span>
+                <span className="t-figure" style={{ fontSize: 'clamp(36px, 3.6vw, 50px)' }}>{c.value}</span>
                 {c.suffix && <span className="text-[15px] font-medium" style={{ color: 'var(--text-secondary)' }}>{c.suffix}</span>}
               </p>
               <p className="m-0 mt-2 text-[13px]" style={{ color: 'var(--text-muted)' }}>
@@ -87,7 +87,7 @@ export default function Pricing() {
                 </span>
                 <span className="text-right flex-shrink-0">
                   <span className="t-mono block" style={{ color: 'var(--text-muted)', fontSize: 8.5 }}>From</span>
-                  <span className="t-readout block" style={{ fontSize: 22, color: 'var(--text-primary)' }}>{c.start}</span>
+                  <span className="t-figure block" style={{ fontSize: 22, color: 'var(--text-primary)' }}>{c.start}</span>
                 </span>
               </Link>
             ))}

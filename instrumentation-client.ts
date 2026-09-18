@@ -1,5 +1,6 @@
 import posthog from 'posthog-js'
 import { POSTHOG_KEY, sanitizeUrl } from '@/lib/analytics'
+import { startAttribution } from '@/lib/attribution'
 
 const URL_PROPS = ['$current_url', '$referrer', '$initial_current_url', '$initial_referrer', '$prev_pageview_pathname']
 
@@ -12,6 +13,9 @@ if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
     capture_pageleave: true,
     capture_exceptions: true,
     respect_dnt: true,
+    // Pinned off: a stray ph_debug flag in a visitor's browser otherwise turns
+    // production into a console firehose.
+    debug: false,
     // Autocapture keeps element types, classes and hrefs, never visible text.
     mask_all_text: true,
     session_recording: {
@@ -32,3 +36,7 @@ if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
     loaded: (ph) => ph.register({ app: 'site' }),
   })
 }
+
+// Ad attribution. Runs regardless of PostHog (and on localhost), because the
+// click id has to reach the portal whether or not product analytics is on.
+if (typeof window !== 'undefined') startAttribution()

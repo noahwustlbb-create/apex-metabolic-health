@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T00:00:00Z",
+  "title": "Design System: Apex Metabolic Health",
+  "extensions": {
+    "colorMeta": {
+      "accent": { "role": "primary", "displayName": "Apex Blue", "canonical": "#4890f7", "note": "Display weight: fills, icons, borders, large type. 3.18:1 on white - never small text.", "tonalRamp": ["#1e3a8a", "#1e40af", "#1d4ed8", "#2563eb", "#4890f7", "#60a5fa", "#93c5fd", "#dbeafe"] },
+      "accent-fg": { "role": "primary", "displayName": "Deep Link Blue", "canonical": "#1d4ed8", "note": "5.9:1 on canvas. Normative for all small blue text.", "tonalRamp": ["#172554", "#1e3a8a", "#1e40af", "#1d4ed8", "#2563eb", "#4890f7", "#93c5fd", "#eff6ff"] },
+      "canvas": { "role": "neutral", "displayName": "Paper", "canonical": "#ffffff", "tonalRamp": ["#030712", "#111827", "#374151", "#6b7280", "#9ca3af", "#e5e7eb", "#f5f7fa", "#ffffff"] },
+      "canvas-subtle": { "role": "neutral", "displayName": "Porcelain", "canonical": "#f5f7fa", "tonalRamp": ["#0f172a", "#1f2937", "#374151", "#6b7280", "#d1d5db", "#e5e7eb", "#f5f7fa", "#ffffff"] },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#111827", "note": "17.4:1 on canvas.", "tonalRamp": ["#030712", "#111827", "#1f2937", "#374151", "#4b5563", "#6b7280", "#9ca3af", "#e5e7eb"] },
+      "ink-muted": { "role": "neutral", "displayName": "Ink Muted", "canonical": "#374151", "note": "8.1:1." },
+      "ink-subtle": { "role": "neutral", "displayName": "Ink Subtle", "canonical": "#4b5563", "note": "6.4:1 - the floor for text." },
+      "glass-card": { "role": "neutral", "displayName": "Card Glass", "canonical": "rgba(255,255,255,0.72)", "note": "Always with backdrop blur, always over a mesh field or photograph." },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "rgba(0,0,0,0.10)" },
+      "success-fg": { "role": "tertiary", "displayName": "Clinical Green", "canonical": "#047857", "note": "4.8:1." },
+      "warning-fg": { "role": "tertiary", "displayName": "Clinical Amber", "canonical": "#92400e", "note": "6.4:1." },
+      "danger-fg": { "role": "tertiary", "displayName": "Clinical Red", "canonical": "#b91c1c", "note": "6.3:1." }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The hero sentence. One per page." },
+      "headline": { "displayName": "Headline", "purpose": "The one idea a chapter section carries." },
+      "title": { "displayName": "Title", "purpose": "Card and sub-section headings." },
+      "lead": { "displayName": "Lead", "purpose": "The paragraph directly under a headline." },
+      "body": { "displayName": "Body", "purpose": "Prose, 62-75ch." },
+      "label": { "displayName": "Eyebrow", "purpose": "Chapter kicker in Deep Link Blue. Max three per page." },
+      "mono": { "displayName": "Micro-label", "purpose": "Space Grotesk uppercase margin notes. The only licensed sub-12px type." },
+      "figure": { "displayName": "Figure", "purpose": "Numbers the visitor acts on: prices, step counters. Inter, tabular." },
+      "readout": { "displayName": "Readout", "purpose": "Atmosphere numerals only: 48h, Day 03, 90d, mock-dashboard values. Never a price." }
+    },
+    "shadows": [
+      { "name": "glass-lift", "value": "0 1px 0 rgba(255,255,255,1) inset, 0 20px 50px rgba(15,23,42,0.10)", "purpose": "Resting state of .glass-card: a lit top rim and a wide, soft throw." },
+      { "name": "accent-throw", "value": "0 4px 16px rgba(72,144,247,0.32), inset 0 1px 0 rgba(255,255,255,0.15)", "purpose": "Under the single primary button, so the one action reads as lit." },
+      { "name": "accent-throw-hover", "value": "0 8px 32px rgba(72,144,247,0.48), inset 0 1px 0 rgba(255,255,255,0.18)", "purpose": "Primary button hover." },
+      { "name": "card-hover", "value": "0 8px 32px rgba(72,144,247,0.08)", "purpose": "Flat card response to the cursor. Absent at rest." }
+    ],
+    "backdropFilters": [
+      { "name": "glass-card", "value": "blur(18px) saturate(1.3)", "purpose": "Primary content container." },
+      { "name": "glass-panel", "value": "blur(14px) saturate(1.4)", "purpose": "The .glass utility on floating panels." },
+      { "name": "nav", "value": "blur(20px)", "purpose": "Nav bar once scrolled off the hero." },
+      { "name": "btn-ghost", "value": "blur(10px)", "purpose": "Frosted secondary button over imagery only." }
+    ],
+    "gradients": [
+      { "name": "mesh", "value": "radial-gradient(60% 55% at 18% 20%, rgba(196,226,210,0.55) 0%, transparent 70%), radial-gradient(55% 60% at 82% 30%, rgba(184,214,250,0.55) 0%, transparent 70%), radial-gradient(70% 60% at 50% 100%, rgba(255,236,214,0.45) 0%, transparent 70%), #f6f8fa", "purpose": "Sage/sky/peach field behind glass cards. Full-bleed section ground, never a card fill." },
+      { "name": "mesh-rose", "value": "radial-gradient(60% 55% at 18% 20%, rgba(252,205,220,0.6) 0%, transparent 70%), radial-gradient(55% 60% at 82% 30%, rgba(255,224,214,0.55) 0%, transparent 70%), radial-gradient(70% 60% at 50% 100%, rgba(238,214,240,0.5) 0%, transparent 70%), #faf6f8", "purpose": "Warm variant for softer chapters." },
+      { "name": "mesh-blue", "value": "radial-gradient(55% 60% at 80% 20%, rgba(72,144,247,0.18) 0%, transparent 70%), radial-gradient(60% 55% at 15% 85%, rgba(196,226,210,0.5) 0%, transparent 70%), #f6f8fa", "purpose": "Accent-leaning variant behind CTA surfaces." },
+      { "name": "btn-primary", "value": "linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)", "purpose": "The only gradient fill on a control." },
+      { "name": "glow-rule", "value": "linear-gradient(90deg, transparent, rgba(72,144,247,0.2), transparent)", "purpose": "1px divider that fades at both ends. The system has no full-width grey rule." }
+    ],
+    "focus": [
+      { "name": "skip-link", "value": "outline: 3px solid #ffffff; outline-offset: 2px", "purpose": "The skip link's visible focus treatment on its blue fill." },
+      { "name": "focus-ring-token", "value": "--state-focus-ring: #4890f7", "purpose": "The token intended for keyboard focus rings. The build relies largely on UA defaults; any component that strips an outline must replace it." }
+    ],
+    "motion": [
+      { "name": "ease-expo-out", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Scroll reveals, layout transitions, drawn underlines." },
+      { "name": "ease-hero", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Hero entrance and hero media settle." },
+      { "name": "duration-state", "value": "150-250ms", "purpose": "Hover, press and colour state feedback." },
+      { "name": "duration-reveal", "value": "600-900ms", "purpose": "Scroll reveal and blur-in." },
+      { "name": "ambient-loops", "value": "float 7-9s, breathe 9s, hero-drift 24s, ticker 48s, hotspot 2.6s", "purpose": "Slow, small, always with a reduced-motion off switch." },
+      { "name": "reduced-motion", "value": "@media (prefers-reduced-motion: reduce) { animation: none; blur-in: filter none }", "purpose": "Mandatory branch for every animation." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "container", "value": "1280px" },
+      { "name": "nav", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one lit action on a view. Gradient blue, white label.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Start your assessment</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 12px; background: linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%); color: #ffffff; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.005em; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 16px rgba(72,144,247,0.32), inset 0 1px 0 rgba(255,255,255,0.15); transition: transform 0.18s ease, box-shadow 0.18s ease; } .ds-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 32px rgba(72,144,247,0.48), inset 0 1px 0 rgba(255,255,255,0.18); } .ds-btn-primary:focus-visible { outline: 2px solid #4890f7; outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The secondary action beside the primary. Accent wash, accent border.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">See how it works</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 12px; background: rgba(72,144,247,0.06); border: 1.5px solid rgba(72,144,247,0.28); color: #4890f7; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.005em; text-decoration: none; transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease; } .ds-btn-outline:hover { border-color: #4890f7; background: rgba(72,144,247,0.1); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(72,144,247,0.18); } .ds-btn-outline:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pill CTA",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "The quiet wide-tracked CTA with a trailing blue circle. Label colour is accent-fg, never raw brand blue.",
+      "html": "<a class=\"ds-btn-pill\" href=\"#\">Book a consult<span class=\"ds-btn-circle\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line><polyline points=\"12 5 19 12 12 19\"></polyline></svg></span></a>",
+      "css": ".ds-btn-pill { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; padding: 5px 5px 5px 22px; border-radius: 999px; border: 1px solid rgba(72,144,247,0.35); background: rgba(72,144,247,0.07); color: #1d4ed8; font-family: Inter, system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: background 0.25s ease, border-color 0.25s ease; } .ds-btn-pill:hover { background: rgba(72,144,247,0.12); border-color: rgba(72,144,247,0.5); } .ds-btn-pill:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; } .ds-btn-circle { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #4890f7; color: #ffffff; transition: background 0.25s ease; } .ds-btn-pill:hover .ds-btn-circle { background: #2563eb; }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "The primary content container. Only legible over a mesh field or photograph.",
+      "html": "<div class=\"ds-mesh\"><div class=\"ds-glass-card\"><span class=\"ds-eyebrow\">Membership</span><div class=\"ds-figure-row\"><span class=\"ds-figure-prefix\">from</span><span class=\"ds-figure\">$149</span><span class=\"ds-figure-prefix\">/mo</span></div><p class=\"ds-card-note\">Doctor review, protocol adjustments and portal access. Cancel anytime.</p></div></div>",
+      "css": ".ds-mesh { padding: 32px; border-radius: 28px; background: radial-gradient(60% 55% at 18% 20%, rgba(196,226,210,0.55) 0%, transparent 70%), radial-gradient(55% 60% at 82% 30%, rgba(184,214,250,0.55) 0%, transparent 70%), radial-gradient(70% 60% at 50% 100%, rgba(255,236,214,0.45) 0%, transparent 70%), #f6f8fa; } .ds-glass-card { background: rgba(255,255,255,0.72); -webkit-backdrop-filter: blur(18px) saturate(1.3); backdrop-filter: blur(18px) saturate(1.3); border: 1px solid rgba(255,255,255,0.95); box-shadow: 0 1px 0 rgba(255,255,255,1) inset, 0 20px 50px rgba(15,23,42,0.10); border-radius: 28px; padding: 28px; font-family: Inter, system-ui, sans-serif; } .ds-eyebrow { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #1d4ed8; margin-bottom: 14px; } .ds-figure-row { display: flex; align-items: baseline; gap: 6px; } .ds-figure { font-size: 50px; font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: #111827; } .ds-figure-prefix { font-size: 15px; font-weight: 500; color: #374151; } .ds-card-note { margin: 8px 0 0; font-size: 13px; line-height: 1.6; color: #4b5563; }"
+    },
+    {
+      "name": "Flat Card",
+      "kind": "card",
+      "refersTo": "card-flat",
+      "description": "The quiet container on plain white. Hairline border, lifts on hover.",
+      "html": "<div class=\"ds-apex-card\"><h3 class=\"ds-card-title\">Pathology first</h3><p class=\"ds-card-body\">A 38-marker panel at an accredited collection centre before anyone prescribes anything.</p></div>",
+      "css": ".ds-apex-card { background: #f5f7fa; border-radius: 12px; border: 1px solid rgba(0,0,0,0.10); padding: 24px; font-family: Inter, system-ui, sans-serif; transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease, background 0.3s ease; } .ds-apex-card:hover { border-color: rgba(72,144,247,0.3); box-shadow: 0 8px 32px rgba(72,144,247,0.08); transform: translateY(-2px); } .ds-card-title { margin: 0 0 8px; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: #111827; } .ds-card-body { margin: 0; font-size: 16.5px; line-height: 1.65; color: #374151; }"
+    },
+    {
+      "name": "Readout Tile",
+      "kind": "custom",
+      "refersTo": "card-glass",
+      "description": "Atmosphere numeral in the Doto readout face with a Space Grotesk micro-label. Never used for a price.",
+      "html": "<div class=\"ds-readout-tile\"><span class=\"ds-readout\">48h</span><span class=\"ds-mono\">Results turnaround</span></div>",
+      "css": ".ds-readout-tile { display: inline-flex; flex-direction: column; gap: 8px; padding: 20px 24px; border-radius: 16px; background: #f5f7fa; border: 1px solid rgba(0,0,0,0.10); } .ds-readout { font-family: Doto, 'Space Grotesk', monospace; font-variation-settings: \"ROND\" 100, \"wght\" 700; font-weight: 700; font-size: 30px; line-height: 1; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; color: #111827; } .ds-mono { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4b5563; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Fixed translucent bar, transparent over the hero, frosted once scrolled.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-mark\">APEX</span><span class=\"ds-nav-links\"><a href=\"#\" class=\"ds-nav-link\">Protocols</a><a href=\"#\" class=\"ds-nav-link\">How it works</a><a href=\"#\" class=\"ds-nav-cta\">Get started</a></span></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; height: 70px; padding: 0 20px; background: rgba(255,255,255,0.86); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); font-family: Inter, system-ui, sans-serif; } .ds-nav-mark { font-weight: 700; letter-spacing: 0.12em; font-size: 14px; color: #111827; } .ds-nav-links { display: flex; align-items: center; gap: 24px; } .ds-nav-link { font-size: 13px; font-weight: 500; color: #374151; text-decoration: none; transition: color 0.2s ease; } .ds-nav-link:hover { color: #111827; } .ds-nav-cta { font-size: 13px; font-weight: 600; color: #1d4ed8; text-decoration: none; padding: 9px 18px; border-radius: 999px; border: 1.5px solid rgba(72,144,247,0.35); transition: background 0.2s ease, border-color 0.2s ease; } .ds-nav-cta:hover { background: rgba(72,144,247,0.08); border-color: rgba(72,144,247,0.6); } .ds-nav-link:focus-visible, .ds-nav-cta:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; } @media (min-width: 768px) { .ds-nav { height: 88px; padding: 0 40px; } }"
+    },
+    {
+      "name": "Verification Ledger Row",
+      "kind": "custom",
+      "refersTo": "card-flat",
+      "description": "The site's trust pattern: every claim paired with the third party that could refute it. Rows exist only when the proof is real.",
+      "html": "<div class=\"ds-ledger\"><div class=\"ds-ledger-row\"><span class=\"ds-ledger-claim\">AHPRA-registered doctors</span><span class=\"ds-ledger-detail\">Every prescriber holds current general registration</span><a class=\"ds-ledger-verify\" href=\"#\">Verify on the AHPRA register<span class=\"ds-ledger-dest\">opens ahpra.gov.au</span></a></div></div>",
+      "css": ".ds-ledger { font-family: Inter, system-ui, sans-serif; } .ds-ledger-row { display: flex; flex-direction: column; gap: 4px; padding: 18px 0; border-bottom: 1px solid rgba(0,0,0,0.10); } .ds-ledger-claim { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: #111827; } .ds-ledger-detail { font-size: 14px; line-height: 1.6; color: #374151; } .ds-ledger-verify { display: inline-flex; flex-direction: column; margin-top: 6px; font-size: 13px; font-weight: 600; color: #1d4ed8; text-decoration: none; } .ds-ledger-verify:hover { text-decoration: underline; } .ds-ledger-verify:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 3px; } .ds-ledger-dest { font-size: 12px; font-weight: 400; color: #4b5563; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Bright Consulting Room",
+    "overview": "This file replaces a stale DESIGN.md. The version committed 2026-09-06 described a dark product (#0e1117 canvas, Space Grotesk display type) and prohibited bento grids, glassmorphism and homepage pricing. The 2026-09-17 revamp removed all of that. app/globals.css states it plainly at the chapter-band rule: 'The site is white only.' Do not restore the dark system from git history; it is not a fallback, a theme, or an option.\n\nThe shipped site is a white page that gets its depth from photography, translucent panels and motion rather than from dark bands. Inter carries every word at three sizes - display, headline, body - and everything else is a label. One blue does all the interactive work: as a saturated fill and icon colour at display size, and as a darker, AA-passing blue the moment it becomes small text. Numerals split in two: the ones a visitor acts on are set in Inter with tabular figures, and a dot-matrix face carries atmosphere numerals only.\n\nDensity is low and vertical: chapter-length sections (88-150px of padding) inside a 1280px column, one idea each, revealed on scroll. Motion is scroll-driven and reduced-motion-guarded throughout.",
+    "inferred": ["North Star name and voice adjectives are inferred from the build and PRODUCT.md; not user-confirmed.", "The 'precise, unhurried, evidential' voice line is inferred.", "Component philosophy phrasing is inferred from the shipped components, not from an interview."],
+    "keyCharacteristics": [
+      "White canvas (#ffffff) only - no dark register, no theme toggle.",
+      "Inter everywhere for words; Doto for atmosphere numerals; Space Grotesk survives only as the uppercase micro-label face.",
+      "One accent blue in two weights: display blue for fills and icons, accent-fg for anything small.",
+      "Glass panels over pastel mesh fields are the primary container; a hairline-and-radius flat card is the quiet alternative.",
+      "Motion is scroll- and hover-driven, with a prefers-reduced-motion branch on every animation.",
+      "Compliance is a visual constraint, not a footer."
+    ],
+    "rules": [
+      { "name": "The Two-Weight Blue Rule", "body": "Apex Blue fills shapes; Deep Link Blue carries words. If blue text is under 24px or under 19px bold, it is accent-fg (#1d4ed8). Raw #4890f7 on small text is a contrast defect, not a style choice.", "section": "colors" },
+      { "name": "The Token Rule", "body": "Colour is born in styles/tokens.css and consumed as --color-* or the legacy --bg/--surface/--text-* aliases. A new hex literal in a component is a bug.", "section": "colors" },
+      { "name": "The One Light Rule", "body": "Blue is the only saturated non-status colour on a screen. If a section needs a second hue to feel designed, the section is wrong.", "section": "colors" },
+      { "name": "The Two-Numeral Rule", "body": "A number the visitor must read and act on - a price, a step counter, a panel count in a decision - is .t-figure (Inter, tabular). .t-readout (Doto) is reserved for atmosphere numerals that set a scene: 48h, Day 03, 90d, mock-dashboard values.", "section": "typography" },
+      { "name": "The Twelve-Pixel Floor Rule", "body": "No text below 12px on any surface a visitor must read. .t-mono at 10.5px is the single licensed exception, and only for decorative margin labels that repeat information available elsewhere.", "section": "typography" },
+      { "name": "The Kicker Budget Rule", "body": "At most one .t-eyebrow per chapter section, and never more than three per page. An eyebrow is a chapter marker, not section grammar.", "section": "typography" },
+      { "name": "The Chapter Rule", "body": "Vertical space is the pacing device. A section that needs a divider line to separate it from the next one has not been given enough padding.", "section": "layout" },
+      { "name": "The Lit-Not-Raised Rule", "body": "Surfaces get depth from translucency and a lit edge, not from a stack of shadows. There are three shadow values in the shipped system, and that is the whole vocabulary.", "section": "elevation" },
+      { "name": "The Glass-Needs-A-Field Rule", "body": "The glass card only makes sense over something: a mesh gradient, a photograph, or a tinted band. Frosted white on flat white is a blur with nothing to blur.", "section": "elevation" },
+      { "name": "The Hairline-Not-Box Rule", "body": "Structure is drawn with radius and 1px ink-alpha rules, never with a heavy outline or a filled grey chrome.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do take colour from styles/tokens.css and use --color-accent-fg (#1d4ed8) for every small blue string; #4890f7 is for fills, icons, borders and large type.",
+      "Do set prices, step counters and any actionable number in .t-figure, and keep .t-readout for atmosphere numerals.",
+      "Do put .glass-card over a .mesh field or a photograph, and use the flat porcelain card everywhere else.",
+      "Do give a section one idea and clamp(88px, 9vw, 150px) of air around it.",
+      "Do pair every trust claim with the third party that could refute it. components/DoctorCard.tsx is the reference pattern: a verification ledger where each row links to the regulator or registry that confirms it (AHPRA, NATA, ABN), and a REVIEWS_LIVE = false gate that keeps the reviews row dormant until the Google Business Profile genuinely holds 10+ reviews.",
+      "Do ship a prefers-reduced-motion branch with every animation, ambient loops included.",
+      "Do keep hero and section imagery to the clinical process - pathology, consult, protocol - never the outcome.",
+      "Do compress raster imagery before it ships: a single page-level PNG belongs under ~300KB."
+    ],
+    "donts": [
+      "Don't reintroduce a dark canvas, a dark theme block, or a theme toggle. The site is white only.",
+      "Don't set small text in raw #4890f7. It measures 3.18:1 on white and fails AA.",
+      "Don't put a .t-eyebrow above every section, or format credentials as a stat bar - AHPRA registration is a sentence, not a metric.",
+      "Don't ship visible text below 12px. .t-mono at 10.5px is the only licensed exception.",
+      "Don't put a disclaimer, a consent line or any compliance copy in micro-type.",
+      "Don't imply a clinical outcome anywhere in a mock surface: a sample dashboard shows the layout, never a number going up.",
+      "Don't add a fourth container vocabulary or a fourth shadow.",
+      "Don't hard-code hex values in components, or dim text past Ink Subtle (#4b5563).",
+      "Don't use a bento outside ProtocolBento's job (an index of parallel choices), and don't extend .mesh to a new surface without checking it against PRODUCT.md's SaaS-dashboard anti-reference."
+    ],
+    "regulatoryConstraints": [
+      "No testimonials about clinical care (AHPRA). A disclaimer does not cure one. Star ratings and review widgets count.",
+      "No before-and-after imagery, and nothing creating an unreasonable expectation of benefit.",
+      "Never imply a clinical outcome. Mock dashboards and sample reports show layout, never a result improving.",
+      "Don't name prescription-only medicines in marketing (TGA). Naming a hormone as a measured analyte is fine and is not the same thing.",
+      "No clinical data in the CRM; integrations send events and IDs only.",
+      "Consent copy states its purpose, links the Privacy Policy, and asks patients not to include medical details.",
+      "Booking forms collect first name, last name, email, mobile. No clinical free text.",
+      "Telehealth copy must say how the call happens, that it may come from a private number, and to be somewhere private."
+    ],
+    "debt": [
+      "123 visible elements render below 12px; the smallest is a 7px uppercase label in app/order-bloods/BgtOrderPage.tsx.",
+      "12 .t-eyebrow instances ship, 7 on the homepage, against a three-per-page rule.",
+      "public/ totals 15MB; img-injury-repair.png (2.5MB), img-skin-regeneration.png (2.4MB) and img-hair-restoration.png (2.2MB) are roughly half.",
+      "components/home/PortalPeek.tsx renders a mock score captioned 'Up 6 since June' - a fabricated result improving, which the regulatory constraints prohibit.",
+      "Three inks ship (#111827 tokens, #0f172a band-light, #0a0e1a Tailwind primary) plus two tinted surfaces (#f5f7fa, #f8f9ff).",
+      "styles/tokens.css still ships a full dark theme block and a prefers-color-scheme: dark mirror on a white-only site.",
+      "PRODUCT.md principle 4 still forbids glassmorphism and bento grids, and the 2026-07-09 decision confined pricing to /pricing; the build ships all three by owner decision."
+    ]
+  }
+}
