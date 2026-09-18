@@ -73,7 +73,10 @@ const FIGURE: Record<Sex, { src: string; alt: string }> = {
 export default function AnatomyFigure({ sx, sy }: { sx: MotionValue<number>; sy: MotionValue<number> }) {
   const reduced = useReducedMotion()
   const [sex, setSex] = useState<Sex>('male')
-  const [active, setActive] = useState(1)
+  // Nothing is selected until the visitor picks. A preselected hotspot meant
+  // the label card covered the figure on load, which on a phone is most of the
+  // viewport.
+  const [active, setActive] = useState<number | null>(null)
   const [manual, setManual] = useState(false)
   const timer = useRef<number | null>(null)
   const spots = hotspotsFor(sex)
@@ -82,16 +85,20 @@ export default function AnatomyFigure({ sx, sy }: { sx: MotionValue<number>; sy:
   const rotY = useTransform(sx, v => v * 4)
   const rotX = useTransform(sy, v => v * -4)
 
+  // The carousel is desktop-only, and only once the visitor has looked at it.
+  // It used to run everywhere from load, which on touch fought the user for the
+  // screen. It never starts until a hotspot has been opened at least once.
   useEffect(() => {
-    if (manual || reduced) return
-    timer.current = window.setInterval(() => setActive(a => (a + 1) % spots.length), 3400)
+    if (manual || reduced || active === null) return
+    if (!window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) return
+    timer.current = window.setInterval(() => setActive(a => (a === null ? 0 : (a + 1) % spots.length)), 3400)
     return () => { if (timer.current) window.clearInterval(timer.current) }
-  }, [manual, reduced, spots.length])
+  }, [manual, reduced, spots.length, active])
 
   const pick = (i: number) => { setManual(true); setActive(i) }
-  const spot = spots[active]
+  const spot = active === null ? null : spots[active]
   // The card sits on whichever side has room; never past the frame edge.
-  const labelLeft = spot.x >= 46
+  const labelLeft = spot ? spot.x >= 46 : false
 
   return (
     <div className="relative" id="hero-anatomy-slot" aria-label="The systems on the Apex panel">
@@ -138,7 +145,10 @@ export default function AnatomyFigure({ sx, sy }: { sx: MotionValue<number>; sy:
           )
         })}
 
-        {/* The active label: markers, what they tell you, and the protocol CTA. */}
+        {/* The active label: markers, what they tell you, and the protocol CTA.
+            Renders only once the visitor has opened a hotspot - on a phone this
+            card is most of the frame, so nothing should open it for them. */}
+        {spot && (
         <motion.div
           key={`${sex}-${spot.id}`}
           initial={reduced ? false : { opacity: 0, y: 6, scale: 0.98 }}
@@ -157,6 +167,7 @@ export default function AnatomyFigure({ sx, sy }: { sx: MotionValue<number>; sy:
             <svg viewBox="0 0 16 16" fill="none" width={11} height={11} aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </Link>
         </motion.div>
+        )}
 
         {/* Sex toggle */}
         <div className="absolute right-5 top-5 glass-card flex" style={{ padding: 4, borderRadius: 999 }} role="group" aria-label="Show figure for">

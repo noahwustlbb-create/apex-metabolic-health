@@ -25,9 +25,13 @@ export default function FloatingCTA() {
   if (isHidden || menuOpen) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6 flex items-center gap-2">
+    // The GHL chat bubble is also fixed bottom-right and roughly 64px across, so
+    // on a phone this row was sliding underneath it and the assessment label was
+    // being clipped mid-word. Offset to clear it; desktop has room for both.
+    <div className="fixed bottom-6 right-[86px] md:right-6 z-40 flex items-center gap-2">
       <a
         href="https://app.apexmetabolichealth.com.au/login"
+        className="hidden md:inline-flex"
         style={{
           fontSize: '12px',
           fontWeight: 500,

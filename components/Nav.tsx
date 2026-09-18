@@ -261,7 +261,10 @@ export default function Nav() {
           {/* ── Mobile right: primary CTA + hamburger ── */}
           {/* This slot used to carry "Patient Portal" - a login for people who
               have already converted - while the one action the page exists for
-              was desktop-only. Portal login is still in the menu below. */}
+              was desktop-only. Portal login is still in the menu below.
+              The label is just "Start": the full "Start your assessment" ran
+              ~190px at nowrap and overlapped the logo at 390px. The hero and the
+              menu both carry the full wording. */}
           <div className="md:hidden flex items-center gap-2">
             {!menuOpen && (
               <Link
@@ -281,7 +284,7 @@ export default function Nav() {
                   textDecoration: 'none',
                 }}
               >
-                Start your assessment
+                Start
               </Link>
             )}
             <button
