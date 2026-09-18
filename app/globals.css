@@ -82,7 +82,7 @@
 
   .label {
     @apply text-[10px] font-semibold tracking-[0.22em] uppercase;
-    color: #4890f7;
+    color: var(--color-accent-fg);
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 
@@ -217,7 +217,7 @@
     border-radius: 999px;
     border: 1px solid rgba(72,144,247,0.35);
     background: rgba(72,144,247,0.07);
-    color: #4890f7;
+    color: var(--color-accent-fg);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -325,7 +325,8 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--blue);
+  /* Not raw --blue (#4890f7, 3.18:1 on white). DESIGN.md §2 names this rule. */
+  color: var(--color-accent-fg);
 }
 .t-mono {
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
@@ -453,6 +454,16 @@ html.lenis, html.lenis body { height: auto; }
 
 /* ── v3 (2026-09-17): readouts, mesh, glass cards, blur reveal ─────────────── */
 /* Dot-matrix readout numerals. Only for numbers; Inter stays for words. */
+/* Numbers the visitor must ACT on (prices, counters) stay in Inter: same
+   tabular alignment, none of the dot-matrix cost to legibility. Doto keeps the
+   atmosphere numerals (48h, Day 03, 90d). */
+.t-figure {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
 .t-readout {
   font-family: var(--font-doto), var(--font-space-grotesk), monospace;
   font-variation-settings: "ROND" 100, "wght" 700;

@@ -13,6 +13,9 @@ if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
     capture_pageleave: true,
     capture_exceptions: true,
     respect_dnt: true,
+    // Pinned off: a stray ph_debug flag in a visitor's browser otherwise turns
+    // production into a console firehose.
+    debug: false,
     // Autocapture keeps element types, classes and hrefs, never visible text.
     mask_all_text: true,
     session_recording: {

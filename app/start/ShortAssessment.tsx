@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import Nav from '@/components/Nav'
+import Link from 'next/link'
+import Logo from '@/components/brand/Logo'
+import { phasesFor, stepNumber, stepsRemaining, START_TOTAL_STEPS } from '@/lib/startFunnel'
 import { useSignupGate } from '@/context/SignupGateContext'
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
@@ -309,7 +311,7 @@ function ProgressBar({ current, total, onBack, canBack }: { current: number; tot
       <div className="flex-1 h-[4px] rounded-full overflow-hidden" style={{ background: 'rgba(72,144,247,0.12)' }}>
         <motion.div className="h-full rounded-full" style={{ background: `linear-gradient(90deg, ${BLUE}, #7bb3ff)` }} animate={{ width: `${pct}%` }} transition={{ duration: 0.5, ease }} />
       </div>
-      <span className="t-readout flex-shrink-0" style={{ fontSize: 18, color: TEXT, minWidth: 44, textAlign: 'right' }}>{String(current).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
+      <span className="t-figure flex-shrink-0" style={{ fontSize: 18, color: TEXT, minWidth: 44, textAlign: 'right' }}>{String(current).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
     </div>
   )
 }
@@ -362,13 +364,13 @@ function StepHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; 
 }
 
 // ── Interstitial: you're in the right place ────────────────────────────────────
-function PlaceScreen({ programme, count = 1, why, onContinue }: { programme: string; count?: number; why?: string; onContinue: () => void }) {
+function PlaceScreen({ programme, count = 1, why, onContinue, remaining }: { programme: string; count?: number; why?: string; onContinue: () => void; remaining: number }) {
   const [revealed, setRevealed] = useState(false)
   useEffect(() => { const t = window.setTimeout(() => setRevealed(true), 1100); return () => window.clearTimeout(t) }, [])
   const steps = [
-    { when: 'Today', title: 'Finish these questions', body: 'Two more, then we show your match.' },
+    { when: 'Today', title: 'Finish these questions', body: `${remaining === 1 ? 'One more screen' : `${remaining} more screens`}, then we show your match.` },
     { when: 'This week', title: count > 1 ? 'One blood panel for everything' : 'Bloods near you', body: count > 1 ? `One referral covers all ${count} protocols. 4,000+ centres. Results in about 48 hours.` : 'Referral sent electronically. 4,000+ centres. Results in about 48 hours.' },
-    { when: 'Day 5', title: 'Your doctor, on the call', body: count > 1 ? `One call. An AHPRA-registered doctor reads your panel with you and plans ${programme} together.` : `An AHPRA-registered doctor reads your panel with you and builds your ${programme.toLowerCase()} protocol.` },
+    { when: 'Day 3', title: 'Your doctor, on the call', body: count > 1 ? `One call. An AHPRA-registered doctor reads your panel with you and plans ${programme} together.` : `An AHPRA-registered doctor reads your panel with you and builds your ${programme.toLowerCase()} protocol.` },
   ]
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="flex flex-col gap-6">
@@ -405,10 +407,12 @@ function PlaceScreen({ programme, count = 1, why, onContinue }: { programme: str
 // ── Loading: reviewing your answers ────────────────────────────────────────────
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   const [pct, setPct] = useState(0)
-  const lines = ['Reviewing your answers', 'Matching your pathway', 'Checking eligibility', 'Preparing your next step']
+  // No eligibility is computed here and none should be implied: a doctor decides
+  // that, after bloods. These describe assembling the page, nothing more.
+  const lines = ['Putting your answers together', 'Preparing your next step']
   useEffect(() => {
     const start = performance.now()
-    const dur = 2600
+    const dur = 900
     let raf = 0
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / dur)
@@ -428,7 +432,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
           <circle cx="100" cy="100" r="88" fill="none" stroke={BLUE} strokeWidth="6" strokeLinecap="round" strokeDasharray="553" strokeDashoffset={553 - (553 * pct) / 100} style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%', transition: 'stroke-dashoffset 0.12s linear' }} />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="t-readout" style={{ fontSize: 56, color: TEXT }} aria-live="polite">{pct}%</span>
+          <span className="sr-only" aria-live="polite">Preparing your next step</span>
         </div>
       </div>
       <AnimatePresence mode="wait">
@@ -467,7 +471,7 @@ function PrivacyScreen({ refCode, setRefCode, onContinue }: { refCode: string; s
       </ul>
       <div className="glass-card" style={{ padding: '14px 16px', borderRadius: 20 }}>
         <label htmlFor="start-ref" className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>Got a referral code? <span className="font-normal" style={{ color: DIM }}>(optional)</span></label>
-        <input id="start-ref" value={refCode} onChange={e => setRefCode(e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))} placeholder="Enter referral code" autoComplete="off" className="w-full rounded-xl px-3.5 py-3 text-[15px] outline-none" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, letterSpacing: '0.08em' }} />
+        <input id="start-ref" value={refCode} onChange={e => setRefCode(e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))} placeholder="Enter referral code" autoComplete="off" className="w-full rounded-xl px-3.5 py-3 text-[15px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, letterSpacing: '0.08em', outlineColor: 'var(--color-accent-fg)' }} />
       </div>
       <button type="button" onClick={onContinue} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
         Show my match
@@ -505,13 +509,51 @@ export default function ShortAssessment() {
   const [refCode, setRefCode] = useState(() => (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))
   const { open } = useSignupGate()
 
+  // A refresh, a mis-tap on Back, or a phone call used to destroy eight answers
+  // with no warning and no way back in. sessionStorage keeps them for this tab
+  // only, so nothing outlives the visit.
+  const DRAFT_KEY = 'apex.start.draft.v1'
+  const [restored, setRestored] = useState(false)
+  useEffect(() => {
+    try {
+      const raw = window.sessionStorage.getItem(DRAFT_KEY)
+      if (raw) {
+        const d = JSON.parse(raw)
+        if (d.selectedType) setSelectedType(d.selectedType)
+        if (Array.isArray(d.picks)) setPicks(d.picks)
+        if (typeof d.isCaregiver === 'boolean') setIsCaregiver(d.isCaregiver)
+        if (d.s0) setS0(d.s0); if (d.s1) setS1(d.s1)
+        if (d.s2) setS2(d.s2); if (d.s3) setS3(d.s3)
+        if (d.bloods) setBloods(d.bloods)
+        if (d.source) setSource(d.source)
+        if (d.experience) setExperience(d.experience)
+        if (d.refCode) setRefCode(d.refCode)
+        // Never restore straight back into the result screens.
+        if (d.phase && d.phase !== 'loading' && d.phase !== 'eligible') setPhase(d.phase)
+      }
+    } catch { /* private mode, quota, disabled storage: start fresh. */ }
+    setRestored(true)
+    // Restore once, on mount.
+     
+  }, [])
+
+  useEffect(() => {
+    if (!restored) return
+    try {
+      window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({
+        selectedType, picks, isCaregiver, phase, s0, s1, s2, s3, bloods, source, experience, refCode,
+      }))
+    } catch { /* storage unavailable: the funnel still works, it just won't resume. */ }
+  }, [restored, selectedType, picks, isCaregiver, phase, s0, s1, s2, s3, bloods, source, experience, refCode])
+
   const config = CONFIGS[selectedType] ?? CONFIGS.hormone
 
-  const questionPhases: Phase[] = hasPredefinedType ? ['q0', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy'] : ['q0', 'pick', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy']
-  const countable = questionPhases.filter(p => p !== 'place' && p !== 'privacy')
-  // Interstitials (pathway, privacy) keep the number of the question before them instead of resetting to 01.
-  const currentStep = Math.max(1, countable.filter(p => questionPhases.indexOf(p) <= questionPhases.indexOf(phase)).length)
-  const totalSteps = countable.length
+  // Every screen the visitor taps through counts, including the two that aren't
+  // questions. The bar used to exclude them and so reached 100% with three
+  // screens still to come. See lib/startFunnel.ts.
+  const questionPhases = phasesFor(hasPredefinedType) as Phase[]
+  const currentStep = stepNumber(phase as never, hasPredefinedType)
+  const totalSteps = START_TOTAL_STEPS
   const showProgress = phase !== 'intro' && phase !== 'eligible' && phase !== 'loading'
 
   const go = (next: Phase, d = 1) => { setDir(d); setPhase(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
@@ -541,13 +583,23 @@ export default function ShortAssessment() {
   const whyId = params.get('why') || ''
   if (whyId) signupQs.set('why', whyId)
   const signupUrl = `https://app.apexmetabolichealth.com.au/signup${signupQs.toString() ? `?${signupQs}` : ''}`
-  const eyebrow = `Question ${currentStep} of ${totalSteps}`
+  const eyebrow = `Step ${currentStep} of ${totalSteps}`
 
   return (
     <>
-      <Nav />
-      {/* The live-chat bubble sits over the bottom button on phones; the funnel is one screen, so it stays hidden here. */}
-      <style>{`chat-widget, #ghl-chat-widget { display: none !important; }`}</style>
+      {/* A funnel should not offer six ways out of itself. The full site nav is
+          replaced by the mark and one deliberate exit. */}
+      <header className="fixed top-0 left-0 right-0 z-40" style={{ background: 'rgba(255,255,255,0.86)', backdropFilter: 'blur(14px)', borderBottom: `1px solid ${BORDER}` }}>
+        <div className="mx-auto flex items-center justify-between" style={{ maxWidth: 1200, padding: '14px 20px' }}>
+          <Link href="/" aria-label="Apex Metabolic Health home"><Logo /></Link>
+          <Link href="/" className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 10, textDecoration: 'none' }}>
+            Save and exit
+          </Link>
+        </div>
+      </header>
+      {/* The live-chat bubble lands on top of the primary button. The previous
+          selector matched neither element LeadConnector actually injects. */}
+      <style>{`chat-widget, #ghl-chat-widget, [id*="chat-widget"], [class*="chat-widget"], [id^="lc_text-widget"], [class*="lc_text-widget"], iframe[src*="leadconnectorhq"] { display: none !important; }`}</style>
       <main style={{ background: BG, minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 mesh-blue" style={{ opacity: phase === 'intro' ? 0 : 0.5, transition: 'opacity 0.6s ease' }} />
 
@@ -571,13 +623,13 @@ export default function ShortAssessment() {
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7"><path d="M5 12l5 5L19 7" stroke={BLUE} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </motion.div>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full mb-5" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
-                  <span className="t-mono" style={{ color: BLUE }}>Pathway matched</span>
+                  <span className="t-mono" style={{ color: 'var(--color-accent-fg)' }}>Your pathway</span>
                 </motion.div>
                 <motion.h2 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25, ease }} className="t-h2 mb-4" style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}>
-                  {isCaregiver ? 'A strong match for your family member.' : 'You’re a strong match.'}
+                  {isCaregiver ? 'Here’s the pathway they described.' : 'Here’s the pathway you described.'}
                 </motion.h2>
                 <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35, ease }} className="mb-3 leading-relaxed" style={{ color: DIM, fontSize: 16 }}>
-                  Based on your answers, {isCaregiver ? 'the person you care for is' : 'you’re'} a good candidate for {picks.length > 1 ? <>these pathways: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>the <strong style={{ color: TEXT }}>{config.title}</strong> pathway.</>}
+                  From what {isCaregiver ? 'you told us about them' : 'you told us'}, {picks.length > 1 ? <>these are the pathways built for it: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>this is the pathway built for it: <strong style={{ color: TEXT }}>{config.title}</strong>.</>} Whether it’s right for {isCaregiver ? 'them' : 'you'} is a decision your doctor makes after your bloods.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.38, ease }} className="mb-6">
                   <p className="t-mono mb-2" style={{ color: DIM, fontSize: 9.5 }}>{picks.length ? 'Your protocols · tap to add or remove' : 'Add a protocol'}</p>
@@ -679,7 +731,7 @@ export default function ShortAssessment() {
                   </div>
                 )}
 
-                {phase === 'place' && <PlaceScreen programme={programmeLine} count={Math.max(1, picks.length)} why={why} onContinue={advance} />}
+                {phase === 'place' && <PlaceScreen programme={programmeLine} count={Math.max(1, picks.length)} why={why} onContinue={advance} remaining={stepsRemaining('place', hasPredefinedType)} />}
 
                 {phase === 'exp' && (
                   <div className="flex flex-col gap-5">
