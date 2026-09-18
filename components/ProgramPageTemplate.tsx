@@ -45,6 +45,9 @@ export interface ProgramPageConfig {
   mechanismFeatures: { title: string; body: string }[]
   mechanismImage: string
 
+  /** Retained for reference only. NOT rendered: AHPRA prohibits testimonials
+   *  about clinical care in advertising a regulated health service, and a
+   *  disclaimer does not cure one. See DESIGN.md -> Regulatory Constraints. */
   testimonials: { name: string; date: string; highlight: string; full: string }[]
 
   faqs: { q: string; a: string }[]
@@ -591,96 +594,6 @@ function MechanismSection({ config }: { config: ProgramPageConfig }) {
   )
 }
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-
-function TestimonialsSection({ config }: { config: ProgramPageConfig }) {
-  const prefersReduced = useReducedMotion()
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section ref={ref} style={{ backgroundColor: 'var(--bg)', padding: 'clamp(64px, 8vw, 100px) 0' }} aria-label="Patient experiences">
-      <div className="container-tight">
-        <motion.h2
-          initial={prefersReduced ? false : { opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={prefersReduced ? { duration: 0 } : { duration: 0.7, ease }}
-          style={{
-            fontFamily: 'var(--font-inter)',
-            fontSize: 'clamp(24px, 3vw, 42px)',
-            fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.025em',
-            color: INK, marginBottom: '0.5rem',
-          }}
-        >
-          What patients say.
-        </motion.h2>
-        <motion.p
-          initial={prefersReduced ? false : { opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.08 }}
-          style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: '2.5rem', maxWidth: '60ch', lineHeight: 1.6 }}
-        >
-          Patient experiences reflect individual service interactions. Clinical outcomes vary and cannot be implied or guaranteed.
-        </motion.p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {config.testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={prefersReduced ? false : { opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={prefersReduced ? { duration: 0 } : { duration: 0.55, delay: i * 0.1, ease }}
-              style={{
-                borderRadius: 16, padding: '24px',
-                background: '#1a1f2e',
-                display: 'flex', flexDirection: 'column', gap: 16,
-              }}
-            >
-              {/* Header */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{
-                  width: 38, height: 38, borderRadius: '50%',
-                  background: `linear-gradient(135deg, ${BLUE} 0%, #2563eb 100%)`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0,
-                }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: '#fff', fontFamily: 'var(--font-inter)' }}>
-                    {t.name[0]}
-                  </span>
-                </div>
-                <div>
-                  <p style={{ fontSize: 13, fontWeight: 700, color: '#ffffff', fontFamily: 'var(--font-inter)' }}>{t.name}</p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{t.date}</p>
-                </div>
-              </div>
-
-              {/* Quote */}
-              <p style={{ fontSize: 13, lineHeight: 1.75, color: 'rgba(255,255,255,0.75)', flex: 1 }}>
-                <span style={{
-                  background: 'rgba(72,144,247,0.2)',
-                  borderRadius: 3, padding: '1px 2px', color: '#93b9fd',
-                }}>
-                  {t.highlight}
-                </span>
-                {t.full.replace(t.highlight, '')}
-              </p>
-
-              {/* Stars */}
-              <div style={{ display: 'flex', gap: 3 }}>
-                {Array.from({ length: 5 }).map((_, si) => (
-                  <svg key={si} viewBox="0 0 12 12" fill={BLUE} width={12} height={12} aria-hidden="true">
-                    <path d="M6 1l1.4 2.9L10.5 4 8.5 6l.4 3L6 7.5 3.1 9l.4-3L1.5 4l3.1-.1z" />
-                  </svg>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 
 function FinalCTASection({ config, onGetStarted }: { config: ProgramPageConfig; onGetStarted: () => void }) {
@@ -844,7 +757,6 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <EvidenceSection config={config} />
         <ProcessSection config={config} onGetStarted={handleGetStarted} />
         <MechanismSection config={config} />
-        <TestimonialsSection config={config} />
         <FAQSection faqs={config.faqs} />
         <FinalCTASection config={config} onGetStarted={handleGetStarted} />
       </main>

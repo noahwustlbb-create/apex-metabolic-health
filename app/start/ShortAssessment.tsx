@@ -445,6 +445,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
 
 // ── Privacy (before the match and signup) ─────────────────────────────────────
 function PrivacyScreen({ refCode, setRefCode, onContinue }: { refCode: string; setRefCode: (v: string) => void; onContinue: () => void }) {
+  const [refNote, setRefNote] = useState('')
   const points = [
     { t: 'Only your care team sees it', b: 'Your answers go to Apex doctors and clinic staff. Nobody else.' },
     { t: 'Never sold', b: 'We do not sell, rent or trade your information.' },
@@ -471,7 +472,27 @@ function PrivacyScreen({ refCode, setRefCode, onContinue }: { refCode: string; s
       </ul>
       <div className="glass-card" style={{ padding: '14px 16px', borderRadius: 20 }}>
         <label htmlFor="start-ref" className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>Got a referral code? <span className="font-normal" style={{ color: DIM }}>(optional)</span></label>
-        <input id="start-ref" value={refCode} onChange={e => setRefCode(e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))} placeholder="Enter referral code" autoComplete="off" className="w-full rounded-xl px-3.5 py-3 text-[15px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, letterSpacing: '0.08em', outlineColor: 'var(--color-accent-fg)' }} />
+        <input
+          id="start-ref"
+          value={refCode}
+          onChange={e => {
+            const raw = e.target.value
+            const clean = raw.toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32)
+            setRefCode(clean)
+            // Say what was dropped instead of deleting it silently.
+            setRefNote(raw.length && clean.length < raw.toUpperCase().slice(0, 32).length
+              ? 'Referral codes use letters, numbers and dashes only, so we removed the rest.'
+              : '')
+          }}
+          placeholder="Enter referral code"
+          autoComplete="off"
+          aria-describedby="start-ref-note"
+          className="w-full rounded-xl px-3.5 py-3 text-[15px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, letterSpacing: '0.08em', outlineColor: 'var(--color-accent-fg)' }}
+        />
+        <p id="start-ref-note" role={refNote ? 'status' : undefined} className="m-0 mt-1.5 text-[12.5px]" style={{ color: refNote ? 'var(--color-accent-fg)' : DIM, minHeight: 18 }}>
+          {refNote || 'Letters, numbers and dashes. Leave it blank if you don\u2019t have one.'}
+        </p>
       </div>
       <button type="button" onClick={onContinue} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
         Show my match

@@ -258,34 +258,31 @@ export default function Nav() {
             </Link>
           </div>
 
-          {/* ── Mobile right: Portal + Get Started + hamburger ── */}
+          {/* ── Mobile right: primary CTA + hamburger ── */}
+          {/* This slot used to carry "Patient Portal" - a login for people who
+              have already converted - while the one action the page exists for
+              was desktop-only. Portal login is still in the menu below. */}
           <div className="md:hidden flex items-center gap-2">
             {!menuOpen && (
-              <a
-                href="https://app.apexmetabolichealth.com.au/login"
-                aria-label="Patient Portal login"
+              <Link
+                href="/start"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '5px',
                   minHeight: '44px',
-                  padding: '0 12px',
+                  padding: '0 14px',
                   borderRadius: '12px',
-                  border: '1px solid rgba(72,144,247,0.35)',
-                  color: 'var(--blue)',
+                  background: 'var(--blue)',
+                  color: '#fff',
                   fontFamily: 'var(--font-inter)',
-                  fontSize: '12px',
+                  fontSize: '12.5px',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
                   textDecoration: 'none',
                 }}
               >
-                <svg viewBox="0 0 20 20" fill="none" width="14" height="14" aria-hidden="true">
-                  <circle cx="10" cy="6.5" r="3.2" stroke="currentColor" strokeWidth="1.6" />
-                  <path d="M4 17c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                </svg>
-                Patient Portal
-              </a>
+                Start your assessment
+              </Link>
             )}
             <button
               className="flex flex-col justify-center gap-[5px] p-2 min-h-[44px] min-w-[44px]"
