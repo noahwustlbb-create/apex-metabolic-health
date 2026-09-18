@@ -35,7 +35,12 @@ export default function ProtocolBento() {
 
   const isFeatured = useCallback((id: string) => {
     if (active) return active === id
-    return hover ? id === 'hormone' || id === 'longevity' : id === 'hormone'
+    // Desktop rests with two cards open: there is room for them, and they show
+    // what an open card looks like. A phone has no such room — one open card
+    // filled the viewport, so the visitor met a protocol they had not chosen
+    // and had to scroll past it to see the other eight. Phones rest closed and
+    // wait for a tap, which is what the section header already tells them to do.
+    return hover ? id === 'hormone' || id === 'longevity' : false
   }, [active, hover])
 
   return (
