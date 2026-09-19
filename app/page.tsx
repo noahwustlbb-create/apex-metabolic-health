@@ -1,6 +1,6 @@
 import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
-import Hero from '@/components/home/Hero'
+import AnatomyHero from '@/components/home/AnatomyHero'
 import Intro from '@/components/home/Intro'
 import Ticker from '@/components/home/Ticker'
 import ProtocolBento from '@/components/home/ProtocolBento'
@@ -37,7 +37,7 @@ export default function Home() {
       <ScrollProgress />
       <Nav />
       <main id="main-content">
-        <Hero />
+        <AnatomyHero />
         <Ticker />
         <Intro />
         <ProtocolBento />
