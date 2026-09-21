@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 import Logo from '@/components/brand/Logo'
+import { CLINIC_EMAIL, CLINIC_HOURS, CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
@@ -50,14 +51,21 @@ export default function Footer() {
 
             {/* Contact */}
             <div className="flex flex-col gap-2 mb-5">
-              <a href="mailto:admin@apexmetabolichealth.com.au"
+              <a href={`tel:${CLINIC_PHONE_E164}`}
+                className="text-xs transition-colors duration-200"
+                style={{ color: TEXT }}
+                onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
+                onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
+                {CLINIC_PHONE_DISPLAY}
+              </a>
+              <a href={`mailto:${CLINIC_EMAIL}`}
                 className="text-xs transition-colors duration-200 break-all"
                 style={{ color: TEXT }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
-                admin@apexmetabolichealth.com.au
+                {CLINIC_EMAIL}
               </a>
-              <p className="text-xs" style={{ color: DIM }}>Mon – Fri · 9am – 5pm AEST</p>
+              <p className="text-xs" style={{ color: DIM }}>{CLINIC_HOURS}</p>
             </div>
 
             {/* Social links */}

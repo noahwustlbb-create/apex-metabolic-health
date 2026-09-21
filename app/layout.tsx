@@ -6,6 +6,7 @@ import SmoothScroll from '@/components/SmoothScroll'
 import ReferralCapture from '@/components/ReferralCapture'
 import FloatingContact from '@/components/FloatingContact'
 import GhlChatWidget from '@/components/GhlChatWidget'
+import { CLINIC_EMAIL, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { SignupGateProvider } from '@/context/SignupGateContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import MotionProvider from '@/components/MotionProvider'
@@ -97,7 +98,8 @@ const orgJsonLd = {
       logo: `${SITE_URL}/icon-192.png`,
       image: `${SITE_URL}/og.jpg`,
       description: DESCRIPTION,
-      email: 'admin@apexmetabolichealth.com.au',
+      email: CLINIC_EMAIL,
+      telephone: CLINIC_PHONE_E164,
       areaServed: { '@type': 'Country', name: 'Australia' },
       medicalSpecialty: ['Endocrinology', 'PrimaryCare'],
       availableService: [
