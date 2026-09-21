@@ -2,6 +2,7 @@
 
 import { ArrowRight, Phone } from 'lucide-react'
 import FadeUp from './FadeUp'
+import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 export default function CTABanner() {
   return (
@@ -78,13 +79,13 @@ export default function CTABanner() {
 
             {/* Secondary - phone */}
             <a
-              href="tel:+611300000000"
+              href={`tel:${CLINIC_PHONE_E164}`}
               className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium
                          text-sm border border-white/20 hover:border-white/50
                          px-6 py-4 rounded-md transition-all duration-200"
             >
               <Phone size={15} />
-              1300 000 000
+              {CLINIC_PHONE_DISPLAY}
             </a>
           </div>
 
