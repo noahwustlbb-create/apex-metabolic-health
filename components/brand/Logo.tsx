@@ -2,12 +2,15 @@ import { useId } from 'react'
 import { WORD, WORD_CUT, BOX } from './logoPaths'
 
 /**
- * The Apex lockup: the official triangle mark (Higgsfield clean-pass,
- * ~/Clients/Apex/brand/logo-revamp-2026-08/system-4k) beside the APEX
+ * The Apex lockup: the official triangle mark beside the APEX
  * wordmark traced from the locked V3 SVG. The wordmark is painted with
  * currentColor so it sits on any canvas; the descriptor is set in type so it
  * stays legible at nav size, where the drawn version would be four pixels tall.
  */
+
+// Width/height of the triangle mark artwork in public/brand/mark-*.webp.
+// Hardcoded so the <img> reserves the right box before the file loads.
+const MARK_RATIO = 1.163
 
 const [wx0, wy0, wx1, wy1] = BOX.word
 const WORD_VIEWBOX = `${wx0} ${wy0} ${wx1 - wx0} ${wy1 - wy0}`
@@ -43,7 +46,7 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
   if (variant === 'mark') {
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src="/brand/mark-192.webp" alt="Apex Metabolic Health" width={96} height={77} className={className} style={{ display: 'block', height: 'auto' }} />
+      <img src="/brand/mark-192.webp" alt="Apex Metabolic Health" width={96} height={Math.round(96 / MARK_RATIO)} className={className} style={{ display: 'block', height: 'auto' }} />
     )
   }
 
@@ -61,7 +64,7 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
         src={footer ? '/brand/mark-192.webp' : '/brand/mark-96.webp'}
         alt=""
         aria-hidden="true"
-        width={Math.round(markH * 1.243)}
+        width={Math.round(markH * MARK_RATIO)}
         height={markH}
         style={{ display: 'block', flexShrink: 0 }}
       />
