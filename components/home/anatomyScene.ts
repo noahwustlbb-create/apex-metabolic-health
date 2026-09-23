@@ -31,10 +31,10 @@ export const HOTSPOT_POS: Record<Sex, Record<string, [number, number, number]>> 
     skin:      [0.10, 1.60, 0.05],
     thyroid:   [0, 1.53, 0.07],
     heart:     [-0.05, 1.33, 0.09],
-    muscle:    [-0.21, 1.38, 0.05],
+    muscle:    [-0.17, 1.36, 0.06],
     liver:     [0.10, 1.18, 0.10],
     metabolic: [0, 1.08, 0.11],
-    joint:     [0.24, 1.10, 0.04],
+    joint:     [0.14, 0.72, 0.06],
     repro:     [0, 0.92, 0.08],
     sexual:    [0, 0.83, 0.09],
   },
@@ -44,10 +44,10 @@ export const HOTSPOT_POS: Record<Sex, Record<string, [number, number, number]>> 
     skin:      [0.09, 1.56, 0.05],
     thyroid:   [0, 1.49, 0.06],
     heart:     [-0.05, 1.30, 0.09],
-    muscle:    [-0.19, 1.34, 0.05],
+    muscle:    [-0.155, 1.32, 0.06],
     liver:     [0.09, 1.15, 0.09],
     metabolic: [0, 1.05, 0.10],
-    joint:     [0.22, 1.07, 0.04],
+    joint:     [0.13, 0.70, 0.06],
     repro:     [0, 0.90, 0.08],
     sexual:    [0, 0.82, 0.09],
   },
@@ -154,8 +154,8 @@ export class AnatomyScene {
     this.renderer.domElement.style.touchAction = 'pan-y'
 
     this.camera = new THREE.PerspectiveCamera(30, w / h, 0.1, 100)
-    this.camera.position.set(0, 0.95, 3.35)
-    this.camera.lookAt(0, 0.92, 0)
+    this.camera.position.set(0, 0.92, 3.95)
+    this.camera.lookAt(0, 0.88, 0)
 
     this.scene.add(this.pivot)
     this.pivot.add(this.markers)
