@@ -70,6 +70,8 @@ const COMPARISON_ROWS = [
   { label: 'Medication',               member: 'Cost price', single: 'Cost + fee',  highlight: true  },
   { label: 'Escript Release Fee',      member: 'Free',       single: '$125',        highlight: true  },
   { label: 'Referrals & Certs',        member: 'Free',       single: '$25 each',    highlight: true  },
+  { label: 'Health-system score history', member: 'Every panel', single: 'Latest two', highlight: true  },
+  { label: 'Your plan & GP summary',   member: 'Included',   single: 'Included',    highlight: false },
 ]
 
 function MembershipComparison() {

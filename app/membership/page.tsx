@@ -20,7 +20,7 @@ const ADVANTAGE_STATS = [
 const SAVINGS_ROWS = [
   { label: 'Prescribing fees',        saving: 'Up to $500',   period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
   { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up: pharmacy cost price passed direct' },
-  { label: 'Follow-up blood panels',  saving: '~$120',        period: '/yr', detail: 'Discounted member rate on all repeat pathology' },
+  { label: 'Follow-up blood panels',  saving: '~$120',        period: '/yr', detail: '$139 instead of $180 for the monitoring panel your doctor rechecks on' },
 ]
 
 const INCLUDED = [
@@ -48,8 +48,18 @@ const INCLUDED = [
         <path d="M3 3v16h16" strokeLinecap="round" /><path d="M7 14l4-5 4 3 4-6" strokeLinecap="round" />
       </svg>
     ),
-    title: 'Biomarker tracking over time',
-    body: 'One result tells you where you are. Trends tell you where you\'re going. We track your markers across every draw so optimisation is data-driven, not guesswork.',
+    title: 'Eight health-system scores, trended',
+    body: 'Hormones, metabolic, heart, thyroid, nutrients, liver, kidney and blood, each scored from your own markers and tracked across every panel you have ever done. Non-members see the latest two.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
+        <path d="M6 3h7l4 4v12H6z" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M13 3v4h4M9 12h5M9 15h5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    title: 'Your plan, after every panel',
+    body: 'One page: your system scores, the markers your doctor is watching, the written assessment, your protocol and the next review date. Print it or hand it to your GP.',
   },
   {
     icon: (

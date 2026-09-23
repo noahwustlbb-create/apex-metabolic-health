@@ -12,7 +12,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 const CARDS = [
   { label: 'Blood panel, men’s or women’s', prefix: '', value: '$199', suffix: '', single: '$280', note: 'Bloods first. Full panel, doctor reviewed, results usually within 48 hours.' },
   { label: 'Doctor consultation', prefix: 'from', value: '$99', suffix: '', single: 'from $199', note: 'Phone or video, 45 to 60 minutes, with your results on screen.' },
-  { label: 'Membership', prefix: '', value: '$99', suffix: '/ month', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees, free referrals.', highlight: true },
+  { label: 'Membership', prefix: '', value: '$99', suffix: '/ month', single: 'Optional', note: 'No lock-in. Medication at cost price, no escript fees, follow-up bloods $139, every panel in your trend.', highlight: true },
 ]
 
 /**
