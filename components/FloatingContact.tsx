@@ -93,13 +93,10 @@ export default function FloatingContact() {
     <motion.div
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12, pointerEvents: visible ? 'auto' : 'none' }}
       transition={{ duration: 0.35, ease }}
-      className="fixed bottom-6 right-[86px] sm:right-8 z-50 flex flex-col items-end gap-3"
-      /* The GHL chat bubble is fixed bottom-right and ~64px across. This row was
-         anchored 20px from the right, so its right edge sat under the bubble and
-         the pill label was clipped mid-word. The anchor has to move, not just
-         the width - narrowing a right-anchored box leaves the right edge where
-         it was. From sm up there is room for both at the original offset. */
-      style={{ width: 'min(400px, calc(100vw - 32px - 86px))' }}
+      className="fixed bottom-6 right-5 sm:right-8 z-50 flex flex-col items-end gap-3"
+      /* This used to be anchored 86px from the right to clear the GHL chat
+         bubble. The bubble is gone, so the corner is ours again. */
+      style={{ width: 'min(400px, calc(100vw - 32px))' }}
     >
       {/* Expanded panel */}
       <AnimatePresence>

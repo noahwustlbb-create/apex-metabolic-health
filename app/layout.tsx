@@ -5,7 +5,6 @@ import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 import ReferralCapture from '@/components/ReferralCapture'
 import FloatingContact from '@/components/FloatingContact'
-import GhlChatWidget from '@/components/GhlChatWidget'
 import { CLINIC_EMAIL, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { SignupGateProvider } from '@/context/SignupGateContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -167,7 +166,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SignupGateProvider>
               {children}
               <FloatingContact />
-              <GhlChatWidget />
             </SignupGateProvider>
           </MotionProvider>
         </ThemeProvider>
