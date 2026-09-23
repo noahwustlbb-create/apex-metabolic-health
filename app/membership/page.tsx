@@ -54,6 +54,16 @@ const INCLUDED = [
   {
     icon: (
       <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
+        <path d="M4 5h14v9H9l-4 4v-4H4z" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M8 9h6" strokeLinecap="round" />
+      </svg>
+    ),
+    title: 'Ask about your results, any time',
+    body: 'Plain-English answers grounded in your own markers and your doctor\'s written assessment. It explains what a result means and what moves it; it never diagnoses, doses or changes your protocol. Members ask without limit; a single visit includes five questions a month.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
         <path d="M6 3h7l4 4v12H6z" strokeLinecap="round" strokeLinejoin="round" />
         <path d="M13 3v4h4M9 12h5M9 15h5" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
