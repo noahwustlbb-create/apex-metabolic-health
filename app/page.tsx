@@ -2,24 +2,22 @@ import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
 import Hero from '@/components/home/Hero'
 import Intro from '@/components/home/Intro'
-import Ticker from '@/components/home/Ticker'
-import ProtocolBento from '@/components/home/ProtocolBento'
+import Pillars from '@/components/home/Pillars'
 import Pathway from '@/components/home/Pathway'
-import PortalPeek from '@/components/home/PortalPeek'
 import ReportPreview from '@/components/home/ReportPreview'
 import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
 import Pricing from '@/components/home/Pricing'
-import Values from '@/components/home/Values'
 import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
 import Invite from '@/components/home/Invite'
 import Footer from '@/components/Footer'
 
-// Story: HOOK (hero) → INTRODUCE (clinic) → OFFER (protocols) → EXPLAIN
-// (pathway) → PROVE (report preview, verification, pricing) → PAUSE
-// (who we are) → ANSWER (FAQ) → INVITE (cta). White page; depth comes from
-// framed photographs, floating panels and motion, not from dark bands.
+// Story: HOOK (hero: one promise, the figure) → INTRODUCE (one statement) →
+// OFFER (four areas) → EXPLAIN (pathway) → PROVE (panel, sample report,
+// verification, pricing) → ANSWER (FAQ) → INVITE. White page; chapters are
+// marked by white/porcelain bands, not dark ones. Ticker, PortalPeek and
+// Values left the homepage on 2026-09-27: each repeated a neighbour.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -38,16 +36,13 @@ export default function Home() {
       <Nav />
       <main id="main-content">
         <Hero />
-        <Ticker />
         <Intro />
-        <ProtocolBento />
+        <Pillars />
         <Pathway />
-        <PortalPeek />
-        <ReportPreview />
         <PanelMarkers />
+        <ReportPreview />
         <DoctorCard />
         <Pricing />
-        <Values />
         <FAQSection />
         <Invite />
       </main>

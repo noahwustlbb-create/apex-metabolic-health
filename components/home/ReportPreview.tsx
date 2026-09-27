@@ -48,7 +48,6 @@ export default function ReportPreview() {
 
       <div className="container-x relative">
         <div className="max-w-2xl mb-12 md:mb-16">
-          <motion.p {...reveal(0, 10)} className="t-eyebrow" style={{ marginBottom: 20 }}>What you get back</motion.p>
           <RevealText as="h2" className="t-h2" style={{ marginBottom: 20 }} text="Your numbers, read for how you function." />
           <motion.p {...reveal(0.3, 14)} className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '52ch' }}>
             Every marker grouped by system, flagged where it matters, and explained by your doctor on the call. This is a sample layout, not a patient.

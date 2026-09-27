@@ -44,13 +44,12 @@ export default function Pathway() {
   }, [])
 
   return (
-    <section id="pathway" className="band-light section-y mesh-blue" aria-label="How it works">
+    <section id="pathway" className="band-light section-y" aria-label="How it works">
       <div className="container-x">
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-24">
 
           <div className="lg:sticky lg:self-start" style={{ top: 112 }}>
-            <p className="t-eyebrow" style={{ marginBottom: 20 }}>How it works</p>
-            <RevealText as="h2" className="t-h2" style={{ marginBottom: 20, maxWidth: '14ch' }} text="You’re in the right place. Here’s where you’re headed." />
+            <RevealText as="h2" className="t-h2" style={{ marginBottom: 20, maxWidth: '14ch' }} text="From first question to your protocol." />
             <p className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '44ch', marginBottom: 36 }}>
               Five steps, each with a stated clock. Nothing waits on a waiting room.
             </p>

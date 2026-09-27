@@ -146,7 +146,7 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3">
-              <Link href="/start" className="btn-primary text-[11px] tracking-widest uppercase py-3 px-5">
+              <Link href="/start" className="btn-primary">
                 Start your assessment
               </Link>
               {/* LegitScript certified badge - real verifiable seal */}
