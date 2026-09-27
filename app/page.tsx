@@ -3,12 +3,14 @@ import ScrollProgress from '@/components/ScrollProgress'
 import StageHero from '@/components/home/stage/StageHero'
 import StageClarity from '@/components/home/stage/StageClarity'
 import StagePortal from '@/components/home/stage/StagePortal'
-import Pathway from '@/components/home/Pathway'
 import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
 import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
 import StageClose from '@/components/home/stage/StageClose'
+import StageStartTiles from '@/components/home/stage/StageStartTiles'
+import StageSteps from '@/components/home/stage/StageSteps'
+import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import Footer from '@/components/Footer'
 
@@ -38,9 +40,11 @@ export default function Home() {
       <StageToneProvider>
       <main id="main-content">
         <StageHero />
+        <StageStartTiles />
         <StageClarity />
+        <StageSteps />
         <StagePortal />
-        <Pathway />
+        <StageIncluded />
         <PanelMarkers />
         <DoctorCard />
         <FAQSection />
