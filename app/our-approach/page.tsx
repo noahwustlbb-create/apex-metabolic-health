@@ -291,7 +291,7 @@ export default function OurApproachPage() {
                   { label: 'Blood work included in care', desc: 'Follow-up testing is built into the cycle. No gaps. No blind adjustments.' },
                 ].map((item, i) => (
                   <div key={item.label} className="px-7 py-6"
-                    style={{ background: i === 1 ? '#111111' : '#111111', borderRight: i < 2 ? '1px solid #1E1E1E' : 'none' }}>
+                    style={{ background: 'var(--stage-ice)', borderRight: i < 2 ? '1px solid var(--stage-white)' : 'none' }}>
                     <p className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--blue)' }}>{item.label}</p>
                     <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.desc}</p>
                   </div>

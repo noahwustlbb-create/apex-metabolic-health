@@ -335,27 +335,28 @@ function AllPathways() {
                   href={path.href}
                   className="group flex flex-col h-full p-6 rounded-xl transition-all duration-300"
                   style={{
-                    background: path.featured ? 'rgba(44,116,232,0.1)' : '#111111',
+                    background: path.featured ? 'var(--stage-white)' : 'var(--stage-ice)',
                     border: path.featured
-                      ? '1px solid rgba(44,116,232,0.4)'
-                      : '1px solid rgba(72,144,247,0.12)',
+                      ? '1px solid rgba(13,93,234,0.35)'
+                      : '1px solid transparent',
+                    borderRadius: 24,
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget
                     el.style.transform = 'translateY(-3px)'
                     el.style.borderColor = path.featured
-                      ? 'rgba(44,116,232,0.7)'
-                      : 'rgba(72,144,247,0.3)'
+                      ? 'rgba(13,93,234,0.6)'
+                      : 'rgba(13,93,234,0.18)'
                     el.style.boxShadow = path.featured
                       ? '0 12px 40px rgba(44,116,232,0.18)'
-                      : '0 8px 30px rgba(0,0,0,0.3)'
+                      : '0 18px 40px -24px rgba(13,93,234,0.35)'
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget
                     el.style.transform = 'translateY(0)'
                     el.style.borderColor = path.featured
-                      ? 'rgba(44,116,232,0.4)'
-                      : 'var(--border)'
+                      ? 'rgba(13,93,234,0.35)'
+                      : 'transparent'
                     el.style.boxShadow = 'none'
                   }}
                 >
@@ -369,7 +370,7 @@ function AllPathways() {
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
-                      background: path.featured ? 'rgba(44,116,232,0.15)' : 'var(--elevated)',
+                      background: path.featured ? 'rgba(13,93,234,0.1)' : 'var(--stage-white)',
                       color: path.featured ? 'var(--blue)' : 'var(--blue)',
                     }}
                   >

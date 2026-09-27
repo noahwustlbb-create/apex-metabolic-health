@@ -595,6 +595,7 @@ main section[data-stage-hero] {
   display: flex; align-items: center;
 }
 @media (max-width: 767px) { main section[data-stage-hero] { margin-top: calc(70px + 8px) !important; min-height: 0; padding-bottom: 58vw !important; } }
+@media (max-width: 767px) { main section[data-stage-hero][data-art="none"] { padding-bottom: 48px !important; } }
 main section[data-stage-hero]::after {
   content: ""; position: absolute; z-index: -1; inset: 0 0 0 46%;
   background-size: cover; background-position: 50% 30%;
