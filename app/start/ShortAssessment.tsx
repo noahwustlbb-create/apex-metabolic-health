@@ -665,9 +665,6 @@ export default function ShortAssessment() {
           </Link>
         </div>
       </header>
-      {/* The live-chat bubble lands on top of the primary button. The previous
-          selector matched neither element LeadConnector actually injects. */}
-      <style>{`chat-widget, #ghl-chat-widget, [id*="chat-widget"], [class*="chat-widget"], [id^="lc_text-widget"], [class*="lc_text-widget"], iframe[src*="leadconnectorhq"] { display: none !important; }`}</style>
       <main style={{ background: BG, minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
         <div aria-hidden="true" className="pointer-events-none fixed inset-0 quiz-bg" />
 
