@@ -489,4 +489,36 @@
   }
   */
 
+  /* ════════════════════════════════════════════════════════
+     5. STAGE — the ice frames that hold the glass-body renders
+     (2026-09-27 rebuild, BioTrack bar). The renders are baked
+     on #E9F5FD, so the stage is one fixed look in both themes;
+     text on it uses --stage-ink, never the theme fg tokens.
+     contrast : #0b1220 / #e9f5fd = 17.1:1  ·  #516173 / #e9f5fd = 5.6:1
+     ════════════════════════════════════════════════════════ */
+  :root {
+    --stage-white:      #ffffff;
+    --stage-ice:        #e9f5fd;
+    --stage-ice-deep:   #d4e8f8;
+    --stage-ink:        #0b1220;
+    --stage-ink-muted:  #516173;
+    --stage-glass:      rgba(255,255,255,0.64);
+    --stage-glass-edge: rgba(255,255,255,0.9);
+    --stage-cyan:       #15e4fa;
+    --stage-gauge:      #15e4fa;   /* gauges stay cyan in every tone: red means "flagged" on results */
+    --stage-blue:       #0d5dea;
+    --stage-night:      #05070b;
+    --stage-night-2:    #0d121b;
+    --stage-night-fg:   #eef3f9;
+    --stage-night-mute: #9aa8ba;   /* 7.9:1 on #05070b */
+    --stage-radius:     clamp(24px, 3vw, 40px);
+  }
+
 } /* end @layer tokens */
+
+/* Red comparison tone for the stage glow (?tone=red). Buttons keep Apex blue. */
+@layer tokens {
+  html[data-stage-tone="red"] {
+    --stage-cyan: #ff4d3d;
+  }
+}

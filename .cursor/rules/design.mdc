@@ -24,3 +24,7 @@ Reject
 - Pricing on the homepage. Pricing lives on `/pricing` and `/membership`.
 
 If a section needs a second accent to feel designed, the section is wrong.
+
+Homepage stage (2026-09-27, Noah): the BioTrack/Fulcrum bar overrides "glass on flat canvas" for the ice stage only. Glass chips and cards sit on the renders, never on plain white.
+Stage colours live in `--stage-*` (tokens.css); renders in `public/3d` (cyan) and `public/3d/red` (`?tone=red`). Buttons stay Apex blue in both tones.
+Red never marks a result on the stage; gauges and status chips keep their meaning.

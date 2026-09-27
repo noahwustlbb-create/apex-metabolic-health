@@ -1,22 +1,23 @@
 import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
-import Hero from '@/components/home/Hero'
-import Intro from '@/components/home/Intro'
-import Pillars from '@/components/home/Pillars'
+import StageHero from '@/components/home/stage/StageHero'
+import StageClarity from '@/components/home/stage/StageClarity'
+import StagePortal from '@/components/home/stage/StagePortal'
 import Pathway from '@/components/home/Pathway'
-import ReportPreview from '@/components/home/ReportPreview'
 import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
 import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
-import Invite from '@/components/home/Invite'
+import StageClose from '@/components/home/stage/StageClose'
+import { StageToneProvider } from '@/components/home/stage/StageTone'
 import Footer from '@/components/Footer'
 
-// Story: HOOK (hero: one promise, the figure) → INTRODUCE (one statement) →
-// OFFER (four areas) → EXPLAIN (pathway) → PROVE (panel, sample report,
-// verification) → ANSWER (FAQ) → INVITE. White page; chapters are
-// marked by white/porcelain bands, not dark ones. Ticker, PortalPeek and
-// Values left the homepage on 2026-09-27: each repeated a neighbour.
+// Story, rebuilt to the BioTrack bar (Noah, 2026-09-27): HOOK (ice stage,
+// glass body with the four pillars, handing over to the heart) → PROVE
+// (four cards: bloods, doctor, panel, portal) → SHOW (the portal on a night
+// band, sample data) → EXPLAIN (pathway) → PROVE (panel) → TRUST (doctor)
+// → ANSWER (FAQ) → INVITE (ice stage again). Renders: public/3d, made in
+// Higgsfield (jobs in Clients/Apex/research/hero-2026-09-27/HANDOFF.md).
 // No prices on the homepage (Noah, 2026-09-27); they live on /pricing.
 
 const faqJsonLd = {
@@ -34,17 +35,18 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Nav />
+      <StageToneProvider>
       <main id="main-content">
-        <Hero />
-        <Intro />
-        <Pillars />
+        <StageHero />
+        <StageClarity />
+        <StagePortal />
         <Pathway />
         <PanelMarkers />
-        <ReportPreview />
         <DoctorCard />
         <FAQSection />
-        <Invite />
+        <StageClose />
       </main>
+      </StageToneProvider>
       <Footer />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
