@@ -7,7 +7,6 @@ import Pathway from '@/components/home/Pathway'
 import ReportPreview from '@/components/home/ReportPreview'
 import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
-import Pricing from '@/components/home/Pricing'
 import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
 import Invite from '@/components/home/Invite'
@@ -15,9 +14,10 @@ import Footer from '@/components/Footer'
 
 // Story: HOOK (hero: one promise, the figure) → INTRODUCE (one statement) →
 // OFFER (four areas) → EXPLAIN (pathway) → PROVE (panel, sample report,
-// verification, pricing) → ANSWER (FAQ) → INVITE. White page; chapters are
+// verification) → ANSWER (FAQ) → INVITE. White page; chapters are
 // marked by white/porcelain bands, not dark ones. Ticker, PortalPeek and
 // Values left the homepage on 2026-09-27: each repeated a neighbour.
+// No prices on the homepage (Noah, 2026-09-27); they live on /pricing.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -42,7 +42,6 @@ export default function Home() {
         <PanelMarkers />
         <ReportPreview />
         <DoctorCard />
-        <Pricing />
         <FAQSection />
         <Invite />
       </main>

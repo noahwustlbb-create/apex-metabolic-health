@@ -10,6 +10,8 @@ type Sex = 'male' | 'female'
 type Region = {
   id: string
   label: string
+  /** Label in the pillar row under the button. */
+  short: string
   /** Tests on the Apex panel. Test names only, never medicines or outcomes. */
   markers: Record<Sex, string>
   /** The first /start question this region answers (t = pathway, why = reason). */
@@ -25,28 +27,28 @@ type Region = {
 // on the figure answers the funnel's first question. Test names only.
 const REGIONS: Region[] = [
   {
-    id: 'hormones', label: 'Hormones',
+    id: 'hormones', short: 'Hormones', label: 'Hormones',
     markers: { male: 'Testosterone, SHBG, oestradiol, LH, FSH and prolactin', female: 'Oestradiol, progesterone, testosterone, LH, FSH and prolactin' },
     t: 'hormone', why: 'energy', whyLabel: 'hormones',
     at: { male: [0.5, 0.088], female: [0.5, 0.078] },
   },
   {
-    id: 'longevity', label: 'Longevity',
-    markers: { male: 'Cholesterol, triglycerides, hs-CRP, IGF-1 and a full blood count', female: 'Cholesterol, triglycerides, hs-CRP, vitamin D and a full blood count' },
-    t: 'longevity', why: 'ageing', whyLabel: 'longevity',
-    at: { male: [0.53, 0.405], female: [0.52, 0.365] },
+    id: 'metabolic', short: 'Metabolic', label: 'Metabolic health',
+    markers: { male: 'Glucose, liver and kidney function, uric acid and lipids', female: 'Glucose, HbA1c, liver and kidney function and lipids' },
+    t: 'weight', why: 'weight', whyLabel: 'metabolic health',
+    at: { male: [0.46, 0.545], female: [0.5, 0.49] },
   },
   {
-    id: 'recovery', label: 'Recovery',
+    id: 'recovery', short: 'Recovery', label: 'Recovery',
     markers: { male: 'Testosterone, IGF-1, cortisol and hs-CRP', female: 'Testosterone, cortisol, iron studies and hs-CRP' },
     t: 'recovery', why: 'recovery', whyLabel: 'recovery',
     at: { male: [0.2, 0.39], female: [0.21, 0.39] },
   },
   {
-    id: 'metabolic', label: 'Metabolic health',
-    markers: { male: 'Glucose, liver and kidney function, uric acid and lipids', female: 'Glucose, HbA1c, liver and kidney function and lipids' },
-    t: 'weight', why: 'weight', whyLabel: 'metabolic health',
-    at: { male: [0.46, 0.545], female: [0.5, 0.49] },
+    id: 'longevity', short: 'Longevity', label: 'Longevity',
+    markers: { male: 'Cholesterol, triglycerides, hs-CRP, IGF-1 and a full blood count', female: 'Cholesterol, triglycerides, hs-CRP, vitamin D and a full blood count' },
+    t: 'longevity', why: 'ageing', whyLabel: 'longevity',
+    at: { male: [0.53, 0.405], female: [0.52, 0.365] },
   },
 ]
 
@@ -61,7 +63,7 @@ const toBox = (sex: Sex, [x, y]: [number, number]): [number, number] => {
   return [(1 - scale) / 2 + x * scale, y]
 }
 
-const CYCLE_MS = 4200
+const CYCLE_MS = 3600
 const lerp = (a: number, b: number, k: number) => a + (b - a) * k
 
 /**
@@ -113,7 +115,7 @@ export default function Hero() {
   useEffect(() => {
     if (picked || reduced) return
     const id = window.setInterval(() => {
-      if (document.hidden || live.current.overFig || !live.current.visible) return
+      if (document.hidden || !live.current.visible) return
       setActive(a => (a + 1) % REGIONS.length)
     }, CYCLE_MS)
     return () => window.clearInterval(id)
@@ -257,11 +259,11 @@ export default function Hero() {
               as="h1"
               className="hero-title"
               delay={0.05}
-              segments={[{ text: 'Measure first.' }, { text: 'Then treat.', accent: true }]}
+              segments={[{ text: 'Fine on paper.' }, { text: 'Flat in real life.', accent: true }]}
             />
 
             <p className="t-lead hero-in hero-sub" style={{ animationDelay: '380ms' }}>
-              Hormones, metabolic health, recovery and longevity, planned by an AHPRA&#8209;registered doctor from your own blood panel. No GP referral.
+              A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and an AHPRA&#8209;registered doctor builds your plan from them. No GP referral.
             </p>
 
             <div className="hero-in hero-ctas" style={{ animationDelay: '480ms' }}>
@@ -274,13 +276,29 @@ export default function Hero() {
               </Link>
             </div>
 
-            <p className="hero-in hero-caption" style={{ animationDelay: '580ms' }} aria-live="polite">
-              <span className="hero-caption-dot" aria-hidden="true" />
-              <span>
+<div className="hero-in hero-pillars" style={{ animationDelay: '580ms' }}>
+              <div className="hero-tabs" role="group" aria-label="What we look at">
+                {REGIONS.map((r, i) => (
+                  <button
+                    key={r.id}
+                    type="button"
+                    className="hero-tab"
+                    data-on={i === active || undefined}
+                    aria-pressed={i === active}
+                    onClick={() => choose(i)}
+                  >
+                    {r.short}
+                    <span className="hero-tab-bar" aria-hidden="true">
+                      <span key={`${active}-${picked}`} className="hero-tab-fill" data-run={(!picked && !reduced && i === active) || undefined} style={{ animationDuration: `${CYCLE_MS}ms` }} />
+                    </span>
+                  </button>
+                ))}
+              </div>
+              <p className="hero-caption" aria-live="polite">
                 <strong>{region.label}.</strong> {region.markers[sex]} are on your panel.
                 {picked && <span className="block" style={{ color: 'var(--color-accent-fg)' }}>Your assessment will start with {region.whyLabel}.</span>}
-              </span>
-            </p>
+              </p>
+            </div>
           </div>
 
           <div className="hero-figure-col hero-in" style={{ animationDelay: '260ms' }}>
@@ -350,9 +368,9 @@ export default function Hero() {
         </div>
 
         <dl className="hero-proof hero-in" style={{ animationDelay: '700ms' }}>
+          <div><dt>23+</dt><dd>markers on every panel</dd></div>
           <div><dt>4,000+</dt><dd>accredited collection centres</dd></div>
           <div><dt>48 hours</dt><dd>most results back</dd></div>
-          <div><dt>$280</dt><dd>full panel, $199 for members</dd></div>
         </dl>
         <p className="hero-foot">
           For Australian adults 18 and over. Illustrative figure; every marker named is on the Apex panel. General information, not medical advice.

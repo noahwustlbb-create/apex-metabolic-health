@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 
 const STATEMENT =
-  'A standard blood test is built to find disease. It is not built to explain why you feel tired, flat or slow to recover. Apex reads the full panel for how you actually function, and an AHPRA-registered doctor builds your plan from those numbers.'
+  'Hormones, metabolism, recovery and longevity are all written in your bloods. Apex reads the full panel, an AHPRA-registered doctor walks you through it, and every plan is re-tested so you can both see what changed.'
 
 function Word({ children, progress, range, reduced }: { children: string; progress: MotionValue<number>; range: [number, number]; reduced: boolean | null }) {
   const color = useTransform(progress, range, ['rgba(15,23,42,0.18)', 'rgba(15,23,42,1)'])

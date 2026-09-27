@@ -529,7 +529,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 32px;
   min-height: min(calc(100svh - 150px), 820px);
@@ -538,7 +538,7 @@ html.lenis, html.lenis body { height: auto; }
 .hero-title {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 500;
-  font-size: clamp(52px, 6.1vw, 96px);
+  font-size: clamp(44px, 5.4vw, 82px);
   letter-spacing: -0.05em;
   line-height: 0.96;
   font-feature-settings: "cv11", "ss03", "cv05";
@@ -547,13 +547,22 @@ html.lenis, html.lenis body { height: auto; }
 .hero-sub { color: var(--text-secondary); max-width: 38ch; margin: 28px 0 40px; }
 .hero-ctas { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
 .hero-secondary { font-size: 15px; font-weight: 500; color: var(--text-primary); }
-.hero-caption {
-  display: flex; gap: 10px; align-items: baseline;
-  margin: 26px 0 0; max-width: 46ch; min-height: 3.4em;
-  font-size: 13.5px; line-height: 1.5; color: var(--text-muted);
+.hero-pillars { margin-top: 32px; max-width: 480px; }
+.hero-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.hero-tab {
+  position: relative; text-align: left; background: none; border: 0; cursor: pointer;
+  padding: 0 0 11px; font-size: 14px; font-weight: 500; letter-spacing: -0.01em; color: var(--text-muted);
+  transition: color 0.25s ease;
 }
+.hero-tab:hover, .hero-tab[data-on] { color: var(--text-primary); }
+.hero-tab:focus-visible { outline: 2px solid #1d4fd8; outline-offset: 4px; border-radius: 4px; }
+.hero-tab-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 2px; background: rgba(15,23,42,0.1); overflow: hidden; }
+.hero-tab-fill { display: block; height: 100%; background: #1d4fd8; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+.hero-tab[data-on] .hero-tab-fill { transform: scaleX(1); }
+.hero-tab-fill[data-run] { animation: tab-fill linear both; }
+@keyframes tab-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.hero-caption { margin: 14px 0 0; min-height: 3em; font-size: 13.5px; line-height: 1.5; color: var(--text-muted); }
 .hero-caption strong { color: var(--text-primary); font-weight: 600; }
-.hero-caption-dot { flex: none; width: 7px; height: 7px; border-radius: 999px; background: #1d4fd8; box-shadow: 0 0 0 4px rgba(29,79,216,0.12); transform: translateY(-1px); }
 .hero-figure-col { position: relative; display: flex; justify-content: center; }
 .hero-perspective { perspective: 1400px; }
 .hero-stage { transform-style: preserve-3d; will-change: transform; }
@@ -606,18 +615,22 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 1023px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 0; min-height: 0; padding-top: 104px; }
   .hero-grid > .relative { display: contents; }
-  .hero-title { order: 1; font-size: clamp(48px, 13vw, 76px); }
-  .hero-sub { order: 2; margin: 18px 0 8px; }
-  .hero-figure-col { order: 3; margin: 0 0 18px; }
-  .hero-ctas { order: 4; flex-direction: column-reverse; align-items: stretch; gap: 14px; text-align: center; }
+  .hero-title { order: 1; font-size: clamp(40px, 11.2vw, 68px); }
+  .hero-sub { order: 2; margin: 16px 0 0; font-size: 16px; }
+  .hero-figure-col { order: 4; margin: 0 0 16px; }
+  .hero-ctas { order: 5; flex-direction: column-reverse; align-items: stretch; gap: 14px; text-align: center; }
   .hero-ctas .btn-primary { width: 100%; }
-  .hero-caption { order: 5; margin-top: 18px; }
-  .hero-figure { height: min(46svh, 400px); }
+  .hero-pillars { order: 3; margin: 18px 0 4px; max-width: none; }
+  .hero-caption { min-height: 4.5em; font-size: 13px; }
+  .hero-tabs { gap: 10px; }
+  .hero-tab { font-size: 13px; }
+  .hero-figure { height: min(40svh, 340px); }
+  .hero-sex { top: auto; bottom: 4px; }
   .hero-proof { gap: 12px; margin-top: 28px; }
   .hero-proof dd { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-spot[data-on] .hero-spot-dot::after { animation: none; }
+  .hero-spot[data-on] .hero-spot-dot::after, .hero-tab-fill[data-run] { animation: none; }
 }
 
 /* Nav CTA: ink, so the one blue button on a screen is the page's own. */
