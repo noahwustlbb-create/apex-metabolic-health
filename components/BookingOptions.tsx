@@ -12,7 +12,7 @@ const OPTIONS = [
     tag: 'Not Sure Where to Start',
     title: 'Find My Program',
     desc: 'Answer 5 questions. Get matched to the right program in under 2 minutes.',
-    href: '/quiz',
+    href: '/start',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">

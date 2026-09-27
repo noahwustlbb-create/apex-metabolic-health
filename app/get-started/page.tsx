@@ -81,7 +81,7 @@ function GetStartedHero() {
           className="flex flex-wrap gap-3"
         >
           {[
-            { label: 'Take the health assessment', href: '/quiz', primary: true },
+            { label: 'Take the health assessment', href: '/start', primary: true },
             { label: 'Hormone Consultation', href: '/intake/hormone-consult' },
             { label: 'Performance Consultation', href: '/intake/hormone-consult' },
             { label: 'Metabolic Consultation', href: '/intake/general-consult' },
@@ -89,12 +89,12 @@ function GetStartedHero() {
             { label: 'Skin Regeneration', href: '/intake/general-consult' },
             { label: 'Injury Repair', href: '/intake/general-consult' },
             { label: 'General Check Up', href: '/intake/general-consult' },
-            { label: 'Order Blood Panel', href: '/quiz' },
+            { label: 'Order Blood Panel', href: '/start?t=bloods' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
           ].map(({ label, href, primary }) => (
             <Link
-              key={href}
+              key={label}
               href={href}
               className={primary ? 'btn-pill' : 'btn-ghost'}
             >
@@ -119,27 +119,13 @@ const ALL_PATHWAYS = [
     tag: 'Not Sure Where to Start',
     title: 'Take the health assessment',
     desc: 'Answer a few questions. Get matched to the right clinical pathway in under 2 minutes.',
-    href: '/assessment',
+    href: '/start',
     cta: 'Take the health assessment',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
         <circle cx="11" cy="11" r="7" strokeLinecap="round"/>
         <path d="M20 20l-3-3M11 8v3l2 2" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    tag: 'Quick 2-Min Quiz',
-    title: 'Health Assessment Quiz',
-    desc: 'Take our short health quiz to understand your symptoms and find the most suitable program.',
-    href: '/quiz',
-    cta: 'Take the Quiz',
-    featured: false,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 12h6M9 16h4" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -188,7 +174,7 @@ const ALL_PATHWAYS = [
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
     desc: 'Doctor-ordered blood panels issued directly through Apex, collected at any accredited centre near you.',
-    href: '/quiz',
+    href: '/start?t=bloods',
     cta: 'Order Blood Panel',
     featured: false,
     icon: (

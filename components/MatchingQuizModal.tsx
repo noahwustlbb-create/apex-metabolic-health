@@ -51,7 +51,7 @@ const PROGRAMS: Record<string, { name: string; sub: string; quizHref: string; be
   hormone: {
     name: 'Hormone Optimisation',
     sub: 'ADAM-validated hormonal assessment',
-    quizHref: '/hormone-check',
+    quizHref: '/start?t=hormone',
     benefits: [
       'Comprehensive 40+ biomarker hormone panel',
       'Evidence-based protocol designed around your bloodwork',
@@ -61,7 +61,7 @@ const PROGRAMS: Record<string, { name: string; sub: string; quizHref: string; be
   weight: {
     name: 'Medical Weight Loss',
     sub: 'Doctor-led metabolic treatment',
-    quizHref: '/metabolic-check',
+    quizHref: '/start?t=weight',
     benefits: [
       'Full metabolic panel including insulin resistance markers',
       'Doctor-prescribed treatment tailored to your metabolic profile',
@@ -71,7 +71,7 @@ const PROGRAMS: Record<string, { name: string; sub: string; quizHref: string; be
   recovery: {
     name: 'Recovery & Injury Repair',
     sub: 'Doctor-led tissue repair',
-    quizHref: '/intake/quiz/injury',
+    quizHref: '/start?t=recovery',
     benefits: [
       'Assessment by an AHPRA-registered doctor',
       'Evidence-based repair protocol coordinated through our pharmacy partner',
@@ -81,7 +81,7 @@ const PROGRAMS: Record<string, { name: string; sub: string; quizHref: string; be
   antiageing: {
     name: 'Anti-Ageing & Longevity',
     sub: 'Performance-focused longevity care',
-    quizHref: '/intake/quiz/antiageing',
+    quizHref: '/start?t=longevity',
     benefits: [
       'Comprehensive longevity biomarker panel',
       'Doctor-designed protocol targeting the biology of ageing',

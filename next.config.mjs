@@ -40,12 +40,31 @@ const PORTAL_LOGIN = 'https://app.apexmetabolichealth.com.au/login'
 // ad URLs are corrected these become dead weight and can be deleted.
 const AD_LANDING_ROUTES = [
   ['/get/started', '/get-started'],
-  ['/hormone/consult', '/hormone-check'],
+  ['/hormone/consult', '/start?t=hormone'],
   // No peptide page exists, and peptides are Schedule 4 — a dedicated landing
   // page would be prescription-drug advertising. Conditions overview instead.
   ['/peptide/consult', '/what-we-treat'],
   ['/peptides', '/what-we-treat'],
   ['/bloods', '/order-bloods'],
+]
+
+// The old per-program quizzes, retired 28 Sep 2026 (Noah: no old quizzes).
+// /start is the one assessment; ?t= preselects the pathway. Some of these
+// are live Google Ads destinations, so they redirect rather than 404.
+const RETIRED_QUIZZES = [
+  ['/intake/quiz/hormone', '/start?t=hormone'],
+  ['/intake/quiz/weightloss', '/start?t=weight'],
+  ['/intake/quiz/performance', '/start?t=recovery'],
+  ['/intake/quiz/hair', '/start?t=skinhair'],
+  ['/intake/quiz/injury', '/start?t=recovery'],
+  ['/intake/quiz/antiageing', '/start?t=longevity'],
+  ['/intake/quiz/sexual', '/start?t=sexual'],
+  ['/intake/quiz/skin', '/start?t=skinhair'],
+  ['/hormone-check', '/start?t=hormone'],
+  ['/metabolic-check', '/start?t=weight'],
+  ['/assessment', '/start'],
+  ['/quiz', '/start'],
+  ['/programs-select', '/start'],
 ]
 
 /** @type {import('next').NextConfig} */
@@ -89,6 +108,7 @@ const nextConfig = {
         destination: PORTAL_SIGNUP,
         permanent: false,
       })),
+      ...RETIRED_QUIZZES.map(([source, destination]) => ({ source, destination, permanent: true })),
       // Existing patients reorder inside the portal.
       { source: '/intake/repeat-order', destination: PORTAL_LOGIN, permanent: false },
       ...AD_LANDING_ROUTES.map(([source, destination]) => ({
