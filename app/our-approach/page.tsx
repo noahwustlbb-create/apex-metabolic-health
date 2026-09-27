@@ -42,7 +42,7 @@ export default function OurApproachPage() {
       <main>
 
         {/* ── 1. Hero ── */}
-        <section
+        <section data-stage-hero="" data-art="/3d/body-female.jpg"
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '150px', paddingBottom: '100px' }}
           aria-label="Our approach hero"

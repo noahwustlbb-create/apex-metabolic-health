@@ -16,7 +16,7 @@ function PricingHero() {
   const inView = useInView(ref, { once: true, margin: '-40px' })
 
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/product/box-white.jpg"
       className="relative overflow-hidden"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="Pricing hero"

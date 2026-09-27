@@ -27,7 +27,7 @@ const inputBase: React.CSSProperties = {
 
 function GetStartedHero() {
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/product/pens.jpg"
       className="relative overflow-hidden section-pad"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="Get started hero"

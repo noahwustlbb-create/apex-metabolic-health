@@ -273,7 +273,7 @@ export default function ServicesPage() {
       <main>
 
         {/* ── Hero ─────────────────────────────────────────────── */}
-        <section
+        <section data-stage-hero="" data-art="/3d/product/vials.jpg"
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="Clinical treatments"

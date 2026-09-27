@@ -546,3 +546,76 @@
 .prog-card-arrow { width: 34px; height: 34px; }
 .prog-card:hover .prog-card-arrow { transform: translateX(3px) rotate(45deg); }
 .stage-card-art-product { inset: 6% 0 34% 0; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
+
+/* ════════════════════════════════════════════════════════════════
+   SITE-WIDE LIFT (2026-09-28): every legacy page reads in the stage
+   language without touching its markup. Headlines go light and tight,
+   blue accent words become the muted second line, gradient text and the
+   blurred colour blobs go, cards float white on a soft ice page.
+   ════════════════════════════════════════════════════════════════ */
+main :is(h1, h2):not(.stage-display):not(.stage-h2):not(.stage-card-title),
+main .t-display, main .t-h2 {
+  font-weight: 400 !important;
+  letter-spacing: -0.048em !important;
+  line-height: 1.0 !important;
+  font-feature-settings: "cv11", "ss03", "cv05";
+}
+main h1 { text-wrap: balance; }
+/* Accent words inside headlines: blue, rgb or gradient -> muted ink. */
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="--blue"],
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="rgb(72, 144, 247)"],
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="rgb(29, 78, 216)"],
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="rgb(29, 79, 216)"],
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="#4890f7"],
+main :is(h1, h2, .t-display, .t-h2) .bg-clip-text,
+main :is(h1, h2, .t-display, .t-h2) .text-transparent,
+main :is(h1, h2, .t-display, .t-h2) .text-accent {
+  color: color-mix(in srgb, currentColor 42%, transparent) !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-style: normal;
+}
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="--blue"] ,
+main :is(h1, h2, .t-display, .t-h2) :is(span, em)[style*="rgb(72, 144, 247)"] { opacity: 1; }
+/* Blurred colour blobs -> soft ice. */
+.mesh, .mesh-rose, .mesh-blue { background: linear-gradient(180deg, var(--stage-white) 0%, var(--stage-ice) 100%) !important; }
+/* Cards: white, floating, larger radius. */
+.glass-card { background: var(--stage-white) !important; border: 1px solid rgba(11,18,32,0.06) !important; border-radius: 28px !important; box-shadow: 0 1px 0 rgba(255,255,255,1) inset, 0 24px 50px -38px rgba(13,93,234,0.45) !important; backdrop-filter: none !important; }
+/* Eyebrow labels: one quiet chip style everywhere. */
+main .t-label, main [class*="tracking-[0.2em]"][class*="uppercase"] { letter-spacing: 0.08em !important; }
+
+/* ── Page stage heroes: any <section data-stage-hero data-art="..."> ── */
+main section[data-stage-hero] {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin: calc(88px + 8px) clamp(10px, 1.4vw, 20px) 0 !important;
+  padding-top: clamp(56px, 7vw, 110px) !important; padding-bottom: clamp(56px, 7vw, 110px) !important;
+  border-radius: var(--stage-radius);
+  background: var(--stage-ice) !important; color: var(--stage-ink);
+  min-height: min(78svh, 720px);
+  display: flex; align-items: center;
+}
+@media (max-width: 767px) { main section[data-stage-hero] { margin-top: calc(70px + 8px) !important; min-height: 0; padding-bottom: 58vw !important; } }
+main section[data-stage-hero]::after {
+  content: ""; position: absolute; z-index: -1; inset: 0 0 0 46%;
+  background-size: cover; background-position: 50% 30%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 34%); mask-image: linear-gradient(90deg, transparent 0%, #000 34%);
+  animation: stage-load 2.2s cubic-bezier(0.22,1,0.36,1) both;
+}
+@media (max-width: 767px) { main section[data-stage-hero]::after { inset: auto 0 0 0; height: 56vw; -webkit-mask-image: linear-gradient(180deg, transparent, #000 35%); mask-image: linear-gradient(180deg, transparent, #000 35%); } }
+main section[data-stage-hero] > * { position: relative; z-index: 1; }
+main section[data-stage-hero] :is(h1, p) { max-width: min(640px, 52%) !important; }
+@media (max-width: 767px) { main section[data-stage-hero] :is(h1, p) { max-width: none !important; } }
+main section[data-stage-hero] h1 { font-family: var(--font-inter), Inter, system-ui, sans-serif !important; font-size: clamp(40px, 5vw, 80px) !important; color: var(--stage-ink) !important; }
+main section[data-stage-hero] .dot-grid, main section[data-stage-hero] > [aria-hidden="true"]:not(img) { display: none !important; }
+main section[data-art="/team/team-standing.webp"]::after { background-image: url("/team/team-standing.webp"); }
+main section[data-art="/3d/phone.jpg"]::after { background-image: url("/3d/phone.jpg"); }
+main section[data-art="/3d/product/box-white.jpg"]::after { background-image: url("/3d/product/box-white.jpg"); }
+main section[data-art="/3d/product/box-black.jpg"]::after { background-image: url("/3d/product/box-black.jpg"); }
+main section[data-art="/3d/tablet.jpg"]::after { background-image: url("/3d/tablet.jpg"); }
+main section[data-art="/editorial/molecular.webp"]::after { background-image: url("/editorial/molecular.webp"); }
+main section[data-art="/3d/body-female.jpg"]::after { background-image: url("/3d/body-female.jpg"); }
+main section[data-art="/3d/body-male.jpg"]::after { background-image: url("/3d/body-male.jpg"); }
+main section[data-art="/3d/product/vials.jpg"]::after { background-image: url("/3d/product/vials.jpg"); }
+main section[data-art="/3d/product/pens.jpg"]::after { background-image: url("/3d/product/pens.jpg"); }
+main section[data-art="none"] :is(h1, p) { max-width: 760px !important; }
+main section[data-art="none"] { min-height: 0; }

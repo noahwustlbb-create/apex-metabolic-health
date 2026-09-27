@@ -99,7 +99,7 @@ export default function AboutPage() {
       <main>
 
         {/* Hero */}
-        <section
+        <section data-stage-hero="" data-art="none"
           ref={heroRef}
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '160px', paddingBottom: '100px' }}

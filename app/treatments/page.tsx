@@ -67,7 +67,7 @@ export default function TreatmentsPage() {
       <Nav />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', paddingTop: 160, paddingBottom: 64 }}>
+        <section data-stage-hero="" data-art="/3d/product/box-white.jpg" className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', paddingTop: 160, paddingBottom: 64 }}>
           <div className="absolute inset-0 dot-grid opacity-[0.12]" aria-hidden />
           <div
             aria-hidden
