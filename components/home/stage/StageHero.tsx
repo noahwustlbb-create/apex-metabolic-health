@@ -165,12 +165,12 @@ export default function StageHero() {
               <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
                 <Image src={art('tube')} alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
                 <span className="stage-float stage-float-a">
-                  <span className="stage-float-k">One blood panel</span>
-                  <span className="stage-float-v">23+ markers, four systems</span>
+                  <span className="stage-float-k">Starts with</span>
+                  <span className="stage-float-v">One blood panel, 23+ markers</span>
                 </span>
                 <span className="stage-float stage-float-b">
-                  <span className="stage-float-k">Most results back in</span>
-                  <span className="stage-float-v stage-readout">48 h</span>
+                  <span className="stage-float-k">Delivered</span>
+                  <span className="stage-float-v">Discreetly, to your door</span>
                 </span>
               </motion.div>
             )}
@@ -200,10 +200,10 @@ export default function StageHero() {
           {!reduced && (
             <motion.div className="stage-hero-copy stage-hero-copy-b" style={{ opacity: copyB, y: copyBY }} aria-hidden="true">
               <h2 className="stage-display">
-                Your markers,<br /><span className="stage-muted">read by a doctor.</span>
+                Your plan,<br /><span className="stage-muted">written by a doctor.</span>
               </h2>
               <p className="stage-lead">
-                An AHPRA-registered doctor goes through every result with you on the call, then writes a plan you can follow.
+                An AHPRA-registered doctor reads your panel with you on the call, decides what is suitable, and your plan arrives at your door.
               </p>
             </motion.div>
           )}
