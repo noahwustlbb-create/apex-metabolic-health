@@ -76,8 +76,8 @@ export default function StageClarity() {
                 </span>
               )}
               {c.tone === 'ice' && (
-                <span className="stage-card-art stage-card-art-heart" aria-hidden="true">
-                  <Image src={art('heart')} alt="" fill sizes="260px" className="object-cover" />
+                <span className="stage-card-art stage-card-art-tube" aria-hidden="true">
+                  <Image src={art('tube')} alt="" fill sizes="260px" className="object-cover" />
                 </span>
               )}
               <div className="stage-card-text">

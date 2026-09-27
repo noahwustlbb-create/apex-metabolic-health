@@ -21,7 +21,7 @@ export default function StageClose() {
     <section ref={ref} id="cta" className="stage-close-wrap" aria-labelledby="close-title">
       <div className="stage-frame stage-close">
         <motion.div className="stage-close-heart" aria-hidden="true" {...(reduced ? {} : { initial: { opacity: 0, scale: 0.9 }, animate: inView ? { opacity: 1, scale: 1 } : {}, transition: { duration: 1.4, ease } })}>
-          <Image src={art('heart')} alt="" fill sizes="(min-width: 900px) 30vw, 70vw" className="object-contain" />
+          <Image src={art('tube')} alt="" fill sizes="(min-width: 900px) 30vw, 70vw" className="object-contain" />
         </motion.div>
         <motion.h2 id="close-title" className="stage-display stage-center" {...rise(0.1)}>
           Stop guessing.<br /><span className="stage-muted">Start measuring.</span>

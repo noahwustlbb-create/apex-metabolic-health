@@ -33,5 +33,6 @@ export const useStageTone = () => useContext(ToneCtx)
 /** Path to a stage render for the current tone. */
 export const useStageArt = () => {
   const tone = useStageTone()
-  return (name: 'body-male' | 'body-female' | 'heart') => `/3d/${tone === 'red' ? 'red/' : ''}${name}.jpg`
+  // The tube has no red render yet, so it stays cyan in both tones.
+  return (name: 'body-male' | 'body-female' | 'heart' | 'tube') => `/3d/${tone === 'red' && name !== 'tube' ? 'red/' : ''}${name}.jpg`
 }

@@ -51,7 +51,6 @@ const PILLARS: Pillar[] = [
 ]
 
 const FIG_ASPECT = 1647 / 2200
-const CYCLE_MS = 3800
 
 /**
  * HOOK, BioTrack structure. An ice stage holds the glass body, bleeding off
@@ -72,13 +71,6 @@ export default function StageHero() {
   const [active, setActive] = useState(0)
   const [picked, setPicked] = useState(false)
 
-  useEffect(() => {
-    if (picked || reduced) return
-    const id = window.setInterval(() => {
-      if (!document.hidden) setActive(a => (a + 1) % PILLARS.length)
-    }, CYCLE_MS)
-    return () => window.clearInterval(id)
-  }, [picked, reduced])
 
   const p = useSectionProgress(ref, 'pin')
   const bodyOpacity = useTransform(p, [0, 0.42, 0.6], [1, 1, 0])
@@ -93,6 +85,17 @@ export default function StageHero() {
   const copyAY = useTransform(p, [0.34, 0.44], [0, -28])
   const copyB = useTransform(p, [0.5, 0.62], [0, 1])
   const copyBY = useTransform(p, [0.5, 0.62], [28, 0])
+
+  // Masterclass rule: motion is scroll-linked, never a timer. Until the
+  // visitor picks a system, the first third of the pinned scroll walks the
+  // four pillars in order, and reverses cleanly on the way back up.
+  useEffect(() => {
+    if (picked || reduced) return
+    return p.on('change', v => {
+      const i = Math.min(PILLARS.length - 1, Math.floor((v / 0.32) * PILLARS.length))
+      setActive(a => (a === i ? a : i))
+    })
+  }, [p, picked, reduced])
 
   const pillar = PILLARS[active]
   const href = picked ? `/start?t=${pillar.t}&why=${pillar.why}` : '/start'
@@ -160,10 +163,10 @@ export default function StageHero() {
 
             {!reduced && (
               <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
-                <Image src={art('heart')} alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
+                <Image src={art('tube')} alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
                 <span className="stage-float stage-float-a">
-                  <span className="stage-float-k">Heart and vessels</span>
-                  <span className="stage-float-v">Cholesterol, triglycerides, hs-CRP</span>
+                  <span className="stage-float-k">One blood panel</span>
+                  <span className="stage-float-v">23+ markers, four systems</span>
                 </span>
                 <span className="stage-float stage-float-b">
                   <span className="stage-float-k">Most results back in</span>

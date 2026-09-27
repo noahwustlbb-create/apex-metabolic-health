@@ -29,48 +29,28 @@ function TreatmentCard({ t, i }: { t: (typeof TREATMENTS)[number]; i: number }) 
       initial={prefersReduced ? false : { opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: (i % 3) * 0.08, ease }}
-      className="group relative flex flex-col justify-end overflow-hidden rounded-2xl"
-      style={{ aspectRatio: '4 / 5', border: '1px solid var(--border)', textDecoration: 'none' }}
+      className="group prog-card"
+      style={{ textDecoration: 'none' }}
     >
-      <Image
-        src={t.image}
-        alt=""
-        fill
-        unoptimized
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        style={{ objectPosition: t.imgPos }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg, rgba(8,11,17,0.15) 0%, rgba(8,11,17,0.55) 55%, rgba(8,11,17,0.94) 100%)' }}
-      />
-
-      {t.tag && (
-        <span
-          className="absolute right-4 top-4 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]"
-          style={{ background: 'rgba(72,144,247,0.18)', color: 'rgba(255,255,255,0.92)', border: '1px solid rgba(72,144,247,0.4)', backdropFilter: 'blur(4px)' }}
-        >
-          {t.tag}
-        </span>
-      )}
-
-      <div className="relative z-10 p-6">
-        <h2
-          className="mb-2 font-bold"
-          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', fontSize: 'clamp(19px, 2vw, 23px)', letterSpacing: '-0.01em', lineHeight: 1.15, color: '#fff' }}
-        >
-          {t.label}
-        </h2>
-        <p className="mb-4 text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.72)', maxWidth: '34ch' }}>
-          {t.sub}
-        </p>
-        <span className="inline-flex items-center gap-2 text-sm font-semibold" style={{ color: 'var(--blue-light)' }}>
+      <span className="prog-card-art" aria-hidden>
+        <Image
+          src={t.image}
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+          style={{ objectPosition: t.imgPos }}
+        />
+      </span>
+      {t.tag && <span className="prog-card-tag">{t.tag}</span>}
+      <div className="prog-card-text">
+        <h2 className="prog-card-title">{t.label}</h2>
+        <p className="prog-card-sub">{t.sub}</p>
+        <span className="prog-card-more">
           Explore program
-          <svg viewBox="0 0 16 16" fill="none" width={14} height={14} className="transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden>
-            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <span className="stage-cta-arrow prog-card-arrow" aria-hidden>
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="none"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </span>
         </span>
       </div>
     </motion.a>

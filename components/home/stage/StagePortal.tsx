@@ -82,7 +82,7 @@ export default function StagePortal() {
               </motion.div>
               {!reduced && (
                 <motion.div className="stage-dash-img" style={{ opacity: heart }}>
-                  <Image src={art('heart')} alt="" fill sizes="(min-width: 900px) 34vw, 90vw" className="object-cover" />
+                  <Image src={art('tube')} alt="" fill sizes="(min-width: 900px) 34vw, 90vw" className="object-cover" />
                 </motion.div>
               )}
             </div>
