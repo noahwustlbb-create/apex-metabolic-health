@@ -75,6 +75,11 @@ export default function StageClarity() {
                   <Image src="/3d/drop.png" alt="" fill sizes="220px" className="object-contain" />
                 </span>
               )}
+              {c.tone === 'mist' && (
+                <span className="stage-card-art stage-card-art-product" aria-hidden="true">
+                  <Image src="/3d/product/box-white.jpg" alt="" fill sizes="260px" className="object-cover" />
+                </span>
+              )}
               {c.tone === 'ice' && (
                 <span className="stage-card-art stage-card-art-tube" aria-hidden="true">
                   <Image src={art('tube')} alt="" fill sizes="260px" className="object-cover" />

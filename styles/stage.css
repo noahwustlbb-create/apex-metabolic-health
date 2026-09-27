@@ -545,3 +545,4 @@
 .prog-card-more { margin-top: 8px; display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; }
 .prog-card-arrow { width: 34px; height: 34px; }
 .prog-card:hover .prog-card-arrow { transform: translateX(3px) rotate(45deg); }
+.stage-card-art-product { inset: 6% 0 34% 0; -webkit-mask-image: radial-gradient(closest-side, #000 62%, transparent); mask-image: radial-gradient(closest-side, #000 62%, transparent); }
