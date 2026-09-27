@@ -24,7 +24,7 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)', borderTop: '1px solid var(--border)' }}>
+    <footer className="relative overflow-hidden site-footer" style={{ borderTop: '1px solid var(--border)' }}>
       <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(72,144,247,0.2), transparent)' }} aria-hidden="true" />
 
       <div className="container-tight py-16 md:py-20">
@@ -195,6 +195,8 @@ export default function Footer() {
           </p>
         </div>
       </div>
+      {/* The page closes on the name, full width (stage language). */}
+      <div className="site-footer-mark" aria-hidden="true">APEX</div>
     </footer>
   )
 }

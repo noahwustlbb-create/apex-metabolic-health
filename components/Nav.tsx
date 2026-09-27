@@ -90,7 +90,7 @@ export default function Nav() {
           </Link>
 
           {/* ── Desktop centre nav ── */}
-          <nav className="hidden md:flex items-center gap-8" aria-label="Primary navigation">
+          <nav className="hidden md:flex items-center gap-7 site-navpill" aria-label="Primary navigation">
 
             {/* Programs dropdown */}
             <div

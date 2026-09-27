@@ -34,6 +34,16 @@ const PORTAL_PROGRAM: Record<string, string> = {
   hormone: 'Hormone Optimisation', weight: 'Weight Loss & Metabolic', sexual: 'Sexual Health', recovery: 'Recovery & Injury Repair',
   longevity: 'Anti-Ageing & Longevity', skinhair: 'Skin & Hair', bloods: 'Comprehensive Blood Tests',
 }
+// What the panel looks at for each area (test names only, never medicines or outcomes).
+const FOCUS: Record<string, { art: string; markers: string }> = {
+  hormone:   { art: '/protocols/hormone.jpg',     markers: 'Testosterone, SHBG, oestradiol, LH, FSH, prolactin' },
+  weight:    { art: '/protocols/weight.jpg',      markers: 'Glucose, HbA1c, liver and kidney function, lipids' },
+  sexual:    { art: '/protocols/sexual.jpg',      markers: 'Hormones, prolactin, thyroid and metabolic markers' },
+  recovery:  { art: '/protocols/recovery.jpg',    markers: 'Testosterone, IGF-1, cortisol, iron studies, hs-CRP' },
+  longevity: { art: '/protocols/longevity.jpg',   markers: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
+  skinhair:  { art: '/protocols/hair.jpg',        markers: 'Iron studies, thyroid, hormones, vitamin D' },
+  bloods:    { art: '/protocols/bloods.jpg',      markers: 'The full 23+ marker panel across four systems' },
+}
 const PICK_LABEL = (id: string) => TREATMENT_PICKS.find(t => t.id === id)?.label ?? id
 
 // ── Per-treatment configs ──────────────────────────────────────────────────────
@@ -273,30 +283,67 @@ const WHY_LABEL: Record<string, string> = {
 
 // ── Intro (welcome) ────────────────────────────────────────────────────────────
 function IntroScreen({ onStart }: { onStart: () => void }) {
+  // Everlab's split screen + Hormn's reward-first card: say what you get before
+  // asking anything. Every line is something Apex already does; nothing here is
+  // a diagnosis or a promise of treatment.
+  const gets = [
+    { k: '23+', t: 'Markers on one blood panel', b: 'Hormones, metabolic, recovery and longevity. Near you, results in about 48 hours.' },
+    { k: '01', t: 'A doctor with your results open', b: 'An AHPRA-registered doctor reads your panel with you on the call.' },
+    { k: '→', t: 'Your plan, delivered discreetly', b: 'If treatment is suitable, it comes to your door. Reviewed every 3 months.' },
+  ]
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="flex flex-col items-center justify-center text-center" style={{ minHeight: 'calc(100vh - 96px)', padding: '40px 20px' }}>
-      <div aria-hidden="true" className="pointer-events-none fixed inset-0 mesh-blue" style={{ opacity: 0.7 }} />
-      <div className="relative z-10 max-w-lg w-full">
-        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1, ease }} className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full mb-10 glass-card" style={{ borderRadius: 999 }}>
-          <span className="w-2 h-2 rounded-full" style={{ background: '#22c55e' }} aria-hidden="true" />
-          <span className="text-[12px] font-semibold" style={{ color: TEXT }}>Doctor-led · AHPRA-registered · Australia-wide</span>
-        </motion.div>
-        <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.18, ease }} className="t-display mb-6">
-          <span style={{ color: TEXT }}>Your protocol </span><span style={{ color: BLUE }}>starts here.</span>
-        </motion.h1>
-        <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3, ease }} className="t-lead mb-10 mx-auto" style={{ color: DIM, maxWidth: 420 }}>
-          A few quick questions. We match you to the right pathway, then you decide whether to create an account.
-        </motion.p>
-        <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.42, ease }}>
-          <button type="button" onClick={onStart} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '18px 40px', borderRadius: 999, maxWidth: 420, margin: '0 auto' }}>
-            Get started
-            <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </button>
-          <p className="mt-4 text-[12.5px]" style={{ color: DIM }}>Under two minutes · No payment · No GP referral</p>
-          <a href="https://app.apexmetabolichealth.com.au/login" className="inline-block mt-6 text-[14px] font-medium link-draw" style={{ color: TEXT }}>Already a patient? Sign in</a>
-        </motion.div>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="quiz-intro">
+      <div className="quiz-intro-art" aria-hidden="true">
+        <img src="/3d/body-male.jpg" alt="" />
+        <div className="quiz-intro-chip"><span>Reviewed by</span><strong>An AHPRA-registered doctor</strong></div>
+      </div>
+      <div className="quiz-intro-copy">
+        <p className="stage-kicker"><span className="stage-kicker-dot" aria-hidden="true" /> Takes 2 minutes · No payment · No GP referral</p>
+        <h1 className="stage-display quiz-intro-title">Find out what<br /><span className="stage-muted">to measure.</span></h1>
+        <p className="stage-lead">A few quick questions. We match you to the right pathway, show you what your panel looks at, then you decide whether to create an account.</p>
+        <div className="quiz-gets">
+          <p className="quiz-gets-k">If it is suitable for you, you get</p>
+          {gets.map((g, i) => (
+            <motion.div key={g.t} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 + i * 0.1, ease }} className="quiz-get">
+              <span className="t-readout quiz-get-n">{g.k}</span>
+              <span><strong>{g.t}</strong><span>{g.b}</span></span>
+            </motion.div>
+          ))}
+        </div>
+        <button type="button" onClick={onStart} className="stage-cta" style={{ border: 0, background: 'none', padding: 0, cursor: 'pointer' }}>
+          <span className="stage-cta-label">Start the 2-minute check</span>
+          <span className="stage-cta-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
+        </button>
+        <a href="https://app.apexmetabolichealth.com.au/login" className="stage-link quiz-signin">Already a patient? Sign in</a>
       </div>
     </motion.div>
+  )
+}
+
+// ── Side panel: Everlab-style "Did you know?" beside every question ────────────
+const ASIDE: Partial<Record<string, { art: string; fact: string }>> = {
+  q0:      { art: '/3d/body-male.jpg',          fact: 'One Apex account can manage care for someone you look after. Their consent is confirmed before any treatment.' },
+  pick:    { art: '/3d/product/vials.jpg',      fact: 'One blood panel and one doctor call cover every protocol you pick.' },
+  q1:      { art: '/3d/body-female.jpg',        fact: 'A result inside the reference range is not always where you feel your best. Your doctor reads your markers for how you actually function.' },
+  exp:     { art: '/3d/product/pens.jpg',       fact: 'Already on treatment with another clinic? Your Apex doctor reviews what you are on and your bloods before changing anything.' },
+  q2:      { art: '/3d/phone.jpg',              fact: 'Your answers reach your doctor before the call, so the call starts where you are.' },
+  q3:      { art: '/3d/tablet.jpg',             fact: 'Your results, plan and follow-ups live in one portal. Nothing on paper to lose.' },
+  bloods:  { art: '/3d/product/vials.jpg',      fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
+  source:  { art: '/3d/product/box-white.jpg',  fact: 'Every Apex doctor is AHPRA-registered. You can check any of them on the public register.' },
+  privacy: { art: '/3d/product/tin.jpg',        fact: 'Your answers are confidential and read only by your care team.' },
+}
+function QuizAside({ phase }: { phase: string }) {
+  const a = ASIDE[phase]
+  if (!a) return null
+  return (
+    <aside className="quiz-aside" aria-hidden="true">
+      <AnimatePresence mode="wait">
+        <motion.div key={phase} className="quiz-aside-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease }}>
+          <img src={a.art} alt="" />
+          <div className="quiz-aside-fact"><strong>Did you know?</strong><span>{a.fact}</span></div>
+        </motion.div>
+      </AnimatePresence>
+    </aside>
   )
 }
 
@@ -329,22 +376,22 @@ function OptionCard({ label, sub, selected, onClick, icon, index }: { label: str
       className="w-full text-left rounded-[20px] transition-all duration-200"
       style={{
         padding: '16px 18px',
-        background: selected ? 'rgba(72,144,247,0.08)' : 'rgba(255,255,255,0.85)',
-        border: `1.5px solid ${selected ? BLUE : BORDER}`,
-        boxShadow: selected ? '0 0 0 4px rgba(72,144,247,0.10), 0 14px 32px rgba(72,144,247,0.14)' : '0 1px 2px rgba(15,23,42,0.04)',
+        background: selected ? 'var(--stage-ice)' : 'var(--stage-white)',
+        border: `1.5px solid ${selected ? 'var(--stage-ink)' : 'rgba(11,18,32,0.07)'}`,
+        boxShadow: selected ? '0 16px 34px -22px rgba(13,93,234,0.55)' : '0 10px 26px -24px rgba(13,93,234,0.5)',
         cursor: 'pointer',
       }}
       aria-pressed={selected}
     >
       <span className="flex items-center gap-4">
-        <span className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selected ? BLUE : 'rgba(72,144,247,0.08)', color: selected ? '#fff' : BLUE, transition: 'background 0.2s ease' }} aria-hidden="true">
-          {icon ?? <span className="t-mono" style={{ fontSize: 10, color: 'inherit' }}>{String(index + 1).padStart(2, '0')}</span>}
+        <span className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selected ? 'var(--stage-ink)' : 'var(--stage-ice)', color: selected ? '#fff' : 'var(--stage-blue)', transition: 'background 0.2s ease' }} aria-hidden="true">
+          {icon ?? <span className="t-readout" style={{ fontSize: 13, color: 'inherit' }}>{String(index + 1).padStart(2, '0')}</span>}
         </span>
         <span className="flex-1 min-w-0">
           <span className="block font-semibold" style={{ color: TEXT, fontSize: 16.5, lineHeight: 1.3, letterSpacing: '-0.01em' }}>{label}</span>
           {sub && <span className="block mt-0.5" style={{ fontSize: 13.5, color: DIM }}>{sub}</span>}
         </span>
-        <span className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ border: `1.5px solid ${selected ? BLUE : 'rgba(15,23,42,0.15)'}`, background: selected ? BLUE : 'transparent', transition: 'all 0.2s ease' }} aria-hidden="true">
+        <span className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ border: `1.5px solid ${selected ? 'var(--stage-ink)' : 'rgba(15,23,42,0.15)'}`, background: selected ? 'var(--stage-ink)' : 'transparent', transition: 'all 0.2s ease' }} aria-hidden="true">
           {selected && <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3"><path d="M2 5l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>}
         </span>
       </span>
@@ -356,9 +403,9 @@ function OptionCard({ label, sub, selected, onClick, icon, index }: { label: str
 function StepHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
     <div className="mb-7">
-      <p className="t-eyebrow mb-3">{eyebrow}</p>
-      <h1 className="t-h2" style={{ fontSize: 'clamp(28px, 3.6vw, 40px)', marginBottom: 10 }}>{title}</h1>
-      {sub && <p className="text-[15px] m-0" style={{ color: DIM }}>{sub}</p>}
+      <p className="stage-kicker" style={{ marginBottom: 18 }}><span className="stage-kicker-dot" aria-hidden="true" /> {eyebrow}</p>
+      <h1 className="stage-h2 quiz-q">{title}</h1>
+      {sub && <p className="text-[15px] m-0 mt-3" style={{ color: DIM }}>{sub}</p>}
     </div>
   )
 }
@@ -622,7 +669,7 @@ export default function ShortAssessment() {
           selector matched neither element LeadConnector actually injects. */}
       <style>{`chat-widget, #ghl-chat-widget, [id*="chat-widget"], [class*="chat-widget"], [id^="lc_text-widget"], [class*="lc_text-widget"], iframe[src*="leadconnectorhq"] { display: none !important; }`}</style>
       <main style={{ background: BG, minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
-        <div aria-hidden="true" className="pointer-events-none fixed inset-0 mesh-blue" style={{ opacity: phase === 'intro' ? 0 : 0.5, transition: 'opacity 0.6s ease' }} />
+        <div aria-hidden="true" className="pointer-events-none fixed inset-0 quiz-bg" />
 
         <AnimatePresence mode="wait">
           {phase === 'intro' && <IntroScreen key="intro" onStart={() => go('q0')} />}
@@ -640,14 +687,14 @@ export default function ShortAssessment() {
           {phase === 'eligible' && (
             <motion.div key="eligible" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, ease }} className="relative flex flex-col items-center justify-center text-center" style={{ minHeight: 'calc(100vh - 96px)', padding: '40px 20px' }}>
               <div className="relative z-10 max-w-md w-full">
-                <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.45, delay: 0.1, ease }} className="mx-auto mb-8 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.3)' }}>
+                <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.45, delay: 0.1, ease }} className="mx-auto mb-8 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'var(--stage-ice)', border: '1px solid var(--stage-glass-edge)', boxShadow: '0 0 0 8px color-mix(in srgb, var(--stage-cyan) 14%, transparent)' }}>
                   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7"><path d="M5 12l5 5L19 7" stroke={BLUE} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </motion.div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full mb-5" style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)' }}>
-                  <span className="t-mono" style={{ color: 'var(--color-accent-fg)' }}>Your pathway</span>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="stage-kicker">
+                  <span className="stage-kicker-dot" aria-hidden="true" /> Your pathway
                 </motion.div>
                 <motion.h2 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25, ease }} className="t-h2 mb-4" style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}>
-                  {isCaregiver ? 'Here’s the pathway they described.' : 'Here’s the pathway you described.'}
+                  {isCaregiver ? 'Here is where their plan starts.' : 'Here is where your plan starts.'}
                 </motion.h2>
                 <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35, ease }} className="mb-3 leading-relaxed" style={{ color: DIM, fontSize: 16 }}>
                   From what {isCaregiver ? 'you told us about them' : 'you told us'}, {picks.length > 1 ? <>these are the pathways built for it: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>this is the pathway built for it: <strong style={{ color: TEXT }}>{config.title}</strong>.</>} Whether it’s right for {isCaregiver ? 'them' : 'you'} is a decision your doctor makes after your bloods.
@@ -658,7 +705,7 @@ export default function ShortAssessment() {
                     {TREATMENT_PICKS.filter(t => t.id !== 'general').map(t => {
                       const on = picks.includes(t.id)
                       return (
-                        <button key={t.id} type="button" onClick={() => togglePick(t.id)} aria-pressed={on} className="rounded-full text-[13px] font-medium transition-colors" style={{ padding: '7px 12px', background: on ? BLUE : 'rgba(255,255,255,0.85)', color: on ? '#fff' : TEXT, border: `1px solid ${on ? BLUE : BORDER}`, cursor: 'pointer' }}>
+                        <button key={t.id} type="button" onClick={() => togglePick(t.id)} aria-pressed={on} className="rounded-full text-[13px] font-medium transition-colors" style={{ padding: '7px 12px', background: on ? 'var(--stage-ink)' : 'var(--stage-white)', color: on ? '#fff' : TEXT, border: `1px solid ${on ? 'var(--stage-ink)' : BORDER}`, cursor: 'pointer' }}>
                           {on ? '✓ ' : '+ '}{t.label}
                         </button>
                       )
@@ -666,6 +713,24 @@ export default function ShortAssessment() {
                   </div>
                 </motion.div>
 
+                {/* Everlab: show the value before asking for an email. */}
+                {picks.filter(id => FOCUS[id]).length > 0 && (
+                  <div className="quiz-focus mb-6">
+                    <p className="quiz-gets-k">Your areas to look at</p>
+                    {picks.filter(id => FOCUS[id]).map((id, i) => (
+                      <motion.div key={id} initial={{ opacity: 0, y: 12, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease }} className="quiz-focus-card">
+                        <img src={FOCUS[id].art} alt="" aria-hidden="true" />
+                        <span><strong>{PICK_LABEL(id)}</strong><span>On your panel: {FOCUS[id].markers}.</span></span>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+                {experience === 'current' && !isCaregiver && (
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.45, ease }} className="quiz-transfer mb-6">
+                    <strong>Already on treatment elsewhere?</strong>
+                    <span>Bring it across. Your Apex doctor reviews what you are on and your latest bloods, then decides with you whether to continue, adjust or stop. Nothing changes until you have spoken.</span>
+                  </motion.div>
+                )}
                 {isCaregiver ? (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="text-left glass-card p-5 mb-8" style={{ borderRadius: 22 }}>
                     <p className="t-eyebrow mb-3">How caregiver accounts work</p>
@@ -705,7 +770,9 @@ export default function ShortAssessment() {
         </AnimatePresence>
 
         {showProgress && (
-          <div className="relative" style={{ maxWidth: 560, margin: '0 auto', padding: '0 20px' }}>
+          <div className="quiz-split">
+          <QuizAside phase={phase} />
+          <div className="relative quiz-main" style={{ maxWidth: 560, margin: '0 auto', padding: '0 20px', width: '100%' }}>
             <ProgressBar current={currentStep} total={totalSteps} onBack={back} canBack={phase !== 'q0'} />
 
             <AnimatePresence mode="wait" custom={dir}>
@@ -822,6 +889,7 @@ export default function ShortAssessment() {
                 <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer' }}>Skip this question</button>
               </div>
             )}
+          </div>
           </div>
         )}
       </main>
