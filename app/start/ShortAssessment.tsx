@@ -322,15 +322,15 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
 
 // ── Side panel: Everlab-style "Did you know?" beside every question ────────────
 const ASIDE: Partial<Record<string, { art: string; fact: string }>> = {
-  q0:      { art: '/3d/body-male.jpg',          fact: 'One Apex account can manage care for someone you look after. Their consent is confirmed before any treatment.' },
-  pick:    { art: '/3d/product/vials.jpg',      fact: 'One blood panel and one doctor call cover every protocol you pick.' },
-  q1:      { art: '/3d/body-female.jpg',        fact: 'A result inside the reference range is not always where you feel your best. Your doctor reads your markers for how you actually function.' },
-  exp:     { art: '/3d/product/pens.jpg',       fact: 'Already on treatment with another clinic? Your Apex doctor reviews what you are on and your bloods before changing anything.' },
-  q2:      { art: '/3d/phone.jpg',              fact: 'Your answers reach your doctor before the call, so the call starts where you are.' },
-  q3:      { art: '/3d/tablet.jpg',             fact: 'Your results, plan and follow-ups live in one portal. Nothing on paper to lose.' },
-  bloods:  { art: '/3d/product/vials.jpg',      fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
-  source:  { art: '/3d/product/box-white.jpg',  fact: 'Every Apex doctor is AHPRA-registered. You can check any of them on the public register.' },
-  privacy: { art: '/3d/product/tin.jpg',        fact: 'Your answers are confidential and read only by your care team.' },
+  q0:      { art: '/start/quiz/body-male.jpg',    fact: 'One Apex account can manage care for someone you look after. Their consent is confirmed before any treatment.' },
+  pick:    { art: '/start/quiz/dna.jpg',          fact: 'One blood panel and one doctor call cover every protocol you pick.' },
+  q1:      { art: '/start/quiz/body-female.jpg',  fact: 'A result inside the reference range is not always where you feel your best. Your doctor reads your markers for how you actually function.' },
+  exp:     { art: '/3d/product/pens.jpg',         fact: 'Already on treatment with another clinic? Your Apex doctor reviews what you are on and your bloods before changing anything.' },
+  q2:      { art: '/start/quiz/phone.jpg',        fact: 'Your answers reach your doctor before the call, so the call starts where you are.' },
+  q3:      { art: '/start/quiz/tablet.jpg',       fact: 'Your results, plan and follow-ups live in one portal. Nothing on paper to lose.' },
+  bloods:  { art: '/start/quiz/vials.jpg',        fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
+  source:  { art: '/start/quiz/box.jpg',          fact: 'Every Apex doctor is AHPRA-registered. You can check any of them on the public register.' },
+  privacy: { art: '/start/quiz/tin.jpg',          fact: 'Your answers are confidential and read only by your care team.' },
 }
 function QuizAside({ phase }: { phase: string }) {
   const a = ASIDE[phase]
