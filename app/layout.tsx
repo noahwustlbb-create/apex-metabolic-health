@@ -127,6 +127,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable} ${doto.variable}`}>
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+      </head>
       <body className="antialiased overflow-x-hidden">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
@@ -158,7 +161,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', '${AW_ID}');
           `}
         </Script>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <SmoothScroll />
         <ReferralCapture />

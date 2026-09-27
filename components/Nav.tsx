@@ -206,50 +206,14 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-3">
             <a
               href="https://app.apexmetabolichealth.com.au/login"
-              style={{
-                fontFamily: 'var(--font-inter)',
-                fontSize: '12.5px',
-                fontWeight: 600,
-                color: 'var(--blue)',
-                textDecoration: 'none',
-                letterSpacing: '0.01em',
-                whiteSpace: 'nowrap',
-                border: `1.5px solid rgba(72,144,247,0.35)`,
-                borderRadius: '999px',
-                padding: '9px 16px',
-                transition: 'border-color 0.2s, background 0.2s, color 0.2s',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.6)' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.35)' }}
+              className="link-draw"
+              style={{ fontFamily: 'var(--font-inter)', fontSize: '13.5px', fontWeight: 500, color: 'var(--text-primary)', textDecoration: 'none', whiteSpace: 'nowrap', marginRight: 8 }}
             >
-              Patient Portal
+              Log in
             </a>
             <Link
               href="/start"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '7px',
-                background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
-                color: '#ffffff',
-                padding: '11px 22px',
-                borderRadius: '999px',
-                fontSize: '12.5px',
-                fontWeight: 600,
-                letterSpacing: '0.01em',
-                whiteSpace: 'nowrap',
-                boxShadow: '0 4px 14px rgba(72,144,247,0.35), inset 0 1px 0 rgba(255,255,255,0.15)',
-                transition: 'transform 0.18s ease, box-shadow 0.18s ease',
-                textDecoration: 'none',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 8px 24px rgba(72,144,247,0.48), inset 0 1px 0 rgba(255,255,255,0.18)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 14px rgba(72,144,247,0.35), inset 0 1px 0 rgba(255,255,255,0.15)'
-              }}
+              className="nav-cta"
             >
               Start your assessment
               <svg viewBox="0 0 16 16" fill="none" width="12" height="12" aria-hidden="true">
@@ -273,9 +237,9 @@ export default function Nav() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   minHeight: '44px',
-                  padding: '0 14px',
-                  borderRadius: '12px',
-                  background: 'var(--blue)',
+                  borderRadius: '999px',
+                  padding: '0 18px',
+                  background: '#0f172a',
                   color: '#fff',
                   fontFamily: 'var(--font-inter)',
                   fontSize: '12.5px',
@@ -352,14 +316,13 @@ export default function Nav() {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
-                  background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)',
+                  background: '#1d4fd8',
                   color: '#ffffff',
                   padding: '16px 24px',
-                  borderRadius: '12px',
+                  borderRadius: '999px',
                   fontSize: '14px',
                   fontWeight: 600,
                   letterSpacing: '0.01em',
-                  boxShadow: '0 6px 20px rgba(72,144,247,0.38), inset 0 1px 0 rgba(255,255,255,0.15)',
                   textDecoration: 'none',
                 }}
               >
@@ -372,13 +335,10 @@ export default function Nav() {
                 href="https://app.apexmetabolichealth.com.au/login"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center w-full"
-                style={{ border: '1px solid rgba(72,144,247,0.35)', color: 'var(--blue)', padding: '15px 24px', borderRadius: '12px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
+                style={{ border: '1px solid var(--border)', color: 'var(--text-primary)', padding: '15px 24px', borderRadius: '999px', fontSize: '14px', fontWeight: 500, textDecoration: 'none' }}
               >
                 Patient Portal: log in
               </a>
-              <div className="flex items-center justify-between pt-1">
-                <span style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '0.04em' }}>Appearance</span>
-                  </div>
             </motion.div>
           </motion.div>
         )}

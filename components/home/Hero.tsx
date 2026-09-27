@@ -1,137 +1,362 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
-import Magnetic from '@/components/motion/Magnetic'
-import AgeNotice from '@/components/AgeNotice'
-import AnatomyFigure from '@/components/home/AnatomyFigure'
-import { START_TOTAL_STEPS } from '@/lib/startFunnel'
 
-const ease = [0.22, 1, 0.36, 1] as const
+type Sex = 'male' | 'female'
 
-/** The first funnel question, asked on the page. Each answer maps to a /start pathway. */
-const WHY = [
-  { id: 'energy',   label: 'Low energy',         t: 'hormone' },
-  { id: 'weight',   label: 'Weight that won’t move', t: 'weight' },
-  { id: 'libido',   label: 'Libido or performance', t: 'sexual' },
-  { id: 'recovery', label: 'Slow recovery',      t: 'recovery' },
-  { id: 'ageing',   label: 'Ageing well',        t: 'longevity' },
-  { id: 'unsure',   label: 'Not sure yet',       t: 'general' },
+type Region = {
+  id: string
+  label: string
+  /** Tests on the Apex panel. Test names only, never medicines or outcomes. */
+  markers: Record<Sex, string>
+  /** The first /start question this region answers (t = pathway, why = reason). */
+  t: string
+  why: string
+  whyLabel: string
+  /** Position as a fraction of the figure image, per figure. */
+  at: Record<Sex, [number, number]>
+}
+
+// The four pillars, each placed where the body tells that story. Every one
+// maps to a /start pathway (t) and first answer (why), so choosing a system
+// on the figure answers the funnel's first question. Test names only.
+const REGIONS: Region[] = [
+  {
+    id: 'hormones', label: 'Hormones',
+    markers: { male: 'Testosterone, SHBG, oestradiol, LH, FSH and prolactin', female: 'Oestradiol, progesterone, testosterone, LH, FSH and prolactin' },
+    t: 'hormone', why: 'energy', whyLabel: 'hormones',
+    at: { male: [0.5, 0.088], female: [0.5, 0.078] },
+  },
+  {
+    id: 'longevity', label: 'Longevity',
+    markers: { male: 'Cholesterol, triglycerides, hs-CRP, IGF-1 and a full blood count', female: 'Cholesterol, triglycerides, hs-CRP, vitamin D and a full blood count' },
+    t: 'longevity', why: 'ageing', whyLabel: 'longevity',
+    at: { male: [0.53, 0.405], female: [0.52, 0.365] },
+  },
+  {
+    id: 'recovery', label: 'Recovery',
+    markers: { male: 'Testosterone, IGF-1, cortisol and hs-CRP', female: 'Testosterone, cortisol, iron studies and hs-CRP' },
+    t: 'recovery', why: 'recovery', whyLabel: 'recovery',
+    at: { male: [0.2, 0.39], female: [0.21, 0.39] },
+  },
+  {
+    id: 'metabolic', label: 'Metabolic health',
+    markers: { male: 'Glucose, liver and kidney function, uric acid and lipids', female: 'Glucose, HbA1c, liver and kidney function and lipids' },
+    t: 'weight', why: 'weight', whyLabel: 'metabolic health',
+    at: { male: [0.46, 0.545], female: [0.5, 0.49] },
+  },
 ]
 
+const FIGURE: Record<Sex, { src: string; w: number; h: number; alt: string }> = {
+  male:   { src: '/photos/anatomy.webp',        w: 1106, h: 1900, alt: 'Illustrated male figure showing the systems the Apex panel measures' },
+  female: { src: '/photos/anatomy-female.webp', w: 1073, h: 1900, alt: 'Illustrated female figure showing the systems the Apex panel measures' },
+}
+// The frame takes the male aspect; the slightly narrower female figure is centred in it.
+const BOX_ASPECT = FIGURE.male.w / FIGURE.male.h
+const toBox = (sex: Sex, [x, y]: [number, number]): [number, number] => {
+  const scale = (FIGURE[sex].w / FIGURE[sex].h) / BOX_ASPECT
+  return [(1 - scale) / 2 + x * scale, y]
+}
+
+const CYCLE_MS = 4200
+const lerp = (a: number, b: number, k: number) => a + (b - a) * k
+
 /**
- * HOOK. One question in the headline, one question the visitor can answer
- * right here. The answer carries into the assessment, so the page starts
- * the funnel instead of pointing at it. Right: the anatomy figure.
+ * HOOK. One question, one line, one button. The figure is the instrument:
+ * a pale body with a scanner ring that rides to whichever system is active,
+ * a lens that shows the anatomy only where you look, and a line that runs
+ * from that system to the button. Choosing a system carries it into /start.
  */
 export default function Hero() {
-  const reduced = useReducedMotion()
-  const router = useRouter()
-  const ref = useRef<HTMLElement>(null)
-  const [picked, setPicked] = useState<string | null>(null)
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 60, damping: 20 })
-  const sy = useSpring(my, { stiffness: 60, damping: 20 })
+  const [sex, setSex] = useState<Sex>('male')
+  const [active, setActive] = useState(0)
+  const [picked, setPicked] = useState(false)
+  const [reduced, setReduced] = useState(false)
 
-  const onMove = (e: React.PointerEvent) => {
-    if (reduced || e.pointerType !== 'mouse' || !ref.current) return
-    const r = ref.current.getBoundingClientRect()
-    mx.set(((e.clientX - r.left) / r.width - 0.5) * 2)
-    my.set(((e.clientY - r.top) / r.height - 0.5) * 2)
-  }
+  const heroRef = useRef<HTMLElement>(null)
+  const stageRef = useRef<HTMLDivElement>(null)
+  const figRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLAnchorElement>(null)
+  const pathRef = useRef<SVGPathElement>(null)
+  const pulseRef = useRef<SVGCircleElement>(null)
+  const endRef = useRef<SVGCircleElement>(null)
+  const ringBackRef = useRef<SVGPathElement>(null)
+  const ringFrontRef = useRef<SVGPathElement>(null)
+  const ringSvgRefs = useRef<(SVGSVGElement | null)[]>([])
 
-  const choose = (w: (typeof WHY)[number]) => {
-    setPicked(w.id)
-    window.setTimeout(() => router.push(`/start?t=${w.t}&why=${w.id}`), 260)
+  // Everything the frame loop reads lives in one mutable object, so pointer
+  // moves never re-render React.
+  const live = useRef({
+    px: 0, py: 0, overFig: false, fx: 0.5, fy: 0.5,
+    tx: 0, ty: 0, lx: 0.5, ly: 0.3, ringY: 0.3,
+    drawStart: 0, active: 0, sex: 'male' as Sex, reduced: false, visible: true,
+  })
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const set = () => { setReduced(mq.matches); live.current.reduced = mq.matches }
+    set()
+    mq.addEventListener('change', set)
+    return () => mq.removeEventListener('change', set)
+  }, [])
+
+  useEffect(() => {
+    live.current.active = active
+    live.current.sex = sex
+    live.current.drawStart = performance.now()
+  }, [active, sex])
+
+  // Auto-cycle until the visitor chooses. Pauses while the cursor is on the figure.
+  useEffect(() => {
+    if (picked || reduced) return
+    const id = window.setInterval(() => {
+      if (document.hidden || live.current.overFig || !live.current.visible) return
+      setActive(a => (a + 1) % REGIONS.length)
+    }, CYCLE_MS)
+    return () => window.clearInterval(id)
+  }, [picked, reduced])
+
+  const choose = useCallback((i: number) => { setActive(i); setPicked(true) }, [])
+
+  // Frame loop: tilt, lens, ring, leader line. Runs only while the hero is on screen.
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+    const io = new IntersectionObserver(([e]) => { live.current.visible = e.isIntersecting }, { threshold: 0 })
+    io.observe(hero)
+    let raf = 0
+
+    const frame = (now: number) => {
+      raf = requestAnimationFrame(frame)
+      const L = live.current
+      if (!L.visible) return
+      const fig = figRef.current, stage = stageRef.current, cta = ctaRef.current, path = pathRef.current
+      if (!fig || !stage || !cta || !path) return
+      const k = L.reduced ? 1 : 0.075
+
+      // Tilt follows the pointer (desktop only, the pointer never moves on touch).
+      const targetX = L.overFig || L.px ? L.px : 0
+      L.tx = lerp(L.tx, L.reduced ? 0 : targetX, k)
+      L.ty = lerp(L.ty, L.reduced ? 0 : L.py, k)
+      stage.style.transform = `rotateY(${(L.tx * 7).toFixed(3)}deg) rotateX(${(-L.ty * 4).toFixed(3)}deg) translate3d(${(L.tx * -8).toFixed(2)}px, ${(L.ty * -6).toFixed(2)}px, 0)`
+
+      // Lens: on the cursor while it is over the figure, otherwise on the active system.
+      const target = toBox(L.sex, REGIONS[L.active].at[L.sex])
+      const lensTo = L.overFig ? [L.fx, L.fy] : target
+      L.lx = lerp(L.lx, lensTo[0], L.reduced ? 1 : 0.09)
+      L.ly = lerp(L.ly, lensTo[1], L.reduced ? 1 : 0.09)
+      L.ringY = lerp(L.ringY, L.ly, L.reduced ? 1 : 0.06)
+      const fw = fig.offsetWidth, fh = fig.offsetHeight
+      fig.style.setProperty('--lx', `${(L.lx * 100).toFixed(2)}%`)
+      fig.style.setProperty('--ly', `${(L.ly * 100).toFixed(2)}%`)
+      fig.style.setProperty('--lr', `${Math.round(fw * 0.34)}px`)
+
+      // Scanner ring around the body at the lens height. Back half is drawn
+      // under the figure, front half over it. Pointer changes its pitch.
+      const cx = fw / 2, cy = L.ringY * fh
+      const rx = fw * 0.6, ry = fw * (0.085 + L.ty * 0.035)
+      ringBackRef.current?.setAttribute('d', `M ${cx - rx} ${cy} A ${rx} ${ry} 0 0 1 ${cx + rx} ${cy}`)
+      ringFrontRef.current?.setAttribute('d', `M ${cx + rx} ${cy} A ${rx} ${ry} 0 0 1 ${cx - rx} ${cy}`)
+      ringSvgRefs.current.forEach(s => { if (s) s.style.transform = `rotate(${(L.tx * -3).toFixed(2)}deg)` })
+
+      // Leader line: from the active system to the button.
+      const hr = hero.getBoundingClientRect()
+      const spot = fig.querySelector<HTMLElement>(`[data-region="${REGIONS[L.active].id}"]`)
+      if (!spot) return
+      const sr = spot.getBoundingClientRect(), cr = cta.getBoundingClientRect()
+      const sx = sr.left + sr.width / 2 - hr.left, sy = sr.top + sr.height / 2 - hr.top
+      let ex: number, ey: number, d: string
+      const cl = cr.left - hr.left, ct = cr.top - hr.top
+      if (sx > cr.right - hr.left + 40) {
+        // Figure beside the button (desktop): land on its right edge.
+        ex = cr.right - hr.left + 12; ey = ct + cr.height / 2
+        const dx = sx - ex
+        d = `M ${sx} ${sy} C ${sx - dx * 0.55} ${sy}, ${ex + dx * 0.4} ${ey}, ${ex} ${ey}`
+      } else if (sy < ct) {
+        // Figure above the button (phone): drop onto its top edge.
+        ex = cl + cr.width * 0.5; ey = ct - 10
+        const dy = ey - sy
+        d = `M ${sx} ${sy} C ${sx} ${sy + dy * 0.6}, ${ex} ${ey - dy * 0.5}, ${ex} ${ey}`
+      } else {
+        ex = cl + cr.width / 2; ey = cr.bottom - hr.top + 12
+        const dy = sy - ey
+        d = `M ${sx} ${sy} C ${sx} ${sy - dy * 0.55}, ${ex} ${ey + dy * 0.45}, ${ex} ${ey}`
+      }
+      path.setAttribute('d', d)
+      const len = path.getTotalLength()
+      const t = L.reduced ? 1 : Math.min(1, (now - L.drawStart) / 900)
+      const drawn = 1 - Math.pow(1 - t, 3)
+      path.style.strokeDasharray = `${(len * drawn).toFixed(1)} ${len.toFixed(1)}`
+      endRef.current?.setAttribute('cx', String(ex))
+      endRef.current?.setAttribute('cy', String(ey))
+      endRef.current?.setAttribute('opacity', drawn > 0.98 ? '1' : '0')
+      const pulse = pulseRef.current
+      if (pulse) {
+        if (L.reduced || t < 1) { pulse.setAttribute('opacity', '0') }
+        else {
+          const p = ((now - L.drawStart - 900) % 2400) / 2400
+          const pt = path.getPointAtLength(len * p)
+          pulse.setAttribute('cx', pt.x.toFixed(1)); pulse.setAttribute('cy', pt.y.toFixed(1))
+          pulse.setAttribute('opacity', (Math.sin(p * Math.PI) * 0.9).toFixed(2))
+        }
+      }
+    }
+    raf = requestAnimationFrame(frame)
+    return () => { cancelAnimationFrame(raf); io.disconnect() }
+  }, [])
+
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (e.pointerType !== 'mouse') return
+    const hero = heroRef.current, fig = figRef.current
+    if (!hero || !fig) return
+    const hr = hero.getBoundingClientRect()
+    live.current.px = ((e.clientX - hr.left) / hr.width - 0.5) * 2
+    live.current.py = ((e.clientY - hr.top) / hr.height - 0.5) * 2
+    const fr = fig.getBoundingClientRect()
+    const fx = (e.clientX - fr.left) / fr.width, fy = (e.clientY - fr.top) / fr.height
+    live.current.overFig = fx > 0.08 && fx < 0.92 && fy > 0 && fy < 1
+    live.current.fx = fx; live.current.fy = fy
   }
+  const onPointerLeave = () => { live.current.px = 0; live.current.py = 0; live.current.overFig = false }
+
+  const region = REGIONS[active]
+  const href = picked ? `/start?t=${region.t}&why=${region.why}` : '/start'
 
   return (
     <section
       id="hero"
-      ref={ref}
-      onPointerMove={onMove}
-      onPointerLeave={() => { mx.set(0); my.set(0) }}
+      ref={heroRef}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
       className="relative overflow-hidden"
       style={{ background: 'var(--bg)' }}
       aria-label="Introduction"
     >
-      <div aria-hidden="true" className="absolute pointer-events-none" style={{ right: '-10%', top: '-20%', width: 900, height: 900, background: 'radial-gradient(circle at center, rgba(72,144,247,0.14) 0%, rgba(72,144,247,0.04) 38%, transparent 62%)', filter: 'blur(20px)' }} />
+      <div aria-hidden="true" className="absolute pointer-events-none hero-glow" />
 
-      <div className="container-x relative" style={{ paddingTop: 'clamp(112px, 14vh, 160px)', paddingBottom: 'clamp(56px, 8vh, 104px)' }}>
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center">
+      {/* Leader line, drawn in hero coordinates so it can cross the columns. */}
+      <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 4, overflow: 'visible' }}>
+        <defs>
+          <linearGradient id="hero-lead" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0" stopColor="#4890f7" stopOpacity="0.9" />
+            <stop offset="1" stopColor="#1d4fd8" stopOpacity="0.55" />
+          </linearGradient>
+        </defs>
+        <path ref={pathRef} fill="none" stroke="url(#hero-lead)" strokeWidth="1.25" strokeLinecap="round" style={{ strokeDasharray: '0 9999' }} />
+        <circle ref={pulseRef} r="3" fill="#4890f7" opacity="0" />
+        <circle ref={endRef} r="3.5" fill="#fff" stroke="#1d4fd8" strokeWidth="1.5" opacity="0" />
+      </svg>
 
-          <div className="relative z-10">
-            <p className="t-mono hero-in" style={{ animationDelay: '0ms', color: 'var(--text-muted)', marginBottom: 22 }}>
-              Doctor-led telehealth · Australia-wide · No GP referral
-            </p>
-
+      <div className="container-x relative" style={{ zIndex: 3 }}>
+        <div className="hero-grid">
+          <div className="relative" style={{ zIndex: 5 }}>
             <RevealText
               as="h1"
-              className="t-display"
-              style={{ marginBottom: 22 }}
-              delay={0.1}
-              segments={[{ text: 'Tired, flat, and told' }, { text: 'you’re fine?', accent: true }]}
+              className="hero-title"
+              delay={0.05}
+              segments={[{ text: 'Measure first.' }, { text: 'Then treat.', accent: true }]}
             />
 
-            <p className="t-lead hero-in" style={{ animationDelay: '420ms', color: 'var(--text-secondary)', maxWidth: '46ch', marginBottom: 30 }}>
-              A standard panel is built to find disease, not to explain how you feel. Apex runs the full hormone and metabolic panel, an AHPRA-registered doctor reads it with you, and your protocol is built on those numbers.
+            <p className="t-lead hero-in hero-sub" style={{ animationDelay: '380ms' }}>
+              Hormones, metabolic health, recovery and longevity, planned by an AHPRA&#8209;registered doctor from your own blood panel. No GP referral.
             </p>
 
-            {/* The first question, answered on the page. */}
-            <div className="hero-in glass-card" style={{ animationDelay: '520ms', padding: '18px 18px 16px', borderRadius: 22, marginBottom: 26, maxWidth: 560 }}>
-              <div className="flex items-baseline justify-between gap-4 mb-3">
-                <p className="m-0 text-[14.5px] font-semibold" style={{ color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>What brings you here?</p>
-                <span className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 9.5 }}>Step 1 of {START_TOTAL_STEPS}</span>
-              </div>
-              <div className="flex flex-wrap gap-2" role="group" aria-label="What brings you here">
-                {WHY.map(w => {
-                  const on = picked === w.id
-                  return (
-                    <motion.button
-                      key={w.id}
-                      type="button"
-                      onClick={() => choose(w)}
-                      whileTap={reduced ? undefined : { scale: 0.96 }}
-                      animate={picked && !on ? { opacity: 0.45 } : { opacity: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-[13.5px] font-medium rounded-full transition-colors duration-200"
-                      style={{ padding: '10px 15px', background: on ? 'var(--text-primary)' : '#fff', color: on ? '#fff' : 'var(--text-primary)', border: `1px solid ${on ? 'var(--text-primary)' : 'var(--border)'}`, cursor: 'pointer', boxShadow: on ? '0 10px 24px rgba(15,23,42,0.18)' : '0 1px 2px rgba(15,23,42,0.05)' }}
-                      aria-pressed={on}
-                    >
-                      {w.label}
-                    </motion.button>
-                  )
-                })}
-              </div>
-              <p className="m-0 mt-3 text-[12px]" style={{ color: 'var(--text-muted)' }}>Pick one to start. Two minutes, no payment, no referral.</p>
+            <div className="hero-in hero-ctas" style={{ animationDelay: '480ms' }}>
+              <a href="#panel" className="hero-secondary link-draw">See what we measure</a>
+              <Link ref={ctaRef} href={href} className="btn-primary btn-lg group">
+                Start your assessment
+                <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
             </div>
 
-            <div className="hero-in flex flex-wrap items-center gap-x-7 gap-y-4" style={{ animationDelay: '600ms', marginBottom: 24 }}>
-              <Magnetic>
-                <Link href="/start" className="btn-primary" style={{ fontSize: 15, padding: '18px 36px', borderRadius: 999 }}>
-                  Start your assessment
-                  <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <p className="hero-in hero-caption" style={{ animationDelay: '580ms' }} aria-live="polite">
+              <span className="hero-caption-dot" aria-hidden="true" />
+              <span>
+                <strong>{region.label}.</strong> {region.markers[sex]} are on your panel.
+                {picked && <span className="block" style={{ color: 'var(--color-accent-fg)' }}>Your assessment will start with {region.whyLabel}.</span>}
+              </span>
+            </p>
+          </div>
+
+          <div className="hero-figure-col hero-in" style={{ animationDelay: '260ms' }}>
+            <div className="hero-perspective">
+              <div ref={stageRef} className="hero-stage">
+                <div
+                  ref={figRef}
+                  className="hero-figure"
+                  style={{ aspectRatio: `${FIGURE.male.w} / ${FIGURE.male.h}` }}
+                >
+                  <svg ref={el => { ringSvgRefs.current[0] = el }} aria-hidden="true" className="hero-ring">
+                    <path ref={ringBackRef} fill="none" stroke="rgba(29,79,216,0.22)" strokeWidth="1" strokeDasharray="2 5" />
                   </svg>
-                </Link>
-              </Magnetic>
-              <a href="#pathway" className="link-draw text-[14px] font-medium" style={{ color: 'var(--text-primary)' }}>
-                See how it works
-              </a>
+
+                  {(['male', 'female'] as Sex[]).map(s => (
+                    <div key={s} className="hero-figure-layer" style={{ opacity: s === sex ? 1 : 0 }} aria-hidden={s !== sex}>
+                      <Image src={FIGURE[s].src} alt={s === sex ? FIGURE[s].alt : ''} fill priority={s === 'male'} sizes="(min-width: 1024px) 460px, 70vw" className="object-contain hero-ghost" />
+                      <Image src={FIGURE[s].src} alt="" fill sizes="(min-width: 1024px) 460px, 70vw" className="object-contain hero-vivid" />
+                    </div>
+                  ))}
+
+                  <svg ref={el => { ringSvgRefs.current[1] = el }} aria-hidden="true" className="hero-ring" style={{ zIndex: 3 }}>
+                    <defs>
+                      <linearGradient id="hero-ring-front" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stopColor="#1d4fd8" stopOpacity="0" />
+                        <stop offset="0.5" stopColor="#1d4fd8" stopOpacity="0.7" />
+                        <stop offset="1" stopColor="#1d4fd8" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path ref={ringFrontRef} fill="none" stroke="url(#hero-ring-front)" strokeWidth="1.5" />
+                  </svg>
+
+                  {REGIONS.map((r, i) => {
+                    const [x, y] = toBox(sex, r.at[sex])
+                    const on = i === active
+                    return (
+                      <button
+                        key={r.id}
+                        type="button"
+                        data-region={r.id}
+                        onMouseEnter={() => choose(i)}
+                        onFocus={() => choose(i)}
+                        onClick={() => choose(i)}
+                        aria-pressed={on && picked}
+                        aria-label={`${r.label}: ${r.markers[sex]}`}
+                        className="hero-spot"
+                        data-on={on || undefined}
+                        style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
+                      >
+                        <span className="hero-spot-dot" aria-hidden="true" />
+                        <span className="hero-spot-tag" aria-hidden="true">{r.label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
 
-            <AgeNotice />
+            <div className="hero-sex" role="group" aria-label="Show figure for">
+              {(['male', 'female'] as Sex[]).map(s => (
+                <button key={s} type="button" onClick={() => setSex(s)} aria-pressed={sex === s} data-on={sex === s || undefined}>
+                  {s === 'male' ? 'Men' : 'Women'}
+                </button>
+              ))}
+            </div>
           </div>
-
-          <div className="relative lg:pl-4">
-            <AnatomyFigure sx={sx} sy={sy} />
-          </div>
-
         </div>
+
+        <dl className="hero-proof hero-in" style={{ animationDelay: '700ms' }}>
+          <div><dt>4,000+</dt><dd>accredited collection centres</dd></div>
+          <div><dt>48 hours</dt><dd>most results back</dd></div>
+          <div><dt>$280</dt><dd>full panel, $199 for members</dd></div>
+        </dl>
+        <p className="hero-foot">
+          For Australian adults 18 and over. Illustrative figure; every marker named is on the Apex panel. General information, not medical advice.
+        </p>
       </div>
     </section>
   )
