@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from '@/components/audience/Img'
 import { useStageArt, useStageTone } from './StageTone'
-import { motion, useReducedMotion, useTransform } from 'framer-motion'
+import { motion, useReducedMotion, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import { useAudience } from '@/components/audience/Audience'
@@ -88,6 +88,9 @@ export default function StageHero() {
   const chipsEvents = useTransform(p, v => (v > 0.38 ? 'none' : 'auto'))
   const copyA = useTransform(p, [0, 0.34, 0.44], [1, 1, 0])
   const copyAY = useTransform(p, [0.34, 0.44], [0, -28])
+  // Faded copy must not swallow taps meant for the Men / Women switch.
+  const [copyFaded, setCopyFaded] = useState(false)
+  useMotionValueEvent(copyA, 'change', v => setCopyFaded(v < 0.3))
   const copyB = useTransform(p, [0.5, 0.62], [0, 1])
   const copyBY = useTransform(p, [0.5, 0.62], [28, 0])
 
@@ -200,7 +203,7 @@ export default function StageHero() {
           </div>
 
           {/* Copy A: the hook */}
-          <motion.div className="stage-hero-copy" style={reduced ? undefined : { opacity: copyA, y: copyAY }}>
+          <motion.div className="stage-hero-copy" data-faded={copyFaded || undefined} style={reduced ? undefined : { opacity: copyA, y: copyAY }}>
             <p className="stage-kicker hero-in" style={{ animationDelay: '120ms' }}>
               <span className="stage-kicker-dot" aria-hidden="true" /> AHPRA-registered doctors · Australia-wide
             </p>
