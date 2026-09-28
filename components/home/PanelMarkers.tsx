@@ -49,6 +49,14 @@ export default function PanelMarkers() {
           </motion.p>
         </div>
         <PanelWheel men={MEN as [string, string][]} women={WOMEN as [string, string][]} />
+        {/* Ultrahuman Vision Cloud: bring the bloods you already have. */}
+        <motion.div {...reveal(0.4)} className="pw-upload">
+          <div>
+            <p className="pw-upload-t">Had bloods in the last year?</p>
+            <p className="pw-upload-b">Upload the report after you sign up. We read every marker into your portal, and your doctor goes through it with you, so you may not need to retest.</p>
+          </div>
+          <a href="https://app.apexmetabolichealth.com.au/signup?next=upload" className="stage-link">Upload your results</a>
+        </motion.div>
         <motion.div {...reveal(0.5)} className="flex flex-wrap items-center justify-between gap-4 mt-8">
           <p className="text-[12.5px] leading-relaxed m-0" style={{ color: 'var(--text-muted)', maxWidth: '62ch' }}>
             Collected at any of 4,000+ accredited centres. Most results are back within 48 hours and reviewed by your doctor before your call.

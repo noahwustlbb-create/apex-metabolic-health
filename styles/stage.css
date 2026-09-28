@@ -797,3 +797,7 @@ main section[data-art="none"] { min-height: 0; }
 .stage-price strong { font-size: 20px; font-weight: 600; color: var(--stage-ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
 .stage-price-or { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
 @media (max-width: 899px) { .stage-price { font-size: 12.5px; margin: 0 0 16px; gap: 2px 8px; } .stage-price strong { font-size: 17px; } .stage-price-or { display: none; } .stage-price > span { flex-basis: 100%; } }
+
+.pw-upload { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; margin-top: 36px; padding: 20px 24px; border-radius: 24px; background: var(--stage-ice); }
+.pw-upload-t { font-size: 16px; font-weight: 600; color: var(--stage-ink); }
+.pw-upload-b { margin-top: 4px; font-size: 14px; line-height: 1.55; color: var(--stage-ink-muted); max-width: 62ch; }
