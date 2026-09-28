@@ -27,7 +27,7 @@ const inputBase: React.CSSProperties = {
 
 function GetStartedHero() {
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/product/pens.jpg"
       className="relative overflow-hidden section-pad"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="Get started hero"
@@ -81,7 +81,7 @@ function GetStartedHero() {
           className="flex flex-wrap gap-3"
         >
           {[
-            { label: 'Take the health assessment', href: '/quiz', primary: true },
+            { label: 'Take the health assessment', href: '/start', primary: true },
             { label: 'Hormone Consultation', href: '/intake/hormone-consult' },
             { label: 'Performance Consultation', href: '/intake/hormone-consult' },
             { label: 'Metabolic Consultation', href: '/intake/general-consult' },
@@ -89,12 +89,12 @@ function GetStartedHero() {
             { label: 'Skin Regeneration', href: '/intake/general-consult' },
             { label: 'Injury Repair', href: '/intake/general-consult' },
             { label: 'General Check Up', href: '/intake/general-consult' },
-            { label: 'Order Blood Panel', href: '/quiz' },
+            { label: 'Order Blood Panel', href: '/start?t=bloods' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
           ].map(({ label, href, primary }) => (
             <Link
-              key={href}
+              key={label}
               href={href}
               className={primary ? 'btn-pill' : 'btn-ghost'}
             >
@@ -119,27 +119,13 @@ const ALL_PATHWAYS = [
     tag: 'Not Sure Where to Start',
     title: 'Take the health assessment',
     desc: 'Answer a few questions. Get matched to the right clinical pathway in under 2 minutes.',
-    href: '/assessment',
+    href: '/start',
     cta: 'Take the health assessment',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
         <circle cx="11" cy="11" r="7" strokeLinecap="round"/>
         <path d="M20 20l-3-3M11 8v3l2 2" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    tag: 'Quick 2-Min Quiz',
-    title: 'Health Assessment Quiz',
-    desc: 'Take our short health quiz to understand your symptoms and find the most suitable program.',
-    href: '/quiz',
-    cta: 'Take the Quiz',
-    featured: false,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">
-        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M9 12h6M9 16h4" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -188,7 +174,7 @@ const ALL_PATHWAYS = [
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
     desc: 'Doctor-ordered blood panels issued directly through Apex, collected at any accredited centre near you.',
-    href: '/quiz',
+    href: '/start?t=bloods',
     cta: 'Order Blood Panel',
     featured: false,
     icon: (
@@ -326,7 +312,7 @@ function AllPathways() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {ALL_PATHWAYS.map((path, i) => (
               <motion.div
-                key={path.href}
+                key={path.title}
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
@@ -335,27 +321,28 @@ function AllPathways() {
                   href={path.href}
                   className="group flex flex-col h-full p-6 rounded-xl transition-all duration-300"
                   style={{
-                    background: path.featured ? 'rgba(44,116,232,0.1)' : '#111111',
+                    background: path.featured ? 'var(--stage-white)' : 'var(--stage-ice)',
                     border: path.featured
-                      ? '1px solid rgba(44,116,232,0.4)'
-                      : '1px solid rgba(72,144,247,0.12)',
+                      ? '1px solid rgba(13,93,234,0.35)'
+                      : '1px solid transparent',
+                    borderRadius: 24,
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget
                     el.style.transform = 'translateY(-3px)'
                     el.style.borderColor = path.featured
-                      ? 'rgba(44,116,232,0.7)'
-                      : 'rgba(72,144,247,0.3)'
+                      ? 'rgba(13,93,234,0.6)'
+                      : 'rgba(13,93,234,0.18)'
                     el.style.boxShadow = path.featured
                       ? '0 12px 40px rgba(44,116,232,0.18)'
-                      : '0 8px 30px rgba(0,0,0,0.3)'
+                      : '0 18px 40px -24px rgba(13,93,234,0.35)'
                   }}
                   onMouseLeave={(e) => {
                     const el = e.currentTarget
                     el.style.transform = 'translateY(0)'
                     el.style.borderColor = path.featured
-                      ? 'rgba(44,116,232,0.4)'
-                      : 'var(--border)'
+                      ? 'rgba(13,93,234,0.35)'
+                      : 'transparent'
                     el.style.boxShadow = 'none'
                   }}
                 >
@@ -369,7 +356,7 @@ function AllPathways() {
                   <div
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4 flex-shrink-0"
                     style={{
-                      background: path.featured ? 'rgba(44,116,232,0.15)' : 'var(--elevated)',
+                      background: path.featured ? 'rgba(13,93,234,0.1)' : 'var(--stage-white)',
                       color: path.featured ? 'var(--blue)' : 'var(--blue)',
                     }}
                   >

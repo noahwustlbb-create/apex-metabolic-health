@@ -5,7 +5,6 @@ import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 import ReferralCapture from '@/components/ReferralCapture'
 import FloatingContact from '@/components/FloatingContact'
-import GhlChatWidget from '@/components/GhlChatWidget'
 import { CLINIC_EMAIL, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { SignupGateProvider } from '@/context/SignupGateContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -127,7 +126,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable} ${doto.variable}`}>
-      <body className="antialiased overflow-x-hidden">
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+      </head>
+      <body className="antialiased overflow-x-clip">
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -158,7 +160,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', '${AW_ID}');
           `}
         </Script>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <SmoothScroll />
         <ReferralCapture />
@@ -167,7 +168,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <SignupGateProvider>
               {children}
               <FloatingContact />
-              <GhlChatWidget />
             </SignupGateProvider>
           </MotionProvider>
         </ThemeProvider>

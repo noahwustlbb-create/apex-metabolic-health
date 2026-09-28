@@ -1,25 +1,26 @@
 import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
-import Hero from '@/components/home/Hero'
-import Intro from '@/components/home/Intro'
-import Ticker from '@/components/home/Ticker'
-import ProtocolBento from '@/components/home/ProtocolBento'
-import Pathway from '@/components/home/Pathway'
-import PortalPeek from '@/components/home/PortalPeek'
-import ReportPreview from '@/components/home/ReportPreview'
+import StageHero from '@/components/home/stage/StageHero'
+import StageClarity from '@/components/home/stage/StageClarity'
+import StagePortal from '@/components/home/stage/StagePortal'
 import PanelMarkers from '@/components/home/PanelMarkers'
 import DoctorCard from '@/components/DoctorCard'
-import Pricing from '@/components/home/Pricing'
-import Values from '@/components/home/Values'
 import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
-import Invite from '@/components/home/Invite'
+import StageClose from '@/components/home/stage/StageClose'
+import StageStartTiles from '@/components/home/stage/StageStartTiles'
+import StageSteps from '@/components/home/stage/StageSteps'
+import StageIncluded from '@/components/home/stage/StageIncluded'
+import { StageToneProvider } from '@/components/home/stage/StageTone'
 import Footer from '@/components/Footer'
 
-// Story: HOOK (hero) → INTRODUCE (clinic) → OFFER (protocols) → EXPLAIN
-// (pathway) → PROVE (report preview, verification, pricing) → PAUSE
-// (who we are) → ANSWER (FAQ) → INVITE (cta). White page; depth comes from
-// framed photographs, floating panels and motion, not from dark bands.
+// Story, rebuilt to the BioTrack bar (Noah, 2026-09-27): HOOK (ice stage,
+// glass body with the four pillars, handing over to the heart) → PROVE
+// (four cards: bloods, doctor, panel, portal) → SHOW (the portal on a night
+// band, sample data) → EXPLAIN (pathway) → PROVE (panel) → TRUST (doctor)
+// → ANSWER (FAQ) → INVITE (ice stage again). Renders: public/3d, made in
+// Higgsfield (jobs in Clients/Apex/research/hero-2026-09-27/HANDOFF.md).
+// No prices on the homepage (Noah, 2026-09-27); they live on /pricing.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -36,21 +37,20 @@ export default function Home() {
     <>
       <ScrollProgress />
       <Nav />
+      <StageToneProvider>
       <main id="main-content">
-        <Hero />
-        <Ticker />
-        <Intro />
-        <ProtocolBento />
-        <Pathway />
-        <PortalPeek />
-        <ReportPreview />
+        <StageHero />
+        <StageStartTiles />
+        <StageClarity />
+        <StageSteps />
+        <StagePortal />
+        <StageIncluded />
         <PanelMarkers />
         <DoctorCard />
-        <Pricing />
-        <Values />
         <FAQSection />
-        <Invite />
+        <StageClose />
       </main>
+      </StageToneProvider>
       <Footer />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>

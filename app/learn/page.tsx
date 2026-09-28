@@ -90,7 +90,7 @@ export default function LearnPage() {
       <main>
 
         {/* Hero */}
-        <section
+        <section data-stage-hero="" data-art="/editorial/molecular.webp"
           ref={heroRef}
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '160px', paddingBottom: '80px' }}

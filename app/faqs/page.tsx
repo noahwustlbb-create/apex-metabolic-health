@@ -197,7 +197,7 @@ const FAQ_CATEGORIES = [
 
 function FAQHero() {
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/tablet.jpg"
       className="relative overflow-hidden section-pad"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
       aria-label="FAQs hero"

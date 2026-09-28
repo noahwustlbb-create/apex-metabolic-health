@@ -2,12 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Logo from '@/components/brand/Logo'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
 
-const BLUE = 'var(--blue)'
-const BG   = '#070a0d'
 const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 
 function SignupFormInner() {
@@ -51,129 +50,73 @@ function SignupFormInner() {
     }
   }
 
-  return (
-    <div className="min-h-screen flex" style={{ background: BG }}>
-      {/* Left - form */}
-      <div className="flex-1 flex flex-col justify-center px-8 py-16 max-w-xl">
-        <Link href="/" className="flex flex-col leading-none mb-12">
-          <span className="font-black text-sm tracking-[0.2em] uppercase" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>APEX</span>
-          <span className="text-[9px] tracking-[0.18em] font-semibold uppercase" style={{ color: BLUE }}>Metabolic Health</span>
-        </Link>
+  const bad = (on: boolean) => (on ? ' su-input-bad' : '')
 
-        <h1 className="font-bold mb-2 leading-tight" style={{ fontSize: 'clamp(28px,4vw,40px)', color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', letterSpacing: '-0.02em' }}>
-          Take the first step<br />
-          to a <span style={{ color: BLUE }}>better you.</span>
+  return (
+    <main className="su">
+      <div className="su-form">
+        <Link href="/" className="su-logo" aria-label="Apex Metabolic Health home"><Logo variant="nav" /></Link>
+
+        <p className="su-kicker">Create your account</p>
+        <h1 className="stage-display su-title">
+          Start with your email.<br /><span className="stage-muted">The rest takes minutes.</span>
         </h1>
-        <p className="text-sm mb-8 leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>
-          Create your account to access your personalised health protocol and book your consultation.
+        <p className="stage-lead su-lead">
+          Your account holds your assessment, your results and your doctor&apos;s plan. You choose a password on the next step, in the secure patient portal.
         </p>
 
-        <div className="flex items-center gap-6 mb-10">
-          <div className="flex items-center gap-2">
-            <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-              <circle cx="10" cy="10" r="9" stroke={BLUE} strokeWidth="1.5" />
-              <path d="M6.5 10l2.5 2.5 4-4" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-xs" style={{ color: 'rgba(240,244,248,0.6)' }}>Get treatment in days, not months</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 flex-shrink-0" aria-hidden="true">
-              <circle cx="10" cy="10" r="9" stroke={BLUE} strokeWidth="1.5" />
-              <path d="M6.5 10l2.5 2.5 4-4" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span className="text-xs" style={{ color: 'rgba(240,244,248,0.6)' }}>Doctor prescribed, tailored to you</span>
-          </div>
-        </div>
+        <form onSubmit={handleSubmit} className="su-fields" noValidate>
+          <label className="su-field">
+            <span>Email</span>
+            <input
+              id="su-email" type="email" autoComplete="email" placeholder="you@example.com"
+              value={form.email}
+              onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+              className={'su-input' + bad(!!form.email && !form.email.includes('@'))}
+              required
+            />
+          </label>
+          <label className="su-field">
+            <span>Confirm email</span>
+            <input
+              id="su-email-confirm" type="email" autoComplete="email" placeholder="Type it again"
+              value={form.emailConfirm}
+              onChange={e => setForm(f => ({ ...f, emailConfirm: e.target.value }))}
+              className={'su-input' + bad(!!form.emailConfirm && form.emailConfirm !== form.email)}
+              required
+            />
+            {form.emailConfirm && form.emailConfirm !== form.email && <em className="su-err">The two emails do not match yet.</em>}
+          </label>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="su-email" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Email</label>
-              <input
-                id="su-email"
-                type="email"
-                placeholder="example@gmail.com"
-                value={form.email}
-                onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.email && !form.email.includes('@') ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="su-email-confirm" className="text-xs font-semibold" style={{ color: 'rgba(240,244,248,0.6)' }}>Confirm email</label>
-              <input
-                id="su-email-confirm"
-                type="email"
-                placeholder="Enter email again"
-                value={form.emailConfirm}
-                onChange={e => setForm(f => ({ ...f, emailConfirm: e.target.value }))}
-                className="px-4 py-3 rounded-sm text-sm outline-none transition-all duration-150"
-                style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${form.emailConfirm && form.emailConfirm !== form.email ? '#ef4444' : 'rgba(255,255,255,0.1)'}`, color: '#f0f4f8' }}
-                required
-              />
-            </div>
-          </div>
+          {error && <p className="su-err" role="alert">{error}</p>}
 
-          <p className="text-xs leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>
-            You&apos;ll choose your password on the next step, in the secure patient portal.
-          </p>
-
-          {error && <p className="text-sm" style={{ color: '#ef4444' }}>{error}</p>}
-
-          <button
-            type="submit"
-            disabled={!valid || loading}
-            className="w-full py-4 rounded-sm text-sm font-bold tracking-wide transition-all duration-150 mt-2"
-            style={{
-              background: valid && !loading ? BLUE : 'rgba(255,255,255,0.06)',
-              color: valid && !loading ? '#fff' : 'rgba(255,255,255,0.3)',
-              cursor: valid && !loading ? 'pointer' : 'not-allowed',
-              fontFamily: 'var(--font-space-grotesk)',
-            }}
-          >
-            {loading ? 'Continuing…' : 'Continue to create account'}
+          <button type="submit" disabled={!valid || loading} className="stage-cta su-submit">
+            <span className="stage-cta-label">{loading ? 'Continuing…' : 'Continue'}</span>
+            <span className="stage-cta-arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </span>
           </button>
         </form>
 
-        <p className="text-sm mt-6" style={{ color: 'rgba(240,244,248,0.4)' }}>
-          Already have an account?{' '}
-          <Link href="/login" style={{ color: BLUE }} className="hover:underline">Login</Link>
+        <p className="su-alt">
+          Not sure yet? <Link href="/start">Take the two-minute assessment</Link> first.<br />
+          Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a>
         </p>
       </div>
 
-      {/* Right - trust panel */}
-      <div className="hidden lg:flex flex-col justify-center gap-6 px-12 flex-1" style={{ background: 'rgba(255,255,255,0.015)', borderLeft: '1px solid rgba(255,255,255,0.05)' }}>
-        {[
-          {
-            title: 'Personalised prescription care',
-            body: 'Access science-backed treatments and protocols, proven to work based on research.',
-            accent: BLUE,
-          },
-          {
-            title: 'Pharmacy delivery next day in Australia',
-            body: 'If eligible, receive a personalised prescribed treatment plan delivered to your home.',
-            accent: '#7bb3ff',
-          },
-          {
-            title: 'Unlimited doctor consultations',
-            body: "Ongoing care from Australia's most experienced doctors, whenever you need it.",
-            accent: BLUE,
-          },
-          {
-            title: '100% telehealth based',
-            body: 'No more drives, queues, or waiting rooms. Enjoy quality care from your home.',
-            accent: '#7bb3ff',
-          },
-        ].map((item) => (
-          <div key={item.title} className="p-6 rounded-xl" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-            <p className="text-xs font-bold mb-1" style={{ color: item.accent }}>{item.title.split(' ').slice(0, 2).join(' ')}</p>
-            <p className="font-bold mb-2 leading-tight" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)', fontSize: '15px' }}>{item.title.split(' ').slice(2).join(' ')}</p>
-            <p className="text-sm leading-relaxed" style={{ color: 'rgba(240,244,248,0.5)' }}>{item.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+      <aside className="su-aside" aria-hidden="true">
+        <img src="/start/quiz/vials.jpg" alt="" />
+        <ul className="su-points">
+          {[
+            ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],
+            ['02', 'A doctor reads them', 'An AHPRA-registered doctor, with your results open.'],
+            ['03', 'A written plan', 'In your portal, with follow-ups when they are due.'],
+          ].map(([n, t, b]) => (
+            <li key={n}><span className="t-readout">{n}</span><strong>{t}</strong><span>{b}</span></li>
+          ))}
+        </ul>
+      </aside>
+    </main>
   )
 }
 

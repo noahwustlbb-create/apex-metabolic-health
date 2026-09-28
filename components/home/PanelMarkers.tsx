@@ -57,10 +57,9 @@ export default function PanelMarkers() {
   )
 
   return (
-    <section ref={ref} id="panel" className="band-light section-y mesh" aria-label="What is on the panel">
+    <section ref={ref} id="panel" className="band-light section-y" style={{ background: 'var(--surface)' }} aria-label="What is on the panel">
       <div className="container-x">
         <div className="max-w-2xl mb-12 md:mb-16">
-          <motion.p {...reveal(0, 10)} className="t-eyebrow" style={{ marginBottom: 20 }}>The panel</motion.p>
           <RevealText as="h2" className="t-h2" style={{ marginBottom: 20 }} text="Every marker, for men and for women." />
           <motion.p {...reveal(0.3, 14)} className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '54ch' }}>
             This is the baseline your doctor orders. Nothing is hidden behind a consult. The markers differ by sex because the questions do.

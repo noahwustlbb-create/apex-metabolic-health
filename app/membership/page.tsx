@@ -119,7 +119,7 @@ function Hero() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/product/box-black.jpg"
       className="relative overflow-hidden"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '90px' }}
       aria-label="Apex Membership"

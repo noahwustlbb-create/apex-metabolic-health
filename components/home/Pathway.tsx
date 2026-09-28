@@ -9,7 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 export const STEPS = [
   { when: 'Today',    readout: 'Day 00', title: 'Two-minute assessment', body: 'Answer a handful of questions online. No GP referral, no waiting room. Your doctor reads your intake before you speak.', src: '/photos/intake-sofa.webp', alt: 'A patient completing the Apex intake on her phone at home' },
-  { when: 'Day 1', readout: 'Day 01', title: 'Bloods first, near you', body: 'Choose the men’s or women’s panel: $199 for members, $280 single. We issue the referral, you walk into any of 4,000+ accredited centres, and most results are back within 48 hours.', src: '/photos/pathology-draw.webp', alt: 'Blood collection at an accredited pathology centre' },
+  { when: 'Day 1', readout: 'Day 01', title: 'Bloods first, near you', body: 'Choose the men’s or women’s panel. We issue the referral, you walk into any of 4,000+ accredited centres, and most results are back within 48 hours.', src: '/photos/pathology-draw.webp', alt: 'Blood collection at an accredited pathology centre' },
   { when: 'Day 3',    readout: 'Day 03', title: 'Your doctor, on the call', body: 'Booked for three days after your draw. If results are late we move it at no cost. An AHPRA-registered doctor walks the full panel with you and builds a protocol around your numbers.', src: '/photos/telehealth-call.webp', alt: 'A telehealth consultation with an Apex doctor' },
   { when: 'Week 2',   readout: 'Wk 02',  title: 'Protocol at your door', body: 'Anything prescribed is filled by a TGA-compliant Australian pharmacy and delivered discreetly, with instructions in your portal.', src: '/photos/protocol-box-white.webp', alt: 'A plain white Apex delivery box on an entry table' },
   { when: 'Month 3',  readout: 'Mo 03',  title: 'Re-test and review', body: 'Repeat bloods, a structured review with your doctor, and the protocol adjusted to what the numbers now say. Support in between.', src: '/photos/hands-results.webp', alt: 'Results being reviewed on paper' },
@@ -44,13 +44,12 @@ export default function Pathway() {
   }, [])
 
   return (
-    <section id="pathway" className="band-light section-y mesh-blue" aria-label="How it works">
+    <section id="pathway" className="band-light section-y" aria-label="How it works">
       <div className="container-x">
         <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-12 lg:gap-24">
 
           <div className="lg:sticky lg:self-start" style={{ top: 112 }}>
-            <p className="t-eyebrow" style={{ marginBottom: 20 }}>How it works</p>
-            <RevealText as="h2" className="t-h2" style={{ marginBottom: 20, maxWidth: '14ch' }} text="You’re in the right place. Here’s where you’re headed." />
+            <RevealText as="h2" className="t-h2" style={{ marginBottom: 20, maxWidth: '14ch' }} text="From first question to your protocol." />
             <p className="t-body" style={{ color: 'var(--text-secondary)', maxWidth: '44ch', marginBottom: 36 }}>
               Five steps, each with a stated clock. Nothing waits on a waiting room.
             </p>

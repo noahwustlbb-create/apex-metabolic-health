@@ -20,4 +20,8 @@ Always:
 - Urgent symptoms → call 000.
 - Email copy follows the rules at the top of `lib/email/templates.ts` (service vs marketing, no approval language).
 
+Product imagery (Noah, 2026-09-28): Apex-branded vials, pens, tablets, tubs and packaging may appear on the site, portal and ads, like Hormn does.
+Never on them: a medication or compound name, a dose, "mg", "Rx", or copy that pairs a pictured product with a named treatment or a result.
+Hims AU shows only plain packaging and lifestyle; prefer packaging-forward shots when a page is public-facing.
+
 If a requested line would not survive a TGA advertising review, do not write it. Say why in one sentence.

@@ -11,6 +11,10 @@ if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
     person_profiles: 'identified_only',
     capture_pageview: 'history_change',
     capture_pageleave: true,
+    // Load lazy PostHog bundles into <head>. The default inserts them before
+    // the first <script> in <body>, which is a server-rendered JSON-LD tag, and
+    // React then hydrated against the wrong node on every page.
+    external_scripts_inject_target: 'head',
     capture_exceptions: true,
     respect_dnt: true,
     // Pinned off: a stray ph_debug flag in a visitor's browser otherwise turns

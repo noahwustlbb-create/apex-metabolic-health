@@ -98,7 +98,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   ctaHeadline: 'Find out where you actually stand.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your suitability and contacts you directly to confirm next steps. No commitment, no upfront payment.',
   ctaImage: '/team/team-lounge.webp',
-  intakeUrl: '/intake/quiz/hormone',
+  intakeUrl: '/start?t=hormone',
 }
 
 // ─── Metabolic Weight Loss ─────────────────────────────────────────────────────
@@ -160,7 +160,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
   ctaHeadline: 'Find out what\'s actually driving your weight.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your metabolic history and contacts you directly to confirm clinical suitability and next steps.',
   ctaImage: '/team/team-standing.webp',
-  intakeUrl: '/intake/quiz/weightloss',
+  intakeUrl: '/start?t=weight',
 }
 
 // ─── Performance Plus ──────────────────────────────────────────────────────────
@@ -222,7 +222,7 @@ export const performancePlusConfig: ProgramPageConfig = {
   ctaHeadline: 'Start training with a full biological picture.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your performance history and contacts you to confirm suitability and next steps.',
   ctaImage: '/team/team-standing.webp',
-  intakeUrl: '/intake/quiz/performance',
+  intakeUrl: '/start?t=recovery',
 }
 
 // ─── Hair Restoration ──────────────────────────────────────────────────────────
@@ -289,7 +289,7 @@ export const hairRestorationConfig: ProgramPageConfig = {
   ctaHeadline: 'Start with a proper clinical assessment.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your hormonal profile and contacts you to confirm suitability for the Hair Restoration program.',
   ctaImage: '/team/team-armchairs.webp',
-  intakeUrl: '/intake/quiz/hair',
+  intakeUrl: '/start?t=skinhair',
 }
 
 // ─── Injury Repair ─────────────────────────────────────────────────────────────
@@ -351,7 +351,7 @@ export const injuryRepairConfig: ProgramPageConfig = {
   ctaHeadline: 'Understand what\'s slowing your recovery.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your injury history and recovery timeline, and contacts you to confirm suitability.',
   ctaImage: '/team/team-lounge.webp',
-  intakeUrl: '/intake/quiz/injury',
+  intakeUrl: '/start?t=recovery',
 }
 
 // ─── Longevity ─────────────────────────────────────────────────────────────────
@@ -413,7 +413,7 @@ export const longevityConfig: ProgramPageConfig = {
   ctaHeadline: 'Start with a proper biological baseline.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your health history and contacts you to confirm suitability for the Longevity program.',
   ctaImage: '/team/team-armchairs.webp',
-  intakeUrl: '/intake/quiz/antiageing',
+  intakeUrl: '/start?t=longevity',
 }
 
 // ─── Pathology ─────────────────────────────────────────────────────────────────
@@ -541,7 +541,7 @@ export const sexualHealthConfig: ProgramPageConfig = {
   ctaHeadline: 'A clinical assessment. Completely private.',
   ctaBody: 'Complete the pre-screen. Confidential from start to finish. Your doctor reviews your intake and confirms suitability and next steps.',
   ctaImage: '/editorial/sexual-health.webp',
-  intakeUrl: '/intake/quiz/sexual',
+  intakeUrl: '/start?t=sexual',
 }
 
 // ─── Skin Regeneration ─────────────────────────────────────────────────────────
@@ -608,7 +608,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
   ctaHeadline: 'Skin quality starts from the inside.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your skin history and hormonal markers and contacts you to confirm clinical suitability.',
   ctaImage: '/team/portrait-woman-blonde.webp',
-  intakeUrl: '/intake/quiz/skin',
+  intakeUrl: '/start?t=skinhair',
 }
 
 // ─── Registry ──────────────────────────────────────────────────────────────────

@@ -264,7 +264,7 @@ export default function WhatWeTreatPage() {
       <main>
 
         {/* ── Hero ── */}
-        <section
+        <section data-stage-hero="" data-art="/3d/body-male.jpg"
           className="relative overflow-hidden"
           style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
           aria-label="What we treat hero"

@@ -163,7 +163,7 @@ const FAQS = [
 
 function Hero() {
   return (
-    <section
+    <section data-stage-hero="" data-art="/3d/phone.jpg"
       className="relative overflow-hidden"
       style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
       aria-label="How it works"
