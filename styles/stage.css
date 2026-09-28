@@ -845,3 +845,11 @@ html[data-audience="women"] main section[data-art="/3d/product/vials.jpg"]::afte
 html[data-audience="women"] main section[data-art="/3d/body-female.jpg"]::after,
 html[data-audience="women"] main section[data-art="/3d/body-male.jpg"]::after { background-image: url("/3d/pink/body-female.jpg"); }
 html[data-audience="women"] main section[data-art="/editorial/molecular.webp"]::after { background-image: url("/3d/pink/molecular.jpg"); }
+
+/* Hero hit-testing (28 Sep bug: "can't tap Women" on phones). The copy block
+   is wider than its text and sits above the figure layer, so its empty area
+   covered the Men / Women switch. Only real controls take taps. */
+.stage-hero-copy, .stage-hero-copy .stage-actions { pointer-events: none; }
+.stage-hero-copy :is(a, button, input, label) { pointer-events: auto; }
+.stage-sex, .stage-sex button { pointer-events: auto; }
+.stage-hero-copy[data-faded] :is(a, button, input, label) { pointer-events: none; }
