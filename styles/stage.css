@@ -741,3 +741,13 @@ main section[data-art="none"] { min-height: 0; }
   .su { grid-template-columns: 1fr; }
   .su-aside { min-height: 660px; order: 2; }
 }
+
+/* ── Living body (28 Sep, BioTrack app reference) ─────────────────────── */
+.stage-fig-media { --tx: 0; --ty: 0; transform: perspective(900px) rotateY(calc(var(--tx) * 5deg)) rotateX(calc(var(--ty) * -3deg)) translateX(calc(var(--tx) * 8px)); transition: transform 0.9s cubic-bezier(0.22,1,0.36,1); }
+.stage-fig-img { animation: stage-breathe 6.5s ease-in-out infinite; transform-origin: 50% 60%; }
+@keyframes stage-breathe { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.018) translateY(-4px); } }
+.stage-scan { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--stage-cyan) 14%, transparent) 48%, rgba(255,255,255,0.3) 50%, color-mix(in srgb, var(--stage-cyan) 14%, transparent) 52%, transparent 100%); background-size: 100% 260%; animation: stage-scan 7s cubic-bezier(0.45,0,0.25,1) 1.5s infinite; }
+@keyframes stage-scan { 0% { background-position: 0 120%; opacity: 0; } 10% { opacity: 1; } 55% { background-position: 0 -20%; opacity: 1; } 65%, 100% { background-position: 0 -20%; opacity: 0; } }
+.stage-hero[data-still] .stage-fig-img { animation: none; }
+.stage-hero[data-still] .stage-scan { display: none; }
+@media (prefers-reduced-motion: reduce) { .stage-fig-img, .stage-scan { animation: none; } .stage-fig-media { transform: none; } }

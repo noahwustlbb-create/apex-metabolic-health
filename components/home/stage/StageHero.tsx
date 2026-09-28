@@ -97,6 +97,23 @@ export default function StageHero() {
     })
   }, [p, picked, reduced])
 
+  // The body turns a few degrees toward the cursor (BioTrack app reference).
+  const mediaRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = mediaRef.current
+    if (!el || reduced || !window.matchMedia('(pointer: fine)').matches) return
+    let raf = 0
+    const onMove = (e: PointerEvent) => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        el.style.setProperty('--tx', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3))
+        el.style.setProperty('--ty', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3))
+      })
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
+  }, [reduced])
+
   const pillar = PILLARS[active]
   const href = picked ? `/start?t=${pillar.t}&why=${pillar.why}` : '/start'
   const choose = (i: number) => { setActive(i); setPicked(true) }
@@ -108,7 +125,7 @@ export default function StageHero() {
           {/* Figure: body, then heart */}
           <div className="stage-hero-figure" aria-hidden={false}>
             <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { opacity: bodyOpacity, scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
-              <div className="stage-fig-media">
+              <div className="stage-fig-media" ref={mediaRef}>
               {(['male', 'female'] as Sex[]).map(s => (
                 <Image
                   key={s}
@@ -122,6 +139,7 @@ export default function StageHero() {
                 />
               ))}
               <span className="stage-pulse" aria-hidden="true" />
+              <span className="stage-scan" aria-hidden="true" />
               </div>
 
               <motion.div className="stage-chips" style={reduced ? undefined : { opacity: chips, pointerEvents: chipsEvents }}>
