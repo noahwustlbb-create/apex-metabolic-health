@@ -869,3 +869,7 @@ html[data-audience="women"] main section[data-art="/editorial/molecular.webp"]::
 .stage-hero-copy-b .stage-lead { max-width: 36ch; }
 @media (max-width: 899px) { .stage-feel-chip { font-size: 12px; padding: 7px 11px; } }
 @media (max-width: 899px) { .stage-feel-chip:nth-child(4) { left: auto !important; right: 0; } .stage-feel-chip:nth-child(2) { left: auto !important; right: 4%; } }
+/* Phones: the Men / Women switch sits at the foot of the figure, clear of
+   every line of copy whatever the viewport height (28 Sep: it collided
+   with the CTA on an iPhone with Safari bars showing). */
+@media (max-width: 899px) { .stage-sex { top: auto !important; bottom: 4%; right: auto !important; left: 50%; transform: translateX(-50%); z-index: 6; } }
