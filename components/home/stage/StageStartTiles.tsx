@@ -18,6 +18,13 @@ const TILES = [
   { t: 'skinhair',  why: 'unsure',   label: 'Hair and skin',        sub: 'Skin and hair',       art: '/protocols/hair.jpg' },
 ]
 
+// Ahead Health's other door: start from where you are in life, not a symptom.
+const STAGES = [
+  { why: 's30', label: 'Late 30s', sub: 'Getting ahead of it' },
+  { why: 's40', label: 'Mid 40s', sub: 'Noticing the shift' },
+  { why: 's50', label: '50s and on', sub: 'Staying strong' },
+]
+
 export default function StageStartTiles() {
   const reduced = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
@@ -42,6 +49,14 @@ export default function StageStartTiles() {
           </motion.div>
         ))}
       </div>
+      <motion.div className="st-stages" initial={reduced ? false : { opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6, ease }}>
+        <span className="st-stages-k">Or start from where you are in life</span>
+        {STAGES.map(x => (
+          <Link key={x.why} href={`/start?why=${x.why}`} className="st-stage">
+            <strong>{x.label}</strong><span>{x.sub}</span>
+          </Link>
+        ))}
+      </motion.div>
     </section>
   )
 }

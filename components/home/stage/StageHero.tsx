@@ -6,6 +6,7 @@ import { useStageArt, useStageTone } from './StageTone'
 import { motion, useReducedMotion, useTransform } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
+import TickGauge from '../../motion/TickGauge'
 
 type Sex = 'male' | 'female'
 
@@ -226,6 +227,16 @@ export default function StageHero() {
             </motion.div>
           )}
 
+
+          {/* AlgoRx / Superpower: one number, labelled as a sample. */}
+          <div className="stage-score hero-in" style={{ animationDelay: '800ms' }} aria-label="Sample Apex score, 74 out of 100. Not a real patient.">
+            <TickGauge value={74} delay={900} size={104} />
+            <div className="stage-score-t">
+              <strong>Apex score</strong>
+              <span>One number from your whole panel, tracked every test.</span>
+              <em>Sample</em>
+            </div>
+          </div>
 
           <p className="stage-foot">Illustrative render. Every marker named is on the Apex panel. For Australian adults 18+. General information, not medical advice.</p>
         </div>
