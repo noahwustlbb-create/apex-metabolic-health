@@ -39,7 +39,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Every number published upfront. Member or single consult: compare and decide before you start.
+          Every number published upfront. Single consult, partner pharmacy or membership: compare and decide before you start.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -61,18 +61,32 @@ function PricingHero() {
 
 // ─── Membership vs Single Consultation ───────────────────────────────────────
 
-const COMPARISON_ROWS = [
-  { label: 'Initial Blood Referral',   member: '$199',       single: '$280',        highlight: false },
-  { label: 'Follow Up Blood Referral', member: '$139',       single: '$180',        highlight: true  },
-  { label: 'Hormone Consultation',     member: '$199',       single: '$275',        highlight: true  },
-  { label: 'Peptide Consultation',     member: '$99',        single: '$199',        highlight: true  },
-  { label: 'Monthly Membership',       member: '$99 /mo',    single: '·',           highlight: true  },
-  { label: 'Medication',               member: 'Cost price', single: 'Cost + fee',  highlight: true  },
-  { label: 'Escript Release Fee',      member: 'Free',       single: '$125',        highlight: true  },
-  { label: 'Referrals & Certs',        member: 'Free',       single: '$25 each',    highlight: true  },
-  { label: 'Health-system score history', member: 'Every panel', single: 'Latest two', highlight: true  },
-  { label: 'Ask about your results',   member: 'Unlimited',  single: '5 / month',   highlight: true  },
-  { label: 'Your plan & GP summary',   member: 'Included',   single: 'Included',    highlight: false },
+// Three ways to be treated (Noah, 28 Sep 2026). Retail pharmacies mark
+// medication up; Apex's partner pharmacy does not, but each order carries
+// admin, infrastructure and handling fees (A$350-650 on average). Members
+// get cost-price medication with those fees and the escript fee included.
+type Col = 'single' | 'partner' | 'member'
+const COMPARISON_ROWS: { label: string; single: string; partner: string; member: string; highlight: boolean }[] = [
+  { label: 'Initial Blood Referral',      single: '$280',           partner: '$280',            member: '$199',        highlight: false },
+  { label: 'Follow Up Blood Referral',    single: '$180',           partner: '$180',            member: '$139',        highlight: true  },
+  { label: 'Hormone Consultation',        single: '$275',           partner: '$275',            member: '$199',        highlight: true  },
+  { label: 'Peptide Consultation',        single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
+  { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
+  { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
+  { label: 'AHI fee per order',           single: '·',              partner: '$350–$650 avg',   member: 'Included',    highlight: true  },
+  { label: 'Escript Release Fee',         single: '$125',           partner: '$125',            member: 'Free',        highlight: true  },
+  { label: 'Referrals & Certs',           single: '$25 each',       partner: '$25 each',        member: 'Free',        highlight: true  },
+  { label: 'Health-system score history', single: 'Latest two',     partner: 'Latest two',      member: 'Every panel', highlight: true  },
+  { label: 'Ask about your results',      single: '5 / month',      partner: '5 / month',       member: 'Unlimited',   highlight: true  },
+  { label: 'Your plan & GP summary',      single: 'Included',       partner: 'Included',        member: 'Included',    highlight: false },
+]
+
+const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
+  { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
+    box: { k: 'Average initial investment', v: '$604 – $680', note: 'Blood referral + consultation + escript fee. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
+  { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
+    box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $125 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
+  { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Cancel anytime', box: null, cta: 'Get Started' },
 ]
 
 function MembershipComparison() {
@@ -97,8 +111,8 @@ function MembershipComparison() {
             className="display-heading"
             style={{ fontSize: 'clamp(26px, 3.5vw, 46px)' }}
           >
-            Ongoing treatment vs.{' '}
-            <span style={{ color: accent }}>script only.</span>
+            Three ways to be treated.{' '}
+            <span style={{ color: accent }}>Compare before you start.</span>
           </motion.h2>
         </div>
 
@@ -106,142 +120,64 @@ function MembershipComparison() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.16, ease }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
         >
 
-          {/* ── Single Consult Card ── */}
-          <div
-            className="flex flex-col rounded-2xl overflow-hidden"
-            style={{ border: '1px solid rgba(72,144,247,0.1)', background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)' }}
-          >
-            <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
-              <p style={{
-                fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
-                letterSpacing: '0.1em', textTransform: 'uppercase' as const,
-                color: 'var(--text-primary)', opacity: 0.72, marginBottom: '4px',
-              }}>Single Consult</p>
-              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
-                Once-off · No subscription
-              </p>
-            </div>
-
-            <div className="flex flex-col flex-1">
-              {COMPARISON_ROWS.map((row, i) => (
-                <div
-                  key={row.label}
-                  className="flex items-center justify-between px-6 py-3.5"
-                  style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
-                >
-                  <span style={{
-                    fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
-                    textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72,
-                  }}>{row.label}</span>
-                  <span style={{
-                    fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
-                    color: row.single === '·' ? 'var(--text-muted)' : 'var(--text-primary)',
-                    opacity: row.single === '·' ? 0.5 : 0.48,
-                  }}>{row.single}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(72,144,247,0.07)' }}>
-              <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Average initial investment</p>
-                <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>$604 – $680</p>
-                <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>Blood referral + consultation + Escript fee</p>
-              </div>
-              <Link
-                href="https://app.apexmetabolichealth.com.au/signup"
-                className="flex items-center justify-center w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
-                style={{ border: '1px solid rgba(72,144,247,0.18)', color: 'var(--text-primary)', opacity: 0.72 }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '0.9'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.4)' }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '0.55'; e.currentTarget.style.borderColor = 'rgba(72,144,247,0.18)' }}
-              >
-                Single Consult
-              </Link>
-            </div>
-          </div>
-
-          {/* ── Member Card (featured) ── */}
-          <div
-            className="flex flex-col rounded-2xl overflow-hidden relative"
-            style={{
-              border: `1px solid ${accent}`,
-              background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
-              boxShadow: '0 0 80px rgba(72,144,247,0.14), 0 16px 40px rgba(15,23,42,0.08)',
-            }}
-          >
-            {/* Recommended badge */}
-            <div style={{
-              position: 'absolute', top: 0, right: 20,
-              background: accent, borderRadius: '0 0 6px 6px',
-              padding: '4px 12px',
-              fontFamily: 'var(--font-space-grotesk)', fontSize: '9px',
-              fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff',
-            }}>
-              Recommended
-            </div>
-
-            <div className="px-6 py-5" style={{ borderBottom: `1px solid rgba(72,144,247,0.18)` }}>
-              <p style={{
-                fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800,
-                letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: accent, marginBottom: '4px',
-              }}>Apex Member</p>
-              <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
-                Ongoing treatment · Cancel anytime
-              </p>
-            </div>
-
-            <div className="flex flex-col flex-1">
-              {COMPARISON_ROWS.map((row, i) => {
-                const isAdvantage = row.highlight
-                return (
-                  <div
-                    key={row.label}
-                    className="flex items-center justify-between px-6 py-3.5"
-                    style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? `1px solid rgba(72,144,247,0.08)` : 'none' }}
-                  >
-                    <span style={{
-                      fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em',
-                      textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72,
-                    }}>{row.label}</span>
-                    <span
-                      className="flex items-center gap-1.5"
-                      style={{
-                        fontFamily: 'var(--font-space-grotesk)', fontSize: '15px', fontWeight: 700,
-                        color: isAdvantage ? accent : 'var(--text-primary)',
-                      }}
-                    >
-                      {isAdvantage && (
-                        <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
-                          <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.15)" stroke={accent} strokeWidth="0.8" />
-                          <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                      {row.member}
-                    </span>
+          {PATHS.map(path => {
+            const featured = path.col === 'member'
+            return (
+              <div key={path.col} className="flex flex-col rounded-2xl overflow-hidden relative"
+                style={{
+                  border: featured ? `1px solid ${accent}` : '1px solid rgba(15,23,42,0.08)',
+                  background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
+                  boxShadow: featured ? '0 0 80px color-mix(in srgb, var(--blue) 14%, transparent), 0 16px 40px rgba(15,23,42,0.08)' : '0 16px 40px rgba(15,23,42,0.08)',
+                }}>
+                {featured && (
+                  <div style={{ position: 'absolute', top: 0, right: 20, background: accent, borderRadius: '0 0 6px 6px', padding: '4px 12px', fontFamily: 'var(--font-space-grotesk)', fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff' }}>
+                    Saves the most
                   </div>
-                )
-              })}
-            </div>
-
-            <div className="px-6 py-5" style={{ borderTop: `1px solid rgba(72,144,247,0.18)` }}>
-              <Link
-                href="https://app.apexmetabolichealth.com.au/signup"
-                className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
-                style={{ background: accent, color: '#ffffff', boxShadow: '0 4px 20px rgba(72,144,247,0.35)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#5fa0ff'; e.currentTarget.style.boxShadow = '0 6px 28px rgba(72,144,247,0.5)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = accent; e.currentTarget.style.boxShadow = '0 4px 20px rgba(72,144,247,0.35)' }}
-              >
-                Get Started
-                <svg viewBox="0 0 14 14" fill="none" width="12" height="12" aria-hidden="true">
-                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-
+                )}
+                <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(15,23,42,0.06)' }}>
+                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: featured ? accent : 'var(--text-primary)', opacity: featured ? 1 : 0.72, marginBottom: '4px' }}>{path.name}</p>
+                  <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>{path.sub}</p>
+                </div>
+                <div className="flex flex-col flex-1">
+                  {COMPARISON_ROWS.map((row, i) => {
+                    const v = row[path.col]
+                    const good = featured && row.highlight
+                    return (
+                      <div key={row.label} className="flex items-center justify-between gap-3 px-6 py-3.5" style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(15,23,42,0.05)' : 'none' }}>
+                        <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72 }}>{row.label}</span>
+                        <span className="flex items-center gap-1.5 text-right" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '14.5px', fontWeight: 700, color: good ? accent : 'var(--text-primary)', opacity: v === '·' ? 0.4 : featured ? 1 : 0.62 }}>
+                          {good && (
+                            <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
+                              <circle cx="6" cy="6" r="5.5" fill="color-mix(in srgb, var(--blue) 15%, transparent)" stroke={accent} strokeWidth="0.8" />
+                              <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          )}
+                          {v}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(15,23,42,0.06)' }}>
+                  {path.box && (
+                    <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(15,23,42,0.03)', border: '1px solid rgba(15,23,42,0.06)' }}>
+                      <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.k}</p>
+                      <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-primary)' }}>{path.box.v}</p>
+                      <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.note}</p>
+                    </div>
+                  )}
+                  <Link href="https://app.apexmetabolichealth.com.au/signup"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
+                    style={featured ? { background: accent, color: '#ffffff' } : { border: '1px solid rgba(15,23,42,0.14)', color: 'var(--text-primary)' }}>
+                    {path.cta}
+                  </Link>
+                </div>
+              </div>
+            )
+          })}
         </motion.div>
 
         <motion.p
@@ -251,7 +187,7 @@ function MembershipComparison() {
           className="text-center text-[11px] leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520, margin: '20px auto 0' }}
         >
-          Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
+          Retail pharmacies usually mark medication up. Our partner pharmacy does not, but each order carries admin, infrastructure and handling fees. Membership includes those fees and the escript fee, which is why members save the most. Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
         </motion.p>
       </div>
     </section>
