@@ -206,6 +206,12 @@ export default function StageHero() {
             <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
               A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and a doctor builds your plan from them. No GP referral.
             </p>
+            {/* Function / Superpower: the price is part of the promise. */}
+            <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
+              <span><strong>$280</strong> one blood panel</span>
+              <span className="stage-price-or">or</span>
+              <span><strong>$99</strong>/month membership, two panels a year included</span>
+            </p>
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
               <a href="#panel" className="stage-link">See what we measure</a>

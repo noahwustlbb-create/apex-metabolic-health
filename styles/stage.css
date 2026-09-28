@@ -304,10 +304,10 @@
 @media (max-width: 899px) {
   .stage-hero { height: 200vh; }
   .stage-hero-copy { align-self: start; max-width: none; padding-top: 28px; }
-  .stage-hero-copy .stage-lead { margin: 18px 0 24px; font-size: 15.5px; }
+  .stage-hero-copy .stage-lead { margin: 14px 0 12px; font-size: 15px; }
   .stage-kicker { margin-bottom: 18px; font-size: 11.5px; }
   .stage-display { font-size: clamp(40px, 11vw, 60px); }
-  .stage-fig-box { right: 50%; translate: 50% 0; height: 50%; max-width: none; }
+  .stage-fig-box { right: 50%; translate: 50% 0; height: 44%; max-width: none; }
   .stage-heart-box { right: 50%; translate: 50% 0; top: auto; bottom: 6%; width: 64%; }
   .stage-foot { display: none; }
   /* Phones: dots only (44px targets); the caption under the button names the system. */
@@ -792,3 +792,8 @@ main section[data-art="none"] { min-height: 0; }
 .pw-count { font-family: var(--font-doto, inherit); font-size: 15px; color: var(--stage-blue); }
 .pw-list { margin: 4px 16px 10px; font-size: 14px; line-height: 1.6; color: var(--stage-ink-muted); }
 @media (max-width: 900px) { .pw { grid-template-columns: 1fr; } }
+
+.stage-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 4px 0 22px; font-size: 14px; color: var(--stage-ink-muted); }
+.stage-price strong { font-size: 20px; font-weight: 600; color: var(--stage-ink); font-variant-numeric: tabular-nums; margin-right: 2px; }
+.stage-price-or { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+@media (max-width: 899px) { .stage-price { font-size: 12.5px; margin: 0 0 16px; gap: 2px 8px; } .stage-price strong { font-size: 17px; } .stage-price-or { display: none; } .stage-price > span { flex-basis: 100%; } }

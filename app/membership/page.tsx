@@ -13,14 +13,14 @@ const ACCENT = 'var(--blue)'
 const ADVANTAGE_STATS = [
   { value: '$0',           label: 'Prescribing fees',   sub: 'vs $125 per script' },
   { value: 'Cost price',   label: 'All medication',     sub: 'No medication mark-up' },
-  { value: '$1,000–$1,800', label: 'Est. annual saving', sub: 'Based on 3+ scripts/yr' },
+  { value: '$1,200–$2,200', label: 'Est. annual saving', sub: 'Based on 3+ scripts and 2 panels/yr' },
   { value: '$99',          label: 'Per month',           sub: 'No lock-in contracts' },
 ]
 
 const SAVINGS_ROWS = [
   { label: 'Prescribing fees',        saving: 'Up to $500',   period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
   { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up: pharmacy cost price passed direct' },
-  { label: 'Follow-up blood panels',  saving: '~$120',        period: '/yr', detail: '$139 instead of $180 for the monitoring panel your doctor rechecks on' },
+  { label: 'Two blood panels a year', saving: '$360–$560',    period: '/yr', detail: 'Included: two panels in every 12 months at no charge. Extras at member rates' },
 ]
 
 const INCLUDED = [
@@ -77,8 +77,8 @@ const INCLUDED = [
         <path d="M8 3l-1 5.5H5L8 17a3 3 0 006 0l3-8.5h-2L14 3H8z" strokeLinecap="round" />
       </svg>
     ),
-    title: 'Discounted follow-up blood panels',
-    body: 'Repeat pathology at member rates. No guessing at dose changes without data: every adjustment is grounded in objective measurement.',
+    title: 'Two blood panels a year, included',
+    body: 'Two panels in every 12 months at no charge, and any extra at member rates. No guessing at dose changes without data: every adjustment is grounded in objective measurement.',
   },
   {
     icon: (
