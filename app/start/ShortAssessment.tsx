@@ -279,6 +279,8 @@ const SOURCE_OPTIONS = [
 
 const WHY_LABEL: Record<string, string> = {
   energy: 'Low energy', weight: 'Weight that won’t move', libido: 'Libido or performance', recovery: 'Slow recovery', ageing: 'Ageing well', unsure: 'Not sure yet',
+  // Life-stage entry chips on the home page (Ahead Health pattern).
+  s30: 'Late 30s, getting ahead of it', s40: 'Mid 40s, noticing the shift', s50: '50s and on, staying strong',
 }
 
 // ── Intro (welcome) ────────────────────────────────────────────────────────────

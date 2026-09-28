@@ -6,6 +6,7 @@ import { useStageArt, useStageTone } from './StageTone'
 import { motion, useReducedMotion, useTransform } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
+import TickGauge from '../../motion/TickGauge'
 
 type Sex = 'male' | 'female'
 
@@ -97,6 +98,23 @@ export default function StageHero() {
     })
   }, [p, picked, reduced])
 
+  // The body turns a few degrees toward the cursor (BioTrack app reference).
+  const mediaRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = mediaRef.current
+    if (!el || reduced || !window.matchMedia('(pointer: fine)').matches) return
+    let raf = 0
+    const onMove = (e: PointerEvent) => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        el.style.setProperty('--tx', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3))
+        el.style.setProperty('--ty', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3))
+      })
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
+  }, [reduced])
+
   const pillar = PILLARS[active]
   const href = picked ? `/start?t=${pillar.t}&why=${pillar.why}` : '/start'
   const choose = (i: number) => { setActive(i); setPicked(true) }
@@ -108,7 +126,7 @@ export default function StageHero() {
           {/* Figure: body, then heart */}
           <div className="stage-hero-figure" aria-hidden={false}>
             <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { opacity: bodyOpacity, scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
-              <div className="stage-fig-media">
+              <div className="stage-fig-media" ref={mediaRef}>
               {(['male', 'female'] as Sex[]).map(s => (
                 <Image
                   key={s}
@@ -122,6 +140,7 @@ export default function StageHero() {
                 />
               ))}
               <span className="stage-pulse" aria-hidden="true" />
+              <span className="stage-scan" aria-hidden="true" />
               </div>
 
               <motion.div className="stage-chips" style={reduced ? undefined : { opacity: chips, pointerEvents: chipsEvents }}>
@@ -187,6 +206,12 @@ export default function StageHero() {
             <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
               A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and a doctor builds your plan from them. No GP referral.
             </p>
+            {/* Function / Superpower: the price is part of the promise. */}
+            <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
+              <span><strong>$280</strong> one blood panel</span>
+              <span className="stage-price-or">or</span>
+              <span><strong>$99</strong>/month membership, two panels a year included</span>
+            </p>
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
               <a href="#panel" className="stage-link">See what we measure</a>
@@ -208,6 +233,16 @@ export default function StageHero() {
             </motion.div>
           )}
 
+
+          {/* AlgoRx / Superpower: one number, labelled as a sample. */}
+          <div className="stage-score hero-in" style={{ animationDelay: '800ms' }} aria-label="Sample Apex score, 74 out of 100. Not a real patient.">
+            <TickGauge value={74} delay={900} size={104} />
+            <div className="stage-score-t">
+              <strong>Apex score</strong>
+              <span>One number from your whole panel, tracked every test.</span>
+              <em>Sample</em>
+            </div>
+          </div>
 
           <p className="stage-foot">Illustrative render. Every marker named is on the Apex panel. For Australian adults 18+. General information, not medical advice.</p>
         </div>
