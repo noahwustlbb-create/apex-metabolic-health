@@ -751,3 +751,7 @@ main section[data-art="none"] { min-height: 0; }
 .stage-hero[data-still] .stage-fig-img { animation: none; }
 .stage-hero[data-still] .stage-scan { display: none; }
 @media (prefers-reduced-motion: reduce) { .stage-fig-img, .stage-scan { animation: none; } .stage-fig-media { transform: none; } }
+
+.stage-dash-trend { display: grid; gap: 6px; padding: 12px 14px; color: var(--stage-ink); }
+.stage-dash-trend svg { width: 100%; height: 64px; overflow: visible; }
+.stage-device-screen { transform-origin: 50% 40%; }
