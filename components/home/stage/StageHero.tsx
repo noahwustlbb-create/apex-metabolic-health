@@ -189,14 +189,15 @@ export default function StageHero() {
 
             {!reduced && (
               <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
-                <Image src={art('tube')} alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
+                {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
+                <Image src="/3d/product/box-white.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img stage-box-img" />
                 <span className="stage-float stage-float-a">
                   <span className="stage-float-k">Starts with</span>
                   <span className="stage-float-v">One blood panel, 23+ markers</span>
                 </span>
                 <span className="stage-float stage-float-b">
                   <span className="stage-float-k">Delivered</span>
-                  <span className="stage-float-v">Discreetly, to your door</span>
+                  <span className="stage-float-v">Plain outer pack, to your door</span>
                 </span>
               </motion.div>
             )}

@@ -857,3 +857,11 @@ html[data-audience="women"] main section[data-art="/editorial/molecular.webp"]::
    every line of copy whatever the viewport height (28 Sep: it collided
    with the CTA on an iPhone with Safari bars showing). */
 @media (max-width: 899px) { .stage-sex { top: auto !important; bottom: 4%; right: auto !important; left: 50%; transform: translateX(-50%); z-index: 6; } }
+/* Hero hand-off is the Apex box (29 Sep): a wide render, so a wide stage
+   with an oval fade instead of the vials' tall one. */
+.stage-heart-box { aspect-ratio: 1600 / 1066; width: min(48%, 700px); translate: 0 -40%;
+  -webkit-mask-image: radial-gradient(ellipse closest-side, #000 74%, transparent); mask-image: radial-gradient(ellipse closest-side, #000 74%, transparent); }
+.stage-heart-box .stage-box-img { object-fit: cover; }
+@media (max-width: 899px) { .stage-heart-box { width: 96% !important; bottom: 14% !important; translate: 50% 0 !important; } }
+@media (max-width: 899px) { .stage-float-b { right: 2% !important; max-width: 70%; } }
+@media (max-width: 899px) { .stage-float-b { right: auto !important; left: 50% !important; translate: -50% 0; max-width: 84% !important; white-space: normal !important; } .stage-float-b .stage-float-v { white-space: normal !important; } }
