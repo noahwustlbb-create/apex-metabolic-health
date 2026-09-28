@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Logo from '@/components/brand/Logo'
 import { phasesFor, stepNumber, stepsRemaining, START_TOTAL_STEPS } from '@/lib/startFunnel'
 import { useSignupGate } from '@/context/SignupGateContext'
+import { ArtImg } from '@/components/audience/Img'
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
 const BG     = 'var(--bg)'
@@ -296,7 +297,7 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="quiz-intro">
       <div className="quiz-intro-art" aria-hidden="true">
-        <img src="/3d/body-male.jpg" alt="" />
+        <ArtImg src="/3d/body-male.jpg" alt="" />
         <div className="quiz-intro-chip"><span>Reviewed by</span><strong>An AHPRA-registered doctor</strong></div>
       </div>
       <div className="quiz-intro-copy">
@@ -341,7 +342,7 @@ function QuizAside({ phase }: { phase: string }) {
     <aside className="quiz-aside" aria-hidden="true">
       <AnimatePresence mode="wait">
         <motion.div key={phase} className="quiz-aside-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease }}>
-          <img src={a.art} alt="" />
+          <ArtImg src={a.art} alt="" />
           <div className="quiz-aside-fact"><strong>Did you know?</strong><span>{a.fact}</span></div>
         </motion.div>
       </AnimatePresence>
@@ -718,7 +719,7 @@ export default function ShortAssessment() {
                     <p className="quiz-gets-k">Your areas to look at</p>
                     {picks.filter(id => FOCUS[id]).map((id, i) => (
                       <motion.div key={id} initial={{ opacity: 0, y: 12, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease }} className="quiz-focus-card">
-                        <img src={FOCUS[id].art} alt="" aria-hidden="true" />
+                        <ArtImg src={FOCUS[id].art} alt="" aria-hidden="true" />
                         <span><strong>{PICK_LABEL(id)}</strong><span>On your panel: {FOCUS[id].markers}.</span></span>
                       </motion.div>
                     ))}

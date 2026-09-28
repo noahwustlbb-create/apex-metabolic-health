@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import { useStageArt, useStageTone } from './StageTone'
 import { motion, useReducedMotion, useTransform } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
+import { useAudience } from '@/components/audience/Audience'
 import TickGauge from '../../motion/TickGauge'
 
 type Sex = 'male' | 'female'
@@ -68,7 +69,10 @@ export default function StageHero() {
   }
   const reduced = useReducedMotion()
   const ref = useRef<HTMLElement>(null)
-  const [sex, setSex] = useState<Sex>('male')
+  // The Men / Women switch is the whole site's switch (components/audience).
+  const { audience, setAudience } = useAudience()
+  const sex: Sex = audience === 'women' ? 'female' : 'male'
+  const setSex = (s: Sex) => setAudience(s === 'female' ? 'women' : 'men')
   const [active, setActive] = useState(0)
   const [picked, setPicked] = useState(false)
 

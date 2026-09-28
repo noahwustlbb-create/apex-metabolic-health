@@ -801,3 +801,47 @@ main section[data-art="none"] { min-height: 0; }
 .pw-upload { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 28px; margin-top: 36px; padding: 20px 24px; border-radius: 24px; background: var(--stage-ice); }
 .pw-upload-t { font-size: 16px; font-weight: 600; color: var(--stage-ink); }
 .pw-upload-b { margin-top: 4px; font-size: 14px; line-height: 1.55; color: var(--stage-ink-muted); max-width: 62ch; }
+
+/* ── WOMEN'S SITE (28 Sep 2026): the same site in rose ─────────────────
+   Set by components/audience (?for=women, the hero switch, or a remembered
+   choice). Tokens first, then the few rules that hard-code a blue. Rose is
+   #D6336C, the women's accent in the portal, so the two stay one brand. */
+html[data-audience="women"] {
+  --stage-blue: #d6336c;
+  --stage-cyan: #ff6fa8;
+  --stage-gauge: #ff6fa8;
+  --stage-ice: #fdf0f5;
+  --stage-ice-deep: #f8dce8;
+  --blue: #d6336c;
+  --blue-dark: #b8285b;
+  --blue-light: #f06595;
+  --apex-blue: #d6336c;
+  --color-accent-fg: #b8285b;
+  --color-accent-emphasis: #d6336c;
+  --color-accent-muted: rgba(214, 51, 108, 0.08);
+  --color-accent-border: rgba(214, 51, 108, 0.28);
+}
+html[data-audience="women"] .btn-primary { background: #b8285b; box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 10px 24px -12px rgba(184,40,91,0.55); }
+html[data-audience="women"] .btn-primary:hover { box-shadow: 0 1px 2px rgba(15,23,42,0.12), 0 14px 28px -12px rgba(184,40,91,0.6); }
+html[data-audience="women"] .btn-outline { color: #b8285b; }
+html[data-audience="women"] .btn-outline:hover { border-color: #b8285b; }
+html[data-audience="women"] .btn-white { color: #b8285b; }
+html[data-audience="women"] .stage-cta { box-shadow: 0 1px 2px rgba(11,18,32,0.08), 0 10px 30px -14px rgba(214,51,108,0.45); }
+html[data-audience="women"] .hero-tab-fill,
+html[data-audience="women"] .hero-spot[data-on] .hero-spot-dot { background: #b8285b; }
+/* Inline blues written straight into older pages' style attributes. */
+html[data-audience="women"] main [style*="color: rgb(72, 144, 247)"],
+html[data-audience="women"] main [style*="color:#4890f7"],
+html[data-audience="women"] main [style*="color: #4890f7"],
+html[data-audience="women"] main [style*="color: var(--blue)"] { color: #b8285b !important; }
+html[data-audience="women"] main [style*="background: rgb(72, 144, 247)"],
+html[data-audience="women"] main [style*="background:#4890f7"],
+html[data-audience="women"] main [style*="linear-gradient(135deg, #4890f7"] { background: #d6336c !important; }
+/* Women's site: page heroes use the rose renders. */
+html[data-audience="women"] main section[data-art="/3d/phone.jpg"]::after { background-image: url("/3d/pink/phone.jpg"); }
+html[data-audience="women"] main section[data-art="/3d/tablet.jpg"]::after { background-image: url("/3d/pink/phone.jpg"); }
+html[data-audience="women"] main section[data-art="/3d/product/box-white.jpg"]::after { background-image: url("/3d/product/pink/box-white.jpg"); }
+html[data-audience="women"] main section[data-art="/3d/product/vials.jpg"]::after { background-image: url("/3d/product/pink/vials.jpg"); }
+html[data-audience="women"] main section[data-art="/3d/body-female.jpg"]::after,
+html[data-audience="women"] main section[data-art="/3d/body-male.jpg"]::after { background-image: url("/3d/pink/body-female.jpg"); }
+html[data-audience="women"] main section[data-art="/editorial/molecular.webp"]::after { background-image: url("/3d/pink/molecular.jpg"); }

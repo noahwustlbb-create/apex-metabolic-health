@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import { useStageArt } from './StageTone'
 import { motion, motionValue, useReducedMotion, useTransform, type MotionValue } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'

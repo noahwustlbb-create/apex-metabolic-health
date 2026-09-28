@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'

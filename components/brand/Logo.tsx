@@ -76,7 +76,7 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
             fontSize: footer ? 10 : 7.5,
             fontWeight: 600,
             letterSpacing: footer ? '0.32em' : '0.3em',
-            color: 'var(--color-accent-fg)',
+            color: 'var(--primitive-blue-700, #1d4ed8)', // brand lockup stays blue on the women's site too
             textTransform: 'uppercase',
             whiteSpace: 'nowrap',
           }}
