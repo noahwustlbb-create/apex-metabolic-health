@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from '@/components/audience/Img'
 import { useStageArt, useStageTone } from './StageTone'
-import { motion, useReducedMotion, useTransform, useMotionValueEvent, useMotionTemplate } from 'framer-motion'
+import { motion, useReducedMotion, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import { useAudience } from '@/components/audience/Audience'
@@ -60,18 +60,6 @@ const FIG_ASPECT = 1647 / 2200
  * body on dot leaders; the active one opens with its markers. Scrolling hands
  * the body over to the heart and the headline over to the doctor.
  */
-// The hook: what "flat" feels like. Symptoms people describe, never claims.
-const FEEL: Record<Sex, { t: string; at: [number, number] }[]> = {
-  male: [
-    { t: 'Tired all the time', at: [0.02, 0.3] }, { t: 'Poor sleep', at: [0.66, 0.16] },
-    { t: 'Low drive', at: [0.06, 0.56] }, { t: 'Weight that won’t move', at: [0.6, 0.48] },
-  ],
-  female: [
-    { t: 'Tired all the time', at: [0.02, 0.3] }, { t: 'Poor sleep', at: [0.66, 0.16] },
-    { t: 'Brain fog', at: [0.08, 0.56] }, { t: 'Weight that won’t move', at: [0.6, 0.48] },
-  ],
-}
-
 export default function StageHero() {
   const art = useStageArt()
   const glow = useStageTone() === 'red' ? 'red' : 'Apex blue'
@@ -90,37 +78,21 @@ export default function StageHero() {
 
 
   const p = useSectionProgress(ref, 'pin')
-  // The journey (masterclass: HOOK, INTRODUCE, EXPLAIN, INVITE), one object
-  // the whole way. The body opens flat and grey ("flat in real life"), what
-  // that feels like surfaces around it, a scan reads it, and it ignites from
-  // the heart out when the markers land. Then the doctor, then the button.
-  const bodyScale = useTransform(p, [0, 1], [1, 1.06])
-  const bodyY = useTransform(p, [0, 1], ['0%', '-2%'])
-  const lit = useTransform(p, [0.4, 0.56], [0, 1])
-  const gray = useTransform(lit, [0, 1], [0.92, 0])
-  const bright = useTransform(lit, [0, 1], [0.84, 1])
-  const bodyFilter = useMotionTemplate`grayscale(${gray}) brightness(${bright})`
-  const pulse = useTransform(lit, [0, 0.6, 1], [0, 1, 0.75])
-  const scanTop = useTransform(p, [0.3, 0.46], ['-12%', '104%'])
-  const scanOpacity = useTransform(p, [0.29, 0.32, 0.43, 0.47], [0, 1, 1, 0])
-  const scoreOpacity = useTransform(lit, [0.55, 1], [0, 1])
-  const feel = [0, 1, 2, 3].map(i => ({
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    opacity: useTransform(p, [0.04 + i * 0.055, 0.1 + i * 0.055, 0.32, 0.4], [0, 1, 1, 0]),
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    y: useTransform(p, [0.04 + i * 0.055, 0.1 + i * 0.055], [14, 0]),
-  }))
-  const chips = useTransform(p, [0.5, 0.6], [0, 1])
-  const chipsEvents = useTransform(p, v => (v < 0.54 ? 'none' : 'auto'))
-  const copyA = useTransform(p, [0, 0.32, 0.4], [1, 1, 0])
-  const copyAY = useTransform(p, [0.32, 0.4], [0, -28])
+  const bodyOpacity = useTransform(p, [0, 0.42, 0.6], [1, 1, 0])
+  const bodyScale = useTransform(p, [0, 0.6], [1, 1.08])
+  const bodyY = useTransform(p, [0, 0.6], ['0%', '-3%'])
+  const heartOpacity = useTransform(p, [0.44, 0.62], [0, 1])
+  const heartScale = useTransform(p, [0.44, 0.8], [0.9, 1])
+  const heartRotate = useTransform(p, [0.44, 1], [-7, 2])
+  const chips = useTransform(p, [0.28, 0.4], [1, 0])
+  const chipsEvents = useTransform(p, v => (v > 0.38 ? 'none' : 'auto'))
+  const copyA = useTransform(p, [0, 0.34, 0.44], [1, 1, 0])
+  const copyAY = useTransform(p, [0.34, 0.44], [0, -28])
   // Faded copy must not swallow taps meant for the Men / Women switch.
   const [copyFaded, setCopyFaded] = useState(false)
   useMotionValueEvent(copyA, 'change', v => setCopyFaded(v < 0.3))
-  const copyB = useTransform(p, [0.4, 0.5], [0, 1])
-  const copyBY = useTransform(p, [0.4, 0.5], [28, 0])
-  const [copyBOn, setCopyBOn] = useState(false)
-  useMotionValueEvent(copyB, 'change', v => setCopyBOn(v > 0.6))
+  const copyB = useTransform(p, [0.5, 0.62], [0, 1])
+  const copyBY = useTransform(p, [0.5, 0.62], [28, 0])
 
   // Masterclass rule: motion is scroll-linked, never a timer. Until the
   // visitor picks a system, the first third of the pinned scroll walks the
@@ -128,8 +100,7 @@ export default function StageHero() {
   useEffect(() => {
     if (picked || reduced) return
     return p.on('change', v => {
-      if (v < 0.62) return
-      const i = Math.min(PILLARS.length - 1, Math.floor(((v - 0.62) / 0.33) * PILLARS.length))
+      const i = Math.min(PILLARS.length - 1, Math.floor((v / 0.32) * PILLARS.length))
       setActive(a => (a === i ? a : i))
     })
   }, [p, picked, reduced])
@@ -161,8 +132,8 @@ export default function StageHero() {
         <div className="stage-frame stage-hero-frame">
           {/* Figure: body, then heart */}
           <div className="stage-hero-figure" aria-hidden={false}>
-            <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
-              <motion.div className="stage-fig-media" ref={mediaRef} style={reduced ? undefined : { filter: bodyFilter }}>
+            <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { opacity: bodyOpacity, scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
+              <div className="stage-fig-media" ref={mediaRef}>
               {(['male', 'female'] as Sex[]).map(s => (
                 <Image
                   key={s}
@@ -175,21 +146,9 @@ export default function StageHero() {
                   style={{ opacity: s === sex ? 1 : 0 }}
                 />
               ))}
-              <motion.span className="stage-pulse" aria-hidden="true" style={reduced ? undefined : { opacity: pulse }} />
+              <span className="stage-pulse" aria-hidden="true" />
               <span className="stage-scan" aria-hidden="true" />
-              {!reduced && <motion.span className="stage-scanband" aria-hidden="true" style={{ top: scanTop, opacity: scanOpacity }} />}
-              </motion.div>
-
-              {/* HOOK: what flat feels like, one line at a time as you scroll. */}
-              {!reduced && (
-                <div className="stage-feel" aria-hidden="true">
-                  {FEEL[sex].map((f, i) => (
-                    <motion.span key={f.t} className="stage-feel-chip" style={{ left: `${f.at[0] * 100}%`, top: `${f.at[1] * 100}%`, opacity: feel[i].opacity, y: feel[i].y }}>
-                      <span className="stage-feel-dot" />{f.t}
-                    </motion.span>
-                  ))}
-                </div>
-              )}
+              </div>
 
               <motion.div className="stage-chips" style={reduced ? undefined : { opacity: chips, pointerEvents: chipsEvents }}>
               {PILLARS.map((pl, i) => {
@@ -228,6 +187,20 @@ export default function StageHero() {
               </div>
             </motion.div>
 
+            {!reduced && (
+              <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
+                {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
+                <Image src="/3d/product/box-white.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img stage-box-img" />
+                <span className="stage-float stage-float-a">
+                  <span className="stage-float-k">Starts with</span>
+                  <span className="stage-float-v">One blood panel, 23+ markers</span>
+                </span>
+                <span className="stage-float stage-float-b">
+                  <span className="stage-float-k">Delivered</span>
+                  <span className="stage-float-v">Plain outer pack, to your door</span>
+                </span>
+              </motion.div>
+            )}
           </div>
 
           {/* Copy A: the hook */}
@@ -258,30 +231,26 @@ export default function StageHero() {
 
           {/* Copy B: the doctor */}
           {!reduced && (
-            <motion.div className="stage-hero-copy stage-hero-copy-b" data-faded={!copyBOn || undefined} inert={!copyBOn || undefined} style={{ opacity: copyB, y: copyBY }}>
+            <motion.div className="stage-hero-copy stage-hero-copy-b" style={{ opacity: copyB, y: copyBY }} aria-hidden="true">
               <h2 className="stage-display">
-                Measured properly.<br /><span className="stage-muted">Then a doctor writes the plan.</span>
+                Your plan,<br /><span className="stage-muted">written by a doctor.</span>
               </h2>
               <p className="stage-lead">
-                Your 23+ markers are read against optimal ranges, not just the disease cut-off. An AHPRA-registered doctor goes through them with you and decides what is suitable.
+                An AHPRA-registered doctor reads your panel with you on the call, decides what is suitable, and your plan arrives at your door.
               </p>
-              <div className="stage-actions">
-                <StageCta href={href}>Start your assessment</StageCta>
-                <a href="#panel" className="stage-link">See what we measure</a>
-              </div>
             </motion.div>
           )}
 
 
           {/* AlgoRx / Superpower: one number, labelled as a sample. */}
-          <motion.div className="stage-score" style={reduced ? undefined : { opacity: scoreOpacity }} aria-label="Sample Apex score, 74 out of 100. Not a real patient.">
+          <div className="stage-score hero-in" style={{ animationDelay: '800ms' }} aria-label="Sample Apex score, 74 out of 100. Not a real patient.">
             <TickGauge value={74} delay={900} size={104} />
             <div className="stage-score-t">
               <strong>Apex score</strong>
               <span>One number from your whole panel, tracked every test.</span>
               <em>Sample</em>
             </div>
-          </motion.div>
+          </div>
 
           <p className="stage-foot">Illustrative render. Every marker named is on the Apex panel. For Australian adults 18+. General information, not medical advice.</p>
         </div>
