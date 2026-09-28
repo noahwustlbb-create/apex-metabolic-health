@@ -7,7 +7,6 @@ import { motion, useReducedMotion, useTransform, useMotionValueEvent } from 'fra
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import { useAudience } from '@/components/audience/Audience'
-import TickGauge from '../../motion/TickGauge'
 
 type Sex = 'male' | 'female'
 
@@ -122,6 +121,14 @@ export default function StageHero() {
     return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
   }, [reduced])
 
+  const price = (
+    <p className="stage-price">
+      <span><strong>$280</strong> one blood panel</span>
+      <span className="stage-price-or">or</span>
+      <span><strong>$99</strong>/month membership, two panels a year included</span>
+    </p>
+  )
+
   const pillar = PILLARS[active]
   const href = picked ? `/start?t=${pillar.t}&why=${pillar.why}` : '/start'
   const choose = (i: number) => { setActive(i); setPicked(true) }
@@ -190,7 +197,7 @@ export default function StageHero() {
             {!reduced && (
               <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
                 {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
-                <Image src="/3d/product/box-white.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img stage-box-img" />
+                <Image src="/3d/product/box-tall.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
                 <span className="stage-float stage-float-a">
                   <span className="stage-float-k">Starts with</span>
                   <span className="stage-float-v">One blood panel, 23+ markers</span>
@@ -214,12 +221,7 @@ export default function StageHero() {
             <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
               A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and a doctor builds your plan from them. No GP referral.
             </p>
-            {/* Function / Superpower: the price is part of the promise. */}
-            <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
-              <span><strong>$280</strong> one blood panel</span>
-              <span className="stage-price-or">or</span>
-              <span><strong>$99</strong>/month membership, two panels a year included</span>
-            </p>
+            {reduced && price}
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
               <a href="#panel" className="stage-link">See what we measure</a>
@@ -238,19 +240,11 @@ export default function StageHero() {
               <p className="stage-lead">
                 An AHPRA-registered doctor reads your panel with you on the call, decides what is suitable, and your plan arrives at your door.
               </p>
+              {/* Function / Superpower: the price lands on the plan beat, clear of the hook. */}
+              {price}
             </motion.div>
           )}
 
-
-          {/* AlgoRx / Superpower: one number, labelled as a sample. */}
-          <div className="stage-score hero-in" style={{ animationDelay: '800ms' }} aria-label="Sample Apex score, 74 out of 100. Not a real patient.">
-            <TickGauge value={74} delay={900} size={104} />
-            <div className="stage-score-t">
-              <strong>Apex score</strong>
-              <span>One number from your whole panel, tracked every test.</span>
-              <em>Sample</em>
-            </div>
-          </div>
 
           <p className="stage-foot">Illustrative render. Every marker named is on the Apex panel. For Australian adults 18+. General information, not medical advice.</p>
         </div>
