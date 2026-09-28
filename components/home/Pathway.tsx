@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import { motion, useReducedMotion } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 

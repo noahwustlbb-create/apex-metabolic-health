@@ -9,6 +9,7 @@ import { CLINIC_EMAIL, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { SignupGateProvider } from '@/context/SignupGateContext'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import MotionProvider from '@/components/MotionProvider'
+import { AudienceProvider, AUDIENCE_BOOT } from '@/components/audience/Audience'
 
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
@@ -128,6 +129,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-AU" data-theme="light" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable} ${doto.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        {/* Women's site: rose before first paint, no blue flash (components/audience). */}
+        <script dangerouslySetInnerHTML={{ __html: AUDIENCE_BOOT }} />
       </head>
       <body className="antialiased overflow-x-clip">
         {/* Google Tag Manager */}
@@ -163,6 +166,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip-link" href="#main-content">Skip to main content</a>
         <SmoothScroll />
         <ReferralCapture />
+        <AudienceProvider>
         <ThemeProvider>
           <MotionProvider>
             <SignupGateProvider>
@@ -171,6 +175,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </SignupGateProvider>
           </MotionProvider>
         </ThemeProvider>
+        </AudienceProvider>
         <Script
           id="ghl-external-tracking"
           src="https://links.apexmetabolichealth.com.au/js/external-tracking.js"

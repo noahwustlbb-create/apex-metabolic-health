@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 

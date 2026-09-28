@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { useAudience } from '@/components/audience/Audience'
 
 /**
  * Glow tone for the stage renders: 'cyan' (Apex default) or 'red' (the
@@ -33,6 +34,11 @@ export const useStageTone = () => useContext(ToneCtx)
 /** Path to a stage render for the current tone. */
 export const useStageArt = () => {
   const tone = useStageTone()
-  // The tube has no red render yet, so it stays cyan in both tones.
-  return (name: 'body-male' | 'body-female' | 'heart' | 'tube') => `/3d/${tone === 'red' && name !== 'tube' ? 'red/' : ''}${name}.jpg`
+  const { audience } = useAudience()
+  return (name: 'body-male' | 'body-female' | 'heart' | 'tube') => {
+    // Women's site: rose renders, and never a man in rose.
+    if (audience === 'women') return name === 'tube' ? '/3d/pink/tube.jpg' : '/3d/pink/body-female.jpg'
+    // The tube has no red render yet, so it stays cyan in both tones.
+    return `/3d/${tone === 'red' && name !== 'tube' ? 'red/' : ''}${name}.jpg`
+  }
 }

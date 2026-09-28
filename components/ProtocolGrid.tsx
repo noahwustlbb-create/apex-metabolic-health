@@ -2,7 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, useInView, useReducedMotion, AnimatePresence, LayoutGroup } from 'framer-motion'
-import Image from 'next/image'
+import Image from '@/components/audience/Img'
 
 /**
  * Choose your protocol.

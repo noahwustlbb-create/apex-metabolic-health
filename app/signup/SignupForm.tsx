@@ -6,6 +6,7 @@ import Logo from '@/components/brand/Logo'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
+import { ArtImg } from '@/components/audience/Img'
 
 const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 
@@ -105,7 +106,7 @@ function SignupFormInner() {
       </div>
 
       <aside className="su-aside" aria-hidden="true">
-        <img src="/start/quiz/vials.jpg" alt="" />
+        <ArtImg src="/start/quiz/vials.jpg" alt="" />
         <ul className="su-points">
           {[
             ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],
