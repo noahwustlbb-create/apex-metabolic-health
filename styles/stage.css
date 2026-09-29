@@ -880,3 +880,16 @@ html[data-audience="women"] main section[data-art="/editorial/molecular.webp"]::
 .stage-perks em { font-style: normal; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stage-blue); }
 .stage-perks strong { font-size: 16px; letter-spacing: -0.02em; }
 @media (max-width: 899px) { .stage-perks strong { font-size: 14.5px; } .stage-perks em { font-size: 9.5px; } }
+/* Phones (29 Sep, Noah: the box was covered by the plan copy). The plan beat
+   keeps the headline and two one-line hooks; the lead goes, so the box and
+   its card sit clear below. */
+@media (max-width: 899px) {
+  .stage-hero-copy-b .stage-lead { display: none; }
+  .stage-hero-copy-b .stage-display { font-size: clamp(34px, 9.5vw, 48px); }
+  .stage-perks { grid-template-columns: 1fr; gap: 6px; margin-top: 14px; }
+  .stage-perks li { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; padding: 9px 12px; border-radius: 14px; }
+  .stage-perks li em { flex-basis: 100%; }
+  .stage-perks li span { display: none; }
+  .stage-heart-box { bottom: 2% !important; width: 60% !important; }
+  .stage-float-b { bottom: 0 !important; }
+}
