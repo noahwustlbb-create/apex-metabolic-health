@@ -71,7 +71,8 @@ export default function StageHero() {
   // The Men / Women switch is the whole site's switch (components/audience).
   const { audience, setAudience } = useAudience()
   const sex: Sex = audience === 'women' ? 'female' : 'male'
-  const setSex = (s: Sex) => setAudience(s === 'female' ? 'women' : 'men')
+  const [chose, setChose] = useState(false)
+  const setSex = (s: Sex) => { setAudience(s === 'female' ? 'women' : 'men'); setChose(true) }
   const [active, setActive] = useState(0)
   const [picked, setPicked] = useState(false)
 
@@ -83,13 +84,18 @@ export default function StageHero() {
   const heartOpacity = useTransform(p, [0.44, 0.62], [0, 1])
   const heartScale = useTransform(p, [0.44, 0.8], [0.9, 1])
   const heartRotate = useTransform(p, [0.44, 1], [-7, 2])
-  const chips = useTransform(p, [0.28, 0.4], [1, 0])
-  const chipsEvents = useTransform(p, v => (v > 0.38 ? 'none' : 'auto'))
-  const copyA = useTransform(p, [0, 0.34, 0.44], [1, 1, 0])
-  const copyAY = useTransform(p, [0.34, 0.44], [0, -28])
+  const chips = useTransform(p, [0.34, 0.42], [1, 0])
+  const chipsEvents = useTransform(p, v => (v > 0.4 ? 'none' : 'auto'))
+  const copyA = useTransform(p, [0, 0.14, 0.2], [1, 1, 0])
+  const copyAY = useTransform(p, [0.14, 0.2], [0, -28])
   // Faded copy must not swallow taps meant for the Men / Women switch.
   const [copyFaded, setCopyFaded] = useState(false)
   useMotionValueEvent(copyA, 'change', v => setCopyFaded(v < 0.3))
+  // Who: the visitor picks Men or Women while the body walks its systems.
+  const copyW = useTransform(p, [0.18, 0.24, 0.38, 0.44], [0, 1, 1, 0])
+  const copyWY = useTransform(p, [0.18, 0.24, 0.38, 0.44], [28, 0, 0, -28])
+  const [whoOn, setWhoOn] = useState(false)
+  useMotionValueEvent(copyW, 'change', v => setWhoOn(v > 0.6))
   const copyB = useTransform(p, [0.5, 0.62], [0, 1])
   const copyBY = useTransform(p, [0.5, 0.62], [28, 0])
 
@@ -99,7 +105,7 @@ export default function StageHero() {
   useEffect(() => {
     if (picked || reduced) return
     return p.on('change', v => {
-      const i = Math.min(PILLARS.length - 1, Math.floor((v / 0.32) * PILLARS.length))
+      const i = Math.min(PILLARS.length - 1, Math.floor((v / 0.4) * PILLARS.length))
       setActive(a => (a === i ? a : i))
     })
   }, [p, picked, reduced])
@@ -121,12 +127,23 @@ export default function StageHero() {
     return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
   }, [reduced])
 
-  const price = (
-    <p className="stage-price">
-      <span><strong>$280</strong> one blood panel</span>
-      <span className="stage-price-or">or</span>
-      <span><strong>$99</strong>/month membership, two panels a year included</span>
-    </p>
+  // No prices on the homepage (Noah, 29 Sep): promote the app and membership.
+  const perks = (
+    <ul className="stage-perks">
+      <li><strong>In the Apex app</strong><span>Every marker tracked, test to test</span></li>
+      <li><strong>Members</strong><span>Two panels a year included, member rates after that</span></li>
+    </ul>
+  )
+
+  const who = (
+    <div className="stage-who" role="group" aria-label="Who is the test for?">
+      {(['male', 'female'] as Sex[]).map(s => (
+        <button key={s} type="button" onClick={() => setSex(s)} aria-pressed={sex === s} data-on={sex === s || undefined}>
+          <strong>{s === 'male' ? 'Men' : 'Women'}</strong>
+          <span>{s === 'male' ? 'Testosterone, energy, recovery' : 'Hormones, cycle, iron'}</span>
+        </button>
+      ))}
+    </div>
   )
 
   const pillar = PILLARS[active]
@@ -185,13 +202,6 @@ export default function StageHero() {
                 )
               })}
               </motion.div>
-              <div className="stage-sex" role="group" aria-label="Show figure for">
-                {(['male', 'female'] as Sex[]).map(s => (
-                  <button key={s} type="button" onClick={() => setSex(s)} aria-pressed={sex === s} data-on={sex === s || undefined}>
-                    {s === 'male' ? 'Men' : 'Women'}
-                  </button>
-                ))}
-              </div>
             </motion.div>
 
             {!reduced && (
@@ -221,27 +231,37 @@ export default function StageHero() {
             <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
               A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and a doctor builds your plan from them. No GP referral.
             </p>
-            {reduced && price}
+            {reduced && perks}
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
               <a href="#panel" className="stage-link">See what we measure</a>
             </div>
-            <p className="stage-caption hero-in" aria-live="polite" style={{ animationDelay: '560ms' }}>
-              {picked ? <>Your assessment will start with <strong>{pillar.label.toLowerCase()}</strong>.</> : <><strong>{pillar.label}:</strong> {pillar.markers[sex]}. Tap a system on the body to start there.</>}
-            </p>
+            {reduced && who}
           </motion.div>
+
+          {/* Copy W: who are we testing? The pick tells the rest of the story. */}
+          {!reduced && (
+            <motion.div className="stage-hero-copy stage-hero-copy-who" data-faded={!whoOn || undefined} style={{ opacity: copyW, y: copyWY }}>
+              <h2 className="stage-display">
+                Who are we<br /><span className="stage-muted">testing?</span>
+              </h2>
+              {who}
+              <p className="stage-caption" aria-live="polite">
+                {picked ? <>Your assessment will start with <strong>{pillar.label.toLowerCase()}</strong>.</> : <><strong>{pillar.label}:</strong> {pillar.markers[sex]}.</>}
+              </p>
+            </motion.div>
+          )}
 
           {/* Copy B: the doctor */}
           {!reduced && (
             <motion.div className="stage-hero-copy stage-hero-copy-b" style={{ opacity: copyB, y: copyBY }} aria-hidden="true">
               <h2 className="stage-display">
-                Your plan,<br /><span className="stage-muted">written by a doctor.</span>
+                {chose ? (sex === 'female' ? 'Her plan,' : 'His plan,') : 'Your plan,'}<br /><span className="stage-muted">written by a doctor.</span>
               </h2>
               <p className="stage-lead">
-                An AHPRA-registered doctor reads your panel with you on the call, decides what is suitable, and your plan arrives at your door.
+                An AHPRA-registered doctor reads {sex === 'female' ? 'your hormones, iron and metabolic markers' : 'your testosterone, metabolic and heart markers'} with you on the call, decides what is suitable, and your plan arrives at your door.
               </p>
-              {/* Function / Superpower: the price lands on the plan beat, clear of the hook. */}
-              {price}
+              {perks}
             </motion.div>
           )}
 
