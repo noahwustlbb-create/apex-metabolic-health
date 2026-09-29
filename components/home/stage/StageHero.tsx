@@ -127,11 +127,13 @@ export default function StageHero() {
     return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
   }, [reduced])
 
-  // No prices on the homepage (Noah, 29 Sep): promote the app and membership.
+  // No prices on the homepage (Noah, 29 Sep). Two hooks instead, both real
+  // portal features: the Apex score (progress you can watch, only in our
+  // app) and follow-up bloods booked for you (nothing to chase, nothing slips).
   const perks = (
     <ul className="stage-perks">
-      <li><strong>In the Apex app</strong><span>Every marker tracked, test to test</span></li>
-      <li><strong>Members</strong><span>Two panels a year included, member rates after that</span></li>
+      <li><em>Only in the Apex app</em><strong>Your Apex score</strong><span>One number from your whole panel. Watch it move every test.</span></li>
+      <li><em>Nothing to chase</em><strong>We book the follow-ups</strong><span>On a program, your next bloods are scheduled for you.</span></li>
     </ul>
   )
 
