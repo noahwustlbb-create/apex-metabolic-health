@@ -83,7 +83,11 @@ export default function StageHero() {
   const bodyY = useTransform(p, [0, 0.6], ['0%', '-3%'])
   const heartOpacity = useTransform(p, [0.44, 0.62], [0, 1])
   const heartScale = useTransform(p, [0.44, 0.8], [0.9, 1])
-  const heartRotate = useTransform(p, [0.44, 1], [-7, 2])
+  const heartRotate = useTransform(p, [0.44, 0.72, 1], [-16, 2, 5])
+  // The box spins in (Noah, 29 Sep): a scroll-linked turn in depth as it
+  // rises, then it keeps turning slowly under the doctor copy.
+  const heartSpin = useTransform(p, [0.44, 0.72, 1], [-70, 0, 18])
+  const heartRise = useTransform(p, [0.44, 0.7], ['18%', '0%'])
   const chips = useTransform(p, [0.34, 0.42], [1, 0])
   const chipsEvents = useTransform(p, v => (v > 0.4 ? 'none' : 'auto'))
   const copyA = useTransform(p, [0, 0.14, 0.2], [1, 1, 0])
@@ -207,7 +211,7 @@ export default function StageHero() {
             </motion.div>
 
             {!reduced && (
-              <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate }} aria-hidden="true">
+              <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate, rotateY: heartSpin, y: heartRise, transformPerspective: 1100 }} aria-hidden="true">
                 {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
                 <Image src="/3d/product/box-tall.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
                 <span className="stage-float stage-float-a">
