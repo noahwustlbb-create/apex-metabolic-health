@@ -88,6 +88,7 @@ const GOOGLE = [
   'https://www.googleadservices.com',
   'https://*.doubleclick.net',
   'https://*.google-analytics.com',
+  'https://analytics.google.com',
   'https://*.analytics.google.com',
   'https://pagead2.googlesyndication.com',
 ]
