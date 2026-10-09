@@ -101,7 +101,7 @@ const CSP = [
   "font-src 'self' data: https://fonts.gstatic.com",
   "img-src 'self' data: blob: https:",
   "media-src 'self' data: blob:",
-  ["connect-src 'self'", ...GOOGLE, ...GHL, ...POSTHOG, ...VERCEL_LIVE].join(' '),
+  ["connect-src 'self' https://app.apexmetabolichealth.com.au", ...GOOGLE, ...GHL, ...POSTHOG, ...VERCEL_LIVE].join(' '),
   [
     "frame-src 'self'",
     'https://www.googletagmanager.com',
