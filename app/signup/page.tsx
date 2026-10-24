@@ -4,6 +4,7 @@ import SignupForm from './SignupForm'
 export const metadata: Metadata = {
   title: 'Create Account',
   description: 'Create your Apex Metabolic Health account to get started.',
+  alternates: { canonical: '/signup' },
   robots: { index: false, follow: false },
 }
 

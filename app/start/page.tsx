@@ -5,6 +5,7 @@ import ShortAssessment from './ShortAssessment'
 export const metadata: Metadata = {
   title: 'Start your assessment',
   description: 'Answer a few quick questions and our clinical team will guide you to the right doctor-led treatment pathway.',
+  alternates: { canonical: '/start' },
   robots: { index: false, follow: false },
 }
 

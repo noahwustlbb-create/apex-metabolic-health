@@ -57,7 +57,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'Are your services legal and regulated?',
         answer:
-          'Yes. All medical services at Apex Metabolic Health are provided by AHPRA-registered medical practitioners. We operate in full compliance with Australian healthcare regulations, including TGA guidelines for the prescription and supply of medications.',
+          'Yes. All medical services at Apex Metabolic Health are provided by AHPRA-registered medical practitioners. Prescriptions are issued by your doctor and dispensed by an Australian pharmacy.',
       },
       {
         question: 'Do I need a referral from my GP?',
@@ -177,7 +177,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'Is Apex Metabolic Health a pharmacy?',
         answer:
-          'No. Apex Metabolic Health is a telehealth clinic. We do not dispense medications directly. Where treatment is clinically indicated, prescriptions are fulfilled through our TGA-compliant partner pharmacies or a pharmacy of your choosing.',
+          'No. Apex Metabolic Health is a telehealth clinic. We do not dispense medications directly. Where treatment is clinically indicated, prescriptions are fulfilled through our Australian partner pharmacy or a pharmacy of your choosing.',
       },
       {
         question: 'Are all practitioners at Apex doctors?',

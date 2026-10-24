@@ -33,7 +33,7 @@ const WHAT = [
   {
     n: '03',
     title: 'Personalised protocol',
-    body: 'Where clinically appropriate, a tailored treatment protocol is prepared through our TGA-compliant compounding pharmacy partner.',
+    body: 'Where clinically appropriate, a tailored treatment protocol is prepared through our Australian compounding pharmacy partner.',
   },
   {
     n: '04',
@@ -50,7 +50,7 @@ const PROCESS = [
 ]
 
 const TRUST = [
-  { stat: '32+', label: 'biomarkers tested' },
+  { stat: '23+', label: 'biomarkers tested' },
   { stat: 'AHPRA', label: 'registered doctors' },
   { stat: '< 48h', label: 'referral issued' },
   { stat: '4,000+', label: 'collection centres' },

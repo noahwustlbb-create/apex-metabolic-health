@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Order Blood Tests',
   description: 'Order doctor-reviewed blood panels online. Results in about 48 hours at accredited collection centres across Australia.',
   // Logged-in reorder handoff, not a landing page (behaviour audit 24 Oct).
+  alternates: { canonical: '/order-bloods' },
   robots: { index: false, follow: true },
 }
 

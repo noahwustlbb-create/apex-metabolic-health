@@ -44,7 +44,7 @@ const PATHS: Path[] = [
       { k: 'AHI fee and escript fee', v: 'Included' },
     ],
     total: { k: 'First 3 months', v: '$595' },
-    then: 'Plus the medication at cost price. Follow-up panels are $139 for members.',
+    then: 'Assumes you join before your first panel: member rates apply from the day you join. Plus the medication at cost price. Follow-up panels are $139 for members.',
   },
 ]
 

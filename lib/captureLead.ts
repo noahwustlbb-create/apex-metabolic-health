@@ -85,4 +85,23 @@ export async function captureLead(lead: LeadPayload): Promise<void> {
   }
   // Routing context only: never the lead's identity fields.
   track('lead_captured', { source: lead.source })
+  markLeadConversion(lead.source)
+}
+
+/**
+ * The one place a lead conversion is signalled to Google: only after a lead
+ * was actually delivered, never on page view. Google Ads' "Submit lead form"
+ * conversion must be keyed to this event (GA4 event `generate_lead`, or the
+ * GTM custom event `apex_lead_captured`), not to a /start page-load URL rule,
+ * which counted every visit as a lead (live QA 24 Oct 2026).
+ */
+function markLeadConversion(source: string) {
+  try {
+    const w = window as unknown as { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }
+    w.dataLayer = w.dataLayer || []
+    w.dataLayer.push({ event: 'apex_lead_captured', lead_source: source })
+    if (typeof w.gtag === 'function') w.gtag('event', 'generate_lead', { lead_source: source })
+  } catch {
+    /* tracking must never break a form */
+  }
 }

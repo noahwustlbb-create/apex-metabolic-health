@@ -189,7 +189,7 @@ function MembershipComparison() {
           className="text-center text-[12px] leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520, margin: '20px auto 0' }}
         >
-          Retail pharmacies usually mark medication up. Our partner pharmacy does not, but each order carries admin, infrastructure and handling fees. Membership includes those fees and the escript fee. Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
+          Retail pharmacies usually mark medication up. Our partner pharmacy does not, but each order carries admin, infrastructure and handling fees. Membership includes those fees and the escript fee. Join from your account at any time, including before your first consult: member rates apply to anything you book after you join. No lock-in contracts.
         </motion.p>
       </div>
     </section>
@@ -238,7 +238,7 @@ const PATHWAYS: Pathway[] = [
       },
       {
         label: 'Ongoing Protocol',
-        body: 'Apex Membership activates post-consultation, where clinically appropriate. Your protocol evolves with your results, reviewed every cycle.',
+        body: 'Membership starts the day you join, so the member rates above apply from your first panel and consult. Your protocol evolves with your results, reviewed every cycle.',
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
@@ -312,7 +312,7 @@ const PATHWAYS: Pathway[] = [
       },
       {
         label: 'Ongoing Protocol',
-        body: 'Apex Membership activates post-consultation where clinically appropriate.',
+        body: 'Membership starts the day you join, so the member rates above apply from your first panel and consult.',
         price: '$99 /mo',
         priceNote: 'No lock-in contracts',
         includes: [
@@ -718,7 +718,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'When does membership activate?',
-    a: 'Membership activates after your initial consultation, where clinically appropriate. You only pay for what your protocol requires.',
+    a: 'The day you join, from your account. You can join before your first blood panel and consult, and member rates apply to anything you book after joining. Pause or cancel from your account.',
   },
   {
     q: 'Are there any hidden fees?',

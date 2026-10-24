@@ -396,7 +396,7 @@ export const TEMPLATES: Record<string, Template> = {
     subject: () => 'Your prescription has been sent for processing',
     preheader: () => 'Your partner pharmacy has received it.',
     heading: d => `${Hi(d)}Your prescription has been sent.`,
-    intro: () => 'Your doctor\'s prescription has been securely transmitted to our TGA-compliant partner pharmacy for processing.',
+    intro: () => 'Your doctor\'s prescription has been securely transmitted to our Australian partner pharmacy for processing.',
     steps: () => [
       'The pharmacy completes its own independent checks',
       'They may contact you directly if they need to confirm anything',

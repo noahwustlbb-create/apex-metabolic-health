@@ -145,7 +145,7 @@ export default function DoctorCard() {
             >
               {[
                 ['No overseas prescribers.', 'Every script is written by a doctor registered to practise in Australia.'],
-                ['No grey-market pharmacies.', 'Medication is compounded and dispensed by a TGA-compliant Australian pharmacy.'],
+                ['No grey-market pharmacies.', 'Medication is compounded and dispensed by an Australian pharmacy.'],
                 ['No unaccredited diagnostics.', 'Every blood panel runs through NATA-accredited pathology.'],
               ].map(([lead, rest]) => (
                 <li key={lead} className="py-4 flex items-start gap-3" style={{ borderBottom: '1px solid var(--border)' }}>

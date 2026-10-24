@@ -23,7 +23,7 @@ const STEPS = [
   {
     number: '04',
     title: 'Your personalised protocol',
-    description: 'You receive a treatment protocol tailored to your biology. Prescriptions coordinated through our TGA-compliant compounding pharmacy where indicated.',
+    description: 'You receive a treatment protocol tailored to your biology. Prescriptions coordinated through our Australian compounding pharmacy where indicated.',
   },
   {
     number: '05',

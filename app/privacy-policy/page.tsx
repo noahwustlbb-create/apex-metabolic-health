@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
               <p>We may disclose your personal and health information to:</p>
               <ul className="list-disc pl-5 mt-3 space-y-1">
                 <li>Our AHPRA-registered medical practitioners providing your care</li>
-                <li>Our TGA-compliant compounding pharmacy partner for medication fulfilment</li>
+                <li>Our Australian compounding pharmacy partner for medication fulfilment</li>
                 <li>Accredited pathology collection centres and laboratory providers</li>
                 <li>Queensland Health&apos;s QScript system, where required by law</li>
                 <li>Third-party service providers (e.g., secure form hosting, email delivery) under confidentiality obligations</li>

@@ -458,7 +458,7 @@ const PROGRAM_FAQS = [
   },
   {
     q: 'Is this legal in Australia?',
-    a: 'Yes. We operate under Australian law with TGA-compliant prescribing and a registered compounding pharmacy partner operating under TGA GMP standards.',
+    a: 'Yes. Every doctor is AHPRA-registered, prescriptions follow Australian prescribing rules, and anything prescribed is dispensed by an Australian compounding pharmacy partner.',
   },
 ]
 

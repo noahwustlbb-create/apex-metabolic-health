@@ -109,6 +109,11 @@ const nextConfig = {
         permanent: false,
       })),
       ...RETIRED_QUIZZES.map(([source, destination]) => ({ source, destination, permanent: true })),
+      // /learn listed six articles that were never written (live QA 24 Oct 2026).
+      // The page is gone; old links land on a real page. Temporary, so the
+      // path is free again when real articles are published.
+      { source: '/learn', destination: '/how-it-works', permanent: false },
+      { source: '/learn/:slug*', destination: '/how-it-works', permanent: false },
       // Existing patients reorder inside the portal.
       { source: '/intake/repeat-order', destination: PORTAL_LOGIN, permanent: false },
       ...AD_LANDING_ROUTES.map(([source, destination]) => ({
