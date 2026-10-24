@@ -93,7 +93,7 @@ const PORTAL_FEATURES = [
       </svg>
     ),
     title: 'Consultation booking',
-    body: 'Book, reschedule, or cancel consultations inside your portal. Telehealth links are sent automatically.',
+    body: 'Book consultations from your portal. Cancel or reschedule up to 4 hours before your appointment. Telehealth links are sent automatically.',
   },
   {
     icon: (

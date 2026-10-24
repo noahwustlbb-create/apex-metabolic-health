@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion'
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
+import { motion, useScroll, useSpring } from 'framer-motion'
 
 // A one-pixel-and-a-half line along the top that fills as the page is read.
 // Replaces the browser's scrollbar as the sense of "where am I": it lives
@@ -8,7 +9,7 @@ import { motion, useScroll, useSpring, useReducedMotion } from 'framer-motion'
 
 export default function ScrollProgress() {
   const { scrollYProgress } = useScroll()
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.3 })
   return (
     <motion.div
@@ -18,8 +19,7 @@ export default function ScrollProgress() {
         transformOrigin: '0 50%',
         scaleX: reduced ? scrollYProgress : scaleX,
         background: 'linear-gradient(90deg, var(--blue), #1d4fd8)',
-        pointerEvents: 'none',
-      }}
+        pointerEvents: 'none' }}
     />
   )
 }

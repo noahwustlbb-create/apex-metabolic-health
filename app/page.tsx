@@ -13,6 +13,7 @@ import StageSteps from '@/components/home/stage/StageSteps'
 import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import Footer from '@/components/Footer'
+import Objections from '@/components/Objections'
 
 // Story, rebuilt to the BioTrack bar (Noah, 2026-09-27): HOOK (ice stage,
 // glass body with the four pillars, handing over to the heart) → PROVE
@@ -20,7 +21,8 @@ import Footer from '@/components/Footer'
 // band, sample data) → EXPLAIN (pathway) → PROVE (panel) → TRUST (doctor)
 // → ANSWER (FAQ) → INVITE (ice stage again). Renders: public/3d, made in
 // Higgsfield (jobs in Clients/Apex/research/hero-2026-09-27/HANDOFF.md).
-// No prices on the homepage (Noah, 2026-09-27); they live on /pricing.
+// 24 Oct 2026 fundamentals plan (Noah: Go) supersedes 27 Sep: the hero carries
+// one price line; the detail lives on /pricing.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -38,13 +40,14 @@ export default function Home() {
       <ScrollProgress />
       <Nav />
       <StageToneProvider>
-      <main id="main-content">
+      <main id="main-content" className="home-main">
         <StageHero />
         <StageStartTiles />
         <StageClarity />
         <StageSteps />
         <StagePortal />
         <StageIncluded />
+        <Objections />
         <PanelMarkers />
         <DoctorCard />
         <FAQSection />

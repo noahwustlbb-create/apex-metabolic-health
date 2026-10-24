@@ -1,8 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useEffect, useRef, useState } from 'react'
 import Image from '@/components/audience/Img'
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -22,7 +23,7 @@ export const STEPS = [
  * with the card in view.
  */
 export default function Pathway() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const [active, setActive] = useState(0)
   const [seen, setSeen] = useState<boolean[]>(() => STEPS.map(() => !!reduced))
   const refs = useRef<(HTMLLIElement | null)[]>([])

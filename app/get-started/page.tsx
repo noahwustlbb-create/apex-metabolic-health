@@ -144,9 +144,9 @@ const ALL_PATHWAYS = [
     ),
   },
   {
-    tag: 'Weight, Peptides & More',
+    tag: 'Weight, Recovery & More',
     title: 'General Check Up',
-    desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and peptide consultation programs.',
+    desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and general consultations.',
     href: '/intake/general-consult',
     cta: 'Book General Check Up',
     featured: false,

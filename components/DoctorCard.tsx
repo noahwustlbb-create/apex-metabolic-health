@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -10,6 +11,15 @@ const LEGITSCRIPT_URL = 'https://www.legitscript.com/websites/?checker_keywords=
 const ABN = '91 682 876 884'
 const ABN_URL = 'https://abr.business.gov.au/ABN/View?abn=91682876884'
 const NATA_URL = 'https://nata.com.au/'
+
+// NOAH-OWED SLOT (fundamentals plan, 24 Oct 2026; multi-doctor 24 Oct): the
+// doctors who consult for Apex, each with their entry on the AHPRA public
+// register. Apex has more than one doctor and no medical director, so this is
+// a list and there is no title field. Leave it empty until Noah confirms each
+// doctor has agreed to be named; nothing renders while it is empty.
+// Shape: { name: 'Dr ...', ahpra: 'MED000...', registerUrl: 'https://www.ahpra.gov.au/...' }
+interface NamedDoctor { name: string; ahpra: string; registerUrl: string }
+const OUR_DOCTORS: NamedDoctor[] = []
 
 /**
  * The verification ledger. Every row is an auditable claim paired with the
@@ -38,42 +48,37 @@ const LEDGER: LedgerRow[] = [
     detail: 'Every prescriber holds current Australian medical registration',
     verifyLabel: 'Search the public register',
     destination: 'opens ahpra.gov.au',
-    href: AHPRA_URL,
-  },
+    href: AHPRA_URL },
   {
     claim: 'LegitScript-certified healthcare merchant',
     detail: 'apexmetabolichealth.com.au',
     verifyLabel: 'Verify certification',
     destination: 'opens legitscript.com',
-    href: LEGITSCRIPT_URL,
-  },
+    href: LEGITSCRIPT_URL },
   {
     claim: 'Registered Australian company',
     detail: `ABN ${ABN}`,
     verifyLabel: 'Look up the ABN',
     destination: 'opens abr.business.gov.au',
-    href: ABN_URL,
-  },
+    href: ABN_URL },
   {
     claim: 'NATA-accredited pathology',
     detail: 'Bloods collected and analysed by accredited laboratories',
     verifyLabel: 'About NATA accreditation',
     destination: 'opens nata.com.au',
-    href: NATA_URL,
-  },
+    href: NATA_URL },
   ...(REVIEWS_LIVE
     ? [{
         claim: 'Patient reviews, published unedited',
         detail: 'Google Business Profile',
         verifyLabel: 'Read patient reviews',
         destination: 'opens google.com',
-        href: GOOGLE_REVIEWS_URL,
-      }]
+        href: GOOGLE_REVIEWS_URL }]
     : []),
 ]
 
 export default function DoctorCard() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -111,6 +116,22 @@ export default function DoctorCard() {
               through an accredited lab. You don&apos;t have to trust any of that: each
               claim on the right links to the body that regulates it.
             </motion.p>
+            {OUR_DOCTORS.length > 0 && (
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Our doctors</h3>
+                <ul className="list-none p-0 m-0" style={{ borderTop: '1px solid var(--border)' }}>
+                  {OUR_DOCTORS.map(d => (
+                    <li key={d.ahpra} className="py-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1" style={{ borderBottom: '1px solid var(--border)' }}>
+                      <span className="text-base" style={{ color: 'var(--text-primary)' }}>
+                        <strong>{d.name}</strong>{' '}
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>AHPRA {d.ahpra}</span>
+                      </span>
+                      <a href={d.registerUrl} target="_blank" rel="noopener noreferrer" className="link-draw text-sm inline-flex items-center" style={{ color: 'var(--color-accent-fg)', minHeight: 44 }}>Check the AHPRA register</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* No individual clinician on the brand. The trust device is the
                 absence list: the three things a legitimate clinic never does. */}
@@ -120,7 +141,7 @@ export default function DoctorCard() {
               transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.24, ease }}
               className="list-none p-0 m-0"
               style={{ borderTop: '1px solid var(--border)' }}
-              aria-label="What Apex does not do"
+              aria-label="What Apex does not do" data-phone-hide=""
             >
               {[
                 ['No overseas prescribers.', 'Every script is written by a doctor registered to practise in Australia.'],

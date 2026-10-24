@@ -1,9 +1,10 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
 import { useStageArt } from './StageTone'
-import { motion, motionValue, useReducedMotion, useTransform, type MotionValue } from 'framer-motion'
+import { motion, motionValue, useTransform, type MotionValue } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 
@@ -47,7 +48,7 @@ function Gauge({ pct, draw }: { pct: number; draw?: MotionValue<number> }) {
  */
 export default function StagePortal() {
   const art = useStageArt()
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const p = useSectionProgress(ref, 'cross')
   const deviceY = useTransform(p, [0.05, 0.4], [120, 0])
@@ -65,8 +66,7 @@ export default function StagePortal() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     opacity: useTransform(p, [0.42 + i * 0.03, 0.48 + i * 0.03], [0, 1]),
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    x: useTransform(p, [0.42 + i * 0.03, 0.48 + i * 0.03], [14, 0]),
-  }))
+    x: useTransform(p, [0.42 + i * 0.03, 0.48 + i * 0.03], [14, 0]) }))
 
   return (
     <section ref={ref} id="portal" className="stage-night" aria-labelledby="portal-title">

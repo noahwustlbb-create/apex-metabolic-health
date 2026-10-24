@@ -28,7 +28,7 @@ export default function Footer() {
       <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(72,144,247,0.2), transparent)' }} aria-hidden="true" />
 
       <div className="container-tight py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-12 mb-14 footer-grid">
 
           {/* Brand column */}
           <div className="lg:col-span-2">
@@ -41,8 +41,8 @@ export default function Footer() {
             </p>
 
             <div className="flex flex-wrap gap-2 mb-6">
-              {['AHPRA Registered', 'TGA Compliant', '100% Online'].map((badge) => (
-                <span key={badge} className="text-[10px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5"
+              {['AHPRA-registered doctors', '100% online'].map((badge) => (
+                <span key={badge} className="text-[12px] font-semibold tracking-[0.1em] uppercase px-3 py-1.5"
                   style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 0 }}>
                   {badge}
                 </span>
@@ -111,7 +111,7 @@ export default function Footer() {
 
           {/* Programs */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
+            <h3 className="text-[12px] font-semibold tracking-[0.2em] uppercase mb-5" style={{ color: BLUE }}>
               Treatments
             </h3>
             <ul className="space-y-2.5">
@@ -130,7 +130,7 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-5" style={{ color: BLUE }}>
+            <h3 className="text-[12px] font-semibold tracking-[0.2em] uppercase mb-5" style={{ color: BLUE }}>
               Company
             </h3>
             <ul className="space-y-2.5">

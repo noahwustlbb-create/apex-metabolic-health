@@ -1,8 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import StageCta from './StageCta'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -10,7 +11,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 // Hims sells its support as loudly as its treatment. Every line here is
 // something Apex already does (see /how-it-works, /membership, the portal).
 const ITEMS = [
-  { k: '7',   u: 'days',   t: 'A doctor, seven days a week', b: 'Phone or video with an AHPRA-registered doctor.' },
+  { k: '6',   u: 'days',   t: 'A doctor, Monday to Saturday', b: 'Phone or video with an AHPRA-registered doctor.' },
   { k: '1',   u: 'day',    t: 'Messages answered',          b: 'Within one business day. Members usually the same day.' },
   { k: '48',  u: 'hours',  t: 'Most results back',          b: '4,000+ accredited collection centres, Australia-wide.' },
   { k: '90',  u: 'days',   t: 'Reviews built in',           b: 'Repeat bloods and a doctor review about every three months.' },
@@ -19,7 +20,7 @@ const ITEMS = [
 ]
 
 export default function StageIncluded() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-12% 0px' })
   return (

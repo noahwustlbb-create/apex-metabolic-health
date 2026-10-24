@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Image from '@/components/audience/Img'
-import { useStageArt, useStageTone } from './StageTone'
+import NextImage from 'next/image'
+import Link from 'next/link'
+import { useStageTone } from './StageTone'
 import { motion, useReducedMotion, useTransform, useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
@@ -60,13 +61,29 @@ const FIG_ASPECT = 1647 / 2200
  * the body over to the heart and the headline over to the doctor.
  */
 export default function StageHero() {
-  const art = useStageArt()
-  const glow = useStageTone() === 'red' ? 'red' : 'Apex blue'
+  const tone = useStageTone()
+  const glow = tone === 'red' ? 'red' : 'Apex blue'
+  // Fixed paths per audience (24 Oct): the server cannot know the audience, so
+  // both slots ship and CSS shows the one html[data-audience] asks for. Lazy
+  // loading means the hidden slot is never downloaded (no man on ?for=women).
   const FIG = {
-    male:   { src: art('body-male'),   alt: `Dark glass figure of a man, blood vessels lit in ${glow} from the heart outward` },
-    female: { src: art('body-female'), alt: `Dark glass figure of a woman, blood vessels lit in ${glow} from the heart outward` },
+    male:   { src: `/3d/${tone === 'red' ? 'red/' : ''}body-male.jpg`, alt: `Dark glass figure of a man, blood vessels lit in ${glow} from the heart outward` },
+    female: { src: '/3d/pink/body-female.jpg', alt: 'Dark glass figure of a woman, blood vessels lit in rose from the heart outward' },
   }
-  const reduced = useReducedMotion()
+  // React #418 (24 Oct): useReducedMotion is null on the server and true on a
+  // reduced-motion client, so the first render must ignore it. Phones get the
+  // still hero too: motion never holds the offer hostage on a small screen.
+  const prefersReduced = useReducedMotion()
+  const [mounted, setMounted] = useState(false)
+  const [phone, setPhone] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+    const mq = window.matchMedia('(max-width: 899px)')
+    const on = () => setPhone(mq.matches)
+    on(); mq.addEventListener('change', on)
+    return () => mq.removeEventListener('change', on)
+  }, [])
+  const reduced = mounted && (!!prefersReduced || phone)
   const ref = useRef<HTMLElement>(null)
   // The Men / Women switch is the whole site's switch (components/audience).
   const { audience, setAudience } = useAudience()
@@ -165,15 +182,15 @@ export default function StageHero() {
             <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { opacity: bodyOpacity, scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
               <div className="stage-fig-media" ref={mediaRef}>
               {(['male', 'female'] as Sex[]).map(s => (
-                <Image
+                <NextImage
                   key={s}
                   src={FIG[s].src}
                   alt={s === sex ? FIG[s].alt : ''}
                   fill
-                  priority={s === 'male'}
+                  loading="lazy"
+                  fetchPriority="high"
                   sizes="(min-width: 900px) 46vw, 92vw"
-                  className="stage-fig-img"
-                  style={{ opacity: s === sex ? 1 : 0 }}
+                  className={`stage-fig-img ${s === 'male' ? 'for-men' : 'for-women'}`}
                 />
               ))}
               <span className="stage-pulse" aria-hidden="true" />
@@ -213,7 +230,7 @@ export default function StageHero() {
             {!reduced && (
               <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate, rotateY: heartSpin, y: heartRise, transformPerspective: 1100 }} aria-hidden="true">
                 {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
-                <Image src="/3d/product/box-tall.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
+                <NextImage src="/3d/product/box-tall.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
                 <span className="stage-float stage-float-a">
                   <span className="stage-float-k">Starts with</span>
                   <span className="stage-float-v">One blood panel, 23+ markers</span>
@@ -229,20 +246,32 @@ export default function StageHero() {
           {/* Copy A: the hook */}
           <motion.div className="stage-hero-copy" data-faded={copyFaded || undefined} style={reduced ? undefined : { opacity: copyA, y: copyAY }}>
             <p className="stage-kicker hero-in" style={{ animationDelay: '120ms' }}>
-              <span className="stage-kicker-dot" aria-hidden="true" /> AHPRA-registered doctors · Australia-wide
+              <span className="stage-kicker-dot" aria-hidden="true" /> <span><span className="for-men">Australian adults 18+</span><span className="for-women">Australian women 18+</span> · AHPRA-registered doctors</span>
             </p>
             <h1 className="stage-display hero-in" style={{ animationDelay: '200ms' }}>
               Fine on paper.<br /><span className="stage-muted">Flat in real life.</span>
             </h1>
             <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
-              A standard panel looks for disease. Ours reads 23+ markers for how you actually function, and a doctor builds your plan from them. No GP referral.
+              <span className="for-men">One blood panel, 23+ markers, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
+              <span className="for-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
             </p>
-            {reduced && perks}
+            {/* Price line, consult first (Noah, 24 Oct 2026: bloods are not the best hook).
+                "From" covers the hormone consult, which costs more. Mirrored on the /start
+                match screen (app/start/ShortAssessment.tsx).
+                Alternative, bloods first (the line before 24 Oct). To switch, swap it in:
+                  <span>Bloods from <strong>$199</strong></span><span>Doctor consult from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+                Held back: Noah's "$99 therapeutic peptide consults". TGA risk: it advertises a
+                prescription-medicine therapy to the public, and $99 is the member price only.
+                Do not ship it without a compliance decision. */}
+            <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
+              <span className="stage-price-lead">Doctor consults from <strong>$99</strong> for members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+            </p>
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
-              <a href="#panel" className="stage-link">See what we measure</a>
+              <Link href="/pricing" className="stage-link">See full pricing</Link>
             </div>
-            {reduced && who}
+            <div className="stage-hero-perks-still">{perks}</div>
+            <div className="stage-hero-who-still">{who}</div>
           </motion.div>
 
           {/* Copy W: who are we testing? The pick tells the rest of the story. */}

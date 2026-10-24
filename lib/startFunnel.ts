@@ -12,12 +12,14 @@
 // A step the user has to tap through is a step, whatever we put on it.
 
 export type StartPhase =
-  | 'q0' | 'pick' | 'q1' | 'place' | 'exp' | 'q2' | 'q3' | 'bloods' | 'source' | 'privacy'
+  | 'q0' | 'pick' | 'q1' | 'email' | 'place' | 'exp' | 'q2' | 'q3' | 'bloods' | 'source' | 'privacy'
 
 /** The full journey, in order. `pick` is answered by the hero chips upstream. */
 export const START_PHASES: StartPhase[] = [
-  'q0', 'pick', 'q1', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy',
+  'q0', 'pick', 'q1', 'email', 'place', 'exp', 'q2', 'q3', 'bloods', 'source', 'privacy',
 ]
+// 'email' (24 Oct 2026): progress is saved after the third question, not at the
+// end, so a visitor who leaves mid-way can still be followed up. Skippable.
 
 /** Total steps, identical whether or not the visitor entered from a hero chip. */
 export const START_TOTAL_STEPS = START_PHASES.length

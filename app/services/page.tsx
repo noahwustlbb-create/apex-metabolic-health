@@ -138,7 +138,7 @@ const PROGRAMS = [
   {
     category: 'Diagnostic Pathology',
     name: 'Comprehensive Blood Tests',
-    tagline: '30+ markers: hormones, metabolism, inflammation, nutrition. Doctor-issued, doctor-reviewed, doctor-explained.',
+    tagline: '23+ markers: hormones, metabolism, inflammation, nutrition. Doctor-issued, doctor-reviewed, doctor-explained.',
     tag: null,
     accent: '#f97316',
     accentBg: 'rgba(249,115,22,0.12)',

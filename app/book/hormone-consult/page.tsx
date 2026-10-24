@@ -22,7 +22,7 @@ const WHO = [
 const WHAT = [
   {
     n: '01',
-    title: 'Full hormone panel: 32+ markers',
+    title: 'Full hormone panel: 23+ markers',
     body: 'Total and free testosterone, SHBG, LH & FSH, oestradiol, cortisol, full thyroid, DHEA-S, prolactin, IGF-1, Vitamin D, hsCRP. Not a 3-marker GP panel.',
   },
   {
@@ -102,7 +102,7 @@ export default function HormoneConsultBookPage() {
                 </span>
               </h1>
               <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 560 }}>
-                Standard GP panels miss the markers that matter. Our hormone consultation tests 32+ biomarkers interpreted by doctors who specialise in exactly this. Where treatment is warranted, it starts.
+                Standard GP panels miss the markers that matter. Our hormone consultation tests 23+ biomarkers interpreted by doctors who specialise in exactly this. Where treatment is warranted, it starts.
               </p>
 
               {/* Stats */}

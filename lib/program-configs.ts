@@ -141,7 +141,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
     { title: 'Appetite signalling', body: 'Hormonal imbalances affect the signals your brain receives about hunger and satiety. Clinical protocols can correct these pathways.' },
     { title: 'Insulin sensitivity', body: 'Poor insulin sensitivity makes fat storage more efficient and fat burning harder. Identified through blood testing and addressable through targeted treatment.' },
     { title: 'Metabolic rate', body: 'Thyroid function, testosterone, and cortisol all influence your resting metabolic rate. Suboptimal levels slow fat oxidation even at a calorie deficit.' },
-    { title: 'Body composition', body: 'True medical weight management prioritises fat loss while protecting muscle. We track composition markers, not just weight on a scale.' },
+    { title: 'Body composition', body: 'Weight on a scale is only one number. We track the markers that sit behind body composition, and your doctor reviews them with you.' },
   ],
   mechanismImage: '/editorial/molecular.webp',
 
@@ -152,7 +152,7 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
   ],
 
   faqs: [
-    { q: 'Will you just prescribe weight loss injections?', a: 'No. Treatment is only prescribed where clinically appropriate based on your blood results, medical history, and clinical assessment. We don\'t name or discuss specific medications on this website in compliance with TGA guidelines.' },
+    { q: 'Will you just prescribe something for weight loss?', a: 'No. Treatment is only prescribed where clinically appropriate based on your blood results, medical history, and clinical assessment. We don\'t name or discuss specific medications on this website in compliance with TGA guidelines.' },
     { q: 'What if I\'ve tried everything before?', a: 'That\'s exactly who this program is designed for. Most people who haven\'t responded to lifestyle changes have at least one unidentified metabolic or hormonal driver. We investigate those properly.' },
     ...SHARED_FAQS,
   ],
@@ -201,7 +201,7 @@ export const performancePlusConfig: ProgramPageConfig = {
   mechanismBody: 'Performance is the output of multiple biological systems working together. We assess all of them.',
   mechanismFeatures: [
     { title: 'Hormonal optimisation', body: 'Testosterone, IGF-1, and cortisol ratios directly determine your body\'s capacity to build, recover, and adapt.' },
-    { title: 'Recovery enhancement', body: 'Clinical protocols target the biological pathways that govern muscle protein synthesis, inflammation resolution, and tissue repair.' },
+    { title: 'Recovery markers', body: 'We test the hormonal and inflammatory markers involved in muscle repair and recovery, so your doctor can see what may be holding you back.' },
     { title: 'Energy system support', body: 'Mitochondrial efficiency, nutrient partitioning, and metabolic rate all influence sustainable training performance and output quality.' },
     { title: 'Nutritional biomarkers', body: 'Deficiencies in key micronutrients (B12, D, ferritin, zinc) significantly impair performance even when everything else is dialled in.' },
   ],
@@ -329,7 +329,7 @@ export const injuryRepairConfig: ProgramPageConfig = {
   mechanismHeadline: 'Why clinical recovery protocols work.',
   mechanismBody: 'The body\'s repair capacity is not fixed. It\'s determined by biological conditions that can be assessed, optimised, and supported.',
   mechanismFeatures: [
-    { title: 'Tissue repair signalling', body: 'Growth factors and peptide signalling pathways govern the rate and quality of soft tissue repair. Clinical protocols can modulate these pathways.' },
+    { title: 'Tissue repair signalling', body: 'Hormones, inflammation and nutrient status all play a part in how soft tissue repairs. We test for them so your doctor can see what is going on.' },
     { title: 'Inflammatory regulation', body: 'Chronic low-grade inflammation impedes healing and perpetuates pain. Identifying and addressing the inflammatory driver is often the missing step.' },
     { title: 'Nutritional support', body: 'Collagen synthesis requires specific nutrients: vitamin C, zinc, glycine, proline. Deficiencies directly slow healing timelines.' },
     { title: 'Hormonal environment', body: 'Testosterone and growth hormone are anabolic hormones that influence protein synthesis and tissue regeneration. Suboptimal levels impair recovery.' },
@@ -391,7 +391,7 @@ export const longevityConfig: ProgramPageConfig = {
   mechanismHeadline: 'The hallmarks of ageing that medicine can address.',
   mechanismBody: 'Modern longevity science has identified the biological processes that drive cellular ageing. Several of these are now clinically addressable.',
   mechanismFeatures: [
-    { title: 'Hormonal decline', body: 'Testosterone, DHEA, and growth hormone decline predictably with age. Suboptimal levels accelerate metabolic ageing and reduce vitality years before symptoms appear.' },
+    { title: 'Hormonal decline', body: 'Testosterone, DHEA, and growth hormone decline predictably with age. Testing shows where your levels sit today, so changes can be tracked over time.' },
     { title: 'Chronic inflammation', body: '"Inflammaging", chronic low-grade inflammation, is now understood as a primary driver of age-related disease. Blood markers can identify it years before clinical presentation.' },
     { title: 'Metabolic function', body: 'Insulin sensitivity, glucose metabolism, and lipid handling all deteriorate with age. Each is measurable and, where appropriate, clinically modifiable.' },
     { title: 'Cellular repair capacity', body: 'DNA repair, mitochondrial function, and autophagic processes decline with age. Clinical interventions can support these pathways.' },
@@ -425,7 +425,7 @@ export const pathologyConfig: ProgramPageConfig = {
 
   headline: 'Know your numbers.',
   headlineAccent: 'All of them.',
-  heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 30+ markers that actually tell you where you stand.',
+  heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 23+ markers that actually tell you where you stand.',
   heroBullets: [
     '30+ clinically relevant blood markers',
     'AHPRA-registered doctor review',
@@ -588,7 +588,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
   mechanismFeatures: [
     { title: 'Collagen synthesis', body: 'Collagen production is regulated by hormones and nutrition. Growth factors and key nutrients directly influence the rate of new collagen formation.' },
     { title: 'Cellular turnover', body: 'The rate at which skin cells renew is influenced by metabolic function, thyroid status, and growth factor signalling, all assessable through blood testing.' },
-    { title: 'Inflammatory control', body: 'Chronic inflammation accelerates skin ageing and drives conditions like adult acne. Identifying and reducing inflammatory load improves skin quality from the inside out.' },
+    { title: 'Inflammatory control', body: 'Chronic inflammation accelerates skin ageing and drives conditions like adult acne. We test inflammatory markers so your doctor can see whether they are part of the picture.' },
     { title: 'Hydration and barrier function', body: 'Hormonal influences on skin hydration and lipid production are significant, particularly testosterone and DHEA levels in both men and women.' },
   ],
   mechanismImage: '/editorial/molecular.webp',

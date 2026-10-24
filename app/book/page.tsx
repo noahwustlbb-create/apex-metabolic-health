@@ -18,7 +18,7 @@ const PROGRAMS = [
     icon: <svg viewBox="0 0 22 22" fill="none" className="w-5 h-5"><circle cx="11" cy="11" r="9" stroke="currentColor" strokeWidth="1.4" /><path d="M11 7v4l3 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /><path d="M8 5.5L11 3l3 2.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" /></svg> },
   { id: 'sexual',    name: 'Sexual Health',           sub: 'Libido, ED & performance',           href: '/intake/general-consult', color: '#e879f9',
     icon: <svg viewBox="0 0 22 22" fill="none" className="w-5 h-5"><path d="M11 19c-4 0-7-3-7-7 0-2.5 1.5-5 4-6.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /><path d="M11 19c4 0 7-3 7-7 0-2.5-1.5-5-4-6.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /><path d="M11 19V9M11 9l-3-3M11 9l3-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg> },
-  { id: 'peptides',  name: 'Peptide Therapy',         sub: 'Recovery, repair & performance',     href: '/intake/general-consult', color: '#34d399',
+  { id: 'peptides',  name: 'Recovery & Repair',       sub: 'Injury, training load & recovery',     href: '/intake/general-consult', color: '#34d399',
     icon: <svg viewBox="0 0 22 22" fill="none" className="w-5 h-5"><path d="M6 16l3-5 3 3 3-7" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /><circle cx="16" cy="7" r="1.5" stroke="currentColor" strokeWidth="1.2" /><circle cx="6" cy="16" r="1.5" stroke="currentColor" strokeWidth="1.2" /></svg> },
   { id: 'weight',    name: 'Weight Loss',             sub: 'Medical, doctor-supervised',         href: '/intake/general-consult', color: '#fb923c',
     icon: <svg viewBox="0 0 22 22" fill="none" className="w-5 h-5"><path d="M5 11h12M11 5v12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" /><circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="1.2" /></svg> },
@@ -165,7 +165,7 @@ function BookingFlow() {
                       <span style={{ color: prog.color }}>{prog.icon}</span>
                       <div>
                         <p className="text-sm font-semibold leading-tight" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{prog.name}</p>
-                        <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--text-secondary)' }}>{prog.sub}</p>
+                        <p className="text-[12px] mt-0.5 leading-snug" style={{ color: 'var(--text-secondary)' }}>{prog.sub}</p>
                       </div>
                     </motion.button>
                   ))}
@@ -249,7 +249,7 @@ function BookingFlow() {
             {step === 4 && (
               <motion.div key="s4" custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.32, ease }}>
                 <div className="text-center mb-10">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider uppercase mb-6"
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] font-semibold tracking-wider uppercase mb-6"
                     style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)', color: ACCENT }}>
                     <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: ACCENT }} />
                     Almost there
@@ -298,7 +298,7 @@ function BookingFlow() {
                 <button onClick={back} className="flex items-center gap-1.5 text-xs mt-4 mx-auto" style={{ color: 'var(--text-secondary)', display: 'flex' }}>
                   <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3"><path d="M10 4L6 8l4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>Back
                 </button>
-                <p className="text-[10px] text-center mt-4" style={{ color: 'var(--text-secondary)', opacity: 0.4 }}>
+                <p className="text-[12px] text-center mt-4" style={{ color: 'var(--text-secondary)', opacity: 0.4 }}>
                   We never sell your information. AHPRA-registered clinic.
                 </p>
               </motion.div>
@@ -310,7 +310,7 @@ function BookingFlow() {
                 {outcomeView === 'default' ? (
                   <>
                     <div className="text-center mb-10">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wider uppercase mb-6"
+                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[12px] font-semibold tracking-wider uppercase mb-6"
                         style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.25)', color: ACCENT }}>
                         <span className="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style={{ background: ACCENT }} />
                         {capName ? `${capName}, here` : 'Here'}&apos;s what to do next
@@ -330,7 +330,7 @@ function BookingFlow() {
                         className="rounded-2xl p-6 relative overflow-hidden"
                         style={{ background: readiness === 'now' ? 'rgba(72,144,247,0.08)' : 'var(--surface)', border: `1px solid ${readiness === 'now' ? 'rgba(72,144,247,0.35)' : 'rgba(255,255,255,0.07)'}` }}>
                         {readiness === 'now' && (
-                          <span className="absolute top-3 right-3 text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
+                          <span className="absolute top-3 right-3 text-[12px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full"
                             style={{ background: ACCENT, color: '#fff' }}>Recommended</span>
                         )}
                         <div className="flex items-start gap-4 mb-4">
@@ -356,7 +356,7 @@ function BookingFlow() {
                         <div className="flex flex-col gap-2 text-xs mb-5" style={{ color: 'var(--text-secondary)' }}>
                           {['Intake form (~10 min)', 'Doctor issues pathology referral (48h)', 'Telehealth consultation', 'Personalised protocol'].map((s, i) => (
                             <div key={s} className="flex items-center gap-2.5">
-                              <span className="w-4.5 h-4.5 rounded-full flex items-center justify-center text-[9px] font-bold flex-shrink-0"
+                              <span className="w-4.5 h-4.5 rounded-full flex items-center justify-center text-[12px] font-bold flex-shrink-0"
                                 style={{ background: 'rgba(72,144,247,0.12)', color: ACCENT }}>{i + 1}</span>
                               <span>{s}</span>
                             </div>

@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion'
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 
 const STATEMENT =
   'Hormones, metabolism, recovery and longevity are all written in your bloods. Apex reads the full panel, an AHPRA-registered doctor walks you through it, and every plan is re-tested so you can both see what changed.'
@@ -17,7 +18,7 @@ function Word({ children, progress, range, reduced }: { children: string; progre
  * reveal (scroll-linked, reverses cleanly).
  */
 export default function Intro() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLParagraphElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] })
   const words = STATEMENT.split(' ')

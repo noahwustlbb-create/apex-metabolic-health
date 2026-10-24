@@ -1,9 +1,10 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Link from 'next/link'
 import Image from '@/components/audience/Img'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -13,7 +14,7 @@ const ease = [0.22, 1, 0.36, 1] as const
  * ring settled at the heart, one line and one button.
  */
 export default function Invite() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-120px' })
   const reveal = (delay: number, y = 20) =>

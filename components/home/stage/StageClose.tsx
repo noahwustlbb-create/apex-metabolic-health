@@ -1,10 +1,11 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
 import Link from 'next/link'
 import { useStageArt } from './StageTone'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import StageCta from './StageCta'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -12,7 +13,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 /** INVITE. The page closes on the ice stage it opened on: one line, one button. */
 export default function StageClose() {
   const art = useStageArt()
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-15% 0px' })
   const rise = (d: number) => reduced ? { initial: false as const } : { initial: { opacity: 0, y: 24 }, animate: inView ? { opacity: 1, y: 0 } : {}, transition: { duration: 0.8, delay: d, ease } }

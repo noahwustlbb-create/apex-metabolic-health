@@ -8,7 +8,7 @@ export const SAMPLE: EmailData = {
   appointmentDate: 'Thursday, 14 August 2026',
   appointmentTime: '10:30am AEST',
   appointmentFormat: 'Telehealth video call',
-  panelName: 'Comprehensive Hormone Panel (32 markers)',
+  panelName: 'Comprehensive Hormone Panel (23+ markers)',
   amount: '$249.00',
   orderRef: 'APX-48213',
   trackingNumber: 'AP7739210458',

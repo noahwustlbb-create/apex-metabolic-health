@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import Image from '@/components/audience/Img'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -19,7 +20,7 @@ const TREATMENTS = [
 ]
 
 function TreatmentCard({ t, i }: { t: (typeof TREATMENTS)[number]; i: number }) {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   return (
@@ -58,7 +59,7 @@ function TreatmentCard({ t, i }: { t: (typeof TREATMENTS)[number]; i: number }) 
 }
 
 export default function TreatmentsPage() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const heroRef = useRef(null)
   const heroInView = useInView(heroRef, { once: true })
 

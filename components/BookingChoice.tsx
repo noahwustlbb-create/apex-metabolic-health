@@ -23,8 +23,8 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
   const discoveryLink = CALENDLY.discovery
   const activeLink = chose === 'discovery' ? discoveryLink : primaryLink
 
-  const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Telehealth consultation' : 'Book now'
-  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor.' : type === 'general' ? 'General telehealth consultation with your Apex doctor.' : 'Pick a time that suits you and speak to us today.'
+  const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Peptide / General Consult' : 'Book now'
+  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor.' : type === 'general' ? 'Peptide / General Consult with your Apex doctor, $199 ($99 for members).' : 'Pick a time that suits you and speak to us today.'
 
   return (
     <motion.div

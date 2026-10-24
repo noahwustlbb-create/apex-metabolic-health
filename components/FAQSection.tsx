@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { FAQS } from '@/lib/faqs'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -9,7 +10,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false)
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
 
   return (
     <motion.div
@@ -28,8 +29,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
           className="text-sm md:text-base font-semibold leading-snug transition-colors duration-150"
           style={{
             fontFamily: 'var(--font-space-grotesk)',
-            color: open ? 'var(--blue)' : 'var(--text-primary)',
-          }}
+            color: open ? 'var(--blue)' : 'var(--text-primary)' }}
         >
           {q}
         </span>
@@ -45,8 +45,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
             border: '1px solid rgba(72,144,247,0.2)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-          }}
+            justifyContent: 'center' }}
         >
           <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
             <path d="M6 2v8M2 6h8" stroke="#4890f7" strokeWidth="1.6" strokeLinecap="round" />
@@ -77,7 +76,7 @@ function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
 }
 
 export default function FAQSection({ faqs: customFaqs }: { faqs?: typeof FAQS }) {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const headingRef = useRef(null)
   const inView = useInView(headingRef, { once: true, margin: '-80px' })
   const items = customFaqs ?? FAQS
