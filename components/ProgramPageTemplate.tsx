@@ -1,8 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from '@/components/audience/Img'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
@@ -69,12 +70,11 @@ const ART: Record<string, string> = {
   longevity: 'longevity',
   pathology: 'bloods',
   'sexual-health': 'sexual',
-  'skin-regeneration': 'skin',
-}
+  'skin-regeneration': 'skin' }
 const art = (slug: string) => `/protocols/${ART[slug] ?? 'bloods'}.jpg`
 
 function useReveal(margin = '-12% 0px') {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: margin as `${number}px` })
   const rise = (delay = 0, y = 22) =>
@@ -255,7 +255,7 @@ function FinalCTASection({ config, onGetStarted }: { config: ProgramPageConfig; 
 }
 
 function StickyBar({ name, onGetStarted }: { name: string; onGetStarted: () => void }) {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const [show, setShow] = useState(false)
 
   useEffect(() => {
@@ -277,8 +277,7 @@ function StickyBar({ name, onGetStarted }: { name: string; onGetStarted: () => v
             background: 'rgba(255,255,255,0.86)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 -8px 30px rgba(15,23,42,0.08)',
             borderTop: '1px solid var(--border)',
             padding: '12px clamp(16px, 5vw, 48px)',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
-          }}
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}
         >
           <div>
             <p style={{ fontSize: 13, fontWeight: 600, color: INK, fontFamily: 'var(--font-inter)' }}>{name}</p>

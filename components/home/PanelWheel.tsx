@@ -1,7 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
+import { useAudience } from '@/components/audience/Audience'
 
 /**
  * Everlab's biomarker wheel / Lucis's body systems, for the real Apex panel:
@@ -14,10 +16,13 @@ const ease = [0.22, 1, 0.36, 1] as const
 const split = (s: string) => s.split(/,\s*/).map(x => x.trim()).filter(Boolean)
 
 export default function PanelWheel({ men, women }: { men: Group[]; women: Group[] }) {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-15% 0px' })
   const [sex, setSex] = useState<'men' | 'women'>('men')
+  // Open on the visitor's own panel (women's site shows the women's panel first).
+  const { audience } = useAudience()
+  useEffect(() => { setSex(audience); setActive(0) }, [audience])
   const [active, setActive] = useState(0)
   const [touched, setTouched] = useState(false)
 

@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef, useState, useCallback } from 'react'
-import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -20,8 +21,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: 'Most popular',
-  },
+    tag: 'Most popular' },
   {
     id: 'weight',
     href: '/programs/metabolic-weight-loss',
@@ -32,8 +32,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: null,
-  },
+    tag: null },
   {
     id: 'sexual',
     href: '/programs/sexual-health',
@@ -44,8 +43,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: null,
-  },
+    tag: null },
   {
     id: 'recovery',
     href: '/programs/injury-repair',
@@ -56,8 +54,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: null,
-  },
+    tag: null },
   {
     id: 'longevity',
     href: '/programs/longevity',
@@ -68,8 +65,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: 'New',
-  },
+    tag: 'New' },
   {
     id: 'skinhair',
     href: '/programs/skin-regeneration',
@@ -80,8 +76,7 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: null,
-  },
+    tag: null },
   {
     id: 'bloods',
     href: '/programs/pathology',
@@ -92,12 +87,11 @@ const TREATMENTS = [
     bg: '#0e1117',
     accent: ACCENT,
     glowColor: GLOW,
-    tag: null,
-  },
+    tag: null },
 ]
 
 export default function TreatmentSelector() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -122,8 +116,7 @@ export default function TreatmentSelector() {
       style={{
         backgroundColor: 'var(--bg)',
         paddingTop: 'clamp(72px, 9vw, 120px)',
-        paddingBottom: 'clamp(72px, 9vw, 120px)',
-      }}
+        paddingBottom: 'clamp(72px, 9vw, 120px)' }}
       aria-label="Treatment pathways"
     >
 
@@ -135,8 +128,7 @@ export default function TreatmentSelector() {
         style={{
           paddingLeft: 'clamp(24px, 5.5vw, 80px)',
           paddingRight: 'clamp(24px, 5.5vw, 80px)',
-          marginBottom: 40,
-        }}
+          marginBottom: 40 }}
       >
         <div className="flex items-end justify-between flex-wrap gap-4">
           <h2
@@ -181,8 +173,7 @@ export default function TreatmentSelector() {
           scrollSnapType: 'x proximity',
           WebkitOverflowScrolling: 'touch',
           msOverflowStyle: 'none',
-          scrollbarWidth: 'none',
-        }}
+          scrollbarWidth: 'none' }}
       >
         <div className="flex gap-3 md:gap-4" style={{ width: 'max-content' }}>
           {TREATMENTS.map((t, i) => (
@@ -200,8 +191,7 @@ export default function TreatmentSelector() {
                 borderRadius: 20,
                 background: t.bg,
                 scrollSnapAlign: 'start',
-                display: 'block',
-              }}
+                display: 'block' }}
               aria-label={t.label}
             >
               {/* ── Photography ── */}
@@ -219,8 +209,7 @@ export default function TreatmentSelector() {
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                  background: `linear-gradient(to bottom, ${t.bg} 0%, ${t.bg}e0 22%, ${t.bg}80 44%, transparent 68%)`,
-                }}
+                  background: `linear-gradient(to bottom, ${t.bg} 0%, ${t.bg}e0 22%, ${t.bg}80 44%, transparent 68%)` }}
                 aria-hidden="true"
               />
 
@@ -250,8 +239,7 @@ export default function TreatmentSelector() {
                         background: `${t.accent}22`,
                         border: `1px solid ${t.accent}55`,
                         borderRadius: 99,
-                        padding: '4px 10px',
-                      }}
+                        padding: '4px 10px' }}
                     >
                       <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: t.accent }}>
                         {t.tag}
@@ -267,8 +255,7 @@ export default function TreatmentSelector() {
                       fontFamily: 'var(--font-inter)',
                       fontSize: 'clamp(16px, 2vw, 21px)',
                       color: '#ffffff',
-                      letterSpacing: '-0.015em',
-                    }}
+                      letterSpacing: '-0.015em' }}
                   >
                     {t.label}
                   </h3>
@@ -285,8 +272,7 @@ export default function TreatmentSelector() {
                       background: `${t.accent}20`,
                       border: `1px solid ${t.accent}55`,
                       flexShrink: 0,
-                      color: t.accent,
-                    }}
+                      color: t.accent }}
                   >
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4" aria-hidden="true">
                       <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -304,8 +290,7 @@ export default function TreatmentSelector() {
         style={{
           paddingLeft: 'clamp(24px, 5.5vw, 80px)',
           paddingRight: 'clamp(24px, 5.5vw, 80px)',
-          marginTop: 20,
-        }}
+          marginTop: 20 }}
         aria-hidden="true"
       >
         <div
@@ -322,8 +307,7 @@ export default function TreatmentSelector() {
               borderRadius: 1,
               background: 'var(--blue)',
               transform: `translateX(${scrollProgress * 300}%)`,
-              transition: 'transform 80ms linear',
-            }}
+              transition: 'transform 80ms linear' }}
           />
         </div>
       </div>
@@ -359,8 +343,7 @@ export default function TreatmentSelector() {
             style={{
               position: 'fixed', inset: 0, zIndex: 1000, display: 'flex',
               alignItems: 'center', justifyContent: 'center', padding: 24,
-              background: 'rgba(4,6,13,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
-            }}
+              background: 'rgba(4,6,13,0.72)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
           >
             <motion.div
               onClick={e => e.stopPropagation()}
@@ -371,8 +354,7 @@ export default function TreatmentSelector() {
               style={{
                 width: '100%', maxWidth: 460, background: 'var(--surface)',
                 border: '1px solid var(--border)', borderRadius: 20, padding: 'clamp(24px, 4vw, 32px)',
-                boxShadow: '0 40px 90px rgba(0,0,0,0.5)',
-              }}
+                boxShadow: '0 40px 90px rgba(0,0,0,0.5)' }}
             >
               <h3 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 22, fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em', marginBottom: 8 }}>
                 Skin or hair?
@@ -391,8 +373,7 @@ export default function TreatmentSelector() {
                   style={{
                     display: 'flex', alignItems: 'center', gap: 14, padding: '18px 20px', borderRadius: 14,
                     marginBottom: 12, textDecoration: 'none', background: 'var(--bg)',
-                    border: '1px solid var(--border)', transition: 'border-color 0.18s ease, transform 0.18s ease',
-                  }}
+                    border: '1px solid var(--border)', transition: 'border-color 0.18s ease, transform 0.18s ease' }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--blue)'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)' }}
                 >

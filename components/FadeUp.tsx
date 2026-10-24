@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
+import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 interface FadeUpProps {
@@ -16,9 +17,8 @@ export default function FadeUp({
   delay    = 0,
   duration = 0.65,
   className,
-  once     = true,
-}: FadeUpProps) {
-  const prefersReduced = useReducedMotion()
+  once     = true }: FadeUpProps) {
+  const prefersReduced = useReducedMotionSafe()
   return (
     <motion.div
       initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}

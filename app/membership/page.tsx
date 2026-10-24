@@ -139,7 +139,7 @@ function Hero() {
             <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.15)" stroke={ACCENT} strokeWidth="0.8" />
             <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className="text-[11px] font-semibold" style={{ color: ACCENT }}>
+          <span className="text-[12px] font-semibold" style={{ color: ACCENT }}>
             $99 a month · No lock-in · Cancel anytime
           </span>
         </motion.div>
@@ -212,7 +212,7 @@ function Hero() {
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
           {['AHPRA-registered doctors', 'Reviewed every 3 months', 'Australia-wide telehealth', 'Cancel anytime'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: ACCENT }}>
+            <span key={t} className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase" style={{ color: ACCENT }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
               {t}
             </span>
@@ -257,10 +257,10 @@ function AdvantageStrip() {
               }}>
                 {stat.value}
               </span>
-              <span style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '3px' }}>
+              <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '3px' }}>
                 {stat.label}
               </span>
-              <span style={{ fontSize: '10px', color: 'var(--text-primary)', opacity: 0.72 }}>
+              <span style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
                 {stat.sub}
               </span>
             </motion.div>
@@ -336,7 +336,7 @@ function WhatsIncluded() {
                 <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.12)" stroke={ACCENT} strokeWidth="0.8" />
                 <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
+              <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
             </div>
           ))}
         </motion.div>
@@ -507,9 +507,9 @@ function FourMonthCycle() {
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
                   style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                  <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
+                  <span className="text-[12px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
                 </div>
-                <span className="text-[10px] font-semibold tracking-[0.16em] uppercase" style={{ color: ACCENT }}>{phase.phase}</span>
+                <span className="text-[12px] font-semibold tracking-[0.16em] uppercase" style={{ color: ACCENT }}>{phase.phase}</span>
               </div>
               <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</span>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
@@ -524,10 +524,10 @@ function FourMonthCycle() {
               style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.12)' }}>
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
                 style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                <span className="text-[10px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
+                <span className="text-[12px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
               </div>
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: ACCENT }}>{phase.phase}</p>
+                <p className="text-[12px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: ACCENT }}>{phase.phase}</p>
                 <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</p>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
               </div>
@@ -556,7 +556,7 @@ function ClosingCTA() {
 
       <div className="container-tight relative z-10 text-center">
         <motion.p initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
-          className="text-[11px] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
+          className="text-[12px] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
           Apex Protocol Membership
         </motion.p>
         <motion.h2
@@ -586,7 +586,7 @@ function ClosingCTA() {
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '22px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>{stat.value}</p>
-              <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginTop: '4px' }}>{stat.label}</p>
+              <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginTop: '4px' }}>{stat.label}</p>
             </div>
           ))}
         </motion.div>

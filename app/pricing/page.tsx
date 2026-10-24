@@ -6,6 +6,8 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FAQSection from '@/components/FAQSection'
+import FirstThreeMonths from '@/components/pricing/FirstThreeMonths'
+import Objections from '@/components/Objections'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -30,8 +32,8 @@ function PricingHero() {
           className="display-heading mb-5"
           style={{ fontSize: 'clamp(32px, 4.5vw, 64px)', maxWidth: '780px' }}
         >
-          Simple. Transparent.{' '}
-          <span style={{ color: 'var(--blue)' }}>Nothing forced.</span>
+          What it costs,{' '}
+          <span style={{ color: 'var(--blue)' }}>added up.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -39,7 +41,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Every number published upfront. Single consult, partner pharmacy or membership: compare and decide before you start.
+          Bloods from $199, a doctor consult from $99, membership $99 a month. Below is what your first 3 months cost on each path, before medication. Private clinic, no Medicare rebate.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -48,7 +50,7 @@ function PricingHero() {
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
           {['No hidden fees', 'No lock-in contracts', 'AHPRA-registered doctors'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
+            <span key={t} className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
               {t}
             </span>
@@ -83,7 +85,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
 
 const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
   { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
-    box: { k: 'Average initial investment', v: '$604 – $680', note: 'Blood referral + consultation + escript fee. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
+    box: { k: 'Before medication', v: '$680', note: 'Blood panel $280 + hormone consult $275 + escript $125. With a general consult: $280 + $199 + $125 = $604. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
   { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
     box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $125 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
   { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Cancel anytime', box: null, cta: 'Get Started' },
@@ -133,7 +135,7 @@ function MembershipComparison() {
                   boxShadow: featured ? '0 0 80px color-mix(in srgb, var(--blue) 14%, transparent), 0 16px 40px rgba(15,23,42,0.08)' : '0 16px 40px rgba(15,23,42,0.08)',
                 }}>
                 {featured && (
-                  <div style={{ position: 'absolute', top: 0, right: 20, background: accent, borderRadius: '0 0 6px 6px', padding: '4px 12px', fontFamily: 'var(--font-space-grotesk)', fontSize: '9px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff' }}>
+                  <div style={{ position: 'absolute', top: 0, right: 20, background: accent, borderRadius: '0 0 6px 6px', padding: '4px 12px', fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff' }}>
                     Most included
                   </div>
                 )}
@@ -147,7 +149,7 @@ function MembershipComparison() {
                     const good = featured && row.highlight
                     return (
                       <div key={row.label} className="flex items-center justify-between gap-3 px-6 py-3.5" style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(15,23,42,0.05)' : 'none' }}>
-                        <span style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72 }}>{row.label}</span>
+                        <span style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72 }}>{row.label}</span>
                         <span className="flex items-center gap-1.5 text-right" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '14.5px', fontWeight: 700, color: good ? accent : 'var(--text-primary)', opacity: v === '·' ? 0.4 : featured ? 1 : 0.62 }}>
                           {good && (
                             <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
@@ -164,13 +166,13 @@ function MembershipComparison() {
                 <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(15,23,42,0.06)' }}>
                   {path.box && (
                     <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(15,23,42,0.03)', border: '1px solid rgba(15,23,42,0.06)' }}>
-                      <p className="text-[10px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.k}</p>
+                      <p className="text-[12px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.k}</p>
                       <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-primary)' }}>{path.box.v}</p>
-                      <p className="text-[10px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.note}</p>
+                      <p className="text-[12px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.note}</p>
                     </div>
                   )}
                   <Link href="https://app.apexmetabolichealth.com.au/signup"
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[11px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[12px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
                     style={featured ? { background: accent, color: '#ffffff' } : { border: '1px solid rgba(15,23,42,0.14)', color: 'var(--text-primary)' }}>
                     {path.cta}
                   </Link>
@@ -184,7 +186,7 @@ function MembershipComparison() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center text-[11px] leading-relaxed"
+          className="text-center text-[12px] leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520, margin: '20px auto 0' }}
         >
           Retail pharmacies usually mark medication up. Our partner pharmacy does not, but each order carries admin, infrastructure and handling fees. Membership includes those fees and the escript fee. Membership activates after your initial consultation, where clinically appropriate. No lock-in contracts.
@@ -387,7 +389,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
       >
         <div className="flex items-center gap-4 min-w-0">
           <span
-            className="flex-shrink-0 px-3 py-1.5 rounded text-[11px] font-bold tracking-[0.1em] uppercase"
+            className="flex-shrink-0 px-3 py-1.5 rounded text-[12px] font-bold tracking-[0.1em] uppercase"
             style={{
               background: isMember ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.05)',
               color: isMember ? accent : 'var(--text-primary)',
@@ -432,9 +434,9 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                     <div className="flex items-center gap-2.5 mb-2">
                       <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
                         style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                        <span style={{ fontSize: '9px', fontWeight: 700, color: accent, fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</span>
+                        <span style={{ fontSize: '12px', fontWeight: 700, color: accent, fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</span>
                       </div>
-                      <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
+                      <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
                         {step.label}
                       </p>
                     </div>
@@ -446,7 +448,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                       <div className="mt-4 flex flex-col gap-2.5" style={{ paddingLeft: '29px' }}>
                         {step.options.map(opt => (
                           <div key={opt.label} className="p-4 rounded-xl" style={{ background: 'rgba(72,144,247,0.03)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                            <p style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '6px' }}>
+                            <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '6px' }}>
                               {opt.label}
                             </p>
                             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
@@ -485,7 +487,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
                         {step.price}
                       </p>
                       {step.priceNote && (
-                        <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '4px' }}>
+                        <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '4px' }}>
                           {step.priceNote}
                         </p>
                       )}
@@ -555,7 +557,7 @@ function ProgramPathways() {
                   {title}
                 </h3>
                 <span style={{
-                  fontSize: '10px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const,
+                  fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const,
                   color: 'var(--text-primary)', opacity: 0.72,
                 }}>
                   {pathways.length} pathways
@@ -570,7 +572,7 @@ function ProgramPathways() {
           ))}
         </motion.div>
 
-        <p className="text-[10px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
+        <p className="text-[12px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
           Script release excludes NSW patients. All treatment subject to clinical appropriateness.
         </p>
       </div>
@@ -720,7 +722,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'Are there any hidden fees?',
-    a: 'No. Every cost is published upfront. No discovery call fees, no bundled packages, no surprise admin charges.',
+    a: 'No. Every fee is on this page before you start, including the AHI fee on partner-pharmacy orders. No discovery call fees and no bundled packages.',
   },
   {
     q: 'Are your doctors AHPRA-registered?',
@@ -734,6 +736,8 @@ export default function PricingPage() {
       <Nav />
       <main>
         <PricingHero />
+        <FirstThreeMonths />
+        <Objections />
         <MembershipComparison />
         <ProgramPathways />
         <NotIncluded />

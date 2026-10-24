@@ -1,8 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
-import { motion, useInView, useMotionValue, useReducedMotion, useSpring } from 'framer-motion'
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import RevealText from '@/components/motion/RevealText'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -23,7 +24,7 @@ const GROUPS = [
  * toward the cursor. Every number is labelled a sample.
  */
 export default function ReportPreview() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-120px' })
   const rx = useMotionValue(0)

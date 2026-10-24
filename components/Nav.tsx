@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
@@ -32,7 +33,7 @@ const TEXT = 'var(--text-primary)'
 const BLUE = 'var(--blue)'
 
 export default function Nav() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const pathname = usePathname()
   const [scrolled, setScrolled]         = useState(false)
   const [menuOpen, setMenuOpen]         = useState(false)
@@ -62,8 +63,7 @@ export default function Nav() {
     letterSpacing: '0.01em',
     transition: 'color 0.2s',
     whiteSpace: 'nowrap' as const,
-    textDecoration: 'none',
-  }
+    textDecoration: 'none' }
 
   return (
     <>
@@ -77,8 +77,7 @@ export default function Nav() {
           backdropFilter: overHero ? 'none' : 'blur(20px)',
           WebkitBackdropFilter: overHero ? 'none' : 'blur(20px)',
           borderBottom: overHero ? '1px solid transparent' : scrolled ? '1px solid var(--nav-border-scrolled)' : '1px solid var(--nav-border)',
-          boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.12)' : 'none',
-        }}
+          boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.12)' : 'none' }}
       >
         <div
           className="mx-auto w-full max-w-[1440px] flex items-center justify-between px-5 md:px-10 h-[70px] md:h-[88px]"
@@ -142,8 +141,7 @@ export default function Nav() {
                       border: '1px solid var(--border)',
                       borderRadius: 10,
                       boxShadow: '0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10)',
-                      padding: '8px',
-                    }}
+                      padding: '8px' }}
                   >
                     {NAV_PROGRAMS.map((p) => (
                       <Link
@@ -245,8 +243,7 @@ export default function Nav() {
                   fontSize: '12.5px',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
-                  textDecoration: 'none',
-                }}
+                  textDecoration: 'none' }}
               >
                 Start
               </Link>
@@ -323,8 +320,7 @@ export default function Nav() {
                   fontSize: '14px',
                   fontWeight: 600,
                   letterSpacing: '0.01em',
-                  textDecoration: 'none',
-                }}
+                  textDecoration: 'none' }}
               >
                 Start your assessment
                 <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">

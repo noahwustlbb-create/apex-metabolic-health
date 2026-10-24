@@ -1,7 +1,8 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef, useState, useCallback, useEffect } from 'react'
-import { motion, useInView, useReducedMotion, AnimatePresence, LayoutGroup } from 'framer-motion'
+import { motion, useInView, AnimatePresence, LayoutGroup } from 'framer-motion'
 import Image from '@/components/audience/Img'
 
 /**
@@ -66,7 +67,7 @@ function useCanHover() {
 }
 
 export default function ProtocolGrid() {
-  const prefersReduced = useReducedMotion()
+  const prefersReduced = useReducedMotionSafe()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const canHover = useCanHover()
@@ -176,8 +177,7 @@ export default function ProtocolGrid() {
 }
 
 function ProtocolCard({
-  p, index, featured, reduced, onEnter,
-}: {
+  p, index, featured, reduced, onEnter }: {
   p: Protocol
   index: number
   featured: boolean
@@ -198,8 +198,7 @@ function ProtocolCard({
         border: `1px solid ${featured ? 'rgba(255,255,255,0.08)' : 'var(--border)'}`,
         minHeight: ROW,
         transition: 'background-color 0.35s ease, border-color 0.35s ease',
-        outlineColor: 'var(--blue)',
-      }}
+        outlineColor: 'var(--blue)' }}
     >
       {/* Feature image: always mounted so the reveal is a fade, not a load. */}
       <div

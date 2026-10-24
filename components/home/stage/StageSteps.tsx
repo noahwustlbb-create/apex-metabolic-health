@@ -1,8 +1,9 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import StageCta from './StageCta'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -15,7 +16,7 @@ const STEPS = [
 
 /** Three simple steps (Hims), in the stage material: one render per step. */
 export default function StageSteps() {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-12% 0px' })
   return (

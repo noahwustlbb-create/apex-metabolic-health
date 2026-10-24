@@ -1,9 +1,10 @@
 'use client'
 
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
 import { useRef } from 'react'
 import Image from '@/components/audience/Img'
 import { useStageArt } from './StageTone'
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -33,7 +34,7 @@ function Icon({ name }: { name: Card['icon'] }) {
 /** PROVE, the promise in four objects. Cards rise in, frosted, then sharpen. */
 export default function StageClarity() {
   const art = useStageArt()
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const ref = useRef<HTMLElement>(null)
   const inView = useInView(ref, { once: true, margin: '-15% 0px' })
 

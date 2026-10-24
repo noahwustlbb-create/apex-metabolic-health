@@ -1,6 +1,7 @@
 'use client'
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { useReducedMotionSafe } from '@/lib/useReducedMotionSafe'
+import { motion, type Variants } from 'framer-motion'
 import type { ElementType, ReactNode } from 'react'
 
 const ease = [0.22, 1, 0.36, 1] as const
@@ -21,8 +22,7 @@ export default function RevealText({
   style,
   delay = 0,
   stagger = 0.045,
-  once = true,
-}: {
+  once = true }: {
   text?: string
   segments?: Segment[]
   as?: ElementType
@@ -32,7 +32,7 @@ export default function RevealText({
   stagger?: number
   once?: boolean
 }) {
-  const reduced = useReducedMotion()
+  const reduced = useReducedMotionSafe()
   const segs: Segment[] = segments ?? [{ text: text ?? '' }]
 
   const word: Variants = {
@@ -40,9 +40,7 @@ export default function RevealText({
     visible: (i: number) => ({
       y: '0%',
       opacity: 1,
-      transition: reduced ? { duration: 0 } : { duration: 0.75, delay: delay + i * stagger, ease },
-    }),
-  }
+      transition: reduced ? { duration: 0 } : { duration: 0.75, delay: delay + i * stagger, ease } }) }
 
   let i = 0
   const nodes: ReactNode[] = []

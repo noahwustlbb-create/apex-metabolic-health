@@ -425,7 +425,7 @@ export const pathologyConfig: ProgramPageConfig = {
 
   headline: 'Know your numbers.',
   headlineAccent: 'All of them.',
-  heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 30+ markers that actually tell you where you stand.',
+  heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 23+ markers that actually tell you where you stand.',
   heroBullets: [
     '30+ clinically relevant blood markers',
     'AHPRA-registered doctor review',

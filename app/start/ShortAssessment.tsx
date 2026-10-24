@@ -8,6 +8,8 @@ import Logo from '@/components/brand/Logo'
 import { phasesFor, stepNumber, stepsRemaining, START_TOTAL_STEPS } from '@/lib/startFunnel'
 import { useSignupGate } from '@/context/SignupGateContext'
 import { ArtImg } from '@/components/audience/Img'
+import { useAudience } from '@/components/audience/Audience'
+import { captureLead } from '@/lib/captureLead'
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
 const BG     = 'var(--bg)'
@@ -44,6 +46,21 @@ const FOCUS: Record<string, { art: string; markers: string }> = {
   longevity: { art: '/protocols/longevity.jpg',   markers: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
   skinhair:  { art: '/protocols/hair.jpg',        markers: 'Iron studies, thyroid, hormones, vitamin D' },
   bloods:    { art: '/protocols/bloods.jpg',      markers: 'The full 23+ marker panel across four systems' },
+}
+// Women's site (24 Oct): not led by testosterone. Same ids, so routing and the
+// portal program names do not change.
+const WOMEN_PICK_ORDER = ['hormone', 'weight', 'longevity', 'skinhair', 'recovery', 'sexual', 'bloods', 'general']
+const WOMEN_PICK_TEXT: Record<string, { label: string; sub: string }> = {
+  hormone: { label: 'Hormones and cycle', sub: 'Energy, mood, cycle, perimenopause' },
+  sexual: { label: 'Sexual Health', sub: 'Libido, comfort, confidence' },
+  recovery: { label: 'Recovery & Injury Repair', sub: 'Training, injury, iron and energy' },
+}
+const picksFor = (women: boolean) => women
+  ? WOMEN_PICK_ORDER.map(id => ({ ...TREATMENT_PICKS.find(t => t.id === id)!, ...(WOMEN_PICK_TEXT[id] ?? {}) }))
+  : TREATMENT_PICKS
+const WOMEN_FOCUS: Partial<Record<string, string>> = {
+  hormone: 'Oestradiol, progesterone, testosterone, LH, FSH, prolactin',
+  recovery: 'Iron studies, thyroid, cortisol, hs-CRP',
 }
 const PICK_LABEL = (id: string) => TREATMENT_PICKS.find(t => t.id === id)?.label ?? id
 
@@ -253,7 +270,7 @@ const Q0_OPTIONS = [
   },
 ]
 
-type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'place' | 'exp' | 'q2' | 'q3' | 'bloods' | 'source' | 'privacy' | 'loading' | 'eligible'
+type Phase = 'intro' | 'q0' | 'pick' | 'q1' | 'email' | 'place' | 'exp' | 'q2' | 'q3' | 'bloods' | 'source' | 'privacy' | 'loading' | 'eligible'
 
 const BLOODS_OPTIONS = [
   { id: 'recent', label: 'Yes, from the last 12 months', sub: 'Upload them in your portal and your doctor reads them first' },
@@ -297,7 +314,10 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="quiz-intro">
       <div className="quiz-intro-art" aria-hidden="true">
-        <ArtImg src="/3d/body-male.jpg" alt="" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/3d/body-male.jpg" alt="" loading="lazy" className="for-men" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/3d/pink/body-female.jpg" alt="" loading="lazy" className="for-women" />
         <div className="quiz-intro-chip"><span>Reviewed by</span><strong>An AHPRA-registered doctor</strong></div>
       </div>
       <div className="quiz-intro-copy">
@@ -436,7 +456,7 @@ function PlaceScreen({ programme, count = 1, why, onContinue, remaining }: { pro
             <motion.li key={s.when} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 + i * 0.15, ease }} className="glass-card flex gap-4 items-start" style={{ padding: '18px 20px', borderRadius: 22, filter: blurred ? 'blur(8px)' : 'blur(0)', transition: 'filter 0.9s cubic-bezier(0.22,1,0.36,1)' }}>
               <span className="t-readout flex-shrink-0" style={{ fontSize: 22, color: BLUE, minWidth: 44 }}>{String(i + 1).padStart(2, '0')}</span>
               <span>
-                <span className="t-mono block mb-1" style={{ color: DIM, fontSize: 9.5 }}>{s.when}</span>
+                <span className="t-mono block mb-1" style={{ color: DIM, fontSize: 12 }}>{s.when}</span>
                 <span className="block font-semibold text-[16px]" style={{ color: TEXT, letterSpacing: '-0.01em' }}>{s.title}</span>
                 <span className="block mt-1 text-[14px]" style={{ color: DIM }}>{s.body}</span>
               </span>
@@ -552,6 +572,47 @@ function PrivacyScreen({ refCode, setRefCode, onContinue }: { refCode: string; s
   )
 }
 
+// ── Save progress (question 3) ──────────────────────────────────────────────────
+function EmailScreen({ eyebrow, program, onSaved, onSkip }: { eyebrow: string; program: string; onSaved: (email: string, name: string) => void; onSkip: () => void }) {
+  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [err, setErr] = useState('')
+  const [busy, setBusy] = useState(false)
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const clean = email.trim()
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) { setErr('Please enter a valid email address.'); return }
+    setErr(''); setBusy(true)
+    // Same wiring as the end-of-funnel gate: admin email + HighLevel, PostHog
+    // 'lead_captured'. Identity and program only, never the answers.
+    try { await captureLead({ name: name.trim(), email: clean, source: 'assessment', program }) } catch { /* never block the visitor */ }
+    setBusy(false)
+    onSaved(clean, name.trim())
+  }
+  return (
+    <form onSubmit={submit} className="flex flex-col gap-5" noValidate>
+      <StepHeading eyebrow={eyebrow} title="Where should we send your match?" sub="We save your progress so you can pick up where you left off. No spam, and your answers stay with your care team." />
+      <div className="flex flex-col gap-3">
+        <label className="block">
+          <span className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>First name <span className="font-normal" style={{ color: DIM }}>(optional)</span></span>
+          <input value={name} onChange={e => setName(e.target.value)} autoComplete="given-name" className="w-full rounded-xl px-3.5 py-3 text-[16px] outline-none" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, minHeight: 48 }} />
+        </label>
+        <label className="block">
+          <span className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>Email</span>
+          <input type="email" inputMode="email" autoComplete="email" required value={email} onChange={e => { setEmail(e.target.value); if (err) setErr('') }} aria-invalid={!!err} aria-describedby={err ? 'start-email-err' : undefined} placeholder="you@example.com" className="w-full rounded-xl px-3.5 py-3 text-[16px] outline-none" style={{ background: '#fff', border: `1px solid ${err ? '#dc2626' : BORDER}`, color: TEXT, minHeight: 48 }} />
+        </label>
+        {err && <p id="start-email-err" role="alert" className="m-0 text-[13px]" style={{ color: '#dc2626' }}>{err}</p>}
+      </div>
+      <button type="submit" disabled={busy} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+        {busy ? 'Saving' : 'Save and continue'}
+      </button>
+      <button type="button" onClick={onSkip} className="mx-auto text-[14px] font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>
+        Skip for now
+      </button>
+    </form>
+  )
+}
+
 // ── Main ───────────────────────────────────────────────────────────────────────
 export default function ShortAssessment() {
   const params = useSearchParams()
@@ -579,6 +640,11 @@ export default function ShortAssessment() {
   const [experience, setExperience] = useState('')
   const [refCode, setRefCode] = useState(() => (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32))
   const { open } = useSignupGate()
+  const { audience } = useAudience()
+  const women = audience === 'women'
+  const PICKS = picksFor(women)
+  // Captured at question 3; kept in memory only, never in the session draft.
+  const [saved, setSaved] = useState<{ email: string; name: string } | null>(null)
 
   // A refresh, a mis-tap on Back, or a phone call used to destroy eight answers
   // with no warning and no way back in. sessionStorage keeps them for this tab
@@ -663,7 +729,7 @@ export default function ShortAssessment() {
       <header className="fixed top-0 left-0 right-0 z-40" style={{ background: 'rgba(255,255,255,0.86)', backdropFilter: 'blur(14px)', borderBottom: `1px solid ${BORDER}` }}>
         <div className="mx-auto flex items-center justify-between" style={{ maxWidth: 1200, padding: '14px 20px' }}>
           <Link href="/" aria-label="Apex Metabolic Health home"><Logo /></Link>
-          <Link href="/" className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 10, textDecoration: 'none' }}>
+          <Link href="/" className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 12, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>
             Save and exit
           </Link>
         </div>
@@ -700,9 +766,9 @@ export default function ShortAssessment() {
                   From what {isCaregiver ? 'you told us about them' : 'you told us'}, {picks.length > 1 ? <>these are the pathways built for it: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>this is the pathway built for it: <strong style={{ color: TEXT }}>{config.title}</strong>.</>} Whether it’s right for {isCaregiver ? 'them' : 'you'} is a decision your doctor makes after your bloods.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.38, ease }} className="mb-6">
-                  <p className="t-mono mb-2" style={{ color: DIM, fontSize: 9.5 }}>{picks.length ? 'Your protocols · tap to add or remove' : 'Add a protocol'}</p>
+                  <p className="t-mono mb-2" style={{ color: DIM, fontSize: 12 }}>{picks.length ? 'Your protocols · tap to add or remove' : 'Add a protocol'}</p>
                   <div className="flex flex-wrap justify-center gap-2">
-                    {TREATMENT_PICKS.filter(t => t.id !== 'general').map(t => {
+                    {PICKS.filter(t => t.id !== 'general').map(t => {
                       const on = picks.includes(t.id)
                       return (
                         <button key={t.id} type="button" onClick={() => togglePick(t.id)} aria-pressed={on} className="rounded-full text-[13px] font-medium transition-colors" style={{ padding: '7px 12px', background: on ? 'var(--stage-ink)' : 'var(--stage-white)', color: on ? '#fff' : TEXT, border: `1px solid ${on ? 'var(--stage-ink)' : BORDER}`, cursor: 'pointer' }}>
@@ -720,7 +786,7 @@ export default function ShortAssessment() {
                     {picks.filter(id => FOCUS[id]).map((id, i) => (
                       <motion.div key={id} initial={{ opacity: 0, y: 12, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease }} className="quiz-focus-card">
                         <ArtImg src={FOCUS[id].art} alt="" aria-hidden="true" />
-                        <span><strong>{PICK_LABEL(id)}</strong><span>On your panel: {FOCUS[id].markers}.</span></span>
+                        <span><strong>{PICK_LABEL(id)}</strong><span>On your panel: {(women && WOMEN_FOCUS[id]) || FOCUS[id].markers}.</span></span>
                       </motion.div>
                     ))}
                   </div>
@@ -744,25 +810,29 @@ export default function ShortAssessment() {
                     </ul>
                   </motion.div>
                 ) : (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="glass-card grid grid-cols-3 gap-2 mb-8" style={{ padding: 14, borderRadius: 22 }}>
-                    {[{ n: '48h', l: 'Results' }, { n: '01', l: 'Doctor' }, { n: '$0', l: 'To start' }].map(r => (
-                      <div key={r.l}>
-                        <span className="t-readout block" style={{ fontSize: 28, color: TEXT }}>{r.n}</span>
-                        <span className="t-mono block mt-1" style={{ color: DIM, fontSize: 9.5 }}>{r.l}</span>
-                      </div>
-                    ))}
+                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="glass-card mb-8" style={{ padding: 14, borderRadius: 22 }}>
+                    <p className="t-mono m-0 mb-2" style={{ color: DIM, fontSize: 12 }}>What it costs</p>
+                    <div className="grid grid-cols-3 gap-2">
+                      {[{ n: '$199', l: 'Bloods from' }, { n: '$99', l: 'Doctor consult from' }, { n: '$99/mo', l: 'Membership' }].map(r => (
+                        <div key={r.l}>
+                          <span className="t-mono block mb-1" style={{ color: DIM, fontSize: 12 }}>{r.l}</span>
+                          <span className="t-readout block" style={{ fontSize: 24, color: TEXT }}>{r.n}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="m-0 mt-3 text-[13px]" style={{ color: DIM }}>Private clinic, no Medicare rebate. Creating an account is free. <Link href="/pricing" className="link-draw" style={{ color: TEXT }}>Full pricing</Link></p>
                   </motion.div>
                 )}
 
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, ease }} className="flex flex-col gap-3 w-full" style={{ maxWidth: 400, margin: '0 auto' }}>
-                  <button type="button" onClick={() => open(undefined, { capture: true, program: pickTitles.length ? pickTitles.join(', ') : config.title, signupUrl })} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+                  <button type="button" onClick={() => { if (saved) { const sep = signupUrl.includes('?') ? '&' : '?'; window.location.href = `${signupUrl}${sep}email=${encodeURIComponent(saved.email)}${saved.name ? `&name=${encodeURIComponent(saved.name)}` : ''}`; return } open(undefined, { capture: true, program: pickTitles.length ? pickTitles.join(', ') : config.title, signupUrl }) }} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
                     {isCaregiver ? 'Create a caregiver account' : 'Create your free account'}
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </button>
                   <a href="https://app.apexmetabolichealth.com.au/login" className="w-full flex items-center justify-center font-medium" style={{ color: DIM, fontSize: 14, padding: '15px 32px', borderRadius: 999, border: `1.5px solid ${BORDER}`, textDecoration: 'none', background: 'rgba(255,255,255,0.8)' }}>
                     Already have an account? Log in
                   </a>
-                  <p className="text-[11.5px] mt-2" style={{ color: DIM }}>Reviewed by an AHPRA-registered doctor · Confidential · A consultation never guarantees a prescription</p>
+                  <p className="text-[12px] mt-2" style={{ color: DIM }}>Reviewed by an AHPRA-registered doctor · Confidential · A consultation never guarantees a prescription</p>
                 </motion.div>
               </div>
             </motion.div>
@@ -793,7 +863,7 @@ export default function ShortAssessment() {
                   <div className="flex flex-col gap-5">
                     <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'What are you looking for help with?' : 'What would you like help with?'} sub="Select all that apply. One blood panel and one doctor call cover everything you pick." />
                     <div className="flex flex-col gap-3">
-                      {TREATMENT_PICKS.filter(t => t.id !== 'general').map((t, i) => (
+                      {PICKS.filter(t => t.id !== 'general').map((t, i) => (
                         <OptionCard key={t.id} index={i} label={t.label} sub={t.sub} selected={picks.includes(t.id)} onClick={() => togglePick(t.id)} />
                       ))}
                     </div>
@@ -818,6 +888,8 @@ export default function ShortAssessment() {
                     </div>
                   </div>
                 )}
+
+                {phase === 'email' && <EmailScreen eyebrow={eyebrow} program={pickTitles.length ? pickTitles.join(', ') : config.title} onSaved={(email, name) => { setSaved({ email, name }); advance() }} onSkip={advance} />}
 
                 {phase === 'place' && <PlaceScreen programme={programmeLine} count={Math.max(1, picks.length)} why={why} onContinue={advance} remaining={stepsRemaining('place', hasPredefinedType)} />}
 
@@ -886,7 +958,7 @@ export default function ShortAssessment() {
 
             {(phase === 'q1' || phase === 'exp' || phase === 'q2' || phase === 'q3' || phase === 'bloods' || phase === 'source') && (
               <div className="flex justify-end mt-6">
-                <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer' }}>Skip this question</button>
+                <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>Skip this question</button>
               </div>
             )}
           </div>
