@@ -16,7 +16,7 @@ const ITEMS: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: 'Can I cancel the membership?',
-    a: <>Yes. Membership is $99 a month with no lock-in contract, and you can cancel anytime.</>,
+    a: <>Yes. Membership is $99 a month with no lock-in contract. Pause or cancel your membership from your account.</>,
   },
   {
     q: 'What about side effects?',
@@ -24,7 +24,7 @@ const ITEMS: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: 'What if I change my mind?',
-    a: <>Cancel more than 24 hours before your consult for a full refund of the consult fee. After a consult has happened the fee is not refundable, whatever the outcome. The full rules are in our <Link href="/terms">terms</Link>.</>,
+    a: <>Cancel or reschedule up to 4 hours before your appointment for a full refund of the consult fee. After a consult has happened the fee is not refundable, whatever the outcome. The full rules are in our <Link href="/terms">terms</Link>.</>,
   },
 ]
 

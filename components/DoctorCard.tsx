@@ -12,11 +12,14 @@ const ABN = '91 682 876 884'
 const ABN_URL = 'https://abr.business.gov.au/ABN/View?abn=91682876884'
 const NATA_URL = 'https://nata.com.au/'
 
-// NOAH-OWED SLOT (fundamentals plan, 24 Oct 2026): name the treating doctor
-// publicly with a link to their entry on the AHPRA public register. Leave null
-// until Noah confirms the doctor has agreed to be named; nothing renders while
-// it is null. Example shape: { name: 'Dr ...', role: 'Medical Director', registerUrl: 'https://www.ahpra.gov.au/...' }
-const NAMED_DOCTOR: { name: string; role: string; registerUrl: string } | null = null
+// NOAH-OWED SLOT (fundamentals plan, 24 Oct 2026; multi-doctor 24 Oct): the
+// doctors who consult for Apex, each with their entry on the AHPRA public
+// register. Apex has more than one doctor and no medical director, so this is
+// a list and there is no title field. Leave it empty until Noah confirms each
+// doctor has agreed to be named; nothing renders while it is empty.
+// Shape: { name: 'Dr ...', ahpra: 'MED000...', registerUrl: 'https://www.ahpra.gov.au/...' }
+interface NamedDoctor { name: string; ahpra: string; registerUrl: string }
+const OUR_DOCTORS: NamedDoctor[] = []
 
 /**
  * The verification ledger. Every row is an auditable claim paired with the
@@ -113,11 +116,21 @@ export default function DoctorCard() {
               through an accredited lab. You don&apos;t have to trust any of that: each
               claim on the right links to the body that regulates it.
             </motion.p>
-            {NAMED_DOCTOR && (
-              <p className="text-base mb-8" style={{ color: 'var(--text-primary)' }}>
-                <strong>{NAMED_DOCTOR.name}</strong>, {NAMED_DOCTOR.role}.{' '}
-                <a href={NAMED_DOCTOR.registerUrl} target="_blank" rel="noopener noreferrer" className="link-draw" style={{ color: 'var(--color-accent-fg)' }}>Check the AHPRA register</a>
-              </p>
+            {OUR_DOCTORS.length > 0 && (
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Our doctors</h3>
+                <ul className="list-none p-0 m-0" style={{ borderTop: '1px solid var(--border)' }}>
+                  {OUR_DOCTORS.map(d => (
+                    <li key={d.ahpra} className="py-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1" style={{ borderBottom: '1px solid var(--border)' }}>
+                      <span className="text-base" style={{ color: 'var(--text-primary)' }}>
+                        <strong>{d.name}</strong>{' '}
+                        <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>AHPRA {d.ahpra}</span>
+                      </span>
+                      <a href={d.registerUrl} target="_blank" rel="noopener noreferrer" className="link-draw text-sm inline-flex items-center" style={{ color: 'var(--color-accent-fg)', minHeight: 44 }}>Check the AHPRA register</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
             {/* No individual clinician on the brand. The trust device is the

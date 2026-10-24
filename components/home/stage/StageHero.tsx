@@ -256,7 +256,7 @@ export default function StageHero() {
               <span className="for-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
             </p>
             <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
-              <span>Bloods from <strong>$199</strong></span><span>Doctor consult from <strong>$99</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+              <span>Bloods from <strong>$199</strong></span><span>Doctor consult <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
             </p>
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>

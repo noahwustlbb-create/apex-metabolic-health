@@ -14,7 +14,7 @@ export default function TermsPage() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Terms of Service
             </h1>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 26 March 2026</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 24 October 2026</p>
           </div>
 
           <div className="space-y-8 text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -59,9 +59,9 @@ export default function TermsPage() {
               <h2 className="text-lg font-semibold mb-3" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>8. Cancellations and Refunds</h2>
               <p>The following cancellation and refund terms apply to all services provided by Apex Metabolic Health (Imperial Equity Investments Pty Ltd):</p>
               <ul className="list-disc pl-5 mt-3 flex flex-col gap-2">
-                <li><strong>Pre-consultation cancellation:</strong> If you cancel more than 24 hours before your scheduled consultation, you are entitled to a full refund of any consultation fee paid. Cancellations within 24 hours of the appointment are non-refundable.</li>
+                <li><strong>Cancelling or rescheduling:</strong> You can cancel or reschedule your appointment up to 4 hours before it starts, using the links in your booking confirmation email or by contacting us. If you cancel at least 4 hours before, you get a full refund of any consultation fee paid. Cancellations made less than 4 hours before the appointment are non-refundable.</li>
                 <li><strong>Post-consultation:</strong> Consultation fees are non-refundable once a consultation has been conducted, regardless of clinical outcome.</li>
-                <li><strong>Missed appointments (patient no-show):</strong> Missed appointments without at least 24 hours' notice forfeit the consultation fee. A rescheduling fee may apply.</li>
+                <li><strong>Missed appointments (patient no-show):</strong> If you miss your appointment without cancelling or rescheduling at least 4 hours before, the consultation fee is forfeited.</li>
                 <li><strong>Appointment cancelled by Apex:</strong> If we cancel or are unable to attend a scheduled appointment, you will be offered a full refund or a rescheduled appointment at no additional cost.</li>
                 <li><strong>Clinical decline:</strong> If a consultation is conducted and the treating doctor determines you are not clinically suitable for treatment, the consultation fee is non-refundable. This reflects the clinical service rendered. No treatment obligation arises from completing a consultation.</li>
                 <li><strong>Medications:</strong> Medication fees are governed by our pharmacy partner's terms and are non-refundable once dispensed or compounded.</li>

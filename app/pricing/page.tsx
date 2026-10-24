@@ -41,7 +41,7 @@ function PricingHero() {
           transition={{ duration: 0.6, delay: 0.22, ease }}
           style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
         >
-          Bloods from $199, a doctor consult from $99, membership $99 a month. Below is what your first 3 months cost on each path, before medication. Private clinic, no Medicare rebate.
+          Bloods from $199, a Peptide / General Consult $199 ($99 for members), membership $99 a month. Below is what your first 3 months cost on each path, before medication. Private clinic, no Medicare rebate.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -72,7 +72,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
   { label: 'Initial Blood Referral',      single: '$280',           partner: '$280',            member: '$199',        highlight: false },
   { label: 'Follow Up Blood Referral',    single: '$180',           partner: '$180',            member: '$139',        highlight: true  },
   { label: 'Hormone Consultation',        single: '$275',           partner: '$275',            member: '$199',        highlight: true  },
-  { label: 'General Consultation',        single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
+  { label: 'Peptide / General Consult',   single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
   { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
   { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
   { label: 'AHI fee per order',           single: '·',              partner: '$350–$650 avg',   member: 'Included',    highlight: true  },
@@ -85,10 +85,10 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
 
 const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
   { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
-    box: { k: 'Before medication', v: '$680', note: 'Blood panel $280 + hormone consult $275 + escript $125. With a general consult: $280 + $199 + $125 = $604. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
+    box: { k: 'Before medication', v: '$604', note: 'Blood panel $280 + Peptide / General Consult $199 + escript fee $125. With the hormone consult ($275) instead: $680. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
   { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
     box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $125 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
-  { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Cancel anytime', box: null, cta: 'Get Started' },
+  { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Pause or cancel from your account', box: null, cta: 'Get Started' },
 ]
 
 function MembershipComparison() {
@@ -305,10 +305,10 @@ const PATHWAYS: Pathway[] = [
         priceNote: 'Initial · follow-ups $139',
       },
       {
-        label: 'General Consultation',
+        label: 'Peptide / General Consult',
         body: 'Telehealth review of your metabolic health profile, results, and goals. Treatment plan built where clinically appropriate.',
         price: '$99',
-        priceNote: 'Initial consultation',
+        priceNote: 'Member rate',
       },
       {
         label: 'Ongoing Protocol',
@@ -341,7 +341,7 @@ const PATHWAYS: Pathway[] = [
         priceNote: 'Initial · follow-ups $180',
       },
       {
-        label: 'General Consultation',
+        label: 'Peptide / General Consult',
         body: 'Telehealth review of your metabolic health and goals. Treatment plan issued where clinically appropriate.',
         price: '$199',
         priceNote: 'Initial consultation',
@@ -706,7 +706,7 @@ function PricingCTA() {
 const PRICING_FAQS = [
   {
     q: 'Is there a lock-in contract?',
-    a: "No. Membership can be cancelled at any time. Clinical reviews happen every 3 months. That's a clinical schedule, not a commercial one.",
+    a: "No. Pause or cancel your membership from your account. Clinical reviews happen every 3 months. That's a clinical schedule, not a commercial one.",
   },
   {
     q: 'Do I need a GP referral?',

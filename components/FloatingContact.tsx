@@ -45,7 +45,7 @@ const ACTIONS = [
         <path d="M3 9h4M11 9h4" strokeLinecap="round" />
       </svg>
     ),
-    label: 'General consultation',
+    label: 'Peptide / General Consult',
     sub: 'Weight, recovery, skin, hair and longevity. Speak with a doctor.',
     href: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
     external: true,

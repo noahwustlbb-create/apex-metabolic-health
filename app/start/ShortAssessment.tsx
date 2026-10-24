@@ -813,7 +813,7 @@ export default function ShortAssessment() {
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="glass-card mb-8" style={{ padding: 14, borderRadius: 22 }}>
                     <p className="t-mono m-0 mb-2" style={{ color: DIM, fontSize: 12 }}>What it costs</p>
                     <div className="grid grid-cols-3 gap-2">
-                      {[{ n: '$199', l: 'Bloods from' }, { n: '$99', l: 'Doctor consult from' }, { n: '$99/mo', l: 'Membership' }].map(r => (
+                      {[{ n: '$199', l: 'Bloods from' }, { n: '$199', l: 'Doctor consult' }, { n: '$99/mo', l: 'Membership' }].map(r => (
                         <div key={r.l}>
                           <span className="t-mono block mb-1" style={{ color: DIM, fontSize: 12 }}>{r.l}</span>
                           <span className="t-readout block" style={{ fontSize: 24, color: TEXT }}>{r.n}</span>

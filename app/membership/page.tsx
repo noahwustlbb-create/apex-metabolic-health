@@ -140,7 +140,7 @@ function Hero() {
             <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="text-[12px] font-semibold" style={{ color: ACCENT }}>
-            $99 a month · No lock-in · Cancel anytime
+            $99 a month · No lock-in · Pause or cancel from your account
           </span>
         </motion.div>
 
@@ -211,7 +211,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.48, ease }}
           className="flex flex-wrap gap-x-6 gap-y-2"
         >
-          {['AHPRA-registered doctors', 'Reviewed every 3 months', 'Australia-wide telehealth', 'Cancel anytime'].map(t => (
+          {['AHPRA-registered doctors', 'Reviewed every 3 months', 'Australia-wide telehealth', 'Pause or cancel from your account'].map(t => (
             <span key={t} className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase" style={{ color: ACCENT }}>
               <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
               {t}
@@ -368,7 +368,7 @@ function PortalAccess() {
     },
     {
       icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M7 2v4M13 2v4M3 9h14" strokeLinecap="round"/></svg>,
-      label: 'Consultation booking', body: 'Book, reschedule, or cancel telehealth appointments directly from the portal.',
+      label: 'Consultation booking', body: 'Book telehealth appointments from the portal. Cancel or reschedule up to 4 hours before your appointment.',
     },
     {
       icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M10 2a6 6 0 016 6c0 3-1 5-2 6H6c-1-1-2-3-2-6a6 6 0 016-6zM8 17a2 2 0 004 0" strokeLinecap="round" strokeLinejoin="round"/></svg>,
@@ -582,7 +582,7 @@ function ClosingCTA() {
           {[
             { value: '$0', label: 'Prescribing fees' },
             { value: 'Cost price', label: 'Medication' },
-            { value: '$99/mo', label: 'Cancel anytime' },
+            { value: '$99/mo', label: 'Pause or cancel in your account' },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '22px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>{stat.value}</p>
