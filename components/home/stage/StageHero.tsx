@@ -1,310 +1,230 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import NextImage from 'next/image'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { useStageTone } from './StageTone'
-import { motion, useReducedMotion, useTransform, useMotionValueEvent } from 'framer-motion'
+import { useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
+import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
 
 type Sex = 'male' | 'female'
+type Who = 'men' | 'women'
 
-type Pillar = {
-  id: string
-  label: string
-  /** Tests on the Apex panel. Test names only, never medicines or outcomes. */
-  markers: Record<Sex, string>
-  /** First /start question this pillar answers. */
-  t: string
-  why: string
-  /** Where the dot sits, as a fraction of the figure box. */
-  at: Record<Sex, [number, number]>
-  /** Which side of the dot the chip opens to. */
-  side: 'left' | 'right'
-}
+/**
+ * HERO (Noah, 24 Oct 2026: "choose a gender first ... with the award winning
+ * 3D hero"). The visitor picks Men or Women inside the hero. Before the pick
+ * the hero is neutral: two grey glass figures side by side. The pick is the
+ * moment: the hero floods into that colour world from the tapped button, the
+ * chosen figure steps forward in colour and starts to turn (a real 360 degree
+ * turntable, drag to turn), the copy and the /start link follow.
+ *
+ * A short scroll (pinned under one screen) faces the figure to camera and
+ * lights the four systems the panel reads, one by one. Every name on a marker
+ * is a test on the Apex panel (components/home/PanelMarkers.tsx), never a
+ * medicine or an outcome.
+ *
+ * State lives on <html>: data-chosen (men | women, absent = neutral) and
+ * data-audience (the site-wide rose tokens). The <head> boot script stamps
+ * both before paint, so a returning visitor or ?for=women never sees the
+ * neutral hero flash first. CSS drives the look; React drives the moment.
+ */
 
-const PILLARS: Pillar[] = [
+const SYSTEMS: { id: string; label: string; tests: Record<Sex, string>; at: Record<Sex, [number, number]> }[] = [
   {
-    id: 'hormones', label: 'Hormones', side: 'left',
-    markers: { male: 'Testosterone, SHBG, oestradiol, LH, FSH, prolactin', female: 'Oestradiol, progesterone, testosterone, LH, FSH, prolactin' },
-    t: 'hormone', why: 'energy',
-    at: { male: [0.36, 0.2], female: [0.4, 0.2] },
+    id: 'hormones', label: 'Hormones',
+    tests: { male: 'Testosterone, SHBG, oestradiol, LH, FSH, prolactin', female: 'Oestradiol, progesterone, testosterone, LH, FSH, prolactin' },
+    at: { male: [0.6, 0.12], female: [0.6, 0.1] },
   },
   {
-    id: 'longevity', label: 'Longevity', side: 'left',
-    markers: { male: 'Cholesterol, triglycerides, hs-CRP, IGF-1, full blood count', female: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
-    t: 'longevity', why: 'ageing',
-    at: { male: [0.57, 0.71], female: [0.56, 0.7] },
+    id: 'energy', label: 'Energy',
+    tests: { male: 'Thyroid (TSH), full blood count, cortisol, IGF-1', female: 'Thyroid (TSH, free T4, free T3), iron studies, vitamin D' },
+    at: { male: [0.54, 0.47], female: [0.55, 0.44] },
   },
   {
-    id: 'recovery', label: 'Recovery', side: 'left',
-    markers: { male: 'Testosterone, IGF-1, cortisol, hs-CRP', female: 'Testosterone, cortisol, iron studies, hs-CRP' },
-    t: 'recovery', why: 'recovery',
-    at: { male: [0.13, 0.63], female: [0.14, 0.63] },
+    id: 'heart', label: 'Heart',
+    tests: { male: 'Cholesterol, triglycerides, hs-CRP', female: 'Cholesterol, triglycerides, hs-CRP' },
+    at: { male: [0.5, 0.76], female: [0.46, 0.74] },
   },
   {
-    id: 'metabolic', label: 'Metabolic', side: 'left',
-    markers: { male: 'Glucose, liver and kidney function, uric acid, lipids', female: 'Glucose, HbA1c, liver and kidney function, lipids' },
-    t: 'weight', why: 'weight',
-    at: { male: [0.62, 0.93], female: [0.6, 0.93] },
+    id: 'metabolic', label: 'Metabolic',
+    tests: { male: 'Glucose, liver and kidney function, uric acid', female: 'Glucose, HbA1c, liver and kidney function' },
+    at: { male: [0.36, 0.82], female: [0.36, 0.82] },
   },
 ]
 
-const FIG_ASPECT = 1647 / 2200
+const POSTER: Record<Sex, string> = { male: '/3d/turn/male/00.webp', female: '/3d/turn/female/00.webp' }
+const POSTER_SM: Record<Sex, string> = { male: '/3d/turn/male/poster-540.webp', female: '/3d/turn/female/poster-540.webp' }
 
-/**
- * HOOK, BioTrack structure. An ice stage holds the glass body, bleeding off
- * the bottom edge. It loads ghost → glow → full. Four pillar chips sit on the
- * body on dot leaders; the active one opens with its markers. Scrolling hands
- * the body over to the heart and the headline over to the doctor.
- */
+const readChosen = (): Who | null => {
+  const c = typeof document !== 'undefined' ? document.documentElement.dataset.chosen : undefined
+  return c === 'men' || c === 'women' ? c : null
+}
+
 export default function StageHero() {
-  const tone = useStageTone()
-  const glow = tone === 'red' ? 'red' : 'Apex blue'
-  // Fixed paths per audience (24 Oct): the server cannot know the audience, so
-  // both slots ship and CSS shows the one html[data-audience] asks for. Lazy
-  // loading means the hidden slot is never downloaded (no man on ?for=women).
-  const FIG = {
-    male:   { src: `/3d/${tone === 'red' ? 'red/' : ''}body-male.jpg`, alt: `Dark glass figure of a man, blood vessels lit in ${glow} from the heart outward` },
-    female: { src: '/3d/pink/body-female.jpg', alt: 'Dark glass figure of a woman, blood vessels lit in rose from the heart outward' },
-  }
-  // React #418 (24 Oct): useReducedMotion is null on the server and true on a
-  // reduced-motion client, so the first render must ignore it. Phones get the
-  // still hero too: motion never holds the offer hostage on a small screen.
-  const prefersReduced = useReducedMotion()
+  const ref = useRef<HTMLElement>(null)
+  const frameRef = useRef<HTMLDivElement>(null)
+  const washRef = useRef<HTMLDivElement>(null)
+  const { setAudience } = useAudience()
+  const [chosen, setChosen] = useState<Who | null>(null)
   const [mounted, setMounted] = useState(false)
-  const [phone, setPhone] = useState(false)
+  const [still, setStill] = useState(false)
+  const [live, setLive] = useState<Record<Sex, boolean>>({ male: false, female: false })
+  const [lit, setLit] = useState(-1)
+  const [away, setAway] = useState(1)
+  const [beat, setBeat] = useState(false)
+  const face = useRef(0)
+  const anim = useRef<{ a?: Animation; t?: number }>({})
+
   useEffect(() => {
     setMounted(true)
-    const mq = window.matchMedia('(max-width: 899px)')
-    const on = () => setPhone(mq.matches)
+    setChosen(readChosen())
+    // Reduced motion, Save-Data and low-power devices keep the composed still.
+    const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number }
+    const low = !!nav.connection?.saveData || (nav.deviceMemory !== undefined && nav.deviceMemory <= 2) || (navigator.hardwareConcurrency || 8) <= 2
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const on = () => setStill(mq.matches || low)
     on(); mq.addEventListener('change', on)
     return () => mq.removeEventListener('change', on)
   }, [])
-  const reduced = mounted && (!!prefersReduced || phone)
-  const ref = useRef<HTMLElement>(null)
-  // The Men / Women switch is the whole site's switch (components/audience).
-  const { audience, setAudience } = useAudience()
-  const sex: Sex = audience === 'women' ? 'female' : 'male'
-  const [chose, setChose] = useState(false)
-  const setSex = (s: Sex) => { setAudience(s === 'female' ? 'women' : 'men'); setChose(true) }
-  const [active, setActive] = useState(0)
-  const [picked, setPicked] = useState(false)
 
+  const sex: Sex | null = chosen === 'women' ? 'female' : chosen === 'men' ? 'male' : null
 
-  const p = useSectionProgress(ref, 'pin')
-  const bodyOpacity = useTransform(p, [0, 0.42, 0.6], [1, 1, 0])
-  const bodyScale = useTransform(p, [0, 0.6], [1, 1.08])
-  const bodyY = useTransform(p, [0, 0.6], ['0%', '-3%'])
-  const heartOpacity = useTransform(p, [0.44, 0.62], [0, 1])
-  const heartScale = useTransform(p, [0.44, 0.8], [0.9, 1])
-  const heartRotate = useTransform(p, [0.44, 0.72, 1], [-16, 2, 5])
-  // The box spins in (Noah, 29 Sep): a scroll-linked turn in depth as it
-  // rises, then it keeps turning slowly under the doctor copy.
-  const heartSpin = useTransform(p, [0.44, 0.72, 1], [-70, 0, 18])
-  const heartRise = useTransform(p, [0.44, 0.7], ['18%', '0%'])
-  const chips = useTransform(p, [0.34, 0.42], [1, 0])
-  const chipsEvents = useTransform(p, v => (v > 0.4 ? 'none' : 'auto'))
-  const copyA = useTransform(p, [0, 0.14, 0.2], [1, 1, 0])
-  const copyAY = useTransform(p, [0.14, 0.2], [0, -28])
-  // Faded copy must not swallow taps meant for the Men / Women switch.
-  const [copyFaded, setCopyFaded] = useState(false)
-  useMotionValueEvent(copyA, 'change', v => setCopyFaded(v < 0.3))
-  // Who: the visitor picks Men or Women while the body walks its systems.
-  const copyW = useTransform(p, [0.18, 0.24, 0.38, 0.44], [0, 1, 1, 0])
-  const copyWY = useTransform(p, [0.18, 0.24, 0.38, 0.44], [28, 0, 0, -28])
-  const [whoOn, setWhoOn] = useState(false)
-  useMotionValueEvent(copyW, 'change', v => setWhoOn(v > 0.6))
-  const copyB = useTransform(p, [0.5, 0.62], [0, 1])
-  const copyBY = useTransform(p, [0.5, 0.62], [28, 0])
-
-  // Masterclass rule: motion is scroll-linked, never a timer. Until the
-  // visitor picks a system, the first third of the pinned scroll walks the
-  // four pillars in order, and reverses cleanly on the way back up.
-  useEffect(() => {
-    if (picked || reduced) return
-    return p.on('change', v => {
-      const i = Math.min(PILLARS.length - 1, Math.floor((v / 0.4) * PILLARS.length))
-      setActive(a => (a === i ? a : i))
-    })
-  }, [p, picked, reduced])
-
-  // The body turns a few degrees toward the cursor (BioTrack app reference).
-  const mediaRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const el = mediaRef.current
-    if (!el || reduced || !window.matchMedia('(pointer: fine)').matches) return
-    let raf = 0
-    const onMove = (e: PointerEvent) => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        el.style.setProperty('--tx', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3))
-        el.style.setProperty('--ty', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3))
-      })
+  // The pick: flood the hero with the new colour world from the button.
+  const choose = useCallback((who: Who, e?: React.MouseEvent<HTMLButtonElement>) => {
+    const html = document.documentElement
+    const frame = frameRef.current
+    const wash = washRef.current
+    const prev = anim.current
+    prev.a?.cancel(); if (prev.t) window.clearTimeout(prev.t)
+    const commit = () => { setAudience(who) }
+    if (!frame || !wash || still || html.dataset.chosen === who) {
+      html.dataset.chosen = who; commit(); setChosen(who)
+      frame?.style.removeProperty('--hx-bg-now')
+      return
     }
-    window.addEventListener('pointermove', onMove, { passive: true })
-    return () => { window.removeEventListener('pointermove', onMove); cancelAnimationFrame(raf) }
-  }, [reduced])
+    // Hold the current background while the wash grows over it.
+    const bgNow = getComputedStyle(frame).backgroundColor
+    frame.style.setProperty('--hx-bg-now', bgNow)
+    wash.dataset.to = who
+    const fr = frame.getBoundingClientRect()
+    const br = e?.currentTarget.getBoundingClientRect()
+    const x = br ? br.left + br.width / 2 - fr.left : fr.width / 2
+    const y = br ? br.top + br.height / 2 - fr.top : fr.height
+    const R = Math.hypot(Math.max(x, fr.width - x), Math.max(y, fr.height - y)) + 40
+    html.dataset.chosen = who
+    setChosen(who)
+    // Tokens (CTA, glows) turn as the edge of the wash passes the copy.
+    prev.t = window.setTimeout(commit, 320)
+    const a = wash.animate(
+      [{ clipPath: `circle(0px at ${x}px ${y}px)`, opacity: 1 }, { clipPath: `circle(${R}px at ${x}px ${y}px)`, opacity: 1 }],
+      { duration: 820, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' },
+    )
+    prev.a = a
+    a.onfinish = () => { frame.style.removeProperty('--hx-bg-now'); a.cancel(); delete wash.dataset.to }
+  }, [setAudience, still])
 
-  // No prices on the homepage (Noah, 29 Sep). Two hooks instead, both real
-  // portal features: the Apex score (progress you can watch, only in our
-  // app) and follow-up bloods booked for you (nothing to chase, nothing slips).
-  const perks = (
-    <ul className="stage-perks">
-      <li><em>Only in the Apex app</em><strong>Your Apex score</strong><span>One number from your whole panel. Watch it move every test.</span></li>
-      <li><em>Nothing to chase</em><strong>We book the follow-ups</strong><span>On a program, your next bloods are scheduled for you.</span></li>
-    </ul>
-  )
+  // The short scroll beat: face the camera, light the systems in order.
+  const p = useSectionProgress(ref, 'pin')
+  useMotionValueEvent(p, 'change', v => {
+    face.current = Math.min(1, v / 0.08)
+    const i = v < 0.12 ? -1 : Math.min(SYSTEMS.length - 1, Math.floor((v - 0.12) / 0.19))
+    setLit(l => (l === i ? l : i))
+    setBeat(b => (b === v > 0.05 ? b : v > 0.05))
+  })
 
-  const who = (
-    <div className="stage-who" role="group" aria-label="Who is the test for?">
-      {(['male', 'female'] as Sex[]).map(s => (
-        <button key={s} type="button" onClick={() => setSex(s)} aria-pressed={sex === s} data-on={sex === s || undefined}>
-          <strong>{s === 'male' ? 'Men' : 'Women'}</strong>
-          <span>{s === 'male' ? 'Testosterone, energy, recovery' : 'Hormones, cycle, iron'}</span>
-        </button>
-      ))}
-    </div>
-  )
+  const onAngle = useCallback((a: number) => setAway(a), [])
+  const readyM = useCallback(() => setLive(l => ({ ...l, male: true })), [])
+  const readyF = useCallback(() => setLive(l => ({ ...l, female: true })), [])
 
-  const pillar = PILLARS[active]
-  const href = picked ? `/start?t=${pillar.t}&why=${pillar.why}` : '/start'
-  const choose = (i: number) => { setActive(i); setPicked(true) }
+  const href = chosen ? `/start?for=${chosen}` : '/start'
+  const markerShow = sex && (still ? 1 : 1 - away)
+  const sys = lit >= 0 ? SYSTEMS[lit] : null
 
   return (
-    <section ref={ref} id="hero" className="stage-hero" data-still={reduced || undefined} aria-label="Introduction">
-      <div className="stage-hero-pin">
-        <div className="stage-frame stage-hero-frame">
-          {/* Figure: body, then heart */}
-          <div className="stage-hero-figure" aria-hidden={false}>
-            <motion.div className="stage-fig-box stage-load" style={reduced ? undefined : { opacity: bodyOpacity, scale: bodyScale, y: bodyY, aspectRatio: FIG_ASPECT }}>
-              <div className="stage-fig-media" ref={mediaRef}>
-              {(['male', 'female'] as Sex[]).map(s => (
-                <NextImage
-                  key={s}
-                  src={FIG[s].src}
-                  alt={s === sex ? FIG[s].alt : ''}
-                  fill
-                  loading="lazy"
-                  fetchPriority="high"
-                  sizes="(min-width: 900px) 46vw, 92vw"
-                  className={`stage-fig-img ${s === 'male' ? 'for-men' : 'for-women'}`}
-                />
-              ))}
-              <span className="stage-pulse" aria-hidden="true" />
-              <span className="stage-scan" aria-hidden="true" />
-              </div>
+    <section ref={ref} id="hero" className="hx" data-still={still || undefined} data-pin={(!!chosen && !still) || undefined} data-beat={(beat && !!chosen && !still) || undefined} aria-label="Introduction">
+      <div className="hx-pin">
+        <div className="hx-frame stage-frame" ref={frameRef}>
+          <div className="hx-wash" ref={washRef} aria-hidden="true" />
 
-              <motion.div className="stage-chips" style={reduced ? undefined : { opacity: chips, pointerEvents: chipsEvents }}>
-              {PILLARS.map((pl, i) => {
-                const [x, y] = pl.at[sex]
-                const on = i === active
-                return (
-                  <button
-                    key={pl.id}
-                    type="button"
-                    className="stage-chip"
-                    data-on={on || undefined}
-                    data-side={pl.side}
-                    style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
-                    onClick={() => choose(i)}
-                    onMouseEnter={() => choose(i)}
-                    onFocus={() => choose(i)}
-                    aria-pressed={on && picked}
-                    aria-label={`${pl.label}: ${pl.markers[sex]}`}
-                  >
-                    <span className="stage-chip-dot" aria-hidden="true" />
-                    <span className="stage-chip-lead" aria-hidden="true" />
-                    <span className="stage-chip-card" aria-hidden="true">
-                      <span className="stage-chip-title">{pl.label}</span>
-                      <span className="stage-chip-body">{pl.markers[sex]}</span>
-                    </span>
-                  </button>
-                )
-              })}
-              </motion.div>
-            </motion.div>
-
-            {!reduced && (
-              <motion.div className="stage-heart-box" style={{ opacity: heartOpacity, scale: heartScale, rotate: heartRotate, rotateY: heartSpin, y: heartRise, transformPerspective: 1100 }} aria-hidden="true">
-                {/* Noah 29 Sep: the hand-off is the Apex box, not the vials. */}
-                <NextImage src="/3d/product/box-tall.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 80vw" className="stage-fig-img" />
-                <span className="stage-float stage-float-a">
-                  <span className="stage-float-k">Starts with</span>
-                  <span className="stage-float-v">One blood panel, 23+ markers</span>
-                </span>
-                <span className="stage-float stage-float-b">
-                  <span className="stage-float-k">Delivered</span>
-                  <span className="stage-float-v">Plain outer pack, to your door</span>
-                </span>
-              </motion.div>
-            )}
-          </div>
-
-          {/* Copy A: the hook */}
-          <motion.div className="stage-hero-copy" data-faded={copyFaded || undefined} style={reduced ? undefined : { opacity: copyA, y: copyAY }}>
-            <p className="stage-kicker hero-in" style={{ animationDelay: '120ms' }}>
-              <span className="stage-kicker-dot" aria-hidden="true" /> <span><span className="for-men">Australian adults 18+</span><span className="for-women">Australian women 18+</span> · AHPRA-registered doctors</span>
+          <div className="hx-copy">
+            <p className="stage-kicker hero-in" style={{ animationDelay: '80ms' }}>
+              <span className="stage-kicker-dot" aria-hidden="true" />
+              <span><span className="hx-when-none">Australian adults 18 to 80</span><span className="hx-when-men">Australian men 18 to 80</span><span className="hx-when-women">Australian women 18 to 80</span> · AHPRA-registered doctors</span>
             </p>
-            <h1 className="stage-display hero-in" style={{ animationDelay: '200ms' }}>
+            <h1 className="stage-display hero-in" style={{ animationDelay: '140ms' }}>
               Fine on paper.<br /><span className="stage-muted">Flat in real life.</span>
             </h1>
-            <p className="stage-lead hero-in" style={{ animationDelay: '360ms' }}>
-              <span className="for-men">One blood panel, 23+ markers, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
-              <span className="for-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
+            <p className="stage-lead hx-lead hero-in" style={{ animationDelay: '260ms' }}>
+              <span className="hx-when-none">One blood panel, 23+ markers, read with you by a doctor online. No GP referral.</span>
+              <span className="hx-when-men">One blood panel, 23+ markers including testosterone, read with you by a doctor online. No GP referral.</span>
+              <span className="hx-when-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. No GP referral.</span>
             </p>
-            {/* Price line, consult first (Noah, 24 Oct 2026: bloods are not the best hook).
-                "From" covers the hormone consult, which costs more. Mirrored on the /start
-                match screen (app/start/ShortAssessment.tsx).
-                Alternative, bloods first (the line before 24 Oct). To switch, swap it in:
-                  <span>Bloods from <strong>$199</strong></span><span>Doctor consult from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
-                Held back: Noah's "$99 therapeutic peptide consults". TGA risk: it advertises a
-                prescription-medicine therapy to the public, and $99 is the member price only.
-                Do not ship it without a compliance decision. */}
-            <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
-              <span className="stage-price-lead">Doctor consults from <strong>$99</strong> for members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+            {/* One price line (24 Oct fundamentals pass). Detail lives on /pricing. */}
+            <p className="stage-price hx-price hero-in" style={{ animationDelay: '320ms' }}>
+              <span className="stage-price-lead">Doctor consults from <strong>$99</strong> members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>No Medicare rebate</span>
             </p>
-            <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
+            <div className="stage-actions hx-actions hero-in" style={{ animationDelay: '380ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
-              <Link href="/pricing" className="stage-link">See full pricing</Link>
+              <Link href="/pricing" className="stage-link">See pricing</Link>
             </div>
-            <div className="stage-hero-perks-still">{perks}</div>
-            <div className="stage-hero-who-still">{who}</div>
-          </motion.div>
+          </div>
 
-          {/* Copy W: who are we testing? The pick tells the rest of the story. */}
-          {!reduced && (
-            <motion.div className="stage-hero-copy stage-hero-copy-who" data-faded={!whoOn || undefined} style={{ opacity: copyW, y: copyWY }}>
-              <h2 className="stage-display">
-                Who are we<br /><span className="stage-muted">testing?</span>
-              </h2>
-              {who}
-              <p className="stage-caption" aria-live="polite">
-                {picked ? <>Your assessment will start with <strong>{pillar.label.toLowerCase()}</strong>.</> : <><strong>{pillar.label}:</strong> {pillar.markers[sex]}.</>}
-              </p>
-            </motion.div>
-          )}
+          <div className="hx-stage">
+            {(['male', 'female'] as Sex[]).map(s => {
+              const isOn = sex === s
+              return (
+                <div key={s} className="hx-fig" data-sex={s} data-live={(live[s] && !still) || undefined}>
+                  <picture>
+                    <source media="(max-width: 899px)" srcSet={POSTER_SM[s]} />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={POSTER[s]}
+                      alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
+                      width={828} height={1108}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="hx-poster"
+                    />
+                  </picture>
+                  {mounted && !still && (
+                    <Turntable sex={s} active={isOn} face={face} onAngle={isOn ? onAngle : undefined} onReady={s === 'male' ? readyM : readyF} />
+                  )}
+                  {isOn && (
+                    <div className="hx-marks" style={{ opacity: markerShow || 0 }} aria-hidden="true">
+                      {SYSTEMS.map((m, i) => (
+                        <span key={m.id} className="hx-mark" data-on={i <= lit || undefined} data-now={i === lit || undefined} style={{ left: `${m.at[s][0] * 100}%`, top: `${m.at[s][1] * 100}%` }}>
+                          <span className="hx-mark-dot" />
+                          <span className="hx-mark-label">{m.label}</span>
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
 
-          {/* Copy B: the doctor */}
-          {!reduced && (
-            <motion.div className="stage-hero-copy stage-hero-copy-b" style={{ opacity: copyB, y: copyBY }} aria-hidden="true">
-              <h2 className="stage-display">
-                {chose ? (sex === 'female' ? 'Her plan,' : 'His plan,') : 'Your plan,'}<br /><span className="stage-muted">written by a doctor.</span>
-              </h2>
-              <p className="stage-lead">
-                An AHPRA-registered doctor reads {sex === 'female' ? 'your hormones, iron and metabolic markers' : 'your testosterone, metabolic and heart markers'} with you on the call, decides what is suitable, and your plan arrives at your door.
-              </p>
-              {perks}
-            </motion.div>
-          )}
+            {/* What the lit system measures. Announced for screen readers. */}
+            <div className="hx-readout" data-on={(!!sys && !!sex) || undefined} aria-live="polite">
+              {sys && sex && (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)}
+            </div>
 
+            <div className="hx-pick" role="group" aria-labelledby="hx-pick-k">
+              <p id="hx-pick-k" className="hx-pick-k">{chosen ? <>Showing the {chosen === 'women' ? 'women’s' : 'men’s'} panel. <span className="hx-hint">Drag to turn.</span></> : 'Who is this for? Start here.'}</p>
+              <div className="hx-pick-row">
+                {(['men', 'women'] as Who[]).map(w => (
+                  <button key={w} type="button" className="hx-pick-btn" data-who={w} aria-pressed={chosen === w} onClick={e => choose(w, e)}>
+                    <strong>{w === 'men' ? 'Men' : 'Women'}</strong>
+                    <span>{w === 'men' ? 'Testosterone, energy' : 'Hormones, cycle, iron'}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
 
-          <p className="stage-foot">Illustrative render. Every marker named is on the Apex panel. For Australian adults 18+. General information, not medical advice.</p>
+          <p className="stage-foot hx-foot">Illustrative render. Every marker named is on the Apex panel. General information, not medical advice.</p>
         </div>
       </div>
     </section>
   )
 }
-

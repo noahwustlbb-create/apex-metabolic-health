@@ -20,10 +20,11 @@ const TILES = [
 ]
 
 // Ahead Health's other door: start from where you are in life, not a symptom.
+// Covers the whole 18 to 80 audience (Noah, 24 Oct 2026).
 const STAGES = [
-  { why: 's30', label: 'Late 30s', sub: 'Getting ahead of it' },
-  { why: 's40', label: 'Mid 40s', sub: 'Noticing the shift' },
-  { why: 's50', label: '50s and on', sub: 'Staying strong' },
+  { why: 'a18', label: '18 to 34', sub: 'Know your baseline' },
+  { why: 'a35', label: '35 to 54', sub: 'Noticing the shift' },
+  { why: 'a55', label: '55 to 80', sub: 'Staying strong' },
 ]
 
 export default function StageStartTiles() {
@@ -34,7 +35,7 @@ export default function StageStartTiles() {
     <section ref={ref} className="st-tiles container-x" aria-labelledby="st-tiles-title">
       <div className="st-tiles-head">
         <h2 id="st-tiles-title" className="stage-h2">What brings you here?<br /><span className="stage-muted">Start with that.</span></h2>
-        <p className="stage-lead">Pick what is bothering you. The 2-minute check starts there, and one blood panel covers everything you add.</p>
+        <p className="stage-lead">Pick what is bothering you. The 45-second check starts there, and one blood panel covers everything you add.</p>
       </div>
       <div className="st-tiles-grid">
         {TILES.map((x, i) => (
@@ -51,7 +52,7 @@ export default function StageStartTiles() {
         ))}
       </div>
       <motion.div className="st-stages" initial={reduced ? false : { opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6, ease }}>
-        <span className="st-stages-k">Or start from where you are in life</span>
+        <span className="st-stages-k">Or start from your age</span>
         {STAGES.map(x => (
           <Link key={x.why} href={`/start?why=${x.why}`} className="st-stage">
             <strong>{x.label}</strong><span>{x.sub}</span>

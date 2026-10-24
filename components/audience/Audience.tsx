@@ -13,15 +13,18 @@ const KEY = 'apex-audience'
 const Ctx = createContext<{ audience: Audience; setAudience: (a: Audience) => void }>({ audience: 'men', setAudience: () => {} })
 
 /** Runs inline in <head>, before React. Keep it tiny and dependency-free. */
-export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');if(a==='women')document.documentElement.dataset.audience='women'}catch(e){}`
+export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');var d=document.documentElement.dataset;if(a==='women')d.audience='women';if(a==='women'||a==='men')d.chosen=a}catch(e){}`
 
 export function AudienceProvider({ children }: { children: ReactNode }) {
   const [audience, set] = useState<Audience>('men')
   useEffect(() => { if (document.documentElement.dataset.audience === 'women') set('women') }, [])
   const setAudience = useCallback((a: Audience) => {
     set(a)
-    if (a === 'women') document.documentElement.dataset.audience = 'women'
-    else delete document.documentElement.dataset.audience
+    const d = document.documentElement.dataset
+    if (a === 'women') d.audience = 'women'
+    else delete d.audience
+    // The visitor has now said who this is for: the hero and /start use it.
+    d.chosen = a
     try { localStorage.setItem(KEY, a) } catch { /* storage blocked */ }
     const ph = (window as unknown as { posthog?: { register?: (p: Record<string, string>) => void } }).posthog
     ph?.register?.({ audience: a })

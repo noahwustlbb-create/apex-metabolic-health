@@ -1,4 +1,3 @@
-import { useId } from 'react'
 import { WORD, WORD_CUT, BOX } from './logoPaths'
 
 /**
@@ -15,11 +14,13 @@ const MARK_RATIO = 1.163
 const [wx0, wy0, wx1, wy1] = BOX.word
 const WORD_VIEWBOX = `${wx0} ${wy0} ${wx1 - wx0} ${wy1 - wy0}`
 const WORD_RATIO = (wx1 - wx0) / (wy1 - wy0)
+const WORD_D = [...WORD, ...WORD_CUT].join(' ')
 
 export function Wordmark({ height = 18, className }: { height?: number; className?: string }) {
-  // Unique per instance. A hardcoded id collided between the nav and footer
-  // lockups, and an unresolved mask renders the rect as a solid block.
-  const maskId = `apex-wm-${useId().replace(/:/g, '')}`
+  // One compound path, counters cut by the even-odd rule. The old version
+  // painted a rect through an SVG <mask>; on phones (Noah, 24 Oct 2026) the
+  // mask failed to resolve in the footer and the wordmark showed as a solid
+  // black block. No mask, no id, nothing to resolve.
   return (
     <svg
       viewBox={WORD_VIEWBOX}
@@ -29,13 +30,7 @@ export function Wordmark({ height = 18, className }: { height?: number; classNam
       aria-hidden="true"
       focusable="false"
     >
-      <defs>
-        <mask id={maskId} maskUnits="userSpaceOnUse" x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0}>
-          {WORD.map((d, i) => <path key={i} d={d} fill="#fff" />)}
-          {WORD_CUT.map((d, i) => <path key={`c${i}`} d={d} fill="#000" />)}
-        </mask>
-      </defs>
-      <rect x={wx0} y={wy0} width={wx1 - wx0} height={wy1 - wy0} fill="currentColor" mask={`url(#${maskId})`} />
+      <path d={WORD_D} fill="currentColor" fillRule="evenodd" />
     </svg>
   )
 }
