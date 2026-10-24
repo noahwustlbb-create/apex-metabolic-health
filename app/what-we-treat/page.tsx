@@ -136,7 +136,7 @@ const CLINICAL = [
     title: 'Hair Loss & Skin Regeneration',
     recognition: 'Hair loss and declining skin quality both have identifiable clinical drivers: DHT, nutrient deficiencies, hormones, collagen.',
     clinical: 'We run the blood work, identify the cause, and build a protocol tailored to your pattern.',
-    tags: ['DHT', 'Hormones', 'Peptides', 'Nutrition'],
+    tags: ['DHT', 'Hormones', 'Iron', 'Nutrition'],
     href: '/programs/hair-restoration',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
@@ -147,9 +147,9 @@ const CLINICAL = [
   },
   {
     title: 'Injury Repair & Recovery',
-    recognition: 'Chronic injuries that won\'t resolve, or recovery that stalls after training: these have clinical solutions.',
-    clinical: 'Peptide protocols accelerate tissue repair and reduce the inflammation that blocks recovery.',
-    tags: ['Peptides', 'Inflammation', 'Tissue Repair', 'Recovery'],
+    recognition: 'Chronic injuries that won\'t settle, or recovery that stalls after training, can have a clinical driver worth testing for.',
+    clinical: 'We test the hormonal, inflammatory and nutritional markers involved in recovery, and a doctor talks you through what is suitable for you.',
+    tags: ['Inflammation', 'Hormones', 'Iron', 'Recovery'],
     href: '/programs/injury-repair',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

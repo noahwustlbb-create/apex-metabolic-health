@@ -13,15 +13,10 @@ const ACCENT = 'var(--blue)'
 const ADVANTAGE_STATS = [
   { value: '$0',           label: 'Prescribing fees',   sub: 'vs $125 per script' },
   { value: 'Cost price',   label: 'All medication',     sub: 'No medication mark-up' },
-  { value: '$1,200–$2,200', label: 'Est. annual saving', sub: 'Based on 3+ scripts and 2 panels/yr' },
+  { value: 'Included',     label: 'AHI fee per order',  sub: 'Admin, handling, infrastructure' },
   { value: '$99',          label: 'Per month',           sub: 'No lock-in contracts' },
 ]
 
-const SAVINGS_ROWS = [
-  { label: 'Prescribing fees',        saving: 'Up to $500',   period: '/yr', detail: '3–5 scripts × $125, waived entirely as a member' },
-  { label: 'Medication mark-ups',     saving: '$600–$1,200',  period: '/yr', detail: 'No medication mark-up: pharmacy cost price passed direct' },
-  { label: 'Two blood panels a year', saving: '$360–$560',    period: '/yr', detail: 'Included: two panels in every 12 months at no charge. Extras at member rates' },
-]
 
 const INCLUDED = [
   {
@@ -77,8 +72,8 @@ const INCLUDED = [
         <path d="M8 3l-1 5.5H5L8 17a3 3 0 006 0l3-8.5h-2L14 3H8z" strokeLinecap="round" />
       </svg>
     ),
-    title: 'Two blood panels a year, included',
-    body: 'Two panels in every 12 months at no charge, and any extra at member rates. No guessing at dose changes without data: every adjustment is grounded in objective measurement.',
+    title: 'Member rates on every panel',
+    body: 'Your first panel at $199 and follow-up panels at $139, booked for you when they are due. Every change to your plan is made with fresh results in front of your doctor.',
   },
   {
     icon: (
@@ -145,7 +140,7 @@ function Hero() {
             <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="text-[11px] font-semibold" style={{ color: ACCENT }}>
-            Members may save $1,000–$1,800/yr based on 3+ scripts annually
+            $99 a month · No lock-in · Cancel anytime
           </span>
         </motion.div>
 
@@ -173,9 +168,9 @@ function Hero() {
             marginBottom: '1.25rem',
           }}
         >
-          Ongoing care that{' '}
+          Ongoing care,{' '}
           <span style={{ color: 'var(--blue)' }}>
-            pays for itself.
+            one monthly fee.
           </span>
         </motion.h1>
 
@@ -186,7 +181,7 @@ function Hero() {
           className="text-base md:text-lg leading-relaxed"
           style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '520px', marginBottom: '2.25rem' }}
         >
-          A full doctor-led clinical system for $99/mo: protocol management, biomarker tracking, medication at cost price, and prescribing fees waived. Structured to save you more than it costs.
+          A full doctor-led clinical system for $99/mo: protocol management, biomarker tracking, medication at cost price, and prescribing fees waived.
         </motion.p>
 
         <motion.div
@@ -270,110 +265,6 @@ function AdvantageStrip() {
               </span>
             </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SavingsBreakdown() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <section
-      className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--bg)' }}
-      aria-label="Savings breakdown"
-    >
-      <div className="glow-rule" aria-hidden="true" />
-      <div aria-hidden="true" className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.05) 0%, transparent 70%)' }} />
-
-      <div ref={ref} className="container-tight relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left - context */}
-          <div>
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-              Is it worth it?
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 44px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.08, marginBottom: '1rem' }}
-            >
-              The average Apex patient on protocol has:
-            </motion.h2>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
-              className="grid grid-cols-3 gap-3 mb-8"
-            >
-              {[
-                { value: '2–4', label: 'Consultations per year' },
-                { value: '2–3', label: 'Blood panels per year' },
-                { value: '12+', label: 'Months of treatment' },
-              ].map(({ value, label }) => (
-                <div key={label} className="flex flex-col items-center justify-center py-5 rounded-xl text-center"
-                  style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                  <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '32px', fontWeight: 800, color: ACCENT, lineHeight: 1 }}>{value}</span>
-                  <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '6px' }}>{label}</span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.32 }}
-              className="text-sm leading-relaxed"
-              style={{ color: 'var(--text-primary)', opacity: 0.72 }}
-            >
-              If that sounds like you, here&apos;s what membership saves you annually, before you factor in the clinical value of having a doctor actually managing your protocol.
-            </motion.p>
-          </div>
-
-          {/* Right - savings table */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
-          >
-            <div className="overflow-hidden" style={{ border: '1px solid rgba(72,144,247,0.14)', borderRadius: '16px', background: 'var(--surface)' }}>
-              {SAVINGS_ROWS.map((row) => (
-                <div key={row.label} className="flex items-center justify-between px-6 py-5"
-                  style={{ borderBottom: '1px solid rgba(72,144,247,0.06)' }}>
-                  <div className="min-w-0 pr-4">
-                    <p style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginBottom: '3px' }}>
-                      {row.label}
-                    </p>
-                    <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72 }}>{row.detail}</p>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '20px', fontWeight: 800, color: ACCENT }}>{row.saving}</span>
-                    <span style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 600, color: ACCENT, opacity: 0.65 }}>{row.period}</span>
-                  </div>
-                </div>
-              ))}
-
-              {/* Total */}
-              <div className="flex items-center justify-between px-6 py-6"
-                style={{ background: 'rgba(72,144,247,0.05)', borderTop: '1px solid rgba(72,144,247,0.16)' }}>
-                <div>
-                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72 }}>
-                    Typical annual saving
-                  </p>
-                  <p style={{ fontSize: '11px', color: 'var(--text-primary)', opacity: 0.72, marginTop: '3px' }}>
-                    vs. single consult path · individual results vary
-                  </p>
-                </div>
-                <div className="text-right flex-shrink-0 ml-6">
-                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '30px', fontWeight: 800, color: ACCENT, lineHeight: 1 }}>$1,000–$1,800</p>
-                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '11px', fontWeight: 600, color: ACCENT, opacity: 0.6, marginTop: '3px' }}>per year</p>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-[11px] mt-4 text-center" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-              Membership costs $99/mo ($1,188/yr). At 3+ medication invoices, the saving covers the cost of membership itself.
-            </p>
-          </motion.div>
         </div>
       </div>
     </section>
@@ -680,7 +571,7 @@ function ClosingCTA() {
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.12, ease }}
           className="text-sm leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.88)' }}
         >
-          $99/mo. No lock-in. Activates after your initial consultation where clinically appropriate. Saves most members more than it costs.
+          $99/mo. No lock-in. Activates after your initial consultation where clinically appropriate.
         </motion.p>
 
         {/* Inline stats */}
@@ -691,7 +582,7 @@ function ClosingCTA() {
           {[
             { value: '$0', label: 'Prescribing fees' },
             { value: 'Cost price', label: 'Medication' },
-            { value: '$1,000–$1,800', label: 'Est. annual saving' },
+            { value: '$99/mo', label: 'Cancel anytime' },
           ].map(stat => (
             <div key={stat.label} className="text-center">
               <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '22px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>{stat.value}</p>
@@ -731,7 +622,6 @@ export default function MembershipPage() {
       <main>
         <Hero />
         <AdvantageStrip />
-        <SavingsBreakdown />
         <WhatsIncluded />
         <PortalAccess />
         <FourMonthCycle />

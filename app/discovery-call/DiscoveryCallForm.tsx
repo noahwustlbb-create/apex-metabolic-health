@@ -16,7 +16,7 @@ const BORDER = 'rgba(0,0,0,0.09)'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const TREATMENTS = [
-  'Hormone Optimisation / TRT',
+  'Hormone Optimisation',
   'Medical Weight Loss',
   'Performance & Recovery',
   'Hair Restoration',

@@ -117,7 +117,7 @@ export default function GeneralConsultBookPage() {
           <div className="container-tight max-w-2xl relative z-10">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }}>
               <p className="text-[10px] font-bold tracking-[0.22em] uppercase mb-5" style={{ color: ACCENT }}>
-                Peptide Consultation · Doctor-led · Australia-wide
+                General Consultation · Doctor-led · Australia-wide
               </p>
               <h1 className="font-bold tracking-tight mb-5"
                 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(34px, 5vw, 58px)', lineHeight: 1.05, color: 'var(--text-primary)' }}>
