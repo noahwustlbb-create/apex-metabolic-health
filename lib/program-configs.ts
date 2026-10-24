@@ -13,7 +13,7 @@ const STANDARD_STEPS: ProgramPageConfig['processSteps'] = [
   { title: 'Create your account', body: 'Register at app.apexmetabolichealth.com.au in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
   { title: 'Complete pathology testing', body: 'We issue your referral electronically. Attend any of 4,000+ accredited collection centres across Australia.', time: '45 MIN', image: STEPS_IMAGES.bloodTest },
   { title: 'Telehealth consultation', body: 'Your AHPRA-registered doctor reviews your results and builds a protocol personalised to your biology.', time: '45–60 MIN', image: STEPS_IMAGES.consult },
-  { title: 'Ongoing clinical care', body: 'Protocol dispatched through our TGA-compliant pharmacy partner. 3-monthly reviews built in from day one.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+  { title: 'Ongoing clinical care', body: 'Protocol dispatched through our Australian pharmacy partner. 3-monthly reviews built in from day one.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
 ]
 
 const SHARED_FAQS: ProgramPageConfig['faqs'] = [
@@ -35,7 +35,7 @@ const SHARED_FAQS: ProgramPageConfig['faqs'] = [
   },
   {
     q: 'Is this legal in Australia?',
-    a: 'Yes. We operate under Australian law with TGA-compliant prescribing and a registered compounding pharmacy partner operating under TGA GMP standards.',
+    a: 'Yes. Every doctor is AHPRA-registered, prescriptions follow Australian prescribing rules, and anything prescribed is dispensed by an Australian compounding pharmacy partner.',
   },
 ]
 
@@ -52,7 +52,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   heroBullets: [
     'Comprehensive hormone & metabolic panel',
     'AHPRA-registered doctors, Australia-wide',
-    'Doctor-prescribed, TGA-compliant protocols',
+    'Doctor-prescribed protocols, Australian pharmacy partner',
   ],
   heroBentoPortrait: '/editorial/athletic-male.webp',
   heroBentoStat: { value: '1 in 4', label: 'men over 35 have suboptimal testosterone' },
@@ -90,7 +90,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   ],
 
   faqs: [
-    { q: 'Do I need two blood tests for testosterone?', a: 'Yes. AHPRA and TGA guidelines require two separate fasted morning blood draws (7am–11am, on different days) to confirm suboptimal testosterone before treatment can be prescribed. Both referrals are issued as part of your pathway.' },
+    { q: 'Do I need two blood tests for testosterone?', a: 'Yes. Clinical guidelines call for two separate fasted morning blood draws (7am–11am, on different days) to confirm suboptimal testosterone before treatment can be prescribed. Both referrals are issued as part of your pathway.' },
     { q: 'Can I use recent blood tests from my GP?', a: 'Potentially. Submit them during pre-screen and we\'ll review whether they meet our clinical requirements. If they do, you may not need to retest.' },
     ...SHARED_FAQS,
   ],
@@ -261,7 +261,7 @@ export const hairRestorationConfig: ProgramPageConfig = {
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
     { title: 'Complete pathology testing', body: 'Hormonal and DHT-focused blood panel at your nearest collection centre. Results within 48 hours.', time: '30 MIN', image: STEPS_IMAGES.bloodTest },
     { title: 'Doctor consultation', body: 'Your AHPRA-registered doctor reviews your panel and builds a protocol specifically around your hormonal profile.', time: '45 MIN', image: STEPS_IMAGES.consult },
-    { title: 'Protocol dispatched', body: 'Your treatment coordinated through our TGA-compliant pharmacy partner. Clinical reviews every 3–6 months.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+    { title: 'Protocol dispatched', body: 'Your treatment coordinated through our Australian pharmacy partner. Clinical reviews every 3–6 months.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
   ],
 
   mechanismHeadline: 'Why clinical hair loss treatment is different.',
@@ -580,7 +580,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
     { title: 'Complete pathology testing', body: 'Hormonal and skin-relevant blood panel at your nearest collection centre. Results within 48 hours.', time: '30 MIN', image: STEPS_IMAGES.bloodTest },
     { title: 'Doctor consultation', body: 'Your doctor reviews your panel and skin health history to build a protocol addressing your specific biological drivers.', time: '45 MIN', image: STEPS_IMAGES.consult },
-    { title: 'Protocol dispatched', body: 'Treatment coordinated through our TGA-compliant pharmacy partner with regular clinical reviews.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+    { title: 'Protocol dispatched', body: 'Treatment coordinated through our Australian pharmacy partner with regular clinical reviews.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
   ],
 
   mechanismHeadline: 'Why internal biology determines skin quality.',

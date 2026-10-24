@@ -9,6 +9,7 @@ import { phasesFor, stepNumber, startTotal, type StartPhase } from '@/lib/startF
 import { useSignupGate } from '@/context/SignupGateContext'
 import { ArtImg } from '@/components/audience/Img'
 import { useAudience } from '@/components/audience/Audience'
+import Image from 'next/image'
 import { captureLead } from '@/lib/captureLead'
 
 // ── Design tokens ──────────────────────────────────────────────────────────────
@@ -256,10 +257,9 @@ function IntroScreen({ onStart }: { onStart: () => void }) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="quiz-intro">
       <div className="quiz-intro-art" aria-hidden="true">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/3d/body-male.jpg" alt="" loading="lazy" className="for-men" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/3d/pink/body-female.jpg" alt="" loading="lazy" className="for-women" />
+        {/* next/image: the raw 1 MB JPEG was the /start LCP (3.1 s, live QA 24 Oct). */}
+        <Image src="/3d/body-male.jpg" alt="" fill priority sizes="(max-width: 899px) 100vw, 50vw" quality={70} className="for-men" />
+        <Image src="/3d/pink/body-female.jpg" alt="" fill sizes="(max-width: 899px) 100vw, 50vw" quality={70} className="for-women" />
         <div className="quiz-intro-chip"><span>Reviewed by</span><strong>An AHPRA-registered doctor</strong></div>
       </div>
       <div className="quiz-intro-copy">

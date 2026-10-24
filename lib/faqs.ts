@@ -25,7 +25,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: 'Is this legal in Australia?',
-    a: 'Yes. We operate under Australian law, with TGA-compliant prescribing and a registered compounding pharmacy partner who operates under TGA Good Manufacturing Practice (GMP) standards. Our services comply with all relevant AHPRA telehealth regulations.',
+    a: 'Yes. Every doctor is AHPRA-registered, prescriptions follow Australian prescribing rules, and anything prescribed is dispensed by an Australian compounding pharmacy partner.',
   },
   {
     q: 'What if I\'ve had blood tests with my GP recently?',

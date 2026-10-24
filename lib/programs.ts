@@ -47,7 +47,7 @@ const defaultHormoneHowItWorks = [
     number: '05',
     title: 'Protocol begins',
     description:
-      'Your prescription is coordinated through our TGA-compliant compounding pharmacy partner and dispatched directly to you. 3-monthly reviews and script renewals are built in.',
+      'Your prescription is coordinated through our Australian compounding pharmacy partner and dispatched directly to you. 3-monthly reviews and script renewals are built in.',
   },
 ]
 
@@ -74,7 +74,7 @@ const defaultGeneralHowItWorks = [
     number: '04',
     title: 'Protocol begins',
     description:
-      'Treatment is arranged through our TGA-compliant pharmacy partner and dispatched directly to you. Your doctor manages your protocol ongoing.',
+      'Treatment is arranged through our Australian pharmacy partner and dispatched directly to you. Your doctor manages your protocol ongoing.',
   },
   {
     number: '05',
@@ -104,7 +104,7 @@ export const programs: Program[] = [
       'Comprehensive hormone blood panel referral',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Personalised clinical protocol based on your pathology',
-      'Coordinated treatment through our TGA-compliant pharmacy partner',
+      'Coordinated treatment through our Australian pharmacy partner',
       'Scheduled follow-up reviews',
     ],
     howItWorks: defaultHormoneHowItWorks,
@@ -130,7 +130,7 @@ export const programs: Program[] = [
       'IGF-1, cortisol, CK and inflammatory marker assessment',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Biomarker-driven protocol: strength, recovery and endurance focus',
-      'Treatment coordination through our TGA-compliant pharmacy partner',
+      'Treatment coordination through our Australian pharmacy partner',
       'Scheduled review cycles with clinical progress tracking',
     ],
     howItWorks: defaultHormoneHowItWorks,
@@ -158,7 +158,7 @@ export const programs: Program[] = [
       'Targeted pathology referral where clinically indicated',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Personalised injury recovery protocol',
-      'Treatment coordination through our TGA-compliant pharmacy partner',
+      'Treatment coordination through our Australian pharmacy partner',
       'Follow-up review consultations',
     ],
     howItWorks: defaultGeneralHowItWorks,
@@ -185,7 +185,7 @@ export const programs: Program[] = [
       'Skin and hormonal pathology referral where indicated',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Personalised skin regeneration protocol',
-      'Doctor-prescribed treatment via our TGA-compliant pharmacy partner',
+      'Doctor-prescribed treatment via our Australian pharmacy partner',
       'Follow-up review consultation',
     ],
     howItWorks: defaultGeneralHowItWorks,
@@ -212,7 +212,7 @@ export const programs: Program[] = [
       'Targeted hair and hormonal pathology referral',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Personalised hair restoration protocol',
-      'Doctor-prescribed treatment via our TGA-compliant pharmacy partner',
+      'Doctor-prescribed treatment via our Australian pharmacy partner',
       'Follow-up review consultation',
     ],
     howItWorks: defaultGeneralHowItWorks,
@@ -239,7 +239,7 @@ export const programs: Program[] = [
       'Metabolic and hormonal pathology referral',
       'Telehealth consultation with an AHPRA-registered doctor',
       'Personalised metabolic management protocol',
-      'Access to doctor-prescribed treatment via our TGA-compliant pharmacy partner',
+      'Access to doctor-prescribed treatment via our Australian pharmacy partner',
       'Ongoing monitoring and review consultations',
     ],
     howItWorks: [
@@ -265,7 +265,7 @@ export const programs: Program[] = [
         number: '04',
         title: 'Protocol begins',
         description:
-          'Treatment is coordinated through our TGA-compliant pharmacy partner. Your doctor manages your protocol ongoing.',
+          'Treatment is coordinated through our Australian pharmacy partner. Your doctor manages your protocol ongoing.',
       },
       {
         number: '05',
@@ -298,7 +298,7 @@ export const programs: Program[] = [
       'Extended telehealth consultation with an AHPRA-registered doctor',
       'Long-horizon clinical protocol',
       'Periodic review and pathology monitoring schedule',
-      'Coordinated treatment through our TGA-compliant pharmacy partner',
+      'Coordinated treatment through our Australian pharmacy partner',
     ],
     howItWorks: defaultHormoneHowItWorks,
     ctaLabel: 'Join the Waitlist',

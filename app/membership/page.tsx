@@ -571,7 +571,7 @@ function ClosingCTA() {
           initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.12, ease }}
           className="text-sm leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.88)' }}
         >
-          $99/mo. No lock-in. Activates after your initial consultation where clinically appropriate.
+          $99/mo. No lock-in. Starts the day you join, from your account.
         </motion.p>
 
         {/* Inline stats */}
@@ -606,7 +606,7 @@ function ClosingCTA() {
 
         <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }}
           className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.35)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Membership activates post-consultation where clinically appropriate. Pricing subject to change; confirm at time of booking.
+          All consultations conducted by AHPRA-registered practitioners. Membership starts the day you join, and member rates apply to anything booked after that. Pricing subject to change; confirm at time of booking.
         </motion.p>
       </div>
     </section>

@@ -14,7 +14,6 @@ const publicRoutes = [
   '/faqs',
   '/get-started',
   '/how-it-works',
-  '/learn',
   '/membership',
   '/our-approach',
   '/pricing',

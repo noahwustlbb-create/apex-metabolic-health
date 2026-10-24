@@ -29,8 +29,8 @@ const TREATMENTS = [
 ]
 
 const DAYS = [
-  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday',
-  'Any weekday', 'Weekend preferred',
+  'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday',
+  'Any day',
 ]
 
 const TIMES = [
@@ -265,7 +265,7 @@ export default function DiscoveryCallForm() {
                 </button>
 
                 <p className="text-center text-[11px]" style={{ color: MUTED }}>
-                  Calls are conducted by our clinical coordination team, Monday–Friday.
+                  Calls are conducted by our clinical coordination team, Monday to Saturday.
                 </p>
               </form>
             </motion.div>

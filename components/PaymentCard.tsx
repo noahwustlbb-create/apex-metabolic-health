@@ -20,7 +20,7 @@ const CONSULT_STEPS = [
   'Our team confirms your appointment time within 1 business day',
   'Your doctor reviews your blood results and health history before your consultation',
   'Telehealth consultation where your personalised protocol is discussed where clinically appropriate',
-  'Coordinated treatment through our TGA-compliant compounding pharmacy partner',
+  'Coordinated treatment through our Australian compounding pharmacy partner',
 ]
 
 export default function PaymentCard() {
@@ -133,7 +133,7 @@ export default function PaymentCard() {
         {/* Trust strip */}
         <div className="px-6 py-3 flex flex-wrap gap-x-4 gap-y-1"
           style={{ borderTop: '1px solid rgba(72,144,247,0.08)', background: 'rgba(72,144,247,0.03)' }}>
-          {['AHPRA-registered doctors', 'Secure payment via Stripe', 'TGA-compliant protocols'].map(t => (
+          {['AHPRA-registered doctors', 'Secure payment via Stripe', 'Australian pharmacy partner'].map(t => (
             <div key={t} className="flex items-center gap-1.5">
               <div className="w-1 h-1 rounded-full" style={{ background: ACCENT }} />
               <span className="text-[10px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{t}</span>

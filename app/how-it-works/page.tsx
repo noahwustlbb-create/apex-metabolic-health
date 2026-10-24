@@ -61,7 +61,7 @@ const STEPS = [
     title: 'Protocol begins. Care continues.',
     duration: '10–14 days to delivery',
     phase: 'From week 1',
-    body: 'Your prescription is issued via our ePrescribing system and coordinated through our TGA-compliant pharmacy partner. Medication is compounded and dispatched directly to your door. 3-monthly reviews (blood panel, consultation, script renewal) are built into your portal and required by AHPRA and TGA guidelines.',
+    body: 'Your prescription is issued via our ePrescribing system and coordinated through our Australian pharmacy partner. Medication is compounded and dispatched directly to your door. 3-monthly reviews (blood panel, consultation, script renewal) are built into your portal.',
     details: ['Medication dispatched in 10–14 days', '3-monthly review required for all active protocols', 'Portal manages your review schedule automatically'],
   },
 ]
@@ -151,7 +151,7 @@ const FAQS = [
   },
   {
     q: 'What does the 3-month review involve?',
-    a: 'A follow-up blood panel at any accredited collection centre, then a telehealth consultation where your doctor reviews your results, assesses your response, and adjusts your protocol as needed. The 3-monthly review is required by AHPRA and TGA before any script renewal. Your portal manages the scheduling.',
+    a: 'A follow-up blood panel at any accredited collection centre, then a telehealth consultation where your doctor reviews your results, assesses your response, and adjusts your protocol as needed. Your doctor completes the 3-monthly review before any script renewal. Your portal manages the scheduling.',
   },
   {
     q: 'Is there a lock-in contract?',

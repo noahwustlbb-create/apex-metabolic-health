@@ -64,7 +64,7 @@ const WHAT = [
   {
     n: '03',
     title: 'Personalised protocol',
-    body: 'Where clinically appropriate, a targeted clinical protocol is prepared through our TGA-compliant compounding pharmacy partner.',
+    body: 'Where clinically appropriate, a targeted clinical protocol is prepared through our Australian compounding pharmacy partner.',
   },
   {
     n: '04',

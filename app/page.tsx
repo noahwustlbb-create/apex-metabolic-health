@@ -14,6 +14,11 @@ import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import Footer from '@/components/Footer'
 import Objections from '@/components/Objections'
+import type { Metadata } from 'next'
+
+// Homepage keeps the root title and description; only the canonical is set here,
+// so it never leaks onto other pages through the layout.
+export const metadata: Metadata = { alternates: { canonical: '/' } }
 
 // Story, rebuilt to the BioTrack bar (Noah, 2026-09-27): HOOK (ice stage,
 // glass body with the four pillars, handing over to the heart) → PROVE

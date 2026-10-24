@@ -1,10 +1,11 @@
 import DiscoveryCallForm from './DiscoveryCallForm'
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
+  path: '/discovery-call',
   title: 'Free Discovery Call',
   description: 'Request a free discovery call with our clinical team. We will review your situation and confirm whether an Apex program is the right fit for you.',
-}
+})
 
 export default function DiscoveryCallPage() {
   return <DiscoveryCallForm />
