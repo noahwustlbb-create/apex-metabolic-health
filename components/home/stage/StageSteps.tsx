@@ -9,7 +9,7 @@ import StageCta from './StageCta'
 const ease = [0.22, 1, 0.36, 1] as const
 
 const STEPS = [
-  { n: '01', when: 'Today',     t: 'Take the 2-minute check', b: 'A few questions. We show you what your panel looks at before you create an account.', art: '/3d/phone.jpg' },
+  { n: '01', when: 'Today',     t: 'Take the 45-second check', b: 'A few questions. We show you what your panel looks at before you create an account.', art: '/3d/phone.jpg' },
   { n: '02', when: 'This week', t: 'Bloods, then your doctor', b: 'Referral sent electronically. Results in about 48 hours, then a doctor call with them open.', art: '/3d/product/vials.jpg' },
   { n: '03', when: 'After',     t: 'Your plan, delivered',    b: 'If treatment is suitable, it arrives discreetly. Reviewed about every three months.', art: '/3d/product/box-white.jpg' },
 ]
@@ -34,7 +34,7 @@ export default function StageSteps() {
           </motion.li>
         ))}
       </ol>
-      <div className="stage-actions stage-actions-center"><StageCta href="/start">Start the 2-minute check</StageCta></div>
+      <div className="stage-actions stage-actions-center"><StageCta href="/start">Start the 45-second check</StageCta></div>
     </section>
   )
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 import Logo from '@/components/brand/Logo'
-import { CLINIC_EMAIL, CLINIC_HOURS, CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
+import { CLINIC_EMAIL, CLINIC_HOURS, DOCTOR_DAYS, CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
@@ -65,6 +65,7 @@ export default function Footer() {
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
                 {CLINIC_EMAIL}
               </a>
+              <p className="text-xs" style={{ color: DIM }}>{DOCTOR_DAYS}</p>
               <p className="text-xs" style={{ color: DIM }}>{CLINIC_HOURS}</p>
             </div>
 

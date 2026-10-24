@@ -10,4 +10,6 @@
 export const CLINIC_PHONE_E164 = '+61468085700'
 export const CLINIC_PHONE_DISPLAY = '0468 085 700'
 export const CLINIC_EMAIL = 'admin@apexmetabolichealth.com.au'
-export const CLINIC_HOURS = 'Mon – Fri · 9am – 5pm AEST'
+// Phone line hours. Doctor consults run Monday to Saturday (Noah, 24 Oct 2026).
+export const CLINIC_HOURS = 'Phone Mon to Fri, 9am to 5pm AEST'
+export const DOCTOR_DAYS = 'Doctor consults Monday to Saturday'
