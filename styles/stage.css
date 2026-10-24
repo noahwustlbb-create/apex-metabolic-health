@@ -906,6 +906,7 @@ html[data-audience="women"] .for-men { display: none !important; }
 .stage-hero .stage-price { margin: 0 0 24px; }
 .stage-hero .stage-price span { white-space: nowrap; }
 .stage-hero .stage-price { gap: 6px 22px; max-width: 640px; }
+.stage-hero .stage-price .stage-price-lead { flex-basis: 100%; }
 
 /* Phones: one still screen. No pinned scroll, no hand-off beats, CSS-first so
    it holds before hydration too. */
@@ -919,6 +920,7 @@ html[data-audience="women"] .for-men { display: none !important; }
   .stage-hero-who-still { display: block; }
   .stage-hero .stage-price { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 14px; margin: 0 0 18px; }
   .stage-hero .stage-price span { flex-basis: auto; }
+  .stage-hero .stage-price .stage-price-lead { grid-column: 1 / -1; white-space: normal; }
   .stage-hero .stage-price strong { font-size: 16px; }
   .stage-hero .stage-fig-box { opacity: 0.55; }
   .stage-chips { display: none; }

@@ -255,8 +255,16 @@ export default function StageHero() {
               <span className="for-men">One blood panel, 23+ markers, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
               <span className="for-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. If treatment is suitable, your plan comes to your door. No GP referral.</span>
             </p>
+            {/* Price line, consult first (Noah, 24 Oct 2026: bloods are not the best hook).
+                "From" covers the hormone consult, which costs more. Mirrored on the /start
+                match screen (app/start/ShortAssessment.tsx).
+                Alternative, bloods first (the line before 24 Oct). To switch, swap it in:
+                  <span>Bloods from <strong>$199</strong></span><span>Doctor consult from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+                Held back: Noah's "$99 therapeutic peptide consults". TGA risk: it advertises a
+                prescription-medicine therapy to the public, and $99 is the member price only.
+                Do not ship it without a compliance decision. */}
             <p className="stage-price hero-in" style={{ animationDelay: '420ms' }}>
-              <span>Bloods from <strong>$199</strong></span><span>Doctor consult <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
+              <span className="stage-price-lead">Doctor consults from <strong>$99</strong> for members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>Membership <strong>$99/mo</strong></span><span>No Medicare rebate</span>
             </p>
             <div className="stage-actions hero-in" style={{ animationDelay: '460ms' }}>
               <StageCta href={href}>Start your assessment</StageCta>
