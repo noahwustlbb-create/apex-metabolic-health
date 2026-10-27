@@ -7,17 +7,24 @@ import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
+import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 type Sex = 'male' | 'female'
 type Who = 'men' | 'women'
 
 /**
  * HERO (Noah, 24 Oct 2026: "choose a gender first ... with the award winning
- * 3D hero"). The visitor picks Men or Women inside the hero. Before the pick
- * the hero is neutral: two grey glass figures side by side. The pick is the
- * moment: the hero floods into that colour world from the tapped button, the
- * chosen figure steps forward in colour and starts to turn (a real 360 degree
- * turntable, drag to turn), the copy and the /start link follow.
+ * 3D hero"; S tier pass 28 Oct 2026 after the wearebrand playbook). The
+ * visitor picks Men or Women inside the hero. Before the pick the hero is
+ * neutral: two quiet glass figures side by side in a framed plate beside the
+ * copy, and the default figure (men) is already turning from first paint, so
+ * one live object owns the screen before anyone touches it. The pick sits in
+ * the copy column above the CTA, never the fold. The pick is the moment: the
+ * hero floods into that colour world from the tapped button, the chosen figure
+ * steps forward in colour (a real 360 degree turntable, drag to turn), the copy
+ * and the /start link follow. A fixed pill CTA sits bottom centre from the
+ * first pixel on desktop; on phones the hero's own buttons carry it, and the
+ * pill only appears while the scroll beat steps the copy back.
  *
  * A short scroll (pinned under one screen) faces the figure to camera and
  * lights the four systems the panel reads, one by one. Every name on a marker
@@ -89,6 +96,8 @@ export default function StageHero() {
   }, [])
 
   const sex: Sex | null = chosen === 'women' ? 'female' : chosen === 'men' ? 'male' : null
+  // The live object before any pick: the men's turntable idles on its own.
+  const shown: Sex = sex ?? 'male'
 
   // The pick: flood the hero with the new colour world from the button.
   const choose = useCallback((who: Who, e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -153,7 +162,7 @@ export default function StageHero() {
               <span><span className="hx-when-none">Australian adults 18 to 80</span><span className="hx-when-men">Australian men 18 to 80</span><span className="hx-when-women">Australian women 18 to 80</span> · AHPRA-registered doctors</span>
             </p>
             <h1 className="stage-display hero-in" style={{ animationDelay: '140ms' }}>
-              Fine on paper.<br /><span className="stage-muted">Flat in real life.</span>
+              Find out what your blood is really saying.
             </h1>
             <p className="stage-lead hx-lead hero-in" style={{ animationDelay: '260ms' }}>
               <span className="hx-when-none">One blood panel, 23+ markers, read with you by a doctor online. No GP referral.</span>
@@ -164,53 +173,8 @@ export default function StageHero() {
             <p className="stage-price hx-price hero-in" style={{ animationDelay: '320ms' }}>
               <span className="stage-price-lead">Doctor consults from <strong>$99</strong> members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>No Medicare rebate</span>
             </p>
-            <div className="stage-actions hx-actions hero-in" style={{ animationDelay: '380ms' }}>
-              <StageCta href={href}>Start your assessment</StageCta>
-              <Link href="/pricing" className="stage-link">See pricing</Link>
-            </div>
-          </div>
-
-          <div className="hx-stage">
-            {(['male', 'female'] as Sex[]).map(s => {
-              const isOn = sex === s
-              return (
-                <div key={s} className="hx-fig" data-sex={s} data-live={(live[s] && !still) || undefined}>
-                  <picture>
-                    <source media="(max-width: 899px)" srcSet={POSTER_SM[s]} />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={POSTER[s]}
-                      alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
-                      width={828} height={1108}
-                      fetchPriority="high"
-                      decoding="async"
-                      className="hx-poster"
-                    />
-                  </picture>
-                  {mounted && !still && (
-                    <Turntable sex={s} active={isOn} face={face} onAngle={isOn ? onAngle : undefined} onReady={s === 'male' ? readyM : readyF} />
-                  )}
-                  {isOn && (
-                    <div className="hx-marks" style={{ opacity: markerShow || 0 }} aria-hidden="true">
-                      {SYSTEMS.map((m, i) => (
-                        <span key={m.id} className="hx-mark" data-on={i <= lit || undefined} data-now={i === lit || undefined} style={{ left: `${m.at[s][0] * 100}%`, top: `${m.at[s][1] * 100}%` }}>
-                          <span className="hx-mark-dot" />
-                          <span className="hx-mark-label">{m.label}</span>
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )
-            })}
-
-            {/* What the lit system measures. Announced for screen readers. */}
-            <div className="hx-readout" data-on={(!!sys && !!sex) || undefined} aria-live="polite">
-              {sys && sex && (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)}
-            </div>
-
-            <div className="hx-pick" role="group" aria-labelledby="hx-pick-k">
-              <p id="hx-pick-k" className="hx-pick-k">{chosen ? <>Showing the {chosen === 'women' ? 'women’s' : 'men’s'} panel. <span className="hx-hint">Drag to turn.</span></> : 'Who is this for? Start here.'}</p>
+            <div className="hx-pick hero-in" style={{ animationDelay: '360ms' }} role="group" aria-labelledby="hx-pick-k">
+              <p id="hx-pick-k" className="hx-pick-k">{chosen ? <>Showing the {chosen === 'women' ? 'women’s' : 'men’s'} panel. <span className="hx-hint">Drag the figure to turn it.</span></> : 'I’m here for'}</p>
               <div className="hx-pick-row">
                 {(['men', 'women'] as Who[]).map(w => (
                   <button key={w} type="button" className="hx-pick-btn" data-who={w} aria-pressed={chosen === w} onClick={e => choose(w, e)}>
@@ -220,11 +184,70 @@ export default function StageHero() {
                 ))}
               </div>
             </div>
+            <div className="stage-actions hx-actions hero-in" style={{ animationDelay: '420ms' }}>
+              <StageCta href={href}>Start your assessment</StageCta>
+              <Link href="/pricing" className="stage-link">See pricing</Link>
+            </div>
+            <p className="hx-meta hero-in" style={{ animationDelay: '480ms' }}>
+              Doctors Mon to Sat · <a href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a>
+            </p>
           </div>
 
-          <p className="stage-foot hx-foot">Illustrative render. Every marker named is on the Apex panel. General information, not medical advice.</p>
+          <div className="hx-plate">
+            <div className="hx-stage">
+              {(['male', 'female'] as Sex[]).map(s => {
+                const isOn = sex === s
+                const isLive = shown === s
+                return (
+                  <div key={s} className="hx-fig" data-sex={s} data-live={(live[s] && !still) || undefined}>
+                    <picture>
+                      <source media="(max-width: 899px)" srcSet={POSTER_SM[s]} />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={POSTER[s]}
+                        alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
+                        width={828} height={1108}
+                        fetchPriority="high"
+                        decoding="async"
+                        className="hx-poster"
+                      />
+                    </picture>
+                    {mounted && !still && (
+                      <Turntable sex={s} active={isLive} face={face} onAngle={isOn ? onAngle : undefined} onReady={s === 'male' ? readyM : readyF} />
+                    )}
+                    {isOn && (
+                      <div className="hx-marks" style={{ opacity: markerShow || 0 }} aria-hidden="true">
+                        {SYSTEMS.map((m, i) => (
+                          <span key={m.id} className="hx-mark" data-on={i <= lit || undefined} data-now={i === lit || undefined} style={{ left: `${m.at[s][0] * 100}%`, top: `${m.at[s][1] * 100}%` }}>
+                            <span className="hx-mark-dot" />
+                            <span className="hx-mark-label">{m.label}</span>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+
+              {/* What the lit system measures. Announced for screen readers. */}
+              <div className="hx-readout" data-on={(!!sys && !!sex) || undefined} aria-live="polite">
+                {sys && sex && (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)}
+              </div>
+
+              </div>
+
+            {/* Plus-sign corner marks: the figure is an object in a frame, not a backdrop. */}
+            <div className="hx-corners" aria-hidden="true"><i /><i /><i /><i /></div>
+            <p className="stage-foot hx-foot">Illustrative render. <span className="hx-foot-long">Every marker named is on the Apex panel. </span>General information, not medical advice.</p>
+          </div>
         </div>
       </div>
+
+      {/* Fixed pill CTA, bottom centre from the first pixel (desktop). */}
+      <Link href={href} className="hx-pill">
+        <span>Start your assessment</span>
+        <span className="hx-pill-dot" aria-hidden="true" />
+      </Link>
     </section>
   )
 }
