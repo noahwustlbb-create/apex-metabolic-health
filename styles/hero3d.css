@@ -326,3 +326,10 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-46%)
   .hx-pick-btn { min-height: 52px; }
   .hx-foot { display: none; }
 }
+
+/* Desktop: the fixed pill is the hero's "Start your assessment"; the inline button only serves phones, where the pill
+   is hidden until the scroll beat (28 Oct 2026, Noah: one action per screen, nav + pill, not three). */
+@media (min-width: 760px) {
+  .hx-actions .stage-cta { display: none; }
+  .hx-actions .stage-link { font-size: 15px; }
+}
