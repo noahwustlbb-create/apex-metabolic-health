@@ -16,7 +16,7 @@ const ITEMS: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: 'Can I cancel the membership?',
-    a: <>Yes. Membership is $99 a month with no lock-in contract. Pause or cancel your membership from your account.</>,
+    a: <>Yes. Membership is month to month with no lock-in contract. Pause or cancel your membership from your account.</>,
   },
   {
     q: 'What about side effects?',

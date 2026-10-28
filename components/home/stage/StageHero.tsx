@@ -169,10 +169,7 @@ export default function StageHero() {
               <span className="hx-when-men">One blood panel, 23+ markers including testosterone, read with you by a doctor online. No GP referral.</span>
               <span className="hx-when-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. No GP referral.</span>
             </p>
-            {/* One price line (24 Oct fundamentals pass). Detail lives on /pricing. */}
-            <p className="stage-price hx-price hero-in" style={{ animationDelay: '320ms' }}>
-              <span className="stage-price-lead">Doctor consults from <strong>$99</strong> members · <strong>$199</strong> standard</span><span>Bloods from <strong>$199</strong></span><span>No Medicare rebate</span>
-            </p>
+            {/* No prices on the homepage (Noah, 28 Oct). They live on /pricing. */}
             <div className="hx-pick hero-in" style={{ animationDelay: '360ms' }} role="group" aria-labelledby="hx-pick-k">
               <p id="hx-pick-k" className="hx-pick-k">{chosen ? <>Showing the {chosen === 'women' ? 'women’s' : 'men’s'} panel. <span className="hx-hint">Drag the figure to turn it.</span></> : 'I’m here for'}</p>
               <div className="hx-pick-row">
