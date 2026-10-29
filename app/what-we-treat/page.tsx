@@ -11,6 +11,11 @@ const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
 const ACCENT_BG = 'rgba(72,144,247,0.06)'
 const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
+// Straight to portal signup. The old /intake/* links went through a
+// cross-domain redirect, which the browser blocked when Next prefetched them
+// (console error once the cards scrolled into view) and which never carried
+// ad attribution; lib/attribution decorates portal links in place.
+const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 
 // ─── Symptoms ─────────────────────────────────────────────────────────────────
 
@@ -20,7 +25,7 @@ const SYMPTOMS = [
     recognition: 'If you wake up exhausted, crash by midday, or rely on caffeine to function, that\'s worth investigating properly.',
     clinical: 'We assess hormonal, thyroid, iron, cortisol, and metabolic drivers rather than dismissing it as ageing or stress.',
     tags: ['Hormones', 'Thyroid', 'Cortisol', 'Iron'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
@@ -32,7 +37,7 @@ const SYMPTOMS = [
     recognition: 'Can\'t focus, forgetting things, or feeling mentally slower than you should? This has a clinical explanation.',
     clinical: 'Brain fog is a downstream effect of hormonal, thyroid, or metabolic dysfunction. We find the cause.',
     tags: ['Hormones', 'Thyroid', 'Metabolic', 'Cortisol'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M9.5 2a5.5 5.5 0 015.5 5.5c0 1.5-.5 2.8-1.4 3.8C14.8 12.5 16 14.1 16 16a4 4 0 01-8 0c0-1.9 1.2-3.5 2.4-4.7A5.5 5.5 0 019.5 2z" strokeLinecap="round" strokeLinejoin="round" />
@@ -44,7 +49,7 @@ const SYMPTOMS = [
     recognition: 'Waking at 3am, never feeling rested, or running on chronic stress: these aren\'t lifestyle issues, they\'re hormonal ones.',
     clinical: 'Cortisol dysregulation, low testosterone, and thyroid dysfunction are the most common drivers. We measure and manage them.',
     tags: ['Cortisol', 'HPA Axis', 'Sleep', 'Hormones'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" strokeLinecap="round" strokeLinejoin="round" />
@@ -56,7 +61,7 @@ const SYMPTOMS = [
     recognition: 'Flat affect, low motivation, irritability, or just not feeling like yourself: these are textbook presentations of hormonal dysfunction.',
     clinical: 'Low testosterone and thyroid imbalance are among the most common hormonal drivers. We assess and treat both.',
     tags: ['Testosterone', 'Thyroid', 'Cortisol', 'Hormones'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
@@ -69,7 +74,7 @@ const SYMPTOMS = [
     recognition: 'If you\'re eating well and training but the weight won\'t shift, the problem isn\'t effort. It\'s underlying physiology.',
     clinical: 'Hormonal resistance, poor insulin sensitivity, and metabolic adaptation block progress. We address the root cause.',
     tags: ['Metabolic', 'Insulin', 'Hormones', 'Body Composition'],
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M3 3v18h18" strokeLinecap="round" strokeLinejoin="round" />
@@ -82,7 +87,7 @@ const SYMPTOMS = [
     recognition: 'Strength that\'s harder to build, recovery that takes longer, and drive that simply isn\'t there: these are signals, not age.',
     clinical: 'We optimise the hormonal and metabolic physiology that physical performance depends on.',
     tags: ['Performance', 'Hormones', 'Recovery', 'Muscle'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" strokeLinecap="round" strokeLinejoin="round" />
@@ -99,7 +104,7 @@ const CLINICAL = [
     recognition: 'Testosterone, oestradiol, SHBG, DHEA, prolactin: when these are off, everything downstream suffers.',
     clinical: 'Full hormonal panel, clinical interpretation, and a doctor-led protocol where treatment is appropriate.',
     tags: ['Testosterone', 'Hormone Optimisation', 'Hormones', 'DHEA'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M12 2C10.5 2 9.5 3 9.5 4.5V13.5C8 14.3 7 15.8 7 17.5C7 20 9.2 22 12 22C14.8 22 17 20 17 17.5C17 15.8 16 14.3 14.5 13.5V4.5C14.5 3 13.5 2 12 2Z" strokeLinecap="round" strokeLinejoin="round" />
@@ -112,7 +117,7 @@ const CLINICAL = [
     recognition: 'ED has clinical causes (vascular, hormonal, neurological) and deserves a clinical solution, not a generic script.',
     clinical: 'We assess the root cause and build a treatment approach that addresses it directly, not just symptomatically.',
     tags: ['Sexual Health', 'Vascular', 'Hormones', 'ED'],
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
@@ -125,7 +130,7 @@ const CLINICAL = [
     recognition: 'Most people don\'t know their metabolic risk numbers until something goes wrong. We give you the full picture.',
     clinical: 'Lipids, glucose, HbA1c, inflammation, and cardiovascular markers, assessed, interpreted, and explained.',
     tags: ['Lipids', 'HbA1c', 'CRP', 'Metabolic'],
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" strokeLinecap="round" strokeLinejoin="round" />

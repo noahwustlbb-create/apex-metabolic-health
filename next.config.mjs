@@ -70,6 +70,11 @@ const RETIRED_QUIZZES = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Inlined into both bundles at build time, so the footer's copyright year
+  // is identical on the server and in the client's first render.
+  env: {
+    NEXT_PUBLIC_BUILD_YEAR: String(new Date().getFullYear()),
+  },
   images: {
     // AVIF disabled: Next.js AVIF image-optimizer RCE advisory
     formats: ['image/webp'],
