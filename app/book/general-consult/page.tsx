@@ -9,6 +9,11 @@ import Footer from '@/components/Footer'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const ACCENT = 'var(--blue)'
+// Straight to portal signup. The old /intake-v2 link went through a
+// cross-domain redirect, which the browser blocked when Next prefetched it
+// (console error on every load) and which never carried ad attribution;
+// lib/attribution decorates portal links in place.
+const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
 
 const PROGRAMS = [
   {
@@ -142,7 +147,7 @@ export default function GeneralConsultBookPage() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Link href="/intake-v2" className="btn-primary" style={{ fontSize: '14px', padding: '15px 36px' }}>
+                <Link href={PORTAL_SIGNUP} className="btn-primary" style={{ fontSize: '14px', padding: '15px 36px' }}>
                   Start your intake
                   <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -278,7 +283,7 @@ export default function GeneralConsultBookPage() {
               Complete your intake in under 5 minutes. AHPRA-registered doctors. Fully online. Australia-wide.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Link href="/intake-v2" className="btn-white" style={{ fontSize: '14px', padding: '14px 36px' }}>
+              <Link href={PORTAL_SIGNUP} className="btn-white" style={{ fontSize: '14px', padding: '14px 36px' }}>
                 Start your intake →
               </Link>
               <a href="/intake/discovery"

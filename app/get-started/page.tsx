@@ -8,6 +8,12 @@ import Footer from '@/components/Footer'
 import { programs } from '@/lib/programs'
 import { captureLead } from '@/lib/captureLead'
 
+// Straight to portal signup. The old /intake/* links went through a
+// cross-domain redirect, which the browser blocked when Next prefetched them
+// (console error on every load) and which never carried ad attribution;
+// lib/attribution decorates portal links in place.
+const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
+
 // ─── Input styles ─────────────────────────────────────────────────────────────
 
 
@@ -82,13 +88,13 @@ function GetStartedHero() {
         >
           {[
             { label: 'Take the health assessment', href: '/start', primary: true },
-            { label: 'Hormone Consultation', href: '/intake/hormone-consult' },
-            { label: 'Performance Consultation', href: '/intake/hormone-consult' },
-            { label: 'Metabolic Consultation', href: '/intake/general-consult' },
-            { label: 'Hair Restoration', href: '/intake/hormone-consult' },
-            { label: 'Skin Regeneration', href: '/intake/general-consult' },
-            { label: 'Injury Repair', href: '/intake/general-consult' },
-            { label: 'General Check Up', href: '/intake/general-consult' },
+            { label: 'Hormone Consultation', href: PORTAL_SIGNUP },
+            { label: 'Performance Consultation', href: PORTAL_SIGNUP },
+            { label: 'Metabolic Consultation', href: PORTAL_SIGNUP },
+            { label: 'Hair Restoration', href: PORTAL_SIGNUP },
+            { label: 'Skin Regeneration', href: PORTAL_SIGNUP },
+            { label: 'Injury Repair', href: PORTAL_SIGNUP },
+            { label: 'General Check Up', href: PORTAL_SIGNUP },
             { label: 'Order Blood Panel', href: '/start?t=bloods' },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
@@ -133,7 +139,7 @@ const ALL_PATHWAYS = [
     tag: 'Hormone Optimisation',
     title: 'Get Started Hormone Consult',
     desc: 'Hormone optimisation and performance-focused treatment. Advanced blood work first, then your dedicated consultation.',
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Get Started Hormone Consult',
     featured: false,
     icon: (
@@ -147,7 +153,7 @@ const ALL_PATHWAYS = [
     tag: 'Weight, Recovery & More',
     title: 'General Check Up',
     desc: 'Metabolic weight loss, injury repair, skin regeneration, hair restoration, and general consultations.',
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Book General Check Up',
     featured: false,
     icon: (
@@ -187,7 +193,7 @@ const ALL_PATHWAYS = [
     tag: 'Performance & Recovery',
     title: 'Performance Consultation',
     desc: 'Optimise recovery, strength output, endurance, and mental performance. Advanced panel with IGF-1, cortisol, testosterone and more.',
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Start Performance Intake',
     featured: false,
     icon: (
@@ -200,7 +206,7 @@ const ALL_PATHWAYS = [
     tag: 'Metabolic & Weight Management',
     title: 'Metabolic Consultation',
     desc: 'Blood panel covering glucose, cholesterol, thyroid, liver and kidney function, and inflammation.',
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Start Metabolic Intake',
     featured: false,
     icon: (
@@ -214,7 +220,7 @@ const ALL_PATHWAYS = [
     tag: 'Hair Restoration',
     title: 'Hair Restoration Consultation',
     desc: 'DHT, SHBG, ferritin, thyroid and more. Identify the hormonal and nutritional root causes of hair loss.',
-    href: '/intake/hormone-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Start Hair Intake',
     featured: false,
     icon: (
@@ -227,7 +233,7 @@ const ALL_PATHWAYS = [
     tag: 'Skin Regeneration',
     title: 'Skin Regeneration Consultation',
     desc: 'Cortisol, DHEA-S, thyroid and inflammatory markers. Address skin ageing, texture and conditions from the inside out.',
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Start Skin Intake',
     featured: false,
     icon: (
@@ -241,7 +247,7 @@ const ALL_PATHWAYS = [
     tag: 'Injury Repair & Recovery',
     title: 'Injury Repair Consultation',
     desc: 'IGF-1, cortisol, Vit D, CK and inflammatory markers. Understand what\'s slowing your recovery and how to fix it.',
-    href: '/intake/general-consult',
+    href: PORTAL_SIGNUP,
     cta: 'Start Injury Intake',
     featured: false,
     icon: (

@@ -1,5 +1,6 @@
 'use client'
 
+import { useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { CANONICAL_PROGRAMS } from '@/lib/canonical-programs'
 import Logo from '@/components/brand/Logo'
@@ -20,8 +21,19 @@ const BLUE  = 'var(--blue)'
 const TEXT  = 'var(--text-muted)'
 const DIM   = 'var(--text-muted)'
 
+// The copyright year was `new Date().getFullYear()` in render. Pages are
+// prerendered at build time, so the moment a year ticked over without a deploy
+// the server HTML and the client disagreed and every page threw React #418
+// and re-rendered. The build year (next.config env) is what the server
+// rendered and what the client hydrates against; after hydration the
+// visitor's own clock takes over, with no mismatch.
+const BUILD_YEAR = Number(process.env.NEXT_PUBLIC_BUILD_YEAR) || new Date().getFullYear()
+const subscribeNever = () => () => {}
+const useYear = () =>
+  useSyncExternalStore(subscribeNever, () => new Date().getFullYear(), () => BUILD_YEAR)
+
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const year = useYear()
 
   return (
     <footer className="relative overflow-hidden site-footer" style={{ borderTop: '1px solid var(--border)' }}>
