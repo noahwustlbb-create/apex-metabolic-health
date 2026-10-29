@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
-import StageCta from './StageCta'
 import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -14,22 +13,25 @@ type Who = 'men' | 'women'
 
 /**
  * HERO (Noah, 24 Oct 2026: "choose a gender first ... with the award winning
- * 3D hero"; S tier pass 28 Oct 2026 after the wearebrand playbook). The
- * visitor picks Men or Women inside the hero. Before the pick the hero is
- * neutral: two quiet glass figures side by side in a framed plate beside the
- * copy, and the default figure (men) is already turning from first paint, so
- * one live object owns the screen before anyone touches it. The pick sits in
- * the copy column above the CTA, never the fold. The pick is the moment: the
- * hero floods into that colour world from the tapped button, the chosen figure
- * steps forward in colour (a real 360 degree turntable, drag to turn), the copy
- * and the /start link follow. A fixed pill CTA sits bottom centre from the
- * first pixel on desktop; on phones the hero's own buttons carry it, and the
- * pill only appears while the scroll beat steps the copy back.
+ * 3D hero"; S tier pass 28 Oct 2026 after the wearebrand playbook; phone
+ * treatment 29 Oct 2026). The visitor picks Men or Women inside the hero.
+ * Before the pick the hero is neutral: on desktop two quiet glass figures side
+ * by side in a framed plate beside the copy; on phones one monochrome figure
+ * standing on the page itself (no plate, no card). The default figure (men) is
+ * already turning from first paint, so one live object owns the screen before
+ * anyone touches it. The pick sits in the copy column above the CTA, never the
+ * fold. The pick is the moment: the hero floods into that colour world from
+ * the tapped button, the chosen figure steps forward in colour (a real 360
+ * degree turntable, drag to turn), the copy and the /start link follow. A
+ * fixed pill CTA sits bottom centre from the first pixel at every width; on
+ * phones the copy sits above the pill's lane.
  *
  * A short scroll (pinned under one screen) faces the figure to camera and
- * lights the four systems the panel reads, one by one. Every name on a marker
- * is a test on the Apex panel (components/home/PanelMarkers.tsx), never a
- * medicine or an outcome.
+ * lights the four systems the panel reads, one by one. On phones the beat is
+ * scroll-linked through --hx-b (0 to 1, written on the section): the copy
+ * steps back and the figure grows from its head before the systems light.
+ * Every name on a marker is a test on the Apex panel
+ * (components/home/PanelMarkers.tsx), never a medicine or an outcome.
  *
  * State lives on <html>: data-chosen (men | women, absent = neutral) and
  * data-audience (the site-wide rose tokens). The <head> boot script stamps
@@ -61,7 +63,6 @@ const SYSTEMS: { id: string; label: string; tests: Record<Sex, string>; at: Reco
 ]
 
 const POSTER: Record<Sex, string> = { male: '/3d/turn/male/00.webp', female: '/3d/turn/female/00.webp' }
-const POSTER_SM: Record<Sex, string> = { male: '/3d/turn/male/poster-540.webp', female: '/3d/turn/female/poster-540.webp' }
 
 const readChosen = (): Who | null => {
   const c = typeof document !== 'undefined' ? document.documentElement.dataset.chosen : undefined
@@ -82,10 +83,18 @@ export default function StageHero() {
   const [beat, setBeat] = useState(false)
   const face = useRef(0)
   const anim = useRef<{ a?: Animation; t?: number }>({})
+  // Read inside the scroll handler without re-subscribing: is this the phone layout,
+  // what is chosen, is it the still, and the last beat value written to CSS.
+  const phone = useRef(false)
+  const chosenRef = useRef<Who | null>(null)
+  const stillRef = useRef(false)
+  const lastB = useRef(-1)
 
   useEffect(() => {
     setMounted(true)
-    setChosen(readChosen())
+    const c = readChosen()
+    chosenRef.current = c
+    setChosen(c)
     // Reduced motion, Save-Data and low-power devices keep the composed still.
     const nav = navigator as Navigator & { connection?: { saveData?: boolean }; deviceMemory?: number }
     const low = !!nav.connection?.saveData || (nav.deviceMemory !== undefined && nav.deviceMemory <= 2) || (navigator.hardwareConcurrency || 8) <= 2
@@ -94,6 +103,19 @@ export default function StageHero() {
     on(); mq.addEventListener('change', on)
     return () => mq.removeEventListener('change', on)
   }, [])
+
+  // Phones get the seamless layout and the scroll-linked beat; desktop keeps the 27 Oct plate.
+  useEffect(() => {
+    const pm = window.matchMedia('(max-width: 899px) and (min-height: 601px)')
+    const on = () => { phone.current = pm.matches }
+    on(); pm.addEventListener('change', on)
+    return () => pm.removeEventListener('change', on)
+  }, [])
+  useEffect(() => { chosenRef.current = chosen }, [chosen])
+  useEffect(() => {
+    stillRef.current = still
+    if (still) ref.current?.style.setProperty('--hx-b', '0')
+  }, [still])
 
   const sex: Sex | null = chosen === 'women' ? 'female' : chosen === 'men' ? 'male' : null
   // The live object before any pick: the men's turntable idles on its own.
@@ -105,6 +127,7 @@ export default function StageHero() {
     const frame = frameRef.current
     const wash = washRef.current
     const prev = anim.current
+    chosenRef.current = who
     prev.a?.cancel(); if (prev.t) window.clearTimeout(prev.t)
     const commit = () => { setAudience(who) }
     if (!frame || !wash || still || html.dataset.chosen === who) {
@@ -137,9 +160,19 @@ export default function StageHero() {
   const p = useSectionProgress(ref, 'pin')
   useMotionValueEvent(p, 'change', v => {
     face.current = Math.min(1, v / 0.08)
-    const i = v < 0.12 ? -1 : Math.min(SYSTEMS.length - 1, Math.floor((v - 0.12) / 0.19))
+    const ph = phone.current
+    // Phones: the figure grows over the first 0.22, then the systems light; desktop lights from 0.12.
+    const s0 = ph ? 0.24 : 0.12
+    const i = v < s0 ? -1 : Math.min(SYSTEMS.length - 1, Math.floor((v - s0) / 0.19))
     setLit(l => (l === i ? l : i))
-    setBeat(b => (b === v > 0.05 ? b : v > 0.05))
+    const t = ph && chosenRef.current && !stillRef.current ? Math.min(1, v / 0.22) : 0
+    // Smoothstep: the first 30px of scroll stay calm (a thumb twitch never half-erases the
+    // headline) and the copy is fully away at v 0.22.
+    const b = t * t * (3 - 2 * t)
+    if (Math.abs(b - lastB.current) > 0.002) { lastB.current = b; ref.current?.style.setProperty('--hx-b', b.toFixed(3)) }
+    // data-beat now means "the copy is out of reach" (pointer-events only, phones).
+    const on = ph ? t > 0.5 : v > 0.11
+    setBeat(x => (x === on ? x : on))
   })
 
   const onAngle = useCallback((a: number) => setAway(a), [])
@@ -182,12 +215,13 @@ export default function StageHero() {
               </div>
             </div>
             <div className="stage-actions hx-actions hero-in" style={{ animationDelay: '420ms' }}>
-              <StageCta href={href}>Start your assessment</StageCta>
               <Link href="/pricing" className="stage-link">See pricing</Link>
             </div>
             <p className="hx-meta hero-in" style={{ animationDelay: '480ms' }}>
               Doctors Mon to Sat · <a href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a>
             </p>
+            {/* Phones only: the honesty line sits with the copy (the plate's copy of it is hidden there). */}
+            <p className="stage-foot hx-foot hx-foot-m hero-in" style={{ animationDelay: '540ms' }}>Illustrative render. <span className="hx-foot-long">Every marker named is on the Apex panel. </span>General information, not medical advice.</p>
           </div>
 
           <div className="hx-plate">
@@ -197,18 +231,15 @@ export default function StageHero() {
                 const isLive = shown === s
                 return (
                   <div key={s} className="hx-fig" data-sex={s} data-live={(live[s] && !still) || undefined}>
-                    <picture>
-                      <source media="(max-width: 899px)" srcSet={POSTER_SM[s]} />
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={POSTER[s]}
-                        alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
-                        width={828} height={1108}
-                        fetchPriority="high"
-                        decoding="async"
-                        className="hx-poster"
-                      />
-                    </picture>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={POSTER[s]}
+                      alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
+                      width={828} height={1108}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="hx-poster"
+                    />
                     {mounted && !still && (
                       <Turntable sex={s} active={isLive} face={face} onAngle={isOn ? onAngle : undefined} onReady={s === 'male' ? readyM : readyF} />
                     )}
@@ -240,7 +271,7 @@ export default function StageHero() {
         </div>
       </div>
 
-      {/* Fixed pill CTA, bottom centre from the first pixel (desktop). */}
+      {/* Fixed pill CTA, bottom centre from the first pixel at every width. */}
       <Link href={href} className="hx-pill">
         <span>Start your assessment</span>
         <span className="hx-pill-dot" aria-hidden="true" />

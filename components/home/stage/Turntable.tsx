@@ -92,10 +92,20 @@ export default function Turntable({
     const io = new IntersectionObserver(es => { visible = es.some(e => e.isIntersecting) })
     io.observe(cv)
     const s = state.current
+    // Size from the layout box, not the bounding rect: the phone beat scales the
+    // figure with a transform on every scroll frame, and a canvas that resizes on
+    // every frame reallocates and clears itself. Oversample for that scale on
+    // phones, never past the source frames.
+    const SRC_W = 828, SRC_H = 1108
+    const pm = window.matchMedia('(max-width: 899px)')
     const fit = () => {
-      const r = cv.getBoundingClientRect()
-      const dpr = Math.min(2, window.devicePixelRatio || 1)
-      const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr)
+      const lw = cv.offsetWidth
+      if (!lw) return
+      const ph = pm.matches
+      const dpr = Math.min(ph ? 3 : 2, window.devicePixelRatio || 1)
+      const over = ph ? 1.3 : 1                       // headroom for the beat's scale (tablets grow 0.3)
+      const w = Math.min(SRC_W, Math.round(lw * dpr * over))
+      const h = Math.round(w * SRC_H / SRC_W)
       if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h }
     }
     const nearest = (i: number) => {
@@ -111,6 +121,9 @@ export default function Turntable({
       raf = requestAnimationFrame(tick)
       const dt = Math.min(0.05, (t - last) / 1000); last = t
       if (!visible) return
+      // Hold the poster pose until frame 0 has decoded: the idle clock starts from
+      // what the visitor saw, so the first canvas draw never snaps away from the poster.
+      if (!s.dragging && !frames.current[0]) return
       const f = face.current
       if (!s.dragging) {
         if (f > 0.001) {

@@ -4,10 +4,13 @@
  * neutral) and data-audience (site-wide rose tokens). See
  * components/home/stage/StageHero.tsx.
  *
- * Layout: the copy column (kicker, one sentence, lead, price, the pick, CTA,
- * phone) sits beside a framed night plate that holds the figure. The figure is
- * an object in a frame, never a backdrop behind words. On phones the plate
- * stacks above the copy and the five fundamentals stay on the first screen.
+ * Layout: the copy column (kicker, one sentence, lead, the pick, phone) sits
+ * beside a framed night plate that holds the figure on desktop (900 px and up):
+ * an object in a frame, never a backdrop behind words. On phones (29 Oct 2026)
+ * there is no plate: the figure stands on the page in the world colour, full
+ * bleed behind the transparent nav, with its own light on the ground, and the
+ * copy sits at the foot of the first screen above the fixed pill, rising out of
+ * the figure's dissolve. The scroll beat there is scroll-linked through --hx-b.
  * Text is always --stage-ink on a pale ground: AA in every colour world and
  * at every point of the wash (all three grounds are lighter than #e9f5fd).
  */
@@ -225,6 +228,7 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-46%)
 
 /* The honesty line lives on the plate it describes. */
 .hx-foot { z-index: 5; left: auto; right: 36px; bottom: 16px; max-width: 52ch; text-align: right; color: var(--stage-night-mute); }
+.hx-foot-m { display: none; }
 
 /* ── Fixed pill CTA: bottom centre from the first pixel ── */
 .hx-pill {
@@ -246,90 +250,190 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-46%)
   background: var(--stage-cyan);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--stage-cyan) 25%, transparent);
 }
-@media (max-width: 759px) {
-  /* Phones: the hero's own buttons carry the CTA. The pill only steps in
-     while the scroll beat steps the copy back, so motion never hides it. */
-  .hx-pill { display: none; }
-  .hx[data-beat] .hx-pill { display: inline-flex; }
-}
 
 /* Still: reduced motion, Save-Data, low power. No pin, no transitions, the composed still. */
 .hx[data-still] .hx-fig, .hx[data-still] .hx-stage::before, .hx[data-still] .hx-pick-btn, .hx[data-still] .hx-plate::before { transition: none; }
 
-/* ── Phones and small tablets: plate above the copy ── */
+/* ── Phones and small tablets (under 900 px, 29 Oct 2026): the figure stands on
+   the page. No card, no night plate, no corner marks. The world colour runs
+   full bleed behind the transparent nav; the figure's own light is the only
+   glow; the copy is anchored to the foot of the first screen above the fixed
+   pill's lane and rises out of the figure's dissolve. The scroll beat is
+   scroll-linked through --hx-b (0 to 1, written by StageHero.tsx), never a
+   toggle. Budget and thresholds: ~/Clients/Apex/research/hero-phone-2026-10-29/SPEC.md ── */
 @media (max-width: 899px) {
-  .hx { --nav-h: 70px; --hx-inset: 0px; --hx-plate-h: clamp(170px, 30svh, 260px); --hx-beat-h: 64svh; --hx-beat-dy: calc(var(--hx-beat-h) - var(--hx-plate-h)); }
-  .hx[data-pin] { height: 160svh; }
-  .hx-pin { height: auto; min-height: 100svh; max-height: none; padding: calc(var(--nav-h) + 6px) 8px 8px; }
-  .hx[data-pin] .hx-pin { height: 100svh; }
-  .hx-frame { height: auto; min-height: calc(100svh - var(--nav-h) - 14px); grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); align-content: start; }
-  .hx[data-pin] .hx-frame { height: 100%; }
-  .hx-plate { order: -1; height: var(--hx-plate-h); margin: 8px 8px 0; border-radius: 22px; overflow: visible; }
-  .hx-plate::before { height: var(--hx-plate-h); }
-  .hx-stage::before { inset: 8% 0 0; }
-  .hx-corners { inset: 10px; }
-  .hx-corners i { width: 10px; height: 10px; }
-  .hx-copy { align-self: start; padding: 14px 16px 16px; }
-  .hx-copy .stage-kicker { margin-bottom: 10px; font-size: 11px; padding: 6px 10px 6px 8px; }
-  .hx-copy .stage-display { font-size: clamp(30px, 8.6vw, 46px); max-width: none; }
-  .hx-lead { margin: 10px 0 8px; font-size: 14.5px; line-height: 1.45; }
-  .hx-price { margin: 0; font-size: 12.5px; gap: 0 10px; }
-  .hx-price strong { font-size: 16px; }
-  .hx-price > span { flex-basis: auto !important; }
-  .hx-price .stage-price-lead { flex-basis: 100% !important; }
-  .hx-pick { max-width: none; margin: 12px 0 12px; }
-  .hx-pick-k { font-size: 12.5px; margin-bottom: 8px; }
-  .hx-pick-btn { min-height: 56px; padding: 8px 14px; border-radius: 16px; }
+  /* The figure's dimensions live on <main>, so the section after the hero (a
+     sibling of .hx) can read --hx-tail and pull up over the hero's tail like a
+     blanket: no pale band between the readout and the next H2. */
+  .home-main {
+    --nav-h: 70px;
+    --hx-lane: 76px;                                               /* the fixed pill's lane at the foot of the first screen */
+    --hx-fig-h: clamp(280px, min(56svh, 166svh - 737px), 520px);  /* the figure box, from 6px under the nav */
+    --hx-grow: 0.22;                                               /* how much the figure grows on the beat */
+    /* The air left under the grown figure and its readout at the end of the beat
+       (85px = the 6px gap + the 79px women's readout, the tallest). */
+    --hx-tail: calc(100svh - var(--nav-h) - 6px - var(--hx-fig-h) * (1 + var(--hx-grow)) - 85px);
+  }
+  .hx {
+    --nav-h: inherit;                                              /* the base rule sets 88px on .hx itself; read <main>'s value */
+    --hx-inset: 0px;
+    --hx-fade: 0.26;                                               /* how far the dissolve lifts on the beat, in box heights */
+    /* Short viewports (Safari with its bars, about 660 to 710 svh): the chosen copy runs three
+       lines and its headline reaches 61 to 63% of the box, so the dissolve at rest sits a
+       little higher there (up to 40px, continuous, no step) and the H1 never meets more than
+       ~30% of the figure. Zero from 710 svh up; the beat still ends at the same place. */
+    --hx-fade-x: clamp(0px, calc((710px - 100svh) * 0.75), 40px);
+  }
+  /* The next section slides in under the readout over the last stretch of the
+     Metabolic beat (its H2 lands 48 to 66px under the readout at release) and,
+     before a pick or in the still, sits 24px under the honesty line. */
+  .hx + .st-tiles { position: relative; z-index: 2; }
+  .hx[data-pin] + .st-tiles { margin-top: max(-160px, calc(24px - var(--hx-tail))); }
+  .hx:not([data-pin]) + .st-tiles { margin-top: calc(24px - var(--hx-lane)); }
+  .hx[data-pin] { height: 200svh; }
+  .hx-pin, .hx[data-pin] .hx-pin { height: 100svh; min-height: 0; max-height: none; padding: 0; }
+
+  /* The frame is the screen: full bleed, no radius, the ground runs behind the nav. */
+  .hx-frame {
+    height: 100%; min-height: 100svh;
+    grid-template-columns: minmax(0, 1fr); grid-template-rows: auto;
+    align-content: end;
+    padding: calc(var(--nav-h) + 6px) 16px var(--hx-lane);
+    border-radius: 0;
+  }
+  /* The ground melts into the page under the pill, so the hand-over has no edge. */
+  .hx-frame::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    height: 120px; pointer-events: none;
+    background: linear-gradient(180deg, transparent 0%, var(--bg) 100%);
+  }
+
+  /* Copy: anchored above the lane, rises out of the dissolve, steps back on the beat. */
+  .hx-copy {
+    align-self: end; padding: 0; max-width: 560px;
+    opacity: calc(1 - var(--hx-b, 0));
+    translate: 0 calc(-28px * var(--hx-b, 0));
+  }
+  .hx[data-beat] .hx-copy { pointer-events: none; }
+  .hx-copy .stage-kicker { margin: 0 0 8px; font-size: 11.5px; padding: 6px 10px 6px 8px; }
+  .hx-copy .stage-display { font-size: clamp(30px, 8.6vw, 36px); max-width: none; }
+  .hx-lead { margin: 10px 0 0; font-size: 15px; line-height: 1.42; }
+  .hx-pick { max-width: none; margin: 12px 0 0; }
+  .hx-pick-k { margin: 0 0 8px; font-size: 12.5px; }
+  .hx-pick-row { gap: 8px; }
+  .hx-pick-btn { min-height: 54px; padding: 8px 14px; border-radius: 16px; }
   .hx-pick-btn strong { font-size: 16px; }
   .hx-pick-btn span { font-size: 11.5px; }
-  .hx-actions { flex-wrap: nowrap; gap: 14px; }
-  .hx-actions .stage-cta-label { height: 46px; padding: 0 18px; font-size: 15px; }
-  .hx-actions .stage-cta-arrow { width: 46px; height: 46px; }
-  .hx-actions .stage-link { font-size: 13.5px; }
-  .hx-meta { margin-top: 10px; font-size: 12.5px; }
-  .hx-fig { height: 100%; bottom: 0; }
-  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-30%) scale(0.92); }
-  html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(30%) scale(0.88); }
-  .hx-readout { top: auto; bottom: 10px; left: 10px; right: 10px; max-width: none; padding: 9px 12px; border-radius: 14px; transition: opacity 0.35s var(--hx-ease), transform 0.45s var(--hx-ease); }
-  .hx-readout-v { font-size: 13px; }
+  .hx-actions { display: none; }
+  .hx-meta { margin: 10px 0 0; font-size: 12.5px; }
+  .hx-foot-m { display: block; position: static; margin: 6px 0 0; max-width: none; font-size: 10.5px; line-height: 1.4; text-align: left; color: var(--stage-ink-muted); }
+  .hx-foot-long { display: none; }
+
+  /* The figure box: absolute from under the nav. No night ground, no corners, no card. */
+  .hx-plate {
+    position: absolute; left: 0; right: 0; top: calc(var(--nav-h) + 6px);
+    height: var(--hx-fig-h); margin: 0;
+    border-radius: 0; overflow: visible; isolation: auto;
+  }
+  /* The light the figure throws on the ground: one source, in the world colour, grey
+     before a pick. It grows from the top with the figure on the beat. The lobes
+     centre at 55, 47 and 36% of the figure box (the pseudo-element is inset -12%
+     top and -28% bottom): under the lit chest and neck inside the dissolve, fading
+     out where the copy begins at about 75% of the box, never a cloud under the H1. */
+  .hx-plate::before {
+    inset: -12% -16% -28%; height: auto; border-radius: 0;
+    background:
+      radial-gradient(30% 20% at 50% 48%, color-mix(in srgb, var(--hx-glow, #9aa6b4) 36%, transparent), transparent 70%),
+      radial-gradient(44% 34% at 50% 42%, color-mix(in srgb, var(--hx-glow, #9aa6b4) 26%, transparent), transparent 70%),
+      radial-gradient(64% 54% at 50% 34%, color-mix(in srgb, var(--hx-glow, #9aa6b4) 12%, transparent), transparent 72%);
+    transform-origin: 50% 0;
+    scale: calc(1 + var(--hx-grow) * var(--hx-b, 0));
+    animation: hero-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hx-stage::before, .hx-corners, .hx-plate > .hx-foot { display: none; }
+
+  /* The figure: grows from its head on the beat (scale, a separate property from the
+     pick's transform), dissolves into the ground below the copy, and the dissolve
+     lifts with the beat so the heart comes whole. The side fade softens the arms
+     where the frames cut them at the box edge. */
+  .hx-fig {
+    top: 0; bottom: auto; height: 100%;
+    transform-origin: 50% 0;
+    scale: calc(1 + var(--hx-grow) * var(--hx-b, 0));
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 51%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 38%, transparent 51%, transparent 100%), linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+    -webkit-mask-size: 100% 200%, 100% 100%;
+            mask-size: 100% 200%, 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-position: 0 calc((-1 * var(--hx-fade) * var(--hx-fig-h) - var(--hx-fade-x)) * (1 - var(--hx-b, 0))), 0 0;
+            mask-position: 0 calc((-1 * var(--hx-fade) * var(--hx-fig-h) - var(--hx-fade-x)) * (1 - var(--hx-b, 0))), 0 0;
+  }
+  /* The base rules pin transform-origin to the feet (50% 100%) with higher specificity;
+     on phones every state scales from the head so it never moves or crops. */
+  html[data-chosen] .hx-fig, html:not([data-chosen]) .hx-fig { transform-origin: 50% 0; }
+  /* Neutral: one monochrome figure, the men's default turntable; the women's waits off stage. */
+  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: none; transform-origin: 50% 0; filter: grayscale(1) contrast(1.06); }
+  html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(40%) scale(0.8); transform-origin: 50% 0; opacity: 0; filter: grayscale(1); pointer-events: none; z-index: 1; }
+  /* Chosen: the other figure steps out from the top centre, so heads stay in place. */
+  html[data-chosen="men"] .hx-fig[data-sex="female"]  { transform: translateX(40%) scale(0.8); }
+  html[data-chosen="women"] .hx-fig[data-sex="male"]  { transform: translateX(-40%) scale(0.8); }
+
   .hx-mark-label { display: none; }
   .hx-mark-dot { width: 10px; height: 10px; }
-  .hx-foot { display: block; left: 28px; right: 28px; bottom: 9px; font-size: 10px; line-height: 1.35; max-width: none; text-align: center; }
-  .hx-foot-long { display: none; }
-  /* The scroll beat: the night ground grows down over the copy (absolute, so
-     nothing in flow moves), the figure scales up by transform, the copy steps
-     back and the fixed pill carries the CTA. The markers and the heart are in
-     clear view. */
-  .hx-copy { transition: opacity 0.45s var(--hx-ease), translate 0.45s var(--hx-ease); }
-  .hx[data-beat] .hx-plate::before { height: var(--hx-beat-h); }
-  html[data-chosen="men"] .hx[data-beat] .hx-fig[data-sex="male"],
-  html[data-chosen="women"] .hx[data-beat] .hx-fig[data-sex="female"] { transform: translateY(var(--hx-beat-dy)) scale(2.05); }
-  .hx[data-beat] .hx-readout { transform: translateY(var(--hx-beat-dy)); }
-  .hx[data-beat] .hx-corners i:nth-child(3), .hx[data-beat] .hx-corners i:nth-child(4) { transform: translateY(var(--hx-beat-dy)); }
-  .hx[data-beat] .hx-copy { opacity: 0; translate: 0 -18px; pointer-events: none; }
-  .hx[data-beat] .hx-foot { opacity: 0; }
-  .hx-fig {
-    -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 95%), linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
-            mask-image: linear-gradient(180deg, #000 80%, transparent 95%), linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  /* The composed still: no dim dots on the forehead and throat; a marker shows only once it is lit. */
+  .hx[data-still] .hx-mark:not([data-on]) .hx-mark-dot { opacity: 0; }
+
+  /* The readout sits under the grown figure, never on the face or the heart. */
+  .hx-readout {
+    top: calc(100% * (1 + var(--hx-grow) * var(--hx-b, 0)) + 6px); bottom: auto;
+    left: 16px; right: 16px; max-width: none;
+    padding: 10px 14px; border-radius: 14px;
   }
+  .hx-readout-k { font-size: 11px; }
+  .hx-readout-v { font-size: 13px; }
+  .hx[data-still] .hx-readout { display: none; }
+
+  .hx-pill { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
 }
-/* Short phones (Safari with its bars is ~390x660): the copy tightens and the
-   plate gives way, so what, who, price, the pick and the CTA stay in the first screen. */
-@media (max-width: 899px) and (max-height: 720px) {
-  .hx { --hx-plate-h: 150px; }
-  .hx-copy { padding-top: 10px; }
-  .hx-copy .stage-kicker { margin-bottom: 8px; }
-  .hx-copy .stage-display { font-size: 29px; }
-  .hx-lead { font-size: 13.5px; margin: 6px 0 6px; }
-  .hx-pick { margin: 8px 0 10px; }
-  .hx-pick-k { display: none; }
-  .hx-pick-btn { min-height: 52px; }
-  .hx-foot { display: none; }
+/* Under 740 svh the women's Hormones and Energy readouts wrap to two value lines (79px);
+   the figure grows a little less there so the readout stays under it and clear of the pill.
+   Under 700 svh (375x667) a little less again, so the readout ends 16px above the pill. */
+@media (max-width: 899px) and (max-height: 740px) {
+  .home-main { --hx-grow: 0.17; }
+}
+@media (max-width: 899px) and (max-height: 700px) {
+  .home-main { --hx-grow: 0.15; }
 }
 
-/* Desktop: the fixed pill is the hero's "Start your assessment"; the inline button only serves phones, where the pill
-   is hidden until the scroll beat (28 Oct 2026, Noah: one action per screen, nav + pill, not three). */
+/* Tablets 768 to 899 px (the nav is 88 px from Tailwind's md): same composition, bigger type,
+   capped figure that grows more on the beat (520 to 676px) so the tail under it stays short. */
+@media (min-width: 768px) and (max-width: 899px) {
+  .home-main { --nav-h: 88px; --hx-grow: 0.3; }
+  .hx-frame { padding-left: 32px; padding-right: 32px; }
+  .hx-copy { max-width: 600px; }
+  .hx-copy .stage-display { font-size: 46px; }
+  .hx-lead { font-size: 17px; max-width: 46ch; }
+  .hx-pick { max-width: 480px; }
+  .hx-readout { left: 50%; right: auto; width: min(520px, calc(100% - 64px)); translate: -50% 8px; }
+  .hx-readout[data-on] { translate: -50% 0; }
+}
+
+/* Short viewports (landscape phones, the iPhone SE class under 600 px tall): no pin,
+   no beat, the figure in flow above the copy, everything scrolls. */
+@media (max-width: 899px) and (max-height: 600px) {
+  .hx { --hx-b: 0 !important; --hx-fig-h: 300px; }
+  .hx[data-pin] { height: auto; }
+  .hx-pin, .hx[data-pin] .hx-pin { position: relative; height: auto; min-height: 100svh; }
+  .hx-frame, .hx[data-pin] .hx-frame { height: auto; min-height: 100svh; align-content: start; }
+  .hx-plate { position: relative; top: auto; left: auto; right: auto; order: -1; height: var(--hx-fig-h); margin: 0 auto 10px; }
+  .hx-copy { align-self: start; }
+  .hx-readout { display: none; }
+  .hx[data-beat] .hx-copy { pointer-events: auto; }
+  .hx + .st-tiles { margin-top: 0; }
+}
+
+/* Desktop: the fixed pill is the hero's "Start your assessment" at every width (29 Oct 2026). */
 @media (min-width: 760px) {
-  .hx-actions .stage-cta { display: none; }
   .hx-actions .stage-link { font-size: 15px; }
 }

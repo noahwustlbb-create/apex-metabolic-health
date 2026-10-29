@@ -937,6 +937,7 @@ html[data-audience="women"] .for-men { display: none !important; }
 
 /* Start tiles: on phones the photo tiles become chips (they only list areas). */
 @media (max-width: 899px) {
+  .st-tiles { padding-top: 24px; }   /* the hero melts into the page; the section pulls up over its tail (hero3d.css) and the H2 follows 24px later (29 Oct 2026) */
   .st-tiles-grid { display: flex !important; flex-wrap: wrap; gap: 8px; grid-template-columns: none; }
   .st-tiles-grid > div { flex: 0 0 auto; }
   .st-tile { display: inline-flex !important; align-items: center; gap: 8px; min-height: 44px; padding: 10px 16px !important; border-radius: 999px !important; aspect-ratio: auto !important; height: auto !important; background: var(--stage-white, #fff); border: 1px solid var(--border); }
