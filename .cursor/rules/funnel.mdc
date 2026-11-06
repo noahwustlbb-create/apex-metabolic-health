@@ -28,7 +28,7 @@ Integrations (extend, do not replace)
 
 - Stripe checkout: `app/api/create-checkout/route.ts` + `lib/intake-routing.ts`.
 - Mail: Google Workspace SMTP via `lib/mailer.ts`. Resend is leftover.
-- Pathology partner: Bloody Good Tests (`lib` + `app/api/bgt`).
+- Pathology partner: iMedical only (ordered in the portal via /order-bloods). Bloody Good Tests is retired for ordering; app/api/bgt only serves results for orders placed before 6 Nov 2026.
 - Practice: Apex portal (`app.apexmetabolichealth.com.au`). Cliniko is dead. Do not rebuild it. `lib/cliniko.ts` is leftover.
 - Chat: Haiku in `app/api/chat/route.ts`. Keep replies short. No prices. No drug names.
 
