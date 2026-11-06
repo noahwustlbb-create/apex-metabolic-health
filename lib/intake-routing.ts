@@ -21,18 +21,10 @@ export const ENQUIRY_LABELS: Record<EnquiryType, string> = {
   'sleep': 'Sleep Optimisation',
 }
 
-// bloodygoodtests.com.au panel URLs - shown when patient has no existing bloods
-export const PANEL_URLS: Record<EnquiryType, string> = {
-  'trt':          'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
-  'sexual-health':'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
-  'anti-aging':   'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
-  'sleep':        'https://app.bloodygoodtests.com.au/buy/8db67cec-81c9-4c51-a66a-ddf4ce8278f2',
-  'performance':  'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
-  'injury-repair':'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
-  'weight-loss':  'https://app.bloodygoodtests.com.au/buy/6b4a52f4-fcb8-422c-aefb-aa2811451d0f',
-  'hair':         'https://app.bloodygoodtests.com.au/buy/a09b6127-f307-4446-81a6-ab7789440754',
-  'skin':         'https://app.bloodygoodtests.com.au/buy/a09b6127-f307-4446-81a6-ab7789440754',
-}
+// Bloods are ordered in the portal, which checks membership and opens the right
+// iMedical checkout (6 Nov 2026: iMedical is the only lab, Bloody Good Tests removed).
+// /order-bloods redirects there.
+export const ORDER_BLOODS_PATH = '/order-bloods'
 
 export type ProductType =
   | 'panel-hormone'
