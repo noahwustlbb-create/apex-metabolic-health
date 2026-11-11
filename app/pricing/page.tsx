@@ -76,7 +76,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
   { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
   { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
   { label: 'AHI fee per order',           single: '·',              partner: '$350–$650 avg',   member: 'Included',    highlight: true  },
-  { label: 'Escript Release Fee',         single: '$125',           partner: '$125',            member: 'Free',        highlight: true  },
+  { label: 'Escript Release Fee',         single: '$155',           partner: '$155',            member: 'Free',        highlight: true  },
   { label: 'Referrals & Certs',           single: '$25 each',       partner: '$25 each',        member: 'Free',        highlight: true  },
   { label: 'Health-system score history', single: 'Latest two',     partner: 'Latest two',      member: 'Every panel', highlight: true  },
   { label: 'Ask about your results',      single: '5 / month',      partner: '5 / month',       member: 'Unlimited',   highlight: true  },
@@ -85,9 +85,9 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
 
 const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
   { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
-    box: { k: 'Before medication', v: '$599', note: 'Blood panel $275 + Peptide / General Consult $199 + escript fee $125. With the hormone consult ($275) instead: $675. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
+    box: { k: 'Before medication', v: '$629', note: 'Blood panel $275 + Peptide / General Consult $199 + escript fee $155. With the hormone consult ($275) instead: $705. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
   { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
-    box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $125 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
+    box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $155 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
   { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Pause or cancel from your account', box: null, cta: 'Get Started' },
 ]
 
@@ -214,6 +214,7 @@ type Pathway = {
   steps: PathwayStep[]
 }
 
+// Rewritten 11 Nov 2026 from Noah's brief, in Apex's own words and prices; script release $155.
 const PATHWAYS: Pathway[] = [
   {
     id: 'hormone-member',
@@ -221,32 +222,31 @@ const PATHWAYS: Pathway[] = [
     tag: 'Apex Member',
     steps: [
       {
-        label: 'Intake',
-        body: 'Complete the hormone consult intake form online in 8–10 minutes. Our clinical team reviews your submission before your consultation is scheduled.',
+        label: 'Sign up',
+        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
       },
       {
-        label: 'Blood Referral',
-        body: 'Doctor-issued referral, no GP required. Collected fasted before 9am at any accredited pathology centre. Results reviewed directly by your Apex doctor.',
+        label: 'Blood panel',
+        body: 'Doctor-issued referral, no GP needed. Collect fasted before 9am at any accredited centre. Recent results with the right markers may be accepted.',
         price: '$199',
-        priceNote: 'Initial · follow-ups $139',
+        priceNote: 'First panel · follow-ups $139',
       },
       {
-        label: 'Hormone Consultation',
-        body: 'Full telehealth review of your pathology, clinical history, and goals. Your doctor builds a personalised protocol and prescribes where clinically appropriate.',
+        label: 'Hormone consultation',
+        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
         price: '$199',
         priceNote: 'Member rate',
       },
       {
-        label: 'Ongoing Protocol',
-        body: 'Membership starts the day you join, so the member rates above apply from your first panel and consult. Your protocol evolves with your results, reviewed every cycle.',
+        label: 'Ongoing care',
+        body: 'Member rates apply from the day you join, including your first panel and consult. Pause or cancel from your account.',
         price: '$99 /mo',
-        priceNote: 'No lock-in contracts',
+        priceNote: 'No lock-in',
         includes: [
-          'Zero medication mark-ups: pharmacy cost price direct',
-          'Prescribing fee waived: scripts issued at no charge',
-          'Discounted follow-up consultations and review blood panels',
-          'Nursing team check-ins every 6–8 weeks',
-          'Free referrals, medical certificates, and health summaries',
+          'If your doctor prescribes: medication at cost, no per-order fee, delivered to you',
+          'Free scripts, sent to any pharmacy you like (not available in NSW)',
+          'Nursing check-ins every 6 to 8 weeks',
+          'Referrals, med certs, health summaries and travel letters',
           'Priority clinical support between reviews',
         ],
       },
@@ -258,32 +258,32 @@ const PATHWAYS: Pathway[] = [
     tag: 'Single Consult',
     steps: [
       {
-        label: 'Intake',
-        body: 'Complete the hormone consult intake form. Our clinical team reviews your submission before your consultation is scheduled.',
+        label: 'Sign up',
+        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
       },
       {
-        label: 'Blood Referral',
-        body: 'Doctor-issued referral. Collected fasted before 9am at any accredited pathology centre. Results reviewed by your Apex doctor.',
+        label: 'Blood panel',
+        body: 'Doctor-issued referral, no GP needed. Collect fasted before 9am at any accredited centre. Recent results with the right markers may be accepted.',
         price: '$275',
-        priceNote: 'Initial · follow-ups $180',
+        priceNote: 'First panel · follow-ups $180',
       },
       {
-        label: 'Hormone Consultation',
-        body: 'Full telehealth review of your results and clinical history. Personalised treatment plan issued where clinically appropriate.',
+        label: 'Hormone consultation',
+        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
         price: '$275',
-        priceNote: 'Initial consultation',
+        priceNote: 'Members pay $199',
       },
       {
-        label: 'Treatment Options',
-        body: 'At the conclusion of your consultation, choose how to proceed with your prescription.',
+        label: 'Treatment options',
+        body: 'Two ways to fill a script, if you get one. Members skip these fees.',
         options: [
           {
-            label: 'Partner Pharmacy',
-            detail: 'You pay the pharmacy cost price for medication. An administration fee from $50 per invoice covers file management, dosing guidance, and safety checks.',
+            label: 'Partner pharmacy',
+            detail: 'Medication at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (usually $350 to $650) and the $155 escript fee.',
           },
           {
-            label: 'Own Pharmacy: Script Release',
-            detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you. Ongoing nursing support included. Note: excludes NSW patients.',
+            label: 'Your own pharmacy',
+            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy you like. Not available in NSW.',
           },
         ],
       },
@@ -295,32 +295,32 @@ const PATHWAYS: Pathway[] = [
     tag: 'Apex Member',
     steps: [
       {
-        label: 'Intake',
-        body: 'Complete the metabolic health intake form online. Our clinical team reviews your submission before your consultation.',
+        label: 'Sign up',
+        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
       },
       {
-        label: 'Blood Referral',
-        body: 'Doctor-issued referral matched to your metabolic pathway. No GP required. Collected at any accredited pathology centre.',
+        label: 'Blood panel',
+        body: 'Doctor-issued referral, no GP needed. Collect at any accredited centre. Recent results with the right markers may be accepted.',
         price: '$199',
-        priceNote: 'Initial · follow-ups $139',
+        priceNote: 'First panel · follow-ups $139',
       },
       {
         label: 'Peptide / General Consult',
-        body: 'Telehealth review of your metabolic health profile, results, and goals. Treatment plan built where clinically appropriate.',
+        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
         price: '$99',
         priceNote: 'Member rate',
       },
       {
-        label: 'Ongoing Protocol',
-        body: 'Membership starts the day you join, so the member rates above apply from your first panel and consult.',
+        label: 'Ongoing care',
+        body: 'Member rates apply from the day you join, including your first panel and consult. Pause or cancel from your account.',
         price: '$99 /mo',
-        priceNote: 'No lock-in contracts',
+        priceNote: 'No lock-in',
         includes: [
-          'Zero medication mark-ups: pharmacy cost price direct',
-          'Prescribing fee waived',
-          'Discounted follow-up consultations and review bloods',
-          'Nursing team support throughout your protocol',
-          'Free referrals, medical certificates, and health summaries',
+          'If your doctor prescribes: medication at cost, no per-order fee, delivered to you',
+          'Free scripts, sent to any pharmacy you like (not available in NSW)',
+          'Nursing check-ins every 6 to 8 weeks',
+          'Referrals, med certs, health summaries and travel letters',
+          'Priority clinical support between reviews',
         ],
       },
     ],
@@ -331,32 +331,32 @@ const PATHWAYS: Pathway[] = [
     tag: 'Single Consult',
     steps: [
       {
-        label: 'Intake',
-        body: 'Complete the metabolic health intake form. Our clinical team reviews before your consultation.',
+        label: 'Sign up',
+        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
       },
       {
-        label: 'Blood Referral',
-        body: 'Doctor-issued referral. Collected at any accredited pathology centre. Results reviewed by your Apex doctor.',
+        label: 'Blood panel',
+        body: 'Doctor-issued referral, no GP needed. Collect at any accredited centre. Recent results with the right markers may be accepted.',
         price: '$275',
-        priceNote: 'Initial · follow-ups $180',
+        priceNote: 'First panel · follow-ups $180',
       },
       {
         label: 'Peptide / General Consult',
-        body: 'Telehealth review of your metabolic health and goals. Treatment plan issued where clinically appropriate.',
+        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
         price: '$199',
-        priceNote: 'Initial consultation',
+        priceNote: 'Members pay $99',
       },
       {
-        label: 'Treatment Options',
-        body: 'Choose how to proceed with your prescription after consultation.',
+        label: 'Treatment options',
+        body: 'Two ways to fill a script, if you get one. Members skip these fees.',
         options: [
           {
-            label: 'Partner Pharmacy',
-            detail: 'Pharmacy cost price for medication. Administration fee from $50 per invoice covers ongoing management, guidance, and safety checks.',
+            label: 'Partner pharmacy',
+            detail: 'Medication at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (usually $350 to $650) and the $155 escript fee.',
           },
           {
-            label: 'Own Pharmacy: Script Release',
-            detail: '$125 prescribing fee. Prescription, treatment plan, and dosing guides sent directly to you.',
+            label: 'Your own pharmacy',
+            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy you like. Not available in NSW.',
           },
         ],
       },
@@ -585,7 +585,7 @@ function ProgramPathways() {
 const NOT_INCLUDED = [
   {
     label: 'Discovery call fees',
-    detail: 'No discovery call. Complete the assessment and your doctor contacts you directly.',
+    detail: 'The discovery call is free. Book one if you’d like to talk it through first.',
   },
   {
     label: 'Surprise admin charges',
@@ -723,6 +723,14 @@ const PRICING_FAQS = [
   {
     q: 'Are there any hidden fees?',
     a: 'No. Every fee is on this page before you start, including the AHI fee on partner-pharmacy orders. No discovery call fees and no bundled packages.',
+  },
+  {
+    q: 'What is your refund policy?',
+    a: 'Not happy after your consult? Contact us and we’ll refund the consult fee, less a $50 admin fee. Cancel at least 4 hours before your appointment for a full refund. Blood panel referrals and medication invoices are not refundable. None of this limits your rights under the Australian Consumer Law. Full details are in our terms.',
+  },
+  {
+    q: 'What else should I know before I pay?',
+    a: 'Prices may change over time. Every medication invoice includes the AHI fee (for members it’s covered by the membership). Prescription fees are paid before your script is issued. A consult does not guarantee a prescription: your doctor only prescribes where it’s clinically appropriate.',
   },
   {
     q: 'Are your doctors AHPRA-registered?',

@@ -11,7 +11,7 @@ const ACCENT = 'var(--blue)'
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const ADVANTAGE_STATS = [
-  { value: '$0',           label: 'Prescribing fees',   sub: 'vs $125 per script' },
+  { value: '$0',           label: 'Prescribing fees',   sub: 'vs $155 per script' },
   { value: 'Cost price',   label: 'All medication',     sub: 'No medication mark-up' },
   { value: 'Included',     label: 'AHI fee per order',  sub: 'Admin, handling, infrastructure' },
   { value: '$99',          label: 'Per month',           sub: 'No lock-in contracts' },
