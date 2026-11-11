@@ -6,6 +6,7 @@
 @import '../styles/stage.css';
 @import '../styles/hero3d.css';
 @import '../styles/algo.css';
+@import '../styles/panels.css';
 
 :root {
   /* Primitive not covered by tokens.css */

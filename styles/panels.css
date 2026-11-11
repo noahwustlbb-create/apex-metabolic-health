@@ -1,0 +1,177 @@
+/*
+ * Core Health Panels (components/CoreHealthPanels.tsx). AlgoRx /labs layout,
+ * measured from Noah's 12 Nov phone screenshots (402 css wide): 20px gutter,
+ * 28px card radius, frame inset 20px with a 1px light border, 28px frame
+ * padding, 48px pill buttons, 9px between them, 18px between cards.
+ * Apex accent only: blue for Male, the site's rose for Female.
+ */
+.chp {
+  --chp-ink: #0a0a0a;
+  --chp-mute: #55595f;            /* 7.1:1 on #fafafa */
+  --chp-accent: #0d5dea;          /* Apex blue, white text 5.6:1 */
+  --chp-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  background: #fafafa;
+  color: var(--chp-ink);
+  padding: 104px 20px 72px;
+}
+.chp[data-sex="female"] { --chp-accent: #b8285b; } /* site rose, white text 6.1:1 */
+.chp-wrap { max-width: 1240px; margin: 0 auto; }
+.chp-card[data-tier="advanced"] .chp-bg { filter: brightness(0.72); }
+
+.chp-k {
+  display: block;
+  font: 500 11px/1.4 var(--chp-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--chp-mute);
+  margin: 0 0 12px;
+}
+.chp-select { position: relative; max-width: 420px; }
+.chp-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 48px;
+  padding: 0 52px 0 20px;
+  border: 1.5px solid var(--chp-ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--chp-ink);
+  font: 500 13px/1 var(--chp-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.chp-select select:focus-visible { outline: 3px solid var(--chp-accent); outline-offset: 3px; }
+.chp-select svg { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--chp-ink); }
+
+.chp-h {
+  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin: 40px 0 0;
+  color: var(--chp-ink);
+}
+/* Beat stage.css's site-wide light-headline rule (main :is(h1,h2):not(...) + !important). */
+main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; letter-spacing: -0.035em !important; line-height: 1.08 !important; }
+.chp-lead { font-size: 15px; line-height: 1.45; color: var(--chp-mute); margin: 8px 0 0; max-width: 46ch; }
+
+.chp-grid { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 18px; }
+
+/* ── Card ── */
+.chp-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 20px;
+  background: #0b0b0c;
+  color: #fff;
+  display: flex;
+}
+.chp-bg { object-fit: cover; object-position: 70% 30%; z-index: -2; transform: scale(1.15); }
+.chp-card::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.42) 0%, rgba(0,0,0,0.12) 70%, rgba(0,0,0,0) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.3) 45%, rgba(0,0,0,0.62) 100%);
+}
+.chp-frame {
+  flex: 1;
+  display: flex; flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 20px;
+  padding: 30px 28px 26px;
+}
+
+.chp-meta {
+  position: relative;
+  display: flex; align-items: flex-start; gap: 10px;
+  font: 500 10.5px/1.5 var(--chp-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+.chp-flask { flex: none; color: #fff; margin-top: -3px; }
+.chp-sq { flex: none; width: 4px; height: 4px; margin-top: 6px; background: rgba(255,255,255,0.55); }
+.chp-lab { min-width: 0; }
+.chp-lab b { display: block; font-weight: inherit; white-space: nowrap; }
+.chp-rings { position: absolute; right: 0; top: 2px; display: flex; gap: 7px; }
+.chp-rings i { width: 9px; height: 9px; border: 1px solid rgba(255,255,255,0.8); border-radius: 50%; }
+
+.chp-title {
+  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 26px 0 0;
+  color: #fff;
+}
+.chp-body { font-size: 15px; line-height: 1.42; color: rgba(255,255,255,0.8); margin: 14px 0 0; }
+
+.chp-foot { margin-top: auto; padding-top: 24px; }
+.chp-rule { border: 0; border-top: 1px solid rgba(255,255,255,0.24); margin: 0; }
+.chp-count {
+  font: 500 11px/1.4 var(--chp-mono);
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  margin: 26px 0 0;
+}
+.chp-price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; }
+.chp-soon-row { justify-content: flex-start; margin-top: 26px; }
+.chp-price {
+  font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700; font-size: 30px; line-height: 1; letter-spacing: -0.02em;
+  margin: 0; color: #fff;
+}
+.chp-chip {
+  display: inline-flex; align-items: center;
+  height: 32px; padding: 0 14px;
+  border-radius: 999px;
+  background: var(--chp-accent);
+  color: #fff;
+  font: 600 11px/1 var(--chp-mono);
+  letter-spacing: 0.12em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chp-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; min-height: 48px; padding: 0 20px;
+  border-radius: 999px;
+  font: 500 12px/1 var(--chp-mono);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  text-decoration: none;
+}
+.chp-btn-solid { background: #fff; color: var(--chp-ink); margin-top: 18px; }
+.chp-btn-line { border: 1px solid rgba(255,255,255,0.55); color: #fff; margin-top: 9px; background: rgba(0,0,0,0.12); }
+.chp-soon-row + .chp-btn-line { margin-top: 18px; }
+.chp-btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .chp-btn { transition: background-color .18s ease, border-color .18s ease, color .18s ease; }
+}
+@media (hover: hover) {
+  .chp-btn-solid:hover { background: #e9e9e9; }
+  .chp-btn-line:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+}
+
+/* ── Wider ── */
+@media (min-width: 640px) {
+  .chp { padding: 128px 32px 96px; }
+  .chp-grid { max-width: 600px; }
+  .chp-h { font-size: 40px; }
+}
+@media (min-width: 1200px) {
+  .chp { padding: 148px 40px 120px; }
+  .chp-h { font-size: 52px; margin-top: 56px; letter-spacing: -0.045em; }
+  /* Beat stage.css's site-wide light-headline rule (main :is(h1,h2):not(...) + !important). */
+main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; letter-spacing: -0.035em !important; line-height: 1.08 !important; }
+.chp-lead { font-size: 17px; margin-top: 12px; }
+  .chp-grid { max-width: none; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+  .chp-title { font-size: 30px; }
+}
