@@ -65,7 +65,7 @@ function PricingHero() {
 
 // Three ways to be treated (Noah, 28 Sep 2026). Retail pharmacies mark
 // medication up; Apex's partner pharmacy does not, but each order carries
-// admin, infrastructure and handling fees (A$350-650 on average). Members
+// admin, infrastructure and handling fees (from A$50, A$350-650 on average; Noah 11 Nov). Members
 // get cost-price medication with those fees and the escript fee included.
 type Col = 'single' | 'partner' | 'member'
 const COMPARISON_ROWS: { label: string; single: string; partner: string; member: string; highlight: boolean }[] = [
@@ -75,7 +75,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
   { label: 'Peptide / General Consult',   single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
   { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
   { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
-  { label: 'AHI fee per order',           single: '·',              partner: '$350–$650 avg',   member: 'Included',    highlight: true  },
+  { label: 'AHI fee per order',           single: '·',              partner: 'From $50, avg\u00a0$350\u2060–\u2060$650', member: 'Included',    highlight: true  },
   { label: 'Escript Release Fee',         single: '$155',           partner: '$155',            member: 'Free',        highlight: true  },
   { label: 'Referrals & Certs',           single: '$25 each',       partner: '$25 each',        member: 'Free',        highlight: true  },
   { label: 'Health-system score history', single: 'Latest two',     partner: 'Latest two',      member: 'Every panel', highlight: true  },
@@ -87,7 +87,7 @@ const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string;
   { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
     box: { k: 'Before medication', v: '$634', note: 'Blood panel $280 + Peptide / General Consult $199 + escript fee $155. With the hormone consult ($275) instead: $710. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
   { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
-    box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $155 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
+    box: { k: 'On every medication order, on average', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) starts from $50 and averages this, plus the $155 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
   { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Pause or cancel from your account', box: null, cta: 'Get Started' },
 ]
 
@@ -243,8 +243,9 @@ const PATHWAYS: Pathway[] = [
         price: '$99 /mo',
         priceNote: 'No lock-in',
         includes: [
-          'If your doctor prescribes: medication at cost, no per-order fee, delivered to you',
-          'Free scripts, sent to any pharmacy you like (not available in NSW)',
+          'If your doctor prescribes: medication at cost, no per-order fee',
+          'Dispensed discreetly by our cGMP partner pharmacies',
+          'Free escripts, to our partners or your own pharmacy (not NSW)',
           'Nursing check-ins every 6 to 8 weeks',
           'Referrals, med certs, health summaries and travel letters',
           'Priority clinical support between reviews',
@@ -278,12 +279,12 @@ const PATHWAYS: Pathway[] = [
         body: 'Two ways to fill a script, if you get one. Members skip these fees.',
         options: [
           {
-            label: 'Partner pharmacy',
-            detail: 'Medication at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (usually $350 to $650) and the $155 escript fee.',
+            label: 'Partner pharmacy (recommended)',
+            detail: 'Our cGMP partner pharmacies dispense at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (from $50, averaging $350 to $650) and the $155 escript fee.',
           },
           {
             label: 'Your own pharmacy',
-            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy you like. Not available in NSW.',
+            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy. We always recommend our partner pharmacies. Not available in NSW.',
           },
         ],
       },
@@ -316,8 +317,9 @@ const PATHWAYS: Pathway[] = [
         price: '$99 /mo',
         priceNote: 'No lock-in',
         includes: [
-          'If your doctor prescribes: medication at cost, no per-order fee, delivered to you',
-          'Free scripts, sent to any pharmacy you like (not available in NSW)',
+          'If your doctor prescribes: medication at cost, no per-order fee',
+          'Dispensed discreetly by our cGMP partner pharmacies',
+          'Free escripts, to our partners or your own pharmacy (not NSW)',
           'Nursing check-ins every 6 to 8 weeks',
           'Referrals, med certs, health summaries and travel letters',
           'Priority clinical support between reviews',
@@ -351,12 +353,12 @@ const PATHWAYS: Pathway[] = [
         body: 'Two ways to fill a script, if you get one. Members skip these fees.',
         options: [
           {
-            label: 'Partner pharmacy',
-            detail: 'Medication at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (usually $350 to $650) and the $155 escript fee.',
+            label: 'Partner pharmacy (recommended)',
+            detail: 'Our cGMP partner pharmacies dispense at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (from $50, averaging $350 to $650) and the $155 escript fee.',
           },
           {
             label: 'Your own pharmacy',
-            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy you like. Not available in NSW.',
+            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy. We always recommend our partner pharmacies. Not available in NSW.',
           },
         ],
       },
