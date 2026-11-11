@@ -16,10 +16,11 @@ export const PORTAL_MEMBERSHIP = viaSignup('membership')
 
 /** Only the portal or a same-site path may be a signup redirect target. */
 export function safeSignupRedirect(raw: string | null): string {
-  if (!raw) return PORTAL_SIGNUP
-  if (raw.startsWith('/') && !raw.startsWith('//') && !raw.includes('\\')) return raw
+  if (!raw || /[\x00-\x1f\x7f\\]/.test(raw)) return PORTAL_SIGNUP
   try {
-    const u = new URL(raw)
+    const here = typeof window !== 'undefined' ? window.location.origin : 'https://www.apexmetabolichealth.com.au'
+    const u = new URL(raw, here)
+    if (u.origin === here) return u.pathname + u.search + u.hash
     if (u.origin === PORTAL_ORIGIN) return u.toString()
   } catch { /* not a URL */ }
   return PORTAL_SIGNUP
