@@ -20,7 +20,7 @@ export function safeSignupRedirect(raw: string | null): string {
   try {
     const here = typeof window !== 'undefined' ? window.location.origin : 'https://www.apexmetabolichealth.com.au'
     const u = new URL(raw, here)
-    if (u.origin === here) return u.pathname + u.search + u.hash
+    if (u.origin === here) return u.toString()
     if (u.origin === PORTAL_ORIGIN) return u.toString()
   } catch { /* not a URL */ }
   return PORTAL_SIGNUP
