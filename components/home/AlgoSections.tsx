@@ -40,10 +40,10 @@ export function TrustStrip() {
 
 /** 5. The AlgoRx "Best Sellers" slot: the four ways people start with Apex. */
 const PATHWAYS = [
-  { cat: 'Men', name: 'Men’s blood panel', sub: '23+ markers · incl. testosterone', price: '$280 first panel · members $199', page: '/programs/pathology', start: PORTAL_ORDER_BLOODS },
-  { cat: 'Women', name: 'Women’s blood panel', sub: 'Hormones · cycle · iron · thyroid', price: '$280 first panel · members $199', page: '/programs/pathology', start: PORTAL_ORDER_BLOODS },
-  { cat: 'Pathology', name: 'Order bloods', sub: 'Doctor-reviewed · 4,000+ collection centres', price: 'Most results in about 48 hours', page: '/order-bloods', start: PORTAL_ORDER_BLOODS },
-  { cat: 'Membership', name: 'Apex Member', sub: 'Member rates · reviews about every 3 months', price: '$99 /mo · no lock-in', page: '/membership', start: PORTAL_MEMBERSHIP },
+  { cat: 'Men', name: 'Men’s blood panel', sub: '23+ markers · incl. testosterone', price: '$280 first panel · members $199', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
+  { cat: 'Women', name: 'Women’s blood panel', sub: 'Hormones · cycle · iron · thyroid', price: '$280 first panel · members $199', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
+  { cat: 'Pathology', name: 'Order bloods', sub: 'Doctor-reviewed · 4,000+ collection centres', price: 'Most results in about 48 hours', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
+  { cat: 'Membership', name: 'Apex Member', sub: 'Member rates · reviews about every 3 months', price: '$99 /mo · no lock-in', page: PORTAL_MEMBERSHIP, start: PORTAL_MEMBERSHIP },
 ]
 export function Pathways() {
   return (

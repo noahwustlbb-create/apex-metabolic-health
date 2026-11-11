@@ -94,7 +94,7 @@ export default function TreatmentsPage() {
               style={{ color: 'var(--text-secondary)', maxWidth: 560, marginBottom: 28 }}
             >
               Every program starts with advanced diagnostics and a real doctor. Choose the area
-              that fits, or take the assessment and we&apos;ll point you to the right one.
+              that fits, or create a free account and we&apos;ll point you to the right one.
             </motion.p>
             <motion.div
               initial={prefersReduced ? false : { opacity: 0 }}

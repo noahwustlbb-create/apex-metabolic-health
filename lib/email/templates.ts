@@ -58,7 +58,7 @@ const doc = (d: EmailData) => d.doctorName || 'your Apex doctor'
 // under /dashboard/* — linking to bare /bloods or /consultations loads the SPA
 // shell, matches nothing and leaves the patient on an endless spinner.
 const U = {
-  assessment: `${SITE}/start`,
+  assessment: `${SITE}/signup`,
   bloods: `${PORTAL}/dashboard/bloods`,
   book: `${PORTAL}/dashboard/consultations`,
   portal: `${PORTAL}/dashboard`,
@@ -68,7 +68,7 @@ const U = {
   intake: `${PORTAL}/dashboard/intake`,
   orders: `${PORTAL}/dashboard/orders`,
   checkin: `${PORTAL}/dashboard/check-in`,
-  contact: `${SITE}/start`,
+  contact: `${SITE}/signup`,
   centres: 'https://www.google.com/maps/search/pathology+collection+centre+near+me',
 }
 

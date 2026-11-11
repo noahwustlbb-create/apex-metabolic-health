@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { PORTAL_ORDER_BLOODS } from '@/lib/portal'
 import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
@@ -95,7 +96,7 @@ function GetStartedHero() {
             { label: 'Skin Regeneration', href: PORTAL_SIGNUP },
             { label: 'Injury Repair', href: PORTAL_SIGNUP },
             { label: 'General Check Up', href: PORTAL_SIGNUP },
-            { label: 'Order Blood Panel', href: '/start?t=bloods' },
+            { label: 'Order Blood Panel', href: PORTAL_ORDER_BLOODS },
             { label: 'Free Discovery Call', href: '/intake/discovery' },
             { label: 'View All Programs', href: '/services' },
           ].map(({ label, href, primary }) => (
@@ -180,7 +181,7 @@ const ALL_PATHWAYS = [
     tag: 'No GP Referral Needed',
     title: 'Start With Bloods',
     desc: 'Doctor-ordered blood panels issued directly through Apex, collected at any accredited centre near you.',
-    href: '/start?t=bloods',
+    href: PORTAL_ORDER_BLOODS,
     cta: 'Order Blood Panel',
     featured: false,
     icon: (

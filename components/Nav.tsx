@@ -146,7 +146,7 @@ export default function Nav() {
                     {NAV_PROGRAMS.map((p) => (
                       <Link
                         key={p.type}
-                        href={p.href ?? `/start?t=${p.type}`}
+                        href={p.href ?? '/signup'}
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'background 0.12s, color 0.12s' }}
