@@ -14,8 +14,9 @@ import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
  * removed from the hero when the Men / Women hero landed (PR #43). It now has
  * its own section right after the hero and plays on phones too: a
  * scroll-linked turn in depth as it rises, then it keeps turning slowly.
- * The box is plain: logo and "Measure first. Then treat." No medicine names,
- * no needles (TGA advertising rules).
+ * The render shows the Apex logo and "Measure first. Then treat.", so the copy
+ * makes no "plain pack" claim and carries an ILLUSTRATIVE RENDER caption.
+ * No medicine names, no needles (TGA advertising rules).
  *
  * The fixed pill (StageHero) carries Start here; the band adds the call line.
  * The server renders the box flat and visible; the turn starts after mount,
@@ -38,7 +39,7 @@ export default function StageBox() {
   return (
     <section ref={ref} className="st-box" aria-labelledby="st-box-title">
       <div className="st-box-head container-x">
-        <p className="al-k">→ Delivered · Plain outer pack</p>
+        <p className="al-k">→ Delivered to your door</p>
         <h2 id="st-box-title" className="al-h2">Measure first. Then treat.</h2>
       </div>
       <div className="st-box-stage">
@@ -48,7 +49,7 @@ export default function StageBox() {
         >
           <NextImage
             src="/3d/product/box-tall-grey.jpg"
-            alt="A plain white Apex Metabolic Health box printed with Measure first. Then treat."
+            alt="Illustrative render of a white Apex Metabolic Health box printed with the Apex logo and Measure first. Then treat."
             fill
             sizes="(min-width: 900px) 880px, 92vw"
             className="st-box-img"
@@ -60,9 +61,10 @@ export default function StageBox() {
         </motion.span>
         <motion.span className="stage-float st-box-float st-box-float-b" style={live ? { opacity: chips } : undefined}>
           <span className="stage-float-k">Delivered</span>
-          <span className="stage-float-v">Plain outer pack, to your door</span>
+          <span className="stage-float-v">To your door</span>
         </motion.span>
       </div>
+      <p className="al-k st-box-note">Illustrative render</p>
       <div className="stage-actions st-box-actions">
         <a className="stage-link st-box-call" href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a>
       </div>

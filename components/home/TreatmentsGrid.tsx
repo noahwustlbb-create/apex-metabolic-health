@@ -19,14 +19,16 @@ const Arrow = () => (
 function Card({ c }: { c: GridCard }) {
   return (
     <Link href={c.href} className="tg-card" data-default={DEFAULT_FEATURES.includes(c.slug) || undefined}>
+      {/* One format per browser: AVIF via <source>, WebP fallback via the img
+          src only (no img srcset, which made Chrome fetch both). */}
       <picture className="tg-img" aria-hidden="true">
         <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes="(min-width: 900px) 33vw, 50vw" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={`${c.img}-600.webp`} srcSet={`${c.img}-600.webp 600w, ${c.img}-1200.webp 1200w`} sizes="(min-width: 900px) 33vw, 50vw" alt="" width={1200} height={708} loading="lazy" decoding="async" />
+        <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
       </picture>
       <span className="tg-n">{c.n}</span>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="tg-thumb" src={`${c.img}-600.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
+      <img className="tg-thumb" src={`${c.img}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
       <span className="tg-text">
         <span className="tg-name">{c.name}</span>
         <span className="tg-sub">{c.sub}</span>
@@ -44,7 +46,10 @@ export default function TreatmentsGrid() {
           <h2 id="tg-title" className="al-h2">Choose your program.</h2>
           <p className="al-cap"><span>Nine programs<br /></span><span>Measure first<br /></span><span>Doctor-led, online</span></p>
         </div>
-        <p className="al-k tg-k"><span className="tg-k-hover">→ Hover to expand · Any card becomes the feature · </span>All 9 programs</p>
+        <div className="tg-k-row">
+          <p className="al-k tg-k"><span className="tg-k-hover">→ Hover to expand · Any card becomes the feature · </span>All 9 programs</p>
+          <p className="al-k tg-k tg-k-note">Textures: AI-generated, illustrative</p>
+        </div>
         <div className="tg-grid">
           {cols.map((col, k) => (
             <div key={k} className="tg-col">

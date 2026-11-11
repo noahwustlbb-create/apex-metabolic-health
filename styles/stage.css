@@ -968,7 +968,6 @@ html[data-audience="women"] .for-men { display: none !important; }
   #portal .stage-dash-figure { display: none !important; }
   #portal .stage-device { margin-top: 28px; }
   #panel .pw-wheel { display: none !important; }
-  .home-main > #faq { display: none; }
   .st-inc-grid li span:last-child { font-size: 13px; }
 }
 @media (max-width: 1023px) { .footer-grid > :first-child { grid-column: 1 / -1; } }

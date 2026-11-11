@@ -388,3 +388,23 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 
 /* Footer text links: 44px wide minimum as well as tall (fix 9). */
 .al-foot .site-footer ul a { display: inline-flex; align-items: center; min-width: 44px; }
+
+/* ── Round 4 (11 Nov 2026, QA r3) ── */
+/* Grid: AI texture disclosure beside the kicker. */
+.tg-k-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin: 0 0 16px; }
+.tg-k-row .tg-k { margin: 0; }
+/* Proof: same 1280 container as every other home section (heading at 144 on 1440). */
+.home-main #our-doctors > .container-tight { max-width: 1280px; padding-inline: clamp(20px, 5vw, 64px); }
+/* Included: container-x sets the inline padding; keep it over .st-inc's. */
+.home-main .st-inc.container-x { max-width: 1280px; padding-inline: clamp(20px, 5vw, 64px); }
+/* Box band: card capped near 640px tall on desktop; render caption. */
+.home-main .st-box-stage { width: min(92vw, 708px); }
+.home-main .st-box-note { text-align: center; margin: 14px 0 0; }
+@media (max-width: 899px) {
+  /* Nine cards in two columns: the ninth spans the row. */
+  .tg-col:nth-child(3) > .tg-card:last-child { grid-column: 1 / -1; }
+  /* Render at ~90% so the lid and left corner sit clear of the chips and the card edge. */
+  .home-main .st-box-fig { inset: 9% 5% 1%; }
+  .home-main .st-box-img { object-fit: contain !important; }
+  .home-main .st-box-actions { margin-top: 8px; }
+}

@@ -57,7 +57,7 @@ export function Pathways() {
               <span className="al-k al-path-sub">{p.sub}</span>
               <span className="al-path-foot">
                 <span className="al-path-price">{p.price}</span>
-                <Link href={p.start} className="al-pill" aria-label={`Start: ${p.name}`}>Start <Arrow /></Link>
+                <Link href={p.start} className="al-pill" aria-label={`Start ${p.name} pathway`}>Start <Arrow /></Link>
               </span>
             </li>
           ))}

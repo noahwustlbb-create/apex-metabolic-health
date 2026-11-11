@@ -25,7 +25,7 @@ export default function StageIncluded() {
   const inView = useInView(ref, { once: true, margin: '-12% 0px' })
   return (
     <section ref={ref} className="st-inc-wrap" aria-labelledby="st-inc-title">
-      <div className="stage-frame st-inc">
+      <div className="stage-frame st-inc container-x">
         <div className="st-inc-art" aria-hidden="true"><Image src="/3d/product/box-white.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 90vw" className="object-cover" /></div>
         <div className="st-inc-head">
           <h2 id="st-inc-title" className="stage-h2">Included in every plan.<br /><span className="stage-muted">Not an upsell.</span></h2>
