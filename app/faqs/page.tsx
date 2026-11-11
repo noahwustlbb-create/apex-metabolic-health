@@ -177,7 +177,7 @@ const FAQ_CATEGORIES = [
       {
         question: 'Is Apex Metabolic Health a pharmacy?',
         answer:
-          'No. Apex Metabolic Health is a telehealth clinic. We do not dispense medications directly. Where treatment is clinically indicated, prescriptions are fulfilled through our Australian partner pharmacy or a pharmacy of your choosing.',
+          'No. Apex Metabolic Health is a telehealth clinic. We do not dispense medications directly. Where treatment is clinically indicated, prescriptions are fulfilled through our Australian cGMP partner pharmacies, which we always recommend, or a pharmacy of your choosing.',
       },
       {
         question: 'Are all practitioners at Apex doctors?',
