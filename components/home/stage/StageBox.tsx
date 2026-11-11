@@ -47,10 +47,10 @@ export default function StageBox() {
           style={live ? { rotateY: spin, rotate: tilt, y: rise, scale, transformPerspective: 1100 } : undefined}
         >
           <NextImage
-            src="/3d/product/box-tall.jpg"
+            src="/3d/product/box-tall-grey.jpg"
             alt="A plain white Apex Metabolic Health box printed with Measure first. Then treat."
             fill
-            sizes="(min-width: 900px) 560px, 92vw"
+            sizes="(min-width: 900px) 880px, 92vw"
             className="st-box-img"
           />
         </motion.div>

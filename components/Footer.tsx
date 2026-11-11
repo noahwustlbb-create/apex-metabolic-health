@@ -55,7 +55,7 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2 mb-6">
               {['AHPRA-registered doctors', '100% online'].map((badge) => (
                 <span key={badge} className="text-[12px] font-semibold tracking-[0.1em] uppercase px-3 py-1.5"
-                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 0 }}>
+                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 24 }}>
                   {badge}
                 </span>
               ))}

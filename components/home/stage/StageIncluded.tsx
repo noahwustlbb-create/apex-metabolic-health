@@ -16,6 +16,7 @@ const ITEMS = [
   { k: '48',  u: 'hours',  t: 'Most results back',          b: '4,000+ accredited collection centres, Australia-wide.' },
   { k: '90',  u: 'days',   t: 'Reviews built in',           b: 'Repeat bloods and a doctor review about every three months.' },
   { k: '24/7', u: '',      t: 'Ask about your results',     b: 'Plain-English answers from your own panel, any time, in the portal.' },
+  { k: '0', u: 'referrals', t: 'No GP referral needed', b: 'Book online and start with one blood panel. No letter, no clinic visit.' },
 ]
 
 export default function StageIncluded() {

@@ -371,8 +371,9 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 /* ── Box band (fix 7): the render sits in a 1px / 24px card on its own pale
    ground, no radial fade (the fade read as a blue glow); chips 1px / 24px,
    no shadow, inside the card; phone loses the empty band. ── */
-.home-main .st-box-stage { margin-top: clamp(24px, 3vw, 40px); border: 1px solid var(--al-line); border-radius: var(--al-r); overflow: clip; background: #e7f4fd; }
-.home-main .st-box-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: cover; object-position: 50% 42%; }
+.home-main .st-box-stage { width: min(92vw, 880px); aspect-ratio: 1440 / 1300; max-height: none; }
+.home-main .st-box-stage { margin-top: clamp(24px, 3vw, 40px); border: 1px solid var(--al-line); border-radius: var(--al-r); overflow: clip; background: #f7f7f7; }
+.home-main .st-box-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: cover; object-position: 50% 50%; }
 .home-main .st-box .stage-float { border-radius: var(--al-r) !important; box-shadow: none !important; filter: none !important; padding: 12px 18px; }
 .home-main .st-box-float-a { left: 20px; top: 20px; }
 .home-main .st-box-float-b { right: 20px; bottom: 20px; left: auto; translate: none; }
