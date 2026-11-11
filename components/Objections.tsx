@@ -24,7 +24,7 @@ const ITEMS: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: 'What if I change my mind?',
-    a: <>Cancel or reschedule up to 4 hours before your appointment for a full refund of the consult fee. Not happy after your consult? We refund the fee, less a $50 admin fee. Blood panels and medication are not refundable. The full rules are in our <Link href="/terms">terms</Link>.</>,
+    a: <>Cancel or reschedule up to 4 hours before your appointment for a full refund of the consult fee. Not happy after your consult? We refund the fee, less a $50 admin fee. Blood panel referrals are not refundable once issued, and medication once dispensed. The full rules are in our <Link href="/terms">terms</Link>.</>,
   },
 ]
 

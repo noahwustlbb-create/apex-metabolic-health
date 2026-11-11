@@ -59,7 +59,7 @@ const ACTIONS = [
       </svg>
     ),
     label: 'Request a discovery call',
-    sub: 'Tell us your goals — our clinical team calls you back within 1 business day.',
+    sub: 'Tell us your goals. Our clinical team calls you back within 1 business day.',
     href: '/intake/discovery',
     external: false,
     highlight: false,

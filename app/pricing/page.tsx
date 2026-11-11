@@ -422,7 +422,7 @@ function AccordionItem({ pathway }: { pathway: Pathway }) {
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             style={{ overflow: 'hidden' }}
           >
-            <div className="pb-8" style={{ borderTop: '1px solid rgba(72,144,247,0.06)' }}>
+            <div className="px-5 pb-8" style={{ borderTop: '1px solid rgba(72,144,247,0.06)' }}>
               {pathway.steps.map((step, i) => (
                 <div
                   key={step.label}
@@ -726,7 +726,7 @@ const PRICING_FAQS = [
   },
   {
     q: 'What is your refund policy?',
-    a: 'Not happy after your consult? Contact us and we’ll refund the consult fee, less a $50 admin fee. Cancel at least 4 hours before your appointment for a full refund. Blood panel referrals and medication invoices are not refundable. None of this limits your rights under the Australian Consumer Law. Full details are in our terms.',
+    a: 'Not happy after your consult? Contact us and we’ll refund the consult fee, less a $50 admin fee. Cancel at least 4 hours before your appointment for a full refund. Blood panel referrals are not refundable once issued, and medication invoices once dispensed. None of this limits your rights under the Australian Consumer Law. Full details are in our terms.',
   },
   {
     q: 'What else should I know before I pay?',
