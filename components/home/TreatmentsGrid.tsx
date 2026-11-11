@@ -59,7 +59,6 @@ export default function TreatmentsGrid() {
             </span>
           </Link>
         </div>
-        <p className="tg-note">Program images are temporary placeholders</p>
       </div>
     </section>
   )

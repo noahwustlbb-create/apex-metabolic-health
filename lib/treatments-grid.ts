@@ -5,11 +5,9 @@
  * app/programs/ but are not in the canonical list yet, so they carry their
  * page titles here.
  *
- * IMAGES: temporary, owner's instruction 11 Nov ("use the photos provided and
- * I will change them tomorrow"), replace. They are AlgoRx's own site assets,
- * supplied by Noah, cropped to drop their baked-in labels. Every image path
- * lives in IMG below, so tomorrow's swap is this one object. Prompts for the
- * originals: ~/Clients/Apex/research/hero-athlete-2026-11-11/refs/IMAGE-PROMPTS.md
+ * IMAGES: Apex originals, GPT Image 2.5 macro textures made 11 Nov 2026
+ * (prompts: ~/Clients/Apex/research/hero-athlete-2026-11-11/grid-final/prompts.json).
+ * Every image path lives in IMG below.
  *
  * Sub-lines name areas, never a medicine or a medicine class (TGA).
  */
