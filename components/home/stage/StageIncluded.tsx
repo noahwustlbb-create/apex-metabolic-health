@@ -29,8 +29,8 @@ export default function StageIncluded() {
         <div className="st-inc-art" aria-hidden="true"><Image src="/3d/product/box-white.jpg" alt="" fill sizes="(min-width: 900px) 40vw, 90vw" className="object-cover" /></div>
         <div className="st-inc-head">
           <h2 id="st-inc-title" className="stage-h2">Included in every plan.<br /><span className="stage-muted">Not an upsell.</span></h2>
-          <Link href="/start" className="al-pill al-pill-lg st-inc-cta">
-            Start the 45-second check
+          <Link href="/signup" className="al-pill al-pill-lg st-inc-cta">
+            Create your free account
             <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </Link>
         </div>

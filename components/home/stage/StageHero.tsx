@@ -166,7 +166,7 @@ export default function StageHero() {
   const readyM = useCallback(() => setLive(l => ({ ...l, male: true })), [])
   const readyF = useCallback(() => setLive(l => ({ ...l, female: true })), [])
 
-  const href = chosen ? `/start?for=${chosen}` : '/start'
+  const href = '/signup'
   const markerShow = sex && (still ? 1 : 1 - away)
   const litNow = sex ? Math.max(0, lit) : -1
 
@@ -220,7 +220,6 @@ export default function StageHero() {
                 </button>
               ))}
             </div>
-            <p className="hx-foot">Illustrative render</p>
           </div>
 
           <div className="hx-copy">
@@ -235,7 +234,7 @@ export default function StageHero() {
             </p>
             {/* One action. No prices on the homepage (Noah, 28 Oct; 2 Nov). */}
             <div className="hx-actions hero-in" style={{ animationDelay: '300ms' }}>
-              <StageCta href={href} tone="dark">Start your assessment</StageCta>
+              <StageCta href={href} tone="dark">Create your free account</StageCta>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { PORTAL_MEMBERSHIP, PORTAL_ORDER_BLOODS } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -39,10 +40,10 @@ export function TrustStrip() {
 
 /** 5. The AlgoRx "Best Sellers" slot: the four ways people start with Apex. */
 const PATHWAYS = [
-  { cat: 'Men', name: 'Men’s blood panel', sub: '23+ markers · incl. testosterone', price: '$280 first panel · members $199', page: '/programs/pathology', start: '/start?for=men' },
-  { cat: 'Women', name: 'Women’s blood panel', sub: 'Hormones · cycle · iron · thyroid', price: '$280 first panel · members $199', page: '/programs/pathology', start: '/start?for=women' },
-  { cat: 'Pathology', name: 'Order bloods', sub: 'Doctor-reviewed · 4,000+ collection centres', price: 'Most results in about 48 hours', page: '/order-bloods', start: '/order-bloods' },
-  { cat: 'Membership', name: 'Apex Member', sub: 'Member rates · reviews about every 3 months', price: '$99 /mo · no lock-in', page: '/membership', start: '/start' },
+  { cat: 'Men', name: 'Men’s blood panel', sub: '23+ markers · incl. testosterone', price: '$280 first panel · members $199', page: '/programs/pathology', start: PORTAL_ORDER_BLOODS },
+  { cat: 'Women', name: 'Women’s blood panel', sub: 'Hormones · cycle · iron · thyroid', price: '$280 first panel · members $199', page: '/programs/pathology', start: PORTAL_ORDER_BLOODS },
+  { cat: 'Pathology', name: 'Order bloods', sub: 'Doctor-reviewed · 4,000+ collection centres', price: 'Most results in about 48 hours', page: '/order-bloods', start: PORTAL_ORDER_BLOODS },
+  { cat: 'Membership', name: 'Apex Member', sub: 'Member rates · reviews about every 3 months', price: '$99 /mo · no lock-in', page: '/membership', start: PORTAL_MEMBERSHIP },
 ]
 export function Pathways() {
   return (
@@ -107,7 +108,7 @@ export function ResultsTeaser() {
             <li>Flagged against your lab’s reference range</li>
             <li>Ask about your results, any time</li>
           </ul>
-          <Link href="/start" className="al-pill al-pill-lg">Start your assessment <Arrow /></Link>
+          <Link href="/signup" className="al-pill al-pill-lg">Create your free account <Arrow /></Link>
         </div>
         <figure className="al-bio" aria-label="How a marker shows in your portal">
           <div className="al-bio-top"><span className="al-k">Your panel · Hormones, energy, heart, metabolic</span><span className="al-k">Sample layout</span></div>
@@ -145,7 +146,7 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <Link href="/start" className="al-pill al-pill-lg al-pill-light">Start the 45-second check <Arrow /></Link>
+        <Link href="/signup" className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
       </div>
     </section>
   )
@@ -189,7 +190,7 @@ export function CloseBand() {
         <h2 id="close-title" className="al-h2">Stop guessing. Start measuring.</h2>
         <p className="al-lead">Two minutes to start. Bloods near you, then a doctor with your results open. No GP referral.</p>
         <div className="al-close-row">
-          <Link href="/start" className="al-pill al-pill-lg al-pill-light">Start your assessment <Arrow /></Link>
+          <Link href="/signup" className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
           <a href={`tel:${CLINIC_PHONE_E164}`} className="al-pill al-pill-lg al-pill-ghost">Call {CLINIC_PHONE_DISPLAY}</a>
         </div>
         <p className="al-k al-close-meta">Doctors Monday to Saturday · <Link href="/discovery-call">Prefer to talk first? Book a free call</Link></p>

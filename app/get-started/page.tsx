@@ -87,7 +87,7 @@ function GetStartedHero() {
           className="flex flex-wrap gap-3"
         >
           {[
-            { label: 'Take the health assessment', href: '/start', primary: true },
+            { label: 'Create your free account', href: '/signup', primary: true },
             { label: 'Hormone Consultation', href: PORTAL_SIGNUP },
             { label: 'Performance Consultation', href: PORTAL_SIGNUP },
             { label: 'Metabolic Consultation', href: PORTAL_SIGNUP },
@@ -123,10 +123,10 @@ function GetStartedHero() {
 const ALL_PATHWAYS = [
   {
     tag: 'Not Sure Where to Start',
-    title: 'Take the health assessment',
-    desc: 'Answer a few questions. Get matched to the right clinical pathway in under 2 minutes.',
-    href: '/start',
-    cta: 'Take the health assessment',
+    title: 'Create your free account',
+    desc: 'Set up your patient portal in a few minutes. Order bloods or book a consult from there.',
+    href: '/signup',
+    cta: 'Create your free account',
     featured: true,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true" stroke="currentColor" strokeWidth="1.5">

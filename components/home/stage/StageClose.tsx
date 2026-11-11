@@ -31,7 +31,7 @@ export default function StageClose() {
           Two minutes to start. Bloods near you, then a doctor with your results open. No GP referral.
         </motion.p>
         <motion.div className="stage-actions stage-actions-center" {...rise(0.3)}>
-          <StageCta href="/start">Start your assessment</StageCta>
+          <StageCta href="/signup">Create your free account</StageCta>
           <Link href="/discovery-call" className="stage-link">Prefer to talk first? Book a free call</Link>
         </motion.div>
       </div>

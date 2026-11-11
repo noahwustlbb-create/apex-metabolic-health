@@ -402,7 +402,7 @@ export default function ServicesPage() {
                   el.style.borderColor = 'rgba(72,144,247,0.25)'
                 }}
               >
-                Take the health assessment
+                Create your free account
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -478,7 +478,7 @@ export default function ServicesPage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-3"
             >
               <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
-                Take the health assessment
+                Create your free account
                 <span className="btn-circle" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

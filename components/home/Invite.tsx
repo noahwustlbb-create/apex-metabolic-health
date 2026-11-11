@@ -29,8 +29,8 @@ export default function Invite() {
             Two minutes to start. Bloods near you, then a doctor with your results open. No GP referral.
           </motion.p>
           <motion.div {...reveal(0.4)} className="flex flex-wrap items-center gap-x-7 gap-y-4">
-            <Link href="/start" className="btn-primary btn-lg group">
-              Start your assessment
+            <Link href="/signup" className="btn-primary btn-lg group">
+              Create your free account
               <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

@@ -46,7 +46,7 @@ const DURATIONS = [
 const READINESS = [
   { id: 'now',       label: "I'm ready, let's get started",       detail: 'Skip straight to booking' },
   { id: 'talk',      label: 'I want to speak with someone first',   detail: 'Send a message, we respond within 1 business day' },
-  { id: 'exploring', label: "I'm still exploring my options",       detail: 'Take the health assessment first' },
+  { id: 'exploring', label: "I'm still exploring my options",       detail: 'Create a free account first' },
 ]
 
 // ─── Slide variants ────────────────────────────────────────────────────────────
@@ -384,7 +384,7 @@ function BookingFlow() {
                           </div>
                           <div>
                             <p className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-space-grotesk)' }}>
-                              Take the health assessment
+                              Create your free account
                             </p>
                             <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                               Not sure which program fits? Answer 18 questions and get a personalised plan built from your answers. Takes 2 minutes.

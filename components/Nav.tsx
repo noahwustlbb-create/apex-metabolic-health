@@ -167,7 +167,7 @@ export default function Nav() {
                     ))}
                     <div style={{ borderTop: '1px solid var(--border)', marginTop: '6px', paddingTop: '6px' }}>
                       <Link
-                        href="/start"
+                        href="/signup"
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '12px', fontWeight: 600, color: BLUE, textDecoration: 'none', transition: 'background 0.12s' }}
@@ -175,7 +175,7 @@ export default function Nav() {
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                         onKeyDown={(e) => { if (e.key === 'Escape') { setProgramsOpen(false); programsButtonRef.current?.focus() } }}
                       >
-                        Not sure? Start your assessment
+                        Not sure? Create your free account
                         <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -210,10 +210,10 @@ export default function Nav() {
               Log in
             </a>
             <Link
-              href="/start"
+              href="/signup"
               className="nav-cta"
             >
-              Start your assessment
+              Create your free account
               <svg viewBox="0 0 16 16" fill="none" width="12" height="12" aria-hidden="true">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -224,14 +224,14 @@ export default function Nav() {
           {/* This slot used to carry "Patient Portal" - a login for people who
               have already converted - while the one action the page exists for
               was desktop-only. Portal login is still in the menu below.
-              The label is just "Start": the full "Start your assessment" ran
+              The label is just "Start": the full "Create your free account" ran
               ~190px at nowrap and overlapped the logo at 390px. The hero and the
               menu both carry the full wording. */}
           <div className="md:hidden flex items-center gap-2">
             {!menuOpen && (
               <Link
-                href="/start"
-                aria-label="Start your assessment"
+                href="/signup"
+                aria-label="Create your free account"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -310,7 +310,7 @@ export default function Nav() {
               style={{ borderTop: '1px solid var(--border)' }}
             >
               <Link
-                href="/start"
+                href="/signup"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
@@ -323,7 +323,7 @@ export default function Nav() {
                   letterSpacing: '0.01em',
                   textDecoration: 'none' }}
               >
-                Start your assessment
+                Create your free account
                 <svg viewBox="0 0 16 16" fill="none" width="13" height="13" aria-hidden="true">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

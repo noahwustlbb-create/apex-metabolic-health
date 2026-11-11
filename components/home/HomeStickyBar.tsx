@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 /**
- * Phone sticky bar. While the hero's own "Start your assessment" is on screen
+ * Phone sticky bar. While the hero's own "Create your free account" is on screen
  * the bar carries only the phone number, so the first screen never shows two
  * Start buttons (fix 2, 11 Nov 2026). Server render assumes the hero is in view.
  */
@@ -20,7 +20,7 @@ export default function HomeStickyBar() {
   }, [])
   return (
     <div className="hsb" role="region" aria-label="Quick actions" data-hero={heroCta || undefined}>
-      <Link href="/start" className="hsb-start" aria-hidden={heroCta || undefined} tabIndex={heroCta ? -1 : undefined}>Start your assessment</Link>
+      <Link href="/signup" className="hsb-start" aria-hidden={heroCta || undefined} tabIndex={heroCta ? -1 : undefined}>Create your free account</Link>
       <a href={`tel:${CLINIC_PHONE_E164}`} className="hsb-call" aria-label={`Call ${CLINIC_PHONE_DISPLAY}`}>{CLINIC_PHONE_DISPLAY}</a>
     </div>
   )

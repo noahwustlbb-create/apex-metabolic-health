@@ -477,7 +477,7 @@ export default function AboutPage() {
               </div>
               <div className="flex flex-col gap-3 flex-shrink-0">
                 <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary whitespace-nowrap">
-                  Take the health assessment
+                  Create your free account
                   <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

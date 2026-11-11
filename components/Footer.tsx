@@ -12,7 +12,7 @@ const COMPANY_LINKS = [
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },
-  { label: 'Start your assessment', href: '/start' },
+  { label: 'Create your free account', href: '/signup' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms', href: '/terms' },
 ]
@@ -159,8 +159,8 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3">
-              <Link href="/start" className="btn-primary footer-start">
-                Start your assessment
+              <Link href="/signup" className="btn-primary footer-start">
+                Create your free account
               </Link>
               {/* LegitScript certified badge - real verifiable seal */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
