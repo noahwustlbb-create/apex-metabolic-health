@@ -37,7 +37,10 @@ export default function StageBox() {
 
   return (
     <section ref={ref} className="st-box" aria-labelledby="st-box-title">
-      <h2 id="st-box-title" className="sr-only">Your Apex box</h2>
+      <div className="st-box-head container-x">
+        <p className="al-k">→ Delivered · Plain outer pack</p>
+        <h2 id="st-box-title" className="al-h2">Measure first. Then treat.</h2>
+      </div>
       <div className="st-box-stage">
         <motion.div
           className="st-box-fig"

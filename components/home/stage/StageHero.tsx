@@ -1,13 +1,11 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import { useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
-import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 type Sex = 'male' | 'female'
 type Who = 'men' | 'women'
@@ -31,7 +29,16 @@ type Who = 'men' | 'women'
  * is a test on the Apex panel (components/home/PanelMarkers.tsx), never a
  * medicine or an outcome.
  *
- * 11 Nov 2026 (Noah: "I hate the box landing page"): no ice card, no framed
+ * 11 Nov 2026 PM (Noah, ASKS item 22: "apex hero still isn't hitting", AlgoRx
+ * approach): one dark full-bleed stage, the headline "Understand your health.
+ * Optimise your future." bottom left, one subline, one CTA. The figures are
+ * coloured from first paint (man blue, woman rose) and are themselves the
+ * pick ("For men" / "For women"). Removed from the hero: the 23+ markers
+ * readout box, the 18 to 80 kicker (now on the start tiles), the long lead,
+ * the Men / Women cards (now on the start tiles too), See pricing, the phone
+ * line (now in the phone sticky bar and the close) and the fixed pill.
+ *
+ * 11 Nov 2026 AM (Noah: "I hate the box landing page"): no ice card, no framed
  * plate. One night ground, full bleed; on phones the figures stand full width
  * above the copy. Neutral is grey; after the pick the figure faces the camera
  * with Hormones lit and the "on your panel" card showing from the first screen.
@@ -84,7 +91,6 @@ export default function StageHero() {
   const [live, setLive] = useState<Record<Sex, boolean>>({ male: false, female: false })
   const [lit, setLit] = useState(-1)
   const [away, setAway] = useState(1)
-  const [beat, setBeat] = useState(false)
   const face = useRef(0)
   const anim = useRef<{ a?: Animation; t?: number }>({})
 
@@ -149,7 +155,6 @@ export default function StageHero() {
     face.current = chosenRef.current ? 1 : Math.min(1, v / 0.08)
     const i = v < 0.12 ? 0 : Math.min(SYSTEMS.length - 1, Math.floor((v - 0.12) / 0.19))
     setLit(l => (l === i ? l : i))
-    setBeat(b => (b === v > 0.05 ? b : v > 0.05))
   })
 
   const onAngle = useCallback((a: number) => setAway(a), [])
@@ -159,47 +164,12 @@ export default function StageHero() {
   const href = chosen ? `/start?for=${chosen}` : '/start'
   const markerShow = sex && (still ? 1 : 1 - away)
   const litNow = sex ? Math.max(0, lit) : -1
-  const sys = litNow >= 0 ? SYSTEMS[litNow] : null
 
   return (
-    <section ref={ref} id="hero" className="hx" data-still={still || undefined} data-pin={(!!chosen && !still) || undefined} data-beat={(beat && !!chosen && !still) || undefined} aria-label="Introduction">
+    <section ref={ref} id="hero" className="hx" data-still={still || undefined} data-pin={(!!chosen && !still) || undefined} aria-labelledby="hx-title">
       <div className="hx-pin">
-        <div className="hx-frame stage-frame" ref={frameRef}>
+        <div className="hx-frame" ref={frameRef}>
           <div className="hx-wash" ref={washRef} aria-hidden="true" />
-
-          <div className="hx-copy">
-            <p className="stage-kicker hero-in" style={{ animationDelay: '80ms' }}>
-              <span className="stage-kicker-dot" aria-hidden="true" />
-              <span><span className="hx-when-none">Australian adults 18 to 80</span><span className="hx-when-men">Australian men 18 to 80</span><span className="hx-when-women">Australian women 18 to 80</span> · AHPRA-registered doctors</span>
-            </p>
-            <h1 className="stage-display hero-in" style={{ animationDelay: '140ms' }}>
-              Find out what your blood is really saying.
-            </h1>
-            <p className="stage-lead hx-lead hero-in" style={{ animationDelay: '260ms' }}>
-              <span className="hx-when-none">One blood panel, 23+ markers, read with you by a doctor online. No GP referral.</span>
-              <span className="hx-when-men">One blood panel, 23+ markers including testosterone, read with you by a doctor online. No GP referral.</span>
-              <span className="hx-when-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online. No GP referral.</span>
-            </p>
-            {/* No prices on the homepage (Noah, 28 Oct). They live on /pricing. */}
-            <div className="hx-pick hero-in" style={{ animationDelay: '360ms' }} role="group" aria-labelledby="hx-pick-k">
-              <p id="hx-pick-k" className="hx-pick-k">{chosen ? <>Showing the {chosen === 'women' ? 'women’s' : 'men’s'} panel. <span className="hx-hint">Drag the figure to turn it.</span></> : 'I’m here for'}</p>
-              <div className="hx-pick-row">
-                {(['men', 'women'] as Who[]).map(w => (
-                  <button key={w} type="button" className="hx-pick-btn" data-who={w} aria-pressed={chosen === w} onClick={e => choose(w, e)}>
-                    <strong>{w === 'men' ? 'Men' : 'Women'}</strong>
-                    <span>{w === 'men' ? 'Testosterone, energy' : 'Hormones, cycle, iron'}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="stage-actions hx-actions hero-in" style={{ animationDelay: '420ms' }}>
-              <StageCta href={href}>Start your assessment</StageCta>
-              <Link href="/pricing" className="stage-link">See pricing</Link>
-            </div>
-            <p className="hx-meta hero-in" style={{ animationDelay: '480ms' }}>
-              Doctors Mon to Sat · <a href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a>
-            </p>
-          </div>
 
           <div className="hx-plate">
             <div className="hx-stage">
@@ -213,7 +183,7 @@ export default function StageHero() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={POSTER[s]}
-                        alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit from the heart outward' : 'Glass figure of a woman, her blood vessels lit from the heart outward'}
+                        alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit blue from the heart outward' : 'Glass figure of a woman, her blood vessels lit rose from the heart outward'}
                         width={828} height={1108}
                         fetchPriority="high"
                         decoding="async"
@@ -236,29 +206,35 @@ export default function StageHero() {
                   </div>
                 )
               })}
+            </div>
+            {/* The pick: the figures are the choice. Colour is on from the first paint. */}
+            <div className="hx-pick" role="group" aria-label="Show the panel for">
+              {(['men', 'women'] as Who[]).map(w => (
+                <button key={w} type="button" className="hx-pick-btn" data-who={w} aria-pressed={chosen === w} onClick={e => choose(w, e)}>
+                  For {w}
+                </button>
+              ))}
+            </div>
+            <p className="hx-foot">Illustrative render</p>
+          </div>
 
-              {/* What the lit system measures. Announced for screen readers. */}
-              {/* Neutral (before a pick, and with JavaScript off) it names the four systems. */}
-              <div className="hx-readout" data-on="" aria-live="polite">
-                {sys && sex
-                  ? (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)
-                  : (<><span className="hx-readout-k">23+ markers · on your panel</span><span className="hx-readout-v">Hormones, energy, heart and metabolic health</span></>)}
-              </div>
-
-              </div>
-
-            {/* Plus-sign corner marks: the figure is an object in a frame, not a backdrop. */}
-            <div className="hx-corners" aria-hidden="true"><i /><i /><i /><i /></div>
-            <p className="stage-foot hx-foot">Illustrative render. <span className="hx-foot-long">Every marker named is on the Apex panel. </span>General information, not medical advice.</p>
+          <div className="hx-copy">
+            <p className="hx-trust hero-in" style={{ animationDelay: '40ms' }}>AHPRA-registered doctors · Australia-wide · No GP referral</p>
+            <h1 id="hx-title" className="hx-h1 hero-in" style={{ animationDelay: '80ms' }}>
+              Understand your health.<br /><span className="hx-h1-b">Optimise your future.</span>
+            </h1>
+            <p className="hx-sub hero-in" style={{ animationDelay: '200ms' }}>
+              <span className="hx-when-none">One blood panel, read with you by a doctor online. No GP referral.</span>
+              <span className="hx-when-men">One blood panel including testosterone, read with you by a doctor online.</span>
+              <span className="hx-when-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online.</span>
+            </p>
+            {/* One action. No prices on the homepage (Noah, 28 Oct; 2 Nov). */}
+            <div className="hx-actions hero-in" style={{ animationDelay: '300ms' }}>
+              <StageCta href={href} tone="dark">Start your assessment</StageCta>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Fixed pill CTA, bottom centre from the first pixel (desktop). */}
-      <Link href={href} className="hx-pill">
-        <span>Start your assessment</span>
-        <span className="hx-pill-dot" aria-hidden="true" />
-      </Link>
     </section>
   )
 }
