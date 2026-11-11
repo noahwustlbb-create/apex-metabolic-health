@@ -34,7 +34,7 @@ export default function StageSteps() {
           </motion.li>
         ))}
       </ol>
-      <div className="stage-actions stage-actions-center"><StageCta href="/start">Start the 45-second check</StageCta></div>
+      <div className="stage-actions stage-actions-center"><StageCta href="/signup">Create your free account</StageCta></div>
     </section>
   )
 }

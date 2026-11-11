@@ -19,7 +19,7 @@ const ACTIONS = [
     ),
     label: '60-second assessment',
     sub: 'Tell us your goals and we match you to the right doctor and program.',
-    href: '/start',
+    href: '/signup',
     external: false,
     highlight: true,
   },

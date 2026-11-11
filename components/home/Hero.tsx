@@ -225,7 +225,7 @@ export default function Hero() {
   const onPointerLeave = () => { live.current.px = 0; live.current.py = 0; live.current.overFig = false }
 
   const region = REGIONS[active]
-  const href = picked ? `/start?t=${region.t}&why=${region.why}` : '/start'
+  const href = '/signup'
 
   return (
     <section
@@ -269,7 +269,7 @@ export default function Hero() {
             <div className="hero-in hero-ctas" style={{ animationDelay: '480ms' }}>
               <a href="#panel" className="hero-secondary link-draw">See what we measure</a>
               <Link ref={ctaRef} href={href} className="btn-primary btn-lg group">
-                Start your assessment
+                Create your free account
                 <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>

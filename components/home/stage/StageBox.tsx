@@ -39,7 +39,7 @@ export default function StageBox() {
   return (
     <section ref={ref} className="st-box" aria-labelledby="st-box-title">
       <div className="st-box-head container-x">
-        <p className="al-k">→ Delivered to your door</p>
+        <p className="al-k">→ Doctor-led, start to finish</p>
         <h2 id="st-box-title" className="al-h2">Measure first. Then treat.</h2>
       </div>
       <div className="st-box-stage">
@@ -49,22 +49,21 @@ export default function StageBox() {
         >
           <NextImage
             src="/3d/product/box-tall-grey.jpg"
-            alt="Illustrative render of a white Apex Metabolic Health box printed with the Apex logo and Measure first. Then treat."
+            alt="A white Apex Metabolic Health box printed with the Apex logo and Measure first. Then treat."
             fill
             sizes="(min-width: 900px) 880px, 92vw"
             className="st-box-img"
           />
         </motion.div>
         <motion.span className="stage-float st-box-float st-box-float-a" style={live ? { opacity: chips } : undefined}>
-          <span className="stage-float-k">Starts with</span>
-          <span className="stage-float-v">One blood panel, 23+ markers</span>
+          <span className="stage-float-k">Fast</span>
+          <span className="stage-float-v">Discreet delivery</span>
         </motion.span>
         <motion.span className="stage-float st-box-float st-box-float-b" style={live ? { opacity: chips } : undefined}>
-          <span className="stage-float-k">Delivered</span>
-          <span className="stage-float-v">To your door</span>
+          <span className="stage-float-k">Reviewed by</span>
+          <span className="stage-float-v">An Australian doctor</span>
         </motion.span>
       </div>
-      <p className="al-k st-box-note">Illustrative render</p>
       <div className="stage-actions st-box-actions">
         <a className="stage-link st-box-call" href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a>
       </div>

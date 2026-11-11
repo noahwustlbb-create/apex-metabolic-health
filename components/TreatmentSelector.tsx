@@ -138,13 +138,13 @@ export default function TreatmentSelector() {
             Find your treatment.
           </h2>
           <a
-            href="/start"
+            href="/signup"
             className="hidden md:inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
             style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
             onMouseEnter={e => { e.currentTarget.style.color = 'var(--blue)' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-secondary)' }}
           >
-            Not sure? Start your assessment
+            Not sure? Create your free account
             <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
               <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -321,11 +321,11 @@ export default function TreatmentSelector() {
         style={{ paddingLeft: 24, paddingRight: 24 }}
       >
         <a
-          href="/start"
+          href="/signup"
           className="inline-flex items-center gap-2 text-sm font-medium transition-colors duration-200"
           style={{ color: 'var(--text-secondary)', textDecoration: 'none' }}
         >
-          Not sure? Start your assessment
+          Not sure? Create your free account
           <svg viewBox="0 0 14 14" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
             <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>

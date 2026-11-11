@@ -94,7 +94,7 @@ export default function TreatmentsPage() {
               style={{ color: 'var(--text-secondary)', maxWidth: 560, marginBottom: 28 }}
             >
               Every program starts with advanced diagnostics and a real doctor. Choose the area
-              that fits, or take the assessment and we&apos;ll point you to the right one.
+              that fits, or create a free account and we&apos;ll point you to the right one.
             </motion.p>
             <motion.div
               initial={prefersReduced ? false : { opacity: 0 }}
@@ -132,11 +132,11 @@ export default function TreatmentsPage() {
                   Answer a few quick questions and we&apos;ll match you to the right program and doctor.
                 </p>
                 <a
-                  href="/start"
+                  href="/signup"
                   className="inline-flex w-fit items-center gap-2.5 font-semibold"
                   style={{ background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', color: '#fff', fontSize: 15, padding: '14px 28px', borderRadius: 12, textDecoration: 'none', boxShadow: '0 8px 28px rgba(72,144,247,0.35)' }}
                 >
-                  Start your assessment
+                  Create your free account
                   <svg viewBox="0 0 16 16" fill="none" width={15} height={15} aria-hidden>
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

@@ -48,7 +48,6 @@ export default function TreatmentsGrid() {
         </div>
         <div className="tg-k-row">
           <p className="al-k tg-k"><span className="tg-k-hover">→ Hover to expand · Any card becomes the feature · </span>All 9 programs</p>
-          <p className="al-k tg-k tg-k-note">Textures: AI-generated, illustrative</p>
         </div>
         <div className="tg-grid">
           {cols.map((col, k) => (

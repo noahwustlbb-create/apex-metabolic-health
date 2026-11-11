@@ -71,7 +71,7 @@ export default function FirstThreeMonths() {
         <p><strong>AHI fee (from $50, averaging $350 – $650 per order).</strong> Admin, handling and infrastructure on each partner-pharmacy order. The medication itself is not marked up. Members do not pay it.</p>
         <p><strong>Hormone consult instead?</strong> It is $275, or $199 for members. Add $76 to the first two totals, or $100 to the member total.</p>
       </div>
-      <p className="ftm-cta"><Link href="/start" className="stage-link">Start your assessment</Link> <span>Creating an account is free.</span></p>
+      <p className="ftm-cta"><Link href="/signup" className="stage-link">Create your free account</Link></p>
     </section>
   )
 }

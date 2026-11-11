@@ -8,14 +8,14 @@ import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
 import { ArtImg } from '@/components/audience/Img'
 
-const PORTAL_SIGNUP = 'https://app.apexmetabolichealth.com.au/signup'
+import { PORTAL_ORIGIN, safeSignupRedirect } from '@/lib/portal'
 
 function SignupFormInner() {
   const router = useRouter()
   const params = useSearchParams()
   // Accounts are created in the portal (Supabase auth) — this page only collects
   // the email and hands off. It must never ask for a password it cannot use.
-  const redirect = params.get('redirect') || PORTAL_SIGNUP
+  const redirect = safeSignupRedirect(params.get('redirect'))
 
   const [form, setForm] = useState({ email: '', emailConfirm: '' })
   const [error, setError] = useState('')
@@ -43,7 +43,8 @@ function SignupFormInner() {
       /* captureLead already logs; both channels down shouldn't strand the user */
     }
     // The portal lives on a different origin, so next/router can't navigate there.
-    if (/^https?:\/\//i.test(redirect)) {
+    // Only the portal gets the email in its URL, to prefill its own signup form.
+    if (redirect.startsWith(PORTAL_ORIGIN + '/')) {
       const sep = redirect.includes('?') ? '&' : '?'
       window.location.href = `${redirect}${sep}email=${encodeURIComponent(form.email.trim())}`
     } else {
@@ -100,7 +101,6 @@ function SignupFormInner() {
         </form>
 
         <p className="su-alt">
-          Not sure yet? <Link href="/start">Take the two-minute assessment</Link> first.<br />
           Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a>
         </p>
       </div>

@@ -79,7 +79,7 @@ export default function StagePortal() {
             <p className="stage-lead">
               Every marker grouped by system and flagged where it matters. Your doctor explains it on the call, and your plan lives next to it.
             </p>
-            <StageCta href="/start" tone="dark">Start your assessment</StageCta>
+            <StageCta href="/signup" tone="dark">Create your free account</StageCta>
           </div>
         </div>
 

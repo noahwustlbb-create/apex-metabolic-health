@@ -222,7 +222,7 @@ function AreaCard({ area, index }: { area: typeof SYMPTOMS[0]; index: number }) 
 
         <div className="flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.1em] uppercase transition-colors duration-200"
           style={{ color: 'var(--blue)' }}>
-          <span className="group-hover:text-blue transition-colors duration-200">Take the health assessment</span>
+          <span className="group-hover:text-blue transition-colors duration-200">Create your free account</span>
           <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -295,7 +295,7 @@ export default function WhatWeTreatPage() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
               className="flex flex-wrap items-center gap-4 mb-8">
               <button type="button" onClick={() => open()} className="btn-pill" style={{ cursor: 'pointer' }}>
-                Take the health assessment
+                Create your free account
                 <span className="btn-circle" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
@@ -371,7 +371,7 @@ export default function WhatWeTreatPage() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button type="button" onClick={() => open()} className="btn-pill" style={{ cursor: 'pointer' }}>
-                  Take the health assessment
+                  Create your free account
                   <span className="btn-circle" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>

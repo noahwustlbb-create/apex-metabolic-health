@@ -149,7 +149,7 @@ export default function ProtocolGrid() {
             {/* Not sure: always compact, always last. */}
             <li className="min-w-0" style={{ gridColumn: canHover ? 3 : undefined }}>
               <a
-                href="/start"
+                href="/signup"
                 className="group no-underline flex flex-col justify-between h-full rounded-2xl px-4 py-3.5 transition-colors duration-200"
                 style={{ background: 'var(--text-primary)', color: 'var(--bg)', minHeight: ROW }}
               >

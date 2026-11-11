@@ -40,7 +40,7 @@ export default function StageStartTiles() {
       <div className="st-tiles-grid">
         {TILES.map((x, i) => (
           <motion.div key={x.t} initial={reduced ? false : { opacity: 0, y: 40, filter: 'blur(10px)' }} animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}} transition={{ duration: 0.9, delay: 0.1 + i * 0.07, ease }}>
-            <Link href={`/start?t=${x.t}&why=${x.why}`} className="st-tile">
+            <Link href="/signup" className="st-tile">
               <span className="st-tile-art" aria-hidden="true"><Image src={x.art} alt="" fill sizes="(min-width: 900px) 30vw, 90vw" className="object-cover" /></span>
               <span className="st-tile-text">
                 <span className="st-tile-sub">{x.sub}</span>
@@ -54,7 +54,7 @@ export default function StageStartTiles() {
       <motion.div className="st-stages" initial={reduced ? false : { opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.6, ease }}>
         <span className="st-stages-k">Or start from your age</span>
         {STAGES.map(x => (
-          <Link key={x.why} href={`/start?why=${x.why}`} className="st-stage">
+          <Link key={x.why} href="/signup" className="st-stage">
             <strong>{x.label}</strong><span>{x.sub}</span>
           </Link>
         ))}

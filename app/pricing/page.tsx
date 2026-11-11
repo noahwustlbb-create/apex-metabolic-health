@@ -686,7 +686,7 @@ function PricingCTA() {
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }} className="flex flex-col items-center gap-3">
           <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
-            Take the health assessment
+            Create your free account
             <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

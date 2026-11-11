@@ -68,7 +68,7 @@ export default function OurApproachPage() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.36, ease }}
               className="flex flex-wrap items-center gap-4 mb-8">
               <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
-                Take the health assessment
+                Create your free account
                 <span className="btn-circle" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
@@ -326,7 +326,7 @@ export default function OurApproachPage() {
         </section>
 
         {/* ── 7. CTA ── */}
-        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Take the health assessment">
+        <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Create your free account">
           <div className="glow-rule" aria-hidden="true" />
           <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
             style={{ background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.06) 0%, transparent 55%)' }} />
@@ -341,7 +341,7 @@ export default function OurApproachPage() {
               </h2>
               <div className="flex flex-col items-center gap-3 mt-6">
                 <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
-                  Take the health assessment
+                  Create your free account
                   <span className="btn-circle" aria-hidden="true">
                     <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </span>

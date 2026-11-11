@@ -117,7 +117,7 @@ function HeroSection({ config, onGetStarted }: { config: ProgramPageConfig; onGe
             ))}
           </motion.ul>
           <motion.div {...rise(0.32)} className="stage-actions">
-            <StartButton onClick={onGetStarted}>Start your assessment</StartButton>
+            <StartButton onClick={onGetStarted}>Create your free account</StartButton>
             <Link href="/discovery-call" className="stage-link">Free discovery call</Link>
           </motion.div>
         </div>
@@ -205,7 +205,7 @@ function ProcessSection({ config, onGetStarted }: { config: ProgramPageConfig; o
           ))}
         </div>
         <div className="stage-actions stage-actions-center prog-process-cta">
-          <StartButton onClick={onGetStarted}>Start your assessment</StartButton>
+          <StartButton onClick={onGetStarted}>Create your free account</StartButton>
         </div>
       </div>
     </section>
@@ -246,7 +246,7 @@ function FinalCTASection({ config, onGetStarted }: { config: ProgramPageConfig; 
         <motion.h2 {...rise(0.05)} className="stage-display stage-center">{config.ctaHeadline}</motion.h2>
         <motion.p {...rise(0.15)} className="stage-lead stage-center">{config.ctaBody}</motion.p>
         <motion.div {...rise(0.25)} className="stage-actions stage-actions-center">
-          <StartButton onClick={onGetStarted}>Start your assessment</StartButton>
+          <StartButton onClick={onGetStarted}>Create your free account</StartButton>
           <Link href="/discovery-call" className="stage-link">Prefer to talk first? Book a free call</Link>
         </motion.div>
       </div>
@@ -283,7 +283,7 @@ function StickyBar({ name, onGetStarted }: { name: string; onGetStarted: () => v
             <p style={{ fontSize: 13, fontWeight: 600, color: INK, fontFamily: 'var(--font-inter)' }}>{name}</p>
             <p style={{ fontSize: 11, color: '#6b7280' }}>Doctor-led · AHPRA registered · 100% online</p>
           </div>
-          <StartButton onClick={onGetStarted}>Start assessment</StartButton>
+          <StartButton onClick={onGetStarted}>Create your free account</StartButton>
         </motion.div>
       )}
     </AnimatePresence>
