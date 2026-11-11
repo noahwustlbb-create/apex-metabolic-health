@@ -69,7 +69,7 @@ function PricingHero() {
 // get cost-price medication with those fees and the escript fee included.
 type Col = 'single' | 'partner' | 'member'
 const COMPARISON_ROWS: { label: string; single: string; partner: string; member: string; highlight: boolean }[] = [
-  { label: 'Initial Blood Referral',      single: '$275',           partner: '$275',            member: '$199',        highlight: false },
+  { label: 'Initial Blood Referral',      single: '$280',           partner: '$280',            member: '$199',        highlight: false },
   { label: 'Follow Up Blood Referral',    single: '$180',           partner: '$180',            member: '$139',        highlight: true  },
   { label: 'Hormone Consultation',        single: '$275',           partner: '$275',            member: '$199',        highlight: true  },
   { label: 'Peptide / General Consult',   single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
@@ -85,7 +85,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
 
 const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
   { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
-    box: { k: 'Before medication', v: '$629', note: 'Blood panel $275 + Peptide / General Consult $199 + escript fee $155. With the hormone consult ($275) instead: $705. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
+    box: { k: 'Before medication', v: '$634', note: 'Blood panel $280 + Peptide / General Consult $199 + escript fee $155. With the hormone consult ($275) instead: $710. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
   { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
     box: { k: 'On every medication order', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) averages this, plus the $155 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
   { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Pause or cancel from your account', box: null, cta: 'Get Started' },
@@ -264,7 +264,7 @@ const PATHWAYS: Pathway[] = [
       {
         label: 'Blood panel',
         body: 'Doctor-issued referral, no GP needed. Collect fasted before 9am at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$275',
+        price: '$280',
         priceNote: 'First panel · follow-ups $180',
       },
       {
@@ -337,7 +337,7 @@ const PATHWAYS: Pathway[] = [
       {
         label: 'Blood panel',
         body: 'Doctor-issued referral, no GP needed. Collect at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$275',
+        price: '$280',
         priceNote: 'First panel · follow-ups $180',
       },
       {

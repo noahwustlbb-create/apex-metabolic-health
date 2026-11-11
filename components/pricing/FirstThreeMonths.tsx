@@ -3,7 +3,7 @@ import Link from 'next/link'
 /**
  * Your first 3 months, per path, in plain English (fundamentals plan, 24 Oct 2026).
  * Every figure is a sum of prices already in COMPARISON_ROWS on /pricing:
- * bloods $275 / $199 member (Noah, 11 Nov 2026), Peptide / General Consult $199 / $99 member,
+ * bloods $280 / $199 member (Noah, 11 Nov 2026), Peptide / General Consult $199 / $99 member,
  * escript fee $155 (Noah, 11 Nov 2026), AHI fee $350-$650 per partner-pharmacy order, membership $99/mo.
  * The $155 here is the escript fee, not a consult. Totals use the $199 consult
  * (Noah, 24 Oct 2026); the hormone consult ($275 / $199 member) is the note below.
@@ -17,22 +17,22 @@ const PATHS: Path[] = [
   {
     id: 'single', name: 'Script only', who: 'You want a doctor’s script and will fill it at any pharmacy.',
     lines: [
-      { k: 'Blood panel', v: '$275' },
+      { k: 'Blood panel', v: '$280' },
       { k: 'Peptide / General Consult', v: '$199' },
       { k: 'Escript fee', v: '$155' },
     ],
-    total: { k: 'First 3 months', v: '$629' },
+    total: { k: 'First 3 months', v: '$634' },
     then: 'Plus the medication itself, at your pharmacy’s price. Most pharmacies add their own mark-up.',
   },
   {
     id: 'partner', name: 'Partner pharmacy', who: 'You want medication with no mark-up and to pay per order.',
     lines: [
-      { k: 'Blood panel', v: '$275' },
+      { k: 'Blood panel', v: '$280' },
       { k: 'Peptide / General Consult', v: '$199' },
       { k: 'Each order: AHI fee', v: '$350 – $650' },
       { k: 'Each order: escript fee', v: '$155' },
     ],
-    total: { k: 'First 3 months, one order', v: '$979 – $1,279' },
+    total: { k: 'First 3 months, one order', v: '$984 – $1,284' },
     then: 'Plus the medication at the pharmacy’s cost, with no mark-up. Each further order adds the AHI fee and the escript fee again.',
   },
   {
