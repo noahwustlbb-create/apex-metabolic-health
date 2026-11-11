@@ -774,7 +774,8 @@ main section[data-art="none"] { min-height: 0; }
 .pw-g { font-size: 16px; font-weight: 600; color: var(--stage-ink); margin-top: 8px; max-width: 12em; }
 .pw-of { font-size: 12px; color: var(--stage-ink-muted); margin-top: 2px; }
 .pw-toggle { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--stage-ice); margin-bottom: 18px; }
-.pw-toggle button { padding: 9px 16px; border-radius: 999px; font-size: 13.5px; color: var(--stage-ink-muted); transition: background .3s, color .3s; }
+.pw-toggle button { position: relative; padding: 9px 16px; border-radius: 999px; font-size: 13.5px; color: var(--stage-ink-muted); transition: background .3s, color .3s; }
+.pw-toggle button::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 44px; transform: translateY(-50%); } /* 44px tap height, pill unchanged */
 .pw-toggle button.is-on { background: var(--stage-ink); color: #fff; }
 .pw-groups { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .pw-groups button { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-radius: 16px; font-size: 15px; color: var(--stage-ink); background: transparent; transition: background .3s; text-align: left; }
@@ -959,7 +960,7 @@ html[data-audience="women"] .for-men { display: none !important; }
 .obj-item { padding: 20px 22px; border-radius: 22px; background: var(--stage-white, #fff); border: 1px solid rgba(11,18,32,0.07); }
 .obj-item dt { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; color: var(--stage-ink); margin-bottom: 6px; }
 .obj-item dd { margin: 0; font-size: 15px; line-height: 1.55; color: var(--stage-ink-muted); }
-.obj-item a { color: var(--stage-blue); text-decoration: underline; text-underline-offset: 3px; }
+.obj-item a { position: relative; padding-block: 13px; margin-block: -13px; color: var(--stage-blue); text-decoration: underline; text-underline-offset: 3px; } /* inline padding = 44px tap height, no layout change */
 @media (max-width: 899px) { .obj-list { gap: 8px; } .obj-item { padding: 14px 16px; } .obj-item dt { font-size: 16px; } .obj-item dd { font-size: 15px; } }
 
 /* Homepage phone length (~20 -> ~12 screens): drop the decorative halves. */

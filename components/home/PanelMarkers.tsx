@@ -62,7 +62,7 @@ export default function PanelMarkers() {
           <p className="text-[12.5px] leading-relaxed m-0" style={{ color: 'var(--text-muted)', maxWidth: '62ch' }}>
             Collected at any of 4,000+ accredited centres. Most results are back within 48 hours and reviewed by your doctor before your call.
           </p>
-          <Link href="/programs/pathology" className="link-draw text-[15px] font-medium" style={{ color: 'var(--color-accent-fg)' }}>
+          <Link href="/programs/pathology" className="link-draw tap44 text-[15px] font-medium" style={{ color: 'var(--color-accent-fg)' }}>
             See the pathology pathway
           </Link>
         </motion.div>

@@ -409,6 +409,18 @@
 .protocol-row .protocol-arrow { opacity: 0; transform: translateX(-6px); transition: opacity 0.25s ease, transform 0.25s ease; }
 .protocol-row:hover .protocol-arrow, .protocol-row:focus-visible .protocol-arrow { opacity: 1; transform: translateX(0); }
 
+/* Site header entrance: only once JS has run (html[data-js] is set by an
+   inline script in app/layout.tsx). With JS off the header stays visible. */
+@keyframes nav-in { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  [data-js] .site-header-enter { animation: nav-in 0.6s ease-out both; }
+}
+
+/* 44px tap height for short links without moving layout: an invisible,
+   vertically centred hit area. Needs a positioned parent (set here). */
+.tap44 { position: relative; }
+.tap44::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 44px; transform: translateY(-50%); }
+
 /* Text link with a drawn underline. */
 .link-draw {
   position: relative;

@@ -67,11 +67,11 @@ export default function Nav() {
 
   return (
     <>
-      <motion.header
-        initial={prefersReduced ? false : { opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={prefersReduced ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-400"
+      {/* Visible by default. The entrance animation only runs once the inline
+          boot script in app/layout.tsx has set html[data-js], so with JS off
+          the header is simply there (it used to sit at opacity 0 forever). */}
+      <header
+        className="site-header-enter fixed top-0 left-0 right-0 z-50 transition-all duration-400"
         style={{
           backgroundColor: overHero ? 'transparent' : scrolled ? 'var(--nav-bg-scrolled)' : 'var(--nav-bg)',
           backdropFilter: overHero ? 'none' : 'blur(20px)',
@@ -84,7 +84,7 @@ export default function Nav() {
         >
 
           {/* ── Logo ── */}
-          <Link href="/" className="flex-shrink-0 select-none" aria-label="Apex Metabolic Health, Home" style={{ textDecoration: 'none' }}>
+          <Link href="/" className="flex-shrink-0 select-none inline-flex items-center min-h-[44px]" aria-label="Apex Metabolic Health, Home" style={{ textDecoration: 'none' }}>
             <Logo variant="nav" />
           </Link>
 
@@ -260,7 +260,7 @@ export default function Nav() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </header>
 
       {/* ── Mobile drawer ── */}
       <AnimatePresence>
