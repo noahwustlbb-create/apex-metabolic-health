@@ -14,7 +14,7 @@ export default function TermsPage() {
             <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
               Terms of Service
             </h1>
-            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 24 October 2026</p>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Last updated: 11 November 2026</p>
           </div>
 
           <div className="space-y-8 text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -60,11 +60,13 @@ export default function TermsPage() {
               <p>The following cancellation and refund terms apply to all services provided by Apex Metabolic Health (Imperial Equity Investments Pty Ltd):</p>
               <ul className="list-disc pl-5 mt-3 flex flex-col gap-2">
                 <li><strong>Cancelling or rescheduling:</strong> You can cancel or reschedule your appointment up to 4 hours before it starts, using the links in your booking confirmation email or by contacting us. If you cancel at least 4 hours before, you get a full refund of any consultation fee paid. Cancellations made less than 4 hours before the appointment are non-refundable.</li>
-                <li><strong>Post-consultation:</strong> Consultation fees are non-refundable once a consultation has been conducted, regardless of clinical outcome.</li>
+                <li><strong>Post-consultation:</strong> If you are not satisfied after your consultation, contact us and we will refund the consultation fee, less a $50 administration fee.</li>
                 <li><strong>Missed appointments (patient no-show):</strong> If you miss your appointment without cancelling or rescheduling at least 4 hours before, the consultation fee is forfeited. A rescheduling fee may apply.</li>
                 <li><strong>Appointment cancelled by Apex:</strong> If we cancel or are unable to attend a scheduled appointment, you will be offered a full refund or a rescheduled appointment at no additional cost.</li>
-                <li><strong>Clinical decline:</strong> If a consultation is conducted and the treating doctor determines you are not clinically suitable for treatment, the consultation fee is non-refundable. This reflects the clinical service rendered. No treatment obligation arises from completing a consultation.</li>
-                <li><strong>Medications:</strong> Medication fees are governed by our pharmacy partner's terms and are non-refundable once dispensed or compounded.</li>
+                <li><strong>Clinical decline:</strong> A consultation does not guarantee a prescription. If the treating doctor determines you are not clinically suitable for treatment, no treatment obligation arises from the consultation. The post-consultation refund above still applies.</li>
+                <li><strong>Blood pathology and medications:</strong> Blood pathology referrals are non-refundable once issued. Medication invoices are non-refundable once dispensed or compounded, and are also governed by our pharmacy partner's terms.</li>
+                <li><strong>Fees on medication and prescriptions:</strong> Every medication invoice includes the AHI fee (administration, handling and infrastructure); for members it is covered by the membership. Prescription and script release fees are payable before the script is issued.</li>
+                <li><strong>Pricing:</strong> Prices may change.</li>
                 <li><strong>Australian Consumer Law:</strong> Nothing in these terms limits any right or guarantee you have under the Australian Consumer Law, including that services be rendered with due care and skill and be fit for the purpose for which they are supplied.</li>
               </ul>
             </section>

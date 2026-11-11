@@ -652,7 +652,7 @@ function AfterConsultation() {
 
               <div className="flex flex-col gap-2.5 mb-8">
                 {[
-                  'Prescribing fees waived ($125 per script otherwise)',
+                  'Prescribing fees waived ($155 per script otherwise)',
                   'Medication at pharmacy cost, no mark-up',
                   'Discounted follow-up blood panels',
                   '3-monthly review and protocol adjustment',
@@ -700,7 +700,7 @@ function AfterConsultation() {
                 {[
                   'Standard consulting fees apply per session',
                   'Script released to your chosen pharmacy',
-                  'Prescribing fee: $125 per script',
+                  'Prescribing fee: $155 per script',
                   'Follow-up consultations available on request',
                   'No structured review cycle included',
                 ].map(item => (

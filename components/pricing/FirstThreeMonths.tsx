@@ -3,9 +3,9 @@ import Link from 'next/link'
 /**
  * Your first 3 months, per path, in plain English (fundamentals plan, 24 Oct 2026).
  * Every figure is a sum of prices already in COMPARISON_ROWS on /pricing:
- * bloods $280 / $199 member, Peptide / General Consult $199 / $99 member,
- * escript fee $125, AHI fee $350-$650 per partner-pharmacy order, membership $99/mo.
- * The $125 here is the escript fee, not a consult. Totals use the $199 consult
+ * bloods $280 / $199 member (Noah, 11 Nov 2026), Peptide / General Consult $199 / $99 member,
+ * escript fee $155 (Noah, 11 Nov 2026), AHI fee $350-$650 per partner-pharmacy order, membership $99/mo.
+ * The $155 here is the escript fee, not a consult. Totals use the $199 consult
  * (Noah, 24 Oct 2026); the hormone consult ($275 / $199 member) is the note below.
  * Medication is never included: it depends on what (if anything) a doctor prescribes.
  * Change the table and these together.
@@ -19,9 +19,9 @@ const PATHS: Path[] = [
     lines: [
       { k: 'Blood panel', v: '$280' },
       { k: 'Peptide / General Consult', v: '$199' },
-      { k: 'Escript fee', v: '$125' },
+      { k: 'Escript fee', v: '$155' },
     ],
-    total: { k: 'First 3 months', v: '$604' },
+    total: { k: 'First 3 months', v: '$634' },
     then: 'Plus the medication itself, at your pharmacy’s price. Most pharmacies add their own mark-up.',
   },
   {
@@ -30,9 +30,9 @@ const PATHS: Path[] = [
       { k: 'Blood panel', v: '$280' },
       { k: 'Peptide / General Consult', v: '$199' },
       { k: 'Each order: AHI fee', v: '$350 – $650' },
-      { k: 'Each order: escript fee', v: '$125' },
+      { k: 'Each order: escript fee', v: '$155' },
     ],
-    total: { k: 'First 3 months, one order', v: '$954 – $1,254' },
+    total: { k: 'First 3 months, one order', v: '$984 – $1,284' },
     then: 'Plus the medication at the pharmacy’s cost, with no mark-up. Each further order adds the AHI fee and the escript fee again.',
   },
   {
@@ -67,7 +67,7 @@ export default function FirstThreeMonths() {
         ))}
       </div>
       <div className="ftm-terms">
-        <p><strong>Escript fee ($125).</strong> The fee for your doctor to write and send an electronic prescription. Members do not pay it.</p>
+        <p><strong>Escript fee ($155).</strong> The fee for your doctor to write and send an electronic prescription. Members do not pay it.</p>
         <p><strong>AHI fee ($350 – $650 per order, on average).</strong> Admin, handling and infrastructure on each partner-pharmacy order. The medication itself is not marked up. Members do not pay it.</p>
         <p><strong>Hormone consult instead?</strong> It is $275, or $199 for members. Add $76 to the first two totals, or $100 to the member total.</p>
       </div>
