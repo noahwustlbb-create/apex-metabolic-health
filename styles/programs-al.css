@@ -1,0 +1,233 @@
+/*
+ * PROGRAM PAGES, AlgoRx system (12 Nov 2026). Same tokens, type, cards and
+ * dark blocks as the home page (styles/algo.css) and /order-bloods; reuses
+ * the shared al-* classes (al-k, al-h2, al-head, al-cap, al-pill, al-card,
+ * al-how, al-faq) and adds only what a program page needs: a full-bleed
+ * photo hero, a photo break, a bento of bordered cards with one photo card,
+ * and a photo CTA band. Scoped to .prog-al so nothing else moves.
+ * Rhythm: photo, white cards, photo, black steps, white cards, FAQ, photo.
+ */
+
+.prog-al, .prog-al-foot, .prog-al-bar {
+  --al-bg: #fafafa;
+  --al-card: #ffffff;
+  --al-ink: #0a0a0a;
+  --al-mute: #55595f;            /* 7.1:1 on #fafafa */
+  --al-line: #0a0a0a;
+  --al-hair: #dcdcda;
+  --al-accent: #0d5dea;          /* Apex blue */
+  --al-accent-on-dark: #5b9bff;  /* 7.4:1 on #050505 */
+  --al-r: 24px;
+  --al-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+.prog-al {
+  background: var(--al-bg);
+  color: var(--al-ink);
+  overflow-x: clip;
+  --text-primary: var(--al-ink);
+  --text-secondary: var(--al-mute);
+  --text-muted: var(--al-mute);
+  --bg: var(--al-bg);
+  --surface: var(--al-bg);
+}
+/* Beat stage.css's site-wide light-headline rule (main :is(h1,h2):not(...) + !important). */
+main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weight: 700 !important; letter-spacing: -0.045em !important; line-height: 1 !important; }
+
+/* ── Shared: full-bleed photo with a dark grade, label bottom-left ── */
+.pa-photo { position: absolute; inset: 0; z-index: -2; }
+.pa-photo img { object-fit: cover; object-position: var(--pos, 50% 50%); }
+.pa-grade { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+
+/* ── 1. Hero ── */
+.pa-hero {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(100svh, 940px);
+  display: flex; align-items: flex-end;
+  background: #050505; color: #fff;
+  padding: 120px 0 clamp(36px, 5vw, 72px);
+}
+.pa-hero .pa-grade {
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 22%, rgba(0,0,0,0.12) 42%, rgba(0,0,0,0.72) 70%, rgba(0,0,0,0.9) 100%),
+    linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 100%);
+}
+.pa-hero-in { width: 100%; }
+.pa-hero-copy { max-width: 760px; }
+.pa-hero .al-k { color: #d3d6db; }
+.pa-h1 {
+  margin: 16px 0 0;
+  font-family: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(42px, 6.6vw, 104px);
+  line-height: 0.98; letter-spacing: -0.05em; font-weight: 700;
+  color: #fff; text-wrap: balance;
+}
+.pa-h1 span { display: block; color: rgba(255, 255, 255, 0.74); }
+.pa-hero-lead { margin: 18px 0 0; max-width: 46ch; font-size: clamp(16px, 1.2vw, 18.5px); line-height: 1.5; color: #e6e8eb; }
+.pa-hero-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 26px; }
+.pa-call {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px;
+  font: 500 12.5px/1 var(--al-mono); letter-spacing: 0.1em; text-transform: uppercase;
+  color: #fff; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+}
+.pa-call:focus-visible, .prog-al .al-pill:focus-visible, .pa-btn:focus-visible { outline: 2px solid var(--al-accent-on-dark); outline-offset: 3px; }
+.pa-btn { border: 0; cursor: pointer; font-family: var(--al-mono); }
+@media (prefers-reduced-motion: no-preference) {
+  .pa-hero-copy > * { animation: pa-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .pa-hero-copy > :nth-child(2) { animation-delay: 0.06s; }
+  .pa-hero-copy > :nth-child(3) { animation-delay: 0.14s; }
+  .pa-hero-copy > :nth-child(4) { animation-delay: 0.22s; }
+  .pa-photo-hero img { animation: pa-settle 1.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+@keyframes pa-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes pa-settle { from { transform: scale(1.06); } to { transform: none; } }
+
+/* ── 2. What it is ── */
+.pa-intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(28px, 3vw, 44px); }
+.pa-intro .al-h2 { margin-top: 18px; max-width: 18ch; }
+.pa-intro .al-lead { margin-top: 0; }
+.pa-chips { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.pa-chips li { padding: 9px 14px; border: 1px solid var(--al-line); border-radius: 999px; background: var(--al-card); font: 500 11px/1.2 var(--al-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--al-ink); }
+
+.pa-bento { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pa-bento > .pa-photocard { grid-row: span 2; }
+.pa-tcard { display: flex; flex-direction: column; gap: 10px; padding: 22px; min-height: 220px; }
+.pa-tcard .al-k { margin-bottom: auto; padding-bottom: 28px; }
+.pa-tcard h3 { margin: 0; font-size: clamp(19px, 1.5vw, 22px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.12; color: var(--al-ink); }
+.pa-tcard p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--al-mute); }
+
+/* Photo card: full-bleed photo, dark gradient, white label bottom-left. */
+.pa-photocard {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 320px; border-radius: var(--al-r); background: #0b0b0c; color: #fff;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding: 22px;
+}
+.pa-photocard .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.78) 100%); }
+.pa-photocard-name { font-size: clamp(22px, 1.9vw, 28px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
+.pa-photocard .al-k { color: rgba(255, 255, 255, 0.86); }
+
+/* ── 3. Photo break ── */
+.pa-break {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin-top: clamp(88px, 9vw, 150px);
+  min-height: min(78svh, 760px);
+  display: flex; align-items: flex-end;
+  background: #050505; color: #fff;
+  padding-block: clamp(56px, 6vw, 96px);
+}
+.pa-break .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.85) 100%), linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0) 70%); }
+.pa-break .al-k { color: #d3d6db; }
+.pa-break-h { margin: 16px 0 0; max-width: 16ch; font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-size: clamp(34px, 4.6vw, 72px); font-weight: 700; line-height: 1; letter-spacing: -0.045em; color: #fff; text-wrap: balance; }
+.pa-break p.pa-break-b { margin: 18px 0 0; max-width: 48ch; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.55; color: #e6e8eb; }
+
+/* ── 4. How it works: shared .al-how on black; time as the mono kicker ── */
+.prog-al .al-how { margin-top: 0; }
+
+/* ── 5. What's included ── */
+.pa-inc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.pa-inc li { display: flex; align-items: center; gap: 14px; padding: 20px 22px; min-height: 88px; font-size: 16.5px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; color: var(--al-ink); }
+.pa-inc li::before { content: ""; width: 24px; height: 24px; border-radius: 99px; flex: none; background: var(--al-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 24px no-repeat; }
+.pa-ev-k { margin: clamp(36px, 4vw, 56px) 0 16px !important; padding-bottom: 14px; border-bottom: 1px solid var(--al-line); }
+.pa-ev { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.pa-ev .pa-photocard { min-height: 100%; }
+.pa-evcard { display: flex; flex-direction: column; gap: 8px; padding: 22px; min-height: 260px; }
+.pa-evcard .pa-ev-v { margin: 0 0 auto; padding-bottom: 24px; font-size: clamp(44px, 4.2vw, 64px); font-weight: 600; letter-spacing: -0.06em; line-height: 0.95; color: var(--al-ink); }
+.pa-evcard h3 { margin: 0; font-size: 16.5px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; color: var(--al-ink); }
+.pa-evcard p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--al-mute); }
+.pa-inc-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pa-pill-out { background: transparent; color: var(--al-ink); border: 1px solid var(--al-line); }
+.pa-pill-out:hover { background: var(--al-ink); color: #fff; }
+
+/* ── 6. FAQ: shared .al-faq; buttons render as pills ── */
+
+/* ── 7. Photo CTA band ── */
+.pa-cta {
+  position: relative; isolation: isolate; overflow: hidden;
+  margin-top: clamp(88px, 9vw, 150px);
+  min-height: min(84svh, 780px);
+  display: flex; align-items: flex-end;
+  background: #050505; color: #fff;
+  padding-block: clamp(72px, 8vw, 130px) clamp(56px, 6vw, 96px);
+  border-bottom: 1px solid #1f2124;
+}
+.pa-cta .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.88) 100%), linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0) 70%); }
+.pa-cta .al-k { color: #d3d6db; }
+.pa-cta .al-h2 { margin-top: 18px; max-width: 14ch; color: #fff; font-size: clamp(40px, 5.4vw, 84px); }
+.pa-cta .al-lead { color: #e6e8eb; }
+.pa-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.pa-cta-meta { margin-top: 22px !important; color: #d3d6db !important; }
+.pa-cta-meta a { color: #fff; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ── Footer black (same as home) ── */
+.prog-al-foot {
+  --text-primary: #ffffff; --text-secondary: #d3d6db; --text-muted: #a3a8b0;
+  --border: #1f2124; --blue: #9a9fa6; --primitive-blue-700: #8db9ff;
+  background: #050505;
+}
+.prog-al-foot .site-footer { background: #050505 !important; color: #fff; border-top: 0 !important; }
+.prog-al-foot .site-footer h3 { font-family: var(--al-mono); font-weight: 500 !important; letter-spacing: 0.14em !important; }
+.prog-al-foot .site-footer [style*="72,144,247"] { border-color: #2a2d31 !important; background-color: transparent !important; }
+.prog-al-foot .btn-primary { background: #fff !important; color: #0a0a0a !important; box-shadow: none !important; }
+.prog-al-foot .footer-contact { display: inline-flex; align-items: center; min-height: 44px; }
+.prog-al-foot .footer-legal { border-radius: var(--al-r) !important; padding: 24px !important; }
+.prog-al-foot .footer-start { width: 100%; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; white-space: normal; }
+.prog-al-foot .site-footer ul a { display: inline-flex; align-items: center; min-width: 44px; }
+
+/* ── Sticky bar: phones and desktop, after the hero CTA leaves the screen ── */
+.prog-al-bar {
+  position: fixed; z-index: 45; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px clamp(12px, 4vw, 48px) calc(10px + env(safe-area-inset-bottom));
+  background: #050505; border-top: 1px solid #1f2124; color: #fff;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.35s;
+}
+.prog-al-bar[data-off] { transform: translateY(110%); visibility: hidden; }
+.prog-al-bar-name { display: grid; gap: 3px; min-width: 0; }
+.prog-al-bar-name strong { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.prog-al-bar-acts { display: flex; gap: 8px; flex: none; }
+@media (prefers-reduced-motion: reduce) { .prog-al-bar { transition: none; } .pa-photo-hero img { animation: none; } }
+
+/* ── Nav on program pages: one solid black bar, as on home ── */
+html:has(.prog-al) header.site-header-enter {
+  background-color: #050505 !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  border-bottom: 1px solid #1f2124 !important;
+  --text-primary: #ffffff; --text-secondary: #c9ced4; --text-muted: #a3a8b0;
+  --primitive-blue-700: #8db9ff; --surface: #ffffff;
+}
+html:has(.prog-al) header.site-header-enter .site-navpill { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; }
+html:has(.prog-al) header.site-header-enter a[style*="#0f172a"] { background: #ffffff !important; color: #0a0a0a !important; }
+html:has(.prog-al) header.site-header-enter img[src*="mark-"] { filter: brightness(0) invert(1); }
+html:has(.prog-al) header.site-header-enter nav [role="menu"], html:has(.prog-al) header.site-header-enter nav div[style*="var(--surface)"] { --text-primary: #0a0a0a; --text-secondary: #3d4148; }
+html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !important; color: #0a0a0a !important; box-shadow: none !important; }
+
+/* ── Tablet ── */
+@media (max-width: 1099px) {
+  .pa-ev { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* ── Phone ── */
+@media (max-width: 899px) {
+  .pa-hero { min-height: 100svh; padding: 96px 0 28px; }
+  .pa-photo img { object-position: var(--pos-m, var(--pos, 50% 50%)); }
+  .pa-hero .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 18%, rgba(0,0,0,0.2) 34%, rgba(0,0,0,0.8) 56%, rgba(0,0,0,0.92) 100%); }
+  .pa-hero-row { margin-top: 22px; gap: 4px 16px; }
+  .pa-intro { grid-template-columns: 1fr; align-items: start; }
+  .pa-bento { grid-template-columns: 1fr; gap: 8px; }
+  .pa-bento > .pa-photocard { grid-row: auto; min-height: 300px; }
+  .pa-tcard { min-height: 0; padding: 20px; }
+  .pa-tcard .al-k { padding-bottom: 14px; }
+  .pa-break, .pa-cta { margin-top: 72px; min-height: 86svh; }
+  .pa-inc { grid-template-columns: 1fr; gap: 8px; }
+  .pa-inc li { min-height: 64px; padding: 16px 18px; }
+  .pa-ev { grid-template-columns: 1fr; gap: 8px; }
+  .pa-ev .pa-photocard { min-height: 340px; }
+  .pa-evcard { min-height: 0; padding: 20px; }
+  .pa-evcard .pa-ev-v { padding-bottom: 14px; }
+  .prog-al-bar { display: grid; grid-template-columns: 1fr auto; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
+  .prog-al-bar-name { display: none; }
+  .prog-al-bar-acts { display: contents; }
+  .prog-al-bar .al-pill { min-height: 48px; justify-content: center; }
+  .prog-al-foot { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 380px) {
+  .prog-al-bar .al-pill { padding: 0 12px; font-size: 11px; letter-spacing: 0.08em; }
+}

@@ -427,12 +427,12 @@ export const pathologyConfig: ProgramPageConfig = {
   headlineAccent: 'All of them.',
   heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 23+ markers that actually tell you where you stand.',
   heroBullets: [
-    '30+ clinically relevant blood markers',
+    '23+ clinically relevant blood markers',
     'AHPRA-registered doctor review',
     'Results explained in context, not just in range',
   ],
   heroBentoPortrait: '/editorial/blood-vials.webp',
-  heroBentoStat: { value: '30+', label: 'markers across hormones, metabolism, and health' },
+  heroBentoStat: { value: '23+', label: 'markers across hormones, metabolism, and health' },
   heroBentoLifestyle: '/editorial/molecular.webp',
 
   empathyHeadline: "Your GP checks if you\'re sick. We check how well you\'re functioning.",
@@ -442,7 +442,7 @@ export const pathologyConfig: ProgramPageConfig = {
 
   evidenceHeadline: 'What a real blood panel looks like.',
   evidencePoints: [
-    { value: '30+', label: 'Markers across hormones, metabolism, and health', detail: 'Hormone panel, thyroid, metabolic markers, cardiovascular risk, inflammatory markers, nutritional status, liver and kidney function: the complete picture.' },
+    { value: '23+', label: 'Markers across hormones, metabolism, and health', detail: 'Hormone panel, thyroid, metabolic markers, cardiovascular risk, inflammatory markers, nutritional status, liver and kidney function: the complete picture.' },
     { value: '48h', label: 'Results turnaround from pathology collection', detail: 'Results reviewed and explained by your AHPRA-registered doctor in a follow-up consultation. Not just a PDF of numbers.' },
     { value: '4,000+', label: 'Collection centres across Australia', detail: 'Your referral issued electronically. No appointment needed at most collection centres.' },
   ],
