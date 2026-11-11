@@ -17,6 +17,7 @@ const publicRoutes = [
   '/membership',
   '/our-approach',
   '/pricing',
+  '/order-bloods',
   '/privacy-policy',
   '/services',
   '/terms',

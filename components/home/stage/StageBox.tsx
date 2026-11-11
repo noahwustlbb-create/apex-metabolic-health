@@ -55,13 +55,26 @@ export default function StageBox() {
             className="st-box-img"
           />
         </motion.div>
-        <motion.span className="stage-float st-box-float st-box-float-a" style={live ? { opacity: chips } : undefined}>
-          <span className="stage-float-k">Fast</span>
-          <span className="stage-float-v">Discreet delivery</span>
+        <motion.span className="stage-float st-box-float st-box-float-a st-box-chip" style={live ? { opacity: chips } : undefined}>
+          <svg className="st-box-chip-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 2.8 20.5 7.3v9.4L12 21.2 3.5 16.7V7.3Z" />
+            <path d="M3.5 7.3 12 11.8l8.5-4.5M12 11.8v9.4M7.8 5 16.2 9.6" />
+          </svg>
+          <span className="st-box-chip-txt">
+            <span className="stage-float-k">Medication dispensed discreetly</span>
+            <span className="stage-float-v">via approved cGMP partnering pharmacies Australia-wide.</span>
+          </span>
         </motion.span>
-        <motion.span className="stage-float st-box-float st-box-float-b" style={live ? { opacity: chips } : undefined}>
-          <span className="stage-float-k">Reviewed by</span>
-          <span className="stage-float-v">An Australian doctor</span>
+        <motion.span className="stage-float st-box-float st-box-float-b st-box-chip" style={live ? { opacity: chips } : undefined}>
+          <svg className="st-box-chip-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M3 11h18c0 4.4-3.6 8-8 8h-2c-4.4 0-8-3.6-8-8Z" />
+            <path d="M9 19.4V21h6v-1.6M15.5 11l4-7.5a1.4 1.4 0 0 1 2.4 1.4L17.6 11" />
+            <path d="M12 12.8v4.4M9.8 15h4.4" />
+          </svg>
+          <span className="st-box-chip-txt">
+            <span className="stage-float-k">Approved <span style={{ textTransform: 'none' }}>cGMP</span></span>
+            <span className="stage-float-v">Partnering pharmacies Australia-wide.</span>
+          </span>
         </motion.span>
       </div>
       <div className="stage-actions st-box-actions">

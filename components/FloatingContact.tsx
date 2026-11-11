@@ -17,8 +17,8 @@ const ACTIONS = [
         <path d="M6 9l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    label: '60-second assessment',
-    sub: 'Tell us your goals and we match you to the right doctor and program.',
+    label: 'Create your free account',
+    sub: 'Set up your patient portal, then order bloods or book a doctor.',
     href: '/signup',
     external: false,
     highlight: true,
@@ -231,7 +231,7 @@ export default function FloatingContact() {
       >
         <span className="text-[11px] font-bold tracking-[0.18em] uppercase whitespace-nowrap"
           style={{ fontFamily: 'var(--font-space-grotesk)' }}>
-          Start Health Assessment
+          Create your free account
         </span>
         <motion.span
           className="w-2 h-2 rounded-full flex-shrink-0"
