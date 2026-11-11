@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
 import { ArtImg } from '@/components/audience/Img'
 
-import { safeSignupRedirect } from '@/lib/portal'
+import { PORTAL_ORIGIN, safeSignupRedirect } from '@/lib/portal'
 
 function SignupFormInner() {
   const router = useRouter()
@@ -43,7 +43,8 @@ function SignupFormInner() {
       /* captureLead already logs; both channels down shouldn't strand the user */
     }
     // The portal lives on a different origin, so next/router can't navigate there.
-    if (/^https?:\/\//i.test(redirect)) {
+    // Only the portal gets the email in its URL, to prefill its own signup form.
+    if (redirect.startsWith(PORTAL_ORIGIN + '/')) {
       const sep = redirect.includes('?') ? '&' : '?'
       window.location.href = `${redirect}${sep}email=${encodeURIComponent(form.email.trim())}`
     } else {
