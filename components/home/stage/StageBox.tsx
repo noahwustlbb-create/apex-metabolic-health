@@ -61,8 +61,8 @@ export default function StageBox() {
             <path d="M3.5 7.3 12 11.8l8.5-4.5M12 11.8v9.4M7.8 5 16.2 9.6" />
           </svg>
           <span className="st-box-chip-txt">
-            <span className="st-box-chip-t">Medication dispensed discreetly</span>
-            <span className="st-box-chip-s">via approved cGMP partnering pharmacies Australia-wide.</span>
+            <span className="stage-float-k">Medication dispensed discreetly</span>
+            <span className="stage-float-v">via approved cGMP partnering pharmacies Australia-wide.</span>
           </span>
         </motion.span>
         <motion.span className="stage-float st-box-float st-box-float-b st-box-chip" style={live ? { opacity: chips } : undefined}>
@@ -72,8 +72,8 @@ export default function StageBox() {
             <path d="M12 12.8v4.4M9.8 15h4.4" />
           </svg>
           <span className="st-box-chip-txt">
-            <span className="st-box-chip-t">Approved cGMP</span>
-            <span className="st-box-chip-s">Partnering pharmacies Australia-wide.</span>
+            <span className="stage-float-k">Approved <span style={{ textTransform: 'none' }}>cGMP</span></span>
+            <span className="stage-float-v">Partnering pharmacies Australia-wide.</span>
           </span>
         </motion.span>
       </div>
