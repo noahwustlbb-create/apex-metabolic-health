@@ -9,6 +9,7 @@ import FAQSection from '@/components/FAQSection'
 import { FAQS } from '@/lib/faqs'
 import StageClose from '@/components/home/stage/StageClose'
 import StageStartTiles from '@/components/home/stage/StageStartTiles'
+import StageBox from '@/components/home/stage/StageBox'
 import StageSteps from '@/components/home/stage/StageSteps'
 import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
@@ -47,6 +48,7 @@ export default function Home() {
       <StageToneProvider>
       <main id="main-content" className="home-main">
         <StageHero />
+        <StageBox />
         <StageStartTiles />
         <StageClarity />
         <StageSteps />

@@ -333,3 +333,103 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-46%)
   .hx-actions .stage-cta { display: none; }
   .hx-actions .stage-link { font-size: 15px; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+ * 11 Nov 2026, Noah: "I hate the box landing page." No ice card, no
+ * rounded night plate, no corner marks. The hero is one night ground,
+ * full bleed, and the glass figure stands on it at full width, the way
+ * the scroll beat used to look. Neutral = grey figures; the pick floods
+ * the chosen one with its colour. Text on night: --stage-night-fg
+ * (#eef3f9, 16:1 on #0d121b) and --stage-night-mute (#9aa8ba, 7.3:1).
+ * ════════════════════════════════════════════════════════════════ */
+.hx {
+  --hx-neutral: var(--stage-night-2);
+  --hx-men: #08141f;
+  --hx-women: #1a0e16;
+  background: var(--stage-night-2);
+  overflow-x: clip;
+}
+html[data-chosen="men"] .hx { background: var(--hx-men); }
+html[data-chosen="women"] .hx { background: var(--hx-women); }
+.hx-pin { padding: var(--nav-h) 0 0; }
+.hx-frame { border-radius: 0; color: var(--stage-night-fg); }
+.hx-frame.stage-frame { overflow: visible; }
+.hx-plate { margin: 0; border-radius: 0; overflow: visible; }
+.hx-plate::before {
+  background: radial-gradient(60% 52% at 50% 64%, color-mix(in srgb, var(--hx-glow, #9aa6b4) 16%, transparent), transparent 72%);
+}
+.hx-corners { display: none; }
+/* The nav keeps its own ground over the night hero, so the wordmark reads. */
+.hx-pill { background: var(--stage-blue); }
+.hx-pill-dot { background: #fff; box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25); }
+html:has(#hero.hx) header.fixed { background-color: var(--nav-bg) !important; -webkit-backdrop-filter: blur(20px) !important; backdrop-filter: blur(20px) !important; border-bottom-color: var(--nav-border) !important; }
+
+/* Neutral is grey and black: the same glass figures, no colour at all. */
+html:not([data-chosen]) .hx-fig { filter: grayscale(1) brightness(0.92) contrast(1.06); }
+
+/* Copy on night */
+.hx-copy .stage-kicker { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.16); color: var(--stage-night-fg); }
+.hx-copy .stage-display { color: var(--stage-night-fg); }
+.hx-frame .hx-lead { color: var(--stage-night-mute); }
+.hx-pick-k { color: var(--stage-night-mute); }
+.hx-pick-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--stage-night-fg);
+  box-shadow: none;
+}
+.hx-pick-btn span { color: var(--stage-night-mute); }
+.hx-pick-btn:focus-visible { outline-color: var(--stage-night-fg); }
+.hx-pick-btn[aria-pressed="true"] { background: var(--stage-white); color: var(--stage-ink); box-shadow: 0 18px 34px -18px var(--hx-glow-btn, #15e4fa); }
+.hx-pick-btn[aria-pressed="true"] span { color: var(--stage-ink-muted); }
+html[data-chosen="women"] .hx-pick-btn[aria-pressed="true"] { --hx-glow-btn: #ff6fa8; }
+.hx-actions .stage-link { color: var(--stage-night-fg); }
+.hx-meta { color: var(--stage-night-mute); }
+.hx-meta a { color: var(--stage-night-fg); display: inline-flex; align-items: center; min-height: 44px; }
+.hx-foot { color: var(--stage-night-mute); }
+.hx-readout { top: auto; bottom: 7%; left: 50%; translate: -50% 8px; width: min(420px, 86%); max-width: none; }
+.hx-readout[data-on] { translate: -50% 0; }
+
+/* Desktop: copy left, figure right, both on the one night ground. */
+@media (min-width: 900px) {
+  .hx-pin { padding: var(--nav-h) 0 72px; }
+  .hx-plate { margin: 0 clamp(16px, 3vw, 56px) 0 0; }
+  .hx-foot { bottom: 0; }
+}
+
+/* Phones and small tablets: figure full width on top, copy under it. */
+@media (max-width: 899px) {
+  .hx { --hx-plate-h: clamp(280px, 44svh, 420px); --hx-beat-h: calc(100svh - var(--nav-h) - 88px); --hx-beat-dy: calc(var(--hx-beat-h) - var(--hx-plate-h)); }
+  .hx-pin { padding: var(--nav-h) 0 0; }
+  .hx-frame { min-height: calc(100svh - var(--nav-h)); }
+  .hx-plate { margin: 0; height: var(--hx-plate-h); }
+  .hx-plate::before { height: auto; inset: 0; }
+  .hx-fig { height: 100%; }
+  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24%) scale(0.94); }
+  html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(24%) scale(0.9); }
+  .hx-readout { bottom: 26px; width: auto; left: 16px; right: 16px; translate: 0 8px; }
+  .hx-readout[data-on] { translate: 0 0; }
+  .hx-foot { left: 16px; right: 16px; bottom: 6px; font-size: 10.5px; }
+  .hx-copy { padding: 16px 20px 20px; }
+  .hx-copy .stage-display { font-size: clamp(34px, 9.4vw, 46px); }
+  .hx-lead { font-size: 15px; }
+  .hx-actions .stage-cta-label { height: 48px; }
+  .hx-actions .stage-cta-arrow { width: 48px; height: 48px; }
+  .hx-actions .stage-link { display: inline-flex; align-items: center; min-height: 44px; }
+  .hx-meta { margin-top: 4px; font-size: 13px; }
+  /* The beat: the figure grows into the whole screen, the copy steps back. */
+  .hx[data-beat] .hx-plate::before { height: auto; }
+  html[data-chosen="men"] .hx[data-beat] .hx-fig[data-sex="male"],
+  html[data-chosen="women"] .hx[data-beat] .hx-fig[data-sex="female"] { transform: translateY(var(--hx-beat-dy)) scale(1.42); }
+  .hx-fig {
+    -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent 96%), linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 74%, transparent 96%), linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  }
+}
+@media (max-width: 899px) and (max-height: 720px) {
+  .hx { --hx-plate-h: 236px; }
+  .hx-copy { padding-top: 10px; }
+  .hx-copy .stage-display { font-size: 30px; }
+  .hx-lead { font-size: 13.5px; }
+  .hx-foot { display: block; }
+}
