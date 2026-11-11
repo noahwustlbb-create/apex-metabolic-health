@@ -55,7 +55,7 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2 mb-6">
               {['AHPRA-registered doctors', '100% online'].map((badge) => (
                 <span key={badge} className="text-[12px] font-semibold tracking-[0.1em] uppercase px-3 py-1.5"
-                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 0 }}>
+                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 24 }}>
                   {badge}
                 </span>
               ))}
@@ -64,14 +64,14 @@ export default function Footer() {
             {/* Contact */}
             <div className="flex flex-col gap-2 mb-5">
               <a href={`tel:${CLINIC_PHONE_E164}`}
-                className="text-xs transition-colors duration-200"
+                className="text-xs transition-colors duration-200 footer-contact"
                 style={{ color: TEXT }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
                 {CLINIC_PHONE_DISPLAY}
               </a>
               <a href={`mailto:${CLINIC_EMAIL}`}
-                className="text-xs transition-colors duration-200 break-all"
+                className="text-xs transition-colors duration-200 break-all footer-contact"
                 style={{ color: TEXT }}
                 onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)' }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}>
@@ -159,7 +159,7 @@ export default function Footer() {
               ))}
             </ul>
             <div className="mt-8 flex flex-col gap-3">
-              <Link href="/start" className="btn-primary">
+              <Link href="/start" className="btn-primary footer-start">
                 Start your assessment
               </Link>
               {/* LegitScript certified badge - real verifiable seal */}
@@ -177,6 +177,8 @@ export default function Footer() {
                   alt="Verify Approval for apexmetabolichealth.com.au"
                   width={73}
                   height={79}
+                  loading="lazy"
+                  decoding="async"
                   style={{ display: 'block' }}
                 />
               </a>
@@ -187,7 +189,7 @@ export default function Footer() {
         <div className="h-px w-full mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.12)' }} aria-hidden="true" />
 
         {/* Compliance */}
-        <div className="p-5 rounded-none mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
+        <div className="p-5 rounded-none mb-8 footer-legal" style={{ backgroundColor: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
           <p className="text-xs leading-relaxed mb-2" style={{ color: DIM }}>
             All consultations conducted by AHPRA-registered medical practitioners. This website does not constitute medical advice. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
           </p>

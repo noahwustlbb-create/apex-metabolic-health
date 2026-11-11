@@ -5,7 +5,7 @@ import Link from 'next/link'
  * Every answer restates something already in /terms or on /pricing. Do not add
  * outcomes, medicines or prices that are not in those two places.
  */
-const ITEMS: { q: string; a: React.ReactNode }[] = [
+export const OBJECTIONS: { q: string; a: React.ReactNode }[] = [
   {
     q: 'Can I claim it on Medicare?',
     a: <>No. Apex is a fully private clinic, so there is no Medicare rebate on consults, bloods or anything else. Every fee is on the <Link href="/pricing">pricing page</Link> before you start.</>,
@@ -33,7 +33,7 @@ export default function Objections({ id = 'before-you-start' }: { id?: string })
     <section id={id} className="obj container-x" aria-labelledby={`${id}-title`}>
       <h2 id={`${id}-title`} className="stage-h2">Before you start.<br /><span className="stage-muted">The straight answers.</span></h2>
       <dl className="obj-list">
-        {ITEMS.map(x => (
+        {OBJECTIONS.map(x => (
           <div key={x.q} className="obj-item">
             <dt>{x.q}</dt>
             <dd>{x.a}</dd>

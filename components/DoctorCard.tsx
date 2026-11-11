@@ -99,7 +99,7 @@ export default function DoctorCard() {
               initial={prefersReduced ? false : { opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.7, ease }}
-              className="display-heading mb-6"
+              className="display-heading mb-6 dc-h2"
               style={{ fontSize: 'clamp(32px, 3.5vw, 54px)' }}
             >
               Don&apos;t take our word for it.
@@ -108,7 +108,7 @@ export default function DoctorCard() {
               initial={prefersReduced ? false : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.14, ease }}
-              className="text-base leading-relaxed mb-10"
+              className="text-base leading-relaxed mb-10 dc-body"
               style={{ color: 'var(--text-secondary)' }}
             >
               Every consultation at Apex is conducted by an AHPRA-registered doctor.
@@ -150,7 +150,7 @@ export default function DoctorCard() {
               ].map(([lead, rest]) => (
                 <li key={lead} className="py-4 flex items-start gap-3" style={{ borderBottom: '1px solid var(--border)' }}>
                   <span
-                    className="mt-[7px] w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    className="mt-[7px] w-1.5 h-1.5 rounded-full flex-shrink-0 dc-dot"
                     style={{ background: 'var(--blue)' }}
                     aria-hidden="true"
                   />
@@ -163,7 +163,7 @@ export default function DoctorCard() {
           </div>
 
           {/* ── Right: the verification ledger ── */}
-          <div className="lg:pt-3">
+          <div className="lg:pt-3 dc-ledger">
             {LEDGER.map((row, i) => (
               <motion.a
                 key={row.claim}
@@ -173,7 +173,7 @@ export default function DoctorCard() {
                 initial={prefersReduced ? false : { opacity: 0, x: -28 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={prefersReduced ? { duration: 0 } : { duration: 0.6, delay: 0.2 + i * 0.1, ease }}
-                className="group grid grid-cols-1 sm:grid-cols-[8fr_5fr] gap-2 sm:gap-8 py-7 no-underline transition-colors duration-200"
+                className="group grid grid-cols-1 sm:grid-cols-[8fr_5fr] gap-2 sm:gap-8 py-7 no-underline transition-colors duration-200 dc-row"
                 style={{ borderTop: '1px solid var(--border)', minHeight: 44 }}
               >
                 <div>
@@ -181,8 +181,8 @@ export default function DoctorCard() {
                     {row.claim}
                   </p>
                   <p
-                    className="text-sm mt-1"
-                    style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-secondary)', letterSpacing: '0.02em' }}
+                    className="text-sm mt-1 dc-detail"
+                    style={{ fontFamily: 'var(--font-inter), Inter, sans-serif', color: 'var(--text-secondary)' }}
                   >
                     {row.detail}
                   </p>
@@ -209,7 +209,7 @@ export default function DoctorCard() {
                 </div>
               </motion.a>
             ))}
-            <div style={{ borderTop: '1px solid var(--border)' }} aria-hidden="true" />
+            <div className="dc-rule" style={{ borderTop: '1px solid var(--border)' }} aria-hidden="true" />
 
             <motion.p
               initial={prefersReduced ? false : { opacity: 0 }}

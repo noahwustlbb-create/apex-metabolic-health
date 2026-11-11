@@ -9,7 +9,8 @@ import { useEffect, useRef } from 'react'
  * 48 frames read as a continuous turn.
  *
  * Behaviour
- * - Idle: turns slowly on its own (one turn every ~26 s).
+ * - Idle: holds the poster pose until the first touch anywhere on the page,
+ *   then turns slowly on its own (one turn every ~26 s).
  * - Drag sideways (mouse or thumb): turns it, with a little inertia.
  *   touch-action: pan-y keeps vertical swipes as normal page scroll.
  * - `face` (0..1): the scroll beat eases it round to face the camera and holds
@@ -32,7 +33,7 @@ export default function Turntable({
   onReady?: () => void
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const state = useRef({ angle: 0, vel: 0, dragging: false, lastX: 0, lastT: 0, idle: 1 })
+  const state = useRef({ angle: 0, vel: 0, dragging: false, lastX: 0, lastT: 0, idle: 1, touched: false })
   const frames = useRef<(HTMLImageElement | null)[]>([])
   const started = useRef(false)
 
@@ -121,9 +122,12 @@ export default function Turntable({
         } else {
           s.angle += s.vel * dt
           s.vel *= Math.pow(0.12, dt)
-          // Idle turn resumes softly after a drag.
-          s.idle = Math.min(1, s.idle + dt * 0.5)
-          s.angle += (dt / 26) * s.idle
+          // Idle turn resumes softly after a drag. Before the first touch the
+          // figure holds frame 00 (the poster pose), so poster = first frame.
+          if (s.touched) {
+            s.idle = Math.min(1, s.idle + dt * 0.5)
+            s.angle += (dt / 26) * s.idle
+          }
         }
       }
       s.angle = ((s.angle % 1) + 1) % 1
@@ -144,8 +148,10 @@ export default function Turntable({
       const away = Math.min(1, off / 0.09)
       if (Math.abs(away - lastAway) > 0.01) { lastAway = away; onAngle?.(away) }
     }
+    const touch = () => { s.touched = true }
+    window.addEventListener('pointerdown', touch, { once: true, passive: true })
     raf = requestAnimationFrame(tick)
-    return () => { cancelAnimationFrame(raf); io.disconnect() }
+    return () => { cancelAnimationFrame(raf); io.disconnect(); window.removeEventListener('pointerdown', touch) }
   }, [active, face, onAngle])
 
   // Drag to turn. Horizontal only; vertical stays page scroll.

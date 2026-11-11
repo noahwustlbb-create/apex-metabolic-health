@@ -1,20 +1,15 @@
 import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
 import StageHero from '@/components/home/stage/StageHero'
-import StageClarity from '@/components/home/stage/StageClarity'
-import StagePortal from '@/components/home/stage/StagePortal'
-import PanelMarkers from '@/components/home/PanelMarkers'
-import DoctorCard from '@/components/DoctorCard'
-import FAQSection from '@/components/FAQSection'
-import { FAQS } from '@/lib/faqs'
-import StageClose from '@/components/home/stage/StageClose'
-import StageStartTiles from '@/components/home/stage/StageStartTiles'
 import StageBox from '@/components/home/stage/StageBox'
-import StageSteps from '@/components/home/stage/StageSteps'
 import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
+import TreatmentsGrid from '@/components/home/TreatmentsGrid'
+import { TrustStrip, Pathways, WhyApex, ResultsTeaser, HowItWorks, HomeFAQ, CloseBand } from '@/components/home/AlgoSections'
+import HomeStickyBar from '@/components/home/HomeStickyBar'
+import DoctorCard from '@/components/DoctorCard'
+import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
-import Objections from '@/components/Objections'
 import type { Metadata } from 'next'
 
 // Homepage keeps the root title and description; only the canonical is set here,
@@ -46,22 +41,26 @@ export default function Home() {
       <ScrollProgress />
       <Nav />
       <StageToneProvider>
+      {/* AlgoRx order (playbook section 4, 11 Nov 2026): hero, trust strip,
+          program grid, ways in, box band, why, results, proof, how it works
+          (black), included, FAQ, close, black footer. */}
       <main id="main-content" className="home-main">
         <StageHero />
+        <TrustStrip />
+        <TreatmentsGrid />
+        <Pathways />
         <StageBox />
-        <StageStartTiles />
-        <StageClarity />
-        <StageSteps />
-        <StagePortal />
-        <StageIncluded />
-        <Objections />
-        <PanelMarkers />
+        <WhyApex />
+        <ResultsTeaser />
         <DoctorCard />
-        <FAQSection />
-        <StageClose />
+        <HowItWorks />
+        <StageIncluded />
+        <HomeFAQ />
+        <CloseBand />
       </main>
       </StageToneProvider>
-      <Footer />
+      <div className="al-foot"><Footer /></div>
+      <HomeStickyBar />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
     </>
   )

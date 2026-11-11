@@ -231,6 +231,7 @@ export default function Nav() {
             {!menuOpen && (
               <Link
                 href="/start"
+                aria-label="Start your assessment"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
