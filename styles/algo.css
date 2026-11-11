@@ -272,6 +272,8 @@
   .hsb-start { background: #fff; color: #0a0a0a; }
   .hsb-call { padding: 0 16px; border: 1px solid rgba(255, 255, 255, 0.42); color: #fff; font-family: var(--al-mono); font-size: 13px !important; letter-spacing: 0.04em; }
   .al-foot { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .hsb[data-hero] { grid-template-columns: 1fr; }
+  .hsb[data-hero] .hsb-start { display: none; }
 }
 
 /* ── Tablet and phone ── */
@@ -337,3 +339,52 @@ html:has(.home-main) header.site-header-enter .nav-cta { background: #ffffff !im
 .home-main .st-box-head .al-h2 { text-align: center; margin: 14px auto 0; }
 /* Beat stage.css's site-wide light-headline rule (main :is(h1,h2):not(...), 0,3,2 + !important). */
 main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):not(.y) { font-weight: 700 !important; }
+
+/* ── Proof (DoctorCard) on the AlgoRx system (fix 6, 11 Nov 2026):
+   two typefaces only, 1px / 24px cards with a 24px gap, mono counters
+   instead of the old blue-dot bullets, air under the heading. ── */
+.home-main #our-doctors { background: var(--al-bg) !important; }
+.home-main #our-doctors h2.dc-h2 { margin-bottom: 24px !important; line-height: 1.02; }
+.home-main #our-doctors .dc-body { margin-top: 0; }
+.home-main #our-doctors .dc-ledger { display: grid; gap: 24px; }
+.home-main #our-doctors .dc-row { background: var(--al-card); border: 1px solid var(--al-line) !important; border-radius: var(--al-r); padding: 24px !important; }
+.home-main #our-doctors .dc-row:hover { border-color: var(--al-accent) !important; }
+.home-main #our-doctors .dc-rule { display: none; }
+.home-main #our-doctors .dc-ledger > p { margin-top: 0; }
+.home-main #our-doctors .dc-detail { font-family: var(--al-mono) !important; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+.home-main #our-doctors ul[aria-label="What Apex does not do"] { counter-reset: dc; }
+.home-main #our-doctors .dc-dot { width: auto; height: auto; margin-top: 2px; background: none !important; border-radius: 0; }
+.home-main #our-doctors .dc-dot::before { counter-increment: dc; content: "0" counter(dc); font: 500 11.5px/1.5 var(--al-mono); letter-spacing: 0.1em; color: var(--al-mute); }
+
+/* ── Included (fix 8): one column on small phones, ink pill CTA ── */
+.home-main .st-inc-cta { justify-self: start; }
+@media (max-width: 399px) {
+  .home-main .st-inc-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Footer on home (fix 9): 44px contact taps, 24px legal box, Start pill inside the column ── */
+.al-foot .footer-contact { display: inline-flex; align-items: center; min-height: 44px; }
+.al-foot .footer-contact + .footer-contact { margin-top: -8px; }
+.al-foot .footer-legal { border-radius: var(--al-r) !important; padding: 24px !important; }
+.al-foot .footer-start { width: 100%; max-width: 100%; box-sizing: border-box; justify-content: center; text-align: center; white-space: normal; }
+
+/* ── Box band (fix 7): the render sits in a 1px / 24px card on its own pale
+   ground, no radial fade (the fade read as a blue glow); chips 1px / 24px,
+   no shadow, inside the card; phone loses the empty band. ── */
+.home-main .st-box-stage { margin-top: clamp(24px, 3vw, 40px); border: 1px solid var(--al-line); border-radius: var(--al-r); overflow: clip; background: #e7f4fd; }
+.home-main .st-box-img { -webkit-mask-image: none !important; mask-image: none !important; object-fit: cover; object-position: 50% 42%; }
+.home-main .st-box .stage-float { border-radius: var(--al-r) !important; box-shadow: none !important; filter: none !important; padding: 12px 18px; }
+.home-main .st-box-float-a { left: 20px; top: 20px; }
+.home-main .st-box-float-b { right: 20px; bottom: 20px; left: auto; translate: none; }
+.home-main .st-box { padding-bottom: clamp(48px, 6vw, 96px); }
+@media (max-width: 899px) {
+  .home-main .st-box-head { padding-top: 48px; }
+  .home-main .st-box-stage { width: 100%; aspect-ratio: 1 / 1; }
+  .home-main .st-box-float-a { left: 12px; top: 12px; }
+  .home-main .st-box-float-b { right: 12px; bottom: 12px; }
+  .home-main .st-box .stage-float { padding: 10px 14px; }
+  .home-main .st-box-actions { margin-top: 16px; }
+}
+
+/* Footer text links: 44px wide minimum as well as tall (fix 9). */
+.al-foot .site-footer ul a { display: inline-flex; align-items: center; min-width: 44px; }

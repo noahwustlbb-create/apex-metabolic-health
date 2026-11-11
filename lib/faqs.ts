@@ -17,7 +17,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: 'Where do I get my blood test done?',
-    a: 'At any of 4,000+ accredited pathology collection centres across Australia. We send your referral electronically and you simply book a morning appointment at your nearest centre. Most results come back within 24–48 hours.',
+    a: 'At any of 4,000+ accredited pathology collection centres across Australia. We send your referral electronically and you simply book a morning appointment at your nearest centre. Most results come back within 24 to 48 hours.',
   },
   {
     q: 'How does the ongoing care model work?',

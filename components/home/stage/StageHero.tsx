@@ -6,6 +6,7 @@ import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
 import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
+import { preload } from 'react-dom'
 
 type Sex = 'male' | 'female'
 type Who = 'men' | 'women'
@@ -81,6 +82,10 @@ const readChosen = (): Who | null => {
 }
 
 export default function StageHero() {
+  // The men's poster is the LCP on every width: preload it in <head> so it is
+  // fetched before the CSS and scripts finish (fix 12, 11 Nov 2026).
+  preload(POSTER_SM.male, { as: 'image', fetchPriority: 'high', media: '(max-width: 899px)' })
+  preload(POSTER.male, { as: 'image', fetchPriority: 'high', media: '(min-width: 900px)' })
   const ref = useRef<HTMLElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const washRef = useRef<HTMLDivElement>(null)
@@ -185,8 +190,8 @@ export default function StageHero() {
                         src={POSTER[s]}
                         alt={s === 'male' ? 'Glass figure of a man, his blood vessels lit blue from the heart outward' : 'Glass figure of a woman, her blood vessels lit rose from the heart outward'}
                         width={828} height={1108}
-                        fetchPriority="high"
-                        decoding="async"
+                        fetchPriority={s === 'male' ? 'high' : 'low'}
+                        decoding={s === 'male' ? 'sync' : 'async'}
                         className="hx-poster"
                       />
                     </picture>
@@ -219,7 +224,7 @@ export default function StageHero() {
           </div>
 
           <div className="hx-copy">
-            <p className="hx-trust hero-in" style={{ animationDelay: '40ms' }}>AHPRA-registered doctors · Australia-wide · No GP referral</p>
+            <p className="hx-trust hero-in" style={{ animationDelay: '40ms' }}><span className="hx-trust-in"><span>AHPRA-registered doctors</span><span className="hx-trust-aw">Australia-wide</span><span>No GP referral</span></span></p>
             <h1 id="hx-title" className="hx-h1 hero-in" style={{ animationDelay: '80ms' }}>
               Understand your health.<br /><span className="hx-h1-b">Optimise your future.</span>
             </h1>

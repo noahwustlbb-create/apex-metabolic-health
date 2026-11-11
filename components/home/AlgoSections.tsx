@@ -199,11 +199,3 @@ export function CloseBand() {
 }
 
 /** Phones: one slim bar from the first screen, the CTA and the phone number. */
-export function HomeStickyBar() {
-  return (
-    <div className="hsb" role="region" aria-label="Quick actions">
-      <Link href="/start" className="hsb-start">Start your assessment</Link>
-      <a href={`tel:${CLINIC_PHONE_E164}`} className="hsb-call" aria-label={`Call ${CLINIC_PHONE_DISPLAY}`}>{CLINIC_PHONE_DISPLAY}</a>
-    </div>
-  )
-}
