@@ -75,7 +75,7 @@ const COMPARISON_ROWS: { label: string; single: string; partner: string; member:
   { label: 'Peptide / General Consult',   single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
   { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
   { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
-  { label: 'AHI fee per order',           single: '·',              partner: 'From $50, avg $350–$650', member: 'Included',    highlight: true  },
+  { label: 'AHI fee per order',           single: '·',              partner: 'From $50, avg\u00a0$350\u2060–\u2060$650', member: 'Included',    highlight: true  },
   { label: 'Escript Release Fee',         single: '$155',           partner: '$155',            member: 'Free',        highlight: true  },
   { label: 'Referrals & Certs',           single: '$25 each',       partner: '$25 each',        member: 'Free',        highlight: true  },
   { label: 'Health-system score history', single: 'Latest two',     partner: 'Latest two',      member: 'Every panel', highlight: true  },
