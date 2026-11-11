@@ -31,6 +31,11 @@ type Who = 'men' | 'women'
  * is a test on the Apex panel (components/home/PanelMarkers.tsx), never a
  * medicine or an outcome.
  *
+ * 11 Nov 2026 (Noah: "I hate the box landing page"): no ice card, no framed
+ * plate. One night ground, full bleed; on phones the figures stand full width
+ * above the copy. Neutral is grey; after the pick the figure faces the camera
+ * with Hormones lit and the "on your panel" card showing from the first screen.
+ *
  * State lives on <html>: data-chosen (men | women, absent = neutral) and
  * data-audience (the site-wide rose tokens). The <head> boot script stamps
  * both before paint, so a returning visitor or ?for=women never sees the
@@ -134,10 +139,15 @@ export default function StageHero() {
   }, [setAudience, still])
 
   // The short scroll beat: face the camera, light the systems in order.
+  // 11 Nov 2026 (Noah): once picked, the figure faces the camera with its first
+  // system lit from the first screen; the scroll then walks the other three.
   const p = useSectionProgress(ref, 'pin')
+  const chosenRef = useRef(false)
+  chosenRef.current = !!chosen
+  useEffect(() => { if (chosen) face.current = 1 }, [chosen])
   useMotionValueEvent(p, 'change', v => {
-    face.current = Math.min(1, v / 0.08)
-    const i = v < 0.12 ? -1 : Math.min(SYSTEMS.length - 1, Math.floor((v - 0.12) / 0.19))
+    face.current = chosenRef.current ? 1 : Math.min(1, v / 0.08)
+    const i = v < 0.12 ? 0 : Math.min(SYSTEMS.length - 1, Math.floor((v - 0.12) / 0.19))
     setLit(l => (l === i ? l : i))
     setBeat(b => (b === v > 0.05 ? b : v > 0.05))
   })
@@ -148,7 +158,8 @@ export default function StageHero() {
 
   const href = chosen ? `/start?for=${chosen}` : '/start'
   const markerShow = sex && (still ? 1 : 1 - away)
-  const sys = lit >= 0 ? SYSTEMS[lit] : null
+  const litNow = sex ? Math.max(0, lit) : -1
+  const sys = litNow >= 0 ? SYSTEMS[litNow] : null
 
   return (
     <section ref={ref} id="hero" className="hx" data-still={still || undefined} data-pin={(!!chosen && !still) || undefined} data-beat={(beat && !!chosen && !still) || undefined} aria-label="Introduction">
@@ -215,7 +226,7 @@ export default function StageHero() {
                     {isOn && (
                       <div className="hx-marks" style={{ opacity: markerShow || 0 }} aria-hidden="true">
                         {SYSTEMS.map((m, i) => (
-                          <span key={m.id} className="hx-mark" data-on={i <= lit || undefined} data-now={i === lit || undefined} style={{ left: `${m.at[s][0] * 100}%`, top: `${m.at[s][1] * 100}%` }}>
+                          <span key={m.id} className="hx-mark" data-on={i <= litNow || undefined} data-now={i === litNow || undefined} style={{ left: `${m.at[s][0] * 100}%`, top: `${m.at[s][1] * 100}%` }}>
                             <span className="hx-mark-dot" />
                             <span className="hx-mark-label">{m.label}</span>
                           </span>
@@ -227,8 +238,11 @@ export default function StageHero() {
               })}
 
               {/* What the lit system measures. Announced for screen readers. */}
-              <div className="hx-readout" data-on={(!!sys && !!sex) || undefined} aria-live="polite">
-                {sys && sex && (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)}
+              {/* Neutral (before a pick, and with JavaScript off) it names the four systems. */}
+              <div className="hx-readout" data-on="" aria-live="polite">
+                {sys && sex
+                  ? (<><span className="hx-readout-k">{sys.label} · on your panel</span><span className="hx-readout-v">{sys.tests[sex]}</span></>)
+                  : (<><span className="hx-readout-k">23+ markers · on your panel</span><span className="hx-readout-v">Hormones, energy, heart and metabolic health</span></>)}
               </div>
 
               </div>

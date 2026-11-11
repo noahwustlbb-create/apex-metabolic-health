@@ -12,8 +12,9 @@ export type Audience = 'men' | 'women'
 const KEY = 'apex-audience'
 const Ctx = createContext<{ audience: Audience; setAudience: (a: Audience) => void }>({ audience: 'men', setAudience: () => {} })
 
-/** Runs inline in <head>, before React. Keep it tiny and dependency-free. */
-export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');var d=document.documentElement.dataset;if(a==='women')d.audience='women';if(a==='women'||a==='men')d.chosen=a}catch(e){}`
+/** Runs inline in <head>, before React. Keep it tiny and dependency-free.
+ * The homepage hero always opens neutral (grey) unless ?for= is set (Noah, 11 Nov 2026). */
+export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');var d=document.documentElement.dataset;if(a==='women')d.audience='women';if((a==='women'||a==='men')&&(q||location.pathname!=='/'))d.chosen=a}catch(e){}`
 
 export function AudienceProvider({ children }: { children: ReactNode }) {
   const [audience, set] = useState<Audience>('men')

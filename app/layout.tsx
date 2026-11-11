@@ -130,6 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         {/* Women's site: rose before first paint, no blue flash (components/audience). */}
         <script dangerouslySetInnerHTML={{ __html: AUDIENCE_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.dataset.js='1'" }} />
       </head>
       <body className="antialiased overflow-x-clip">
         {/* Google Tag Manager */}
