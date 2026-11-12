@@ -54,7 +54,13 @@ export default function HowItWorksPage() {
                 <Link href={PORTAL_ORDER_BLOODS} className="al-pill al-pill-lg">Order your panel <Arrow /></Link>
               </div>
               <div className="ip-portal-card">
-                <div className="ip-bg"><img src={SHOTS.phoneDesk.src} alt={SHOTS.phoneDesk.alt} loading="lazy" decoding="async" sizes="(min-width: 900px) 58vw, 100vw" /></div>
+                <div className="ip-bg">
+                  {/* Noah's device renders (13 Nov 2026): the phone on phones, the tablet from 900 up. */}
+                  <picture>
+                    <source media="(min-width: 900px)" srcSet="/photos/device-tablet-900.webp 900w, /photos/device-tablet-1600.webp 1600w" sizes="58vw" />
+                    <img src="/photos/device-phone-1200.webp" srcSet="/photos/device-phone-700.webp 700w, /photos/device-phone-1200.webp 1200w" sizes="100vw" alt={SHOTS.phoneDesk.alt} loading="lazy" decoding="async" className="ip-device" />
+                  </picture>
+                </div>
                 <div className="ip-grade" aria-hidden="true" />
                 <div className="ip-reading" aria-label="Sample portal reading, no result shown">
                   <p className="al-k">Marker · Ferritin</p>

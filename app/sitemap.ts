@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { programs } from '@/lib/programs'
+import { FIELD_NOTES } from '@/lib/field-notes'
 
 const SITE_URL = 'https://www.apexmetabolichealth.com.au'
 
@@ -10,6 +11,7 @@ const publicRoutes = [
   '/book',
   '/discovery-call',
   '/faqs',
+  '/field-notes',
   '/get-started',
   '/how-it-works',
   '/membership',
@@ -19,6 +21,8 @@ const publicRoutes = [
   '/terms',
   '/treatments',
 ]
+
+const fieldNoteRoutes = FIELD_NOTES.map(n => `/field-notes/${n.slug}`)
 
 const additionalProgramRoutes = [
   '/programs/pathology',
@@ -48,5 +52,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...programPages, ...additionalProgramPages]
+  const notePages = fieldNoteRoutes.map((path) => ({
+    url: `${SITE_URL}${path}`,
+    lastModified: updatedAt,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...staticPages, ...programPages, ...additionalProgramPages, ...notePages]
 }

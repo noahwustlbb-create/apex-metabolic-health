@@ -277,3 +277,12 @@ html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !impo
 @media (max-width: 380px) {
   .prog-al-bar .al-pill { padding: 0 12px; font-size: 11px; letter-spacing: 0.08em; }
 }
+
+/* Portal card holds Noah's phone render (13 Nov 2026): 4:5 on phones so the whole phone shows (Hugo, spec C). */
+@media (max-width: 899px) { .pa-ev .pa-photocard { aspect-ratio: 4 / 5; min-height: 0; } }
+/* Portal card with Noah's phone render (13 Nov 2026, QA r1): the whole phone sits on the render's own pale blue
+   above a dark label band, so the title never lands on the phone and nothing is cropped at any width. */
+.pa-ev .pa-devicecard { padding-top: 0; }
+.pa-devicecard .pa-photo { inset: 0 0 128px 0; background: #ecf9fe; } /* two-line title on desktop */
+.pa-devicecard .pa-photo img { object-fit: contain !important; object-position: 50% 55% !important; padding: 14px 0 6px; }
+@media (max-width: 899px) { .pa-devicecard .pa-photo { inset: 0 0 92px 0; } }

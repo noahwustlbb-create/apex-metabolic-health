@@ -160,10 +160,12 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 .hx-canvas:active { cursor: grabbing; }
 .hx-fig[data-live] .hx-poster { opacity: 0; }
 
-/* The pick: two pills under the figures. Grey dots until chosen. */
+/* The pick: two pills under the figures. Grey dots until chosen. --hx-pick-b is its bottom offset (the welcome
+   line above it reads it too): 24 here, 62 on phones, 10 on short phones. */
+.hx { --hx-pick-b: 24px; }
 .hx-pick {
   position: absolute; z-index: 4;
-  left: 50%; bottom: 24px; translate: -50% 0;
+  left: 50%; bottom: var(--hx-pick-b); translate: -50% 0;
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
   width: min(380px, 88%);
   padding: 6px; border-radius: 999px;
@@ -272,7 +274,8 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
   .hx-stage { inset: 14px -6% 0; }
   html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24.5%); }
   html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); }
-  .hx-pick { bottom: 62px; width: calc(100% - 40px); }
+  .hx { --hx-pick-b: 62px; }
+  .hx-pick { width: calc(100% - 40px); }
   .hx-copy { grid-column: 1; grid-row: 2; padding: 16px 20px 20px; }
   .hx-kicker { margin-bottom: 12px; font-size: 10.5px; }
   .hx-h1 { font-size: clamp(30px, 8.6vw, 44px); line-height: 1; }
@@ -303,7 +306,7 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 /* Short phones (375 x 667): the stage keeps 45svh; the kicker and readouts go. */
 @media (max-width: 899px) and (max-height: 700px) {
   .hx-kicker, .hx-reads { display: none; }
-  .hx-pick { bottom: 10px; }
+  .hx { --hx-pick-b: 10px; }
   /* Three-line headline (12 Nov 2026): tighter type and a shorter stage so the CTA clears the phone bar. */
   .hx-frame { min-height: calc(100svh - var(--nav-h) - 76px); grid-template-rows: minmax(calc(40svh + 14px), 1fr) auto; }
   .hx-h1 { font-size: 26px; }
@@ -314,3 +317,24 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   .hx, .hx-frame, .hx-fig, .hx-pair, .hx-stage::before, .hx-pick-btn { transition: none; }
 }
+
+/* "Welcome to Apex. Who is it for?" over the pick (13 Nov 2026, Hugo's spec D). The pick is 62 tall, so the line
+   sits 10 above it. Centred on phones; on desktop it lines up with the pick's left edge, clear of readout 3. */
+.hx-hello {
+  position: absolute; z-index: 4; margin: 0;
+  left: 50%; translate: -50% 0; bottom: calc(var(--hx-pick-b) + 72px);
+  display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; white-space: nowrap;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+  color: var(--hx-fg);
+}
+.hx-hello b { font: 600 13px/1 var(--font-inter, Inter, system-ui, sans-serif); letter-spacing: -0.01em; }
+.hx-hello span { font: 500 11px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hx-mute); }
+.hx-hello-arrow { flex: none; margin-left: -2px; animation: hx-hello-bob 1.4s ease-in-out 1.2s 3; }
+@keyframes hx-hello-bob { 50% { transform: translateY(3px); } }
+@media (min-width: 900px) { .hx-hello { left: calc(50% - min(190px, 44%)); translate: none; } }
+/* .hero-in's fill-mode would hold opacity at 1, so the animation goes with it. */
+html[data-chosen] .hx-hello { animation: none; opacity: 0; visibility: hidden; }
+@media (prefers-reduced-motion: reduce) { .hx-hello { animation: none; } .hx-hello-arrow { animation: none; } }

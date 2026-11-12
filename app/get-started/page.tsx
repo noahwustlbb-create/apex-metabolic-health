@@ -54,7 +54,7 @@ export default function GetStartedPage() {
             <Head id="gs-enquiry" kicker="Send an enquiry" title="Ask us anything." cap={['Reply within 1 business day', 'Private', 'No obligation']} />
             <div className="ip-split">
               <div className="al-card" style={{ overflow: 'hidden' }}>
-                <Photo shot={SHOTS.couple} className="ip-story-photo" sizes="(min-width: 900px) 40vw, 100vw" />
+                <Photo shot={SHOTS.womanLaptop} className="ip-story-photo" sizes="(min-width: 900px) 40vw, 100vw" />
               </div>
               <EnquiryForm />
             </div>

@@ -8,6 +8,8 @@ import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeClub, HomeFAQ, ReadyToStart
 import HomeStickyBar from '@/components/home/HomeStickyBar'
 import TrustChips from '@/components/TrustChips'
 import ImageryNote from '@/components/ImageryNote'
+import FieldNotes from '@/components/FieldNotes'
+import { notesFor } from '@/lib/field-notes'
 import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -51,10 +53,14 @@ export default function Home() {
         <TreatmentsGrid />
         <HomeHow />
         <StageBox />
+        {/* Membership pushed up (Noah, 13 Nov 2026: "push the apex membership"): straight after Approach, whose
+            last step is the 3-monthly review the band's third card sells. Field Notes after the photo break, then
+            the FAQ, as on AlgoRx. */}
+        <HomeClub />
         <WhyApex />
         <TrustChips />
         <PhotoBreak />
-        <HomeClub />
+        <FieldNotes notes={notesFor('home')} />
         <HomeFAQ />
         <ReadyToStart />
         <ImageryNote />
