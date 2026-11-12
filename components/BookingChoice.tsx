@@ -1,13 +1,17 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
-const CALENDLY = {
-  hormone: 'https://calendly.com/admin-apexmetabolichealth/comprehensive-hormone-consultation',
-  general: 'https://calendly.com/admin-apexmetabolichealth/quick-check-up-general-consult',
+// Every consult is booked inside the portal (13 Nov 2026, the third-party
+// booking tool is gone). /book explains the two consults and sends the visitor
+// to create their account; the discovery call is a request form on this site.
+const LINKS = {
+  hormone: '/book',
+  general: '/book',
   discovery: '/intake/discovery',
 } as const
 
@@ -19,12 +23,12 @@ interface Props {
 
 export default function BookingChoice({ type = 'discovery', showDiscovery = false, delay = 0.6 }: Props) {
   const [chose, setChose] = useState<'book' | 'discovery' | 'call' | null>(null)
-  const primaryLink = CALENDLY[type]
-  const discoveryLink = CALENDLY.discovery
+  const primaryLink = LINKS[type]
+  const discoveryLink = LINKS.discovery
   const activeLink = chose === 'discovery' ? discoveryLink : primaryLink
 
   const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Program consult' : 'Book now'
-  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor.' : type === 'general' ? 'Program consult with your Apex doctor, $199 ($99 for members).' : 'Pick a time that suits you and speak to us today.'
+  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor, booked from your portal.' : type === 'general' ? 'Program consult with your Apex doctor, $199 ($99 for members), booked from your portal.' : 'Pick a time that suits you and speak to us today.'
 
   return (
     <motion.div
@@ -58,14 +62,12 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               transition={{ duration: 0.2 }}
               className={showDiscovery ? 'flex flex-col' : 'grid grid-cols-1 sm:grid-cols-2'}
             >
-              {/* Primary booking option */}
-              <a
+              {/* Primary booking option: the portal, via /book */}
+              <Link
                 href={primaryLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={() => setChose('book')}
                 className="flex gap-4 items-start p-5 transition-all duration-200"
-                style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
+                style={{ borderBottom: '1px solid rgba(72,144,247,0.08)', minHeight: 44 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
               >
@@ -85,15 +87,15 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   </p>
                   <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Choose a time →</p>
                 </div>
-              </a>
+              </Link>
 
               {/* Free discovery call - only shown when showDiscovery=true */}
               {showDiscovery && (
-                <a
+                <Link
                   href={discoveryLink}
                   onClick={() => setChose('discovery')}
                   className="flex gap-4 items-start p-5 transition-all duration-200"
-                  style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}
+                  style={{ borderBottom: '1px solid rgba(72,144,247,0.08)', minHeight: 44 }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                 >
@@ -113,13 +115,14 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                     </p>
                     <p className="text-xs font-semibold mt-1.5" style={{ color: 'var(--blue)' }}>Book free call →</p>
                   </div>
-                </a>
+                </Link>
               )}
 
               {/* Wait for call */}
               <button
                 onClick={() => setChose('call')}
                 className="flex gap-4 items-start p-5 text-left transition-all duration-200 w-full"
+                style={{ minHeight: 44 }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
               >
@@ -159,7 +162,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Got it, we'll be in touch within 1 business day.</p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
                   Changed your mind?{' '}
-                  <a href={primaryLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>Book a time here.</a>
+                  <Link href={primaryLink} style={{ color: 'var(--blue)', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>Book a time from your portal.</Link>
                 </p>
               </div>
             </motion.div>
@@ -179,17 +182,11 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               </div>
               <div>
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  {chose === 'discovery' ? 'Opening your request form.' : 'Calendly is opening in a new tab.'}
+                  {chose === 'discovery' ? 'Opening your request form.' : 'Taking you to book your consult.'}
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                  Can&apos;t see it?{' '}
-                  {chose === 'discovery' ? (
-                    <a href={activeLink} style={{ color: 'var(--blue)' }}>Click here to continue.</a>
-                  ) : (
-                    <a href={activeLink} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue)' }}>
-                      Click here to book.
-                    </a>
-                  )}
+                  Still here?{' '}
+                  <Link href={activeLink} style={{ color: 'var(--blue)', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>Click here to continue.</Link>
                 </p>
               </div>
             </motion.div>
