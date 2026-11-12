@@ -42,11 +42,11 @@ const Arrow = () => (
 )
 
 // ── Pieces ─────────────────────────────────────────────────────────────────────
-function Option({ n, label, sub, on, onClick, role = 'button' }: { n: number; label: string; sub?: string; on: boolean; onClick: () => void; role?: 'button' | 'checkbox' }) {
+function Option({ n, label, sub, on, onClick, role = 'button', compact }: { n: number; label: string; sub?: string; on: boolean; onClick: () => void; role?: 'button' | 'checkbox'; compact?: boolean }) {
   const pressed = role === 'checkbox' ? { role: 'checkbox' as const, 'aria-checked': on } : { 'aria-pressed': on }
   return (
     <button type="button" className="qz-opt" onClick={onClick} {...pressed}>
-      <span className="qz-opt-n" aria-hidden="true">{String(n).padStart(2, '0')}</span>
+      {!compact && <span className="qz-opt-n" aria-hidden="true">{String(n).padStart(2, '0')}</span>}
       <span className="qz-opt-t"><strong>{label}</strong>{sub && <span>{sub}</span>}</span>
       <span className="qz-opt-box" aria-hidden="true"><Tick /></span>
     </button>
@@ -56,7 +56,7 @@ function Option({ n, label, sub, on, onClick, role = 'button' }: { n: number; la
 function Heading({ step, total, title, lead }: { step: number; total: number; title: string; lead?: string }) {
   return (
     <>
-      <p className="al-k qz-k">{`// Step ${step} of ${total}`}</p>
+      <p className="al-k qz-k">{`// Health quiz, step ${step} of ${total}`}</p>
       <h1 className="qz-h1">{title}</h1>
       {lead && <p className="qz-lead">{lead}</p>}
     </>
@@ -132,9 +132,9 @@ function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizRe
         </p>
         <div className="qz-stop">
           <Link href="/" className="al-pill al-pill-lg">Back to the home page<Arrow /></Link>
-          <button type="button" className="qz-skip" onClick={onBack}>Change an answer</button>
+          <button type="button" className="qz-skip" onClick={onBack}>Go back</button>
         </div>
-        <p className="qz-alt">Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.</p>
+        <p className="qz-alt"><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
       </div>
     )
   }
@@ -171,13 +171,14 @@ function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizRe
             <article key={id} className="al-card qz-sec">
               <h3>{PROGRAMS[id].name}</h3>
               <p>{whyLine(id, sex, false)}</p>
+              <Link href={PROGRAMS[id].href} className="al-why-link">Read about this program</Link>
             </article>
           ))}
         </div>
       )}
 
       <p className="qz-fine">Whether it is right for {they} is a decision {their} doctor makes after {their} bloods. Creating an account is free and nothing is prescribed from a quiz.</p>
-      <div className="qz-actions"><button type="button" className="qz-skip" onClick={onBack}>Change an answer</button></div>
+      <div className="qz-actions"><button type="button" className="qz-skip" onClick={onBack}>Go back</button></div>
 
       {caregiver && (
         <section className="al-card qz-care" aria-label="How caregiver accounts work">
@@ -192,7 +193,7 @@ function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizRe
       )}
 
       <p className="qz-alt">Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a></p>
-      <p className="qz-alt" style={{ marginTop: 0 }}>Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.</p>
+      <p className="qz-alt" style={{ marginTop: 0 }}><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
     </div>
   )
 }
@@ -258,7 +259,11 @@ export default function ShortAssessment() {
   }, [])
   useEffect(() => {
     if (!restored) return
-    try { window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ phase, sex, age, goal, symptoms, safety, source, caregiver })) } catch { /* storage unavailable: the quiz still works, it just won't resume. */ }
+    try {
+      // The result is the end of the draft: a reload afterwards starts fresh (QA, 12 Nov 2026).
+      if (phase === 'result') window.sessionStorage.removeItem(DRAFT_KEY)
+      else window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ phase, sex, age, goal, symptoms, safety, source, caregiver }))
+    } catch { /* storage unavailable: the quiz still works, it just won't resume. */ }
   }, [restored, phase, sex, age, goal, symptoms, safety, source, caregiver])
 
   const step = phase === 'result' ? total : stepNumber(phase, opts)
@@ -324,9 +329,10 @@ export default function ShortAssessment() {
                 <div>
                   <Heading step={step} total={total} title="First, who this is for." lead="Seven taps, under a minute. It points you to the right program to read about. Not a diagnosis, and nothing is prescribed from a quiz." />
                   <div className="qz-opts" data-cols="2">
-                    <Option n={1} label="Men" on={sex === 'men'} onClick={() => tap(() => { setSex('men'); setAudience('men') })} />
-                    <Option n={2} label="Women" on={sex === 'women'} onClick={() => tap(() => { setSex('women'); setAudience('women') })} />
+                    <Option compact n={1} label="Men" on={sex === 'men'} onClick={() => tap(() => { setSex('men'); setAudience('men') })} />
+                    <Option compact n={2} label="Women" on={sex === 'women'} onClick={() => tap(() => { setSex('women'); setAudience('women') })} />
                   </div>
+                  <p className="qz-alt"><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
                 </div>
               )}
 
@@ -334,7 +340,8 @@ export default function ShortAssessment() {
                 <div>
                   <Heading step={step} total={total} title={caregiver ? 'Their age.' : 'Your age.'} lead={sexCarried && idx === 0 ? 'Seven taps, under a minute. It points you to the right program to read about. Not a diagnosis, and nothing is prescribed from a quiz.' : 'A doctor reads every result against your age.'} />
                   <div className="qz-opts" data-cols="2">
-                    {AGE_BANDS.map((b, i) => <Option key={b.id} n={i + 1} label={b.label} on={age === b.id} onClick={() => tap(() => setAge(b.id))} />)}
+                    {/* Under 18 stops here: no goal, symptom or email screens for a minor. */}
+                    {AGE_BANDS.map((b, i) => <Option key={b.id} compact n={i + 1} label={b.label} on={age === b.id} onClick={() => { setAge(b.id); window.setTimeout(() => (b.id === 'under18' ? go('result') : advance()), 200) }} />)}
                   </div>
                   <div className="qz-actions">
                     <button type="button" onClick={() => setCaregiver(c => !c)} aria-pressed={caregiver} className="qz-skip">
@@ -387,7 +394,7 @@ export default function ShortAssessment() {
 
               {phase === 'source' && (
                 <div>
-                  <Heading step={step} total={total} title="Last one: where you heard about Apex." lead="It helps us spend less on ads and more on doctors." />
+                  <Heading step={step} total={total} title="Last one: where you heard about Apex." lead="It helps us see what is working." />
                   <div className="qz-opts">
                     {SOURCE_OPTIONS.map((o, i) => <Option key={o.id} n={i + 1} label={o.label} on={source === o.id} onClick={() => tap(() => setSource(o.id))} />)}
                   </div>
@@ -397,7 +404,7 @@ export default function ShortAssessment() {
                 </div>
               )}
 
-              {phase === 'result' && <Result result={result} sex={sex} caregiver={caregiver} signupHref={signupHref} onBack={() => go(phases[phases.length - 1], -1)} />}
+              {phase === 'result' && <Result result={result} sex={sex} caregiver={caregiver} signupHref={signupHref} onBack={() => go(result.stopReason === 'under18' ? 'age' : result.stopReason === 'pregnant' ? 'safety' : phases[phases.length - 1], -1)} />}
             </motion.div>
           </AnimatePresence>
         </div>
