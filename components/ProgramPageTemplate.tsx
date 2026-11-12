@@ -306,7 +306,13 @@ function Included({ config }: { config: ProgramPageConfig }) {
         <p className="al-k pa-ev-k">{config.evidenceHeadline}</p>
         <ul className="pa-ev" role="list">
           <li className="pa-photocard pa-devicecard">
-            <Photo shot={PORTAL_CARD} sizes="(min-width: 1100px) 25vw, (min-width: 900px) 50vw, 100vw" />
+            {/* Noah's renders: the phone where the slot is tall (phones), the tablet where it is wide (900 up). */}
+            <div className="pa-photo">
+              <picture>
+                <source media="(min-width: 900px)" srcSet="/photos/device-tablet-900.webp 900w, /photos/device-tablet-1600.webp 1600w" sizes="(min-width: 1100px) 25vw, 50vw" />
+                <img src="/photos/device-phone-1200.webp" srcSet="/photos/device-phone-700.webp 700w, /photos/device-phone-1200.webp 1200w" sizes="100vw" alt={PORTAL_CARD.alt} loading="lazy" decoding="async" />
+              </picture>
+            </div>
             <span className="al-k">{'// Your portal'}</span>
             <span className="pa-photocard-name">Results in your portal.</span>
           </li>
