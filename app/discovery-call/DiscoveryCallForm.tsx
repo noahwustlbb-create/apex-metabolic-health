@@ -5,6 +5,7 @@ import Nav from '@/components/Nav'
 import TrustChips from '@/components/TrustChips'
 import MarketingConsent from '@/components/MarketingConsent'
 import { captureLead } from '@/lib/captureLead'
+import ImageryNote from '@/components/ImageryNote'
 import { InnerHero, InnerFoot, SHOTS, Photo } from '@/components/inner/InnerSections'
 
 /**
@@ -145,6 +146,7 @@ export default function DiscoveryCallForm() {
                 </form>
               )}
             </div>
+            <ImageryNote tone="light" />
           </div>
         </section>
       </main>

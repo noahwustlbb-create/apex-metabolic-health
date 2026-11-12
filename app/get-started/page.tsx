@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
 import { PORTAL_ORDER_BLOODS, START_HREF } from '@/lib/portal'
 import { InnerHero, Head, InnerFoot, Arrow, SHOTS, Photo } from '@/components/inner/InnerSections'
@@ -53,10 +54,11 @@ export default function GetStartedPage() {
             <Head id="gs-enquiry" kicker="Send an enquiry" title="Ask us anything." cap={['Reply within 1 business day', 'Private', 'No obligation']} />
             <div className="ip-split">
               <div className="al-card" style={{ overflow: 'hidden' }}>
-                <Photo shot={SHOTS.womanCall} className="ip-story-photo" sizes="(min-width: 900px) 40vw, 100vw" />
+                <Photo shot={SHOTS.couple} className="ip-story-photo" sizes="(min-width: 900px) 40vw, 100vw" />
               </div>
               <EnquiryForm />
             </div>
+            <ImageryNote tone="light" />
           </div>
         </section>
       </main>

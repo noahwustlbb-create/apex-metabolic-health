@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
 import { START_HREF } from '@/lib/portal'
 import { InnerHero, Head, InnerFoot, CtaBand, Arrow, SHOTS } from '@/components/inner/InnerSections'
@@ -48,7 +49,8 @@ export default function BookPage() {
           </div>
         </section>
 
-        <CtaBand shot={SHOTS.balconyCall} />
+        <CtaBand shot={SHOTS.balance} />
+        <ImageryNote />
       </main>
       <InnerFoot />
     </>

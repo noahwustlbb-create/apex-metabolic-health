@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
 import { InnerHero, Photo, WhyApex, CtaBand, InnerFoot, SHOTS, n2, type Shot } from '@/components/inner/InnerSections'
 
@@ -8,7 +9,7 @@ import { InnerHero, Photo, WhyApex, CtaBand, InnerFoot, SHOTS, n2, type Shot } f
  * "Why Apex?" principles, trust chips, photo CTA band. Apex's real story only:
  * a doctor-led Australian telehealth clinic, Imperial Equity Investments Pty
  * Ltd, Gold Coast. No invented founder story, no doctor named or pictured
- * until Noah says yes (brand platform, decision 3). Photos are the repo's own.
+ * until Noah says yes (brand platform, decision 3). Photos are mood only (AI lifestyle imagery), never presented as our clinic, doctors or team; the page ends with the shared ImageryNote.
  */
 
 const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot }[] = [
@@ -40,7 +41,7 @@ const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot 
       'Apex Metabolic Health is operated by Imperial Equity Investments Pty Ltd, a registered Australian company based on the Gold Coast, Queensland. Every claim on this page links to the body that regulates it.',
     ],
     chips: ['AHPRA', 'NATA', 'cGMP partner pharmacies', 'LegitScript'],
-    shot: SHOTS.womanCall,
+    shot: SHOTS.phoneDesk,
   },
 ]
 
@@ -80,6 +81,7 @@ export default function AboutPage() {
         <div style={{ marginTop: 'clamp(64px, 7vw, 110px)' }}><TrustChips /></div>
 
         <CtaBand shot={SHOTS.parkBench} />
+        <ImageryNote />
       </main>
       <InnerFoot />
     </>

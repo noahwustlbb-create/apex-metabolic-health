@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ImageryNote from '@/components/ImageryNote'
 import Nav from '@/components/Nav'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
@@ -61,6 +62,7 @@ export default function FAQsPage() {
         </section>
 
         <CtaBand shot={SHOTS.duskWoman} />
+        <ImageryNote />
       </main>
       <InnerFoot />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

@@ -481,3 +481,51 @@ html:has(.al-page) header.site-header-enter .nav-cta { background: #ffffff !impo
 .su.al-page .su-submit { background: var(--al-ink); padding: 0 24px; justify-self: start; }
 .su.al-page .su-submit:hover { background: var(--al-accent); }
 .ip-split .ip-story-photo { aspect-ratio: 4 / 5; max-height: none; border-radius: 0; border: 0; }
+
+/* ── Imagery note (components/ImageryNote.tsx): one caption per page, no per-image tags ── */
+.ip-note { padding: 18px 0; }
+.ip-note[data-tone="dark"] { background: #050505; }
+.ip-note[data-tone="dark"] .al-k { color: #a3a8b0; }
+.ip-note[data-tone="light"] { padding: 28px 0 0; }
+.ip-note[data-tone="light"] .al-k { color: var(--al-mute); }
+.al-page .ip-note .al-k { font-size: 11px; line-height: 1.5; letter-spacing: 0.12em; text-transform: uppercase; }
+.su .ip-note { padding: 28px 0 0; }
+.su .ip-note .container-x { padding: 0; }
+
+/* ── Desktop hero photo on the right half (treatments, pricing, how-it-works) ── */
+.ip-hero-photo { display: none; }
+@media (min-width: 900px) {
+  .ip-hero-photo { display: block; position: absolute; top: 0; right: 0; bottom: 0; width: 52%; z-index: -2; }
+  .ip-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 30%); display: block; filter: brightness(0.8); }
+  .ip-hero-photo::after { content: ""; position: absolute; inset: 0; background:
+    linear-gradient(90deg, #050505 0%, rgba(5,5,5,0.72) 28%, rgba(5,5,5,0.12) 70%, rgba(5,5,5,0.25) 100%),
+    linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0) 30%, rgba(5,5,5,0.55) 100%); }
+}
+
+/* ── Photo band with one white line (how-it-works pacing) ── */
+.ip-band-line { height: clamp(260px, 40vh, 440px); align-items: flex-end; padding-bottom: clamp(24px, 3vw, 44px); }
+.ip-band-line .ip-grade { background: linear-gradient(180deg, rgba(5,5,5,0.25) 0%, rgba(5,5,5,0.35) 40%, rgba(5,5,5,0.85) 100%); }
+.ip-band-text { margin: 0; max-width: 14ch; font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-size: clamp(32px, 5vw, 64px); font-weight: 700; line-height: 1; letter-spacing: -0.045em; color: #fff; text-wrap: balance; }
+.ip-hero + .ip-band-line, .ip-how + .ip-band-line { margin-top: 0; }
+.ip-band-line + .ip-how, .ip-band-line + .al-sec { margin-top: 0; }
+.ip-band-line + .al-sec { padding-top: clamp(64px, 6vw, 96px); }
+
+/* ── Pricing: the panels block directly under the chips, no 100px+ blank band ── */
+.al-page .chp { padding-top: clamp(40px, 4vw, 64px); }
+
+/* ── Treatments phone grid: the last text card (09) spans the row so the grid ends flush ── */
+@media (max-width: 899px) {
+  .al-page .tg-row > .tg-card:nth-child(2):has(+ .tg-all:last-child) { grid-column: 1 / -1; }
+  /* How it works: tighten the empty black under the hero and the step head */
+  .ip-hero + .ip-band-line { margin-top: 0; }
+  .ip-how { padding-block: 56px; }
+}
+
+/* Signup: site Nav on top (black), 44px log-in tap, one-colour H1 */
+.su.al-page { padding-top: 72px; }
+.su.al-page .su-form { justify-content: flex-start; }
+.su.al-page .su-alt a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 4px; }
+.su.al-page .su-title { color: var(--al-ink); }
+.container-x .ip-note .container-x { padding-inline: 0; }
+.container-x .ip-note { padding-bottom: 0; }
+@media (min-width: 900px) { .su.al-page .su-aside { min-height: calc(100svh - 72px); } }

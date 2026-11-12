@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
 import { PORTAL_ORDER_BLOODS, START_HREF } from '@/lib/portal'
-import { InnerHero, Head, HowBand, WhyApex, CtaBand, InnerFoot, Arrow, BLOOD_STEPS, PROGRAM_STEPS, SHOTS } from '@/components/inner/InnerSections'
+import { InnerHero, Head, HowBand, PhotoLine, WhyApex, CtaBand, InnerFoot, Arrow, BLOOD_STEPS, PROGRAM_STEPS, SHOTS } from '@/components/inner/InnerSections'
 
 /**
  * /how-it-works in the AlgoRx "How It Works." treatment (12 Nov 2026):
@@ -24,7 +25,10 @@ export default function HowItWorksPage() {
           title="Bloods first. Then a doctor. Then a plan."
           lead="One blood panel, read by an AHPRA-registered doctor with you, then a plan you understand. Everything lives in your portal."
           cap={['No GP referral', 'Most results in about 48 hours', 'Online, Australia-wide']}
+          sidePhoto={SHOTS.balconyCall}
         />
+
+        <PhotoLine shot={SHOTS.womanKitchen} line="Measure first. Then treat." />
 
         <HowBand
           rows={[{ label: 'Bloods', steps: BLOOD_STEPS }, { label: 'Programs', steps: PROGRAM_STEPS }]}
@@ -32,6 +36,8 @@ export default function HowItWorksPage() {
           kicker="Step by step"
           cap={['Bloods: four steps', 'Programs: four steps', 'Doctor-led, start to finish']}
         />
+
+        <PhotoLine shot={SHOTS.windowMan} line="A doctor reads every result." />
 
         <WhyApex />
 
@@ -86,6 +92,7 @@ export default function HowItWorksPage() {
         <div style={{ marginTop: 'clamp(64px, 7vw, 110px)' }}><TrustChips /></div>
 
         <CtaBand shot={SHOTS.runner} href={START_HREF} />
+        <ImageryNote />
       </main>
       <InnerFoot />
     </>

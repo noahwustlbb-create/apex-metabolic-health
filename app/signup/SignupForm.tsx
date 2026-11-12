@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import Logo from '@/components/brand/Logo'
+import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
@@ -54,13 +54,14 @@ function SignupFormInner() {
   const bad = (on: boolean) => (on ? ' su-input-bad' : '')
 
   return (
+    <>
+    <Nav />
     <main id="main-content" className="su al-page">
       <div className="su-form">
-        <Link href="/" className="su-logo" aria-label="Apex Metabolic Health home"><Logo variant="nav" /></Link>
 
         <p className="su-kicker">{'// Create your account'}</p>
         <h1 className="stage-display su-title">
-          Start with your email.<br /><span className="stage-muted">The rest takes minutes.</span>
+          Start with your email. The rest takes minutes.
         </h1>
         <p className="stage-lead su-lead">
           Your account holds your assessment, your results and your doctor&apos;s plan. You choose a password on the next step, in the secure patient portal.
@@ -100,12 +101,13 @@ function SignupFormInner() {
         <p className="su-alt">
           Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a>
         </p>
+        <ImageryNote tone="light" />
       </div>
 
       <aside className="su-aside" aria-hidden="true">
         {/* A person, not a vial (no needles, vials or pens anywhere on the site). */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/photos/woman-stairs.webp" alt="" loading="lazy" decoding="async" />
+        <img src="/photos/man-park-bench.webp" alt="" loading="lazy" decoding="async" />
         <ul className="su-points">
           {[
             ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],
@@ -117,6 +119,7 @@ function SignupFormInner() {
         </ul>
       </aside>
     </main>
+    </>
   )
 }
 

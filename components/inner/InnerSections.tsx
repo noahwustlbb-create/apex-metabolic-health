@@ -64,12 +64,18 @@ export function CallLink({ prefix = 'Or call' }: { prefix?: string }) {
 }
 
 /** Hero band: black (or a crushed photo), kicker, headline with a full stop, one line, one CTA, mono caption. */
-export function InnerHero({ kicker, title, lead, cap, photo, cta = true, ctaLabel, ctaHref, id = 'ip-title' }: {
-  kicker: string; title: React.ReactNode; lead?: string; cap?: string[]; photo?: Shot; cta?: boolean; ctaLabel?: string; ctaHref?: string; id?: string
+export function InnerHero({ kicker, title, lead, cap, photo, sidePhoto, cta = true, ctaLabel, ctaHref, id = 'ip-title' }: {
+  kicker: string; title: React.ReactNode; lead?: string; cap?: string[]; photo?: Shot; sidePhoto?: Shot; cta?: boolean; ctaLabel?: string; ctaHref?: string; id?: string
 }) {
   return (
     <section className="ip-hero" aria-labelledby={id} data-photo={photo ? '' : undefined}>
       {photo && <Bg shot={photo} priority />}
+      {sidePhoto && (
+        /* Desktop only (>= 900px): photo on the right half, dark gradient to the text side. */
+        <div className="ip-hero-photo" aria-hidden="true" style={{ ['--pos' as string]: sidePhoto.pos ?? '50% 30%' }}>
+          <img src={sidePhoto.src} alt="" loading="lazy" decoding="async" sizes="50vw" />
+        </div>
+      )}
       <div className="container-x">
         <div className="ip-hero-in">
           <div className="ip-hero-copy">
@@ -237,6 +243,16 @@ export function PhotoBand({ shot, label }: { shot: Shot; label: string }) {
     <section className="ip-band" aria-label={label.replace(/^\/\/\s*/, '')}>
       <Bg shot={shot} />
       <div className="container-x"><p className="al-k">{label}</p></div>
+    </section>
+  )
+}
+
+/** Full-bleed photo band with one short white line (phone pacing between text sections). */
+export function PhotoLine({ shot, line }: { shot: Shot; line: string }) {
+  return (
+    <section className="ip-band ip-band-line" aria-label={line}>
+      <Bg shot={shot} />
+      <div className="container-x"><p className="ip-band-text">{line}</p></div>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
 import CoreHealthPanels from '@/components/CoreHealthPanels'
 import { OBJECTIONS } from '@/components/Objections'
@@ -105,6 +106,7 @@ export default function PricingPage() {
           title="What it costs, added up."
           lead="Every fee is on this page before you start. One blood panel, a doctor who reads it with you, and three ways to be treated. Private clinic, no Medicare rebate."
           cap={['No hidden fees', 'No lock-in', 'Member rates from day one']}
+          sidePhoto={SHOTS.kitchenMan}
         />
         <TrustChips />
 
@@ -163,6 +165,7 @@ export default function PricingPage() {
         <FaqSection faqs={faqs} kicker="Before you start" title={<>Before you start.<br />The straight answers.</>} lead="Fees, refunds, cancelling and what a consult does and does not guarantee." id="pr-faq" />
 
         <CtaBand shot={SHOTS.kettlebell} lead="Create your free account and order your panel at the standard or member rate. A doctor reads every result with you. No GP referral." />
+        <ImageryNote />
       </main>
       <InnerFoot />
     </>
