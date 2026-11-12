@@ -3,6 +3,7 @@ import Nav from '@/components/Nav'
 import TrustChips from '@/components/TrustChips'
 import { PORTAL_MEMBERSHIP } from '@/lib/portal'
 import { InnerHero, Head, FaqSection, CtaBand, InnerFoot, Arrow, SHOTS, type Faq } from '@/components/inner/InnerSections'
+import ImageryNote from '@/components/ImageryNote'
 
 /**
  * /membership in the AlgoRx "Performance Club" treatment (12 Nov 2026), Apex's
@@ -119,6 +120,7 @@ export default function MembershipPage() {
         <FaqSection faqs={FAQS} kicker="Membership" title={<>Before you join.<br />The straight answers.</>} lead="Cancelling, when it starts, what it covers, and what it never changes." id="mb-faq" />
 
         <CtaBand shot={SHOTS.womanKitchen} kicker="Join" title="Ready to join." lead="Create your free account, then join from your account. Member rates apply from that day, including your first panel and consult." label="Join as a member" href={PORTAL_MEMBERSHIP} />
+        <ImageryNote />
       </main>
       <InnerFoot />
     </>

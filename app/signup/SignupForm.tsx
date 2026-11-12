@@ -101,6 +101,9 @@ function SignupFormInner() {
         <p className="su-alt">
           Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a>
         </p>
+        <p className="su-alt su-phone">
+          Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.
+        </p>
         <ImageryNote tone="light" />
       </div>
 
