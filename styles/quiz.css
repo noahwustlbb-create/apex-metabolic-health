@@ -43,7 +43,6 @@
 
 /* Actions under a screen */
 .qz-actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
-.qz-actions[data-sticky] { position: sticky; bottom: 16px; z-index: 2; }
 .qz-skip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; background: none; border: 0; cursor: pointer; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); text-decoration: underline; text-underline-offset: 4px; }
 .qz-skip:hover { color: var(--al-ink); }
 .qz .al-pill { border: 0; cursor: pointer; }

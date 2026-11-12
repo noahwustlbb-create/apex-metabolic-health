@@ -160,15 +160,16 @@ export function symptomQuestion(goal: Goal, caregiver: boolean): string {
   const them = caregiver ? 'them' : 'you'
   const they = caregiver ? 'they' : 'you'
   const their = caregiver ? 'their' : 'your'
+  // Headlines end in a full stop on this site, so each is an instruction, not a question.
   switch (goal) {
-    case 'energy': return `What sounds like ${them}?`
-    case 'weight': return `What has ${their} weight been doing?`
-    case 'recovery': return `What are ${they} dealing with?`
-    case 'hairskin': return `What have ${they} noticed?`
-    case 'longevity': return 'What is behind it?'
-    case 'sexual': return 'What is going on?'
-    case 'mind': return `What sounds like ${them}?`
-    case 'unsure': return `What bothers ${them} most?`
+    case 'energy': return `Tick what sounds like ${them}.`
+    case 'weight': return `Tick what ${their} weight has been doing.`
+    case 'recovery': return `Tick what ${they} are dealing with.`
+    case 'hairskin': return `Tick what ${they} have noticed.`
+    case 'longevity': return 'Tick what is behind it.'
+    case 'sexual': return 'Tick what is going on.'
+    case 'mind': return `Tick what sounds like ${them}.`
+    case 'unsure': return `Tick what bothers ${them} most.`
   }
 }
 

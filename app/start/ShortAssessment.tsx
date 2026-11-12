@@ -95,7 +95,7 @@ function EmailStep({ step, total, program, onSaved, onSkip }: { step: number; to
   }
   return (
     <form onSubmit={submit} noValidate>
-      <Heading step={step} total={total} title="Where should we send your result?" lead="We save your progress so you can pick up where you left off. Your answers stay with your care team, and you can skip this." />
+      <Heading step={step} total={total} title="Tell us where to send your result." lead="We save your progress so you can pick up where you left off. Your answers stay with your care team, and you can skip this." />
       <div className="qz-fields">
         <label className="qz-field">
           <span>First name <em>(optional)</em></span>
@@ -116,7 +116,7 @@ function EmailStep({ step, total, program, onSaved, onSkip }: { step: number; to
 }
 
 // ── Result ─────────────────────────────────────────────────────────────────────
-function Result({ result, sex, caregiver, signupHref }: { result: QuizResult; sex: Sex | ''; caregiver: boolean; signupHref: string }) {
+function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizResult; sex: Sex | ''; caregiver: boolean; signupHref: string; onBack: () => void }) {
   const they = caregiver ? 'they' : 'you'
   const their = caregiver ? 'their' : 'your'
 
@@ -132,6 +132,7 @@ function Result({ result, sex, caregiver, signupHref }: { result: QuizResult; se
         </p>
         <div className="qz-stop">
           <Link href="/" className="al-pill al-pill-lg">Back to the home page<Arrow /></Link>
+          <button type="button" className="qz-skip" onClick={onBack}>Change an answer</button>
         </div>
         <p className="qz-alt">Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.</p>
       </div>
@@ -176,6 +177,7 @@ function Result({ result, sex, caregiver, signupHref }: { result: QuizResult; se
       )}
 
       <p className="qz-fine">Whether it is right for {they} is a decision {their} doctor makes after {their} bloods. Creating an account is free and nothing is prescribed from a quiz.</p>
+      <div className="qz-actions"><button type="button" className="qz-skip" onClick={onBack}>Change an answer</button></div>
 
       {caregiver && (
         <section className="al-card qz-care" aria-label="How caregiver accounts work">
@@ -320,7 +322,7 @@ export default function ShortAssessment() {
 
               {phase === 'sex' && (
                 <div>
-                  <Heading step={step} total={total} title="Who is this for?" lead="Seven quick taps, under a minute. It points you to the right program to read about. It is not a diagnosis, and nothing is prescribed from a quiz." />
+                  <Heading step={step} total={total} title="First, who this is for." lead="Seven taps, under a minute. It points you to the right program to read about. Not a diagnosis, and nothing is prescribed from a quiz." />
                   <div className="qz-opts" data-cols="2">
                     <Option n={1} label="Men" on={sex === 'men'} onClick={() => tap(() => { setSex('men'); setAudience('men') })} />
                     <Option n={2} label="Women" on={sex === 'women'} onClick={() => tap(() => { setSex('women'); setAudience('women') })} />
@@ -330,7 +332,7 @@ export default function ShortAssessment() {
 
               {phase === 'age' && (
                 <div>
-                  <Heading step={step} total={total} title={caregiver ? 'How old are they?' : 'How old are you?'} lead={sexCarried && idx === 0 ? 'Seven quick taps, under a minute. It points you to the right program to read about. It is not a diagnosis, and nothing is prescribed from a quiz.' : 'A doctor reads every result against your age.'} />
+                  <Heading step={step} total={total} title={caregiver ? 'Their age.' : 'Your age.'} lead={sexCarried && idx === 0 ? 'Seven taps, under a minute. It points you to the right program to read about. Not a diagnosis, and nothing is prescribed from a quiz.' : 'A doctor reads every result against your age.'} />
                   <div className="qz-opts" data-cols="2">
                     {AGE_BANDS.map((b, i) => <Option key={b.id} n={i + 1} label={b.label} on={age === b.id} onClick={() => tap(() => setAge(b.id))} />)}
                   </div>
@@ -344,7 +346,7 @@ export default function ShortAssessment() {
 
               {phase === 'goal' && (
                 <div>
-                  <Heading step={step} total={total} title="What matters most right now?" lead="Pick one. The next screen is about that." />
+                  <Heading step={step} total={total} title="Pick what matters most right now." lead="One choice. The next screen is about that." />
                   <div className="qz-opts">
                     {GOALS.map((g, i) => <Option key={g.id} n={i + 1} label={g.label} sub={g.sub} on={goal === g.id} onClick={() => tap(() => { if (goal !== g.id) setSymptoms([]); setGoal(g.id) })} />)}
                   </div>
@@ -353,7 +355,7 @@ export default function ShortAssessment() {
 
               {phase === 'symptoms' && (
                 <div>
-                  <Heading step={step} total={total} title={goal ? symptomQuestion(goal, caregiver) : 'What sounds like you?'} lead="Tick everything that applies." />
+                  <Heading step={step} total={total} title={goal ? symptomQuestion(goal, caregiver) : 'Tick what sounds like you.'} lead="Everything that applies." />
                   {goal ? (
                     <div className="qz-opts" role="group" aria-label="Symptoms">
                       {symptomOpts.map((s, i) => <Option key={s.id} role="checkbox" n={i + 1} label={s.label} on={symptoms.includes(s.id)} onClick={() => toggle(symptoms, setSymptoms, s.id)} />)}
@@ -361,7 +363,7 @@ export default function ShortAssessment() {
                   ) : (
                     <div className="qz-actions"><button type="button" className="qz-skip" onClick={back}>Pick a goal first</button></div>
                   )}
-                  <div className="qz-actions" data-sticky="">
+                  <div className="qz-actions">
                     <button type="button" className="al-pill al-pill-lg" disabled={symptoms.length === 0} onClick={advance}>Continue<Arrow /></button>
                     <button type="button" className="qz-skip" onClick={() => { setSymptoms([]); advance() }}>None of these</button>
                   </div>
@@ -372,12 +374,12 @@ export default function ShortAssessment() {
 
               {phase === 'safety' && (
                 <div>
-                  <Heading step={step} total={total} title={caregiver ? 'Anything their doctor must know first?' : 'Anything your doctor must know first?'} lead="Tick any that apply. Some of these change where to start, and a doctor sees them before anything else." />
+                  <Heading step={step} total={total} title={caregiver ? 'Things their doctor must know first.' : 'Things your doctor must know first.'} lead="Tick any that apply. Some of these change where to start, and a doctor sees them before anything else." />
                   <div className="qz-opts" role="group" aria-label="Safety">
                     {safetyOpts.map((s, i) => <Option key={s.id} role="checkbox" n={i + 1} label={s.label} on={safety.includes(s.id)} onClick={() => toggleSafety(s.id)} />)}
                     <Option role="checkbox" n={safetyOpts.length + 1} label="None of these" on={safety.includes('none')} onClick={() => toggleSafety('none')} />
                   </div>
-                  <div className="qz-actions" data-sticky="">
+                  <div className="qz-actions">
                     <button type="button" className="al-pill al-pill-lg" disabled={safety.length === 0} onClick={advance}>Continue<Arrow /></button>
                   </div>
                 </div>
@@ -385,7 +387,7 @@ export default function ShortAssessment() {
 
               {phase === 'source' && (
                 <div>
-                  <Heading step={step} total={total} title="Where did you hear about Apex?" lead="Last one. It helps us spend less on ads and more on doctors." />
+                  <Heading step={step} total={total} title="Last one: where you heard about Apex." lead="It helps us spend less on ads and more on doctors." />
                   <div className="qz-opts">
                     {SOURCE_OPTIONS.map((o, i) => <Option key={o.id} n={i + 1} label={o.label} on={source === o.id} onClick={() => tap(() => setSource(o.id))} />)}
                   </div>
@@ -395,7 +397,7 @@ export default function ShortAssessment() {
                 </div>
               )}
 
-              {phase === 'result' && <Result result={result} sex={sex} caregiver={caregiver} signupHref={signupHref} />}
+              {phase === 'result' && <Result result={result} sex={sex} caregiver={caregiver} signupHref={signupHref} onBack={() => go(phases[phases.length - 1], -1)} />}
             </motion.div>
           </AnimatePresence>
         </div>
