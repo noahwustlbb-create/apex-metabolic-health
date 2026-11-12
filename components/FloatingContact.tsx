@@ -88,12 +88,15 @@ export default function FloatingContact() {
   // The home page carries its own single CTA in the hero, nav and close; a second
   // floating pill was a second competing ask on a phone.
   if (pathname === '/') return null
+  // Program pages have their own phone sticky bar (.prog-al-bar): below 768px the
+  // floating pill would sit on top of it, so it only shows from md up there.
+  const onProgram = pathname?.startsWith('/programs/') ?? false
 
   return (
     <motion.div
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12, pointerEvents: visible ? 'auto' : 'none' }}
       transition={{ duration: 0.35, ease }}
-      className="fixed bottom-6 right-4 sm:right-8 z-50 flex flex-col items-end gap-3"
+      className={`fixed bottom-6 right-4 sm:right-8 z-50 flex-col items-end gap-3 ${onProgram ? 'hidden md:flex' : 'flex'}`}
       style={{ width: 'min(400px, calc(100vw - 32px))' }}
     >
       {/* Expanded panel */}

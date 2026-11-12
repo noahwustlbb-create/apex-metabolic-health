@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence } from 'framer-motion'
 import Image from '@/components/audience/Img'
@@ -29,25 +29,26 @@ export interface ProgramPageConfig {
   headlineAccent: string
   heroBody: string
   heroBullets: string[]
-  heroBentoPortrait: string
-  heroBentoStat: { value: string; label: string }
-  heroBentoLifestyle: string
+  /** Legacy fields from the old bento hero. Not rendered. */
+  heroBentoPortrait?: string
+  heroBentoStat?: { value: string; label: string }
+  heroBentoLifestyle?: string
 
   empathyHeadline: string
   empathyBody: string
   empathyChips: string[]
-  empathyImage: string
+  empathyImage?: string
 
   evidenceHeadline: string
   evidencePoints: { value: string; label: string; detail: string }[]
-  evidenceImage: string
+  evidenceImage?: string
 
-  processSteps: { title: string; body: string; time: string; image: string }[]
+  processSteps: { title: string; body: string; time: string; image?: string }[]
 
   mechanismHeadline: string
   mechanismBody: string
   mechanismFeatures: { title: string; body: string }[]
-  mechanismImage: string
+  mechanismImage?: string
 
   /** Retained for reference only. NOT rendered: AHPRA prohibits testimonials
    *  about clinical care in advertising a regulated health service, and a
@@ -58,84 +59,69 @@ export interface ProgramPageConfig {
 
   ctaHeadline: string
   ctaBody: string
-  ctaImage: string
+  ctaImage?: string
   intakeUrl?: string
 }
 
-// ─── Photos per program (repo images only; one distinct hero per page) ─────────
-// pos / posM are object-position on desktop / phone so the subject stays clear of the copy.
+// ─── Photos (repo images only; one distinct hero per page, no repeat within a page) ──
+// pos / posM are object-position on desktop / phone, set on the subject's face.
 
-type Shot = { src: string; pos?: string; posM?: string }
-type ProgramPhotos = { hero: Shot; card: Shot; brk: Shot; cta: Shot }
+type Shot = { src: string; alt: string; pos?: string; posM?: string; posD?: string; portrait?: boolean }
 
-const PORTAL_CARD: Shot = { src: '/photos/phone-hand.webp', pos: '50% 40%' }
+const IMG = {
+  windowMan: { src: '/photos/hero-window-portrait.webp', alt: 'Man looking out of a window in low evening light', pos: '50% 30%', posM: '62% 30%', posD: '50% 20%', portrait: true },
+  kitchenMan: { src: '/photos/man-kitchen-dawn.webp', alt: 'Man leaning on a kitchen bench at dawn', pos: '50% 28%', posM: '55% 25%', posD: '50% 18%', portrait: true },
+  greyMan: { src: '/photos/portrait-man.webp', alt: 'Portrait of a grey-haired man in a black t-shirt', pos: '50% 26%', posM: '50% 22%', posD: '50% 14%', portrait: true },
+  hairBack: { src: '/team/hair-editorial.webp', alt: 'The back of a man’s head and hairline, close up', pos: '50% 30%', posM: '50% 22%', posD: '50% 20%', portrait: true },
+  darkWoman: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt', pos: '50% 26%', posM: '50% 20%', posD: '50% 16%', portrait: true },
+  oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%', posM: '40% 40%' },
+  balconyCall: { src: '/photos/man-balcony-call.webp', alt: 'Man on a phone call on a coastal balcony', pos: '50% 30%', posM: '46% 30%' },
+  duskWoman: { src: '/photos/hero-window-woman.webp', alt: 'Woman looking out at the ocean at dusk', pos: '30% 50%', posM: '22% 50%' },
+  phoneDesk: { src: '/photos/phone-desk.webp', alt: 'Hands holding a phone beside a cup of coffee', pos: '50% 50%', posM: '62% 50%' },
+  phoneHand: { src: '/photos/phone-hand.webp', alt: 'A hand holding a phone', pos: '50% 40%', portrait: true },
+  balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 30%', posM: '50% 30%', posD: '50% 0%', portrait: true },
+  runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 35%', posM: '45% 35%', posD: '50% 8%', portrait: true },
+  womanKitchen: { src: '/photos/woman-kitchen.webp', alt: 'Woman holding a glass of water in a sunlit kitchen', pos: '50% 28%', posD: '50% 12%', portrait: true },
+  womanStairs: { src: '/photos/woman-stairs.webp', alt: 'Woman climbing outdoor stairs above the coast', pos: '50% 28%', posD: '50% 3%', portrait: true },
+  womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
+  parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 26%', posD: '50% 17%', portrait: true },
+  kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man lifting a kettlebell in a timber-walled gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
+  couple: { src: '/photos/couple-walk.webp', alt: 'A couple talking as they walk along a leafy street', pos: '50% 26%', posD: '50% 4%', portrait: true },
+} satisfies Record<string, Shot>
 
-// hero: full-bleed first screen · card: photo card in "What it is" · brk: photo break · cta: closing band.
-// injury-repair has no fitting lifestyle photo in the repo yet, so its texture holds the hero.
+const texture = (slug: string, tone: string): Shot => ({ src: `/programs-grid/${slug}-1200.webp`, alt: `Close-up natural texture in ${tone} tones` })
+
+type ProgramPhotos = { hero: Shot; card: Shot; brk: Shot; bandA: Shot; bandB: Shot; how: Shot; cta: Shot }
+
+const PORTAL_CARD: Shot = IMG.phoneHand
+
+// hero: first screen · card: photo card in "What it is" · brk: photo break ·
+// bandA: after How it works · bandB: between What's included and the FAQ ·
+// how: phone-only photo between steps 02 and 03 · cta: closing band.
 const PHOTOS: Record<string, ProgramPhotos> = {
-  'hormone-optimisation': {
-    hero: { src: '/photos/hero-window-portrait.webp', pos: '50% 30%', posM: '62% 30%' },
-    card: { src: '/programs-grid/hormone-optimisation-1200.webp' },
-    brk: { src: '/photos/ocean-dawn.webp' },
-    cta: { src: '/photos/hero-window-woman.webp', pos: '30% 50%', posM: '22% 50%' },
-  },
-  'metabolic-weight-loss': {
-    hero: { src: '/photos/man-kitchen-dawn.webp', pos: '50% 28%', posM: '55% 25%' },
-    card: { src: '/programs-grid/metabolic-weight-loss-1200.webp' },
-    brk: { src: '/photos/ridge-dawn.webp' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
-  longevity: {
-    hero: { src: '/photos/portrait-man.webp', pos: '50% 26%', posM: '50% 22%' },
-    card: { src: '/programs-grid/longevity-1200.webp' },
-    brk: { src: '/photos/ocean-dawn.webp' },
-    cta: { src: '/photos/ridge-dawn.webp' },
-  },
-  'hair-restoration': {
-    hero: { src: '/team/hair-editorial.webp', pos: '50% 30%', posM: '50% 22%' },
-    card: { src: '/programs-grid/hair-restoration-1200.webp' },
-    brk: { src: '/photos/ridge-dawn.webp' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
-  'skin-regeneration': {
-    hero: { src: '/photos/portrait-woman.webp', pos: '50% 26%', posM: '50% 20%' },
-    card: { src: '/programs-grid/skin-regeneration-1200.webp' },
-    brk: { src: '/photos/hero-window-woman.webp', pos: '30% 50%', posM: '22% 50%' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
-  'injury-repair': {
-    hero: { src: '/programs-grid/injury-repair-1200.webp' },
-    card: { src: '/photos/mesh-field.webp' },
-    brk: { src: '/photos/ridge-dawn.webp' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
-  'performance-plus': {
-    hero: { src: '/photos/hero-window-wide.webp', pos: '50% 40%', posM: '40% 40%' },
-    card: { src: '/programs-grid/performance-plus-1200.webp' },
-    brk: { src: '/photos/ridge-dawn.webp' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
-  'sexual-health': {
-    hero: { src: '/photos/man-balcony-call.webp', pos: '50% 30%', posM: '46% 30%' },
-    card: { src: '/programs-grid/sexual-health-1200.webp' },
-    brk: { src: '/photos/ocean-dawn.webp' },
-    cta: { src: '/photos/hero-window-woman.webp', pos: '30% 50%', posM: '22% 50%' },
-  },
-  pathology: {
-    hero: { src: '/photos/phone-desk.webp', pos: '50% 50%', posM: '62% 50%' },
-    card: { src: '/programs-grid/pathology-1200.webp' },
-    brk: { src: '/photos/consult-room.webp', pos: '60% 50%' },
-    cta: { src: '/photos/ocean-dawn.webp' },
-  },
+  'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: IMG.couple, how: IMG.womanCall, cta: IMG.womanStairs },
+  'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: IMG.couple, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
+  longevity: { hero: IMG.greyMan, card: IMG.couple, brk: IMG.womanStairs, bandA: IMG.parkBench, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
+  'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.kettlebell, cta: IMG.womanKitchen },
+  'skin-regeneration': { hero: IMG.darkWoman, card: texture('skin-regeneration', 'soft rose'), brk: IMG.womanKitchen, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.duskWoman, cta: IMG.womanStairs },
+  'injury-repair': { hero: IMG.balance, card: IMG.kettlebell, brk: IMG.womanStairs, bandA: IMG.parkBench, bandB: IMG.couple, how: IMG.womanKitchen, cta: IMG.womanCall },
+  'performance-plus': { hero: IMG.runner, card: IMG.kettlebell, brk: IMG.womanStairs, bandA: IMG.couple, bandB: IMG.parkBench, how: IMG.womanCall, cta: IMG.womanKitchen },
+  'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: IMG.couple, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
+  pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: IMG.couple, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.phoneDesk },
 }
 const FALLBACK: ProgramPhotos = PHOTOS.pathology
 
-const photoStyle = (s: Shot) => ({ ['--pos' as string]: s.pos ?? '50% 50%', ['--pos-m' as string]: s.posM ?? s.pos ?? '50% 50%' })
+const photoStyle = (s: Shot) => ({
+  ['--pos' as string]: s.pos ?? '50% 50%',
+  ['--pos-m' as string]: s.posM ?? s.pos ?? '50% 50%',
+  // Wide crops of portrait photos (desktop bands, break, CTA): keep the head in frame.
+  ['--pos-d' as string]: s.posD ?? s.pos ?? '50% 50%',
+})
 
 function Photo({ shot, priority, sizes = '100vw', className = '' }: { shot: Shot; priority?: boolean; sizes?: string; className?: string }) {
   return (
-    <div className={`pa-photo ${className}`} style={photoStyle(shot)} aria-hidden="true">
-      <Image src={shot.src} alt="" fill priority={priority} loading={priority ? undefined : 'lazy'} sizes={sizes} />
+    <div className={`pa-photo ${className}`} style={photoStyle(shot)}>
+      <Image src={shot.src} alt={shot.alt} fill priority={priority} loading={priority ? undefined : 'lazy'} sizes={sizes} />
     </div>
   )
 }
@@ -161,7 +147,7 @@ function StartButton({ onClick, light, lg = true }: { onClick: () => void; light
 
 function Hero({ config, photos, onStart }: { config: ProgramPageConfig; photos: ProgramPhotos; onStart: () => void }) {
   return (
-    <section className="pa-hero" aria-labelledby="pa-title">
+    <section className="pa-hero" aria-labelledby="pa-title" data-portrait={photos.hero.portrait || undefined}>
       <Photo shot={photos.hero} priority className="pa-photo-hero" />
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x pa-hero-in">
@@ -234,9 +220,21 @@ function PhotoBreak({ config, photos }: { config: ProgramPageConfig; photos: Pro
   )
 }
 
+// ─── Photo band: a full-bleed people photo, about 40vh, between text blocks ───
+
+function Band({ shot, label }: { shot: Shot; label: string }) {
+  return (
+    <section className="pa-band" aria-label={label}>
+      <Photo shot={shot} />
+      <div className="pa-grade" aria-hidden="true" />
+      <div className="container-x"><p className="al-k">{label}</p></div>
+    </section>
+  )
+}
+
 // ─── 4. How it works, on black, numbered 01 to 04 ────────────────────────────
 
-function HowItWorks({ config, onStart }: { config: ProgramPageConfig; onStart: () => void }) {
+function HowItWorks({ config, photos, onStart }: { config: ProgramPageConfig; photos: ProgramPhotos; onStart: () => void }) {
   return (
     <section className="al-sec al-how" aria-labelledby="pa-how">
       <div className="container-x">
@@ -245,15 +243,28 @@ function HowItWorks({ config, onStart }: { config: ProgramPageConfig; onStart: (
           <p className="al-cap"><span>Four steps<br /></span><span>No GP referral<br /></span><span>AHPRA-registered doctors</span></p>
         </div>
         <p className="al-k al-how-row">{config.name}</p>
-        <ol className="al-how-grid" role="list">
-          {config.processSteps.map((s, i) => (
-            <li key={s.title}>
-              <span className="al-how-k">{n2(i)} / {s.time}</span>
-              <h3>{s.title}</h3>
-              <p>{s.body}</p>
-            </li>
+        {/* Two lists so a photo can sit between steps 02 and 03 on phones (no run of
+            text longer than one phone screen). On desktop the lists flow as one 4-up grid. */}
+        <div className="al-how-grid pa-how-grid">
+          {[config.processSteps.slice(0, 2), config.processSteps.slice(2)].map((half, h) => (
+            <Fragment key={h}>
+              {h === 1 && (
+                <figure className="pa-how-photo">
+                  <Photo shot={photos.how} sizes="(max-width: 899px) 100vw, 1px" />
+                </figure>
+              )}
+              <ol className="pa-how-ol" role="list" start={h * 2 + 1}>
+                {half.map((s, j) => (
+                  <li key={s.title}>
+                    <span className="al-how-k">{n2(h * 2 + j)} / {s.time}</span>
+                    <h3>{s.title}</h3>
+                    <p>{s.body}</p>
+                  </li>
+                ))}
+              </ol>
+            </Fragment>
           ))}
-        </ol>
+        </div>
         <StartButton onClick={onStart} light />
       </div>
     </section>
@@ -312,12 +323,12 @@ function FAQ({ config }: { config: ProgramPageConfig }) {
         <div className="al-faq-side">
           <p className="al-k">{'// Straight answers'}</p>
           <h2 id="pa-faq" className="al-h2">You ask,<br />we answer.</h2>
-          <p className="al-lead">The straight answers on {config.name.toLowerCase()}, bloods and your doctor.</p>
+          <p className="al-lead pa-faq-lead">The straight answers on {config.name.toLowerCase()}, bloods and your doctor.</p>
           <Link href="/faqs" className="al-pill">All questions <Arrow /></Link>
         </div>
         <div className="al-faq-list">
           {config.faqs.map((f, i) => (
-            <details key={f.q} className="al-faq-item" open={i === 0}>
+            <details key={f.q} className="al-faq-item">
               <summary>
                 <span className="al-k">{n2(i)}</span>
                 <span className="al-faq-q">{f.q}</span>
@@ -409,8 +420,10 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <Hero config={config} photos={photos} onStart={handleGetStarted} />
         <WhatItIs config={config} photos={photos} />
         <PhotoBreak config={config} photos={photos} />
-        <HowItWorks config={config} onStart={handleGetStarted} />
+        <HowItWorks config={config} photos={photos} onStart={handleGetStarted} />
+        <Band shot={photos.bandA} label="// Bloods first · Then a plan" />
         <Included config={config} />
+        <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />
         <FAQ config={config} />
         <CtaBand config={config} photos={photos} onStart={handleGetStarted} />
       </main>

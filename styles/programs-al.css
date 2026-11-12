@@ -81,6 +81,24 @@ main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weigh
 @keyframes pa-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @keyframes pa-settle { from { transform: scale(1.06); } to { transform: none; } }
 
+/* Portrait photos on wide screens: the photo takes the right half at full height so
+   the head and body stay whole; the copy sits on black at the left. */
+@media (min-width: 900px) {
+  .pa-hero[data-portrait] .pa-photo-hero { top: 86px; left: 46%; }
+  .pa-hero[data-portrait] .pa-grade {
+    background:
+      linear-gradient(90deg, #050505 0%, #050505 46%, rgba(5,5,5,0.55) 54%, rgba(5,5,5,0) 70%),
+      linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
+  }
+  .pa-hero[data-portrait] .pa-photo-hero img { object-position: 50% 0%; }
+}
+
+/* Wide crops on desktop: bands, break and CTA band use the head-safe position. */
+@media (min-width: 900px) {
+  :is(.pa-break, .pa-band, .pa-cta) .pa-photo img { object-position: var(--pos-d, var(--pos, 50% 50%)); }
+  .pa-band { height: clamp(320px, 52vh, 560px); }
+}
+
 /* ── 2. What it is ── */
 .pa-intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px clamp(32px, 6vw, 96px); align-items: end; margin-bottom: clamp(28px, 3vw, 44px); }
 .pa-intro .al-h2 { margin-top: 18px; max-width: 18ch; }
@@ -119,8 +137,21 @@ main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weigh
 .pa-break-h { margin: 16px 0 0; max-width: 16ch; font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-size: clamp(34px, 4.6vw, 72px); font-weight: 700; line-height: 1; letter-spacing: -0.045em; color: #fff; text-wrap: balance; }
 .pa-break p.pa-break-b { margin: 18px 0 0; max-width: 48ch; font-size: clamp(16px, 1.2vw, 18px); line-height: 1.55; color: #e6e8eb; }
 
+/* ── Photo bands: full-bleed people photo, about 40vh, mono label bottom-left ── */
+.pa-band {
+  position: relative; isolation: isolate; overflow: hidden;
+  height: clamp(280px, 40vh, 460px);
+  display: flex; align-items: flex-end;
+  background: #050505; color: #fff; padding-bottom: 22px;
+}
+.al-sec:not(.al-how) + .pa-band { margin-top: clamp(72px, 8vw, 130px); }
+.pa-band .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.62) 100%); }
+.pa-band .al-k { color: #fff; }
+
 /* ── 4. How it works: shared .al-how on black; time as the mono kicker ── */
 .prog-al .al-how { margin-top: 0; }
+.pa-how-ol { display: contents; list-style: none; margin: 0; padding: 0; }
+.pa-how-photo { display: none; }
 
 /* ── 5. What's included ── */
 .pa-inc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
@@ -180,7 +211,7 @@ main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weigh
   background: #050505; border-top: 1px solid #1f2124; color: #fff;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.35s;
 }
-.prog-al-bar[data-off] { transform: translateY(110%); visibility: hidden; }
+.prog-al-bar[data-off], .prog-al-bar[hidden] { transform: translateY(110%); visibility: hidden; }
 .prog-al-bar-name { display: grid; gap: 3px; min-width: 0; }
 .prog-al-bar-name strong { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
 .prog-al-bar-acts { display: flex; gap: 8px; flex: none; }
@@ -208,15 +239,29 @@ html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !impo
 @media (max-width: 899px) {
   .pa-hero { min-height: 100svh; padding: 96px 0 28px; }
   .pa-photo img { object-position: var(--pos-m, var(--pos, 50% 50%)); }
+  .pa-photo-hero { top: 70px; }
   .pa-hero .pa-grade { background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 18%, rgba(0,0,0,0.2) 34%, rgba(0,0,0,0.8) 56%, rgba(0,0,0,0.92) 100%); }
   .pa-hero-row { margin-top: 22px; gap: 4px 16px; }
   .pa-intro { grid-template-columns: 1fr; align-items: start; }
   .pa-bento { grid-template-columns: 1fr; gap: 8px; }
   .pa-bento > .pa-photocard { grid-row: auto; min-height: 300px; }
   .pa-tcard { min-height: 0; padding: 20px; }
-  .pa-tcard .al-k { padding-bottom: 14px; }
-  .pa-break, .pa-cta { margin-top: 72px; min-height: 86svh; }
+  .pa-tcard { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 8px; align-items: baseline; padding: 18px 20px; }
+  .pa-tcard .al-k { padding-bottom: 0; margin: 0; }
+  .pa-tcard p { grid-column: 1 / -1; }
+  .pa-band + .al-sec { padding-top: 56px; }
+  .prog-al .al-faq-side .al-pill { margin-top: 20px; }
+  .pa-break { margin-top: 56px; min-height: 86svh; }
+  .pa-cta { margin-top: 56px; min-height: 86svh; }
   .pa-inc { grid-template-columns: 1fr; gap: 8px; }
+  /* How it works on phones: tighter, and a photo between steps 02 and 03. */
+  .prog-al .al-how { padding-block: 56px; }
+  .prog-al .al-how .al-head { margin-bottom: 16px; }
+  .prog-al .al-how-row { display: none; }
+  .prog-al .al-how-grid { margin-bottom: 28px; }
+  .prog-al .al-how-grid li { padding: 18px 0; }
+  .pa-how-photo { display: block; position: relative; isolation: isolate; overflow: hidden; height: 240px; margin: 4px 0 6px; border-radius: 20px; }
+  .pa-faq-lead { display: none; }
   .pa-inc li { min-height: 64px; padding: 16px 18px; }
   .pa-ev { grid-template-columns: 1fr; gap: 8px; }
   .pa-ev .pa-photocard { min-height: 340px; }
@@ -228,6 +273,7 @@ html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !impo
   .prog-al-bar .al-pill { min-height: 48px; justify-content: center; }
   .prog-al-foot { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
 }
+@media (min-width: 768px) { .prog-al-bar { display: none !important; } .prog-al-foot { padding-bottom: 0 !important; } }
 @media (max-width: 380px) {
   .prog-al-bar .al-pill { padding: 0 12px; font-size: 11px; letter-spacing: 0.08em; }
 }
