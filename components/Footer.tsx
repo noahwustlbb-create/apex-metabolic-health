@@ -8,7 +8,7 @@ import { CLINIC_EMAIL, CLINIC_HOURS, DOCTOR_DAYS, CLINIC_PHONE_DISPLAY, CLINIC_P
 
 const COMPANY_LINKS = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
+  { label: 'Treatments', href: '/treatments' },
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'FAQs', href: '/faqs' },

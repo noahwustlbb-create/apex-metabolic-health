@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import HeroStartModal from '@/components/HeroStartModal'
+import TrustChips from '@/components/TrustChips'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 /**
@@ -418,6 +419,7 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
       <Nav />
       <main id="main-content" className="prog-al">
         <Hero config={config} photos={photos} onStart={handleGetStarted} />
+        <TrustChips />
         <WhatItIs config={config} photos={photos} />
         <PhotoBreak config={config} photos={photos} />
         <HowItWorks config={config} photos={photos} onStart={handleGetStarted} />

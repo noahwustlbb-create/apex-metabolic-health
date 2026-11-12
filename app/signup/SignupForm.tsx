@@ -1,12 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
-import Logo from '@/components/brand/Logo'
+import Nav from '@/components/Nav'
+import ImageryNote from '@/components/ImageryNote'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
 import { captureLead } from '@/lib/captureLead'
-import { ArtImg } from '@/components/audience/Img'
 
 import { PORTAL_ORIGIN, safeSignupRedirect } from '@/lib/portal'
 
@@ -55,13 +54,14 @@ function SignupFormInner() {
   const bad = (on: boolean) => (on ? ' su-input-bad' : '')
 
   return (
-    <main className="su">
+    <>
+    <Nav />
+    <main id="main-content" className="su al-page">
       <div className="su-form">
-        <Link href="/" className="su-logo" aria-label="Apex Metabolic Health home"><Logo variant="nav" /></Link>
 
-        <p className="su-kicker">Create your account</p>
+        <p className="su-kicker">{'// Create your account'}</p>
         <h1 className="stage-display su-title">
-          Start with your email.<br /><span className="stage-muted">The rest takes minutes.</span>
+          Start with your email. The rest takes minutes.
         </h1>
         <p className="stage-lead su-lead">
           Your account holds your assessment, your results and your doctor&apos;s plan. You choose a password on the next step, in the secure patient portal.
@@ -92,21 +92,25 @@ function SignupFormInner() {
 
           {error && <p className="su-err" role="alert">{error}</p>}
 
-          <button type="submit" disabled={!valid || loading} className="stage-cta su-submit">
-            <span className="stage-cta-label">{loading ? 'Continuing…' : 'Continue'}</span>
-            <span className="stage-cta-arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </span>
+          <button type="submit" disabled={!valid || loading} className="al-pill al-pill-lg su-submit">
+            {loading ? 'Continuing' : 'Continue'}
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
         </form>
 
         <p className="su-alt">
           Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a>
         </p>
+        <p className="su-alt su-phone">
+          Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.
+        </p>
+        <ImageryNote tone="light" />
       </div>
 
       <aside className="su-aside" aria-hidden="true">
-        <ArtImg src="/start/quiz/vials.jpg" alt="" />
+        {/* A person, not a vial (no needles, vials or pens anywhere on the site). */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/photos/man-park-bench.webp" alt="" loading="lazy" decoding="async" />
         <ul className="su-points">
           {[
             ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],
@@ -118,6 +122,7 @@ function SignupFormInner() {
         </ul>
       </aside>
     </main>
+    </>
   )
 }
 

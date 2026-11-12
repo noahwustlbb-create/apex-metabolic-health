@@ -63,7 +63,7 @@ export const BLOOD_PANELS: Record<PanelSex, BloodPanel[]> = {
     {
       tier: 'basic',
       name: 'Basic',
-      body: 'Your first full panel, ordered and reviewed by an AHPRA-registered doctor. One morning draw covers hormones, thyroid, prostate (PSA), growth factor (IGF-1), a full blood count, inflammation (hs-CRP), and liver and kidney function, glucose and cholesterol. The standard panel also includes HbA1c and iron studies. Your doctor reviews every marker in context.',
+      body: 'Your first full panel, ordered and reviewed by an AHPRA-registered doctor. One morning draw covers hormone markers, thyroid, prostate and metabolic markers, a full blood count, inflammation (hs-CRP), and liver and kidney function, glucose and cholesterol. The standard panel also includes HbA1c and iron studies. Your doctor reviews every marker in context.',
       texture: TEXTURE.basic,
       ...LIVE,
     },

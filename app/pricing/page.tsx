@@ -1,760 +1,173 @@
-'use client'
-
-import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import Link from 'next/link'
 import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import FAQSection from '@/components/FAQSection'
-import FirstThreeMonths from '@/components/pricing/FirstThreeMonths'
-import Objections from '@/components/Objections'
+import ImageryNote from '@/components/ImageryNote'
+import TrustChips from '@/components/TrustChips'
+import CoreHealthPanels from '@/components/CoreHealthPanels'
+import { OBJECTIONS } from '@/components/Objections'
+import { PORTAL_MEMBERSHIP, START_HREF } from '@/lib/portal'
+import { InnerHero, Head, FaqSection, CtaBand, InnerFoot, Arrow, SHOTS, type Faq } from '@/components/inner/InnerSections'
+import Link from 'next/link'
 
-const ease = [0.22, 1, 0.36, 1] as const
+/**
+ * /pricing in the AlgoRx lab-packages structure (12 Nov 2026), Apex's numbers.
+ * Hero (headline, sub, chips only: no price on the first screen) -> the dark
+ * Core Health Panels cards -> the three paths added up as white bordered cards
+ * with mono line items and one big total -> every fee side by side -> "Before
+ * you start" as the numbered FAQ accordion -> photo CTA band.
+ *
+ * Every figure is the live pricing data (Noah, 11 Nov 2026): bloods $280 /
+ * $199 member, follow-ups $180 / $139, hormone consult $275 / $199, general
+ * consult $199 / $99, escript fee $155, AHI fee from $50 averaging $350 to
+ * $650 per partner-pharmacy order, membership $99 a month. The consult the
+ * portal calls "Peptide / General Consult" is shown as "General consult"
+ * here: no medicine classes on the site (brand platform, open item).
+ * Medication is never included in a total: it depends on what, if anything,
+ * a doctor prescribes. Private clinic, no Medicare rebate.
+ */
 
-// ─── Hero ─────────────────────────────────────────────────────────────────────
+type Line = { k: string; v: string }
+type Path = { id: string; tag?: string; name: string; who: string; lines: Line[]; total: { k: string; v: string }; then: string; cta: { label: string; href: string }; featured?: boolean }
 
-function PricingHero() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
-
-  return (
-    <section data-stage-hero="" data-art="/3d/product/box-white.jpg"
-      className="relative overflow-hidden"
-      style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '80px' }}
-      aria-label="Pricing hero"
-    >
-
-      <div ref={ref} className="container-tight relative z-10">
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.75, delay: 0.08, ease }}
-          className="display-heading mb-5"
-          style={{ fontSize: 'clamp(32px, 4.5vw, 64px)', maxWidth: '780px' }}
-        >
-          What it costs,{' '}
-          <span style={{ color: 'var(--blue)' }}>added up.</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.22, ease }}
-          style={{ color: 'var(--text-primary)', maxWidth: '480px', fontSize: '15px', lineHeight: 1.75, marginBottom: '2rem' }}
-        >
-          Bloods from $199, a Peptide / General Consult $199 ($99 for members), membership $99 a month. Below is what your first 3 months cost on each path, before medication. Private clinic, no Medicare rebate.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.35, ease }}
-          className="flex flex-wrap gap-x-6 gap-y-2"
-        >
-          {['No hidden fees', 'No lock-in contracts', 'AHPRA-registered doctors'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase" style={{ color: 'var(--text-primary)' }}>
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'var(--blue)' }} />
-              {t}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Membership vs Single Consultation ───────────────────────────────────────
-
-// Three ways to be treated (Noah, 28 Sep 2026). Retail pharmacies mark
-// medication up; Apex's partner pharmacy does not, but each order carries
-// admin, infrastructure and handling fees (from A$50, A$350-650 on average; Noah 11 Nov). Members
-// get cost-price medication with those fees and the escript fee included.
-type Col = 'single' | 'partner' | 'member'
-const COMPARISON_ROWS: { label: string; single: string; partner: string; member: string; highlight: boolean }[] = [
-  { label: 'Initial Blood Referral',      single: '$280',           partner: '$280',            member: '$199',        highlight: false },
-  { label: 'Follow Up Blood Referral',    single: '$180',           partner: '$180',            member: '$139',        highlight: true  },
-  { label: 'Hormone Consultation',        single: '$275',           partner: '$275',            member: '$199',        highlight: true  },
-  { label: 'Peptide / General Consult',   single: '$199',           partner: '$199',            member: '$99',         highlight: true  },
-  { label: 'Monthly Membership',          single: '·',              partner: '·',               member: '$99 /mo',     highlight: true  },
-  { label: 'Medication',                  single: 'Pharmacy price', partner: 'No mark-up',      member: 'Cost price',  highlight: true  },
-  { label: 'AHI fee per order',           single: '·',              partner: 'From $50, avg\u00a0$350\u2060–\u2060$650', member: 'Included',    highlight: true  },
-  { label: 'Escript Release Fee',         single: '$155',           partner: '$155',            member: 'Free',        highlight: true  },
-  { label: 'Referrals & Certs',           single: '$25 each',       partner: '$25 each',        member: 'Free',        highlight: true  },
-  { label: 'Health-system score history', single: 'Latest two',     partner: 'Latest two',      member: 'Every panel', highlight: true  },
-  { label: 'Ask about your results',      single: '5 / month',      partner: '5 / month',       member: 'Unlimited',   highlight: true  },
-  { label: 'Your plan & GP summary',      single: 'Included',       partner: 'Included',        member: 'Included',    highlight: false },
-]
-
-const PATHS: { col: Col; name: string; sub: string; box: { k: string; v: string; note: string } | null; cta: string }[] = [
-  { col: 'single', name: 'Single Consult', sub: 'Script only · Fill it at any pharmacy',
-    box: { k: 'Before medication', v: '$634', note: 'Blood panel $280 + Peptide / General Consult $199 + escript fee $155. With the hormone consult ($275) instead: $710. Retail pharmacies usually add their own mark-up to the medication.' }, cta: 'Single Consult' },
-  { col: 'partner', name: 'Partner Pharmacy', sub: 'No medication mark-up · Pay per order',
-    box: { k: 'On every medication order, on average', v: '$350 – $650', note: 'The AHI fee (admin, handling and infrastructure) starts from $50 and averages this, plus the $155 escript fee. The medication itself is not marked up.' }, cta: 'Partner Pharmacy' },
-  { col: 'member', name: 'Apex Member', sub: 'Ongoing treatment · Pause or cancel from your account', box: null, cta: 'Get Started' },
-]
-
-function MembershipComparison() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-  const accent = 'var(--blue)'
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Choose your path">
-
-
-      <div ref={ref} className="container-tight relative z-10">
-
-        <div className="mb-12 text-center max-w-2xl mx-auto">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            Choose Your Path
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="display-heading"
-            style={{ fontSize: 'clamp(26px, 3.5vw, 46px)' }}
-          >
-            Three ways to be treated.{' '}
-            <span style={{ color: accent }}>Compare before you start.</span>
-          </motion.h2>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.16, ease }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-5 max-w-6xl mx-auto"
-        >
-
-          {PATHS.map(path => {
-            const featured = path.col === 'member'
-            return (
-              <div key={path.col} className="flex flex-col rounded-2xl overflow-hidden relative"
-                style={{
-                  border: featured ? `1px solid ${accent}` : '1px solid rgba(15,23,42,0.08)',
-                  background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)',
-                  boxShadow: featured ? '0 0 80px color-mix(in srgb, var(--blue) 14%, transparent), 0 16px 40px rgba(15,23,42,0.08)' : '0 16px 40px rgba(15,23,42,0.08)',
-                }}>
-                {featured && (
-                  <div style={{ position: 'absolute', top: 0, right: 20, background: accent, borderRadius: '0 0 6px 6px', padding: '4px 12px', fontFamily: 'var(--font-space-grotesk)', fontSize: '12px', fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#fff' }}>
-                    Most included
-                  </div>
-                )}
-                <div className="px-6 py-5" style={{ borderBottom: '1px solid rgba(15,23,42,0.06)' }}>
-                  <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '13px', fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: featured ? accent : 'var(--text-primary)', opacity: featured ? 1 : 0.72, marginBottom: '4px' }}>{path.name}</p>
-                  <p style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>{path.sub}</p>
-                </div>
-                <div className="flex flex-col flex-1">
-                  {COMPARISON_ROWS.map((row, i) => {
-                    const v = row[path.col]
-                    const good = featured && row.highlight
-                    return (
-                      <div key={row.label} className="flex items-center justify-between gap-3 px-6 py-3.5" style={{ borderBottom: i < COMPARISON_ROWS.length - 1 ? '1px solid rgba(15,23,42,0.05)' : 'none' }}>
-                        <span style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: 'var(--text-primary)', opacity: 0.72 }}>{row.label}</span>
-                        <span className="flex items-center gap-1.5 text-right" style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '14.5px', fontWeight: 700, color: good ? accent : 'var(--text-primary)', opacity: v === '·' ? 0.4 : featured ? 1 : 0.62 }}>
-                          {good && (
-                            <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
-                              <circle cx="6" cy="6" r="5.5" fill="color-mix(in srgb, var(--blue) 15%, transparent)" stroke={accent} strokeWidth="0.8" />
-                              <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                          )}
-                          {v}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className="px-6 py-5" style={{ borderTop: '1px solid rgba(15,23,42,0.06)' }}>
-                  {path.box && (
-                    <div className="mb-4 p-3 rounded-lg" style={{ background: 'rgba(15,23,42,0.03)', border: '1px solid rgba(15,23,42,0.06)' }}>
-                      <p className="text-[12px] font-semibold" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.k}</p>
-                      <p className="text-base font-bold mt-0.5" style={{ fontFamily: 'var(--font-inter)', color: 'var(--text-primary)' }}>{path.box.v}</p>
-                      <p className="text-[12px] mt-1 leading-snug" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{path.box.note}</p>
-                    </div>
-                  )}
-                  <Link href="https://app.apexmetabolichealth.com.au/signup"
-                    className="flex items-center justify-center gap-2 w-full py-3.5 rounded-lg text-[12px] font-bold tracking-[0.1em] uppercase transition-all duration-200"
-                    style={featured ? { background: accent, color: '#ffffff' } : { border: '1px solid rgba(15,23,42,0.14)', color: 'var(--text-primary)' }}>
-                    {path.cta}
-                  </Link>
-                </div>
-              </div>
-            )
-          })}
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center text-[12px] leading-relaxed"
-          style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: 520, margin: '20px auto 0' }}
-        >
-          Retail pharmacies usually mark medication up. Our partner pharmacy does not, but each order carries admin, infrastructure and handling fees. Membership includes those fees and the escript fee. Join from your account at any time, including before your first consult: member rates apply to anything you book after you join. No lock-in contracts.
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
-// ─── Program Pathways (accordion) ────────────────────────────────────────────
-
-type PathwayStep = {
-  label: string
-  body: string
-  price?: string
-  priceNote?: string
-  includes?: string[]
-  options?: { label: string; detail: string }[]
-}
-
-type Pathway = {
-  id: string
-  title: string
-  tag: 'Apex Member' | 'Single Consult'
-  steps: PathwayStep[]
-}
-
-// Rewritten 11 Nov 2026 from Noah's brief, in Apex's own words and prices; script release $155.
-const PATHWAYS: Pathway[] = [
+const PATHS: Path[] = [
   {
-    id: 'hormone-member',
-    title: 'Hormone Optimisation',
-    tag: 'Apex Member',
-    steps: [
-      {
-        label: 'Sign up',
-        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
-      },
-      {
-        label: 'Blood panel',
-        body: 'Doctor-issued referral, no GP needed. Collect fasted before 9am at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$199',
-        priceNote: 'First panel · follow-ups $139',
-      },
-      {
-        label: 'Hormone consultation',
-        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
-        price: '$199',
-        priceNote: 'Member rate',
-      },
-      {
-        label: 'Ongoing care',
-        body: 'Member rates apply from the day you join, including your first panel and consult. Pause or cancel from your account.',
-        price: '$99 /mo',
-        priceNote: 'No lock-in',
-        includes: [
-          'If your doctor prescribes: medication at cost, no per-order fee',
-          'Dispensed discreetly by our cGMP partner pharmacies',
-          'Free escripts, to our partners or your own pharmacy (not NSW)',
-          'Nursing check-ins every 6 to 8 weeks',
-          'Referrals, med certs, health summaries and travel letters',
-          'Priority clinical support between reviews',
-        ],
-      },
+    id: 'single', name: 'Script only', who: 'You want a doctor’s script and will fill it at any pharmacy.',
+    lines: [
+      { k: 'Blood panel', v: '$280' },
+      { k: 'General consult', v: '$199' },
+      { k: 'Escript fee', v: '$155' },
     ],
+    total: { k: 'First 3 months, before medication', v: '$634' },
+    then: 'With the hormone consult ($275) instead: $710. Plus the medication itself at your pharmacy’s price. Most pharmacies add their own mark-up.',
+    cta: { label: 'Create your free account', href: START_HREF },
   },
   {
-    id: 'hormone-single',
-    title: 'Hormone Optimisation',
-    tag: 'Single Consult',
-    steps: [
-      {
-        label: 'Sign up',
-        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
-      },
-      {
-        label: 'Blood panel',
-        body: 'Doctor-issued referral, no GP needed. Collect fasted before 9am at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$280',
-        priceNote: 'First panel · follow-ups $180',
-      },
-      {
-        label: 'Hormone consultation',
-        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
-        price: '$275',
-        priceNote: 'Members pay $199',
-      },
-      {
-        label: 'Treatment options',
-        body: 'Two ways to fill a script, if you get one. Members skip these fees.',
-        options: [
-          {
-            label: 'Partner pharmacy (recommended)',
-            detail: 'Our cGMP partner pharmacies dispense at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (from $50, averaging $350 to $650) and the $155 escript fee.',
-          },
-          {
-            label: 'Your own pharmacy',
-            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy. We always recommend our partner pharmacies. Not available in NSW.',
-          },
-        ],
-      },
+    id: 'partner', name: 'Partner pharmacy', who: 'You want medication with no mark-up and to pay per order.',
+    lines: [
+      { k: 'Blood panel', v: '$280' },
+      { k: 'General consult', v: '$199' },
+      { k: 'Each order: AHI fee, on average', v: '$350 to $650' },
+      { k: 'Each order: escript fee', v: '$155' },
     ],
+    total: { k: 'First 3 months, one order', v: '$984 to $1,284' },
+    then: 'Plus the medication at the pharmacy’s cost, with no mark-up. The AHI fee (admin, handling and infrastructure) starts from $50. Each further order adds the AHI fee and the escript fee again.',
+    cta: { label: 'Create your free account', href: START_HREF },
   },
   {
-    id: 'weight-member',
-    title: 'Weight Loss & Metabolic',
-    tag: 'Apex Member',
-    steps: [
-      {
-        label: 'Sign up',
-        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
-      },
-      {
-        label: 'Blood panel',
-        body: 'Doctor-issued referral, no GP needed. Collect at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$199',
-        priceNote: 'First panel · follow-ups $139',
-      },
-      {
-        label: 'Peptide / General Consult',
-        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
-        price: '$99',
-        priceNote: 'Member rate',
-      },
-      {
-        label: 'Ongoing care',
-        body: 'Member rates apply from the day you join, including your first panel and consult. Pause or cancel from your account.',
-        price: '$99 /mo',
-        priceNote: 'No lock-in',
-        includes: [
-          'If your doctor prescribes: medication at cost, no per-order fee',
-          'Dispensed discreetly by our cGMP partner pharmacies',
-          'Free escripts, to our partners or your own pharmacy (not NSW)',
-          'Nursing check-ins every 6 to 8 weeks',
-          'Referrals, med certs, health summaries and travel letters',
-          'Priority clinical support between reviews',
-        ],
-      },
+    id: 'member', tag: 'Most included', name: 'Apex member', who: 'You want ongoing care with the fees included. Pause or cancel from your account.', featured: true,
+    lines: [
+      { k: 'Blood panel, member rate', v: '$199' },
+      { k: 'General consult, members', v: '$99' },
+      { k: 'Membership, 3 x $99', v: '$297' },
+      { k: 'AHI fee and escript fee', v: 'Included' },
     ],
-  },
-  {
-    id: 'weight-single',
-    title: 'Weight Loss & Metabolic',
-    tag: 'Single Consult',
-    steps: [
-      {
-        label: 'Sign up',
-        body: 'Fill in our online form in about 8 to 10 minutes. Prefer to talk first? Request a free call with our clinical team.',
-      },
-      {
-        label: 'Blood panel',
-        body: 'Doctor-issued referral, no GP needed. Collect at any accredited centre. Recent results with the right markers may be accepted.',
-        price: '$280',
-        priceNote: 'First panel · follow-ups $180',
-      },
-      {
-        label: 'Peptide / General Consult',
-        body: 'Your AHPRA-registered doctor reviews your results, history and goals by phone or video. You get a personalised plan, with a prescription only where clinically appropriate.',
-        price: '$199',
-        priceNote: 'Members pay $99',
-      },
-      {
-        label: 'Treatment options',
-        body: 'Two ways to fill a script, if you get one. Members skip these fees.',
-        options: [
-          {
-            label: 'Partner pharmacy (recommended)',
-            detail: 'Our cGMP partner pharmacies dispense at the pharmacy’s price, with no mark-up. Each order adds our AHI fee (from $50, averaging $350 to $650) and the $155 escript fee.',
-          },
-          {
-            label: 'Your own pharmacy',
-            detail: '$155 per script. We send you the script and how to take it, to fill at any pharmacy. We always recommend our partner pharmacies. Not available in NSW.',
-          },
-        ],
-      },
-    ],
+    total: { k: 'First 3 months', v: '$595' },
+    then: 'Assumes you join before your first panel: member rates apply from the day you join. Plus the medication at cost price. Follow-up panels are $139 for members.',
+    cta: { label: 'Join as a member', href: PORTAL_MEMBERSHIP },
   },
 ]
 
-function AccordionItem({ pathway }: { pathway: Pathway }) {
-  const [open, setOpen] = useState(false)
-  const accent = 'var(--blue)'
-  const isMember = pathway.tag === 'Apex Member'
-
-  return (
-    <div
-      className="rounded-xl overflow-hidden mb-2"
-      style={{
-        border: open
-          ? `1px solid ${isMember ? 'rgba(72,144,247,0.3)' : 'rgba(72,144,247,0.12)'}`
-          : `1px solid ${isMember ? 'rgba(72,144,247,0.18)' : 'rgba(72,144,247,0.08)'}`,
-        background: open
-          ? (isMember ? 'rgba(72,144,247,0.04)' : 'var(--bg)')
-          : 'var(--bg)',
-        transition: 'border-color 0.2s, background 0.2s',
-      }}
-    >
-      <button
-        onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between px-5 py-4 text-left"
-        aria-expanded={open}
-      >
-        <div className="flex items-center gap-4 min-w-0">
-          <span
-            className="flex-shrink-0 px-3 py-1.5 rounded text-[12px] font-bold tracking-[0.1em] uppercase"
-            style={{
-              background: isMember ? 'rgba(72,144,247,0.12)' : 'rgba(255,255,255,0.05)',
-              color: isMember ? accent : 'var(--text-primary)',
-              border: `1px solid ${isMember ? 'rgba(72,144,247,0.3)' : 'rgba(255,255,255,0.14)'}`,
-              opacity: isMember ? 1 : 0.8,
-              minWidth: '120px',
-              textAlign: 'center',
-            }}
-          >
-            {pathway.tag}
-          </span>
-          <span style={{ fontSize: '13px', color: 'var(--text-primary)', opacity: 0.72 }}>
-            {isMember ? 'Ongoing treatment · $99/mo membership' : 'Once-off · Script release available'}
-          </span>
-        </div>
-        <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }} className="flex-shrink-0 ml-4">
-          <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
-            <path d="M4 6l4 4 4-4" stroke={open ? accent : 'currentColor'} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: open ? 1 : 0.35 }} />
-          </svg>
-        </motion.div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="body"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            style={{ overflow: 'hidden' }}
-          >
-            <div className="px-5 pb-8" style={{ borderTop: '1px solid rgba(72,144,247,0.06)' }}>
-              {pathway.steps.map((step, i) => (
-                <div
-                  key={step.label}
-                  className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-8 py-5"
-                  style={{ borderBottom: i < pathway.steps.length - 1 ? '1px solid rgba(72,144,247,0.05)' : 'none' }}
-                >
-                  {/* Left - step number + content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2.5 mb-2">
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                        <span style={{ fontSize: '12px', fontWeight: 700, color: accent, fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</span>
-                      </div>
-                      <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-primary)' }}>
-                        {step.label}
-                      </p>
-                    </div>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72, paddingLeft: '29px' }}>
-                      {step.body}
-                    </p>
-
-                    {step.options && (
-                      <div className="mt-4 flex flex-col gap-2.5" style={{ paddingLeft: '29px' }}>
-                        {step.options.map(opt => (
-                          <div key={opt.label} className="p-4 rounded-xl" style={{ background: 'rgba(72,144,247,0.03)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                            <p style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: accent, marginBottom: '6px' }}>
-                              {opt.label}
-                            </p>
-                            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                              {opt.detail}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {step.includes && (
-                      <ul className="mt-4 flex flex-col gap-2" style={{ paddingLeft: '29px' }}>
-                        {step.includes.map(item => (
-                          <li key={item} className="flex items-start gap-2.5">
-                            <svg viewBox="0 0 12 12" fill="none" className="flex-shrink-0" style={{ width: 12, height: 12, marginTop: '3px' }} aria-hidden="true">
-                              <circle cx="6" cy="6" r="5.5" stroke={accent} strokeWidth="0.8" fill="rgba(72,144,247,0.06)" />
-                              <path d="M3.5 6l2 2 3-3.5" stroke={accent} strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  {/* Right - price */}
-                  {step.price && (
-                    <div className="flex-shrink-0 sm:text-right" style={{ minWidth: '100px' }}>
-                      <p style={{
-                        fontFamily: 'var(--font-space-grotesk)',
-                        fontSize: '20px',
-                        fontWeight: 700,
-                        lineHeight: 1,
-                        color: (isMember && step.price.includes('/mo')) ? accent : 'var(--text-primary)',
-                      }}>
-                        {step.price}
-                      </p>
-                      {step.priceNote && (
-                        <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', opacity: 0.72, marginTop: '4px' }}>
-                          {step.priceNote}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  )
-}
-
-function ProgramPathways() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const accent = 'var(--blue)'
-
-  const programGroups = PATHWAYS.reduce<Record<string, Pathway[]>>((acc, p) => {
-    if (!acc[p.title]) acc[p.title] = []
-    acc[p.title].push(p)
-    return acc
-  }, {})
-
-  return (
-    <section className="relative section-pad overflow-hidden mesh" aria-label="Program pathways">
-
-      <div ref={ref} className="container-tight relative z-10">
-
-        <div className="mb-10">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            Treatment Pathways
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.65, delay: 0.08, ease }}
-            className="display-heading"
-            style={{ fontSize: 'clamp(24px, 3vw, 40px)' }}
-          >
-            Step-by-step,{' '}
-            <span style={{ color: accent }}>by treatment.</span>
-          </motion.h2>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2, ease }}
-          className="flex flex-col gap-10"
-        >
-          {Object.entries(programGroups).map(([title, pathways], groupIndex) => (
-            <div key={title}>
-              <div
-                className="flex items-center gap-4 mb-4"
-                style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(72,144,247,0.14)' }}
-              >
-                <h3 style={{
-                  fontFamily: 'var(--font-space-grotesk)',
-                  fontSize: '18px',
-                  fontWeight: 700,
-                  color: 'var(--text-primary)',
-                  letterSpacing: '-0.01em',
-                }}>
-                  {title}
-                </h3>
-                <span style={{
-                  fontSize: '12px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const,
-                  color: 'var(--text-primary)', opacity: 0.72,
-                }}>
-                  {pathways.length} pathways
-                </span>
-              </div>
-              <div className="flex flex-col gap-2">
-                {pathways.map(pathway => (
-                  <AccordionItem key={pathway.id} pathway={pathway} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </motion.div>
-
-        <p className="text-[12px] mt-8" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-          Script release excludes NSW patients. All treatment subject to clinical appropriateness.
-        </p>
-      </div>
-    </section>
-  )
-}
-
-// ─── What's NOT Included ──────────────────────────────────────────────────────
-
-const NOT_INCLUDED = [
-  {
-    label: 'Discovery call fees',
-    detail: 'The discovery call is free. Book one if you’d like to talk it through first.',
-  },
-  {
-    label: 'Surprise admin charges',
-    detail: 'Clinical support is part of membership. No bolt-ons.',
-  },
-  {
-    label: 'Lock-in contracts',
-    detail: 'No lock-in. 3-monthly reviews are clinical, not commercial.',
-  },
-  {
-    label: 'Bundled packages',
-    detail: 'No bundles. You pay for what your protocol requires, nothing else.',
-  },
-  {
-    label: 'Outcome guarantees',
-    detail: 'No clinic can guarantee outcomes. We won\'t. What we guarantee is clinical rigour.',
-  },
+// Every fee, side by side (the live comparison table, same numbers).
+const FEES: { label: string; single: string; partner: string; member: string }[] = [
+  { label: 'Initial blood referral', single: '$280', partner: '$280', member: '$199' },
+  { label: 'Follow-up blood referral', single: '$180', partner: '$180', member: '$139' },
+  { label: 'Hormone consultation', single: '$275', partner: '$275', member: '$199' },
+  { label: 'General consult', single: '$199', partner: '$199', member: '$99' },
+  { label: 'Monthly membership', single: 'None', partner: 'None', member: '$99 a month' },
+  { label: 'Medication', single: 'Pharmacy price', partner: 'No mark-up', member: 'Cost price' },
+  { label: 'AHI fee per order', single: 'None', partner: 'From $50, avg $350 to $650', member: 'Included' },
+  { label: 'Escript release fee', single: '$155', partner: '$155', member: 'Free' },
+  { label: 'Referrals and certificates', single: '$25 each', partner: '$25 each', member: 'Free' },
+  { label: 'Health-system score history', single: 'Latest two', partner: 'Latest two', member: 'Every panel' },
+  { label: 'Ask about your results', single: '5 a month', partner: '5 a month', member: 'Unlimited' },
+  { label: 'Your plan and GP summary', single: 'Included', partner: 'Included', member: 'Included' },
 ]
+const COLS = [
+  { id: 'single', name: 'Script only' },
+  { id: 'partner', name: 'Partner pharmacy' },
+  { id: 'member', name: 'Apex member' },
+] as const
 
-function NotIncluded() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="What's not included">
-
-
-      <div ref={ref} className="container-tight relative z-10">
-        <div className="max-w-2xl">
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="label mb-4">
-            Transparency
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="display-heading mb-3"
-            style={{ fontSize: 'clamp(24px, 3vw, 42px)' }}
-          >
-            What&apos;s NOT included.
-          </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18 }}
-            className="text-sm leading-relaxed mb-10" style={{ color: 'var(--text-primary)' }}>
-            Most clinics hide fees until you&apos;re committed. We&apos;d rather tell you what you won&apos;t be paying for.
-          </motion.p>
-
-          <div className="flex flex-col" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-            {NOT_INCLUDED.map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, x: -16 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.07, ease }}
-                className="flex items-start gap-4 py-4"
-                style={{ borderBottom: '1px solid rgba(72,144,247,0.07)' }}
-              >
-                <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{ background: 'rgba(255,80,80,0.06)', border: '1px solid rgba(255,80,80,0.2)' }}>
-                  <svg viewBox="0 0 12 12" fill="none" className="w-2.5 h-2.5" aria-hidden="true">
-                    <path d="M2 2l8 8M10 2l-8 8" stroke="rgba(220,50,50,0.6)" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <div>
-                  <span className="text-sm font-semibold mr-2" style={{ color: 'var(--text-primary)' }}>{item.label}.</span>
-                  <span className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>{item.detail}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── CTA ──────────────────────────────────────────────────────────────────────
-
-function PricingCTA() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section
-      ref={ref}
-      className="relative section-pad overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #3b82f6 55%, #4890f7 100%)' }}
-      aria-label="Get started"
-    >
-
-      <div className="container-tight relative z-10 text-center">
-        <motion.h2 initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease }}
-          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 52px)', fontWeight: 700, lineHeight: 1.08, letterSpacing: '-0.025em', color: '#ffffff', marginBottom: '1rem' }}>
-          Know the cost.{' '}
-          <span style={{ color: 'rgba(255,255,255,0.8)' }}>Start when you&apos;re ready.</span>
-        </motion.h2>
-
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }} className="flex flex-col items-center gap-3">
-          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
-            Create your free account
-            <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.85)' }}>Takes 60 seconds. No commitment.</p>
-        </motion.div>
-
-        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.78)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Treatment only where clinically appropriate. Pricing subject to change; confirm at time of booking.
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-const PRICING_FAQS = [
-  {
-    q: 'Is there a lock-in contract?',
-    a: "No. Pause or cancel your membership from your account. Clinical reviews happen every 3 months. That's a clinical schedule, not a commercial one.",
-  },
-  {
-    q: 'Do I need a GP referral?',
-    a: 'No GP referral needed. You register directly through Apex and we issue a pathology referral within the same business day.',
-  },
-  {
-    q: 'What does the membership fee cover?',
-    a: 'The $99/month membership covers: zero medication mark-ups (pharmacy cost price), prescribing fees waived, discounted follow-up blood panels, nursing team check-ins, and priority clinical support between reviews.',
-  },
-  {
-    q: 'When does membership activate?',
-    a: 'The day you join, from your account. You can join before your first blood panel and consult, and member rates apply to anything you book after joining. Pause or cancel from your account.',
-  },
-  {
-    q: 'Are there any hidden fees?',
-    a: 'No. Every fee is on this page before you start, including the AHI fee on partner-pharmacy orders. No discovery call fees and no bundled packages.',
-  },
-  {
-    q: 'What is your refund policy?',
-    a: 'Not happy after your consult? Contact us and we’ll refund the consult fee, less a $50 admin fee. Cancel at least 4 hours before your appointment for a full refund. Blood panel referrals are not refundable once issued, and medication invoices once dispensed. None of this limits your rights under the Australian Consumer Law. Full details are in our terms.',
-  },
-  {
-    q: 'What else should I know before I pay?',
-    a: 'Prices may change over time. Every medication invoice includes the AHI fee (for members it’s covered by the membership). Prescription fees are paid before your script is issued. A consult does not guarantee a prescription: your doctor only prescribes where it’s clinically appropriate.',
-  },
-  {
-    q: 'Are your doctors AHPRA-registered?',
-    a: 'Yes, unconditionally. Every consultation is conducted by an AHPRA-registered medical practitioner. You can verify any of our doctors on the AHPRA national register.',
-  },
+const PRICING_FAQS: Faq[] = [
+  { q: 'Is there a lock-in contract?', a: 'No. Pause or cancel your membership from your account. Clinical reviews happen about every 3 months. That is a clinical schedule, not a commercial one.' },
+  { q: 'What does the membership fee cover?', a: 'The $99 a month membership covers: medication at cost price, no AHI fee and no escript fee on partner-pharmacy orders, member rates on every blood panel and consult, nursing check-ins, and priority clinical support between reviews.' },
+  { q: 'When does membership activate?', a: 'The day you join, from your account. You can join before your first blood panel and consult, and member rates apply to anything you book after joining.' },
+  { q: 'Are there any hidden fees?', a: 'No. Every fee is on this page before you start, including the AHI fee on partner-pharmacy orders. No discovery call fees and no bundled packages.' },
+  { q: 'What is your refund policy?', a: <>Not happy after your consult? Contact us and we refund the consult fee, less a $50 admin fee. Cancel at least 4 hours before your appointment for a full refund. Blood panel referrals are not refundable once issued, and medication invoices once dispensed. None of this limits your rights under the Australian Consumer Law. Full details are in our <Link href="/terms">terms</Link>.</> },
+  { q: 'What else should I know before I pay?', a: 'Prices may change over time. Every medication invoice includes the AHI fee (for members it is covered by the membership). Prescription fees are paid before your script is issued. A consult does not guarantee a prescription: your doctor only prescribes where it is clinically appropriate.' },
 ]
 
 export default function PricingPage() {
+  const faqs: Faq[] = [...OBJECTIONS, ...PRICING_FAQS.filter(f => !OBJECTIONS.some(o => o.q === f.q))]
   return (
     <>
       <Nav />
-      <main>
-        <PricingHero />
-        <FirstThreeMonths />
-        <Objections />
-        <MembershipComparison />
-        <ProgramPathways />
-        <NotIncluded />
-        <FAQSection faqs={PRICING_FAQS} />
-        <PricingCTA />
+      <main id="main-content" className="al-page">
+        <InnerHero
+          kicker="Pricing"
+          title="What it costs, added up."
+          lead="Every fee is on this page before you start. One blood panel, a doctor who reads it with you, and three ways to be treated. Private clinic, no Medicare rebate."
+          cap={['No hidden fees', 'No lock-in', 'Member rates from day one']}
+          sidePhoto={SHOTS.kitchenMan}
+        />
+        <TrustChips />
+
+        <CoreHealthPanels />
+
+        <section className="al-sec" aria-labelledby="pr-paths">
+          <div className="container-x">
+            <Head id="pr-paths" kicker="Three ways to be treated" title="Your first 3 months, added up." cap={['Bloods first', 'Then a doctor', 'Medication is extra on every path']} />
+            <ul className="ip-cards" role="list">
+              {PATHS.map(p => (
+                <li key={p.id} className="al-card ip-path" data-featured={p.featured || undefined}>
+                  {p.tag && <span className="ip-path-tag">{p.tag}</span>}
+                  <h3>{p.name}</h3>
+                  <p className="ip-path-who">{p.who}</p>
+                  <ul className="ip-lines" role="list">
+                    {p.lines.map(l => <li key={l.k}><span>{l.k}</span><b>{l.v}</b></li>)}
+                  </ul>
+                  <div className="ip-total">
+                    <p className="ip-total-k">{p.total.k}</p>
+                    <p className="ip-total-v">{p.total.v}</p>
+                    <p className="ip-total-then">{p.then}</p>
+                  </div>
+                  <Link href={p.cta.href} className={p.featured ? 'al-pill' : 'ip-path-line'}>{p.cta.label} {p.featured && <Arrow />}</Link>
+                </li>
+              ))}
+            </ul>
+            <p className="al-k" style={{ marginTop: 20 }}>Totals use the general consult. Every path starts with one panel and one doctor read. Apex is a private clinic: no Medicare rebate.</p>
+          </div>
+        </section>
+
+        <section className="al-sec" aria-labelledby="pr-fees">
+          <div className="container-x">
+            <Head id="pr-fees" kicker="Every fee" title="Side by side." cap={['Script only', 'Partner pharmacy', 'Apex member']} />
+            <div className="al-card ip-fees">
+              <table className="ip-table">
+                <thead>
+                  <tr>
+                    <th scope="col"><span className="al-k">Fee</span></th>
+                    {COLS.map(c => <th key={c.id} scope="col"><span className="al-k">{c.name}</span></th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {FEES.map(f => (
+                    <tr key={f.label}>
+                      <th scope="row">{f.label}</th>
+                      {COLS.map(c => <td key={c.id} data-col={c.name}>{f[c.id]}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="al-k" style={{ marginTop: 20 }}>Join from your account at any time, including before your first consult. Member rates apply to anything you book after you join.</p>
+          </div>
+        </section>
+
+        <FaqSection faqs={faqs} kicker="Before you start" title={<>Before you start.<br />The straight answers.</>} lead="Fees, refunds, cancelling and what a consult does and does not guarantee." id="pr-faq" />
+
+        <CtaBand shot={SHOTS.kettlebell} lead="Create your free account and order your panel at the standard or member rate. A doctor reads every result with you. No GP referral." />
+        <ImageryNote />
       </main>
-      <Footer />
+      <InnerFoot />
     </>
   )
 }

@@ -231,6 +231,7 @@ export default function Nav() {
             {!menuOpen && (
               <Link
                 href="/signup"
+                className="nav-start-m"
                 aria-label="Create your free account"
                 style={{
                   display: 'inline-flex',
