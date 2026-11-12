@@ -85,7 +85,7 @@ const IMG = {
   womanStairs: { src: '/photos/woman-stairs.webp', alt: 'Woman climbing outdoor stairs above the coast', pos: '50% 28%', posD: '50% 3%', portrait: true },
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
   parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 26%', posD: '50% 17%', portrait: true },
-  kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man lifting a kettlebell in a timber-walled gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
+  kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
   couple: { src: '/photos/couple-walk.webp', alt: 'A couple talking as they walk along a leafy street', pos: '50% 26%', posD: '50% 4%', portrait: true },
 } satisfies Record<string, Shot>
 
