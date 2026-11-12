@@ -304,8 +304,10 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 @media (max-width: 899px) and (max-height: 700px) {
   .hx-kicker, .hx-reads { display: none; }
   .hx-pick { bottom: 10px; }
-  .hx-h1 { font-size: 30px; }
-  .hx-sub { font-size: 15px; margin: 8px 0 12px; }
+  /* Three-line headline (12 Nov 2026): tighter type and a shorter stage so the CTA clears the phone bar. */
+  .hx-frame { min-height: calc(100svh - var(--nav-h) - 76px); grid-template-rows: minmax(calc(40svh + 14px), 1fr) auto; }
+  .hx-h1 { font-size: 26px; }
+  .hx-sub { font-size: 14.5px; line-height: 1.4; margin: 8px 0 12px; }
   .hx-copy { padding: 12px 20px 14px; }
 }
 
