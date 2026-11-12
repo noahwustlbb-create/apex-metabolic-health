@@ -1,17 +1,21 @@
 import Link from 'next/link'
-import { PORTAL_MEMBERSHIP, PORTAL_ORDER_BLOODS } from '@/lib/portal'
+import { START_HREF } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 /**
- * Home sections in the AlgoRx system (Noah 11 Nov 2026; locked reference
- * ~/Clients/4thQtr/reference/algorx/ALGORX-PLAYBOOK.md section 4). Every
- * fact here already appears elsewhere on the site: prices from
- * app/pricing/page.tsx, timings from /order-bloods and the stage sections,
- * answers from lib/faqs.ts and components/Objections.tsx. No medicine names,
- * no outcomes, no invented numbers.
+ * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
+ * 01 hero, 02 about you, 03 protocols, 04 approach, 05 why Apex, FAQ,
+ * 06 ready to start. 02 is about the person, 03 is the programs, so neither
+ * repeats the other. Facts come from the brand platform
+ * (~/Clients/Apex/brand/BRAND-PLATFORM-2026-11-12.md), lib/faqs.ts and
+ * components/Objections.tsx. No medicine names, no outcomes, no invented
+ * numbers, no prices above the fold.
  */
+
+/** The 45-second health quiz (app/start, lib/startFunnel.ts). Secondary only: no primary CTA points here. */
+export const QUIZ_HREF = '/start'
 
 const Arrow = () => (
   <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
@@ -19,147 +23,139 @@ const Arrow = () => (
   </svg>
 )
 
-function Head({ id, title, cap, dark }: { id: string; title: string; cap: string[]; dark?: boolean }) {
+function Head({ id, n, k, title, cap, dark }: { id: string; n: string; k: string; title: string; cap?: string[]; dark?: boolean }) {
   return (
     <div className="al-head" data-dark={dark || undefined}>
-      <h2 id={id} className="al-h2">{title}</h2>
-      <p className="al-cap">{cap.map((c, i) => <span key={c}>{c}{i < cap.length - 1 && <br />}</span>)}</p>
+      <div>
+        <p className="al-k al-num">// {n} {k}</p>
+        <h2 id={id} className="al-h2">{title}</h2>
+      </div>
+      {cap && <p className="al-cap">{cap.map((c, i) => <span key={c}>{c}{i < cap.length - 1 && <br />}</span>)}</p>}
     </div>
   )
 }
 
-/** 3. Trust strip: claims the site already proves (footer badges, /about). */
-export function TrustStrip() {
-  const items = ['AHPRA-registered doctors', 'NATA-accredited pathology', 'TGA-compliant pharmacy partner', 'LegitScript certified', 'No GP referral']
+/* eslint-disable @next/next/no-img-element */
+function Photo({ src, alt, className, sizes = '(min-width: 900px) 50vw, 100vw' }: { src: string; alt: string; className?: string; sizes?: string }) {
   return (
-    <div className="al-trust" aria-label="Why you can trust Apex">
-      <ul className="container-x">{items.map(t => <li key={t}>{t}</li>)}</ul>
-    </div>
+    <figure className={`al-photo ${className ?? ''}`}>
+      <img src={src} alt={alt} loading="lazy" decoding="async" sizes={sizes} />
+    </figure>
   )
 }
 
-/** 5. The AlgoRx "Best Sellers" slot: the four ways people start with Apex. */
-const PATHWAYS = [
-  { cat: 'Men', name: 'Men’s blood panel', sub: '23+ markers · incl. testosterone', price: '$280 first panel · members $199', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
-  { cat: 'Women', name: 'Women’s blood panel', sub: 'Hormones · cycle · iron · thyroid', price: '$280 first panel · members $199', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
-  { cat: 'Pathology', name: 'Order bloods', sub: 'Doctor-reviewed · 4,000+ collection centres', price: 'Most results in about 48 hours', page: PORTAL_ORDER_BLOODS, start: PORTAL_ORDER_BLOODS },
-  { cat: 'Membership', name: 'Apex Member', sub: 'Member rates · reviews about every 3 months', price: '$99 /mo · no lock-in', page: PORTAL_MEMBERSHIP, start: PORTAL_MEMBERSHIP },
+/** 02 About you: who it is for, how they feel, what they want to know. */
+const QUESTIONS = [
+  { t: 'Why do I feel flat?', b: 'Tired by mid-afternoon, slower to recover, not as sharp as you were. You want a reason, not a shrug.' },
+  { t: 'What do my numbers say?', b: 'Your hormone markers, thyroid, iron, heart and metabolic health, measured in one blood panel.' },
+  { t: 'What do I do about it?', b: 'A doctor who reads every result with you, and a plan you understand.' },
 ]
-export function Pathways() {
+export function AboutYou() {
   return (
-    <section className="al-sec al-paths" aria-labelledby="paths-title">
+    <section className="al-sec al-about" aria-labelledby="about-title">
       <div className="container-x">
-        <Head id="paths-title" title="Start here." cap={['One panel, then a plan', 'Four ways in', 'Prices on /pricing']} />
-        <ul className="al-paths-grid" role="list">
-          {PATHWAYS.map((p, i) => (
-            <li key={p.name} className="al-card al-path">
-              <span className="al-path-top"><span className="al-k">{String(i + 1).padStart(2, '0')} · {p.cat}</span></span>
-              <Link href={p.page} className="al-path-name">{p.name}</Link>
-              <span className="al-k al-path-sub">{p.sub}</span>
-              <span className="al-path-foot">
-                <span className="al-path-price">{p.price}</span>
-                <Link href={p.start} className="al-pill" aria-label={`Start ${p.name} pathway`}>Start <Arrow /></Link>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
-/** 7. Why Apex? Four principles under a hairline. */
-const PRINCIPLES = [
-  { t: 'Measure first', b: 'One blood panel before any plan, read with you by a doctor.' },
-  { t: 'Doctor-led', b: 'Every consultation is with an AHPRA-registered doctor.' },
-  { t: 'Australian', b: 'NATA-accredited pathology, Australian pharmacies, Australian doctors.' },
-  { t: 'Honest', b: 'Every fee is on the pricing page before you start. No lock-in.' },
-]
-export function WhyApex() {
-  return (
-    <section className="al-sec al-why" aria-labelledby="why-title">
-      <div className="container-x">
-        <Head id="why-title" title="Why Apex?" cap={['Numbers, not guesses', 'Four principles', 'Every claim checkable']} />
-        <ol className="al-why-grid" role="list">
-          {PRINCIPLES.map((p, i) => (
-            <li key={p.t}>
-              <span className="al-k">{String(i + 1).padStart(2, '0')}</span>
-              <h3>{p.t}</h3>
-              <p>{p.b}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  )
-}
-
-/** 8. Results teaser: split, with a dark panel card. No result values are shown. */
-export function ResultsTeaser() {
-  return (
-    <section className="al-sec al-results" aria-labelledby="results-title">
-      <div className="container-x al-results-in">
-        <div className="al-results-copy">
-          <p className="al-k">→ Read with your doctor · Every panel</p>
-          <h2 id="results-title" className="al-h2">Your results, in your portal.</h2>
-          <p className="al-lead">Every marker grouped by system and flagged where it matters. Your doctor explains it on the call, and your plan lives next to it.</p>
-          <ul className="al-ticks" role="list">
-            <li>Every marker grouped by system</li>
-            <li>Flagged against your lab’s reference range</li>
-            <li>Ask about your results, any time</li>
-          </ul>
-          <Link href="/signup" className="al-pill al-pill-lg">Create your free account <Arrow /></Link>
+        <Head id="about-title" n="02" k="About you" title="Told you're fine. Still don't feel it." cap={['Men and women', 'Australians 18 to 80', 'No GP referral']} />
+        <div className="al-about-grid">
+          <Photo className="al-about-main" src="/photos/couple-walk.webp" alt="A man and a woman in their forties walking side by side on a tree-lined street in the morning" />
+          <div className="al-about-side">
+            <div className="al-card al-about-card">
+              <p className="al-lead al-about-lead">
+                Apex is for adults who want to understand their health properly. Your bloods came back &ldquo;normal&rdquo; but something is off, or you simply want to know where you stand before it becomes a problem.
+              </p>
+              <ol className="al-qs" role="list">
+                {QUESTIONS.map((q, i) => (
+                  <li key={q.t}>
+                    <span className="al-k">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{q.t}</h3>
+                      <p>{q.b}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="al-about-pair">
+              <Photo src="/photos/woman-kitchen.webp" alt="A woman standing at her kitchen bench with a glass of water, looking out the window" sizes="(min-width: 900px) 22vw, 50vw" />
+              <Photo src="/photos/man-park-bench.webp" alt="A man in a grey hoodie resting on a park bench after a walk" sizes="(min-width: 900px) 22vw, 50vw" />
+            </div>
+          </div>
         </div>
-        <figure className="al-bio" aria-label="How a marker shows in your portal">
-          <div className="al-bio-top"><span className="al-k">Your panel · Hormones, energy, heart, metabolic</span><span className="al-k">Sample layout</span></div>
-          <p className="al-bio-big">23+<span>markers</span></p>
-          <div className="al-bio-bar" aria-hidden="true"><i /><i /><i /></div>
-          <div className="al-bio-scale al-k" aria-hidden="true"><span>Low</span><span>In range</span><span>High</span></div>
-          <figcaption>Each result sits against your lab’s reference range. Your doctor reads it with you.</figcaption>
-          <div className="al-bio-chips"><span>Hormones</span><span>Metabolic</span></div>
-        </figure>
       </div>
     </section>
   )
 }
 
-/** 12. How it works, on black. The copy is the old three steps, split into four. */
+/** 04 Approach: Test, Assess, Optimise, Review, on black. */
 const STEPS = [
-  { k: 'Check', t: 'Take the 45-second check', b: 'A few questions. We show you what your panel looks at before you create an account.', icon: 'M4 6h12M4 10h8M4 14h5' },
-  { k: 'Bloods', t: 'Bloods near you', b: 'Referral sent electronically. Most results back in about 48 hours.', icon: 'M10 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9Z' },
-  { k: 'Consult', t: 'Your doctor, results open', b: 'Phone or video with an AHPRA-registered doctor, Monday to Saturday.', icon: 'M4 5h12v8H8l-4 3V5Z' },
-  { k: 'Plan', t: 'Your plan, delivered', b: 'If treatment is suitable, it arrives discreetly. Reviewed about every three months.', icon: 'M3 7l7-4 7 4v6l-7 4-7-4V7Zm0 0 7 4 7-4M10 11v6' },
+  { k: 'Test', t: 'Bloods near you.', b: '23+ markers from one draw at a collection centre near you. Most results are back in about 48 hours.' },
+  { k: 'Assess', t: 'A doctor reads every result.', b: 'Results come into your portal automatically and a doctor reviews them before you see them. Then you talk it through, results open.' },
+  { k: 'Optimise', t: 'Normal isn’t optimal.', b: 'Your doctor sets a plan aimed at where you work best, not just inside the reference range. If treatment is suitable, it is dispensed discreetly.' },
+  { k: 'Review', t: 'Measure again.', b: 'Follow-up bloods and a review about every 3 months, so the plan follows your numbers. Your trend lives in your portal.' },
 ]
-export function HowItWorks() {
+export function Approach() {
   return (
-    <section className="al-sec al-how" aria-labelledby="how-title">
+    <section className="al-sec al-how" id="approach" aria-labelledby="how-title">
       <div className="container-x">
-        <Head id="how-title" title="How it works." cap={['Four steps', 'That is the whole thing', 'No GP referral']} dark />
-        <p className="al-k al-how-row">Blood testing and care</p>
+        <div className="al-how-top">
+          <Head id="how-title" n="04" k="Approach" title="Test. Assess. Optimise. Review." dark />
+          <Photo className="al-how-photo" src="/photos/man-kitchen-dawn.webp" alt="A man leaning on his kitchen bench at dawn, a glass of water beside him" sizes="(min-width: 900px) 34vw, 100vw" />
+        </div>
         <ol className="al-how-grid" role="list">
           {STEPS.map((s, i) => (
             <li key={s.k}>
               <span className="al-how-k">{String(i + 1).padStart(2, '0')} / {s.k}</span>
               <h3>{s.t}</h3>
               <p>{s.b}</p>
-              <svg viewBox="0 0 20 20" width="22" height="22" fill="none" aria-hidden="true"><path d={s.icon} stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" strokeLinecap="round" /></svg>
             </li>
           ))}
         </ol>
-        <Link href="/signup" className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
+        <Link href={START_HREF} className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
       </div>
     </section>
   )
 }
 
-/** 15. You ask, we answer: left block, numbered accordion right. */
+/** 05 Why Apex: three reasons, then the four principles. */
+const REASONS = [
+  { k: 'Doctors', t: 'Australian-registered doctors.', b: 'Every plan is set by an AHPRA-registered doctor who works in hormone and metabolic health. NATA-accredited pathology, cGMP partner pharmacies.' },
+  { k: 'Pricing', t: 'Transparent pricing.', b: 'Every fee is on the pricing page before you start. No lock-in, no surprise invoices.', link: { href: '/pricing', label: 'See pricing' } },
+  { k: 'Care', t: 'Personalised care.', b: 'Your plan starts from your own numbers and changes when they do. You can ask about your results any time in your portal.' },
+]
+const PRINCIPLES = ['Measure', 'Assess', 'Optimise', 'Doctor-led specialists']
+export function WhyApex() {
+  return (
+    <section className="al-sec al-why" aria-labelledby="why-title">
+      <div className="container-x">
+        <Head id="why-title" n="05" k="Why Apex" title="Doctor-led. No fluff." cap={['LegitScript certified', 'No GP referral', 'Australia-wide']} />
+        <div className="al-why-in">
+          <Photo className="al-why-photo" src="/photos/woman-video-call.webp" alt="A woman at her dining table on a video call on her laptop" sizes="(min-width: 900px) 40vw, 100vw" />
+          <ol className="al-why-cards" role="list">
+            {REASONS.map((r, i) => (
+              <li key={r.k} className="al-card">
+                <span className="al-k">{String(i + 1).padStart(2, '0')} · {r.k}</span>
+                <h3>{r.t}</h3>
+                <p>{r.b}</p>
+                {r.link && <Link href={r.link.href} className="al-why-link">{r.link.label} <Arrow /></Link>}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <ul className="al-principles" aria-label="Our principles" role="list">
+          {PRINCIPLES.map((p, i) => <li key={p}><span className="al-k">{String(i + 1).padStart(2, '0')}</span>{p}.</li>)}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+/** You ask, we answer: left block, numbered accordion right. */
 export function HomeFAQ() {
   const all = [...FAQS.map(f => ({ q: f.q, a: <>{f.a}</> })), ...OBJECTIONS]
   return (
     <section className="al-sec al-faq" id="faq" aria-labelledby="faq-title">
       <div className="container-x al-faq-in">
         <div className="al-faq-side">
-          <p className="al-k">→ Straight answers</p>
+          <p className="al-k">// Straight answers</p>
           <h2 id="faq-title" className="al-h2">You ask,<br />we answer.</h2>
           <p className="al-lead">For Australian adults 18 to 80. The straight answers on bloods, doctors, fees and cancelling.</p>
           <Link href="/faqs" className="al-pill">All questions <Arrow /></Link>
@@ -181,22 +177,23 @@ export function HomeFAQ() {
   )
 }
 
-/** 16. Closing band: one line, one action, the phone. */
-export function CloseBand() {
+/** 06 Ready to start: one primary action, the quiz as a quiet text link. */
+export function ReadyToStart() {
   return (
     <section className="al-close" id="cta" aria-labelledby="close-title">
-      <div className="container-x">
-        <p className="al-k">→ Measure first</p>
-        <h2 id="close-title" className="al-h2">Stop guessing. Start measuring.</h2>
-        <p className="al-lead">Two minutes to start. Bloods near you, then a doctor with your results open. No GP referral.</p>
+      <img className="al-close-bg" src="/photos/woman-stairs.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <div className="container-x al-close-in">
+        <p className="al-k">// 06 Ready to start</p>
+        <h2 id="close-title" className="al-h2">Ready to start.</h2>
+        <p className="al-lead">Create your free account, order your bloods, and a doctor reads every result with you. No GP referral.</p>
         <div className="al-close-row">
-          <Link href="/signup" className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
-          <a href={`tel:${CLINIC_PHONE_E164}`} className="al-pill al-pill-lg al-pill-ghost">Call {CLINIC_PHONE_DISPLAY}</a>
+          <Link href={START_HREF} className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
         </div>
-        <p className="al-k al-close-meta">Doctors Monday to Saturday · <Link href="/discovery-call">Prefer to talk first? Book a free call</Link></p>
+        <p className="al-close-quiz">
+          Not sure where to start? <Link href={QUIZ_HREF}>Take the 45-second health quiz</Link>
+        </p>
+        <p className="al-k al-close-meta">Doctors Monday to Saturday · <a href={`tel:${CLINIC_PHONE_E164}`}>Call {CLINIC_PHONE_DISPLAY}</a></p>
       </div>
     </section>
   )
 }
-
-/** Phones: one slim bar from the first screen, the CTA and the phone number. */

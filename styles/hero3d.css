@@ -1,85 +1,92 @@
 /*
- * HERO (11 Nov 2026 PM, Noah ASKS item 22, AlgoRx approach). One dark,
- * full-bleed stage. Headline bottom left, one subline, one CTA. The two glass
- * figures are coloured from the first paint (man blue, woman rose) and are
- * the pick: "For men" / "For women" under them. The pick floods the stage in
- * that colour, the chosen figure takes the stage, the copy and the accent
- * follow. State lives on <html>: data-chosen (men | women | absent) and
- * data-audience. See components/home/stage/StageHero.tsx.
+ * HERO (12 Nov 2026, Noah: "keep the avatars back, make them bigger and
+ * premium, kinda like when you enter the portal; gender neutral till the user
+ * picks, then rose pink or blue"). The portal login ice stage, full bleed:
+ * kicker with a dot, two-line title, glass readouts on dot leaders, and the
+ * glass figures large on the right. Neutral on load: grey ice ground, both
+ * figures in greyscale, grey accents. The pick floods the stage from the
+ * tapped button into ice blue (men) or rose (women) and the chosen figure
+ * turns to colour. State lives on <html>: data-chosen (men | women | absent).
+ * See components/home/stage/StageHero.tsx.
  *
- * Text is #f4f6f9 on #05070b (19:1) and the muted subline #b4bfcc (10.8:1).
+ * Ink #0b1220 on the grey ice #eceff3 is 16.9:1; the muted #4a5463 is 6.9:1.
  */
 
 .hx {
   --nav-h: 88px;
   --hx-ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --hx-night: #05070b;
-  --hx-fg: #f4f6f9;
-  --hx-mute: #b4bfcc;
-  --hx-blue: #2f8cff;
-  --hx-rose: #ff6fa8;
-  --hx-accent: var(--hx-blue);
+  --hx-bg: #eceff3;            /* neutral grey ice */
+  --hx-bg-deep: #dfe3e9;
+  --hx-fg: #0b1220;
+  --hx-mute: #4a5463;
+  --hx-blue: #0d5dea;
+  --hx-rose: #d63a78;          /* rose pink, 4.6:1 on its ice */
+  --hx-accent: #5d6673;        /* neutral until the pick */
+  --hx-glow: rgba(120, 130, 145, 0.18);
   position: relative;
-  background: var(--hx-night);
+  background: var(--hx-bg);
   color: var(--hx-fg);
+  transition: background-color 0.8s var(--hx-ease);
 }
-html[data-chosen="women"] .hx { --hx-accent: var(--hx-rose); }
+html[data-chosen="men"] .hx { --hx-bg: #e6f0fc; --hx-bg-deep: #d2e4f8; --hx-accent: var(--hx-blue); --hx-glow: rgba(13, 93, 234, 0.16); }
+html[data-chosen="women"] .hx { --hx-bg: #fbecf2; --hx-bg-deep: #f6d8e4; --hx-accent: var(--hx-rose); --hx-glow: rgba(214, 58, 120, 0.15); }
 
 .hx-pin {
   position: relative;
-  height: calc(100svh - 58px); min-height: 600px; max-height: 1000px;
+  height: calc(100svh - 24px); min-height: 640px; max-height: 1040px;
   padding-top: var(--nav-h);
 }
 .hx-frame {
   position: relative;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 52fr) minmax(0, 48fr);
+  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
   isolation: isolate;
   overflow: hidden;
-  background: var(--hx-night);
+  background: radial-gradient(60% 70% at 72% 58%, var(--hx-bg-deep), transparent 72%) var(--hx-bg-now, var(--hx-bg));
+  transition: background-color 0.8s var(--hx-ease);
 }
 
 /* The colour flood on pick: grows from the tapped button. */
 .hx-wash { position: absolute; inset: 0; z-index: 0; pointer-events: none; clip-path: circle(0px at 50% 100%); opacity: 0; }
-.hx-wash[data-to="men"]   { background: radial-gradient(70% 70% at 70% 60%, rgba(47, 140, 255, 0.28), transparent 70%), var(--hx-night); }
-.hx-wash[data-to="women"] { background: radial-gradient(70% 70% at 70% 60%, rgba(255, 111, 168, 0.26), transparent 70%), var(--hx-night); }
+.hx-wash[data-to="men"]   { background: radial-gradient(60% 70% at 72% 58%, #d2e4f8, transparent 72%), #e6f0fc; }
+.hx-wash[data-to="women"] { background: radial-gradient(60% 70% at 72% 58%, #f6d8e4, transparent 72%), #fbecf2; }
 
 /* ── Copy: bottom left ── */
 .hx-copy {
   position: relative; z-index: 3;
   grid-column: 1; grid-row: 1;
   align-self: end;
-  padding: 0 clamp(20px, 4.4vw, 72px) clamp(40px, 7vh, 88px);
+  padding: 0 clamp(20px, 4.4vw, 72px) clamp(44px, 8vh, 96px);
+}
+.hx-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin: 0 0 20px;
+  font: 500 11.5px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--hx-fg);
+}
+.hx-kicker span {
+  width: 8px; height: 8px; border-radius: 99px; flex: none;
+  background: var(--hx-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--hx-accent) 22%, transparent);
+  transition: background 0.6s var(--hx-ease), box-shadow 0.6s var(--hx-ease);
 }
 .hx-h1 {
   margin: 0;
   font-family: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: clamp(40px, 4.4vw, 68px);
-  line-height: 0.98;
-  letter-spacing: -0.048em;
+  font-size: clamp(44px, 4.7vw, 76px);
+  line-height: 0.96;
+  letter-spacing: -0.052em;
   color: var(--hx-fg);
   text-wrap: balance;
-  max-width: 15ch;
+  max-width: 13ch;
 }
-.hx-trust {
-  margin: 0 0 18px;
-  font: 500 11.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--hx-mute);
-  display: flex; align-items: center; gap: 10px;
-}
-.hx-trust::before { content: ""; width: 6px; height: 6px; transform: rotate(45deg); background: var(--hx-accent); flex: none; transition: background 0.6s var(--hx-ease); }
-/* Each item stays whole; the line wraps between items, never inside one (fix 5). */
-/* The separator sits in the gap; one that would start a line is clipped. */
-.hx-trust-in { display: flex; flex-wrap: wrap; gap: 0 1.6em; min-width: 0; overflow: hidden; }
-.hx-trust-in > span { position: relative; white-space: nowrap; }
-.hx-trust-in > span + span::before { content: "·"; position: absolute; left: -1.05em; }
-.hx-h1-b { color: color-mix(in srgb, var(--hx-fg) 58%, transparent); }
+.hx-h1-b { color: color-mix(in srgb, var(--hx-fg) 42%, transparent); }
 .hx-sub {
-  margin: clamp(16px, 2.2vh, 26px) 0 clamp(22px, 3vh, 34px);
-  max-width: 40ch;
+  margin: clamp(18px, 2.4vh, 28px) 0 clamp(24px, 3.2vh, 36px);
+  max-width: 42ch;
   font-size: clamp(16px, 1.2vw, 19px);
   line-height: 1.5;
   letter-spacing: -0.01em;
@@ -89,92 +96,113 @@ html[data-chosen="women"] .hx { --hx-accent: var(--hx-rose); }
 html[data-chosen="men"] .hx-when-none, html[data-chosen="women"] .hx-when-none { display: none; }
 html[data-chosen="men"] .hx-when-men { display: inline; }
 html[data-chosen="women"] .hx-when-women { display: inline; }
-.hx-actions { display: flex; }
-.hx .stage-cta-label { background: var(--hx-fg); color: #05070b; box-shadow: none; height: 52px; padding: 0 26px; font-size: 15.5px; }
-.hx .stage-cta-arrow { background: var(--hx-accent); width: 52px; height: 52px; transition: transform 0.45s var(--hx-ease), background 0.6s var(--hx-ease); }
+.hx-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+.hx-tel {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font: 500 12.5px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--hx-fg); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px;
+}
+.home-main .hx .stage-cta-label, .hx .stage-cta-label { background: var(--hx-fg); color: #fff; box-shadow: none; height: 54px; padding: 0 28px; font-size: 15.5px; }
+.home-main .hx .stage-cta-arrow, .hx .stage-cta-arrow { background: var(--hx-accent); color: #fff; width: 54px; height: 54px; transition: transform 0.45s var(--hx-ease), background 0.6s var(--hx-ease); }
 
-/* ── Stage: the figures, right side, full height ── */
+/* ── Stage: the figures, large, bleeding off the bottom ── */
 .hx-plate {
   position: relative; z-index: 2;
   grid-column: 2; grid-row: 1;
   min-height: 0;
 }
-.hx-stage { position: absolute; inset: 0 0 76px; }
-/* Air behind each figure, in its own colour. */
-.hx-stage::before, .hx-stage::after {
-  content: ""; position: absolute; z-index: 0; inset: 10% 0 -6%;
+.hx-stage { position: absolute; inset: 2% -2% -14% -10%; }
+/* Soft light behind the figures, in the stage's colour. */
+.hx-stage::before {
+  content: ""; position: absolute; z-index: 0; inset: 8% 4% 6%;
   pointer-events: none;
-  transition: opacity 0.8s var(--hx-ease), transform 0.85s var(--hx-ease);
+  background: radial-gradient(closest-side at 50% 46%, var(--hx-glow), transparent 74%);
+  transition: background 0.8s var(--hx-ease);
 }
-.hx-stage::before { background: radial-gradient(closest-side at 34% 55%, rgba(47, 140, 255, 0.26), transparent 70%); }
-.hx-stage::after  { background: radial-gradient(closest-side at 66% 55%, rgba(255, 111, 168, 0.22), transparent 70%); }
-html[data-chosen="men"] .hx-stage::before { transform: translateX(16%); }
-html[data-chosen="men"] .hx-stage::after { opacity: 0; }
-html[data-chosen="women"] .hx-stage::after { transform: translateX(-16%); }
-html[data-chosen="women"] .hx-stage::before { opacity: 0; }
 
 .hx-fig {
   position: absolute; z-index: 1;
   left: 50%; bottom: 0;
   height: 100%;
   aspect-ratio: 828 / 1108;
-  max-width: 100%;
   translate: -50% 0;
-  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 98%);
-          mask-image: linear-gradient(180deg, #000 72%, transparent 98%);
+  /* Fade the bottom, and the side edges where the render crops the arms. */
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 96%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 70%, transparent 96%), linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
   transform-origin: 50% 100%;
-  transition: transform 0.85s var(--hx-ease), opacity 0.6s var(--hx-ease);
+  filter: grayscale(1) contrast(1.06) brightness(1.04);
+  transition: transform 0.85s var(--hx-ease), opacity 0.6s var(--hx-ease), filter 0.9s var(--hx-ease);
   will-change: transform;
 }
-/* Neutral: both figures, in colour, side by side. */
-html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-26%) scale(0.9); }
-html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.86); }
-/* Chosen: that figure takes the stage, the other leaves. */
+/* Neutral: both figures, grey, side by side, the woman a step behind. */
+html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24%); z-index: 2; }
+html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); opacity: 0.96; }
+/* Chosen: that figure takes the stage in colour, the other leaves. */
 html[data-chosen="men"] .hx-fig[data-sex="male"],
-html[data-chosen="women"] .hx-fig[data-sex="female"] { transform: none; z-index: 2; }
-html[data-chosen="men"] .hx-fig[data-sex="female"] { transform: translateX(50%) scale(0.74); opacity: 0; pointer-events: none; }
-html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%) scale(0.74); opacity: 0; pointer-events: none; }
+html[data-chosen="women"] .hx-fig[data-sex="female"] { transform: none; z-index: 2; filter: none; }
+html[data-chosen="men"] .hx-fig[data-sex="female"] { transform: translateX(50%) scale(0.8); opacity: 0; pointer-events: none; }
+html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%) scale(0.8); opacity: 0; pointer-events: none; }
 
-.hx-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; transition: opacity 0.4s ease; }
+.hx-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 0; transition: opacity 0.4s ease; }
 .hx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
 .hx-canvas:active { cursor: grabbing; }
 .hx-fig[data-live] .hx-poster { opacity: 0; }
 
-/* The pick: two mono pills under the figures. */
+/* The pick: two pills under the figures. Grey dots until chosen. */
 .hx-pick {
   position: absolute; z-index: 4;
-  left: 50%; bottom: 20px; translate: -50% 0;
+  left: 50%; bottom: 24px; translate: -50% 0;
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-  width: min(360px, 88%);
+  width: min(380px, 88%);
+  padding: 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 16px 34px -20px rgba(11, 18, 32, 0.4);
 }
 .hx-pick-btn {
   min-height: 48px;
   border-radius: 999px;
-  border: 1px solid rgba(244, 246, 249, 0.32);
+  border: 0;
   background: transparent;
   color: var(--hx-fg);
   font: 500 12.5px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.4s var(--hx-ease), color 0.4s var(--hx-ease), border-color 0.4s var(--hx-ease);
+  transition: background 0.4s var(--hx-ease), color 0.4s var(--hx-ease);
 }
-.hx-pick-btn[data-who="men"]::before, .hx-pick-btn[data-who="women"]::before {
+.hx-pick-btn::before {
   content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 9px; margin-right: 9px; vertical-align: 1px;
-  background: var(--hx-blue);
+  background: #8a929e;
+  transition: background 0.4s var(--hx-ease);
 }
-.hx-pick-btn[data-who="women"]::before { background: var(--hx-rose); }
-.hx-pick-btn:hover { border-color: var(--hx-fg); }
-.hx-pick-btn:focus-visible { outline: 2px solid var(--hx-fg); outline-offset: 3px; }
-.hx-pick-btn[aria-pressed="true"] { background: var(--hx-fg); color: #05070b; border-color: var(--hx-fg); }
+.hx-pick-btn:hover { background: rgba(11, 18, 32, 0.06); }
+.hx-pick-btn:focus-visible { outline: 2px solid var(--hx-fg); outline-offset: 2px; }
+.hx-pick-btn[aria-pressed="true"] { background: var(--hx-fg); color: #fff; }
+.hx-pick-btn[data-who="men"][aria-pressed="true"]::before { background: #5b9bff; }
+.hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #ff8fbc; }
 
-/* Honesty line: the figures are renders. */
-.hx-foot {
-  position: absolute; z-index: 4; right: clamp(16px, 2vw, 28px); top: 14px; margin: 0;
-  font: 500 10.5px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: #8793a3;
+/* ── Readouts on dot leaders (portal ice stage) ── */
+.hx-reads { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.hx-reads li {
+  position: absolute; display: grid; gap: 2px; width: 200px;
+  padding: 12px 14px; border-radius: 18px;
+  background: rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4); backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 16px 34px -20px rgba(11, 18, 32, 0.4);
 }
+.hx-reads li::after { content: ""; position: absolute; top: 24px; right: 100%; width: 40px; border-top: 1.5px dotted color-mix(in srgb, var(--hx-fg) 45%, transparent); }
+.hx-read-v { font-size: 26px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; color: var(--hx-accent); transition: color 0.6s var(--hx-ease); }
+.hx-reads strong { font-size: 13px; font-weight: 600; color: var(--hx-fg); }
+.hx-reads li > span:last-child { font-size: 12px; line-height: 1.4; color: var(--hx-mute); }
+.hx-reads li[data-i="0"] { right: 3%; top: 44%; }
+.hx-reads li[data-i="1"] { right: 7%; top: 59%; }
+.hx-reads li[data-i="2"] { right: 3%; top: 74%; }
 
 /* ── Markers: light up on the short scroll after a pick (desktop) ── */
 .hx-marks { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.25s linear; }
@@ -182,19 +210,19 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%)
 .hx-mark-dot {
   width: 12px; height: 12px; border-radius: 99px; flex: none;
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
-  opacity: 0.35; scale: 0.7;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+  opacity: 0.45; scale: 0.7;
   transition: opacity 0.4s var(--hx-ease), scale 0.4s var(--hx-ease), box-shadow 0.4s var(--hx-ease);
 }
-.hx-mark[data-on] .hx-mark-dot { opacity: 1; scale: 1; box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.4), 0 0 22px 4px var(--hx-accent); }
+.hx-mark[data-on] .hx-mark-dot { opacity: 1; scale: 1; box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.6), 0 0 22px 4px var(--hx-accent); }
 .hx-mark[data-now] .hx-mark-dot { animation: hx-ping 1.6s ease-out infinite; }
 @keyframes hx-ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--hx-accent) 70%, transparent), 0 0 22px 4px var(--hx-accent); } 100% { box-shadow: 0 0 0 16px transparent, 0 0 22px 4px var(--hx-accent); } }
 .hx-mark-label {
   font: 500 11px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 7px 10px; border-radius: 999px;
-  background: #05070b; border: 1px solid rgba(244, 246, 249, 0.4);
-  color: var(--hx-fg);
+  background: #0b1220; border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
   opacity: 0; translate: -4px 0;
   transition: opacity 0.4s var(--hx-ease), translate 0.4s var(--hx-ease);
 }
@@ -205,45 +233,53 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%)
   .hx[data-pin] { height: 170svh; }
   .hx[data-pin] .hx-pin { position: sticky; top: 0; }
 }
+@media (min-width: 900px) and (max-width: 1199px) {
+  .hx-reads { display: none; }
+}
 
-/* ── Phones: stage on top, copy under it, all on the night ground ── */
+/* ── Phones: big stage on top, copy under it ── */
 @media (max-width: 899px) {
   .hx { --nav-h: 70px; }
   .hx-pin { height: auto; min-height: 0; max-height: none; }
   .hx-frame {
     height: calc(100svh - var(--nav-h) - 64px);
-    min-height: 560px;
+    min-height: 600px;
     grid-template-columns: 1fr;
     grid-template-rows: minmax(0, 1fr) auto;
+    background: radial-gradient(90% 55% at 50% 34%, var(--hx-bg-deep), transparent 74%) var(--hx-bg-now, var(--hx-bg));
   }
+  .hx-wash[data-to="men"]   { background: radial-gradient(90% 55% at 50% 34%, #d2e4f8, transparent 74%), #e6f0fc; }
+  .hx-wash[data-to="women"] { background: radial-gradient(90% 55% at 50% 34%, #f6d8e4, transparent 74%), #fbecf2; }
   .hx-plate { grid-column: 1; grid-row: 1; }
-  .hx-stage { inset: 6px 0 60px; }
-  .hx-stage::before { background: radial-gradient(closest-side at 30% 55%, rgba(47, 140, 255, 0.3), transparent 72%); }
-  .hx-stage::after  { background: radial-gradient(closest-side at 70% 55%, rgba(255, 111, 168, 0.26), transparent 72%); }
-  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-27%) scale(0.94); }
-  html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(27%) scale(0.9); }
-  .hx-pick { bottom: 6px; width: calc(100% - 40px); }
-  .hx-foot { top: 10px; right: 16px; font-size: 10px; }
-  .hx-copy { grid-column: 1; grid-row: 2; padding: 14px 20px 22px; }
-  .hx-h1 { font-size: clamp(36px, 10.2vw, 46px); max-width: none; }
-  .hx-trust { margin-bottom: 12px; font-size: 10.5px; }
-  .hx-sub { margin: 10px 0 16px; font-size: 16px; line-height: 1.45; }
-  .hx .stage-cta-label { height: 50px; padding: 0 22px; font-size: 15.5px; }
-  .hx .stage-cta-arrow { width: 50px; height: 50px; }
-  /* Phones: no hotspot dots on the figure (fix 4, 11 Nov 2026). */
+  .hx-stage { inset: 4px -6% 0; }
+  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-25%); }
+  html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); }
+  .hx-fig { height: 108%; }
+  .hx-pick { bottom: 10px; width: calc(100% - 40px); }
+  .hx-copy { grid-column: 1; grid-row: 2; padding: 16px 20px 20px; }
+  .hx-kicker { margin-bottom: 12px; font-size: 10.5px; }
+  .hx-h1 { font-size: clamp(30px, 8.6vw, 44px); line-height: 1; max-width: none; }
+  .hx-sub { margin: 10px 0 16px; font-size: 15.5px; line-height: 1.45; }
+  .hx .stage-cta-label, .home-main .hx .stage-cta-label { height: 52px; padding: 0 22px; font-size: 15.5px; }
+  .hx .stage-cta-arrow, .home-main .hx .stage-cta-arrow { width: 52px; height: 52px; }
+  /* The phone sticky bar carries the number on the first screen. */
+  .hx-tel { display: none; }
+  .hx-reads li { width: auto; padding: 8px 11px; border-radius: 14px; gap: 0; }
+  .hx-reads li::after, .hx-reads li > span:last-child { display: none; }
+  .hx-read-v { font-size: 19px; }
+  .hx-reads strong { font-size: 11px; }
+  .hx-reads li[data-i="0"] { left: 14px; right: auto; top: 14px; }
+  .hx-reads li[data-i="1"] { left: 14px; right: auto; top: 76px; }
+  .hx-reads li[data-i="2"] { display: none; }
   .hx-mark, .hx-marks { display: none; }
-  /* Clear the round floating button at the right edge (fix 3). */
-  .hx-trust { padding-right: 56px; }
-}
-@media (max-width: 399px) {
-  .hx-trust-aw { display: none; }
 }
 @media (max-width: 899px) and (max-height: 700px) {
   .hx-frame { min-height: 0; }
   .hx-h1 { font-size: 34px; }
   .hx-sub { font-size: 15px; margin: 8px 0 12px; }
+  .hx-reads { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hx-fig, .hx-stage::before, .hx-stage::after, .hx-pick-btn { transition: none; }
+  .hx, .hx-frame, .hx-fig, .hx-stage::before, .hx-pick-btn { transition: none; }
 }

@@ -80,80 +80,9 @@
 .al-pill-ghost:hover { background: #fff; color: var(--al-ink); }
 .home-main .stage-cta-label { background: var(--al-ink); color: #fff; box-shadow: none; }
 .home-main .stage-cta-arrow { background: var(--al-accent); }
-.home-main .hx .stage-cta-label { background: #f4f6f9; color: #05070b; }
-.home-main .hx .stage-cta-arrow { background: var(--hx-accent); }
 
 /* ── Cards ── */
 .al-card { background: var(--al-card); border: 1px solid var(--al-line); border-radius: var(--al-r); }
-
-/* ── 3. Trust strip ── */
-.al-trust { background: var(--al-card); border-bottom: 1px solid var(--al-hair); }
-.al-trust ul { list-style: none; margin: 0 auto; padding-block: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
-.al-trust li { font: 500 11.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); display: inline-flex; align-items: center; gap: 10px; }
-.al-trust li::before { content: ""; width: 6px; height: 6px; background: var(--al-accent); transform: rotate(45deg); flex: none; }
-
-/* ── 4. Program grid ── */
-.tg-k { margin: 0 0 16px; }
-.tg-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
-.tg-col { display: grid; gap: 12px; }
-.tg-card {
-  --h-text: 116px; --h-feat: 252px;
-  position: relative; display: block; overflow: hidden; isolation: isolate;
-  height: var(--h-text);
-  border: 1px solid var(--al-line); border-radius: var(--al-r);
-  background: var(--al-card); color: var(--al-ink); text-decoration: none;
-  transition: height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.tg-img { position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
-.tg-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.tg-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.6)); }
-.tg-n { position: absolute; z-index: 2; left: 20px; top: 18px; font: 500 11.5px/1 var(--al-mono); letter-spacing: 0.1em; color: var(--al-mute); transition: opacity 0.3s; }
-.tg-thumb { position: absolute; z-index: 2; right: 16px; top: 14px; width: 40px; height: 40px; border-radius: 99px; object-fit: cover; transition: opacity 0.3s; }
-.tg-text { position: absolute; z-index: 2; left: 20px; right: 20px; bottom: 18px; display: grid; gap: 6px; }
-.tg-name { font-size: clamp(17px, 1.3vw, 21px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; transition: color 0.3s; }
-.tg-sub { font: 500 11px/1.4 var(--al-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--al-mute); transition: color 0.3s; }
-.tg-all {
-  grid-column: 1 / -1;
-  display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  min-height: 96px; padding: 18px 20px 18px 24px;
-  border-radius: var(--al-r); background: var(--al-ink); color: #fff; text-decoration: none;
-}
-.tg-all-k { color: #a9adb3; }
-.tg-all-row { display: flex; align-items: center; gap: 20px; }
-.tg-all-name { font-size: clamp(22px, 2vw, 30px); font-weight: 600; letter-spacing: -0.04em; }
-.tg-all-arrow { width: 52px; height: 52px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.5); display: grid; place-items: center; flex: none; transition: background 0.3s, border-color 0.3s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
-.tg-all:hover .tg-all-arrow { background: var(--al-accent); border-color: var(--al-accent); transform: rotate(45deg); }
-
-@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
-  /* Feature state: the defaults when nothing is hovered, else only the hovered or focused card. */
-  .tg-grid:not(:has(.tg-card:hover, .tg-card:focus-visible)) .tg-card[data-default],
-  .tg-card:hover, .tg-card:focus-visible { height: var(--h-feat); }
-  .tg-grid:not(:has(.tg-card:hover, .tg-card:focus-visible)) .tg-card[data-default] .tg-img,
-  .tg-card:hover .tg-img, .tg-card:focus-visible .tg-img { opacity: 1; }
-  .tg-grid:not(:has(.tg-card:hover, .tg-card:focus-visible)) .tg-card[data-default] :is(.tg-n, .tg-thumb),
-  .tg-card:hover :is(.tg-n, .tg-thumb), .tg-card:focus-visible :is(.tg-n, .tg-thumb) { opacity: 0; }
-  .tg-grid:not(:has(.tg-card:hover, .tg-card:focus-visible)) .tg-card[data-default] .tg-name,
-  .tg-card:hover .tg-name, .tg-card:focus-visible .tg-name { color: #fff; }
-  .tg-grid:not(:has(.tg-card:hover, .tg-card:focus-visible)) .tg-card[data-default] .tg-sub,
-  .tg-card:hover .tg-sub, .tg-card:focus-visible .tg-sub { color: rgba(255, 255, 255, 0.85); }
-}
-/* Touch and phones: no hover, every card is a flat image card. */
-@media not ((hover: hover) and (pointer: fine) and (min-width: 900px)) {
-  .tg-k-hover { display: none; }
-  .tg-img { opacity: 1; }
-  .tg-n, .tg-thumb { display: none; }
-  .tg-name { color: #fff; }
-  .tg-sub { color: rgba(255, 255, 255, 0.85); }
-}
-
-/* ── 5. Ways in ── */
-.al-paths-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.al-path { display: flex; flex-direction: column; gap: 10px; padding: 20px; min-height: 300px; }
-.al-path-top { margin-bottom: auto; padding-bottom: 40px; }
-.al-path-name { display: flex; align-items: center; min-height: 44px; font-size: clamp(22px, 1.8vw, 28px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; color: var(--al-ink); text-decoration: none; }
-.al-path-name:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
-.al-path-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; margin-top: 8px; border-top: 1px solid var(--al-hair); }
-.al-path-price { font-size: 13.5px; font-weight: 500; color: var(--al-ink); }
 
 /* ── 6. Box band ── */
 .home-main .st-box { background: var(--al-bg); margin-top: clamp(64px, 7vw, 120px); border-block: 1px solid var(--al-hair); }
@@ -161,60 +90,6 @@
 .home-main .stage-float-k { font: 500 10.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
 .home-main .stage-float-v { color: var(--al-ink); font-weight: 600; }
 .home-main .st-box-call { font-family: var(--al-mono); font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; }
-
-/* ── 7. Why Apex ── */
-.al-why-grid { list-style: none; margin: 0; padding: 28px 0 0; border-top: 1px solid var(--al-line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
-.al-why-grid h3 { margin: 18px 0 8px; font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
-.al-why-grid p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--al-mute); max-width: 30ch; }
-
-/* ── 8. Results teaser ── */
-.al-results-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
-.al-results-copy .al-h2 { margin-top: 18px; max-width: 13ch; }
-.al-ticks { list-style: none; margin: 24px 0 28px; padding: 0; display: grid; gap: 10px; }
-.al-ticks li { display: flex; align-items: center; gap: 12px; font-size: 15.5px; color: var(--al-ink); }
-.al-ticks li::before { content: ""; width: 20px; height: 20px; border-radius: 99px; flex: none; background: var(--al-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
-.al-bio { margin: 0; padding: clamp(22px, 2.4vw, 32px); border-radius: var(--al-r); background: #0a0a0a; color: #f4f6f9; display: grid; gap: 18px; }
-.al-bio .al-k { color: #a9adb3; }
-.al-bio-top { display: flex; justify-content: space-between; gap: 16px; }
-.al-bio-big { margin: 8px 0 0; font-size: clamp(64px, 7vw, 104px); font-weight: 600; letter-spacing: -0.06em; line-height: 0.9; }
-.al-bio-big span { margin-left: 12px; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: #a9adb3; }
-.al-bio-bar { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 4px; height: 8px; }
-.al-bio-bar i { border-radius: 99px; background: #2b2e33; }
-.al-bio-bar i:nth-child(2) { background: var(--al-accent-on-dark); }
-.al-bio-scale { display: grid; grid-template-columns: 1fr 2fr 1fr; text-align: center; }
-.al-bio-scale span:first-child { text-align: left; }
-.al-bio-scale span:last-child { text-align: right; }
-.al-bio figcaption { font-size: 14.5px; line-height: 1.5; color: #c9ced4; max-width: 44ch; }
-.al-bio-chips { display: flex; gap: 8px; }
-.al-bio-chips span { padding: 8px 12px; border-radius: 999px; border: 1px solid #3a3d42; font: 500 11px/1 var(--al-mono); letter-spacing: 0.1em; text-transform: uppercase; color: #e6e8eb; }
-
-/* ── 9/10. Proof: the checkable doctor and registration block ── */
-.home-main section.section-pad { background: var(--al-bg) !important; padding-block: clamp(88px, 9vw, 150px) 0 !important; }
-.home-main section.section-pad > [aria-hidden="true"] { display: none; }
-.home-main section.section-pad .display-heading::before { content: "→ Proof · Check every claim"; display: block; margin-bottom: 18px; font: 500 11.5px/1.55 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
-.home-main section.section-pad li { border-color: var(--al-hair) !important; }
-
-/* ── 12. How it works, on black ── */
-.al-how { background: #050505; color: #f4f6f9; margin-top: clamp(88px, 9vw, 150px); padding-block: clamp(80px, 8vw, 130px); }
-.al-how .al-h2 { color: #f4f6f9; }
-.al-how .al-cap, .al-how .al-k { color: #a3a8b0; }
-.al-how-row { padding-bottom: 14px; border-bottom: 1px solid #26292d; margin-bottom: 28px !important; }
-.al-how-grid { list-style: none; margin: 0 0 44px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
-.al-how-grid li { display: grid; align-content: start; gap: 10px; padding-left: 20px; border-left: 1px solid #26292d; }
-.al-how-k { font: 500 11.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-accent-on-dark); }
-.al-how-grid h3 { margin: 4px 0 0; font-size: 20px; font-weight: 600; letter-spacing: -0.03em; }
-.al-how-grid p { margin: 0; font-size: 15px; line-height: 1.5; color: #b4bac2; max-width: 30ch; }
-.al-how-grid svg { margin-top: 8px; color: #8b9098; }
-
-/* ── 13. Included: text cards with mono numerals ── */
-.home-main .st-inc-wrap { padding: clamp(88px, 9vw, 150px) 0 0; background: var(--al-bg); }
-.home-main .st-inc { padding: 0 var(--container-pad, clamp(20px, 4vw, 48px)); max-width: 1440px; margin: 0 auto; background: transparent; border-radius: 0; overflow: visible; }
-.home-main .st-inc-art { display: none !important; }
-.home-main .st-inc-head { max-width: none; }
-.home-main .st-inc-head .stage-h2::before { content: "→ Every plan · Not an upsell"; display: block; margin-bottom: 18px; font: 500 11.5px/1.55 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
-.home-main .st-inc-grid { gap: 12px; }
-.home-main .st-inc-grid li { background: var(--al-card) !important; border: 1px solid var(--al-line) !important; border-radius: var(--al-r) !important; backdrop-filter: none !important; padding: 22px !important; }
-.home-main .st-inc-k { font-family: var(--font-inter); font-variation-settings: normal; font-weight: 600; letter-spacing: -0.04em; color: var(--al-ink); }
 
 /* ── 15. FAQ ── */
 .al-faq-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
@@ -232,15 +107,6 @@
 .al-faq-item[open] .al-faq-x { background: var(--al-ink); color: #fff; transform: rotate(45deg); }
 .al-faq-a { padding: 0 40px 22px 48px; font-size: 15.5px; line-height: 1.6; color: var(--al-mute); }
 .al-faq-a a { color: var(--al-ink); text-decoration: underline; text-underline-offset: 3px; }
-
-/* ── 16. Close band ── */
-.al-close { margin-top: clamp(88px, 9vw, 150px); background: #050505; color: #f4f6f9; padding-block: clamp(96px, 10vw, 170px); border-bottom: 1px solid #1f2124; }
-.al-close .al-k { color: #a3a8b0; }
-.al-close .al-h2 { color: #f4f6f9; margin-top: 18px; max-width: 14ch; font-size: clamp(40px, 5.4vw, 84px); }
-.al-close .al-lead { color: #b4bac2; }
-.al-close-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-.al-close-meta { margin-top: 22px !important; }
-.al-close-meta a { color: #f4f6f9; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
 
 /* ── 17. Footer: black, mono headers ── */
 .al-foot {
@@ -275,46 +141,6 @@
   .hsb[data-hero] .hsb-start { display: none; }
 }
 
-/* ── Tablet and phone ── */
-@media (max-width: 1099px) {
-  .al-paths-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .al-why-grid, .al-how-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
-}
-@media (max-width: 899px) {
-  .al-sec { padding-top: 72px; }
-  .al-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-  .al-cap { text-align: left; }
-  .al-cap br { display: none; }
-  .al-cap span + span::before { content: " · "; }
-  .al-trust ul { display: grid; grid-template-columns: 1fr; gap: 10px; padding-block: 20px; }
-  .tg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-  .tg-col { display: contents; }
-  .tg-card { height: 196px; border-radius: 20px; }
-  .tg-text { left: 14px; right: 12px; bottom: 14px; gap: 5px; }
-  .tg-name { font-size: 18px; }
-  .tg-sub { font-size: 9.5px; letter-spacing: 0.08em; }
-  .tg-all { min-height: 88px; border-radius: 20px; padding: 16px 16px 16px 18px; }
-  .tg-all-k { display: none; }
-  .tg-all-row { width: 100%; justify-content: space-between; }
-  .al-paths-grid { grid-template-columns: 1fr; gap: 8px; }
-  .al-path { min-height: 0; }
-  .al-path-top { padding-bottom: 20px; }
-  .al-why-grid { grid-template-columns: 1fr; gap: 0; padding-top: 0; }
-  .al-why-grid li { padding: 22px 0; border-bottom: 1px solid var(--al-hair); }
-  .al-why-grid h3 { margin-top: 10px; }
-  .al-results-in { grid-template-columns: 1fr; }
-  .al-bio-top { flex-direction: column; gap: 4px; }
-  .al-how { margin-top: 72px; }
-  .al-how-grid { grid-template-columns: 1fr; gap: 0; }
-  .al-how-grid li { padding: 22px 0; border-left: 0; border-bottom: 1px solid #26292d; }
-  .al-how-grid li:first-child { padding-top: 0; }
-  .al-faq-in { grid-template-columns: 1fr; }
-  .al-faq-a { padding: 0 8px 20px 48px; }
-  .al-close { margin-top: 72px; }
-  .home-main .st-inc-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .home-main .st-box { margin-top: 72px; }
-}
-
 /* ── Nav on the home page: one solid black bar (AlgoRx) ── */
 html:has(.home-main) header.site-header-enter {
   background-color: #050505 !important;
@@ -338,28 +164,6 @@ html:has(.home-main) header.site-header-enter .nav-cta { background: #ffffff !im
 .home-main .st-box-head .al-h2 { text-align: center; margin: 14px auto 0; }
 /* Beat stage.css's site-wide light-headline rule (main :is(h1,h2):not(...), 0,3,2 + !important). */
 main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):not(.y) { font-weight: 700 !important; }
-
-/* ── Proof (DoctorCard) on the AlgoRx system (fix 6, 11 Nov 2026):
-   two typefaces only, 1px / 24px cards with a 24px gap, mono counters
-   instead of the old blue-dot bullets, air under the heading. ── */
-.home-main #our-doctors { background: var(--al-bg) !important; }
-.home-main #our-doctors h2.dc-h2 { margin-bottom: 24px !important; line-height: 1.02; }
-.home-main #our-doctors .dc-body { margin-top: 0; }
-.home-main #our-doctors .dc-ledger { display: grid; gap: 24px; }
-.home-main #our-doctors .dc-row { background: var(--al-card); border: 1px solid var(--al-line) !important; border-radius: var(--al-r); padding: 24px !important; }
-.home-main #our-doctors .dc-row:hover { border-color: var(--al-accent) !important; }
-.home-main #our-doctors .dc-rule { display: none; }
-.home-main #our-doctors .dc-ledger > p { margin-top: 0; }
-.home-main #our-doctors .dc-detail { font-family: var(--al-mono) !important; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; }
-.home-main #our-doctors ul[aria-label="What Apex does not do"] { counter-reset: dc; }
-.home-main #our-doctors .dc-dot { width: auto; height: auto; margin-top: 2px; background: none !important; border-radius: 0; }
-.home-main #our-doctors .dc-dot::before { counter-increment: dc; content: "0" counter(dc); font: 500 11.5px/1.5 var(--al-mono); letter-spacing: 0.1em; color: var(--al-mute); }
-
-/* ── Included (fix 8): one column on small phones, ink pill CTA ── */
-.home-main .st-inc-cta { justify-self: start; }
-@media (max-width: 399px) {
-  .home-main .st-inc-grid { grid-template-columns: 1fr !important; }
-}
 
 /* ── Footer on home (fix 9): 44px contact taps, 24px legal box, Start pill inside the column ── */
 .al-foot .footer-contact { display: inline-flex; align-items: center; min-height: 44px; }
@@ -389,29 +193,204 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 /* Footer text links: 44px wide minimum as well as tall (fix 9). */
 .al-foot .site-footer ul a { display: inline-flex; align-items: center; min-width: 44px; }
 
-/* ── Round 4 (11 Nov 2026, QA r3) ── */
-/* Grid: AI texture disclosure beside the kicker. */
-.tg-k-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin: 0 0 16px; }
-.tg-k-row .tg-k { margin: 0; }
-/* Proof: same 1280 container as every other home section (heading at 144 on 1440). */
-.home-main #our-doctors > .container-tight { max-width: 1280px; padding-inline: clamp(20px, 5vw, 64px); }
-/* Included: container-x sets the inline padding; keep it over .st-inc's. */
-.home-main .st-inc.container-x { max-width: 1280px; padding-inline: clamp(20px, 5vw, 64px); }
-/* Box band: card capped near 640px tall on desktop; render caption. */
-.home-main .st-box-stage { width: min(92vw, 708px); }
-.home-main .st-box-note { text-align: center; margin: 14px 0 0; }
-@media (max-width: 899px) {
-  /* Nine cards in two columns: the ninth spans the row. */
-  .tg-col:nth-child(3) > .tg-card:last-child { grid-column: 1 / -1; }
-  /* Render at ~90% so the lid and left corner sit clear of the chips and the card edge. */
-  .home-main .st-box-fig { inset: 9% 5% 1%; }
-  .home-main .st-box-img { object-fit: contain !important; }
-  .home-main .st-box-actions { margin-top: 8px; }
-}
-
 /* Box chips (Noah, 12 Nov): our chip style and fonts, plus a small icon. */
 .home-main .st-box .st-box-chip { display: flex !important; align-items: center; gap: 12px; max-width: min(78%, 340px); white-space: normal !important; translate: none !important; text-align: left; }
 .home-main .st-box .st-box-chip-ic { flex: none; width: 22px; height: 22px; color: var(--al-ink); }
 .home-main .st-box .st-box-chip-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .home-main .st-box .st-box-float-b { left: auto !important; }
 @media (max-width: 899px) { .home-main .st-box .st-box-chip { max-width: calc(100% - 24px); } }
+
+/* Box band (kept from round 4, 11 Nov 2026). */
+.home-main .st-box-stage { width: min(92vw, 708px); }
+.home-main .st-box-note { text-align: center; margin: 14px 0 0; }
+@media (max-width: 899px) {
+  .home-main .st-box { margin-top: 0; }
+  .home-main .st-box-fig { inset: 9% 5% 1%; }
+  .home-main .st-box-img { object-fit: contain !important; }
+  .home-main .st-box-actions { margin-top: 8px; }
+}
+
+/* ══ 12 Nov 2026 structure: 02 about, 03 protocols, 04 approach, 05 why, 06 ready ══ */
+.al-num { margin-bottom: 16px; color: var(--al-ink); }
+.al-head[data-dark] .al-num { color: #a3a8b0; }
+.al-photo { margin: 0; overflow: hidden; border-radius: var(--al-r); background: #e9e9e7; }
+.al-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── 02 About you: big photo, white card, photo pair ── */
+.al-about-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 12px; align-items: stretch; }
+.al-about-main { min-height: 640px; }
+.al-about-main img { object-position: 50% 30%; }
+.al-about-side { display: grid; grid-template-rows: auto 1fr; gap: 12px; }
+.al-about-card { padding: clamp(22px, 2.4vw, 34px); }
+.al-about-lead { margin-top: 0; color: var(--al-ink); max-width: none; }
+.al-qs { list-style: none; margin: 22px 0 0; padding: 0; border-top: 1px solid var(--al-hair); }
+.al-qs li { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--al-hair); }
+.al-qs li:last-child { border-bottom: 0; padding-bottom: 0; }
+.al-qs .al-k { padding-top: 3px; }
+.al-qs h3 { margin: 0 0 4px; font-size: 18px; font-weight: 600; letter-spacing: -0.03em; }
+.al-qs p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--al-mute); }
+.al-about-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; min-height: 220px; }
+.al-about-pair .al-photo img { object-position: 50% 25%; }
+
+/* ── 03 Protocols: one cinematic feature, then alternating rows ── */
+.tg-board { display: grid; gap: 12px; }
+.tg-feature {
+  position: relative; display: block; overflow: hidden; isolation: isolate;
+  height: clamp(420px, 44vw, 600px);
+  border-radius: var(--al-r); background: #0a0a0a; color: #fff; text-decoration: none;
+}
+.tg-feature .tg-img { opacity: 1; }
+.tg-feature .tg-img img { transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+.tg-feature .tg-img::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.78)); }
+.tg-feature-k { position: absolute; z-index: 2; left: clamp(20px, 2.6vw, 40px); top: clamp(18px, 2.2vw, 32px); color: rgba(255, 255, 255, 0.85); }
+.tg-feature-text { position: absolute; z-index: 2; left: clamp(20px, 2.6vw, 40px); bottom: clamp(22px, 2.8vw, 44px); right: 120px; display: grid; gap: 10px; }
+.tg-feature-name { font-size: clamp(36px, 5.2vw, 84px); font-weight: 700; letter-spacing: -0.05em; line-height: 0.95; }
+.tg-feature-sub { font: 500 12px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
+.tg-feature-arrow { position: absolute; z-index: 2; right: clamp(20px, 2.6vw, 40px); bottom: clamp(22px, 2.8vw, 44px); width: 60px; height: 60px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.6); display: grid; place-items: center; transition: background 0.3s, border-color 0.3s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.tg-feature:hover .tg-img img { transform: scale(1.03); }
+.tg-feature:hover .tg-feature-arrow { background: var(--al-accent); border-color: var(--al-accent); transform: rotate(45deg); }
+.tg-feature:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 3px; }
+
+.tg-row { display: flex; gap: 12px; }
+.tg-card {
+  position: relative; display: block; overflow: hidden; isolation: isolate;
+  flex: 1 1 0; min-width: 0; height: 280px;
+  border: 1px solid var(--al-line); border-radius: var(--al-r);
+  background: var(--al-card); color: var(--al-ink); text-decoration: none;
+  transition: flex-grow 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+.tg-card[data-kind="img"] { flex-grow: 1.5; border-color: transparent; background: #0a0a0a; color: #fff; }
+.tg-img { position: absolute; inset: 0; z-index: 0; opacity: 0; transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.tg-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tg-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(0, 0, 0, 0.66)); }
+.tg-card[data-kind="img"] .tg-img { opacity: 1; }
+.tg-n { position: absolute; z-index: 2; left: 22px; top: 20px; font: 500 11.5px/1 var(--al-mono); letter-spacing: 0.1em; color: var(--al-mute); transition: color 0.3s; }
+.tg-card[data-kind="img"] .tg-n { color: rgba(255, 255, 255, 0.85); }
+.tg-thumb { position: absolute; z-index: 2; right: 18px; top: 16px; width: 40px; height: 40px; border-radius: 99px; object-fit: cover; transition: opacity 0.3s; }
+.tg-text { position: absolute; z-index: 2; left: 22px; right: 22px; bottom: 20px; display: grid; gap: 6px; }
+.tg-name { font-size: clamp(20px, 1.6vw, 26px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; transition: color 0.3s; }
+.tg-sub { font: 500 11px/1.4 var(--al-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--al-mute); transition: color 0.3s; }
+.tg-card[data-kind="img"] .tg-sub { color: rgba(255, 255, 255, 0.85); }
+.tg-card:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 3px; }
+.tg-all {
+  flex: 1 1 0; min-width: 0;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  min-height: 96px; padding: 22px;
+  border-radius: var(--al-r); background: var(--al-ink); color: #fff; text-decoration: none;
+  transition: flex-grow 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+.tg-all-k { color: #a9adb3; }
+.tg-all-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.tg-all-name { font-size: clamp(22px, 2vw, 30px); font-weight: 600; letter-spacing: -0.04em; }
+.tg-all-arrow { width: 52px; height: 52px; border-radius: 99px; border: 1px solid rgba(255, 255, 255, 0.5); display: grid; place-items: center; flex: none; transition: background 0.3s, border-color 0.3s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.tg-all:hover .tg-all-arrow { background: var(--al-accent); border-color: var(--al-accent); transform: rotate(45deg); }
+.tg-all:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 3px; }
+
+/* Desktop, fine pointer: hover or focus widens the card and the rest step back. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .tg-row .tg-card:hover, .tg-row .tg-card:focus-visible { flex-grow: 2.4; }
+  .tg-board:has(.tg-row .tg-card:hover, .tg-row .tg-card:focus-visible) .tg-row :is(.tg-card, .tg-all):not(:hover):not(:focus-visible) { opacity: 0.45; }
+  .tg-card[data-kind="text"]:is(:hover, :focus-visible) .tg-img { opacity: 1; }
+  .tg-card[data-kind="text"]:is(:hover, :focus-visible) { border-color: transparent; }
+  .tg-card[data-kind="text"]:is(:hover, :focus-visible) .tg-thumb { opacity: 0; }
+  .tg-card[data-kind="text"]:is(:hover, :focus-visible) :is(.tg-name, .tg-n) { color: #fff; }
+  .tg-card[data-kind="text"]:is(:hover, :focus-visible) .tg-sub { color: rgba(255, 255, 255, 0.85); }
+}
+
+/* ── 04 Approach: dark numbered steps ── */
+.al-how { background: #050505; color: #f4f6f9; margin-top: clamp(88px, 9vw, 150px); padding-block: clamp(80px, 8vw, 130px); }
+.al-how .al-h2 { color: #f4f6f9; max-width: 12ch; }
+.al-how .al-cap, .al-how .al-k { color: #a3a8b0; }
+.al-how-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 4vw, 64px); align-items: end; margin-bottom: clamp(36px, 4vw, 56px); }
+.al-how-top .al-head { margin-bottom: 0; }
+.al-how-photo { aspect-ratio: 4 / 3; background: #15171a; }
+.al-how-photo img { object-position: 50% 30%; }
+.al-how-grid { list-style: none; margin: 0 0 44px; padding: 28px 0 0; border-top: 1px solid #26292d; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.al-how-grid li { display: grid; align-content: start; gap: 10px; padding-left: 20px; border-left: 1px solid #26292d; }
+.al-how-k { font: 500 11.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-accent-on-dark); }
+.al-how-grid h3 { margin: 4px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; }
+.al-how-grid p { margin: 0; font-size: 15px; line-height: 1.55; color: #b4bac2; max-width: 32ch; }
+
+/* ── 05 Why Apex: photo, three cards, four principles ── */
+.al-why-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px; align-items: stretch; }
+.al-why-photo { min-height: 520px; }
+.al-why-photo img { object-position: 50% 30%; }
+.al-why-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.al-why-cards li { display: grid; align-content: start; gap: 10px; padding: clamp(20px, 2.2vw, 30px); }
+.al-why-cards h3 { margin: 6px 0 0; font-size: clamp(22px, 1.9vw, 28px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
+.al-why-cards p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--al-mute); max-width: 52ch; }
+.al-why-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; justify-self: start; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }
+.al-principles { list-style: none; margin: 28px 0 0; padding: 22px 0 0; border-top: 1px solid var(--al-line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 28px; }
+.al-principles li { display: flex; align-items: baseline; gap: 12px; font-size: clamp(18px, 1.5vw, 22px); font-weight: 600; letter-spacing: -0.035em; }
+
+/* ── 06 Ready to start: photo CTA band ── */
+.al-close { position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(88px, 9vw, 150px); background: #050505; color: #f4f6f9; padding-block: clamp(110px, 12vw, 200px); border-bottom: 1px solid #1f2124; }
+.al-close-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+.al-close::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.72) 45%, rgba(5, 5, 5, 0.25) 100%); }
+.al-close .al-k { color: #c3c8cf; }
+.al-close .al-h2 { color: #f4f6f9; margin-top: 18px; max-width: 12ch; font-size: clamp(40px, 5.4vw, 84px); }
+.al-close .al-lead { color: #d0d4da; }
+.al-close-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.al-close-quiz { margin: 22px 0 0; font-size: 15px; color: #c3c8cf; }
+.al-close-quiz a { display: inline-flex; align-items: center; min-height: 44px; color: #f4f6f9; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.al-close-meta { margin-top: 10px !important; }
+.al-close-meta a { color: #f4f6f9; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+
+/* ── Tablet and phone ── */
+@media (max-width: 1099px) {
+  .al-how-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+  .al-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px) {
+  .al-sec { padding-top: 72px; }
+  .al-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+  .al-cap { text-align: left; }
+  .al-cap br { display: none; }
+  .al-cap span + span::before { content: " · "; }
+  .al-num { margin-bottom: 12px; }
+
+  .al-about-grid { grid-template-columns: 1fr; gap: 8px; }
+  .al-about-main { min-height: 0; aspect-ratio: 4 / 5; }
+  .al-about-side { gap: 8px; }
+  .al-about-pair { gap: 8px; min-height: 0; }
+  .al-about-pair .al-photo { aspect-ratio: 4 / 5; }
+
+  .tg-board { gap: 8px; }
+  .tg-feature { height: 440px; border-radius: 20px; }
+  .tg-feature-text { right: 84px; }
+  .tg-feature-name { font-size: 40px; }
+  .tg-feature-arrow { width: 52px; height: 52px; }
+  .tg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tg-card { height: 168px; border-radius: 20px; }
+  .tg-card[data-kind="img"] { grid-column: 1 / -1; height: 220px; }
+  /* Phones: image card first in every row, so image and white pairs alternate. */
+  .tg-row[data-flip] .tg-card[data-kind="img"] { order: -1; }
+  .tg-n { left: 16px; top: 16px; }
+  .tg-thumb { right: 12px; top: 12px; width: 34px; height: 34px; }
+  .tg-text { left: 16px; right: 12px; bottom: 14px; gap: 5px; }
+  .tg-name { font-size: 18px; }
+  .tg-sub { font-size: 9.5px; letter-spacing: 0.08em; }
+  .tg-all { border-radius: 20px; padding: 16px; min-height: 168px; }
+  .tg-all-name { font-size: 20px; }
+  .tg-all-arrow { width: 44px; height: 44px; }
+
+  .al-how { margin-top: 72px; padding-block: 64px; }
+  .al-how-top { grid-template-columns: 1fr; gap: 24px; margin-bottom: 28px; }
+  .al-how-photo { aspect-ratio: 16 / 10; border-radius: 20px; }
+  .al-how-grid { grid-template-columns: 1fr; gap: 0; padding-top: 0; border-top: 0; }
+  .al-how-grid li { padding: 20px 0; border-left: 0; border-bottom: 1px solid #26292d; }
+  .al-how-grid h3 { font-size: 20px; }
+
+  .al-why-in { grid-template-columns: 1fr; gap: 8px; }
+  .al-why-photo { min-height: 0; aspect-ratio: 4 / 3; border-radius: 20px; }
+  .al-why-cards { gap: 8px; }
+  .al-principles { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+  .al-principles li { font-size: 17px; }
+
+  .al-faq-in { grid-template-columns: 1fr; }
+  .al-faq-a { padding: 0 8px 20px 48px; }
+
+  .al-close { margin-top: 72px; padding-block: 96px 88px; }
+  .al-close::before { background: linear-gradient(180deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0.88) 55%, rgba(5, 5, 5, 0.94) 100%); }
+  .al-close .al-h2 { font-size: 44px; }
+}

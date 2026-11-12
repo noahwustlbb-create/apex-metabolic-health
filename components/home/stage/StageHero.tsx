@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useMotionValueEvent } from 'framer-motion'
 import { useSectionProgress } from './useSectionProgress'
 import StageCta from './StageCta'
+import { START_HREF } from '@/lib/portal'
+import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 import Turntable from './Turntable'
 import { useAudience } from '@/components/audience/Audience'
 import { preload } from 'react-dom'
@@ -12,6 +14,14 @@ type Sex = 'male' | 'female'
 type Who = 'men' | 'women'
 
 /**
+ * 12 Nov 2026 (Noah: "keep the avatars back, make them bigger and premium,
+ * kinda like when you enter the portal, gender neutral till the user picks,
+ * then rose pink or blue"). The portal login ice stage, full bleed (no box,
+ * per 11 Nov AM): kicker, two-line title, readouts on dot leaders, and the
+ * glass figures large on the right. On load both figures are grey on a grey
+ * ice ground; the pick floods the stage blue (men) or rose (women) and the
+ * chosen figure turns to colour. Older notes below are history.
+ *
  * HERO (Noah, 24 Oct 2026: "choose a gender first ... with the award winning
  * 3D hero"; S tier pass 28 Oct 2026 after the wearebrand playbook). The
  * visitor picks Men or Women inside the hero. Before the pick the hero is
@@ -50,27 +60,19 @@ type Who = 'men' | 'women'
  * neutral hero flash first. CSS drives the look; React drives the moment.
  */
 
-const SYSTEMS: { id: string; label: string; tests: Record<Sex, string>; at: Record<Sex, [number, number]> }[] = [
-  {
-    id: 'hormones', label: 'Hormones',
-    tests: { male: 'Testosterone, SHBG, oestradiol, LH, FSH, prolactin', female: 'Oestradiol, progesterone, testosterone, LH, FSH, prolactin' },
-    at: { male: [0.6, 0.12], female: [0.6, 0.1] },
-  },
-  {
-    id: 'energy', label: 'Energy',
-    tests: { male: 'Thyroid (TSH), full blood count, cortisol, IGF-1', female: 'Thyroid (TSH, free T4, free T3), iron studies, vitamin D' },
-    at: { male: [0.54, 0.47], female: [0.55, 0.44] },
-  },
-  {
-    id: 'heart', label: 'Heart',
-    tests: { male: 'Cholesterol, triglycerides, hs-CRP', female: 'Cholesterol, triglycerides, hs-CRP' },
-    at: { male: [0.5, 0.76], female: [0.46, 0.74] },
-  },
-  {
-    id: 'metabolic', label: 'Metabolic',
-    tests: { male: 'Glucose, liver and kidney function, uric acid', female: 'Glucose, HbA1c, liver and kidney function' },
-    at: { male: [0.36, 0.82], female: [0.36, 0.82] },
-  },
+// Every name on a marker is a system the panel reads, never a medicine.
+const SYSTEMS: { id: string; label: string; at: Record<Sex, [number, number]> }[] = [
+  { id: 'hormones', label: 'Hormones', at: { male: [0.6, 0.12], female: [0.6, 0.1] } },
+  { id: 'energy', label: 'Energy', at: { male: [0.54, 0.47], female: [0.55, 0.44] } },
+  { id: 'heart', label: 'Heart', at: { male: [0.5, 0.76], female: [0.46, 0.74] } },
+  { id: 'metabolic', label: 'Metabolic', at: { male: [0.36, 0.82], female: [0.36, 0.82] } },
+]
+
+/** Readouts on dot leaders (portal ice stage). Approved facts only, no prices. */
+const READS = [
+  { v: '23+', k: 'Markers', d: 'One blood panel, one draw' },
+  { v: '48 h', k: 'Most results back', d: 'Collection centre near you' },
+  { v: 'AHPRA', k: 'Registered doctors', d: 'A doctor reads every result' },
 ]
 
 const POSTER: Record<Sex, string> = { male: '/3d/turn/male/00.webp', female: '/3d/turn/female/00.webp' }
@@ -166,7 +168,7 @@ export default function StageHero() {
   const readyM = useCallback(() => setLive(l => ({ ...l, male: true })), [])
   const readyF = useCallback(() => setLive(l => ({ ...l, female: true })), [])
 
-  const href = '/signup'
+  const href = START_HREF
   const markerShow = sex && (still ? 1 : 1 - away)
   const litNow = sex ? Math.max(0, lit) : -1
 
@@ -212,7 +214,7 @@ export default function StageHero() {
                 )
               })}
             </div>
-            {/* The pick: the figures are the choice. Colour is on from the first paint. */}
+            {/* The pick: grey until chosen, then that colour world. */}
             <div className="hx-pick" role="group" aria-label="Show the panel for">
               {(['men', 'women'] as Who[]).map(w => (
                 <button key={w} type="button" className="hx-pick-btn" data-who={w} aria-pressed={chosen === w} onClick={e => choose(w, e)}>
@@ -222,19 +224,30 @@ export default function StageHero() {
             </div>
           </div>
 
+          <ul className="hx-reads" aria-label="At a glance">
+            {READS.map((r, i) => (
+              <li key={r.k} data-i={i} className="hero-in" style={{ animationDelay: `${500 + i * 120}ms` }}>
+                <span className="hx-read-v">{r.v}</span>
+                <strong>{r.k}</strong>
+                <span>{r.d}</span>
+              </li>
+            ))}
+          </ul>
+
           <div className="hx-copy">
-            <p className="hx-trust hero-in" style={{ animationDelay: '40ms' }}><span className="hx-trust-in"><span>AHPRA-registered doctors</span><span className="hx-trust-aw">Australia-wide</span><span>No GP referral</span></span></p>
+            <p className="hx-kicker hero-in" style={{ animationDelay: '40ms' }}><span aria-hidden="true" />Doctor-led telehealth · Australia-wide</p>
             <h1 id="hx-title" className="hx-h1 hero-in" style={{ animationDelay: '80ms' }}>
               Understand your health.<br /><span className="hx-h1-b">Optimise your future.</span>
             </h1>
             <p className="hx-sub hero-in" style={{ animationDelay: '200ms' }}>
-              <span className="hx-when-none">One blood panel, read with you by a doctor online. No GP referral.</span>
-              <span className="hx-when-men">One blood panel including testosterone, read with you by a doctor online.</span>
-              <span className="hx-when-women">One blood panel for hormones, cycle, iron and thyroid, read with you by a doctor online.</span>
+              <span className="hx-when-none">Hormone and metabolic health for Australians 18 to 80. Bloods near you, read by a doctor online. No GP referral.</span>
+              <span className="hx-when-men">Hormone and metabolic health for men. One blood panel with your hormone markers, read by a doctor online.</span>
+              <span className="hx-when-women">Hormone and metabolic health for women. One blood panel for hormone markers, cycle, iron and thyroid, read by a doctor online.</span>
             </p>
-            {/* One action. No prices on the homepage (Noah, 28 Oct; 2 Nov). */}
+            {/* One action. No prices in the hero (Noah, 28 Oct; 2 Nov). */}
             <div className="hx-actions hero-in" style={{ animationDelay: '300ms' }}>
               <StageCta href={href} tone="dark">Create your free account</StageCta>
+              <a className="hx-tel" href={`tel:${CLINIC_PHONE_E164}`}>or call {CLINIC_PHONE_DISPLAY}</a>
             </div>
           </div>
         </div>
