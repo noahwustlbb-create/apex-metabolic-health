@@ -392,7 +392,7 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 
 /* ══ QA round 1 (12 Nov 2026) ══ */
 /* Featured card: lifestyle photo, runner kept in frame. */
-.tg-feature .tg-img img { object-position: 50% 14%; }
+.tg-feature .tg-img img { object-position: 50% 50%; }
 
 /* Desktop isolation: while any card is hovered or focused, only that card shows
    an image; every other image card (the feature too) turns into a white card. */

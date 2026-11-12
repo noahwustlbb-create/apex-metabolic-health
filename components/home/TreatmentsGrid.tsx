@@ -68,11 +68,8 @@ export default function TreatmentsGrid() {
 
         <div className="tg-board">
           <Link href={feature.href} className="tg-feature">
-            {/* A lifestyle frame, not a texture (QA 12 Nov): energy reads as a person moving. */}
-            <picture className="tg-img" aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/photos/performance-hero.webp" alt="" width={1194} height={1600} loading="lazy" decoding="async" />
-            </picture>
+            {/* The Hormonal texture, not the runner (Noah, 12 Nov 2026: "change the hormonal photo back to the original one"). */}
+            <Img c={feature} sizes="100vw" />
             <span className="tg-feature-k al-k">{feature.n} · Featured program</span>
             <span className="tg-feature-text">
               <span className="tg-feature-name">{feature.name}</span>

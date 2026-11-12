@@ -175,8 +175,9 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 .hx-pick-btn {
   min-height: 48px;
   border-radius: 999px;
-  border: 0;
-  background: transparent;
+  border: 1px solid rgba(11, 18, 32, 0.28);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 2px rgba(11, 18, 32, 0.08);
   color: var(--hx-fg);
   font: 500 12.5px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   letter-spacing: 0.12em;
@@ -189,9 +190,15 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
   background: #8a929e;
   transition: background 0.4s var(--hx-ease);
 }
-.hx-pick-btn:hover { background: rgba(11, 18, 32, 0.06); }
+.hx-pick-btn::after {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 10px; vertical-align: 1px;
+  border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; rotate: -45deg;
+  opacity: 0.75;
+}
+.hx-pick-btn:hover { background: rgba(11, 18, 32, 0.06); border-color: var(--hx-fg); }
+.hx-pick-btn[aria-pressed="true"]::after { opacity: 1; }
 .hx-pick-btn:focus-visible { outline: 2px solid var(--hx-fg); outline-offset: 2px; }
-.hx-pick-btn[aria-pressed="true"] { background: var(--hx-fg); color: #fff; }
+.hx-pick-btn[aria-pressed="true"] { background: var(--hx-fg); color: #fff; border-color: var(--hx-fg); }
 .hx-pick-btn[data-who="men"][aria-pressed="true"]::before { background: #5b9bff; }
 .hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #ff8fbc; }
 

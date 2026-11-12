@@ -44,8 +44,8 @@ type Who = 'men' | 'women'
  * medicine or an outcome.
  *
  * 11 Nov 2026 PM (Noah, ASKS item 22: "apex hero still isn't hitting", AlgoRx
- * approach): one dark full-bleed stage, the headline "Understand your health.
- * Optimise your future." bottom left, one subline, one CTA. The figures are
+ * approach): one dark full-bleed stage, the headline "The art of living better.
+ * The science of performing better." (Noah, 12 Nov 2026) bottom left, one subline, one CTA. The figures are
  * coloured from first paint (man blue, woman rose) and are themselves the
  * pick ("For men" / "For women"). Removed from the hero: the 23+ markers
  * readout box, the 18 to 80 kicker (now on the start tiles), the long lead,
@@ -263,7 +263,7 @@ export default function StageHero() {
           <div className="hx-copy">
             <p className="hx-kicker hero-in" style={{ animationDelay: '40ms' }}><span aria-hidden="true" />Doctor-led telehealth · Australia-wide</p>
             <h1 id="hx-title" className="hx-h1 hero-in" style={{ animationDelay: '80ms' }}>
-              Understand <span className="hx-nw">your health.</span><br /><span className="hx-h1-b">Optimise <span className="hx-nw">your future.</span></span>
+              The art of <span className="hx-nw">living better.</span><br /><span className="hx-h1-b">The science of <span className="hx-nw">performing better.</span></span>
             </h1>
             <p className="hx-sub hero-in" style={{ animationDelay: '200ms' }}>
               <span className="hx-when-none">Hormone and metabolic health for men and women. Bloods near you, read by a doctor online. No GP referral.</span>
