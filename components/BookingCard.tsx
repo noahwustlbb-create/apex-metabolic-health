@@ -15,7 +15,7 @@ export default function BookingCard() {
   const [enquiryLabel, setEnquiryLabel] = useState('')
   const [hasBloods, setHasBloods] = useState(false)
   const [panelUrl, setPanelUrl] = useState('')
-  const [calendlyType, setCalendlyType] = useState<'hormone' | 'general'>('general')
+  const [consultType, setConsultType] = useState<'hormone' | 'general'>('general')
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function BookingCard() {
       setEnquiryLabel(ENQUIRY_LABELS[enquiry] || enquiry)
       setHasBloods(intake.hasBloods === true)
       setPanelUrl(PANEL_URLS[enquiry] || '')
-      setCalendlyType(HORMONE_ENQUIRIES.has(enquiry) ? 'hormone' : 'general')
+      setConsultType(HORMONE_ENQUIRIES.has(enquiry) ? 'hormone' : 'general')
       setReady(true)
     } catch {
       router.replace('/intake-v2')
@@ -67,7 +67,7 @@ export default function BookingCard() {
               ))}
             </div>
           </div>
-          <BookingChoice type={calendlyType} showDiscovery delay={0} />
+          <BookingChoice type={consultType} showDiscovery delay={0} />
         </>
       ) : (
         // No bloods yet → order the correct panel
