@@ -28,7 +28,7 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
   const activeLink = chose === 'discovery' ? discoveryLink : primaryLink
 
   const consultLabel = type === 'hormone' ? 'Hormone consultation' : type === 'general' ? 'Program consult' : 'Book now'
-  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor, booked from your portal.' : type === 'general' ? 'Program consult with your Apex doctor, $199 ($99 for members), booked from your portal.' : 'Pick a time that suits you and speak to us today.'
+  const consultSub   = type === 'hormone' ? 'Comprehensive hormone consultation with your Apex doctor, booked from your portal.' : type === 'general' ? 'Program consult with your Apex doctor, $199 ($125 for members), booked from your portal.' : 'Pick a time that suits you and speak to us today.'
 
   return (
     <motion.div

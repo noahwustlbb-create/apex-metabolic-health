@@ -15,7 +15,7 @@ import { InnerHero, Head, InnerFoot, CtaBand, Arrow, SHOTS } from '@/components/
 
 const CONSULTS = [
   { k: 'Hormone consultation', t: 'For hormone and metabolic health.', b: 'Your AHPRA-registered doctor reviews your blood results, history and goals by phone or video, then sets a plan. Bloods first.', price: '$275, members $199' },
-  { k: 'Program consult', t: 'For every other program.', b: 'Weight, recovery, skin and hair, longevity, sexual health. The same doctor review, your results open on the screen.', price: '$199, members $99' },
+  { k: 'Program consult', t: 'For every other program.', b: 'Weight, recovery, skin and hair, longevity, sexual health. The same doctor review, your results open on the screen.', price: '$199, members $125' },
 ]
 
 export default function BookPage() {

@@ -29,7 +29,7 @@ const CARDS = [
 
 const TICKS = [
   'First blood panel $199, follow-ups $139',
-  'Program consult $99, hormone consult $199',
+  'Program consult $125, hormone consult $199',
   'Medication at cost price, no AHI fee per order',
   'Escript fee included',
   'Referrals, medical certificates, health summaries and travel letters included',
