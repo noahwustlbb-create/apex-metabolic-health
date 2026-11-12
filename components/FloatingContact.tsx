@@ -66,6 +66,8 @@ const ACTIONS = [
   },
 ]
 
+const AL_PAGES = new Set(['/treatments', '/pricing', '/membership', '/how-it-works', '/about', '/faqs', '/get-started', '/book', '/discovery-call'])
+
 export default function FloatingContact() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -90,7 +92,8 @@ export default function FloatingContact() {
   if (pathname === '/') return null
   // Program pages have their own phone sticky bar (.prog-al-bar): below 768px the
   // floating pill would sit on top of it, so it only shows from md up there.
-  const onProgram = pathname?.startsWith('/programs/') ?? false
+  // The inner pages in the AlgoRx system carry the same bar (.al-page-bar).
+  const onProgram = (pathname?.startsWith('/programs/') ?? false) || AL_PAGES.has(pathname ?? '')
 
   return (
     <motion.div

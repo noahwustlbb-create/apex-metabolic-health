@@ -6,6 +6,7 @@ import { StageToneProvider } from '@/components/home/stage/StageTone'
 import TreatmentsGrid from '@/components/home/TreatmentsGrid'
 import { AboutYou, Approach, WhyApex, PhotoBreak, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
 import HomeStickyBar from '@/components/home/HomeStickyBar'
+import TrustChips from '@/components/TrustChips'
 import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -50,6 +51,7 @@ export default function Home() {
         <Approach />
         <StageBox />
         <WhyApex />
+        <TrustChips />
         <PhotoBreak />
         <HomeFAQ />
         <ReadyToStart />

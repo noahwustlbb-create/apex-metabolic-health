@@ -50,7 +50,6 @@ const ROSE: Record<string, string> = {
   '/3d/product/tin.jpg': '/3d/product/pink/tin.jpg',
   '/3d/product/tub.jpg': '/3d/product/pink/tub.jpg',
   '/3d/product/vials.jpg': '/3d/product/pink/vials.jpg',
-  '/protocols/bloods.jpg': '/protocols/pink/bloods.jpg',
   '/protocols/hair.jpg': '/protocols/pink/hair.jpg',
   '/protocols/hormone.jpg': '/protocols/pink/hormone.jpg',
   '/protocols/longevity.jpg': '/protocols/pink/longevity.jpg',

@@ -8,6 +8,7 @@
 @import '../styles/algo.css';
 @import '../styles/panels.css';
 @import '../styles/programs-al.css';
+@import '../styles/inner.css';
 
 :root {
   /* Primitive not covered by tokens.css */
