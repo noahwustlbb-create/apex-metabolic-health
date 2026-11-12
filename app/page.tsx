@@ -4,7 +4,7 @@ import StageHero from '@/components/home/stage/StageHero'
 import StageBox from '@/components/home/stage/StageBox'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import TreatmentsGrid from '@/components/home/TreatmentsGrid'
-import { AboutYou, Approach, WhyApex, PhotoBreak, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
+import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
 import HomeStickyBar from '@/components/home/HomeStickyBar'
 import TrustChips from '@/components/TrustChips'
 import { FAQS } from '@/lib/faqs'
@@ -48,7 +48,7 @@ export default function Home() {
         <StageHero />
         <AboutYou />
         <TreatmentsGrid />
-        <Approach />
+        <HomeHow />
         <StageBox />
         <WhyApex />
         <TrustChips />

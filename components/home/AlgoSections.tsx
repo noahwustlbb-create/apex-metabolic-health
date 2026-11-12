@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HowBand, BLOOD_STEPS, PROGRAM_STEPS } from '@/components/inner/InnerSections'
 import { START_HREF } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
@@ -114,6 +115,23 @@ export function Approach() {
         <Link href={START_HREF} className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>
       </div>
     </section>
+  )
+}
+
+/** 04 Approach, AlgoRx "How It Works." treatment (Noah, 12 Nov 2026: "yes" to the
+ * two-row dark band on home): BLOODS and PROGRAMS rows, mono step labels, outline
+ * icons. Same component as /how-it-works and /treatments, so one source of truth. */
+export function HomeHow() {
+  return (
+    <div id="approach">
+      <HowBand
+        id="how-title"
+        kicker="04 Approach"
+        title="Test. Assess. Optimise. Review."
+        cap={['Bloods: four steps', 'Programs: four steps', 'Doctor-led, start to finish']}
+        rows={[{ label: 'Bloods', steps: BLOOD_STEPS }, { label: 'Programs', steps: PROGRAM_STEPS }]}
+      />
+    </div>
   )
 }
 
