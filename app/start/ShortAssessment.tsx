@@ -134,7 +134,7 @@ function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizRe
           <Link href="/" className="al-pill al-pill-lg">Back to the home page<Arrow /></Link>
           <button type="button" className="qz-skip" onClick={onBack}>Go back</button>
         </div>
-        <p className="qz-alt"><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
+        <p className="qz-alt"><span>Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a></span><span>Mon to Fri, 9am to 5pm AEST.</span></p>
       </div>
     )
   }
@@ -192,8 +192,8 @@ function Result({ result, sex, caregiver, signupHref, onBack }: { result: QuizRe
         </section>
       )}
 
-      <p className="qz-alt">Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a></p>
-      <p className="qz-alt" style={{ marginTop: 0 }}><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
+      <p className="qz-alt"><span>Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a></span></p>
+      <p className="qz-alt" style={{ marginTop: 0 }}><span>Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a></span><span>Mon to Fri, 9am to 5pm AEST.</span></p>
     </div>
   )
 }
@@ -332,7 +332,7 @@ export default function ShortAssessment() {
                     <Option compact n={1} label="Men" on={sex === 'men'} onClick={() => tap(() => { setSex('men'); setAudience('men') })} />
                     <Option compact n={2} label="Women" on={sex === 'women'} onClick={() => tap(() => { setSex('women'); setAudience('women') })} />
                   </div>
-                  <p className="qz-alt"><span>Prefer to talk?</span> <a href="tel:+61468085700">Call 0468 085 700</a><span>, Mon to Fri, 9am to 5pm AEST.</span></p>
+                  <p className="qz-alt"><span>Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a></span><span>Mon to Fri, 9am to 5pm AEST.</span></p>
                 </div>
               )}
 
