@@ -226,6 +226,11 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-ticks li::before { content: ""; flex: none; width: 20px; height: 20px; margin-top: 1px; border-radius: 99px; background: var(--al-accent-on-dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='%23050505' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 20px no-repeat; }
 .ip-tier .al-pill { margin-top: 22px; justify-content: center; }
 .ip-tier-note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: #a3a8b0; }
+/* Home membership band (AlgoRx club): cards sit on the photo, glass dark */
+.al-club .ip-bg img { object-position: 50% 45%; filter: brightness(0.45); }
+.al-club .ip-card[data-dark] { background: rgba(8, 8, 9, 0.72); backdrop-filter: blur(6px); border-color: rgba(255, 255, 255, 0.22); }
+.al-club-cta { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.al-club-join { color: #f4f6f9; }
 .ip-inc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ip-inc li { display: grid; gap: 8px; padding: 20px 22px; border: 1px solid rgba(255,255,255,0.22); border-radius: 20px; background: rgba(8,8,9,0.6); }
 .ip-inc h3 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: #fff; display: flex; align-items: center; gap: 10px; }
