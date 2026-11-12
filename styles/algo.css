@@ -127,6 +127,7 @@
 /* ── Phone sticky bar ── */
 .hsb { display: none; }
 @media (max-width: 899px) {
+  .al-close-bg { object-position: 78% 16%; }
   .hsb {
     position: fixed; z-index: 45; left: 0; right: 0; bottom: 0;
     display: grid; grid-template-columns: 1fr auto; gap: 8px;
@@ -323,7 +324,7 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 
 /* ── 06 Ready to start: photo CTA band ── */
 .al-close { position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(88px, 9vw, 150px); background: #050505; color: #f4f6f9; padding-block: clamp(110px, 12vw, 200px); border-bottom: 1px solid #1f2124; }
-.al-close-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
+.al-close-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 62% 18%; }
 .al-close::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.72) 45%, rgba(5, 5, 5, 0.25) 100%); }
 .al-close .al-k { color: #c3c8cf; }
 .al-close .al-h2 { color: #f4f6f9; margin-top: 18px; max-width: 12ch; font-size: clamp(40px, 5.4vw, 84px); }

@@ -308,7 +308,7 @@ export const SHOTS = {
   greyMan: { src: '/photos/portrait-man.webp', alt: 'Portrait of a grey-haired man in a black t-shirt', pos: '50% 20%' },
   darkWoman: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt', pos: '50% 20%' },
   trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%' },
-  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '55% 45%' },
+  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '82% 38%' },
   sprintWoman: { src: '/photos/woman-sprint-night.webp', alt: 'Woman sprinting on a track at night', pos: '50% 40%' },
   trailRun: { src: '/photos/woman-trail-run.webp', alt: 'Woman running up a grassy volcanic hillside under a grey sky', pos: '50% 50%' },
   driftwood: { src: '/photos/driftwood.webp', alt: 'Close-up of weathered driftwood grain', pos: '50% 50%' },

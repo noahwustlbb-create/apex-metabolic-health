@@ -155,7 +155,7 @@ export function HomeClub() {
       <div className="ip-bg"><img src={SHOTS.glassSphere.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
       <div className="ip-grade" aria-hidden="true" />
       <div className="container-x">
-        <InnerHead id="club-title" kicker="Membership" title="Join Apex Member." cap={['One tier', 'One monthly fee', 'Cancel from your account']} dark />
+        <InnerHead id="club-title" kicker="Membership" title="Join Apex Member." cap={['One plan', 'One monthly fee', 'Cancel from your account']} dark />
         <ul className="ip-cards" role="list">
           {CLUB.map((c, i) => (
             <li key={c.k} className="al-card ip-card" data-dark>

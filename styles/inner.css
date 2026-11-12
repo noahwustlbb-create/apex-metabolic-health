@@ -157,10 +157,10 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-how-label::after { content: ""; flex: 1; height: 1px; background: #26292d; }
 /* AlgoRx "How It Works." step: mono label, bold title, grey copy, outline icon last, hairlines between (Noah, 13 Nov 2026). */
 .ip-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
-.ip-steps li { display: grid; align-content: start; gap: 12px; padding: 4px 24px 8px 0; }
+.ip-steps li { display: grid; grid-template-rows: auto auto 1fr auto; gap: 12px; padding: 4px 24px 8px 0; }
 .ip-steps li + li { padding-left: 24px; border-left: 1px solid #26292d; }
 .ip-step-k { font: 500 11.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-accent-on-dark); }
-.ip-step-ic { margin-top: 8px; display: block; color: #f4f6f9; line-height: 0; }
+.ip-step-ic { margin-top: 8px; display: block; color: #f4f6f9; line-height: 0; align-self: end; }
 .ip-step-ic svg { width: 30px; height: 30px; stroke-width: 1.4; }
 .ip-steps h3 { margin: 2px 0 0; font-size: 21px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; color: #f4f6f9; }
 .ip-steps p { margin: 0; font-size: 15px; line-height: 1.55; color: #b4bac2; max-width: 30ch; }
@@ -227,7 +227,8 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-tier .al-pill { margin-top: 22px; justify-content: center; }
 .ip-tier-note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: #a3a8b0; }
 /* Home membership band (AlgoRx club): cards sit on the photo, glass dark */
-.al-club .ip-bg img { object-position: 50% 45%; filter: brightness(0.45); }
+.al-club .ip-bg img { object-position: 50% 45%; filter: brightness(0.7); }
+.al-club .ip-grade { background: linear-gradient(180deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.2) 50%, rgba(5,5,5,0.7) 100%); }
 .al-club .ip-card[data-dark] { background: rgba(8, 8, 9, 0.72); backdrop-filter: blur(6px); border-color: rgba(255, 255, 255, 0.22); }
 .al-club-cta { margin-top: 28px; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
 .al-club-join { color: #f4f6f9; }
@@ -351,7 +352,7 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .ip-how-row + .ip-how-row { margin-top: 20px; }
   .ip-how-label { margin-bottom: 4px; }
   .ip-steps { grid-template-columns: 1fr; gap: 0; }
-  .ip-steps li { gap: 10px; padding: 26px 0 28px; border-bottom: 1px solid #26292d; }
+  .ip-steps li { grid-template-rows: auto; gap: 10px; padding: 26px 0 28px; border-bottom: 1px solid #26292d; }
   .ip-steps li + li { padding-left: 0; border-left: 0; }
   .ip-steps li:last-child { border-bottom: 0; }
   .ip-step-ic { margin-top: 10px; }

@@ -7,6 +7,7 @@ import Image from '@/components/audience/Img'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import ImageryNote from '@/components/ImageryNote'
 import HeroStartModal from '@/components/HeroStartModal'
 import TrustChips from '@/components/TrustChips'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -82,7 +83,7 @@ const IMG = {
   phoneHand: { src: '/photos/phone-hand.webp', alt: 'A hand holding a phone', pos: '50% 40%', portrait: true },
   balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 30%', posM: '50% 30%', posD: '50% 0%', portrait: true },
   runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 35%', posM: '45% 35%', posD: '50% 8%', portrait: true },
-  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '55% 45%', posM: '55% 45%', posD: '55% 40%', portrait: true },
+  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '80% 40%', posM: '84% 42%', posD: '70% 40%', portrait: true },
   sprintWoman: { src: '/photos/woman-sprint-night.webp', alt: 'Woman sprinting on a track at night', pos: '50% 40%', posM: '50% 40%', posD: '50% 30%', portrait: true },
   trailRun: { src: '/photos/woman-trail-run.webp', alt: 'Woman running up a grassy volcanic hillside under a grey sky', pos: '50% 50%', posM: '50% 50%', posD: '50% 45%', portrait: true },
   trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%', posM: '50% 30%', posD: '50% 20%', portrait: true },
@@ -432,6 +433,7 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />
         <FAQ config={config} />
         <CtaBand config={config} photos={photos} onStart={handleGetStarted} />
+        <ImageryNote />
       </main>
       <div className="prog-al-foot"><Footer /></div>
       <StickyBar name={config.name} onStart={handleGetStarted} />
