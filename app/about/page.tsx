@@ -1,504 +1,87 @@
-'use client'
-
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
 import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-import DoctorCard from '@/components/DoctorCard'
-import FAQSection from '@/components/FAQSection'
+import TrustChips from '@/components/TrustChips'
+import { InnerHero, Photo, WhyApex, CtaBand, InnerFoot, SHOTS, n2, type Shot } from '@/components/inner/InnerSections'
 
-const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = 'var(--blue)'
-const ACCENT_BORDER = 'rgba(72,144,247,0.15)'
+/**
+ * /about in the AlgoRx about-us structure (12 Nov 2026): dark photo hero with
+ * a big headline and a mono trust line, alternating photo + story blocks,
+ * "Why Apex?" principles, trust chips, photo CTA band. Apex's real story only:
+ * a doctor-led Australian telehealth clinic, Imperial Equity Investments Pty
+ * Ltd, Gold Coast. No invented founder story, no doctor named or pictured
+ * until Noah says yes (brand platform, decision 3). Photos are the repo's own.
+ */
 
-const STANDARDS = [
+const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot }[] = [
   {
-    title: 'AHPRA-Registered Doctors',
-    body: 'Every consultation is conducted by a doctor registered with the Australian Health Practitioner Regulation Agency. No exceptions.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    k: 'What Apex is',
+    t: 'A doctor-led clinic, built on blood work.',
+    ps: [
+      'Apex Metabolic Health is an Australian telehealth clinic for hormone and metabolic health. Men and women, 18 to 80, anywhere in Australia, no GP referral.',
+      'Every plan starts the same way: one blood panel, 23+ markers from one morning draw at an accredited collection centre near you, read by an AHPRA-registered doctor with you.',
+    ],
+    chips: ['Men and women', '18 to 80', 'Australia-wide'],
+    shot: SHOTS.couple,
   },
   {
-    title: 'Australian Pharmacy Partner',
-    body: 'Anything prescribed is dispensed by our Australian compounding pharmacy partner and sent to your door.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    k: 'How we think',
+    t: 'Normal isn’t optimal.',
+    ps: [
+      'A result inside the reference range is not always where you feel your best. Our doctors read your markers for how you actually function, and set a plan aimed at where you work best, not just inside the range.',
+      'Then we measure again. Follow-up bloods and a review about every 3 months, so the plan follows your numbers, and your trend lives in your portal.',
+    ],
+    chips: ['Measure first. Then treat.', 'Review every 3 months'],
+    shot: SHOTS.kitchenMan,
   },
   {
-    title: 'Evidence-Based Protocols',
-    body: 'Our clinical protocols are built on peer-reviewed research and guided by internationally recognised guidelines. We don\'t guess. We follow the evidence.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    title: 'Accredited Pathology',
-    body: 'All blood panels are collected at NATA-accredited pathology centres. 4,000+ collection points across Australia. No grey-market diagnostics.',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
-        <path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    k: 'Who we are',
+    t: 'Doctors, labs and pharmacies you can check.',
+    ps: [
+      'Every consultation is with an AHPRA-registered doctor who works in hormone and metabolic health. Bloods run through NATA-accredited pathology. If treatment is suitable, it is dispensed by Australian cGMP partner pharmacies and delivered discreetly.',
+      'Apex Metabolic Health is operated by Imperial Equity Investments Pty Ltd, a registered Australian company based on the Gold Coast, Queensland. Every claim on this page links to the body that regulates it.',
+    ],
+    chips: ['AHPRA', 'NATA', 'cGMP partner pharmacies', 'LegitScript'],
+    shot: SHOTS.womanCall,
   },
 ]
-
-const WHY = [
-  {
-    label: 'The gap we fill',
-    title: 'GPs are not built for optimisation.',
-    body: 'The standard of care in Australian general practice is designed to identify disease, not investigate function. A patient with testosterone at the bottom of the reference range will be told they are "fine." Their GP is not wrong; they do not have a diagnosable disease. But they are nowhere near optimal, and nobody is investigating why.\n\nApex exists to close that gap. We run deeper panels, interpreted by doctors who specialise in exactly this, and we build protocols around where your biology should be, not just where it technically clears the threshold.',
-  },
-  {
-    label: 'What we are not',
-    title: 'Not a wellness brand. Not a supplement store.',
-    body: 'The health optimisation space is full of brands selling confidence and identity alongside protein powder. We are a medical clinic. Our doctors are qualified. Our pathology is accredited. Our pharmacy partner is an Australian compounding pharmacy.\n\nIf that sounds clinical, good. You should be sceptical of anyone in this space who isn\'t. The patients who come to us have usually spent years being told everything is fine. They want real answers, not a lifestyle subscription.',
-  },
-]
-
-function Section({ children, bg = 'var(--bg)' }: { children: React.ReactNode; bg?: string }) {
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: bg }}>
-      <div className="container-tight relative z-10">{children}</div>
-    </section>
-  )
-}
-
-function AnimBlock({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease }}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 export default function AboutPage() {
-  const heroRef = useRef(null)
-  const heroInView = useInView(heroRef, { once: true })
-
   return (
     <>
       <Nav />
-      <main>
+      <main id="main-content" className="al-page">
+        <InnerHero
+          kicker="About Apex"
+          title="Doctor-led. Built on blood work."
+          lead="An Australian telehealth clinic for hormone and metabolic health. Your markers measured, read by an AHPRA-registered doctor, and a plan you understand."
+          cap={['AHPRA-registered doctors', 'Imperial Equity Investments Pty Ltd', 'Gold Coast, Australia-wide']}
+          photo={SHOTS.oceanWindow}
+        />
+        <TrustChips />
 
-        {/* Hero */}
-        <section data-stage-hero="" data-art="none"
-          ref={heroRef}
-          className="relative overflow-hidden"
-          style={{ backgroundColor: 'var(--bg)', paddingTop: '160px', paddingBottom: '100px' }}
-        >
-          <div className="container-tight relative z-10">
-            <motion.h1
-              initial={{ opacity: 0, y: 28 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.75, delay: 0.08, ease }}
-              className="font-bold tracking-tight mb-6"
-              style={{
-                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                fontSize: 'clamp(38px, 5vw, 72px)',
-                lineHeight: 1.04,
-                letterSpacing: '-0.025em',
-                color: 'var(--text-primary)',
-                maxWidth: '800px',
-              }}
-            >
-              Behind every protocol,{' '}
-              <span style={{ color: 'var(--blue)' }}>
-                a clinical team.
-              </span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.18, ease }}
-              className="text-lg leading-relaxed"
-              style={{ color: 'var(--text-primary)', maxWidth: '560px', opacity: 0.75 }}
-            >
-              Apex Metabolic Health is an Australian doctor-led telehealth clinic built for those who want more than a normal result. They want an optimal one.
-            </motion.p>
+        <section className="al-sec" aria-label="Our story">
+          <div className="container-x">
+            {STORY.map((s, i) => (
+              <article key={s.k} className="ip-story" data-flip={i % 2 === 1 || undefined}>
+                <Photo shot={s.shot} className="ip-story-photo" />
+                <div className="ip-story-copy">
+                  <p className="ip-story-n" aria-hidden="true">{n2(i)}</p>
+                  <p className="al-k">{'// '}{s.k}</p>
+                  <h2 className="al-h2">{s.t}</h2>
+                  {s.ps.map(p => <p key={p.slice(0, 24)}>{p}</p>)}
+                  {s.chips && <div className="ip-chips" aria-label="In short">{s.chips.map(c => <span key={c}>{c}</span>)}</div>}
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
-        {/* Clinical imagery strip */}
-        <section className="relative overflow-hidden" style={{ backgroundColor: 'var(--bg)' }}>
-          <div className="container-tight">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pb-0">
-              {[
-                {
-                  src: '/team/team-standing.webp',
-                  alt: 'The Apex Metabolic Health team',
-                  label: 'Doctor-led, Australia-wide',
-                },
-                {
-                  src: '/team/team-armchairs.webp',
-                  alt: 'A relaxed consultation setting',
-                  label: 'Care built around your data',
-                },
-                {
-                  src: '/team/brand-boxes.webp',
-                  alt: 'Apex branded treatment packaging',
-                  label: 'Discreet, delivered to you',
-                },
-              ].map((img, i) => {
-                const ref = useRef(null)
-                const inView = useInView(ref, { once: true, margin: '-40px' })
-                return (
-                  <motion.div
-                    key={img.label}
-                    ref={ref}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.55, delay: i * 0.1, ease }}
-                    className="relative rounded-2xl overflow-hidden"
-                    style={{ aspectRatio: '4/3', border: '1px solid rgba(72,144,247,0.12)' }}
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover"
-                      style={{ opacity: 0.8 }}
-                      unoptimized
-                    />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 45%, rgba(4,6,13,0.9) 100%)' }} />
-                    <div className="absolute bottom-0 left-0 p-4">
-                      <p className="text-xs font-semibold tracking-[0.12em] uppercase" style={{ color: 'rgba(72,144,247,0.9)' }}>{img.label}</p>
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
+        <WhyApex id="ab-why" />
 
-        {/* Why Apex exists */}
-        <Section bg="var(--surface)">
-          {WHY.map((block, i) => {
-            const ref = useRef(null)
-            const inView = useInView(ref, { once: true, margin: '-60px' })
-            return (
-              <motion.div
-                key={block.label}
-                ref={ref}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.65, delay: 0.05, ease }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start ${i > 0 ? 'mt-20 pt-20' : ''}`}
-                style={i > 0 ? { borderTop: '1px solid rgba(72,144,247,0.08)' } : {}}
-              >
-                <div>
-                  <p className="label mb-4">{block.label}</p>
-                  <h2
-                    className="font-bold tracking-tight"
-                    style={{
-                      fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                      fontSize: 'clamp(26px, 3vw, 42px)',
-                      lineHeight: 1.1,
-                      letterSpacing: '-0.02em',
-                      color: 'var(--text-primary)',
-                    }}
-                  >
-                    {block.title}
-                  </h2>
-                </div>
-                <div>
-                  {block.body.split('\n\n').map((para, j) => (
-                    <p
-                      key={j}
-                      className={`text-base leading-relaxed ${j > 0 ? 'mt-4' : ''}`}
-                      style={{ color: 'var(--text-primary)', opacity: 0.75 }}
-                    >
-                      {para}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            )
-          })}
-        </Section>
+        <div style={{ marginTop: 'clamp(64px, 7vw, 110px)' }}><TrustChips /></div>
 
-        {/* Human by design */}
-        <Section bg="var(--bg)">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <AnimBlock>
-              <p className="label mb-4">Human by design</p>
-              <h2
-                className="font-bold tracking-tight mb-5"
-                style={{
-                  fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                  fontSize: 'clamp(26px, 3vw, 42px)',
-                  lineHeight: 1.1,
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text-primary)',
-                }}
-              >
-                Clinical doesn&apos;t have to mean cold.
-              </h2>
-              <p className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                Apex was built by people who were tired of ten-minute appointments and being
-                told they were &ldquo;fine.&rdquo; Behind the science is a team that actually
-                has the conversation, reads the full picture, and stays with you between
-                appointments, not just at them.
-              </p>
-              <p className="text-base leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                Modern, meticulous, and genuinely accessible. Everything runs online, on your
-                schedule, anywhere in Australia.
-              </p>
-            </AnimBlock>
-
-            <AnimBlock delay={0.12}>
-              <div className="grid grid-cols-3 gap-3 sm:gap-4">
-                {[
-                  '/team/portrait-woman-blonde.webp',
-                  '/team/portrait-woman.webp',
-                  '/team/portrait-man.webp',
-                ].map((src, i) => (
-                  <div
-                    key={src}
-                    className="relative rounded-2xl overflow-hidden"
-                    style={{
-                      aspectRatio: '3 / 4',
-                      border: `1px solid ${ACCENT_BORDER}`,
-                      transform: i === 1 ? 'translateY(20px)' : 'none',
-                      boxShadow: '0 20px 50px rgba(0,0,0,0.22)',
-                    }}
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      fill
-                      sizes="(max-width: 1024px) 30vw, 15vw"
-                      className="object-cover"
-                      style={{ objectPosition: 'center 22%' }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </AnimBlock>
-          </div>
-        </Section>
-
-        {/* Clinical team */}
-        <Section bg="var(--surface)">
-          <AnimBlock>
-            <h2
-              className="font-bold tracking-tight mb-12"
-              style={{
-                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                fontSize: 'clamp(28px, 3.5vw, 48px)',
-                lineHeight: 1.08,
-                letterSpacing: '-0.02em',
-                color: 'var(--text-primary)',
-              }}
-            >
-              Doctors who specialise<br />in exactly this.
-            </h2>
-          </AnimBlock>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Doctor Card */}
-            {(() => {
-              const ref = useRef(null)
-              const inView = useInView(ref, { once: true, margin: '-60px' })
-              return (
-                <motion.div
-                  ref={ref}
-                  initial={{ opacity: 0, y: 28 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.55, delay: 0, ease }}
-                  className="rounded-2xl p-7 flex flex-col justify-between"
-                  style={{
-                    background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
-                    border: `1px solid ${ACCENT_BORDER}`,
-                    minHeight: 280,
-                  }}
-                >
-                  <div>
-                    <div className="flex items-start justify-between mb-5">
-                      <div>
-                        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Medical team</p>
-                        <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>
-                          Apex doctors
-                        </h3>
-                      </div>
-                      <span
-                        className="text-[10px] font-semibold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
-                        style={{ background: 'rgba(72,144,247,0.08)', color: ACCENT, border: `1px solid rgba(72,144,247,0.2)` }}
-                      >
-                        AHPRA Registered
-                      </span>
-                    </div>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Every Apex consultation is with an AHPRA-registered medical practitioner. Our doctors focus on evidence-based hormone and metabolic medicine, moving patients from functional decline toward measurable biological optimisation.
-                    </p>
-                  </div>
-                  <div className="mt-6 pt-5 flex flex-wrap gap-2" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-                    {['Hormone Medicine', 'Metabolic Health', 'Telehealth'].map(tag => (
-                      <span key={tag} className="text-[10px] font-semibold tracking-wide uppercase px-2.5 py-1 rounded-full" style={{ background: 'var(--elevated)', color: 'var(--text-primary)', border: '1px solid rgba(72,144,247,0.1)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </motion.div>
-              )
-            })()}
-
-            {/* Broader team */}
-            {(() => {
-              const ref = useRef(null)
-              const inView = useInView(ref, { once: true, margin: '-60px' })
-              return (
-                <motion.div
-                  ref={ref}
-                  initial={{ opacity: 0, y: 28 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.55, delay: 0.1, ease }}
-                  className="rounded-2xl p-7 flex flex-col justify-between"
-                  style={{
-                    background: 'rgba(255,255,255,0.78)', backdropFilter: 'blur(18px)', WebkitBackdropFilter: 'blur(18px)', boxShadow: '0 16px 40px rgba(15,23,42,0.08)',
-                    border: '1px solid rgba(72,144,247,0.1)',
-                    minHeight: 280,
-                  }}
-                >
-                  <div>
-                    <div className="mb-5">
-                      <p className="text-[10px] font-semibold tracking-[0.2em] uppercase mb-1" style={{ color: ACCENT }}>Clinical Network</p>
-                      <h3 className="text-xl font-bold" style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}>
-                        Clinical Standards
-                      </h3>
-                    </div>
-                    <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      Every consultation at Apex is conducted by an AHPRA-registered medical practitioner with experience in hormonal and metabolic medicine. Each patient receives individualised clinical attention, not a template protocol.
-                    </p>
-                    <p className="text-sm leading-relaxed mt-4" style={{ color: 'var(--text-primary)', opacity: 0.75 }}>
-                      All clinical work at Apex operates under a consistent governance framework and the same evidence-based protocols.
-                    </p>
-                  </div>
-                  <div className="mt-6 pt-5" style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
-                    <p className="text-[11px]" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                      All consultations conducted by AHPRA-registered medical practitioners.
-                    </p>
-                  </div>
-                </motion.div>
-              )
-            })()}
-          </div>
-        </Section>
-
-        {/* Clinical standards */}
-        <Section bg="var(--elevated)">
-          <AnimBlock>
-            <h2
-              className="font-bold tracking-tight mb-12"
-              style={{
-                fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                fontSize: 'clamp(28px, 3.5vw, 48px)',
-                lineHeight: 1.08,
-                letterSpacing: '-0.02em',
-                color: 'var(--text-primary)',
-              }}
-            >
-              Clinical credibility<br />is non-negotiable.
-            </h2>
-          </AnimBlock>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {STANDARDS.map((standard, i) => {
-              const ref = useRef(null)
-              const inView = useInView(ref, { once: true, margin: '-40px' })
-              return (
-                <motion.div
-                  key={standard.title}
-                  ref={ref}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: i * 0.08, ease }}
-                  className="rounded-2xl p-6"
-                  style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.12)' }}
-                >
-                  <div
-                    className="w-9 h-9 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: 'rgba(72,144,247,0.08)', color: ACCENT }}
-                  >
-                    {standard.icon}
-                  </div>
-                  <h3 className="text-base font-semibold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                    {standard.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                    {standard.body}
-                  </p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </Section>
-
-        {/* CTA */}
-        <Section bg="var(--bg)">
-          <AnimBlock>
-            <div
-              className="rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
-              style={{
-                background: 'linear-gradient(135deg, rgba(72,144,247,0.06) 0%, rgba(72,144,247,0.02) 100%)',
-                border: `1px solid ${ACCENT_BORDER}`,
-              }}
-            >
-              <div>
-                <h2
-                  className="font-bold tracking-tight"
-                  style={{
-                    fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"',
-                    fontSize: 'clamp(24px, 3vw, 38px)',
-                    lineHeight: 1.1,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  Get started today.<br />Your account only takes a minute to create.
-                </h2>
-              </div>
-              <div className="flex flex-col gap-3 flex-shrink-0">
-                <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-primary whitespace-nowrap">
-                  Create your free account
-                  <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </Link>
-                <Link
-                  href="https://app.apexmetabolichealth.com.au/signup"
-                  className="text-sm text-center font-medium transition-colors duration-200"
-                  style={{ color: ACCENT }}
-                >
-                  Or create your account →
-                </Link>
-              </div>
-            </div>
-          </AnimBlock>
-        </Section>
-
-        <DoctorCard />
-        <FAQSection />
-
+        <CtaBand shot={SHOTS.parkBench} />
       </main>
-      <Footer />
+      <InnerFoot />
     </>
   )
 }
