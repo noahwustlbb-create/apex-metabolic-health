@@ -1,633 +1,126 @@
-'use client'
-
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
-const ease = [0.22, 1, 0.36, 1] as const
-const ACCENT = 'var(--blue)'
+import TrustChips from '@/components/TrustChips'
+import { PORTAL_MEMBERSHIP } from '@/lib/portal'
+import { InnerHero, Head, FaqSection, CtaBand, InnerFoot, Arrow, SHOTS, type Faq } from '@/components/inner/InnerSections'
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+/**
+ * /membership in the AlgoRx "Performance Club" treatment (12 Nov 2026), Apex's
+ * own model: no points, no tiers. Dark photo hero (no price on the first
+ * screen) -> three bordered dark cards (member pricing, free escripts, reviews
+ * about every 3 months) -> the one tier card, Apex Member $99 a month, on a
+ * texture, with what's included as ticks -> FAQ accordion -> CTA to the portal
+ * membership page (lib/portal.ts). Facts from the live pricing data; no
+ * medicine names, no outcomes.
+ */
 
-const ADVANTAGE_STATS = [
-  { value: '$0',           label: 'Prescribing fees',   sub: 'vs $155 per script' },
-  { value: 'Cost price',   label: 'All medication',     sub: 'No medication mark-up' },
-  { value: 'Included',     label: 'AHI fee per order',  sub: 'Admin, handling, infrastructure' },
-  { value: '$99',          label: 'Per month',           sub: 'No lock-in contracts' },
+const Ic = {
+  tag: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12l9-9h9v9l-9 9-9-9z" /><circle cx="16" cy="8" r="1.5" /></svg>,
+  script: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h6M8 16h4" /></svg>,
+  review: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6" /><path d="M20 4v5h-5" /></svg>,
+}
+
+const CARDS = [
+  { k: 'Member pricing', t: 'Member rates on everything.', b: 'Your first panel at $199 instead of $280, follow-ups at $139, consults at the member rate, and medication at cost price with no AHI fee.', ic: Ic.tag },
+  { k: 'Free escripts', t: 'No escript fee.', b: 'The $155 escript release fee is included. Scripts go to our partner pharmacies or to your own pharmacy (not NSW).', ic: Ic.script },
+  { k: 'Reviews', t: 'A review about every 3 months.', b: 'Follow-up bloods and a doctor review built into your plan, with nursing check-ins every 6 to 8 weeks in between.', ic: Ic.review },
 ]
 
+const TICKS = [
+  'First blood panel $199, follow-ups $139',
+  'General consult $99, hormone consult $199',
+  'Medication at cost price, no AHI fee per order',
+  'Escript fee included',
+  'Referrals, medical certificates, health summaries and travel letters included',
+  'Pause or cancel from your account, no lock-in',
+]
 
 const INCLUDED = [
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M20 11h-4l-3 8L7 3 4 11H2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Doctor-led protocol management',
-    body: 'Your treatment isn\'t a static prescription. It evolves with your bloods, your feedback, and your response to treatment, adjusted by a doctor every cycle.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <circle cx="11" cy="11" r="9" /><path d="M11 7v4l3 2" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Structured 3-month review cycles',
-    body: 'Every 3 months: blood work, full biomarker analysis, and protocol reassessment. Not guesswork between appointments, but a systematic clinical review.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M3 3v16h16" strokeLinecap="round" /><path d="M7 14l4-5 4 3 4-6" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Eight health-system scores, trended',
-    body: 'Hormones, metabolic, heart, thyroid, nutrients, liver, kidney and blood, each scored from your own markers and tracked across every panel you have ever done. Non-members see the latest two.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M4 5h14v9H9l-4 4v-4H4z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M8 9h6" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Ask about your results, any time',
-    body: 'Plain-English answers grounded in your own markers and your doctor\'s written assessment. It explains what a result means and what moves it; it never diagnoses, doses or changes your protocol. Members ask without limit; a single visit includes five questions a month.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M6 3h7l4 4v12H6z" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M13 3v4h4M9 12h5M9 15h5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Your plan, after every panel',
-    body: 'One page: your system scores, the markers your doctor is watching, the written assessment, your protocol and the next review date. Print it or hand it to your GP.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M8 3l-1 5.5H5L8 17a3 3 0 006 0l3-8.5h-2L14 3H8z" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Member rates on every panel',
-    body: 'Your first panel at $199 and follow-up panels at $139, booked for you when they are due. Every change to your plan is made with fresh results in front of your doctor.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" /><path d="M12 6v5l3 2" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Priority clinical support',
-    body: 'Your care team between consultations, not just at them. Questions answered, concerns escalated, and care coordinated by a dedicated clinical team.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <path d="M11 2a10 10 0 100 20A10 10 0 0011 2z" />
-        <path d="M11 8v5" strokeLinecap="round" /><path d="M11 16h.01" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Free referrals, certs & letters',
-    body: 'Medical certificates, health summaries, referrals, and travel letters included as part of your membership. No bolt-on fees.',
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5" aria-hidden="true">
-        <rect x="5" y="2" width="12" height="18" rx="2" />
-        <path d="M9 6h4M11 16h.01" strokeLinecap="round" />
-        <path d="M8 10h6M8 13h4" strokeLinecap="round" />
-      </svg>
-    ),
-    title: 'Full patient portal access',
-    body: 'View your bloodwork results, track biomarker trends over time, message your care team, access prescriptions and medical documents, all in one place.',
-  },
+  { t: 'Doctor-led plan management', b: 'Your plan is not a static script. It changes with your bloods, your feedback and your response, adjusted by a doctor every cycle.' },
+  { t: 'Eight health-system scores, trended', b: 'Hormones, metabolic, heart, thyroid, nutrients, liver, kidney and blood, each scored from your own markers across every panel you have done.' },
+  { t: 'Ask about your results, any time', b: 'Plain-English answers grounded in your own markers and your doctor’s written assessment. Members ask without limit.' },
+  { t: 'Your plan, after every panel', b: 'One page: your scores, the markers your doctor is watching, the written assessment and the next review date. Hand it to your GP.' },
+  { t: 'Priority clinical support', b: 'Your care team between consultations, not just at them. Questions answered, concerns escalated.' },
+  { t: 'Full patient portal access', b: 'Results, trends, bookings, documents and messages to your care team, in one place.' },
 ]
 
-// ─── Sections ─────────────────────────────────────────────────────────────────
-
-function Hero() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section data-stage-hero="" data-art="/3d/product/box-black.jpg"
-      className="relative overflow-hidden"
-      style={{ backgroundColor: 'var(--bg)', paddingTop: '140px', paddingBottom: '90px' }}
-      aria-label="Apex Membership"
-    >
-      <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
-      <div aria-hidden="true" className="absolute top-0 left-0 w-[800px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 0% 0%, rgba(72,144,247,0.07) 0%, transparent 60%)' }} />
-      <div aria-hidden="true" className="absolute bottom-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 100% 100%, rgba(72,144,247,0.05) 0%, transparent 60%)' }} />
-
-      <div ref={ref} className="container-tight relative z-10">
-
-        {/* Savings proof pill */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease }}
-          className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-full"
-          style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)' }}
-        >
-          <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
-            <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.15)" stroke={ACCENT} strokeWidth="0.8" />
-            <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className="text-[12px] font-semibold" style={{ color: ACCENT }}>
-            $99 a month · No lock-in · Pause or cancel from your account
-          </span>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.45, delay: 0.04, ease }}
-          className="label mb-5"
-        >
-          Apex Protocol
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.75, delay: 0.1, ease }}
-          style={{
-            fontFamily: 'var(--font-space-grotesk)',
-            fontSize: 'clamp(32px, 4.5vw, 68px)',
-            fontWeight: 700,
-            lineHeight: 1.04,
-            letterSpacing: '-0.025em',
-            color: 'var(--text-primary)',
-            maxWidth: '820px',
-            marginBottom: '1.25rem',
-          }}
-        >
-          Ongoing care,{' '}
-          <span style={{ color: 'var(--blue)' }}>
-            one monthly fee.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2, ease }}
-          className="text-base md:text-lg leading-relaxed"
-          style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '520px', marginBottom: '2.25rem' }}
-        >
-          A full doctor-led clinical system for $99/mo: protocol management, biomarker tracking, medication at cost price, and prescribing fees waived.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.32, ease }}
-          className="flex flex-wrap items-center gap-4 mb-8"
-        >
-          <Link href="https://app.apexmetabolichealth.com.au/signup?next=membership" className="btn-pill">
-            Create your free account
-            <span className="btn-circle" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </Link>
-          <div className="flex items-baseline gap-1.5 px-5 py-3 rounded-full"
-            style={{ background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.18)' }}>
-            <span className="text-2xl font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>$99</span>
-            <span className="text-sm" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>/month · no lock-in</span>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.48, ease }}
-          className="flex flex-wrap gap-x-6 gap-y-2"
-        >
-          {['AHPRA-registered doctors', 'Reviewed every 3 months', 'Australia-wide telehealth', 'Pause or cancel from your account'].map(t => (
-            <span key={t} className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase" style={{ color: ACCENT }}>
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: 'rgba(72,144,247,0.5)' }} />
-              {t}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-function AdvantageStrip() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
-
-  return (
-    <section
-      ref={ref}
-      aria-label="Membership advantages"
-      style={{ backgroundColor: 'var(--surface)', borderTop: '1px solid rgba(72,144,247,0.1)', borderBottom: '1px solid rgba(72,144,247,0.1)' }}
-    >
-      <div className="container-tight">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {ADVANTAGE_STATS.map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08, ease }}
-              className="flex flex-col py-8 px-6"
-              style={{
-                borderRight: i < 3 ? '1px solid rgba(72,144,247,0.08)' : 'none',
-                borderBottom: i < 2 ? '1px solid rgba(72,144,247,0.08)' : 'none',
-              }}
-            >
-              <span style={{
-                fontFamily: 'var(--font-space-grotesk)',
-                fontSize: i === 2 ? 'clamp(18px, 2.5vw, 26px)' : '28px',
-                fontWeight: 800,
-                color: ACCENT,
-                lineHeight: 1,
-                marginBottom: '6px',
-              }}>
-                {stat.value}
-              </span>
-              <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: '3px' }}>
-                {stat.label}
-              </span>
-              <span style={{ fontSize: '12px', color: 'var(--text-primary)', opacity: 0.72 }}>
-                {stat.sub}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function WhatsIncluded() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--surface)' }} aria-label="What's included">
-      <div className="glow-rule" aria-hidden="true" />
-      <div ref={ref} className="container-tight relative z-10">
-
-        <div className="mb-12">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            What&apos;s Included
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
-            style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 44px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.08, maxWidth: '600px' }}
-          >
-            Everything inside{' '}
-            <span style={{ color: ACCENT }}>$99 a month.</span>
-          </motion.h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {INCLUDED.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.08 + i * 0.07, ease }}
-              className="rounded-xl p-6"
-              style={{ background: 'var(--bg)', border: '1px solid rgba(72,144,247,0.12)', borderTop: `2px solid ${ACCENT}` }}
-            >
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.18)', color: ACCENT }}>
-                {item.icon}
-              </div>
-              <h3 className="text-sm font-bold mb-2" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                {item.title}
-              </h3>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                {item.body}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bonus items */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.55, ease }}
-          className="mt-6 flex flex-wrap gap-3"
-        >
-          {[
-            'Medication at pharmacy cost price',
-            'Prescribing fee waived',
-            'Nursing team check-ins every 6–8 weeks',
-            'Medical certificates included',
-            'Health summaries on request',
-            'Full patient portal access',
-          ].map(item => (
-            <div key={item} className="flex items-center gap-2 px-4 py-2.5 rounded-lg"
-              style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
-              <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden="true">
-                <circle cx="6" cy="6" r="5.5" fill="rgba(72,144,247,0.12)" stroke={ACCENT} strokeWidth="0.8" />
-                <path d="M3.5 6l2 2 3-3.5" stroke={ACCENT} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', opacity: 0.72 }}>{item}</span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-function PortalAccess() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  const features = [
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M3 3v14h14" strokeLinecap="round"/><path d="M7 13l3-5 3 3 3-5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Biomarker dashboard', body: 'Every blood result in one place, plotted over time so you can see exactly how your markers are moving.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M17 12a2 2 0 01-2 2H5l-3 3V5a2 2 0 012-2h11a2 2 0 012 2z" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Message your care team', body: 'Direct access to your clinical team between consultations. Questions answered, not queued.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h0a2 2 0 002-2M9 5a2 2 0 012-2h0a2 2 0 012 2" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Prescription history', body: 'Full visibility of your treatment history, current protocol, and upcoming renewals.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M4 4h12v12H4zM8 4V2M12 4V2M4 8h12" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Medical documents', body: 'Certificates, referrals, and clinical summaries available to download any time.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><rect x="3" y="4" width="14" height="13" rx="2"/><path d="M7 2v4M13 2v4M3 9h14" strokeLinecap="round"/></svg>,
-      label: 'Consultation booking', body: 'Book telehealth appointments from the portal. Cancel or reschedule up to 4 hours before your appointment.',
-    },
-    {
-      icon: <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16"><path d="M10 2a6 6 0 016 6c0 3-1 5-2 6H6c-1-1-2-3-2-6a6 6 0 016-6zM8 17a2 2 0 004 0" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-      label: 'Review reminders', body: 'Automated reminders when your next blood draw or clinical review is due.',
-    },
-  ]
-
-  return (
-    <section className="relative section-pad-sm overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="Patient portal">
-      <div className="glow-rule" aria-hidden="true" />
-      <div ref={ref} className="container-tight relative z-10">
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-          {/* Left */}
-          <div>
-            <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-              Patient Portal
-            </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
-              style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 44px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.08, marginBottom: '1rem' }}
-            >
-              Members unlock the{' '}
-              <span style={{ color: ACCENT }}>full platform.</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
-              className="text-sm leading-relaxed mb-8"
-              style={{ color: 'var(--text-primary)', opacity: 0.72, maxWidth: '440px' }}
-            >
-              The Apex patient portal puts your entire clinical picture in one place (results, messaging, documents, and bookings) accessible from any device.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5, delay: 0.28, ease }}
-            >
-              <Link
-                href="https://app.apexmetabolichealth.com.au/signup?next=membership"
-                className="btn-primary"
-                style={{ display: 'inline-flex', fontSize: '13px' }}
-              >
-                Create your account
-                <svg viewBox="0 0 16 16" fill="none" width="14" height="14" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-            </motion.div>
-          </div>
-
-          {/* Right - feature grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3"
-          >
-            {features.map((f, i) => (
-              <motion.div
-                key={f.label}
-                initial={{ opacity: 0, y: 16 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.45, delay: 0.3 + i * 0.06, ease }}
-                className="rounded-xl p-4"
-                style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.1)' }}
-              >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
-                  style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.15)', color: ACCENT }}
-                  aria-hidden="true">
-                  {f.icon}
-                </div>
-                <p className="text-xs font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>
-                  {f.label}
-                </p>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-                  {f.body}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function FourMonthCycle() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  const phases = [
-    { n: '01', phase: 'Month 1', label: 'Baseline', desc: 'Comprehensive blood work. Full biomarker baseline established. Initial protocol built by your doctor.' },
-    { n: '02', phase: 'Month 2', label: 'Optimise', desc: 'Treatment underway. Early response reviewed. Dosing and protocol refined to your feedback.' },
-    { n: '03', phase: 'Month 3', label: 'Refine', desc: 'Mid-cycle check-in. Nutrition and lifestyle calibrated. Progress tracked against clinical targets.' },
-    { n: '04', phase: 'Month 4', label: 'Review', desc: 'Full clinical review. Follow-up blood work completed. Protocol reassessed. Next cycle begins.' },
-  ]
-
-  return (
-    <section className="relative section-pad overflow-hidden" style={{ backgroundColor: 'var(--bg)' }} aria-label="3-month review cycle">
-      <div className="glow-rule" aria-hidden="true" />
-      <div className="absolute inset-0 dot-grid opacity-20" aria-hidden="true" />
-      <div aria-hidden="true" className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)' }} />
-
-      <div ref={ref} className="container-tight relative z-10">
-        <div className="text-center mb-14">
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="label mb-4">
-            The System
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.08, ease }}
-            style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', marginBottom: '0.75rem' }}
-          >
-            How the 3-month review cycle works.
-          </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.18, ease }}
-            className="text-sm leading-relaxed max-w-xl mx-auto" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-            Not a static prescription, but a living, evolving protocol that responds to your biology.
-          </motion.p>
-        </div>
-
-        {/* Desktop */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.22, ease }}
-          className="hidden md:grid grid-cols-4 gap-0 rounded-2xl overflow-hidden"
-          style={{ border: '1px solid rgba(72,144,247,0.14)' }}
-        >
-          {phases.map((phase, i) => (
-            <div key={phase.phase} className="flex flex-col p-8 relative"
-              style={{ background: i % 2 === 0 ? 'var(--surface)' : 'var(--bg)', borderRight: i < 3 ? '1px solid rgba(72,144,247,0.1)' : 'none' }}>
-              {i < 3 && (
-                <div className="absolute top-8 -right-3 z-10 w-6 h-6 rounded-full flex items-center justify-center"
-                  style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.18)' }}>
-                  <svg viewBox="0 0 12 12" fill="none" className="w-3 h-3" aria-hidden="true">
-                    <path d="M2 6h8M7 3l3 3-3 3" stroke={ACCENT} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-                  </svg>
-                </div>
-              )}
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                  <span className="text-[12px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
-                </div>
-                <span className="text-[12px] font-semibold tracking-[0.16em] uppercase" style={{ color: ACCENT }}>{phase.phase}</span>
-              </div>
-              <span className="text-lg font-bold mb-3" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</span>
-              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Mobile */}
-        <div className="md:hidden flex flex-col gap-3">
-          {phases.map((phase) => (
-            <div key={phase.phase} className="flex gap-4 rounded-xl p-5"
-              style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.12)' }}>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
-                <span className="text-[12px] font-bold" style={{ fontFamily: 'var(--font-space-grotesk)', color: ACCENT }}>{phase.n}</span>
-              </div>
-              <div>
-                <p className="text-[12px] font-semibold tracking-[0.16em] uppercase mb-1" style={{ color: ACCENT }}>{phase.phase}</p>
-                <p className="text-sm font-bold mb-1" style={{ fontFamily: 'var(--font-space-grotesk)', color: 'var(--text-primary)' }}>{phase.label}</p>
-                <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{phase.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ClosingCTA() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section
-      ref={ref}
-      className="relative section-pad overflow-hidden"
-      style={{ background: `linear-gradient(135deg, #1a3a6e 0%, #2563eb 50%, #4890f7 100%)` }}
-      aria-label="Join the membership"
-    >
-      <div className="absolute inset-0 dot-grid opacity-20" style={{ filter: 'invert(1)' }} aria-hidden="true" />
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255,255,255,0.08) 0%, transparent 70%)' }} />
-
-      <div className="container-tight relative z-10 text-center">
-        <motion.p initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
-          className="text-[12px] font-semibold tracking-[0.18em] uppercase mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
-          Apex Protocol Membership
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, ease }}
-          style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: 'clamp(28px, 3.5vw, 56px)', fontWeight: 700, lineHeight: 1.06, letterSpacing: '-0.025em', color: '#ffffff', marginBottom: '1.25rem' }}
-        >
-          Your biology doesn&apos;t stop.
-          <br />
-          <span style={{ color: 'rgba(255,255,255,0.8)' }}>Neither should your care.</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.12, ease }}
-          className="text-sm leading-relaxed mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.88)' }}
-        >
-          $99/mo. No lock-in. Starts the day you join, from your account.
-        </motion.p>
-
-        {/* Inline stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.2, ease }}
-          className="flex flex-wrap justify-center gap-6 mb-10"
-        >
-          {[
-            { value: '$0', label: 'Prescribing fees' },
-            { value: 'Cost price', label: 'Medication' },
-            { value: '$99/mo', label: 'Pause or cancel in your account' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center">
-              <p style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '22px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>{stat.value}</p>
-              <p style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginTop: '4px' }}>{stat.label}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3, ease }}
-          className="flex flex-col items-center gap-3"
-        >
-          <Link href="https://app.apexmetabolichealth.com.au/signup?next=membership" className="btn-white" style={{ fontSize: '14px', padding: '16px 32px' }}>
-            Create your free account
-            <svg viewBox="0 0 16 16" fill="none" width="15" height="15" aria-hidden="true">
-              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.45)' }}>Takes 60 seconds. No commitment. No lock-in.</p>
-        </motion.div>
-
-        <motion.p initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.5, delay: 0.5 }}
-          className="text-xs mt-10 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.35)' }}>
-          All consultations conducted by AHPRA-registered practitioners. Membership starts the day you join, and member rates apply to anything booked after that. Pricing subject to change; confirm at time of booking.
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
+const FAQS: Faq[] = [
+  { q: 'Can I cancel the membership?', a: 'Yes. Membership is month to month with no lock-in contract. Pause or cancel from your account.' },
+  { q: 'When does membership activate?', a: 'The day you join, from your account. You can join before your first blood panel and consult, and member rates apply to anything you book after joining.' },
+  { q: 'What does the fee cover?', a: 'Medication at cost price with no AHI fee and no escript fee on partner-pharmacy orders, member rates on every panel and consult, nursing check-ins, referrals and certificates, and priority support between reviews.' },
+  { q: 'Do I have to be a member to be treated?', a: <>No. You can pay per consult and fill scripts at any pharmacy, or use our partner pharmacy and pay per order. Membership is the path with the fees included. The three paths are added up on the <Link href="/pricing">pricing page</Link>.</> },
+  { q: 'Does membership guarantee a prescription?', a: 'No. A doctor only prescribes where it is clinically appropriate, member or not. Membership changes what you pay, never what a doctor decides.' },
+  { q: 'Can I claim it on Medicare?', a: 'No. Apex is a fully private clinic, so there is no Medicare rebate on membership, consults or bloods.' },
+]
 
 export default function MembershipPage() {
   return (
     <>
       <Nav />
-      <main>
-        <Hero />
-        <AdvantageStrip />
-        <WhatsIncluded />
-        <PortalAccess />
-        <FourMonthCycle />
-        <ClosingCTA />
+      <main id="main-content" className="al-page">
+        <InnerHero
+          kicker="Membership"
+          title="Ongoing care, one monthly fee."
+          lead="Apex Member: member rates on every panel and consult, medication at cost, free escripts, and a doctor review about every 3 months. Pause or cancel from your account."
+          cap={['No lock-in', 'Member rates from day one', 'Cancel from your account']}
+          photo={SHOTS.balance}
+          ctaLabel="Join as a member"
+          ctaHref={PORTAL_MEMBERSHIP}
+        />
+        <TrustChips />
+
+        <section className="al-sec" aria-labelledby="mb-cards">
+          <div className="container-x">
+            <Head id="mb-cards" kicker="What members get" title="Three things change." cap={['Member pricing', 'Free escripts', 'Reviews every 3 months']} />
+            <ul className="ip-cards" role="list">
+              {CARDS.map((c, i) => (
+                <li key={c.k} className="al-card ip-card" data-dark>
+                  <span className="ip-card-ic" aria-hidden="true">{c.ic}</span>
+                  <span className="al-k">{String(i + 1).padStart(2, '0')} · {c.k}</span>
+                  <h3>{c.t}</h3>
+                  <p>{c.b}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="ip-tier-band" aria-labelledby="mb-tier">
+          <div className="ip-bg"><img src={SHOTS.textureLongevity.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
+          <div className="ip-grade" aria-hidden="true" />
+          <div className="container-x">
+            <Head id="mb-tier" kicker="The membership" title="Apex Member." cap={['One tier', 'One monthly fee', 'Textures: AI-generated, illustrative']} dark />
+            <div className="ip-tier-grid">
+              <div className="ip-tier">
+                <span className="al-k">Membership</span>
+                <h3>Apex Member</h3>
+                <div className="ip-tier-price"><b>$99</b><span>a month</span></div>
+                <hr />
+                <p className="ip-tier-req">To join</p>
+                <p>Create your free account, then join from your account.</p>
+                <ul className="ip-ticks" role="list">
+                  {TICKS.map(t => <li key={t}>{t}</li>)}
+                </ul>
+                <Link href={PORTAL_MEMBERSHIP} className="al-pill al-pill-lg al-pill-light">Join as a member <Arrow /></Link>
+                <p className="ip-tier-note">Medication is extra on every path and depends on what, if anything, your doctor prescribes. Private clinic, no Medicare rebate.</p>
+              </div>
+              <ul className="ip-inc" role="list">
+                {INCLUDED.map(x => (
+                  <li key={x.t}>
+                    <h3>{x.t}</h3>
+                    <p>{x.b}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <FaqSection faqs={FAQS} kicker="Membership" title={<>Before you join.<br />The straight answers.</>} lead="Cancelling, when it starts, what it covers, and what it never changes." id="mb-faq" />
+
+        <CtaBand shot={SHOTS.womanKitchen} kicker="Join" title="Ready to join." lead="Create your free account, then join from your account. Member rates apply from that day, including your first panel and consult." label="Join as a member" href={PORTAL_MEMBERSHIP} />
       </main>
-      <Footer />
+      <InnerFoot />
     </>
   )
 }
