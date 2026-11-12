@@ -14,8 +14,8 @@ import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
  * numbers, no prices above the fold.
  */
 
-/** The 45-second health quiz (app/start, lib/startFunnel.ts). Secondary only: no primary CTA points here. */
-export const QUIZ_HREF = '/start'
+/** The 45-second health quiz (app/start/quiz, lib/startFunnel.ts). Secondary only: no primary CTA points here. */
+export const QUIZ_HREF = '/start/quiz'
 
 const Arrow = () => (
   <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
@@ -106,6 +106,8 @@ export function Approach() {
               <span className="al-how-k">{String(i + 1).padStart(2, '0')} / {s.k}</span>
               <h3>{s.t}</h3>
               <p>{s.b}</p>
+              {/* Phones only: a photo between 02 and 03, so no screen is text alone. */}
+              {i === 1 && <Photo className="al-how-photo-sm" src="/photos/man-balcony-call.webp" alt="A man on a phone call on his balcony above the ocean" sizes="100vw" />}
             </li>
           ))}
         </ol>
@@ -115,20 +117,18 @@ export function Approach() {
   )
 }
 
-/** 05 Why Apex: three reasons, then the four principles. */
+/** 05 Why Apex: three reasons beside a patient-side photo (principles live in Approach). */
 const REASONS = [
   { k: 'Doctors', t: 'Australian-registered doctors.', b: 'Every plan is set by an AHPRA-registered doctor who works in hormone and metabolic health. NATA-accredited pathology, cGMP partner pharmacies.' },
   { k: 'Pricing', t: 'Transparent pricing.', b: 'Every fee is on the pricing page before you start. No lock-in, no surprise invoices.', link: { href: '/pricing', label: 'See pricing' } },
   { k: 'Care', t: 'Personalised care.', b: 'Your plan starts from your own numbers and changes when they do. You can ask about your results any time in your portal.' },
 ]
-const PRINCIPLES = ['Measure', 'Assess', 'Optimise', 'Doctor-led specialists']
 export function WhyApex() {
   return (
     <section className="al-sec al-why" aria-labelledby="why-title">
       <div className="container-x">
         <Head id="why-title" n="05" k="Why Apex" title="Doctor-led. No fluff." cap={['LegitScript certified', 'No GP referral', 'Australia-wide']} />
         <div className="al-why-in">
-          <Photo className="al-why-photo" src="/photos/woman-video-call.webp" alt="A woman at her dining table on a video call on her laptop" sizes="(min-width: 900px) 40vw, 100vw" />
           <ol className="al-why-cards" role="list">
             {REASONS.map((r, i) => (
               <li key={r.k} className="al-card">
@@ -139,26 +139,33 @@ export function WhyApex() {
               </li>
             ))}
           </ol>
+          <Photo className="al-why-photo" src="/photos/man-kettlebell.webp" alt="A man with a towel over his shoulder after a session in his home gym" sizes="(min-width: 900px) 40vw, 100vw" />
         </div>
-        <ul className="al-principles" aria-label="Our principles" role="list">
-          {PRINCIPLES.map((p, i) => <li key={p}><span className="al-k">{String(i + 1).padStart(2, '0')}</span>{p}.</li>)}
-        </ul>
       </div>
     </section>
   )
 }
 
+/** Full-bleed photo break between Why Apex and the FAQ. */
+export function PhotoBreak() {
+  return (
+    <figure className="al-break">
+      <img src="/photos/hero-window-wide.webp" alt="A man at a window looking out over the coast at dusk" loading="lazy" decoding="async" sizes="100vw" />
+    </figure>
+  )
+}
+
 /** You ask, we answer: left block, numbered accordion right. */
 export function HomeFAQ() {
-  const all = [...FAQS.map(f => ({ q: f.q, a: <>{f.a}</> })), ...OBJECTIONS]
+  // Five on the home page; the rest live on /faqs.
+  const all = [...FAQS.map(f => ({ q: f.q, a: <>{f.a}</> })), ...OBJECTIONS].slice(0, 5)
   return (
     <section className="al-sec al-faq" id="faq" aria-labelledby="faq-title">
       <div className="container-x al-faq-in">
         <div className="al-faq-side">
           <p className="al-k">// Straight answers</p>
           <h2 id="faq-title" className="al-h2">You ask,<br />we answer.</h2>
-          <p className="al-lead">For Australian adults 18 to 80. The straight answers on bloods, doctors, fees and cancelling.</p>
-          <Link href="/faqs" className="al-pill">All questions <Arrow /></Link>
+          <p className="al-lead">The straight answers on bloods, doctors, fees and cancelling.</p>
         </div>
         <div className="al-faq-list">
           {all.map((f, i) => (
@@ -171,6 +178,7 @@ export function HomeFAQ() {
               <div className="al-faq-a">{f.a}</div>
             </details>
           ))}
+          <Link href="/faqs" className="al-faq-more">All questions <Arrow /></Link>
         </div>
       </div>
     </section>

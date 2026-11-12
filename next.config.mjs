@@ -108,10 +108,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Every start goes to account creation, never the quiz (Noah, 12 Nov 2026).
+      // Every start goes to account creation (Noah, 12 Nov 2026). The one
+      // exception is /start/quiz, the quiet secondary "health quiz" link on
+      // the home page; its end CTA goes to /signup too.
       // Bloods links land on the portal's order tab after signup.
       { source: '/start', has: [{ type: 'query', key: 't', value: 'bloods' }], destination: '/signup?redirect=' + encodeURIComponent(PORTAL_SIGNUP + '?next=order'), permanent: false },
-      { source: '/start/:path((?!quiz/).*)', destination: '/signup', permanent: false },
+      { source: '/start/:path((?!quiz).*)', destination: '/signup', permanent: false },
       { source: '/start', destination: '/signup', permanent: false },
       ...LEGACY_INTAKE_ROUTES.map((source) => ({
         source,

@@ -311,17 +311,15 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 .al-how-grid h3 { margin: 4px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; }
 .al-how-grid p { margin: 0; font-size: 15px; line-height: 1.55; color: #b4bac2; max-width: 32ch; }
 
-/* ── 05 Why Apex: photo, three cards, four principles ── */
-.al-why-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 12px; align-items: stretch; }
+/* ── 05 Why Apex: three cards, photo ── */
+.al-why-in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 12px; align-items: stretch; }
 .al-why-photo { min-height: 520px; }
-.al-why-photo img { object-position: 50% 30%; }
+.al-why-photo img { object-position: 50% 12%; }
 .al-why-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .al-why-cards li { display: grid; align-content: start; gap: 10px; padding: clamp(20px, 2.2vw, 30px); }
 .al-why-cards h3 { margin: 6px 0 0; font-size: clamp(22px, 1.9vw, 28px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; }
 .al-why-cards p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--al-mute); max-width: 52ch; }
 .al-why-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; justify-self: start; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }
-.al-principles { list-style: none; margin: 28px 0 0; padding: 22px 0 0; border-top: 1px solid var(--al-line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 28px; }
-.al-principles li { display: flex; align-items: baseline; gap: 12px; font-size: clamp(18px, 1.5vw, 22px); font-weight: 600; letter-spacing: -0.035em; }
 
 /* ── 06 Ready to start: photo CTA band ── */
 .al-close { position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(88px, 9vw, 150px); background: #050505; color: #f4f6f9; padding-block: clamp(110px, 12vw, 200px); border-bottom: 1px solid #1f2124; }
@@ -339,8 +337,7 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 /* ── Tablet and phone ── */
 @media (max-width: 1099px) {
   .al-how-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
-  .al-principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+  }
 @media (max-width: 899px) {
   .al-sec { padding-top: 72px; }
   .al-head { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
@@ -384,13 +381,52 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
   .al-why-in { grid-template-columns: 1fr; gap: 8px; }
   .al-why-photo { min-height: 0; aspect-ratio: 4 / 3; border-radius: 20px; }
   .al-why-cards { gap: 8px; }
-  .al-principles { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
-  .al-principles li { font-size: 17px; }
-
+    
   .al-faq-in { grid-template-columns: 1fr; }
   .al-faq-a { padding: 0 8px 20px 48px; }
 
   .al-close { margin-top: 72px; padding-block: 96px 88px; }
   .al-close::before { background: linear-gradient(180deg, rgba(5, 5, 5, 0.55) 0%, rgba(5, 5, 5, 0.88) 55%, rgba(5, 5, 5, 0.94) 100%); }
   .al-close .al-h2 { font-size: 44px; }
+}
+
+/* ══ QA round 1 (12 Nov 2026) ══ */
+/* Featured card: lifestyle photo, runner kept in frame. */
+.tg-feature .tg-img img { object-position: 50% 14%; }
+
+/* Desktop isolation: while any card is hovered or focused, only that card shows
+   an image; every other image card (the feature too) turns into a white card. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .tg-board:has(:is(.tg-card, .tg-feature):is(:hover, :focus-visible)) :is(.tg-card[data-kind="img"], .tg-feature):not(:hover):not(:focus-visible) {
+    background: var(--al-card); color: var(--al-ink); border: 1px solid var(--al-line);
+  }
+  .tg-board:has(:is(.tg-card, .tg-feature):is(:hover, :focus-visible)) :is(.tg-card[data-kind="img"], .tg-feature):not(:hover):not(:focus-visible) .tg-img { opacity: 0; }
+  .tg-board:has(:is(.tg-card, .tg-feature):is(:hover, :focus-visible)) :is(.tg-card[data-kind="img"], .tg-feature):not(:hover):not(:focus-visible) :is(.tg-sub, .tg-n, .tg-feature-sub, .tg-feature-k) { color: var(--al-mute); }
+  .tg-board:has(:is(.tg-card, .tg-feature):is(:hover, :focus-visible)) .tg-feature:not(:hover):not(:focus-visible) .tg-feature-arrow { border-color: var(--al-line); }
+  .tg-feature { border: 1px solid transparent; transition: background-color 0.35s ease, color 0.35s ease; }
+  .tg-feature .tg-img, .tg-card .tg-img { transition: opacity 0.35s ease; }
+  /* No dimming: the white state is the step back. */
+  .tg-board:has(.tg-row .tg-card:hover, .tg-row .tg-card:focus-visible) .tg-row :is(.tg-card, .tg-all):not(:hover):not(:focus-visible) { opacity: 1; }
+}
+
+/* Approach: the phone-only photo between 02 and 03. */
+.al-how-photo-sm { display: none; }
+
+/* Full-bleed photo break between Why Apex and the FAQ. */
+.al-break { margin: clamp(88px, 9vw, 150px) 0 0; height: clamp(320px, 50vw, 680px); overflow: hidden; background: #15171a; }
+.al-break img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+
+/* FAQ: five on home, then the link to all of them. */
+.al-faq-more { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 18px; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }
+/* Inline links in answers: 44px tall tap area without moving the text. */
+.al-faq-a a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+
+/* Footer on home: one "Create your free account" (the button), 44px link rows. */
+.al-foot .site-footer ul li:has(> a[href="/signup"]) { display: none; }
+.al-foot .site-footer ul a, .al-foot .site-footer a[href^="tel:"], .al-foot .site-footer a[href^="mailto:"] { min-height: 44px; display: inline-flex; align-items: center; }
+
+@media (max-width: 899px) {
+  .al-how-photo-sm { display: block; margin-top: 20px; aspect-ratio: 16 / 10; border-radius: 20px; }
+  .al-how-photo-sm img { object-position: 50% 40%; }
+  .al-break { margin-top: 72px; height: 62vw; min-height: 260px; }
 }

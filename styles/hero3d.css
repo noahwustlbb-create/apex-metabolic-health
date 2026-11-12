@@ -40,7 +40,7 @@ html[data-chosen="women"] .hx { --hx-bg: #fbecf2; --hx-bg-deep: #f6d8e4; --hx-ac
   position: relative;
   height: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   isolation: isolate;
   overflow: hidden;
   background: radial-gradient(60% 70% at 72% 58%, var(--hx-bg-deep), transparent 72%) var(--hx-bg-now, var(--hx-bg));
@@ -76,13 +76,14 @@ html[data-chosen="women"] .hx { --hx-bg: #fbecf2; --hx-bg-deep: #f6d8e4; --hx-ac
   margin: 0;
   font-family: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: clamp(44px, 4.7vw, 76px);
+  font-size: clamp(44px, 3.9vw, 64px);
   line-height: 0.96;
   letter-spacing: -0.052em;
   color: var(--hx-fg);
   text-wrap: balance;
-  max-width: 13ch;
+  max-width: none;
 }
+.hx-nw { white-space: nowrap; }
 .hx-h1-b { color: color-mix(in srgb, var(--hx-fg) 42%, transparent); }
 .hx-sub {
   margin: clamp(18px, 2.4vh, 28px) 0 clamp(24px, 3.2vh, 36px);
@@ -133,19 +134,27 @@ html[data-chosen="women"] .hx-when-women { display: inline; }
   -webkit-mask-composite: source-in;
           mask-composite: intersect;
   transform-origin: 50% 100%;
-  filter: grayscale(1) contrast(1.06) brightness(1.04);
-  transition: transform 0.85s var(--hx-ease), opacity 0.6s var(--hx-ease), filter 0.9s var(--hx-ease);
-  will-change: transform;
+  opacity: 0;
+  transition: transform 0.85s var(--hx-ease), opacity 0.45s var(--hx-ease);
 }
-/* Neutral: both figures, grey, side by side, the woman a step behind. */
-html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24%); z-index: 2; }
-html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); opacity: 0.96; }
+/* Neutral: the colour figures wait, unseen, where the grey pair shows them. */
+html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24.5%); z-index: 2; }
+html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); }
 /* Chosen: that figure takes the stage in colour, the other leaves. */
 html[data-chosen="men"] .hx-fig[data-sex="male"],
-html[data-chosen="women"] .hx-fig[data-sex="female"] { transform: none; z-index: 2; filter: none; }
+html[data-chosen="women"] .hx-fig[data-sex="female"] { transform: none; z-index: 2; opacity: 1; will-change: transform; }
 html[data-chosen="men"] .hx-fig[data-sex="female"] { transform: translateX(50%) scale(0.8); opacity: 0; pointer-events: none; }
 html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%) scale(0.8); opacity: 0; pointer-events: none; }
 
+.hx-pair {
+  position: absolute; z-index: 1; left: 50%; bottom: 0;
+  height: 100%; width: auto; aspect-ratio: 1225 / 1108; max-width: none;
+  translate: -50.36% 0;
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 96%);
+          mask-image: linear-gradient(180deg, #000 70%, transparent 96%);
+  transition: opacity 0.45s var(--hx-ease);
+}
+html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 .hx-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 0; transition: opacity 0.4s ease; }
 .hx-canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
 .hx-canvas:active { cursor: grabbing; }
@@ -197,7 +206,8 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%)
   box-shadow: 0 16px 34px -20px rgba(11, 18, 32, 0.4);
 }
 .hx-reads li::after { content: ""; position: absolute; top: 24px; right: 100%; width: 40px; border-top: 1.5px dotted color-mix(in srgb, var(--hx-fg) 45%, transparent); }
-.hx-read-v { font-size: 26px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; color: var(--hx-accent); transition: color 0.6s var(--hx-ease); }
+.hx-read-sk { display: none; }
+.hx-read-v { white-space: nowrap; font-size: 26px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; color: var(--hx-accent); transition: color 0.6s var(--hx-ease); }
 .hx-reads strong { font-size: 13px; font-weight: 600; color: var(--hx-fg); }
 .hx-reads li > span:last-child { font-size: 12px; line-height: 1.4; color: var(--hx-mute); }
 .hx-reads li[data-i="0"] { right: 3%; top: 44%; }
@@ -242,44 +252,56 @@ html[data-chosen="women"] .hx-fig[data-sex="male"] { transform: translateX(-50%)
   .hx { --nav-h: 70px; }
   .hx-pin { height: auto; min-height: 0; max-height: none; }
   .hx-frame {
-    height: calc(100svh - var(--nav-h) - 64px);
-    min-height: 600px;
+    height: auto;
+    min-height: calc(100svh - var(--nav-h) - 64px);
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-rows: minmax(calc(45svh + 14px), 1fr) auto;
     background: radial-gradient(90% 55% at 50% 34%, var(--hx-bg-deep), transparent 74%) var(--hx-bg-now, var(--hx-bg));
   }
   .hx-wash[data-to="men"]   { background: radial-gradient(90% 55% at 50% 34%, #d2e4f8, transparent 74%), #e6f0fc; }
   .hx-wash[data-to="women"] { background: radial-gradient(90% 55% at 50% 34%, #f6d8e4, transparent 74%), #fbecf2; }
   .hx-plate { grid-column: 1; grid-row: 1; }
-  .hx-stage { inset: 4px -6% 0; }
-  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-25%); }
+  /* Heads clear the 70px header by 12px or more (the frame starts under it). */
+  .hx-stage { inset: 14px -6% 0; }
+  html:not([data-chosen]) .hx-fig[data-sex="male"]   { transform: translateX(-24.5%); }
   html:not([data-chosen]) .hx-fig[data-sex="female"] { transform: translateX(26%) scale(0.95); }
-  .hx-fig { height: 108%; }
-  .hx-pick { bottom: 10px; width: calc(100% - 40px); }
+  .hx-pick { bottom: 62px; width: calc(100% - 40px); }
   .hx-copy { grid-column: 1; grid-row: 2; padding: 16px 20px 20px; }
   .hx-kicker { margin-bottom: 12px; font-size: 10.5px; }
-  .hx-h1 { font-size: clamp(30px, 8.6vw, 44px); line-height: 1; max-width: none; }
+  .hx-h1 { font-size: clamp(30px, 8.6vw, 44px); line-height: 1; }
   .hx-sub { margin: 10px 0 16px; font-size: 15.5px; line-height: 1.45; }
   .hx .stage-cta-label, .home-main .hx .stage-cta-label { height: 52px; padding: 0 22px; font-size: 15.5px; }
   .hx .stage-cta-arrow, .home-main .hx .stage-cta-arrow { width: 52px; height: 52px; }
   /* The phone sticky bar carries the number on the first screen. */
   .hx-tel { display: none; }
-  .hx-reads li { width: auto; padding: 8px 11px; border-radius: 14px; gap: 0; }
-  .hx-reads li::after, .hx-reads li > span:last-child { display: none; }
-  .hx-read-v { font-size: 19px; }
-  .hx-reads strong { font-size: 11px; }
-  .hx-reads li[data-i="0"] { left: 14px; right: auto; top: 14px; }
-  .hx-reads li[data-i="1"] { left: 14px; right: auto; top: 76px; }
-  .hx-reads li[data-i="2"] { display: none; }
+  /* Readouts: one 2-up row under the picker, over the faded chest, never a face. */
+  .hx-reads { inset: auto 20px 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hx-reads li { position: static; width: auto; display: flex; align-items: baseline; gap: 8px; padding: 9px 12px; border-radius: 14px; }
+  .hx-reads li::after, .hx-reads li > span:last-child, .hx-reads li[data-i="2"] { display: none; }
+  .hx-read-v { font-size: 18px; }
+  .hx-reads strong { font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .hx-mark, .hx-marks { display: none; }
 }
+/* Narrow phones (360): short readout labels; the sub-line says what Apex is,
+   so the kicker goes and the CTA stays above the sticky bar. */
+@media (max-width: 399px) {
+  .hx-read-k { display: none; }
+  .hx-read-sk { display: inline; }
+  .hx-h1 { font-size: 30px; }
+}
+@media (max-width: 379px) {
+  .hx-kicker { display: none; }
+  .hx-sub { font-size: 15px; }
+}
+/* Short phones (375 x 667): the stage keeps 45svh; the kicker and readouts go. */
 @media (max-width: 899px) and (max-height: 700px) {
-  .hx-frame { min-height: 0; }
-  .hx-h1 { font-size: 34px; }
+  .hx-kicker, .hx-reads { display: none; }
+  .hx-pick { bottom: 10px; }
+  .hx-h1 { font-size: 30px; }
   .hx-sub { font-size: 15px; margin: 8px 0 12px; }
-  .hx-reads { display: none; }
+  .hx-copy { padding: 12px 20px 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hx, .hx-frame, .hx-fig, .hx-stage::before, .hx-pick-btn { transition: none; }
+  .hx, .hx-frame, .hx-fig, .hx-pair, .hx-stage::before, .hx-pick-btn { transition: none; }
 }

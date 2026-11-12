@@ -23,12 +23,12 @@ const Arrow = () => (
   </svg>
 )
 
-function Img({ c, sizes, eager }: { c: GridCard; sizes: string; eager?: boolean }) {
+function Img({ c, sizes }: { c: GridCard; sizes: string }) {
   return (
     <picture className="tg-img" aria-hidden="true">
       <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes={sizes} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${c.img}-${eager ? 1200 : 600}.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
+      <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
     </picture>
   )
 }
@@ -68,7 +68,11 @@ export default function TreatmentsGrid() {
 
         <div className="tg-board">
           <Link href={feature.href} className="tg-feature">
-            <Img c={feature} sizes="100vw" eager />
+            {/* A lifestyle frame, not a texture (QA 12 Nov): energy reads as a person moving. */}
+            <picture className="tg-img" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/photos/performance-hero.webp" alt="" width={1194} height={1600} loading="lazy" decoding="async" />
+            </picture>
             <span className="tg-feature-k al-k">{feature.n} · Featured program</span>
             <span className="tg-feature-text">
               <span className="tg-feature-name">{feature.name}</span>
