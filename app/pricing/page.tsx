@@ -16,7 +16,7 @@ import Link from 'next/link'
  *
  * Every figure is the live pricing data (Noah, 11 Nov 2026): bloods $280 /
  * $199 member, follow-ups $180 / $139, hormone consult $275 / $199, general
- * consult $199 / $99, escript fee $155, AHI fee from $50 averaging $350 to
+ * consult $199 / $125 (Noah, 13 Nov 2026), escript fee $155, AHI fee from $50 averaging $350 to
  * $650 per partner-pharmacy order, membership $99 a month. The consult the
  * portal calls "Peptide / General Consult" is shown as "Program consult" (Noah, 12 Nov 2026: rename)
  * here: no medicine classes on the site (brand platform, open item).
@@ -55,11 +55,11 @@ const PATHS: Path[] = [
     id: 'member', tag: 'Most included', name: 'Apex member', who: 'You want ongoing care with the fees included. Pause or cancel from your account.', featured: true,
     lines: [
       { k: 'Blood panel, member rate', v: '$199' },
-      { k: 'Program consult, members', v: '$99' },
+      { k: 'Program consult, members', v: '$125' },
       { k: 'Membership, 3 x $99', v: '$297' },
       { k: 'AHI fee and escript fee', v: 'Included' },
     ],
-    total: { k: 'First 3 months', v: '$595' },
+    total: { k: 'First 3 months', v: '$621' },
     then: 'Assumes you join before your first panel: member rates apply from the day you join. Plus the medication at cost price. Follow-up panels are $139 for members.',
     cta: { label: 'Join as a member', href: PORTAL_MEMBERSHIP },
   },
@@ -70,7 +70,7 @@ const FEES: { label: string; single: string; partner: string; member: string }[]
   { label: 'Initial blood referral', single: '$280', partner: '$280', member: '$199' },
   { label: 'Follow-up blood referral', single: '$180', partner: '$180', member: '$139' },
   { label: 'Hormone consultation', single: '$275', partner: '$275', member: '$199' },
-  { label: 'Program consult', single: '$199', partner: '$199', member: '$99' },
+  { label: 'Program consult', single: '$199', partner: '$199', member: '$125' },
   { label: 'Monthly membership', single: 'None', partner: 'None', member: '$99 a month' },
   { label: 'Medication', single: 'Pharmacy price', partner: 'No mark-up', member: 'Cost price' },
   { label: 'AHI fee per order', single: 'None', partner: 'From $50, avg $350 to $650', member: 'Included' },
