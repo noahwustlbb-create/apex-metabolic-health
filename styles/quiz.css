@@ -102,3 +102,8 @@
 @media (prefers-reduced-motion: reduce) {
   .qz-bar > span, .qz-opt, .qz-back { transition: none; }
 }
+
+/* The site-wide floating "Create your free account" pill (components/FloatingContact.tsx)
+   is a nag on a seven-tap funnel and covered the Continue button at 375 wide. Hidden
+   on the quiz only; the quiz's own result card carries that CTA. */
+body:has(main.qz) .fixed.bottom-6.z-50 { display: none !important; }
