@@ -1,0 +1,111 @@
+/*
+ * Health quiz (app/start/ShortAssessment.tsx, /start/quiz) in the AlgoRx system.
+ * Same page as /signup: black nav, mono kicker, one headline with a full stop,
+ * white option cards with a 1px ink border, black pill, 44px taps. The accent
+ * follows html[data-audience] (blue, rose once the visitor picks "women"),
+ * through the --al-accent token set in inner.css.
+ */
+
+.qz.al-page { padding: 72px 0 0; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
+.qz-main { width: 100%; max-width: 640px; padding: clamp(28px, 5vw, 72px) clamp(20px, 5vw, 64px); }
+
+/* Progress: back, a hairline bar, the honest count */
+.qz-prog { display: flex; align-items: center; gap: 14px; margin-bottom: clamp(28px, 4vw, 44px); }
+.qz-back { width: 44px; height: 44px; border-radius: 99px; border: 1px solid var(--al-line); background: var(--al-card); color: var(--al-ink); display: grid; place-items: center; cursor: pointer; flex: none; padding: 0; transition: background 0.2s, color 0.2s; }
+.qz-back:hover:not(:disabled) { background: var(--al-ink); color: #fff; }
+.qz-back:disabled { opacity: 0.3; cursor: default; }
+.qz-back svg { width: 16px; height: 16px; }
+.qz-bar { flex: 1; height: 2px; background: var(--al-hair); overflow: hidden; }
+.qz-bar > span { display: block; height: 100%; background: var(--al-ink); transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.qz-count { font: 500 11.5px/1 var(--al-mono); letter-spacing: 0.12em; color: var(--al-mute); flex: none; }
+
+/* Type */
+.qz-k { margin: 0 0 18px; }
+.qz-h1 { margin: 0; font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: clamp(34px, 3.6vw, 52px); line-height: 1; letter-spacing: -0.045em; color: var(--al-ink); text-wrap: balance; }
+.qz-lead { margin: 16px 0 0; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; color: var(--al-mute); max-width: 46ch; }
+
+/* Option cards */
+.qz-opts { display: grid; gap: 10px; margin-top: 28px; }
+.qz-opts[data-cols="2"] { grid-template-columns: 1fr 1fr; }
+.qz-opt { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 56px; padding: 14px 18px; border: 1px solid var(--al-line); border-radius: 16px; background: var(--al-card); color: var(--al-ink); text-align: left; cursor: pointer; font: inherit; transition: background 0.2s, color 0.2s, border-color 0.2s; -webkit-tap-highlight-color: transparent; }
+.qz-opt:hover { background: #f1f1f0; }
+.qz-opt-n { font: 500 11px/1 var(--al-mono); letter-spacing: 0.1em; color: var(--al-mute); flex: none; width: 20px; }
+.qz-opt-t { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.qz-opt-t strong { font-size: 16.5px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+.qz-opt-t span { font-size: 13.5px; line-height: 1.4; color: var(--al-mute); }
+.qz-opt-box { width: 22px; height: 22px; border-radius: 99px; border: 1px solid var(--al-line); flex: none; display: grid; place-items: center; color: transparent; transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.qz-opt-box svg { width: 12px; height: 12px; }
+.qz-opt[aria-pressed="true"], .qz-opt[aria-checked="true"] { background: var(--al-ink); color: #fff; border-color: var(--al-ink); }
+.qz-opt[aria-pressed="true"] .qz-opt-n, .qz-opt[aria-checked="true"] .qz-opt-n,
+.qz-opt[aria-pressed="true"] .qz-opt-t span, .qz-opt[aria-checked="true"] .qz-opt-t span { color: #c3c8cf; }
+.qz-opt[aria-pressed="true"] .qz-opt-box, .qz-opt[aria-checked="true"] .qz-opt-box { background: var(--al-accent); border-color: var(--al-accent); color: #fff; }
+.qz-opt:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 3px; }
+
+/* Actions under a screen */
+.qz-actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+.qz-skip { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; background: none; border: 0; cursor: pointer; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); text-decoration: underline; text-underline-offset: 4px; }
+.qz-skip:hover { color: var(--al-ink); }
+.qz .al-pill { border: 0; cursor: pointer; }
+.qz .al-pill:disabled { opacity: 0.45; cursor: not-allowed; }
+.qz .al-pill:disabled:hover { background: var(--al-ink); }
+
+/* Email (lead capture) */
+.qz-fields { display: grid; gap: 14px; margin-top: 28px; }
+.qz-field { display: grid; gap: 6px; font: 500 11px/1.4 var(--al-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--al-mute); }
+.qz-field em { font-style: normal; text-transform: none; letter-spacing: 0; font: 400 11px/1.4 var(--al-mono); }
+.qz-input { width: 100%; min-height: 52px; padding: 13px 16px; border: 1px solid var(--al-line); border-radius: 14px; background: var(--al-card); color: var(--al-ink); font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-size: 16px; line-height: 1.4; outline: none; transition: box-shadow 0.2s ease, border-color 0.2s ease; }
+.qz-input:focus { border-color: var(--al-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--al-accent) 18%, transparent); }
+.qz-input[aria-invalid="true"] { border-color: #b42318; }
+.qz-err { margin: 0; font-size: 13px; color: #b42318; }
+
+/* Result */
+.qz-flag { margin-top: 24px; padding: 20px; border-color: var(--al-accent); box-shadow: inset 0 0 0 1px var(--al-accent); }
+.qz-flag .al-k { color: var(--al-accent); }
+.qz-flag ul { list-style: disc; margin: 12px 0 0; padding: 0 0 0 18px; display: grid; gap: 8px; font-size: 15px; line-height: 1.5; color: var(--al-ink); }
+.qz-flag li { display: list-item; }
+.qz-flag p { margin: 12px 0 0; font-size: 14px; line-height: 1.5; color: var(--al-mute); }
+.qz-primary { margin-top: 24px; padding: clamp(22px, 2.6vw, 32px); display: grid; gap: 12px; justify-items: start; }
+.qz-primary h2 { margin: 0; font-size: clamp(26px, 2.4vw, 34px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; color: var(--al-ink); }
+.qz-primary p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--al-mute); }
+.qz-primary .al-pill { margin-top: 10px; }
+.qz-secs { margin-top: 20px; display: grid; gap: 10px; }
+.qz-secs .al-k { margin-bottom: 2px; }
+.qz-sec { padding: 18px 20px; display: grid; gap: 6px; justify-items: start; }
+.qz-sec .al-why-link { margin-top: 6px; font-size: 11px; }
+.qz-sec h3 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; color: var(--al-ink); }
+.qz-sec p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--al-mute); }
+.qz-fine { margin: 24px 0 0; font-size: 14px; line-height: 1.55; color: var(--al-mute); max-width: 46ch; }
+.qz-care { margin-top: 20px; padding: 18px 20px; display: grid; gap: 12px; }
+.qz-care ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.qz-care li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; line-height: 1.45; color: var(--al-ink); }
+.qz-care li::before { content: ""; flex: none; width: 18px; height: 18px; margin-top: 1px; border-radius: 99px; background: var(--al-ink) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.5 2.5L14 7.5' fill='none' stroke='white' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.qz-alt { margin: 28px 0 0; display: grid; gap: 2px; justify-items: start; font-size: 13.5px; line-height: 1.5; color: var(--al-mute); }
+.qz-alt a { color: var(--al-ink); text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; padding-inline: 4px; font-weight: 600; }
+.qz-stop { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px 20px; align-items: center; }
+
+/* Desktop aside, the same black panel as /signup */
+.qz-aside { position: relative; overflow: hidden; background: #0b0b0c; min-height: calc(100svh - 72px); }
+.qz-aside img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.qz-aside::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%); }
+.qz-points { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 24px; display: grid; gap: 10px; list-style: none; margin: 0; padding: 0; }
+.qz-points li { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; padding: 14px 18px; border-radius: 18px; background: rgba(8,8,9,0.72); border: 1px solid rgba(255,255,255,0.28); backdrop-filter: blur(6px); }
+.qz-points .t-readout { grid-row: span 2; align-self: center; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; color: var(--al-accent-on-dark); }
+.qz-points strong { font-size: 14px; font-weight: 600; color: #fff; }
+.qz-points span:last-child { font-size: 13px; color: #c3c8cf; }
+
+@media (max-width: 899px) {
+  .qz.al-page { grid-template-columns: 1fr; }
+  .qz-aside { display: none; }
+  .qz-main { padding: 24px 20px 48px; max-width: none; }
+}
+@media (max-width: 380px) {
+  .qz-opts[data-cols="2"] { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .qz-bar > span, .qz-opt, .qz-back { transition: none; }
+}
+
+/* The site-wide floating "Create your free account" pill (components/FloatingContact.tsx)
+   is a nag on a seven-tap funnel and covered the Continue button at 375 wide. Hidden
+   on the quiz only; the quiz's own result card carries that CTA. */
+body:has(main.qz) .fixed.bottom-6.z-50 { display: none !important; }
