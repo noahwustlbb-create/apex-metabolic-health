@@ -8,6 +8,8 @@ import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeClub, HomeFAQ, ReadyToStart
 import HomeStickyBar from '@/components/home/HomeStickyBar'
 import TrustChips from '@/components/TrustChips'
 import ImageryNote from '@/components/ImageryNote'
+import FieldNotes from '@/components/FieldNotes'
+import { notesFor } from '@/lib/field-notes'
 import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -55,6 +57,7 @@ export default function Home() {
         <TrustChips />
         <PhotoBreak />
         <HomeClub />
+        <FieldNotes notes={notesFor('home')} />
         <HomeFAQ />
         <ReadyToStart />
         <ImageryNote />

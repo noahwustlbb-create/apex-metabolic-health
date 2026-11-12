@@ -10,6 +10,8 @@ import Footer from '@/components/Footer'
 import ImageryNote from '@/components/ImageryNote'
 import HeroStartModal from '@/components/HeroStartModal'
 import TrustChips from '@/components/TrustChips'
+import FieldNotes from '@/components/FieldNotes'
+import { notesFor } from '@/lib/field-notes'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
 /**
@@ -79,8 +81,9 @@ const IMG = {
   oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%', posM: '40% 40%' },
   balconyCall: { src: '/photos/man-balcony-call.webp', alt: 'Man on a phone call on a coastal balcony', pos: '50% 30%', posM: '46% 30%' },
   duskWoman: { src: '/photos/hero-window-woman.webp', alt: 'Woman looking out at the ocean at dusk', pos: '30% 50%', posM: '22% 50%' },
-  phoneDesk: { src: '/photos/phone-desk.webp', alt: 'Hands holding a phone beside a cup of coffee', pos: '50% 50%', posM: '62% 50%' },
-  phoneHand: { src: '/photos/phone-hand.webp', alt: 'A hand holding a phone', pos: '50% 40%', portrait: true },
+  phoneDesk: { src: '/photos/device-tablet-1600.webp', alt: 'A tablet showing a glowing outline of the human body beside four result rings', pos: '50% 50%', posM: '50% 50%' },
+  // 13 Nov 2026 (Noah): the hand-held phone becomes his device render.
+  phoneHand: { src: '/photos/device-phone-1200.webp', alt: 'A phone showing a glowing outline of the human body', pos: '50% 46%', portrait: true },
   balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 30%', posM: '50% 30%', posD: '50% 0%', portrait: true },
   runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 35%', posM: '45% 35%', posD: '50% 8%', portrait: true },
   sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '80% 40%', posM: '84% 42%', posD: '70% 40%', portrait: true },
@@ -430,6 +433,8 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <HowItWorks config={config} photos={photos} onStart={handleGetStarted} />
         <Band shot={photos.bandA} label="// Bloods first · Then a plan" />
         <Included config={config} />
+        {/* Field Notes for longevity (Noah, 13 Nov 2026). */}
+        {config.slug === 'longevity' && <FieldNotes notes={notesFor('longevity')} variant="rail" id="fn-longevity" line="Notes on training, recovery and ageing well." />}
         <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />
         <FAQ config={config} />
         <CtaBand config={config} photos={photos} onStart={handleGetStarted} />

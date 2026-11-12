@@ -302,8 +302,9 @@ export const SHOTS = {
   oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%' },
   duskWoman: { src: '/photos/hero-window-woman.webp', alt: 'Woman looking out at the ocean at dusk', pos: '30% 50%' },
   windowMan: { src: '/photos/hero-window-portrait.webp', alt: 'Man looking out of a window in low evening light', pos: '55% 25%' },
-  phoneDesk: { src: '/photos/phone-desk.webp', alt: 'Hands holding a phone beside a cup of coffee', pos: '55% 50%' },
-  phoneHand: { src: '/photos/phone-hand.webp', alt: 'A hand holding a phone', pos: '50% 40%' },
+  // 13 Nov 2026 (Noah): people holding phones become his device renders (tablet for wide slots, phone for tall).
+  phoneDesk: { src: '/photos/device-tablet-1600.webp', alt: 'A tablet showing a glowing outline of the human body beside four result rings', pos: '50% 50%' },
+  phoneHand: { src: '/photos/device-phone-1200.webp', alt: 'A phone showing a glowing outline of the human body', pos: '50% 46%' },
   balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 20%' },
   greyMan: { src: '/photos/portrait-man.webp', alt: 'Portrait of a grey-haired man in a black t-shirt', pos: '50% 20%' },
   darkWoman: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt', pos: '50% 20%' },
