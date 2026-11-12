@@ -127,7 +127,6 @@
 /* ── Phone sticky bar ── */
 .hsb { display: none; }
 @media (max-width: 899px) {
-  .al-close-bg { object-position: 78% 16%; }
   .hsb {
     position: fixed; z-index: 45; left: 0; right: 0; bottom: 0;
     display: grid; grid-template-columns: 1fr auto; gap: 8px;
@@ -430,4 +429,9 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
   .al-how-photo-sm { display: block; margin-top: 20px; aspect-ratio: 16 / 10; border-radius: 20px; }
   .al-how-photo-sm img { object-position: 50% 40%; }
   .al-break { margin-top: 72px; height: 62vw; min-height: 260px; }
+}
+
+/* Phone crop for the close band photo (man on the track): the face sits top right of the source. Must come after the base rule. */
+@media (max-width: 899px) {
+  .al-close .al-close-bg { object-position: 88% 10%; }
 }
