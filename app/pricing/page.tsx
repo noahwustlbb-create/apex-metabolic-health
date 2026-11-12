@@ -164,7 +164,7 @@ export default function PricingPage() {
 
         <FaqSection faqs={faqs} kicker="Before you start" title={<>Before you start.<br />The straight answers.</>} lead="Fees, refunds, cancelling and what a consult does and does not guarantee." id="pr-faq" />
 
-        <CtaBand shot={SHOTS.kettlebell} lead="Create your free account and order your panel at the standard or member rate. A doctor reads every result with you. No GP referral." />
+        <CtaBand shot={SHOTS.trailRun} lead="Create your free account and order your panel at the standard or member rate. A doctor reads every result with you. No GP referral." />
         <ImageryNote />
       </main>
       <InnerFoot />

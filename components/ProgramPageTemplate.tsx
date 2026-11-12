@@ -7,6 +7,7 @@ import Image from '@/components/audience/Img'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import ImageryNote from '@/components/ImageryNote'
 import HeroStartModal from '@/components/HeroStartModal'
 import TrustChips from '@/components/TrustChips'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -82,6 +83,10 @@ const IMG = {
   phoneHand: { src: '/photos/phone-hand.webp', alt: 'A hand holding a phone', pos: '50% 40%', portrait: true },
   balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 30%', posM: '50% 30%', posD: '50% 0%', portrait: true },
   runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 35%', posM: '45% 35%', posD: '50% 8%', portrait: true },
+  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '80% 40%', posM: '84% 42%', posD: '70% 40%', portrait: true },
+  sprintWoman: { src: '/photos/woman-sprint-night.webp', alt: 'Woman sprinting on a track at night', pos: '50% 40%', posM: '50% 40%', posD: '50% 30%', portrait: true },
+  trailRun: { src: '/photos/woman-trail-run.webp', alt: 'Woman running up a grassy volcanic hillside under a grey sky', pos: '50% 50%', posM: '50% 50%', posD: '50% 45%', portrait: true },
+  trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%', posM: '50% 30%', posD: '50% 20%', portrait: true },
   womanKitchen: { src: '/photos/woman-kitchen.webp', alt: 'Woman holding a glass of water in a sunlit kitchen', pos: '50% 28%', posD: '50% 12%', portrait: true },
   womanStairs: { src: '/photos/woman-stairs.webp', alt: 'Woman climbing outdoor stairs above the coast', pos: '50% 28%', posD: '50% 3%', portrait: true },
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
@@ -102,11 +107,11 @@ const PORTAL_CARD: Shot = IMG.phoneHand
 const PHOTOS: Record<string, ProgramPhotos> = {
   'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: IMG.couple, how: IMG.womanCall, cta: IMG.womanStairs },
   'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: IMG.couple, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
-  longevity: { hero: IMG.greyMan, card: IMG.couple, brk: IMG.womanStairs, bandA: IMG.parkBench, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
+  longevity: { hero: IMG.greyMan, card: IMG.couple, brk: IMG.trailRun, bandA: IMG.parkBench, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
   'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.kettlebell, cta: IMG.womanKitchen },
   'skin-regeneration': { hero: IMG.darkWoman, card: texture('skin-regeneration', 'soft rose'), brk: IMG.womanKitchen, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.duskWoman, cta: IMG.womanStairs },
-  'injury-repair': { hero: IMG.balance, card: IMG.kettlebell, brk: IMG.womanStairs, bandA: IMG.parkBench, bandB: IMG.couple, how: IMG.womanKitchen, cta: IMG.womanCall },
-  'performance-plus': { hero: IMG.runner, card: IMG.kettlebell, brk: IMG.womanStairs, bandA: IMG.couple, bandB: IMG.parkBench, how: IMG.womanCall, cta: IMG.womanKitchen },
+  'injury-repair': { hero: IMG.balance, card: IMG.kettlebell, brk: IMG.trackRest, bandA: IMG.parkBench, bandB: IMG.couple, how: IMG.womanKitchen, cta: IMG.womanCall },
+  'performance-plus': { hero: IMG.sprintMan, card: IMG.kettlebell, brk: IMG.sprintWoman, bandA: IMG.couple, bandB: IMG.parkBench, how: IMG.womanCall, cta: IMG.trackRest },
   'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: IMG.couple, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
   pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: IMG.couple, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.phoneDesk },
 }
@@ -428,6 +433,7 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />
         <FAQ config={config} />
         <CtaBand config={config} photos={photos} onStart={handleGetStarted} />
+        <ImageryNote />
       </main>
       <div className="prog-al-foot"><Footer /></div>
       <StickyBar name={config.name} onStart={handleGetStarted} />

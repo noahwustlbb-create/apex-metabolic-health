@@ -4,9 +4,10 @@ import StageHero from '@/components/home/stage/StageHero'
 import StageBox from '@/components/home/stage/StageBox'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import TreatmentsGrid from '@/components/home/TreatmentsGrid'
-import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
+import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeClub, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
 import HomeStickyBar from '@/components/home/HomeStickyBar'
 import TrustChips from '@/components/TrustChips'
+import ImageryNote from '@/components/ImageryNote'
 import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -53,8 +54,10 @@ export default function Home() {
         <WhyApex />
         <TrustChips />
         <PhotoBreak />
+        <HomeClub />
         <HomeFAQ />
         <ReadyToStart />
+        <ImageryNote />
       </main>
       </StageToneProvider>
       <div className="al-foot"><Footer /></div>

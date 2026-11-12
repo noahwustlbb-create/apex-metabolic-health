@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { HowBand, BLOOD_STEPS, PROGRAM_STEPS } from '@/components/inner/InnerSections'
-import { START_HREF } from '@/lib/portal'
+import { HowBand, BLOOD_STEPS, PROGRAM_STEPS, Head as InnerHead, SHOTS } from '@/components/inner/InnerSections'
+import { START_HREF, PORTAL_MEMBERSHIP } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -135,6 +135,46 @@ export function HomeHow() {
   )
 }
 
+/** Apex Member on the home page, AlgoRx "Join The Performance Club." treatment
+ * (Noah, 13 Nov 2026: "did you add this in as well to promote our apex membership"):
+ * dark photo band, kicker, headline, three bordered dark cards, one pill to the
+ * membership page. No points, no tiers. Same three facts as /membership. */
+const ClubIc = {
+  tag: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12l9-9h9v9l-9 9-9-9z" /><circle cx="16" cy="8" r="1.5" /></svg>,
+  script: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h6M8 16h4" /></svg>,
+  review: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.6" /><path d="M20 4v5h-5" /></svg>,
+}
+const CLUB = [
+  { k: 'Member pricing', t: 'Member rates on everything.', b: 'Panels, consults and follow-ups at the member rate, and medication at cost price with no handling fee.', ic: ClubIc.tag },
+  { k: 'Free escripts', t: 'No escript fee.', b: 'The escript release fee is included. Scripts go to our partner pharmacies or to your own pharmacy.', ic: ClubIc.script },
+  { k: 'Reviews', t: 'A review about every 3 months.', b: 'Follow-up bloods and a doctor review built into your plan, with nursing check-ins in between.', ic: ClubIc.review },
+]
+export function HomeClub() {
+  return (
+    <section className="ip-tier-band al-club" id="membership" aria-labelledby="club-title">
+      <div className="ip-bg"><img src={SHOTS.glassSphere.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
+      <div className="ip-grade" aria-hidden="true" />
+      <div className="container-x">
+        <InnerHead id="club-title" kicker="Membership" title="Join Apex Member." cap={['One plan', 'One monthly fee', 'Cancel from your account']} dark />
+        <ul className="ip-cards" role="list">
+          {CLUB.map((c, i) => (
+            <li key={c.k} className="al-card ip-card" data-dark>
+              <span className="ip-card-ic" aria-hidden="true">{c.ic}</span>
+              <span className="al-k">{String(i + 1).padStart(2, '0')} · {c.k}</span>
+              <h3>{c.t}</h3>
+              <p>{c.b}</p>
+            </li>
+          ))}
+        </ul>
+        <div className="al-club-cta">
+          <Link href="/membership" className="al-pill al-pill-lg al-pill-light">Explore membership <Arrow /></Link>
+          <Link href={PORTAL_MEMBERSHIP} className="al-why-link al-club-join">Join as a member <Arrow /></Link>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /** 05 Why Apex: three reasons beside a patient-side photo (principles live in Approach). */
 const REASONS = [
   { k: 'Doctors', t: 'Australian-registered doctors.', b: 'Every plan is set by an AHPRA-registered doctor who works in hormone and metabolic health. NATA-accredited pathology, cGMP partner pharmacies.' },
@@ -168,7 +208,7 @@ export function WhyApex() {
 export function PhotoBreak() {
   return (
     <figure className="al-break">
-      <img src="/photos/hero-window-wide.webp" alt="A man at a window looking out over the coast at dusk" loading="lazy" decoding="async" sizes="100vw" />
+      <img src="/photos/woman-trail-run.webp" alt="A woman running up a grassy volcanic hillside under a grey sky" loading="lazy" decoding="async" sizes="100vw" />
     </figure>
   )
 }
@@ -207,7 +247,7 @@ export function HomeFAQ() {
 export function ReadyToStart() {
   return (
     <section className="al-close" id="cta" aria-labelledby="close-title">
-      <img className="al-close-bg" src="/photos/woman-stairs.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <img className="al-close-bg" src="/photos/man-track-rest.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
       <div className="container-x al-close-in">
         <p className="al-k">// 06 Ready to start</p>
         <h2 id="close-title" className="al-h2">Ready to start.</h2>

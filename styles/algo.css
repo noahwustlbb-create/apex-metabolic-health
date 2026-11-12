@@ -323,7 +323,7 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 
 /* ── 06 Ready to start: photo CTA band ── */
 .al-close { position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(88px, 9vw, 150px); background: #050505; color: #f4f6f9; padding-block: clamp(110px, 12vw, 200px); border-bottom: 1px solid #1f2124; }
-.al-close-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+.al-close-bg { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 62% 18%; }
 .al-close::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.72) 45%, rgba(5, 5, 5, 0.25) 100%); }
 .al-close .al-k { color: #c3c8cf; }
 .al-close .al-h2 { color: #f4f6f9; margin-top: 18px; max-width: 12ch; font-size: clamp(40px, 5.4vw, 84px); }
@@ -414,7 +414,7 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
 
 /* Full-bleed photo break between Why Apex and the FAQ. */
 .al-break { margin: clamp(88px, 9vw, 150px) 0 0; height: clamp(320px, 50vw, 680px); overflow: hidden; background: #15171a; }
-.al-break img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.al-break img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; }
 
 /* FAQ: five on home, then the link to all of them. */
 .al-faq-more { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; margin-top: 18px; font: 500 12px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }
@@ -429,4 +429,9 @@ main.home-main :is(h1.hx-h1, h2.al-h2, h2.display-heading, h2.stage-h2):not(.x):
   .al-how-photo-sm { display: block; margin-top: 20px; aspect-ratio: 16 / 10; border-radius: 20px; }
   .al-how-photo-sm img { object-position: 50% 40%; }
   .al-break { margin-top: 72px; height: 62vw; min-height: 260px; }
+}
+
+/* Phone crop for the close band photo (man on the track): the face sits top right of the source. Must come after the base rule. */
+@media (max-width: 899px) {
+  .al-close .al-close-bg { object-position: 88% 10%; }
 }

@@ -66,7 +66,7 @@ export default function TreatmentsPage() {
 
         <HowBand rows={[{ label: 'Programs', steps: PROGRAM_STEPS }]} cap={['Bloods first', 'Then a plan', 'Review every 3 months']} />
 
-        <CtaBand shot={SHOTS.womanStairs} kicker="Ready to start" title="Not sure which program?" lead="Create your free account and order one panel. Your doctor reads it with you and points you to the right program. No GP referral." />
+        <CtaBand shot={SHOTS.sprintWoman} kicker="Ready to start" title="Not sure which program?" lead="Create your free account and order one panel. Your doctor reads it with you and points you to the right program. No GP referral." />
         <ImageryNote />
       </main>
       <InnerFoot />
