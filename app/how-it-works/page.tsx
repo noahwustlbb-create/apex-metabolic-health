@@ -91,7 +91,7 @@ export default function HowItWorksPage() {
 
         <div style={{ marginTop: 'clamp(64px, 7vw, 110px)' }}><TrustChips /></div>
 
-        <CtaBand shot={SHOTS.runner} href={START_HREF} />
+        <CtaBand shot={SHOTS.sprintMan} href={START_HREF} />
         <ImageryNote />
       </main>
       <InnerFoot />

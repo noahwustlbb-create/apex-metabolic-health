@@ -168,7 +168,7 @@ export function WhyApex() {
 export function PhotoBreak() {
   return (
     <figure className="al-break">
-      <img src="/photos/hero-window-wide.webp" alt="A man at a window looking out over the coast at dusk" loading="lazy" decoding="async" sizes="100vw" />
+      <img src="/photos/woman-trail-run.webp" alt="A woman running up a grassy volcanic hillside under a grey sky" loading="lazy" decoding="async" sizes="100vw" />
     </figure>
   )
 }
@@ -207,7 +207,7 @@ export function HomeFAQ() {
 export function ReadyToStart() {
   return (
     <section className="al-close" id="cta" aria-labelledby="close-title">
-      <img className="al-close-bg" src="/photos/woman-stairs.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <img className="al-close-bg" src="/photos/man-track-rest.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
       <div className="container-x al-close-in">
         <p className="al-k">// 06 Ready to start</p>
         <h2 id="close-title" className="al-h2">Ready to start.</h2>

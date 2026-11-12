@@ -87,7 +87,7 @@ export default function MembershipPage() {
         </section>
 
         <section className="ip-tier-band" aria-labelledby="mb-tier">
-          <div className="ip-bg"><img src={SHOTS.textureLongevity.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
+          <div className="ip-bg"><img src={SHOTS.driftwood.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
           <div className="ip-grade" aria-hidden="true" />
           <div className="container-x">
             <Head id="mb-tier" kicker="The membership" title="Apex Member." cap={['One tier', 'One monthly fee', 'Textures: AI-generated, illustrative']} dark />

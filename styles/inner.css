@@ -155,11 +155,13 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-how-row + .ip-how-row { margin-top: 28px; }
 .ip-how-label { display: flex; align-items: center; gap: 12px; margin: 0 0 24px; color: #d3d6db; }
 .ip-how-label::after { content: ""; flex: 1; height: 1px; background: #26292d; }
-.ip-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
-.ip-steps li { display: grid; align-content: start; gap: 12px; padding-left: 20px; border-left: 1px solid #26292d; }
+/* AlgoRx "How It Works." step: mono label, bold title, grey copy, outline icon last, hairlines between (Noah, 13 Nov 2026). */
+.ip-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+.ip-steps li { display: grid; align-content: start; gap: 12px; padding: 4px 24px 8px 0; }
+.ip-steps li + li { padding-left: 24px; border-left: 1px solid #26292d; }
 .ip-step-k { font: 500 11.5px/1.4 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-accent-on-dark); }
-.ip-step-ic { width: 44px; height: 44px; border-radius: 12px; border: 1px solid #2e3135; display: grid; place-items: center; color: #f4f6f9; }
-.ip-step-ic svg { width: 20px; height: 20px; }
+.ip-step-ic { margin-top: 8px; display: block; color: #f4f6f9; line-height: 0; }
+.ip-step-ic svg { width: 30px; height: 30px; stroke-width: 1.4; }
 .ip-steps h3 { margin: 2px 0 0; font-size: 21px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; color: #f4f6f9; }
 .ip-steps p { margin: 0; font-size: 15px; line-height: 1.55; color: #b4bac2; max-width: 30ch; }
 .ip-how-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
@@ -344,12 +346,13 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .ip-how-row + .ip-how-row { margin-top: 20px; }
   .ip-how-label { margin-bottom: 4px; }
   .ip-steps { grid-template-columns: 1fr; gap: 0; }
-  .ip-steps li { grid-template-columns: 44px 1fr; grid-template-areas: "ic k" "ic h" "p p"; column-gap: 14px; row-gap: 6px; padding: 18px 0; border-left: 0; border-bottom: 1px solid #26292d; align-items: center; }
+  .ip-steps li { gap: 10px; padding: 26px 0 28px; border-bottom: 1px solid #26292d; }
+  .ip-steps li + li { padding-left: 0; border-left: 0; }
   .ip-steps li:last-child { border-bottom: 0; }
-  .ip-step-ic { grid-area: ic; width: 40px; height: 40px; align-self: start; }
-  .ip-step-k { grid-area: k; }
-  .ip-steps h3 { grid-area: h; margin: 0; font-size: 19px; }
-  .ip-steps p { grid-area: p; max-width: none; }
+  .ip-step-ic { margin-top: 10px; }
+  .ip-step-ic svg { width: 34px; height: 34px; }
+  .ip-steps h3 { margin: 4px 0 0; font-size: 24px; }
+  .ip-steps p { max-width: none; font-size: 16px; }
   .ip-how-cta { margin-top: 28px; }
   .ip-why { grid-template-columns: 1fr; gap: 0; padding-top: 0; border-top: 0; }
   .ip-why li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--al-hair); }
