@@ -17,7 +17,7 @@ export default function FieldNotesIndex() {
       <Nav />
       <main id="main-content" className="al-page">
         <div style={{ paddingTop: 88 }}>
-          <FieldNotes notes={FIELD_NOTES} id="fn-index" all={false} />
+          <FieldNotes notes={FIELD_NOTES} id="fn-index" all={false} h="h1" />
         </div>
         <CtaBand shot={SHOTS.duskWoman} />
         <ImageryNote />

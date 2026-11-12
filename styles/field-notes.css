@@ -1,45 +1,30 @@
-/* Field Notes (13 Nov 2026). Measured from algorx.com: section 72/80 phone, 100/120 desktop; title 34 -> 58 px,
-   600, -0.025em; mono line 12 px, 0.14em, max 216 px, right-aligned on desktop; cards 4:5, radius 14, a soft
-   bottom shade, tag 11 px mono with a 6 px dot, 18 px under the image; title 20/24, 600; grid gap 24, 50 under
-   the head. Our ink, mute and mono tokens (styles/inner.css). */
-.fn {
-  --fn-ink: var(--al-ink, #0a0a0a);
-  --fn-mute: var(--al-mute, #55595f);
-  --fn-mono: var(--al-mono, ui-monospace, "SF Mono", Menlo, monospace);
-  background: var(--al-bg, #fafafa);
-  color: var(--fn-ink);
-  padding: 72px 0 80px;
-}
-@media (min-width: 768px) { .fn { padding: 100px 0 120px; } }
-.fn-head { display: flex; flex-direction: column; gap: 20px; }
-@media (min-width: 768px) { .fn-head { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
-/* stage.css forces light headlines site-wide (main :is(h1,h2):not()x3, !important); this beats it. */
-main .fn h2.fn-h2:not(.x):not(.y):not(.z):not(.w) { margin: 0; font-size: 34px; font-weight: 600 !important; line-height: 1.02 !important; letter-spacing: -0.025em !important; color: var(--fn-ink); }
-@media (min-width: 768px) { main .fn h2.fn-h2:not(.x):not(.y):not(.z):not(.w) { font-size: 58px; } }
-.fn-line { margin: 0; max-width: 216px; font: 400 12px/1.5 var(--fn-mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fn-mute); }
-@media (min-width: 768px) { .fn-line { text-align: right; } }
-.fn-list { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 32px; }
-@media (min-width: 768px) { .fn-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
+/* Field Notes (13 Nov 2026), after algorx.com's home section, set in our system per Hugo's spec
+   (~/Clients/Apex/research/site-pass-2026-11-13/HUGO-SPEC.md section B): site heading row, 4:5 cards at our 24 radius,
+   one accent for every tag dot, 18 image to tag, 8 tag to title, 48 head to grid, 24 grid gap. */
+.fn { --fn-mono: var(--al-mono, ui-monospace, "SF Mono", Menlo, monospace); }
+.fn-line { max-width: 216px; }
+.fn-head { margin-bottom: 48px; }
+.fn-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 768px) { .fn-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .fn-card { display: flex; flex-direction: column; color: inherit; text-decoration: none; }
-.fn-img { position: relative; display: block; aspect-ratio: 4 / 5; width: 100%; overflow: hidden; border-radius: 14px; background: #1a1d21; }
+.fn-img { position: relative; display: block; aspect-ratio: 4 / 5; width: 100%; overflow: hidden; border-radius: var(--al-r, 24px); background: #1a1d21; }
 .fn-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
 .fn-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 55%, rgba(8, 12, 11, 0.5) 100%); }
 @media (hover: hover) { .fn-card:hover .fn-img img { transform: scale(1.04); } }
-.fn-card:focus-visible { outline: 2px solid var(--fn-ink); outline-offset: 4px; border-radius: 16px; }
-.fn-tag { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font: 500 11px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fn-mute); }
-.fn-tag span { width: 6px; height: 6px; border-radius: 99px; background: var(--al-accent, #0d5dea); }
-.fn-tag[data-tag="Longevity"] span { background: #6e7b4e; }
-.fn-tag[data-tag="Blood tests"] span { background: #5f7a82; }
-.fn-tag[data-tag="Recovery"] span { background: #8a6a4a; }
-.fn-t { margin-top: 8px; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: -0.02em; color: var(--fn-ink); text-wrap: pretty; }
-.fn-all { margin: 36px 0 0; }
-.fn-all a { display: inline-flex; align-items: center; min-height: 44px; font: 500 12px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fn-ink); text-decoration: underline; text-underline-offset: 4px; }
+.fn-card:focus-visible { outline: 2px solid var(--al-ink); outline-offset: 4px; border-radius: calc(var(--al-r, 24px) + 2px); }
+.fn-tag { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font: 500 11.5px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
+.fn-tag span { width: 6px; height: 6px; border-radius: 99px; background: var(--al-accent, #0d5dea); flex: none; }
+.fn-t { margin-top: 8px; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: -0.02em; color: var(--al-ink); text-wrap: pretty; }
+.fn-all { margin: 32px 0 0; }
+.fn-all a { display: inline-flex; align-items: center; min-height: 44px; font: 500 12px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }
 
-/* Rail: a swipe row (longevity page, seven notes). Cards 78% of the phone width so the next one peeks. */
-.fn[data-variant="rail"] .fn-list { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); padding-inline: clamp(20px, 5vw, 64px); scroll-padding-inline: clamp(20px, 5vw, 64px); }
-.fn[data-variant="rail"] .fn-list::-webkit-scrollbar { display: none; }
-.fn[data-variant="rail"] .fn-list > li { flex: 0 0 78%; scroll-snap-align: start; }
-@media (min-width: 768px) { .fn[data-variant="rail"] .fn-list { gap: 24px; } .fn[data-variant="rail"] .fn-list > li { flex-basis: calc((100% - 48px) / 3.25); } }
+/* Rail (longevity, eight notes): a swipe row on phones, the next card peeking; four up in two rows on desktop. */
+@media (max-width: 899px) {
+  .fn[data-variant="rail"] .fn-list { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); padding: 0 clamp(20px, 5vw, 64px) 4px; scroll-padding-inline: clamp(20px, 5vw, 64px); }
+  .fn[data-variant="rail"] .fn-list::-webkit-scrollbar { display: none; }
+  .fn[data-variant="rail"] .fn-list > li { flex: 0 0 78vw; max-width: 360px; scroll-snap-align: start; }
+}
+@media (min-width: 900px) { .fn[data-variant="rail"] .fn-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; } }
 @media (prefers-reduced-motion: reduce) { .fn-img img { transition: none; } }
 
 /* Article pages (/field-notes/[slug]) */
@@ -49,7 +34,7 @@ main .fn h2.fn-h2:not(.x):not(.y):not(.z):not(.w) { margin: 0; font-size: 34px; 
 .fn-art h1 { margin: 16px 0 0; font-size: clamp(36px, 5vw, 60px); color: var(--al-ink); }
 .fn-art-dek { margin: 18px 0 0; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; color: var(--al-mute); }
 .fn-art-meta { margin: 18px 0 0; font: 500 11px/1 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
-.fn-art-img { margin: clamp(28px, 4vw, 48px) auto 0; max-width: 1100px; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #1a1d21; }
+.fn-art-img { margin: clamp(28px, 4vw, 48px) auto 0; max-width: 1100px; aspect-ratio: 16 / 9; border-radius: var(--al-r, 24px); overflow: hidden; background: #1a1d21; }
 @media (max-width: 767px) { .fn-art-img { aspect-ratio: 4 / 5; } }
 .fn-art-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .fn-art-body { margin: clamp(32px, 4vw, 52px) auto 0; }

@@ -277,3 +277,6 @@ html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !impo
 @media (max-width: 380px) {
   .prog-al-bar .al-pill { padding: 0 12px; font-size: 11px; letter-spacing: 0.08em; }
 }
+
+/* Portal card holds Noah's phone render (13 Nov 2026): 4:5 on phones so the whole phone shows (Hugo, spec C). */
+@media (max-width: 899px) { .pa-ev .pa-photocard { aspect-ratio: 4 / 5; min-height: 0; } }

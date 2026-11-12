@@ -241,6 +241,14 @@ export default function StageHero() {
                 )
               })}
             </div>
+            {/* Welcome line over the pick (Noah, 13 Nov 2026: "welcome to apex, pick your gender ... subtle arrow,
+                dont change too much"). Absolutely placed: it adds no height to the first phone screen. Goes after a pick. */}
+            <p className="hx-hello hero-in" style={{ animationDelay: '380ms' }}>
+              <b>Welcome to Apex.</b> <span>Who is it for?</span>
+              <svg className="hx-hello-arrow" viewBox="0 0 12 12" width="12" height="12" fill="none" aria-hidden="true">
+                <path d="M6 1.5v8.5M2.5 6.5 6 10l3.5-3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </p>
             {/* The pick: grey until chosen, then that colour world. */}
             <div className="hx-pick" role="group" aria-label="Show the panel for">
               {(['men', 'women'] as Who[]).map(w => (

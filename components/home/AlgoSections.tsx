@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { HowBand, BLOOD_STEPS, PROGRAM_STEPS, Head as InnerHead, SHOTS } from '@/components/inner/InnerSections'
-import { START_HREF, PORTAL_MEMBERSHIP } from '@/lib/portal'
+import { START_HREF } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
@@ -57,7 +57,8 @@ export function AboutYou() {
       <div className="container-x">
         <Head id="about-title" n="02" k="About you" title="Told you're fine. Still don't feel it." cap={['Men and women', 'Australians 18 to 80', 'No GP referral']} />
         <div className="al-about-grid">
-          <Photo className="al-about-main" src="/photos/couple-walk.webp" alt="A man and a woman in their forties walking side by side on a tree-lined street in the morning" />
+          {/* Not a young couple (Noah, 13 Nov 2026): a man flat at dawn in a real kitchen, "told you're fine". */}
+          <Photo className="al-about-main" src="/photos/man-kitchen-dawn.webp" alt="A man in his forties leaning on his kitchen bench at dawn, looking tired" />
           <div className="al-about-side">
             <div className="al-card al-about-card">
               <p className="al-lead al-about-lead">
@@ -150,17 +151,23 @@ const CLUB = [
   { k: 'Reviews', t: 'A review about every 3 months.', b: 'Follow-up bloods and a doctor review built into your plan, with nursing check-ins in between.', ic: ClubIc.review },
 ]
 export function HomeClub() {
+  // Noah, 13 Nov 2026: "push the apex membership", AlgoRx's "Join The Performance Club." band (IMG_2196-2198).
+  // Centred head with one line under it, three icon cards, one pill (Hugo's spec, section A).
   return (
     <section className="ip-tier-band al-club" id="membership" aria-labelledby="club-title">
       <div className="ip-bg"><img src={SHOTS.glassSphere.src} alt="" loading="lazy" decoding="async" sizes="100vw" /></div>
       <div className="ip-grade" aria-hidden="true" />
       <div className="container-x">
-        <InnerHead id="club-title" kicker="Membership" title="Join Apex Member." cap={['One plan', 'One monthly fee', 'Cancel from your account']} dark />
+        <div className="al-club-head">
+          <p className="al-k">{'// Apex Membership'}</p>
+          <h2 id="club-title" className="al-h2">Join Apex Membership.</h2>
+          <p className="al-lead">One plan and one monthly fee. Member rates on panels, consults and follow-ups. Cancel from your account.</p>
+        </div>
         <ul className="ip-cards" role="list">
-          {CLUB.map((c, i) => (
+          {CLUB.map(c => (
             <li key={c.k} className="al-card ip-card" data-dark>
               <span className="ip-card-ic" aria-hidden="true">{c.ic}</span>
-              <span className="al-k">{String(i + 1).padStart(2, '0')} · {c.k}</span>
+              <span className="al-k">{c.k}</span>
               <h3>{c.t}</h3>
               <p>{c.b}</p>
             </li>
@@ -168,7 +175,6 @@ export function HomeClub() {
         </ul>
         <div className="al-club-cta">
           <Link href="/membership" className="al-pill al-pill-lg al-pill-light">Explore membership <Arrow /></Link>
-          <Link href={PORTAL_MEMBERSHIP} className="al-why-link al-club-join">Join as a member <Arrow /></Link>
         </div>
       </div>
     </section>

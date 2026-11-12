@@ -95,28 +95,34 @@ const IMG = {
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
   parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 26%', posD: '50% 17%', portrait: true },
   kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
-  couple: { src: '/photos/couple-walk.webp', alt: 'A couple talking as they walk along a leafy street', pos: '50% 26%', posD: '50% 4%', portrait: true },
 } satisfies Record<string, Shot>
 
 const texture = (slug: string, tone: string): Shot => ({ src: `/programs-grid/${slug}-1200.webp`, alt: `Close-up natural texture in ${tone} tones` })
 
 type ProgramPhotos = { hero: Shot; card: Shot; brk: Shot; bandA: Shot; bandB: Shot; how: Shot; cta: Shot }
 
-const PORTAL_CARD: Shot = IMG.phoneHand
+const PORTAL_CARD: Shot = { ...IMG.phoneHand, posM: '50% 45%', posD: '50% 32%' }
+
+// No young couple anywhere (Noah, 13 Nov 2026: "our target audience isn't young couples"). Wide-band crops for
+// the photos that replace it, measured by Hugo (HUGO-SPEC.md section C).
+const BAND = {
+  duskWoman: { ...IMG.duskWoman, posM: '22% 50%', posD: '30% 0%' },
+  oceanWindow: { ...IMG.oceanWindow, posM: '35% 40%', posD: '50% 5%' },
+} satisfies Record<string, Shot>
 
 // hero: first screen · card: photo card in "What it is" · brk: photo break ·
 // bandA: after How it works · bandB: between What's included and the FAQ ·
 // how: phone-only photo between steps 02 and 03 · cta: closing band.
 const PHOTOS: Record<string, ProgramPhotos> = {
-  'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: IMG.couple, how: IMG.womanCall, cta: IMG.womanStairs },
-  'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: IMG.couple, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
-  longevity: { hero: IMG.greyMan, card: IMG.couple, brk: IMG.trailRun, bandA: IMG.parkBench, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
-  'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.kettlebell, cta: IMG.womanKitchen },
-  'skin-regeneration': { hero: IMG.darkWoman, card: texture('skin-regeneration', 'soft rose'), brk: IMG.womanKitchen, bandA: IMG.womanCall, bandB: IMG.couple, how: IMG.duskWoman, cta: IMG.womanStairs },
-  'injury-repair': { hero: IMG.balance, card: IMG.kettlebell, brk: IMG.trackRest, bandA: IMG.parkBench, bandB: IMG.couple, how: IMG.womanKitchen, cta: IMG.womanCall },
-  'performance-plus': { hero: IMG.sprintMan, card: IMG.kettlebell, brk: IMG.sprintWoman, bandA: IMG.couple, bandB: IMG.parkBench, how: IMG.womanCall, cta: IMG.trackRest },
-  'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: IMG.couple, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
-  pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: IMG.couple, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.phoneDesk },
+  'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: BAND.duskWoman, how: IMG.womanCall, cta: IMG.womanStairs },
+  'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: BAND.oceanWindow, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
+  longevity: { hero: IMG.greyMan, card: { ...IMG.womanStairs, pos: '50% 22%', posM: '50% 22%', posD: '50% 20%' }, brk: IMG.runner, bandA: BAND.oceanWindow, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
+  'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: BAND.duskWoman, how: IMG.kettlebell, cta: IMG.womanKitchen },
+  'skin-regeneration': { hero: IMG.darkWoman, card: texture('skin-regeneration', 'soft rose'), brk: IMG.womanKitchen, bandA: IMG.womanCall, bandB: BAND.oceanWindow, how: IMG.duskWoman, cta: IMG.womanStairs },
+  'injury-repair': { hero: IMG.balance, card: IMG.kettlebell, brk: IMG.trackRest, bandA: IMG.parkBench, bandB: BAND.duskWoman, how: IMG.womanKitchen, cta: IMG.womanCall },
+  'performance-plus': { hero: IMG.sprintMan, card: IMG.kettlebell, brk: IMG.sprintWoman, bandA: { ...IMG.balconyCall, posM: '46% 30%', posD: '50% 20%' }, bandB: IMG.parkBench, how: IMG.womanCall, cta: IMG.trackRest },
+  'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: { ...IMG.womanKitchen, posM: '50% 28%', posD: '50% 12%' }, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
+  pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.windowMan },
 }
 const FALLBACK: ProgramPhotos = PHOTOS.pathology
 
@@ -433,9 +439,10 @@ export default function ProgramPageTemplate({ config }: { config: ProgramPageCon
         <HowItWorks config={config} photos={photos} onStart={handleGetStarted} />
         <Band shot={photos.bandA} label="// Bloods first · Then a plan" />
         <Included config={config} />
-        {/* Field Notes for longevity (Noah, 13 Nov 2026). */}
-        {config.slug === 'longevity' && <FieldNotes notes={notesFor('longevity')} variant="rail" id="fn-longevity" line="Notes on training, recovery and ageing well." />}
-        <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />
+        {/* Longevity: Field Notes take the second photo band's place (Noah, 13 Nov 2026; Hugo's spec B2). */}
+        {config.slug === 'longevity'
+          ? <FieldNotes notes={notesFor('longevity')} variant="rail" id="fn-longevity" line="Notes on training, recovery and ageing well." />
+          : <Band shot={photos.bandB} label="// Doctor-led · Australia-wide" />}
         <FAQ config={config} />
         <CtaBand config={config} photos={photos} onStart={handleGetStarted} />
         <ImageryNote />

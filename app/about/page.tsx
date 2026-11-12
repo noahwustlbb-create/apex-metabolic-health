@@ -21,7 +21,7 @@ const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot 
       'Every plan starts the same way: one blood panel, 23+ markers from one morning draw at an accredited collection centre near you, read by an AHPRA-registered doctor with you.',
     ],
     chips: ['Men and women', '18 to 80', 'Australia-wide'],
-    shot: SHOTS.couple,
+    shot: { ...SHOTS.womanCall, pos: '50% 30%' },
   },
   {
     k: 'How we think',
@@ -41,7 +41,7 @@ const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot 
       'Apex Metabolic Health is operated by Imperial Equity Investments Pty Ltd, a registered Australian company based on the Gold Coast, Queensland. Every claim on this page links to the body that regulates it.',
     ],
     chips: ['AHPRA', 'NATA', 'cGMP partner pharmacies', 'LegitScript'],
-    shot: SHOTS.phoneDesk,
+    shot: SHOTS.phoneHand,
   },
 ]
 

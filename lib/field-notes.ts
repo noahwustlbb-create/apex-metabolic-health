@@ -27,7 +27,7 @@ export const FIELD_NOTES: FieldNote[] = [
     tag: 'Hormones',
     title: 'Normal is a range, not a verdict.',
     dek: 'Why a result inside the reference range can still be worth a conversation.',
-    img: { src: '/photos/field-mountain-1800.webp', srcSet: '/photos/field-mountain-900.webp 900w, /photos/field-mountain-1800.webp 1800w', alt: 'A dark mountain at night with a thin line of light climbing to the summit', pos: '58% 40%' },
+    img: { src: '/photos/field-mountain-1800.webp', srcSet: '/photos/field-mountain-900.webp 900w, /photos/field-mountain-1800.webp 1800w', alt: 'A dark mountain at night with a thin line of light climbing to the summit', pos: '58% 50%' },
     minutes: 3,
     on: ['home'],
     body: [
@@ -45,7 +45,7 @@ export const FIELD_NOTES: FieldNote[] = [
     dek: 'The path from the collection centre to a plan, step by step.',
     img: { src: '/photos/amber-dropper-1400.webp', srcSet: '/photos/amber-dropper-800.webp 800w, /photos/amber-dropper-1400.webp 1400w', alt: 'A single amber drop falling from a glass dropper between two stones', pos: '50% 45%' },
     minutes: 3,
-    on: ['home'],
+    on: ['longevity'],
     body: [
       'Once you create your account and order your panel, your referral is issued electronically. You do not need a GP referral first.',
       'You take that referral to an accredited collection centre near you. A morning visit is usually best. Ask the centre if you need to fast and follow what they tell you.',
@@ -123,9 +123,9 @@ export const FIELD_NOTES: FieldNote[] = [
     tag: 'Longevity',
     title: 'Desk days and metabolic health.',
     dek: 'Long hours sitting show up in more places than your back.',
-    img: { src: '/photos/woman-laptop-1400.webp', srcSet: '/photos/woman-laptop-800.webp 800w, /photos/woman-laptop-1400.webp 1400w', alt: 'A woman in her forties working on a laptop at a marble kitchen bench', pos: '50% 22%' },
+    img: { src: '/photos/woman-laptop-1400.webp', srcSet: '/photos/woman-laptop-800.webp 800w, /photos/woman-laptop-1400.webp 1400w', alt: 'A woman in her forties working on a laptop at a marble kitchen bench', pos: '50% 26%' },
     minutes: 2,
-    on: ['longevity'],
+    on: ['home', 'longevity'],
     body: [
       'Many of us sit for most of the working day, then sit again at night. Long unbroken sitting is linked with poorer metabolic health, even in people who exercise.',
       'The fix is less dramatic than it sounds. Stand or walk for a few minutes every half hour. Take calls on your feet. Walk after meals when you can.',
@@ -169,4 +169,10 @@ export const FIELD_NOTES: FieldNote[] = [
 ]
 
 export const fieldNote = (slug: string) => FIELD_NOTES.find(n => n.slug === slug)
-export const notesFor = (where: 'home' | 'longevity') => FIELD_NOTES.filter(n => n.on.includes(where))
+// Card order per page (Hugo's spec B3): home leads with Noah's mountain; longevity puts people first and
+// alternates men and women, and never shows driftwood and both sprinters side by side in one row of three.
+const ORDER: Record<'home' | 'longevity', string[]> = {
+  home: ['normal-is-a-range', 'before-your-blood-test', 'desk-days-and-metabolic-health'],
+  longevity: ['baseline-in-your-forties', 'fitness-is-a-long-game', 'power-fades-first', 'keep-a-health-log', 'inflammation-you-cannot-feel', 'desk-days-and-metabolic-health', 'from-blood-draw-to-consult', 'before-your-blood-test'],
+}
+export const notesFor = (where: 'home' | 'longevity') => ORDER[where].map(s => FIELD_NOTES.find(n => n.slug === s && n.on.includes(where))).filter((n): n is FieldNote => !!n)
