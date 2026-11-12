@@ -1,364 +1,69 @@
-'use client'
-
-import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
-import Footer from '@/components/Footer'
+import { FAQS } from '@/lib/faqs'
+import { OBJECTIONS } from '@/components/Objections'
+import { CLINIC_EMAIL } from '@/lib/contact'
+import { pageMetadata } from '@/lib/seo'
+import { FaqList, CtaBand, InnerFoot, Arrow, SHOTS, type Faq } from '@/components/inner/InnerSections'
 
-// ─── Accordion Item ───────────────────────────────────────────────────────────
+export const metadata = pageMetadata({
+  path: '/faqs',
+  title: 'FAQs',
+  description: 'Straight answers on bloods, doctors, fees, membership and cancelling at Apex Metabolic Health. AHPRA-registered doctors, no GP referral, Australia-wide.',
+})
 
-function AccordionItem({ question, answer }: { question: string; answer: string }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div style={{ borderBottom: '1px solid rgba(15,23,42,0.08)' }}>
-      <button
-        className="w-full flex items-center justify-between py-5 text-left gap-4"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-space-grotesk)',
-            fontWeight: 600,
-            color: 'var(--text-primary)',
-            fontSize: '15px',
-          }}
-        >
-          {question}
-        </span>
-        <span
-          style={{
-            color: 'var(--blue)',
-            fontSize: '22px',
-            lineHeight: 1,
-            flexShrink: 0,
-            fontWeight: 300,
-          }}
-        >
-          {open ? '−' : '+'}
-        </span>
-      </button>
-      {open && (
-        <p className="pb-5 text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-          {answer}
-        </p>
-      )}
-    </div>
-  )
-}
+/**
+ * /faqs in the AlgoRx "You Ask, We Answer." treatment (12 Nov 2026): left
+ * column (kicker // SUPPORT, headline, one line, black pill to contact), right
+ * a numbered accordion with hairlines and + / x toggles. Questions come from
+ * lib/faqs.ts and components/Objections.tsx only: no hormone names, no
+ * medicines, no outcomes.
+ */
 
-// ─── FAQ Data ─────────────────────────────────────────────────────────────────
-
-const FAQ_CATEGORIES = [
-  {
-    category: 'Getting Started',
-    faqs: [
-      {
-        question: 'Are your services legal and regulated?',
-        answer:
-          'Yes. All medical services at Apex Metabolic Health are provided by AHPRA-registered medical practitioners. Prescriptions are issued by your doctor and dispensed by an Australian pharmacy.',
-      },
-      {
-        question: 'Do I need a referral from my GP?',
-        answer:
-          'No GP referral is required. You can book directly through our website. Clinical suitability is assessed by our own AHPRA-registered doctors during your consultation.',
-      },
-      {
-        question: 'How do I begin the process?',
-        answer:
-          "Submit the form on our website. Our team will call to confirm your appointment and pathology referral. No commitment until we've spoken.",
-      },
-      {
-        question: 'How long does the initial review take?',
-        answer:
-          'From submitting the form to completing your consultation, most patients move through the process within 1–2 weeks. Blood test turnaround time depends on the collection centre and the markers ordered. We\'ll keep you updated throughout.',
-      },
-    ],
-  },
-  {
-    category: 'Pathology & Blood Tests',
-    faqs: [
-      {
-        question: 'Why do I need blood tests before a consultation?',
-        answer:
-          'Advanced biomarker analysis is the foundation of every clinical decision. Without objective biological data, a doctor cannot responsibly design a hormonal protocol. We don\'t guess. We measure.',
-      },
-      {
-        question: 'Where do I get my blood tests done?',
-        answer:
-          'We refer you to an accredited pathology collection centre. There are centres across all major cities and most regional areas in Australia, and you can attend whichever one is most convenient. No appointment is required at most locations.',
-      },
-      {
-        question: 'Can I use existing blood test results?',
-        answer:
-          'Possibly. If your results are recent (within the last 3–6 months) and cover the relevant markers, your doctor may accept them. Submit your existing results through the Get Started form and our team will assess them before your consultation.',
-      },
-      {
-        question: 'What does the blood panel test for?',
-        answer:
-          'Our advanced biomarker panels cover a comprehensive range of markers including free and total testosterone, oestradiol, SHBG, FSH/LH, liver and kidney function, full blood count, metabolic and cellular markers, thyroid function, and more. Panels are tailored by your doctor based on your protocol and clinical history.',
-      },
-    ],
-  },
-  {
-    category: 'Consultations & Treatment',
-    faqs: [
-      {
-        question: 'How are consultations conducted?',
-        answer:
-          'All consultations are conducted via secure telehealth, by video or phone call. You need a private space, a device with a camera or microphone, and a stable internet connection. Our doctors are available across all Australian time zones.',
-      },
-      {
-        question: 'Am I guaranteed to receive a prescription?',
-        answer:
-          'No. A prescription is issued only if your doctor determines that treatment is clinically appropriate based on your pathology results, health history, and individual circumstances. We do not prescribe to patients who are not suitable candidates.',
-      },
-      {
-        question: 'What happens if treatment isn\'t clinically appropriate for me?',
-        answer:
-          'Your doctor will explain their assessment, discuss alternative options, and ensure you leave the consultation with clear guidance, even if that guidance is to explore other options. You will not be charged for a consultation that doesn\'t result in a treatment plan without prior discussion.',
-      },
-      {
-        question: 'Can I share my medication with someone else?',
-        answer:
-          'Absolutely not. All prescribed treatments are prescribed for a specific individual based on their individual pathology results and health profile. Sharing prescription medication is illegal and dangerous.',
-      },
-      {
-        question: 'What if I have a medical emergency?',
-        answer:
-          'Apex Metabolic Health is not an emergency service. In the case of a medical emergency, call 000 immediately. Our clinical team is available for non-urgent queries during business hours.',
-      },
-    ],
-  },
-  {
-    category: 'Services & Treatments',
-    faqs: [
-      {
-        question: 'What treatments does Apex Metabolic Health offer?',
-        answer:
-          'We currently offer eight clinical treatments: Hormone Optimisation, Performance & Recovery, Metabolic Weight Loss, Injury Repair & Recovery, Skin Regeneration, Hair Restoration, General Telehealth, and the Longevity Protocol. Visit our treatments pages for full details.',
-      },
-      {
-        question: 'Are your services suitable for both men and women?',
-        answer:
-          'Yes. Apex Metabolic Health provides clinical services for all adults. Our hormone and metabolic treatments are designed to assess and address imbalances in both men and women. Women\'s-specific treatments are available including tailored pathology panels.',
-      },
-      {
-        question: 'What is telehealth and how does it work at Apex?',
-        answer:
-          'Telehealth is a secure, online medical consultation, held to the same clinical standard as an in-person visit, conducted via video or phone. All Apex consultations are telehealth-based, meaning you can access our services from anywhere in Australia without travelling to a clinic.',
-      },
-      {
-        question: 'Can I get a medical certificate during my consultation?',
-        answer:
-          'Yes. Our AHPRA-registered doctors can issue medical certificates and referral letters during a telehealth consultation where clinically appropriate.',
-      },
-      {
-        question: 'What is integrative hormone care?',
-        answer:
-          'Integrative hormone care combines evidence-based pathology testing with personalised clinical protocols that address the full picture of a patient\'s health, not just a single symptom. Our approach considers hormonal, metabolic, and lifestyle factors together rather than in isolation.',
-      },
-      {
-        question: 'How does the weight management treatment work?',
-        answer:
-          'Our Metabolic Optimisation treatment begins with a doctor consultation (no upfront biomarker analysis required) to assess your metabolic profile and design a personalised protocol. Where clinically appropriate, doctor-prescribed treatment is coordinated through our pharmacy partner. Ongoing biological monitoring and review consultations are built into the treatment.',
-      },
-    ],
-  },
-  {
-    category: 'Privacy & Compliance',
-    faqs: [
-      {
-        question: 'Is my information kept confidential?',
-        answer:
-          'Yes. All patient information is handled in accordance with the Australian Privacy Act 1988 and relevant health privacy legislation. Your records are never shared with third parties without your explicit consent.',
-      },
-      {
-        question: 'Is Apex Metabolic Health a pharmacy?',
-        answer:
-          'No. Apex Metabolic Health is a telehealth clinic. We do not dispense medications directly. Where treatment is clinically indicated, prescriptions are fulfilled through our Australian cGMP partner pharmacies, which we always recommend, or a pharmacy of your choosing.',
-      },
-      {
-        question: 'Are all practitioners at Apex doctors?',
-        answer:
-          'Yes. All clinical consultations at Apex Metabolic Health are conducted by AHPRA-registered medical practitioners. You will always consult with a qualified doctor.',
-      },
-      {
-        question: 'Can I decline treatment at any point?',
-        answer:
-          'Yes, at any point. Participation in any treatment protocol is entirely voluntary. You can pause, modify, or discontinue treatment by discussing it with your doctor during any consultation.',
-      },
-    ],
-  },
+const GROUPS: { k: string; faqs: Faq[] }[] = [
+  { k: 'Getting started', faqs: FAQS.map(f => ({ q: f.q, a: f.a })) },
+  { k: 'Before you pay', faqs: OBJECTIONS },
 ]
 
-// ─── FAQ Hero ─────────────────────────────────────────────────────────────────
-
-function FAQHero() {
-  return (
-    <section data-stage-hero="" data-art="/3d/tablet.jpg"
-      className="relative overflow-hidden section-pad"
-      style={{ backgroundColor: 'var(--bg)', paddingTop: '120px' }}
-      aria-label="FAQs hero"
-    >
-      <div className="absolute inset-0 dot-grid opacity-40" aria-hidden="true" />
-
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 100% 0%, rgba(72,144,247,0.05) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="container-tight relative z-10">
-
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-5 max-w-3xl"
-          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)', lineHeight: '1.06' }}
-        >
-          Straight Answers.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.22 }}
-          className="text-lg leading-relaxed max-w-xl"
-          style={{ color: 'var(--text-primary)' }}
-        >
-          Not on this list? Contact us through the Get Started page.
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
-// ─── FAQ Category Section ─────────────────────────────────────────────────────
-
-function FAQCategory({
-  category,
-  faqs,
-  index,
-}: {
-  category: string
-  faqs: Array<{ question: string; answer: string }>
-  index: number
-}) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-60px' })
-  const bg = index % 2 === 0 ? '#ffffff' : '#f6f8fa'
-
-  return (
-    <section
-      className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: bg }}
-      aria-label={category}
-    >
-      <div className="glow-rule" aria-hidden="true" />
-
-      <div className="container-tight relative z-10">
-        <motion.h2
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-2xl md:text-3xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
-        >
-          {category}
-        </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="max-w-3xl"
-        >
-          {faqs.map((faq) => (
-            <AccordionItem key={faq.question} question={faq.question} answer={faq.answer} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Bottom CTA ───────────────────────────────────────────────────────────────
-
-function FAQBottomCTA() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-80px' })
-
-  return (
-    <section
-      ref={ref}
-      className="relative section-pad overflow-hidden"
-      style={{ backgroundColor: 'var(--bg)' }}
-      aria-label="Get started"
-    >
-      <div className="glow-rule" aria-hidden="true" />
-
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.07) 0%, transparent 60%)',
-        }}
-      />
-
-      <div className="container-tight relative z-10 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 28 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-3xl md:text-4xl font-bold tracking-tight mb-8"
-          style={{ fontFamily: 'var(--font-inter)', fontFeatureSettings: '"cv11", "ss03"', color: 'var(--text-primary)' }}
-        >
-          Still have questions?
-        </motion.h2>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.22 }}
-          className="flex flex-wrap items-center justify-center gap-4"
-        >
-          <Link href="https://app.apexmetabolichealth.com.au/signup" className="btn-pill">
-            Get Started
-          </Link>
-          <Link href="/how-it-works" className="btn-ghost">
-            How It Works
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function FAQsPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  }
+  let start = 0
   return (
     <>
       <Nav />
-      <main>
-        <FAQHero />
-        {FAQ_CATEGORIES.map((cat, i) => (
-          <FAQCategory
-            key={cat.category}
-            category={cat.category}
-            faqs={cat.faqs}
-            index={i}
-          />
-        ))}
-        <FAQBottomCTA />
+      <main id="main-content" className="al-page">
+        <section className="al-sec ip-faq" aria-labelledby="fq-title" style={{ paddingTop: 'calc(88px + clamp(48px, 6vw, 96px))' }}>
+          <div className="container-x al-faq-in">
+            <div className="al-faq-side">
+              <p className="al-k">{'// Support'}</p>
+              <h1 id="fq-title" className="al-h2" style={{ fontSize: 'clamp(40px, 4.6vw, 72px)' }}>You ask,<br />we answer.</h1>
+              <p className="al-lead">The straight answers on bloods, doctors, fees, membership and cancelling.</p>
+              <a href={`mailto:${CLINIC_EMAIL}`} className="al-pill">Ask us a question <Arrow /></a>
+            </div>
+            <div>
+              {GROUPS.map(g => {
+                const s = start
+                start += g.faqs.length
+                return (
+                  <div key={g.k} className="ip-faq-group">
+                    <p className="al-k">{'// '}{g.k}</p>
+                    <FaqList faqs={g.faqs} start={s} openFirst={s === 0} />
+                  </div>
+                )
+              })}
+              <p className="al-k" style={{ marginTop: 28 }}>Not on this list? <Link href="/discovery-call" style={{ color: 'var(--al-ink)', textDecoration: 'underline', textUnderlineOffset: 3, display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>Book a free call</Link></p>
+            </div>
+          </div>
+        </section>
+
+        <CtaBand shot={SHOTS.duskWoman} />
       </main>
-      <Footer />
+      <InnerFoot />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )
 }
