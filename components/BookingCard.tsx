@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import BookingChoice from '@/components/BookingChoice'
-import { ENQUIRY_LABELS, PANEL_URLS, type EnquiryType } from '@/lib/intake-routing'
+import { ENQUIRY_LABELS, ORDER_BLOODS_PATH, type EnquiryType } from '@/lib/intake-routing'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -14,7 +14,6 @@ export default function BookingCard() {
   const router = useRouter()
   const [enquiryLabel, setEnquiryLabel] = useState('')
   const [hasBloods, setHasBloods] = useState(false)
-  const [panelUrl, setPanelUrl] = useState('')
   const [calendlyType, setCalendlyType] = useState<'hormone' | 'general'>('general')
   const [ready, setReady] = useState(false)
 
@@ -26,7 +25,6 @@ export default function BookingCard() {
       const enquiry = intake.enquiry as EnquiryType
       setEnquiryLabel(ENQUIRY_LABELS[enquiry] || enquiry)
       setHasBloods(intake.hasBloods === true)
-      setPanelUrl(PANEL_URLS[enquiry] || '')
       setCalendlyType(HORMONE_ENQUIRIES.has(enquiry) ? 'hormone' : 'general')
       setReady(true)
     } catch {
@@ -109,16 +107,14 @@ export default function BookingCard() {
             </div>
 
             <a
-              href={panelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={ORDER_BLOODS_PATH}
               className="btn-pill w-full justify-center"
             >
               Order your blood panel →
             </a>
 
             <p className="text-[11px] text-center mt-3" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
-              Powered by Bloody Good Tests · Results delivered digitally
+              Pathology by iMedical · Your doctor goes through your results with you
             </p>
           </div>
 
