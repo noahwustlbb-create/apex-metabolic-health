@@ -210,9 +210,9 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 .hx-read-v { white-space: nowrap; font-size: 26px; line-height: 1; font-weight: 600; letter-spacing: -0.04em; color: var(--hx-accent); transition: color 0.6s var(--hx-ease); }
 .hx-reads strong { font-size: 13px; font-weight: 600; color: var(--hx-fg); }
 .hx-reads li > span:last-child { font-size: 12px; line-height: 1.4; color: var(--hx-mute); }
-.hx-reads li[data-i="0"] { right: 3%; top: 44%; }
-.hx-reads li[data-i="1"] { right: 7%; top: 59%; }
-.hx-reads li[data-i="2"] { right: 3%; top: 74%; }
+.hx-reads li[data-i="0"] { right: 3%; top: 50%; }
+.hx-reads li[data-i="1"] { right: 7%; top: 63%; }
+.hx-reads li[data-i="2"] { right: 3%; top: 76%; }
 
 /* ── Markers: light up on the short scroll after a pick (desktop) ── */
 .hx-marks { position: absolute; inset: 0; pointer-events: none; transition: opacity 0.25s linear; }

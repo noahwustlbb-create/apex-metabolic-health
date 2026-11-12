@@ -113,7 +113,7 @@ const nextConfig = {
       // the home page; its end CTA goes to /signup too.
       // Bloods links land on the portal's order tab after signup.
       { source: '/start', has: [{ type: 'query', key: 't', value: 'bloods' }], destination: '/signup?redirect=' + encodeURIComponent(PORTAL_SIGNUP + '?next=order'), permanent: false },
-      { source: '/start/:path((?!quiz).*)', destination: '/signup', permanent: false },
+      { source: '/start/:path((?!quiz$).*)', destination: '/signup', permanent: false },
       { source: '/start', destination: '/signup', permanent: false },
       ...LEGACY_INTAKE_ROUTES.map((source) => ({
         source,

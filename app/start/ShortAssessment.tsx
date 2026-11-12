@@ -45,7 +45,7 @@ const FOCUS: Record<string, { art: string; markers: string }> = {
   recovery:  { art: '/protocols/recovery.jpg',    markers: 'Hormone markers, iron studies, inflammation markers' },
   longevity: { art: '/protocols/longevity.jpg',   markers: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
   skinhair:  { art: '/protocols/hair.jpg',        markers: 'Iron studies, thyroid, hormones, vitamin D' },
-  bloods:    { art: '/protocols/bloods.jpg',      markers: 'The full 23+ marker panel across four systems' },
+  bloods:    { art: '/start/quiz/dna.jpg',          markers: 'The full 23+ marker panel across four systems' },
 }
 // Women's site (24 Oct): not led by testosterone. Same ids, so routing and the
 // portal program names do not change.
