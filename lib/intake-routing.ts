@@ -103,7 +103,7 @@ const PRODUCTS: Record<ProductType, Omit<Product, 'type'>> = {
     priceEnvKey: 'STRIPE_PRICE_CONSULT_HORMONE_RECOVERY',
   },
   'consult-general': {
-    name: 'Peptide / General Consult',
+    name: 'Program consult',
     description: 'Telehealth consultation with an AHPRA-registered doctor. Your health history is reviewed and next clinical steps are discussed.',
     // Display price. The charge is the Stripe Price in STRIPE_PRICE_CONSULT_GENERAL,
     // which must also be A$199 (Noah, 24 Oct 2026). Was 125 here until 24 Oct.

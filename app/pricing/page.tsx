@@ -18,7 +18,7 @@ import Link from 'next/link'
  * $199 member, follow-ups $180 / $139, hormone consult $275 / $199, general
  * consult $199 / $99, escript fee $155, AHI fee from $50 averaging $350 to
  * $650 per partner-pharmacy order, membership $99 a month. The consult the
- * portal calls "Peptide / General Consult" is shown as "General consult"
+ * portal calls "Peptide / General Consult" is shown as "Program consult" (Noah, 12 Nov 2026: rename)
  * here: no medicine classes on the site (brand platform, open item).
  * Medication is never included in a total: it depends on what, if anything,
  * a doctor prescribes. Private clinic, no Medicare rebate.
@@ -32,7 +32,7 @@ const PATHS: Path[] = [
     id: 'single', name: 'Script only', who: 'You want a doctor’s script and will fill it at any pharmacy.',
     lines: [
       { k: 'Blood panel', v: '$280' },
-      { k: 'General consult', v: '$199' },
+      { k: 'Program consult', v: '$199' },
       { k: 'Escript fee', v: '$155' },
     ],
     total: { k: 'First 3 months, before medication', v: '$634' },
@@ -43,7 +43,7 @@ const PATHS: Path[] = [
     id: 'partner', name: 'Partner pharmacy', who: 'You want medication with no mark-up and to pay per order.',
     lines: [
       { k: 'Blood panel', v: '$280' },
-      { k: 'General consult', v: '$199' },
+      { k: 'Program consult', v: '$199' },
       { k: 'Each order: AHI fee, on average', v: '$350 to $650' },
       { k: 'Each order: escript fee', v: '$155' },
     ],
@@ -55,7 +55,7 @@ const PATHS: Path[] = [
     id: 'member', tag: 'Most included', name: 'Apex member', who: 'You want ongoing care with the fees included. Pause or cancel from your account.', featured: true,
     lines: [
       { k: 'Blood panel, member rate', v: '$199' },
-      { k: 'General consult, members', v: '$99' },
+      { k: 'Program consult, members', v: '$99' },
       { k: 'Membership, 3 x $99', v: '$297' },
       { k: 'AHI fee and escript fee', v: 'Included' },
     ],
@@ -70,7 +70,7 @@ const FEES: { label: string; single: string; partner: string; member: string }[]
   { label: 'Initial blood referral', single: '$280', partner: '$280', member: '$199' },
   { label: 'Follow-up blood referral', single: '$180', partner: '$180', member: '$139' },
   { label: 'Hormone consultation', single: '$275', partner: '$275', member: '$199' },
-  { label: 'General consult', single: '$199', partner: '$199', member: '$99' },
+  { label: 'Program consult', single: '$199', partner: '$199', member: '$99' },
   { label: 'Monthly membership', single: 'None', partner: 'None', member: '$99 a month' },
   { label: 'Medication', single: 'Pharmacy price', partner: 'No mark-up', member: 'Cost price' },
   { label: 'AHI fee per order', single: 'None', partner: 'From $50, avg $350 to $650', member: 'Included' },
