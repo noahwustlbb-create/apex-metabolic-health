@@ -43,8 +43,8 @@ const AD_LANDING_ROUTES = [
   ['/hormone/consult', '/start?t=hormone'],
   // No peptide page exists, and peptides are Schedule 4 — a dedicated landing
   // page would be prescription-drug advertising. Conditions overview instead.
-  ['/peptide/consult', '/what-we-treat'],
-  ['/peptides', '/what-we-treat'],
+  ['/peptide/consult', '/treatments'],
+  ['/peptides', '/treatments'],
   ['/bloods', '/order-bloods'],
 ]
 
@@ -133,6 +133,12 @@ const nextConfig = {
         destination,
         permanent: false,
       })),
+      // Duplicate pages fold into their canonical page (inner pages rebuild,
+      // 12 Nov 2026): one programs page, one how-it-works page. 308 permanent.
+      { source: '/services', destination: '/treatments', permanent: true },
+      { source: '/what-we-treat', destination: '/treatments', permanent: true },
+      { source: '/our-approach', destination: '/how-it-works', permanent: true },
+      { source: '/book/:slug(hormone-consult|general-consult)', destination: '/book', permanent: true },
     ]
   },
 }

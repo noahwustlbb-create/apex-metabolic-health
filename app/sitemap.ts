@@ -8,21 +8,16 @@ const publicRoutes = [
   '/about',
   '/app',
   '/book',
-  '/book/general-consult',
-  '/book/hormone-consult',
   '/discovery-call',
   '/faqs',
   '/get-started',
   '/how-it-works',
   '/membership',
-  '/our-approach',
   '/pricing',
   '/order-bloods',
   '/privacy-policy',
-  '/services',
   '/terms',
   '/treatments',
-  '/what-we-treat',
 ]
 
 const additionalProgramRoutes = [
