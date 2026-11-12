@@ -157,16 +157,18 @@ export function symptomsFor(goal: Goal, sex: Sex | ''): SymptomOption[] {
 }
 
 export function symptomQuestion(goal: Goal, caregiver: boolean): string {
-  const you = caregiver ? 'them' : 'you'
+  const them = caregiver ? 'them' : 'you'
+  const they = caregiver ? 'they' : 'you'
+  const their = caregiver ? 'their' : 'your'
   switch (goal) {
-    case 'energy': return `What sounds like ${you}?`
-    case 'weight': return `What has ${caregiver ? 'their' : 'your'} weight been doing?`
-    case 'recovery': return `What are ${you === 'you' ? 'you' : 'they'} dealing with?`
-    case 'hairskin': return `What have ${you === 'you' ? 'you' : 'they'} noticed?`
+    case 'energy': return `What sounds like ${them}?`
+    case 'weight': return `What has ${their} weight been doing?`
+    case 'recovery': return `What are ${they} dealing with?`
+    case 'hairskin': return `What have ${they} noticed?`
     case 'longevity': return 'What is behind it?'
     case 'sexual': return 'What is going on?'
-    case 'mind': return `What sounds like ${you}?`
-    case 'unsure': return 'What bothers you most?'
+    case 'mind': return `What sounds like ${them}?`
+    case 'unsure': return `What bothers ${them} most?`
   }
 }
 

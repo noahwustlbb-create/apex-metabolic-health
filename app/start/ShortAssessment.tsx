@@ -1,229 +1,29 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import Logo from '@/components/brand/Logo'
-import { phasesFor, stepNumber, startTotal, type StartPhase } from '@/lib/startFunnel'
-import { ArtImg } from '@/components/audience/Img'
+import Nav from '@/components/Nav'
 import { useAudience } from '@/components/audience/Audience'
-import Image from 'next/image'
 import { captureLead } from '@/lib/captureLead'
+import { track } from '@/lib/analytics'
+import { PORTAL_SIGNUP } from '@/lib/portal'
+import { phasesFor, stepNumber, startTotal, type StartPhase } from '@/lib/startFunnel'
+import {
+  AGE_BANDS, GOALS, PROGRAMS, evaluateQuiz, portalPrograms, safetyFor, symptomQuestion, symptomsFor, whyLine,
+  type AgeBand, type Goal, type ProgramId, type QuizResult, type Sex,
+} from '@/lib/quiz-logic'
 
-// ── Design tokens ──────────────────────────────────────────────────────────────
-const BG     = 'var(--bg)'
-const SURF   = 'var(--surface)'
-const BLUE   = 'var(--blue)'
-const TEXT   = 'var(--text-primary)'
-const DIM    = 'var(--text-secondary)'
-const BORDER = 'var(--border)'
-const ease   = [0.22, 1, 0.36, 1] as const
+/**
+ * The health quiz (/start/quiz), rebuilt from the program guide (Noah, 12 Nov
+ * 2026). Questions and the answer-to-program mapping live in lib/quiz-logic.ts;
+ * the screen order in lib/startFunnel.ts; the look in styles/quiz.css (the same
+ * system as /signup). Nothing here diagnoses, promises or prices anything.
+ */
 
-// ── Treatment picker ───────────────────────────────────────────────────────────
-const TREATMENT_PICKS = [
-  { id: 'hormone',   label: 'Hormone Optimisation',       sub: 'Energy, drive, recovery, hormone markers' },
-  { id: 'weight',    label: 'Medical Weight Loss',         sub: 'Doctor-led metabolic management' },
-  { id: 'sexual',    label: 'Sexual Health',               sub: 'Libido, performance, confidence' },
-  { id: 'recovery',  label: 'Recovery & Injury Repair',    sub: 'Injury repair, performance, mobility' },
-  { id: 'longevity', label: 'Anti-Ageing & Longevity',     sub: 'Healthspan, vitality, long-term optimisation' },
-  { id: 'skinhair',  label: 'Skin & Hair',                 sub: 'Hair restoration, skin health, anti-ageing' },
-  { id: 'bloods',    label: 'Comprehensive Blood Tests',   sub: 'Full-panel diagnostics with doctor review' },
-  { id: 'general',   label: 'General Telehealth',          sub: "Not sure yet, but I'd like to speak to a doctor" },
-]
-
-// Portal program names, so the account opens with every protocol already set.
-const PORTAL_PROGRAM: Record<string, string> = {
-  hormone: 'Hormone Optimisation', weight: 'Weight Loss & Metabolic', sexual: 'Sexual Health', recovery: 'Recovery & Injury Repair',
-  longevity: 'Anti-Ageing & Longevity', skinhair: 'Skin & Hair', bloods: 'Comprehensive Blood Tests',
-}
-// What the panel looks at for each area (test names only, never medicines or outcomes).
-const FOCUS: Record<string, { art: string; markers: string }> = {
-  hormone:   { art: '/protocols/hormone.jpg',     markers: 'Hormone markers, binding proteins, pituitary markers' },
-  weight:    { art: '/protocols/weight.jpg',      markers: 'Glucose, HbA1c, liver and kidney function, lipids' },
-  sexual:    { art: '/protocols/sexual.jpg',      markers: 'Hormones, prolactin, thyroid and metabolic markers' },
-  recovery:  { art: '/protocols/recovery.jpg',    markers: 'Hormone markers, iron studies, inflammation markers' },
-  longevity: { art: '/protocols/longevity.jpg',   markers: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
-  skinhair:  { art: '/protocols/hair.jpg',        markers: 'Iron studies, thyroid, hormones, vitamin D' },
-  bloods:    { art: '/start/quiz/dna.jpg',          markers: 'The full 23+ marker panel across four systems' },
-}
-// Women's site (24 Oct): not led by testosterone. Same ids, so routing and the
-// portal program names do not change.
-const WOMEN_PICK_ORDER = ['hormone', 'weight', 'longevity', 'skinhair', 'recovery', 'sexual', 'bloods', 'general']
-const WOMEN_PICK_TEXT: Record<string, { label: string; sub: string }> = {
-  hormone: { label: 'Hormones and cycle', sub: 'Energy, mood, cycle, perimenopause' },
-  sexual: { label: 'Sexual Health', sub: 'Libido, comfort, confidence' },
-  recovery: { label: 'Recovery & Injury Repair', sub: 'Training, injury, iron and energy' },
-}
-const picksFor = (women: boolean) => women
-  ? WOMEN_PICK_ORDER.map(id => ({ ...TREATMENT_PICKS.find(t => t.id === id)!, ...(WOMEN_PICK_TEXT[id] ?? {}) }))
-  : TREATMENT_PICKS
-const WOMEN_FOCUS: Partial<Record<string, string>> = {
-  hormone: 'Hormone markers across your cycle, pituitary markers',
-  recovery: 'Iron studies, thyroid, cortisol, hs-CRP',
-}
-const PICK_LABEL = (id: string) => TREATMENT_PICKS.find(t => t.id === id)?.label ?? id
-
-// ── Per-treatment configs ──────────────────────────────────────────────────────
-interface Config {
-  title: string
-  q1: string
-  opts1: string[]
-  q2: string
-  opts2: string[]
-}
-
-const CONFIGS: Record<string, Config> = {
-  hormone: {
-    title: 'Hormone Optimisation',
-    q1: "What symptom is affecting you most?",
-    opts1: [
-      'Low energy or fatigue',
-      'Reduced libido',
-      'Difficulty building muscle',
-      'Mood changes or low motivation',
-      'Weight gain despite diet and exercise',
-      "I'm not sure, I'd like a health check",
-    ],
-    q2: 'How long have they been experiencing this?',
-    opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
-  },
-  weight: {
-    title: 'Medical Weight Loss',
-    q1: "What's the primary goal?",
-    opts1: [
-      'Lose body fat',
-      'Improve metabolic health',
-      'Address insulin resistance',
-      'Manage a related condition',
-      "I'm not sure, guidance needed",
-    ],
-    q2: 'Have they tried medically supervised weight loss before?',
-    opts2: ["No, this is the first time", "Yes, but it didn't stick", "Currently on a treatment that isn't working"],
-  },
-  sexual: {
-    title: 'Sexual Health',
-    q1: "What's the main concern?",
-    opts1: [
-      'Low libido',
-      'Erectile dysfunction',
-      'Performance and confidence',
-      'Hormonal contributors to sexual health',
-      "I'm not sure, general assessment",
-    ],
-    q2: 'How long has this been a concern?',
-    opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
-  },
-  recovery: {
-    title: 'Recovery & Injury Repair',
-    q1: "What's the goal?",
-    opts1: [
-      'Recover from a specific injury',
-      'Improve recovery between training sessions',
-      'Improve athletic output and performance',
-      'Healthy ageing and mobility',
-      "I'm not sure, general assessment",
-    ],
-    q2: 'Which best describes their activity level?',
-    opts2: [
-      'Competitive or professional athlete',
-      'Regular gym-goer',
-      'Active lifestyle (non-gym)',
-      'Recovering from injury or surgery',
-      'Just getting started',
-    ],
-  },
-  longevity: {
-    title: 'Anti-Ageing & Longevity',
-    q1: "What's the main focus?",
-    opts1: [
-      'Energy and vitality as they age',
-      'Extending healthspan long-term',
-      'Physical and cognitive optimisation',
-      'Proactive health monitoring and prevention',
-      "I'm not sure, a full review is needed",
-    ],
-    q2: 'How long have these concerns been present?',
-    opts2: ['Less than 3 months', '3–12 months', '1–3 years', 'More than 3 years'],
-  },
-  skinhair: {
-    title: 'Skin & Hair',
-    q1: 'What would they like help with?',
-    opts1: [
-      'Hair loss or thinning',
-      'Skin ageing & fine lines',
-      'Acne or breakouts',
-      'Skin health & complexion',
-      "I'm not sure, guidance needed",
-    ],
-    q2: "What's the main goal?",
-    opts2: [
-      'Restore hair',
-      'Improve skin',
-      'Slow the signs of ageing',
-      'Build a personalised treatment plan',
-    ],
-  },
-  bloods: {
-    title: 'Comprehensive Blood Tests',
-    q1: 'What would they like to test for?',
-    opts1: [
-      'Hormone markers and thyroid',
-      'Metabolic health (glucose, cholesterol, liver, kidney)',
-      'Full comprehensive panel',
-      'Cardiovascular markers',
-      "I'm not sure, recommend a panel",
-    ],
-    q2: 'When did they last have a blood test?',
-    opts2: ['Never', 'More than 2 years ago', 'Within the last 2 years', 'Within the last 6 months'],
-  },
-  general: {
-    title: 'General Telehealth',
-    q1: 'How can we help?',
-    opts1: [
-      "General health",
-      "Men's health",
-      "Women's health",
-      'Preventative care',
-      'Prescription or medication management',
-      'Other',
-    ],
-    q2: "What best describes the situation?",
-    opts2: [
-      'First time seeking specialist help',
-      'Follow-up or ongoing care',
-      'Second opinion',
-      "Not sure, I just need to speak to a doctor",
-    ],
-  },
-}
-
-
-const SELF_Q1_OVERRIDES: Partial<Record<string, string>> = {
-  hormone:   'What symptom is affecting you most?',
-  weight:    "What's your primary goal?",
-  sexual:    "What's your main concern?",
-  recovery:  "What's your goal?",
-  longevity: "What's your main focus?",
-  skinhair:  'What would you like help with?',
-  bloods:    'What would you like to test for?',
-  general:   'How can we help you today?',
-}
-
-
-
-// ── Sex and age (24 Oct 2026): the 45-second check ─────────────────────────────
-// Sex is usually answered in the homepage hero and carried in (?for= or the
-// remembered 'apex-audience' choice), so most visitors never see it here.
-type Who = 'men' | 'women'
-const SEX_OPTIONS: { id: Who; label: string; sub: string }[] = [
-  { id: 'men', label: 'Men', sub: 'Hormone markers, energy, heart' },
-  { id: 'women', label: 'Women', sub: 'Hormones, cycle, iron' },
-]
-const AGE_BANDS = ['18-29', '30-39', '40-49', '50-59', '60-69', '70-80'] as const
-const ageLabel = (b: string) => b.replace('-', ' to ')
-
-type Phase = 'intro' | StartPhase | 'loading' | 'eligible'
+const ease = [0.22, 1, 0.36, 1] as const
+type Phase = StartPhase | 'result'
 
 const SOURCE_OPTIONS = [
   { id: 'google', label: 'Google search' },
@@ -234,187 +34,50 @@ const SOURCE_OPTIONS = [
   { id: 'other', label: 'Somewhere else' },
 ]
 
+const Tick = () => (
+  <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3L9.5 3.7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+)
+const Arrow = () => (
+  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+)
 
-const WHY_LABEL: Record<string, string> = {
-  energy: 'Low energy', weight: 'Weight that won’t move', libido: 'Libido or performance', recovery: 'Slow recovery', ageing: 'Ageing well', unsure: 'Not sure yet',
-  // Life-stage entry chips on the home page (Ahead Health pattern).
-  s30: 'Late 30s, getting ahead of it', s40: 'Mid 40s, noticing the shift', s50: '50s and on, staying strong',
-  // Age entry chips (24 Oct 2026, the 18 to 80 audience).
-  a18: 'Knowing your baseline', a35: 'Noticing the shift', a55: 'Staying strong',
-}
-
-// ── Intro (welcome) ────────────────────────────────────────────────────────────
-function IntroScreen({ onStart }: { onStart: () => void }) {
-  // Everlab's split screen + Hormn's reward-first card: say what you get before
-  // asking anything. Every line is something Apex already does; nothing here is
-  // a diagnosis or a promise of treatment.
-  const gets = [
-    { k: '23+', t: 'Markers on one blood panel', b: 'Hormones, metabolic, recovery and longevity. Near you, results in about 48 hours.' },
-    { k: '01', t: 'A doctor with your results open', b: 'An AHPRA-registered doctor reads your panel with you on the call.' },
-    { k: '→', t: 'Your plan, delivered discreetly', b: 'If treatment is suitable, it comes to your door. Reviewed every 3 months.' },
-  ]
+// ── Pieces ─────────────────────────────────────────────────────────────────────
+function Option({ n, label, sub, on, onClick, role = 'button' }: { n: number; label: string; sub?: string; on: boolean; onClick: () => void; role?: 'button' | 'checkbox' }) {
+  const pressed = role === 'checkbox' ? { role: 'checkbox' as const, 'aria-checked': on } : { 'aria-pressed': on }
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="quiz-intro">
-      <div className="quiz-intro-art" aria-hidden="true">
-        {/* next/image: the raw 1 MB JPEG was the /start LCP (3.1 s, live QA 24 Oct). */}
-        <Image src="/3d/body-male.jpg" alt="" fill priority sizes="(max-width: 899px) 100vw, 50vw" quality={70} className="for-men" />
-        <Image src="/3d/pink/body-female.jpg" alt="" fill sizes="(max-width: 899px) 100vw, 50vw" quality={70} className="for-women" />
-        <div className="quiz-intro-chip"><span>Reviewed by</span><strong>An AHPRA-registered doctor</strong></div>
-      </div>
-      <div className="quiz-intro-copy">
-        <p className="stage-kicker"><span className="stage-kicker-dot" aria-hidden="true" /> Takes about 45 seconds · No payment · No GP referral</p>
-        <h1 className="stage-display quiz-intro-title">Find out what<br /><span className="stage-muted">to measure.</span></h1>
-        <p className="stage-lead">Four quick taps. We match you to the right pathway, show you what your panel looks at, then you decide whether to create an account.</p>
-        <div className="quiz-gets">
-          <p className="quiz-gets-k">If it is suitable for you, you get</p>
-          {gets.map((g, i) => (
-            <motion.div key={g.t} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 + i * 0.1, ease }} className="quiz-get">
-              <span className="t-readout quiz-get-n">{g.k}</span>
-              <span><strong>{g.t}</strong><span>{g.b}</span></span>
-            </motion.div>
-          ))}
-        </div>
-        <button type="button" onClick={onStart} className="stage-cta" style={{ border: 0, background: 'none', padding: 0, cursor: 'pointer' }}>
-          <span className="stage-cta-label">Start the 45-second check</span>
-          <span className="stage-cta-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M5 11 11 5M6 5h5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
-        </button>
-        <a href="https://app.apexmetabolichealth.com.au/login" className="stage-link quiz-signin">Already a patient? Sign in</a>
-      </div>
-    </motion.div>
+    <button type="button" className="qz-opt" onClick={onClick} {...pressed}>
+      <span className="qz-opt-n" aria-hidden="true">{String(n).padStart(2, '0')}</span>
+      <span className="qz-opt-t"><strong>{label}</strong>{sub && <span>{sub}</span>}</span>
+      <span className="qz-opt-box" aria-hidden="true"><Tick /></span>
+    </button>
   )
 }
 
-
-// ── Side panel: Everlab-style "Did you know?" beside every question ────────────
-const ASIDE: Partial<Record<string, { art: string; fact: string }>> = {
-  sex:     { art: '/start/quiz/body-male.jpg',    fact: 'The panel is different for men and women, because the questions are.' },
-  age:     { art: '/start/quiz/body-female.jpg',  fact: 'Apex sees Australian adults from 18 to 80. Your doctor reads your markers against your age, not a single average.' },
-  pick:    { art: '/start/quiz/dna.jpg',          fact: 'One blood panel and one doctor call cover every protocol you pick.' },
-  q1:      { art: '/start/quiz/body-female.jpg',  fact: 'A result inside the reference range is not always where you feel your best. Your doctor reads your markers for how you actually function.' },
-  email:   { art: '/start/quiz/tablet.jpg',        fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
-  source:  { art: '/start/quiz/box.jpg',          fact: 'Every Apex doctor is AHPRA-registered. You can check any of them on the public register.' },
-}
-function QuizAside({ phase }: { phase: string }) {
-  const a = ASIDE[phase]
-  if (!a) return null
+function Heading({ step, total, title, lead }: { step: number; total: number; title: string; lead?: string }) {
   return (
-    <aside className="quiz-aside" aria-hidden="true">
-      <AnimatePresence mode="wait">
-        <motion.div key={phase} className="quiz-aside-inner" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45, ease }}>
-          <ArtImg src={a.art} alt="" />
-          <div className="quiz-aside-fact"><strong>Did you know?</strong><span>{a.fact}</span></div>
-        </motion.div>
-      </AnimatePresence>
-    </aside>
+    <>
+      <p className="al-k qz-k">{`// Step ${step} of ${total}`}</p>
+      <h1 className="qz-h1">{title}</h1>
+      {lead && <p className="qz-lead">{lead}</p>}
+    </>
   )
 }
 
-// ── Progress bar (thin, top of the flow) ───────────────────────────────────────
-function ProgressBar({ current, total, onBack, canBack }: { current: number; total: number; onBack: () => void; canBack: boolean }) {
-  const pct = Math.round((current / total) * 100)
+function Progress({ step, total, canBack, onBack }: { step: number; total: number; canBack: boolean; onBack: () => void }) {
   return (
-    <div className="w-full mb-8 flex items-center gap-4">
-      <button type="button" onClick={onBack} disabled={!canBack} aria-label="Back" className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-opacity" style={{ background: SURF, border: `1px solid ${BORDER}`, color: TEXT, opacity: canBack ? 1 : 0.35, cursor: canBack ? 'pointer' : 'default' }}>
-        <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+    <div className="qz-prog">
+      <button type="button" className="qz-back" onClick={onBack} disabled={!canBack} aria-label="Back">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3L5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </button>
-      <div className="flex-1 h-[4px] rounded-full overflow-hidden" style={{ background: 'rgba(72,144,247,0.12)' }}>
-        <motion.div className="h-full rounded-full" style={{ background: `linear-gradient(90deg, ${BLUE}, #7bb3ff)` }} animate={{ width: `${pct}%` }} transition={{ duration: 0.5, ease }} />
+      <div className="qz-bar" role="progressbar" aria-valuemin={1} aria-valuemax={total} aria-valuenow={step} aria-label={`Step ${step} of ${total}`}>
+        <span style={{ width: `${Math.round((step / total) * 100)}%` }} />
       </div>
-      <span className="t-figure flex-shrink-0" style={{ fontSize: 18, color: TEXT, minWidth: 44, textAlign: 'right' }}>{String(current).padStart(2, '0')}/{String(total).padStart(2, '0')}</span>
+      <span className="qz-count" aria-hidden="true">{String(step).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
     </div>
   )
 }
 
-// ── Option card ────────────────────────────────────────────────────────────────
-function OptionCard({ label, sub, selected, onClick, icon, index, compact }: { label: string; sub?: string; selected: boolean; onClick: () => void; icon?: React.ReactNode; index: number; compact?: boolean }) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      whileTap={{ scale: 0.985 }}
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.05 + index * 0.05, ease }}
-      className="w-full text-left rounded-[20px] transition-all duration-200"
-      style={{
-        padding: '16px 18px',
-        background: selected ? 'var(--stage-ice)' : 'var(--stage-white)',
-        border: `1.5px solid ${selected ? 'var(--stage-ink)' : 'rgba(11,18,32,0.07)'}`,
-        boxShadow: selected ? '0 16px 34px -22px rgba(13,93,234,0.55)' : '0 10px 26px -24px rgba(13,93,234,0.5)',
-        cursor: 'pointer',
-      }}
-      aria-pressed={selected}
-    >
-      <span className="flex items-center gap-4">
-        {!compact && <span className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: selected ? 'var(--stage-ink)' : 'var(--stage-ice)', color: selected ? '#fff' : 'var(--stage-blue)', transition: 'background 0.2s ease' }} aria-hidden="true">
-          {icon ?? <span className="t-readout" style={{ fontSize: 13, color: 'inherit' }}>{String(index + 1).padStart(2, '0')}</span>}
-        </span>}
-        <span className="flex-1 min-w-0">
-          <span className="block font-semibold" style={{ color: TEXT, fontSize: 16.5, lineHeight: 1.3, letterSpacing: '-0.01em' }}>{label}</span>
-          {sub && <span className="block mt-0.5" style={{ fontSize: 13.5, color: DIM }}>{sub}</span>}
-        </span>
-        {!compact && <span className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ border: `1.5px solid ${selected ? 'var(--stage-ink)' : 'rgba(15,23,42,0.15)'}`, background: selected ? 'var(--stage-ink)' : 'transparent', transition: 'all 0.2s ease' }} aria-hidden="true">
-          {selected && <svg viewBox="0 0 10 10" fill="none" className="w-3 h-3"><path d="M2 5l2 2 4-4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>}
-        </span>}
-      </span>
-    </motion.button>
-  )
-}
-
-// ── Step heading ───────────────────────────────────────────────────────────────
-function StepHeading({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
-  return (
-    <div className="mb-7">
-      <p className="stage-kicker" style={{ marginBottom: 18 }}><span className="stage-kicker-dot" aria-hidden="true" /> {eyebrow}</p>
-      <h1 className="stage-h2 quiz-q">{title}</h1>
-      {sub && <p className="text-[15px] m-0 mt-3" style={{ color: DIM }}>{sub}</p>}
-    </div>
-  )
-}
-
-
-// ── Loading: reviewing your answers ────────────────────────────────────────────
-function LoadingScreen({ onDone }: { onDone: () => void }) {
-  const [pct, setPct] = useState(0)
-  // No eligibility is computed here and none should be implied: a doctor decides
-  // that, after bloods. These describe assembling the page, nothing more.
-  const lines = ['Putting your answers together', 'Preparing your next step']
-  useEffect(() => {
-    const start = performance.now()
-    const dur = 900
-    let raf = 0
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur)
-      const eased = 1 - Math.pow(1 - p, 2.2)
-      setPct(Math.round(eased * 100))
-      if (p < 1) raf = requestAnimationFrame(tick); else window.setTimeout(onDone, 350)
-    }
-    raf = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(raf)
-  }, [onDone])
-  const line = lines[Math.min(lines.length - 1, Math.floor(pct / 26))]
-  return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease }} className="flex flex-col items-center justify-center text-center" style={{ minHeight: 'calc(100vh - 200px)' }}>
-      <div className="relative" style={{ width: 200, height: 200 }}>
-        <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full" aria-hidden="true">
-          <circle cx="100" cy="100" r="88" fill="none" stroke="rgba(72,144,247,0.14)" strokeWidth="6" />
-          <circle cx="100" cy="100" r="88" fill="none" stroke={BLUE} strokeWidth="6" strokeLinecap="round" strokeDasharray="553" strokeDashoffset={553 - (553 * pct) / 100} style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%', transition: 'stroke-dashoffset 0.12s linear' }} />
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="sr-only" aria-live="polite">Preparing your next step</span>
-        </div>
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.p key={line} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.3 }} className="mt-8 text-[16px] font-medium m-0" style={{ color: TEXT }}>{line}</motion.p>
-      </AnimatePresence>
-      <p className="mt-2 text-[13px] m-0" style={{ color: DIM }}>Nothing is sent to a doctor yet. This is a match, not a diagnosis.</p>
-    </motion.div>
-  )
-}
-
-
-// ── Save progress (question 3) ──────────────────────────────────────────────────
-function EmailScreen({ eyebrow, program, onSaved, onSkip }: { eyebrow: string; program: string; onSaved: (email: string, name: string) => void; onSkip: () => void }) {
+function EmailStep({ step, total, program, onSaved, onSkip }: { step: number; total: number; program: string; onSaved: () => void; onSkip: () => void }) {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [err, setErr] = useState('')
@@ -424,46 +87,118 @@ function EmailScreen({ eyebrow, program, onSaved, onSkip }: { eyebrow: string; p
     const clean = email.trim()
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) { setErr('Please enter a valid email address.'); return }
     setErr(''); setBusy(true)
-    // Same wiring as the end-of-funnel gate: admin email + HighLevel, PostHog
-    // 'lead_captured'. Identity and program only, never the answers.
+    // Admin email + HighLevel, PostHog 'lead_captured' (lib/captureLead.ts).
+    // Identity and the program only, never the answers.
     try { await captureLead({ name: name.trim(), email: clean, source: 'assessment', program }) } catch { /* never block the visitor */ }
     setBusy(false)
-    onSaved(clean, name.trim())
+    onSaved()
   }
   return (
-    <form onSubmit={submit} className="flex flex-col gap-5" noValidate>
-      <StepHeading eyebrow={eyebrow} title="Where should we send your match?" sub="We save your progress so you can pick up where you left off. No spam, and your answers stay with your care team." />
-      <div className="flex flex-col gap-3">
-        <label className="block">
-          <span className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>First name <span className="font-normal" style={{ color: DIM }}>(optional)</span></span>
-          <input value={name} onChange={e => setName(e.target.value)} autoComplete="given-name" className="w-full rounded-xl px-3.5 py-3 text-[16px] outline-none" style={{ background: '#fff', border: `1px solid ${BORDER}`, color: TEXT, minHeight: 48 }} />
+    <form onSubmit={submit} noValidate>
+      <Heading step={step} total={total} title="Where should we send your result?" lead="We save your progress so you can pick up where you left off. Your answers stay with your care team, and you can skip this." />
+      <div className="qz-fields">
+        <label className="qz-field">
+          <span>First name <em>(optional)</em></span>
+          <input value={name} onChange={e => setName(e.target.value)} autoComplete="given-name" className="qz-input" />
         </label>
-        <label className="block">
-          <span className="block font-semibold text-[14px] mb-1.5" style={{ color: TEXT }}>Email</span>
-          <input type="email" inputMode="email" autoComplete="email" required value={email} onChange={e => { setEmail(e.target.value); if (err) setErr('') }} aria-invalid={!!err} aria-describedby={err ? 'start-email-err' : undefined} placeholder="you@example.com" className="w-full rounded-xl px-3.5 py-3 text-[16px] outline-none" style={{ background: '#fff', border: `1px solid ${err ? '#dc2626' : BORDER}`, color: TEXT, minHeight: 48 }} />
+        <label className="qz-field">
+          <span>Email</span>
+          <input type="email" inputMode="email" autoComplete="email" required value={email} onChange={e => { setEmail(e.target.value); if (err) setErr('') }} aria-invalid={!!err} aria-describedby={err ? 'qz-email-err' : undefined} placeholder="you@example.com" className="qz-input" />
         </label>
-        {err && <p id="start-email-err" role="alert" className="m-0 text-[13px]" style={{ color: '#dc2626' }}>{err}</p>}
+        {err && <p id="qz-email-err" role="alert" className="qz-err">{err}</p>}
       </div>
-      <button type="submit" disabled={busy} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
-        {busy ? 'Saving' : 'Save and continue'}
-      </button>
-      <button type="button" onClick={onSkip} className="mx-auto text-[14px] font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>
-        Skip for now
-      </button>
+      <div className="qz-actions">
+        <button type="submit" disabled={busy} className="al-pill al-pill-lg">{busy ? 'Saving' : 'Save and continue'}<Arrow /></button>
+        <button type="button" onClick={onSkip} className="qz-skip">Skip for now</button>
+      </div>
     </form>
   )
 }
 
+// ── Result ─────────────────────────────────────────────────────────────────────
+function Result({ result, sex, caregiver, signupHref }: { result: QuizResult; sex: Sex | ''; caregiver: boolean; signupHref: string }) {
+  const they = caregiver ? 'they' : 'you'
+  const their = caregiver ? 'their' : 'your'
+
+  if (result.outcome === 'stop') {
+    return (
+      <div>
+        <p className="al-k qz-k">{'// Before anything else'}</p>
+        <h1 className="qz-h1">Speak to your GP.</h1>
+        <p className="qz-lead">
+          {result.stopReason === 'under18'
+            ? 'Apex sees adults from 18 to 80. For anyone younger, a GP is the right first call, and they can refer on if needed.'
+            : 'Apex does not run its programs during pregnancy or breastfeeding. Your GP or midwife is the right first call, and the door here stays open for later.'}
+        </p>
+        <div className="qz-stop">
+          <Link href="/" className="al-pill al-pill-lg">Back to the home page<Arrow /></Link>
+        </div>
+        <p className="qz-alt">Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.</p>
+      </div>
+    )
+  }
+
+  const primary = PROGRAMS[result.primary]
+  return (
+    <div>
+      <p className="al-k qz-k">{caregiver ? '// Their starting point' : '// Your starting point'}</p>
+      <h1 className="qz-h1">Here is where to start.</h1>
+      <p className="qz-lead">Every Apex program starts the same way: one blood panel, collected near {they === 'you' ? 'you' : 'them'}, read by an AHPRA-registered doctor. From what {they === 'you' ? 'you' : 'they'} told us, this is the program to read about while the panel is on its way.</p>
+
+      {result.doctorFirst && (
+        <section className="al-card qz-flag" aria-label="See a doctor first">
+          <p className="al-k">{'// See a doctor first'}</p>
+          <ul>
+            {result.doctorFirstReasons.map(r => <li key={r}>{r}</li>)}
+          </ul>
+          <p>{caregiver ? 'They' : 'You'} can still create an account and order the panel. {caregiver ? 'Their' : 'Your'} doctor reads it with this in mind, and will say if an in-person visit comes first.</p>
+        </section>
+      )}
+
+      <article className="al-card qz-primary">
+        <p className="al-k">{'// Start here'}</p>
+        <h2>{primary.name}</h2>
+        <p>{whyLine(primary.id, sex, true)}</p>
+        <a href={signupHref} className="al-pill al-pill-lg">{caregiver ? 'Create a caregiver account' : 'Create your free account'}<Arrow /></a>
+        <Link href={primary.href} className="al-why-link">Read about this program</Link>
+      </article>
+
+      {result.secondary.length > 0 && (
+        <div className="qz-secs">
+          <p className="al-k">{'// Also worth reading'}</p>
+          {result.secondary.map(id => (
+            <article key={id} className="al-card qz-sec">
+              <h3>{PROGRAMS[id].name}</h3>
+              <p>{whyLine(id, sex, false)}</p>
+            </article>
+          ))}
+        </div>
+      )}
+
+      <p className="qz-fine">Whether it is right for {they} is a decision {their} doctor makes after {their} bloods. Creating an account is free and nothing is prescribed from a quiz.</p>
+
+      {caregiver && (
+        <section className="al-card qz-care" aria-label="How caregiver accounts work">
+          <p className="al-k">{'// How caregiver accounts work'}</p>
+          <ul>
+            <li>Create an account using your own name and contact details</li>
+            <li>During intake, enter the patient&apos;s full name and date of birth</li>
+            <li>Upload their blood test results, even if the patient&apos;s name is on the report</li>
+            <li>The clinical team confirms consent with the patient before any treatment begins</li>
+          </ul>
+        </section>
+      )}
+
+      <p className="qz-alt">Already have an account? <a href="https://app.apexmetabolichealth.com.au/login">Log in</a></p>
+      <p className="qz-alt" style={{ marginTop: 0 }}>Prefer to talk? <a href="tel:+61468085700">Call 0468 085 700</a>, Mon to Fri, 9am to 5pm AEST.</p>
+    </div>
+  )
+}
 
 // ── Main ───────────────────────────────────────────────────────────────────────
 export default function ShortAssessment() {
   const params = useSearchParams()
-  const paramType = params.get('t') || ''
-  const why = WHY_LABEL[params.get('why') || '']
-  const hasPredefinedType = !!CONFIGS[paramType]
   const { audience, setAudience } = useAudience()
-  const women = audience === 'women'
-  const PICKS = picksFor(women)
 
   // Sex carried in from the hero: ?for= wins, else the remembered choice the
   // <head> boot script stamped on <html> (components/audience/Audience.tsx).
@@ -474,302 +209,211 @@ export default function ShortAssessment() {
     const c = document.documentElement.dataset.chosen
     return c === 'men' || c === 'women'
   })
-  const [sex, setSex] = useState<Who | ''>(() => {
+  const [sex, setSex] = useState<Sex | ''>(() => {
     if (forParam === 'men' || forParam === 'women') return forParam
     if (typeof document === 'undefined') return ''
     const c = document.documentElement.dataset.chosen
     return c === 'men' || c === 'women' ? c : ''
   })
-  const opts = { hasType: hasPredefinedType, hasSex: sexCarried }
+  const opts = { hasSex: sexCarried }
+  const phases = phasesFor(opts)
+  const total = startTotal()
 
-  const [selectedType, setSelectedType] = useState(hasPredefinedType ? paramType : '')
-  // Every protocol the visitor wants. The first one drives the questions; all of them go to the portal.
-  const [picks, setPicks] = useState<string[]>(hasPredefinedType ? [paramType] : [])
-  const togglePick = (id: string) => {
-    const next = picks.includes(id) ? picks.filter(x => x !== id) : [...picks, id]
-    setPicks(next)
-    setSelectedType(next[0] ?? '')
-  }
-  const [isCaregiver, setIsCaregiver] = useState(false)
-  // Arriving from the hero (sex or a pathway carried in), skip the welcome.
-  const [phase, setPhase] = useState<Phase>(sexCarried || hasPredefinedType ? phasesFor(opts)[0] : 'intro')
+  const [phase, setPhase] = useState<Phase>(phases[0])
   const [dir, setDir] = useState(1)
-  const [age, setAge] = useState('')
-  const [s1, setS1] = useState('')
+  const [age, setAge] = useState<AgeBand | ''>('')
+  const [goal, setGoal] = useState<Goal | ''>('')
+  const [symptoms, setSymptoms] = useState<string[]>([])
+  const [safety, setSafety] = useState<string[]>([])
   const [source, setSource] = useState('')
+  const [caregiver, setCaregiver] = useState(false)
   const refCode = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32)
-  // Captured after question 3; kept in memory only, never in the session draft.
-  const [, setSaved] = useState<{ email: string; name: string } | null>(null)
+  const whyId = params.get('why') || ''
 
   // A refresh, a mis-tap on Back, or a phone call used to destroy the answers
   // with no warning. sessionStorage keeps them for this tab only.
-  const DRAFT_KEY = 'apex.start.draft.v2'
+  const DRAFT_KEY = 'apex.start.draft.v3'
   const [restored, setRestored] = useState(false)
   useEffect(() => {
     try {
       const raw = window.sessionStorage.getItem(DRAFT_KEY)
       if (raw) {
         const d = JSON.parse(raw)
-        if (d.selectedType) setSelectedType(d.selectedType)
-        if (Array.isArray(d.picks)) setPicks(d.picks)
-        if (typeof d.isCaregiver === 'boolean') setIsCaregiver(d.isCaregiver)
         if (d.sex === 'men' || d.sex === 'women') setSex(d.sex)
-        if (d.age) setAge(d.age)
-        if (d.s1) setS1(d.s1)
-        if (d.source) setSource(d.source)
-        // Never restore straight back into the result screens.
-        if (d.phase && d.phase !== 'loading' && d.phase !== 'eligible' && phasesFor(opts).includes(d.phase)) setPhase(d.phase)
+        if (AGE_BANDS.some(b => b.id === d.age)) setAge(d.age)
+        if (GOALS.some(g => g.id === d.goal)) setGoal(d.goal)
+        if (Array.isArray(d.symptoms)) setSymptoms(d.symptoms.filter((s: unknown) => typeof s === 'string'))
+        if (Array.isArray(d.safety)) setSafety(d.safety.filter((s: unknown) => typeof s === 'string'))
+        if (typeof d.source === 'string') setSource(d.source)
+        if (typeof d.caregiver === 'boolean') setCaregiver(d.caregiver)
+        // Never restore straight into the result.
+        if (phases.includes(d.phase)) setPhase(d.phase)
       }
     } catch { /* private mode, quota, disabled storage: start fresh. */ }
     setRestored(true)
     // Restore once, on mount.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   useEffect(() => {
     if (!restored) return
-    try {
-      window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ selectedType, picks, isCaregiver, phase, sex, age, s1, source }))
-    } catch { /* storage unavailable: the funnel still works, it just won't resume. */ }
-  }, [restored, selectedType, picks, isCaregiver, phase, sex, age, s1, source])
+    try { window.sessionStorage.setItem(DRAFT_KEY, JSON.stringify({ phase, sex, age, goal, symptoms, safety, source, caregiver })) } catch { /* storage unavailable: the quiz still works, it just won't resume. */ }
+  }, [restored, phase, sex, age, goal, symptoms, safety, source, caregiver])
 
-  const config = CONFIGS[selectedType] ?? CONFIGS.hormone
-
-  // Every screen counts, including anything answered upstream (lib/startFunnel.ts).
-  const questionPhases = phasesFor(opts) as Phase[]
-  const currentStep = stepNumber(phase as StartPhase, opts)
-  const totalSteps = startTotal()
-  const showProgress = phase !== 'intro' && phase !== 'eligible' && phase !== 'loading'
+  const step = phase === 'result' ? total : stepNumber(phase, opts)
+  const idx = phase === 'result' ? phases.length : phases.indexOf(phase)
 
   const go = (next: Phase, d = 1) => { setDir(d); setPhase(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
-  const advance = () => { const i = questionPhases.indexOf(phase); go(i + 1 < questionPhases.length ? questionPhases[i + 1] : 'loading') }
-  const back = () => { const i = questionPhases.indexOf(phase); if (i > 0) go(questionPhases[i - 1], -1) }
-  const onLoaded = useCallback(() => { setDir(1); setPhase('eligible'); window.scrollTo({ top: 0, behavior: 'smooth' }) }, [])
+  const advance = () => go(idx + 1 < phases.length ? phases[idx + 1] : 'result')
+  const back = () => { if (idx > 0) go(phases[idx - 1], -1) }
+  const tap = (fn: () => void) => { fn(); window.setTimeout(advance, 200) }
 
-  const variants = {
-    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 28 : -28 }),
-    center: { opacity: 1, x: 0 },
-    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -28 : 28 }),
+  const result = useMemo(() => evaluateQuiz({ sex, age, goal, symptoms, safety }), [sex, age, goal, symptoms, safety])
+  useEffect(() => {
+    if (phase !== 'result') return
+    // Routing context only, never identity or the answers themselves.
+    track('quiz_result', { outcome: result.outcome, primary: result.primary, secondary: result.secondary.length, doctor_first: result.doctorFirst })
+  }, [phase, result])
+
+  // Hand-off: the site /signup page collects the email, then the portal creates
+  // the account with every program already set (?programs=, pipe-separated).
+  const signupHref = useMemo(() => {
+    const qs = new URLSearchParams()
+    if (caregiver) qs.set('type', 'caregiver')
+    if (source) qs.set('src', source)
+    if (refCode) qs.set('ref', refCode)
+    if (sex) qs.set('for', sex)
+    if (age) qs.set('age', age)
+    if (whyId) qs.set('why', whyId)
+    const programs = portalPrograms(result)
+    if (programs.length) qs.set('programs', programs.join('|'))
+    if (result.notes.length) qs.set('notes', result.notes.join(','))
+    const portal = `${PORTAL_SIGNUP}${qs.toString() ? `?${qs}` : ''}`
+    return `/signup?redirect=${encodeURIComponent(portal)}`
+  }, [caregiver, source, refCode, sex, age, whyId, result])
+
+  const women = audience === 'women' || sex === 'women'
+  const symptomOpts = goal ? symptomsFor(goal, sex) : []
+  const safetyOpts = safetyFor(sex)
+  const toggle = (list: string[], set: (v: string[]) => void, id: string) => set(list.includes(id) ? list.filter(x => x !== id) : [...list, id])
+  const toggleSafety = (id: string) => {
+    if (id === 'none') { setSafety(safety.includes('none') ? [] : ['none']); return }
+    setSafety(safety.includes(id) ? safety.filter(x => x !== id) : [...safety.filter(x => x !== 'none'), id])
   }
 
-  const q1Question = isCaregiver ? config.q1 : (SELF_Q1_OVERRIDES[selectedType] ?? config.q1)
-  const signupQs = new URLSearchParams()
-  if (isCaregiver) signupQs.set('type', 'caregiver')
-  if (source) signupQs.set('src', source)
-  if (refCode) signupQs.set('ref', refCode)
-  if (sex) signupQs.set('for', sex)
-  if (age) signupQs.set('age', age)
-  const portalPrograms = picks.map(id => PORTAL_PROGRAM[id]).filter(Boolean)
-  if (portalPrograms.length) signupQs.set('programs', portalPrograms.join('|'))
-  const pickTitles = picks.map(PICK_LABEL)
-  const programmeLine = pickTitles.length > 1 ? `${pickTitles.slice(0, -1).join(', ')} and ${pickTitles[pickTitles.length - 1]}` : config.title
-  const whyId = params.get('why') || ''
-  if (whyId) signupQs.set('why', whyId)
-  const signupUrl = `https://app.apexmetabolichealth.com.au/signup${signupQs.toString() ? `?${signupQs}` : ''}`
-  const eyebrow = `Step ${currentStep} of ${totalSteps}`
-  const tap = (fn: () => void) => { fn(); setTimeout(advance, 220) }
+  const variants = {
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 24 : -24 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -24 : 24 }),
+  }
+
+  const leadProgram = PROGRAMS[result.primary as ProgramId]?.name ?? 'Health quiz'
 
   return (
     <>
-      {/* A funnel should not offer six ways out of itself. The full site nav is
-          replaced by the mark and one deliberate exit. */}
-      <header className="fixed top-0 left-0 right-0 z-40" style={{ background: 'rgba(255,255,255,0.86)', backdropFilter: 'blur(14px)', borderBottom: `1px solid ${BORDER}` }}>
-        <div className="mx-auto flex items-center justify-between" style={{ maxWidth: 1200, padding: '14px 20px' }}>
-          <Link href="/" aria-label="Apex Metabolic Health home"><Logo /></Link>
-          <Link href="/" className="t-mono" style={{ color: 'var(--text-muted)', fontSize: 12, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', minHeight: 44 }}>
-            Save and exit
-          </Link>
-        </div>
-      </header>
-      <main style={{ background: BG, minHeight: '100vh', paddingTop: '96px', paddingBottom: '80px' }}>
-        <div aria-hidden="true" className="pointer-events-none fixed inset-0 quiz-bg" />
+      <Nav />
+      <main id="main-content" className="qz al-page">
+        <div className="qz-main">
+          {phase !== 'result' && <Progress step={step} total={total} canBack={idx > 0} onBack={back} />}
 
-        <AnimatePresence mode="wait">
-          {phase === 'intro' && <IntroScreen key="intro" onStart={() => go(questionPhases[0])} />}
-        </AnimatePresence>
+          <AnimatePresence mode="wait" custom={dir} initial={false}>
+            <motion.div key={phase} custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.26, ease }}>
 
-        <AnimatePresence mode="wait">
-          {phase === 'loading' && (
-            <div key="loading" className="relative" style={{ maxWidth: 560, margin: '0 auto', padding: '0 20px' }}>
-              <LoadingScreen onDone={onLoaded} />
-            </div>
-          )}
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          {phase === 'eligible' && (
-            <motion.div key="eligible" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, ease }} className="relative flex flex-col items-center justify-center text-center" style={{ minHeight: 'calc(100vh - 96px)', padding: '40px 20px' }}>
-              <div className="relative z-10 max-w-md w-full">
-                <motion.div initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.45, delay: 0.1, ease }} className="mx-auto mb-8 w-16 h-16 rounded-full flex items-center justify-center" style={{ background: 'var(--stage-ice)', border: '1px solid var(--stage-glass-edge)', boxShadow: '0 0 0 8px color-mix(in srgb, var(--stage-cyan) 14%, transparent)' }}>
-                  <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7"><path d="M5 12l5 5L19 7" stroke={BLUE} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="stage-kicker">
-                  <span className="stage-kicker-dot" aria-hidden="true" /> Your pathway
-                </motion.div>
-                <motion.h2 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25, ease }} className="t-h2 mb-4" style={{ fontSize: 'clamp(30px, 4vw, 46px)' }}>
-                  {isCaregiver ? 'Here is where their plan starts.' : 'Here is where your plan starts.'}
-                </motion.h2>
-                <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35, ease }} className="mb-3 leading-relaxed" style={{ color: DIM, fontSize: 16 }}>
-                  From what {isCaregiver ? 'you told us about them' : 'you told us'}, {picks.length > 1 ? <>these are the pathways built for it: <strong style={{ color: TEXT }}>{programmeLine}</strong>.</> : <>this is the pathway built for it: <strong style={{ color: TEXT }}>{config.title}</strong>.</>} Whether it’s right for {isCaregiver ? 'them' : 'you'} is a decision your doctor makes after your bloods.
-                </motion.p>
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.38, ease }} className="mb-6">
-                  <p className="t-mono mb-2" style={{ color: DIM, fontSize: 12 }}>{picks.length ? 'Your protocols · tap to add or remove' : 'Add a protocol'}</p>
-                  <div className="flex flex-wrap justify-center gap-2">
-                    {PICKS.filter(t => t.id !== 'general').map(t => {
-                      const on = picks.includes(t.id)
-                      return (
-                        <button key={t.id} type="button" onClick={() => togglePick(t.id)} aria-pressed={on} className="rounded-full text-[13px] font-medium transition-colors" style={{ padding: '7px 12px', background: on ? 'var(--stage-ink)' : 'var(--stage-white)', color: on ? '#fff' : TEXT, border: `1px solid ${on ? 'var(--stage-ink)' : BORDER}`, cursor: 'pointer' }}>
-                          {on ? '✓ ' : '+ '}{t.label}
-                        </button>
-                      )
-                    })}
+              {phase === 'sex' && (
+                <div>
+                  <Heading step={step} total={total} title="Who is this for?" lead="Seven quick taps, under a minute. It points you to the right program to read about. It is not a diagnosis, and nothing is prescribed from a quiz." />
+                  <div className="qz-opts" data-cols="2">
+                    <Option n={1} label="Men" on={sex === 'men'} onClick={() => tap(() => { setSex('men'); setAudience('men') })} />
+                    <Option n={2} label="Women" on={sex === 'women'} onClick={() => tap(() => { setSex('women'); setAudience('women') })} />
                   </div>
-                </motion.div>
+                </div>
+              )}
 
-                {/* Everlab: show the value before asking for an email. */}
-                {picks.filter(id => FOCUS[id]).length > 0 && (
-                  <div className="quiz-focus mb-6">
-                    <p className="quiz-gets-k">Your areas to look at</p>
-                    {picks.filter(id => FOCUS[id]).map((id, i) => (
-                      <motion.div key={id} initial={{ opacity: 0, y: 12, filter: 'blur(8px)' }} animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }} transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease }} className="quiz-focus-card">
-                        <ArtImg src={FOCUS[id].art} alt="" aria-hidden="true" />
-                        <span><strong>{PICK_LABEL(id)}</strong><span>On your panel: {(women && WOMEN_FOCUS[id]) || FOCUS[id].markers}.</span></span>
-                      </motion.div>
-                    ))}
+              {phase === 'age' && (
+                <div>
+                  <Heading step={step} total={total} title={caregiver ? 'How old are they?' : 'How old are you?'} lead={sexCarried && idx === 0 ? 'Seven quick taps, under a minute. It points you to the right program to read about. It is not a diagnosis, and nothing is prescribed from a quiz.' : 'A doctor reads every result against your age.'} />
+                  <div className="qz-opts" data-cols="2">
+                    {AGE_BANDS.map((b, i) => <Option key={b.id} n={i + 1} label={b.label} on={age === b.id} onClick={() => tap(() => setAge(b.id))} />)}
                   </div>
-                )}
-                {isCaregiver ? (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="text-left glass-card p-5 mb-8" style={{ borderRadius: 22 }}>
-                    <p className="t-eyebrow mb-3">How caregiver accounts work</p>
-                    <ul className="flex flex-col gap-2.5 list-none p-0 m-0">
-                      {['Create an account using your own name and contact details', "During intake, enter the patient's full name and date of birth", "Upload their blood test results, even if the patient's name is on the report", 'Our clinical team will confirm consent with the patient before any treatment begins'].map((item, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm" style={{ color: DIM }}>
-                          <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"><path d="M3 8l4 4 6-6" stroke={BLUE} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ) : (
-                  <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: 0.4, ease }} className="glass-card mb-8" style={{ padding: 14, borderRadius: 22 }}>
-                    <p className="t-mono m-0 mb-2" style={{ color: DIM, fontSize: 12 }}>What it costs</p>
-                    {/* Consult first, mirroring the homepage hero price line (Noah, 24 Oct 2026).
-                        Alternative, bloods first: grid-cols-3 with
-                          [{ n: '$199', l: 'Bloods from' }, { n: '$199', l: 'Doctor consult from' }, { n: '$99/mo', l: 'Membership' }]
-                        "$99 therapeutic peptide consults" is held back for TGA advertising risk. */}
-                    <div className="grid grid-cols-2 gap-x-2 gap-y-3">
-                      {[{ n: '$99', l: 'Doctor consults from, members' }, { n: '$199', l: 'Doctor consults from, standard' }, { n: '$199', l: 'Bloods from' }, { n: '$99/mo', l: 'Membership' }].map(r => (
-                        <div key={r.l}>
-                          <span className="t-mono block mb-1" style={{ color: DIM, fontSize: 12 }}>{r.l}</span>
-                          <span className="t-readout block" style={{ fontSize: 24, color: TEXT }}>{r.n}</span>
-                        </div>
-                      ))}
+                  <div className="qz-actions">
+                    <button type="button" onClick={() => setCaregiver(c => !c)} aria-pressed={caregiver} className="qz-skip">
+                      {caregiver ? 'Doing this for yourself? Switch back' : 'Doing this for someone you care for?'}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {phase === 'goal' && (
+                <div>
+                  <Heading step={step} total={total} title="What matters most right now?" lead="Pick one. The next screen is about that." />
+                  <div className="qz-opts">
+                    {GOALS.map((g, i) => <Option key={g.id} n={i + 1} label={g.label} sub={g.sub} on={goal === g.id} onClick={() => tap(() => { if (goal !== g.id) setSymptoms([]); setGoal(g.id) })} />)}
+                  </div>
+                </div>
+              )}
+
+              {phase === 'symptoms' && (
+                <div>
+                  <Heading step={step} total={total} title={goal ? symptomQuestion(goal, caregiver) : 'What sounds like you?'} lead="Tick everything that applies." />
+                  {goal ? (
+                    <div className="qz-opts" role="group" aria-label="Symptoms">
+                      {symptomOpts.map((s, i) => <Option key={s.id} role="checkbox" n={i + 1} label={s.label} on={symptoms.includes(s.id)} onClick={() => toggle(symptoms, setSymptoms, s.id)} />)}
                     </div>
-                    <p className="m-0 mt-3 text-[13px]" style={{ color: DIM }}>Private clinic, no Medicare rebate. Creating an account is free. <Link href="/pricing" className="link-draw" style={{ color: TEXT }}>Full pricing</Link></p>
-                  </motion.div>
-                )}
+                  ) : (
+                    <div className="qz-actions"><button type="button" className="qz-skip" onClick={back}>Pick a goal first</button></div>
+                  )}
+                  <div className="qz-actions" data-sticky="">
+                    <button type="button" className="al-pill al-pill-lg" disabled={symptoms.length === 0} onClick={advance}>Continue<Arrow /></button>
+                    <button type="button" className="qz-skip" onClick={() => { setSymptoms([]); advance() }}>None of these</button>
+                  </div>
+                </div>
+              )}
 
-                <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, ease }} className="flex flex-col gap-3 w-full" style={{ maxWidth: 400, margin: '0 auto' }}>
-                  <button type="button" onClick={() => { /* Quiz end: create the account on /signup, which hands off to the portal with the answers (Noah, 12 Nov 2026). */ window.location.href = `/signup?redirect=${encodeURIComponent(signupUrl)}` }} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
-                    {isCaregiver ? 'Create a caregiver account' : 'Create your free account'}
-                    <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  </button>
-                  <a href="https://app.apexmetabolichealth.com.au/login" className="w-full flex items-center justify-center font-medium" style={{ color: DIM, fontSize: 14, padding: '15px 32px', borderRadius: 999, border: `1.5px solid ${BORDER}`, textDecoration: 'none', background: 'rgba(255,255,255,0.8)' }}>
-                    Already have an account? Log in
-                  </a>
-                  <p className="text-[12px] mt-2" style={{ color: DIM }}>Reviewed by an AHPRA-registered doctor · Confidential · A consultation never guarantees a prescription</p>
-                </motion.div>
-              </div>
+              {phase === 'email' && <EmailStep step={step} total={total} program={leadProgram} onSaved={advance} onSkip={advance} />}
+
+              {phase === 'safety' && (
+                <div>
+                  <Heading step={step} total={total} title={caregiver ? 'Anything their doctor must know first?' : 'Anything your doctor must know first?'} lead="Tick any that apply. Some of these change where to start, and a doctor sees them before anything else." />
+                  <div className="qz-opts" role="group" aria-label="Safety">
+                    {safetyOpts.map((s, i) => <Option key={s.id} role="checkbox" n={i + 1} label={s.label} on={safety.includes(s.id)} onClick={() => toggleSafety(s.id)} />)}
+                    <Option role="checkbox" n={safetyOpts.length + 1} label="None of these" on={safety.includes('none')} onClick={() => toggleSafety('none')} />
+                  </div>
+                  <div className="qz-actions" data-sticky="">
+                    <button type="button" className="al-pill al-pill-lg" disabled={safety.length === 0} onClick={advance}>Continue<Arrow /></button>
+                  </div>
+                </div>
+              )}
+
+              {phase === 'source' && (
+                <div>
+                  <Heading step={step} total={total} title="Where did you hear about Apex?" lead="Last one. It helps us spend less on ads and more on doctors." />
+                  <div className="qz-opts">
+                    {SOURCE_OPTIONS.map((o, i) => <Option key={o.id} n={i + 1} label={o.label} on={source === o.id} onClick={() => tap(() => setSource(o.id))} />)}
+                  </div>
+                  <div className="qz-actions">
+                    <button type="button" className="qz-skip" onClick={advance}>Skip this question</button>
+                  </div>
+                </div>
+              )}
+
+              {phase === 'result' && <Result result={result} sex={sex} caregiver={caregiver} signupHref={signupHref} />}
             </motion.div>
-          )}
-        </AnimatePresence>
-        {showProgress && (
-          <div className="quiz-split">
-          <QuizAside phase={phase} />
-          <div className="relative quiz-main" style={{ maxWidth: 560, margin: '0 auto', padding: '0 20px', width: '100%' }}>
-            <ProgressBar current={currentStep} total={totalSteps} onBack={back} canBack={questionPhases.indexOf(phase) > 0} />
+          </AnimatePresence>
+        </div>
 
-            <AnimatePresence mode="wait" custom={dir}>
-              <motion.div key={phase} custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.28, ease }}>
-
-                {phase === 'sex' && (
-                  <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title="Who is the panel for?" sub="Men and women get different markers, because the questions are different." />
-                    <div className="grid grid-cols-2 gap-3">
-                      {SEX_OPTIONS.map((opt, i) => (
-                        <OptionCard key={opt.id} index={i} label={opt.label} sub={opt.sub} compact selected={sex === opt.id} onClick={() => tap(() => { setSex(opt.id); setAudience(opt.id) })} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {phase === 'age' && (
-                  <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'How old are they?' : 'How old are you?'} sub="Your doctor reads every marker against your age." />
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                      {AGE_BANDS.map((b, i) => (
-                        <OptionCard key={b} index={i} label={ageLabel(b)} compact selected={age === b} onClick={() => tap(() => setAge(b))} />
-                      ))}
-                    </div>
-                    <button type="button" onClick={() => setIsCaregiver(c => !c)} aria-pressed={isCaregiver} className="mx-auto text-[14px] font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>
-                      {isCaregiver ? 'Doing this for yourself? Switch back' : 'Doing this for someone you care for?'}
-                    </button>
-                  </div>
-                )}
-
-                {phase === 'pick' && (
-                  <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title={isCaregiver ? 'What are they after?' : 'What are you after?'} sub="Pick one or more. One blood panel and one doctor call cover everything you pick." />
-                    <div className="flex flex-col gap-3">
-                      {PICKS.filter(t => t.id !== 'general').map((t, i) => (
-                        <OptionCard key={t.id} index={i} label={t.label} sub={t.sub} selected={picks.includes(t.id)} onClick={() => togglePick(t.id)} />
-                      ))}
-                    </div>
-                    <button type="button" onClick={() => { setPicks([]); setSelectedType('general'); advance() }} className="mx-auto text-[14px] font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>
-                      Not sure yet, I’d like to talk to a doctor
-                    </button>
-                    <div className="sticky bottom-4 z-10">
-                      <button type="button" disabled={!picks.length} onClick={advance} className="btn-primary w-full justify-center disabled:opacity-40" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
-                        {picks.length > 1 ? `Continue with ${picks.length} protocols` : 'Continue'}
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {phase === 'email' && <EmailScreen eyebrow={eyebrow} program={pickTitles.length ? pickTitles.join(', ') : config.title} onSaved={(email, name) => { setSaved({ email, name }); advance() }} onSkip={advance} />}
-
-                {phase === 'q1' && (
-                  <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title={q1Question} sub="One tap. Your doctor reads it before the call." />
-                    <div className="flex flex-col gap-3">
-                      {config.opts1.map((opt, i) => (
-                        <OptionCard key={opt} index={i} label={opt} selected={s1 === opt} onClick={() => tap(() => setS1(opt))} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {phase === 'source' && (
-                  <div className="flex flex-col gap-5">
-                    <StepHeading eyebrow={eyebrow} title="Where did you hear about Apex?" sub="Last one. It helps us spend less on ads and more on doctors." />
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {SOURCE_OPTIONS.map((opt, i) => (
-                        <OptionCard key={opt.id} index={i} label={opt.label} selected={source === opt.id} onClick={() => tap(() => setSource(opt.id))} />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-
-            {(phase === 'q1' || phase === 'source' || phase === 'age') && (
-              <div className="flex justify-end mt-6">
-                <button type="button" onClick={advance} className="text-sm font-medium link-draw" style={{ color: DIM, background: 'none', border: 'none', cursor: 'pointer', minHeight: 44 }}>Skip this question</button>
-              </div>
-            )}
-          </div>
-          </div>
-        )}
+        <aside className="qz-aside" aria-hidden="true">
+          {/* A person, not a vial (no needles, vials or pens anywhere on the site). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={women ? '/photos/woman-stairs.webp' : '/photos/man-park-bench.webp'} alt="" loading="lazy" decoding="async" />
+          <ul className="qz-points">
+            {[
+              ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],
+              ['02', 'A doctor reads them', 'An AHPRA-registered doctor, with your results open.'],
+              ['03', 'A written plan', 'In your portal, with follow-ups when they are due.'],
+            ].map(([n, t, b]) => (
+              <li key={n}><span className="t-readout">{n}</span><strong>{t}</strong><span>{b}</span></li>
+            ))}
+          </ul>
+        </aside>
       </main>
     </>
   )
