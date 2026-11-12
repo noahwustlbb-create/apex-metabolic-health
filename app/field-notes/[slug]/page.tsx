@@ -11,14 +11,16 @@ export function generateStaticParams() {
   return FIELD_NOTES.map(n => ({ slug: n.slug }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const n = fieldNote(params.slug)
+type Props = { params: Promise<{ slug: string }> }
+
+export async function generateMetadata({ params }: Props) {
+  const n = fieldNote((await params).slug)
   if (!n) return {}
   return pageMetadata({ path: `/field-notes/${n.slug}`, title: n.title.replace(/\.$/, ''), description: n.dek })
 }
 
-export default function FieldNotePage({ params }: { params: { slug: string } }) {
-  const n = fieldNote(params.slug)
+export default async function FieldNotePage({ params }: Props) {
+  const n = fieldNote((await params).slug)
   if (!n) notFound()
   const more = FIELD_NOTES.filter(x => x.slug !== n.slug && x.tag === n.tag).concat(FIELD_NOTES.filter(x => x.slug !== n.slug && x.tag !== n.tag)).slice(0, 3)
   const jsonLd = { '@context': 'https://schema.org', '@type': 'Article', headline: n.title, description: n.dek, publisher: { '@type': 'Organization', name: 'Apex Metabolic Health' } }
