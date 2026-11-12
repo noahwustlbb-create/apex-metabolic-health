@@ -7,7 +7,8 @@ import { APEX_WORD } from './logoPaths'
  *    traced from his file and painted with currentColor, so it reads on the light and the dark header. The
  *    descriptor is set in type: drawn at header size it would be under 2 px tall.
  *  - footer / mark: the triangle lockup (his hf_20260817_031310), cut out of its black background
- *    (public/brand/lockup-2026-*.webp, mark-2026-*.webp). Silver and blue on transparent: dark canvases only.
+ *    (public/brand/lockup-2026-*.webp holds triangle + APEX; mark-2026-*.webp the triangle). Silver and blue on
+ *    transparent: dark canvases only. The footer's METABOLIC HEALTH line is live text so it stays legible.
  */
 
 const LOCKUP_RATIO = 3.58 // lockup-2026-*.webp width / height
@@ -35,19 +36,16 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
   }
 
   if (variant === 'footer') {
-    const w = 236
+    // The lockup art (triangle + APEX) with METABOLIC HEALTH set as live text in the lockup's blue, in the exact
+    // box it occupies in Noah's file (x 790-2347, baseline 634 of 2370 x 662). Drawn, it would be 4 px tall here.
+    const w = 280
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src="/brand/lockup-2026-640.webp"
-        srcSet="/brand/lockup-2026-640.webp 640w, /brand/lockup-2026-1280.webp 1280w"
-        sizes={`${w}px`}
-        alt="Apex Metabolic Health"
-        width={w}
-        height={Math.round(w / LOCKUP_RATIO)}
-        className={className}
-        style={{ display: 'block', height: 'auto', maxWidth: '100%' }}
-      />
+      <svg viewBox="0 0 2370 662" width={w} height={Math.round(w / LOCKUP_RATIO)} className={className} role="img" aria-label="Apex Metabolic Health" style={{ display: 'block', maxWidth: '100%', height: 'auto', overflow: 'visible' }}>
+        <image href="/brand/lockup-2026-1280.webp" x="0" y="0" width="2370" height="662" />
+        <text x="790" y="634" textLength="1557" lengthAdjust="spacing" fill="#3a86f6" style={{ fontFamily: 'var(--font-inter), Inter, system-ui, sans-serif', fontSize: 88, fontWeight: 600 }}>
+          METABOLIC HEALTH
+        </text>
+      </svg>
     )
   }
 

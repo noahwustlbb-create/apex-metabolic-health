@@ -23,9 +23,12 @@ const Arrow = () => (
   </svg>
 )
 
-function Img({ c, sizes }: { c: GridCard; sizes: string }) {
+function Img({ c, sizes, wide }: { c: GridCard; sizes: string; wide?: boolean }) {
   return (
     <picture className="tg-img" aria-hidden="true">
+      {/* Feature card on desktop is about 1.9:1; the square asset cut the crystal tips (13 Nov 2026), so a wide crop. */}
+      {wide && <source media="(min-width: 900px)" type="image/avif" srcSet={`${c.img}-wide-1200.avif 1200w, ${c.img}-wide-2016.avif 2016w`} sizes={sizes} />}
+      {wide && <source media="(min-width: 900px)" type="image/webp" srcSet={`${c.img}-wide-1200.webp 1200w, ${c.img}-wide-2016.webp 2016w`} sizes={sizes} />}
       <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes={sizes} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
@@ -69,7 +72,7 @@ export default function TreatmentsGrid() {
         <div className="tg-board">
           <Link href={feature.href} className="tg-feature">
             {/* The Hormonal texture, not the runner (Noah, 12 Nov 2026: "change the hormonal photo back to the original one"). */}
-            <Img c={feature} sizes="100vw" />
+            <Img c={feature} sizes="100vw" wide={feature.slug === 'hormone-optimisation'} />
             <span className="tg-feature-k al-k">{feature.n} · Featured program</span>
             <span className="tg-feature-text">
               <span className="tg-feature-name">{feature.name}</span>
