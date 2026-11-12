@@ -297,6 +297,7 @@ export const SHOTS = {
   womanLaptop: { src: '/photos/woman-laptop-1400.webp', alt: 'A woman in her forties working on a laptop at a marble kitchen bench', pos: '50% 26%' },
   parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 22%' },
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 25%' },
+  benchDusk: { src: '/photos/man-bench-dusk-1400.webp', alt: 'A man in his forties in a grey hoodie resting on a park bench at dusk', pos: '50% 22%' },
   kitchenMan: { src: '/photos/man-kitchen-dawn.webp', alt: 'Man leaning on a kitchen bench at dawn', pos: '50% 25%' },
   balconyCall: { src: '/photos/man-balcony-call.webp', alt: 'Man on a phone call on a coastal balcony', pos: '50% 30%' },
   oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%' },

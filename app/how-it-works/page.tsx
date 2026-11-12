@@ -25,10 +25,10 @@ export default function HowItWorksPage() {
           title="Bloods first. Then a doctor. Then a plan."
           lead="One blood panel, read by an AHPRA-registered doctor with you, then a plan you understand. Everything lives in your portal."
           cap={['No GP referral', 'Most results in about 48 hours', 'Online, Australia-wide']}
-          sidePhoto={SHOTS.balconyCall}
+          photo={{ ...SHOTS.kettlebell, pos: '50% 22%' }}
         />
 
-        <PhotoLine shot={SHOTS.womanKitchen} line="Measure first. Then treat." />
+        <PhotoLine shot={SHOTS.kitchenMan} line="Measure first. Then treat." />
 
         <HowBand
           rows={[{ label: 'Bloods', steps: BLOOD_STEPS }, { label: 'Programs', steps: PROGRAM_STEPS }]}
@@ -62,12 +62,13 @@ export default function HowItWorksPage() {
                   </picture>
                 </div>
                 <div className="ip-grade" aria-hidden="true" />
-                <div className="ip-reading" aria-label="Sample portal reading, no result shown">
-                  <p className="al-k">Marker · Ferritin</p>
-                  <div className="ip-reading-v"><b>Sample</b><span>Layout only</span></div>
-                  <div className="ip-bar" aria-hidden="true"><i style={{ left: '58%' }} /></div>
+                {/* An actual example reading (Noah, 13 Nov 2026: "free test at 400 being low range"). Illustrative, not a patient. */}
+                <div className="ip-reading" aria-label="Example portal reading: free testosterone 400 picomoles per litre, at the lower end of the reference range">
+                  <p className="al-k">Example reading · Free testosterone</p>
+                  <div className="ip-reading-v"><b>400</b><span>pmol/L</span><em className="ip-reading-flag">Lower end of range</em></div>
+                  <div className="ip-bar" aria-hidden="true"><i style={{ left: '30%' }} /></div>
                   <p className="ip-bar-k"><span>Low</span><span>Reference range</span><span>High</span></p>
-                  <p className="ip-reading-note">Your own value sits here once your results are in, with your doctor’s note underneath.</p>
+                  <p className="ip-reading-note">Inside the range, so it often gets called normal. Your doctor reads it with how you feel and your other markers, then tells you what it means for you.</p>
                   <div className="ip-chips"><span>Doctor reviewed</span><span>Trend over time</span></div>
                 </div>
               </div>

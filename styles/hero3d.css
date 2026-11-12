@@ -338,3 +338,13 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 /* .hero-in's fill-mode would hold opacity at 1, so the animation goes with it. */
 html[data-chosen] .hx-hello { animation: none; opacity: 0; visibility: hidden; }
 @media (prefers-reduced-motion: reduce) { .hx-hello { animation: none; } .hx-hello-arrow { animation: none; } }
+
+/* Clean hero (Noah, 13 Nov 2026: "i dont like boxes on the hero it needs to clean! no words boxed, only ctas").
+   The welcome line is plain text, the pick loses its glass tray (the two pills are the CTAs and keep theirs), and
+   the readout cards go (without their glass they sat as loose text over the figure). */
+.hx-hello { background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; height: auto;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.95), 0 0 22px rgba(255, 255, 255, 0.8); }
+.hx-hello span { color: var(--hx-fg); }
+.hx-pick { background: none; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; padding: 0; gap: 10px; }
+.hx-pick-btn { box-shadow: 0 10px 24px -14px rgba(11, 18, 32, 0.45); }
+.hx-reads { display: none !important; }
