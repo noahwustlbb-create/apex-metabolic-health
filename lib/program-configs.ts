@@ -1,19 +1,10 @@
 import type { ProgramPageConfig } from '@/components/ProgramPageTemplate'
 
-// ─── Shared assets ─────────────────────────────────────────────────────────────
-
-const STEPS_IMAGES = {
-  signup: '/team/team-standing.webp',
-  bloodTest: '/editorial/blood-vials.webp',
-  consult: '/team/portrait-woman-blonde.webp',
-  protocol: '/team/brand-boxes.webp',
-}
-
 const STANDARD_STEPS: ProgramPageConfig['processSteps'] = [
-  { title: 'Create your account', body: 'Register at app.apexmetabolichealth.com.au in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
-  { title: 'Complete pathology testing', body: 'We issue your referral electronically. Attend any of 4,000+ accredited collection centres across Australia.', time: '45 MIN', image: STEPS_IMAGES.bloodTest },
-  { title: 'Telehealth consultation', body: 'Your AHPRA-registered doctor reviews your results and builds a protocol personalised to your biology.', time: '45–60 MIN', image: STEPS_IMAGES.consult },
-  { title: 'Ongoing clinical care', body: 'Protocol dispatched through our Australian pharmacy partner. 3-monthly reviews built in from day one.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+  { title: 'Create your account', body: 'Register at app.apexmetabolichealth.com.au in under two minutes. No GP referral required.', time: '2 MIN' },
+  { title: 'Complete pathology testing', body: 'We issue your referral electronically. Attend an accredited collection centre near you.', time: '45 MIN' },
+  { title: 'Telehealth consultation', body: 'Your AHPRA-registered doctor reviews your results with you and, if treatment is suitable, builds a plan around them.', time: '45–60 MIN' },
+  { title: 'Ongoing clinical care', body: 'Protocol dispatched through our Australian pharmacy partner. 3-monthly reviews built in from day one.', time: 'ONGOING' },
 ]
 
 const SHARED_FAQS: ProgramPageConfig['faqs'] = [
@@ -27,7 +18,7 @@ const SHARED_FAQS: ProgramPageConfig['faqs'] = [
   },
   {
     q: 'Where do I get my blood test done?',
-    a: 'At any of 4,000+ accredited pathology collection centres across Australia. We send your referral electronically, and most results come back within 24–48 hours.',
+    a: 'At an accredited pathology collection centre near you. We send your referral electronically, and most results are back in about 48 hours.',
   },
   {
     q: 'How does ongoing care work?',
@@ -48,40 +39,34 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
 
   headline: 'Hormonal health.',
   headlineAccent: 'Measured properly.',
-  heroBody: 'Most GPs check one or two markers. We run a comprehensive hormonal and metabolic panel, then build a personalised, doctor-prescribed protocol around what your biology actually needs.',
+  heroBody: 'A standard check often looks at one or two markers. We run a 23+ marker hormone and metabolic panel, then your doctor reads it with you and builds a plan around what it shows.',
   heroBullets: [
     'Comprehensive hormone & metabolic panel',
     'AHPRA-registered doctors, Australia-wide',
     'Doctor-prescribed protocols, Australian pharmacy partner',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
-  heroBentoStat: { value: '1 in 4', label: 'men over 35 have suboptimal testosterone' },
-  heroBentoLifestyle: '/team/team-sofa.webp',
 
   empathyHeadline: "You've been told your results look normal. But you don't feel normal.",
-  empathyBody: "Standard GP panels check whether you're in a disease range, not an optimal one. Testosterone can sit in the bottom quarter of the reference range and your results will show 'normal.' We look harder.",
+  empathyBody: "Standard panels check whether you sit inside a reference range. A hormone marker can sit near the bottom of that range and still read 'normal'. Your doctor looks at the whole picture, not one line.",
   empathyChips: ['Persistent fatigue', 'Poor recovery', 'Brain fog', 'Low drive', 'Body composition changes', 'Sleep disruption'],
-  empathyImage: '/team/portrait-man.webp',
 
   evidenceHeadline: 'The clinical picture behind how you feel.',
   evidencePoints: [
-    { value: '1 in 4', label: 'Men over 35 with suboptimal testosterone', detail: 'Most will receive a normal result on a standard GP blood test. Reference ranges are set for disease detection, not optimal function.' },
-    { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'No matter where you are in Australia, your blood work can be collected within a short drive. Results back within 48 hours.' },
-    { value: '12+', label: 'Markers in our hormone panel', detail: 'We assess the full endocrine picture: upstream signals, metabolic context, conversion pathways, and nutritional status.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Hormone markers, thyroid, metabolic, heart, liver, kidney and nutrient markers, read together rather than one at a time.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Collected at an accredited collection centre near you. Your results land in your portal before your consultation.' },
+    { value: '3 mo', label: 'Reviews about every three months', detail: 'A repeat panel and a telehealth review with your doctor, so any plan is checked against your numbers over time.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
   mechanismHeadline: 'Why your hormones affect more than you think.',
-  mechanismBody: 'Testosterone is not a single-purpose hormone. It operates across multiple systems, and when levels are suboptimal, the effects compound across your entire physiology.',
+  mechanismBody: 'Hormones are not single-purpose. They work across several systems at once, which is why your doctor reads your hormone markers alongside your metabolic, thyroid and nutrient results.',
   mechanismFeatures: [
-    { title: 'Energy & mitochondrial function', body: 'Testosterone directly influences cellular energy production. Low levels correlate with persistent fatigue that sleep alone cannot resolve.' },
-    { title: 'Body composition', body: 'Hormonal imbalance drives fat accumulation, particularly visceral fat, while making muscle retention progressively harder regardless of training volume.' },
-    { title: 'Cognitive sharpness', body: 'Brain fog, reduced concentration, and slower recall are recognised downstream effects of suboptimal testosterone and SHBG levels.' },
-    { title: 'Mood and drive', body: 'Testosterone influences dopamine receptor sensitivity. Its deficiency is associated with reduced motivation, emotional flatness, and increased irritability.' },
+    { title: 'Energy & mitochondrial function', body: 'Hormone markers sit alongside thyroid, iron and B12 in how your body makes and uses energy. Persistent fatigue is a reason to test all of them.' },
+    { title: 'Body composition', body: 'Hormone and metabolic markers are linked to where the body stores fat and how it holds muscle. Your panel shows where yours sit today.' },
+    { title: 'Cognitive sharpness', body: 'Brain fog and poor concentration have many possible causes, including hormone, thyroid and nutrient markers. Testing helps your doctor narrow them down.' },
+    { title: 'Mood and drive', body: 'Low drive, flat mood and irritability can have a hormonal component. Your doctor reviews your markers and history together before suggesting anything.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Marcus T.', date: 'March 2025', highlight: 'Having a doctor actually investigate my free testosterone properly was completely different', full: 'Having a doctor actually investigate my free testosterone properly was completely different to anything I\'d experienced with a GP. The process was thorough and they actually explained every marker.' },
@@ -90,14 +75,13 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   ],
 
   faqs: [
-    { q: 'Do I need two blood tests for testosterone?', a: 'Yes. Clinical guidelines call for two separate fasted morning blood draws (7am–11am, on different days) to confirm suboptimal testosterone before treatment can be prescribed. Both referrals are issued as part of your pathway.' },
+    { q: 'Why might I need two blood tests?', a: 'For some hormone markers, clinical guidelines call for two separate fasted morning blood draws (7am to 11am, on different days) before treatment can be considered. Where that applies, both referrals are issued as part of your pathway.' },
     { q: 'Can I use recent blood tests from my GP?', a: 'Potentially. Submit them during pre-screen and we\'ll review whether they meet our clinical requirements. If they do, you may not need to retest.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Find out where you actually stand.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your suitability and contacts you directly to confirm next steps. No commitment, no upfront payment.',
-  ctaImage: '/team/team-lounge.webp',
   intakeUrl: '/signup',
 }
 
@@ -110,40 +94,34 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
 
   headline: 'Medical weight loss.',
   headlineAccent: 'Backed by your biology.',
-  heroBody: 'If diet and exercise haven\'t moved the needle, there\'s usually a clinical reason. We identify the metabolic and hormonal drivers behind stubborn weight, and treat them properly.',
+  heroBody: 'If diet and exercise haven\'t moved the needle, there\'s usually a clinical reason. We test the metabolic and hormonal markers behind stubborn weight, and your doctor talks you through what they show.',
   heroBullets: [
     'Comprehensive metabolic blood panel',
     'AHPRA-registered doctors, Australia-wide',
     'Personalised protocol around your biomarkers',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
-  heroBentoStat: { value: '50%+', label: 'of Australian men are overweight or obese' },
-  heroBentoLifestyle: '/team/team-armchairs.webp',
 
   empathyHeadline: "It's not a willpower problem. It's a physiology problem.",
-  empathyBody: "Carrying extra weight isn't a character failure. Metabolism, hormones, appetite signalling, insulin sensitivity: these are biological systems that can be assessed, identified, and treated. Most people who struggle with weight have at least one clinical driver that's never been investigated.",
+  empathyBody: "Carrying extra weight isn't a character failure. Metabolism, hormones, appetite signalling, insulin sensitivity: these are biological systems that can be measured. Many people who struggle with weight have never had them tested together.",
   empathyChips: ['Stubborn belly fat', 'Appetite dysregulation', 'Energy crashes', 'Diet not working', 'Slow metabolism', 'Poor sleep'],
-  empathyImage: '/team/portrait-man.webp',
 
   evidenceHeadline: 'The metabolic picture most GPs miss.',
   evidencePoints: [
-    { value: '70%', label: 'Of men have undiagnosed insulin resistance', detail: "Insulin resistance precedes type 2 diabetes by years. It drives fat accumulation, energy crashes, and cravings that no amount of willpower overcomes." },
-    { value: '13+', label: 'Markers in our metabolic panel', detail: 'Fasting glucose, HbA1c, HOMA-IR, lipids, thyroid, testosterone, liver function: the full picture that determines what\'s actually driving your weight.' },
-    { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'Your blood work collected near you, when it suits. Results reviewed by your doctor before your consultation.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Fasting glucose, HbA1c, lipids, thyroid, hormone markers and liver function, read together.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Collected at an accredited collection centre near you, then reviewed by your doctor before your consultation.' },
+    { value: '3 mo', label: 'Reviews about every three months', detail: 'A repeat panel and a telehealth review, so any plan is checked against your numbers, not just the scale.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
-  mechanismHeadline: 'Effective weight management starts with the right diagnosis.',
+  mechanismHeadline: 'Weight management starts with the right tests.',
   mechanismBody: 'Our approach identifies what\'s actually driving your weight (metabolically, hormonally, and behaviourally) before building any protocol.',
   mechanismFeatures: [
-    { title: 'Appetite signalling', body: 'Hormonal imbalances affect the signals your brain receives about hunger and satiety. Clinical protocols can correct these pathways.' },
-    { title: 'Insulin sensitivity', body: 'Poor insulin sensitivity makes fat storage more efficient and fat burning harder. Identified through blood testing and addressable through targeted treatment.' },
-    { title: 'Metabolic rate', body: 'Thyroid function, testosterone, and cortisol all influence your resting metabolic rate. Suboptimal levels slow fat oxidation even at a calorie deficit.' },
+    { title: 'Appetite signalling', body: 'Hunger and fullness are regulated by hormonal and metabolic signals. Your panel gives your doctor a view of the markers involved.' },
+    { title: 'Insulin sensitivity', body: 'Poor insulin sensitivity makes fat storage more efficient and fat burning harder. It shows up in blood testing, which is why it is part of your panel.' },
+    { title: 'Metabolic rate', body: 'Thyroid and hormone markers are linked to resting metabolic rate. If they sit outside range, your doctor will talk you through what that means.' },
     { title: 'Body composition', body: 'Weight on a scale is only one number. We track the markers that sit behind body composition, and your doctor reviews them with you.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Tom B.', date: 'February 2025', highlight: 'First time a doctor approached this from a metabolic angle', full: 'First time a doctor approached this from a metabolic angle rather than just telling me to eat less and move more. The consultation was thorough and actually explained what was happening with my insulin.' },
@@ -153,13 +131,12 @@ export const metabolicWeightLossConfig: ProgramPageConfig = {
 
   faqs: [
     { q: 'Will you just prescribe something for weight loss?', a: 'No. Treatment is only prescribed where clinically appropriate based on your blood results, medical history, and clinical assessment. We don\'t name or discuss specific medications on this website in compliance with TGA guidelines.' },
-    { q: 'What if I\'ve tried everything before?', a: 'That\'s exactly who this program is designed for. Most people who haven\'t responded to lifestyle changes have at least one unidentified metabolic or hormonal driver. We investigate those properly.' },
+    { q: 'What if I\'ve tried everything before?', a: 'That\'s exactly who this program is designed for. If lifestyle changes haven\'t shifted things, your panel can show whether a metabolic or hormonal factor is worth a closer look.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Find out what\'s actually driving your weight.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your metabolic history and contacts you directly to confirm clinical suitability and next steps.',
-  ctaImage: '/team/team-standing.webp',
   intakeUrl: '/signup',
 }
 
@@ -170,42 +147,36 @@ export const performancePlusConfig: ProgramPageConfig = {
   name: 'Performance Optimisation',
   category: 'Performance & Recovery',
 
-  headline: 'Peak performance.',
+  headline: 'Performance, measured.',
   headlineAccent: 'Built on your biology.',
-  heroBody: 'Training harder isn\'t always the answer. If your recovery, strength response, and energy aren\'t matching your effort, the cause is often measurable, and treatable.',
+  heroBody: 'Training harder isn\'t always the answer. If your recovery, strength response, and energy aren\'t matching your effort, the cause is often measurable.',
   heroBullets: [
     'Comprehensive performance blood panel',
-    'AHPRA-registered sports medicine approach',
-    'Doctor-prescribed recovery and performance protocols',
+    'AHPRA-registered doctors',
+    'A plan built around your results',
   ],
-  heroBentoPortrait: '/editorial/athletic-male.webp',
-  heroBentoStat: { value: '40%', label: 'performance drop from suboptimal testosterone in trained men' },
-  heroBentoLifestyle: '/editorial/recovery.webp',
 
   empathyHeadline: "Training consistently. Recovery not matching your effort.",
-  empathyBody: "If your strength plateaus won't shift, recovery is slower than it used to be, and your training sessions feel harder than they should, the problem is rarely technique. Hormonal, metabolic, and nutritional markers often hold the answer.",
+  empathyBody: "If your strength plateaus won't shift, recovery is slower than it used to be, and your training sessions feel harder than they should, it is worth looking past technique. Hormonal, metabolic and nutritional markers are part of the picture.",
   empathyChips: ['Strength plateau', 'Slow recovery', 'Training fatigue', 'Poor sleep quality', 'Low drive', 'Muscle loss'],
-  empathyImage: '/editorial/recovery.webp',
 
   evidenceHeadline: 'What your training data doesn\'t tell you.',
   evidencePoints: [
-    { value: '3×', label: 'Faster recovery with optimised hormonal levels', detail: 'Testosterone, growth factors, and recovery markers all influence how efficiently your body repairs and adapts after training.' },
-    { value: '12+', label: 'Performance-specific markers tested', detail: 'Full hormonal panel, inflammatory markers, nutritional status, thyroid: everything that determines how your body responds to training stress.' },
+    { value: '01', label: 'Recovery markers read with your doctor', detail: 'Hormone, inflammatory and nutrient markers are part of how your body repairs after training. Your doctor reviews them with your training history.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Hormone markers, inflammatory markers, nutrient status and thyroid, tested together in one panel.' },
     { value: '100%', label: 'Online, no clinic visits for consultations', detail: 'Your consultation with an AHPRA-registered doctor conducted entirely via telehealth. Blood tests at your nearest collection centre.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
-  mechanismHeadline: 'Optimise the systems that drive performance.',
+  mechanismHeadline: 'The systems behind performance.',
   mechanismBody: 'Performance is the output of multiple biological systems working together. We assess all of them.',
   mechanismFeatures: [
-    { title: 'Hormonal optimisation', body: 'Testosterone, IGF-1, and cortisol ratios directly determine your body\'s capacity to build, recover, and adapt.' },
+    { title: 'Hormone markers', body: 'Hormone markers are part of how the body builds, recovers and adapts. Your panel shows where yours sit today.' },
     { title: 'Recovery markers', body: 'We test the hormonal and inflammatory markers involved in muscle repair and recovery, so your doctor can see what may be holding you back.' },
-    { title: 'Energy system support', body: 'Mitochondrial efficiency, nutrient partitioning, and metabolic rate all influence sustainable training performance and output quality.' },
-    { title: 'Nutritional biomarkers', body: 'Deficiencies in key micronutrients (B12, D, ferritin, zinc) significantly impair performance even when everything else is dialled in.' },
+    { title: 'Energy system support', body: 'Thyroid, iron and metabolic markers are linked to energy during training. Your doctor reads them together.' },
+    { title: 'Nutritional biomarkers', body: 'Low B12, vitamin D, ferritin or zinc can sit behind fatigue in people who train. All are in your panel.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Luke M.', date: 'February 2025', highlight: 'First time my blood work was looked at through a performance lens', full: 'First time my blood work was looked at through a performance lens rather than just checking I wasn\'t sick. The doctor understood what I was trying to achieve and the protocol reflected that.' },
@@ -215,13 +186,12 @@ export const performancePlusConfig: ProgramPageConfig = {
 
   faqs: [
     { q: 'Is this program for elite athletes only?', a: 'No. The program is designed for anyone who trains consistently and feels their performance or recovery isn\'t matching their effort. You don\'t need to be competitive to benefit from understanding your biology.' },
-    { q: 'What makes this different from a GP sports medicine consult?', a: 'We run a far more comprehensive panel, our doctors review results against optimal ranges rather than disease ranges, and our protocols are built around your individual markers, not general athletic guidelines.' },
+    { q: 'What makes this different from a GP sports medicine consult?', a: 'We run a far more comprehensive panel, your doctor reads every result with your training history, and any plan is built around your own markers, not general guidelines.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Start training with a full biological picture.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your performance history and contacts you to confirm suitability and next steps.',
-  ctaImage: '/team/team-standing.webp',
   intakeUrl: '/signup',
 }
 
@@ -234,45 +204,39 @@ export const hairRestorationConfig: ProgramPageConfig = {
 
   headline: 'Hair restoration.',
   headlineAccent: 'Doctor-led.',
-  heroBody: 'Hair loss driven by DHT and hormonal factors responds to clinical treatment. We identify the cause through blood work, then build a protocol your doctor designs around your specific biology.',
+  heroBody: 'Hair loss often has a hormonal component. We start with blood work, then your doctor reviews the results with you and talks through options that suit you.',
   heroBullets: [
-    'Hormonal and DHT-focused blood panel',
+    'Hormone-focused blood panel',
     'AHPRA-registered doctors',
     'Clinically assessed, personalised protocols',
   ],
-  heroBentoPortrait: '/team/hair-editorial.webp',
-  heroBentoStat: { value: '50%', label: 'of men experience significant hair loss by age 50' },
-  heroBentoLifestyle: '/team/team-lounge.webp',
 
   empathyHeadline: 'Hair loss is a clinical issue. Not an aesthetic one.',
-  empathyBody: "DHT-driven hair loss is a recognised medical condition with identifiable causes and evidence-based treatments. Over-the-counter products don't target the underlying biology. A clinical approach does.",
-  empathyChips: ['Receding hairline', 'Thinning at crown', 'Rapid progression', 'Family history', 'DHT sensitivity', 'Scalp changes'],
-  empathyImage: '/team/portrait-man.webp',
+  empathyBody: "Pattern hair loss is a recognised medical condition with identifiable causes. A doctor-led assessment looks at the underlying biology, not just the scalp.",
+  empathyChips: ['Receding hairline', 'Thinning at crown', 'Rapid progression', 'Family history', 'Hormonal factors', 'Scalp changes'],
 
   evidenceHeadline: 'Understanding what drives hair loss.',
   evidencePoints: [
-    { value: '95%', label: 'Of male hair loss is androgenetic in origin', detail: 'Driven by DHT (dihydrotestosterone) interacting with genetically sensitive follicles. The mechanism is well-understood and treatable through clinical protocols.' },
-    { value: '6–12', label: 'Months for measurable follicle response', detail: 'Clinical hair loss treatment requires consistency. Early intervention typically produces better outcomes. The sooner the clinical driver is addressed, the more follicles remain viable.' },
-    { value: '4,000+', label: 'Accredited collection centres for your blood work', detail: 'We assess your hormonal profile before any protocol is built. Testosterone, DHT, thyroid, and nutrient markers all inform the approach.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Hormone markers, thyroid, iron and nutrient markers, all reviewed before any plan is discussed.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Collected at an accredited collection centre near you, then reviewed by your doctor in your consultation.' },
+    { value: '3 mo', label: 'Clinical reviews built in', detail: 'Hair changes slowly. Your doctor reviews progress with you at regular intervals rather than once.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: [
-    { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
-    { title: 'Complete pathology testing', body: 'Hormonal and DHT-focused blood panel at your nearest collection centre. Results within 48 hours.', time: '30 MIN', image: STEPS_IMAGES.bloodTest },
-    { title: 'Doctor consultation', body: 'Your AHPRA-registered doctor reviews your panel and builds a protocol specifically around your hormonal profile.', time: '45 MIN', image: STEPS_IMAGES.consult },
-    { title: 'Protocol dispatched', body: 'Your treatment coordinated through our Australian pharmacy partner. Clinical reviews every 3–6 months.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+    { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN' },
+    { title: 'Complete pathology testing', body: 'Hormone-focused blood panel at a collection centre near you. Most results back in about 48 hours.', time: '30 MIN' },
+    { title: 'Doctor consultation', body: 'Your AHPRA-registered doctor reviews your panel and builds a protocol specifically around your hormonal profile.', time: '45 MIN' },
+    { title: 'Protocol dispatched', body: 'Your treatment coordinated through our Australian pharmacy partner. Clinical reviews every 3–6 months.', time: 'ONGOING' },
   ],
 
   mechanismHeadline: 'Why clinical hair loss treatment is different.',
-  mechanismBody: 'Topical products address the surface. Clinical protocols address the biological driver.',
+  mechanismBody: 'Topical products work on the surface. A doctor-led assessment starts with the biology underneath.',
   mechanismFeatures: [
-    { title: 'DHT pathway intervention', body: 'Androgenetic alopecia is driven by DHT binding to follicle receptors. Clinical protocols can interrupt this pathway at a systemic level.' },
-    { title: 'Scalp microcirculation', body: 'Follicle health depends on adequate blood flow and nutrient delivery to the scalp. This is addressable through clinical means.' },
-    { title: 'Hormonal context', body: 'Testosterone, thyroid, iron, and other hormonal factors influence hair cycle length and follicle viability. All assessed in your blood panel.' },
-    { title: 'Growth factor signalling', body: 'Clinical protocols can support the molecular signals that determine whether follicles remain in the growth phase of the hair cycle.' },
+    { title: 'Hormonal pathway', body: 'Pattern hair loss is linked to how hair follicles respond to hormones. Your doctor assesses this with your history and blood results.' },
+    { title: 'Scalp microcirculation', body: 'Follicle health depends on adequate blood flow and nutrient delivery to the scalp. Your doctor considers this as part of your assessment.' },
+    { title: 'Hormonal context', body: 'Hormone markers, thyroid and iron are linked to the hair growth cycle. All are assessed in your blood panel.' },
+    { title: 'Hair cycle', body: 'Hair moves through growth, rest and shedding phases. Your doctor explains where your results fit and what your options are.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Ben A.', date: 'January 2025', highlight: 'Finally approached with a blood test rather than just product recommendations', full: 'Finally approached with a blood test rather than just product recommendations. The doctor actually looked at my DHT and hormonal profile before suggesting anything. That alone was different.' },
@@ -282,13 +246,12 @@ export const hairRestorationConfig: ProgramPageConfig = {
 
   faqs: [
     { q: 'Does this work for all types of hair loss?', a: 'Our program addresses androgenetic alopecia (male pattern hair loss), which represents the vast majority of male hair loss. Other causes (alopecia areata, telogen effluvium) are assessed during consultation and may be referred to a dermatologist where appropriate.' },
-    { q: 'When might I start to see a response?', a: 'Clinical hair loss protocols typically require 3–6 months before any measurable changes in follicle activity are observed. The earlier treatment begins, the more follicles remain viable for response. Individual clinical outcomes vary.' },
+    { q: 'When might I start to see a response?', a: 'Hair changes slowly, so any plan is reviewed over months, not weeks. Your doctor will explain what to expect for you. Individual results vary.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Start with a proper clinical assessment.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your hormonal profile and contacts you to confirm suitability for the Hair Restoration program.',
-  ctaImage: '/team/team-armchairs.webp',
   intakeUrl: '/signup',
 }
 
@@ -299,42 +262,36 @@ export const injuryRepairConfig: ProgramPageConfig = {
   name: 'Injury Repair & Recovery',
   category: 'Recovery & Rehabilitation',
 
-  headline: 'Faster recovery.',
+  headline: 'Recovery, measured.',
   headlineAccent: 'Clinically supported.',
-  heroBody: 'Soft tissue injuries, chronic tendon issues, and slow post-surgical recovery often have biological drivers that standard rehabilitation alone cannot address. We assess and treat those drivers.',
+  heroBody: 'Soft tissue injuries, chronic tendon issues, and slow post-surgical recovery can have biological factors behind them. We test for those factors, alongside your rehabilitation.',
   heroBullets: [
     'Comprehensive recovery & inflammatory panel',
     'AHPRA-registered doctors',
-    'Evidence-based recovery protocols',
+    'A plan that works alongside your physio',
   ],
-  heroBentoPortrait: '/editorial/recovery.webp',
-  heroBentoStat: { value: '60%', label: 'of soft tissue injuries are sub-optimally managed' },
-  heroBentoLifestyle: '/team/team-armchairs.webp',
 
   empathyHeadline: "Still not right months after the injury.",
-  empathyBody: "Slow healing, persistent inflammation, and incomplete recovery are frequently signs of underlying biological factors, not just the nature of the injury. Nutritional deficiencies, hormonal status, and inflammatory load all influence the speed and completeness of tissue repair.",
+  empathyBody: "Slow healing, persistent inflammation, and incomplete recovery can have biological factors behind them as well as the injury itself. Nutrient status, hormone markers and inflammation are all part of how tissue repairs.",
   empathyChips: ['Chronic tendon pain', 'Slow healing', 'Persistent inflammation', 'Joint stiffness', 'Post-surgical recovery', 'Recurring injury'],
-  empathyImage: '/editorial/athletic-male.webp',
 
   evidenceHeadline: 'The biology of recovery most clinics don\'t assess.',
   evidencePoints: [
-    { value: '3×', label: 'Slower healing with vitamin D deficiency', detail: 'Vitamin D plays a critical role in collagen synthesis and inflammatory regulation. Deficiency, common in Australian men despite the climate, significantly impairs soft tissue repair.' },
-    { value: '12+', label: 'Recovery markers in our assessment panel', detail: 'Inflammatory markers, hormonal status, nutritional deficiencies, and metabolic factors that collectively determine your body\'s repair capacity.' },
-    { value: '4,000+', label: 'Accredited collection centres nationwide', detail: 'Your blood panel collected near you, results reviewed by your doctor before your consultation.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Inflammatory markers, vitamin D, iron, hormone markers and metabolic markers, read together by your doctor.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Your blood panel collected at an accredited centre near you, then reviewed by your doctor before your consultation.' },
+    { value: '3 mo', label: 'Reviews about every three months', detail: 'A repeat panel and a telehealth review, alongside your rehabilitation.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
-  mechanismHeadline: 'Why clinical recovery protocols work.',
-  mechanismBody: 'The body\'s repair capacity is not fixed. It\'s determined by biological conditions that can be assessed, optimised, and supported.',
+  mechanismHeadline: 'What sits behind slow recovery.',
+  mechanismBody: 'Repair depends on more than the injury. Several of the biological conditions involved can be measured in a blood panel.',
   mechanismFeatures: [
     { title: 'Tissue repair signalling', body: 'Hormones, inflammation and nutrient status all play a part in how soft tissue repairs. We test for them so your doctor can see what is going on.' },
-    { title: 'Inflammatory regulation', body: 'Chronic low-grade inflammation impedes healing and perpetuates pain. Identifying and addressing the inflammatory driver is often the missing step.' },
-    { title: 'Nutritional support', body: 'Collagen synthesis requires specific nutrients: vitamin C, zinc, glycine, proline. Deficiencies directly slow healing timelines.' },
-    { title: 'Hormonal environment', body: 'Testosterone and growth hormone are anabolic hormones that influence protein synthesis and tissue regeneration. Suboptimal levels impair recovery.' },
+    { title: 'Inflammatory regulation', body: 'Chronic low-grade inflammation impedes healing and perpetuates pain. Inflammatory markers are part of your panel.' },
+    { title: 'Nutritional support', body: 'Collagen synthesis requires specific nutrients: vitamin C, zinc, glycine, proline. Your panel checks the nutrient markers involved.' },
+    { title: 'Hormonal environment', body: 'Hormone markers are linked to how the body builds and repairs tissue. Your doctor reviews them with the rest of your results.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Dave N.', date: 'February 2025', highlight: 'First time someone looked at the biological side of why I wasn\'t healing properly', full: 'First time someone looked at the biological side of why I wasn\'t healing properly. The doctor was thorough, understood injury physiology, and the consultation was properly focused.' },
@@ -350,7 +307,6 @@ export const injuryRepairConfig: ProgramPageConfig = {
 
   ctaHeadline: 'Understand what\'s slowing your recovery.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your injury history and recovery timeline, and contacts you to confirm suitability.',
-  ctaImage: '/team/team-lounge.webp',
   intakeUrl: '/signup',
 }
 
@@ -361,42 +317,36 @@ export const longevityConfig: ProgramPageConfig = {
   name: 'Anti-Ageing & Longevity',
   category: 'Longevity & Healthspan',
 
-  headline: 'Live longer.',
-  headlineAccent: 'Perform better for longer.',
-  heroBody: 'Longevity medicine is not about defying ageing. It\'s about understanding the biological processes that drive it and intervening where the evidence supports doing so.',
+  headline: 'Longevity, measured.',
+  headlineAccent: 'Read with your doctor.',
+  heroBody: 'Longevity medicine is not about defying ageing. It\'s about understanding the biological processes that drive it and acting where the evidence supports it.',
   heroBullets: [
     'Comprehensive longevity & metabolic panel',
     'AHPRA-registered doctors',
-    'Evidence-based healthspan protocols',
+    'A plan reviewed over time',
   ],
-  heroBentoPortrait: '/team/portrait-man.webp',
-  heroBentoStat: { value: '20+', label: 'years between healthspan and lifespan in most men' },
-  heroBentoLifestyle: '/team/team-sofa.webp',
 
-  empathyHeadline: "Most people reach their 50s having never optimised their baseline.",
-  empathyBody: "The gap between how long you live and how well you live is not inevitable. It\'s the product of biological processes that begin decades earlier, and that are measurable, addressable, and modifiable with the right clinical approach.",
+  empathyHeadline: "Most people reach their 50s having never measured their baseline.",
+  empathyBody: "The gap between how long you live and how well you live is not inevitable. It\'s the product of biological processes that begin decades earlier, and many of which can be measured.",
   empathyChips: ['Declining energy', 'Slower recovery', 'Cognitive decline', 'Metabolic drift', 'Hormonal change', 'Inflammatory load'],
-  empathyImage: '/team/team-lounge.webp',
 
   evidenceHeadline: 'The biology of healthspan.',
   evidencePoints: [
-    { value: '20yr', label: 'Average gap between healthspan and lifespan', detail: 'Most men spend the last two decades of their lives in chronic ill-health. Longevity medicine aims to compress that period: not just extend life, but extend quality life.' },
-    { value: '15+', label: 'Longevity markers in our comprehensive panel', detail: 'Biological age markers, metabolic function, hormonal status, inflammatory load, micronutrient deficiencies, and cardiovascular risk, all assessed together.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Metabolic, heart, inflammatory, hormone and nutrient markers, assessed together to give you a baseline.' },
+    { value: '3 mo', label: 'Reviews about every three months', detail: 'A repeat panel and a telehealth review, so changes are tracked against your own baseline over time.' },
     { value: '100%', label: 'Online clinical care, Australia-wide', detail: 'Your longevity consultation conducted entirely via telehealth with an AHPRA-registered doctor who specialises in metabolic and preventive medicine.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
   mechanismHeadline: 'The hallmarks of ageing that medicine can address.',
   mechanismBody: 'Modern longevity science has identified the biological processes that drive cellular ageing. Several of these are now clinically addressable.',
   mechanismFeatures: [
-    { title: 'Hormonal decline', body: 'Testosterone, DHEA, and growth hormone decline predictably with age. Testing shows where your levels sit today, so changes can be tracked over time.' },
+    { title: 'Hormonal decline', body: 'Several hormone markers change with age. Testing shows where yours sit today, so changes can be tracked over time.' },
     { title: 'Chronic inflammation', body: '"Inflammaging", chronic low-grade inflammation, is now understood as a primary driver of age-related disease. Blood markers can identify it years before clinical presentation.' },
-    { title: 'Metabolic function', body: 'Insulin sensitivity, glucose metabolism, and lipid handling all deteriorate with age. Each is measurable and, where appropriate, clinically modifiable.' },
-    { title: 'Cellular repair capacity', body: 'DNA repair, mitochondrial function, and autophagic processes decline with age. Clinical interventions can support these pathways.' },
+    { title: 'Metabolic function', body: 'Insulin sensitivity, glucose metabolism, and lipid handling all deteriorate with age. Each is measurable in a blood panel.' },
+    { title: 'Nutrient status', body: 'Vitamin D, B12, iron and other nutrient markers are part of your baseline and are rechecked at each review.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Richard H.', date: 'January 2025', highlight: 'The most comprehensive clinical review I\'ve ever had', full: 'The most comprehensive clinical review I\'ve ever had. The doctor approached it as optimisation rather than disease detection, which is exactly what I was looking for.' },
@@ -406,13 +356,12 @@ export const longevityConfig: ProgramPageConfig = {
 
   faqs: [
     { q: 'Is longevity medicine evidence-based?', a: 'Yes. Our approach is grounded in peer-reviewed research and uses established clinical markers. We don\'t offer unproven interventions. Where the evidence is emerging, we say so.' },
-    { q: 'How is this different from a standard health check?', a: 'A standard health check screens for disease. Our longevity assessment establishes your optimal baseline, identifies biological ageing processes already underway, and builds a protocol to address modifiable factors before disease develops.' },
+    { q: 'How is this different from a standard health check?', a: 'A standard health check screens for disease. Our longevity assessment sets your baseline across 23+ markers, and your doctor reviews it with you and tracks it over time.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Start with a proper biological baseline.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your health history and contacts you to confirm suitability for the Longevity program.',
-  ctaImage: '/team/team-armchairs.webp',
   intakeUrl: '/signup',
 }
 
@@ -427,43 +376,37 @@ export const pathologyConfig: ProgramPageConfig = {
   headlineAccent: 'All of them.',
   heroBody: 'A comprehensive blood panel that goes far beyond what a GP typically orders. Doctor-issued, doctor-reviewed, doctor-explained, across 23+ markers that actually tell you where you stand.',
   heroBullets: [
-    '30+ clinically relevant blood markers',
+    '23+ clinically relevant blood markers',
     'AHPRA-registered doctor review',
     'Results explained in context, not just in range',
   ],
-  heroBentoPortrait: '/editorial/blood-vials.webp',
-  heroBentoStat: { value: '30+', label: 'markers across hormones, metabolism, and health' },
-  heroBentoLifestyle: '/editorial/molecular.webp',
 
   empathyHeadline: "Your GP checks if you\'re sick. We check how well you\'re functioning.",
-  empathyBody: "Standard GP blood panels are designed for disease detection. They tell you if something has gone wrong. Our comprehensive panel tells you how well your systems are actually performing, and identifies what\'s suboptimal before it becomes a problem.",
-  empathyChips: ['No symptoms?', 'Annual health check', 'Optimise your baseline', 'Track your markers', 'Get ahead of problems', 'Understand your body'],
-  empathyImage: '/team/portrait-woman.webp',
+  empathyBody: "Standard GP blood panels are designed for disease detection. They tell you if something has gone wrong. Our comprehensive panel tells you how well your systems are actually performing, and shows what is worth a closer look.",
+  empathyChips: ['No symptoms?', 'Annual health check', 'Know your baseline', 'Track your markers', 'Get ahead of problems', 'Understand your body'],
 
   evidenceHeadline: 'What a real blood panel looks like.',
   evidencePoints: [
-    { value: '30+', label: 'Markers across hormones, metabolism, and health', detail: 'Hormone panel, thyroid, metabolic markers, cardiovascular risk, inflammatory markers, nutritional status, liver and kidney function: the complete picture.' },
-    { value: '48h', label: 'Results turnaround from pathology collection', detail: 'Results reviewed and explained by your AHPRA-registered doctor in a follow-up consultation. Not just a PDF of numbers.' },
-    { value: '4,000+', label: 'Collection centres across Australia', detail: 'Your referral issued electronically. No appointment needed at most collection centres.' },
+    { value: '23+', label: 'Markers across hormones, metabolism, and health', detail: 'Hormone panel, thyroid, metabolic markers, cardiovascular risk, inflammatory markers, nutritional status, liver and kidney function: the complete picture.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Results reviewed and explained by your AHPRA-registered doctor in a follow-up consultation. Not just a PDF of numbers.' },
+    { value: 'Near you', label: 'Accredited collection centres near you', detail: 'Your referral issued electronically. No appointment needed at most collection centres.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: [
-    { title: 'Create your account', body: 'Register in under two minutes. Your doctor referral issued the same business day.', time: '2 MIN', image: STEPS_IMAGES.signup },
-    { title: 'Collect your bloods', body: 'Attend any accredited collection centre near you. Most tests require a fasted morning sample.', time: '30 MIN', image: STEPS_IMAGES.bloodTest },
-    { title: 'Doctor review', body: 'Your AHPRA-registered doctor reviews every marker in the context of your health history and goals, not just against reference ranges.', time: '45 MIN', image: STEPS_IMAGES.consult },
-    { title: 'Your results explained', body: 'Full interpretation of your results with specific recommendations. Follow-up pathway if any markers require clinical attention.', time: 'SAME DAY', image: STEPS_IMAGES.protocol },
+    { title: 'Create your account', body: 'Register in under two minutes. Your doctor referral issued the same business day.', time: '2 MIN' },
+    { title: 'Collect your bloods', body: 'Attend any accredited collection centre near you. Most tests require a fasted morning sample.', time: '30 MIN' },
+    { title: 'Doctor review', body: 'Your AHPRA-registered doctor reviews every marker in the context of your health history and goals, not just against reference ranges.', time: '45 MIN' },
+    { title: 'Your results explained', body: 'Full interpretation of your results with specific recommendations. Follow-up pathway if any markers require clinical attention.', time: 'SAME DAY' },
   ],
 
   mechanismHeadline: 'What your blood work actually tells you.',
   mechanismBody: 'Blood markers are not just disease indicators. They\'re a window into how your systems are performing right now.',
   mechanismFeatures: [
-    { title: 'Hormonal status', body: 'Testosterone, DHEA, thyroid hormones, cortisol: all influence energy, cognition, body composition, and recovery. All included.' },
-    { title: 'Metabolic function', body: 'Fasting glucose, HbA1c, insulin resistance index, lipid panel: identifies metabolic issues years before clinical symptoms appear.' },
+    { title: 'Hormonal status', body: 'Hormone markers and thyroid markers, linked to energy, focus, body composition and recovery. All included.' },
+    { title: 'Metabolic function', body: 'Fasting glucose, HbA1c, insulin resistance index, lipid panel: shows how your metabolism is running today.' },
     { title: 'Inflammatory load', body: 'hsCRP and inflammatory markers detect chronic low-grade inflammation, a driver of disease that often goes unmeasured for years.' },
-    { title: 'Nutritional status', body: 'Vitamin D, B12, iron studies, zinc: deficiencies that significantly affect how you feel, recover, and perform.' },
+    { title: 'Nutritional status', body: 'Vitamin D, B12, iron studies, zinc: deficiencies that are worth knowing about.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Michael T.', date: 'February 2025', highlight: 'First time my results were actually explained to me in full', full: 'First time my results were actually explained to me in full. Not just "looks fine", but a proper review of each marker in context. Worth it for that alone.' },
@@ -479,7 +422,6 @@ export const pathologyConfig: ProgramPageConfig = {
 
   ctaHeadline: 'Get a proper picture of your health.',
   ctaBody: 'Create your account, receive your referral, and attend your nearest collection centre. Doctor consultation included.',
-  ctaImage: '/team/team-standing.webp',
 }
 
 // ─── Sexual Health ─────────────────────────────────────────────────────────────
@@ -490,41 +432,35 @@ export const sexualHealthConfig: ProgramPageConfig = {
   category: 'Men\'s Sexual Health',
 
   headline: 'Sexual health.',
-  headlineAccent: 'Private, clinical, effective.',
-  heroBody: 'Sexual health concerns are medical issues, not something to manage in silence. We assess the clinical drivers (hormonal, vascular, and psychological) and treat them properly.',
+  headlineAccent: 'Private, clinical, doctor-led.',
+  heroBody: 'Sexual health concerns are medical issues, not something to manage in silence. We assess the clinical drivers (hormonal, vascular and psychological) with you, privately.',
   heroBullets: [
     'Completely confidential, 100% online',
     'AHPRA-registered doctors',
     'Clinical assessment before any treatment',
   ],
-  heroBentoPortrait: '/editorial/sexual-health.webp',
-  heroBentoStat: { value: '1 in 5', label: 'men experience significant sexual health concerns' },
-  heroBentoLifestyle: '/team/team-armchairs.webp',
 
   empathyHeadline: "Most men wait years before seeking help. You don\'t need to.",
-  empathyBody: "Sexual health concerns are among the most under-reported medical issues in men. They are also among the most treatable once the clinical driver is properly identified. A complete assessment, completely online, completely private.",
+  empathyBody: "Sexual health concerns are among the most under-reported medical issues in men. A doctor can help work out the clinical driver. A complete assessment, completely online, completely private.",
   empathyChips: ['Erectile dysfunction', 'Low libido', 'Performance anxiety', 'Hormonal cause', 'Vascular factor', 'Premature ejaculation'],
-  empathyImage: '/team/portrait-man.webp',
 
   evidenceHeadline: 'Understanding the clinical drivers.',
   evidencePoints: [
-    { value: '1 in 5', label: 'Men affected by significant sexual health concerns', detail: 'Most never receive a proper clinical assessment. The majority of sexual health issues in men have an identifiable, treatable physical driver.' },
-    { value: '80%', label: 'Of ED cases have a physical component', detail: 'Vascular function, testosterone levels, and neurological factors account for the majority of erectile dysfunction, not psychological causes as commonly assumed.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Hormone markers, heart and metabolic markers, read by your doctor before any treatment is discussed.' },
+    { value: '01', label: 'A full clinical assessment first', detail: 'Erectile dysfunction can have vascular, hormonal, neurological or psychological factors. Your doctor looks at all of them.' },
     { value: '100%', label: 'Confidential, online consultation', detail: 'Your consultation conducted entirely via telehealth. No clinic waiting rooms. No awkward conversations in person.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: STANDARD_STEPS,
 
   mechanismHeadline: 'Sexual health is a function of multiple systems.',
-  mechanismBody: 'Effective treatment requires identifying which system is the primary driver, and addressing it clinically.',
+  mechanismBody: 'Your doctor works out which system is most likely involved before any treatment is discussed.',
   mechanismFeatures: [
-    { title: 'Hormonal drivers', body: 'Testosterone and related hormones are the primary regulators of libido and sexual function. Suboptimal levels are identified through blood testing.' },
+    { title: 'Hormonal drivers', body: 'Hormone markers are linked to libido and sexual function. They are measured in your blood panel.' },
     { title: 'Vascular function', body: 'Erectile function is primarily a vascular event. Cardiovascular risk markers and blood flow indicators are assessed as part of your panel.' },
     { title: 'Neurological factors', body: 'Nerve signalling governs arousal and sensation. Nutritional status and metabolic function both influence neurological health.' },
     { title: 'Psychological context', body: 'Performance anxiety and psychological factors can compound physical drivers. Your doctor assesses the full clinical picture before any treatment is recommended.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'S.B.', date: 'March 2025', highlight: 'Completely confidential and the doctor didn\'t make it awkward', full: 'Completely confidential and the doctor didn\'t make it awkward. They approached it like any other medical issue, which was exactly what I needed. Very professional.' },
@@ -540,7 +476,6 @@ export const sexualHealthConfig: ProgramPageConfig = {
 
   ctaHeadline: 'A clinical assessment. Completely private.',
   ctaBody: 'Complete the pre-screen. Confidential from start to finish. Your doctor reviews your intake and confirms suitability and next steps.',
-  ctaImage: '/editorial/sexual-health.webp',
   intakeUrl: '/signup',
 }
 
@@ -551,47 +486,41 @@ export const skinRegenerationConfig: ProgramPageConfig = {
   name: 'Skin Regeneration',
   category: 'Skin Health',
 
-  headline: 'Better skin.',
-  headlineAccent: 'Clinical grade.',
+  headline: 'Skin, from the inside.',
+  headlineAccent: 'Doctor-led.',
   heroBody: 'Skin quality is a reflection of internal biology. We assess the hormonal, nutritional, and systemic factors driving skin ageing, then build a protocol around your actual markers.',
   heroBullets: [
     'Hormonal and nutritional skin panel',
     'AHPRA-registered doctors',
     'Clinically assessed, personalised protocols',
   ],
-  heroBentoPortrait: '/editorial/skin-closeup.webp',
-  heroBentoStat: { value: '70%', label: 'of skin ageing is driven by controllable biological factors' },
-  heroBentoLifestyle: '/team/portrait-woman.webp',
 
   empathyHeadline: "Skin ageing is not just about what you put on it.",
   empathyBody: "Collagen production, cellular turnover, hydration, and elasticity are regulated by hormones, nutrition, and systemic biology. Topical products can support, but they cannot compensate for deficiencies at the biological level.",
   empathyChips: ['Premature ageing', 'Skin laxity', 'Dullness', 'Acne in adults', 'Collagen loss', 'Uneven texture'],
-  empathyImage: '/editorial/skin-closeup.webp',
 
   evidenceHeadline: 'The biology behind skin quality.',
   evidencePoints: [
-    { value: '1%', label: 'Collagen lost per year after age 25', detail: 'Collagen loss is hormonally driven. Testosterone, growth factors, and nutritional status all influence the rate of collagen synthesis and degradation.' },
-    { value: '10+', label: 'Skin-relevant markers in our panel', detail: 'Hormonal status, vitamin D, zinc, collagen markers, and inflammatory load, all assessed before any protocol is built.' },
+    { value: '23+', label: 'Markers in your panel', detail: 'Hormone markers, vitamin D, zinc, iron and inflammatory markers, all assessed before any plan is discussed.' },
+    { value: '48h', label: 'Most results back in about 48 hours', detail: 'Collected at an accredited collection centre near you, then reviewed by your doctor in your consultation.' },
     { value: '100%', label: 'Doctor-led and clinically assessed', detail: 'No protocol is recommended without a proper clinical assessment and review of your blood markers. Treatment only where clinically appropriate.' },
   ],
-  evidenceImage: '/editorial/blood-vials.webp',
 
   processSteps: [
-    { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN', image: STEPS_IMAGES.signup },
-    { title: 'Complete pathology testing', body: 'Hormonal and skin-relevant blood panel at your nearest collection centre. Results within 48 hours.', time: '30 MIN', image: STEPS_IMAGES.bloodTest },
-    { title: 'Doctor consultation', body: 'Your doctor reviews your panel and skin health history to build a protocol addressing your specific biological drivers.', time: '45 MIN', image: STEPS_IMAGES.consult },
-    { title: 'Protocol dispatched', body: 'Treatment coordinated through our Australian pharmacy partner with regular clinical reviews.', time: 'ONGOING', image: STEPS_IMAGES.protocol },
+    { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN' },
+    { title: 'Complete pathology testing', body: 'Hormone and skin-relevant blood panel at a collection centre near you. Most results back in about 48 hours.', time: '30 MIN' },
+    { title: 'Doctor consultation', body: 'Your doctor reviews your panel and skin health history to build a protocol addressing your specific biological drivers.', time: '45 MIN' },
+    { title: 'Protocol dispatched', body: 'Treatment coordinated through our Australian pharmacy partner with regular clinical reviews.', time: 'ONGOING' },
   ],
 
   mechanismHeadline: 'Why internal biology determines skin quality.',
-  mechanismBody: 'Skin quality is a downstream output of multiple biological systems. Addressing the root causes produces more durable outcomes than surface-level treatment.',
+  mechanismBody: 'Skin quality is a downstream output of multiple biological systems. Your doctor looks at those systems as well as the skin itself.',
   mechanismFeatures: [
-    { title: 'Collagen synthesis', body: 'Collagen production is regulated by hormones and nutrition. Growth factors and key nutrients directly influence the rate of new collagen formation.' },
-    { title: 'Cellular turnover', body: 'The rate at which skin cells renew is influenced by metabolic function, thyroid status, and growth factor signalling, all assessable through blood testing.' },
-    { title: 'Inflammatory control', body: 'Chronic inflammation accelerates skin ageing and drives conditions like adult acne. We test inflammatory markers so your doctor can see whether they are part of the picture.' },
-    { title: 'Hydration and barrier function', body: 'Hormonal influences on skin hydration and lipid production are significant, particularly testosterone and DHEA levels in both men and women.' },
+    { title: 'Collagen synthesis', body: 'Collagen production is regulated by hormones and nutrition. Your panel includes the nutrient markers involved.' },
+    { title: 'Cellular turnover', body: 'The rate at which skin cells renew is linked to metabolic function and thyroid status, both assessable through blood testing.' },
+    { title: 'Inflammatory control', body: 'Inflammation is linked to skin ageing and to conditions like adult acne. We test inflammatory markers so your doctor can see whether they are part of the picture.' },
+    { title: 'Hydration and barrier function', body: 'Hormone markers are linked to skin hydration and oil production in both men and women. Your panel includes them.' },
   ],
-  mechanismImage: '/editorial/molecular.webp',
 
   testimonials: [
     { name: 'Oliver K.', date: 'March 2025', highlight: 'First time skin health was approached as a medical question', full: 'First time skin health was approached as a medical question rather than a cosmetic one. The doctor identified nutritional deficiencies I wasn\'t aware of. Very different experience.' },
@@ -600,14 +529,13 @@ export const skinRegenerationConfig: ProgramPageConfig = {
   ],
 
   faqs: [
-    { q: 'Is this program suitable for acne in adults?', a: 'Yes. Adult acne frequently has hormonal and inflammatory drivers that a comprehensive blood panel can identify. Your doctor will assess suitability during consultation.' },
+    { q: 'Is this program suitable for acne in adults?', a: 'Yes. Adult acne can have hormonal and inflammatory factors that a blood panel can show. Your doctor will assess suitability during consultation.' },
     { q: 'How is this different from seeing a dermatologist?', a: 'A dermatologist primarily addresses surface-level skin conditions. Our program investigates the internal biological factors (hormonal, nutritional, and systemic) that drive skin quality and ageing.' },
     ...SHARED_FAQS,
   ],
 
   ctaHeadline: 'Skin quality starts from the inside.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your skin history and hormonal markers and contacts you to confirm clinical suitability.',
-  ctaImage: '/team/portrait-woman-blonde.webp',
   intakeUrl: '/signup',
 }
 
