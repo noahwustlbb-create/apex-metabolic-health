@@ -31,6 +31,6 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
     )
   }
   if (variant === 'footer') return <Lockup width={280} src="/brand/lockup-2026-1280.webp" className={className} />
-  // Header: 150 px wide on phones (42 tall), 186 px from 768 (52 tall); see .apex-navlock in globals.css.
+  // Header: 180 px wide on phones (50 tall), 200 px from 768 (56 tall); see .apex-navlock in globals.css.
   return <Lockup width={186} src="/brand/lockup-2026-640.webp" className={`apex-navlock ${className || ''}`} />
 }

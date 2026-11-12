@@ -736,5 +736,5 @@ html.lenis, html.lenis body { height: auto; }
 @media (prefers-reduced-motion: reduce) { .invite-dot::after { animation: none; } }
 
 /* Header logo: Noah's triangle lockup (13 Nov 2026), components/brand/Logo.tsx */
-.apex-navlock { width: 150px !important; height: auto; }
-@media (min-width: 768px) { .apex-navlock { width: 186px !important; } }
+.apex-navlock { width: 180px !important; height: auto; }
+@media (min-width: 768px) { .apex-navlock { width: 200px !important; } }
