@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Logo from '@/components/brand/Logo'
 import { phasesFor, stepNumber, startTotal, type StartPhase } from '@/lib/startFunnel'
-import { useSignupGate } from '@/context/SignupGateContext'
 import { ArtImg } from '@/components/audience/Img'
 import { useAudience } from '@/components/audience/Audience'
 import Image from 'next/image'
@@ -23,7 +22,7 @@ const ease   = [0.22, 1, 0.36, 1] as const
 
 // ── Treatment picker ───────────────────────────────────────────────────────────
 const TREATMENT_PICKS = [
-  { id: 'hormone',   label: 'Hormone Optimisation',       sub: 'Energy, testosterone, drive, recovery' },
+  { id: 'hormone',   label: 'Hormone Optimisation',       sub: 'Energy, drive, recovery, hormone markers' },
   { id: 'weight',    label: 'Medical Weight Loss',         sub: 'Doctor-led metabolic management' },
   { id: 'sexual',    label: 'Sexual Health',               sub: 'Libido, performance, confidence' },
   { id: 'recovery',  label: 'Recovery & Injury Repair',    sub: 'Injury repair, performance, mobility' },
@@ -40,13 +39,13 @@ const PORTAL_PROGRAM: Record<string, string> = {
 }
 // What the panel looks at for each area (test names only, never medicines or outcomes).
 const FOCUS: Record<string, { art: string; markers: string }> = {
-  hormone:   { art: '/protocols/hormone.jpg',     markers: 'Testosterone, SHBG, oestradiol, LH, FSH, prolactin' },
+  hormone:   { art: '/protocols/hormone.jpg',     markers: 'Hormone markers, binding proteins, pituitary markers' },
   weight:    { art: '/protocols/weight.jpg',      markers: 'Glucose, HbA1c, liver and kidney function, lipids' },
   sexual:    { art: '/protocols/sexual.jpg',      markers: 'Hormones, prolactin, thyroid and metabolic markers' },
-  recovery:  { art: '/protocols/recovery.jpg',    markers: 'Testosterone, IGF-1, cortisol, iron studies, hs-CRP' },
+  recovery:  { art: '/protocols/recovery.jpg',    markers: 'Hormone markers, iron studies, inflammation markers' },
   longevity: { art: '/protocols/longevity.jpg',   markers: 'Cholesterol, triglycerides, hs-CRP, vitamin D, full blood count' },
   skinhair:  { art: '/protocols/hair.jpg',        markers: 'Iron studies, thyroid, hormones, vitamin D' },
-  bloods:    { art: '/protocols/bloods.jpg',      markers: 'The full 23+ marker panel across four systems' },
+  bloods:    { art: '/start/quiz/dna.jpg',          markers: 'The full 23+ marker panel across four systems' },
 }
 // Women's site (24 Oct): not led by testosterone. Same ids, so routing and the
 // portal program names do not change.
@@ -60,7 +59,7 @@ const picksFor = (women: boolean) => women
   ? WOMEN_PICK_ORDER.map(id => ({ ...TREATMENT_PICKS.find(t => t.id === id)!, ...(WOMEN_PICK_TEXT[id] ?? {}) }))
   : TREATMENT_PICKS
 const WOMEN_FOCUS: Partial<Record<string, string>> = {
-  hormone: 'Oestradiol, progesterone, testosterone, LH, FSH, prolactin',
+  hormone: 'Hormone markers across your cycle, pituitary markers',
   recovery: 'Iron studies, thyroid, cortisol, hs-CRP',
 }
 const PICK_LABEL = (id: string) => TREATMENT_PICKS.find(t => t.id === id)?.label ?? id
@@ -169,7 +168,7 @@ const CONFIGS: Record<string, Config> = {
     title: 'Comprehensive Blood Tests',
     q1: 'What would they like to test for?',
     opts1: [
-      'Hormones (testosterone, oestrogen, thyroid)',
+      'Hormone markers and thyroid',
       'Metabolic health (glucose, cholesterol, liver, kidney)',
       'Full comprehensive panel',
       'Cardiovascular markers',
@@ -218,7 +217,7 @@ const SELF_Q1_OVERRIDES: Partial<Record<string, string>> = {
 // remembered 'apex-audience' choice), so most visitors never see it here.
 type Who = 'men' | 'women'
 const SEX_OPTIONS: { id: Who; label: string; sub: string }[] = [
-  { id: 'men', label: 'Men', sub: 'Testosterone, energy, heart' },
+  { id: 'men', label: 'Men', sub: 'Hormone markers, energy, heart' },
   { id: 'women', label: 'Women', sub: 'Hormones, cycle, iron' },
 ]
 const AGE_BANDS = ['18-29', '30-39', '40-49', '50-59', '60-69', '70-80'] as const
@@ -292,7 +291,7 @@ const ASIDE: Partial<Record<string, { art: string; fact: string }>> = {
   age:     { art: '/start/quiz/body-female.jpg',  fact: 'Apex sees Australian adults from 18 to 80. Your doctor reads your markers against your age, not a single average.' },
   pick:    { art: '/start/quiz/dna.jpg',          fact: 'One blood panel and one doctor call cover every protocol you pick.' },
   q1:      { art: '/start/quiz/body-female.jpg',  fact: 'A result inside the reference range is not always where you feel your best. Your doctor reads your markers for how you actually function.' },
-  email:   { art: '/start/quiz/vials.jpg',        fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
+  email:   { art: '/start/quiz/tablet.jpg',        fact: '4,000+ accredited collection centres across Australia. Most results are back in about 48 hours.' },
   source:  { art: '/start/quiz/box.jpg',          fact: 'Every Apex doctor is AHPRA-registered. You can check any of them on the public register.' },
 }
 function QuizAside({ phase }: { phase: string }) {
@@ -499,9 +498,8 @@ export default function ShortAssessment() {
   const [s1, setS1] = useState('')
   const [source, setSource] = useState('')
   const refCode = (params.get('ref') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 32)
-  const { open } = useSignupGate()
   // Captured after question 3; kept in memory only, never in the session draft.
-  const [saved, setSaved] = useState<{ email: string; name: string } | null>(null)
+  const [, setSaved] = useState<{ email: string; name: string } | null>(null)
 
   // A refresh, a mis-tap on Back, or a phone call used to destroy the answers
   // with no warning. sessionStorage keeps them for this tab only.
@@ -672,7 +670,7 @@ export default function ShortAssessment() {
                 )}
 
                 <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, ease }} className="flex flex-col gap-3 w-full" style={{ maxWidth: 400, margin: '0 auto' }}>
-                  <button type="button" onClick={() => { if (saved) { const sep = signupUrl.includes('?') ? '&' : '?'; window.location.href = `${signupUrl}${sep}email=${encodeURIComponent(saved.email)}${saved.name ? `&name=${encodeURIComponent(saved.name)}` : ''}`; return } open(undefined, { capture: true, program: pickTitles.length ? pickTitles.join(', ') : config.title, signupUrl }) }} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
+                  <button type="button" onClick={() => { /* Quiz end: create the account on /signup, which hands off to the portal with the answers (Noah, 12 Nov 2026). */ window.location.href = `/signup?redirect=${encodeURIComponent(signupUrl)}` }} className="btn-primary w-full justify-center" style={{ fontSize: 16, padding: '17px 32px', borderRadius: 999 }}>
                     {isCaregiver ? 'Create a caregiver account' : 'Create your free account'}
                     <svg viewBox="0 0 16 16" fill="none" className="w-4 h-4"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   </button>

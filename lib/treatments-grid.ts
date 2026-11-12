@@ -31,7 +31,7 @@ type Row = { slug: string; name?: string; sub: string }
 const ROWS: Row[] = [
   { slug: 'hormone-optimisation', sub: 'Energy · drive · hormones' },
   { slug: 'metabolic-weight-loss', sub: 'Metabolic health · weight' },
-  { slug: 'pathology', sub: '23+ markers · one draw' },
+  { slug: 'pathology', sub: 'One panel · doctor read' },
   { slug: 'performance-plus', name: 'Performance Optimisation', sub: 'Training · output · recovery' },
   { slug: 'injury-repair', sub: 'Joints · tissue · recovery' },
   { slug: 'longevity', sub: 'Healthspan · prevention' },

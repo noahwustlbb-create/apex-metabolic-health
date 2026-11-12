@@ -2,12 +2,10 @@ import Nav from '@/components/Nav'
 import ScrollProgress from '@/components/ScrollProgress'
 import StageHero from '@/components/home/stage/StageHero'
 import StageBox from '@/components/home/stage/StageBox'
-import StageIncluded from '@/components/home/stage/StageIncluded'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import TreatmentsGrid from '@/components/home/TreatmentsGrid'
-import { TrustStrip, Pathways, WhyApex, ResultsTeaser, HowItWorks, HomeFAQ, CloseBand } from '@/components/home/AlgoSections'
+import { AboutYou, Approach, WhyApex, PhotoBreak, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
 import HomeStickyBar from '@/components/home/HomeStickyBar'
-import DoctorCard from '@/components/DoctorCard'
 import { FAQS } from '@/lib/faqs'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -22,8 +20,8 @@ export const metadata: Metadata = { alternates: { canonical: '/' } }
 // band, sample data) → EXPLAIN (pathway) → PROVE (panel) → TRUST (doctor)
 // → ANSWER (FAQ) → INVITE (ice stage again). Renders: public/3d, made in
 // Higgsfield (jobs in Clients/Apex/research/hero-2026-09-27/HANDOFF.md).
-// 24 Oct 2026 fundamentals plan (Noah: Go) supersedes 27 Sep: the hero carries
-// one price line; the detail lives on /pricing.
+// 24 Oct 2026 fundamentals plan (Noah: Go) supersedes 27 Sep. No price in the
+// hero (Noah, 2 Nov); the detail lives on /pricing. Current order: 12 Nov below.
 
 const faqJsonLd = {
   '@context': 'https://schema.org',
@@ -41,22 +39,20 @@ export default function Home() {
       <ScrollProgress />
       <Nav />
       <StageToneProvider>
-      {/* AlgoRx order (playbook section 4, 11 Nov 2026): hero, trust strip,
-          program grid, ways in, box band, why, results, proof, how it works
-          (black), included, FAQ, close, black footer. */}
+      {/* Noah's structure (12 Nov 2026): 01 hero (neutral until the pick),
+          02 about you, 03 protocols, 04 approach (with the box band after
+          Optimise and Review), 05 why Apex, FAQ, 06 ready to start, black
+          footer. */}
       <main id="main-content" className="home-main">
         <StageHero />
-        <TrustStrip />
+        <AboutYou />
         <TreatmentsGrid />
-        <Pathways />
+        <Approach />
         <StageBox />
         <WhyApex />
-        <ResultsTeaser />
-        <DoctorCard />
-        <HowItWorks />
-        <StageIncluded />
+        <PhotoBreak />
         <HomeFAQ />
-        <CloseBand />
+        <ReadyToStart />
       </main>
       </StageToneProvider>
       <div className="al-foot"><Footer /></div>

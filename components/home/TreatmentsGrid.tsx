@@ -1,14 +1,21 @@
 import Link from 'next/link'
-import { TREATMENT_CARDS, DEFAULT_FEATURES, type GridCard } from '@/lib/treatments-grid'
+import { TREATMENT_CARDS, type GridCard } from '@/lib/treatments-grid'
 
 /**
- * Treatments bento (AlgoRx reference, Noah 11 Nov 2026). Server rendered, CSS
- * only. Desktop with a fine pointer: three columns; a feature card is tall,
- * with its image filling the card and the name in white bottom left; a text
- * card is short and white (number, round thumbnail, name, mono sub-line).
- * Nothing hovered: the DEFAULT_FEATURES diagonal. Hovering or focusing a card
- * makes it the only feature. Phones and touch: no hover, every card is a flat
- * image card that links to its program page.
+ * 03 PROTOCOLS (Noah 12 Nov 2026: "one large cinematic Hormonal Optimisation
+ * card followed by smaller cards in an alternating layout, like your AlgoRx
+ * references. On mobile, tap to navigate; on desktop, hover to expand").
+ * Server rendered, CSS only.
+ *
+ * - One full-bleed feature card (Hormone Optimisation): image, dark gradient,
+ *   white label bottom left.
+ * - Then rows of three that alternate: image card + two bordered white cards,
+ *   two white cards + image card, and so on.
+ * - Desktop with a fine pointer: the hovered or focused card widens in its
+ *   row and every other card steps back (isolate); a white card shows its
+ *   image while it is the one in focus.
+ * - Phones and touch: no hover content. Every card is a plain link to its
+ *   program page; image cards span the row, white cards sit two up.
  */
 const Arrow = () => (
   <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
@@ -16,19 +23,25 @@ const Arrow = () => (
   </svg>
 )
 
-function Card({ c }: { c: GridCard }) {
+function Img({ c, sizes }: { c: GridCard; sizes: string }) {
   return (
-    <Link href={c.href} className="tg-card" data-default={DEFAULT_FEATURES.includes(c.slug) || undefined}>
-      {/* One format per browser: AVIF via <source>, WebP fallback via the img
-          src only (no img srcset, which made Chrome fetch both). */}
-      <picture className="tg-img" aria-hidden="true">
-        <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes="(min-width: 900px) 33vw, 50vw" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
-      </picture>
-      <span className="tg-n">{c.n}</span>
+    <picture className="tg-img" aria-hidden="true">
+      <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes={sizes} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="tg-thumb" src={`${c.img}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
+      <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
+    </picture>
+  )
+}
+
+function Card({ c, kind }: { c: GridCard; kind: 'img' | 'text' }) {
+  return (
+    <Link href={c.href} className="tg-card" data-kind={kind}>
+      <Img c={c} sizes={kind === 'img' ? '(min-width: 900px) 40vw, 100vw' : '(min-width: 900px) 40vw, 50vw'} />
+      <span className="tg-n">{c.n}</span>
+      {kind === 'text' && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img className="tg-thumb" src={`${c.img}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
+      )}
       <span className="tg-text">
         <span className="tg-name">{c.name}</span>
         <span className="tg-sub">{c.sub}</span>
@@ -38,30 +51,62 @@ function Card({ c }: { c: GridCard }) {
 }
 
 export default function TreatmentsGrid() {
-  const cols = [0, 1, 2].map(k => TREATMENT_CARDS.filter((_, i) => i % 3 === k))
+  const [feature, ...rest] = TREATMENT_CARDS
+  // Rows of three, alternating image position: [img, text, text], [text, text, img], ...
+  const rows: GridCard[][] = []
+  for (let i = 0; i < rest.length; i += 3) rows.push(rest.slice(i, i + 3))
   return (
-    <section className="tg al-sec" aria-labelledby="tg-title">
+    <section className="tg al-sec" id="programs" aria-labelledby="tg-title">
       <div className="container-x">
         <div className="al-head">
-          <h2 id="tg-title" className="al-h2">Choose your program.</h2>
+          <div>
+            <p className="al-k al-num">// 03 Protocols</p>
+            <h2 id="tg-title" className="al-h2">Choose your program.</h2>
+          </div>
           <p className="al-cap"><span>Nine programs<br /></span><span>Measure first<br /></span><span>Doctor-led, online</span></p>
         </div>
-        <div className="tg-k-row">
-          <p className="al-k tg-k"><span className="tg-k-hover">→ Hover to expand · Any card becomes the feature · </span>All 9 programs</p>
-        </div>
-        <div className="tg-grid">
-          {cols.map((col, k) => (
-            <div key={k} className="tg-col">
-              {col.map(c => <Card key={c.slug} c={c} />)}
+
+        <div className="tg-board">
+          <Link href={feature.href} className="tg-feature">
+            {/* A lifestyle frame, not a texture (QA 12 Nov): energy reads as a person moving. */}
+            <picture className="tg-img" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/photos/performance-hero.webp" alt="" width={1194} height={1600} loading="lazy" decoding="async" />
+            </picture>
+            <span className="tg-feature-k al-k">{feature.n} · Featured program</span>
+            <span className="tg-feature-text">
+              <span className="tg-feature-name">{feature.name}</span>
+              <span className="tg-feature-sub">{feature.sub}</span>
+            </span>
+            <span className="tg-feature-arrow"><Arrow /></span>
+          </Link>
+
+          {rows.map((row, r) => (
+            <div key={r} className="tg-row" data-flip={r % 2 === 1 || undefined}>
+              {row.map((c, i) => {
+                const imgAt = r % 2 === 1 ? 2 : 0
+                return <Card key={c.slug} c={c} kind={i === imgAt ? 'img' : 'text'} />
+              })}
+              {row.length < 3 && (
+                <Link href="/treatments" className="tg-all">
+                  <span className="al-k tg-all-k">All treatments</span>
+                  <span className="tg-all-row">
+                    <span className="tg-all-name">View all programs</span>
+                    <span className="tg-all-arrow"><Arrow /></span>
+                  </span>
+                </Link>
+              )}
             </div>
           ))}
-          <Link href="/treatments" className="tg-all">
-            <span className="al-k tg-all-k">All treatments</span>
-            <span className="tg-all-row">
-              <span className="tg-all-name">View all programs</span>
-              <span className="tg-all-arrow"><Arrow /></span>
-            </span>
-          </Link>
+          {rest.length % 3 === 0 && (
+            <Link href="/treatments" className="tg-all tg-all-wide">
+              <span className="al-k tg-all-k">All treatments</span>
+              <span className="tg-all-row">
+                <span className="tg-all-name">View all programs</span>
+                <span className="tg-all-arrow"><Arrow /></span>
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </section>
