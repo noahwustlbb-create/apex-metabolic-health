@@ -64,7 +64,7 @@ export default function MembershipPage() {
           title="Ongoing care, one monthly fee."
           lead="Apex Member: member rates on every panel and consult, medication at cost, free escripts, and a doctor review about every 3 months. Pause or cancel from your account."
           cap={['No lock-in', 'Member rates from day one', 'Cancel from your account']}
-          photo={SHOTS.balance}
+          photo={SHOTS.benchDusk}
           ctaLabel="Join as a member"
           ctaHref={PORTAL_MEMBERSHIP}
         />

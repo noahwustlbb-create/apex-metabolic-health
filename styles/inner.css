@@ -557,16 +557,21 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 
 /* /how-it-works portal card: Noah's device renders in a <picture> (13 Nov 2026). */
 .ip-bg picture { display: block; width: 100%; height: 100%; }
-.ip-portal-card .ip-bg img.ip-device { object-position: 50% 42%; }
-@media (min-width: 900px) { .ip-portal-card .ip-bg img.ip-device { object-position: 50% 50%; } }
 /* Membership band keeps three up from 900 and its 18 gap on phones (the generic 1099 / 899 rules would make it 2+1, gap 8). */
 @media (min-width: 900px) { .al-club .ip-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 899px) { .al-club .ip-cards { gap: 18px; } }
-/* Phones: the render on top, whole and unfiltered, the sample reading underneath it (QA r1: the card hid 80% of it). */
-@media (max-width: 899px) {
-  .ip-portal-card { display: block; padding: 0; min-height: 0; }
-  .ip-portal-card .ip-bg { position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 5; background: #ecf9fe; }
-  .ip-portal-card .ip-bg img.ip-device { filter: none; object-fit: contain; object-position: 50% 50%; }
-  .ip-portal-card .ip-grade { display: none; }
-  .ip-portal-card .ip-reading { border: 0; border-radius: 0; background: #0b0b0c; backdrop-filter: none; padding: 20px; }
+/* The render on top, whole and unfiltered, the sample reading underneath it, at every width (QA r1 on phones;
+   Noah 13 Nov "fix how it works": on desktop the reading card covered half the tablet). */
+.ip-portal-card { display: flex; flex-direction: column; justify-content: flex-start; padding: 0; min-height: 0; }
+.ip-portal-card .ip-bg { position: relative; inset: auto; left: 0; width: 100%; z-index: 0; aspect-ratio: 4 / 5; background: #ecf9fe; overflow: hidden; } /* left/width: beat .ip-hero[data-photo] .ip-bg { left: 44% } (QA #65) */
+@media (min-width: 600px) and (max-width: 899px) { .ip-portal-card .ip-bg { aspect-ratio: 16 / 9; } }
+.ip-portal-card .ip-bg img.ip-device { filter: none; object-fit: contain; object-position: 50% 50%; }
+.ip-portal-card .ip-grade { display: none; }
+.ip-portal-card .ip-reading { max-width: none; border: 0; border-radius: 0; background: #0b0b0c; backdrop-filter: none; padding: 20px; flex: 1; }
+@media (min-width: 900px) {
+  .ip-portal-card .ip-bg { aspect-ratio: 16 / 9; }
+  .ip-portal-card .ip-bg img.ip-device { padding: 8px 0; transform: scale(1.08); }
+  .ip-portal-card .ip-reading { padding: 22px 24px; }
 }
+.ip-reading-v { flex-wrap: wrap; }
+.ip-reading-flag { margin-left: auto; align-self: center; font: 500 11px/1 var(--al-mono); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; color: #ffc879; }

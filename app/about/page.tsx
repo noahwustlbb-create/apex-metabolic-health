@@ -21,7 +21,7 @@ const STORY: { k: string; t: string; ps: string[]; chips?: string[]; shot: Shot 
       'Every plan starts the same way: one blood panel, 23+ markers from one morning draw at an accredited collection centre near you, read by an AHPRA-registered doctor with you.',
     ],
     chips: ['Men and women', '18 to 80', 'Australia-wide'],
-    shot: { ...SHOTS.womanCall, pos: '50% 30%' },
+    shot: { ...SHOTS.balconyCall, pos: '46% 30%' },
   },
   {
     k: 'How we think',
@@ -55,7 +55,7 @@ export default function AboutPage() {
           title="Doctor-led. Built on blood work."
           lead="An Australian telehealth clinic for hormone and metabolic health. Your markers measured, read by an AHPRA-registered doctor, and a plan you understand."
           cap={['AHPRA-registered doctors', 'Imperial Equity Investments Pty Ltd', 'Gold Coast, Australia-wide']}
-          photo={SHOTS.oceanWindow}
+          photo={{ ...SHOTS.greyMan, pos: '50% 18%' }}
         />
         <TrustChips />
 
