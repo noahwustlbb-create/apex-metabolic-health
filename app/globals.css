@@ -734,3 +734,12 @@ html.lenis, html.lenis body { height: auto; }
   .invite-figure { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .invite-dot::after { animation: none; } }
+
+/* Header wordmark (Noah, 13 Nov 2026): components/brand/Logo.tsx */
+.apex-navword { display: inline-flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-primary); line-height: 1; }
+.apex-navword-a { display: block; width: 94px; height: 26px; }
+.apex-navword-d { font-family: var(--font-inter), Inter, system-ui, sans-serif; font-size: 7px; font-weight: 600; letter-spacing: 0.1em; margin-right: -0.1em; text-transform: uppercase; white-space: nowrap; color: var(--text-secondary); }
+@media (min-width: 768px) {
+  .apex-navword-a { width: 116px; height: 32px; }
+  .apex-navword-d { font-size: 8.5px; letter-spacing: 0.12em; margin-right: -0.12em; }
+}

@@ -235,8 +235,8 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .al-club { padding-block: clamp(80px, 7.8vw, 112px); }
 .al-club-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin: 0 auto clamp(52px, 4.2vw, 60px); }
 .al-club-head .al-k { color: #c3c8cf; }
-.al-club-head .al-h2 { margin-top: 18px; max-width: 727px; color: #f4f6f9; text-wrap: balance; }
-.al-club-head .al-lead { margin: 20px 0 0; max-width: 509px; color: #c3c8cf; text-wrap: pretty; }
+.al-club-head .al-h2 { margin: 18px auto 0; max-width: 727px; color: #f4f6f9; text-align: center; text-wrap: balance; }
+.al-club-head .al-lead { margin: 20px auto 0; max-width: 509px; color: #c3c8cf; text-align: center; text-wrap: pretty; }
 .al-club .ip-cards { gap: 18px; }
 .al-club .ip-card { padding: 32px 28px; min-height: 0; gap: 0; }
 .al-club .ip-card .al-k { margin: 0; padding: 0; }
@@ -562,3 +562,11 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 /* Membership band keeps three up from 900 and its 18 gap on phones (the generic 1099 / 899 rules would make it 2+1, gap 8). */
 @media (min-width: 900px) { .al-club .ip-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 899px) { .al-club .ip-cards { gap: 18px; } }
+/* Phones: the render on top, whole and unfiltered, the sample reading underneath it (QA r1: the card hid 80% of it). */
+@media (max-width: 899px) {
+  .ip-portal-card { display: block; padding: 0; min-height: 0; }
+  .ip-portal-card .ip-bg { position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 5; background: #ecf9fe; }
+  .ip-portal-card .ip-bg img.ip-device { filter: none; object-fit: contain; object-position: 50% 50%; }
+  .ip-portal-card .ip-grade { display: none; }
+  .ip-portal-card .ip-reading { border: 0; border-radius: 0; background: #0b0b0c; backdrop-filter: none; padding: 20px; }
+}

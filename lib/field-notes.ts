@@ -66,7 +66,7 @@ export const FIELD_NOTES: FieldNote[] = [
       'A blood test is a snapshot of one morning. A few simple habits make that snapshot more useful.',
       'Skip the hard session the day before. Heavy or unusual exercise can temporarily lift some muscle and liver markers. A walk is fine.',
       'Go in the morning, and fast only if the collection centre asks you to. Drink water as normal unless told otherwise.',
-      'Tell your doctor about every supplement you take, including powders and gummies. Some, such as biotin, can interfere with certain lab tests. Do not stop anything a doctor has prescribed without asking them first.',
+      'Tell your doctor about every supplement you take, including powders and gummies. Some supplements can interfere with certain lab tests. Do not stop anything a doctor has prescribed without asking them first.',
       'Write down how you have been feeling, how you have been sleeping, and any questions. Bring the list to your consult. It turns a set of numbers into a conversation about you.',
     ],
   },

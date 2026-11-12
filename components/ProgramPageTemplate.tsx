@@ -305,9 +305,8 @@ function Included({ config }: { config: ProgramPageConfig }) {
         </ul>
         <p className="al-k pa-ev-k">{config.evidenceHeadline}</p>
         <ul className="pa-ev" role="list">
-          <li className="pa-photocard">
+          <li className="pa-photocard pa-devicecard">
             <Photo shot={PORTAL_CARD} sizes="(min-width: 1100px) 25vw, (min-width: 900px) 50vw, 100vw" />
-            <div className="pa-grade" aria-hidden="true" />
             <span className="al-k">{'// Your portal'}</span>
             <span className="pa-photocard-name">Results in your portal.</span>
           </li>

@@ -49,24 +49,13 @@ export default function Logo({ variant = 'nav', className }: { variant?: Variant
     )
   }
 
-  // Header: APEX 24 px tall (87 px wide), descriptor centred under it, as in Noah's file.
+  // Header: APEX with METABOLIC HEALTH centred under it, as in Noah's file. In his file the line is 9% of the APEX
+  // height (3 px at header size), so it is set larger and tighter here, about 85% of the APEX width, caps 5 px on
+  // phones and 6 px on desktop (QA r1). Sizes live in globals.css (.apex-navword).
   return (
-    <span className={`apex-navword ${className || ''}`} style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 4, color: 'var(--text-primary)', lineHeight: 1 }}>
-      <ApexWord height={24} />
-      <span
-        style={{
-          fontFamily: 'var(--font-inter)',
-          fontSize: 7,
-          fontWeight: 600,
-          letterSpacing: '0.24em',
-          marginRight: '-0.24em', // tracking adds space after the last letter; pull it back so the line centres
-          color: 'var(--text-secondary)',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        Metabolic Health
-      </span>
+    <span className={`apex-navword ${className || ''}`}>
+      <ApexWord height={26} className="apex-navword-a" />
+      <span className="apex-navword-d">Metabolic Health</span>
       <span className="sr-only">Apex Metabolic Health</span>
     </span>
   )
