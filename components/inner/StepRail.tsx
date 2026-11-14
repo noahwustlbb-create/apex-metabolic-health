@@ -43,7 +43,7 @@ export default function StepRail({ count }: { count: number }) {
           list.setAttribute('data-in', '')
           io?.disconnect()
         }
-      }, { threshold: 0.2 })
+      }, { threshold: 0.35 })
       io.observe(list)
     }
 
