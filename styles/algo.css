@@ -92,9 +92,10 @@
 .home-main .st-box-call { font-family: var(--al-mono); font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; }
 
 /* ── Community (components/home/AlgoSections.tsx Community): AlgoRx's centred
-   "// THE COMMUNITY" block. Top padding equals the membership band's top
-   margin below it, so the gap above the kicker matches the gap under the seal. */
-.al-comm { padding-block: clamp(80px, 8.5vw, 140px) 0; background: var(--al-bg); }
+   "// THE COMMUNITY" block, then a slim accent strip (the WASTED giveaway
+   strip) flush above the membership band. Equal padding above the kicker and
+   under the seal. */
+.al-comm { padding-block: clamp(80px, 8.5vw, 140px); background: var(--al-bg); }
 .al-comm-in { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .al-comm .al-h2 { margin: 16px auto 0; max-width: 12ch; text-align: center; }
 .al-comm-lead { margin: 18px auto 0; max-width: 34ch; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; color: var(--al-mute); text-wrap: balance; }
@@ -105,7 +106,19 @@
 .al-comm-seal { display: block; margin-top: 36px; border-radius: 12px; }
 .al-comm-seal img { display: block; }
 .al-comm-seal:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 4px; }
-@media (max-width: 899px) { .al-comm { padding-top: 64px; } }
+/* White on Apex blue is 5.6:1. */
+.al-comm-bar { background: var(--al-accent); color: #fff; }
+.al-comm-bar-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 22px; min-height: 56px; text-align: center; }
+.al-comm-bar-t, .al-comm-bar-a { font: 500 12px/1.5 var(--al-mono); letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin: 0; }
+.al-comm-bar-a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; white-space: nowrap; }
+.al-comm-bar-a:hover { text-decoration-thickness: 2px; }
+.al-comm-bar-a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; border-radius: 4px; }
+.al-comm-bar + .ip-tier-band { margin-top: 0; }
+@media (max-width: 899px) {
+  .al-comm { padding-block: 64px; }
+  .al-comm-bar-in { flex-direction: column; gap: 0; padding-block: 12px 4px; }
+  .al-comm-bar-t, .al-comm-bar-a { font-size: 11.5px; }
+}
 
 /* ── 15. FAQ ── */
 .al-faq-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
