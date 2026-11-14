@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Footer from '@/components/Footer'
 import InnerStickyBar from '@/components/inner/InnerStickyBar'
+import StepRail from '@/components/inner/StepRail'
 import { START_HREF } from '@/lib/portal'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 
@@ -150,6 +151,7 @@ export function StepRow({ label, steps }: { label: string; steps: Step[] }) {
           </li>
         ))}
       </ol>
+      <StepRail count={steps.length} />
     </div>
   )
 }

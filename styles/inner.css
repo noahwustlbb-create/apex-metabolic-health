@@ -166,6 +166,38 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-steps p { margin: 0; font-size: 15px; line-height: 1.55; color: #b4bac2; max-width: 30ch; }
 .ip-how-cta { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
+/* ── Step micro interactions (components/inner/StepRail.tsx, Noah 15 Nov 2026) ──
+   Everything hangs off [data-live], which the script sets, so without JS the
+   steps are simply visible. Curve is the site's expo-out; state feedback 200ms. */
+.ip-rail { display: none; }
+.ip-steps[data-live] li { transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease; }
+.ip-steps[data-live] li:nth-child(2) { transition-delay: 0.06s, 0.06s, 0s; }
+.ip-steps[data-live] li:nth-child(3) { transition-delay: 0.12s, 0.12s, 0s; }
+.ip-steps[data-live] li:nth-child(4) { transition-delay: 0.18s, 0.18s, 0s; }
+.ip-steps[data-live]:not([data-in]) li { opacity: 0; transform: translateY(14px); }
+/* Icons draw once as the row arrives (every stroke is normalised to length 1). */
+.ip-steps[data-live] .ip-step-ic svg { transition: opacity 0.2s ease 0.15s; }
+.ip-steps[data-live] .ip-step-ic svg * { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.2s; }
+.ip-steps[data-live]:not([data-in]) .ip-step-ic svg { opacity: 0; }
+.ip-steps[data-live]:not([data-in]) .ip-step-ic svg * { stroke-dashoffset: 1; }
+.ip-steps[data-live] li:nth-child(2) .ip-step-ic svg * { transition-delay: 0.26s; }
+.ip-steps[data-live] li:nth-child(3) .ip-step-ic svg * { transition-delay: 0.32s; }
+.ip-steps[data-live] li:nth-child(4) .ip-step-ic svg * { transition-delay: 0.38s; }
+.ip-steps li > * { transition: opacity 0.2s ease; }
+.ip-steps li > .ip-step-ic { transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease; }
+/* Desktop: the step under the pointer holds, its neighbours sit back. */
+@media (hover: hover) and (pointer: fine) and (min-width: 900px) {
+  .ip-steps:hover li:not(:hover) > * { opacity: 0.6; }
+  .ip-steps li:hover .ip-step-ic { color: var(--al-accent-on-dark, #5b9bff); transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ip-steps[data-live] li, .ip-steps[data-live]:not([data-in]) li { opacity: 1; transform: none; transition: border-color 0.2s ease; }
+  .ip-steps[data-live] .ip-step-ic svg, .ip-steps[data-live]:not([data-in]) .ip-step-ic svg { opacity: 1; transition: none; }
+  .ip-steps[data-live] .ip-step-ic svg *, .ip-steps[data-live]:not([data-in]) .ip-step-ic svg * { stroke-dashoffset: 0; transition: none; }
+  .ip-steps li:hover .ip-step-ic { transform: none; }
+  .ip-rail-fill { transition: none; }
+}
+
 /* ── Why Apex: four principles, numbered 01 to 04, on white ── */
 .ip-why { list-style: none; margin: 0; padding: 28px 0 0; border-top: 1px solid var(--al-line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
 .ip-why li { display: grid; align-content: start; gap: 10px; padding-left: 20px; border-left: 1px solid var(--al-hair); }
@@ -373,6 +405,15 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .ip-step-ic { margin-top: 14px; }
   .ip-steps h3 { margin: 4px 0 0; font-size: 21px; }
   .ip-steps p { max-width: none; font-size: 15px; }
+  /* Phones: the box you are on lights up, the rest sit back, and the rail and counter follow the swipe. */
+  .ip-steps[data-live] li:not([data-active]) > * { opacity: 0.7; } /* body text stays about 5:1 on the box */
+  .ip-steps[data-live] li[data-active] { border-color: #4a4f57; }
+  .ip-steps[data-live] li[data-active] .ip-step-ic { color: var(--al-accent-on-dark, #5b9bff); }
+  /* Shown only once the script is running, so a rail never sits there without following the swipe. */
+  .ip-steps[data-live] + .ip-rail { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
+  .ip-rail-track { position: relative; flex: 1; height: 2px; border-radius: 2px; background: #26292d; overflow: hidden; }
+  .ip-rail-fill { position: absolute; inset: 0; background: var(--al-accent-on-dark, #5b9bff); transform-origin: 0 50%; transition: transform 0.12s linear; }
+  .ip-rail-n { font: 500 11.5px/1 var(--al-mono, ui-monospace, "SF Mono", Menlo, monospace); letter-spacing: 0.12em; color: #a3a8b0; font-variant-numeric: tabular-nums; }
   .ip-how-cta { margin-top: 28px; }
   .ip-why { grid-template-columns: 1fr; gap: 0; padding-top: 0; border-top: 0; }
   .ip-why li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--al-hair); }
