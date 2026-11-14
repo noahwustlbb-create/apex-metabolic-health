@@ -4,6 +4,7 @@ import { START_HREF } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
+import { ATHLETES } from '@/lib/athletes'
 
 /**
  * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
@@ -133,6 +134,94 @@ export function HomeHow() {
         rows={[{ label: 'Bloods', steps: BLOOD_STEPS }, { label: 'Programs', steps: PROGRAM_STEPS }]}
       />
     </div>
+  )
+}
+
+/** Verified, AlgoRx "// THE COMMUNITY" composition, kicker "Verified" on Noah's
+ * word (15 Nov 2026: "verified instead"). Asks, same day: "add
+ * this after how it works", then "i signed up for [Trustpilot] wanna add that too
+ * and then google reviews as like a small banner below it"): centred kicker,
+ * headline, one line, the Trustpilot review button and the LegitScript seal,
+ * then a slim Apex-blue strip for Google (the WASTED giveaway strip: one mono
+ * line and one underlined link), flush above the membership band.
+ *
+ * Both review links are write-a-review links only. The section shows NO star
+ * rating, NO review count and NO review text, and never links to a page for
+ * reading reviews: National Law s 133(1)(c) bans testimonials in advertising a
+ * regulated health service, and DESIGN.md (Regulatory Constraints) counts star
+ * ratings and review widgets. Both asks are for service feedback only, so a
+ * review left from here stays outside the clinical-aspect definition.
+ *
+ * Trustpilot: the evaluate page for the clinic's domain. Google: the review form
+ * for the Business Profile "Apex Metabolic Health Clinic". Both checked 15 Nov
+ * 2026. The seal is the real, verifiable LegitScript seal used in the footer. */
+const TRUSTPILOT_REVIEW_HREF = 'https://www.trustpilot.com/evaluate/apexmetabolichealth.com.au'
+const GOOGLE_REVIEW_HREF = 'https://search.google.com/local/writereview?placeid=ChIJmwBVkB0_lykRoRjs4jhY6AE'
+const LEGITSCRIPT_VERIFY_HREF = 'https://www.legitscript.com/websites/?checker_keywords=apexmetabolichealth.com.au'
+const TrustpilotStar = () => (
+  <svg viewBox="0 -1 33.1 31.6" width="18" height="17" aria-hidden="true">
+    <path fill="#00B67A" d="M33.074774 11.07005H20.444649L16.543595-.954007 12.630447 11.07005 0 11.057941l10.228377 7.435362-3.913147 12.01196 10.228377-7.423252 10.216283 7.423252-3.901053-12.01196 10.215937-7.423252z" />
+    <path fill="#005128" d="M21.631369 21.211262l-.877527-2.717959-6.314165 4.582641z" />
+  </svg>
+)
+export function Community() {
+  return (
+    <>
+      <section className="al-comm" id="community" aria-labelledby="comm-title">
+        <div className="container-x al-comm-in">
+          <p className="al-k">// Verified</p>
+          <h2 id="comm-title" className="al-h2">Proof you can check.</h2>
+          <p className="al-comm-lead">Our LegitScript certification is public, so anyone can look it up. Been a patient? Leave us feedback on Trustpilot.</p>
+          <div className="al-comm-review">
+            <a
+              className="al-pill al-pill-lg al-comm-btn"
+              href={TRUSTPILOT_REVIEW_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="al-comm-g"><TrustpilotStar /></span>
+              Review us on Trustpilot<span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            <p className="al-comm-note">Service feedback only. No health details, please.</p>
+          </div>
+          <a
+            className="al-comm-seal"
+            href={LEGITSCRIPT_VERIFY_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Verify LegitScript Approval for apexmetabolichealth.com.au"
+            aria-label="LegitScript certified: verify at legitscript.com (opens in a new tab)"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="https://static.legitscript.com/seals/46014035.png" alt="LegitScript Certified seal" width={73} height={79} loading="lazy" decoding="async" />
+          </a>
+          {/* Sponsored athletes slot (lib/athletes.ts). Renders nothing until Noah's real photos and names are in. */}
+          {ATHLETES.length > 0 && (
+            <div className="al-ath">
+              <p className="al-k">Apex sponsored athletes</p>
+              <ul className="al-ath-row" role="list">
+                {ATHLETES.map(a => (
+                  <li key={a.name} className="al-card al-ath-card">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" sizes="(min-width: 900px) 280px, 70vw" />
+                    <span className="al-k">Sponsored athlete</span>
+                    <h3>{a.name}</h3>
+                    <p>{a.sport}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+      <div className="al-comm-bar">
+        <a className="container-x al-comm-bar-in" href={GOOGLE_REVIEW_HREF} target="_blank" rel="noopener noreferrer">
+          <span className="al-comm-bar-t">Prefer Google?</span>
+          <span className="al-comm-bar-a">Review us on Google <span aria-hidden="true">→</span></span>
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      </div>
+    </>
   )
 }
 
