@@ -134,12 +134,13 @@
 .al-fnd-card[data-live]:not([data-in]) .al-fnd-bg { transform: scale(1.06); }
 .al-fnd-card[data-live]:not([data-in]) .al-fnd-top, .al-fnd-card[data-live]:not([data-in]) .al-fnd-q, .al-fnd-card[data-live]:not([data-in]) .al-fnd-by { opacity: 0; transform: translateY(10px); }
 .al-fnd-card[data-live]:not([data-in]) .al-fnd-by path { stroke-dashoffset: 1; }
+@media (min-width: 900px) { .al-fnd-q p { max-width: 31ch; } }
 @media (hover: hover) and (pointer: fine) {
   .al-fnd-card[data-in]:hover .al-fnd-bg { transform: scale(1.03); }
 }
 @media (max-width: 899px) {
   .al-fnd { padding-bottom: 64px; }
-  .al-fnd-card { min-height: 300px; padding: 30px 28px 32px; }
+  .al-fnd-card { min-height: 300px; padding: 30px 28px; }
   .al-fnd-q { padding-top: 36px; }
 }
 @media (prefers-reduced-motion: reduce) {
