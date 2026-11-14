@@ -41,7 +41,7 @@ export const ATHLETES: Athlete[] = [
     name: 'Jay Tonkin',
     nickname: 'The Dingo',
     sport: 'Muay Thai · Super middleweight',
-    facts: ['65 fights, 45 wins, 20 KOs', 'Ranked WBC world No. 5', 'Australian titles: WBC, WMO', 'Fight of the Year 2023'],
+    facts: ['65 fights, 45 wins, 20 KOs', 'Ranked WBC world No. 5', 'WBC, WMO Australian titles', 'Fight of the Year 2023'],
     photo: '/athletes/jay-tonkin.webp',
     alt: 'Jay Tonkin in a fighting stance, his right hand bound in rope',
     pos: '50% 0%',
