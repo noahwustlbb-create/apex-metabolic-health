@@ -20,8 +20,10 @@
  * and first-round debut win at Eternal MMA 96 (Sherdog). Added 15 Nov 2026 on Noah's
  * word, no public source found: Tonkin "ranked 5th WBC world rankings" and
  * "Fight of the year 2023". Supplied by the athletes: Gray's Queensland state
- * title, Deng's gym. Still held back: Deng's exact records (public records
- * disagree). Every card carries four facts so the row stays level.
+ * title. Deng's record is his whole record, amateur and pro together, from the
+ * bio Noah supplied (amateur 5-0, pro 1-2 = 8 fights, 6 wins), shown on Noah's
+ * word 15 Nov 2026; Sherdog and CombatReg listed fewer fights when checked, so
+ * recheck it when he next fights. Every card carries four facts so the row stays level.
  */
 export type Athlete = {
   name: string
@@ -58,7 +60,7 @@ export const ATHLETES: Athlete[] = [
     name: 'Ran Deng',
     nickname: 'The Midnight Samurai',
     sport: 'MMA · Lightweight',
-    facts: ['Eternal MMA professional', 'Trains at NTG Fight & Fitness', 'Undefeated as an amateur', 'Pro debut: first-round TKO'],
+    facts: ['8 fights, 6 wins', 'Undefeated as an amateur', 'Eternal MMA professional', 'Pro debut: first-round TKO'],
     photo: '/athletes/ran-deng.webp',
     alt: 'Ran Deng standing in the cage in fight gloves',
     pos: '50% 0%',
