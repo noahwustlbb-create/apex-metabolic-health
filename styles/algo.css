@@ -140,7 +140,7 @@
 }
 @media (max-width: 899px) {
   .al-fnd { padding-bottom: 64px; }
-  .al-fnd-card { min-height: 300px; padding: 30px 28px; }
+  .al-fnd-card { min-height: 300px; padding: 40px 34px; }
   .al-fnd-q { padding-top: 36px; }
 }
 @media (prefers-reduced-motion: reduce) {
