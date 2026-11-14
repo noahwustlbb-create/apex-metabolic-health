@@ -166,8 +166,8 @@ export function Community() {
     <section className="al-comm" id="community" aria-labelledby="comm-title">
       <div className="container-x al-comm-in">
         <p className="al-k">// The community</p>
-        <h2 id="comm-title" className="al-h2">Don’t take our word for it.</h2>
-        <p className="al-comm-lead">Our certification is public and anyone can check it. Already a patient? Tell Google how we went.</p>
+        <h2 id="comm-title" className="al-h2">Verified, not just claimed.</h2>
+        <p className="al-comm-lead">Our LegitScript certification is public, and anyone can check it. Been a patient? Tell Google how the service went.</p>
         <div className="al-comm-review">
           <a
             className="al-pill al-pill-lg al-comm-btn"
