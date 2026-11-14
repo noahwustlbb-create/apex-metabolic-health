@@ -45,7 +45,7 @@ export const ATHLETES: Athlete[] = [
   {
     name: 'Kalob Gray',
     sport: 'Boxing · Professional',
-    facts: ['Pro boxer and boxing trainer, NTG Fight & Fitness', 'Australian junior national champion', 'Tri-Nations gold medallist'],
+    facts: ['Boxing trainer, NTG Fight & Fitness', 'Australian junior national champion', 'Tri-Nations gold medallist'],
     photo: '/athletes/kalob-gray.webp',
     alt: 'Kalob Gray flexing both arms',
     pos: '50% 20%',

@@ -210,7 +210,8 @@ export function Community() {
                     <div className="al-ath-body">
                       <span className="al-k al-ath-tag">Sponsored athlete</span>
                       <h3>{a.name}</h3>
-                      {a.nickname && <p className="al-ath-nick">“{a.nickname}”</p>}
+                      {/* The line is kept when there is no nickname, so the rule and facts line up across cards. */}
+                      <p className="al-ath-nick" aria-hidden={a.nickname ? undefined : true}>{a.nickname ? `“${a.nickname}”` : '\u00a0'}</p>
                       <p className="al-k al-ath-sport">{a.sport}</p>
                       <ul className="al-ath-facts" role="list">
                         {a.facts.map(f => <li key={f}>{f}</li>)}
