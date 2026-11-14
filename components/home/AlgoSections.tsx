@@ -196,35 +196,41 @@ export function Community() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://static.legitscript.com/seals/46014035.png" alt="LegitScript Certified seal" width={73} height={79} loading="lazy" decoding="async" />
           </a>
-          {/* Sponsored athletes slot (lib/athletes.ts). Renders nothing until Noah's real photos and names are in. */}
-          {ATHLETES.length > 0 && (
-            <div className="al-ath">
-              <p className="al-k">Athletes we back</p>
-              <ul className="al-ath-row" role="list" data-rail>
-                {ATHLETES.map(a => (
-                  <li key={a.name} className="al-card al-ath-card">
-                    <figure className="al-ath-photo">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" style={a.pos ? { objectPosition: a.pos } : undefined} />
-                    </figure>
-                    <div className="al-ath-body">
-                      <span className="al-k al-ath-tag">Sponsored athlete</span>
-                      <h3>{a.name}</h3>
-                      {/* The line is kept when there is no nickname, so the rule and facts line up across cards. */}
-                      <p className="al-ath-nick" aria-hidden={a.nickname ? undefined : true}>{a.nickname ? `“${a.nickname}”` : '\u00a0'}</p>
-                      <p className="al-k al-ath-sport">{a.sport}</p>
-                      <ul className="al-ath-facts" role="list">
-                        {a.facts.map(f => <li key={f}>{f}</li>)}
-                      </ul>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              <StepRail count={ATHLETES.length} />
-            </div>
-          )}
         </div>
       </section>
+      {/* Sponsored athletes (lib/athletes.ts): their own section with their own heading, NOT inside the
+          Verified section above. Paid athletes shown as "proof" of the clinic would be an implied
+          endorsement (s 133(1)(c)); here they are disclosed as sponsorship and the facts are sporting only. */}
+      {ATHLETES.length > 0 && (
+        <section className="al-ath" id="athletes" aria-labelledby="ath-title">
+          <div className="container-x al-ath-in">
+            <p className="al-k">// Sponsorship</p>
+            <h2 id="ath-title" className="al-h2">Sponsored athletes.</h2>
+            <p className="al-comm-lead">Apex sponsors these fighters. Their records are their own work.</p>
+            <ul className="al-ath-row" role="list" data-rail>
+              {ATHLETES.map(a => (
+                <li key={a.name} className="al-card al-ath-card">
+                  <figure className="al-ath-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" style={a.pos ? { objectPosition: a.pos } : undefined} />
+                  </figure>
+                  <div className="al-ath-body">
+                    <span className="al-k al-ath-tag">Sponsored athlete</span>
+                    <h3>{a.name}</h3>
+                    {/* The line is kept when there is no nickname, so the rule and facts line up across cards. */}
+                    <p className="al-ath-nick" aria-hidden={a.nickname ? undefined : true}>{a.nickname ? `“${a.nickname}”` : '\u00a0'}</p>
+                    <p className="al-k al-ath-sport">{a.sport}</p>
+                    <ul className="al-ath-facts" role="list">
+                      {a.facts.map(f => <li key={f}>{f}</li>)}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <StepRail count={ATHLETES.length} />
+          </div>
+        </section>
+      )}
       <div className="al-comm-bar">
         <a className="container-x al-comm-bar-in" href={GOOGLE_REVIEW_HREF} target="_blank" rel="noopener noreferrer">
           <span className="al-comm-bar-t">Prefer Google?</span>

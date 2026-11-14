@@ -1,6 +1,8 @@
 /**
- * Apex sponsored athletes (Noah, 15 Nov 2026). Shown in the home Verified
- * section, under the LegitScript seal. An empty list renders nothing.
+ * Apex sponsored athletes (Noah, 15 Nov 2026). Shown on the home page in their
+ * own "Sponsored athletes." section, after Verified. Never inside a proof or
+ * review section: paid athletes shown as proof of the clinic is an implied
+ * endorsement. An empty list renders nothing.
  *
  * Rules for every entry (National Law s 133(1)(c), compliance ACTIONS on paid
  * ambassadors):
