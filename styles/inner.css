@@ -363,15 +363,16 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .ip-how { margin-top: 64px; padding-block: 56px; }
   .ip-how-row { padding-top: 20px; }
   .ip-how-row + .ip-how-row { margin-top: 20px; }
-  .ip-how-label { margin-bottom: 4px; }
-  .ip-steps { grid-template-columns: 1fr; gap: 0; }
-  .ip-steps li { grid-template-rows: auto; gap: 10px; padding: 26px 0 28px; border-bottom: 1px solid #26292d; }
-  .ip-steps li + li { padding-left: 0; border-left: 0; }
-  .ip-steps li:last-child { border-bottom: 0; }
-  .ip-step-ic { margin-top: 10px; }
-  .ip-step-ic svg { width: 34px; height: 34px; }
-  .ip-steps h3 { margin: 4px 0 0; font-size: 24px; }
-  .ip-steps p { max-width: none; font-size: 16px; }
+  .ip-how-label { margin-bottom: 14px; }
+  /* Phones: each row of steps is one line of boxes that scrolls sideways
+     (Noah, 15 Nov 2026: "make this horizontal, in boxes"). The row bleeds to
+     the screen edges and the next box peeks in, so the scroll is obvious. */
+  .ip-steps { display: flex; gap: 12px; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); padding: 2px clamp(20px, 5vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 5vw, 64px); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .ip-steps::-webkit-scrollbar { display: none; }
+  .ip-steps li, .ip-steps li + li { flex: 0 0 min(78%, 320px); scroll-snap-align: start; grid-template-rows: auto auto 1fr auto; gap: 10px; padding: 22px 22px 24px; border: 1px solid #2a2d31; border-radius: var(--al-r, 24px); background: #0b0b0c; }
+  .ip-step-ic { margin-top: 14px; }
+  .ip-steps h3 { margin: 4px 0 0; font-size: 21px; }
+  .ip-steps p { max-width: none; font-size: 15px; }
   .ip-how-cta { margin-top: 28px; }
   .ip-why { grid-template-columns: 1fr; gap: 0; padding-top: 0; border-top: 0; }
   .ip-why li { padding: 18px 0; border-left: 0; border-bottom: 1px solid var(--al-hair); }

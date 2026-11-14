@@ -106,6 +106,21 @@
 .al-comm-seal { display: block; margin-top: 36px; border-radius: 12px; }
 .al-comm-seal img { display: block; }
 .al-comm-seal:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 4px; }
+/* Sponsored athletes slot (lib/athletes.ts): photo cards under the seal, one
+   line of boxes that scrolls sideways on phones. Hidden while the list is empty. */
+.al-ath { width: 100%; margin-top: 56px; }
+.al-ath-row { list-style: none; margin: 20px 0 0; padding: 0; display: flex; justify-content: center; gap: 16px; }
+.al-ath-card { flex: 0 1 280px; overflow: hidden; text-align: left; padding-bottom: 20px; }
+.al-ath-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.al-ath-card .al-k, .al-ath-card h3, .al-ath-card p { margin-inline: 20px; }
+.al-ath-card .al-k { margin-top: 18px; }
+.al-ath-card h3 { margin-block: 8px 0; font-size: 20px; font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; }
+.al-ath-card p { margin-block: 6px 0; font-size: 15px; line-height: 1.5; color: var(--al-mute); }
+@media (max-width: 899px) {
+  .al-ath-row { justify-content: flex-start; gap: 12px; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); padding-inline: clamp(20px, 5vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 5vw, 64px); scrollbar-width: none; }
+  .al-ath-row::-webkit-scrollbar { display: none; }
+  .al-ath-card { flex: 0 0 min(70%, 280px); scroll-snap-align: start; }
+}
 /* White on Apex blue is 5.6:1. */
 .al-comm-bar { background: var(--al-accent); color: #fff; }
 .al-comm-bar .al-comm-bar-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px 22px; min-height: 56px; padding-block: 10px; text-align: center; color: #fff; text-decoration: none; }

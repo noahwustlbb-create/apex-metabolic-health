@@ -4,6 +4,7 @@ import { START_HREF } from '@/lib/portal'
 import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
+import { ATHLETES } from '@/lib/athletes'
 
 /**
  * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
@@ -136,7 +137,8 @@ export function HomeHow() {
   )
 }
 
-/** The community, AlgoRx "// THE COMMUNITY" composition (Noah, 15 Nov 2026: "add
+/** Verified, AlgoRx "// THE COMMUNITY" composition, kicker "Verified" on Noah's
+ * word (15 Nov 2026: "verified instead"). Asks, same day: "add
  * this after how it works", then "i signed up for [Trustpilot] wanna add that too
  * and then google reviews as like a small banner below it"): centred kicker,
  * headline, one line, the Trustpilot review button and the LegitScript seal,
@@ -167,9 +169,9 @@ export function Community() {
     <>
       <section className="al-comm" id="community" aria-labelledby="comm-title">
         <div className="container-x al-comm-in">
-          <p className="al-k">// The community</p>
-          <h2 id="comm-title" className="al-h2">Verified, not just claimed.</h2>
-          <p className="al-comm-lead">Our LegitScript certification is public. Check it yourself. Been a patient? Leave us feedback on Trustpilot.</p>
+          <p className="al-k">// Verified</p>
+          <h2 id="comm-title" className="al-h2">Proof you can check.</h2>
+          <p className="al-comm-lead">Our LegitScript certification is public, so anyone can look it up. Been a patient? Leave us feedback on Trustpilot.</p>
           <div className="al-comm-review">
             <a
               className="al-pill al-pill-lg al-comm-btn"
@@ -193,6 +195,23 @@ export function Community() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="https://static.legitscript.com/seals/46014035.png" alt="LegitScript Certified seal" width={73} height={79} loading="lazy" decoding="async" />
           </a>
+          {/* Sponsored athletes slot (lib/athletes.ts). Renders nothing until Noah's real photos and names are in. */}
+          {ATHLETES.length > 0 && (
+            <div className="al-ath">
+              <p className="al-k">Apex sponsored athletes</p>
+              <ul className="al-ath-row" role="list">
+                {ATHLETES.map(a => (
+                  <li key={a.name} className="al-card al-ath-card">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" sizes="(min-width: 900px) 280px, 70vw" />
+                    <span className="al-k">Sponsored athlete</span>
+                    <h3>{a.name}</h3>
+                    <p>{a.sport}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
       <div className="al-comm-bar">
