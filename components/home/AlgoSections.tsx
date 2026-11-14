@@ -5,6 +5,7 @@ import { FAQS } from '@/lib/faqs'
 import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { ATHLETES } from '@/lib/athletes'
+import StepRail from '@/components/inner/StepRail'
 
 /**
  * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
@@ -198,18 +199,27 @@ export function Community() {
           {/* Sponsored athletes slot (lib/athletes.ts). Renders nothing until Noah's real photos and names are in. */}
           {ATHLETES.length > 0 && (
             <div className="al-ath">
-              <p className="al-k">Apex sponsored athletes</p>
-              <ul className="al-ath-row" role="list">
+              <p className="al-k">Athletes we back</p>
+              <ul className="al-ath-row" role="list" data-rail>
                 {ATHLETES.map(a => (
                   <li key={a.name} className="al-card al-ath-card">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" sizes="(min-width: 900px) 280px, 70vw" />
-                    <span className="al-k">Sponsored athlete</span>
-                    <h3>{a.name}</h3>
-                    <p>{a.sport}</p>
+                    <figure className="al-ath-photo">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={a.photo} alt={a.alt} loading="lazy" decoding="async" style={a.pos ? { objectPosition: a.pos } : undefined} />
+                    </figure>
+                    <div className="al-ath-body">
+                      <span className="al-k al-ath-tag">Sponsored athlete</span>
+                      <h3>{a.name}</h3>
+                      {a.nickname && <p className="al-ath-nick">“{a.nickname}”</p>}
+                      <p className="al-k al-ath-sport">{a.sport}</p>
+                      <ul className="al-ath-facts" role="list">
+                        {a.facts.map(f => <li key={f}>{f}</li>)}
+                      </ul>
+                    </div>
                   </li>
                 ))}
               </ul>
+              <StepRail count={ATHLETES.length} />
             </div>
           )}
         </div>

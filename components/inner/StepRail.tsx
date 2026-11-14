@@ -5,8 +5,9 @@ import { useEffect, useRef } from 'react'
 /**
  * Micro interactions for a row of How It Works steps (Noah, 15 Nov 2026:
  * "micro interactions for the steps in boxes ... details are everything").
- * Rendered straight after the <ol className="ip-steps">, which stays server
- * markup; this only adds behaviour to it and draws the progress rail.
+ * Rendered straight after the <ol className="ip-steps"> (or any list marked
+ * data-rail), which stays server markup; this only adds behaviour to it and
+ * draws the progress rail.
  *
  *  - Entrance, once: the boxes rise in with a 60ms stagger and each icon draws.
  *  - Phones: the box you are on lights up, the others sit back, and the rail
@@ -24,7 +25,8 @@ export default function StepRail({ count }: { count: number }) {
 
   useEffect(() => {
     const list = rail.current?.previousElementSibling as HTMLElement | null
-    if (!list || !list.classList.contains('ip-steps')) return
+    // Works on the step rows and on any list that opts in with data-rail (the athlete cards).
+    if (!list || !list.matches('.ip-steps, [data-rail]')) return
     const items = Array.from(list.children) as HTMLElement[]
     if (!items.length) return
 
