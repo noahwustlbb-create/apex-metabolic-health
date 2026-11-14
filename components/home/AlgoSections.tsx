@@ -6,6 +6,8 @@ import { OBJECTIONS } from '@/components/Objections'
 import { CLINIC_PHONE_DISPLAY, CLINIC_PHONE_E164 } from '@/lib/contact'
 import { ATHLETES } from '@/lib/athletes'
 import StepRail from '@/components/inner/StepRail'
+import { FOUNDER_NOTE } from '@/lib/founder'
+import FounderNote from '@/components/home/FounderNote'
 
 /**
  * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
@@ -198,6 +200,15 @@ export function Community() {
           </a>
         </div>
       </section>
+      {/* Co-founder note (lib/founder.ts): the business speaking for itself, between Verified and the
+          athletes. Not a testimonial, and not part of the athletes section below. */}
+      {FOUNDER_NOTE && (
+        <section className="al-fnd" aria-label={`A note from our ${FOUNDER_NOTE.role.toLowerCase()}`}>
+          <div className="container-x">
+            <FounderNote note={FOUNDER_NOTE} />
+          </div>
+        </section>
+      )}
       {/* Sponsored athletes (lib/athletes.ts): their own section with their own heading, NOT inside the
           Verified section above. Paid athletes shown as "proof" of the clinic would be an implied
           endorsement (s 133(1)(c)); here they are disclosed as sponsorship and the facts are sporting only. */}
