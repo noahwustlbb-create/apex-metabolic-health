@@ -91,6 +91,21 @@
 .home-main .stage-float-v { color: var(--al-ink); font-weight: 600; }
 .home-main .st-box-call { font-family: var(--al-mono); font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; }
 
+/* ── Community (components/home/AlgoSections.tsx Community): AlgoRx's centred
+   "// THE COMMUNITY" block. Top padding equals the membership band's top
+   margin below it, so the gap above the kicker matches the gap under the seal. */
+.al-comm { padding-block: clamp(80px, 8.5vw, 140px) 0; background: var(--al-bg); }
+.al-comm-in { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.al-comm .al-h2 { margin: 16px auto 0; max-width: 12ch; text-align: center; }
+.al-comm-lead { margin: 18px auto 0; max-width: 34ch; font-size: clamp(16px, 1.15vw, 18px); line-height: 1.55; color: var(--al-mute); text-wrap: pretty; }
+.al-comm-review { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 32px; }
+.al-comm-btn { padding-left: 8px; gap: 12px; }
+.al-comm-g { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: #fff; flex: none; }
+.al-comm-note { margin: 0; max-width: 34ch; font-size: 13.5px; line-height: 1.5; color: var(--al-mute); }
+.al-comm-seal { display: block; margin-top: 36px; border-radius: 12px; }
+.al-comm-seal img { display: block; }
+.al-comm-seal:focus-visible { outline: 2px solid var(--al-accent); outline-offset: 4px; }
+
 /* ── 15. FAQ ── */
 .al-faq-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
 .al-faq-side .al-h2 { margin: 18px 0 0; }

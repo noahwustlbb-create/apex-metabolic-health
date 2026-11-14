@@ -4,7 +4,7 @@ import StageHero from '@/components/home/stage/StageHero'
 import StageBox from '@/components/home/stage/StageBox'
 import { StageToneProvider } from '@/components/home/stage/StageTone'
 import TreatmentsGrid from '@/components/home/TreatmentsGrid'
-import { AboutYou, HomeHow, WhyApex, PhotoBreak, HomeClub, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
+import { AboutYou, HomeHow, Community, WhyApex, PhotoBreak, HomeClub, HomeFAQ, ReadyToStart } from '@/components/home/AlgoSections'
 import HomeStickyBar from '@/components/home/HomeStickyBar'
 import TrustChips from '@/components/TrustChips'
 import ImageryNote from '@/components/ImageryNote'
@@ -53,6 +53,9 @@ export default function Home() {
         <TreatmentsGrid />
         <HomeHow />
         <StageBox />
+        {/* The community (Noah, 15 Nov 2026: "add this after how it works"): Google review button and the
+            LegitScript seal, between Approach and the membership band, as on AlgoRx. */}
+        <Community />
         {/* Membership pushed up (Noah, 13 Nov 2026: "push the apex membership"): straight after Approach, whose
             last step is the 3-monthly review the band's third card sells. Field Notes after the photo break, then
             the FAQ, as on AlgoRx. */}

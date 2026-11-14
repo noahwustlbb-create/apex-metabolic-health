@@ -305,7 +305,7 @@ Three pastel radial gradients (sage, sky, peach) over porcelain, with rose and b
 
 These are not style preferences. They come from `~/Projects/studio/playbooks/ghl-healthcare-au/PLAYBOOK.md`, which encodes the AHPRA, TGA and Privacy Act rules this clinic builds under, and they match the constraints recorded in the portal's DESIGN.md. A design that breaks one of these is wrong however good it looks.
 
-- **No testimonials about clinical care.** AHPRA prohibits them in advertising a regulated health service. A disclaimer does not cure a testimonial. Star ratings and review widgets count.
+- **No testimonials about clinical care.** AHPRA prohibits them in advertising a regulated health service. A disclaimer does not cure a testimonial. Star ratings and review widgets count. The one allowed review surface is the home Community section (15 Nov 2026): a button that opens Google's write-a-review form, with a note asking for service feedback only. It shows no rating, count or review text and never links to a page for reading reviews.
 - **No before-and-after** imagery, and nothing that creates an unreasonable expectation of benefit.
 - **Never imply a clinical outcome.** Mock dashboards, sample reports and score trends must show the *layout*, never a result improving. A fabricated score going up is a different object from a fabricated score.
 - **Don't name prescription-only medicines** in marketing surfaces (TGA). Naming a hormone or analyte as something *measured* on a pathology panel is not the same thing and is fine.
