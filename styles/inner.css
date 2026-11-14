@@ -409,7 +409,8 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .ip-steps[data-live] li:not([data-active]) > * { opacity: 0.55; }
   .ip-steps[data-live] li[data-active] { border-color: #4a4f57; }
   .ip-steps[data-live] li[data-active] .ip-step-ic { color: var(--al-accent-on-dark, #5b9bff); }
-  .ip-rail { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
+  /* Shown only once the script is running, so a rail never sits there without following the swipe. */
+  .ip-steps[data-live] + .ip-rail { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
   .ip-rail-track { position: relative; flex: 1; height: 2px; border-radius: 2px; background: #26292d; overflow: hidden; }
   .ip-rail-fill { position: absolute; inset: 0; background: var(--al-accent-on-dark, #5b9bff); transform-origin: 0 50%; transition: transform 0.12s linear; }
   .ip-rail-n { font: 500 11.5px/1 var(--al-mono, ui-monospace, "SF Mono", Menlo, monospace); letter-spacing: 0.12em; color: #a3a8b0; font-variant-numeric: tabular-nums; }
