@@ -197,18 +197,16 @@ export function Community() {
         </div>
       </section>
       <aside className="al-comm-bar" aria-label="Review us on Google">
-        <div className="container-x al-comm-bar-in">
-          <p className="al-comm-bar-t">Prefer Google? Tell us how the service went</p>
-          <a
-            className="al-comm-bar-a"
-            href={GOOGLE_REVIEW_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Review Apex Metabolic Health on Google (opens in a new tab)"
-          >
-            Review us on Google <span aria-hidden="true">→</span>
-          </a>
-        </div>
+        <a
+          className="container-x al-comm-bar-in"
+          href={GOOGLE_REVIEW_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Prefer Google? Tell us about the service. Review Apex Metabolic Health on Google (opens in a new tab)"
+        >
+          <span className="al-comm-bar-t">Prefer Google? Tell us about the service</span>
+          <span className="al-comm-bar-a">Review us on Google <span aria-hidden="true">→</span></span>
+        </a>
       </aside>
     </>
   )
