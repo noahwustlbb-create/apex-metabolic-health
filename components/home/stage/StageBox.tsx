@@ -28,12 +28,19 @@ export default function StageBox() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
-  const p = useSectionProgress(ref, 'cross')
-  const spin = useTransform(p, [0.12, 0.46, 1], [-70, 0, 18])
-  const tilt = useTransform(p, [0.12, 0.42, 1], [-16, 2, 5])
-  const rise = useTransform(p, [0.12, 0.44], ['18%', '0%'])
-  const scale = useTransform(p, [0.12, 0.48], [0.9, 1])
-  const chips = useTransform(p, [0.3, 0.46], [0, 1])
+  // Progress is measured on the box stage, not the whole band (Noah, 15 Nov 2026:
+  // "there's a scroll animation we made for this box, add that interactive
+  // feature"). It was live but timed off the band, so on phones the turn ran
+  // while the box was still under the fixed bar and it arrived looking static.
+  // On the stage, 0.5 is always "box centred in the screen": the turn starts as
+  // the box comes into view and lands square as it reaches the middle.
+  const stageRef = useRef<HTMLDivElement>(null)
+  const p = useSectionProgress(stageRef, 'cross')
+  const spin = useTransform(p, [0.2, 0.5, 1], [-70, 0, 18])
+  const tilt = useTransform(p, [0.2, 0.47, 1], [-16, 2, 5])
+  const rise = useTransform(p, [0.2, 0.48], ['18%', '0%'])
+  const scale = useTransform(p, [0.2, 0.5], [0.9, 1])
+  const chips = useTransform(p, [0.42, 0.52], [0, 1])
   const live = mounted && !reduced
 
   return (
@@ -42,7 +49,7 @@ export default function StageBox() {
         <p className="al-k">→ Doctor-led, start to finish</p>
         <h2 id="st-box-title" className="al-h2">Measure first. Then treat.</h2>
       </div>
-      <div className="st-box-stage">
+      <div ref={stageRef} className="st-box-stage">
         <motion.div
           className="st-box-fig"
           style={live ? { rotateY: spin, rotate: tilt, y: rise, scale, transformPerspective: 1100 } : undefined}
