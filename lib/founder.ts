@@ -24,7 +24,7 @@ export type FounderNote = {
 }
 
 export const FOUNDER_NOTE: FounderNote | null = {
-  quote: 'I’m not a doctor. I got tired of guessing about my own health, so I helped build a clinic for anyone chasing the best version of themselves.',
+  quote: 'I got tired of guessing about my own health, so I helped build a clinic for anyone chasing the best version of themselves.',
   name: 'Noah',
   role: 'Co-founder',
 }
