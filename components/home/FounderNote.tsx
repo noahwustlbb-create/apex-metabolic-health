@@ -37,9 +37,9 @@ export default function FounderNote({ note }: { note: Note }) {
 
   return (
     <figure ref={card} className="al-fnd-card">
-      {/* Mood landscape, decorative: the words carry the card. */}
+      {/* Driftwood texture made for this card (15 Nov 2026), decorative: the words carry the card. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="al-fnd-bg" src="/photos/ridge-dawn.webp" alt="" width={1920} height={826} loading="lazy" decoding="async" />
+      <img className="al-fnd-bg" src="/photos/driftwood-flow.webp" alt="" width={1344} height={752} loading="lazy" decoding="async" />
       <div className="al-fnd-top">
         <span className="al-k">{note.role}</span>
         <span className="al-fnd-brand" aria-hidden="true">Apex</span>

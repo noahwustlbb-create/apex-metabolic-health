@@ -10,7 +10,10 @@
  *  - it is the business speaking about how it works, not a testimonial
  *    (National Law s 133(1)(c)): no "it worked for me", no result, no claim
  *    about a treatment, nothing the rest of the site does not already say;
- *  - no "Dr" unless the person is an AHPRA-registered doctor.
+ *  - no "Dr" unless the person is an AHPRA-registered doctor;
+ *  - first name only (Noah, 15 Nov 2026), and a personal story, not a slogan.
+ *    A personal story stops at why the clinic exists: it never says what a
+ *    treatment did for him.
  */
 export type FounderNote = {
   quote: string
@@ -19,7 +22,7 @@ export type FounderNote = {
 }
 
 export const FOUNDER_NOTE: FounderNote | null = {
-  quote: 'We built Apex to measure first and treat second. A doctor reads your bloods before anything is prescribed.',
-  name: 'Noah Wust',
+  quote: 'I’m not a doctor. I got sick of guessing about my own health, so I helped build a clinic that measures first.',
+  name: 'Noah',
   role: 'Co-founder',
 }
