@@ -116,7 +116,6 @@
 .al-comm-bar + .ip-tier-band { margin-top: 0; }
 @media (max-width: 899px) {
   .al-comm { padding-block: 64px; }
-  .al-comm-bar .al-comm-bar-in { flex-direction: column; gap: 4px; padding-block: 14px; }
   .al-comm-bar-t, .al-comm-bar-a { font-size: 11.5px; }
 }
 

@@ -169,19 +169,18 @@ export function Community() {
         <div className="container-x al-comm-in">
           <p className="al-k">// The community</p>
           <h2 id="comm-title" className="al-h2">Verified, not just claimed.</h2>
-          <p className="al-comm-lead">Our LegitScript certification is public, and anyone can check it. Been a patient? Tell Trustpilot how the service went.</p>
+          <p className="al-comm-lead">Our LegitScript certification is public. Check it yourself. Been a patient? Leave us feedback on Trustpilot.</p>
           <div className="al-comm-review">
             <a
               className="al-pill al-pill-lg al-comm-btn"
               href={TRUSTPILOT_REVIEW_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Review Apex Metabolic Health on Trustpilot (opens in a new tab)"
             >
               <span className="al-comm-g"><TrustpilotStar /></span>
-              Review us on Trustpilot
+              Review us on Trustpilot<span className="sr-only"> (opens in a new tab)</span>
             </a>
-            <p className="al-comm-note">About the service only. Please keep health details out of your review.</p>
+            <p className="al-comm-note">Service feedback only. No health details, please.</p>
           </div>
           <a
             className="al-comm-seal"
@@ -196,18 +195,13 @@ export function Community() {
           </a>
         </div>
       </section>
-      <aside className="al-comm-bar" aria-label="Review us on Google">
-        <a
-          className="container-x al-comm-bar-in"
-          href={GOOGLE_REVIEW_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Prefer Google? Tell us about the service. Review Apex Metabolic Health on Google (opens in a new tab)"
-        >
-          <span className="al-comm-bar-t">Prefer Google? Tell us about the service</span>
+      <div className="al-comm-bar">
+        <a className="container-x al-comm-bar-in" href={GOOGLE_REVIEW_HREF} target="_blank" rel="noopener noreferrer">
+          <span className="al-comm-bar-t">Prefer Google?</span>
           <span className="al-comm-bar-a">Review us on Google <span aria-hidden="true">→</span></span>
+          <span className="sr-only"> (opens in a new tab)</span>
         </a>
-      </aside>
+      </div>
     </>
   )
 }
