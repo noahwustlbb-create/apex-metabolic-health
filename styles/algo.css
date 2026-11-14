@@ -140,7 +140,8 @@
 @media (max-width: 1099px) { .al-ath-sport { min-height: calc(3.1em + 15px); } }
 @media (max-width: 899px) {
   .al-ath-in { padding-block: 64px; }
-  .al-ath-row { margin-top: 28px; }
+  /* Stretch rather than a fixed 100%, so the negative side margins carry the row to both screen edges. */
+  .al-ath-row { margin-top: 28px; width: auto; align-self: stretch; }
   .al-ath-row { justify-content: flex-start; gap: 12px; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); padding-inline: clamp(20px, 5vw, 64px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: clamp(20px, 5vw, 64px); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .al-ath-row::-webkit-scrollbar { display: none; }
   .al-ath-card { flex: 0 0 min(78%, 320px); scroll-snap-align: start; }
