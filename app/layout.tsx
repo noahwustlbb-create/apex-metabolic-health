@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk, Doto } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -13,27 +13,31 @@ import { AudienceProvider, AUDIENCE_BOOT } from '@/components/audience/Audience'
 const GA_ID = 'G-DFH5B44HVQ'
 const AW_ID = 'AW-18089713060'
 
-const inter = Inter({
-  subsets: ['latin'],
+// Fonts are hosted in the repo (app/fonts), not fetched from Google at build time: the build's
+// Google fetch failed at random on Vercel (15 Nov 2026, "An error occurred in next/font"). These are
+// the same Latin variable files Google serves for Inter v20, Space Grotesk v22 and Doto v3 (SIL Open
+// Font License; the licence text is in each file's name table). To update one, replace the file.
+const inter = localFont({
+  src: './fonts/inter-latin.woff2',
   variable: '--font-inter',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
+  weight: '100 900',
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+const spaceGrotesk = localFont({
+  src: './fonts/space-grotesk-latin.woff2',
   variable: '--font-space-grotesk',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: '300 700',
 })
 
 // Dot-matrix readout face for numerals only (prices, hours, counts). Body copy stays Inter.
-const doto = Doto({
-  subsets: ['latin'],
+// Variable on weight and on ROND (dot roundness), as before.
+const doto = localFont({
+  src: './fonts/doto-latin.woff2',
   variable: '--font-doto',
   display: 'swap',
-  weight: 'variable',
-  axes: ['ROND'],
+  weight: '100 900',
 })
 
 
