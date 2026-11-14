@@ -12,8 +12,10 @@
  *    about a treatment, nothing the rest of the site does not already say;
  *  - no "Dr" unless the person is an AHPRA-registered doctor;
  *  - first name only (Noah, 15 Nov 2026), and a personal story, not a slogan.
- *    A personal story stops at why the clinic exists: it never says what a
- *    treatment did for him.
+ *    A personal story stops at why the clinic exists: it never says what the
+ *    clinic or a treatment did for him. Noah asked (15 Nov) for "a clinic that
+ *    optimises me to the best version of myself"; that is a personal result,
+ *    so the line states the aim for anyone instead, keeping his phrase.
  */
 export type FounderNote = {
   quote: string
@@ -22,7 +24,7 @@ export type FounderNote = {
 }
 
 export const FOUNDER_NOTE: FounderNote | null = {
-  quote: 'I’m not a doctor. I got tired of guessing about my own health, so I helped build a clinic that measures first.',
+  quote: 'I’m not a doctor. I got tired of guessing about my own health, so I helped build a clinic for anyone chasing the best version of themselves.',
   name: 'Noah',
   role: 'Co-founder',
 }
