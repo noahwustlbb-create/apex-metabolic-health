@@ -28,7 +28,7 @@ export type Athlete = {
   nickname?: string
   /** Discipline and class, shown in mono under the name. */
   sport: string
-  /** Four short sporting facts, each short enough for one line at 360 wide. */
+  /** Four short sporting facts. Each must fit one line in a phone card at 360 wide (208px at 14.5px type). */
   facts: string[]
   photo: string
   alt: string
@@ -41,7 +41,7 @@ export const ATHLETES: Athlete[] = [
     name: 'Jay Tonkin',
     nickname: 'The Dingo',
     sport: 'Muay Thai · Super middleweight',
-    facts: ['65 fights, 45 wins, 20 by knockout', 'Ranked 5th in the world by the WBC', 'WBC and WMO Australian champion', 'Fight of the Year 2023'],
+    facts: ['65 fights, 45 wins, 20 KOs', 'Ranked WBC world No. 5', 'Australian titles: WBC, WMO', 'Fight of the Year 2023'],
     photo: '/athletes/jay-tonkin.webp',
     alt: 'Jay Tonkin in a fighting stance, his right hand bound in rope',
     pos: '50% 0%',
@@ -49,7 +49,7 @@ export const ATHLETES: Athlete[] = [
   {
     name: 'Kalob Gray',
     sport: 'Boxing · Professional',
-    facts: ['Boxing trainer, NTG Fight & Fitness', 'Australian junior national champion', 'Tri-Nations gold medallist', 'Queensland state champion'],
+    facts: ['Trainer, NTG Fight & Fitness', 'Australian junior champion', 'Tri-Nations gold medallist', 'Queensland state champion'],
     photo: '/athletes/kalob-gray.webp',
     alt: 'Kalob Gray flexing both arms',
     pos: '50% 20%',
@@ -58,7 +58,7 @@ export const ATHLETES: Athlete[] = [
     name: 'Ran Deng',
     nickname: 'The Midnight Samurai',
     sport: 'MMA · Lightweight',
-    facts: ['Professional with Eternal MMA', 'Fights out of NTG Fight & Fitness', 'Undefeated as an amateur', 'First-round TKO on his pro debut'],
+    facts: ['Eternal MMA professional', 'Trains at NTG Fight & Fitness', 'Undefeated as an amateur', 'Pro debut: first-round TKO'],
     photo: '/athletes/ran-deng.webp',
     alt: 'Ran Deng standing in the cage in fight gloves',
     pos: '50% 0%',
