@@ -1,6 +1,7 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useState, type ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 
 /**
  * The women's website (Noah, 28 Sep 2026): the same site in rose. Chosen by
@@ -10,15 +11,31 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
  */
 export type Audience = 'men' | 'women'
 const KEY = 'apex-audience'
+const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 const Ctx = createContext<{ audience: Audience; setAudience: (a: Audience) => void }>({ audience: 'men', setAudience: () => {} })
 
 /** Runs inline in <head>, before React. Keep it tiny and dependency-free.
- * The homepage hero always opens neutral (grey) unless ?for= is set (Noah, 11 Nov 2026). */
-export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');var d=document.documentElement.dataset;if(a==='women')d.audience='women';if((a==='women'||a==='men')&&(q||location.pathname!=='/'))d.chosen=a}catch(e){}`
+ * The homepage hero always opens neutral (grey) unless ?for= is set (Noah, 11 Nov 2026), and while it is
+ * neutral the whole home page is the men's site: a remembered "women" only applies there after the pick
+ * (Noah, 15 Nov 2026: "keep it male when it's black and white then goes to whatever gender for photos"). */
+export const AUDIENCE_BOOT = `try{var q=new URLSearchParams(location.search).get('for');if(q==='women'||q==='men')localStorage.setItem('${KEY}',q);var a=localStorage.getItem('${KEY}');var d=document.documentElement.dataset;if((a==='women'||a==='men')&&(q||location.pathname!=='/')){d.chosen=a;if(a==='women')d.audience='women'}}catch(e){}`
 
 export function AudienceProvider({ children }: { children: ReactNode }) {
   const [audience, set] = useState<Audience>('men')
   useEffect(() => { if (document.documentElement.dataset.audience === 'women') set('women') }, [])
+  // Leaving the neutral home page without picking: the remembered choice applies from the next page, as it
+  // would on a fresh load of that page. Layout effect, so the men's version is never painted there.
+  const pathname = usePathname()
+  useIsoLayoutEffect(() => {
+    if (pathname === '/') return
+    const d = document.documentElement.dataset
+    if (d.chosen) return
+    let a: string | null = null
+    try { a = localStorage.getItem(KEY) } catch { /* storage blocked */ }
+    if (a !== 'women' && a !== 'men') return
+    d.chosen = a
+    if (a === 'women') { d.audience = 'women'; set('women') }
+  }, [pathname])
   const setAudience = useCallback((a: Audience) => {
     set(a)
     const d = document.documentElement.dataset

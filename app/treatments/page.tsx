@@ -38,7 +38,7 @@ export default function TreatmentsPage() {
           title="Choose your program."
           lead="Nine doctor-led programs. Every one starts with a blood panel and a doctor who reads it with you."
           cap={['Nine programs', 'Measure first', 'Doctor-led, online']}
-          sidePhoto={{ ...SHOTS.duskWoman, women: SHOTS.womanKitchen }}
+          sidePhoto={SHOTS.duskWoman}
         />
         <TrustChips />
 
@@ -66,7 +66,7 @@ export default function TreatmentsPage() {
 
         <HowBand rows={[{ label: 'Programs', steps: PROGRAM_STEPS }]} cap={['Bloods first', 'Then a plan', 'Review every 3 months']} />
 
-        <CtaBand shot={SHOTS.sprintWoman} kicker="Ready to start" title="Not sure which program?" lead="Create your free account and order one panel. Your doctor reads it with you and points you to the right program. No GP referral." />
+        <CtaBand shot={{ ...SHOTS.sprintWoman, women: SHOTS.womanStairs }} kicker="Ready to start" title="Not sure which program?" lead="Create your free account and order one panel. Your doctor reads it with you and points you to the right program. No GP referral." />
         <ImageryNote />
       </main>
       <InnerFoot />
