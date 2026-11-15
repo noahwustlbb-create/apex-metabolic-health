@@ -146,7 +146,8 @@ const BAND = {
 // bandA: after How it works · bandB: between What's included and the FAQ ·
 // how: phone-only photo between steps 02 and 03 · cta: closing band.
 const PHOTOS: Record<string, ProgramPhotos> = {
-  'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: BAND.duskWoman, how: IMG.womanCall, cta: IMG.womanStairs },
+  // Hero: the sprinter, for men as for women (Noah, 15 Nov 2026: "Do the same for men").
+  'hormone-optimisation': { hero: IMG.sprintMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: BAND.duskWoman, how: IMG.womanCall, cta: IMG.womanStairs },
   'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: BAND.oceanWindow, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
   longevity: { hero: IMG.greyMan, card: { ...IMG.womanStairs, pos: '50% 22%', posM: '50% 22%', posD: '50% 20%' }, brk: IMG.runner, bandA: BAND.oceanWindow, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
   'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: BAND.duskWoman, how: IMG.kettlebell, cta: IMG.womanKitchen },

@@ -305,3 +305,9 @@ html[data-audience="women"] .prog-al, html[data-audience="women"] .prog-al-bar {
 html[data-audience="women"] .pa-hero .pa-h1 span { color: var(--al-accent-on-dark); }
 html[data-audience="women"] .prog-al .pa-btn.al-pill-light { background: var(--al-accent); color: #fff; }
 html[data-audience="women"] .prog-al .pa-btn.al-pill-light:hover { background: var(--al-accent-on-dark); color: #05070b; }
+
+/* Men, once they have picked Men (Noah, 15 Nov 2026: "Do the same for men"): the same treatment in Apex blue.
+   Visitors who have not picked keep the plain white line and button. */
+html[data-chosen="men"] .pa-hero .pa-h1 span { color: var(--al-accent-on-dark); }
+html[data-chosen="men"] .prog-al .pa-btn.al-pill-light { background: var(--al-accent); color: #fff; }
+html[data-chosen="men"] .prog-al .pa-btn.al-pill-light:hover { background: var(--al-accent-on-dark); color: #05070b; }
