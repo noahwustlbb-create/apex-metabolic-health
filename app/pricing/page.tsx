@@ -22,6 +22,14 @@ import Link from 'next/link'
  * here: no medicine classes on the site (brand platform, open item).
  * Medication is never included in a total: it depends on what, if anything,
  * a doctor prescribes. Private clinic, no Medicare rebate.
+ *
+ * 15 Nov 2026 clean-up (Noah, after comparing BIOV8's programs page: "a lot
+ * cleaner"; COMPARE.md section A, changes 1 to 8). Layout and density only:
+ * every price, line item, total and the fine print under it is word for word.
+ * Panel card straight under the hero with its price on the first phone screen,
+ * trust chips after it, the two coming-soon panels in one card, a two-column
+ * fee table on phones, one type scale (styles/inner.css .pr-page), and the FAQ
+ * cut to 7 (the four other answers stay on /faqs).
  */
 
 type Line = { k: string; v: string }
@@ -86,6 +94,9 @@ const COLS = [
   { id: 'member', name: 'Apex member' },
 ] as const
 
+// Pricing FAQ (Noah, 15 Nov 2026: 11 rows to 7). These four leave /pricing only; they stay on /faqs.
+const NOT_ON_PRICING = ['Can I cancel the membership?', 'What if I change my mind?', 'Where are my bloods taken?', 'What about side effects?']
+
 const PRICING_FAQS: Faq[] = [
   { q: 'Is there a lock-in contract?', a: 'No. Pause or cancel your membership from your account. Clinical reviews happen about every 3 months. That is a clinical schedule, not a commercial one.' },
   { q: 'What does the membership fee cover?', a: 'The $99 a month membership covers: medication at cost price, no AHI fee and no escript fee on partner-pharmacy orders, member rates on every blood panel and consult, nursing check-ins, and priority clinical support between reviews.' },
@@ -96,11 +107,12 @@ const PRICING_FAQS: Faq[] = [
 ]
 
 export default function PricingPage() {
-  const faqs: Faq[] = [...OBJECTIONS, ...PRICING_FAQS.filter(f => !OBJECTIONS.some(o => o.q === f.q))]
+  const objections = OBJECTIONS.filter(o => !NOT_ON_PRICING.includes(o.q))
+  const faqs: Faq[] = [...objections, ...PRICING_FAQS.filter(f => !OBJECTIONS.some(o => o.q === f.q))]
   return (
     <>
       <Nav />
-      <main id="main-content" className="al-page">
+      <main id="main-content" className="al-page pr-page">
         <InnerHero
           kicker="Pricing"
           title="What it costs, added up."
@@ -108,9 +120,9 @@ export default function PricingPage() {
           cap={['No hidden fees', 'No lock-in', 'Member rates from day one']}
           sidePhoto={SHOTS.kitchenMan}
         />
-        <TrustChips />
+        <CoreHealthPanels variant="pricing" />
 
-        <CoreHealthPanels />
+        <TrustChips />
 
         <section className="al-sec" aria-labelledby="pr-paths">
           <div className="container-x">
@@ -140,7 +152,7 @@ export default function PricingPage() {
         <section className="al-sec" aria-labelledby="pr-fees">
           <div className="container-x">
             <Head id="pr-fees" kicker="Every fee" title="Side by side." cap={['Script only', 'Partner pharmacy', 'Apex member']} />
-            <div className="al-card ip-fees">
+            <div className="al-card ip-fees ip-fees-d">
               <table className="ip-table">
                 <thead>
                   <tr>
@@ -153,6 +165,35 @@ export default function PricingPage() {
                     <tr key={f.label}>
                       <th scope="row">{f.label}</th>
                       {COLS.map(c => <td key={c.id} data-col={c.name}>{f[c.id]}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {/* Phones: two columns. Script only and Partner pharmacy share "Standard" where they match;
+                the rows where they differ keep both values, each labelled. */}
+            <div className="al-card ip-fees ip-fees-m">
+              <table className="ip-t2">
+                <thead>
+                  <tr>
+                    <th scope="col"><span className="al-k">Fee</span></th>
+                    <th scope="col"><span className="al-k">Standard</span><span className="ip-t2-sub">Script only and Partner pharmacy</span></th>
+                    <th scope="col"><span className="al-k">Member</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {FEES.map(f => (
+                    <tr key={f.label}>
+                      <th scope="row">{f.label}</th>
+                      {f.single === f.partner ? (
+                        <td>{f.single}</td>
+                      ) : (
+                        <td>
+                          <span className="ip-t2-pair"><span className="ip-t2-k">Script only</span>{f.single}</span>
+                          <span className="ip-t2-pair"><span className="ip-t2-k">Partner pharmacy</span>{f.partner}</span>
+                        </td>
+                      )}
+                      <td>{f.member}</td>
                     </tr>
                   ))}
                 </tbody>
