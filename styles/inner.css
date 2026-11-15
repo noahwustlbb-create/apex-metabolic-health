@@ -652,8 +652,8 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
    the inner pages (H1 and H2 by clamp, card names 26, leads 18). */
 .pr-page .al-k, .pr-page .al-cap, .pr-page .ip-call, .pr-page .tc-chip,
 .pr-page .ip-path-tag, .pr-page .ip-lines li, .pr-page .ip-total-k { font-size: 12px; }
-.pr-page .ip-path-who, .pr-page .al-faq-q, .pr-page .al-faq-a,
-.pr-page .ip-table th, .pr-page .ip-table td { font-size: 16px; }
+/* The desktop fee table keeps its 15px (change 1: desktop unchanged). */
+.pr-page .ip-path-who, .pr-page .al-faq-q, .pr-page .al-faq-a { font-size: 16px; }
 .pr-page .ip-total-then { font-size: 14px; }
 .pr-page .ip-total-v { font-size: 38px; }
 .pr-page .ip-path h3 { font-size: 22px; }
