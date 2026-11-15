@@ -127,8 +127,7 @@ const PHOTOS: Record<string, ProgramPhotos> = {
   'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: { ...IMG.womanKitchen, posM: '50% 28%', posD: '50% 12%' }, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
   pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.windowMan },
 }
-// The women's site: only the slots that show a man change, and no page repeats a photo. A hero twin keeps the
-// same shape as the hero it replaces (portrait for portrait, wide for wide) so the layout does not move.
+// The women's site: only the slots that show a man change, and no page repeats a photo.
 const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
   'hormone-optimisation': { hero: IMG.darkWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
   'metabolic-weight-loss': { hero: IMG.womanKitchen, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
@@ -138,7 +137,8 @@ const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
   'skin-regeneration': { bandB: IMG.trailRun },
   'injury-repair': { hero: IMG.womanStairs, card: IMG.sprintWoman, brk: IMG.trailRun, bandA: { ...IMG.womanLaptop, posD: '50% 20%' } },
   'performance-plus': { hero: IMG.sprintWoman, card: IMG.womanStairs, brk: IMG.trailRun, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, cta: IMG.darkWoman },
-  'sexual-health': { hero: { ...IMG.duskWoman, posM: '32% 50%' }, bandA: IMG.womanStairs, how: IMG.womanLaptop, cta: IMG.darkWoman },
+  // The one page whose hero changes shape (wide to portrait): data-portrait-w on the hero handles the desktop layout.
+  'sexual-health': { hero: IMG.womanCall, bandA: IMG.womanStairs, bandB: BAND.duskWoman, how: IMG.womanLaptop, cta: IMG.darkWoman },
   pathology: { brk: IMG.womanLaptop, cta: IMG.darkWoman },
 }
 const SLOTS = ['hero', 'card', 'brk', 'bandA', 'bandB', 'how', 'cta'] as const
@@ -187,7 +187,7 @@ function StartButton({ onClick, light, lg = true }: { onClick: () => void; light
 
 function Hero({ config, photos, onStart }: { config: ProgramPageConfig; photos: ProgramPhotos; onStart: () => void }) {
   return (
-    <section className="pa-hero" aria-labelledby="pa-title" data-portrait={photos.hero.portrait || undefined}>
+    <section className="pa-hero" aria-labelledby="pa-title" data-portrait={photos.hero.portrait || undefined} data-portrait-w={(!photos.hero.portrait && photos.hero.women?.portrait) || undefined}>
       <Photo shot={photos.hero} priority className="pa-photo-hero" />
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x pa-hero-in">
