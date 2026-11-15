@@ -67,6 +67,32 @@ export interface ProgramPageConfig {
   ctaBody: string
   ctaImage?: string
   intakeUrl?: string
+
+  /** Copy shown instead on the women's site (Noah, 15 Nov 2026), only where it differs. Lists line up by
+   *  position with the men's list; `undefined`, or a field left out, keeps the men's line. */
+  women?: WomenCopy
+}
+
+type WomenCopy = {
+  category?: string
+  heroBody?: string
+  empathyHeadline?: string
+  empathyBody?: string
+  empathyChips?: (string | undefined)[]
+  evidencePoints?: ({ label?: string; detail?: string } | undefined)[]
+  mechanismHeadline?: string
+  mechanismBody?: string
+  mechanismFeatures?: ({ title?: string; body?: string } | undefined)[]
+  faqs?: ({ q?: string; a?: string } | undefined)[]
+  ctaHeadline?: string
+  ctaBody?: string
+}
+
+/** One line of copy with a women's version. Both ship; html[data-audience] shows one (.for-men / .for-women in
+ *  stage.css), so the men's line never flashes on the women's site. Same text, or no women's line: plain text. */
+function T({ m, w }: { m: string; w?: string }) {
+  if (w === undefined || w === m) return <>{m}</>
+  return <><span className="for-men">{m}</span><span className="for-women">{w}</span></>
 }
 
 // ─── Photos (repo images only; one distinct hero per page, no repeat within a page) ──
@@ -140,7 +166,8 @@ const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
   'skin-regeneration': { bandB: IMG.trailRun },
   'injury-repair': { hero: IMG.womanStairs, card: IMG.sprintWoman, brk: IMG.trailRun, bandA: { ...IMG.womanLaptop, posD: '50% 20%' } },
   'performance-plus': { hero: IMG.sprintWoman, card: IMG.womanStairs, brk: IMG.trailRun, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, cta: IMG.darkWoman },
-  // sexual-health is left out on purpose: the page is written for men (its kicker and conditions), so its photos stay.
+  // The one page whose hero changes shape (wide to portrait): data-portrait-w on the hero handles the desktop layout.
+  'sexual-health': { hero: IMG.womanCall, bandA: IMG.womanStairs, bandB: BAND.duskWoman, how: IMG.womanLaptop, cta: IMG.darkWoman },
   pathology: { brk: IMG.womanLaptop, cta: IMG.darkWoman },
 }
 const SLOTS = ['hero', 'card', 'brk', 'bandA', 'bandB', 'how', 'cta'] as const
@@ -178,7 +205,7 @@ const Arrow = () => (
   </svg>
 )
 
-const kicker = (config: ProgramPageConfig) => `// ${config.category}`
+const Kicker = ({ config }: { config: ProgramPageConfig }) => <T m={`// ${config.category}`} w={config.women?.category ? `// ${config.women.category}` : undefined} />
 const n2 = (i: number) => String(i + 1).padStart(2, '0')
 
 function StartButton({ onClick, light, lg = true }: { onClick: () => void; light?: boolean; lg?: boolean }) {
@@ -193,14 +220,14 @@ function StartButton({ onClick, light, lg = true }: { onClick: () => void; light
 
 function Hero({ config, photos, onStart }: { config: ProgramPageConfig; photos: ProgramPhotos; onStart: () => void }) {
   return (
-    <section className="pa-hero" aria-labelledby="pa-title" data-portrait={photos.hero.portrait || undefined}>
+    <section className="pa-hero" aria-labelledby="pa-title" data-portrait={photos.hero.portrait || undefined} data-portrait-w={(!photos.hero.portrait && photos.hero.women?.portrait) || undefined}>
       <Photo shot={photos.hero} priority className="pa-photo-hero" />
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x pa-hero-in">
         <div className="pa-hero-copy">
-          <p className="al-k">{kicker(config)} · Doctor-led</p>
+          <p className="al-k"><Kicker config={config} /> · Doctor-led</p>
           <h1 id="pa-title" className="pa-h1">{config.headline}<span>{config.headlineAccent}</span></h1>
-          <p className="pa-hero-lead">{config.heroBody}</p>
+          <p className="pa-hero-lead"><T m={config.heroBody} w={config.women?.heroBody} /></p>
           <div className="pa-hero-row" data-pa-hero-cta>
             <StartButton onClick={onStart} light />
             <a href={`tel:${CLINIC_PHONE_E164}`} className="pa-call">Or call {CLINIC_PHONE_DISPLAY}</a>
@@ -220,12 +247,12 @@ function WhatItIs({ config, photos }: { config: ProgramPageConfig; photos: Progr
         <div className="pa-intro">
           <div>
             <p className="al-k">{'// What it is'}</p>
-            <h2 id="pa-what" className="al-h2">{config.empathyHeadline}</h2>
+            <h2 id="pa-what" className="al-h2"><T m={config.empathyHeadline} w={config.women?.empathyHeadline} /></h2>
           </div>
           <div>
-            <p className="al-lead">{config.empathyBody}</p>
+            <p className="al-lead"><T m={config.empathyBody} w={config.women?.empathyBody} /></p>
             <ul className="pa-chips" aria-label="Common reasons people start">
-              {config.empathyChips.map(c => <li key={c}>{c}</li>)}
+              {config.empathyChips.map((c, i) => <li key={c}><T m={c} w={config.women?.empathyChips?.[i]} /></li>)}
             </ul>
           </div>
         </div>
@@ -233,14 +260,14 @@ function WhatItIs({ config, photos }: { config: ProgramPageConfig; photos: Progr
           <li className="pa-photocard">
             <Photo shot={photos.card} sizes="(min-width: 900px) 33vw, 100vw" />
             <div className="pa-grade" aria-hidden="true" />
-            <span className="al-k">{kicker(config)}</span>
+            <span className="al-k"><Kicker config={config} /></span>
             <span className="pa-photocard-name">{config.name}</span>
           </li>
           {config.mechanismFeatures.map((f, i) => (
             <li key={f.title} className="al-card pa-tcard">
               <span className="al-k">{n2(i)}</span>
-              <h3>{f.title}</h3>
-              <p>{f.body}</p>
+              <h3><T m={f.title} w={config.women?.mechanismFeatures?.[i]?.title} /></h3>
+              <p><T m={f.body} w={config.women?.mechanismFeatures?.[i]?.body} /></p>
             </li>
           ))}
         </ul>
@@ -259,8 +286,8 @@ function PhotoBreak({ config, photos }: { config: ProgramPageConfig; photos: Pro
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x">
         <p className="al-k">{'// Why it matters'}</p>
-        <h2 id="pa-why" className="pa-break-h">{config.mechanismHeadline}</h2>
-        <p className="pa-break-b">{config.mechanismBody}</p>
+        <h2 id="pa-why" className="pa-break-h"><T m={config.mechanismHeadline} w={config.women?.mechanismHeadline} /></h2>
+        <p className="pa-break-b"><T m={config.mechanismBody} w={config.women?.mechanismBody} /></p>
       </div>
     </section>
   )
@@ -347,11 +374,11 @@ function Included({ config }: { config: ProgramPageConfig }) {
             <span className="al-k">{'// Your portal'}</span>
             <span className="pa-photocard-name">Results in your portal.</span>
           </li>
-          {config.evidencePoints.map(p => (
+          {config.evidencePoints.map((p, i) => (
             <li key={p.label} className="al-card pa-evcard">
               <p className="pa-ev-v">{p.value}</p>
-              <h3>{p.label}</h3>
-              <p>{p.detail}</p>
+              <h3><T m={p.label} w={config.women?.evidencePoints?.[i]?.label} /></h3>
+              <p><T m={p.detail} w={config.women?.evidencePoints?.[i]?.detail} /></p>
             </li>
           ))}
         </ul>
@@ -382,10 +409,10 @@ function FAQ({ config }: { config: ProgramPageConfig }) {
             <details key={f.q} className="al-faq-item">
               <summary>
                 <span className="al-k">{n2(i)}</span>
-                <span className="al-faq-q">{f.q}</span>
+                <span className="al-faq-q"><T m={f.q} w={config.women?.faqs?.[i]?.q} /></span>
                 <span className="al-faq-x" aria-hidden="true" />
               </summary>
-              <div className="al-faq-a">{f.a}</div>
+              <div className="al-faq-a"><T m={f.a} w={config.women?.faqs?.[i]?.a} /></div>
             </details>
           ))}
         </div>
@@ -403,9 +430,9 @@ function CtaBand({ config, photos, onStart }: { config: ProgramPageConfig; photo
       <Photo shot={shot} />
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x">
-        <p className="al-k">{kicker(config)}</p>
-        <h2 id="pa-close" className="al-h2">{config.ctaHeadline}</h2>
-        <p className="al-lead">{config.ctaBody}</p>
+        <p className="al-k"><Kicker config={config} /></p>
+        <h2 id="pa-close" className="al-h2"><T m={config.ctaHeadline} w={config.women?.ctaHeadline} /></h2>
+        <p className="al-lead"><T m={config.ctaBody} w={config.women?.ctaBody} /></p>
         <div className="pa-cta-row">
           <StartButton onClick={onStart} light />
           <a href={`tel:${CLINIC_PHONE_E164}`} className="al-pill al-pill-lg al-pill-ghost">Call {CLINIC_PHONE_DISPLAY}</a>
