@@ -617,3 +617,11 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 }
 .ip-reading-v { flex-wrap: wrap; }
 .ip-reading-flag { margin-left: auto; align-self: center; font: 500 11px/1 var(--al-mono); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; color: #ffc879; }
+/* Women's example reading on /how-it-works has no number (Noah, 15 Nov 2026: "we don't have levels set").
+   The flag row keeps the number's line height (font size x 0.95, as .ip-reading-v b) so the card keeps its
+   height, and the flag becomes a small status pill at the left so the row does not read as a missing value. */
+.ip-reading-v-flag { min-height: calc(clamp(40px, 3.6vw, 56px) * 0.95); align-items: center; }
+.ip-reading-v-flag .ip-reading-flag { margin-left: 0; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(255, 200, 121, 0.45); border-radius: 999px; }
+.ip-reading-v-flag .ip-reading-flag::before { content: ""; width: 6px; height: 6px; border-radius: 99px; background: currentColor; flex: none; }
+/* Its kicker is five characters longer than the men's; on phones it stays on one line, as the men's does at 390. */
+@media (max-width: 899px) { .ip-reading-k { letter-spacing: 0.05em; } }

@@ -61,9 +61,19 @@ export default function HowItWorksPage() {
                 </div>
                 <div className="ip-grade" aria-hidden="true" />
                 {/* An actual example reading (Noah, 13 Nov 2026: "free test at 400 being low range"). Illustrative, not a patient. */}
-                <div className="ip-reading" aria-label="Example portal reading: free testosterone 400 picomoles per litre, at the lower end of the reference range">
+                <div className="ip-reading for-men" role="group" aria-label="Example portal reading: free testosterone 400 picomoles per litre, at the lower end of the reference range">
                   <p className="al-k">Example reading · Free testosterone</p>
                   <div className="ip-reading-v"><b>400</b><span>pmol/L</span><em className="ip-reading-flag">Lower end of range</em></div>
+                  <div className="ip-bar" aria-hidden="true"><i style={{ left: '30%' }} /></div>
+                  <p className="ip-bar-k"><span>Low</span><span>Reference range</span><span>High</span></p>
+                  <p className="ip-reading-note">Inside the range, so it often gets called normal. Your doctor reads it with how you feel and your other markers, then tells you what it means for you.</p>
+                  <div className="ip-chips"><span>Doctor reviewed</span><span>Trend over time</span></div>
+                </div>
+                {/* Women's example (Noah, 15 Nov 2026: "Show an example but we don't have levels set"): a women's
+                    marker with no number or unit, the same flag, bar position, note and chips. No range or value is invented. */}
+                <div className="ip-reading for-women" role="group" aria-label="Example portal reading: iron stores (ferritin), at the lower end of the reference range">
+                  <p className="al-k ip-reading-k">Example reading · Iron stores (ferritin)</p>
+                  <div className="ip-reading-v ip-reading-v-flag"><em className="ip-reading-flag">Lower end of range</em></div>
                   <div className="ip-bar" aria-hidden="true"><i style={{ left: '30%' }} /></div>
                   <p className="ip-bar-k"><span>Low</span><span>Reference range</span><span>High</span></p>
                   <p className="ip-reading-note">Inside the range, so it often gets called normal. Your doctor reads it with how you feel and your other markers, then tells you what it means for you.</p>
