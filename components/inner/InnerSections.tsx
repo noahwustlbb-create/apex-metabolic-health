@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { womenPreload } from '@/components/audience/preload'
 import Footer from '@/components/Footer'
 import InnerStickyBar from '@/components/inner/InnerStickyBar'
 import StepRail from '@/components/inner/StepRail'
@@ -22,22 +23,29 @@ export const Arrow = ({ size = 14 }: { size?: number }) => (
 
 export const n2 = (i: number) => String(i + 1).padStart(2, '0')
 
-export type Shot = { src: string; alt: string; pos?: string }
+/** `women`: the photo shown instead once the visitor has picked Women (Noah, 15 Nov 2026). Both ship in the
+ *  HTML; html[data-audience] hides one (.for-men / .for-women in stage.css), so there is no flash. */
+export type Shot = { src: string; alt: string; pos?: string; women?: Shot }
 
 /* eslint-disable @next/next/no-img-element */
 export function Photo({ shot, className = '', sizes = '(min-width: 900px) 50vw, 100vw', priority }: { shot: Shot; className?: string; sizes?: string; priority?: boolean }) {
+  const w = shot.women
   return (
     <figure className={`al-photo ${className}`}>
-      <img src={shot.src} alt={shot.alt} loading={priority ? 'eager' : 'lazy'} decoding="async" sizes={sizes} style={{ objectPosition: shot.pos ?? '50% 30%' }} />
+      <img className={w ? 'for-men' : undefined} src={shot.src} alt={shot.alt} loading={priority ? 'eager' : 'lazy'} decoding="async" sizes={sizes} style={{ objectPosition: shot.pos ?? '50% 30%' }} />
+      {w && <img className="for-women" src={w.src} alt={w.alt} loading="lazy" decoding="async" sizes={sizes} style={{ objectPosition: w.pos ?? '50% 30%' }} />}
     </figure>
   )
 }
 
 function Bg({ shot, priority }: { shot: Shot; priority?: boolean }) {
+  const w = shot.women
   return (
     <>
+      {priority && w && <script dangerouslySetInnerHTML={{ __html: womenPreload({ href: w.src }) }} />}
       <div className="ip-bg" style={{ ['--pos' as string]: shot.pos ?? '50% 30%' }}>
-        <img src={shot.src} alt={shot.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : undefined} decoding="async" sizes="100vw" />
+        <img className={w ? 'for-men' : undefined} src={shot.src} alt={shot.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : undefined} decoding="async" sizes="100vw" />
+        {w && <img className="for-women" src={w.src} alt={w.alt} loading="lazy" decoding="async" sizes="100vw" style={{ ['--pos' as string]: w.pos ?? '50% 30%' }} />}
       </div>
       <div className="ip-grade" aria-hidden="true" />
     </>
@@ -74,7 +82,8 @@ export function InnerHero({ kicker, title, lead, cap, photo, sidePhoto, cta = tr
       {sidePhoto && (
         /* Desktop only (>= 900px): photo on the right half, dark gradient to the text side. */
         <div className="ip-hero-photo" aria-hidden="true" style={{ ['--pos' as string]: sidePhoto.pos ?? '50% 30%' }}>
-          <img src={sidePhoto.src} alt="" loading="lazy" decoding="async" sizes="50vw" />
+          <img className={sidePhoto.women ? 'for-men' : undefined} src={sidePhoto.src} alt="" loading="lazy" decoding="async" sizes="50vw" />
+          {sidePhoto.women && <img className="for-women" src={sidePhoto.women.src} alt="" loading="lazy" decoding="async" sizes="50vw" style={{ ['--pos' as string]: sidePhoto.women.pos ?? '50% 30%' }} />}
         </div>
       )}
       <div className="container-x">
@@ -265,7 +274,8 @@ export function CtaBand({ shot, kicker = 'Ready to start', title = 'Ready to sta
 }) {
   return (
     <section className="al-close" id="cta" aria-labelledby="ip-close">
-      <img className="al-close-bg" src={shot.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: shot.pos ?? '50% 20%' }} />
+      <img className={`al-close-bg${shot.women ? ' for-men' : ''}`} src={shot.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: shot.pos ?? '50% 20%' }} />
+      {shot.women && <img className="al-close-bg for-women" src={shot.women.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: shot.women.pos ?? '50% 20%' }} />}
       <div className="container-x al-close-in">
         <p className="al-k">{'// '}{kicker}</p>
         <h2 id="ip-close" className="al-h2">{title}</h2>
@@ -291,30 +301,37 @@ export function InnerFoot({ bar = true }: { bar?: boolean }) {
 }
 
 /* ── Photos: repo originals (public/photos), chosen per page so no page repeats one ── */
-export const SHOTS = {
-  runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 20%' },
+// The women's photos, on their own so each man's photo below can name its twin.
+const WOMEN = {
   womanStairs: { src: '/photos/woman-stairs.webp', alt: 'Woman climbing outdoor stairs above the coast', pos: '50% 12%' },
   womanKitchen: { src: '/photos/woman-kitchen.webp', alt: 'Woman holding a glass of water in a sunlit kitchen', pos: '50% 20%' },
-  kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 10%' },
   womanLaptop: { src: '/photos/woman-laptop-1400.webp', alt: 'A woman in her forties working on a laptop at a marble kitchen bench', pos: '50% 26%' },
-  parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 22%' },
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 25%' },
-  benchDusk: { src: '/photos/man-bench-dusk-1400.webp', alt: 'A man in his forties in a grey hoodie resting on a park bench at dusk', pos: '50% 22%' },
-  kitchenMan: { src: '/photos/man-kitchen-dawn.webp', alt: 'Man leaning on a kitchen bench at dawn', pos: '50% 25%' },
-  balconyCall: { src: '/photos/man-balcony-call.webp', alt: 'Man on a phone call on a coastal balcony', pos: '50% 30%' },
-  oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%' },
   duskWoman: { src: '/photos/hero-window-woman.webp', alt: 'Woman looking out at the ocean at dusk', pos: '30% 50%' },
-  windowMan: { src: '/photos/hero-window-portrait.webp', alt: 'Man looking out of a window in low evening light', pos: '55% 25%' },
+  darkWoman: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt', pos: '50% 20%' },
+  sprintWoman: { src: '/photos/woman-sprint-night.webp', alt: 'Woman sprinting on a track at night', pos: '50% 40%' },
+  trailRun: { src: '/photos/woman-trail-run.webp', alt: 'Woman running up a grassy volcanic hillside under a grey sky', pos: '50% 50%' },
+} satisfies Record<string, Shot>
+
+// Every photo of a man names the woman's photo that replaces it on the women's site (`women`). A page that
+// already shows that woman overrides the twin where it is used, so no page repeats a photo.
+export const SHOTS = {
+  ...WOMEN,
+  runner: { src: '/photos/performance-hero.webp', alt: 'Man running on a coastal path at dawn', pos: '50% 20%', women: WOMEN.trailRun },
+  kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 10%', women: WOMEN.sprintWoman },
+  parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 22%', women: WOMEN.womanStairs },
+  benchDusk: { src: '/photos/man-bench-dusk-1400.webp', alt: 'A man in his forties in a grey hoodie resting on a park bench at dusk', pos: '50% 22%', women: WOMEN.womanStairs },
+  kitchenMan: { src: '/photos/man-kitchen-dawn.webp', alt: 'Man leaning on a kitchen bench at dawn', pos: '50% 25%', women: WOMEN.womanLaptop },
+  balconyCall: { src: '/photos/man-balcony-call.webp', alt: 'Man on a phone call on a coastal balcony', pos: '50% 30%', women: WOMEN.womanCall },
+  oceanWindow: { src: '/photos/hero-window-wide.webp', alt: 'Man looking out over the ocean from a high window', pos: '50% 40%', women: WOMEN.duskWoman },
+  windowMan: { src: '/photos/hero-window-portrait.webp', alt: 'Man looking out of a window in low evening light', pos: '55% 25%', women: WOMEN.darkWoman },
   // 13 Nov 2026 (Noah): people holding phones become his device renders (tablet for wide slots, phone for tall).
   phoneDesk: { src: '/photos/device-tablet-1600.webp', alt: 'A tablet showing a glowing outline of the human body beside four result rings', pos: '50% 50%' },
   phoneHand: { src: '/photos/device-phone-1200.webp', alt: 'A phone showing a glowing outline of the human body', pos: '50% 45%' },
-  balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 20%' },
-  greyMan: { src: '/photos/portrait-man.webp', alt: 'Portrait of a grey-haired man in a black t-shirt', pos: '50% 20%' },
-  darkWoman: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt', pos: '50% 20%' },
-  trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%' },
-  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '82% 38%' },
-  sprintWoman: { src: '/photos/woman-sprint-night.webp', alt: 'Woman sprinting on a track at night', pos: '50% 40%' },
-  trailRun: { src: '/photos/woman-trail-run.webp', alt: 'Woman running up a grassy volcanic hillside under a grey sky', pos: '50% 50%' },
+  balance: { src: '/photos/injury-hero.webp', alt: 'Man doing a single-leg balance exercise in a home gym', pos: '50% 20%', women: WOMEN.womanStairs },
+  greyMan: { src: '/photos/portrait-man.webp', alt: 'Portrait of a grey-haired man in a black t-shirt', pos: '50% 20%', women: WOMEN.darkWoman },
+  trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%', women: WOMEN.sprintWoman },
+  sprintMan: { src: '/photos/man-sprint-track.webp', alt: 'Man sprinting on a running track, seen from above', pos: '82% 38%', women: WOMEN.sprintWoman },
   driftwood: { src: '/photos/driftwood.webp', alt: 'Close-up of weathered driftwood grain', pos: '50% 50%' },
   glassSphere: { src: '/photos/glass-sphere.webp', alt: 'Amber glass sphere inside glass rings on a mossy rock', pos: '50% 50%' },
   texturePathology: { src: '/programs-grid/pathology-1200.webp', alt: 'Close-up natural texture in dark red tones (AI-generated, illustrative)', pos: '50% 50%' },

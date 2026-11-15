@@ -110,7 +110,8 @@ export default function DiscoveryCallForm() {
                   ].map(t => <li key={t}>{t}</li>)}
                 </ul>
                 <div style={{ overflow: 'hidden', borderRadius: 16, marginTop: 8 }}>
-                  <Photo shot={SHOTS.balconyCall} className="" sizes="(min-width: 900px) 40vw, 100vw" />
+                  {/* 3:2 is the balcony photo's own shape, so the box is the same height when the women's photo shows. */}
+                  <Photo shot={SHOTS.balconyCall} className="aspect-[3/2]" sizes="(min-width: 900px) 40vw, 100vw" />
                 </div>
               </div>
 

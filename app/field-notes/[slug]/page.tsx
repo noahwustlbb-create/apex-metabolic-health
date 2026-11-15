@@ -38,7 +38,9 @@ export default async function FieldNotePage({ params }: Props) {
             </div>
             <div className="fn-art-img">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={n.img.src} srcSet={n.img.srcSet} sizes="(min-width: 1100px) 1100px, 100vw" alt={n.img.alt} style={{ objectPosition: n.img.pos ?? '50% 50%' }} />
+              <img className={n.imgWomen ? 'for-men' : undefined} src={n.img.src} srcSet={n.img.srcSet} sizes="(min-width: 1100px) 1100px, 100vw" alt={n.img.alt} style={{ objectPosition: n.img.pos ?? '50% 50%' }} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {n.imgWomen && <img className="for-women" src={n.imgWomen.src} srcSet={n.imgWomen.srcSet} sizes="(min-width: 1100px) 1100px, 100vw" alt={n.imgWomen.alt} loading="lazy" style={{ objectPosition: n.imgWomen.pos ?? '50% 50%' }} />}
             </div>
             <div className="fn-art-in fn-art-body">
               {n.body.map((p, i) => <p key={i}>{p}</p>)}

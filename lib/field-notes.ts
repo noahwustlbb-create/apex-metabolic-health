@@ -15,6 +15,9 @@ export type FieldNote = {
   /** One line under the title on the card and the article. */
   dek: string
   img: { src: string; srcSet?: string; alt: string; pos?: string }
+  /** Cover on the women's site, for a note whose cover shows a man (Noah, 15 Nov 2026). Scenery, not a woman:
+   *  every women's photo is already on the longevity page beside these cards. */
+  imgWomen?: { src: string; srcSet?: string; alt: string; pos?: string }
   minutes: number
   body: string[]
   /** Where the note is shown as a card, besides /field-notes. */
@@ -76,6 +79,7 @@ export const FIELD_NOTES: FieldNote[] = [
     title: 'Your forties are the decade to get a baseline.',
     dek: 'You cannot track a change you never measured.',
     img: { src: '/photos/man-bench-dusk-1400.webp', srcSet: '/photos/man-bench-dusk-800.webp 800w, /photos/man-bench-dusk-1400.webp 1400w', alt: 'A man in his forties in a grey hoodie resting on a park bench at dusk', pos: '50% 24%' },
+    imgWomen: { src: '/photos/ocean-dawn.webp', alt: 'A calm ocean and a level horizon at first light', pos: '50% 50%' },
     minutes: 3,
     on: ['longevity'],
     body: [
@@ -156,6 +160,7 @@ export const FIELD_NOTES: FieldNote[] = [
     title: 'Keep a simple health log.',
     dek: 'A few lines a week make every consult more useful.',
     img: { src: '/photos/man-sprint-track.webp', srcSet: '/photos/man-sprint-track-800.webp 800w, /photos/man-sprint-track.webp 880w', alt: 'A man sprinting on a running track, seen from above', pos: '78% 40%' },
+    imgWomen: { src: '/photos/consult-room.webp', alt: 'A desk with a closed laptop and a pair of glasses under a lamp at night', pos: '62% 50%' },
     minutes: 2,
     on: ['longevity'],
     body: [

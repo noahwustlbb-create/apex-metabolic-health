@@ -3,7 +3,9 @@
 import { useState, useEffect, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence } from 'framer-motion'
+import { getImageProps } from 'next/image'
 import Image from '@/components/audience/Img'
+import { womenPreload } from '@/components/audience/preload'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -70,7 +72,9 @@ export interface ProgramPageConfig {
 // ─── Photos (repo images only; one distinct hero per page, no repeat within a page) ──
 // pos / posM are object-position on desktop / phone, set on the subject's face.
 
-type Shot = { src: string; alt: string; pos?: string; posM?: string; posD?: string; portrait?: boolean }
+// women: the photo shown instead once the visitor has picked Women (Noah, 15 Nov 2026). Both ship in the HTML;
+// html[data-audience] hides one (.for-men / .for-women in stage.css), so there is no flash.
+type Shot = { src: string; alt: string; pos?: string; posM?: string; posD?: string; portrait?: boolean; women?: Shot }
 
 const IMG = {
   windowMan: { src: '/photos/hero-window-portrait.webp', alt: 'Man looking out of a window in low evening light', pos: '50% 30%', posM: '62% 30%', posD: '50% 20%', portrait: true },
@@ -92,6 +96,7 @@ const IMG = {
   trackRest: { src: '/photos/man-track-rest.webp', alt: 'Man bent over, hands on knees, catching his breath on a running track', pos: '50% 30%', posM: '50% 30%', posD: '50% 20%', portrait: true },
   womanKitchen: { src: '/photos/woman-kitchen.webp', alt: 'Woman holding a glass of water in a sunlit kitchen', pos: '50% 28%', posD: '50% 12%', portrait: true },
   womanStairs: { src: '/photos/woman-stairs.webp', alt: 'Woman climbing outdoor stairs above the coast', pos: '50% 28%', posD: '50% 3%', portrait: true },
+  womanLaptop: { src: '/photos/woman-laptop-1400.webp', alt: 'A woman in her forties working on a laptop at a marble kitchen bench', pos: '50% 26%', posM: '50% 24%', posD: '50% 22%', portrait: true },
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
   parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 26%', posD: '50% 17%', portrait: true },
   kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
@@ -124,7 +129,28 @@ const PHOTOS: Record<string, ProgramPhotos> = {
   'sexual-health': { hero: IMG.balconyCall, card: texture('sexual-health', 'deep red'), brk: { ...IMG.womanKitchen, posM: '50% 28%', posD: '50% 12%' }, bandA: IMG.parkBench, bandB: IMG.womanCall, how: IMG.duskWoman, cta: IMG.oceanWindow },
   pathology: { hero: IMG.womanCall, card: texture('pathology', 'dark red'), brk: IMG.parkBench, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, how: IMG.womanStairs, cta: IMG.windowMan },
 }
-const FALLBACK: ProgramPhotos = PHOTOS.pathology
+// The women's site: only the slots that show a man change, and no page repeats a photo. A hero twin keeps the
+// same shape as the hero it replaces (portrait for portrait, wide for wide) so the layout does not move.
+const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
+  'hormone-optimisation': { hero: IMG.darkWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
+  'metabolic-weight-loss': { hero: IMG.womanKitchen, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
+  // Longevity also shows the Field Notes rail (trail run, sprinter, laptop), so those three stay off the page.
+  longevity: { hero: IMG.darkWoman, card: texture('longevity', 'deep green'), brk: IMG.womanKitchen, bandA: BAND.duskWoman, how: { ...IMG.womanStairs, posM: '50% 6%' } },
+  'hair-restoration': { hero: IMG.darkWoman, brk: IMG.womanStairs, how: IMG.womanLaptop },
+  'skin-regeneration': { bandB: IMG.trailRun },
+  'injury-repair': { hero: IMG.womanStairs, card: IMG.sprintWoman, brk: IMG.trailRun, bandA: { ...IMG.womanLaptop, posD: '50% 20%' } },
+  'performance-plus': { hero: IMG.sprintWoman, card: IMG.womanStairs, brk: IMG.trailRun, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, cta: IMG.darkWoman },
+  // sexual-health is left out on purpose: the page is written for men (its kicker and conditions), so its photos stay.
+  pathology: { brk: IMG.womanLaptop, cta: IMG.darkWoman },
+}
+const SLOTS = ['hero', 'card', 'brk', 'bandA', 'bandB', 'how', 'cta'] as const
+const photosFor = (slug: string): ProgramPhotos => {
+  const men = PHOTOS[slug] ?? PHOTOS.pathology
+  const women = PHOTOS_WOMEN[PHOTOS[slug] ? slug : 'pathology'] ?? {}
+  const out = { ...men }
+  for (const k of SLOTS) { const w = women[k]; if (w && w.src !== men[k].src) out[k] = { ...men[k], women: w } }
+  return out
+}
 
 const photoStyle = (s: Shot) => ({
   ['--pos' as string]: s.pos ?? '50% 50%',
@@ -134,9 +160,14 @@ const photoStyle = (s: Shot) => ({
 })
 
 function Photo({ shot, priority, sizes = '100vw', className = '' }: { shot: Shot; priority?: boolean; sizes?: string; className?: string }) {
+  const w = shot.women
+  // First-screen photo: on the women's site, start the twin's download early (same srcset the <img> below asks for).
+  const pre = priority && w ? getImageProps({ src: w.src, alt: '', fill: true, sizes }).props : null
   return (
     <div className={`pa-photo ${className}`} style={photoStyle(shot)}>
-      <Image src={shot.src} alt={shot.alt} fill priority={priority} loading={priority ? undefined : 'lazy'} sizes={sizes} />
+      {pre && <script dangerouslySetInnerHTML={{ __html: womenPreload({ href: pre.src, srcset: pre.srcSet, sizes: pre.sizes }) }} />}
+      <Image className={shot.women ? 'for-men' : undefined} src={shot.src} alt={shot.alt} fill priority={priority} loading={priority ? undefined : 'lazy'} sizes={sizes} />
+      {shot.women && <Image className="for-women" src={shot.women.src} alt={shot.women.alt} fill loading="lazy" sizes={sizes} style={photoStyle(shot.women)} />}
     </div>
   )
 }
@@ -423,7 +454,7 @@ const QUESTIONNAIRE_SLUGS = new Set(['hormone-optimisation', 'sexual-health', 'h
 export default function ProgramPageTemplate({ config }: { config: ProgramPageConfig }) {
   const [modalOpen, setModalOpen] = useState(false)
   const router = useRouter()
-  const photos = PHOTOS[config.slug] ?? FALLBACK
+  const photos = photosFor(config.slug)
 
   const handleGetStarted = () => {
     if (QUESTIONNAIRE_SLUGS.has(config.slug) && config.intakeUrl) {

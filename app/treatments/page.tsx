@@ -38,7 +38,7 @@ export default function TreatmentsPage() {
           title="Choose your program."
           lead="Nine doctor-led programs. Every one starts with a blood panel and a doctor who reads it with you."
           cap={['Nine programs', 'Measure first', 'Doctor-led, online']}
-          sidePhoto={SHOTS.duskWoman}
+          sidePhoto={{ ...SHOTS.duskWoman, women: SHOTS.womanKitchen }}
         />
         <TrustChips />
 
