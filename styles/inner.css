@@ -625,3 +625,67 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-reading-v-flag .ip-reading-flag::before { content: ""; width: 6px; height: 6px; border-radius: 99px; background: currentColor; flex: none; }
 /* Its kicker is five characters longer than the men's; on phones it stays on one line, as the men's does at 390. */
 @media (max-width: 899px) { .ip-reading-k { letter-spacing: 0.05em; } }
+
+/* ── /pricing clean-up (Noah, 15 Nov 2026: BIOV8 compare, COMPARE.md section A) ──
+   Layout and density only. Scoped to main.pr-page so no other page moves. */
+
+/* Change 1: every fee, side by side. Desktop keeps the four-column table; phones get
+   two columns, Standard (Script only and Partner pharmacy) and Member. The rows where
+   the two standard paths differ keep both values, each labelled. */
+.ip-fees-m { display: none; }
+@media (max-width: 899px) {
+  .ip-fees-d { display: none; }
+  .ip-fees-m { display: block; padding: 4px 14px; }
+}
+.ip-t2 { width: 100%; border-collapse: collapse; }
+.ip-t2 thead th:nth-child(1) { width: 38%; }
+.ip-t2 thead th:nth-child(2) { width: 38%; }
+.ip-t2 thead th:nth-child(3) { width: 24%; }
+.ip-t2 th, .ip-t2 td { text-align: left; vertical-align: top; padding: 10px 6px; border-bottom: 1px solid var(--al-hair); font-size: 14px; line-height: 1.35; }
+.ip-t2 :is(th, td):first-child { padding-left: 0; padding-right: 10px; }
+.ip-t2 :is(th, td):last-child { padding-right: 0; }
+.ip-t2 thead th { padding-top: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--al-line); font-weight: 400; }
+.ip-t2 thead .al-k { display: block; color: var(--al-ink); }
+.ip-t2-sub { display: block; margin-top: 2px; font: 500 12px/1.35 var(--al-mono); color: var(--al-mute); }
+.ip-t2 tbody th { font-weight: 600; letter-spacing: -0.01em; color: var(--al-ink); }
+.ip-t2 td { color: var(--al-mute); }
+.ip-t2 td:last-child { color: var(--al-ink); font-weight: 600; }
+.ip-t2 tbody tr:last-child :is(th, td) { border-bottom: 0; }
+.ip-t2-pair { display: block; }
+.ip-t2-pair + .ip-t2-pair { margin-top: 6px; }
+.ip-t2-k { display: block; font: 500 12px/1.35 var(--al-mono); color: var(--al-mute); }
+
+/* Change 4: one type scale. Phone: H1 44, H2 34, card names 22, price numerals 38,
+   body 16, notes 14, mono labels 12. Desktop: the same, with the display steps of
+   the inner pages (H1 and H2 by clamp, card names 26, leads 18). */
+.pr-page .al-k, .pr-page .al-cap, .pr-page .ip-call, .pr-page .tc-chip,
+.pr-page .ip-path-tag, .pr-page .ip-lines li, .pr-page .ip-total-k { font-size: 12px; }
+/* The desktop fee table keeps its 15px (change 1: desktop unchanged). */
+.pr-page .ip-path-who, .pr-page .al-faq-q, .pr-page .al-faq-a { font-size: 16px; }
+.pr-page .ip-total-then { font-size: 14px; }
+.pr-page .ip-total-v { font-size: 38px; }
+.pr-page .ip-path h3 { font-size: 22px; }
+.pr-page .ip-path-tag { height: 28px; }
+/* Change 6: 20px between the fine print and the button on every path card. */
+.pr-page .ip-path .ip-path-line { margin-top: 20px; }
+@media (max-width: 899px) {
+  .pr-page .ip-h1 { font-size: 44px; }
+  /* Change 3: a price on the first phone screen, clear of the call bar down to 375 x 667 (QA, 15 Nov).
+     Tighter hero spacing, and the mono caption row is dropped on phones: its three claims ("No hidden
+     fees", "No lock-in", "Member rates from day one") are all answered in this page's FAQ. */
+  .pr-page .ip-hero { padding-top: 92px; padding-bottom: 20px; }
+  .pr-page .ip-h1 { margin-top: 14px; }
+  .pr-page .ip-hero-lead { line-height: 1.45; }
+  .pr-page .ip-hero-row { margin-top: 18px; }
+  .pr-page .ip-hero-side { display: none; }
+}
+@media (min-width: 900px) {
+  .pr-page .al-close .al-h2 { font-size: clamp(34px, 3.6vw, 56px); }
+}
+@media (min-width: 1200px) {
+  .pr-page .ip-path h3 { font-size: 26px; }
+  .pr-page .ip-hero-lead, .pr-page .al-lead { font-size: 18px; }
+}
+.pr-page .al-pill { font-size: 12px; }
+/* The inline "terms" link in the refund answer measured 43px wide: widen its hit area, not the text. */
+.pr-page .al-faq-a a { padding-inline: 2px; margin-inline: -2px; }
