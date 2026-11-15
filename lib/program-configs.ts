@@ -492,14 +492,16 @@ export const sexualHealthConfig: ProgramPageConfig = {
   intakeUrl: '/signup',
 
   // Women's site (Noah, 15 Nov 2026: "women's version aswell"). The men's page above names men's conditions; this
-  // names what women raise (the quiz's women's list). Menopause itself sits under Hormone Optimisation.
-  // No medicine names and no outcome claims. `undefined` keeps the line above.
+  // is menopause-led on purpose: the clinic's draft protocols cover women's care only around perimenopause and
+  // menopause (APX-PRO-07; the sexual health protocol APX-PRO-03 is men only), so the page says who it is for.
+  // Menopause itself sits under Hormone Optimisation. No medicine names and no outcome claims.
+  // `undefined` keeps the line above.
   women: {
     category: 'Women\'s Sexual Health',
-    heroBody: 'Sexual health concerns are medical issues, not something to manage in silence. We assess the clinical drivers (hormonal, physical and psychological) with you, privately.',
+    heroBody: 'Changes in desire and comfort around menopause are medical issues, not something to manage in silence. We assess the clinical drivers (hormonal, physical and psychological) with you, privately.',
     empathyHeadline: 'It rarely comes up at a normal appointment. It can here.',
-    empathyBody: 'Changes in desire, comfort and confidence are common, and they often go unmentioned. A doctor can help work out what is behind them. A complete assessment, completely online, completely private.',
-    empathyChips: ['Low desire', 'Discomfort or dryness', 'Changes around menopause', 'Hormonal cause', 'Confidence or anxiety', 'Fatigue'],
+    empathyBody: 'Around perimenopause and menopause, changes in desire and comfort are common, and they often go unmentioned. Our women\'s care is for women at that stage. A doctor can help work out what is behind the changes, completely online and completely private.',
+    empathyChips: ['Changes around menopause', 'Low desire', 'Discomfort or dryness', 'Night sweats and poor sleep', 'Mood changes', 'Hormonal changes'],
     evidencePoints: [
       undefined,
       { detail: 'Low desire and discomfort can have hormonal, physical, medicine-related or psychological factors. Your doctor looks at all of them.' },
@@ -507,12 +509,12 @@ export const sexualHealthConfig: ProgramPageConfig = {
     mechanismFeatures: [
       { body: 'Hormone markers change through perimenopause and menopause, and they are linked to desire and comfort. They are measured in your blood panel.' },
       { title: 'Energy and general health', body: 'Thyroid, iron and metabolic markers can all play a part in energy and desire. They are part of the same panel.' },
-      { title: 'Comfort and physical symptoms', body: 'Dryness, discomfort or pain are medical symptoms, not something to put up with. Your doctor asks about them directly and tells you if an in-person examination is the right next step.' },
+      { title: 'Comfort and physical symptoms', body: 'Dryness, discomfort or pain are common after menopause. They are medical symptoms, not something to put up with. Your doctor asks about them directly and tells you if an in-person examination is the right next step.' },
       { body: 'Stress, mood, sleep and relationship factors can sit alongside physical ones. Your doctor assesses the full clinical picture before any treatment is recommended.' },
     ],
     faqs: [
       undefined,
-      { q: 'Is this the same as menopause care?', a: 'They overlap. Low desire and discomfort are often part of perimenopause or menopause, which sits under our Hormone Optimisation program. Your doctor looks at both in the one consultation.' },
+      { q: 'Who is the women\'s program for?', a: 'Women going through perimenopause or menopause. Low desire and discomfort are often part of that stage, which sits under our Hormone Optimisation program, and your doctor can look at both together. If that is not you, your doctor will tell you and point you to the right place, usually your GP.' },
     ],
   },
 }
