@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { womenPreload } from '@/components/audience/preload'
 import Footer from '@/components/Footer'
 import InnerStickyBar from '@/components/inner/InnerStickyBar'
 import StepRail from '@/components/inner/StepRail'
@@ -41,6 +42,7 @@ function Bg({ shot, priority }: { shot: Shot; priority?: boolean }) {
   const w = shot.women
   return (
     <>
+      {priority && w && <script dangerouslySetInnerHTML={{ __html: womenPreload({ href: w.src }) }} />}
       <div className="ip-bg" style={{ ['--pos' as string]: shot.pos ?? '50% 30%' }}>
         <img className={w ? 'for-men' : undefined} src={shot.src} alt={shot.alt} loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : undefined} decoding="async" sizes="100vw" />
         {w && <img className="for-women" src={w.src} alt={w.alt} loading="lazy" decoding="async" sizes="100vw" style={{ ['--pos' as string]: w.pos ?? '50% 30%' }} />}

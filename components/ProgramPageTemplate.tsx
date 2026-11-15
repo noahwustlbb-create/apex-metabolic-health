@@ -3,7 +3,9 @@
 import { useState, useEffect, Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import { AnimatePresence } from 'framer-motion'
+import { getImageProps } from 'next/image'
 import Image from '@/components/audience/Img'
+import { womenPreload } from '@/components/audience/preload'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -158,8 +160,12 @@ const photoStyle = (s: Shot) => ({
 })
 
 function Photo({ shot, priority, sizes = '100vw', className = '' }: { shot: Shot; priority?: boolean; sizes?: string; className?: string }) {
+  const w = shot.women
+  // First-screen photo: on the women's site, start the twin's download early (same srcset the <img> below asks for).
+  const pre = priority && w ? getImageProps({ src: w.src, alt: '', fill: true, sizes }).props : null
   return (
     <div className={`pa-photo ${className}`} style={photoStyle(shot)}>
+      {pre && <script dangerouslySetInnerHTML={{ __html: womenPreload({ href: pre.src, srcset: pre.srcSet, sizes: pre.sizes }) }} />}
       <Image className={shot.women ? 'for-men' : undefined} src={shot.src} alt={shot.alt} fill priority={priority} loading={priority ? undefined : 'lazy'} sizes={sizes} />
       {shot.women && <Image className="for-women" src={shot.women.src} alt={shot.women.alt} fill loading="lazy" sizes={sizes} style={photoStyle(shot.women)} />}
     </div>
