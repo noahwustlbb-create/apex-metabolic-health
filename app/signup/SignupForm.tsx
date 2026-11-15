@@ -110,7 +110,10 @@ function SignupFormInner() {
       <aside className="su-aside" aria-hidden="true">
         {/* A person, not a vial (no needles, vials or pens anywhere on the site). */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/photos/man-park-bench.webp" alt="" loading="lazy" decoding="async" />
+        <img className="for-men" src="/photos/man-park-bench.webp" alt="" loading="lazy" decoding="async" />
+        {/* Women's site (Noah, 15 Nov 2026): the same photo /start shows once she picks Women. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="for-women" src="/photos/woman-stairs.webp" alt="" loading="lazy" decoding="async" />
         <ul className="su-points">
           {[
             ['01', 'One blood panel', 'Collected near you, results in about 48 hours.'],

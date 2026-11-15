@@ -41,13 +41,26 @@ function Head({ id, n, k, title, cap, dark }: { id: string; n: string; k: string
 }
 
 /* eslint-disable @next/next/no-img-element */
-function Photo({ src, alt, className, sizes = '(min-width: 900px) 50vw, 100vw' }: { src: string; alt: string; className?: string; sizes?: string }) {
+/** `women`: the photo shown instead once the visitor has picked Women (Noah, 15 Nov 2026). Both ship; the
+ *  html[data-audience] rules in stage.css (.for-men / .for-women) show one, so nothing flashes. */
+type Twin = { src: string; alt: string; pos?: string }
+function Photo({ src, alt, className, sizes = '(min-width: 900px) 50vw, 100vw', women }: { src: string; alt: string; className?: string; sizes?: string; women?: Twin }) {
   return (
     <figure className={`al-photo ${className ?? ''}`}>
-      <img src={src} alt={alt} loading="lazy" decoding="async" sizes={sizes} />
+      <img className={women ? 'for-men' : undefined} src={src} alt={alt} loading="lazy" decoding="async" sizes={sizes} />
+      {women && <img className="for-women" src={women.src} alt={women.alt} loading="lazy" decoding="async" sizes={sizes} style={women.pos ? { objectPosition: women.pos } : undefined} />}
     </figure>
   )
 }
+
+// Women's home page. None of these repeats a photo already on the page (kitchen, trail run, and the laptop
+// on the Field Notes card).
+const W = {
+  portrait: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt, looking straight at the camera', pos: '50% 20%' },
+  stairs: { src: '/photos/woman-stairs.webp', alt: 'A woman climbing outdoor stairs above the coast' },
+  sprint: { src: '/photos/woman-sprint-night.webp', alt: 'A woman sprinting on a track at night', pos: '50% 5%' },
+  call: { src: '/photos/woman-video-call.webp', alt: '', pos: '50% 22%' },
+} satisfies Record<string, Twin>
 
 /** 02 About you: who it is for, how they feel, what they want to know. */
 const QUESTIONS = [
@@ -62,7 +75,7 @@ export function AboutYou() {
         <Head id="about-title" n="02" k="About you" title="Told you're fine. Still don't feel it." cap={['Men and women', 'Australians 18 to 80', 'No GP referral']} />
         <div className="al-about-grid">
           {/* Not a young couple (Noah, 13 Nov 2026): a man flat at dawn in a real kitchen, "told you're fine". */}
-          <Photo className="al-about-main" src="/photos/man-kitchen-dawn.webp" alt="A man in his forties leaning on his kitchen bench at dawn, looking tired" />
+          <Photo className="al-about-main" src="/photos/man-kitchen-dawn.webp" alt="A man in his forties leaning on his kitchen bench at dawn, looking tired" women={W.portrait} />
           <div className="al-about-side">
             <div className="al-card al-about-card">
               <p className="al-lead al-about-lead">
@@ -82,7 +95,7 @@ export function AboutYou() {
             </div>
             <div className="al-about-pair">
               <Photo src="/photos/woman-kitchen.webp" alt="A woman standing at her kitchen bench with a glass of water, looking out the window" sizes="(min-width: 900px) 22vw, 50vw" />
-              <Photo src="/photos/man-park-bench.webp" alt="A man in a grey hoodie resting on a park bench after a walk" sizes="(min-width: 900px) 22vw, 50vw" />
+              <Photo src="/photos/man-park-bench.webp" alt="A man in a grey hoodie resting on a park bench after a walk" sizes="(min-width: 900px) 22vw, 50vw" women={W.stairs} />
             </div>
           </div>
         </div>
@@ -320,7 +333,7 @@ export function WhyApex() {
               </li>
             ))}
           </ol>
-          <Photo className="al-why-photo" src="/photos/man-kettlebell.webp" alt="A man with a towel over his shoulder after a session in his home gym" sizes="(min-width: 900px) 40vw, 100vw" />
+          <Photo className="al-why-photo" src="/photos/man-kettlebell.webp" alt="A man with a towel over his shoulder after a session in his home gym" sizes="(min-width: 900px) 40vw, 100vw" women={W.sprint} />
         </div>
       </div>
     </section>
@@ -370,7 +383,8 @@ export function HomeFAQ() {
 export function ReadyToStart() {
   return (
     <section className="al-close" id="cta" aria-labelledby="close-title">
-      <img className="al-close-bg" src="/photos/man-track-rest.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <img className="al-close-bg for-men" src="/photos/man-track-rest.webp" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+      <img className="al-close-bg for-women" src={W.call.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: W.call.pos }} />
       <div className="container-x al-close-in">
         <p className="al-k">// 06 Ready to start</p>
         <h2 id="close-title" className="al-h2">Ready to start.</h2>

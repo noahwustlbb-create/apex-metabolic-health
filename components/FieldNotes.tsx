@@ -31,7 +31,8 @@ export default function FieldNotes({ notes, variant = 'grid', id = 'fn-title', t
               <Link href={`/field-notes/${n.slug}`} className="fn-card">
                 <span className="fn-img">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={n.img.src} srcSet={n.img.srcSet} sizes={variant === 'rail' ? '(min-width: 900px) 24vw, 78vw' : '(min-width: 768px) 31vw, 100vw'} alt={n.img.alt} loading="lazy" decoding="async" style={{ objectPosition: n.img.pos ?? '50% 50%' }} />
+                  <img className={n.imgWomen ? 'for-men' : undefined} src={n.img.src} srcSet={n.img.srcSet} sizes={variant === 'rail' ? '(min-width: 900px) 24vw, 78vw' : '(min-width: 768px) 31vw, 100vw'} alt={n.img.alt} loading="lazy" decoding="async" style={{ objectPosition: n.img.pos ?? '50% 50%' }} />
+                  {n.imgWomen && <img className="for-women" src={n.imgWomen.src} srcSet={n.imgWomen.srcSet} sizes={variant === 'rail' ? '(min-width: 900px) 24vw, 78vw' : '(min-width: 768px) 31vw, 100vw'} alt={n.imgWomen.alt} loading="lazy" decoding="async" style={{ objectPosition: n.imgWomen.pos ?? '50% 50%' }} />}
                 </span>
                 <span className="fn-tag"><span aria-hidden="true" />{n.tag}</span>
                 <span className="fn-t">{n.title}</span>
