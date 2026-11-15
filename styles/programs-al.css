@@ -91,6 +91,14 @@ main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weigh
       linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
   }
   .pa-hero[data-portrait] .pa-photo-hero img { object-position: 50% 0%; }
+  /* Women's site, where a portrait photo replaces a wide hero (sexual health): the same split layout. */
+  html[data-audience="women"] .pa-hero[data-portrait-w] .pa-photo-hero { top: 86px; left: 46%; }
+  html[data-audience="women"] .pa-hero[data-portrait-w] .pa-grade {
+    background:
+      linear-gradient(90deg, #050505 0%, #050505 46%, rgba(5,5,5,0.55) 54%, rgba(5,5,5,0) 70%),
+      linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55) 100%);
+  }
+  html[data-audience="women"] .pa-hero[data-portrait-w] .pa-photo-hero img { object-position: 50% 0%; }
 }
 
 /* Wide crops on desktop: bands, break and CTA band use the head-safe position. */

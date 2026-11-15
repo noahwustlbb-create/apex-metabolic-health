@@ -83,6 +83,19 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   ctaHeadline: 'Find out where you actually stand.',
   ctaBody: 'Complete the pre-screen. Your doctor reviews your suitability and contacts you directly to confirm next steps. No commitment, no upfront payment.',
   intakeUrl: '/signup',
+
+  // Women's site (Noah, 15 Nov 2026): menopause sits under this program (protocol APX-PRO-07, draft). No medicine
+  // names and no outcome claims, like the rest of the page. `undefined` keeps the line above.
+  women: {
+    empathyChips: ['Persistent fatigue', 'Hot flushes or night sweats', 'Brain fog', 'Low drive', 'Perimenopause or menopause', 'Sleep disruption'],
+    mechanismFeatures: [
+      undefined,
+      { title: 'Perimenopause and menopause', body: 'Flushes, night sweats, broken sleep and mood changes are common as hormones shift, often from your forties. Your doctor goes through your symptoms and history with you, with your blood results alongside.' },
+    ],
+    faqs: [
+      { q: 'Do you see women for perimenopause and menopause?', a: 'Yes. Tell us what you are noticing in the pre-screen. Your doctor goes through your symptoms, history and blood results with you and talks through what is suitable for you. Some things need an in-person appointment, such as a breast or pelvic concern or unexpected bleeding, and your doctor will tell you if that applies.' },
+    ],
+  },
 }
 
 // ─── Metabolic Weight Loss ─────────────────────────────────────────────────────
@@ -477,6 +490,33 @@ export const sexualHealthConfig: ProgramPageConfig = {
   ctaHeadline: 'A clinical assessment. Completely private.',
   ctaBody: 'Complete the pre-screen. Confidential from start to finish. Your doctor reviews your intake and confirms suitability and next steps.',
   intakeUrl: '/signup',
+
+  // Women's site (Noah, 15 Nov 2026: "women's version aswell"). The men's page above names men's conditions; this
+  // is menopause-led on purpose: the clinic's draft protocols cover women's care only around perimenopause and
+  // menopause (APX-PRO-07; the sexual health protocol APX-PRO-03 is men only), so the page says who it is for.
+  // Menopause itself sits under Hormone Optimisation. No medicine names and no outcome claims.
+  // `undefined` keeps the line above.
+  women: {
+    category: 'Women\'s Sexual Health',
+    heroBody: 'Changes in desire and comfort around menopause are medical issues, not something to manage in silence. We assess the clinical drivers (hormonal, physical and psychological) with you, privately.',
+    empathyHeadline: 'It rarely comes up at a normal appointment. It can here.',
+    empathyBody: 'Around perimenopause and menopause, changes in desire and comfort are common, and they often go unmentioned. Our women\'s care is for women at that stage. A doctor can help work out what is behind the changes, completely online and completely private.',
+    empathyChips: ['Changes around menopause', 'Low desire', 'Discomfort or dryness', 'Night sweats and poor sleep', 'Mood changes', 'Hormonal changes'],
+    evidencePoints: [
+      undefined,
+      { detail: 'Low desire and discomfort can have hormonal, physical, medicine-related or psychological factors. Your doctor looks at all of them.' },
+    ],
+    mechanismFeatures: [
+      { body: 'Hormone markers change through perimenopause and menopause, and they are linked to desire and comfort. They are measured in your blood panel.' },
+      { title: 'Energy and general health', body: 'Thyroid, iron and metabolic markers can all play a part in energy and desire. They are part of the same panel.' },
+      { title: 'Comfort and physical symptoms', body: 'Dryness, discomfort or pain are common after menopause. They are medical symptoms, not something to put up with. Your doctor asks about them directly and tells you if an in-person examination is the right next step.' },
+      { body: 'Stress, mood, sleep and relationship factors can sit alongside physical ones. Your doctor assesses the full clinical picture before any treatment is recommended.' },
+    ],
+    faqs: [
+      undefined,
+      { q: 'Who is the women\'s program for?', a: 'Women going through perimenopause or menopause. Low desire and discomfort are often part of that stage, which sits under our Hormone Optimisation program, and your doctor can look at both together. If that is not you, your doctor will tell you and point you to the right place, usually your GP.' },
+    ],
+  },
 }
 
 // ─── Skin Regeneration ─────────────────────────────────────────────────────────
