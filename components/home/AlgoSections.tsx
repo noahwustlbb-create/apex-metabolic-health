@@ -53,16 +53,16 @@ function Photo({ src, alt, className, sizes = '(min-width: 900px) 50vw, 100vw', 
   )
 }
 
-// Women's home page. None of these repeats a photo already on the page (kitchen, trail run, and the laptop
-// on the Field Notes card).
+// Women's home page. None of these repeats a photo already on the page (the sprinter on the Hormone card,
+// kitchen, trail run, and the laptop on the Field Notes card).
 const W = {
   portrait: { src: '/photos/portrait-woman.webp', alt: 'Portrait of a woman with dark hair in a black t-shirt, looking straight at the camera', pos: '50% 20%' },
   stairs: { src: '/photos/woman-stairs.webp', alt: 'A woman climbing outdoor stairs above the coast' },
-  sprint: { src: '/photos/woman-sprint-night.webp', alt: 'A woman sprinting on a track at night', pos: '50% 5%' },
+  window: { src: '/photos/hero-window-woman.webp', alt: 'A woman looking out at the ocean at dusk', pos: '30% 50%' },
   call: { src: '/photos/woman-video-call.webp', alt: '', pos: '50% 22%' },
 } satisfies Record<string, Twin>
 
-/** 02 About you: who it is for, how they feel, what they want to know. */
+/** 03 About you: who it is for, how they feel, what they want to know. */
 const QUESTIONS = [
   { t: 'Why do I feel flat?', b: 'Tired by mid-afternoon, slower to recover, not as sharp as you were. You want a reason, not a shrug.' },
   { t: 'What do my numbers say?', b: 'Your hormone markers, thyroid, iron, heart and metabolic health, measured in one blood panel.' },
@@ -72,7 +72,7 @@ export function AboutYou() {
   return (
     <section className="al-sec al-about" aria-labelledby="about-title">
       <div className="container-x">
-        <Head id="about-title" n="02" k="About you" title="Told you're fine. Still don't feel it." cap={['Men and women', 'Australians 18 to 80', 'No GP referral']} />
+        <Head id="about-title" n="03" k="About you" title="Told you're fine. Still don't feel it." cap={['Men and women', 'Australians 18 to 80', 'No GP referral']} />
         <div className="al-about-grid">
           {/* Not a young couple (Noah, 13 Nov 2026): a man flat at dawn in a real kitchen, "told you're fine". */}
           <Photo className="al-about-main" src="/photos/man-kitchen-dawn.webp" alt="A man in his forties leaning on his kitchen bench at dawn, looking tired" women={W.portrait} />
@@ -333,7 +333,7 @@ export function WhyApex() {
               </li>
             ))}
           </ol>
-          <Photo className="al-why-photo" src="/photos/man-kettlebell.webp" alt="A man with a towel over his shoulder after a session in his home gym" sizes="(min-width: 900px) 40vw, 100vw" women={W.sprint} />
+          <Photo className="al-why-photo" src="/photos/man-kettlebell.webp" alt="A man with a towel over his shoulder after a session in his home gym" sizes="(min-width: 900px) 40vw, 100vw" women={W.window} />
         </div>
       </div>
     </section>

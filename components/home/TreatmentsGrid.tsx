@@ -23,7 +23,7 @@ const Arrow = () => (
   </svg>
 )
 
-function Pic({ img, sizes, wide, className }: { img: string; sizes: string; wide?: boolean; className: string }) {
+function Pic({ img, sizes, wide, className, pos }: { img: string; sizes: string; wide?: boolean; className: string; pos?: string }) {
   return (
     <picture className={className} aria-hidden="true">
       {/* Feature card on desktop is about 1.9:1; the square asset cut the crystal tips (13 Nov 2026), so a wide crop. */}
@@ -31,7 +31,7 @@ function Pic({ img, sizes, wide, className }: { img: string; sizes: string; wide
       {wide && <source media="(min-width: 900px)" type="image/webp" srcSet={`${img}-wide-1200.webp 1200w, ${img}-wide-2016.webp 2016w`} sizes={sizes} />}
       <source type="image/avif" srcSet={`${img}-600.avif 600w, ${img}-1200.avif 1200w`} sizes={sizes} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
+      <img src={`${img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" style={pos ? { objectPosition: pos } : undefined} />
     </picture>
   )
 }
@@ -42,7 +42,7 @@ function Img({ c, sizes, wide }: { c: GridCard; sizes: string; wide?: boolean })
   return (
     <>
       <Pic img={c.img} sizes={sizes} wide={wide} className="tg-img for-men" />
-      <Pic img={c.imgWomen} sizes={sizes} wide={wide} className="tg-img for-women" />
+      <Pic img={c.imgWomen} sizes={sizes} wide={wide} className="tg-img for-women" pos={c.imgWomenPos} />
     </>
   )
 }
@@ -78,7 +78,7 @@ export default function TreatmentsGrid() {
       <div className="container-x">
         <div className="al-head">
           <div>
-            <p className="al-k al-num">// 03 Protocols</p>
+            <p className="al-k al-num">// 02 Protocols</p>
             <h2 id="tg-title" className="al-h2">Choose your program.</h2>
           </div>
           <p className="al-cap"><span>Nine programs<br /></span><span>Measure first<br /></span><span>Doctor-led, online</span></p>

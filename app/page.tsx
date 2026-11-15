@@ -49,8 +49,9 @@ export default function Home() {
           footer. */}
       <main id="main-content" className="home-main">
         <StageHero />
-        <AboutYou />
+        {/* Programs before About you (Noah, 15 Nov 2026: "we do put choose your program first then about you"). */}
         <TreatmentsGrid />
+        <AboutYou />
         <HomeHow />
         <StageBox />
         {/* The community (Noah, 15 Nov 2026: "add this after how it works"): Google review button and the
