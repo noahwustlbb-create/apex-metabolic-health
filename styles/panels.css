@@ -183,7 +183,7 @@ main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; lette
    (H2 34, card names 22, price numerals 38, body 16, notes 14, mono labels 12),
    and less empty space under the cards. Everything here is scoped to
    [data-variant="pricing"], so /order-bloods does not change. */
-.chp[data-variant="pricing"] { padding: 28px 20px 64px; }
+.chp[data-variant="pricing"] { padding: 20px 20px 64px; }
 .chp[data-variant="pricing"] .chp-head { display: flex; flex-direction: column; gap: 12px; }
 .chp[data-variant="pricing"] .chp-h { margin: 0; font-size: 34px; }
 .chp[data-variant="pricing"] .chp-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
@@ -191,13 +191,13 @@ main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; lette
 .chp[data-variant="pricing"] .chp-select { flex: 1 0 116px; max-width: 160px; }
 .chp[data-variant="pricing"] .chp-select select { height: 44px; padding: 0 40px 0 16px; font-size: 12px; letter-spacing: 0.12em; }
 .chp[data-variant="pricing"] .chp-select svg { right: 14px; }
-.chp[data-variant="pricing"] .chp-grid { margin-top: 16px; padding-bottom: 0; gap: 12px; }
+.chp[data-variant="pricing"] .chp-grid { margin-top: 14px; padding-bottom: 0; gap: 12px; }
 .chp[data-variant="pricing"] .chp-lead { margin-top: 16px; font-size: 14px; max-width: none; }
 
 /* The live card: name and price on one line, then members chip, buttons, detail. */
-.chp[data-variant="pricing"] .chp-card { padding: 14px; }
-.chp[data-variant="pricing"] .chp-frame { padding: 20px 20px 22px; }
-.chp[data-variant="pricing"] .chp-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.chp[data-variant="pricing"] .chp-card { padding: 10px; }
+.chp[data-variant="pricing"] .chp-frame { padding: 18px 18px 20px; }
+.chp[data-variant="pricing"] .chp-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 8px; }
 .chp[data-variant="pricing"] .chp-title { margin: 0; font-size: 22px; line-height: 1.1; }
 .chp[data-variant="pricing"] .chp-price { font-size: 38px; }
 .chp[data-variant="pricing"] .chp-price-row { margin-top: 12px; }
