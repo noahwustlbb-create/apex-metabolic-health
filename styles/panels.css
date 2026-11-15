@@ -227,7 +227,7 @@ main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; lette
 .chp-soon-name { margin: 0; font-family: var(--font-inter), "Helvetica Neue", Arial, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--chp-ink); }
 .chp-soon-body { margin: 8px 0 0; font-size: 16px; line-height: 1.5; color: var(--chp-mute); }
 .chp-btn-ink { margin-top: auto; border: 1px solid var(--chp-ink); color: var(--chp-ink); background: transparent; }
-.chp-soon-list + .chp-btn-ink { margin-top: 22px; }
+.chp-soon-list { margin-bottom: 22px; } /* the button then sits at the foot, level with the live card's on wide screens */
 .chp-btn-ink:focus-visible { outline: 3px solid var(--chp-accent); }
 @media (hover: hover) {
   .chp-btn-ink:hover { background: var(--chp-ink); color: #fff; }
