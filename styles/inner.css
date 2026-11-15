@@ -662,8 +662,14 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .pr-page .ip-path .ip-path-line { margin-top: 20px; }
 @media (max-width: 899px) {
   .pr-page .ip-h1 { font-size: 44px; }
-  /* Change 3: a little less air under the hero so the panel price clears the phone call bar. */
-  .pr-page .ip-hero { padding-bottom: 24px; }
+  /* Change 3: a price on the first phone screen, clear of the call bar down to 375 x 667 (QA, 15 Nov).
+     Tighter hero spacing, and the mono caption row is dropped on phones: its three claims ("No hidden
+     fees", "No lock-in", "Member rates from day one") are all answered in this page's FAQ. */
+  .pr-page .ip-hero { padding-top: 92px; padding-bottom: 20px; }
+  .pr-page .ip-h1 { margin-top: 14px; }
+  .pr-page .ip-hero-lead { line-height: 1.45; }
+  .pr-page .ip-hero-row { margin-top: 18px; }
+  .pr-page .ip-hero-side { display: none; }
 }
 @media (min-width: 900px) {
   .pr-page .al-close .al-h2 { font-size: clamp(34px, 3.6vw, 56px); }
