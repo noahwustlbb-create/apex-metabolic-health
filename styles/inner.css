@@ -627,13 +627,13 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 .ip-fees-m { display: none; }
 @media (max-width: 899px) {
   .ip-fees-d { display: none; }
-  .ip-fees-m { display: block; padding: 4px 16px; }
+  .ip-fees-m { display: block; padding: 4px 14px; }
 }
-.ip-t2 { width: 100%; border-collapse: collapse; table-layout: fixed; }
-.ip-t2 thead th:nth-child(1) { width: 40%; }
-.ip-t2 thead th:nth-child(2) { width: 36%; }
+.ip-t2 { width: 100%; border-collapse: collapse; }
+.ip-t2 thead th:nth-child(1) { width: 38%; }
+.ip-t2 thead th:nth-child(2) { width: 38%; }
 .ip-t2 thead th:nth-child(3) { width: 24%; }
-.ip-t2 th, .ip-t2 td { text-align: left; vertical-align: top; padding: 10px 6px; border-bottom: 1px solid var(--al-hair); font-size: 14px; line-height: 1.35; overflow-wrap: break-word; }
+.ip-t2 th, .ip-t2 td { text-align: left; vertical-align: top; padding: 10px 6px; border-bottom: 1px solid var(--al-hair); font-size: 14px; line-height: 1.35; }
 .ip-t2 :is(th, td):first-child { padding-left: 0; padding-right: 10px; }
 .ip-t2 :is(th, td):last-child { padding-right: 0; }
 .ip-t2 thead th { padding-top: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--al-line); font-weight: 400; }
