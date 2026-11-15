@@ -6,6 +6,7 @@ import { AnimatePresence } from 'framer-motion'
 import { getImageProps } from 'next/image'
 import Image from '@/components/audience/Img'
 import { womenPreload } from '@/components/audience/preload'
+import DevicePicture from '@/components/audience/DevicePicture'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -339,10 +340,7 @@ function Included({ config }: { config: ProgramPageConfig }) {
           <li className="pa-photocard pa-devicecard">
             {/* Noah's renders: the phone where the slot is tall (phones), the tablet where it is wide (900 up). */}
             <div className="pa-photo">
-              <picture>
-                <source media="(min-width: 900px)" srcSet="/photos/device-tablet-900.webp 900w, /photos/device-tablet-1600.webp 1600w" sizes="(min-width: 1100px) 25vw, 50vw" />
-                <img src="/photos/device-phone-1200.webp" srcSet="/photos/device-phone-700.webp 700w, /photos/device-phone-1200.webp 1200w" sizes="100vw" alt={PORTAL_CARD.alt} loading="lazy" decoding="async" />
-              </picture>
+              <DevicePicture alt={PORTAL_CARD.alt} sizesWide="(min-width: 1100px) 25vw, 50vw" />
             </div>
             <span className="al-k">{'// Your portal'}</span>
             <span className="pa-photocard-name">Results in your portal.</span>

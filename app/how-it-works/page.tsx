@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import DevicePicture from '@/components/audience/DevicePicture'
 import Nav from '@/components/Nav'
 import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
@@ -56,10 +57,7 @@ export default function HowItWorksPage() {
               <div className="ip-portal-card">
                 <div className="ip-bg">
                   {/* Noah's device renders (13 Nov 2026): the phone on phones, the tablet from 900 up. */}
-                  <picture>
-                    <source media="(min-width: 900px)" srcSet="/photos/device-tablet-900.webp 900w, /photos/device-tablet-1600.webp 1600w" sizes="58vw" />
-                    <img src="/photos/device-phone-1200.webp" srcSet="/photos/device-phone-700.webp 700w, /photos/device-phone-1200.webp 1200w" sizes="100vw" alt={SHOTS.phoneDesk.alt} loading="lazy" decoding="async" className="ip-device" />
-                  </picture>
+                  <DevicePicture alt={SHOTS.phoneDesk.alt} sizesWide="58vw" imgClassName="ip-device" />
                 </div>
                 <div className="ip-grade" aria-hidden="true" />
                 {/* An actual example reading (Noah, 13 Nov 2026: "free test at 400 being low range"). Illustrative, not a patient. */}
