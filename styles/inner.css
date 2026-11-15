@@ -672,3 +672,6 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   .pr-page .ip-path h3 { font-size: 26px; }
   .pr-page .ip-hero-lead, .pr-page .al-lead { font-size: 18px; }
 }
+.pr-page .al-pill { font-size: 12px; }
+/* The inline "terms" link in the refund answer measured 43px wide: widen its hit area, not the text. */
+.pr-page .al-faq-a a { padding-inline: 2px; margin-inline: -2px; }
