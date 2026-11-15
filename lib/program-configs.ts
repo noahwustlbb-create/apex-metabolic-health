@@ -26,7 +26,7 @@ const SHARED_FAQS: ProgramPageConfig['faqs'] = [
   },
   {
     q: 'Is this legal in Australia?',
-    a: 'Yes. Every doctor is AHPRA-registered, prescriptions follow Australian prescribing rules, and anything prescribed is dispensed by an Australian compounding pharmacy partner.',
+    a: 'Yes. Every doctor is AHPRA-registered, prescriptions follow Australian prescribing rules, and anything prescribed is dispensed discreetly via approved cGMP partner pharmacies, Australia-wide.',
   },
 ]
 
