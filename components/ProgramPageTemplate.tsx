@@ -146,7 +146,8 @@ const BAND = {
 // bandA: after How it works · bandB: between What's included and the FAQ ·
 // how: phone-only photo between steps 02 and 03 · cta: closing band.
 const PHOTOS: Record<string, ProgramPhotos> = {
-  'hormone-optimisation': { hero: IMG.windowMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: BAND.duskWoman, how: IMG.womanCall, cta: IMG.womanStairs },
+  // Hero: the sprinter, for men as for women (Noah, 15 Nov 2026: "Do the same for men").
+  'hormone-optimisation': { hero: IMG.sprintMan, card: IMG.parkBench, brk: IMG.womanKitchen, bandA: IMG.kettlebell, bandB: BAND.duskWoman, how: IMG.womanCall, cta: IMG.womanStairs },
   'metabolic-weight-loss': { hero: IMG.kitchenMan, card: IMG.womanKitchen, brk: BAND.oceanWindow, bandA: IMG.womanStairs, bandB: IMG.parkBench, how: IMG.kettlebell, cta: IMG.duskWoman },
   longevity: { hero: IMG.greyMan, card: { ...IMG.womanStairs, pos: '50% 22%', posM: '50% 22%', posD: '50% 20%' }, brk: IMG.runner, bandA: BAND.oceanWindow, bandB: IMG.womanKitchen, how: IMG.duskWoman, cta: IMG.womanCall },
   'hair-restoration': { hero: IMG.hairBack, card: texture('hair-restoration', 'green'), brk: IMG.parkBench, bandA: IMG.womanCall, bandB: BAND.duskWoman, how: IMG.kettlebell, cta: IMG.womanKitchen },
@@ -159,7 +160,9 @@ const PHOTOS: Record<string, ProgramPhotos> = {
 // The women's site: only the slots that show a man change, and no page repeats a photo. A hero twin keeps the
 // same shape as the hero it replaces (portrait for portrait, wide for wide) so the layout does not move.
 const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
-  'hormone-optimisation': { hero: IMG.darkWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
+  // Hero is the sprinter (Noah, 15 Nov 2026: "for women's hormone make it this photo"), the same photo as the
+  // women's Hormone card on the home page. Performance Optimisation shares it until his new photos arrive.
+  'hormone-optimisation': { hero: IMG.sprintWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
   'metabolic-weight-loss': { hero: IMG.womanKitchen, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
   // Longevity also shows the Field Notes rail (trail run, sprinter, laptop), so those three stay off the page.
   longevity: { hero: IMG.darkWoman, card: texture('longevity', 'deep green'), brk: IMG.womanKitchen, bandA: BAND.duskWoman, how: { ...IMG.womanStairs, posM: '50% 6%' } },
