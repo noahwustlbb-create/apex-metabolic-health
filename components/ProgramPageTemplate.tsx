@@ -159,7 +159,9 @@ const PHOTOS: Record<string, ProgramPhotos> = {
 // The women's site: only the slots that show a man change, and no page repeats a photo. A hero twin keeps the
 // same shape as the hero it replaces (portrait for portrait, wide for wide) so the layout does not move.
 const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
-  'hormone-optimisation': { hero: IMG.darkWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
+  // Hero is the sprinter (Noah, 15 Nov 2026: "for women's hormone make it this photo"), the same photo as the
+  // women's Hormone card on the home page. Performance Optimisation shares it until his new photos arrive.
+  'hormone-optimisation': { hero: IMG.sprintWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
   'metabolic-weight-loss': { hero: IMG.womanKitchen, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
   // Longevity also shows the Field Notes rail (trail run, sprinter, laptop), so those three stay off the page.
   longevity: { hero: IMG.darkWoman, card: texture('longevity', 'deep green'), brk: IMG.womanKitchen, bandA: BAND.duskWoman, how: { ...IMG.womanStairs, posM: '50% 6%' } },
