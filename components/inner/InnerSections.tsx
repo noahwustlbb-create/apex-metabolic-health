@@ -142,7 +142,7 @@ export const BLOOD_STEPS: Step[] = [
 export const PROGRAM_STEPS: Step[] = [
   { k: 'Consult', t: 'Talk it through.', b: 'A telehealth consult with an AHPRA-registered doctor, your results open on the screen.', ic: 'consult' },
   { k: 'Plan', t: 'A plan you understand.', b: 'Set from your own numbers, aimed at where you work best, not just inside the reference range.', ic: 'plan' },
-  { k: 'Dispensed', t: 'Dispensed discreetly.', b: 'If treatment is suitable, it is dispensed by an Australian partner pharmacy and delivered to your door.', ic: 'box' },
+  { k: 'Dispensed', t: 'Dispensed discreetly.', b: 'If treatment is suitable, it is dispensed discreetly via approved cGMP partner pharmacies and delivered to your door, Australia-wide.', ic: 'box' },
   { k: 'Review', t: 'Review every 3 months.', b: 'Follow-up bloods and a review about every 3 months, so the plan follows your numbers.', ic: 'review' },
 ]
 
