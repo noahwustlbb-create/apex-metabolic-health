@@ -25,7 +25,7 @@ export default function HowItWorksPage() {
           title="Bloods first. Then a doctor. Then a plan."
           lead="One blood panel, read by an AHPRA-registered doctor with you, then a plan you understand. Everything lives in your portal."
           cap={['No GP referral', 'Most results in about 48 hours', 'Online, Australia-wide']}
-          photo={{ ...SHOTS.kettlebell, pos: '50% 22%', women: SHOTS.womanStairs }}
+          photo={{ ...SHOTS.kettlebell, pos: '50% 22%', women: { ...SHOTS.womanStairs, pos: '50% 4%' } }}
         />
 
         <PhotoLine shot={SHOTS.kitchenMan} line="Measure first. Then treat." />

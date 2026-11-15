@@ -40,7 +40,13 @@ const ROWS: Row[] = [
   { slug: 'hair-restoration', name: 'Hair Restoration', sub: 'Scalp · density' },
 ]
 
-export type GridCard = { n: string; slug: string; name: string; sub: string; href: string; img: string }
+// The one card image that shows a person (a man sprinting) has a women's twin for the women's site
+// (Noah, 15 Nov 2026): crops of /photos/hero-window-woman.webp, same file set as the others.
+const IMG_WOMEN: Record<string, string> = {
+  'hormone-optimisation': '/programs-grid/hormone-optimisation-women',
+}
+
+export type GridCard = { n: string; slug: string; name: string; sub: string; href: string; img: string; imgWomen?: string }
 
 export const TREATMENT_CARDS: GridCard[] = ROWS.map((r, i) => {
   const c = canon(r.slug)
@@ -51,6 +57,7 @@ export const TREATMENT_CARDS: GridCard[] = ROWS.map((r, i) => {
     sub: r.sub,
     href: c?.websiteHref ?? `/programs/${r.slug}`,
     img: IMG[r.slug],
+    imgWomen: IMG_WOMEN[r.slug],
   }
 })
 

@@ -23,16 +23,27 @@ const Arrow = () => (
   </svg>
 )
 
-function Img({ c, sizes, wide }: { c: GridCard; sizes: string; wide?: boolean }) {
+function Pic({ img, sizes, wide, className }: { img: string; sizes: string; wide?: boolean; className: string }) {
   return (
-    <picture className="tg-img" aria-hidden="true">
+    <picture className={className} aria-hidden="true">
       {/* Feature card on desktop is about 1.9:1; the square asset cut the crystal tips (13 Nov 2026), so a wide crop. */}
-      {wide && <source media="(min-width: 900px)" type="image/avif" srcSet={`${c.img}-wide-1200.avif 1200w, ${c.img}-wide-2016.avif 2016w`} sizes={sizes} />}
-      {wide && <source media="(min-width: 900px)" type="image/webp" srcSet={`${c.img}-wide-1200.webp 1200w, ${c.img}-wide-2016.webp 2016w`} sizes={sizes} />}
-      <source type="image/avif" srcSet={`${c.img}-600.avif 600w, ${c.img}-1200.avif 1200w`} sizes={sizes} />
+      {wide && <source media="(min-width: 900px)" type="image/avif" srcSet={`${img}-wide-1200.avif 1200w, ${img}-wide-2016.avif 2016w`} sizes={sizes} />}
+      {wide && <source media="(min-width: 900px)" type="image/webp" srcSet={`${img}-wide-1200.webp 1200w, ${img}-wide-2016.webp 2016w`} sizes={sizes} />}
+      <source type="image/avif" srcSet={`${img}-600.avif 600w, ${img}-1200.avif 1200w`} sizes={sizes} />
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${c.img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
+      <img src={`${img}-600.webp`} alt="" width={1200} height={708} loading="lazy" decoding="async" />
     </picture>
+  )
+}
+
+/** A card whose image shows a man ships a women's twin too; html[data-audience] shows one (stage.css). */
+function Img({ c, sizes, wide }: { c: GridCard; sizes: string; wide?: boolean }) {
+  if (!c.imgWomen) return <Pic img={c.img} sizes={sizes} wide={wide} className="tg-img" />
+  return (
+    <>
+      <Pic img={c.img} sizes={sizes} wide={wide} className="tg-img for-men" />
+      <Pic img={c.imgWomen} sizes={sizes} wide={wide} className="tg-img for-women" />
+    </>
   )
 }
 
@@ -42,8 +53,12 @@ function Card({ c, kind }: { c: GridCard; kind: 'img' | 'text' }) {
       <Img c={c} sizes={kind === 'img' ? '(min-width: 900px) 40vw, 100vw' : '(min-width: 900px) 40vw, 50vw'} />
       <span className="tg-n">{c.n}</span>
       {kind === 'text' && (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img className="tg-thumb" src={`${c.img}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
+        <>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className={`tg-thumb${c.imgWomen ? ' for-men' : ''}`} src={`${c.img}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {c.imgWomen && <img className="tg-thumb for-women" src={`${c.imgWomen}-160.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" aria-hidden="true" />}
+        </>
       )}
       <span className="tg-text">
         <span className="tg-name">{c.name}</span>
