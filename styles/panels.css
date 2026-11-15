@@ -197,9 +197,10 @@ main .chp :is(h1, h2).chp-h:not(.x):not(.y) { font-weight: 700 !important; lette
 /* The live card: name and price on one line, then members chip, buttons, detail. */
 .chp[data-variant="pricing"] .chp-card { padding: 10px; }
 .chp[data-variant="pricing"] .chp-frame { padding: 18px 18px 20px; }
-.chp[data-variant="pricing"] .chp-top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 8px; }
-.chp[data-variant="pricing"] .chp-title { margin: 0; font-size: 22px; line-height: 1.1; }
-.chp[data-variant="pricing"] .chp-price { font-size: 38px; }
+.chp[data-variant="pricing"] .chp-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+/* The price never wraps under the name ("Basic Female Panel" is longer): the name wraps beside it instead. */
+.chp[data-variant="pricing"] .chp-title { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 22px; line-height: 1.1; }
+.chp[data-variant="pricing"] .chp-price { flex: none; font-size: 38px; }
 .chp[data-variant="pricing"] .chp-price-row { margin-top: 12px; }
 .chp[data-variant="pricing"] .chp-count { margin: 0; font-size: 12px; letter-spacing: 0.12em; }
 .chp[data-variant="pricing"] .chp-chip { font-size: 12px; }
