@@ -74,7 +74,7 @@ const PROGRAMS: Record<string, { name: string; sub: string; quizHref: string; be
     quizHref: '/signup',
     benefits: [
       'Assessment by an AHPRA-registered doctor',
-      'Evidence-based repair protocol coordinated through our pharmacy partner',
+      'Evidence-based repair protocol coordinated through approved cGMP partner pharmacies',
       'Structured recovery timeline with clinical reviews',
     ],
   },

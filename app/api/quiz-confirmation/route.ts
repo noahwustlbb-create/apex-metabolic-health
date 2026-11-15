@@ -171,7 +171,7 @@ export async function POST(req: Request) {
                       <td style="font-size:13px;line-height:1.8;color:#8899aa;">
                         &#x2713;&nbsp; Doctor-led protocol design &amp; optimisation<br>
                         &#x2713;&nbsp; Medication at pharmacy-direct rates<br>
-                        &#x2713;&nbsp; Accredited compounding pharmacy fulfilment<br>
+                        &#x2713;&nbsp; Dispensed discreetly via approved cGMP partner pharmacies<br>
                         &#x2713;&nbsp; Ongoing clinical support &amp; treatment adjustments<br>
                         &#x2713;&nbsp; Structured follow-up consultations<br>
                         &#x2713;&nbsp; Evidence-based supplement guidance

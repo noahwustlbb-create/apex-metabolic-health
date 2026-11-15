@@ -23,7 +23,7 @@ const Ic = {
 
 const CARDS = [
   { k: 'Member pricing', t: 'Member rates on everything.', b: 'Your first panel at $199 instead of $280, follow-ups at $139, consults at the member rate, and medication at cost price with no AHI fee.', ic: Ic.tag },
-  { k: 'Free escripts', t: 'No escript fee.', b: 'The $155 escript release fee is included. Scripts go to our partner pharmacies or to your own pharmacy (not NSW).', ic: Ic.script },
+  { k: 'Free escripts', t: 'No escript fee.', b: 'The $155 escript release fee is included. Scripts go to our approved cGMP partner pharmacies or to your own pharmacy (not NSW).', ic: Ic.script },
   { k: 'Reviews', t: 'A review about every 3 months.', b: 'Follow-up bloods and a doctor review built into your plan, with nursing check-ins every 6 to 8 weeks in between.', ic: Ic.review },
 ]
 

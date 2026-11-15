@@ -277,7 +277,7 @@ const ClubIc = {
 }
 const CLUB = [
   { k: 'Member pricing', t: 'Member rates on everything.', b: 'Panels, consults and follow-ups at the member rate, and medication at cost price with no handling fee.', ic: ClubIc.tag },
-  { k: 'Free escripts', t: 'No escript fee.', b: 'The escript release fee is included. Scripts go to our partner pharmacies or to your own pharmacy.', ic: ClubIc.script },
+  { k: 'Free escripts', t: 'No escript fee.', b: 'The escript release fee is included. Scripts go to our approved cGMP partner pharmacies or to your own pharmacy.', ic: ClubIc.script },
   { k: 'Reviews', t: 'A review about every 3 months.', b: 'Follow-up bloods and a doctor review built into your plan, with nursing check-ins in between.', ic: ClubIc.review },
 ]
 export function HomeClub() {

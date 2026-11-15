@@ -4,7 +4,7 @@ const STANDARD_STEPS: ProgramPageConfig['processSteps'] = [
   { title: 'Create your account', body: 'Register at app.apexmetabolichealth.com.au in under two minutes. No GP referral required.', time: '2 MIN' },
   { title: 'Complete pathology testing', body: 'We issue your referral electronically. Attend an accredited collection centre near you.', time: '45 MIN' },
   { title: 'Telehealth consultation', body: 'Your AHPRA-registered doctor reviews your results with you and, if treatment is suitable, builds a plan around them.', time: '45–60 MIN' },
-  { title: 'Ongoing clinical care', body: 'Protocol dispatched through our Australian pharmacy partner. 3-monthly reviews built in from day one.', time: 'ONGOING' },
+  { title: 'Ongoing clinical care', body: 'Protocol dispensed discreetly via approved cGMP partner pharmacies, Australia-wide. 3-monthly reviews built in from day one.', time: 'ONGOING' },
 ]
 
 const SHARED_FAQS: ProgramPageConfig['faqs'] = [
@@ -43,7 +43,7 @@ export const hormoneOptimisationConfig: ProgramPageConfig = {
   heroBullets: [
     'Comprehensive hormone & metabolic panel',
     'AHPRA-registered doctors, Australia-wide',
-    'Doctor-prescribed protocols, Australian pharmacy partner',
+    'Doctor-prescribed protocols, approved cGMP partner pharmacies',
   ],
 
   empathyHeadline: "You've been told your results look normal. But you don't feel normal.",
@@ -239,7 +239,7 @@ export const hairRestorationConfig: ProgramPageConfig = {
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN' },
     { title: 'Complete pathology testing', body: 'Hormone-focused blood panel at a collection centre near you. Most results back in about 48 hours.', time: '30 MIN' },
     { title: 'Doctor consultation', body: 'Your AHPRA-registered doctor reviews your panel and builds a protocol specifically around your hormonal profile.', time: '45 MIN' },
-    { title: 'Protocol dispatched', body: 'Your treatment coordinated through our Australian pharmacy partner. Clinical reviews every 3–6 months.', time: 'ONGOING' },
+    { title: 'Protocol dispatched', body: 'Your treatment dispensed discreetly via approved cGMP partner pharmacies, Australia-wide. Clinical reviews every 3–6 months.', time: 'ONGOING' },
   ],
 
   mechanismHeadline: 'Why clinical hair loss treatment is different.',
@@ -550,7 +550,7 @@ export const skinRegenerationConfig: ProgramPageConfig = {
     { title: 'Create your account', body: 'Register in under two minutes. No GP referral required.', time: '2 MIN' },
     { title: 'Complete pathology testing', body: 'Hormone and skin-relevant blood panel at a collection centre near you. Most results back in about 48 hours.', time: '30 MIN' },
     { title: 'Doctor consultation', body: 'Your doctor reviews your panel and skin health history to build a protocol addressing your specific biological drivers.', time: '45 MIN' },
-    { title: 'Protocol dispatched', body: 'Treatment coordinated through our Australian pharmacy partner with regular clinical reviews.', time: 'ONGOING' },
+    { title: 'Protocol dispatched', body: 'Treatment dispensed discreetly via approved cGMP partner pharmacies, with regular clinical reviews.', time: 'ONGOING' },
   ],
 
   mechanismHeadline: 'Why internal biology determines skin quality.',
