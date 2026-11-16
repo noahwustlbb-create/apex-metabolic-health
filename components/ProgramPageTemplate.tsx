@@ -127,6 +127,15 @@ const IMG = {
   womanCall: { src: '/photos/woman-video-call.webp', alt: 'Woman on a video call at a laptop by a window', pos: '50% 34%', posM: '45% 34%', posD: '50% 15%', portrait: true },
   parkBench: { src: '/photos/man-park-bench.webp', alt: 'Man in a hoodie resting on a park bench', pos: '50% 26%', posD: '50% 17%', portrait: true },
   kettlebell: { src: '/photos/man-kettlebell.webp', alt: 'Man resting between sets in a timber-walled home gym', pos: '50% 30%', posD: '50% 0%', portrait: true },
+  // Women's photo set, 16 Nov 2026: one woman per program hero on the women's site (3:4 portraits).
+  wKettlebell: { src: '/photos/woman-performance-kettlebell.webp', alt: 'A woman lifting a kettlebell in a timber-walled home gym', pos: '50% 18%', posM: '50% 16%', posD: '50% 8%', portrait: true },
+  wWalk: { src: '/photos/woman-weight-loss-walk.webp', alt: 'A woman walking a coastal path at sunrise with a city skyline in the distance', pos: '50% 18%', posM: '50% 16%', posD: '50% 8%', portrait: true },
+  wVerandah: { src: '/photos/woman-menopause-verandah.webp', alt: 'A woman in her fifties holding a mug on a sunlit verandah', pos: '50% 18%', posM: '50% 16%', posD: '50% 8%', portrait: true },
+  wSkin: { src: '/photos/woman-skin-portrait.webp', alt: 'Portrait of a woman with auburn hair and freckles in a knit jumper', pos: '50% 30%', posM: '50% 28%', posD: '50% 22%', portrait: true },
+  wBlood: { src: '/photos/woman-blood-test.webp', alt: 'A woman seated in a clinic chair with a small plaster on her inner arm', pos: '50% 22%', posM: '50% 20%', posD: '50% 12%', portrait: true },
+  wStretch: { src: '/photos/woman-recovery-stretch.webp', alt: 'A woman stretching her leg on a mat in a sunlit living room', pos: '50% 22%', posM: '50% 20%', posD: '50% 14%', portrait: true },
+  wHike: { src: '/photos/woman-longevity-hike.webp', alt: 'A woman in her late fifties walking a eucalypt bush track in morning light', pos: '50% 18%', posM: '50% 16%', posD: '50% 8%', portrait: true },
+  wHair: { src: '/photos/woman-hair-window.webp', alt: 'A woman with long dark hair running a hand through it by a window', pos: '50% 22%', posM: '50% 20%', posD: '50% 16%', portrait: true },
 } satisfies Record<string, Shot>
 
 const texture = (slug: string, tone: string): Shot => ({ src: `/programs-grid/${slug}-1200.webp`, alt: `Close-up natural texture in ${tone} tones` })
@@ -161,18 +170,18 @@ const PHOTOS: Record<string, ProgramPhotos> = {
 // same shape as the hero it replaces (portrait for portrait, wide for wide) so the layout does not move.
 const PHOTOS_WOMEN: Record<string, Partial<ProgramPhotos>> = {
   // Hero is the sprinter (Noah, 15 Nov 2026: "for women's hormone make it this photo"), the same photo as the
-  // women's Hormone card on the home page. Performance Optimisation shares it until his new photos arrive.
+  // women's Hormone card on the home page. Performance Optimisation has its own kettlebell photo (16 Nov 2026).
   'hormone-optimisation': { hero: IMG.sprintWoman, card: IMG.womanLaptop, bandA: IMG.trailRun },
-  'metabolic-weight-loss': { hero: IMG.womanKitchen, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
+  'metabolic-weight-loss': { hero: IMG.wWalk, card: IMG.womanLaptop, brk: IMG.trailRun, bandB: BAND.duskWoman, how: IMG.darkWoman, cta: IMG.womanCall },
   // Longevity also shows the Field Notes rail (trail run, sprinter, laptop), so those three stay off the page.
-  longevity: { hero: IMG.darkWoman, card: texture('longevity', 'deep green'), brk: IMG.womanKitchen, bandA: BAND.duskWoman, how: { ...IMG.womanStairs, posM: '50% 6%' } },
-  'hair-restoration': { hero: IMG.darkWoman, brk: IMG.womanStairs, how: IMG.womanLaptop },
-  'skin-regeneration': { bandB: IMG.trailRun },
-  'injury-repair': { hero: IMG.womanStairs, card: IMG.sprintWoman, brk: IMG.trailRun, bandA: { ...IMG.womanLaptop, posD: '50% 20%' } },
-  'performance-plus': { hero: IMG.sprintWoman, card: IMG.womanStairs, brk: IMG.trailRun, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, cta: IMG.darkWoman },
+  longevity: { hero: IMG.wHike, card: texture('longevity', 'deep green'), brk: IMG.womanKitchen, bandA: BAND.duskWoman, how: { ...IMG.womanStairs, posM: '50% 6%' } },
+  'hair-restoration': { hero: IMG.wHair, brk: IMG.womanStairs, how: IMG.womanLaptop },
+  'skin-regeneration': { hero: IMG.wSkin, bandB: IMG.trailRun },
+  'injury-repair': { hero: IMG.wStretch, card: IMG.sprintWoman, brk: IMG.trailRun, bandA: { ...IMG.womanLaptop, posD: '50% 20%' } },
+  'performance-plus': { hero: IMG.wKettlebell, card: IMG.womanStairs, brk: IMG.trailRun, bandA: BAND.duskWoman, bandB: IMG.womanKitchen, cta: IMG.darkWoman },
   // The one page whose hero changes shape (wide to portrait): data-portrait-w on the hero handles the desktop layout.
-  'sexual-health': { hero: IMG.womanCall, bandA: IMG.womanStairs, bandB: BAND.duskWoman, how: IMG.womanLaptop, cta: IMG.darkWoman },
-  pathology: { brk: IMG.womanLaptop, cta: IMG.darkWoman },
+  'sexual-health': { hero: IMG.wVerandah, bandA: IMG.womanStairs, bandB: BAND.duskWoman, how: IMG.womanLaptop, cta: IMG.darkWoman },
+  pathology: { hero: IMG.wBlood, brk: IMG.womanLaptop, cta: IMG.darkWoman },
 }
 const SLOTS = ['hero', 'card', 'brk', 'bandA', 'bandB', 'how', 'cta'] as const
 const photosFor = (slug: string): ProgramPhotos => {

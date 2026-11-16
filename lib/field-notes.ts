@@ -79,7 +79,7 @@ export const FIELD_NOTES: FieldNote[] = [
     title: 'Your forties are the decade to get a baseline.',
     dek: 'You cannot track a change you never measured.',
     img: { src: '/photos/man-bench-dusk-1400.webp', srcSet: '/photos/man-bench-dusk-800.webp 800w, /photos/man-bench-dusk-1400.webp 1400w', alt: 'A man in his forties in a grey hoodie resting on a park bench at dusk', pos: '50% 24%' },
-    imgWomen: { src: '/photos/ocean-dawn.webp', alt: 'A calm ocean and a level horizon at first light', pos: '50% 50%' },
+    imgWomen: { src: '/photos/woman-bench-dusk.webp', srcSet: '/photos/woman-bench-dusk-900.webp 900w, /photos/woman-bench-dusk.webp 1800w', alt: 'A woman in a grey hoodie sitting on a park bench above the water at dusk', pos: '50% 40%' },
     minutes: 3,
     on: ['longevity'],
     body: [
@@ -143,7 +143,7 @@ export const FIELD_NOTES: FieldNote[] = [
     tag: 'Longevity',
     title: 'Power fades first.',
     dek: 'Why a little speed work is worth keeping as you get older.',
-    img: { src: '/photos/woman-sprint-night.webp', srcSet: '/photos/woman-sprint-night-800.webp 800w, /photos/woman-sprint-night.webp 880w', alt: 'A woman sprinting on a track at night', pos: '50% 35%' },
+    img: { src: '/photos/woman-sprint-night.webp', srcSet: '/photos/woman-sprint-night-800.webp 800w, /photos/woman-sprint-night.webp 1800w', alt: 'A woman sprinting on a track at night', pos: '50% 35%' },
     minutes: 2,
     on: ['longevity'],
     body: [
@@ -159,8 +159,8 @@ export const FIELD_NOTES: FieldNote[] = [
     tag: 'Longevity',
     title: 'Keep a simple health log.',
     dek: 'A few lines a week make every consult more useful.',
-    img: { src: '/photos/man-sprint-track.webp', srcSet: '/photos/man-sprint-track-800.webp 800w, /photos/man-sprint-track.webp 880w', alt: 'A man sprinting on a running track, seen from above', pos: '78% 40%' },
-    imgWomen: { src: '/photos/consult-room.webp', alt: 'A desk with a closed laptop and a pair of glasses under a lamp at night', pos: '62% 50%' },
+    img: { src: '/photos/man-sprint-track.webp', srcSet: '/photos/man-sprint-track-800.webp 800w, /photos/man-sprint-track.webp 1800w', alt: 'A man sprinting on a running track, seen from above', pos: '78% 40%' },
+    imgWomen: { src: '/photos/woman-health-log.webp', srcSet: '/photos/woman-health-log-900.webp 900w, /photos/woman-health-log.webp 1800w', alt: 'A woman writing in a notebook at a kitchen table beside a glass of water', pos: '50% 35%' },
     minutes: 2,
     on: ['longevity'],
     body: [
