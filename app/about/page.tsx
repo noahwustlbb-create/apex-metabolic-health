@@ -1,3 +1,4 @@
+import { accent } from '@/components/audience/Accent'
 import Nav from '@/components/Nav'
 import ImageryNote from '@/components/ImageryNote'
 import TrustChips from '@/components/TrustChips'
@@ -67,7 +68,7 @@ export default function AboutPage() {
                 <div className="ip-story-copy">
                   <p className="ip-story-n" aria-hidden="true">{n2(i)}</p>
                   <p className="al-k">{'// '}{s.k}</p>
-                  <h2 className="al-h2">{s.t}</h2>
+                  <h2 className="al-h2">{accent(s.t)}</h2>
                   {s.ps.map(p => <p key={p.slice(0, 24)}>{p}</p>)}
                   {s.chips && <div className="ip-chips" aria-label="In short">{s.chips.map(c => <span key={c}>{c}</span>)}</div>}
                 </div>

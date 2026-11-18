@@ -1,3 +1,4 @@
+import { accent } from '@/components/audience/Accent'
 import { notFound } from 'next/navigation'
 import Nav from '@/components/Nav'
 import ImageryNote from '@/components/ImageryNote'
@@ -32,7 +33,7 @@ export default async function FieldNotePage({ params }: Props) {
           <div className="container-x">
             <div className="fn-art-in">
               <span className="fn-tag" data-tag={n.tag}><span aria-hidden="true" />{n.tag}</span>
-              <h1 id="fn-art-title">{n.title}</h1>
+              <h1 id="fn-art-title">{accent(n.title)}</h1>
               <p className="fn-art-dek">{n.dek}</p>
               <p className="fn-art-meta">Field Notes · {n.minutes} min read</p>
             </div>

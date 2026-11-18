@@ -40,7 +40,7 @@ export default function CoreHealthPanels({ headingLevel = 'h2', variant = 'defau
       <section className="chp" aria-labelledby={`${selectId}-h`} data-sex={sex} data-variant="pricing">
         <div className="chp-wrap">
           <div className="chp-head">
-            <H id={`${selectId}-h`} className="chp-h">Core Health Panels</H>
+            <H id={`${selectId}-h`} className="chp-h">Core Health <span className="al-acc">Panels</span></H>
             <div className="chp-pick">
               <label className="chp-k" htmlFor={selectId}>Who are these panels for?</label>
               <div className="chp-select">
@@ -93,7 +93,7 @@ export default function CoreHealthPanels({ headingLevel = 'h2', variant = 'defau
           <svg aria-hidden="true" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M4 6l4 4 4-4" /></svg>
         </div>
 
-        <H id={`${selectId}-h`} className="chp-h">Core Health Panels</H>
+        <H id={`${selectId}-h`} className="chp-h">Core Health <span className="al-acc">Panels</span></H>
         <p className="chp-lead">One doctor-reviewed panel today, two deeper panels on the way.</p>
 
         <ul className="chp-grid" aria-live="polite">

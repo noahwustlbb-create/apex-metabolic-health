@@ -8,6 +8,7 @@ import { ATHLETES } from '@/lib/athletes'
 import StepRail from '@/components/inner/StepRail'
 import { FOUNDER_NOTE } from '@/lib/founder'
 import FounderNote from '@/components/home/FounderNote'
+import { accent } from '@/components/audience/Accent'
 
 /**
  * Home sections in the AlgoRx system, to Noah's structure (12 Nov 2026):
@@ -33,7 +34,7 @@ function Head({ id, n, k, title, cap, dark }: { id: string; n: string; k: string
     <div className="al-head" data-dark={dark || undefined}>
       <div>
         <p className="al-k al-num">// {n} {k}</p>
-        <h2 id={id} className="al-h2">{title}</h2>
+        <h2 id={id} className="al-h2">{accent(title)}</h2>
       </div>
       {cap && <p className="al-cap">{cap.map((c, i) => <span key={c}>{c}{i < cap.length - 1 && <br />}</span>)}</p>}
     </div>
@@ -186,7 +187,7 @@ export function Community() {
       <section className="al-comm" id="community" aria-labelledby="comm-title">
         <div className="container-x al-comm-in">
           <p className="al-k">// Verified</p>
-          <h2 id="comm-title" className="al-h2">Proof you can check.</h2>
+          <h2 id="comm-title" className="al-h2">{accent('Proof you can check.')}</h2>
           <p className="al-comm-lead">Our LegitScript certification is public, so anyone can look it up. Been a patient? Leave us feedback on Trustpilot.</p>
           <div className="al-comm-review">
             <a
@@ -229,7 +230,7 @@ export function Community() {
         <section className="al-ath" id="athletes" aria-labelledby="ath-title">
           <div className="container-x al-ath-in">
             <p className="al-k">// Sponsorship</p>
-            <h2 id="ath-title" className="al-h2">Sponsored athletes.</h2>
+            <h2 id="ath-title" className="al-h2">{accent('Sponsored athletes.')}</h2>
             <p className="al-comm-lead">Apex sponsors these fighters. Their records are their own work.</p>
             <ul className="al-ath-row" role="list" data-rail>
               {ATHLETES.map(a => (
@@ -290,7 +291,7 @@ export function HomeClub() {
       <div className="container-x">
         <div className="al-club-head">
           <p className="al-k">{'// Apex Membership'}</p>
-          <h2 id="club-title" className="al-h2">Join Apex Membership.</h2>
+          <h2 id="club-title" className="al-h2">Join <span className="al-acc">Apex Membership.</span></h2>
           <p className="al-lead">One plan and one monthly fee. Member rates on panels, consults and follow-ups. Cancel from your account.</p>
         </div>
         <ul className="ip-cards" role="list">
@@ -358,7 +359,7 @@ export function HomeFAQ() {
       <div className="container-x al-faq-in">
         <div className="al-faq-side">
           <p className="al-k">// Straight answers</p>
-          <h2 id="faq-title" className="al-h2">You ask,<br />we answer.</h2>
+          <h2 id="faq-title" className="al-h2">You ask,<br /><span className="al-acc">we answer.</span></h2>
           <p className="al-lead">The straight answers on bloods, doctors, fees and cancelling.</p>
         </div>
         <div className="al-faq-list">
@@ -387,7 +388,7 @@ export function ReadyToStart() {
       <img className="al-close-bg for-women" src={W.call.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: W.call.pos }} />
       <div className="container-x al-close-in">
         <p className="al-k">// 06 Ready to start</p>
-        <h2 id="close-title" className="al-h2">Ready to start.</h2>
+        <h2 id="close-title" className="al-h2">Ready to <span className="al-acc">start.</span></h2>
         <p className="al-lead">Create your free account, order your bloods, and a doctor reads every result with you. No GP referral.</p>
         <div className="al-close-row">
           <Link href={START_HREF} className="al-pill al-pill-lg al-pill-light">Create your free account <Arrow /></Link>

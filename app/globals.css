@@ -11,6 +11,7 @@
 @import '../styles/inner.css';
 @import '../styles/field-notes.css';
 @import '../styles/quiz.css';
+@import '../styles/accent.css';
 
 :root {
   /* Primitive not covered by tokens.css */

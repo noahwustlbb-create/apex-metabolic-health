@@ -1,0 +1,71 @@
+/*
+ * ACCENT, site-wide (Noah, 15 Nov 2026, women's pages: "Add pink to it! Maybe to the headline or sub, or the CTA
+ * can be pink as well", then "Do the same for men"; 11 Nov: "keep the gender selector, where it will go pink or
+ * blue"). PR #84 did this on the program pages (styles/programs-al.css, end of file). This carries the same rule
+ * and the same tokens to home and the inner pages:
+ *   - the accent line of each headline (.al-acc, components/audience/Accent.tsx) and the home hero's second line;
+ *   - the primary buttons (Create your free account, Join as a member, Explore membership, Order panel);
+ *   - the hero's For men / For women pills once one is pressed.
+ * Women (html[data-audience=women]) get rose, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
+ * changes. Body text, the logo lockup, forms and the portal are untouched.
+ *
+ * Tokens (#84, inner.css, panels.css): rose #b8285b on light, #ff7aa8 on black; blue #0d5dea on light, #5b9bff
+ * on black. Contrast: #b8285b on #fafafa 5.8:1, on the hero's #fbecf2 5.3:1; #0d5dea on #fafafa 5.3:1, on the
+ * hero's #e6f0fc 4.8:1; #ff7aa8 on #050505 8.4:1; #5b9bff on #050505 7.4:1. Buttons: white on #b8285b 6.0:1,
+ * white on #0d5dea 5.6:1; hover #05070b on #ff7aa8 8.3:1, on #5b9bff 7.3:1. Button edge on black: 3.4:1 / 3.7:1.
+ * The <head> boot script sets both attributes before first paint, so nothing flashes blue for women.
+ */
+
+html[data-audience="women"] { --acc: #b8285b; --acc-on-dark: #ff7aa8; }
+html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
+
+/* ── Headlines: the accent line. Light grounds take --acc, black bands --acc-on-dark. The !important beats
+   inner.css's `main.al-page :is(h1,h2) :is(span,em) { color: inherit !important }`. ── */
+html[data-audience="women"] .al-acc, html[data-chosen="men"] .al-acc {
+  color: var(--acc) !important; -webkit-text-fill-color: currentColor !important;
+}
+html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc,
+html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc {
+  color: var(--acc-on-dark) !important;
+}
+
+/* Home hero, second line ("The science of performing better."): 42% ink until the pick, then the accent. */
+html[data-audience="women"] .hx-h1-b, html[data-chosen="men"] .hx-h1-b { color: var(--acc); transition: color 0.6s ease; }
+
+/* ── Primary buttons ── */
+html[data-audience="women"] :is(.home-main, .al-page, .al-foot) .al-pill-light,
+html[data-chosen="men"] :is(.home-main, .al-page, .al-foot) .al-pill-light,
+html[data-audience="women"] .al-page .ip-path[data-featured] .al-pill,
+html[data-chosen="men"] .al-page .ip-path[data-featured] .al-pill,
+html[data-audience="women"] .hsb .hsb-start, html[data-chosen="men"] .hsb .hsb-start,
+html[data-audience="women"] .al-page-bar .al-page-bar-start, html[data-chosen="men"] .al-page-bar .al-page-bar-start,
+html[data-audience="women"] .chp .chp-btn-solid, html[data-chosen="men"] .chp .chp-btn-solid,
+html[data-audience="women"] .prog-al-bar .al-pill-light, html[data-chosen="men"] .prog-al-bar .al-pill-light {
+  background: var(--acc); color: #fff;
+}
+@media (hover: hover) {
+  html[data-audience="women"] :is(.home-main, .al-page, .al-foot) .al-pill-light:hover,
+  html[data-chosen="men"] :is(.home-main, .al-page, .al-foot) .al-pill-light:hover,
+  html[data-audience="women"] .al-page .ip-path[data-featured] .al-pill:hover,
+  html[data-chosen="men"] .al-page .ip-path[data-featured] .al-pill:hover,
+  html[data-audience="women"] .chp .chp-btn-solid:hover, html[data-chosen="men"] .chp .chp-btn-solid:hover {
+    background: var(--acc-on-dark); color: #05070b;
+  }
+}
+/* Footer "Create your free account" (algo.css / programs-al.css pin it white with !important). */
+html[data-audience="women"] :is(.al-foot, .prog-al-foot) .btn-primary.footer-start,
+html[data-chosen="men"] :is(.al-foot, .prog-al-foot) .btn-primary.footer-start {
+  background: var(--acc) !important; color: #fff !important;
+}
+
+/* Home hero "Create your free account": label and arrow both take the accent once a side is picked. */
+html[data-audience="women"] .hx .stage-cta-label, html[data-chosen="men"] .hx .stage-cta-label,
+html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .stage-cta-arrow {
+  background: var(--acc);
+}
+
+/* ── The hero's For men / For women pills: the pressed one fills with its colour, white text and dot. ── */
+.hx-pick-btn[data-who="men"][aria-pressed="true"] { background: #0d5dea; border-color: #0d5dea; }
+.hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b8285b; border-color: #b8285b; }
+.hx-pick-btn[data-who="men"][aria-pressed="true"]::before,
+.hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #fff; }

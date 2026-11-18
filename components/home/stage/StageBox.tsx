@@ -47,7 +47,7 @@ export default function StageBox() {
     <section ref={ref} className="st-box" aria-labelledby="st-box-title">
       <div className="st-box-head container-x">
         <p className="al-k">→ Doctor-led, start to finish</p>
-        <h2 id="st-box-title" className="al-h2">Measure first. Then treat.</h2>
+        <h2 id="st-box-title" className="al-h2">Measure first. <span className="al-acc">Then treat.</span></h2>
       </div>
       <div ref={stageRef} className="st-box-stage">
         <motion.div

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { accent } from '@/components/audience/Accent'
 import { womenPreload } from '@/components/audience/preload'
 import Footer from '@/components/Footer'
 import InnerStickyBar from '@/components/inner/InnerStickyBar'
@@ -90,7 +91,7 @@ export function InnerHero({ kicker, title, lead, cap, photo, sidePhoto, cta = tr
         <div className="ip-hero-in">
           <div className="ip-hero-copy">
             <p className="al-k">{'// '}{kicker}</p>
-            <h1 id={id} className="ip-h1">{title}</h1>
+            <h1 id={id} className="ip-h1">{accent(title)}</h1>
             {lead && <p className="ip-hero-lead">{lead}</p>}
             {cta && (
               <div className="ip-hero-row">
@@ -111,7 +112,7 @@ export function Head({ id, kicker, title, cap, dark }: { id: string; kicker: str
     <div className="ip-head" data-dark={dark || undefined}>
       <div>
         <p className="al-k">{'// '}{kicker}</p>
-        <h2 id={id} className="al-h2">{title}</h2>
+        <h2 id={id} className="al-h2">{accent(title)}</h2>
       </div>
       {cap && <Cap lines={cap} />}
     </div>
@@ -238,7 +239,7 @@ export function FaqSection({ faqs, kicker = 'Straight answers', title = <>You as
       <div className="container-x al-faq-in">
         <div className="al-faq-side">
           <p className="al-k">{'// '}{kicker}</p>
-          <h2 id={id} className="al-h2">{title}</h2>
+          <h2 id={id} className="al-h2">{accent(title)}</h2>
           {lead && <p className="al-lead">{lead}</p>}
           {more && <Link href="/faqs" className="al-pill" style={{ marginTop: 24 }}>All questions <Arrow /></Link>}
         </div>
@@ -278,7 +279,7 @@ export function CtaBand({ shot, kicker = 'Ready to start', title = 'Ready to sta
       {shot.women && <img className="al-close-bg for-women" src={shot.women.src} alt="" loading="lazy" decoding="async" aria-hidden="true" style={{ objectPosition: shot.women.pos ?? '50% 20%' }} />}
       <div className="container-x al-close-in">
         <p className="al-k">{'// '}{kicker}</p>
-        <h2 id="ip-close" className="al-h2">{title}</h2>
+        <h2 id="ip-close" className="al-h2">{accent(title)}</h2>
         <p className="al-lead">{lead}</p>
         <div className="al-close-row">
           <StartPill light label={label} href={href} />
