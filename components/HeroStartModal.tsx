@@ -197,7 +197,7 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                 <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', marginBottom: 8 }}>Thanks, we&apos;ll be in touch.</h2>
                 <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.6, maxWidth: 380, margin: '0 auto 24px' }}>A member of our clinical team will reach out shortly. Want to move faster? Create your account now to track your intake, results and consultations in one place.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-                  <button onClick={goSignupPrefilled} style={{ padding: '14px 32px', borderRadius: 12, background: 'var(--blue)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>Create your account &rarr;</button>
+                  <button onClick={goSignupPrefilled} style={{ padding: '14px 32px', borderRadius: 12, background: 'var(--fill)', color: 'var(--fill-on)', boxShadow: 'inset 0 0 0 1px var(--fill-edge)', border: 'none', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>Create your account &rarr;</button>
                   <button onClick={onClose} style={{ padding: '10px 24px', borderRadius: 12, background: 'transparent', color: '#475569', border: 'none', fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>I&apos;ll do this later</button>
                 </div>
               </div>
@@ -248,8 +248,8 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                 <button type="submit" disabled={busy} style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%',
                   padding: '18px 24px', borderRadius: 12, marginTop: 22, border: 'none',
-                  background: 'linear-gradient(135deg, #18709f 0%, #135d85 100%)', color: '#fff', fontSize: 15, fontWeight: 600,
-                  fontFamily: 'var(--font-space-grotesk)', boxShadow: '0 8px 32px rgba(53,164,224,0.28)',
+                  background: 'var(--fill)', color: 'var(--fill-on)', fontSize: 15, fontWeight: 600,
+                  fontFamily: 'var(--font-space-grotesk)', boxShadow: 'inset 0 0 0 1px var(--fill-edge), 0 8px 32px rgba(53,164,224,0.28)',
                   cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.75 : 1,
                 }}>
                   {busy ? 'Sending…' : 'Send my details'}{!busy && <Arrow />}

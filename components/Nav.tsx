@@ -319,8 +319,9 @@ export default function Nav() {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
-                  background: '#18709f',
-                  color: '#ffffff',
+                  background: 'var(--fill)',
+                  color: 'var(--fill-on)',
+                  boxShadow: 'inset 0 0 0 1px var(--fill-edge)',
                   padding: '16px 24px',
                   borderRadius: '999px',
                   fontSize: '14px',

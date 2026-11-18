@@ -231,3 +231,48 @@ html[data-chosen] :is(.al-k, .hx-kicker, .al-how-k, .ip-step-k, .ip-total-v, .pa
     transition: none;
   }
 }
+
+
+/* ════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ * FILLED ACCENT UI on LIGHT grounds, option B (Noah, 19 Nov 2026, "your choice"). Men and the unpicked site:
+ * #35a4e0 fill, #05070b label (7.24:1), 1px #18709f edge (inset, no layout shift), hover #5bc6f2 fill with the same
+ * label and edge. Text on light stays #18709f. Tokens --fill* live in tokens.css. Black bands put the old values
+ * back (#18709f fill, white label), so everything on dark is unchanged; women's orchid is never touched (every
+ * rule below is html:not([data-audience="women"]) and the reset covers the rest).
+ * ════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
+html:not([data-audience="women"]) :is(header.site-header-enter, .ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .ip-card[data-dark], .ip-portal-card, .ip-band, .ip-note[data-tone="dark"], .pa-hero, .pa-break, .pa-band, .pa-cta, .al-foot, .prog-al-foot, .hsb, .al-page-bar, .prog-al-bar, .tc[data-dark], .ip-head[data-dark], .al-head[data-dark]) {
+  --fill: #18709f; --fill-on: #fff; --fill-edge: transparent; --fill-hover: #5bc6f2; --fill-hover-on: #05070b;
+}
+html[data-chosen="men"] :is(.home-main, .al-page, .al-foot) .al-pill-light,
+html[data-chosen="men"] .al-page .ip-path[data-featured] .al-pill,
+html[data-chosen="men"] .hsb .hsb-start,
+html[data-chosen="men"] .al-page-bar .al-page-bar-start,
+html[data-chosen="men"] .chp .chp-btn-solid,
+html[data-chosen="men"] .prog-al-bar .al-pill-light,
+html[data-chosen="men"] .prog-al .pa-btn.al-pill-light,
+html[data-chosen="men"] .hx .stage-cta-label, html[data-chosen="men"] .hx .stage-cta-arrow,
+html:not([data-audience="women"]) .ip-path-tag, html:not([data-audience="women"]) .chp-chip,
+html:not([data-audience="women"]) .al-comm-bar, html:not([data-audience="women"]) .btn-primary,
+html:not([data-audience="women"]) .st-tile-arrow {
+  background: var(--fill) !important; color: var(--fill-on) !important; box-shadow: inset 0 0 0 1px var(--fill-edge);
+}
+html:not([data-audience="women"]) :is(.al-foot, .prog-al-foot) .btn-primary.footer-start { background: var(--fill) !important; color: var(--fill-on) !important; }
+html:not([data-audience="women"]) .al-comm-bar :is(.al-comm-bar-in, .al-comm-bar-t, .al-comm-bar-a) { color: var(--fill-on); }
+html:not([data-audience="women"]) .al-comm-bar-in:focus-visible { outline-color: var(--fill-on); }
+html[data-chosen="men"] .hx-pick-btn[data-who="men"][aria-pressed="true"] { background: var(--fill); border-color: var(--fill-edge); color: var(--fill-on); box-shadow: inset 0 0 0 1px var(--fill-edge); }
+html[data-chosen="men"] .hx-pick-btn[data-who="men"][aria-pressed="true"]::before { background: var(--fill-on); }
+html[data-chosen="men"] .al-faq-item[open] .al-faq-x { background: var(--fill); border-color: var(--fill-edge); color: var(--fill-on); }
+@media (hover: hover) {
+  html[data-chosen="men"] :is(.home-main, .al-page, .al-foot) .al-pill-light:hover,
+  html[data-chosen="men"] .al-page .ip-path[data-featured] .al-pill:hover,
+  html[data-chosen="men"] .chp .chp-btn-solid:hover,
+  html[data-chosen="men"] .prog-al .pa-btn.al-pill-light:hover,
+  html:not([data-audience="women"]) .btn-primary:hover, html:not([data-audience="women"]) .al-pill:hover {
+    background: var(--fill-hover) !important; color: var(--fill-hover-on) !important; box-shadow: inset 0 0 0 1px var(--fill-edge);
+  }
+  html:not([data-audience="women"]) :is(.ip-list a:hover .ip-list-arrow, .tg-feature:hover .tg-feature-arrow, .tg-all:hover .tg-all-arrow) {
+    background: var(--fill-hover); border-color: var(--fill-edge); color: var(--fill-hover-on);
+  }
+}
+/* Inline-styled fills (menu CTA, start modals) read the tokens too; women keep the values they had before. */
+html[data-audience="women"] { --fill: #18709f; --fill-on: #fff; --fill-edge: transparent; --fill-hover: #5bc6f2; --fill-hover-on: #05070b; }

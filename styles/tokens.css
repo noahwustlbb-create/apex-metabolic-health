@@ -244,6 +244,14 @@
     --blue:             var(--primitive-blue-700);   /* text and fills on light: 5.2:1 */
     --blue-dark:        var(--primitive-blue-800);
     --blue-light:       var(--primitive-blue-400);
+    /* Filled accent UI on LIGHT grounds (buttons, pills, chips, FAQ marker): sky fill, ink label, 1px deep edge so the
+       shape reads on white (fill alone is 2.67:1 vs #fafafa; #05070b on #35a4e0 is 7.24:1). Text stays --blue. Dark
+       grounds and the women's orchid reset these in styles/accent.css. */
+    --fill:             var(--primitive-blue-500);
+    --fill-on:          #05070b;
+    --fill-edge:        var(--primitive-blue-700);
+    --fill-hover:       var(--primitive-blue-400);
+    --fill-hover-on:    #05070b;
     --teal:             var(--primitive-blue-700);
     --gold:             var(--primitive-blue-700);
     --apex-blue:        var(--primitive-blue-700);
