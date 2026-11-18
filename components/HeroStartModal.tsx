@@ -147,10 +147,10 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                   padding: '22px 24px', borderRadius: 16, marginBottom: 14, cursor: 'pointer',
                   background: '#ffffff', border: '1.5px solid #e2e8f0', transition: 'border-color 0.18s ease, transform 0.18s ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#4890f7'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#18709f'; e.currentTarget.style.transform = 'translateY(-2px)' }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.transform = 'translateY(0)' }}
               >
-                <span style={{ width: 44, height: 44, flexShrink: 0, borderRadius: 12, background: 'rgba(72,144,247,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--blue)' }}>
+                <span style={{ width: 44, height: 44, flexShrink: 0, borderRadius: 12, background: 'rgba(53,164,224,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--blue)' }}>
                   <svg viewBox="0 0 24 24" fill="none" width={22} height={22} aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </span>
                 <span style={{ flex: 1 }}>
@@ -166,11 +166,11 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                 style={{
                   width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 16,
                   padding: '22px 24px', borderRadius: 16, cursor: 'pointer',
-                  background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', border: '1.5px solid transparent',
-                  boxShadow: '0 8px 28px rgba(72,144,247,0.28)', transition: 'transform 0.18s ease, box-shadow 0.18s ease',
+                  background: 'linear-gradient(135deg, #18709f 0%, #135d85 100%)', border: '1.5px solid transparent',
+                  boxShadow: '0 8px 28px rgba(53,164,224,0.28)', transition: 'transform 0.18s ease, box-shadow 0.18s ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 44px rgba(72,144,247,0.42)' }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(72,144,247,0.28)' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 16px 44px rgba(53,164,224,0.42)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 8px 28px rgba(53,164,224,0.28)' }}
               >
                 <span style={{ width: 44, height: 44, flexShrink: 0, borderRadius: 12, background: 'rgba(255,255,255,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                   <svg viewBox="0 0 24 24" fill="none" width={22} height={22} aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM19 8v6M22 11h-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -191,13 +191,13 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
           {view === 'form' && (
             sent ? (
               <div style={{ textAlign: 'center', paddingTop: 24 }}>
-                <div style={{ width: 56, height: 56, borderRadius: '50%', margin: '0 auto 20px', background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg viewBox="0 0 24 24" fill="none" width={26} height={26} aria-hidden="true"><path d="M5 12l5 5L19 7" stroke="#4890f7" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <div style={{ width: 56, height: 56, borderRadius: '50%', margin: '0 auto 20px', background: 'rgba(53,164,224,0.1)', border: '1px solid rgba(53,164,224,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg viewBox="0 0 24 24" fill="none" width={26} height={26} aria-hidden="true"><path d="M5 12l5 5L19 7" stroke="#18709f" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h2 style={{ fontSize: 22, fontWeight: 700, color: '#0f172a', fontFamily: 'var(--font-space-grotesk)', marginBottom: 8 }}>Thanks, we&apos;ll be in touch.</h2>
                 <p style={{ fontSize: 14, color: '#475569', lineHeight: 1.6, maxWidth: 380, margin: '0 auto 24px' }}>A member of our clinical team will reach out shortly. Want to move faster? Create your account now to track your intake, results and consultations in one place.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'center' }}>
-                  <button onClick={goSignupPrefilled} style={{ padding: '14px 32px', borderRadius: 12, background: 'var(--blue)', color: '#fff', border: 'none', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>Create your account &rarr;</button>
+                  <button onClick={goSignupPrefilled} style={{ padding: '14px 32px', borderRadius: 12, background: 'var(--fill)', color: 'var(--fill-on)', boxShadow: 'inset 0 0 0 1px var(--fill-edge)', border: 'none', fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>Create your account &rarr;</button>
                   <button onClick={onClose} style={{ padding: '10px 24px', borderRadius: 12, background: 'transparent', color: '#475569', border: 'none', fontSize: 13, fontWeight: 500, cursor: 'pointer', fontFamily: 'var(--font-space-grotesk)' }}>I&apos;ll do this later</button>
                 </div>
               </div>
@@ -248,8 +248,8 @@ export default function HeroStartModal({ onClose, program: initialProgram = '' }
                 <button type="submit" disabled={busy} style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%',
                   padding: '18px 24px', borderRadius: 12, marginTop: 22, border: 'none',
-                  background: 'linear-gradient(135deg, #4890f7 0%, #1d4fd8 100%)', color: '#fff', fontSize: 15, fontWeight: 600,
-                  fontFamily: 'var(--font-space-grotesk)', boxShadow: '0 8px 32px rgba(72,144,247,0.28)',
+                  background: 'var(--fill)', color: 'var(--fill-on)', fontSize: 15, fontWeight: 600,
+                  fontFamily: 'var(--font-space-grotesk)', boxShadow: 'inset 0 0 0 1px var(--fill-edge), 0 8px 32px rgba(53,164,224,0.28)',
                   cursor: busy ? 'default' : 'pointer', opacity: busy ? 0.75 : 1,
                 }}>
                   {busy ? 'Sending…' : 'Send my details'}{!busy && <Arrow />}

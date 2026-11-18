@@ -37,7 +37,7 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden site-footer" style={{ borderTop: '1px solid var(--border)' }}>
-      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(72,144,247,0.2), transparent)' }} aria-hidden="true" />
+      <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, rgba(53,164,224,0.2), transparent)' }} aria-hidden="true" />
 
       <div className="container-tight py-16 md:py-20">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 md:gap-12 mb-14 footer-grid">
@@ -55,7 +55,7 @@ export default function Footer() {
             <div className="flex flex-wrap gap-2 mb-6">
               {['AHPRA-registered doctors', '100% online'].map((badge) => (
                 <span key={badge} className="text-[12px] font-semibold tracking-[0.1em] uppercase px-3 py-1.5"
-                  style={{ color: TEXT, border: '1px solid rgba(72,144,247,0.3)', borderRadius: 24 }}>
+                  style={{ color: TEXT, border: '1px solid rgba(53,164,224,0.3)', borderRadius: 24 }}>
                   {badge}
                 </span>
               ))}
@@ -112,9 +112,9 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={s.label}
                   className="w-11 h-11 rounded-lg flex items-center justify-center transition-all duration-200"
-                  style={{ color: TEXT, background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'rgba(72,144,247,0.18)' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = TEXT; e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
+                  style={{ color: TEXT, background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.2)' }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'rgba(53,164,224,0.18)' }}
+                  onMouseLeave={e => { e.currentTarget.style.color = TEXT; e.currentTarget.style.background = 'rgba(53,164,224,0.08)' }}
                 >
                   {s.icon}
                 </a>
@@ -186,10 +186,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="h-px w-full mb-8" style={{ backgroundColor: 'rgba(72,144,247,0.12)' }} aria-hidden="true" />
+        <div className="h-px w-full mb-8" style={{ backgroundColor: 'rgba(53,164,224,0.12)' }} aria-hidden="true" />
 
         {/* Compliance */}
-        <div className="p-5 rounded-none mb-8 footer-legal" style={{ backgroundColor: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.1)' }}>
+        <div className="p-5 rounded-none mb-8 footer-legal" style={{ backgroundColor: 'rgba(53,164,224,0.04)', border: '1px solid rgba(53,164,224,0.1)' }}>
           <p className="text-xs leading-relaxed mb-2" style={{ color: DIM }}>
             All consultations conducted by AHPRA-registered medical practitioners. This website does not constitute medical advice. Apex Metabolic Health operates under Imperial Equity Investments Pty Ltd.
           </p>

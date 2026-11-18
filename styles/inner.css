@@ -15,8 +15,8 @@
   --al-mute: #55595f;            /* 7.1:1 on #fafafa */
   --al-line: #0a0a0a;
   --al-hair: #dcdcda;
-  --al-accent: #0d5dea;          /* Apex blue */
-  --al-accent-on-dark: #5b9bff;  /* 7.4:1 on #050505 */
+  --al-accent: #18709f;          /* Apex sky blue on light, 5.2:1 on #fafafa */
+  --al-accent-on-dark: #5bc6f2;  /* 10.5:1 on #050505 */
   --al-r: 24px;
   --al-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
@@ -47,7 +47,7 @@ html:has(.al-page) header.site-header-enter {
   border-bottom: 1px solid #1f2124 !important;
   box-shadow: none !important;
   --text-primary: #ffffff; --text-secondary: #c9ced4; --text-muted: #a3a8b0;
-  --primitive-blue-700: #8db9ff; --surface: #ffffff;
+  --primitive-blue-700: #5bc6f2; --surface: #ffffff;
 }
 html:has(.al-page) header.site-header-enter .site-navpill { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; }
 html:has(.al-page) header.site-header-enter a[style*="#0f172a"] { background: #ffffff !important; color: #0a0a0a !important; }
@@ -188,7 +188,7 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
 /* Desktop: the step under the pointer holds, its neighbours sit back. */
 @media (hover: hover) and (pointer: fine) and (min-width: 900px) {
   .ip-steps:hover li:not(:hover) > * { opacity: 0.6; }
-  .ip-steps li:hover .ip-step-ic { color: var(--al-accent-on-dark, #5b9bff); transform: translateY(-3px); }
+  .ip-steps li:hover .ip-step-ic { color: var(--al-accent-on-dark, #5bc6f2); transform: translateY(-3px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ip-steps[data-live] li, .ip-steps[data-live]:not([data-in]) li { opacity: 1; transform: none; transition: border-color 0.2s ease; }
@@ -408,11 +408,11 @@ html:has(.al-page) header .nav-start-m { background: #ffffff !important; color: 
   /* Phones: the box you are on lights up, the rest sit back, and the rail and counter follow the swipe. */
   .ip-steps[data-live] li:not([data-active]) > * { opacity: 0.7; } /* body text stays about 5:1 on the box */
   .ip-steps[data-live] li[data-active] { border-color: #4a4f57; }
-  .ip-steps[data-live] li[data-active] .ip-step-ic { color: var(--al-accent-on-dark, #5b9bff); }
+  .ip-steps[data-live] li[data-active] .ip-step-ic { color: var(--al-accent-on-dark, #5bc6f2); }
   /* Shown only once the script is running, so a rail never sits there without following the swipe. */
   .ip-steps[data-live] + .ip-rail { display: flex; align-items: center; gap: 14px; margin-top: 16px; }
   .ip-rail-track { position: relative; flex: 1; height: 2px; border-radius: 2px; background: #26292d; overflow: hidden; }
-  .ip-rail-fill { position: absolute; inset: 0; background: var(--al-accent-on-dark, #5b9bff); transform-origin: 0 50%; transition: transform 0.12s linear; }
+  .ip-rail-fill { position: absolute; inset: 0; background: var(--al-accent-on-dark, #5bc6f2); transform-origin: 0 50%; transition: transform 0.12s linear; }
   .ip-rail-n { font: 500 11.5px/1 var(--al-mono, ui-monospace, "SF Mono", Menlo, monospace); letter-spacing: 0.12em; color: #a3a8b0; font-variant-numeric: tabular-nums; }
   .ip-how-cta { margin-top: 28px; }
   .ip-why { grid-template-columns: 1fr; gap: 0; padding-top: 0; border-top: 0; }

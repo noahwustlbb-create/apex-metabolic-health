@@ -31,6 +31,8 @@ const MOBILE_LINKS = [
 
 const TEXT = 'var(--text-primary)'
 const BLUE = 'var(--blue)'
+/* Hover on the black header bar: the on-dark sky (#5bc6f2, 10.5:1), not --blue (#18709f is 3.7:1 on black). */
+const HOVER_ON_DARK = 'var(--blue-light)'
 
 export default function Nav() {
   const prefersReduced = useReducedMotionSafe()
@@ -109,7 +111,7 @@ export default function Nav() {
                 style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', padding: 0 }}
                 aria-expanded={programsOpen}
                 aria-haspopup="menu"
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = HOVER_ON_DARK }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = TEXT }}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') {
@@ -150,7 +152,7 @@ export default function Nav() {
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'background 0.12s, color 0.12s' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.09)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.09)'; e.currentTarget.style.color = 'var(--text-primary)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)' }}
                         onKeyDown={(e) => {
                           if (e.key === 'Escape') {
@@ -171,7 +173,7 @@ export default function Nav() {
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '12px', fontWeight: 600, color: BLUE, textDecoration: 'none', transition: 'background 0.12s' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.08)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                         onKeyDown={(e) => { if (e.key === 'Escape') { setProgramsOpen(false); programsButtonRef.current?.focus() } }}
                       >
@@ -193,7 +195,7 @@ export default function Nav() {
                 href={link.href}
                 aria-current={pathname === link.href ? 'page' : undefined}
                 style={linkStyle}
-                onMouseEnter={e => { e.currentTarget.style.color = BLUE }}
+                onMouseEnter={e => { e.currentTarget.style.color = HOVER_ON_DARK }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
               >
                 {link.label}
@@ -317,8 +319,9 @@ export default function Nav() {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
-                  background: '#1d4fd8',
-                  color: '#ffffff',
+                  background: 'var(--fill)',
+                  color: 'var(--fill-on)',
+                  boxShadow: 'inset 0 0 0 1px var(--fill-edge)',
                   padding: '16px 24px',
                   borderRadius: '999px',
                   fontSize: '14px',

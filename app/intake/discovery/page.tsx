@@ -32,7 +32,7 @@ function Input({ id, value, onChange, placeholder, type = 'text', inputMode }: {
       placeholder={placeholder} inputMode={inputMode}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none"
-      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(53,164,224,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
@@ -45,7 +45,7 @@ function TextArea({ id, value, onChange, placeholder }: { id?: string; value: st
       placeholder={placeholder} rows={4}
       onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
       className="w-full px-4 py-3 rounded-sm text-sm transition-colors duration-200 focus:outline-none resize-none"
-      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(72,144,247,0.18)'}`, color: 'var(--text-primary)' }}
+      style={{ backgroundColor: 'var(--elevated-high)', border: `1px solid ${focused ? 'var(--blue)' : 'rgba(53,164,224,0.18)'}`, color: 'var(--text-primary)' }}
     />
   )
 }
@@ -105,7 +105,7 @@ export default function DiscoveryCallPage() {
           <div className="container-tight max-w-xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
-                style={{ backgroundColor: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.25)' }}>
+                style={{ backgroundColor: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.25)' }}>
                 <svg viewBox="0 0 24 24" fill="none" className="w-10 h-10" style={{ color: 'var(--blue)' }}>
                   <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -162,7 +162,7 @@ export default function DiscoveryCallPage() {
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-            className="apex-card p-8 space-y-6" style={{ backgroundColor: "var(--bg)", border: "1px solid rgba(72,144,247,0.14)" }}>
+            className="apex-card p-8 space-y-6" style={{ backgroundColor: "var(--bg)", border: "1px solid rgba(53,164,224,0.14)" }}>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -192,12 +192,12 @@ export default function DiscoveryCallPage() {
                   <button key={p} type="button" onClick={() => set('program', p)}
                     className="flex items-center gap-3 px-4 py-3 rounded-sm text-sm text-left transition-all duration-150"
                     style={{
-                      backgroundColor: form.program === p ? 'rgba(72,144,247,0.07)' : '#f8f9ff',
-                      border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(72,144,247,0.2)'}`,
+                      backgroundColor: form.program === p ? 'rgba(53,164,224,0.07)' : '#f8f9ff',
+                      border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(53,164,224,0.2)'}`,
                       color: form.program === p ? 'var(--blue)' : '#0a0e1a',
                     }}>
                     <span className="w-4 h-4 flex-shrink-0 rounded-full flex items-center justify-center"
-                      style={{ border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(72,144,247,0.3)'}`, backgroundColor: form.program === p ? 'var(--blue)' : 'transparent' }}>
+                      style={{ border: `1px solid ${form.program === p ? 'var(--blue)' : 'rgba(53,164,224,0.3)'}`, backgroundColor: form.program === p ? 'var(--blue)' : 'transparent' }}>
                       {form.program === p && <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--elevated-high)' }} />}
                     </span>
                     {p}

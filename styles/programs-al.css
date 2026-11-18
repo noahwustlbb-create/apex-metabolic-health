@@ -15,8 +15,8 @@
   --al-mute: #55595f;            /* 7.1:1 on #fafafa */
   --al-line: #0a0a0a;
   --al-hair: #dcdcda;
-  --al-accent: #0d5dea;          /* Apex blue */
-  --al-accent-on-dark: #5b9bff;  /* 7.4:1 on #050505 */
+  --al-accent: #18709f;          /* Apex sky blue on light, 5.2:1 on #fafafa */
+  --al-accent-on-dark: #5bc6f2;  /* 10.5:1 on #050505 */
   --al-r: 24px;
   --al-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
@@ -199,7 +199,7 @@ main.prog-al :is(h1.pa-h1, h2.al-h2, h2.pa-break-h):not(.x):not(.y) { font-weigh
 /* ── Footer black (same as home) ── */
 .prog-al-foot {
   --text-primary: #ffffff; --text-secondary: #d3d6db; --text-muted: #a3a8b0;
-  --border: #1f2124; --blue: #9a9fa6; --primitive-blue-700: #8db9ff;
+  --border: #1f2124; --blue: #9a9fa6; --primitive-blue-700: #5bc6f2;
   background: #050505;
 }
 .prog-al-foot .site-footer { background: #050505 !important; color: #fff; border-top: 0 !important; }
@@ -231,7 +231,7 @@ html:has(.prog-al) header.site-header-enter {
   -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
   border-bottom: 1px solid #1f2124 !important;
   --text-primary: #ffffff; --text-secondary: #c9ced4; --text-muted: #a3a8b0;
-  --primitive-blue-700: #8db9ff; --surface: #ffffff;
+  --primitive-blue-700: #5bc6f2; --surface: #ffffff;
 }
 html:has(.prog-al) header.site-header-enter .site-navpill { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; }
 html:has(.prog-al) header.site-header-enter a[style*="#0f172a"] { background: #ffffff !important; color: #0a0a0a !important; }

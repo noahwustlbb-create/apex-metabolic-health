@@ -76,7 +76,7 @@ export default function UnsubscribePage() {
               </p>
 
               <div className="rounded-xl px-5 py-4 mb-7"
-                style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.15)' }}>
+                style={{ background: 'rgba(53,164,224,0.05)', border: '1px solid rgba(53,164,224,0.15)' }}>
                 <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.8 }}>
                   This stops marketing and educational emails only. Messages about your own care — appointment
                   confirmations, pathology requests, results and clinical updates — will continue, as they&apos;re part
@@ -94,7 +94,7 @@ export default function UnsubscribePage() {
                   onChange={e => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-                  style={{ background: 'var(--surface)', border: '1px solid rgba(72,144,247,0.15)', color: 'var(--text-primary)' }}
+                  style={{ background: 'var(--surface)', border: '1px solid rgba(53,164,224,0.15)', color: 'var(--text-primary)' }}
                 />
                 {status === 'error' && (
                   <p className="text-xs" style={{ color: 'var(--color-danger-fg)' }}>

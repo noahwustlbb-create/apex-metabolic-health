@@ -14,8 +14,8 @@
   --al-mute: #55595f;            /* 7.1:1 on #fafafa */
   --al-line: #0a0a0a;
   --al-hair: #dcdcda;
-  --al-accent: #0d5dea;          /* Apex blue */
-  --al-accent-on-dark: #5b9bff;  /* Apex blue lifted for black grounds, 7.4:1 */
+  --al-accent: #18709f;          /* Apex sky blue on light, 5.2:1 on #fafafa */
+  --al-accent-on-dark: #5bc6f2;  /* GTA 6 sky blue on black grounds, 10.5:1 */
   --al-r: 24px;
   --al-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
@@ -238,7 +238,7 @@
   --text-muted: #a3a8b0;         /* 8.4:1 on #050505 */
   --border: #1f2124;
   --blue: #9a9fa6;
-  --primitive-blue-700: #8db9ff;
+  --primitive-blue-700: #5bc6f2;
   background: #050505;
 }
 .al-foot .site-footer { background: #050505 !important; color: #fff; border-top: 0 !important; }
@@ -272,7 +272,7 @@ html:has(.home-main) header.site-header-enter {
   --text-primary: #ffffff;
   --text-secondary: #c9ced4;
   --text-muted: #a3a8b0;
-  --primitive-blue-700: #8db9ff;
+  --primitive-blue-700: #5bc6f2;
   --surface: #ffffff;
 }
 html:has(.home-main) header.site-header-enter .site-navpill { background: transparent; border-color: transparent; box-shadow: none; backdrop-filter: none; }

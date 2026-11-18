@@ -19,7 +19,7 @@ export default function ScrollProgress() {
         position: 'fixed', top: 0, left: 0, right: 0, height: 2, zIndex: 1100,
         transformOrigin: '0 50%',
         scaleX: reduced ? scrollYProgress : scaleX,
-        background: 'linear-gradient(90deg, var(--blue), #1d4fd8)',
+        background: 'linear-gradient(90deg, #35a4e0, #5bc6f2)',
         pointerEvents: 'none' }}
     />
   )

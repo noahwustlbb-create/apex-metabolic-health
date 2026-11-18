@@ -57,7 +57,7 @@ export default function AppComingSoon() {
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at 50% 30%, rgba(72,144,247,0.07) 0%, transparent 55%)',
+              background: 'radial-gradient(ellipse at 50% 30%, rgba(53,164,224,0.07) 0%, transparent 55%)',
             }}
           />
           <div className="absolute inset-0 dot-grid opacity-30" aria-hidden="true" />
@@ -71,13 +71,13 @@ export default function AppComingSoon() {
               transition={{ duration: 0.5, ease }}
               className="mb-8 inline-flex items-center gap-2.5 px-4 py-2 rounded-full"
               style={{
-                background: 'rgba(72,144,247,0.06)',
-                border: '1px solid rgba(72,144,247,0.2)',
+                background: 'rgba(53,164,224,0.06)',
+                border: '1px solid rgba(53,164,224,0.2)',
               }}
             >
               <span
                 className="w-1.5 h-1.5 rounded-full"
-                style={{ background: 'var(--blue)', boxShadow: '0 0 6px rgba(72,144,247,0.8)' }}
+                style={{ background: 'var(--blue)', boxShadow: '0 0 6px rgba(53,164,224,0.8)' }}
               />
               <span
                 className="text-[11px] font-semibold tracking-[0.2em] uppercase"
@@ -140,7 +140,7 @@ export default function AppComingSoon() {
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-              <p className="text-sm" style={{ color: 'rgba(72,144,247,0.6)' }}>
+              <p className="text-sm" style={{ color: '#18709f' }}>
                 App available to all active patients at launch
               </p>
             </motion.div>
@@ -181,7 +181,7 @@ export default function AppComingSoon() {
                 >
                   <div
                     className="w-1.5 h-1.5 rounded-full mb-5"
-                    style={{ background: 'rgba(72,144,247,0.55)' }}
+                    style={{ background: 'rgba(53,164,224,0.55)' }}
                   />
                   <h3
                     className="text-base font-semibold mb-2"
@@ -204,7 +204,7 @@ export default function AppComingSoon() {
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'radial-gradient(ellipse at 50% 100%, rgba(72,144,247,0.05) 0%, transparent 55%)',
+              background: 'radial-gradient(ellipse at 50% 100%, rgba(53,164,224,0.05) 0%, transparent 55%)',
             }}
           />
           <div className="container-tight relative z-10 text-center">

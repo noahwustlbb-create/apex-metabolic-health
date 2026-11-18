@@ -49,9 +49,9 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           width: 240,
           borderRadius: 32,
           background: 'var(--elevated-high)',
-          border: '1.5px solid rgba(72,144,247,0.15)',
+          border: '1.5px solid rgba(53,164,224,0.15)',
           boxShadow:
-            '0 48px 80px rgba(0,0,0,0.7), 0 0 80px rgba(72,144,247,0.07), 0 0 160px rgba(72,144,247,0.03)',
+            '0 48px 80px rgba(0,0,0,0.7), 0 0 80px rgba(53,164,224,0.07), 0 0 160px rgba(53,164,224,0.03)',
           padding: '10px 10px 16px',
           flexShrink: 0,
         }}
@@ -63,7 +63,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               height: 6,
               borderRadius: 3,
               background: 'var(--surface)',
-              border: '1px solid rgba(72,144,247,0.08)',
+              border: '1px solid rgba(53,164,224,0.08)',
             }}
           />
         </div>
@@ -86,7 +86,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                   width: 2.5,
                   height: h,
                   borderRadius: 1,
-                  background: h >= 5 ? 'var(--blue)' : 'rgba(72,144,247,0.12)',
+                  background: h >= 5 ? 'var(--blue)' : 'rgba(53,164,224,0.12)',
                 }}
               />
             ))}
@@ -95,7 +95,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 width: 14,
                 height: 7,
                 borderRadius: 2,
-                border: '1px solid rgba(72,144,247,0.14)',
+                border: '1px solid rgba(53,164,224,0.14)',
                 marginLeft: 2,
                 position: 'relative',
                 overflow: 'hidden',
@@ -119,7 +119,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
         <div
           style={{
             padding: '0 8px 10px',
-            borderBottom: '1px solid rgba(72,144,247,0.07)',
+            borderBottom: '1px solid rgba(53,164,224,0.07)',
             marginBottom: 10,
           }}
         >
@@ -153,14 +153,14 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             margin: '0 6px 8px',
             padding: '10px',
             borderRadius: 10,
-            background: 'rgba(72,144,247,0.04)',
-            border: '1px solid rgba(72,144,247,0.12)',
+            background: 'rgba(53,164,224,0.04)',
+            border: '1px solid rgba(53,164,224,0.12)',
           }}
         >
           <p
             style={{
               fontSize: 7,
-              color: 'var(--blue)',
+              color: 'var(--blue-dark)',
               fontWeight: 700,
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
@@ -206,7 +206,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               >
                 38
               </span>
-              <span style={{ fontSize: 7.5, color: 'var(--blue)', display: 'block', marginTop: 1 }}>
+              <span style={{ fontSize: 7.5, color: 'var(--blue-dark)', display: 'block', marginTop: 1 }}>
                 chronological
               </span>
             </div>
@@ -215,13 +215,13 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             <svg viewBox="0 0 10 10" fill="none" width="8" height="8" aria-hidden="true">
               <path
                 d="M5 8V2M2 5l3-3 3 3"
-                stroke="#4890f7"
+                stroke="#18709f"
                 strokeWidth="1.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
-            <span style={{ fontSize: 7.5, color: 'var(--blue)', fontWeight: 700 }}>
+            <span style={{ fontSize: 7.5, color: 'var(--blue-dark)', fontWeight: 700 }}>
               Biological age tracked over time
             </span>
           </div>
@@ -245,7 +245,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             }}
           >
             <p style={{ fontSize: 7.5, fontWeight: 700, color: 'var(--text-primary)' }}>Testosterone</p>
-            <span style={{ fontSize: 8, color: 'var(--blue)', fontWeight: 700 }}>22.4 nmol/L</span>
+            <span style={{ fontSize: 8, color: 'var(--blue-dark)', fontWeight: 700 }}>22.4 nmol/L</span>
           </div>
           <svg
             viewBox="0 0 200 38"
@@ -256,13 +256,13 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           >
             <defs>
               <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#4890f7" stopOpacity="0.22" />
-                <stop offset="100%" stopColor="#4890f7" stopOpacity="0" />
+                <stop offset="0%" stopColor="#18709f" stopOpacity="0.22" />
+                <stop offset="100%" stopColor="#18709f" stopOpacity="0" />
               </linearGradient>
             </defs>
             <path
               d="M0 30 L32 26 L64 20 L96 16 L128 11 L160 7 L200 4"
-              stroke="#4890f7"
+              stroke="#18709f"
               strokeWidth="1.5"
               strokeLinecap="round"
             />
@@ -274,7 +274,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
             <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Jan</span>
             <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Apr</span>
-            <span style={{ fontSize: 6.5, color: 'var(--blue)', fontWeight: 600 }}>Now</span>
+            <span style={{ fontSize: 6.5, color: 'var(--blue-dark)', fontWeight: 600 }}>Now</span>
           </div>
         </div>
 
@@ -295,7 +295,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--blue)', opacity: 0.7 }}
             />
           </div>
-          <p style={{ fontSize: 7.5, color: 'var(--blue)', marginTop: 3 }}>
+          <p style={{ fontSize: 7.5, color: 'var(--blue-dark)', marginTop: 3 }}>
             Next review: 14 Aug 2025
           </p>
         </div>
@@ -323,7 +323,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                   width: 14,
                   height: 14,
                   borderRadius: 3,
-                  background: i === 0 ? 'rgba(72,144,247,0.1)' : 'transparent',
+                  background: i === 0 ? 'rgba(53,164,224,0.1)' : 'transparent',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -341,7 +341,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               <span
                 style={{
                   fontSize: 5.5,
-                  color: i === 0 ? 'var(--blue)' : '#9ca3af',
+                  color: i === 0 ? 'var(--blue-dark)' : '#9ca3af',
                   fontWeight: i === 0 ? 700 : 400,
                 }}
               >
@@ -372,7 +372,7 @@ function LeftCallout({ title, body, index, inView }: { title: string; body: stri
         </p>
         <div
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.55)' }}
+          style={{ background: 'rgba(53,164,224,0.55)' }}
         />
       </div>
       <p
@@ -396,7 +396,7 @@ function RightCallout({ title, body, index, inView }: { title: string; body: str
       <div className="flex items-center gap-2.5">
         <div
           className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-          style={{ background: 'rgba(72,144,247,0.55)' }}
+          style={{ background: 'rgba(53,164,224,0.55)' }}
         />
         <p
           className="text-sm font-semibold"
@@ -431,7 +431,7 @@ export default function AppFeature() {
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 60%, rgba(72,144,247,0.04) 0%, transparent 55%)',
+          background: 'radial-gradient(ellipse at 50% 60%, rgba(53,164,224,0.04) 0%, transparent 55%)',
         }}
       />
 
@@ -454,7 +454,7 @@ export default function AppFeature() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)', maxWidth: '600px' }}
           >
             Your care,{' '}
-            <span style={{ color: 'var(--blue)' }}>
+            <span style={{ color: 'var(--blue-dark)' }}>
               visible over time.
             </span>
           </motion.h2>
@@ -497,7 +497,7 @@ export default function AppFeature() {
                 <div className="flex items-center gap-2">
                   <div
                     className="w-1 h-1 rounded-full flex-shrink-0"
-                    style={{ background: 'rgba(72,144,247,0.55)' }}
+                    style={{ background: 'rgba(53,164,224,0.55)' }}
                   />
                   <p
                     className="text-xs font-semibold"
@@ -529,7 +529,7 @@ export default function AppFeature() {
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <p className="text-xs" style={{ color: 'var(--blue)' }}>
+          <p className="text-xs" style={{ color: 'var(--blue-dark)' }}>
             App included with all active memberships at launch
           </p>
         </motion.div>
