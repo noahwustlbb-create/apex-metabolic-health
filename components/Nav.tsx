@@ -31,6 +31,8 @@ const MOBILE_LINKS = [
 
 const TEXT = 'var(--text-primary)'
 const BLUE = 'var(--blue)'
+/* Hover on the black header bar: the on-dark sky (#5bc6f2, 10.5:1), not --blue (#18709f is 3.7:1 on black). */
+const HOVER_ON_DARK = 'var(--blue-light)'
 
 export default function Nav() {
   const prefersReduced = useReducedMotionSafe()
@@ -109,7 +111,7 @@ export default function Nav() {
                 style={{ ...linkStyle, display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none', padding: 0 }}
                 aria-expanded={programsOpen}
                 aria-haspopup="menu"
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = BLUE }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = HOVER_ON_DARK }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = TEXT }}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') {
@@ -193,7 +195,7 @@ export default function Nav() {
                 href={link.href}
                 aria-current={pathname === link.href ? 'page' : undefined}
                 style={linkStyle}
-                onMouseEnter={e => { e.currentTarget.style.color = BLUE }}
+                onMouseEnter={e => { e.currentTarget.style.color = HOVER_ON_DARK }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
               >
                 {link.label}
