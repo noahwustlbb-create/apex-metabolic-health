@@ -6,17 +6,20 @@
  *   - the accent line of each headline (.al-acc, components/audience/Accent.tsx) and the home hero's second line;
  *   - the primary buttons (Create your free account, Join as a member, Explore membership, Order panel);
  *   - the hero's For men / For women pills once one is pressed.
- * Women (html[data-audience=women]) get rose, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
+ * Women (html[data-audience=women]) get orchid, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
  * changes. Body text, the logo lockup, forms and the portal are untouched.
  *
- * Tokens (#84, inner.css, panels.css): rose #b8285b on light, #ff7aa8 on black; blue #0d5dea on light, #5b9bff
- * on black. Contrast: #b8285b on #fafafa 5.8:1, on the hero's #fbecf2 5.3:1; #0d5dea on #fafafa 5.3:1, on the
- * hero's #e6f0fc 4.8:1; #ff7aa8 on #050505 8.4:1; #5b9bff on #050505 7.4:1. Buttons: white on #b8285b 6.0:1,
- * white on #0d5dea 5.6:1; hover #05070b on #ff7aa8 8.3:1, on #5b9bff 7.3:1. Button edge on black: 3.4:1 / 3.7:1.
+ * Tokens. Women (Noah, 19 Nov 2026, GTA 6 references in ~/Clients/Apex/research/pink-2026-11-19: "pastel orchid
+ * pink", a white line over a big orchid line on black): orchid #b22aa3 on light, #ea97e1 on black, replacing
+ * rose #b8285b / #ff7aa8 site-wide. Men: blue #0d5dea on light, #5b9bff on black. #ea97e1 is 2.1:1 on white, so
+ * it is never used for type on a light ground.
+ * Contrast: #b22aa3 on #fafafa 5.36:1, on the hero's #f8edf8 4.92:1; #0d5dea on #fafafa 5.34:1, on the hero's
+ * #e6f0fc 4.84:1; #ea97e1 on #050505 9.72:1; #5b9bff on #050505 7.35:1. Buttons: white on #b22aa3 5.60:1, white on
+ * #0d5dea 5.57:1; hover #05070b on #ea97e1 9.61:1, on #5b9bff 7.27:1.
  * The <head> boot script sets both attributes before first paint, so nothing flashes blue for women.
  */
 
-html[data-audience="women"] { --acc: #b8285b; --acc-on-dark: #ff7aa8; }
+html[data-audience="women"] { --acc: #b22aa3; --acc-on-dark: #ea97e1; }
 html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
 
 /* ── Headlines: the accent line. Light grounds take --acc, black bands --acc-on-dark. The !important beats
@@ -66,7 +69,7 @@ html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .s
 
 /* ── The hero's For men / For women pills: the pressed one fills with its colour, white text and dot. ── */
 .hx-pick-btn[data-who="men"][aria-pressed="true"] { background: #0d5dea; border-color: #0d5dea; }
-.hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b8285b; border-color: #b8285b; }
+.hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b22aa3; border-color: #b22aa3; }
 .hx-pick-btn[data-who="men"][aria-pressed="true"]::before,
 .hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #fff; }
 
@@ -84,16 +87,16 @@ html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .s
  * --acc-ui is the accent for whatever ground an element sits on: --acc on light, --acc-on-dark inside black bands.
  * Contrast (WCAG 2.x, ~/Projects/studio/scripts/compare/apex-accent2-contrast.mjs). Text needs 4.5:1, icons and
  * borders 3:1; every pair below clears 4.5:1.
- *   text, light grounds  #b8285b on #fafafa 5.76:1, on #ffffff 6.01:1, on the hero #fbecf2 5.26:1
+ *   text, light grounds  #b22aa3 on #fafafa 5.36:1, on #ffffff 5.60:1, on the hero #f8edf8 4.92:1
  *                        #0d5dea on #fafafa 5.34:1, on #ffffff 5.57:1, on the hero #e6f0fc 4.84:1
- *   text, black grounds  #ff7aa8 on #050505 8.35:1, on card #0b0b0c 8.06:1
+ *   text, black grounds  #ea97e1 on #050505 9.72:1, on card #0b0b0c 9.38:1
  *                        #5b9bff on #050505 7.35:1, on card #0b0b0c 7.10:1
- *   FAQ open marker      white cross on #b8285b 6.01:1, on #0d5dea 5.57:1; disc vs #fafafa as text above
- *   outline buttons      label and 1px border as text above; hover white on #b8285b 6.01:1 / #0d5dea 5.57:1,
- *                        on black bands #05070b on #ff7aa8 8.26:1 / on #5b9bff 7.27:1
+ *   FAQ open marker      white cross on #b22aa3 5.60:1, on #0d5dea 5.57:1; disc vs #fafafa as text above
+ *   outline buttons      label and 1px border as text above; hover white on #b22aa3 5.60:1 / #0d5dea 5.57:1,
+ *                        on black bands #05070b on #ea97e1 9.61:1 / on #5b9bff 7.27:1
  *   focus ring           as text above on each ground
- *   selection            white on #b8285b 6.01:1 / #0d5dea 5.57:1; black bands #05070b on #ff7aa8 / #5b9bff
- *   scroll progress      #ff7aa8 / #5b9bff over the black header 8.35:1 / 7.35:1
+ *   selection            white on #b22aa3 5.60:1 / #0d5dea 5.57:1; black bands #05070b on #ea97e1 / #5b9bff
+ *   scroll progress      #ea97e1 / #5b9bff over the black header 9.72:1 / 7.35:1
  *   rail fill, ticks     as text above on each ground
  * ════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
 

@@ -14,7 +14,7 @@
   color: var(--chp-ink);
   padding: 104px 20px 72px;
 }
-.chp[data-sex="female"] { --chp-accent: #b8285b; } /* site rose, white text 6.1:1 */
+.chp[data-sex="female"] { --chp-accent: #b22aa3; } /* site orchid, white text 5.6:1 */
 .chp-wrap { max-width: 1240px; margin: 0 auto; }
 .chp-card[data-tier="advanced"] .chp-bg { filter: brightness(0.72); }
 
