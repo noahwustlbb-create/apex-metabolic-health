@@ -301,7 +301,7 @@ html:has(.prog-al) header.site-header-enter .nav-cta { background: #ffffff !impo
 /* Women's site on the program pages (Noah, 15 Nov 2026: "Add pink to it ... the headline or sub, or the CTA can be
    pink aswell"). Program pages sit outside .al-page, so the rose tokens from inner.css never reached them and every
    accent stayed blue. Same tokens, same values; men's and neutral pages keep blue. */
-html[data-audience="women"] .prog-al, html[data-audience="women"] .prog-al-bar { --al-accent: #b8285b; --al-accent-on-dark: #ff7aa8; }
+html[data-audience="women"] .prog-al, html[data-audience="women"] .prog-al-bar { --al-accent: #b22aa3; --al-accent-on-dark: #ea97e1; }
 html[data-audience="women"] .pa-hero .pa-h1 span { color: var(--al-accent-on-dark); }
 html[data-audience="women"] .prog-al .pa-btn.al-pill-light { background: var(--al-accent); color: #fff; }
 html[data-audience="women"] .prog-al .pa-btn.al-pill-light:hover { background: var(--al-accent-on-dark); color: #05070b; }

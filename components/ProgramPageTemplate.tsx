@@ -7,6 +7,7 @@ import { getImageProps } from 'next/image'
 import Image from '@/components/audience/Img'
 import { womenPreload } from '@/components/audience/preload'
 import DevicePicture from '@/components/audience/DevicePicture'
+import { Accent, accent } from '@/components/audience/Accent'
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -91,9 +92,10 @@ type WomenCopy = {
 
 /** One line of copy with a women's version. Both ship; html[data-audience] shows one (.for-men / .for-women in
  *  stage.css), so the men's line never flashes on the women's site. Same text, or no women's line: plain text. */
-function T({ m, w }: { m: string; w?: string }) {
-  if (w === undefined || w === m) return <>{m}</>
-  return <><span className="for-men">{m}</span><span className="for-women">{w}</span></>
+function T({ m, w, acc }: { m: string; w?: string; acc?: boolean }) {
+  const f = (t: string) => (acc ? accent(t) : t)
+  if (w === undefined || w === m) return <>{f(m)}</>
+  return <><span className="for-men">{f(m)}</span><span className="for-women">{f(w)}</span></>
 }
 
 // ─── Photos (repo images only; one distinct hero per page, no repeat within a page) ──
@@ -260,7 +262,7 @@ function WhatItIs({ config, photos }: { config: ProgramPageConfig; photos: Progr
         <div className="pa-intro">
           <div>
             <p className="al-k">{'// What it is'}</p>
-            <h2 id="pa-what" className="al-h2"><T m={config.empathyHeadline} w={config.women?.empathyHeadline} /></h2>
+            <h2 id="pa-what" className="al-h2"><T acc m={config.empathyHeadline} w={config.women?.empathyHeadline} /></h2>
           </div>
           <div>
             <p className="al-lead"><T m={config.empathyBody} w={config.women?.empathyBody} /></p>
@@ -299,7 +301,7 @@ function PhotoBreak({ config, photos }: { config: ProgramPageConfig; photos: Pro
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x">
         <p className="al-k">{'// Why it matters'}</p>
-        <h2 id="pa-why" className="pa-break-h"><T m={config.mechanismHeadline} w={config.women?.mechanismHeadline} /></h2>
+        <h2 id="pa-why" className="pa-break-h"><T acc m={config.mechanismHeadline} w={config.women?.mechanismHeadline} /></h2>
         <p className="pa-break-b"><T m={config.mechanismBody} w={config.women?.mechanismBody} /></p>
       </div>
     </section>
@@ -325,7 +327,7 @@ function HowItWorks({ config, photos, onStart }: { config: ProgramPageConfig; ph
     <section className="al-sec al-how" aria-labelledby="pa-how">
       <div className="container-x">
         <div className="al-head">
-          <h2 id="pa-how" className="al-h2">How it works.</h2>
+          <h2 id="pa-how" className="al-h2"><Accent>How it works.</Accent></h2>
           <p className="al-cap"><span>Four steps<br /></span><span>No GP referral<br /></span><span>AHPRA-registered doctors</span></p>
         </div>
         <p className="al-k al-how-row">{config.name}</p>
@@ -367,7 +369,7 @@ function Included({ config }: { config: ProgramPageConfig }) {
         <div className="al-head">
           <div>
             <p className="al-k">{'// What’s included'}</p>
-            <h2 id="pa-inc" className="al-h2" style={{ marginTop: 18 }}>What’s included.</h2>
+            <h2 id="pa-inc" className="al-h2" style={{ marginTop: 18 }}><Accent>What’s included.</Accent></h2>
           </div>
           <p className="al-cap"><span>Bloods first<br /></span><span>Read with your doctor<br /></span><span>Australia-wide</span></p>
         </div>
@@ -410,7 +412,7 @@ function FAQ({ config }: { config: ProgramPageConfig }) {
       <div className="container-x al-faq-in">
         <div className="al-faq-side">
           <p className="al-k">{'// Straight answers'}</p>
-          <h2 id="pa-faq" className="al-h2">You ask,<br />we answer.</h2>
+          <h2 id="pa-faq" className="al-h2"><Accent><>You ask,<br />we answer.</></Accent></h2>
           <p className="al-lead pa-faq-lead">The straight answers on {config.name.toLowerCase()}, bloods and your doctor.</p>
           <Link href="/faqs" className="al-pill">All questions <Arrow /></Link>
         </div>
@@ -441,7 +443,7 @@ function CtaBand({ config, photos, onStart }: { config: ProgramPageConfig; photo
       <div className="pa-grade" aria-hidden="true" />
       <div className="container-x">
         <p className="al-k"><Kicker config={config} /></p>
-        <h2 id="pa-close" className="al-h2"><T m={config.ctaHeadline} w={config.women?.ctaHeadline} /></h2>
+        <h2 id="pa-close" className="al-h2"><T acc m={config.ctaHeadline} w={config.women?.ctaHeadline} /></h2>
         <p className="al-lead"><T m={config.ctaBody} w={config.women?.ctaBody} /></p>
         <div className="pa-cta-row">
           <StartButton onClick={onStart} light />

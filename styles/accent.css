@@ -6,17 +6,20 @@
  *   - the accent line of each headline (.al-acc, components/audience/Accent.tsx) and the home hero's second line;
  *   - the primary buttons (Create your free account, Join as a member, Explore membership, Order panel);
  *   - the hero's For men / For women pills once one is pressed.
- * Women (html[data-audience=women]) get rose, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
+ * Women (html[data-audience=women]) get orchid, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
  * changes. Body text, the logo lockup, forms and the portal are untouched.
  *
- * Tokens (#84, inner.css, panels.css): rose #b8285b on light, #ff7aa8 on black; blue #0d5dea on light, #5b9bff
- * on black. Contrast: #b8285b on #fafafa 5.8:1, on the hero's #fbecf2 5.3:1; #0d5dea on #fafafa 5.3:1, on the
- * hero's #e6f0fc 4.8:1; #ff7aa8 on #050505 8.4:1; #5b9bff on #050505 7.4:1. Buttons: white on #b8285b 6.0:1,
- * white on #0d5dea 5.6:1; hover #05070b on #ff7aa8 8.3:1, on #5b9bff 7.3:1. Button edge on black: 3.4:1 / 3.7:1.
+ * Tokens. Women (Noah, 19 Nov 2026, GTA 6 references in ~/Clients/Apex/research/pink-2026-11-19: "pastel orchid
+ * pink", a white line over a big orchid line on black): orchid #b22aa3 on light, #ea97e1 on black, replacing
+ * rose #b8285b / #ff7aa8 site-wide. Men: blue #0d5dea on light, #5b9bff on black. #ea97e1 is 2.1:1 on white, so
+ * it is never used for type on a light ground.
+ * Contrast: #b22aa3 on #fafafa 5.36:1, on the hero's #f8edf8 4.92:1; #0d5dea on #fafafa 5.34:1, on the hero's
+ * #e6f0fc 4.84:1; #ea97e1 on #050505 9.72:1; #5b9bff on #050505 7.35:1. Buttons: white on #b22aa3 5.60:1, white on
+ * #0d5dea 5.57:1; hover #05070b on #ea97e1 9.61:1, on #5b9bff 7.27:1.
  * The <head> boot script sets both attributes before first paint, so nothing flashes blue for women.
  */
 
-html[data-audience="women"] { --acc: #b8285b; --acc-on-dark: #ff7aa8; }
+html[data-audience="women"] { --acc: #b22aa3; --acc-on-dark: #ea97e1; }
 html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
 
 /* ── Headlines: the accent line. Light grounds take --acc, black bands --acc-on-dark. The !important beats
@@ -24,8 +27,8 @@ html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
 html[data-audience="women"] .al-acc, html[data-chosen="men"] .al-acc {
   color: var(--acc) !important; -webkit-text-fill-color: currentColor !important;
 }
-html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc,
-html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc {
+html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark], .pa-break, .pa-band, .pa-cta) .al-acc,
+html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark], .pa-break, .pa-band, .pa-cta) .al-acc {
   color: var(--acc-on-dark) !important;
 }
 
@@ -66,6 +69,161 @@ html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .s
 
 /* ── The hero's For men / For women pills: the pressed one fills with its colour, white text and dot. ── */
 .hx-pick-btn[data-who="men"][aria-pressed="true"] { background: #0d5dea; border-color: #0d5dea; }
-.hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b8285b; border-color: #b8285b; }
+.hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b22aa3; border-color: #b22aa3; }
 .hx-pick-btn[data-who="men"][aria-pressed="true"]::before,
 .hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #fff; }
+
+/* ════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ * UI TYPE THEME (Noah, 19 Nov 2026: "I just played Gta6 and when you play as the female, the words are pink themed
+ * a lot we need this done for apex mens and women's ... Just make sure it's perfect"). The headline line and the
+ * primary buttons above already switch. This carries the same two tokens into the small UI type, the way a game
+ * re-themes its HUD when you switch character: kickers and section labels, step numbers and counters, big figures,
+ * text links, nav hover and current page, footer labels and hover, ticks and small icons, the FAQ open marker,
+ * the progress rails, outline buttons, focus rings and text selection.
+ * Body paragraphs, the logo lockup, photos, layout, copy, form input text and the portal are untouched. Labels
+ * sitting on photographs (treatment tiles, photo cards) stay white for legibility. Before a pick nothing changes:
+ * every rule below sits under html[data-audience="women"] or html[data-chosen="men"].
+ *
+ * --acc-ui is the accent for whatever ground an element sits on: --acc on light, --acc-on-dark inside black bands.
+ * Contrast (WCAG 2.x, ~/Projects/studio/scripts/compare/apex-accent2-contrast.mjs). Text needs 4.5:1, icons and
+ * borders 3:1; every pair below clears 4.5:1.
+ *   text, light grounds  #b22aa3 on #fafafa 5.36:1, on #ffffff 5.60:1, on the hero #f8edf8 4.92:1
+ *                        #0d5dea on #fafafa 5.34:1, on #ffffff 5.57:1, on the hero #e6f0fc 4.84:1
+ *   text, black grounds  #ea97e1 on #050505 9.72:1, on card #0b0b0c 9.38:1
+ *                        #5b9bff on #050505 7.35:1, on card #0b0b0c 7.10:1
+ *   FAQ open marker      white cross on #b22aa3 5.60:1, on #0d5dea 5.57:1; disc vs #fafafa as text above
+ *   outline buttons      label and 1px border as text above; hover white on #b22aa3 5.60:1 / #0d5dea 5.57:1,
+ *                        on black bands #05070b on #ea97e1 9.61:1 / on #5b9bff 7.27:1
+ *   focus ring           as text above on each ground
+ *   selection            white on #b22aa3 5.60:1 / #0d5dea 5.57:1; black bands #05070b on #ea97e1 / #5b9bff
+ *   scroll progress      #ea97e1 / #5b9bff over the black header 9.72:1 / 7.35:1
+ *   rail fill, ticks     as text above on each ground
+ * ════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
+
+html[data-audience="women"], html[data-chosen="men"] { --acc-ui: var(--acc); }
+html[data-audience="women"] :is(header.site-header-enter, .ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .ip-card[data-dark], .ip-portal-card, .ip-band, .ip-note[data-tone="dark"], .pa-hero, .pa-break, .pa-band, .pa-cta, .al-foot, .prog-al-foot, .hsb, .al-page-bar, .prog-al-bar, .tc[data-dark], .ip-head[data-dark], .al-head[data-dark]),
+html[data-chosen="men"] :is(header.site-header-enter, .ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .ip-card[data-dark], .ip-portal-card, .ip-band, .ip-note[data-tone="dark"], .pa-hero, .pa-break, .pa-band, .pa-cta, .al-foot, .prog-al-foot, .hsb, .al-page-bar, .prog-al-bar, .tc[data-dark], .ip-head[data-dark], .al-head[data-dark]) {
+  --acc-ui: var(--acc-on-dark);
+}
+
+/* The home page and its footer kept Apex blue tokens for women (algo.css), so the athlete tag, the dark member
+   cards, the step labels, the Field Notes dots and the review bar stayed blue on the women's site. Women only:
+   men already have these values. */
+html[data-audience="women"] :is(.home-main, .al-foot, .hsb) { --al-accent: var(--acc); --al-accent-on-dark: var(--acc-on-dark); }
+
+/* ── 1. Kickers, eyebrows and section labels ── */
+html[data-audience="women"] :is(.al-head, .ip-head, .ip-hero-copy, .pa-hero-copy, .al-faq-side, .ip-story-copy, .al-club-head, .ip-faq-group, .pa-intro, .st-box-head, .pa-break, .pa-band) p.al-k,
+html[data-chosen="men"] :is(.al-head, .ip-head, .ip-hero-copy, .pa-hero-copy, .al-faq-side, .ip-story-copy, .al-club-head, .ip-faq-group, .pa-intro, .st-box-head, .pa-break, .pa-band) p.al-k,
+html[data-audience="women"] :is(.al-comm, .al-ath, .al-close, .pa-cta) > .container-x > p.al-k:first-child,
+html[data-chosen="men"] :is(.al-comm, .al-ath, .al-close, .pa-cta) > .container-x > p.al-k:first-child,
+html[data-audience="women"] :is(.ip-how-label, .pa-ev-k, .hx-kicker, .chp-k, .fn-art-meta, .su-kicker, .qz-k),
+html[data-chosen="men"] :is(.ip-how-label, .pa-ev-k, .hx-kicker, .chp-k, .fn-art-meta, .su-kicker, .qz-k),
+html[data-audience="women"] :is(.al-foot, .prog-al-foot) .site-footer h3,
+html[data-chosen="men"] :is(.al-foot, .prog-al-foot) .site-footer h3 {
+  color: var(--acc-ui) !important;
+}
+
+/* ── 2. Step numbers and counters (01, 02 ...) ── */
+html[data-audience="women"] :is(.al-qs, .ip-why, .al-why-cards .al-card, .ip-cards .al-card, .pa-bento .al-card, .al-faq-item summary, .ip-tier) > .al-k,
+html[data-chosen="men"] :is(.al-qs, .ip-why, .al-why-cards .al-card, .ip-cards .al-card, .pa-bento .al-card, .al-faq-item summary, .ip-tier) > .al-k,
+html[data-audience="women"] :is(.al-qs, .ip-why) li > .al-k,
+html[data-chosen="men"] :is(.al-qs, .ip-why) li > .al-k,
+html[data-audience="women"] :is(.ip-list-n, .al-how-k, .ip-step-k, .qz-count, .qz-opt-n),
+html[data-chosen="men"] :is(.ip-list-n, .al-how-k, .ip-step-k, .qz-count, .qz-opt-n),
+html[data-audience="women"] .ip-rail-n > span:first-child,
+html[data-chosen="men"] .ip-rail-n > span:first-child {
+  color: var(--acc-ui);
+}
+
+/* ── 3. Big figures ── */
+html[data-audience="women"] :is(.ip-total-v, .pa-ev-v, .ip-tier-price b),
+html[data-chosen="men"] :is(.ip-total-v, .pa-ev-v, .ip-tier-price b) {
+  color: var(--acc-ui);
+}
+
+/* ── 4. Text links and link arrows. Mono links take the accent; the phone links beside a primary button keep
+   white type and take an accent underline, so the button stays the loudest thing on the line. ── */
+html[data-audience="women"] :is(.al-why-link, .al-faq-more, .fn-all a, .al-faq-a a, .fn-art-body a, .fn-art-note a, .al-close-quiz a),
+html[data-chosen="men"] :is(.al-why-link, .al-faq-more, .fn-all a, .al-faq-a a, .fn-art-body a, .fn-art-note a, .al-close-quiz a),
+html[data-audience="women"] :is(.home-main, .al-page, .prog-al) p.al-k a,
+html[data-chosen="men"] :is(.home-main, .al-page, .prog-al) p.al-k a {
+  color: var(--acc-ui) !important;
+  text-decoration-color: currentColor;
+}
+html[data-audience="women"] :is(.ip-call, .pa-call, .stage-link, .hsb-call, .al-page-bar-call),
+html[data-chosen="men"] :is(.ip-call, .pa-call, .stage-link, .hsb-call, .al-page-bar-call) {
+  text-decoration-color: var(--acc-ui);
+}
+html[data-audience="women"] .fn-card:is(:hover, :focus-visible) h3, html[data-chosen="men"] .fn-card:is(:hover, :focus-visible) h3,
+html[data-audience="women"] .tc-chip:hover, html[data-chosen="men"] .tc-chip:hover {
+  color: var(--acc-ui) !important;
+}
+html[data-audience="women"] .tc-chip:hover, html[data-chosen="men"] .tc-chip:hover { border-color: var(--acc-ui) !important; }
+
+/* Nav: hover and the page you are on. The desktop bar is black; the phone menu sheet is light. Nav.tsx writes
+   the hover colour inline, so these need !important. */
+html[data-audience="women"] header.site-header-enter nav a:is(:hover, [aria-current="page"]),
+html[data-chosen="men"] header.site-header-enter nav a:is(:hover, [aria-current="page"]) {
+  color: var(--acc-ui) !important;
+}
+html[data-audience="women"] header.site-header-enter nav [role="menu"] a:hover,
+html[data-chosen="men"] header.site-header-enter nav [role="menu"] a:hover { color: var(--acc) !important; }
+html[data-audience="women"] .nav-m a[aria-current="page"], html[data-chosen="men"] .nav-m a[aria-current="page"] {
+  color: var(--acc) !important;
+}
+/* Footer links on hover (Footer.tsx writes the hover colour inline). */
+html[data-audience="women"] :is(.al-foot, .prog-al-foot) .site-footer a:not(.btn-primary):hover,
+html[data-chosen="men"] :is(.al-foot, .prog-al-foot) .site-footer a:not(.btn-primary):hover {
+  color: var(--acc-ui) !important;
+}
+
+/* ── 5. Ticks, check icons, dots and small icons ── */
+html[data-audience="women"] .ip-list-ticks li::before, html[data-chosen="men"] .ip-list-ticks li::before { background-color: var(--acc-ui); }
+html[data-audience="women"] .home-main .st-box .st-box-chip-ic, html[data-chosen="men"] .home-main .st-box .st-box-chip-ic,
+html[data-audience="women"] .ip-step-ic, html[data-chosen="men"] .ip-step-ic {
+  color: var(--acc-ui);
+}
+html[data-audience="women"] .fn-tag span, html[data-chosen="men"] .fn-tag span { background: var(--acc-ui); }
+
+/* ── 6. Active and open states ── */
+html[data-audience="women"] .al-faq-item[open] .al-faq-x, html[data-chosen="men"] .al-faq-item[open] .al-faq-x {
+  background: var(--acc-ui); border-color: var(--acc-ui); color: #fff;
+}
+@media (hover: hover) {
+  html[data-audience="women"] .al-faq-item:not([open]) summary:hover .al-faq-x,
+  html[data-chosen="men"] .al-faq-item:not([open]) summary:hover .al-faq-x { border-color: var(--acc-ui); color: var(--acc-ui); }
+}
+html[data-audience="women"] .ip-rail-fill, html[data-chosen="men"] .ip-rail-fill { background: var(--acc-ui); }
+html[data-audience="women"] .scroll-progress, html[data-chosen="men"] .scroll-progress { background: var(--acc-on-dark) !important; }
+html[data-audience="women"] .chp-select select, html[data-chosen="men"] .chp-select select { border-color: var(--acc); }
+
+/* ── 7. Secondary and outline buttons: accent border and label, accent fill on hover ── */
+html[data-audience="women"] :is(.al-page, .prog-al, .home-main) .al-pill-ghost,
+html[data-chosen="men"] :is(.al-page, .prog-al, .home-main) .al-pill-ghost,
+html[data-audience="women"] .ip-path-line, html[data-chosen="men"] .ip-path-line,
+html[data-audience="women"] .chp-btn-ink, html[data-chosen="men"] .chp-btn-ink {
+  color: var(--acc-ui); border-color: var(--acc-ui);
+}
+@media (hover: hover) {
+  html[data-audience="women"] :is(.al-page, .prog-al, .home-main) .al-pill-ghost:hover,
+  html[data-chosen="men"] :is(.al-page, .prog-al, .home-main) .al-pill-ghost:hover { background: var(--acc-ui); border-color: var(--acc-ui); color: #05070b; }
+  html[data-audience="women"] :is(.ip-path-line, .chp-btn-ink):hover,
+  html[data-chosen="men"] :is(.ip-path-line, .chp-btn-ink):hover { background: var(--acc-ui); border-color: var(--acc-ui); color: #fff; }
+}
+
+/* ── 8. Focus rings and selection. Buttons that sit on a coloured panel keep their white ring. ── */
+html[data-audience="women"] body :focus-visible:not(.chp-btn, .al-comm-bar-in),
+html[data-chosen="men"] body :focus-visible:not(.chp-btn, .al-comm-bar-in) { outline-color: var(--acc-ui) !important; }
+html[data-audience="women"] ::selection, html[data-chosen="men"] ::selection { background: var(--acc); color: #fff; }
+html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .pa-hero, .pa-break, .pa-band, .pa-cta, .al-foot, .prog-al-foot) ::selection,
+html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .pa-hero, .pa-break, .pa-band, .pa-cta, .al-foot, .prog-al-foot) ::selection { background: var(--acc-on-dark); color: #05070b; }
+
+/* ── 9. The switch itself: colour eases in over 250ms when a side is picked on the home page. Colour only. ── */
+html[data-chosen] :is(.al-k, .hx-kicker, .al-how-k, .ip-step-k, .ip-total-v, .pa-ev-v, .ip-tier-price b, .al-why-link, .al-faq-more, .fn-all a, .ip-rail-n span, .st-box-chip-ic, .site-footer h3) {
+  transition: color 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-chosen] :is(.al-k, .hx-kicker, .al-how-k, .ip-step-k, .ip-total-v, .pa-ev-v, .ip-tier-price b, .al-why-link, .al-faq-more, .fn-all a, .ip-rail-n span, .st-box-chip-ic, .site-footer h3, .hx-h1-b) {
+    transition: none;
+  }
+}

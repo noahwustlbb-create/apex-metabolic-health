@@ -22,7 +22,7 @@
 }
 /* Women's site (html[data-audience="women"], components/audience): the one
    accent turns rose, exactly as the home hero and CoreHealthPanels do. */
-html[data-audience="women"] .al-page, html[data-audience="women"] .al-page-bar { --al-accent: #b8285b; --al-accent-on-dark: #ff7aa8; }
+html[data-audience="women"] .al-page, html[data-audience="women"] .al-page-bar { --al-accent: #b22aa3; --al-accent-on-dark: #ea97e1; }
 .al-page {
   background: var(--al-bg);
   color: var(--al-ink);

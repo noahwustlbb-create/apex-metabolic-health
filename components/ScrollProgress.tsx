@@ -14,6 +14,7 @@ export default function ScrollProgress() {
   return (
     <motion.div
       aria-hidden="true"
+      className="scroll-progress"
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, height: 2, zIndex: 1100,
         transformOrigin: '0 50%',
