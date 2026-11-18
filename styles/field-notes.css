@@ -13,7 +13,7 @@
 @media (hover: hover) { .fn-card:hover .fn-img img { transform: scale(1.04); } }
 .fn-card:focus-visible { outline: 2px solid var(--al-ink); outline-offset: 4px; border-radius: calc(var(--al-r, 24px) + 2px); }
 .fn-tag { margin-top: 18px; display: inline-flex; align-items: center; gap: 8px; font: 500 11.5px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-mute); }
-.fn-tag span { width: 6px; height: 6px; border-radius: 99px; background: var(--al-accent, #0d5dea); flex: none; }
+.fn-tag span { width: 6px; height: 6px; border-radius: 99px; background: var(--al-accent, #18709f); flex: none; }
 .fn-t { margin-top: 8px; font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: -0.02em; color: var(--al-ink); text-wrap: pretty; }
 .fn-all { margin: 32px 0 0; }
 .fn-all a { display: inline-flex; align-items: center; min-height: 44px; font: 500 12px/1 var(--fn-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--al-ink); text-decoration: underline; text-underline-offset: 4px; }

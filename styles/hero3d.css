@@ -19,7 +19,7 @@
   --hx-bg-deep: #dfe3e9;
   --hx-fg: #0b1220;
   --hx-mute: #4a5463;
-  --hx-blue: #0d5dea;
+  --hx-blue: #18709f;          /* sky blue, 4.90:1 on its ice #e8f5fc, 4.65:1 on #ddf0fa */
   --hx-rose: #b22aa3;          /* orchid, 4.92:1 on its ice #f8edf8, 4.67:1 on #f5e6f6 */
   --hx-accent: #5d6673;        /* neutral until the pick */
   --hx-glow: rgba(120, 130, 145, 0.18);
@@ -28,7 +28,7 @@
   color: var(--hx-fg);
   transition: background-color 0.8s var(--hx-ease);
 }
-html[data-chosen="men"] .hx { --hx-bg: #e6f0fc; --hx-bg-deep: #d2e4f8; --hx-accent: var(--hx-blue); --hx-glow: rgba(13, 93, 234, 0.16); }
+html[data-chosen="men"] .hx { --hx-bg: #e8f5fc; --hx-bg-deep: #ddf0fa; --hx-accent: var(--hx-blue); --hx-glow: rgba(53, 164, 224, 0.18); }
 html[data-chosen="women"] .hx { --hx-bg: #f8edf8; --hx-bg-deep: #f5e6f6; --hx-accent: var(--hx-rose); --hx-glow: rgba(178, 42, 163, 0.15); }
 
 .hx-pin {
@@ -49,7 +49,7 @@ html[data-chosen="women"] .hx { --hx-bg: #f8edf8; --hx-bg-deep: #f5e6f6; --hx-ac
 
 /* The colour flood on pick: grows from the tapped button. */
 .hx-wash { position: absolute; inset: 0; z-index: 0; pointer-events: none; clip-path: circle(0px at 50% 100%); opacity: 0; }
-.hx-wash[data-to="men"]   { background: radial-gradient(60% 70% at 72% 58%, #d2e4f8, transparent 72%), #e6f0fc; }
+.hx-wash[data-to="men"]   { background: radial-gradient(60% 70% at 72% 58%, #ddf0fa, transparent 72%), #e8f5fc; }
 .hx-wash[data-to="women"] { background: radial-gradient(60% 70% at 72% 58%, #f5e6f6, transparent 72%), #f8edf8; }
 
 /* ── Copy: bottom left ── */
@@ -201,7 +201,7 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
 .hx-pick-btn[aria-pressed="true"]::after { opacity: 1; }
 .hx-pick-btn:focus-visible { outline: 2px solid var(--hx-fg); outline-offset: 2px; }
 .hx-pick-btn[aria-pressed="true"] { background: var(--hx-fg); color: #fff; border-color: var(--hx-fg); }
-.hx-pick-btn[data-who="men"][aria-pressed="true"]::before { background: #5b9bff; }
+.hx-pick-btn[data-who="men"][aria-pressed="true"]::before { background: #5bc6f2; }
 .hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #ff8fbc; }
 
 /* ── Readouts on dot leaders (portal ice stage) ── */
@@ -267,7 +267,7 @@ html[data-chosen] .hx-pair { opacity: 0; pointer-events: none; }
     grid-template-rows: minmax(calc(45svh + 14px), 1fr) auto;
     background: radial-gradient(90% 55% at 50% 34%, var(--hx-bg-deep), transparent 74%) var(--hx-bg-now, var(--hx-bg));
   }
-  .hx-wash[data-to="men"]   { background: radial-gradient(90% 55% at 50% 34%, #d2e4f8, transparent 74%), #e6f0fc; }
+  .hx-wash[data-to="men"]   { background: radial-gradient(90% 55% at 50% 34%, #ddf0fa, transparent 74%), #e8f5fc; }
   .hx-wash[data-to="women"] { background: radial-gradient(90% 55% at 50% 34%, #f5e6f6, transparent 74%), #f8edf8; }
   .hx-plate { grid-column: 1; grid-row: 1; }
   /* Heads clear the 70px header by 12px or more (the frame starts under it). */

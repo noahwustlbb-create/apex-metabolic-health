@@ -8,7 +8,7 @@
 .chp {
   --chp-ink: #0a0a0a;
   --chp-mute: #55595f;            /* 7.1:1 on #fafafa */
-  --chp-accent: #0d5dea;          /* Apex blue, white text 5.6:1 */
+  --chp-accent: #18709f;          /* Apex sky blue, white text 5.4:1 */
   --chp-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   background: #fafafa;
   color: var(--chp-ink);

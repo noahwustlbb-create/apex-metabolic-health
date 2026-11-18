@@ -40,10 +40,10 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
     >
       <div
         className="rounded-2xl overflow-hidden"
-        style={{ border: '1px solid rgba(72,144,247,0.15)', background: 'var(--surface)' }}
+        style={{ border: '1px solid rgba(53,164,224,0.15)', background: 'var(--surface)' }}
       >
         {/* Header */}
-        <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+        <div className="px-6 py-4" style={{ borderBottom: '1px solid rgba(53,164,224,0.08)' }}>
           <p className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: 'var(--blue)' }}>
             Next step
           </p>
@@ -67,15 +67,15 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 href={primaryLink}
                 onClick={() => setChose('book')}
                 className="flex gap-4 items-start p-5 transition-all duration-200"
-                style={{ borderBottom: '1px solid rgba(72,144,247,0.08)', minHeight: 44 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
+                style={{ borderBottom: '1px solid rgba(53,164,224,0.08)', minHeight: 44 }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.04)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
               >
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.18)' }}>
+                  style={{ background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.18)' }}>
                   <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-                    <rect x="3" y="4" width="14" height="13" rx="2" stroke="#4890f7" strokeWidth="1.4"/>
-                    <path d="M3 8h14M7 2v4M13 2v4" stroke="#4890f7" strokeWidth="1.4" strokeLinecap="round"/>
+                    <rect x="3" y="4" width="14" height="13" rx="2" stroke="#18709f" strokeWidth="1.4"/>
+                    <path d="M3 8h14M7 2v4M13 2v4" stroke="#18709f" strokeWidth="1.4" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -95,15 +95,15 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                   href={discoveryLink}
                   onClick={() => setChose('discovery')}
                   className="flex gap-4 items-start p-5 transition-all duration-200"
-                  style={{ borderBottom: '1px solid rgba(72,144,247,0.08)', minHeight: 44 }}
-                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
+                  style={{ borderBottom: '1px solid rgba(53,164,224,0.08)', minHeight: 44 }}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.04)' }}
                   onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                 >
                   <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.18)' }}>
+                    style={{ background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.18)' }}>
                     <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-                      <path d="M10 2a6 6 0 016 6c0 2.5-1 4.5-3 5.5V15a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5C5 12.5 4 10.5 4 8a6 6 0 016-6z" stroke="#4890f7" strokeWidth="1.3"/>
-                      <path d="M8 18h4" stroke="#4890f7" strokeWidth="1.3" strokeLinecap="round"/>
+                      <path d="M10 2a6 6 0 016 6c0 2.5-1 4.5-3 5.5V15a1 1 0 01-1 1H8a1 1 0 01-1-1v-1.5C5 12.5 4 10.5 4 8a6 6 0 016-6z" stroke="#18709f" strokeWidth="1.3"/>
+                      <path d="M8 18h4" stroke="#18709f" strokeWidth="1.3" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -123,13 +123,13 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
                 onClick={() => setChose('call')}
                 className="flex gap-4 items-start p-5 text-left transition-all duration-200 w-full"
                 style={{ minHeight: 44 }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.04)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.04)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
               >
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                  style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.18)' }}>
+                  style={{ background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.18)' }}>
                   <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4" aria-hidden="true">
-                    <path d="M4 4.5A1.5 1.5 0 015.5 3h1.879a.5.5 0 01.478.355l1 3.5a.5.5 0 01-.284.604l-1.5.75a9.02 9.02 0 004.218 4.218l.75-1.5a.5.5 0 01.604-.284l3.5 1a.5.5 0 01.355.478V13.5A1.5 1.5 0 0114.5 15C8.701 15 4 10.299 4 4.5z" stroke="#4890f7" strokeWidth="1.4" strokeLinejoin="round"/>
+                    <path d="M4 4.5A1.5 1.5 0 015.5 3h1.879a.5.5 0 01.478.355l1 3.5a.5.5 0 01-.284.604l-1.5.75a9.02 9.02 0 004.218 4.218l.75-1.5a.5.5 0 01.604-.284l3.5 1a.5.5 0 01.355.478V13.5A1.5 1.5 0 0114.5 15C8.701 15 4 10.299 4 4.5z" stroke="#18709f" strokeWidth="1.4" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -153,9 +153,9 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               className="px-6 py-5 flex items-center gap-4"
             >
               <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center"
-                style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.2)' }}>
+                style={{ background: 'rgba(53,164,224,0.1)', border: '1px solid rgba(53,164,224,0.2)' }}>
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8l4 4 6-7" stroke="#4890f7" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 8l4 4 6-7" stroke="#18709f" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <div>
@@ -175,9 +175,9 @@ export default function BookingChoice({ type = 'discovery', showDiscovery = fals
               className="px-6 py-5 flex items-center gap-4"
             >
               <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center"
-                style={{ background: 'rgba(72,144,247,0.1)', border: '1px solid rgba(72,144,247,0.2)' }}>
+                style={{ background: 'rgba(53,164,224,0.1)', border: '1px solid rgba(53,164,224,0.2)' }}>
                 <svg viewBox="0 0 16 16" fill="none" className="w-3.5 h-3.5" aria-hidden="true">
-                  <path d="M3 8l4 4 6-7" stroke="#4890f7" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 8l4 4 6-7" stroke="#18709f" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <div>

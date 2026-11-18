@@ -68,15 +68,15 @@
     --primitive-neutral-950:  #030712;
 
     /* Blue — brand */
-    --primitive-blue-100:     #dbeafe;
-    --primitive-blue-200:     #bfdbfe;
-    --primitive-blue-300:     #93c5fd;
-    --primitive-blue-400:     #60a5fa;
-    --primitive-blue-500:     #4890f7;  /* primary brand */
-    --primitive-blue-600:     #2563eb;
-    --primitive-blue-700:     #1d4ed8;
-    --primitive-blue-800:     #1e40af;
-    --primitive-blue-900:     #1e3a8a;
+    --primitive-blue-100:     #e3f4fc;
+    --primitive-blue-200:     #c4e8f9;
+    --primitive-blue-300:     #94d6f5;
+    --primitive-blue-400:     #5bc6f2;  /* GTA 6 blue, the on-dark accent (10.5:1 on #050505) */
+    --primitive-blue-500:     #35a4e0;  /* core sky: fills, glows, tints only (2.8:1 on white, never text on light) */
+    --primitive-blue-600:     #1f86bd;
+    --primitive-blue-700:     #18709f;  /* on-light accent: 5.2:1 on #fafafa, white on it 5.4:1 */
+    --primitive-blue-800:     #135d85;  /* hover / pressed on light: white on it 7.2:1 */
+    --primitive-blue-900:     #0e4766;
 
     /* Green — success */
     --primitive-green-100:    #d1fae5;
@@ -155,7 +155,7 @@
     /* Exempt per WCAG 1.4.3 (disabled components)           */
     --color-fg-disabled:       var(--primitive-neutral-400);  /* #9ca3af — exempt     */
     /* For text on --color-accent-emphasis (solid blue btn)  */
-    --color-fg-on-accent:      var(--primitive-neutral-0);    /* #ffffff — on #4890f7 */
+    --color-fg-on-accent:      var(--primitive-neutral-0);    /* #ffffff, on #18709f 5.4:1 */
     /* For text layered on dark photo cards                  */
     --color-fg-on-dark:        var(--primitive-neutral-0);    /* #ffffff */
     /* Inverse surface text (dark bg, e.g. toasts)           */
@@ -173,12 +173,14 @@
      * -muted     : tinted surface background
      * -border    : outline / ring colour
      *
-     * contrast : #1d4ed8 / #f9fafb =  5.9:1  AA ✓
+     * Sky blue (Noah, 19 Nov 2026, the GTA 6 "Enter your house" blue). -emphasis
+     * points at 700, not the core 500, so a solid fill or text on light stays AA.
+     * contrast : #18709f / #f9fafb =  5.3:1  AA ✓
      */
-    --color-accent-fg:         var(--primitive-blue-700);     /* #1d4ed8 —  5.9:1 */
-    --color-accent-emphasis:   var(--primitive-blue-500);     /* #4890f7 — display */
-    --color-accent-muted:      rgba(72,144,247,0.08);
-    --color-accent-border:     rgba(72,144,247,0.28);
+    --color-accent-fg:         var(--primitive-blue-700);     /* #18709f, 5.3:1 */
+    --color-accent-emphasis:   var(--primitive-blue-700);     /* #18709f, white on it 5.4:1 */
+    --color-accent-muted:      rgba(53,164,224,0.08);
+    --color-accent-border:     rgba(53,164,224,0.28);
 
     /* ── Success ─────────────────────────────────────────── */
     /* contrast : #047857 / #f9fafb =  4.8:1  AA ✓           */
@@ -204,7 +206,7 @@
     /* ── Interactive states ──────────────────────────────── */
     --state-hover-bg:          rgba(0,0,0,0.04);
     --state-active-bg:         rgba(0,0,0,0.08);
-    --state-focus-ring:        var(--primitive-blue-500);
+    --state-focus-ring:        var(--primitive-blue-700);
     --state-focus-ring-offset: var(--color-canvas-default);
 
     /* ── Shadow ──────────────────────────────────────────── */
@@ -239,12 +241,12 @@
     --border:           var(--color-border-default);
     --border-strong:    var(--color-border-emphasis);
     --shadow-card:      var(--shadow-md);
-    --blue:             var(--primitive-blue-500);
-    --blue-dark:        var(--primitive-blue-600);
+    --blue:             var(--primitive-blue-700);   /* text and fills on light: 5.2:1 */
+    --blue-dark:        var(--primitive-blue-800);
     --blue-light:       var(--primitive-blue-400);
-    --teal:             var(--primitive-blue-500);
-    --gold:             var(--primitive-blue-500);
-    --apex-blue:        var(--primitive-blue-500);
+    --teal:             var(--primitive-blue-700);
+    --gold:             var(--primitive-blue-700);
+    --apex-blue:        var(--primitive-blue-700);
     --nav-bg:               var(--color-nav-bg);
     --nav-bg-scrolled:      var(--color-nav-bg-scrolled);
     --nav-border:           var(--color-nav-border);
@@ -299,11 +301,11 @@
     --color-border-emphasis:   rgba(255,255,255,0.20);
 
     /* ── Accent ─────────────────────────────────────────── */
-    /* contrast : #60a5fa / #0e1117 =  6.8:1  AA ✓ AAA ✓   */
-    --color-accent-fg:         var(--primitive-blue-400);     /* #60a5fa —  6.8:1 */
-    --color-accent-emphasis:   var(--primitive-blue-500);     /* #4890f7 — display */
-    --color-accent-muted:      rgba(72,144,247,0.12);
-    --color-accent-border:     rgba(72,144,247,0.25);
+    /* contrast : #5bc6f2 / #0e1117 =  9.9:1  AA ✓ AAA ✓   */
+    --color-accent-fg:         var(--primitive-blue-400);     /* #5bc6f2, 9.9:1 */
+    --color-accent-emphasis:   var(--primitive-blue-400);     /* #5bc6f2, #05070b on it 10.4:1 */
+    --color-accent-muted:      rgba(53,164,224,0.12);
+    --color-accent-border:     rgba(53,164,224,0.25);
 
     /* ── Success ─────────────────────────────────────────── */
     /* contrast : #34d399 / #0e1117 =  9.0:1  AA ✓ AAA ✓   */
@@ -399,9 +401,9 @@
       --color-border-emphasis:   rgba(255,255,255,0.20);
 
       --color-accent-fg:         var(--primitive-blue-400);
-      --color-accent-emphasis:   var(--primitive-blue-500);
-      --color-accent-muted:      rgba(72,144,247,0.12);
-      --color-accent-border:     rgba(72,144,247,0.25);
+      --color-accent-emphasis:   var(--primitive-blue-400);
+      --color-accent-muted:      rgba(53,164,224,0.12);
+      --color-accent-border:     rgba(53,164,224,0.25);
 
       --color-success-fg:        var(--primitive-green-400);
       --color-success-emphasis:  var(--primitive-green-500);
@@ -504,9 +506,9 @@
     --stage-ink-muted:  #516173;
     --stage-glass:      rgba(255,255,255,0.64);
     --stage-glass-edge: rgba(255,255,255,0.9);
-    --stage-cyan:       #15e4fa;
-    --stage-gauge:      #15e4fa;   /* gauges stay cyan in every tone: red means "flagged" on results */
-    --stage-blue:       #0d5dea;
+    --stage-cyan:       #5bc6f2;
+    --stage-gauge:      #5bc6f2;   /* gauges stay sky blue in every tone: red means "flagged" on results */
+    --stage-blue:       #18709f;
     --stage-night:      #05070b;
     --stage-night-2:    #0d121b;
     --stage-night-fg:   #eef3f9;

@@ -6,21 +6,25 @@
  *   - the accent line of each headline (.al-acc, components/audience/Accent.tsx) and the home hero's second line;
  *   - the primary buttons (Create your free account, Join as a member, Explore membership, Order panel);
  *   - the hero's For men / For women pills once one is pressed.
- * Women (html[data-audience=women]) get orchid, men (html[data-chosen=men]) get Apex blue. Before a pick nothing
- * changes. Body text, the logo lockup, forms and the portal are untouched.
+ * Women (html[data-audience=women]) get orchid, men (html[data-chosen=men]) get Apex sky blue. Before a pick
+ * these rules do nothing (the shared tokens are already sky blue, see below). Body text, the logo lockup, forms and the portal are untouched.
  *
  * Tokens. Women (Noah, 19 Nov 2026, GTA 6 references in ~/Clients/Apex/research/pink-2026-11-19: "pastel orchid
  * pink", a white line over a big orchid line on black): orchid #b22aa3 on light, #ea97e1 on black, replacing
- * rose #b8285b / #ff7aa8 site-wide. Men: blue #0d5dea on light, #5b9bff on black. #ea97e1 is 2.1:1 on white, so
- * it is never used for type on a light ground.
- * Contrast: #b22aa3 on #fafafa 5.36:1, on the hero's #f8edf8 4.92:1; #0d5dea on #fafafa 5.34:1, on the hero's
- * #e6f0fc 4.84:1; #ea97e1 on #050505 9.72:1; #5b9bff on #050505 7.35:1. Buttons: white on #b22aa3 5.60:1, white on
- * #0d5dea 5.57:1; hover #05070b on #ea97e1 9.61:1, on #5b9bff 7.27:1.
+ * rose #b8285b / #ff7aa8 site-wide. #ea97e1 is 2.1:1 on white, so it is never used for type on a light ground.
+ * Men and the whole site (Noah, 19 Nov 2026, the GTA 6 "Enter your house" blue, reference
+ * ~/Clients/Apex/research/pink-2026-11-19/blue-enter-your-house-ref.jpg; "replace that blue for all website"):
+ * sky #5bc6f2 on black, #18709f on light, replacing Apex blue #0d5dea / #5b9bff and the older #4890f7 / #1d4fd8
+ * everywhere (tokens.css, algo.css, inner.css, programs-al.css, hero3d.css, panels.css, globals.css). #5bc6f2 is
+ * 1.9:1 on white, so it is never used for type on a light ground; #18709f is 3.7:1 on black, so never type on black.
+ * Contrast: #b22aa3 on #fafafa 5.36:1, on the hero's #f8edf8 4.92:1; #18709f on #fafafa 5.22:1, on the hero's
+ * #e8f5fc 4.90:1; #ea97e1 on #050505 9.72:1; #5bc6f2 on #050505 10.49:1. Buttons: white on #b22aa3 5.60:1, white on
+ * #18709f 5.44:1; hover #05070b on #ea97e1 9.61:1, on #5bc6f2 10.37:1.
  * The <head> boot script sets both attributes before first paint, so nothing flashes blue for women.
  */
 
 html[data-audience="women"] { --acc: #b22aa3; --acc-on-dark: #ea97e1; }
-html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
+html[data-chosen="men"] { --acc: #18709f; --acc-on-dark: #5bc6f2; }
 
 /* ── Headlines: the accent line. Light grounds take --acc, black bands --acc-on-dark. The !important beats
    inner.css's `main.al-page :is(h1,h2) :is(span,em) { color: inherit !important }`. ── */
@@ -68,7 +72,7 @@ html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .s
 }
 
 /* ── The hero's For men / For women pills: the pressed one fills with its colour, white text and dot. ── */
-.hx-pick-btn[data-who="men"][aria-pressed="true"] { background: #0d5dea; border-color: #0d5dea; }
+.hx-pick-btn[data-who="men"][aria-pressed="true"] { background: #18709f; border-color: #18709f; }
 .hx-pick-btn[data-who="women"][aria-pressed="true"] { background: #b22aa3; border-color: #b22aa3; }
 .hx-pick-btn[data-who="men"][aria-pressed="true"]::before,
 .hx-pick-btn[data-who="women"][aria-pressed="true"]::before { background: #fff; }
@@ -88,15 +92,15 @@ html[data-audience="women"] .hx .stage-cta-arrow, html[data-chosen="men"] .hx .s
  * Contrast (WCAG 2.x, ~/Projects/studio/scripts/compare/apex-accent2-contrast.mjs). Text needs 4.5:1, icons and
  * borders 3:1; every pair below clears 4.5:1.
  *   text, light grounds  #b22aa3 on #fafafa 5.36:1, on #ffffff 5.60:1, on the hero #f8edf8 4.92:1
- *                        #0d5dea on #fafafa 5.34:1, on #ffffff 5.57:1, on the hero #e6f0fc 4.84:1
+ *                        #18709f on #fafafa 5.22:1, on #ffffff 5.44:1, on the hero #e8f5fc 4.90:1
  *   text, black grounds  #ea97e1 on #050505 9.72:1, on card #0b0b0c 9.38:1
- *                        #5b9bff on #050505 7.35:1, on card #0b0b0c 7.10:1
- *   FAQ open marker      white cross on #b22aa3 5.60:1, on #0d5dea 5.57:1; disc vs #fafafa as text above
- *   outline buttons      label and 1px border as text above; hover white on #b22aa3 5.60:1 / #0d5dea 5.57:1,
- *                        on black bands #05070b on #ea97e1 9.61:1 / on #5b9bff 7.27:1
+ *                        #5bc6f2 on #050505 10.49:1, on card #0b0b0c 10.12:1
+ *   FAQ open marker      white cross on #b22aa3 5.60:1, on #18709f 5.44:1; disc vs #fafafa as text above
+ *   outline buttons      label and 1px border as text above; hover white on #b22aa3 5.60:1 / #18709f 5.44:1,
+ *                        on black bands #05070b on #ea97e1 9.61:1 / on #5bc6f2 10.37:1
  *   focus ring           as text above on each ground
- *   selection            white on #b22aa3 5.60:1 / #0d5dea 5.57:1; black bands #05070b on #ea97e1 / #5b9bff
- *   scroll progress      #ea97e1 / #5b9bff over the black header 9.72:1 / 7.35:1
+ *   selection            white on #b22aa3 5.60:1 / #18709f 5.44:1; black bands #05070b on #ea97e1 / #5bc6f2
+ *   scroll progress      #ea97e1 / #5bc6f2 over the black header 9.72:1 / 10.49:1
  *   rail fill, ticks     as text above on each ground
  * ════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
 
@@ -106,7 +110,7 @@ html[data-chosen="men"] :is(header.site-header-enter, .ip-hero, .al-how, .ip-how
   --acc-ui: var(--acc-on-dark);
 }
 
-/* The home page and its footer kept Apex blue tokens for women (algo.css), so the athlete tag, the dark member
+/* The home page and its footer kept the shared blue tokens for women (algo.css), so the athlete tag, the dark member
    cards, the step labels, the Field Notes dots and the review bar stayed blue on the women's site. Women only:
    men already have these values. */
 html[data-audience="women"] :is(.home-main, .al-foot, .hsb) { --al-accent: var(--acc); --al-accent-on-dark: var(--acc-on-dark); }

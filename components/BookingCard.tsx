@@ -50,7 +50,7 @@ export default function BookingCard() {
         // Has existing bloods → book a consultation
         <>
           <div className="rounded-2xl p-5 mb-6"
-            style={{ border: '1px solid rgba(72,144,247,0.18)', background: 'var(--surface)' }}>
+            style={{ border: '1px solid rgba(53,164,224,0.18)', background: 'var(--surface)' }}>
             <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--blue)' }}>
               Telehealth Consultation
             </p>
@@ -58,7 +58,7 @@ export default function BookingCard() {
               Your doctor will review your existing results and build a personalised protocol during your consultation.
             </p>
             <div className="mt-4 pt-3 flex flex-wrap gap-x-4 gap-y-1"
-              style={{ borderTop: '1px solid rgba(72,144,247,0.08)' }}>
+              style={{ borderTop: '1px solid rgba(53,164,224,0.08)' }}>
               {['AHPRA-registered doctors', 'Australia-wide telehealth', 'Private & confidential'].map(t => (
                 <div key={t} className="flex items-center gap-1.5">
                   <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />
@@ -76,9 +76,9 @@ export default function BookingCard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease }}
           className="rounded-2xl overflow-hidden"
-          style={{ border: '1px solid rgba(72,144,247,0.18)', background: 'var(--surface)' }}
+          style={{ border: '1px solid rgba(53,164,224,0.18)', background: 'var(--surface)' }}
         >
-          <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(72,144,247,0.08)' }}>
+          <div className="px-6 pt-6 pb-5" style={{ borderBottom: '1px solid rgba(53,164,224,0.08)' }}>
             <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-2" style={{ color: 'var(--blue)' }}>
               Blood Panel Required
             </p>
@@ -100,7 +100,7 @@ export default function BookingCard() {
               ].map(s => (
                 <div key={s.n} className="flex gap-3 items-start">
                   <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5"
-                    style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.2)' }}>
+                    style={{ background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.2)' }}>
                     <span className="text-[9px] font-bold" style={{ color: 'var(--blue)' }}>{s.n}</span>
                   </div>
                   <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{s.text}</p>
@@ -123,7 +123,7 @@ export default function BookingCard() {
           </div>
 
           <div className="px-6 py-3 flex flex-wrap gap-x-4 gap-y-1"
-            style={{ borderTop: '1px solid rgba(72,144,247,0.08)', background: 'rgba(72,144,247,0.03)' }}>
+            style={{ borderTop: '1px solid rgba(53,164,224,0.08)', background: 'rgba(53,164,224,0.03)' }}>
             {['AHPRA-registered doctors', '4,000+ collection centres', 'Private & confidential'].map(t => (
               <div key={t} className="flex items-center gap-1.5">
                 <div className="w-1 h-1 rounded-full" style={{ background: 'var(--blue)' }} />

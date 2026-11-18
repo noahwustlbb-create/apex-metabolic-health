@@ -19,10 +19,10 @@ export default function ConfirmationPage() {
               initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2, ease }}
               className="w-10 h-10 rounded-full flex items-center justify-center mb-8"
-              style={{ background: 'rgba(72,144,247,0.08)', border: '1px solid rgba(72,144,247,0.25)' }}
+              style={{ background: 'rgba(53,164,224,0.08)', border: '1px solid rgba(53,164,224,0.25)' }}
             >
               <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
-                <path d="M5 12l5 5L19 7" stroke="#4890f7" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5 12l5 5L19 7" stroke="#18709f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.div>
 
@@ -52,7 +52,7 @@ export default function ConfirmationPage() {
 
             <motion.div initial={{ opacity: 0, scaleX: 0 }} animate={{ opacity: 1, scaleX: 1 }}
               transition={{ duration: 0.7, delay: 0.7, ease }}
-              style={{ width: '100%', height: 1, transformOrigin: 'left', background: 'linear-gradient(90deg, rgba(72,144,247,0.12), rgba(255,255,255,0.03) 60%, transparent)', marginBottom: 28 }}
+              style={{ width: '100%', height: 1, transformOrigin: 'left', background: 'linear-gradient(90deg, rgba(53,164,224,0.12), rgba(255,255,255,0.03) 60%, transparent)', marginBottom: 28 }}
             />
 
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function ConfirmationPage() {
                 { step: 'Your protocol', detail: 'Following your consultation, a personalised clinical protocol is prepared where clinically appropriate.' },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start">
-                  <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(72,144,247,0.06)', border: '1px solid rgba(72,144,247,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
+                  <div style={{ minWidth: 20, height: 20, borderRadius: '50%', marginTop: 2, background: 'rgba(53,164,224,0.06)', border: '1px solid rgba(53,164,224,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: 'var(--blue)', fontFamily: 'var(--font-space-grotesk)' }}>{i + 1}</div>
                   <div>
                     <p className="text-sm font-semibold mb-0.5" style={{ color: 'var(--text-primary)' }}>{item.step}</p>
                     <p className="text-sm leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>{item.detail}</p>
@@ -77,7 +77,7 @@ export default function ConfirmationPage() {
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.0, ease }}
               className="p-4 rounded-sm mb-8"
-              style={{ background: 'rgba(72,144,247,0.04)', border: '1px solid rgba(72,144,247,0.12)' }}
+              style={{ background: 'rgba(53,164,224,0.04)', border: '1px solid rgba(53,164,224,0.12)' }}
             >
               <p className="text-xs font-semibold mb-1" style={{ color: 'var(--blue)' }}>Questions? We&apos;re here.</p>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-primary)', opacity: 0.72 }}>
@@ -94,7 +94,7 @@ export default function ConfirmationPage() {
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1.05, ease }}
               className="p-5 rounded-xl mb-6"
-              style={{ background: 'rgba(72,144,247,0.05)', border: '1px solid rgba(72,144,247,0.14)' }}
+              style={{ background: 'rgba(53,164,224,0.05)', border: '1px solid rgba(53,164,224,0.14)' }}
             >
               <p className="text-sm font-semibold mb-1" style={{ color: '#f0f4f8', fontFamily: 'var(--font-space-grotesk)' }}>Want to track your results and consultations?</p>
               <p className="text-xs leading-relaxed mb-4" style={{ color: 'rgba(240,244,248,0.5)' }}>Create a free account to manage your health records, view upcoming appointments, and communicate with your doctor, all in one place.</p>

@@ -150,7 +150,7 @@ export default function Nav() {
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '13px', color: 'var(--text-secondary)', textDecoration: 'none', transition: 'background 0.12s, color 0.12s' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.09)'; e.currentTarget.style.color = 'var(--text-primary)' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.09)'; e.currentTarget.style.color = 'var(--text-primary)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)' }}
                         onKeyDown={(e) => {
                           if (e.key === 'Escape') {
@@ -171,7 +171,7 @@ export default function Nav() {
                         role="menuitem"
                         onClick={() => setProgramsOpen(false)}
                         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '9px 14px', borderRadius: 7, fontSize: '12px', fontWeight: 600, color: BLUE, textDecoration: 'none', transition: 'background 0.12s' }}
-                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(72,144,247,0.08)' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(53,164,224,0.08)' }}
                         onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                         onKeyDown={(e) => { if (e.key === 'Escape') { setProgramsOpen(false); programsButtonRef.current?.focus() } }}
                       >
@@ -317,7 +317,7 @@ export default function Nav() {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center gap-2 w-full"
                 style={{
-                  background: '#1d4fd8',
+                  background: '#18709f',
                   color: '#ffffff',
                   padding: '16px 24px',
                   borderRadius: '999px',
