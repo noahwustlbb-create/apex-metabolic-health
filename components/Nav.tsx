@@ -191,6 +191,7 @@ export default function Nav() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={pathname === link.href ? 'page' : undefined}
                 style={linkStyle}
                 onMouseEnter={e => { e.currentTarget.style.color = BLUE }}
                 onMouseLeave={e => { e.currentTarget.style.color = TEXT }}
@@ -276,7 +277,7 @@ export default function Nav() {
             style={{ backgroundColor: 'var(--bg)' }}
           >
             <div className="flex flex-col flex-1 overflow-y-auto pt-[70px] md:pt-[88px]">
-              <nav className="flex flex-col px-6 pt-4" aria-label="Primary navigation">
+              <nav className="nav-m flex flex-col px-6 pt-4" aria-label="Primary navigation">
                 {MOBILE_LINKS.map((link, i) => (
                   <motion.div
                     key={link.href}
@@ -287,6 +288,7 @@ export default function Nav() {
                   >
                     <Link
                       href={link.href}
+                      aria-current={pathname === link.href ? 'page' : undefined}
                       onClick={() => setMenuOpen(false)}
                       className="flex items-center justify-between py-5 border-b"
                       style={{ color: 'var(--text-primary)', borderColor: 'var(--border)', fontFamily: 'var(--font-inter)', fontSize: '22px', fontWeight: 600, letterSpacing: '-0.02em', textDecoration: 'none' }}
