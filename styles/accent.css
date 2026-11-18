@@ -27,8 +27,8 @@ html[data-chosen="men"] { --acc: #0d5dea; --acc-on-dark: #5b9bff; }
 html[data-audience="women"] .al-acc, html[data-chosen="men"] .al-acc {
   color: var(--acc) !important; -webkit-text-fill-color: currentColor !important;
 }
-html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc,
-html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark]) .al-acc {
+html[data-audience="women"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark], .pa-break, .pa-band, .pa-cta) .al-acc,
+html[data-chosen="men"] :is(.ip-hero, .al-how, .ip-how, .al-close, .ip-tier-band, .al-club-head, .ip-head[data-dark], .al-head[data-dark], .pa-break, .pa-band, .pa-cta) .al-acc {
   color: var(--acc-on-dark) !important;
 }
 
