@@ -79,7 +79,7 @@ export default function TreatmentsGrid() {
         <div className="al-head">
           <div>
             <p className="al-k al-num">// 02 Protocols</p>
-            <h2 id="tg-title" className="al-h2">Choose your program.</h2>
+            <h2 id="tg-title" className="al-h2">Choose your <span className="al-acc">program.</span></h2>
           </div>
           <p className="al-cap"><span>Nine programs<br /></span><span>Measure first<br /></span><span>Doctor-led, online</span></p>
         </div>

@@ -1,3 +1,4 @@
+import { accent } from '@/components/audience/Accent'
 import Link from 'next/link'
 import type { FieldNote } from '@/lib/field-notes'
 
@@ -22,7 +23,7 @@ export default function FieldNotes({ notes, variant = 'grid', id = 'fn-title', t
     <section className="al-sec fn" data-variant={variant} aria-labelledby={id}>
       <div className="container-x">
         <div className="al-head fn-head">
-          <H id={id} className="al-h2">{title}</H>
+          <H id={id} className="al-h2">{accent(title)}</H>
           <p className="al-cap fn-line">{line}</p>
         </div>
         <ul className="fn-list" role="list">

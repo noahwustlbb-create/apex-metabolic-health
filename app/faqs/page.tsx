@@ -41,7 +41,7 @@ export default function FAQsPage() {
           <div className="container-x al-faq-in">
             <div className="al-faq-side">
               <p className="al-k">{'// Support'}</p>
-              <h1 id="fq-title" className="al-h2" style={{ fontSize: 'clamp(40px, 4.6vw, 72px)' }}>You ask,<br />we answer.</h1>
+              <h1 id="fq-title" className="al-h2" style={{ fontSize: 'clamp(40px, 4.6vw, 72px)' }}>You ask,<br /><span className="al-acc">we answer.</span></h1>
               <p className="al-lead">The straight answers on bloods, doctors, fees, membership and cancelling.</p>
               <a href={`mailto:${CLINIC_EMAIL}`} className="al-pill">Ask us a question <Arrow /></a>
             </div>
