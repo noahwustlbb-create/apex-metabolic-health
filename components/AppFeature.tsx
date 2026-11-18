@@ -160,7 +160,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <p
             style={{
               fontSize: 7,
-              color: 'var(--blue)',
+              color: 'var(--blue-dark)',
               fontWeight: 700,
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
@@ -206,7 +206,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               >
                 38
               </span>
-              <span style={{ fontSize: 7.5, color: 'var(--blue)', display: 'block', marginTop: 1 }}>
+              <span style={{ fontSize: 7.5, color: 'var(--blue-dark)', display: 'block', marginTop: 1 }}>
                 chronological
               </span>
             </div>
@@ -221,7 +221,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
                 strokeLinejoin="round"
               />
             </svg>
-            <span style={{ fontSize: 7.5, color: 'var(--blue)', fontWeight: 700 }}>
+            <span style={{ fontSize: 7.5, color: 'var(--blue-dark)', fontWeight: 700 }}>
               Biological age tracked over time
             </span>
           </div>
@@ -245,7 +245,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
             }}
           >
             <p style={{ fontSize: 7.5, fontWeight: 700, color: 'var(--text-primary)' }}>Testosterone</p>
-            <span style={{ fontSize: 8, color: 'var(--blue)', fontWeight: 700 }}>22.4 nmol/L</span>
+            <span style={{ fontSize: 8, color: 'var(--blue-dark)', fontWeight: 700 }}>22.4 nmol/L</span>
           </div>
           <svg
             viewBox="0 0 200 38"
@@ -274,7 +274,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
           <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 3 }}>
             <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Jan</span>
             <span style={{ fontSize: 6.5, color: 'var(--text-primary)' }}>Apr</span>
-            <span style={{ fontSize: 6.5, color: 'var(--blue)', fontWeight: 600 }}>Now</span>
+            <span style={{ fontSize: 6.5, color: 'var(--blue-dark)', fontWeight: 600 }}>Now</span>
           </div>
         </div>
 
@@ -295,7 +295,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--blue)', opacity: 0.7 }}
             />
           </div>
-          <p style={{ fontSize: 7.5, color: 'var(--blue)', marginTop: 3 }}>
+          <p style={{ fontSize: 7.5, color: 'var(--blue-dark)', marginTop: 3 }}>
             Next review: 14 Aug 2025
           </p>
         </div>
@@ -341,7 +341,7 @@ export function AppPhoneMockup({ inView, delay = 0.2 }: { inView: boolean; delay
               <span
                 style={{
                   fontSize: 5.5,
-                  color: i === 0 ? 'var(--blue)' : '#9ca3af',
+                  color: i === 0 ? 'var(--blue-dark)' : '#9ca3af',
                   fontWeight: i === 0 ? 700 : 400,
                 }}
               >
@@ -454,7 +454,7 @@ export default function AppFeature() {
             style={{ fontSize: 'clamp(32px, 3.5vw, 56px)', maxWidth: '600px' }}
           >
             Your care,{' '}
-            <span style={{ color: 'var(--blue)' }}>
+            <span style={{ color: 'var(--blue-dark)' }}>
               visible over time.
             </span>
           </motion.h2>
@@ -529,7 +529,7 @@ export default function AppFeature() {
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <p className="text-xs" style={{ color: 'var(--blue)' }}>
+          <p className="text-xs" style={{ color: 'var(--blue-dark)' }}>
             App included with all active memberships at launch
           </p>
         </motion.div>
