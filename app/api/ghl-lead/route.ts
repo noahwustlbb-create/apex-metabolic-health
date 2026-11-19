@@ -3,6 +3,7 @@ import {
   submitMarketingLeadToHighLevel,
 } from '@/lib/highLevel'
 import { NextResponse } from 'next/server'
+import { formTokenKey, issueFormToken } from '@/lib/formToken'
 
 export const runtime = 'nodejs'
 
@@ -91,5 +92,5 @@ export async function POST(req: Request) {
     return json({ error: 'CRM delivery unavailable' }, 503)
   }
 
-  return json({ ok: true }, 202)
+  return json({ ok: true, confirmToken: issueFormToken(lead.email, formTokenKey()) }, 202)
 }

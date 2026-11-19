@@ -28,16 +28,22 @@ function allowlisted(lead: LeadPayload) {
   return { name, email, phone, source, program, state, message }
 }
 
-async function viaNotifyAdmin(lead: LeadPayload): Promise<void> {
+/** The server's token for the submitted email (for /api/send-confirmation), when it sent one. */
+async function tokenFrom(res: Response): Promise<string | undefined> {
+  try { const b = await res.json() as { confirmToken?: unknown }; return typeof b.confirmToken === 'string' ? b.confirmToken : undefined } catch { return undefined }
+}
+
+async function viaNotifyAdmin(lead: LeadPayload): Promise<string | undefined> {
   const res = await fetch('/api/notify-admin', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(allowlisted(lead)),
   })
   if (!res.ok) throw new Error(`notify-admin ${res.status}`)
+  return tokenFrom(res)
 }
 
-async function viaHighLevel(lead: LeadPayload): Promise<void> {
+async function viaHighLevel(lead: LeadPayload): Promise<string | undefined> {
   // HighLevel is a marketing CRM, not the clinical patient record. Keep this
   // allowlist explicit so questionnaire answers can never cross this boundary.
   const { name, email, phone, source, program } = lead
@@ -48,6 +54,7 @@ async function viaHighLevel(lead: LeadPayload): Promise<void> {
     body: JSON.stringify({ name, email, phone, source, program, marketingConsent }),
   })
   if (!res.ok) throw new Error(`ghl-lead ${res.status}`)
+  return tokenFrom(res)
 }
 
 /**
@@ -58,14 +65,14 @@ async function viaHighLevel(lead: LeadPayload): Promise<void> {
 export async function submitForm(
   payload: Record<string, unknown> & { email: string; source: string },
 ): Promise<void> {
-  return captureLead(payload as LeadPayload)
+  await captureLead(payload as LeadPayload)
 }
 
 /**
  * Deliver a lead through every available channel.
  * Resolves if at least one channel succeeded; rejects only if all of them failed.
  */
-export async function captureLead(lead: LeadPayload): Promise<void> {
+export async function captureLead(lead: LeadPayload): Promise<{ confirmToken?: string }> {
   const results = await Promise.allSettled([
     viaNotifyAdmin(lead),
     viaHighLevel(lead),
@@ -86,6 +93,8 @@ export async function captureLead(lead: LeadPayload): Promise<void> {
   // Routing context only: never the lead's identity fields.
   track('lead_captured', { source: lead.source })
   markLeadConversion(lead.source)
+  const confirmToken = results.map(r => (r.status === 'fulfilled' ? r.value : undefined)).find(Boolean)
+  return { confirmToken }
 }
 
 /**

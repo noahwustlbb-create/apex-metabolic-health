@@ -1,5 +1,6 @@
 import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
+import { formTokenKey, issueFormToken } from '@/lib/formToken'
 
 const ADMIN_EMAIL = 'admin@apexmetabolichealth.com.au'
 
@@ -105,5 +106,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'send failed' }, { status: 500 })
   }
 
-  return NextResponse.json({ ok: true })
+  // A short-lived token for this email only, so /api/send-confirmation can confirm to the person who just submitted.
+  return NextResponse.json({ ok: true, confirmToken: issueFormToken(email, formTokenKey()) })
 }

@@ -1,5 +1,17 @@
 import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
+import { escapeHtml, formTokenKey, greetingName, makeLimiter, normEmail, verifyFormToken } from '@/lib/formToken'
+
+// Sends the "we got your request" email (safety pack item 4, 19 Nov 2026).
+// It used to send any HTML to any address in the body. Now it sends only to
+// the email the lead form just submitted, proven by the token /api/notify-admin
+// or /api/ghl-lead returned for that email (lib/formToken.ts), only from our
+// own pages, rate limited per IP and per recipient, with every value escaped.
+
+export const runtime = 'nodejs'
+const MAX_BODY_BYTES = 4_096
+const perIp = makeLimiter(5, 10 * 60_000)
+const perRecipient = makeLimiter(1, 10 * 60_000)
 
 type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
 
@@ -77,7 +89,7 @@ function buildEmail(firstName: string, formType: FormType): string {
               <span style="display:inline-block;width:22px;height:22px;border-radius:50%;background:#4890f7;text-align:center;font-size:11px;font-weight:700;color:#ffffff;line-height:22px;">${i + 1}</span>
             </td>
             <td style="vertical-align:top;padding-top:2px;">
-              <p style="margin:0;font-size:13px;line-height:1.6;color:#8899aa;">${step}</p>
+              <p style="margin:0;font-size:13px;line-height:1.6;color:#8899aa;">${escapeHtml(step)}</p>
             </td>
           </tr>
         </table>
@@ -111,9 +123,9 @@ function buildEmail(firstName: string, formType: FormType): string {
         <td style="background:#0d1117;border:1px solid rgba(72,144,247,0.15);border-radius:16px 16px 0 0;padding:40px 40px 32px;">
           <p style="margin:0 0 10px;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#4890f7;">Apex Metabolic Health</p>
           <h1 style="margin:0 0 14px;font-size:22px;font-weight:700;color:#f0f4f8;line-height:1.25;">
-            ${firstName ? `Hi ${firstName}, ` : ''}${config.heading}
+            ${firstName ? `Hi ${escapeHtml(firstName)}, ` : ''}${escapeHtml(config.heading)}
           </h1>
-          <p style="margin:0;font-size:14px;line-height:1.7;color:#8899aa;">${config.subheading}</p>
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#8899aa;">${escapeHtml(config.subheading)}</p>
         </td>
       </tr>
 
@@ -220,21 +232,35 @@ function buildEmail(firstName: string, formType: FormType): string {
 </html>`
 }
 
-export async function POST(req: Request) {
-  const { email, firstName, formType } = await req.json() as {
-    email: string
-    firstName?: string
-    formType: FormType
-  }
+function sameOrigin(req: Request): boolean {
+  const origin = req.headers.get('origin')
+  if (!origin) return false
+  const host = req.headers.get('x-forwarded-host')?.split(',')[0]?.trim() ?? req.headers.get('host')
+  if (!host) return false
+  try { return new URL(origin).host.toLowerCase() === host.toLowerCase() } catch { return false }
+}
 
-  if (!email) return NextResponse.json({ error: 'No email' }, { status: 400 })
-  if (!FORM_CONFIG[formType]) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
+export async function POST(req: Request) {
+  if (!sameOrigin(req)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  if (perIp(ip)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+  if (Number(req.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return NextResponse.json({ error: 'Request too large' }, { status: 413 })
+
+  let body: Record<string, unknown>
+  try { body = await req.json() as Record<string, unknown> } catch { return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }) }
+  const email = normEmail(body.email)
+  const formType = body.formType as FormType
+  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: 'No email' }, { status: 400 })
+  if (typeof formType !== 'string' || !Object.prototype.hasOwnProperty.call(FORM_CONFIG, formType)) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
+  // Only the address the form just submitted, proven by the server's own token.
+  if (!verifyFormToken(body.token, email, formTokenKey())) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (perRecipient(email)) return NextResponse.json({ ok: true, skipped: 'recent' })
 
   const config = FORM_CONFIG[formType]
   try {
-    await sendEmail({ to: email, subject: config.subject, html: buildEmail(firstName ?? '', formType) })
+    await sendEmail({ to: email, subject: config.subject, html: buildEmail(greetingName(body.firstName), formType) })
   } catch (error) {
-    console.error('Mailer error:', error)
+    console.error('send-confirmation mailer error:', error instanceof Error ? error.message : 'unknown')
     return NextResponse.json({ error: 'send failed' }, { status: 500 })
   }
 

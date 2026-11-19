@@ -81,17 +81,22 @@ export default function DiscoveryCallPage() {
     const errs = validate()
     if (errs.length > 0) { setErrors(errs); return }
     setSubmitting(true)
+    let confirmToken: string | undefined
     try {
-      await captureLead({
+      ({ confirmToken } = await captureLead({
         source: 'discovery-call-request', email: form.email,
         name: `${form.firstName} ${form.lastName}`.trim(), phone: form.phone,
         marketingConsent,
-      })
+      }))
     } catch {}
-    fetch('/api/send-confirmation', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: form.email, firstName: form.firstName, formType: 'discovery' }),
-    }).catch(() => {})
+    // Confirmation goes only to the address just submitted, with the server's token for it.
+    if (confirmToken) {
+      fetch('/api/send-confirmation', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, firstName: form.firstName, formType: 'discovery', token: confirmToken }),
+        keepalive: true,
+      }).catch(() => {})
+    }
     setSubmitting(false)
     setSubmitted(true)
     window.location.href = '/confirmation'
