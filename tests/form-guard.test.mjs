@@ -79,3 +79,35 @@ test('the confirmation template escapes every interpolated value', () => {
     assert.fail(`unescaped value in template: \${${expr}}`)
   }
 })
+
+test('unsubscribe: fixed origins and platform IP, never the Host header or the first forwarded entry', () => {
+  const src = read('../app/api/unsubscribe/route.ts')
+  assert.match(src, /from '@\/lib\/formGuard'/)
+  assert.match(src, /if \(!originAllowed\(req\.headers\.get\('origin'\)\)\) return json\(\{ error: 'Forbidden' \}, 403\)/)
+  assert.match(src, /perIp\(clientIp\(req\.headers\)\)/)
+  assert.match(src, /const perIp = makeLimiter\(5, 60_000\)/)
+  assert.match(src, /MAX_BODY_BYTES/)
+  assert.match(src, /validEmail\(email\)/)
+  // The old spoofable checks are gone.
+  assert.doesNotMatch(src, /x-forwarded-host|headers\.get\('host'\)|isSameOrigin|x-forwarded-for/)
+  assert.doesNotMatch(src, /if \(!origin\) return true/)
+  // The page that posts here is on our own origin, so a fixed-origin check never blocks a real visitor.
+  assert.match(read('../app/unsubscribe/page.tsx'), /'\/api\/unsubscribe'/)
+})
+
+test('unsubscribe guard behaviour: spoofed Host, missing Origin and a forged first forwarded hop all fail', () => {
+  // A request whose Origin matches its own (attacker-chosen) Host was accepted by the old check.
+  assert.equal(originAllowed('https://evil.example', {}), false)
+  assert.equal(originAllowed(undefined, {}), false)
+  assert.equal(originAllowed('https://www.apexmetabolichealth.com.au/', {}), true)
+  // Rotating the first x-forwarded-for entry no longer gives a fresh rate-limit bucket.
+  const V = { VERCEL: '1' }
+  const lim = makeLimiter(5, 60_000)
+  let limited = false
+  for (let i = 0; i < 7; i++) {
+    const ip = clientIp(headers({ 'x-forwarded-for': `10.0.0.${i}, 198.51.100.7` }), V)
+    assert.equal(ip, '198.51.100.7')
+    limited = lim(ip, 0)
+  }
+  assert.equal(limited, true)
+})
