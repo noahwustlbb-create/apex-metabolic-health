@@ -1,21 +1,13 @@
-import { sendEmail } from '@/lib/mailer'
-import { NextResponse } from 'next/server'
-import { escapeHtml, formTokenKey, greetingName, makeLimiter, normEmail, verifyFormToken } from '@/lib/formToken'
+// The "we got your request" email, sent by the server itself inside the
+// request that accepts the lead (safety pack item 4, 19 Nov 2026). Moved here
+// from /api/send-confirmation, which took any address and any name from the
+// request body and is gone. Every interpolated value is escaped.
 
-// Sends the "we got your request" email (safety pack item 4, 19 Nov 2026).
-// It used to send any HTML to any address in the body. Now it sends only to
-// the email the lead form just submitted, proven by the token /api/notify-admin
-// or /api/ghl-lead returned for that email (lib/formToken.ts), only from our
-// own pages, rate limited per IP and per recipient, with every value escaped.
+import { escapeHtml } from './formGuard'
 
-export const runtime = 'nodejs'
-const MAX_BODY_BYTES = 4_096
-const perIp = makeLimiter(5, 10 * 60_000)
-const perRecipient = makeLimiter(1, 10 * 60_000)
+export type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
 
-type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
-
-const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
+export const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
   'hormone-consult': {
     subject: 'Your Hormone Consultation | Apex Metabolic Health',
     heading: 'Your hormone consult intake has been received.',
@@ -78,7 +70,7 @@ const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheadi
   },
 }
 
-function buildEmail(firstName: string, formType: FormType): string {
+export function buildConfirmationEmail(firstName: string, formType: FormType): string {
   const config = FORM_CONFIG[formType]
   const steps = config.nextSteps.map((step, i) => `
     <tr>
@@ -230,39 +222,4 @@ function buildEmail(firstName: string, formType: FormType): string {
 </table>
 </body>
 </html>`
-}
-
-function sameOrigin(req: Request): boolean {
-  const origin = req.headers.get('origin')
-  if (!origin) return false
-  const host = req.headers.get('x-forwarded-host')?.split(',')[0]?.trim() ?? req.headers.get('host')
-  if (!host) return false
-  try { return new URL(origin).host.toLowerCase() === host.toLowerCase() } catch { return false }
-}
-
-export async function POST(req: Request) {
-  if (!sameOrigin(req)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  if (perIp(ip)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
-  if (Number(req.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return NextResponse.json({ error: 'Request too large' }, { status: 413 })
-
-  let body: Record<string, unknown>
-  try { body = await req.json() as Record<string, unknown> } catch { return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }) }
-  const email = normEmail(body.email)
-  const formType = body.formType as FormType
-  if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return NextResponse.json({ error: 'No email' }, { status: 400 })
-  if (typeof formType !== 'string' || !Object.prototype.hasOwnProperty.call(FORM_CONFIG, formType)) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
-  // Only the address the form just submitted, proven by the server's own token.
-  if (!verifyFormToken(body.token, email, formTokenKey())) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  if (perRecipient(email)) return NextResponse.json({ ok: true, skipped: 'recent' })
-
-  const config = FORM_CONFIG[formType]
-  try {
-    await sendEmail({ to: email, subject: config.subject, html: buildEmail(greetingName(body.firstName), formType) })
-  } catch (error) {
-    console.error('send-confirmation mailer error:', error instanceof Error ? error.message : 'unknown')
-    return NextResponse.json({ error: 'send failed' }, { status: 500 })
-  }
-
-  return NextResponse.json({ ok: true })
 }

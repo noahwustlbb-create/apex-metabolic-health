@@ -3,7 +3,7 @@ import {
   submitMarketingLeadToHighLevel,
 } from '@/lib/highLevel'
 import { NextResponse } from 'next/server'
-import { formTokenKey, issueFormToken } from '@/lib/formToken'
+import { clientIp, originAllowed } from '@/lib/formGuard'
 
 export const runtime = 'nodejs'
 
@@ -25,24 +25,13 @@ function json(body: Record<string, unknown>, status: number) {
   })
 }
 
+// Fixed origin list and platform client IP (safety pack item 4, lib/formGuard.ts).
 function isSameOrigin(req: Request): boolean {
-  const origin = req.headers.get('origin')
-  if (!origin) return true
-
-  const forwardedHost = req.headers.get('x-forwarded-host')?.split(',')[0]?.trim()
-  const expectedHost = forwardedHost ?? req.headers.get('host')
-  if (!expectedHost) return false
-
-  try {
-    return new URL(origin).host.toLowerCase() === expectedHost.toLowerCase()
-  } catch {
-    return false
-  }
+  return originAllowed(req.headers.get('origin'))
 }
 
 function isRateLimited(req: Request): boolean {
-  const forwardedFor = req.headers.get('x-forwarded-for')
-  const clientId = forwardedFor?.split(',')[0]?.trim() || 'unknown'
+  const clientId = clientIp(req.headers)
   const now = Date.now()
   const current = rateLimitBuckets.get(clientId)
 
@@ -92,5 +81,5 @@ export async function POST(req: Request) {
     return json({ error: 'CRM delivery unavailable' }, 503)
   }
 
-  return json({ ok: true, confirmToken: issueFormToken(lead.email, formTokenKey()) }, 202)
+  return json({ ok: true }, 202)
 }
