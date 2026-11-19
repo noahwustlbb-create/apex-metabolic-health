@@ -1,5 +1,20 @@
 import { sendEmail } from '@/lib/mailer'
 import { NextResponse } from 'next/server'
+import { CONFIRMATION_FOR_SOURCE, clientIp, greetingName, makeLimiter, normEmail, originAllowed, validEmail } from '@/lib/formGuard'
+import { FORM_CONFIG, buildConfirmationEmail } from '@/lib/confirmationEmail'
+
+// Safety pack item 4 (19 Nov 2026): our own pages only (fixed origin list),
+// rate limited on the platform client IP, body capped. For a discovery call
+// request the server also sends the "we got your request" email itself, to
+// the lead's own address only, at most once per 10 minutes and 3 times a day
+// per address. Nothing a caller sends can change who gets it or what it says
+// beyond an escaped first name.
+
+export const runtime = 'nodejs'
+const MAX_BODY_BYTES = 16_384
+const perIp = makeLimiter(10, 60_000)
+const confirmRecent = makeLimiter(1, 10 * 60_000)
+const confirmDaily = makeLimiter(3, 24 * 60 * 60_000)
 
 const ADMIN_EMAIL = 'admin@apexmetabolichealth.com.au'
 
@@ -17,7 +32,11 @@ function field(value: unknown, max: number): string {
 }
 
 export async function POST(req: Request) {
-  const body = await req.json() as Record<string, unknown>
+  if (!originAllowed(req.headers.get('origin'))) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  if (perIp(clientIp(req.headers))) return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+  if (Number(req.headers.get('content-length') ?? 0) > MAX_BODY_BYTES) return NextResponse.json({ error: 'Request too large' }, { status: 413 })
+  let body: Record<string, unknown>
+  try { body = await req.json() as Record<string, unknown> } catch { return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }) }
   // Privacy boundary: identity and routing fields only. Health questionnaire
   // answers must never be emailed from the public website.
   const name = field(body.name, 120)
@@ -101,8 +120,19 @@ export async function POST(req: Request) {
   try {
     await sendEmail(sendArgs)
   } catch (error) {
-    console.error('notify-admin mailer error:', error)
+    console.error('notify-admin mailer error:', error instanceof Error ? error.message : 'unknown')
     return NextResponse.json({ error: 'send failed' }, { status: 500 })
+  }
+
+  // The confirmation, if this form gets one: fixed template, to the lead's own email only.
+  const formType = CONFIRMATION_FOR_SOURCE[source]
+  const to = normEmail(email)
+  if (formType && validEmail(to) && !confirmRecent(to) && !confirmDaily(to)) {
+    try {
+      await sendEmail({ to, subject: FORM_CONFIG[formType].subject, html: buildConfirmationEmail(greetingName(name), formType) })
+    } catch (error) {
+      console.error('notify-admin confirmation failed:', error instanceof Error ? error.message : 'unknown')
+    }
   }
 
   return NextResponse.json({ ok: true })

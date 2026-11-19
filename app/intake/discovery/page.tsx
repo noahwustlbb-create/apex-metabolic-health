@@ -88,10 +88,7 @@ export default function DiscoveryCallPage() {
         marketingConsent,
       })
     } catch {}
-    fetch('/api/send-confirmation', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: form.email, firstName: form.firstName, formType: 'discovery' }),
-    }).catch(() => {})
+    // The confirmation email is sent by the server with the lead itself (/api/notify-admin).
     setSubmitting(false)
     setSubmitted(true)
     window.location.href = '/confirmation'

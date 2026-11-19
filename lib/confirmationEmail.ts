@@ -1,9 +1,13 @@
-import { sendEmail } from '@/lib/mailer'
-import { NextResponse } from 'next/server'
+// The "we got your request" email, sent by the server itself inside the
+// request that accepts the lead (safety pack item 4, 19 Nov 2026). Moved here
+// from /api/send-confirmation, which took any address and any name from the
+// request body and is gone. Every interpolated value is escaped.
 
-type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
+import { escapeHtml } from './formGuard'
 
-const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
+export type FormType = 'hormone-consult' | 'general-consult' | 'discovery' | 'bloods' | 'consult-intake' | 'assessment'
+
+export const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheading: string; nextSteps: string[] }> = {
   'hormone-consult': {
     subject: 'Your Hormone Consultation | Apex Metabolic Health',
     heading: 'Your hormone consult intake has been received.',
@@ -66,7 +70,7 @@ const FORM_CONFIG: Record<FormType, { subject: string; heading: string; subheadi
   },
 }
 
-function buildEmail(firstName: string, formType: FormType): string {
+export function buildConfirmationEmail(firstName: string, formType: FormType): string {
   const config = FORM_CONFIG[formType]
   const steps = config.nextSteps.map((step, i) => `
     <tr>
@@ -77,7 +81,7 @@ function buildEmail(firstName: string, formType: FormType): string {
               <span style="display:inline-block;width:22px;height:22px;border-radius:50%;background:#4890f7;text-align:center;font-size:11px;font-weight:700;color:#ffffff;line-height:22px;">${i + 1}</span>
             </td>
             <td style="vertical-align:top;padding-top:2px;">
-              <p style="margin:0;font-size:13px;line-height:1.6;color:#8899aa;">${step}</p>
+              <p style="margin:0;font-size:13px;line-height:1.6;color:#8899aa;">${escapeHtml(step)}</p>
             </td>
           </tr>
         </table>
@@ -111,9 +115,9 @@ function buildEmail(firstName: string, formType: FormType): string {
         <td style="background:#0d1117;border:1px solid rgba(72,144,247,0.15);border-radius:16px 16px 0 0;padding:40px 40px 32px;">
           <p style="margin:0 0 10px;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#4890f7;">Apex Metabolic Health</p>
           <h1 style="margin:0 0 14px;font-size:22px;font-weight:700;color:#f0f4f8;line-height:1.25;">
-            ${firstName ? `Hi ${firstName}, ` : ''}${config.heading}
+            ${firstName ? `Hi ${escapeHtml(firstName)}, ` : ''}${escapeHtml(config.heading)}
           </h1>
-          <p style="margin:0;font-size:14px;line-height:1.7;color:#8899aa;">${config.subheading}</p>
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#8899aa;">${escapeHtml(config.subheading)}</p>
         </td>
       </tr>
 
@@ -218,25 +222,4 @@ function buildEmail(firstName: string, formType: FormType): string {
 </table>
 </body>
 </html>`
-}
-
-export async function POST(req: Request) {
-  const { email, firstName, formType } = await req.json() as {
-    email: string
-    firstName?: string
-    formType: FormType
-  }
-
-  if (!email) return NextResponse.json({ error: 'No email' }, { status: 400 })
-  if (!FORM_CONFIG[formType]) return NextResponse.json({ error: 'Unknown form type' }, { status: 400 })
-
-  const config = FORM_CONFIG[formType]
-  try {
-    await sendEmail({ to: email, subject: config.subject, html: buildEmail(firstName ?? '', formType) })
-  } catch (error) {
-    console.error('Mailer error:', error)
-    return NextResponse.json({ error: 'send failed' }, { status: 500 })
-  }
-
-  return NextResponse.json({ ok: true })
 }
