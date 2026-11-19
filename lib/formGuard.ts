@@ -28,8 +28,13 @@ export function originAllowed(origin: string | null | undefined, env: Env = proc
   return allowedOrigins(env).includes(origin.trim().toLowerCase().replace(/\/$/, ''))
 }
 
-/** The platform-set client IP: x-real-ip, else the rightmost x-forwarded-for hop. */
-export function clientIp(headers: { get(name: string): string | null }): string {
+/**
+ * The platform-set client IP: x-real-ip, else the rightmost x-forwarded-for
+ * hop. Only on Vercel (which overwrites these headers); anywhere else every
+ * request shares one key, so a local run cannot be used to test spoofing.
+ */
+export function clientIp(headers: { get(name: string): string | null }, env: Env = process.env): string {
+  if (!env.VERCEL) return 'local'
   const real = headers.get('x-real-ip')?.trim()
   if (real) return real
   const hops = (headers.get('x-forwarded-for') ?? '').split(',').map(s => s.trim()).filter(Boolean)

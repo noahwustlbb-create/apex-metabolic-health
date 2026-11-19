@@ -20,9 +20,12 @@ test('origin: only our fixed origins, never the request Host; a missing Origin i
 })
 
 test('client IP: the platform value, never the first (client-written) forwarded entry', () => {
-  assert.equal(clientIp(headers({ 'x-real-ip': '203.0.113.9', 'x-forwarded-for': '1.1.1.1, 203.0.113.9' })), '203.0.113.9')
-  assert.equal(clientIp(headers({ 'x-forwarded-for': '1.1.1.1, 198.51.100.7' })), '198.51.100.7')
-  assert.equal(clientIp(headers({})), 'unknown')
+  const V = { VERCEL: '1' }
+  assert.equal(clientIp(headers({ 'x-real-ip': '203.0.113.9', 'x-forwarded-for': '1.1.1.1, 203.0.113.9' }), V), '203.0.113.9')
+  assert.equal(clientIp(headers({ 'x-forwarded-for': '1.1.1.1, 198.51.100.7' }), V), '198.51.100.7')
+  assert.equal(clientIp(headers({}), V), 'unknown')
+  // Off Vercel the headers are not trusted at all.
+  assert.equal(clientIp(headers({ 'x-real-ip': '203.0.113.9' }), {}), 'local')
 })
 
 test('escaping and the greeting name', () => {
